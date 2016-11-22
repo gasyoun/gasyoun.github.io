@@ -1,0 +1,80 @@
+body {
+font-family: "Arial Unicode MS, Sans-Serif";
+font-size: 12pt;
+font-style: normal;
+font-weight: normal;
+color: #333333;
+background: white;
+}
+/* hymn name */
+h3 {
+	font-style: italic;
+}
+p {
+float: inherit;
+	margin: 0 0 0 0;
+}
+table {
+	width: 800px;
+}
+/* rv01.001.01 */
+p.stamp {
+font-size: 14pt;
+font-weight: bold;
+float: none;
+padding-top: 10px;
+padding-bottom: 2px;
+}
+p.comm {
+font-style: italic;
+}
+/* Vedic devanagari */
+p.sa {
+ color: #8b0000;
+ background: white;
+ font-size: 16pt;
+font-family: "Sanskrit 2003";
+ padding-right: 40px;
+}
+/* IAST */
+p.hn {
+ color: #ff4500;
+ background: white;
+ font-family: "Clarendon Indologique";
+ padding-left: 0px;
+}
+/* padapatha */
+p.pp {
+  background: white;
+  font-family: "Clarendon Indologique";
+}
+/* noorten */
+p.no {
+ color: orange;
+ background: white;
+ font-family: "Clarendon Indologique";
+ }
+/* elizarenkova */
+p.ru {
+padding-top: 4px;
+color: #617e25;
+background: white;
+font-family: "Charter Indologique";
+padding-left: 3px;
+}
+/* geldner */
+p.de {
+   color: #5b2e00;
+   background: white;
+ font-family: "Charter Indologique";
+ padding-left: 6px;
+ padding-right: 50px;
+}
+/* griffith */
+p.en {
+ color: #2c577b;
+ background: white;
+ font-family: "Charter Indologique";
+ padding-left: 9px;
+ padding-right: 50px;
+}
