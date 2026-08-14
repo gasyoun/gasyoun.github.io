@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Глосс-ревью akṣara «слог / Непреходящее» — правки ручных RU-глосс — 6 items</title>
+<style>
+  :root { --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --text:#e6e6e6; --muted:#9aa0aa;
+          --accent:#5b8cff; --ok:#3fb950; --bad:#f85149; --defer:#d29922; --border:#2a2f3a; }
+  * { box-sizing: border-box; }
+  body { background:var(--bg); color:var(--text); font-family:-apple-system,Segoe UI,Roboto,sans-serif;
+         margin:0; padding:0 0 120px 0; }
+  header.top { position:sticky; top:0; z-index:10; background:var(--panel); border-bottom:1px solid var(--border);
+               padding:14px 20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+  header.top h1 { font-size:16px; margin:0; }
+  header.top .sub { color:var(--muted); font-size:12px; max-width:760px; }
+  .tally { display:flex; gap:14px; font-size:13px; }
+  .tally span.count { font-weight:700; }
+  .tally .approve { color:var(--ok); } .tally .reject { color:var(--bad); }
+  .tally .defer { color:var(--defer); } .tally .unvoted { color:var(--muted); }
+  .toolbar { padding:10px 20px; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  button.dl { background:var(--accent); color:#fff; border:none; padding:8px 14px; border-radius:6px;
+              cursor:pointer; font-size:13px; }
+  button.dl:hover { opacity:.9; }
+  .filterbar { display:flex; gap:6px; flex-wrap:wrap; }
+  .filterbar button { background:var(--panel2); border:1px solid var(--border); color:var(--text);
+                       padding:6px 10px; border-radius:14px; font-size:12px; cursor:pointer; }
+  .filterbar button.active { border-color:var(--accent); color:var(--accent); }
+  main { max-width:980px; margin:0 auto; padding:10px 20px; }
+  .card { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:16px;
+          margin-bottom:16px; }
+  .card.voted-approve { border-left:4px solid var(--ok); }
+  .card.voted-reject { border-left:4px solid var(--bad); }
+  .card.voted-defer { border-left:4px solid var(--defer); }
+  .card header { display:flex; justify-content:space-between; align-items:baseline; }
+  .card .hw { font-size:18px; font-weight:700; }
+  .badge { font-size:11px; background:var(--panel2); padding:2px 8px; border-radius:10px;
+           margin-left:8px; color:var(--muted); }
+  .question { margin:8px 0 12px; font-size:14px; }
+  .panel { background:var(--panel2); border-radius:8px; padding:10px 12px; font-size:13px; margin-bottom:10px; }
+  .panel h4 { margin:0 0 6px; font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+  .panel pre { white-space:pre-wrap; word-break:break-word; margin:0; font-size:12px; line-height:1.45; }
+  .chip { display:inline-block; background:#263042; border-radius:5px; padding:2px 7px; margin:2px 3px 2px 0; font-size:12px; }
+  .muted { color:var(--muted); font-style:italic; }
+  .controls { display:flex; align-items:center; gap:8px; margin-top:4px; }
+  button.vote { border:1px solid var(--border); background:var(--panel2); color:var(--text);
+                padding:7px 12px; border-radius:6px; cursor:pointer; font-size:13px; }
+  button.vote.approve.active { background:var(--ok); border-color:var(--ok); color:#04240b; }
+  button.vote.reject.active { background:var(--bad); border-color:var(--bad); color:#2a0a08; }
+  button.vote.defer.active { background:var(--defer); border-color:var(--defer); color:#2a1d02; }
+  .vote-state { margin-left:6px; font-size:12px; color:var(--muted); }
+  textarea.note { width:100%; margin-top:10px; min-height:88px; background:#11141a; color:var(--text);
+                  border:1px solid var(--border); border-radius:6px; padding:8px; font-size:13px;
+                  font-family:inherit; resize:vertical; }
+  footer.hint { max-width:980px; margin:20px auto; padding:0 20px; color:var(--muted); font-size:12px; }
+  kbd { background:#263042; border-radius:4px; padding:1px 5px; font-size:11px; }
+  .idchip { font-family:ui-monospace,Consolas,monospace; font-size:11px; color:var(--muted);
+            background:var(--panel2); border:1px solid var(--border); padding:2px 7px;
+            border-radius:6px; user-select:all; }
+  .card header { gap:10px; }
+  .hw a.hwlink { color:inherit; text-decoration:underline dotted; text-underline-offset:3px; }
+  .hw a.hwlink:hover { color:var(--accent); }
+  mark.hl { background:#453407; color:#ffd75e; padding:0 2px; border-radius:3px; }
+  .savebanner { max-width:980px; margin:10px auto 0; padding:8px 20px; font-size:12.5px; }
+  .savebanner code { background:var(--panel2); border:1px solid var(--border); padding:1px 6px; border-radius:5px; }
+  .ratingrow { display:flex; align-items:center; gap:6px; margin-top:10px; flex-wrap:wrap; }
+  .ratinglabel { font-size:12px; color:var(--muted); margin-right:4px; }
+  button.rate { border:1px solid var(--border); background:var(--panel2); color:var(--text);
+                width:34px; padding:6px 0; border-radius:6px; cursor:pointer; font-size:13px; }
+  button.rate.active { background:var(--accent); border-color:var(--accent); color:#fff; }
+  button.rate.active.below { background:var(--defer); border-color:var(--defer); color:#2a1d02; }
+  .rate-state { font-size:12px; color:var(--muted); margin-left:4px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>Глосс-ревью akṣara «слог / Непреходящее» — правки ручных RU-глосс — 6 items</h1>
+    <div class="sub">Generated 18-07-2026 &middot; sheet_id <code>sanskritlexicography-article-comparison_aksara</code> &middot; Из 55 глосс черновик отличный; ключевое разведение слог ↔ Непреходящее/Брахман передано верно, ноль фактических ошибок. 2 уточнения нормы/точности (7 — глиф ⟨кӯ⟩ и подсказка о кутах Шривидьи; 2Eiii — Махат как категориальный термин санкхьи) и несколько факультативных добавок. Источник: article-comparison/aksara.pd-min.ru.md (55 глосс). Данные: gloss_review_items.json (H739).</div>
+  </div>
+  <div class="tally" id="tally">
+    <span class="approve">&#9989; <span class="count" id="c-approve">0</span></span>
+    <span class="reject">&#10060; <span class="count" id="c-reject">0</span></span>
+    <span class="defer">&#9208; <span class="count" id="c-defer">0</span></span>
+    <span class="unvoted">&#9711; <span class="count" id="c-unvoted">6</span></span>
+  </div>
+</header>
+<div class="savebanner">&#128229; Your export downloads as <code>sanskritlexicography-article-comparison_aksara_decisions.json</code> &rarr; save it to <code>SanskritLexicography\review\sanskritlexicography-article-comparison_aksara_decisions.json</code> (the <code>sheet_id</code> inside the file is <code>sanskritlexicography-article-comparison_aksara</code> — that is how a later session knows which sheet these decisions belong to).</div>
+<div class="toolbar">
+  <button class="dl" id="downloadBtn">Download decisions.json</button><button class="dl" id="saveBtn" style="display:none;margin-left:8px">Save to folder…</button>
+  <div class="filterbar" id="filterbar"><button data-filter="all" class="active">all</button><button data-filter="M">M — норма/точность</button><button data-filter="L">L — полировка/добавка</button><button data-filter="unvoted">unvoted only</button></div>
+</div>
+<main id="cards">
+
+  <section class="card" data-id="aksara:A:7" data-filt="M">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/SanskritLexicography/blob/master/article-comparison/aksara.pd-min.ru.md" target="_blank" rel="noopener">7 · three kūṭas beginning with Vāgbhava</a> <span class="badge">M</span><span class="badge">замена</span></div><span class="idchip" title="card id — cite this id back when discussing this card">aksara:A:7</span></header>
+    <div class="question"><div style="margin:2px 0"><b>EN (PD):</b> <i>three kūṭas beginning with Vāgbhava</i></div><div style="margin:2px 0"><b>Сейчас:</b> <mark class="hl">три</mark> <mark class="hl">кӯты</mark>, <mark class="hl">начиная</mark> <mark class="hl">с</mark> <mark class="hl">Вагбхавы</mark></div><div style="margin:2px 0"><b>Предлагается:</b> <b><mark class="hl">три</mark> <mark class="hl">кута</mark> (<mark class="hl">слоговые</mark> <mark class="hl">блоки</mark> <mark class="hl">мантры</mark>: <mark class="hl">Вагбхава-</mark>, <mark class="hl">Камараджа-</mark>, <mark class="hl">Шакти-кута</mark>), <mark class="hl">начиная</mark> <mark class="hl">с</mark> <mark class="hl">Вагбхавы</mark></b></div><div style="margin-top:6px"><b>Почему:</b> Две проблемы. (a) <b>Глиф:</b> в текущей ячейке кириллическая u с макроном (U+04EF) в ⟨кӯ⟩ — не норма Кочергиной, вероятный артефакт набора; долгое <i>ū</i> передавать курсивным латинским <i>kūṭa</i> или писать просто «кута». (b) <b>Смысл:</b> в SetuBa. 95.24 это три куты мантры Панчадаши Шривидьи/Трипуры (Вагбхава-, Камараджа-, Шакти-кута) — «блоки слогов», а не обычное «вершина/куча»; однословная подсказка снимает двусмысленность. Принимать только при нормализации глифа И добавлении подсказки.</div></div>
+    
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять правку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Своя формулировка / частичная правка вместо отклонения…"></textarea>
+  </section>
+
+  <section class="card" data-id="aksara:A:2Eiii" data-filt="M">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/SanskritLexicography/blob/master/article-comparison/aksara.pd-min.ru.md" target="_blank" rel="noopener">2Eiii · name of Mahat or Buddhi</a> <span class="badge">M</span><span class="badge">замена</span></div><span class="idchip" title="card id — cite this id back when discussing this card">aksara:A:2Eiii</span></header>
+    <div class="question"><div style="margin:2px 0"><b>EN (PD):</b> <i>name of Mahat or Buddhi</i></div><div style="margin:2px 0"><b>Сейчас:</b> <mark class="hl">имя</mark> <mark class="hl">Махата</mark> <mark class="hl">или</mark> <mark class="hl">Буддхи</mark></div><div style="margin:2px 0"><b>Предлагается:</b> <b>(<mark class="hl">название</mark>) <mark class="hl">Махата</mark> (= <mark class="hl">Махан</mark>, <mark class="hl">Великое</mark> <mark class="hl">начало</mark>) <mark class="hl">или</mark> <mark class="hl">Буддхи</mark></b></div><div style="margin-top:6px"><b>Почему:</b> <b>Точность.</b> Санскрит (BrahmāṇḍP. iii.3.22, <i>…mahān akṣara eva ca</i>) называет таттву санкхьи <i>mahat/mahān</i> — космический Интеллект, категориальный термин, а не личное имя. Голое «имя» помечает его как имя собственное; ячейки 3A–I используют «имя/название» для подлинных имен. Подсказка «(Великое начало)» маркирует mahat-таттву. Принимать только при подтяжке регистра санкхьи.</div></div>
+    
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять правку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Своя формулировка / частичная правка вместо отклонения…"></textarea>
+  </section>
+
+  <section class="card" data-id="aksara:B:2B" data-filt="L">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/SanskritLexicography/blob/master/article-comparison/aksara.pd-min.ru.md" target="_blank" rel="noopener">2B · puruṣa</a> <span class="badge">L</span><span class="badge">добавка</span></div><span class="idchip" title="card id — cite this id back when discussing this card">aksara:B:2B</span></header>
+    <div class="question"><div style="margin:2px 0"><b>EN (PD):</b> <i>puruṣa</i></div><div style="margin:2px 0"><b>Сейчас (ячейка):</b> <mark class="hl">пуруша</mark></div><div style="margin:2px 0"><b>Предлагаемая добавка:</b> <b><mark class="hl">пуруша</mark> (<mark class="hl">как</mark> <mark class="hl">Непреходящее</mark>, akṣara = puruṣa)</b></div><div style="margin-top:6px"><b>Почему:</b> Параллельно 2A/2Cii, где связь с Непреходящим прописана; TattvSa. <i>…brahma akṣaraḥ</i>.</div></div>
+    
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять правку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Своя формулировка / частичная правка вместо отклонения…"></textarea>
+  </section>
+
+  <section class="card" data-id="aksara:B:2Diii" data-filt="L">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/SanskritLexicography/blob/master/article-comparison/aksara.pd-min.ru.md" target="_blank" rel="noopener">2Diii · ex-perience of individual soul</a> <span class="badge">L</span><span class="badge">добавка</span></div><span class="idchip" title="card id — cite this id back when discussing this card">aksara:B:2Diii</span></header>
+    <div class="question"><div style="margin:2px 0"><b>EN (PD):</b> <i>ex-perience of individual soul</i></div><div style="margin:2px 0"><b>Сейчас (ячейка):</b> <mark class="hl">опыт</mark> <mark class="hl">индивидуальной</mark> <mark class="hl">души</mark></div><div style="margin:2px 0"><b>Предлагаемая добавка:</b> <b><mark class="hl">опыт</mark> (<mark class="hl">блаженства</mark>) <mark class="hl">индивидуальной</mark> <mark class="hl">души</mark></b></div><div style="margin-top:6px"><b>Почему:</b> Полный текст PD: <i>experience of the <b>bliss</b> of individual soul</i> (<i>aiśvaryākṣarayoḥ…</i>); нюанс блаженства выпал только в PD-min скелете.</div></div>
+    
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять правку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Своя формулировка / частичная правка вместо отклонения…"></textarea>
+  </section>
+
+  <section class="card" data-id="aksara:B:2Eii" data-filt="L">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/SanskritLexicography/blob/master/article-comparison/aksara.pd-min.ru.md" target="_blank" rel="noopener">2Eii · illusion, Māyā</a> <span class="badge">L</span><span class="badge">добавка</span></div><span class="idchip" title="card id — cite this id back when discussing this card">aksara:B:2Eii</span></header>
+    <div class="question"><div style="margin:2px 0"><b>EN (PD):</b> <i>illusion, Māyā</i></div><div style="margin:2px 0"><b>Сейчас (ячейка):</b> <mark class="hl">иллюзия</mark>, <mark class="hl">майя</mark></div><div style="margin:2px 0"><b>Предлагаемая добавка:</b> <b><mark class="hl">иллюзия</mark>, <mark class="hl">майя</mark> (<mark class="hl">авидья</mark>, <mark class="hl">непроявленное</mark> avyākṛta)</b></div><div style="margin-top:6px"><b>Почему:</b> Санскрит приравнивает <i>akṣara</i> к <i>avidyā / avyākṛta / māyā</i>: BrahmSūBh.(Śaṅ.) <i>akṣaram avyākṛtam…</i></div></div>
+    
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять правку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Своя формулировка / частичная правка вместо отклонения…"></textarea>
+  </section>
+
+  <section class="card" data-id="aksara:B:15" data-filt="L">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/SanskritLexicography/blob/master/article-comparison/aksara.pd-min.ru.md" target="_blank" rel="noopener">15 · a measure of time</a> <span class="badge">L</span><span class="badge">добавка</span></div><span class="idchip" title="card id — cite this id back when discussing this card">aksara:B:15</span></header>
+    <div class="question"><div style="margin:2px 0"><b>EN (PD):</b> <i>a measure of time</i></div><div style="margin:2px 0"><b>Сейчас (ячейка):</b> <mark class="hl">мера</mark> <mark class="hl">времени</mark></div><div style="margin:2px 0"><b>Предлагаемая добавка:</b> <b><mark class="hl">мера</mark> <mark class="hl">времени</mark> (= 1/5 <mark class="hl">каштхи</mark>)</b></div><div style="margin-top:6px"><b>Почему:</b> Значение Апте (1/5 Kāṣṭhā) есть в PD/IAST источнике: <i>15 n. a measure of time = 1/5 Kāṣṭhā</i>.</div></div>
+    
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять правку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Своя формулировка / частичная правка вместо отклонения…"></textarea>
+  </section>
+</main>
+<footer class="hint"><div style="text-align:left;max-width:920px;margin:18px auto;font-size:13px"><h3>FYI — дефекты источника/экстракции (правка RU не требуется)</h3><table style="border-collapse:collapse"><tr><th>Сенс</th><th>English (PD), как напечатано</th><th>RU (уже корректно)</th></tr><tr><td style="padding:2px 8px;vertical-align:top">2Diii</td><td style="padding:2px 8px;vertical-align:top"><i>ex- perience of individual soul (дефисный разрыв)</i></td><td style="padding:2px 8px;vertical-align:top">опыт индивидуальной души</td></tr></table><h3>Покрытие</h3><p>55/55 глосс проверено. ~53 приняты как есть; 2 содержательных предложения (0 H, 2 M), 4 добавки (L), 1 FYI. Ключевое разведение верифицировано: слог (1Ai, 1F) ↔ Непреходящее/Высшее Существо (2A), обитель Брахмана (2Ci), индивидуальная душа/джива (2Di) — все по норме Кочергиной/Елизаренковой. Оригинальный проход: Opus 4.8 (claude-opus-4-8), 26-06-2026; перенос: Fable 5 (claude-fable-5), 18-07-2026.</p><h3>Куда идут голоса</h3><p>Файл sanskritlexicography-article-comparison_aksara_decisions.json сохранить в SanskritLexicography/review/ — watcher заведет handoff применения; /decisions-apply вносит принятые правки в article-comparison/aksara.pd-min.ru.md (колонка «Русский»), затем при необходимости перегенерация зависимых видов (RussianTranslation/src/_build_skeletons_ru.py).</p></div> Keyboard: <kbd>a</kbd> Принять правку &middot; <kbd>r</kbd> Оставить как есть
+  &middot; <kbd>d</kbd> defer &middot; <kbd>&darr;</kbd>/<kbd>&uarr;</kbd> next/prev. Votes autosave to
+  this browser's localStorage; click "Download decisions.json" when done (unvoted items export with
+  decision:null).</footer>
+<div class="legend" style="max-width:980px;margin:0 auto 20px;padding:0 20px;color:var(--muted);font-size:12px">
+  <b>Approve</b> = accept the proposed change/answer shown on the card (no separate "approve as-is" —
+  approving means agreeing as written). <b>Reject</b> = keep the current entry/answer unchanged.
+  <b>Defer</b> = not sure yet, decide later. The note field is for requesting a partial tweak instead
+  of an outright reject.
+</div>
+<script>
+(function () {
+  var SHEET_ID = "sanskritlexicography-article-comparison_aksara";
+  var STORE_KEY = 'review-sheet:' + SHEET_ID;
+  var ids = ["aksara:A:7", "aksara:A:2Eiii", "aksara:B:2B", "aksara:B:2Diii", "aksara:B:2Eii", "aksara:B:15"];
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(STORE_KEY) || '{}') || {}; } catch (e) { state = {}; }
+  function tally() {
+    var c = { approve:0, reject:0, defer:0 };
+    ids.forEach(function (id) { var v = state[id] && state[id].decision; if (v && c.hasOwnProperty(v)) c[v]++; });
+    document.getElementById('c-approve').textContent = c.approve;
+    document.getElementById('c-reject').textContent = c.reject;
+    document.getElementById('c-defer').textContent = c.defer;
+    document.getElementById('c-unvoted').textContent = ids.length - c.approve - c.reject - c.defer;
+  }
+  function applyCardUI(card) {
+    var id = card.getAttribute('data-id'); var rec = state[id] || {};
+    card.classList.remove('voted-approve','voted-reject','voted-defer');
+    card.querySelectorAll('button.vote').forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-vote') === rec.decision); });
+    card.querySelector('.vote-state').textContent = rec.decision ? rec.decision : 'unvoted';
+    if (rec.decision) card.classList.add('voted-' + rec.decision);
+    var ta = card.querySelector('textarea.note'); if (rec.note && !ta.value) ta.value = rec.note;
+  }
+  function save() { localStorage.setItem(STORE_KEY, JSON.stringify(state)); tally(); }
+  function vote(id, d) { state[id] = state[id] || {}; state[id].decision = d; save(); }
+  function noteChange(id, t) { state[id] = state[id] || {}; state[id].note = t; save(); }
+  document.querySelectorAll('.card').forEach(function (card) {
+    var id = card.getAttribute('data-id'); applyCardUI(card);
+    card.querySelectorAll('button.vote').forEach(function (btn) {
+      btn.addEventListener('click', function () { vote(id, btn.getAttribute('data-vote')); applyCardUI(card); });
+    });
+    var ta = card.querySelector('textarea.note'); ta.addEventListener('input', function () { noteChange(id, ta.value); });
+  });
+  tally();
+  document.getElementById('downloadBtn').addEventListener('click', function () {
+    var decided = ids.filter(function (id) { return state[id] && state[id].decision; }).length;
+    var payload = { sheet_id: SHEET_ID, generated: "18-07-2026", decided: decided,
+      items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '' }; }) };
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
+    var url = URL.createObjectURL(blob); var a = document.createElement('a');
+    a.href = url; a.download = SHEET_ID + '_decisions.json'; document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+  });
+  var filterbar = document.getElementById('filterbar');
+  filterbar.addEventListener('click', function (e) {
+    var btn = e.target.closest('button[data-filter]'); if (!btn) return;
+    filterbar.querySelectorAll('button').forEach(function (b) { b.classList.remove('active'); });
+    btn.classList.add('active'); var f = btn.getAttribute('data-filter');
+    document.querySelectorAll('.card').forEach(function (card) {
+      var show = true;
+      if (f === 'unvoted') { var id = card.getAttribute('data-id'); show = !(state[id] && state[id].decision); }
+      else if (f !== 'all') { show = card.getAttribute('data-filt') === f; }
+      card.style.display = show ? '' : 'none';
+    });
+  });
+  var cardsEl = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  var activeIdx = 0;
+  function visibleCards() { return cardsEl.filter(function (c) { return c.style.display !== 'none'; }); }
+  document.addEventListener('keydown', function (e) {
+    if (e.target.tagName === 'TEXTAREA') return;
+    var vis = visibleCards(); if (!vis.length) return;
+    if (activeIdx >= vis.length) activeIdx = vis.length - 1;
+    var card = vis[activeIdx]; var id = card.getAttribute('data-id');
+    if (e.key === 'a') { vote(id, 'approve'); applyCardUI(card); }
+    else if (e.key === 'r') { vote(id, 'reject'); applyCardUI(card); }
+    else if (e.key === 'd') { vote(id, 'defer'); applyCardUI(card); }
+    else if (e.key === 'ArrowDown') { activeIdx = Math.min(activeIdx + 1, vis.length - 1); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'center'}); }
+    else if (e.key === 'ArrowUp') { activeIdx = Math.max(activeIdx - 1, 0); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'center'}); }
+    else return;
+    e.preventDefault();
+  });
+
+  var saveHandle = null, saveTimer = null;
+  function exportPayload() {
+    var decided = ids.filter(function (id) { return state[id] && state[id].decision; }).length;
+    return JSON.stringify({ sheet_id: SHEET_ID, generated: new Date().toISOString(), decided: decided,
+      items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '' }; }) }, null, 2);
+  }
+  function scheduleAutosave() {
+    if (!saveHandle) return;
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(function () {
+      saveHandle.createWritable().then(function (w) {
+        w.write(exportPayload()).then(function () { w.close(); });
+      }).catch(function () {});
+    }, 1000);
+  }
+  var _origSave = save;
+  save = function () { _origSave(); scheduleAutosave(); };
+  if (window.showSaveFilePicker) {
+    var saveBtn = document.getElementById('saveBtn');
+    saveBtn.style.display = '';
+    saveBtn.addEventListener('click', function () {
+      window.showSaveFilePicker({suggestedName: SHEET_ID + '_decisions.json'}).then(function (h) {
+        saveHandle = h; scheduleAutosave();
+      }).catch(function () {});
+    });
+  }
+})();
+</script>
+</body>
+</html>

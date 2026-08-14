@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="color-scheme" content="dark">
+<title>Правила членения сложных слов PWG: ратификация — 30 items</title>
+<style>
+  :root { color-scheme: dark; --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --text:#e6e6e6; --muted:#9aa0aa;
+          --accent:#5b8cff; --ok:#3fb950; --bad:#f85149; --defer:#d29922; --border:#2a2f3a; }
+  * { box-sizing: border-box; }
+  body { background:var(--bg); color:var(--text); font-family:-apple-system,Segoe UI,Roboto,sans-serif;
+         margin:0; padding:0 0 120px 0; }
+  header.top { position:sticky; top:0; z-index:10; background:var(--panel); border-bottom:1px solid var(--border);
+               padding:14px 20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+  header.top h1 { font-size:16px; margin:0; }
+  header.top .sub { color:var(--muted); font-size:12px; max-width:760px; }
+  .tally { display:flex; gap:14px; font-size:13px; }
+  .tally span.count { font-weight:700; }
+  .tally .approve { color:var(--ok); } .tally .reject { color:var(--bad); }
+  .tally .defer { color:var(--defer); } .tally .unvoted { color:var(--muted); }
+  .toolbar { padding:10px 20px; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  button.dl { background:var(--accent); color:#fff; border:none; padding:8px 14px; border-radius:6px;
+              cursor:pointer; font-size:13px; }
+  button.dl:hover { opacity:.9; }
+  .filterbar { display:flex; gap:6px; flex-wrap:wrap; }
+  .filterbar button { background:var(--panel2); border:1px solid var(--border); color:var(--text);
+                       padding:6px 10px; border-radius:14px; font-size:12px; cursor:pointer; }
+  .filterbar button.active { border-color:var(--accent); color:var(--accent); }
+  main { max-width:980px; margin:0 auto; padding:10px 20px; }
+  .card { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:16px;
+          margin-bottom:16px; }
+  .card.voted-approve { border-left:4px solid var(--ok); }
+  .card.voted-reject { border-left:4px solid var(--bad); }
+  .card.voted-defer { border-left:4px solid var(--defer); }
+  .card header { display:flex; justify-content:space-between; align-items:baseline; }
+  .card .hw { font-size:18px; font-weight:700; }
+  .badge { font-size:11px; background:var(--panel2); padding:2px 8px; border-radius:10px;
+           margin-left:8px; color:var(--muted); }
+  .question { margin:8px 0 12px; font-size:14px; }
+  .panel { background:var(--panel2); border-radius:8px; padding:10px 12px; font-size:13px; margin-bottom:10px; }
+  .panel h4 { margin:0 0 6px; font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+  .panel pre { white-space:pre-wrap; word-break:break-word; margin:0; font-size:12px; line-height:1.45; }
+  .chip { display:inline-block; background:#263042; border-radius:5px; padding:2px 7px; margin:2px 3px 2px 0; font-size:12px; }
+  .muted { color:var(--muted); font-style:italic; }
+  .controls { display:flex; align-items:center; gap:8px; margin-top:4px; }
+  button.vote { border:1px solid var(--border); background:var(--panel2); color:var(--text);
+                padding:7px 12px; border-radius:6px; cursor:pointer; font-size:13px; }
+  button.vote.approve.active { background:var(--ok); border-color:var(--ok); color:#04240b; }
+  button.vote.reject.active { background:var(--bad); border-color:var(--bad); color:#2a0a08; }
+  button.vote.defer.active { background:var(--defer); border-color:var(--defer); color:#2a1d02; }
+  .vote-state { margin-left:6px; font-size:12px; color:var(--muted); }
+  textarea.note { width:100%; margin-top:10px; min-height:88px; background:#11141a !important; color:#e6e6e6 !important;
+                  -webkit-text-fill-color:#e6e6e6; border:1px solid var(--border); border-radius:6px; padding:8px; font-size:13px;
+                  font-family:inherit; resize:vertical; }
+  textarea.note::placeholder { color:var(--muted); opacity:1; }
+  footer.hint { max-width:980px; margin:20px auto; padding:0 20px; color:var(--muted); font-size:12px; }
+  kbd { background:#263042; border-radius:4px; padding:1px 5px; font-size:11px; }
+  .idchip { font-family:ui-monospace,Consolas,monospace; font-size:11px; color:var(--muted);
+            background:var(--panel2); border:1px solid var(--border); padding:2px 7px;
+            border-radius:6px; user-select:all; }
+  .card header { gap:10px; }
+  .hw a.hwlink { color:inherit; text-decoration:underline dotted; text-underline-offset:3px; }
+  .hw a.hwlink:hover { color:var(--accent); }
+  mark.hl { background:#453407; color:#ffd75e; padding:0 2px; border-radius:3px; }
+  .savebanner { max-width:980px; margin:10px auto 0; padding:8px 20px; font-size:12.5px; }
+  .savebanner code { background:var(--panel2); border:1px solid var(--border); padding:1px 6px; border-radius:5px; }
+  .ratingrow { display:flex; align-items:center; gap:6px; margin-top:10px; flex-wrap:wrap; }
+  .ratinglabel { font-size:12px; color:var(--muted); margin-right:4px; }
+  button.rate { border:1px solid var(--border); background:var(--panel2); color:var(--text);
+                width:34px; padding:6px 0; border-radius:6px; cursor:pointer; font-size:13px; }
+  button.rate.active { background:var(--accent); border-color:var(--accent); color:#fff; }
+  button.rate.active.below { background:var(--defer); border-color:var(--defer); color:#2a1d02; }
+  .rate-state { font-size:12px; color:var(--muted); margin-left:4px; }
+  :root { --fs:1.5; }
+  header.top h1 { font-size:calc(16px * var(--fs)) !important; }
+  header.top .sub { font-size:calc(12px * var(--fs)) !important; }
+  .tally, button.dl, button.vote, button.rate, textarea.note, .reject-label-select,
+  #strictReviewerWrap, #strictReviewerWrap input { font-size:calc(13px * var(--fs)) !important; }
+  .filterbar button, .fsctl button, .fsctl .fsval, .chip, .vote-state, .rate-state,
+  .ratinglabel, .rejectlabellabel, footer.hint, div.legend,
+  #strictReviewError { font-size:calc(12px * var(--fs)) !important; }
+  .card .hw { font-size:calc(18px * var(--fs)) !important; }
+  .badge, .panel h4, kbd, .idchip { font-size:calc(11px * var(--fs)) !important; }
+  .question { font-size:calc(14px * var(--fs)) !important; }
+  .panel { font-size:calc(13px * var(--fs)) !important; }
+  .panel pre { font-size:calc(13.5px * var(--fs)) !important; line-height:1.55; }
+  .panel .anatomy { font-size:calc(12.5px * var(--fs)) !important; }
+  .savebanner { font-size:calc(12.5px * var(--fs)) !important; }
+  .fsctl { display:flex; align-items:center; gap:4px; }
+  .fsctl button { background:var(--panel2); border:1px solid var(--border); color:var(--text);
+                  padding:6px 10px; border-radius:14px; cursor:pointer; line-height:1; }
+  .fsctl .fsval { color:var(--muted); min-width:3.4em; text-align:center; }
+  .facetbar { max-width:980px; margin:0 auto; padding:4px 20px 0;
+              font-size:calc(12px * var(--fs)); }
+  .facetrow { display:flex; align-items:baseline; gap:8px; flex-wrap:wrap; margin-bottom:6px; }
+  .facetrow .facetlabel { color:var(--muted); min-width:9em; font-size:calc(12px * var(--fs)); }
+  .facetbar button { background:var(--panel2); border:1px solid var(--border); color:var(--text);
+                     padding:4px 9px; border-radius:14px; cursor:pointer;
+                     font-size:calc(12px * var(--fs)); }
+  .facetbar button.active { border-color:var(--accent); color:var(--accent); }
+  .facetbar button.facetreset { border-style:dashed; }
+  .facetcount { color:var(--muted); padding:2px 0 6px; font-size:calc(12px * var(--fs)); }
+  /* caller css */
+
+.claim{font-size:1.05em}
+table.sides{border-collapse:collapse;width:100%;margin:.6em 0}
+table.sides th{text-align:left;font-weight:600;opacity:.7;font-size:.85em;padding:.2em .5em}
+table.sides td{vertical-align:top;padding:.35em .5em;border-top:1px solid rgba(128,128,128,.35)}
+table.sides td.split{font-size:1.25em;white-space:nowrap}
+.prov{opacity:.65;font-size:.8em;font-weight:400}
+.miss{opacity:.75;font-style:italic}
+.ev code{font-size:.95em}
+.stat{opacity:.7;font-weight:400;font-size:.85em}
+.same{opacity:.55;font-style:italic;font-size:.9em}
+.note{opacity:.9;border-left:3px solid rgba(128,128,160,.5);padding-left:.7em;margin:.5em 0}
+table.stats{border-collapse:collapse;margin:.8em 0;font-size:.85em}
+table.stats th{text-align:left;opacity:.7;font-weight:600;padding:.2em .8em .2em 0}
+table.stats td{padding:.15em .8em .15em 0;border-top:1px solid rgba(128,128,128,.25)}
+table.stats td.num{text-align:right;font-variant-numeric:tabular-nums}
+table.stats tr.tot td{font-weight:700;border-top:2px solid rgba(128,128,128,.5)}
+</style>
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>Правила членения сложных слов PWG: ратификация — 30 items</h1>
+    <div class="sub">Generated 29-07-2026 &middot; sheet_id <code>sanskritlexicography-pwg-compound-rules_ratify30</code> &middot; 30 карточек, 7 правил. Вы решаете НЕ отдельные слова, а <b>правила</b>: каждое правило уже разобрало целый класс строк очереди <code>differs</code> (всего 4 353). Приняв правило, вы снимаете весь его класс с голосования навсегда; отклонив — возвращаете класс в очередь. Ратификация всех 7 правил снимает <b>3 975 строк</b> (91.3 % очереди).<table class="stats"><tr><th>Правило</th><th>строк очереди</th><th>доля</th><th>карточек здесь</th></tr><tr><td>Одно и то же членение, разная форма члена</td><td class="num">3 152</td><td class="num">72.4 %</td><td class="num">10</td></tr><tr><td>MW оставляет с суффиксом, PWG приводит основу</td><td class="num">334</td><td class="num">7.7 %</td><td class="num">4</td></tr><tr><td>Разрез MW оставляет не-слово</td><td class="num">293</td><td class="num">6.7 %</td><td class="num">4</td></tr><tr><td>Анусвара справа от первой части</td><td class="num">107</td><td class="num">2.5 %</td><td class="num">3</td></tr><tr><td>Разрез MW поглощает начальный гласный</td><td class="num">67</td><td class="num">1.5 %</td><td class="num">3</td></tr><tr><td>MW отделяет словообразовательный суффикс как член</td><td class="num">14</td><td class="num">0.3 %</td><td class="num">3</td></tr><tr><td>MW отделяет связанную морфему как член</td><td class="num">8</td><td class="num">0.2 %</td><td class="num">3</td></tr><tr class="tot"><td>Итого</td><td class="num">3 975</td><td class="num">91.3 %</td><td class="num">30</td></tr></table></div>
+  </div>
+  <div class="tally" id="tally">
+    <span class="approve">&#9989; <span class="count" id="c-approve">0</span></span>
+    <span class="reject">&#10060; <span class="count" id="c-reject">0</span></span>
+    <span class="defer">&#9208; <span class="count" id="c-defer">0</span></span>
+    <span class="unvoted">&#9711; <span class="count" id="c-unvoted">30</span></span>
+  </div>
+</header>
+<div class="savebanner">&#128229; Your export downloads as <code>sanskritlexicography-pwg-compound-rules_ratify30_decisions.json</code> &rarr; save it to <code>RussianTranslation\review\sanskritlexicography-pwg-compound-rules_ratify30_decisions.json</code> (the <code>sheet_id</code> inside the file is <code>sanskritlexicography-pwg-compound-rules_ratify30</code> — that is how a later session knows which sheet these decisions belong to).</div>
+<div class="toolbar">
+  <button class="dl" id="downloadBtn">Скачать decisions.json</button><button class="dl" id="saveBtn" style="display:none;margin-left:8px">Сохранить в папку…</button>
+  <label id="strictReviewerWrap" style="display:flex;align-items:center;gap:6px;font-size:13px">
+    Reviewer <input id="strictReviewer" type="text" autocomplete="name" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:7px 9px" />
+  </label>
+  <span id="strictReviewError" role="alert" style="color:var(--bad);font-size:12px"></span>
+  <div class="fsctl" title="text size — persists in this browser"><button type="button" id="fsDown" aria-label="smaller text">A&minus;</button><span class="fsval" id="fsVal"></span><button type="button" id="fsUp" aria-label="larger text">A+</button></div>
+  <div class="filterbar" id="filterbar"><button data-filter="all" class="active">all</button><button data-filter="unvoted">unvoted only</button></div>
+</div>
+<div class="facetbar" id="facetbar">
+  <div class="facetrow"><span class="facetlabel">Правило</span><button type="button" data-facet-key="rule" data-facet-val="Анусвара справа от первой части">Анусвара справа от первой части</button><button type="button" data-facet-key="rule" data-facet-val="Разрез MW поглощает начальный гласный">Разрез MW поглощает начальный гласный</button><button type="button" data-facet-key="rule" data-facet-val="Разрез MW оставляет не-слово">Разрез MW оставляет не-слово</button><button type="button" data-facet-key="rule" data-facet-val="MW отделяет связанную морфему как член">MW отделяет связанную морфему как член</button><button type="button" data-facet-key="rule" data-facet-val="MW отделяет словообразовательный суффикс как член">MW отделяет словообразовательный суффикс как член</button><button type="button" data-facet-key="rule" data-facet-val="MW оставляет с суффиксом, PWG приводит основу">MW оставляет с суффиксом, PWG приводит основу</button><button type="button" data-facet-key="rule" data-facet-val="Одно и то же членение, разная форма члена">Одно и то же членение, разная форма члена</button></div>
+  <div class="facetrow"><span class="facetlabel">Частота DCS</span><button type="button" data-facet-key="dcs" data-facet-val="есть">есть</button><button type="button" data-facet-key="dcs" data-facet-val="нет">нет</button></div>
+  <div class="facetrow"><span class="facetlabel"></span><button type="button" class="facetreset" data-facet-reset="1">clear facets</button><span class="facetcount" id="facetcount"></span></div>
+</div>
+<main id="cards">
+
+  <section class="card" data-id="janaMtapa" data-filt="mw_anusvara_right_of_boundary" data-facets="{&quot;dcs&quot;: [&quot;нет&quot;], &quot;rule&quot;: [&quot;Анусвара справа от первой части&quot;]}">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/3-0026?w=janaMtapa" target="_blank" rel="noopener">janaṃtapa</a> </div><span class="idchip" title="card id — cite this id back when discussing this card">janaMtapa</span></header>
+    <div class="question"><p class="claim"><b>Правило:</b> Анусвара справа от первой части <span class="stat">— покрывает 107 строк очереди (2.5 % из 4 353)</span></p><p>MW печатает границу как <code>jana—ṃ-tapa</code>: анусвара вынесена за дефис вправо. Это деталь записи, а не утверждение, что <i>ṃtapa</i> — отдельное слово; читается <b>janaṃ + tapa</b>. PWG пишет тот же член как <i>janam</i> (винительный падеж). Это одно и то же членение — верен PWG.</p><table class="sides"><tr><th></th><th>членение</th><th>что напечатано в словаре</th></tr><tr><td><b>PWG</b><br><span class="prov">члены как ЛЕКСЕМЫ, из этимологической скобки статьи</span></td><td class="split">janam + tapa</td><td><code title="источник (SLP1): ({#janam#}, &lt;ab&gt;acc.&lt;/ab&gt; von {#jana#}, + {#tapa#})">(<i>janam</i>, <abbr title="Accusativ — accusative (case)">acc.</abbr> von <i>jana</i>, + <i>tapa</i>)</code></td></tr><tr><td><b>MW split</b><br><span class="prov">сегментация MW &lt;k2&gt; эм-дефисами (Дж. Фундербёрк); по построению склады&shy;вается обратно в заголовок</span></td><td class="split">janaṃ + tapa</td><td><code title="источник (SLP1): jana—M-tapa">jana—ṃ-tapa</code></td></tr></table><p class="note">MW печатает <code title="источник (SLP1): jana—M-tapa">jana—ṃ-tapa</code>: анусвара отделена дефисом и стоит справа от границы. Это запись, а не утверждение, что <i>ṃtapa</i> — самостоятельное слово; здесь она приклеена обратно к первой части.</p><p class="ev"><b>Что именно различается:</b> <code title="источник (SLP1): index_members_unattested=Mtapa; mw_hyphen_members=M-tapa; pwg_members_unattested=janam">член указателя не является самостоятельным словом: ṃtapa; дефисные члены MW: ṃ-tapa; член PWG не является самостоятельным словом: janam</code></p></div>
+    <div class="panel"><h4>Источники</h4><a href="https://gasyoun.github.io/kosha/colocation/#pwg/3-0026?w=janaMtapa">статья PWG (со-локация kosha)</a> · <a href="https://sanskrit-lexicon.uni-koeln.de/scans/PWGScan/2020/web/webtc/servepdf.php?page=26">скан PWG, столбец 3-0026</a> · <a href="https://www.sanskrit-lexicon.uni-koeln.de/scans/MWScan/2020/web/webtc/indexcaller.php">MW в Cologne</a> · PWG <code>L26510</code></div><div class="panel"><h4>Частотность</h4><span class="miss">Нет данных DCS для этой леммы — слово в корпусе DCS не засвидетельствовано, поэтому примера употребления показать нельзя.</span></div><div class="panel"><h4>Панини</h4><span class="miss">Сутр Панини для этого заголовка нет.</span></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Правило верно</button>
+      <button class="vote reject" data-vote="reject">&#10060; Правило ломается</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="rule_wrong_here">Правило здесь не работает — членение PWG неверно</option><option value="rule_too_broad">Правило само по себе верно, но эту карточку не покрывает</option><option value="both_wrong">Оба членения неверны (правильное укажите в примечании)</option><option value="need_source">Не могу решить без сканa/источника</option></select></div>
+    <textarea class="note" placeholder="Если правило здесь ломается — напишите, какое членение верно и почему"></textarea>
+  </section>
+
+  <section class="card" data-id="meGaMkara" data-filt="mw_anusvara_right_of_boundary" data-facets="{&quot;dcs&quot;: [&quot;нет&quot;], &quot;rule&quot;: [&quot;Анусвара справа от первой части&quot;]}">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/5-0891?w=meGaMkara" target="_blank" rel="noopener">meghaṃkara</a> </div><span class="idchip" title="card id — cite this id back when discussing this card">meGaMkara</span></header>
+    <div class="question"><p class="claim"><b>Правило:</b> Анусвара справа от первой части <span class="stat">— покрывает 107 строк очереди (2.5 % из 4 353)</span></p><p>MW печатает границу как <code>jana—ṃ-tapa</code>: анусвара вынесена за дефис вправо. Это деталь записи, а не утверждение, что <i>ṃtapa</i> — отдельное слово; читается <b>janaṃ + tapa</b>. PWG пишет тот же член как <i>janam</i> (винительный падеж). Это одно и то же членение — верен PWG.</p><table class="sides"><tr><th></th><th>членение</th><th>что напечатано в словаре</th></tr><tr><td><b>PWG</b><br><span class="prov">члены как ЛЕКСЕМЫ, из этимологической скобки статьи</span></td><td class="split">megham + kara</td><td><code title="источник (SLP1): ({#meGam#}, &lt;ab&gt;acc.&lt;/ab&gt; von {#meGa#}, + &lt;hom&gt;1.&lt;/hom&gt; {#kara#})">(<i>megham</i>, <abbr title="Accusativ — accusative (case)">acc.</abbr> von <i>megha</i>, + 1.  <i>kara</i>)</code></td></tr><tr><td><b>MW split</b><br><span class="prov">сегментация MW &lt;k2&gt; эм-дефисами (Дж. Фундербёрк); по построению склады&shy;вается обратно в заголовок</span></td><td class="split">meghaṃ + kara</td><td><code title="источник (SLP1): meGa—M-kara">megha—ṃ-kara</code></td></tr></table><p class="note">MW печатает <code title="источник (SLP1): meGa—M-kara">megha—ṃ-kara</code>: анусвара отделена дефисом и стоит справа от границы. Это запись, а не утверждение, что <i>ṃkara</i> — самостоятельное слово; здесь она приклеена обратно к первой части.</p><p class="ev"><b>Что именно различается:</b> <code title="источник (SLP1): index_members_unattested=Mkara; mw_hyphen_members=M-kara; pwg_members_unattested=meGam">член указателя не является самостоятельным словом: ṃkara; дефисные члены MW: ṃ-kara; член PWG не является самостоятельным словом: megham</code></p></div>
+    <div class="panel"><h4>Источники</h4><a href="https://gasyoun.github.io/kosha/colocation/#pwg/5-0891?w=meGaMkara">статья PWG (со-локация kosha)</a> · <a href="https://sanskrit-lexicon.uni-koeln.de/scans/PWGScan/2020/web/webtc/servepdf.php?page=891">скан PWG, столбец 5-0891</a> · <a href="https://www.sanskrit-lexicon.uni-koeln.de/scans/MWScan/2020/web/webtc/indexcaller.php">MW в Cologne</a> · PWG <code>L61804</code></div><div class="panel"><h4>Частотность</h4><span class="miss">Нет данных DCS для этой леммы — слово в корпусе DCS не засвидетельствовано, поэтому примера употребления показать нельзя.</span></div><div class="panel"><h4>Панини</h4>Сутры: <a href="https://ashtadhyayi.com/sutraani/3/2/43">P. 3.2.43</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Правило верно</button>
+      <button class="vote reject" data-vote="reject">&#10060; Правило ломается</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="rule_wrong_here">Правило здесь не работает — членение PWG неверно</option><option value="rule_too_broad">Правило само по себе верно, но эту карточку не покрывает</option><option value="both_wrong">Оба членения неверны (правильное укажите в примечании)</option><option value="need_source">Не могу решить без сканa/источника</option></select></div>
+    <textarea class="note" placeholder="Если правило здесь ломается — напишите, какое членение верно и почему"></textarea>
+  </section>
+
+  <section class="card" data-id="puzpaMDaya" data-filt="mw_anusvara_right_of_boundary" data-facets="{&quot;dcs&quot;: [&quot;нет&quot;], &quot;rule&quot;: [&quot;Анусвара справа от первой части&quot;]}">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/4-0819?w=puzpaMDaya" target="_blank" rel="noopener">puṣpaṃdhaya</a> </div><span class="idchip" title="card id — cite this id back when discussing this card">puzpaMDaya</span></header>
+    <div class="question"><p class="claim"><b>Правило:</b> Анусвара справа от первой части <span class="stat">— покрывает 107 строк очереди (2.5 % из 4 353)</span></p><p>MW печатает границу как <code>jana—ṃ-tapa</code>: анусвара вынесена за дефис вправо. Это деталь записи, а не утверждение, что <i>ṃtapa</i> — отдельное слово; читается <b>janaṃ + tapa</b>. PWG пишет тот же член как <i>janam</i> (винительный падеж). Это одно и то же членение — верен PWG.</p><table class="sides"><tr><th></th><th>членение</th><th>что напечатано в словаре</th></tr><tr><td><b>PWG</b><br><span class="prov">члены как ЛЕКСЕМЫ, из этимологической скобки статьи</span></td><td class="split">puṣpam + dhaya</td><td><code title="источник (SLP1): ({#puzpam#}, &lt;ab&gt;acc.&lt;/ab&gt; von {#puzpa#}, + {#Daya#})">(<i>puṣpam</i>, <abbr title="Accusativ — accusative (case)">acc.</abbr> von <i>puṣpa</i>, + <i>dhaya</i>)</code></td></tr><tr><td><b>MW split</b><br><span class="prov">сегментация MW &lt;k2&gt; эм-дефисами (Дж. Фундербёрк); по построению склады&shy;вается обратно в заголовок</span></td><td class="split">puṣpaṃ + dhaya</td><td><code title="источник (SLP1): puzpa—M-Daya">puṣpa—ṃ-dhaya</code></td></tr></table><p class="note">MW печатает <code title="источник (SLP1): puzpa—M-Daya">puṣpa—ṃ-dhaya</code>: анусвара отделена дефисом и стоит справа от границы. Это запись, а не утверждение, что <i>ṃdhaya</i> — самостоятельное слово; здесь она приклеена обратно к первой части.</p><p class="ev"><b>Что именно различается:</b> <code title="источник (SLP1): index_members_unattested=MDaya; mw_hyphen_members=M-Daya; pwg_members_unattested=puzpam">член указателя не является самостоятельным словом: ṃdhaya; дефисные члены MW: ṃ-dhaya; член PWG не является самостоятельным словом: puṣpam</code></p></div>
+    <div class="panel"><h4>Источники</h4><a href="https://gasyoun.github.io/kosha/colocation/#pwg/4-0819?w=puzpaMDaya">статья PWG (со-локация kosha)</a> · <a href="https://sanskrit-lexicon.uni-koeln.de/scans/PWGScan/2020/web/webtc/servepdf.php?page=819">скан PWG, столбец 4-0819</a> · <a href="https://www.sanskrit-lexicon.uni-koeln.de/scans/MWScan/2020/web/webtc/indexcaller.php">MW в Cologne</a> · PWG <code>L46447</code></div><div class="panel"><h4>Частотность</h4><span class="miss">Нет данных DCS для этой леммы — слово в корпусе DCS не засвидетельствовано, поэтому примера употребления показать нельзя.</span></div><div class="panel"><h4>Панини</h4><span class="miss">Сутр Панини для этого заголовка нет.</span></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Правило верно</button>
+      <button class="vote reject" data-vote="reject">&#10060; Правило ломается</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="rule_wrong_here">Правило здесь не работает — членение PWG неверно</option><option value="rule_too_broad">Правило само по себе верно, но эту карточку не покрывает</option><option value="both_wrong">Оба членения неверны (правильное укажите в примечании)</option><option value="need_source">Не могу решить без сканa/источника</option></select></div>
+    <textarea class="note" placeholder="Если правило здесь ломается — напишите, какое членение верно и почему"></textarea>
+  </section>
+
+  <section class="card" data-id="mudrANka" data-filt="mw_cut_absorbs_initial_vowel" data-facets="{&quot;dcs&quot;: [&quot;нет&quot;], &quot;rule&quot;: [&quot;Разрез MW поглощает начальный гласный&quot;]}">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/5-0829?w=mudrANka" target="_blank" rel="noopener">mudrāṅka</a> </div><span class="idchip" title="card id — cite this id back when discussing this card">mudrANka</span></header>
+    <div class="question"><p class="claim"><b>Правило:</b> Разрез MW поглощает начальный гласный <span class="stat">— покрывает 67 строк очереди (1.5 % из 4 353)</span></p><p>Разрез MW относит начальный гласный второго члена к первому (результат сандхи в записи). Членение то же; верен PWG.</p><table class="sides"><tr><th></th><th>членение</th><th>что напечатано в словаре</th></tr><tr><td><b>PWG</b><br><span class="prov">члены как ЛЕКСЕМЫ, из этимологической скобки статьи</span></td><td class="split">mudrā + aṅka</td><td><span class="same">= членение</span></td></tr><tr><td><b>MW split</b><br><span class="prov">сегментация MW &lt;k2&gt; эм-дефисами (Дж. Фундербёрк); по построению склады&shy;вается обратно в заголовок</span></td><td class="split">mudrā + ṅka</td><td><code title="источник (SLP1): mudrA—Nka">mudrā—ṅka</code></td></tr></table><p class="ev"><b>Что именно различается:</b> <code title="источник (SLP1): absorbed_vowel=a; index_members_unattested=Nka">поглощённый начальный гласный: a; член указателя не является самостоятельным словом: ṅka</code></p></div>
+    <div class="panel"><h4>Источники</h4><a href="https://gasyoun.github.io/kosha/colocation/#pwg/5-0829?w=mudrANka">статья PWG (со-локация kosha)</a> · <a href="https://sanskrit-lexicon.uni-koeln.de/scans/PWGScan/2020/web/webtc/servepdf.php?page=829">скан PWG, столбец 5-0829</a> · <a href="https://www.sanskrit-lexicon.uni-koeln.de/scans/MWScan/2020/web/webtc/indexcaller.php">MW в Cologne</a> · PWG <code>L60996</code></div><div class="panel"><h4>Частотность</h4><span class="miss">Нет данных DCS для этой леммы — слово в корпусе DCS не засвидетельствовано, поэтому примера употребления показать нельзя.</span></div><div class="panel"><h4>Панини</h4><span class="miss">Сутр Панини для этого заголовка нет.</span></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Правило верно</button>
+      <button class="vote reject" data-vote="reject">&#10060; Правило ломается</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="rule_wrong_here">Правило здесь не работает — членение PWG неверно</option><option value="rule_too_broad">Правило само по себе верно, но эту карточку не покрывает</option><option value="both_wrong">Оба членения неверны (правильное укажите в примечании)</option><option value="need_source">Не могу решить без сканa/источника</option></select></div>
+    <textarea class="note" placeholder="Если правило здесь ломается — напишите, какое членение верно и почему"></textarea>
+  </section>
+
+  <section class="card" data-id="tamori" data-filt="mw_cut_absorbs_initial_vowel" data-facets="{&quot;dcs&quot;: [&quot;есть&quot;], &quot;rule&quot;: [&quot;Разрез MW поглощает начальный гласный&quot;]}">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/3-0256?w=tamori" target="_blank" rel="noopener">tamori</a> </div><span class="idchip" title="card id — cite this id back when discussing this card">tamori</span></header>
+    <div class="question"><p class="claim"><b>Правило:</b> Разрез MW поглощает начальный гласный <span class="stat">— покрывает 67 строк очереди (1.5 % из 4 353)</span></p><p>Разрез MW относит начальный гласный второго члена к первому (результат сандхи в записи). Членение то же; верен PWG.</p><table class="sides"><tr><th></th><th>членение</th><th>что напечатано в словаре</th></tr><tr><td><b>PWG</b><br><span class="prov">члены как ЛЕКСЕМЫ, из этимологической скобки статьи</span></td><td class="split">tamas + ari</td><td><span class="same">= членение</span></td></tr><tr><td><b>MW split</b><br><span class="prov">сегментация MW &lt;k2&gt; эм-дефисами (Дж. Фундербёрк); по построению склады&shy;вается обратно в заголовок</span></td><td class="split">tamo + ri</td><td><code title="источник (SLP1): tamo—'ri">tamo—'ri</code></td></tr></table><p class="note">В <code title="источник (SLP1): tamo—'ri">tamo—'ri</code> апостроф — <b>аваграха</b>: он стоит на месте начального <i>a</i>, выпавшего по сандхи, то есть восходит к <i>tamo—ari</i>.</p><p class="ev"><b>Что именно различается:</b> <code title="источник (SLP1): absorbed_vowel=a">поглощённый начальный гласный: a</code></p></div>
+    <div class="panel"><h4>Источники</h4><a href="https://gasyoun.github.io/kosha/colocation/#pwg/3-0256?w=tamori">статья PWG (со-локация kosha)</a> · <a href="https://sanskrit-lexicon.uni-koeln.de/scans/PWGScan/2020/web/webtc/servepdf.php?page=256">скан PWG, столбец 3-0256</a> · <a href="https://www.sanskrit-lexicon.uni-koeln.de/scans/MWScan/2020/web/webtc/indexcaller.php">MW в Cologne</a> · PWG <code>L28857</code></div><div class="panel"><h4>Частотность</h4>DCS: <b>2</b> вхождений корпуса.</div><div class="panel"><h4>Панини</h4><span class="miss">Сутр Панини для этого заголовка нет.</span></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Правило верно</button>
+      <button class="vote reject" data-vote="reject">&#10060; Правило ломается</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="rule_wrong_here">Правило здесь не работает — членение PWG неверно</option><option value="rule_too_broad">Правило само по себе верно, но эту карточку не покрывает</option><option value="both_wrong">Оба членения неверны (правильное укажите в примечании)</option><option value="need_source">Не могу решить без сканa/источника</option></select></div>
+    <textarea class="note" placeholder="Если правило здесь ломается — напишите, какое членение верно и почему"></textarea>
+  </section>
+
+  <section class="card" data-id="tejohvA" data-filt="mw_cut_absorbs_initial_vowel" data-facets="{&quot;dcs&quot;: [&quot;есть&quot;], &quot;rule&quot;: [&quot;Разрез MW поглощает начальный гласный&quot;]}">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/3-0394?w=tejohvA" target="_blank" rel="noopener">tejohvā</a> </div><span class="idchip" title="card id — cite this id back when discussing this card">tejohvA</span></header>
+    <div class="question"><p class="claim"><b>Правило:</b> Разрез MW поглощает начальный гласный <span class="stat">— покрывает 67 строк очереди (1.5 % из 4 353)</span></p><p>Разрез MW относит начальный гласный второго члена к первому (результат сандхи в записи). Членение то же; верен PWG.</p><table class="sides"><tr><th></th><th>членение</th><th>что напечатано в словаре</th></tr><tr><td><b>PWG</b><br><span class="prov">члены как ЛЕКСЕМЫ, из этимологической скобки статьи</span></td><td class="split">tejas + āhvā</td><td><span class="same">= членение</span></td></tr><tr><td><b>MW split</b><br><span class="prov">сегментация MW &lt;k2&gt; эм-дефисами (Дж. Фундербёрк); по построению склады&shy;вается обратно в заголовок</span></td><td class="split">tejo + hvā</td><td><code title="источник (SLP1): tejo—'hvA">tejo—'hvā</code></td></tr></table><p class="note">В <code title="источник (SLP1): tejo—'hvA">tejo—'hvā</code> апостроф — <b>аваграха</b>: он стоит на месте начального <i>a</i>, выпавшего по сандхи, то есть восходит к <i>tejo—ahvā</i>.</p><p class="ev"><b>Что именно различается:</b> <code title="источник (SLP1): absorbed_vowel=A">поглощённый начальный гласный: ā</code></p></div>
+    <div class="panel"><h4>Источники</h4><a href="https://gasyoun.github.io/kosha/colocation/#pwg/3-0394?w=tejohvA">статья PWG (со-локация kosha)</a> · <a href="https://sanskrit-lexicon.uni-koeln.de/scans/PWGScan/2020/web/webtc/servepdf.php?page=394">скан PWG, столбец 3-0394</a> · <a href="https://www.sanskrit-lexicon.uni-koeln.de/scans/MWScan/2020/web/webtc/indexcaller.php">MW в Cologne</a> · PWG <code>L30506</code></div><div class="panel"><h4>Частотность</h4>DCS: <b>4</b> вхождений корпуса.</div><div class="panel"><h4>Панини</h4><span class="miss">Сутр Панини для этого заголовка нет.</span></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Правило верно</button>
+      <button class="vote reject" data-vote="reject">&#10060; Правило ломается</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="rule_wrong_here">Правило здесь не работает — членение PWG неверно</option><option value="rule_too_broad">Правило само по себе верно, но эту карточку не покрывает</option><option value="both_wrong">Оба членения неверны (правильное укажите в примечании)</option><option value="need_source">Не могу решить без сканa/источника</option></select></div>
+    <textarea class="note" placeholder="Если правило здесь ломается — напишите, какое членение верно и почему"></textarea>
+  </section>
+
+  <section class="card" data-id="BAryAwika" data-filt="mw_cut_leaves_nonword" data-facets="{&quot;dcs&quot;: [&quot;нет&quot;], &quot;rule&quot;: [&quot;Разрез MW оставляет не-слово&quot;]}">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/5-0256?w=BAryAwika" target="_blank" rel="noopener">bhāryāṭika</a> </div><span class="idchip" title="card id — cite this id back when discussing this card">BAryAwika</span></header>
+    <div class="question"><p class="claim"><b>Правило:</b> Разрез MW оставляет не-слово <span class="stat">— покрывает 293 строк очереди (6.7 % из 4 353)</span></p><p>Разрез MW порождает отрезок, который не является самостоятельным словом. Членение PWG даёт словарные члены — верен PWG.</p><table class="sides"><tr><th></th><th>членение</th><th>что напечатано в словаре</th></tr><tr><td><b>PWG</b><br><span class="prov">члены как ЛЕКСЕМЫ, из этимологической скобки статьи</span></td><td class="split">bhāryā + āṭa</td><td><span class="same">= членение</span></td></tr><tr><td><b>MW split</b><br><span class="prov">сегментация MW &lt;k2&gt; эм-дефисами (Дж. Фундербёрк); по построению склады&shy;вается обратно в заголовок</span></td><td class="split">bhāryā + ṭika</td><td><code title="источник (SLP1): BAryA—wika">bhāryā—ṭika</code></td></tr></table><p class="ev"><b>Что именно различается:</b> <code title="источник (SLP1): index_members_unattested=wika">член указателя не является самостоятельным словом: ṭika</code></p></div>
+    <div class="panel"><h4>Источники</h4><a href="https://gasyoun.github.io/kosha/colocation/#pwg/5-0256?w=BAryAwika">статья PWG (со-локация kosha)</a> · <a href="https://sanskrit-lexicon.uni-koeln.de/scans/PWGScan/2020/web/webtc/servepdf.php?page=256">скан PWG, столбец 5-0256</a> · <a href="https://www.sanskrit-lexicon.uni-koeln.de/scans/MWScan/2020/web/webtc/indexcaller.php">MW в Cologne</a> · PWG <code>L54657</code></div><div class="panel"><h4>Частотность</h4><span class="miss">Нет данных DCS для этой леммы — слово в корпусе DCS не засвидетельствовано, поэтому примера употребления показать нельзя.</span></div><div class="panel"><h4>Панини</h4><span class="miss">Сутр Панини для этого заголовка нет.</span></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Правило верно</button>
+      <button class="vote reject" data-vote="reject">&#10060; Правило ломается</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="rule_wrong_here">Правило здесь не работает — членение PWG неверно</option><option value="rule_too_broad">Правило само по себе верно, но эту карточку не покрывает</option><option value="both_wrong">Оба членения неверны (правильное укажите в примечании)</option><option value="need_source">Не могу решить без сканa/источника</option></select></div>
+    <textarea class="note" placeholder="Если правило здесь ломается — напишите, какое членение верно и почему"></textarea>
+  </section>
+
+  <section class="card" data-id="aGaSaMsahan" data-filt="mw_cut_leaves_nonword" data-facets="{&quot;dcs&quot;: [&quot;нет&quot;], &quot;rule&quot;: [&quot;Разрез MW оставляет не-слово&quot;]}">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/1-0044?w=aGaSaMsahan" target="_blank" rel="noopener">aghaśaṃsahan</a> </div><span class="idchip" title="card id — cite this id back when discussing this card">aGaSaMsahan</span></header>
+    <div class="question"><p class="claim"><b>Правило:</b> Разрез MW оставляет не-слово <span class="stat">— покрывает 293 строк очереди (6.7 % из 4 353)</span></p><p>Разрез MW порождает отрезок, который не является самостоятельным словом. Членение PWG даёт словарные члены — верен PWG.</p><table class="sides"><tr><th></th><th>членение</th><th>что напечатано в словаре</th></tr><tr><td><b>PWG</b><br><span class="prov">члены как ЛЕКСЕМЫ, из этимологической скобки статьи</span></td><td class="split">aghaśaṃsa + han</td><td><code title="источник (SLP1): ({#aGaSaMsa#} + {#han#} &lt;lex&gt;adj.&lt;/lex&gt;)">(<i>aghaśaṃsa</i> + <i>han</i> &lt;lex&gt;adj.&lt;/lex&gt;)</code></td></tr><tr><td><b>MW split</b><br><span class="prov">сегментация MW &lt;k2&gt; эм-дефисами (Дж. Фундербёрк); по построению склады&shy;вается обратно в заголовок</span></td><td class="split">agha + śaṃsahan</td><td><code title="источник (SLP1): aGa—SaMsa-ha/n">agha—śaṃsa-han</code></td></tr></table><p class="ev"><b>Что именно различается:</b> <code title="источник (SLP1): index_members_unattested=SaMsahan; mw_hyphen_members=SaMsa-han">член указателя не является самостоятельным словом: śaṃsahan; дефисные члены MW: śaṃsa-han</code></p></div>
+    <div class="panel"><h4>Источники</h4><a href="https://gasyoun.github.io/kosha/colocation/#pwg/1-0044?w=aGaSaMsahan">статья PWG (со-локация kosha)</a> · <a href="https://sanskrit-lexicon.uni-koeln.de/scans/PWGScan/2020/web/webtc/servepdf.php?page=44">скан PWG, столбец 1-0044</a> · <a href="https://www.sanskrit-lexicon.uni-koeln.de/scans/MWScan/2020/web/webtc/indexcaller.php">MW в Cologne</a> · PWG <code>L602</code></div><div class="panel"><h4>Частотность</h4><span class="miss">Нет данных DCS для этой леммы — слово в корпусе DCS не засвидетельствовано, поэтому примера употребления показать нельзя.</span></div><div class="panel"><h4>Панини</h4><span class="miss">Сутр Панини для этого заголовка нет.</span></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Правило верно</button>
+      <button class="vote reject" data-vote="reject">&#10060; Правило ломается</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="rule_wrong_here">Правило здесь не работает — членение PWG неверно</option><option value="rule_too_broad">Правило само по себе верно, но эту карточку не покрывает</option><option value="both_wrong">Оба членения неверны (правильное укажите в примечании)</option><option value="need_source">Не могу решить без сканa/источника</option></select></div>
+    <textarea class="note" placeholder="Если правило здесь ломается — напишите, какое членение верно и почему"></textarea>
+  </section>
+
+  <section class="card" data-id="gozWADyakza" data-filt="mw_cut_leaves_nonword" data-facets="{&quot;dcs&quot;: [&quot;нет&quot;], &quot;rule&quot;: [&quot;Разрез MW оставляет не-слово&quot;]}">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/2-0820?w=gozWADyakza" target="_blank" rel="noopener">goṣṭhādhyakṣa</a> </div><span class="idchip" title="card id — cite this id back when discussing this card">gozWADyakza</span></header>
+    <div class="question"><p class="claim"><b>Правило:</b> Разрез MW оставляет не-слово <span class="stat">— покрывает 293 строк очереди (6.7 % из 4 353)</span></p><p>Разрез MW порождает отрезок, который не является самостоятельным словом. Членение PWG даёт словарные члены — верен PWG.</p><table class="sides"><tr><th></th><th>членение</th><th>что напечатано в словаре</th></tr><tr><td><b>PWG</b><br><span class="prov">члены как ЛЕКСЕМЫ, из этимологической скобки статьи</span></td><td class="split">goṣṭha + adhyakṣa</td><td><span class="same">= членение</span></td></tr><tr><td><b>MW split</b><br><span class="prov">сегментация MW &lt;k2&gt; эм-дефисами (Дж. Фундербёрк); по построению склады&shy;вается обратно в заголовок</span></td><td class="split">go + ṣṭhādhyakṣa</td><td><code title="источник (SLP1): go—zWADyakza">go—ṣṭhādhyakṣa</code></td></tr></table><p class="ev"><b>Что именно различается:</b> <code title="источник (SLP1): index_members_unattested=zWADyakza">член указателя не является самостоятельным словом: ṣṭhādhyakṣa</code></p></div>
+    <div class="panel"><h4>Источники</h4><a href="https://gasyoun.github.io/kosha/colocation/#pwg/2-0820?w=gozWADyakza">статья PWG (со-локация kosha)</a> · <a href="https://sanskrit-lexicon.uni-koeln.de/scans/PWGScan/2020/web/webtc/servepdf.php?page=820">скан PWG, столбец 2-0820</a> · <a href="https://www.sanskrit-lexicon.uni-koeln.de/scans/MWScan/2020/web/webtc/indexcaller.php">MW в Cologne</a> · PWG <code>L23434</code></div><div class="panel"><h4>Частотность</h4><span class="miss">Нет данных DCS для этой леммы — слово в корпусе DCS не засвидетельствовано, поэтому примера употребления показать нельзя.</span></div><div class="panel"><h4>Панини</h4><span class="miss">Сутр Панини для этого заголовка нет.</span></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Правило верно</button>
+      <button class="vote reject" data-vote="reject">&#10060; Правило ломается</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="rule_wrong_here">Правило здесь не работает — членение PWG неверно</option><option value="rule_too_broad">Правило само по себе верно, но эту карточку не покрывает</option><option value="both_wrong">Оба членения неверны (правильное укажите в примечании)</option><option value="need_source">Не могу решить без сканa/источника</option></select></div>
+    <textarea class="note" placeholder="Если правило здесь ломается — напишите, какое членение верно и почему"></textarea>
+  </section>
+
+  <section class="card" data-id="ratardDika" data-filt="mw_cut_leaves_nonword" data-facets="{&quot;dcs&quot;: [&quot;нет&quot;], &quot;rule&quot;: [&quot;Разрез MW оставляет не-слово&quot;]}">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/6-0246?w=ratardDika" target="_blank" rel="noopener">ratarddhika</a> </div><span class="idchip" title="card id — cite this id back when discussing this card">ratardDika</span></header>
+    <div class="question"><p class="claim"><b>Правило:</b> Разрез MW оставляет не-слово <span class="stat">— покрывает 293 строк очереди (6.7 % из 4 353)</span></p><p>Разрез MW порождает отрезок, который не является самостоятельным словом. Членение PWG даёт словарные члены — верен PWG.</p><table class="sides"><tr><th></th><th>членение</th><th>что напечатано в словаре</th></tr><tr><td><b>PWG</b><br><span class="prov">члены как ЛЕКСЕМЫ, из этимологической скобки статьи</span></td><td class="split">rata + ṛddhi</td><td><span class="same">= членение</span></td></tr><tr><td><b>MW split</b><br><span class="prov">сегментация MW &lt;k2&gt; эм-дефисами (Дж. Фундербёрк); по построению склады&shy;вается обратно в заголовок</span></td><td class="split">rata + rddhika</td><td><code title="источник (SLP1): rata—rdDika">rata—rddhika</code></td></tr></table><p class="ev"><b>Что именно различается:</b> <code title="источник (SLP1): index_members_unattested=rdDika">член указателя не является самостоятельным словом: rddhika</code></p></div>
+    <div class="panel"><h4>Источники</h4><a href="https://gasyoun.github.io/kosha/colocation/#pwg/6-0246?w=ratardDika">статья PWG (со-локация kosha)</a> · <a href="https://sanskrit-lexicon.uni-koeln.de/scans/PWGScan/2020/web/webtc/servepdf.php?page=246">скан PWG, столбец 6-0246</a> · <a href="https://www.sanskrit-lexicon.uni-koeln.de/scans/MWScan/2020/web/webtc/indexcaller.php">MW в Cologne</a> · PWG <code>L83177</code></div><div class="panel"><h4>Частотность</h4><span class="miss">Нет данных DCS для этой леммы — слово в корпусе DCS не засвидетельствовано, поэтому примера употребления показать нельзя.</span></div><div class="panel"><h4>Панини</h4><span class="miss">Сутр Панини для этого заголовка нет.</span></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Правило верно</button>
+      <button class="vote reject" data-vote="reject">&#10060; Правило ломается</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="rule_wrong_here">Правило здесь не работает — членение PWG неверно</option><option value="rule_too_broad">Правило само по себе верно, но эту карточку не покрывает</option><option value="both_wrong">Оба членения неверны (правильное укажите в примечании)</option><option value="need_source">Не могу решить без сканa/источника</option></select></div>
+    <textarea class="note" placeholder="Если правило здесь ломается — напишите, какое членение верно и почему"></textarea>
+  </section>
+
+  <section class="card" data-id="gozWIpati" data-filt="mw_splits_bound_morph" data-facets="{&quot;dcs&quot;: [&quot;нет&quot;], &quot;rule&quot;: [&quot;MW отделяет связанную морфему как член&quot;]}">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/2-0820?w=gozWIpati" target="_blank" rel="noopener">goṣṭhīpati</a> </div><span class="idchip" title="card id — cite this id back when discussing this card">gozWIpati</span></header>
+    <div class="question"><p class="claim"><b>Правило:</b> MW отделяет связанную морфему как член <span class="stat">— покрывает 8 строк очереди (0.2 % из 4 353)</span></p><p>MW выделяет связанную морфему в отдельный член. Она не самостоятельный член сложного слова — верен PWG.</p><table class="sides"><tr><th></th><th>членение</th><th>что напечатано в словаре</th></tr><tr><td><b>PWG</b><br><span class="prov">члены как ЛЕКСЕМЫ, из этимологической скобки статьи</span></td><td class="split">goṣṭhī + pati</td><td><span class="same">= членение</span></td></tr><tr><td><b>MW split</b><br><span class="prov">сегментация MW &lt;k2&gt; эм-дефисами (Дж. Фундербёрк); по построению склады&shy;вается обратно в заголовок</span></td><td class="split">go + ṣṭhī + pati</td><td><code title="источник (SLP1): go—zWI—pati">go—ṣṭhī—pati</code></td></tr></table><p class="note">Самаса состоит ровно из двух частей (исключение — двандва, где частей может быть сколько угодно). Трёхчленный список MW — это не другое членение, а <b>самаса внутри самасы</b>: MW заодно разбирает и первый член. Виграха для этого заголовка — двучленная, то есть PWG.</p><p class="ev"><b>Что именно различается:</b> <code title="источник (SLP1): index_members_unattested=zWI; mw_is_finer=True">член указателя не является самостоятельным словом: ṣṭhī; MW членит мельче</code></p></div>
+    <div class="panel"><h4>Источники</h4><a href="https://gasyoun.github.io/kosha/colocation/#pwg/2-0820?w=gozWIpati">статья PWG (со-локация kosha)</a> · <a href="https://sanskrit-lexicon.uni-koeln.de/scans/PWGScan/2020/web/webtc/servepdf.php?page=820">скан PWG, столбец 2-0820</a> · <a href="https://www.sanskrit-lexicon.uni-koeln.de/scans/MWScan/2020/web/webtc/indexcaller.php">MW в Cologne</a> · PWG <code>L23441</code></div><div class="panel"><h4>Частотность</h4><span class="miss">Нет данных DCS для этой леммы — слово в корпусе DCS не засвидетельствовано, поэтому примера употребления показать нельзя.</span></div><div class="panel"><h4>Панини</h4><span class="miss">Сутр Панини для этого заголовка нет.</span></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Правило верно</button>
+      <button class="vote reject" data-vote="reject">&#10060; Правило ломается</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="rule_wrong_here">Правило здесь не работает — членение PWG неверно</option><option value="rule_too_broad">Правило само по себе верно, но эту карточку не покрывает</option><option value="both_wrong">Оба членения неверны (правильное укажите в примечании)</option><option value="need_source">Не могу решить без сканa/источника</option></select></div>
+    <textarea class="note" placeholder="Если правило здесь ломается — напишите, какое членение верно и почему"></textarea>
+  </section>
+
+  <section class="card" data-id="gozWeSUra" data-filt="mw_splits_bound_morph" data-facets="{&quot;dcs&quot;: [&quot;нет&quot;], &quot;rule&quot;: [&quot;MW отделяет связанную морфему как член&quot;]}">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/2-0820?w=gozWeSUra" target="_blank" rel="noopener">goṣṭheśūra</a> </div><span class="idchip" title="card id — cite this id back when discussing this card">gozWeSUra</span></header>
+    <div class="question"><p class="claim"><b>Правило:</b> MW отделяет связанную морфему как член <span class="stat">— покрывает 8 строк очереди (0.2 % из 4 353)</span></p><p>MW выделяет связанную морфему в отдельный член. Она не самостоятельный член сложного слова — верен PWG.</p><table class="sides"><tr><th></th><th>членение</th><th>что напечатано в словаре</th></tr><tr><td><b>PWG</b><br><span class="prov">члены как ЛЕКСЕМЫ, из этимологической скобки статьи</span></td><td class="split">goṣṭhe + śūra</td><td><span class="same">= членение</span></td></tr><tr><td><b>MW split</b><br><span class="prov">сегментация MW &lt;k2&gt; эм-дефисами (Дж. Фундербёрк); по построению склады&shy;вается обратно в заголовок</span></td><td class="split">go + ṣṭhe + śūra</td><td><code title="источник (SLP1): go—zWe—SUra">go—ṣṭhe—śūra</code></td></tr></table><p class="note">Самаса состоит ровно из двух частей (исключение — двандва, где частей может быть сколько угодно). Трёхчленный список MW — это не другое членение, а <b>самаса внутри самасы</b>: MW заодно разбирает и первый член. Виграха для этого заголовка — двучленная, то есть PWG.</p><p class="ev"><b>Что именно различается:</b> <code title="источник (SLP1): index_members_unattested=zWe; mw_is_finer=True">член указателя не является самостоятельным словом: ṣṭhe; MW членит мельче</code></p></div>
+    <div class="panel"><h4>Источники</h4><a href="https://gasyoun.github.io/kosha/colocation/#pwg/2-0820?w=gozWeSUra">статья PWG (со-локация kosha)</a> · <a href="https://sanskrit-lexicon.uni-koeln.de/scans/PWGScan/2020/web/webtc/servepdf.php?page=820">скан PWG, столбец 2-0820</a> · <a href="https://www.sanskrit-lexicon.uni-koeln.de/scans/MWScan/2020/web/webtc/indexcaller.php">MW в Cologne</a> · PWG <code>L23448</code></div><div class="panel"><h4>Частотность</h4><span class="miss">Нет данных DCS для этой леммы — слово в корпусе DCS не засвидетельствовано, поэтому примера употребления показать нельзя.</span></div><div class="panel"><h4>Панини</h4>Сутры: <a href="https://ashtadhyayi.com/sutraani/2/1/48">P. 2.1.48</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Правило верно</button>
+      <button class="vote reject" data-vote="reject">&#10060; Правило ломается</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="rule_wrong_here">Правило здесь не работает — членение PWG неверно</option><option value="rule_too_broad">Правило само по себе верно, но эту карточку не покрывает</option><option value="both_wrong">Оба членения неверны (правильное укажите в примечании)</option><option value="need_source">Не могу решить без сканa/источника</option></select></div>
+    <textarea class="note" placeholder="Если правило здесь ломается — напишите, какое членение верно и почему"></textarea>
+  </section>
+
+  <section class="card" data-id="pratiBayaMkara" data-filt="mw_splits_bound_morph" data-facets="{&quot;dcs&quot;: [&quot;нет&quot;], &quot;rule&quot;: [&quot;MW отделяет связанную морфему как член&quot;]}">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/4-0966?w=pratiBayaMkara" target="_blank" rel="noopener">pratibhayaṃkara</a> </div><span class="idchip" title="card id — cite this id back when discussing this card">pratiBayaMkara</span></header>
+    <div class="question"><p class="claim"><b>Правило:</b> MW отделяет связанную морфему как член <span class="stat">— покрывает 8 строк очереди (0.2 % из 4 353)</span></p><p>MW выделяет связанную морфему в отдельный член. Она не самостоятельный член сложного слова — верен PWG.</p><table class="sides"><tr><th></th><th>членение</th><th>что напечатано в словаре</th></tr><tr><td><b>PWG</b><br><span class="prov">члены как ЛЕКСЕМЫ, из этимологической скобки статьи</span></td><td class="split">pratibhayam + kara</td><td><code title="источник (SLP1): ({#pratiBayam#}, &lt;ab&gt;acc.&lt;/ab&gt; von {#pratiBaya#} 2. + &lt;hom&gt;1.&lt;/hom&gt; {#kara#})">(<i>pratibhayam</i>, <abbr title="Accusativ — accusative (case)">acc.</abbr> von <i>pratibhaya</i> 2. + 1.  <i>kara</i>)</code></td></tr><tr><td><b>MW split</b><br><span class="prov">сегментация MW &lt;k2&gt; эм-дефисами (Дж. Фундербёрк); по построению склады&shy;вается обратно в заголовок</span></td><td class="split">prati + bhayaṃ + kara</td><td><code title="источник (SLP1): prati—BayaM—kara">prati—bhayaṃ—kara</code></td></tr></table><p class="note">Самаса состоит ровно из двух частей (исключение — двандва, где частей может быть сколько угодно). Трёхчленный список MW — это не другое членение, а <b>самаса внутри самасы</b>: MW заодно разбирает и первый член. Виграха для этого заголовка — двучленная, то есть PWG.</p><p class="ev"><b>Что именно различается:</b> <code title="источник (SLP1): index_members_unattested=BayaM; mw_is_finer=True">член указателя не является самостоятельным словом: bhayaṃ; MW членит мельче</code></p></div>
+    <div class="panel"><h4>Источники</h4><a href="https://gasyoun.github.io/kosha/colocation/#pwg/4-0966?w=pratiBayaMkara">статья PWG (со-локация kosha)</a> · <a href="https://sanskrit-lexicon.uni-koeln.de/scans/PWGScan/2020/web/webtc/servepdf.php?page=966">скан PWG, столбец 4-0966</a> · <a href="https://www.sanskrit-lexicon.uni-koeln.de/scans/MWScan/2020/web/webtc/indexcaller.php">MW в Cologne</a> · PWG <code>L48425</code></div><div class="panel"><h4>Частотность</h4><span class="miss">Нет данных DCS для этой леммы — слово в корпусе DCS не засвидетельствовано, поэтому примера употребления показать нельзя.</span></div><div class="panel"><h4>Панини</h4><span class="miss">Сутр Панини для этого заголовка нет.</span></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Правило верно</button>
+      <button class="vote reject" data-vote="reject">&#10060; Правило ломается</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="rule_wrong_here">Правило здесь не работает — членение PWG неверно</option><option value="rule_too_broad">Правило само по себе верно, но эту карточку не покрывает</option><option value="both_wrong">Оба членения неверны (правильное укажите в примечании)</option><option value="need_source">Не могу решить без сканa/источника</option></select></div>
+    <textarea class="note" placeholder="Если правило здесь ломается — напишите, какое членение верно и почему"></textarea>
+  </section>
+
+  <section class="card" data-id="cittadravIBAvamaya" data-filt="mw_splits_derivational_suffix" data-facets="{&quot;dcs&quot;: [&quot;нет&quot;], &quot;rule&quot;: [&quot;MW отделяет словообразовательный суффикс как член&quot;]}">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/5-1419?w=cittadravIBAvamaya" target="_blank" rel="noopener">cittadravībhāvamaya</a> </div><span class="idchip" title="card id — cite this id back when discussing this card">cittadravIBAvamaya</span></header>
+    <div class="question"><p class="claim"><b>Правило:</b> MW отделяет словообразовательный суффикс как член <span class="stat">— покрывает 14 строк очереди (0.3 % из 4 353)</span></p><p>MW выделяет словообразовательный суффикс в отдельный член. Суффикс не член сложного слова — верен PWG.</p><table class="sides"><tr><th></th><th>членение</th><th>что напечатано в словаре</th></tr><tr><td><b>PWG</b><br><span class="prov">члены как ЛЕКСЕМЫ, из этимологической скобки статьи</span></td><td class="split">citta + dravībhāva</td><td><span class="same">= членение</span></td></tr><tr><td><b>MW split</b><br><span class="prov">сегментация MW &lt;k2&gt; эм-дефисами (Дж. Фундербёрк); по построению склады&shy;вается обратно в заголовок</span></td><td class="split">citta + dravībhāva + maya</td><td><code title="источник (SLP1): citta—dravI-BAva—maya">citta—dravī-bhāva—maya</code></td></tr></table><p class="note">Самаса состоит ровно из двух частей (исключение — двандва, где частей может быть сколько угодно). Трёхчленный список MW — это не другое членение, а <b>самаса внутри самасы</b>: MW заодно разбирает и первый член. Виграха для этого заголовка — двучленная, то есть PWG.</p><p class="ev"><b>Что именно различается:</b> <code title="источник (SLP1): mw_hyphen_members=dravI-BAva; mw_suffix_member=maya">дефисные члены MW: dravī-bhāva; MW выделил суффикс в член: maya</code></p></div>
+    <div class="panel"><h4>Источники</h4><a href="https://gasyoun.github.io/kosha/colocation/#pwg/5-1419?w=cittadravIBAvamaya">статья PWG (со-локация kosha)</a> · <a href="https://sanskrit-lexicon.uni-koeln.de/scans/PWGScan/2020/web/webtc/servepdf.php?page=1419">скан PWG, столбец 5-1419</a> · <a href="https://www.sanskrit-lexicon.uni-koeln.de/scans/MWScan/2020/web/webtc/indexcaller.php">MW в Cologne</a> · PWG <code>L73760</code></div><div class="panel"><h4>Частотность</h4><span class="miss">Нет данных DCS для этой леммы — слово в корпусе DCS не засвидетельствовано, поэтому примера употребления показать нельзя.</span></div><div class="panel"><h4>Панини</h4><span class="miss">Сутр Панини для этого заголовка нет.</span></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Правило верно</button>
+      <button class="vote reject" data-vote="reject">&#10060; Правило ломается</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="rule_wrong_here">Правило здесь не работает — членение PWG неверно</option><option value="rule_too_broad">Правило само по себе верно, но эту карточку не покрывает</option><option value="both_wrong">Оба членения неверны (правильное укажите в примечании)</option><option value="need_source">Не могу решить без сканa/источника</option></select></div>
+    <textarea class="note" placeholder="Если правило здесь ломается — напишите, какое членение верно и почему"></textarea>
+  </section>
+
+  <section class="card" data-id="pARqupattratA" data-filt="mw_splits_derivational_suffix" data-facets="{&quot;dcs&quot;: [&quot;нет&quot;], &quot;rule&quot;: [&quot;MW отделяет словообразовательный суффикс как член&quot;]}">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/4-0638?w=pARqupattratA" target="_blank" rel="noopener">pāṇḍupattratā</a> </div><span class="idchip" title="card id — cite this id back when discussing this card">pARqupattratA</span></header>
+    <div class="question"><p class="claim"><b>Правило:</b> MW отделяет словообразовательный суффикс как член <span class="stat">— покрывает 14 строк очереди (0.3 % из 4 353)</span></p><p>MW выделяет словообразовательный суффикс в отдельный член. Суффикс не член сложного слова — верен PWG.</p><table class="sides"><tr><th></th><th>членение</th><th>что напечатано в словаре</th></tr><tr><td><b>PWG</b><br><span class="prov">члены как ЛЕКСЕМЫ, из этимологической скобки статьи</span></td><td class="split">pāṇḍu + pattra</td><td><span class="same">= членение</span></td></tr><tr><td><b>MW split</b><br><span class="prov">сегментация MW &lt;k2&gt; эм-дефисами (Дж. Фундербёрк); по построению склады&shy;вается обратно в заголовок</span></td><td class="split">pāṇḍu + pattra + tā</td><td><code title="источник (SLP1): pARqu—pattra—tA">pāṇḍu—pattra—tā</code></td></tr></table><p class="note">Самаса состоит ровно из двух частей (исключение — двандва, где частей может быть сколько угодно). Трёхчленный список MW — это не другое членение, а <b>самаса внутри самасы</b>: MW заодно разбирает и первый член. Виграха для этого заголовка — двучленная, то есть PWG.</p><p class="ev"><b>Что именно различается:</b> <code title="источник (SLP1): mw_suffix_member=tA">MW выделил суффикс в член: tā</code></p></div>
+    <div class="panel"><h4>Источники</h4><a href="https://gasyoun.github.io/kosha/colocation/#pwg/4-0638?w=pARqupattratA">статья PWG (со-локация kosha)</a> · <a href="https://sanskrit-lexicon.uni-koeln.de/scans/PWGScan/2020/web/webtc/servepdf.php?page=638">скан PWG, столбец 4-0638</a> · <a href="https://www.sanskrit-lexicon.uni-koeln.de/scans/MWScan/2020/web/webtc/indexcaller.php">MW в Cologne</a> · PWG <code>L44194</code></div><div class="panel"><h4>Частотность</h4><span class="miss">Нет данных DCS для этой леммы — слово в корпусе DCS не засвидетельствовано, поэтому примера употребления показать нельзя.</span></div><div class="panel"><h4>Панини</h4><span class="miss">Сутр Панини для этого заголовка нет.</span></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Правило верно</button>
+      <button class="vote reject" data-vote="reject">&#10060; Правило ломается</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="rule_wrong_here">Правило здесь не работает — членение PWG неверно</option><option value="rule_too_broad">Правило само по себе верно, но эту карточку не покрывает</option><option value="both_wrong">Оба членения неверны (правильное укажите в примечании)</option><option value="need_source">Не могу решить без сканa/источника</option></select></div>
+    <textarea class="note" placeholder="Если правило здесь ломается — напишите, какое членение верно и почему"></textarea>
+  </section>
+
+  <section class="card" data-id="vyaktarasatA" data-filt="mw_splits_derivational_suffix" data-facets="{&quot;dcs&quot;: [&quot;нет&quot;], &quot;rule&quot;: [&quot;MW отделяет словообразовательный суффикс как член&quot;]}">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/6-1427?w=vyaktarasatA" target="_blank" rel="noopener">vyaktarasatā</a> </div><span class="idchip" title="card id — cite this id back when discussing this card">vyaktarasatA</span></header>
+    <div class="question"><p class="claim"><b>Правило:</b> MW отделяет словообразовательный суффикс как член <span class="stat">— покрывает 14 строк очереди (0.3 % из 4 353)</span></p><p>MW выделяет словообразовательный суффикс в отдельный член. Суффикс не член сложного слова — верен PWG.</p><table class="sides"><tr><th></th><th>членение</th><th>что напечатано в словаре</th></tr><tr><td><b>PWG</b><br><span class="prov">члены как ЛЕКСЕМЫ, из этимологической скобки статьи</span></td><td class="split">vyakta + rasa</td><td><span class="same">= членение</span></td></tr><tr><td><b>MW split</b><br><span class="prov">сегментация MW &lt;k2&gt; эм-дефисами (Дж. Фундербёрк); по построению склады&shy;вается обратно в заголовок</span></td><td class="split">vyakta + rasa + tā</td><td><code title="источник (SLP1): vy-akta—rasa—tA">vy-akta—rasa—tā</code></td></tr></table><p class="note">Самаса состоит ровно из двух частей (исключение — двандва, где частей может быть сколько угодно). Трёхчленный список MW — это не другое членение, а <b>самаса внутри самасы</b>: MW заодно разбирает и первый член. Виграха для этого заголовка — двучленная, то есть PWG.</p><p class="ev"><b>Что именно различается:</b> <code title="источник (SLP1): mw_hyphen_members=vy-akta; mw_suffix_member=tA">дефисные члены MW: vy-akta; MW выделил суффикс в член: tā</code></p></div>
+    <div class="panel"><h4>Источники</h4><a href="https://gasyoun.github.io/kosha/colocation/#pwg/6-1427?w=vyaktarasatA">статья PWG (со-локация kosha)</a> · <a href="https://sanskrit-lexicon.uni-koeln.de/scans/PWGScan/2020/web/webtc/servepdf.php?page=1427">скан PWG, столбец 6-1427</a> · <a href="https://www.sanskrit-lexicon.uni-koeln.de/scans/MWScan/2020/web/webtc/indexcaller.php">MW в Cologne</a> · PWG <code>L96197</code></div><div class="panel"><h4>Частотность</h4><span class="miss">Нет данных DCS для этой леммы — слово в корпусе DCS не засвидетельствовано, поэтому примера употребления показать нельзя.</span></div><div class="panel"><h4>Панини</h4><span class="miss">Сутр Панини для этого заголовка нет.</span></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Правило верно</button>
+      <button class="vote reject" data-vote="reject">&#10060; Правило ломается</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="rule_wrong_here">Правило здесь не работает — членение PWG неверно</option><option value="rule_too_broad">Правило само по себе верно, но эту карточку не покрывает</option><option value="both_wrong">Оба членения неверны (правильное укажите в примечании)</option><option value="need_source">Не могу решить без сканa/источника</option></select></div>
+    <textarea class="note" placeholder="Если правило здесь ломается — напишите, какое членение верно и почему"></textarea>
+  </section>
+
+  <section class="card" data-id="araRyetilaka" data-filt="pwg_lexeme_vs_mw_suffixed_tail" data-facets="{&quot;dcs&quot;: [&quot;нет&quot;], &quot;rule&quot;: [&quot;MW оставляет с суффиксом, PWG приводит основу&quot;]}">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/1-0406?w=araRyetilaka" target="_blank" rel="noopener">araṇyetilaka</a> </div><span class="idchip" title="card id — cite this id back when discussing this card">araRyetilaka</span></header>
+    <div class="question"><p class="claim"><b>Правило:</b> MW оставляет с суффиксом, PWG приводит основу <span class="stat">— покрывает 334 строк очереди (7.7 % из 4 353)</span></p><p>Хвостовой член у MW несёт словообразовательный суффикс, PWG приводит основу без него. Членение то же; верен PWG.</p><table class="sides"><tr><th></th><th>членение</th><th>что напечатано в словаре</th></tr><tr><td><b>PWG</b><br><span class="prov">члены как ЛЕКСЕМЫ, из этимологической скобки статьи</span></td><td class="split">araṇya + tila</td><td><code title="источник (SLP1): (von {#a˚#}, &lt;ab&gt;loc.&lt;/ab&gt; von {#araRya#}, + {#tila#}; &lt;ab&gt;vgl.&lt;/ab&gt; &lt;ls&gt;P. 5,3,97&lt;/ls&gt;)">(von <i>a˚</i>, <abbr title="Locativ — locative case">loc.</abbr> von <i>araṇya</i>, + <i>tila</i>; <abbr title="Vergleiche — compare">ср.</abbr> &lt;ls&gt;P. 5,3,97&lt;/ls&gt;)</code></td></tr><tr><td><b>MW split</b><br><span class="prov">сегментация MW &lt;k2&gt; эм-дефисами (Дж. Фундербёрк); по построению склады&shy;вается обратно в заголовок</span></td><td class="split">araṇye + tilaka</td><td><code title="источник (SLP1): araRye—tilaka">araṇye—tilaka</code></td></tr></table><p class="ev"><b>Что именно различается:</b> <code title="источник (SLP1): taddhita_suffix=ka">вторичный суффикс (taddhita): ka</code></p></div>
+    <div class="panel"><h4>Источники</h4><a href="https://gasyoun.github.io/kosha/colocation/#pwg/1-0406?w=araRyetilaka">статья PWG (со-локация kosha)</a> · <a href="https://sanskrit-lexicon.uni-koeln.de/scans/PWGScan/2020/web/webtc/servepdf.php?page=406">скан PWG, столбец 1-0406</a> · <a href="https://www.sanskrit-lexicon.uni-koeln.de/scans/MWScan/2020/web/webtc/indexcaller.php">MW в Cologne</a> · PWG <code>L5597</code></div><div class="panel"><h4>Частотность</h4><span class="miss">Нет данных DCS для этой леммы — слово в корпусе DCS не засвидетельствовано, поэтому примера употребления показать нельзя.</span></div><div class="panel"><h4>Панини</h4>Сутры: <a href="https://ashtadhyayi.com/sutraani/2/1/44">P. 2.1.44</a> · <a href="https://ashtadhyayi.com/sutraani/5/3/97">P. 5.3.97</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Правило верно</button>
+      <button class="vote reject" data-vote="reject">&#10060; Правило ломается</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="rule_wrong_here">Правило здесь не работает — членение PWG неверно</option><option value="rule_too_broad">Правило само по себе верно, но эту карточку не покрывает</option><option value="both_wrong">Оба членения неверны (правильное укажите в примечании)</option><option value="need_source">Не могу решить без сканa/источника</option></select></div>
+    <textarea class="note" placeholder="Если правило здесь ломается — напишите, какое членение верно и почему"></textarea>
+  </section>
+
+  <section class="card" data-id="dvEsamika" data-filt="pwg_lexeme_vs_mw_suffixed_tail" data-facets="{&quot;dcs&quot;: [&quot;нет&quot;], &quot;rule&quot;: [&quot;MW оставляет с суффиксом, PWG приводит основу&quot;]}">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/3-0848?w=dvEsamika" target="_blank" rel="noopener">dvaisamika</a> </div><span class="idchip" title="card id — cite this id back when discussing this card">dvEsamika</span></header>
+    <div class="question"><p class="claim"><b>Правило:</b> MW оставляет с суффиксом, PWG приводит основу <span class="stat">— покрывает 334 строк очереди (7.7 % из 4 353)</span></p><p>Хвостовой член у MW несёт словообразовательный суффикс, PWG приводит основу без него. Членение то же; верен PWG.</p><table class="sides"><tr><th></th><th>членение</th><th>что напечатано в словаре</th></tr><tr><td><b>PWG</b><br><span class="prov">члены как ЛЕКСЕМЫ, из этимологической скобки статьи</span></td><td class="split">dvi + samā</td><td><span class="same">= членение</span></td></tr><tr><td><b>MW split</b><br><span class="prov">сегментация MW &lt;k2&gt; эм-дефисами (Дж. Фундербёрк); по построению склады&shy;вается обратно в заголовок</span></td><td class="split">dvai + samika</td><td><code title="источник (SLP1): dvE—samika">dvai—samika</code></td></tr></table><p class="ev"><b>Что именно различается:</b> <code title="источник (SLP1): taddhita_suffix=ika">вторичный суффикс (taddhita): ika</code></p></div>
+    <div class="panel"><h4>Источники</h4><a href="https://gasyoun.github.io/kosha/colocation/#pwg/3-0848?w=dvEsamika">статья PWG (со-локация kosha)</a> · <a href="https://sanskrit-lexicon.uni-koeln.de/scans/PWGScan/2020/web/webtc/servepdf.php?page=848">скан PWG, столбец 3-0848</a> · <a href="https://www.sanskrit-lexicon.uni-koeln.de/scans/MWScan/2020/web/webtc/indexcaller.php">MW в Cologne</a> · PWG <code>L35964</code></div><div class="panel"><h4>Частотность</h4><span class="miss">Нет данных DCS для этой леммы — слово в корпусе DCS не засвидетельствовано, поэтому примера употребления показать нельзя.</span></div><div class="panel"><h4>Панини</h4>Сутры: <a href="https://ashtadhyayi.com/sutraani/7/3/15">P. 7.3.15</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Правило верно</button>
+      <button class="vote reject" data-vote="reject">&#10060; Правило ломается</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="rule_wrong_here">Правило здесь не работает — членение PWG неверно</option><option value="rule_too_broad">Правило само по себе верно, но эту карточку не покрывает</option><option value="both_wrong">Оба членения неверны (правильное укажите в примечании)</option><option value="need_source">Не могу решить без сканa/источника</option></select></div>
+    <textarea class="note" placeholder="Если правило здесь ломается — напишите, какое членение верно и почему"></textarea>
+  </section>
+
+  <section class="card" data-id="kftapUrvin" data-filt="pwg_lexeme_vs_mw_suffixed_tail" data-facets="{&quot;dcs&quot;: [&quot;нет&quot;], &quot;rule&quot;: [&quot;MW оставляет с суффиксом, PWG приводит основу&quot;]}">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/2-0395?w=kftapUrvin" target="_blank" rel="noopener">kṛtapūrvin</a> </div><span class="idchip" title="card id — cite this id back when discussing this card">kftapUrvin</span></header>
+    <div class="question"><p class="claim"><b>Правило:</b> MW оставляет с суффиксом, PWG приводит основу <span class="stat">— покрывает 334 строк очереди (7.7 % из 4 353)</span></p><p>Хвостовой член у MW несёт словообразовательный суффикс, PWG приводит основу без него. Членение то же; верен PWG.</p><table class="sides"><tr><th></th><th>членение</th><th>что напечатано в словаре</th></tr><tr><td><b>PWG</b><br><span class="prov">члены как ЛЕКСЕМЫ, из этимологической скобки статьи</span></td><td class="split">kṛta + pūrva</td><td><span class="same">= членение</span></td></tr><tr><td><b>MW split</b><br><span class="prov">сегментация MW &lt;k2&gt; эм-дефисами (Дж. Фундербёрк); по построению склады&shy;вается обратно в заголовок</span></td><td class="split">kṛta + pūrvin</td><td><code title="источник (SLP1): kfta—pUrvin">kṛta—pūrvin</code></td></tr></table><p class="ev"><b>Что именно различается:</b> <code title="источник (SLP1): taddhita_suffix=in">вторичный суффикс (taddhita): in</code></p></div>
+    <div class="panel"><h4>Источники</h4><a href="https://gasyoun.github.io/kosha/colocation/#pwg/2-0395?w=kftapUrvin">статья PWG (со-локация kosha)</a> · <a href="https://sanskrit-lexicon.uni-koeln.de/scans/PWGScan/2020/web/webtc/servepdf.php?page=395">скан PWG, столбец 2-0395</a> · <a href="https://www.sanskrit-lexicon.uni-koeln.de/scans/MWScan/2020/web/webtc/indexcaller.php">MW в Cologne</a> · PWG <code>L18620</code></div><div class="panel"><h4>Частотность</h4><span class="miss">Нет данных DCS для этой леммы — слово в корпусе DCS не засвидетельствовано, поэтому примера употребления показать нельзя.</span></div><div class="panel"><h4>Панини</h4>Сутры: <a href="https://ashtadhyayi.com/sutraani/5/2/87">P. 5.2.87</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Правило верно</button>
+      <button class="vote reject" data-vote="reject">&#10060; Правило ломается</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="rule_wrong_here">Правило здесь не работает — членение PWG неверно</option><option value="rule_too_broad">Правило само по себе верно, но эту карточку не покрывает</option><option value="both_wrong">Оба членения неверны (правильное укажите в примечании)</option><option value="need_source">Не могу решить без сканa/источника</option></select></div>
+    <textarea class="note" placeholder="Если правило здесь ломается — напишите, какое членение верно и почему"></textarea>
+  </section>
+
+  <section class="card" data-id="mahAskanDin" data-filt="pwg_lexeme_vs_mw_suffixed_tail" data-facets="{&quot;dcs&quot;: [&quot;нет&quot;], &quot;rule&quot;: [&quot;MW оставляет с суффиксом, PWG приводит основу&quot;]}">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/5-0664?w=mahAskanDin" target="_blank" rel="noopener">mahāskandhin</a> </div><span class="idchip" title="card id — cite this id back when discussing this card">mahAskanDin</span></header>
+    <div class="question"><p class="claim"><b>Правило:</b> MW оставляет с суффиксом, PWG приводит основу <span class="stat">— покрывает 334 строк очереди (7.7 % из 4 353)</span></p><p>Хвостовой член у MW несёт словообразовательный суффикс, PWG приводит основу без него. Членение то же; верен PWG.</p><table class="sides"><tr><th></th><th>членение</th><th>что напечатано в словаре</th></tr><tr><td><b>PWG</b><br><span class="prov">члены как ЛЕКСЕМЫ, из этимологической скобки статьи</span></td><td class="split">mahā + skandha</td><td><span class="same">= членение</span></td></tr><tr><td><b>MW split</b><br><span class="prov">сегментация MW &lt;k2&gt; эм-дефисами (Дж. Фундербёрк); по построению склады&shy;вается обратно в заголовок</span></td><td class="split">mahā + skandhin</td><td><code title="источник (SLP1): mahA—skanDin">mahā—skandhin</code></td></tr></table><p class="ev"><b>Что именно различается:</b> <code title="источник (SLP1): taddhita_suffix=in">вторичный суффикс (taddhita): in</code></p></div>
+    <div class="panel"><h4>Источники</h4><a href="https://gasyoun.github.io/kosha/colocation/#pwg/5-0664?w=mahAskanDin">статья PWG (со-локация kosha)</a> · <a href="https://sanskrit-lexicon.uni-koeln.de/scans/PWGScan/2020/web/webtc/servepdf.php?page=664">скан PWG, столбец 5-0664</a> · <a href="https://www.sanskrit-lexicon.uni-koeln.de/scans/MWScan/2020/web/webtc/indexcaller.php">MW в Cologne</a> · PWG <code>L59159</code></div><div class="panel"><h4>Частотность</h4><span class="miss">Нет данных DCS для этой леммы — слово в корпусе DCS не засвидетельствовано, поэтому примера употребления показать нельзя.</span></div><div class="panel"><h4>Панини</h4><span class="miss">Сутр Панини для этого заголовка нет.</span></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Правило верно</button>
+      <button class="vote reject" data-vote="reject">&#10060; Правило ломается</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="rule_wrong_here">Правило здесь не работает — членение PWG неверно</option><option value="rule_too_broad">Правило само по себе верно, но эту карточку не покрывает</option><option value="both_wrong">Оба членения неверны (правильное укажите в примечании)</option><option value="need_source">Не могу решить без сканa/источника</option></select></div>
+    <textarea class="note" placeholder="Если правило здесь ломается — напишите, какое членение верно и почему"></textarea>
+  </section>
+
+  <section class="card" data-id="aNGriparRI" data-filt="same_split_pwg_lemma_form" data-facets="{&quot;dcs&quot;: [&quot;есть&quot;], &quot;rule&quot;: [&quot;Одно и то же членение, разная форма члена&quot;]}">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/1-0058?w=aNGriparRI" target="_blank" rel="noopener">aṅghriparṇī</a> </div><span class="idchip" title="card id — cite this id back when discussing this card">aNGriparRI</span></header>
+    <div class="question"><p class="claim"><b>Правило:</b> Одно и то же членение, разная форма члена <span class="stat">— покрывает 3 152 строк очереди (72.4 % из 4 353)</span></p><p>Оба источника делят слово в одном и том же месте. Члены различаются только формой: MW пишет отрезок так, как он стоит внутри сложного слова, PWG называет лексему, которая за ним стоит. Списку членов нужна лексема — значит, верен PWG.</p><table class="sides"><tr><th></th><th>членение</th><th>что напечатано в словаре</th></tr><tr><td><b>PWG</b><br><span class="prov">члены как ЛЕКСЕМЫ, из этимологической скобки статьи</span></td><td class="split">aṅghri + parṇa</td><td><span class="same">= членение</span></td></tr><tr><td><b>MW split</b><br><span class="prov">сегментация MW &lt;k2&gt; эм-дефисами (Дж. Фундербёрк); по построению склады&shy;вается обратно в заголовок</span></td><td class="split">aṅghri + parṇī</td><td><code title="источник (SLP1): aNGri—parRI">aṅghri—parṇī</code></td></tr></table><p class="ev"><b>Что именно различается:</b> <code title="источник (SLP1): form_diffs=parRa|parRI">формы членов различаются: parṇa | parṇī</code></p></div>
+    <div class="panel"><h4>Источники</h4><a href="https://gasyoun.github.io/kosha/colocation/#pwg/1-0058?w=aNGriparRI">статья PWG (со-локация kosha)</a> · <a href="https://sanskrit-lexicon.uni-koeln.de/scans/PWGScan/2020/web/webtc/servepdf.php?page=58">скан PWG, столбец 1-0058</a> · <a href="https://www.sanskrit-lexicon.uni-koeln.de/scans/MWScan/2020/web/webtc/indexcaller.php">MW в Cologne</a> · PWG <code>L788</code></div><div class="panel"><h4>Частотность</h4>DCS: <b>1</b> вхождений корпуса.</div><div class="panel"><h4>Панини</h4><span class="miss">Сутр Панини для этого заголовка нет.</span></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Правило верно</button>
+      <button class="vote reject" data-vote="reject">&#10060; Правило ломается</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="rule_wrong_here">Правило здесь не работает — членение PWG неверно</option><option value="rule_too_broad">Правило само по себе верно, но эту карточку не покрывает</option><option value="both_wrong">Оба членения неверны (правильное укажите в примечании)</option><option value="need_source">Не могу решить без сканa/источника</option></select></div>
+    <textarea class="note" placeholder="Если правило здесь ломается — напишите, какое членение верно и почему"></textarea>
+  </section>
+
+  <section class="card" data-id="adrikIlA" data-filt="same_split_pwg_lemma_form" data-facets="{&quot;dcs&quot;: [&quot;есть&quot;], &quot;rule&quot;: [&quot;Одно и то же членение, разная форма члена&quot;]}">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/1-0134?w=adrikIlA" target="_blank" rel="noopener">adrikīlā</a> </div><span class="idchip" title="card id — cite this id back when discussing this card">adrikIlA</span></header>
+    <div class="question"><p class="claim"><b>Правило:</b> Одно и то же членение, разная форма члена <span class="stat">— покрывает 3 152 строк очереди (72.4 % из 4 353)</span></p><p>Оба источника делят слово в одном и том же месте. Члены различаются только формой: MW пишет отрезок так, как он стоит внутри сложного слова, PWG называет лексему, которая за ним стоит. Списку членов нужна лексема — значит, верен PWG.</p><table class="sides"><tr><th></th><th>членение</th><th>что напечатано в словаре</th></tr><tr><td><b>PWG</b><br><span class="prov">члены как ЛЕКСЕМЫ, из этимологической скобки статьи</span></td><td class="split">adri + kīla</td><td><span class="same">= членение</span></td></tr><tr><td><b>MW split</b><br><span class="prov">сегментация MW &lt;k2&gt; эм-дефисами (Дж. Фундербёрк); по построению склады&shy;вается обратно в заголовок</span></td><td class="split">adri + kīlā</td><td><code title="источник (SLP1): adri—kIlA">adri—kīlā</code></td></tr></table><p class="ev"><b>Что именно различается:</b> <code title="источник (SLP1): form_diffs=kIla|kIlA">формы членов различаются: kīla | kīlā</code></p></div>
+    <div class="panel"><h4>Источники</h4><a href="https://gasyoun.github.io/kosha/colocation/#pwg/1-0134?w=adrikIlA">статья PWG (со-локация kosha)</a> · <a href="https://sanskrit-lexicon.uni-koeln.de/scans/PWGScan/2020/web/webtc/servepdf.php?page=134">скан PWG, столбец 1-0134</a> · <a href="https://www.sanskrit-lexicon.uni-koeln.de/scans/MWScan/2020/web/webtc/indexcaller.php">MW в Cologne</a> · PWG <code>L1805</code></div><div class="panel"><h4>Частотность</h4>DCS: <b>1</b> вхождений корпуса.</div><div class="panel"><h4>Панини</h4><span class="miss">Сутр Панини для этого заголовка нет.</span></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Правило верно</button>
+      <button class="vote reject" data-vote="reject">&#10060; Правило ломается</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="rule_wrong_here">Правило здесь не работает — членение PWG неверно</option><option value="rule_too_broad">Правило само по себе верно, но эту карточку не покрывает</option><option value="both_wrong">Оба членения неверны (правильное укажите в примечании)</option><option value="need_source">Не могу решить без сканa/источника</option></select></div>
+    <textarea class="note" placeholder="Если правило здесь ломается — напишите, какое членение верно и почему"></textarea>
+  </section>
+
+  <section class="card" data-id="antaHsAra" data-filt="same_split_pwg_lemma_form" data-facets="{&quot;dcs&quot;: [&quot;есть&quot;], &quot;rule&quot;: [&quot;Одно и то же членение, разная форма члена&quot;]}">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/1-0252?w=antaHsAra" target="_blank" rel="noopener">antaḥsāra</a> </div><span class="idchip" title="card id — cite this id back when discussing this card">antaHsAra</span></header>
+    <div class="question"><p class="claim"><b>Правило:</b> Одно и то же членение, разная форма члена <span class="stat">— покрывает 3 152 строк очереди (72.4 % из 4 353)</span></p><p>Оба источника делят слово в одном и том же месте. Члены различаются только формой: MW пишет отрезок так, как он стоит внутри сложного слова, PWG называет лексему, которая за ним стоит. Списку членов нужна лексема — значит, верен PWG.</p><table class="sides"><tr><th></th><th>членение</th><th>что напечатано в словаре</th></tr><tr><td><b>PWG</b><br><span class="prov">члены как ЛЕКСЕМЫ, из этимологической скобки статьи</span></td><td class="split">antar + sāra</td><td><span class="same">= членение</span></td></tr><tr><td><b>MW split</b><br><span class="prov">сегментация MW &lt;k2&gt; эм-дефисами (Дж. Фундербёрк); по построению склады&shy;вается обратно в заголовок</span></td><td class="split">antaḥ + sāra</td><td><code title="источник (SLP1): antaH—sAra">antaḥ—sāra</code></td></tr></table><p class="ev"><b>Что именно различается:</b> <code title="источник (SLP1): form_diffs=antar|antaH">формы членов различаются: antar | antaḥ</code></p></div>
+    <div class="panel"><h4>Источники</h4><a href="https://gasyoun.github.io/kosha/colocation/#pwg/1-0252?w=antaHsAra">статья PWG (со-локация kosha)</a> · <a href="https://sanskrit-lexicon.uni-koeln.de/scans/PWGScan/2020/web/webtc/servepdf.php?page=252">скан PWG, столбец 1-0252</a> · <a href="https://www.sanskrit-lexicon.uni-koeln.de/scans/MWScan/2020/web/webtc/indexcaller.php">MW в Cologne</a> · PWG <code>L3395</code></div><div class="panel"><h4>Частотность</h4>DCS: <b>1</b> вхождений корпуса.</div><div class="panel"><h4>Панини</h4><span class="miss">Сутр Панини для этого заголовка нет.</span></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Правило верно</button>
+      <button class="vote reject" data-vote="reject">&#10060; Правило ломается</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="rule_wrong_here">Правило здесь не работает — членение PWG неверно</option><option value="rule_too_broad">Правило само по себе верно, но эту карточку не покрывает</option><option value="both_wrong">Оба членения неверны (правильное укажите в примечании)</option><option value="need_source">Не могу решить без сканa/источника</option></select></div>
+    <textarea class="note" placeholder="Если правило здесь ломается — напишите, какое членение верно и почему"></textarea>
+  </section>
+
+  <section class="card" data-id="dyuzad" data-filt="same_split_pwg_lemma_form" data-facets="{&quot;dcs&quot;: [&quot;нет&quot;], &quot;rule&quot;: [&quot;Одно и то же членение, разная форма члена&quot;]}">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/3-0793?w=dyuzad" target="_blank" rel="noopener">dyuṣad</a> </div><span class="idchip" title="card id — cite this id back when discussing this card">dyuzad</span></header>
+    <div class="question"><p class="claim"><b>Правило:</b> Одно и то же членение, разная форма члена <span class="stat">— покрывает 3 152 строк очереди (72.4 % из 4 353)</span></p><p>Оба источника делят слово в одном и том же месте. Члены различаются только формой: MW пишет отрезок так, как он стоит внутри сложного слова, PWG называет лексему, которая за ним стоит. Списку членов нужна лексема — значит, верен PWG.</p><table class="sides"><tr><th></th><th>членение</th><th>что напечатано в словаре</th></tr><tr><td><b>PWG</b><br><span class="prov">члены как ЛЕКСЕМЫ, из этимологической скобки статьи</span></td><td class="split">dyu + sad</td><td><code title="источник (SLP1): (&lt;hom&gt;2.&lt;/hom&gt; {#dyu#} + {#sad#})">(2.  <i>dyu</i> + <i>sad</i>)</code></td></tr><tr><td><b>MW split</b><br><span class="prov">сегментация MW &lt;k2&gt; эм-дефисами (Дж. Фундербёрк); по построению склады&shy;вается обратно в заголовок</span></td><td class="split">dyu + ṣad</td><td><code title="источник (SLP1): dyu—zad">dyu—ṣad</code></td></tr></table><p class="ev"><b>Что именно различается:</b> <code title="источник (SLP1): form_diffs=sad|zad; index_members_unattested=zad">формы членов различаются: sad | ṣad; член указателя не является самостоятельным словом: ṣad</code></p></div>
+    <div class="panel"><h4>Источники</h4><a href="https://gasyoun.github.io/kosha/colocation/#pwg/3-0793?w=dyuzad">статья PWG (со-локация kosha)</a> · <a href="https://sanskrit-lexicon.uni-koeln.de/scans/PWGScan/2020/web/webtc/servepdf.php?page=793">скан PWG, столбец 3-0793</a> · <a href="https://www.sanskrit-lexicon.uni-koeln.de/scans/MWScan/2020/web/webtc/indexcaller.php">MW в Cologne</a> · PWG <code>L35202</code></div><div class="panel"><h4>Частотность</h4><span class="miss">Нет данных DCS для этой леммы — слово в корпусе DCS не засвидетельствовано, поэтому примера употребления показать нельзя.</span></div><div class="panel"><h4>Панини</h4><span class="miss">Сутр Панини для этого заголовка нет.</span></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Правило верно</button>
+      <button class="vote reject" data-vote="reject">&#10060; Правило ломается</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="rule_wrong_here">Правило здесь не работает — членение PWG неверно</option><option value="rule_too_broad">Правило само по себе верно, но эту карточку не покрывает</option><option value="both_wrong">Оба членения неверны (правильное укажите в примечании)</option><option value="need_source">Не могу решить без сканa/источника</option></select></div>
+    <textarea class="note" placeholder="Если правило здесь ломается — напишите, какое членение верно и почему"></textarea>
+  </section>
+
+  <section class="card" data-id="gozWAna" data-filt="same_split_pwg_lemma_form" data-facets="{&quot;dcs&quot;: [&quot;нет&quot;], &quot;rule&quot;: [&quot;Одно и то же членение, разная форма члена&quot;]}">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/2-0820?w=gozWAna" target="_blank" rel="noopener">goṣṭhāna</a> </div><span class="idchip" title="card id — cite this id back when discussing this card">gozWAna</span></header>
+    <div class="question"><p class="claim"><b>Правило:</b> Одно и то же членение, разная форма члена <span class="stat">— покрывает 3 152 строк очереди (72.4 % из 4 353)</span></p><p>Оба источника делят слово в одном и том же месте. Члены различаются только формой: MW пишет отрезок так, как он стоит внутри сложного слова, PWG называет лексему, которая за ним стоит. Списку членов нужна лексема — значит, верен PWG.</p><table class="sides"><tr><th></th><th>членение</th><th>что напечатано в словаре</th></tr><tr><td><b>PWG</b><br><span class="prov">члены как ЛЕКСЕМЫ, из этимологической скобки статьи</span></td><td class="split">go + sthāna</td><td><span class="same">= членение</span></td></tr><tr><td><b>MW split</b><br><span class="prov">сегментация MW &lt;k2&gt; эм-дефисами (Дж. Фундербёрк); по построению склады&shy;вается обратно в заголовок</span></td><td class="split">go + ṣṭhāna</td><td><code title="источник (SLP1): go—zWA/na">go—ṣṭhāna</code></td></tr></table><p class="ev"><b>Что именно различается:</b> <code title="источник (SLP1): form_diffs=sTAna|zWAna; index_members_unattested=zWAna">формы членов различаются: sthāna | ṣṭhāna; член указателя не является самостоятельным словом: ṣṭhāna</code></p></div>
+    <div class="panel"><h4>Источники</h4><a href="https://gasyoun.github.io/kosha/colocation/#pwg/2-0820?w=gozWAna">статья PWG (со-локация kosha)</a> · <a href="https://sanskrit-lexicon.uni-koeln.de/scans/PWGScan/2020/web/webtc/servepdf.php?page=820">скан PWG, столбец 2-0820</a> · <a href="https://www.sanskrit-lexicon.uni-koeln.de/scans/MWScan/2020/web/webtc/indexcaller.php">MW в Cologne</a> · PWG <code>L23435</code></div><div class="panel"><h4>Частотность</h4><span class="miss">Нет данных DCS для этой леммы — слово в корпусе DCS не засвидетельствовано, поэтому примера употребления показать нельзя.</span></div><div class="panel"><h4>Панини</h4><span class="miss">Сутр Панини для этого заголовка нет.</span></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Правило верно</button>
+      <button class="vote reject" data-vote="reject">&#10060; Правило ломается</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="rule_wrong_here">Правило здесь не работает — членение PWG неверно</option><option value="rule_too_broad">Правило само по себе верно, но эту карточку не покрывает</option><option value="both_wrong">Оба членения неверны (правильное укажите в примечании)</option><option value="need_source">Не могу решить без сканa/источника</option></select></div>
+    <textarea class="note" placeholder="Если правило здесь ломается — напишите, какое членение верно и почему"></textarea>
+  </section>
+
+  <section class="card" data-id="jyotirliNga" data-filt="same_split_pwg_lemma_form" data-facets="{&quot;dcs&quot;: [&quot;есть&quot;], &quot;rule&quot;: [&quot;Одно и то же членение, разная форма члена&quot;]}">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/3-0161?w=jyotirliNga" target="_blank" rel="noopener">jyotirliṅga</a> </div><span class="idchip" title="card id — cite this id back when discussing this card">jyotirliNga</span></header>
+    <div class="question"><p class="claim"><b>Правило:</b> Одно и то же членение, разная форма члена <span class="stat">— покрывает 3 152 строк очереди (72.4 % из 4 353)</span></p><p>Оба источника делят слово в одном и том же месте. Члены различаются только формой: MW пишет отрезок так, как он стоит внутри сложного слова, PWG называет лексему, которая за ним стоит. Списку членов нужна лексема — значит, верен PWG.</p><table class="sides"><tr><th></th><th>членение</th><th>что напечатано в словаре</th></tr><tr><td><b>PWG</b><br><span class="prov">члены как ЛЕКСЕМЫ, из этимологической скобки статьи</span></td><td class="split">jyotis + liṅga</td><td><span class="same">= членение</span></td></tr><tr><td><b>MW split</b><br><span class="prov">сегментация MW &lt;k2&gt; эм-дефисами (Дж. Фундербёрк); по построению склады&shy;вается обратно в заголовок</span></td><td class="split">jyotir + liṅga</td><td><code title="источник (SLP1): jyotir—liNga">jyotir—liṅga</code></td></tr></table><p class="ev"><b>Что именно различается:</b> <code title="источник (SLP1): form_diffs=jyotis|jyotir">формы членов различаются: jyotis | jyotir</code></p></div>
+    <div class="panel"><h4>Источники</h4><a href="https://gasyoun.github.io/kosha/colocation/#pwg/3-0161?w=jyotirliNga">статья PWG (со-локация kosha)</a> · <a href="https://sanskrit-lexicon.uni-koeln.de/scans/PWGScan/2020/web/webtc/servepdf.php?page=161">скан PWG, столбец 3-0161</a> · <a href="https://www.sanskrit-lexicon.uni-koeln.de/scans/MWScan/2020/web/webtc/indexcaller.php">MW в Cologne</a> · PWG <code>L27999</code></div><div class="panel"><h4>Частотность</h4>DCS: <b>1</b> вхождений корпуса.</div><div class="panel"><h4>Панини</h4><span class="miss">Сутр Панини для этого заголовка нет.</span></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Правило верно</button>
+      <button class="vote reject" data-vote="reject">&#10060; Правило ломается</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="rule_wrong_here">Правило здесь не работает — членение PWG неверно</option><option value="rule_too_broad">Правило само по себе верно, но эту карточку не покрывает</option><option value="both_wrong">Оба членения неверны (правильное укажите в примечании)</option><option value="need_source">Не могу решить без сканa/источника</option></select></div>
+    <textarea class="note" placeholder="Если правило здесь ломается — напишите, какое членение верно и почему"></textarea>
+  </section>
+
+  <section class="card" data-id="nadIzRa" data-filt="same_split_pwg_lemma_form" data-facets="{&quot;dcs&quot;: [&quot;есть&quot;], &quot;rule&quot;: [&quot;Одно и то же членение, разная форма члена&quot;]}">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/4-0025?w=nadIzRa" target="_blank" rel="noopener">nadīṣṇa</a> </div><span class="idchip" title="card id — cite this id back when discussing this card">nadIzRa</span></header>
+    <div class="question"><p class="claim"><b>Правило:</b> Одно и то же членение, разная форма члена <span class="stat">— покрывает 3 152 строк очереди (72.4 % из 4 353)</span></p><p>Оба источника делят слово в одном и том же месте. Члены различаются только формой: MW пишет отрезок так, как он стоит внутри сложного слова, PWG называет лексему, которая за ним стоит. Списку членов нужна лексема — значит, верен PWG.</p><table class="sides"><tr><th></th><th>членение</th><th>что напечатано в словаре</th></tr><tr><td><b>PWG</b><br><span class="prov">члены как ЛЕКСЕМЫ, из этимологической скобки статьи</span></td><td class="split">nadī + sna</td><td><span class="same">= членение</span></td></tr><tr><td><b>MW split</b><br><span class="prov">сегментация MW &lt;k2&gt; эм-дефисами (Дж. Фундербёрк); по построению склады&shy;вается обратно в заголовок</span></td><td class="split">nadī + ṣṇa</td><td><code title="источник (SLP1): nadI—zRa">nadī—ṣṇa</code></td></tr></table><p class="ev"><b>Что именно различается:</b> <code title="источник (SLP1): form_diffs=sna|zRa; index_members_unattested=zRa">формы членов различаются: sna | ṣṇa; член указателя не является самостоятельным словом: ṣṇa</code></p></div>
+    <div class="panel"><h4>Источники</h4><a href="https://gasyoun.github.io/kosha/colocation/#pwg/4-0025?w=nadIzRa">статья PWG (со-локация kosha)</a> · <a href="https://sanskrit-lexicon.uni-koeln.de/scans/PWGScan/2020/web/webtc/servepdf.php?page=25">скан PWG, столбец 4-0025</a> · <a href="https://www.sanskrit-lexicon.uni-koeln.de/scans/MWScan/2020/web/webtc/indexcaller.php">MW в Cologne</a> · PWG <code>L37539</code></div><div class="panel"><h4>Частотность</h4>DCS: <b>1</b> вхождений корпуса.</div><div class="panel"><h4>Панини</h4>Сутры: <a href="https://ashtadhyayi.com/sutraani/8/3/89">P. 8.3.89</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Правило верно</button>
+      <button class="vote reject" data-vote="reject">&#10060; Правило ломается</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="rule_wrong_here">Правило здесь не работает — членение PWG неверно</option><option value="rule_too_broad">Правило само по себе верно, но эту карточку не покрывает</option><option value="both_wrong">Оба членения неверны (правильное укажите в примечании)</option><option value="need_source">Не могу решить без сканa/источника</option></select></div>
+    <textarea class="note" placeholder="Если правило здесь ломается — напишите, какое членение верно и почему"></textarea>
+  </section>
+
+  <section class="card" data-id="pAdahInAt" data-filt="same_split_pwg_lemma_form" data-facets="{&quot;dcs&quot;: [&quot;есть&quot;], &quot;rule&quot;: [&quot;Одно и то же членение, разная форма члена&quot;]}">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/4-0653?w=pAdahInAt" target="_blank" rel="noopener">pādahīnāt</a> </div><span class="idchip" title="card id — cite this id back when discussing this card">pAdahInAt</span></header>
+    <div class="question"><p class="claim"><b>Правило:</b> Одно и то же членение, разная форма члена <span class="stat">— покрывает 3 152 строк очереди (72.4 % из 4 353)</span></p><p>Оба источника делят слово в одном и том же месте. Члены различаются только формой: MW пишет отрезок так, как он стоит внутри сложного слова, PWG называет лексему, которая за ним стоит. Списку членов нужна лексема — значит, верен PWG.</p><table class="sides"><tr><th></th><th>членение</th><th>что напечатано в словаре</th></tr><tr><td><b>PWG</b><br><span class="prov">члены как ЛЕКСЕМЫ, из этимологической скобки статьи</span></td><td class="split">pāda + hīna</td><td><code title="источник (SLP1): (&lt;ab&gt;abl.&lt;/ab&gt; von {#pAda#} + {#hIna#})">(<abbr title="Ablativ — ablative (case)">abl.</abbr> von <i>pāda</i> + <i>hīna</i>)</code></td></tr><tr><td><b>MW split</b><br><span class="prov">сегментация MW &lt;k2&gt; эм-дефисами (Дж. Фундербёрк); по построению склады&shy;вается обратно в заголовок</span></td><td class="split">pāda + hīnāt</td><td><code title="источник (SLP1): pAda—hInAt">pāda—hīnāt</code></td></tr></table><p class="ev"><b>Что именно различается:</b> <code title="источник (SLP1): form_diffs=hIna|hInAt; index_members_unattested=hInAt">формы членов различаются: hīna | hīnāt; член указателя не является самостоятельным словом: hīnāt</code></p></div>
+    <div class="panel"><h4>Источники</h4><a href="https://gasyoun.github.io/kosha/colocation/#pwg/4-0653?w=pAdahInAt">статья PWG (со-локация kosha)</a> · <a href="https://sanskrit-lexicon.uni-koeln.de/scans/PWGScan/2020/web/webtc/servepdf.php?page=653">скан PWG, столбец 4-0653</a> · <a href="https://www.sanskrit-lexicon.uni-koeln.de/scans/MWScan/2020/web/webtc/indexcaller.php">MW в Cologne</a> · PWG <code>L44400</code></div><div class="panel"><h4>Частотность</h4>DCS: <b>1</b> вхождений корпуса.</div><div class="panel"><h4>Панини</h4><span class="miss">Сутр Панини для этого заголовка нет.</span></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Правило верно</button>
+      <button class="vote reject" data-vote="reject">&#10060; Правило ломается</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="rule_wrong_here">Правило здесь не работает — членение PWG неверно</option><option value="rule_too_broad">Правило само по себе верно, но эту карточку не покрывает</option><option value="both_wrong">Оба членения неверны (правильное укажите в примечании)</option><option value="need_source">Не могу решить без сканa/источника</option></select></div>
+    <textarea class="note" placeholder="Если правило здесь ломается — напишите, какое членение верно и почему"></textarea>
+  </section>
+
+  <section class="card" data-id="romakUpa" data-filt="same_split_pwg_lemma_form" data-facets="{&quot;dcs&quot;: [&quot;есть&quot;], &quot;rule&quot;: [&quot;Одно и то же членение, разная форма члена&quot;]}">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/6-0446?w=romakUpa" target="_blank" rel="noopener">romakūpa</a> </div><span class="idchip" title="card id — cite this id back when discussing this card">romakUpa</span></header>
+    <div class="question"><p class="claim"><b>Правило:</b> Одно и то же членение, разная форма члена <span class="stat">— покрывает 3 152 строк очереди (72.4 % из 4 353)</span></p><p>Оба источника делят слово в одном и том же месте. Члены различаются только формой: MW пишет отрезок так, как он стоит внутри сложного слова, PWG называет лексему, которая за ним стоит. Списку членов нужна лексема — значит, верен PWG.</p><table class="sides"><tr><th></th><th>членение</th><th>что напечатано в словаре</th></tr><tr><td><b>PWG</b><br><span class="prov">члены как ЛЕКСЕМЫ, из этимологической скобки статьи</span></td><td class="split">roman + kūpa</td><td><code title="источник (SLP1): (&lt;hom&gt;1.&lt;/hom&gt; {#roman#} + {#kUpa#})">(1.  <i>roman</i> + <i>kūpa</i>)</code></td></tr><tr><td><b>MW split</b><br><span class="prov">сегментация MW &lt;k2&gt; эм-дефисами (Дж. Фундербёрк); по построению склады&shy;вается обратно в заголовок</span></td><td class="split">roma + kūpa</td><td><code title="источник (SLP1): roma—kUpa">roma—kūpa</code></td></tr></table><p class="ev"><b>Что именно различается:</b> <code title="источник (SLP1): form_diffs=roman|roma">формы членов различаются: roman | roma</code></p></div>
+    <div class="panel"><h4>Источники</h4><a href="https://gasyoun.github.io/kosha/colocation/#pwg/6-0446?w=romakUpa">статья PWG (со-локация kosha)</a> · <a href="https://sanskrit-lexicon.uni-koeln.de/scans/PWGScan/2020/web/webtc/servepdf.php?page=446">скан PWG, столбец 6-0446</a> · <a href="https://www.sanskrit-lexicon.uni-koeln.de/scans/MWScan/2020/web/webtc/indexcaller.php">MW в Cologne</a> · PWG <code>L85415</code></div><div class="panel"><h4>Частотность</h4>DCS: <b>43</b> вхождений корпуса.</div><div class="panel"><h4>Панини</h4><span class="miss">Сутр Панини для этого заголовка нет.</span><br><span class="miss">Скрыто 1 ссыл(ки) вида <code>82.23</code>: в «Аштадхьяи» 8 адхьяй по 4 пады, поэтому такие номера сутрами быть не могут — это цитаты других текстов, попавшие в колонку при извлечении (дефект источника, H1888).</span></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Правило верно</button>
+      <button class="vote reject" data-vote="reject">&#10060; Правило ломается</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="rule_wrong_here">Правило здесь не работает — членение PWG неверно</option><option value="rule_too_broad">Правило само по себе верно, но эту карточку не покрывает</option><option value="both_wrong">Оба членения неверны (правильное укажите в примечании)</option><option value="need_source">Не могу решить без сканa/источника</option></select></div>
+    <textarea class="note" placeholder="Если правило здесь ломается — напишите, какое членение верно и почему"></textarea>
+  </section>
+
+  <section class="card" data-id="trisaMDya~~h1" data-filt="same_split_pwg_lemma_form" data-facets="{&quot;dcs&quot;: [&quot;есть&quot;], &quot;rule&quot;: [&quot;Одно и то же членение, разная форма члена&quot;]}">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/3-0449?w=trisaMDya" target="_blank" rel="noopener">trisaṃdhya</a> </div><span class="idchip" title="card id — cite this id back when discussing this card">trisaMDya~~h1</span></header>
+    <div class="question"><p class="claim"><b>Правило:</b> Одно и то же членение, разная форма члена <span class="stat">— покрывает 3 152 строк очереди (72.4 % из 4 353)</span></p><p>Оба источника делят слово в одном и том же месте. Члены различаются только формой: MW пишет отрезок так, как он стоит внутри сложного слова, PWG называет лексему, которая за ним стоит. Списку членов нужна лексема — значит, верен PWG.</p><table class="sides"><tr><th></th><th>членение</th><th>что напечатано в словаре</th></tr><tr><td><b>PWG</b><br><span class="prov">члены как ЛЕКСЕМЫ, из этимологической скобки статьи</span></td><td class="split">tri + saṃdhyā</td><td><span class="same">= членение</span></td></tr><tr><td><b>MW split</b><br><span class="prov">сегментация MW &lt;k2&gt; эм-дефисами (Дж. Фундербёрк); по построению склады&shy;вается обратно в заголовок</span></td><td class="split">tri + saṃdhya</td><td><code title="источник (SLP1): tri—saMDya">tri—saṃdhya</code></td></tr></table><p class="ev"><b>Что именно различается:</b> <code title="источник (SLP1): form_diffs=saMDyA|saMDya">формы членов различаются: saṃdhyā | saṃdhya</code></p></div>
+    <div class="panel"><h4>Источники</h4><a href="https://gasyoun.github.io/kosha/colocation/#pwg/3-0449?w=trisaMDya">статья PWG (со-локация kosha)</a> · <a href="https://sanskrit-lexicon.uni-koeln.de/scans/PWGScan/2020/web/webtc/servepdf.php?page=449">скан PWG, столбец 3-0449</a> · <a href="https://www.sanskrit-lexicon.uni-koeln.de/scans/MWScan/2020/web/webtc/indexcaller.php">MW в Cologne</a> · PWG <code>L31222</code></div><div class="panel"><h4>Частотность</h4>DCS: <b>30</b> вхождений корпуса.</div><div class="panel"><h4>Панини</h4><span class="miss">Сутр Панини для этого заголовка нет.</span></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Правило верно</button>
+      <button class="vote reject" data-vote="reject">&#10060; Правило ломается</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="rule_wrong_here">Правило здесь не работает — членение PWG неверно</option><option value="rule_too_broad">Правило само по себе верно, но эту карточку не покрывает</option><option value="both_wrong">Оба членения неверны (правильное укажите в примечании)</option><option value="need_source">Не могу решить без сканa/источника</option></select></div>
+    <textarea class="note" placeholder="Если правило здесь ломается — напишите, какое членение верно и почему"></textarea>
+  </section>
+</main>
+<footer class="hint"><b>Принять</b> = правило на этой карточке работает, членение PWG верно. <b>Отклонить</b> = правило здесь ломается — выберите, как именно, и по возможности укажите верное членение в примечании. <b>Отложить</b> = нужен скан или источник. Что показано на карточке: оба членения в IAST, исходный текст обоих словарей (этимологическая скобка PWG и &lt;k2&gt; MW — если он не повторяет членение слово в слово), частота DCS, ссылки на статью и скан. <b>Тип самасы не показан ни на одной карточке</b>, и это не пропуск конкретной карточки: в <a href="https://gasyoun.github.io/SamasaChakram/">SamasaChakram</a> есть таксономия (4 класса / 10 семейств / 58 подтипов) и 20 разобранных примеров, но соответствия «заголовок → подтип» нет ни в одном репозитории. Чтобы его назначить, нужен классификатор по двум членам и их падежному отношению (татпуруша / кармадхарая / бахуврихи / двандва / авьяибхава) — отдельная работа, не побочный продукт этого голосования. Клавиши: a — принять, r — отклонить, d — отложить, ←/→ — соседняя карточка. Голоса сохраняются в браузере по мере работы; по кнопке «Скачать decisions.json» выгружается файл решений.</footer>
+<div class="legend" style="max-width:980px;margin:0 auto 20px;padding:0 20px;color:var(--muted);font-size:12px">
+  <b>Approve</b> = accept the proposed change/answer shown on the card (no separate "approve as-is" —
+  approving means agreeing as written). <b>Reject</b> = keep the current entry/answer unchanged.
+  <b>Defer</b> = not sure yet, decide later. The note field is for requesting a partial tweak instead
+  of an outright reject.
+</div>
+<script>
+(function () {
+  var SHEET_ID = "sanskritlexicography-pwg-compound-rules_ratify30";
+  var STORE_KEY = 'review-sheet:' + SHEET_ID;
+  var ids = ["janaMtapa", "meGaMkara", "puzpaMDaya", "mudrANka", "tamori", "tejohvA", "BAryAwika", "aGaSaMsahan", "gozWADyakza", "ratardDika", "gozWIpati", "gozWeSUra", "pratiBayaMkara", "cittadravIBAvamaya", "pARqupattratA", "vyaktarasatA", "araRyetilaka", "dvEsamika", "kftapUrvin", "mahAskanDin", "aNGriparRI", "adrikIlA", "antaHsAra", "dyuzad", "gozWAna", "jyotirliNga", "nadIzRa", "pAdahInAt", "romakUpa", "trisaMDya~~h1"];
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(STORE_KEY) || '{}') || {}; } catch (e) { state = {}; }
+  function tally() {
+    var c = { approve:0, reject:0, defer:0 };
+    ids.forEach(function (id) { var v = state[id] && state[id].decision; if (v && c.hasOwnProperty(v)) c[v]++; });
+    document.getElementById('c-approve').textContent = c.approve;
+    document.getElementById('c-reject').textContent = c.reject;
+    document.getElementById('c-defer').textContent = c.defer;
+    document.getElementById('c-unvoted').textContent = ids.length - c.approve - c.reject - c.defer;
+  }
+  function applyCardUI(card) {
+    var id = card.getAttribute('data-id'); var rec = state[id] || {};
+    card.classList.remove('voted-approve','voted-reject','voted-defer');
+    card.querySelectorAll('button.vote').forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-vote') === rec.decision); });
+    card.querySelector('.vote-state').textContent = rec.decision ? rec.decision : 'unvoted';
+    if (rec.decision) card.classList.add('voted-' + rec.decision);
+    var ta = card.querySelector('textarea.note'); if (rec.note && !ta.value) ta.value = rec.note;
+  }
+  function save() { localStorage.setItem(STORE_KEY, JSON.stringify(state)); tally(); }
+  // H1523 residual / csl-pyutil#1 Part 1: always re-read the live textarea on vote
+  // and before export so a second vote click (or a missed `input` event) cannot
+  // drop a note that is still visible in the card.
+  function syncNoteFromDom(id) {
+    state[id] = state[id] || {};
+    var card = document.querySelector('.card[data-id="' + id + '"]');
+    if (!card) return;
+    var ta = card.querySelector('textarea.note');
+    if (ta) state[id].note = ta.value;
+  }
+  function vote(id, d) { syncNoteFromDom(id); state[id].decision = d; save(); }
+  function noteChange(id, t) { state[id] = state[id] || {}; state[id].note = t; save(); }
+  document.querySelectorAll('.card').forEach(function (card) {
+    var id = card.getAttribute('data-id'); applyCardUI(card);
+    card.querySelectorAll('button.vote').forEach(function (btn) {
+      btn.addEventListener('click', function () { vote(id, btn.getAttribute('data-vote')); applyCardUI(card); });
+    });
+    var ta = card.querySelector('textarea.note'); ta.addEventListener('input', function () { noteChange(id, ta.value); });
+  });
+  tally();
+  document.getElementById('downloadBtn').addEventListener('click', function () {
+    ids.forEach(function (id) { syncNoteFromDom(id); });
+    var decided = ids.filter(function (id) { return state[id] && state[id].decision; }).length;
+    var payload = { sheet_id: SHEET_ID, generated: "29-07-2026", decided: decided,
+      items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '', reject_label: rec.reject_label || null }; }) };
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
+    var url = URL.createObjectURL(blob); var a = document.createElement('a');
+    a.href = url; a.download = SHEET_ID + '_decisions.json'; document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+  });
+  var filterbar = document.getElementById('filterbar');
+  filterbar.addEventListener('click', function (e) {
+    var btn = e.target.closest('button[data-filter]'); if (!btn) return;
+    filterbar.querySelectorAll('button').forEach(function (b) { b.classList.remove('active'); });
+    btn.classList.add('active'); var f = btn.getAttribute('data-filter');
+    document.querySelectorAll('.card').forEach(function (card) {
+      var show = true;
+      if (f === 'unvoted') { var id = card.getAttribute('data-id'); show = !(state[id] && state[id].decision); }
+      else if (f !== 'all') { show = card.getAttribute('data-filt') === f; }
+      card.style.display = show ? '' : 'none';
+    });
+  });
+  var cardsEl = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  var activeIdx = 0;
+  function visibleCards() { return cardsEl.filter(function (c) { return c.style.display !== 'none'; }); }
+  document.addEventListener('keydown', function (e) {
+    if (e.target.tagName === 'TEXTAREA') return;
+    var vis = visibleCards(); if (!vis.length) return;
+    if (activeIdx >= vis.length) activeIdx = vis.length - 1;
+    var card = vis[activeIdx]; var id = card.getAttribute('data-id');
+    if (e.key === 'a') { vote(id, 'approve'); applyCardUI(card); }
+    else if (e.key === 'r') { vote(id, 'reject'); applyCardUI(card); }
+    else if (e.key === 'd') { vote(id, 'defer'); applyCardUI(card); }
+    else if (e.key === 'ArrowDown') { activeIdx = Math.min(activeIdx + 1, vis.length - 1); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'center'}); }
+    else if (e.key === 'ArrowUp') { activeIdx = Math.max(activeIdx - 1, 0); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'center'}); }
+    else return;
+    e.preventDefault();
+  });
+
+  var STRICT_REVIEW = {"reviewer": "", "requireAllVotes": true, "requireRejectNote": true, "generated": "29-07-2026"};
+  var strictReviewer = document.getElementById('strictReviewer');
+  var strictError = document.getElementById('strictReviewError');
+  strictReviewer.value = state.__reviewer || STRICT_REVIEW.reviewer || '';
+  function strictItems() {
+    return ids.map(function (id) {
+      var rec = state[id] || {};
+      return { id: id, decision: rec.decision || null, note: rec.note || '', reject_label: rec.reject_label || null };
+    });
+  }
+  function strictValidation() {
+    var items = strictItems();
+    var reviewer = strictReviewer.value.trim();
+    var unvoted = STRICT_REVIEW.requireAllVotes ? items.filter(function (item) { return !item.decision; }) : [];
+    var rejectedWithoutNote = STRICT_REVIEW.requireRejectNote ? items.filter(function (item) {
+      return item.decision === 'reject' && !item.note.trim();
+    }) : [];
+    var errors = [];
+    if (!reviewer) errors.push('reviewer is required');
+    if (unvoted.length) errors.push(unvoted.length + ' item(s) remain unvoted');
+    if (rejectedWithoutNote.length) errors.push(rejectedWithoutNote.length + ' rejection(s) need a note');
+    var rejectedWithoutLabel = STRICT_REVIEW.requireRejectNote ? items.filter(function (item) {
+      return item.decision === 'reject' && !item.reject_label;
+    }) : [];
+    if (rejectedWithoutLabel.length) errors.push(rejectedWithoutLabel.length + ' rejection(s) need a label');
+    return { reviewer: reviewer, items: items, complete: errors.length === 0, errors: errors };
+  }
+  function strictPayload() {
+    var result = strictValidation();
+    var decided = result.items.filter(function (item) { return !!item.decision; }).length;
+    return { sheet_id: SHEET_ID, generated: "29-07-2026", decided: decided,
+      reviewer: result.reviewer, reviewedAt: result.complete ? new Date().toISOString() : null,
+      complete: result.complete, items: result.items };
+  }
+  strictReviewer.addEventListener('input', function () {
+    state.__reviewer = strictReviewer.value;
+    strictError.textContent = '';
+    save();
+  });
+  document.getElementById('downloadBtn').addEventListener('click', function (event) {
+    event.preventDefault(); event.stopImmediatePropagation();
+    var result = strictValidation();
+    if (!result.complete) {
+      strictError.textContent = result.errors.join('; ');
+      if (!result.reviewer) strictReviewer.focus();
+      return;
+    }
+    strictError.textContent = '';
+    var blob = new Blob([JSON.stringify(strictPayload(), null, 2)], { type:'application/json' });
+    var url = URL.createObjectURL(blob); var a = document.createElement('a');
+    a.href = url; a.download = SHEET_ID + '_decisions.json'; document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+  }, true);
+
+  var saveHandle = null, saveTimer = null;
+  function exportPayload() {
+    return JSON.stringify(strictPayload(), null, 2);
+  }
+  function scheduleAutosave() {
+    if (!saveHandle) return;
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(function () {
+      saveHandle.createWritable().then(function (w) {
+        w.write(exportPayload()).then(function () { w.close(); });
+      }).catch(function () {});
+    }, 1000);
+  }
+  var _origSave = save;
+  save = function () { _origSave(); scheduleAutosave(); };
+  if (window.showSaveFilePicker) {
+    var saveBtn = document.getElementById('saveBtn');
+    saveBtn.style.display = '';
+    saveBtn.addEventListener('click', function () {
+      window.showSaveFilePicker({suggestedName: SHEET_ID + '_decisions.json'}).then(function (h) {
+        saveHandle = h; scheduleAutosave();
+      }).catch(function () {});
+    });
+  }
+
+  var REJECT_LABELS = [["rule_wrong_here", "\u041f\u0440\u0430\u0432\u0438\u043b\u043e \u0437\u0434\u0435\u0441\u044c \u043d\u0435 \u0440\u0430\u0431\u043e\u0442\u0430\u0435\u0442 \u2014 \u0447\u043b\u0435\u043d\u0435\u043d\u0438\u0435 PWG \u043d\u0435\u0432\u0435\u0440\u043d\u043e"], ["rule_too_broad", "\u041f\u0440\u0430\u0432\u0438\u043b\u043e \u0441\u0430\u043c\u043e \u043f\u043e \u0441\u0435\u0431\u0435 \u0432\u0435\u0440\u043d\u043e, \u043d\u043e \u044d\u0442\u0443 \u043a\u0430\u0440\u0442\u043e\u0447\u043a\u0443 \u043d\u0435 \u043f\u043e\u043a\u0440\u044b\u0432\u0430\u0435\u0442"], ["both_wrong", "\u041e\u0431\u0430 \u0447\u043b\u0435\u043d\u0435\u043d\u0438\u044f \u043d\u0435\u0432\u0435\u0440\u043d\u044b (\u043f\u0440\u0430\u0432\u0438\u043b\u044c\u043d\u043e\u0435 \u0443\u043a\u0430\u0436\u0438\u0442\u0435 \u0432 \u043f\u0440\u0438\u043c\u0435\u0447\u0430\u043d\u0438\u0438)"], ["need_source", "\u041d\u0435 \u043c\u043e\u0433\u0443 \u0440\u0435\u0448\u0438\u0442\u044c \u0431\u0435\u0437 \u0441\u043a\u0430\u043da/\u0438\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0430"]];
+  function applyRejectLabelUI(card) {
+    var row = card.querySelector('.rejectlabelrow'); if (!row) return;
+    var id = card.getAttribute('data-id'); var rec = state[id] || {};
+    row.style.display = rec.decision === 'reject' ? '' : 'none';
+    var sel = row.querySelector('select'); if (sel) sel.value = rec.reject_label || '';
+  }
+  function setRejectLabel(id, v) { state[id] = state[id] || {}; state[id].reject_label = v || null; save(); }
+  document.querySelectorAll('.card').forEach(function (card) {
+    var id = card.getAttribute('data-id');
+    var sel = card.querySelector('.rejectlabelrow select');
+    if (sel) sel.addEventListener('change', function () { setRejectLabel(id, sel.value); applyRejectLabelUI(card); });
+    applyRejectLabelUI(card);
+  });
+  var _origApplyCardUI = applyCardUI;
+  applyCardUI = function (card) { _origApplyCardUI(card); applyRejectLabelUI(card); };
+
+  var FS_KEY = STORE_KEY + ':fs', FS_DEFAULT = 1.5;
+  function fsGet() {
+    var v = parseFloat(localStorage.getItem(FS_KEY));
+    return (isFinite(v) && v >= 0.7 && v <= 3) ? v : FS_DEFAULT;
+  }
+  function fsApply(v) {
+    document.documentElement.style.setProperty('--fs', String(v));
+    document.getElementById('fsVal').textContent = Math.round(v * 100) + '%';
+  }
+  function fsSet(v) {
+    v = Math.min(3, Math.max(0.7, Math.round(v * 10) / 10));
+    localStorage.setItem(FS_KEY, String(v)); fsApply(v);
+  }
+  fsApply(fsGet());
+  document.getElementById('fsDown').addEventListener('click', function () { fsSet(fsGet() - 0.1); });
+  document.getElementById('fsUp').addEventListener('click', function () { fsSet(fsGet() + 0.1); });
+
+  var FACET_COUNT = "showing {shown} of {total}";
+  var facetSel = {};
+  function facetBaseVisible(card) {
+    var bar = document.getElementById('filterbar');
+    var act = bar ? bar.querySelector('button.active') : null;
+    var f = act ? act.getAttribute('data-filter') : 'all';
+    if (f === 'unvoted') { var id = card.getAttribute('data-id'); return !(state[id] && state[id].decision); }
+    if (f && f !== 'all') { return card.getAttribute('data-filt') === f; }
+    return true;
+  }
+  function facetCardValues(card) {
+    var raw = card.getAttribute('data-facets');
+    if (!raw) return {};
+    try { return JSON.parse(raw) || {}; } catch (e) { return {}; }
+  }
+  function facetMatches(card) {
+    var have = facetCardValues(card);
+    for (var k in facetSel) {
+      if (!Object.prototype.hasOwnProperty.call(facetSel, k)) continue;
+      var want = facetSel[k];
+      if (!want || !want.length) continue;
+      var mine = have[k] || [];
+      var hit = false;
+      for (var i = 0; i < want.length; i++) { if (mine.indexOf(want[i]) !== -1) { hit = true; break; } }
+      if (!hit) return false;
+    }
+    return true;
+  }
+  function facetApply() {
+    var shown = 0;
+    document.querySelectorAll('.card').forEach(function (card) {
+      var show = facetBaseVisible(card) && facetMatches(card);
+      card.style.display = show ? '' : 'none';
+      if (show) shown++;
+    });
+    var out = document.getElementById('facetcount');
+    if (out) out.textContent = FACET_COUNT.replace('{shown}', shown).replace('{total}', ids.length);
+    activeIdx = 0;
+  }
+  var facetbar = document.getElementById('facetbar');
+  facetbar.addEventListener('click', function (e) {
+    var reset = e.target.closest('button[data-facet-reset]');
+    if (reset) {
+      facetSel = {};
+      facetbar.querySelectorAll('button[data-facet-key]').forEach(function (b) { b.classList.remove('active'); });
+      facetApply();
+      return;
+    }
+    var btn = e.target.closest('button[data-facet-key]'); if (!btn) return;
+    var k = btn.getAttribute('data-facet-key'), v = btn.getAttribute('data-facet-val');
+    facetSel[k] = facetSel[k] || [];
+    var at = facetSel[k].indexOf(v);
+    if (at === -1) { facetSel[k].push(v); btn.classList.add('active'); }
+    else { facetSel[k].splice(at, 1); btn.classList.remove('active'); }
+    facetApply();
+  });
+  // The core filter bar writes card.style.display from ONE dimension; this
+  // listener is registered later, so it runs after and re-applies the
+  // intersection instead of letting the two writers fight.
+  document.getElementById('filterbar').addEventListener('click', function () { facetApply(); });
+  facetApply();
+})();
+</script>
+</body>
+</html>

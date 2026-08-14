@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>H180 · learner-core threshold calibration — 60 items</title>
+<style>
+  :root { --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --text:#e6e6e6; --muted:#9aa0aa;
+          --accent:#5b8cff; --ok:#3fb950; --bad:#f85149; --defer:#d29922; --border:#2a2f3a; }
+  * { box-sizing: border-box; }
+  body { background:var(--bg); color:var(--text); font-family:-apple-system,Segoe UI,Roboto,sans-serif;
+         margin:0; padding:0 0 120px 0; }
+  header.top { position:sticky; top:0; z-index:10; background:var(--panel); border-bottom:1px solid var(--border);
+               padding:14px 20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+  header.top h1 { font-size:16px; margin:0; }
+  header.top .sub { color:var(--muted); font-size:12px; max-width:760px; }
+  .tally { display:flex; gap:14px; font-size:13px; }
+  .tally span.count { font-weight:700; }
+  .tally .approve { color:var(--ok); } .tally .reject { color:var(--bad); }
+  .tally .defer { color:var(--defer); } .tally .unvoted { color:var(--muted); }
+  .toolbar { padding:10px 20px; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  button.dl { background:var(--accent); color:#fff; border:none; padding:8px 14px; border-radius:6px;
+              cursor:pointer; font-size:13px; }
+  button.dl:hover { opacity:.9; }
+  .filterbar { display:flex; gap:6px; flex-wrap:wrap; }
+  .filterbar button { background:var(--panel2); border:1px solid var(--border); color:var(--text);
+                       padding:6px 10px; border-radius:14px; font-size:12px; cursor:pointer; }
+  .filterbar button.active { border-color:var(--accent); color:var(--accent); }
+  main { max-width:980px; margin:0 auto; padding:10px 20px; }
+  .card { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:16px;
+          margin-bottom:16px; }
+  .card.voted-approve { border-left:4px solid var(--ok); }
+  .card.voted-reject { border-left:4px solid var(--bad); }
+  .card.voted-defer { border-left:4px solid var(--defer); }
+  .card header { display:flex; justify-content:space-between; align-items:baseline; }
+  .card .hw { font-size:18px; font-weight:700; }
+  .badge { font-size:11px; background:var(--panel2); padding:2px 8px; border-radius:10px;
+           margin-left:8px; color:var(--muted); }
+  .question { margin:8px 0 12px; font-size:14px; }
+  .panel { background:var(--panel2); border-radius:8px; padding:10px 12px; font-size:13px; margin-bottom:10px; }
+  .panel h4 { margin:0 0 6px; font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+  .panel pre { white-space:pre-wrap; word-break:break-word; margin:0; font-size:12px; line-height:1.45; }
+  .chip { display:inline-block; background:#263042; border-radius:5px; padding:2px 7px; margin:2px 3px 2px 0; font-size:12px; }
+  .muted { color:var(--muted); font-style:italic; }
+  .controls { display:flex; align-items:center; gap:8px; margin-top:4px; }
+  button.vote { border:1px solid var(--border); background:var(--panel2); color:var(--text);
+                padding:7px 12px; border-radius:6px; cursor:pointer; font-size:13px; }
+  button.vote.approve.active { background:var(--ok); border-color:var(--ok); color:#04240b; }
+  button.vote.reject.active { background:var(--bad); border-color:var(--bad); color:#2a0a08; }
+  button.vote.defer.active { background:var(--defer); border-color:var(--defer); color:#2a1d02; }
+  .vote-state { margin-left:6px; font-size:12px; color:var(--muted); }
+  textarea.note { width:100%; margin-top:10px; min-height:88px; background:#11141a; color:var(--text);
+                  border:1px solid var(--border); border-radius:6px; padding:8px; font-size:13px;
+                  font-family:inherit; resize:vertical; }
+  footer.hint { max-width:980px; margin:20px auto; padding:0 20px; color:var(--muted); font-size:12px; }
+  kbd { background:#263042; border-radius:4px; padding:1px 5px; font-size:11px; }
+  .idchip { font-family:ui-monospace,Consolas,monospace; font-size:11px; color:var(--muted);
+            background:var(--panel2); border:1px solid var(--border); padding:2px 7px;
+            border-radius:6px; user-select:all; }
+  .card header { gap:10px; }
+  .hw a.hwlink { color:inherit; text-decoration:underline dotted; text-underline-offset:3px; }
+  .hw a.hwlink:hover { color:var(--accent); }
+  mark.hl { background:#453407; color:#ffd75e; padding:0 2px; border-radius:3px; }
+  .savebanner { max-width:980px; margin:10px auto 0; padding:8px 20px; font-size:12.5px; }
+  .savebanner code { background:var(--panel2); border:1px solid var(--border); padding:1px 6px; border-radius:5px; }
+  .ratingrow { display:flex; align-items:center; gap:6px; margin-top:10px; flex-wrap:wrap; }
+  .ratinglabel { font-size:12px; color:var(--muted); margin-right:4px; }
+  button.rate { border:1px solid var(--border); background:var(--panel2); color:var(--text);
+                width:34px; padding:6px 0; border-radius:6px; cursor:pointer; font-size:13px; }
+  button.rate.active { background:var(--accent); border-color:var(--accent); color:#fff; }
+  button.rate.active.below { background:var(--defer); border-color:var(--defer); color:#2a1d02; }
+  .rate-state { font-size:12px; color:var(--muted); margin-left:4px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>H180 · learner-core threshold calibration — 60 items</h1>
+    <div class="sub">Generated 2026-07-06 &middot; sheet_id <code>h180-learner-threshold-2026-07-06</code> &middot; is each PWG headword learner-core? — stratified across retention bands</div>
+  </div>
+  <div class="tally" id="tally">
+    <span class="approve">&#9989; <span class="count" id="c-approve">0</span></span>
+    <span class="reject">&#10060; <span class="count" id="c-reject">0</span></span>
+    <span class="defer">&#9208; <span class="count" id="c-defer">0</span></span>
+    <span class="unvoted">&#9711; <span class="count" id="c-unvoted">60</span></span>
+  </div>
+</header>
+<div class="savebanner">&#128229; Your export downloads as <code>h180-learner-threshold-2026-07-06_decisions.json</code> &rarr; save it to <code>RussianTranslation\pwg_ru\eval\h180_learner.decisions.json</code> (the <code>sheet_id</code> inside the file is <code>h180-learner-threshold-2026-07-06</code> — that is how a later session knows which sheet these decisions belong to).</div>
+<div class="toolbar">
+  <button class="dl" id="downloadBtn">Download decisions.json</button><button class="dl" id="saveBtn" style="display:none;margin-left:8px">Save to folder…</button>
+  <div class="filterbar" id="filterbar"><button data-filter="all" class="active">all</button><button data-filter="solid">≥2 RU</button><button data-filter="koch1">Koch-only</button><button data-filter="medonly">medium-only</button><button data-filter="control">control</button><button data-filter="unvoted">unvoted only</button></div>
+</div>
+<main id="cards">
+
+  <section class="card" data-id="learner::A" data-filt="solid">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/1-0581?w=A" target="_blank" rel="noopener">ā</a> <span class="badge">≥2 Russian dicts</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::A</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>3.50</b>  (norm 1.00)
+support_score : 1.00   (CAE/CCS/MD)
+scholarly     : 1.00   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>KCH,KOW,KNA,SMI,FRI,CAE,CCS,MD,PW,MW,AP</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::BUr" data-filt="solid">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/5-0356?w=BUr" target="_blank" rel="noopener">bhūr</a> <span class="badge">≥2 Russian dicts</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::BUr</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>2.20</b>  (norm 0.63)
+support_score : 1.00   (CAE/CCS/MD)
+scholarly     : 1.00   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>KCH,KNA,FRI,CAE,CCS,MD,PW,MW,AP</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::Sabda" data-filt="solid">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/7-0065?w=Sabda" target="_blank" rel="noopener">śabda</a> <span class="badge">≥2 Russian dicts</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::Sabda</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>2.20</b>  (norm 0.63)
+support_score : 1.00   (CAE/CCS/MD)
+scholarly     : 0.67   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>KCH,KNA,FRI,CAE,CCS,MD,PW,MW</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::agAra" data-filt="solid">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/1-0026?w=agAra" target="_blank" rel="noopener">agāra</a> <span class="badge">≥2 Russian dicts</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::agAra</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>2.20</b>  (norm 0.63)
+support_score : 1.00   (CAE/CCS/MD)
+scholarly     : 0.67   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>KCH,KOW,FRI,CAE,CCS,MD,PW,MW</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::aparAnta" data-filt="solid">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/1-0289?w=aparAnta" target="_blank" rel="noopener">aparānta</a> <span class="badge">≥2 Russian dicts</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::aparAnta</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>1.70</b>  (norm 0.49)
+support_score : 1.00   (CAE/CCS/MD)
+scholarly     : 1.00   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>KCH,KOW,CAE,CCS,MD,PW,MW,AP</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::balavant" data-filt="solid">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/5-0034?w=balavant" target="_blank" rel="noopener">balavant</a> <span class="badge">≥2 Russian dicts</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::balavant</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>2.30</b>  (norm 0.66)
+support_score : 0.67   (CAE/CCS/MD)
+scholarly     : 0.33   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>KCH,KNA,SMI,CAE,CCS,PW</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::gAyaka" data-filt="solid">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/2-0736?w=gAyaka" target="_blank" rel="noopener">gāyaka</a> <span class="badge">≥2 Russian dicts</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::gAyaka</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>1.70</b>  (norm 0.49)
+support_score : 1.00   (CAE/CCS/MD)
+scholarly     : 0.67   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>KCH,KOW,CAE,CCS,MD,PW,MW</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::idam" data-filt="solid">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/1-0794?w=idam" target="_blank" rel="noopener">idam</a> <span class="badge">≥2 Russian dicts</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::idam</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>2.80</b>  (norm 0.80)
+support_score : 1.00   (CAE/CCS/MD)
+scholarly     : 1.00   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>KCH,KNA,SMI,FRI,CAE,CCS,MD,PW,MW,AP</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::loBana" data-filt="solid">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/6-0591?w=loBana" target="_blank" rel="noopener">lobhana</a> <span class="badge">≥2 Russian dicts</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::loBana</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>1.50</b>  (norm 0.43)
+support_score : 0.67   (CAE/CCS/MD)
+scholarly     : 1.00   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>KCH,FRI,CAE,CCS,PW,MW,AP</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::nirhrAda" data-filt="solid">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/4-0217?w=nirhrAda" target="_blank" rel="noopener">nirhrāda</a> <span class="badge">≥2 Russian dicts</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::nirhrAda</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>1.50</b>  (norm 0.43)
+support_score : 0.67   (CAE/CCS/MD)
+scholarly     : 0.67   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>KCH,FRI,CAE,CCS,PW,MW</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::pramuKa" data-filt="solid">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/4-1052?w=pramuKa" target="_blank" rel="noopener">pramukha</a> <span class="badge">≥2 Russian dicts</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::pramuKa</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>1.60</b>  (norm 0.46)
+support_score : 0.67   (CAE/CCS/MD)
+scholarly     : 1.00   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>KCH,SMI,CAE,CCS,PW,MW,AP</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::samAramBa" data-filt="solid">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/7-0709?w=samAramBa" target="_blank" rel="noopener">samārambha</a> <span class="badge">≥2 Russian dicts</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::samAramBa</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>2.30</b>  (norm 0.66)
+support_score : 0.67   (CAE/CCS/MD)
+scholarly     : 0.67   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>KCH,KNA,SMI,CAE,CCS,PW,MW</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::udBid" data-filt="solid">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/1-0930?w=udBid" target="_blank" rel="noopener">udbhid</a> <span class="badge">≥2 Russian dicts</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::udBid</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>1.50</b>  (norm 0.43)
+support_score : 0.67   (CAE/CCS/MD)
+scholarly     : 1.00   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>KCH,FRI,CAE,CCS,PW,MW,AP</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::varUTa" data-filt="solid">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/6-0727?w=varUTa" target="_blank" rel="noopener">varūtha</a> <span class="badge">≥2 Russian dicts</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::varUTa</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>2.20</b>  (norm 0.63)
+support_score : 1.00   (CAE/CCS/MD)
+scholarly     : 0.67   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>KCH,KOW,FRI,CAE,CCS,MD,PW,MW</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::vimahas" data-filt="solid">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/6-1139?w=vimahas" target="_blank" rel="noopener">vimahas</a> <span class="badge">≥2 Russian dicts</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::vimahas</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>1.70</b>  (norm 0.49)
+support_score : 0.67   (CAE/CCS/MD)
+scholarly     : 0.67   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>KCH,KOW,CAE,CCS,PW,MW</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::ABIkzRya" data-filt="koch1">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/1-0666?w=ABIkzRya" target="_blank" rel="noopener">ābhīkṣṇya</a> <span class="badge">Kochergina-only</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::ABIkzRya</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>1.00</b>  (norm 0.29)
+support_score : 1.00   (CAE/CCS/MD)
+scholarly     : 0.67   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>KCH,CAE,CCS,MD,PW,MW</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::SAkman" data-filt="koch1">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/7-0130?w=SAkman" target="_blank" rel="noopener">śākman</a> <span class="badge">Kochergina-only</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::SAkman</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>1.00</b>  (norm 0.29)
+support_score : 1.00   (CAE/CCS/MD)
+scholarly     : 0.67   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>KCH,CAE,CCS,MD,PW,MW</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::admara" data-filt="koch1">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/1-0132?w=admara" target="_blank" rel="noopener">admara</a> <span class="badge">Kochergina-only</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::admara</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>1.00</b>  (norm 0.29)
+support_score : 0.00   (CAE/CCS/MD)
+scholarly     : 1.00   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>KCH,PW,MW,AP</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::daBa" data-filt="koch1">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/3-0514?w=daBa" target="_blank" rel="noopener">dabha</a> <span class="badge">Kochergina-only</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::daBa</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>1.00</b>  (norm 0.29)
+support_score : 0.67   (CAE/CCS/MD)
+scholarly     : 0.67   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>KCH,CAE,CCS,PW,MW</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::hvAna" data-filt="koch1">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/7-1684?w=hvAna" target="_blank" rel="noopener">hvāna</a> <span class="badge">Kochergina-only</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::hvAna</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>1.00</b>  (norm 0.29)
+support_score : 0.33   (CAE/CCS/MD)
+scholarly     : 0.67   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>KCH,CAE,PW,MW</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::knUy" data-filt="koch1">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/2-0471?w=knUy" target="_blank" rel="noopener">knūy</a> <span class="badge">Kochergina-only</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::knUy</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>1.00</b>  (norm 0.29)
+support_score : 1.00   (CAE/CCS/MD)
+scholarly     : 1.00   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>KCH,CAE,CCS,MD,PW,MW,AP</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::mahina" data-filt="koch1">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/5-0667?w=mahina" target="_blank" rel="noopener">mahina</a> <span class="badge">Kochergina-only</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::mahina</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>1.00</b>  (norm 0.29)
+support_score : 0.67   (CAE/CCS/MD)
+scholarly     : 0.67   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>KCH,CAE,CCS,PW,MW</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::niHSaNkita" data-filt="koch1">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/4-0235?w=niHSaNkita" target="_blank" rel="noopener">niḥśaṅkita</a> <span class="badge">Kochergina-only</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::niHSaNkita</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>1.00</b>  (norm 0.29)
+support_score : 0.67   (CAE/CCS/MD)
+scholarly     : 0.33   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>KCH,CAE,CCS,PW</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::pAkAgAra" data-filt="koch1">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/4-0624?w=pAkAgAra" target="_blank" rel="noopener">pākāgāra</a> <span class="badge">Kochergina-only</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::pAkAgAra</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>1.00</b>  (norm 0.29)
+support_score : 0.33   (CAE/CCS/MD)
+scholarly     : 0.67   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>KCH,MD,PW,MW</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::piNgAkza" data-filt="koch1">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/4-0702?w=piNgAkza" target="_blank" rel="noopener">piṅgākṣa</a> <span class="badge">Kochergina-only</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::piNgAkza</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>1.00</b>  (norm 0.29)
+support_score : 1.00   (CAE/CCS/MD)
+scholarly     : 1.00   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>KCH,CAE,CCS,MD,PW,MW,AP</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::pratinAyaka" data-filt="koch1">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/4-0957?w=pratinAyaka" target="_blank" rel="noopener">pratināyaka</a> <span class="badge">Kochergina-only</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::pratinAyaka</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>1.00</b>  (norm 0.29)
+support_score : 0.67   (CAE/CCS/MD)
+scholarly     : 0.67   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>KCH,CAE,CCS,PW,MW</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::sAgarAnta" data-filt="koch1">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/7-0895?w=sAgarAnta" target="_blank" rel="noopener">sāgarānta</a> <span class="badge">Kochergina-only</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::sAgarAnta</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>1.00</b>  (norm 0.29)
+support_score : 0.67   (CAE/CCS/MD)
+scholarly     : 1.00   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>KCH,CAE,CCS,PW,MW,AP</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::sarAjaka" data-filt="koch1">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/7-0787?w=sarAjaka" target="_blank" rel="noopener">sarājaka</a> <span class="badge">Kochergina-only</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::sarAjaka</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>1.00</b>  (norm 0.29)
+support_score : 0.67   (CAE/CCS/MD)
+scholarly     : 0.67   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>KCH,CAE,CCS,PW,MW</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::tarasamaya" data-filt="koch1">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/3-0268?w=tarasamaya" target="_blank" rel="noopener">tarasamaya</a> <span class="badge">Kochergina-only</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::tarasamaya</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>1.00</b>  (norm 0.29)
+support_score : 0.00   (CAE/CCS/MD)
+scholarly     : 0.67   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>KCH,PW,MW</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::valkalin" data-filt="koch1">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/6-0810?w=valkalin" target="_blank" rel="noopener">valkalin</a> <span class="badge">Kochergina-only</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::valkalin</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>1.00</b>  (norm 0.29)
+support_score : 1.00   (CAE/CCS/MD)
+scholarly     : 1.00   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>KCH,CAE,CCS,MD,PW,MW,AP</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::ABUzeRya" data-filt="medonly">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/1-0667?w=ABUzeRya" target="_blank" rel="noopener">ābhūṣeṇya</a> <span class="badge">medium-only (learner=0)</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::ABUzeRya</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>0.00</b>  (norm 0.00)
+support_score : 0.33   (CAE/CCS/MD)
+scholarly     : 1.00   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>CAE,PW,MW,AP</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::Penapa" data-filt="medonly">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/4-1213?w=Penapa" target="_blank" rel="noopener">phenapa</a> <span class="badge">medium-only (learner=0)</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::Penapa</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>0.00</b>  (norm 0.00)
+support_score : 0.67   (CAE/CCS/MD)
+scholarly     : 0.67   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>CAE,CCS,PW,MW</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::aBayamkara" data-filt="medonly">
+    <header><div class="hw">abhayamkara <span class="badge">medium-only (learner=0)</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::aBayamkara</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>0.00</b>  (norm 0.00)
+support_score : 1.00   (CAE/CCS/MD)
+scholarly     : 1.00   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>CAE,CCS,MD,PW,MW,AP</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::bfhanta" data-filt="medonly">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/5-0120?w=bfhanta" target="_blank" rel="noopener">bṛhanta</a> <span class="badge">medium-only (learner=0)</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::bfhanta</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>0.00</b>  (norm 0.00)
+support_score : 0.67   (CAE/CCS/MD)
+scholarly     : 0.67   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>CAE,CCS,PW,MW</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::durgasimha" data-filt="medonly">
+    <header><div class="hw">durgasimha <span class="badge">medium-only (learner=0)</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::durgasimha</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>0.00</b>  (norm 0.00)
+support_score : 1.00   (CAE/CCS/MD)
+scholarly     : 0.67   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>CAE,CCS,MD,PW,MW</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::jAtismaraRa" data-filt="medonly">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/3-0080?w=jAtismaraRa" target="_blank" rel="noopener">jātismaraṇa</a> <span class="badge">medium-only (learner=0)</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::jAtismaraRa</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>0.00</b>  (norm 0.00)
+support_score : 0.67   (CAE/CCS/MD)
+scholarly     : 0.67   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>CAE,CCS,PW,MW</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::kuzavA" data-filt="medonly">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/2-0370?w=kuzavA" target="_blank" rel="noopener">kuṣavā</a> <span class="badge">medium-only (learner=0)</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::kuzavA</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>0.00</b>  (norm 0.00)
+support_score : 0.67   (CAE/CCS/MD)
+scholarly     : 0.67   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>CAE,CCS,PW,MW</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::marmarIBU" data-filt="medonly">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/5-0588?w=marmarIBU" target="_blank" rel="noopener">marmarībhū</a> <span class="badge">medium-only (learner=0)</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::marmarIBU</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>0.00</b>  (norm 0.00)
+support_score : 0.33   (CAE/CCS/MD)
+scholarly     : 0.00   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>MD</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::pAlikA" data-filt="medonly">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/4-0692?w=pAlikA" target="_blank" rel="noopener">pālikā</a> <span class="badge">medium-only (learner=0)</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::pAlikA</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>0.00</b>  (norm 0.00)
+support_score : 0.33   (CAE/CCS/MD)
+scholarly     : 1.00   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>MD,PW,MW,AP</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::pralApavant" data-filt="medonly">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/4-1065?w=pralApavant" target="_blank" rel="noopener">pralāpavant</a> <span class="badge">medium-only (learner=0)</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::pralApavant</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>0.00</b>  (norm 0.00)
+support_score : 0.67   (CAE/CCS/MD)
+scholarly     : 0.33   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>CAE,CCS,PW</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::sApatnaka" data-filt="medonly">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/7-0926?w=sApatnaka" target="_blank" rel="noopener">sāpatnaka</a> <span class="badge">medium-only (learner=0)</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::sApatnaka</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>0.00</b>  (norm 0.00)
+support_score : 0.67   (CAE/CCS/MD)
+scholarly     : 0.67   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>CAE,CCS,PW,MW</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::sampatti" data-filt="medonly">
+    <header><div class="hw">sampatti <span class="badge">medium-only (learner=0)</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::sampatti</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>0.00</b>  (norm 0.00)
+support_score : 0.67   (CAE/CCS/MD)
+scholarly     : 0.67   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>CAE,CCS,PW,MW</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::suganDeSa" data-filt="medonly">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/7-1045?w=suganDeSa" target="_blank" rel="noopener">sugandheśa</a> <span class="badge">medium-only (learner=0)</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::suganDeSa</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>0.00</b>  (norm 0.00)
+support_score : 0.33   (CAE/CCS/MD)
+scholarly     : 0.67   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>MD,PW,MW</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::triyAma" data-filt="medonly">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/3-0440?w=triyAma" target="_blank" rel="noopener">triyāma</a> <span class="badge">medium-only (learner=0)</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::triyAma</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>0.00</b>  (norm 0.00)
+support_score : 0.67   (CAE/CCS/MD)
+scholarly     : 0.67   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>CAE,CCS,PW,MW</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::vasukft" data-filt="medonly">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/6-0848?w=vasukft" target="_blank" rel="noopener">vasukṛt</a> <span class="badge">medium-only (learner=0)</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::vasukft</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>0.00</b>  (norm 0.00)
+support_score : 0.33   (CAE/CCS/MD)
+scholarly     : 0.67   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>MD,PW,MW</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::ABAsana" data-filt="control">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/1-0665?w=ABAsana" target="_blank" rel="noopener">ābhāsana</a> <span class="badge">scholarly-only control</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::ABAsana</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>0.00</b>  (norm 0.00)
+support_score : 0.00   (CAE/CCS/MD)
+scholarly     : 0.67   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>PW,MW</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::KaRqaja" data-filt="control">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/2-0593?w=KaRqaja" target="_blank" rel="noopener">khaṇḍaja</a> <span class="badge">scholarly-only control</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::KaRqaja</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>0.00</b>  (norm 0.00)
+support_score : 0.00   (CAE/CCS/MD)
+scholarly     : 0.67   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>PW,MW</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::Tuq" data-filt="control">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/3-0474?w=Tuq" target="_blank" rel="noopener">thuḍ</a> <span class="badge">scholarly-only control</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::Tuq</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>0.00</b>  (norm 0.00)
+support_score : 0.00   (CAE/CCS/MD)
+scholarly     : 1.00   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>PW,MW,AP</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::atisAmyA" data-filt="control">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/1-0106?w=atisAmyA" target="_blank" rel="noopener">atisāmyā</a> <span class="badge">scholarly-only control</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::atisAmyA</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>0.00</b>  (norm 0.00)
+support_score : 0.00   (CAE/CCS/MD)
+scholarly     : 1.00   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>PW,MW,AP</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::dakziRAcAra" data-filt="control">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/3-0487?w=dakziRAcAra" target="_blank" rel="noopener">dakṣiṇācāra</a> <span class="badge">scholarly-only control</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::dakziRAcAra</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>0.00</b>  (norm 0.00)
+support_score : 0.00   (CAE/CCS/MD)
+scholarly     : 1.00   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>PW,MW,AP</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::hamsArUQa" data-filt="control">
+    <header><div class="hw">hamsārūḍha <span class="badge">scholarly-only control</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::hamsArUQa</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>0.00</b>  (norm 0.00)
+support_score : 0.00   (CAE/CCS/MD)
+scholarly     : 0.67   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>PW,MW</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::kaSojU" data-filt="control">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/2-0187?w=kaSojU" target="_blank" rel="noopener">kaśojū</a> <span class="badge">scholarly-only control</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::kaSojU</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>0.00</b>  (norm 0.00)
+support_score : 0.00   (CAE/CCS/MD)
+scholarly     : 0.67   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>PW,MW</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::laGukaNkola" data-filt="control">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/6-0481?w=laGukaNkola" target="_blank" rel="noopener">laghukaṅkola</a> <span class="badge">scholarly-only control</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::laGukaNkola</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>0.00</b>  (norm 0.00)
+support_score : 0.00   (CAE/CCS/MD)
+scholarly     : 0.67   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>PW,MW</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::mfqaNkaRa" data-filt="control">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/5-0878?w=mfqaNkaRa" target="_blank" rel="noopener">mṛḍaṅkaṇa</a> <span class="badge">scholarly-only control</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::mfqaNkaRa</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>0.00</b>  (norm 0.00)
+support_score : 0.00   (CAE/CCS/MD)
+scholarly     : 0.33   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>PW</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::pUrvapAYcAlaka" data-filt="control">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/4-0848?w=pUrvapAYcAlaka" target="_blank" rel="noopener">pūrvapāñcālaka</a> <span class="badge">scholarly-only control</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::pUrvapAYcAlaka</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>0.00</b>  (norm 0.00)
+support_score : 0.00   (CAE/CCS/MD)
+scholarly     : 1.00   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>PW,MW,AP</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::pratizWAtva" data-filt="control">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/4-0981?w=pratizWAtva" target="_blank" rel="noopener">pratiṣṭhātva</a> <span class="badge">scholarly-only control</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::pratizWAtva</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>0.00</b>  (norm 0.00)
+support_score : 0.00   (CAE/CCS/MD)
+scholarly     : 0.67   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>PW,MW</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::sPowahetuka" data-filt="control">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/7-1380?w=sPowahetuka" target="_blank" rel="noopener">sphoṭahetuka</a> <span class="badge">scholarly-only control</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::sPowahetuka</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>0.00</b>  (norm 0.00)
+support_score : 0.00   (CAE/CCS/MD)
+scholarly     : 0.67   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>PW,MW</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::somatva" data-filt="control">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/7-1206?w=somatva" target="_blank" rel="noopener">somatva</a> <span class="badge">scholarly-only control</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::somatva</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>0.00</b>  (norm 0.00)
+support_score : 0.00   (CAE/CCS/MD)
+scholarly     : 0.67   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>PW,MW</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::trivEstika" data-filt="control">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/3-0445?w=trivEstika" target="_blank" rel="noopener">trivaistika</a> <span class="badge">scholarly-only control</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::trivEstika</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>0.00</b>  (norm 0.00)
+support_score : 0.00   (CAE/CCS/MD)
+scholarly     : 0.67   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>PW,MW</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+
+  <section class="card" data-id="learner::varzapAkin" data-filt="control">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/6-0801?w=varzapAkin" target="_blank" rel="noopener">varṣapākin</a> <span class="badge">scholarly-only control</span></div><span class="idchip" title="card id — cite this id back when discussing this card">learner::varzapAkin</span></header>
+    <div class="question">Does a Russian student need this headword? <span class="muted">(approve = learner-core; reject = scholarly-only / skip)</span></div>
+    <div class="panel"><h4>retention scores</h4><pre>learner_score : <b>0.00</b>  (norm 0.00)
+support_score : 0.00   (CAE/CCS/MD)
+scholarly     : 1.00   (PW/MW/AP — non-gating)</pre></div><div class="panel"><h4>dictionaries that kept it</h4><pre>PW,MW,AP</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Learner-core</button>
+      <button class="vote reject" data-vote="reject">&#10060; Skip</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="optional: why keep/drop for a learner edition"></textarea>
+  </section>
+</main>
+<footer class="hint">Approve = a Russian student needs this headword (learner-core) · Reject = scholarly-only / skip · Defer = unsure. Calibrates the learner_score cut. Keyboard: <kbd>a</kbd> Learner-core &middot; <kbd>r</kbd> Skip
+  &middot; <kbd>d</kbd> defer &middot; <kbd>&darr;</kbd>/<kbd>&uarr;</kbd> next/prev. Votes autosave to
+  this browser's localStorage; click "Download decisions.json" when done (unvoted items export with
+  decision:null).</footer>
+<div class="legend" style="max-width:980px;margin:0 auto 20px;padding:0 20px;color:var(--muted);font-size:12px">
+  <b>Approve</b> = accept the proposed change/answer shown on the card (no separate "approve as-is" —
+  approving means agreeing as written). <b>Reject</b> = keep the current entry/answer unchanged.
+  <b>Defer</b> = not sure yet, decide later. The note field is for requesting a partial tweak instead
+  of an outright reject.
+</div>
+<script>
+(function () {
+  var SHEET_ID = "h180-learner-threshold-2026-07-06";
+  var STORE_KEY = 'review-sheet:' + SHEET_ID;
+  var ids = ["learner::A", "learner::BUr", "learner::Sabda", "learner::agAra", "learner::aparAnta", "learner::balavant", "learner::gAyaka", "learner::idam", "learner::loBana", "learner::nirhrAda", "learner::pramuKa", "learner::samAramBa", "learner::udBid", "learner::varUTa", "learner::vimahas", "learner::ABIkzRya", "learner::SAkman", "learner::admara", "learner::daBa", "learner::hvAna", "learner::knUy", "learner::mahina", "learner::niHSaNkita", "learner::pAkAgAra", "learner::piNgAkza", "learner::pratinAyaka", "learner::sAgarAnta", "learner::sarAjaka", "learner::tarasamaya", "learner::valkalin", "learner::ABUzeRya", "learner::Penapa", "learner::aBayamkara", "learner::bfhanta", "learner::durgasimha", "learner::jAtismaraRa", "learner::kuzavA", "learner::marmarIBU", "learner::pAlikA", "learner::pralApavant", "learner::sApatnaka", "learner::sampatti", "learner::suganDeSa", "learner::triyAma", "learner::vasukft", "learner::ABAsana", "learner::KaRqaja", "learner::Tuq", "learner::atisAmyA", "learner::dakziRAcAra", "learner::hamsArUQa", "learner::kaSojU", "learner::laGukaNkola", "learner::mfqaNkaRa", "learner::pUrvapAYcAlaka", "learner::pratizWAtva", "learner::sPowahetuka", "learner::somatva", "learner::trivEstika", "learner::varzapAkin"];
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(STORE_KEY) || '{}') || {}; } catch (e) { state = {}; }
+  function tally() {
+    var c = { approve:0, reject:0, defer:0 };
+    ids.forEach(function (id) { var v = state[id] && state[id].decision; if (v && c.hasOwnProperty(v)) c[v]++; });
+    document.getElementById('c-approve').textContent = c.approve;
+    document.getElementById('c-reject').textContent = c.reject;
+    document.getElementById('c-defer').textContent = c.defer;
+    document.getElementById('c-unvoted').textContent = ids.length - c.approve - c.reject - c.defer;
+  }
+  function applyCardUI(card) {
+    var id = card.getAttribute('data-id'); var rec = state[id] || {};
+    card.classList.remove('voted-approve','voted-reject','voted-defer');
+    card.querySelectorAll('button.vote').forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-vote') === rec.decision); });
+    card.querySelector('.vote-state').textContent = rec.decision ? rec.decision : 'unvoted';
+    if (rec.decision) card.classList.add('voted-' + rec.decision);
+    var ta = card.querySelector('textarea.note'); if (rec.note && !ta.value) ta.value = rec.note;
+  }
+  function save() { localStorage.setItem(STORE_KEY, JSON.stringify(state)); tally(); }
+  function vote(id, d) { state[id] = state[id] || {}; state[id].decision = d; save(); }
+  function noteChange(id, t) { state[id] = state[id] || {}; state[id].note = t; save(); }
+  document.querySelectorAll('.card').forEach(function (card) {
+    var id = card.getAttribute('data-id'); applyCardUI(card);
+    card.querySelectorAll('button.vote').forEach(function (btn) {
+      btn.addEventListener('click', function () { vote(id, btn.getAttribute('data-vote')); applyCardUI(card); });
+    });
+    var ta = card.querySelector('textarea.note'); ta.addEventListener('input', function () { noteChange(id, ta.value); });
+  });
+  tally();
+  document.getElementById('downloadBtn').addEventListener('click', function () {
+    var decided = ids.filter(function (id) { return state[id] && state[id].decision; }).length;
+    var payload = { sheet_id: SHEET_ID, generated: "2026-07-06", decided: decided,
+      items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '' }; }) };
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
+    var url = URL.createObjectURL(blob); var a = document.createElement('a');
+    a.href = url; a.download = SHEET_ID + '_decisions.json'; document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+  });
+  var filterbar = document.getElementById('filterbar');
+  filterbar.addEventListener('click', function (e) {
+    var btn = e.target.closest('button[data-filter]'); if (!btn) return;
+    filterbar.querySelectorAll('button').forEach(function (b) { b.classList.remove('active'); });
+    btn.classList.add('active'); var f = btn.getAttribute('data-filter');
+    document.querySelectorAll('.card').forEach(function (card) {
+      var show = true;
+      if (f === 'unvoted') { var id = card.getAttribute('data-id'); show = !(state[id] && state[id].decision); }
+      else if (f !== 'all') { show = card.getAttribute('data-filt') === f; }
+      card.style.display = show ? '' : 'none';
+    });
+  });
+  var cardsEl = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  var activeIdx = 0;
+  function visibleCards() { return cardsEl.filter(function (c) { return c.style.display !== 'none'; }); }
+  document.addEventListener('keydown', function (e) {
+    if (e.target.tagName === 'TEXTAREA') return;
+    var vis = visibleCards(); if (!vis.length) return;
+    if (activeIdx >= vis.length) activeIdx = vis.length - 1;
+    var card = vis[activeIdx]; var id = card.getAttribute('data-id');
+    if (e.key === 'a') { vote(id, 'approve'); applyCardUI(card); }
+    else if (e.key === 'r') { vote(id, 'reject'); applyCardUI(card); }
+    else if (e.key === 'd') { vote(id, 'defer'); applyCardUI(card); }
+    else if (e.key === 'ArrowDown') { activeIdx = Math.min(activeIdx + 1, vis.length - 1); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'center'}); }
+    else if (e.key === 'ArrowUp') { activeIdx = Math.max(activeIdx - 1, 0); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'center'}); }
+    else return;
+    e.preventDefault();
+  });
+
+  var saveHandle = null, saveTimer = null;
+  function exportPayload() {
+    var decided = ids.filter(function (id) { return state[id] && state[id].decision; }).length;
+    return JSON.stringify({ sheet_id: SHEET_ID, generated: new Date().toISOString(), decided: decided,
+      items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '' }; }) }, null, 2);
+  }
+  function scheduleAutosave() {
+    if (!saveHandle) return;
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(function () {
+      saveHandle.createWritable().then(function (w) {
+        w.write(exportPayload()).then(function () { w.close(); });
+      }).catch(function () {});
+    }, 1000);
+  }
+  var _origSave = save;
+  save = function () { _origSave(); scheduleAutosave(); };
+  if (window.showSaveFilePicker) {
+    var saveBtn = document.getElementById('saveBtn');
+    saveBtn.style.display = '';
+    saveBtn.addEventListener('click', function () {
+      window.showSaveFilePicker({suggestedName: SHEET_ID + '_decisions.json'}).then(function (h) {
+        saveHandle = h; scheduleAutosave();
+      }).catch(function () {});
+    });
+  }
+})();
+</script>
+</body>
+</html>

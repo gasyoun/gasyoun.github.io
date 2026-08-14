@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="color-scheme" content="dark">
+<title>H1682 — сокращения pwg_ru: ратификация правил (content v3 / H2047) — 33 items</title>
+<style>
+  :root { color-scheme: dark; --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --text:#e6e6e6; --muted:#9aa0aa;
+          --accent:#5b8cff; --ok:#3fb950; --bad:#f85149; --defer:#d29922; --border:#2a2f3a; }
+  * { box-sizing: border-box; }
+  body { background:var(--bg); color:var(--text); font-family:-apple-system,Segoe UI,Roboto,sans-serif;
+         margin:0; padding:0 0 120px 0; }
+  header.top { position:sticky; top:0; z-index:10; background:var(--panel); border-bottom:1px solid var(--border);
+               padding:14px 20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+  header.top h1 { font-size:16px; margin:0; }
+  header.top .sub { color:var(--muted); font-size:12px; max-width:760px; }
+  .tally { display:flex; gap:14px; font-size:13px; }
+  .tally span.count { font-weight:700; }
+  .tally .approve { color:var(--ok); } .tally .reject { color:var(--bad); }
+  .tally .defer { color:var(--defer); } .tally .unvoted { color:var(--muted); }
+  .toolbar { padding:10px 20px; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  button.dl { background:var(--accent); color:#fff; border:none; padding:8px 14px; border-radius:6px;
+              cursor:pointer; font-size:13px; }
+  button.dl:hover { opacity:.9; }
+  .filterbar { display:flex; gap:6px; flex-wrap:wrap; }
+  .filterbar button { background:var(--panel2); border:1px solid var(--border); color:var(--text);
+                       padding:6px 10px; border-radius:14px; font-size:12px; cursor:pointer; }
+  .filterbar button.active { border-color:var(--accent); color:var(--accent); }
+  main { max-width:980px; margin:0 auto; padding:10px 20px; }
+  .card { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:16px;
+          margin-bottom:16px; }
+  .card.voted-approve { border-left:4px solid var(--ok); }
+  .card.voted-reject { border-left:4px solid var(--bad); }
+  .card.voted-defer { border-left:4px solid var(--defer); }
+  .card header { display:flex; justify-content:space-between; align-items:baseline; }
+  .card .hw { font-size:18px; font-weight:700; }
+  .badge { font-size:11px; background:var(--panel2); padding:2px 8px; border-radius:10px;
+           margin-left:8px; color:var(--muted); }
+  .question { margin:8px 0 12px; font-size:14px; }
+  .panel { background:var(--panel2); border-radius:8px; padding:10px 12px; font-size:13px; margin-bottom:10px; }
+  .panel h4 { margin:0 0 6px; font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+  .panel pre { white-space:pre-wrap; word-break:break-word; margin:0; font-size:12px; line-height:1.45; }
+  .chip { display:inline-block; background:#263042; border-radius:5px; padding:2px 7px; margin:2px 3px 2px 0; font-size:12px; }
+  .muted { color:var(--muted); font-style:italic; }
+  .controls { display:flex; align-items:center; gap:8px; margin-top:4px; }
+  button.vote { border:1px solid var(--border); background:var(--panel2); color:var(--text);
+                padding:7px 12px; border-radius:6px; cursor:pointer; font-size:13px; }
+  button.vote.approve.active { background:var(--ok); border-color:var(--ok); color:#04240b; }
+  button.vote.reject.active { background:var(--bad); border-color:var(--bad); color:#2a0a08; }
+  button.vote.defer.active { background:var(--defer); border-color:var(--defer); color:#2a1d02; }
+  .vote-state { margin-left:6px; font-size:12px; color:var(--muted); }
+  textarea.note { width:100%; margin-top:10px; min-height:88px; background:#11141a !important; color:#e6e6e6 !important;
+                  -webkit-text-fill-color:#e6e6e6; border:1px solid var(--border); border-radius:6px; padding:8px; font-size:13px;
+                  font-family:inherit; resize:vertical; }
+  textarea.note::placeholder { color:var(--muted); opacity:1; }
+  footer.hint { max-width:980px; margin:20px auto; padding:0 20px; color:var(--muted); font-size:12px; }
+  kbd { background:#263042; border-radius:4px; padding:1px 5px; font-size:11px; }
+  .idchip { font-family:ui-monospace,Consolas,monospace; font-size:11px; color:var(--muted);
+            background:var(--panel2); border:1px solid var(--border); padding:2px 7px;
+            border-radius:6px; user-select:all; }
+  .card header { gap:10px; }
+  .hw a.hwlink { color:inherit; text-decoration:underline dotted; text-underline-offset:3px; }
+  .hw a.hwlink:hover { color:var(--accent); }
+  mark.hl { background:#453407; color:#ffd75e; padding:0 2px; border-radius:3px; }
+  .savebanner { max-width:980px; margin:10px auto 0; padding:8px 20px; font-size:12.5px; }
+  .savebanner code { background:var(--panel2); border:1px solid var(--border); padding:1px 6px; border-radius:5px; }
+  .ratingrow { display:flex; align-items:center; gap:6px; margin-top:10px; flex-wrap:wrap; }
+  .ratinglabel { font-size:12px; color:var(--muted); margin-right:4px; }
+  button.rate { border:1px solid var(--border); background:var(--panel2); color:var(--text);
+                width:34px; padding:6px 0; border-radius:6px; cursor:pointer; font-size:13px; }
+  button.rate.active { background:var(--accent); border-color:var(--accent); color:#fff; }
+  button.rate.active.below { background:var(--defer); border-color:var(--defer); color:#2a1d02; }
+  .rate-state { font-size:12px; color:var(--muted); margin-left:4px; }
+  :root { --fs:1.5; }
+  header.top h1 { font-size:calc(16px * var(--fs)) !important; }
+  header.top .sub { font-size:calc(12px * var(--fs)) !important; }
+  .tally, button.dl, button.vote, button.rate, textarea.note, .reject-label-select,
+  #strictReviewerWrap, #strictReviewerWrap input { font-size:calc(13px * var(--fs)) !important; }
+  .filterbar button, .fsctl button, .fsctl .fsval, .chip, .vote-state, .rate-state,
+  .ratinglabel, .rejectlabellabel, footer.hint, div.legend,
+  #strictReviewError { font-size:calc(12px * var(--fs)) !important; }
+  .card .hw { font-size:calc(18px * var(--fs)) !important; }
+  .badge, .panel h4, kbd, .idchip { font-size:calc(11px * var(--fs)) !important; }
+  .question { font-size:calc(14px * var(--fs)) !important; }
+  .panel { font-size:calc(13px * var(--fs)) !important; }
+  .panel pre { font-size:calc(13.5px * var(--fs)) !important; line-height:1.55; }
+  .panel .anatomy { font-size:calc(12.5px * var(--fs)) !important; }
+  .savebanner { font-size:calc(12.5px * var(--fs)) !important; }
+  .fsctl { display:flex; align-items:center; gap:4px; }
+  .fsctl button { background:var(--panel2); border:1px solid var(--border); color:var(--text);
+                  padding:6px 10px; border-radius:14px; cursor:pointer; line-height:1; }
+  .fsctl .fsval { color:var(--muted); min-width:3.4em; text-align:center; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>H1682 — сокращения pwg_ru: ратификация правил (content v3 / H2047) — 33 items</h1>
+    <div class="sub">Generated 2026-07-31 &middot; sheet_id <code>h1682_abbrev_rules</code> &middot; bound <code class="bindchip" title="content_hash — binds this sheet's decisions.json export to exactly this HTML">sha256:88f7db782d96…</code> &middot; H2047 content remake (MG 31-07): expansion+freq, case-fold семьи, падежи stay-Latin (не Acc.→акк.), до 5 кликабельных KWIC на карточку. 252 ab-токенов → 12 правил + 17 неоднозначных + 3 ls + 1 мета = 33 карточек. Не голосуйте, пока case-секция и примеры не совпадают с lock.</div>
+  </div>
+  <div class="tally" id="tally">
+    <span class="approve">&#9989; <span class="count" id="c-approve">0</span></span>
+    <span class="reject">&#10060; <span class="count" id="c-reject">0</span></span>
+    <span class="defer">&#9208; <span class="count" id="c-defer">0</span></span>
+    <span class="unvoted">&#9711; <span class="count" id="c-unvoted">33</span></span>
+  </div>
+</header>
+<div class="savebanner">&#128229; Your export downloads as <code>h1682_abbrev_rules_decisions.json</code> &rarr; save it to <code>pwg_ru/eval/h1682_abbrev_rules.decisions.json</code> (the <code>sheet_id</code> inside the file is <code>h1682_abbrev_rules</code> — that is how a later session knows which sheet these decisions belong to).</div>
+<div class="toolbar">
+  <button class="dl" id="downloadBtn">Download decisions.json</button><button class="dl" id="saveBtn" style="display:none;margin-left:8px">Save to folder…</button>
+  <div class="fsctl" title="text size — persists in this browser"><button type="button" id="fsDown" aria-label="smaller text">A&minus;</button><span class="fsval" id="fsVal"></span><button type="button" id="fsUp" aria-label="larger text">A+</button></div>
+  <div class="filterbar" id="filterbar"><button data-filter="all" class="active">all</button><button data-filter="rule">правила</button><button data-filter="ambig">неоднозначные</button><button data-filter="ls">ls-сиглы</button><button data-filter="meta">мета</button><button data-filter="unvoted">unvoted only</button></div>
+</div>
+<main id="cards">
+
+  <section class="card" data-id="rule:cross-reference---deictic--ru-map-ratifi" data-filt="rule">
+    <header><div class="hw">cross-reference / deictic (RU_MAP ratifications + additions) <span class="badge">17×</span><span class="badge">без остатка</span><span class="badge">rule</span></div><span class="idchip" title="card id — cite this id back when discussing this card">rule:cross-reference---deictic--ru-map-ratifi</span></header>
+    <div class="question"><b>Раздел:</b> cross-reference / deictic (RU_MAP ratifications + additions)&nbsp;&mdash;&nbsp;<b>17</b> токенов, 2870 вхождений в store.<br><b>Принять</b> = утвердить отображаемые соответствия (ниже: expansion + n=) для всех bulk-семей раздела разом. <b>Отклонить</b> = вернуть раздел к статус-кво (латиница/оригинал + тултип). <b>Отложить</b> = обсудить.</div>
+    <div class="panel"><h4>состав (surface · expansion · proposal · n=; case-fold семьи вместе)</h4><pre>v. a. (vor allem / above all, especially)  · преим. · (n=990)
+Vgl. (Vergleiche, n=712) · vgl. (Vergleiche, n=335)  →  предложение: ср. (см. H2048 / N8 notes)
+u. s. w. (und so weiter / and so on, and so forth = etc.)  · и т.д. · (n=310)
+s. (siehe, n=177) · S. (siehe, n=17)  →  предложение: см. (см. H2048 / N8 notes)
+s. u. (siehe unter / see under)  · см. · (n=97)
+u. (unter / under)  · под · (n=93)
+d. i. (das ist / i.e. id est - that is)  · т.е. · (n=46)
+sc. (scilicet (Latin) / that is to say, namely)  · а именно · (n=29)
+z. B. (zum Beispiel / for example)  · напр. · (n=24)
+d. h. (das heisst / that means)  · т.е. · (n=20)
+s. d. (siehe dort / look there)  · см. · (n=10)
+s. v. (sub verbo (Latin) / see under the word)  · см. · (n=6)
+s. u. d. (нет в pwgab)  · см. · (n=2)
+Vergl. (Vergleiche / compare)  · ср. · (n=1)
+näml. (nämlich / namely)  · а именно · (n=1)</pre></div><div class="panel"><h4>примеры (до 5, семья с max freq: Vgl. / vgl.)</h4><div class="kwic">1. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/1-0649?w=Ap" target="_blank" rel="noopener">āp</a></b> <code>Ap</code><br>&nbsp;&nbsp;DE: — Vgl. anApta . — caus. Apayati; gerund. mit praepp. Apayya oder Apya P. 6,4,57. VOP. 26,215.<br>&nbsp;&nbsp;RU: Vgl. anApta. — caus. Apayati; gerund. с praepp. Apayya или Apya P. 6,4,57. VOP. 26,215.<br>2. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/1-0728?w=As" target="_blank" rel="noopener">ās</a></b> <code>As</code><br>&nbsp;&nbsp;DE: — b) ein gerund. auf tvA (ya) oder am: uparuDyArimAsIta er halte den Feind eingeschlossen M. 7,195.…<br>&nbsp;&nbsp;RU: — b) gerund. при tvA (ya) или am: uparuDyArimAsIta «пусть держит врага в осаде» M. 7,195. tato rAjA…<br>3. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/5-0281?w=Bid" target="_blank" rel="noopener">bhid</a></b> <code>Bid</code><br>&nbsp;&nbsp;DE: — 5) unterbrechen, stören: tayordvAHsTaH samayaM lakzmaRo &#x27;Binat RAGH. 15,94. tezAM na BinnA mudaH …<br>&nbsp;&nbsp;RU: — 5) прерывать, нарушать: tayordvAHsTaH samayaM lakzmaRo &#x27;Binat RAGH. 15,94. tezAM na BinnA mudaH S…<br>4. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/5-0300?w=Buj" target="_blank" rel="noopener">bhuj</a></b> <code>Buj</code><br>&nbsp;&nbsp;DE: 1. Buj¦, Buja/ti biegen DHĀTUP. 28,124. partic. Bugna P. 8,2,45. VOP. 26,88. fg. gebogen, gekrümmt,…<br>&nbsp;&nbsp;RU: 1. Buj¦, Buja/ti «гнуть, сгибать» DHĀTUP. 28,124. partic. Bugna P. 8,2,45. VOP. 26,88. fg. «согнуты…<br>5. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/2-1089?w=Cid" target="_blank" rel="noopener">chid</a></b> <code>Cid</code><br>&nbsp;&nbsp;DE: — Vgl. Bid .<br>&nbsp;&nbsp;RU: — Vgl. Bid .</div></div><div class="panel"><h4>прецедент</h4><pre>RU_MAP (pwg_ab_ru.py) + MG 10-07-2026 AskUserQuestion ruling (ABBREVIATIONS_RU.md Bucket A) + DA-vote N3(a)/N4 &quot;все немецкие сокращения переводятся&quot; (H178_DA_VOTE_ISSUE_REGISTER, 19-07-2026)</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="своя формулировка / комментарий (принять RU / stay-Latin)"></textarea>
+  </section>
+
+  <section class="card" data-id="rule:meaning---designation---usage-labels" data-filt="rule">
+    <header><div class="hw">meaning / designation / usage labels <span class="badge">48×</span><span class="badge">3 неоднозн.</span><span class="badge">rule</span></div><span class="idchip" title="card id — cite this id back when discussing this card">rule:meaning---designation---usage-labels</span></header>
+    <div class="question"><b>Раздел:</b> meaning / designation / usage labels&nbsp;&mdash;&nbsp;<b>48</b> токенов, 997 вхождений в store.<br><b>Принять</b> = утвердить отображаемые соответствия (ниже: expansion + n=) для всех bulk-семей раздела разом. <b>Отклонить</b> = вернуть раздел к статус-кво (латиница/оригинал + тултип). <b>Отложить</b> = обсудить.</div>
+    <div class="panel"><h4>состав (surface · expansion · proposal · n=; case-fold семьи вместе)</h4><pre>Bed. (Bedeutung / meaning)  · знач. · (n=197)
+st. (statt / instead of)  · вместо · (n=159)
+fgg. (folgende / the following (pl.))  · сл. · (n=110)
+fg. (folgend / following)  · сл. · (n=102)
+dass. (dasselbe / the same)  · то же · (n=78)
+bes. (Besonders / special, particular)  · особ. · (n=43)
+insbes. (insbesondere, n=38) · Insbes. (insbesondere, n=3)  →  предложение: особ. (см. H2048 / N8 notes)
+best. (bestimmte / a certain (kind of))  · определ. · (n=33)
+überh. (überhaupt / in general)  · вообще · (n=31)
+Gegens. (Gegensatz / contrast)  · противоп. · (n=29)
+N. pr. (Nomen proprium / proper noun)  · имя собств. · (n=26)
+viell. (vielleicht, n=20) · Viell. (vielleicht, n=2)  →  предложение: возможно (см. H2048 / N8 notes)
+Bez. (Bezeichnung / designation)  · обозн. · (n=17)
+übertr. (übertragen / transferred / metaphorical)  · перен. · (n=16)
+eig. (eigentlich / literally)  · букв. · (n=11)
+uneig. (uneigentlich, n=9) · Uneig. (uneigentlich, n=1)  →  предложение: неточно (см. H2048 / N8 notes)
+Erkl. (Erklärung / explanation)  · пояснение · (n=6)
+Beiw. (Beiwort / adjective / attribute)  · эпит. · (n=5)
+N. (Namen / name)  · имя · (n=5)
+ders. (derselben / the same)  · тот же · (n=5)
+d. W. (das Wort / the word)  · слово · (n=4)
+euphem. (Euphemismus / euphemism)  · эвфем. · (n=4)
+Bedd. (Bedeutungen / meanings)  · знач. · (n=3)
+Bein. (Beiname / epithet, by name)  · эпит. · (n=3)
+Jmd. (Jmden / someone)  · кто-л. · (n=3)
+desgl. (desgleichen / likewise)  · то же · (n=3)
+folg. (folgend / following)  · сл. · (n=3)
+urspr. (ursprünglich / originally)  · первонач. · (n=3)
+w. (Wort? / word?)  · слово · (n=3)
+Erkll. (Erklärungen / explanations)  · пояснения · (n=2)
+des. (desselben / of the same)  · того же · (n=2)
+diess. (dieses (older sp.) / this (n., older sp.))  · это · (n=2)
+gew. (gewöhnlich / usually)  · обычно · (n=2)
+nam. (namentlich / especially / by name)  · особ. · (n=2)
+vorangeh. (vorangehend / preceding)  · предш. · (n=2)
+Beiww. (beiwohner / attendants)  · эпит. · (n=1)
+D. (Daselbst / in the same place (ibid.))  · там же · (n=1)
+Einschieb. (Einschiebung / insertion)  · вставка · (n=1)
+Verbind. (Verbindung / connection / combination)  · связь · (n=1)
+bildl. (bildlich / figurative)  · перен. · (n=1)
+dgl. (desgleichen / likewise)  · то же · (n=1)
+einf. (einfach / simple)  · просто · (n=1)
+mannigf. (mannigfaltig / manifold / various)  · разнообр. · (n=1)
+vom. (vom / from the)  · от · (n=1)
+vorang. (vorangehend / preceding)  · предш. · (n=1)</pre></div><div class="panel"><h4>примеры (до 5, семья с max freq: Bed.)</h4><div class="kwic">1. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/1-0649?w=Ap" target="_blank" rel="noopener">pra+āp</a></b> <code>Ap</code><br>&nbsp;&nbsp;DE: — 5) sich finden, vorhanden sein: yatra^ prA\pnozyo^zaDe AV. 4,19,2. in der Gramm. in Folge einer R…<br>&nbsp;&nbsp;RU: — 5) встречаться, иметь место, наличествовать: yatra^ prA\pnozyo^zaDe AV. 4,19,2. in der Gramm. пол…<br>2. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/1-0728?w=As" target="_blank" rel="noopener">upa-ās</a></b> <code>As</code><br>&nbsp;&nbsp;DE: — upa 1) daneben sitzen, sich daneben setzen, neben Jmd (acc.) sitzen oder sich setzen (als Zeichen…<br>&nbsp;&nbsp;RU: — upa 1) сидеть рядом, садиться рядом, садиться возле кого-л. (acc.), или сидеть, или садиться (как…<br>3. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/5-0281?w=Bid" target="_blank" rel="noopener">nirbhid</a></b> <code>Bid</code><br>&nbsp;&nbsp;DE: 1) auseinanderspalten, — schlitzen, aufreissen, durchschlagen, durchschiessen, verwunden: A\RqA ṚV.…<br>&nbsp;&nbsp;RU: 1) раскалывать, разрезать, разрывать, пробивать насквозь, пронзать, наносить рану: A\RqA ṚV. 1,104,…<br>4. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/5-0300?w=Buj" target="_blank" rel="noopener">bhuj</a></b> <code>Buj</code><br>&nbsp;&nbsp;DE: — intens. boBujyate mit pass. Bed. vielfach verspeist werden: boBujyate &#x27;tiTisuhftsvajanEH sahAnnam…<br>&nbsp;&nbsp;RU: — intens. boBujyate с pass. Bed. многократно поедаться: boBujyate &#x27;tiTisuhftsvajanEH sahAnnam VARĀH…<br>5. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/3-0901?w=DA" target="_blank" rel="noopener">upadhā</a></b> <code>DA</code><br>&nbsp;&nbsp;DE: — 8) upahita verbunden mit: amarmopahite deSe SUŚR. 1,88,3. sEnDavopahita 166,20. jANgalopahita 2,4…<br>&nbsp;&nbsp;RU: — 8) upahita в сочетании с: amarmopahite deSe SUŚR. 1,88,3. sEnDavopahita 166,20. jANgalopahita 2,4…</div></div><div class="panel"><h4>прецедент</h4><pre>RU_MAP + DA-vote N3(a)/N4; MG&#x27;s own worked examples Bein./N. pr. (ABBREVIATIONS_RU.md &quot;MG flagged... Bein. Vṛṣaṇaśva&#x27;s&quot;)</pre></div><div class="panel"><h4>вынесено как неоднозначные (см. ниже)</h4><pre>W. · ebend. · geder.</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="своя формулировка / комментарий (принять RU / stay-Latin)"></textarea>
+  </section>
+
+  <section class="card" data-id="rule:domain-labels" data-filt="rule">
+    <header><div class="hw">domain labels <span class="badge">12×</span><span class="badge">без остатка</span><span class="badge">rule</span></div><span class="idchip" title="card id — cite this id back when discussing this card">rule:domain-labels</span></header>
+    <div class="question"><b>Раздел:</b> domain labels&nbsp;&mdash;&nbsp;<b>12</b> токенов, 490 вхождений в store.<br><b>Принять</b> = утвердить отображаемые соответствия (ниже: expansion + n=) для всех bulk-семей раздела разом. <b>Отклонить</b> = вернуть раздел к статус-кво (латиница/оригинал + тултип). <b>Отложить</b> = обсудить.</div>
+    <div class="panel"><h4>состав (surface · expansion · proposal · n=; case-fold семьи вместе)</h4><pre>med. (Medizin / medicine)  · мед. · (n=459)
+buddh. (Buddhism)  · будд. · (n=7)
+medic. (medicinisch / medicinal / medical)  · мед. · (n=7)
+Astr. (—, n=4) · astr. (Astronomie, n=2)  →  предложение: астр. (см. H2048 / N8 notes)
+astrol. (Astrologie, n=3) · Astrol. (Astrologie, n=1)  →  предложение: астрол. (см. H2048 / N8 notes)
+liturg. (liturgisch / liturgical)  · литург. · (n=3)
+Philos. (Philosophie / philosophy)  · филос. · (n=1)
+Rhet. (Rhetorik / rhetoric)  · рит. · (n=1)
+metr. (metrisch / metrical)  · метр. · (n=1)
+techn. (technisch / technical)  · техн. · (n=1)</pre></div><div class="panel"><h4>примеры (до 5, семья с max freq: med.)</h4><div class="kwic">1. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/1-0649?w=Ap" target="_blank" rel="noopener">abhi + āp</a></b> <code>Ap</code><br>&nbsp;&nbsp;DE: — aBi bis zu Etwas reichen, erreichen ŚAT. BR. 7,4,1,43. yatrAByApnoti tadaBimfSya 9,1,2,16. 13,6,2…<br>&nbsp;&nbsp;RU: aBi доходить до чего-л., достигать ŚAT. BR. 7,4,1,43. yatrAByApnoti tadaBimfSya 9,1,2,16. 13,6,2,20…<br>2. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/5-0281?w=Bid" target="_blank" rel="noopener">vi+bhid</a></b> <code>Bid</code><br>&nbsp;&nbsp;DE: — vi 1) durchbohren, zerspalten, zerbrechen, eröffnen ṚV. 1,33,12. parvatam 85,10. adrim 8,49,16. 6…<br>&nbsp;&nbsp;RU: — vi 1) пронзать, раскалывать, разламывать, раскрывать ṚV. 1,33,12. parvatam 85,10. adrim 8,49,16. …<br>3. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/5-0300?w=Buj" target="_blank" rel="noopener">upabhuj</a></b> <code>Buj</code><br>&nbsp;&nbsp;DE: — upa 1) geniessen, essen, verspeisen, verzehren: yaTA kaTaMcitpiRqAnAM catvAriMSacCatadvayam . mAs…<br>&nbsp;&nbsp;RU: — upa 1) вкушать, есть, поедать, пожирать: yaTA kaTaMcitpiRqAnAM catvAriMSacCatadvayam . mAsenEvopa…<br>4. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/3-0901?w=DA" target="_blank" rel="noopener">dhā</a></b> <code>DA</code><br>&nbsp;&nbsp;DE: 1. DA¦, da/DAti DHĀTUP. 25,10. P. 6,1,190. DatTas, Datta/s 8,2,38. daDma/s, daDma/si, DatTa/, da/Da…<br>&nbsp;&nbsp;RU: 1. DA¦, da/DAti DHĀTUP. 25,10. P. 6,1,190. DatTas, Datta/s 8,2,38. daDma/s, daDma/si, DatTa/, da/Da…<br>5. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/7-0071?w=Sam" target="_blank" rel="noopener">śam</a></b> <code>Sam</code><br>&nbsp;&nbsp;DE: 2. Sam¦, SA/myati DHĀTUP. 26,92 (upaSame). P. 7,3,74. VOP. 11,3. 5. (pra) Samet R. GORR. 1,8,14. Sa…<br>&nbsp;&nbsp;RU: 2. Sam¦, SA/myati DHĀTUP. 26,92 (upaSame). P. 7,3,74. VOP. 11,3. 5. (pra) Samet R. GORR. 1,8,14. Sa…</div></div><div class="panel"><h4>прецедент</h4><pre>ABBREVIATIONS_RU.md &quot;subject-domain labels (semantic-field tags, not grammar) translate like any encyclopedic register label&quot; + RU_MAP</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="своя формулировка / комментарий (принять RU / stay-Latin)"></textarea>
+  </section>
+
+  <section class="card" data-id="rule:contextual-german-word-abbreviations--n-" data-filt="rule">
+    <header><div class="hw">contextual German word-abbreviations (n=-attribute class) <span class="badge">механизм</span><span class="badge">10 неоднозн.</span><span class="badge">rule</span></div><span class="idchip" title="card id — cite this id back when discussing this card">rule:contextual-german-word-abbreviations--n-</span></header>
+    <div class="question"><b>Раздел:</b> contextual German word-abbreviations (n=-attribute class)&nbsp;&mdash;&nbsp;механизм, без фиксированного RU на уровне токена.<br><b>Принять</b> = утвердить render-time механизм (перевод по значению атрибута <code>n=</code> в момент рендера, не по токену). Все 10 токенов вынесены как отдельные карточки ниже. <b>Отклонить</b> = обсудить другой механизм. <b>Отложить</b> = обсудить.</div>
+    <div class="panel"><h4>состав раздела (без фикс. RU → см. карточки ниже)</h4><pre>Fr. · H. · M. · d. · d. r. V. · e. · o. · o. W. · r. V. · schl.</pre></div><div class="panel"><h4>прецедент</h4><pre>Mechanism note, not a per-token RU_MAP entry: these tokens&#x27; visible German expansion lives in the source&#x27;s own `n=` attribute, which varies per occurrence -- no context-independent fixed correspondence is possible at the token level (O dict notes, H1303 Session 1)</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="своя формулировка / комментарий (принять механизм)"></textarea>
+  </section>
+
+  <section class="card" data-id="rule:grammatical--cases--uniform-internationa" data-filt="rule">
+    <header><div class="hw">grammatical: cases (uniform internationalism: 8 cases vs 6 русских) <span class="badge">20×</span><span class="badge">без остатка</span><span class="badge">stay-Latin</span></div><span class="idchip" title="card id — cite this id back when discussing this card">rule:grammatical--cases--uniform-internationa</span></header>
+    <div class="question"><b>Раздел:</b> grammatical: cases (uniform internationalism: 8 cases vs 6 русских)&nbsp;&mdash;&nbsp;<b>20</b> токенов, 2962 вхождений.<br><b>Политика MG 31-07 (LOCKED):</b> падежи остаются <b>латиницей</b> (Acc., Loc., Instr., …) в видимой колонке; полные Latin + русские названия падежей — только в тултипе/легенде (модель Kochergina). N5 <em>не</em> означает «перевести Acc.». LES-формы (акк., вин. п.) — только метаязык, не замена токена.<br><b>Принять</b> = ратифицировать stay-Latin + легенду тултипов для всех case-fold семей раздела. <b>Отклонить</b> = оспорить lock (нужно новое решение MG). <b>Отложить</b> = обсудить.</div>
+    <div class="panel"><h4>состав (surface · expansion · proposal · n=; case-fold семьи вместе)</h4><pre>Acc. (Accusativ, n=873) · acc. (Accusativ, n=447)  →  оставить латиницей (stay Latin)
+Loc. (Locativ, n=439) · loc. (Locativ, n=102)  →  оставить латиницей (stay Latin)
+Instr. (Instrumental, n=239) · instr. (Instrumental, n=84)  →  оставить латиницей (stay Latin)
+Abl. (Ablativ, n=208) · abl. (Ablativ, n=78)  →  оставить латиницей (stay Latin)
+Dat. (Dativ, n=137) · dat. (Dativ, n=75)  →  оставить латиницей (stay Latin)
+Gen. (Genitiv, n=130) · gen. (Genitiv, n=95)  →  оставить латиницей (stay Latin)
+Nom. (Nominativ, n=19) · nom. (Nominativ, n=17)  →  оставить латиницей (stay Latin)
+Nomin. (—, n=10) · nomin. (Nominativ, n=1)  →  оставить латиницей (stay Latin)
+voc. (Vocativ, n=5) · Voc. (Vocativ, n=1)  →  оставить латиницей (stay Latin)
+datt. (Dative / datives)  · Dat. · (n=1)
+locc. (Locativa / locatives)  · Loc. · (n=1)</pre></div><div class="panel"><h4>примеры (до 5, семья с max freq: Acc. / acc.)</h4><div class="kwic">1. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/1-0649?w=Ap" target="_blank" rel="noopener">āp</a></b> <code>Ap</code><br>&nbsp;&nbsp;DE: — Partic. anusaMprApta — 1〉 angelangt bei (Acc.).<br>&nbsp;&nbsp;RU: — Partic. anusaMprApta — 1〉 прибывший к (Acc.).<br>2. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/5-0281?w=Bid" target="_blank" rel="noopener">bhid</a></b> <code>Bid</code><br>&nbsp;&nbsp;DE: — 1〉 durchbrechen, durchdringen durch (Acc.).<br>&nbsp;&nbsp;RU: 1〉 прорываться, проникать через (Acc.).<br>3. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/5-0300?w=Buj" target="_blank" rel="noopener">bhuj</a></b> <code>Buj</code><br>&nbsp;&nbsp;DE: — 1〉 geniessen, Etwas zu geniessen haben, sowohl zu Nutzen haben, mit Nutzen besitzen, benutzen, si…<br>&nbsp;&nbsp;RU: — 1〉 наслаждаться, иметь нечто в пользование, как извлекать пользу, владеть с пользой, пользоваться…<br>4. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/2-1089?w=Cid" target="_blank" rel="noopener">chid</a></b> <code>Cid</code><br>&nbsp;&nbsp;DE: — Mit prati — 1〉 abreissen, -schneiden. — 2〉 mit Zerhauen, Spalten u. s. w. Jmd (Acc.) antworten.<br>&nbsp;&nbsp;RU: — С prati — 1〉 обрывать, -резать. — 2〉 рубя, раскалывая u. s. w. отвечать кому-л. (Acc.).<br>5. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/3-0901?w=DA" target="_blank" rel="noopener">dhā</a></b> <code>DA</code><br>&nbsp;&nbsp;DE: — 4〉 richten auf (Dat. ṚV. 7,56,19, oder Loc.), nach oder an (Loc.). cintAma, matim oder manas sein…<br>&nbsp;&nbsp;RU: направлять на (Dat. ṚV. 7,56,19, или Loc.), к или на (Loc.). cintAma, matim или manas направлять св…</div></div><div class="panel"><h4>прецедент</h4><pre>MG 31-07-2026 LOCK: cases stay Latin visible (Acc./Loc./Instr./Dat./Abl./Gen./Nom./Voc.); tooltip/legend = full Latin + Russian case name (Kochergina model: A. - accusativus - винительный падеж). LES forms (акк., вин. п.) metalanguage only, never visible replacement. N5 does NOT mean &quot;translate Acc.&quot; — cases are Latin-stay by MG 31-07 (overrules prior LES-sanctioned акк. for visible tokens; H2047)</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="своя формулировка / комментарий (принять stay-Latin)"></textarea>
+  </section>
+
+  <section class="card" data-id="rule:grammatical--number---gender---person" data-filt="rule">
+    <header><div class="hw">grammatical: number / gender / person <span class="badge">9×</span><span class="badge">2 неоднозн.</span><span class="badge">gram</span></div><span class="idchip" title="card id — cite this id back when discussing this card">rule:grammatical--number---gender---person</span></header>
+    <div class="question"><b>Раздел:</b> grammatical: number / gender / person&nbsp;&mdash;&nbsp;<b>9</b> токенов, 120 вхождений в store.<br><b>Принять</b> = утвердить отображаемые соответствия (ниже: expansion + n=) для всех bulk-семей раздела разом. <b>Отклонить</b> = вернуть раздел к статус-кво (латиница/оригинал + тултип). <b>Отложить</b> = обсудить. Для voice/tense/прочей грамматики: interim-рекомендация — <b>оставить латиницу + русское полное имя в тултипе</b>, пока H2048 не даст crosswalk; не изобретать calques (фут., прекат.) без источника. N8 (Caus.→кауз.) — <em>одна</em> prior-vote note, не blank cheque.</div>
+    <div class="panel"><h4>состав (surface · expansion · proposal · n=; case-fold семьи вместе)</h4><pre>pl. (Plural, n=46) · Pl. (Plural, n=17)  →  предложение: мн. (см. H2048 / N8 notes)
+sg. (Singular, n=38) · Sg. (Singular, n=2)  →  предложение: ед. (см. H2048 / N8 notes)
+du. (Dual, n=10) · Du. (Dual, n=2)  →  предложение: дв. (см. H2048 / N8 notes)
+masc. (masculinum / masculine)  · м. · (n=3)
+pers. (Person / persisch / person / Persian)  · л. · (n=1)
+sing. (Singular)  · ед. · (n=1)</pre></div><div class="panel"><h4>примеры (до 5, семья с max freq: pl. / Pl.)</h4><div class="kwic">1. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/1-0728?w=As" target="_blank" rel="noopener">ās</a></b> <code>As</code><br>&nbsp;&nbsp;DE: 2. As¦, A/ste (ved. und ep. auch A/sate, ep. auch act.), Asse, 3. pl. ep. Asante; 2. du. potent. ep…<br>&nbsp;&nbsp;RU: 2. As¦, A/ste (ved. и эп. также A/sate, эп. также act.), Asse, 3. pl. эп. Asante; 2. du. potent. эп…<br>2. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/2-1089?w=Cid" target="_blank" rel="noopener">chid</a></b> <code>Cid</code><br>&nbsp;&nbsp;DE: Cid¦, Cina/tti und Cintte DHĀTUP. 29,3. CindDi/ (CinDi/) P. 6,4,101. 2. pl. imperf. acCinad und acC…<br>&nbsp;&nbsp;RU: Cid¦, Cina/tti и Cintte DHĀTUP. 29,3. CindDi/ (CinDi/) P. 6,4,101. 2. pl. imperf. acCinad и acCinas…<br>3. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/3-0901?w=DA" target="_blank" rel="noopener">dhā</a></b> <code>DA</code><br>&nbsp;&nbsp;DE: 1. DA¦, da/DAti DHĀTUP. 25,10. P. 6,1,190. DatTas, Datta/s 8,2,38. daDma/s, daDma/si, DatTa/, da/Da…<br>&nbsp;&nbsp;RU: 1. DA¦, da/DAti DHĀTUP. 25,10. P. 6,1,190. DatTas, Datta/s 8,2,38. daDma/s, daDma/si, DatTa/, da/Da…<br>4. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/5-0156?w=brU" target="_blank" rel="noopener">brū</a></b> <code>brU</code><br>&nbsp;&nbsp;DE: brU¦ DHĀTUP. 24,35. Verbum defect. P. 2,4,53. VOP. 9,54. fgg. bra/vIti P. 7,3,93. VOP. 9,53. bravas…<br>&nbsp;&nbsp;RU: brU¦ DHĀTUP. 24,35. Verbum defect. P. 2,4,53. VOP. 9,54. fgg. bra/vIti P. 7,3,93. VOP. 9,53. bravas…<br>5. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/3-0627?w=diS" target="_blank" rel="noopener">diś</a></b> <code>diS</code><br>&nbsp;&nbsp;DE: 1) (wohin man zeigt) Richtung; Himmelsrichtung, Himmelsgegend (pl. = sarvA diSaH) AK. 1,1,2,2. H. 1…<br>&nbsp;&nbsp;RU: 1) (куда указывают) направление; сторона света, страна света (pl. = sarvA diSaH) AK. 1,1,2,2. H. 16…</div></div><div class="panel"><h4>прецедент</h4><pre>DA-vote N3/N5/N8 (19-07-2026), same grammatical-translate policy as cases</pre></div><div class="panel"><h4>вынесено как неоднозначные (см. ниже)</h4><pre>3. · neutr.</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="своя формулировка / комментарий (принять RU / stay-Latin)"></textarea>
+  </section>
+
+  <section class="card" data-id="rule:grammatical--voice---secondary-stems" data-filt="rule">
+    <header><div class="hw">grammatical: voice / secondary stems <span class="badge">15×</span><span class="badge">1 неоднозн.</span><span class="badge">gram</span></div><span class="idchip" title="card id — cite this id back when discussing this card">rule:grammatical--voice---secondary-stems</span></header>
+    <div class="question"><b>Раздел:</b> grammatical: voice / secondary stems&nbsp;&mdash;&nbsp;<b>15</b> токенов, 2019 вхождений в store.<br><b>Принять</b> = утвердить отображаемые соответствия (ниже: expansion + n=) для всех bulk-семей раздела разом. <b>Отклонить</b> = вернуть раздел к статус-кво (латиница/оригинал + тултип). <b>Отложить</b> = обсудить. Для voice/tense/прочей грамматики: interim-рекомендация — <b>оставить латиницу + русское полное имя в тултипе</b>, пока H2048 не даст crosswalk; не изобретать calques (фут., прекат.) без источника. N8 (Caus.→кауз.) — <em>одна</em> prior-vote note, не blank cheque.</div>
+    <div class="panel"><h4>состав (surface · expansion · proposal · n=; case-fold семьи вместе)</h4><pre>caus. (Causativ, n=453) · Caus. (Causativ, n=378)  →  предложение: кауз. (см. H2048 / N8 notes)
+pass. (Passiv, n=256) · Pass. (—, n=124)  →  предложение: пасс. (см. H2048 / N8 notes)
+act. (Activ, n=237) · Act. (—, n=159)  →  предложение: акт. (см. H2048 / N8 notes)
+desid. (Desiderativ, n=161) · Desid. (Desiderativ, n=113)  →  предложение: дезид. (см. H2048 / N8 notes)
+intens. (Intensiv, n=60) · Intens. (Intensiv, n=43)  →  предложение: интенс. (см. H2048 / N8 notes)
+simpl. (simplex, n=25) · Simpl. (—, n=5)  →  предложение: симпл. (см. H2048 / N8 notes)
+denom. (Denominativ / denominative)  · деном. · (n=2)
+desider. (Desiderativ / desiderative)  · дезид. · (n=2)
+recipr. (reciproc / reciprocal)  · взаимн. · (n=1)</pre></div><div class="panel"><h4>примеры (до 5, семья с max freq: caus. / Caus.)</h4><div class="kwic">1. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/1-0649?w=Ap" target="_blank" rel="noopener">āp</a></b> <code>Ap</code><br>&nbsp;&nbsp;DE: — Vgl. anApta . — caus. Apayati; gerund. mit praepp. Apayya oder Apya P. 6,4,57. VOP. 26,215.<br>&nbsp;&nbsp;RU: Vgl. anApta. — caus. Apayati; gerund. с praepp. Apayya или Apya P. 6,4,57. VOP. 26,215.<br>2. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/1-0728?w=As" target="_blank" rel="noopener">ās</a></b> <code>As</code><br>&nbsp;&nbsp;DE: — 2) n. a) das Sitzen, Sichsetzen: jfmBAsitAdikft (Alasyam) SĀH. D. 68,18. durAsita schlechte, unsc…<br>&nbsp;&nbsp;RU: — 2) n. a) «сидение, усаживание»: jfmBAsitAdikft (Alasyam) SĀH. D. 68,18. durAsita «дурная, неприли…<br>3. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/5-0281?w=Bid" target="_blank" rel="noopener">bhid</a></b> <code>Bid</code><br>&nbsp;&nbsp;DE: — caus. 1) spalten, brechen, zerschlagen: BedayeyuH sTirAndrumAn R. 1,16,23. purodyAnAni sarvARi Be…<br>&nbsp;&nbsp;RU: — caus. 1) раскалывать, ломать, разбивать: BedayeyuH sTirAndrumAn R. 1,16,23. purodyAnAni sarvARi B…<br>4. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/5-0300?w=Buj" target="_blank" rel="noopener">upabhuj</a></b> <code>Buj</code><br>&nbsp;&nbsp;DE: — Vgl. upaBuktaDana, upaBoktar fgg. — caus. zu geniessen geben: rasAnupaBojayet SUŚR. 2,441,11.<br>&nbsp;&nbsp;RU: — Vgl. upaBuktaDana, upaBoktar fgg. — caus. давать вкушать, угощать: rasAnupaBojayet SUŚR. 2,441,11.<br>5. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/2-1089?w=Cid" target="_blank" rel="noopener">chid</a></b> <code>Cid</code><br>&nbsp;&nbsp;DE: — caus. Cedayati<br>&nbsp;&nbsp;RU: — caus. Cedayati</div></div><div class="panel"><h4>прецедент</h4><pre>DA-vote N3/N5/N8 (19-07-2026); N8 specifically pins Caus. -&gt; кауз.</pre></div><div class="panel"><h4>вынесено как неоднозначные (см. ниже)</h4><pre>Med.</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="своя формулировка / комментарий (принять RU / stay-Latin)"></textarea>
+  </section>
+
+  <section class="card" data-id="rule:grammatical--tense---mood" data-filt="rule">
+    <header><div class="hw">grammatical: tense / mood <span class="badge">28×</span><span class="badge">без остатка</span><span class="badge">gram</span></div><span class="idchip" title="card id — cite this id back when discussing this card">rule:grammatical--tense---mood</span></header>
+    <div class="question"><b>Раздел:</b> grammatical: tense / mood&nbsp;&mdash;&nbsp;<b>28</b> токенов, 202 вхождений в store.<br><b>Принять</b> = утвердить отображаемые соответствия (ниже: expansion + n=) для всех bulk-семей раздела разом. <b>Отклонить</b> = вернуть раздел к статус-кво (латиница/оригинал + тултип). <b>Отложить</b> = обсудить. Для voice/tense/прочей грамматики: interim-рекомендация — <b>оставить латиницу + русское полное имя в тултипе</b>, пока H2048 не даст crosswalk; не изобретать calques (фут., прекат.) без источника. N8 (Caus.→кауз.) — <em>одна</em> prior-vote note, не blank cheque.</div>
+    <div class="panel"><h4>состав (surface · expansion · proposal · n=; case-fold семьи вместе)</h4><pre>aor. (Aorist, n=42) · Aor. (Aorist, n=13)  →  предложение: аор. (см. H2048 / N8 notes)
+Conj. (Conjunctiv, n=19) · conj. (Conjunctiv, n=9)  →  предложение: конъ. (см. H2048 / N8 notes)
+fut. (Futurum, n=15) · Fut. (Futurum, n=4)  →  предложение: фут. (см. H2048 / N8 notes)
+perf. (Perfektum, n=12) · Perf. (—, n=4)  →  предложение: перф. (см. H2048 / N8 notes)
+imperat. (Imperativ, n=10) · Imperat. (—, n=3)  →  предложение: импер. (см. H2048 / N8 notes)
+praes. (Praesens, n=10) · Praes. (—, n=4)  →  предложение: през. (см. H2048 / N8 notes)
+imperf. (Imperfectum, n=9) · Imperf. (Imperfektum, n=1)  →  предложение: имперф. (см. H2048 / N8 notes)
+prec. (Precativ, n=9) · Prec. (—, n=1)  →  предложение: прекат. (см. H2048 / N8 notes)
+imper. (Imperativ, n=7) · Imper. (—, n=4)  →  предложение: импер. (см. H2048 / N8 notes)
+potent. (Potentialis, n=6) · Potent. (—, n=1)  →  предложение: потенц. (см. H2048 / N8 notes)
+praet. (Präteritum / preterite)  · прет. · (n=6)
+Präs. (нет в pwgab)  · през. · (n=4)
+pot. (Potentialis / potential mood)  · потенц. · (n=4)
+Indic. (—, n=1) · indic. (Indikativ, n=1)  →  предложение: индик. (см. H2048 / N8 notes)
+Opt. (нет в pwgab)  · опт. · (n=1)
+ind. (indisch / Indikativ / Indian / indicative)  · индик. · (n=1)
+precat. (Precativ / precative)  · прекат. · (n=1)</pre></div><div class="panel"><h4>примеры (до 5, семья с max freq: aor. / Aor.)</h4><div class="kwic">1. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/1-0649?w=Ap" target="_blank" rel="noopener">āp</a></b> <code>Ap</code><br>&nbsp;&nbsp;DE: 1) erreichen lassen: atrEva mA BagavAnmohAntamApIpipat (ungramm. aor. für Apipat; in der Mādhy.-Rec…<br>&nbsp;&nbsp;RU: 1) давать/заставлять достигнуть: atrEva mA BagavAnmohAntamApIpipat (ungramm. aor. вм. Apipat; в Mād…<br>2. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/1-0728?w=As" target="_blank" rel="noopener">ās</a></b> <code>As</code><br>&nbsp;&nbsp;DE: 2. As¦, A/ste (ved. und ep. auch A/sate, ep. auch act.), Asse, 3. pl. ep. Asante; 2. du. potent. ep…<br>&nbsp;&nbsp;RU: 2. As¦, A/ste (ved. и эп. также A/sate, эп. также act.), Asse, 3. pl. эп. Asante; 2. du. potent. эп…<br>3. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/3-0901?w=DA" target="_blank" rel="noopener">dhā</a></b> <code>DA</code><br>&nbsp;&nbsp;DE: 1. DA¦, da/DAti DHĀTUP. 25,10. P. 6,1,190. DatTas, Datta/s 8,2,38. daDma/s, daDma/si, DatTa/, da/Da…<br>&nbsp;&nbsp;RU: 1. DA¦, da/DAti DHĀTUP. 25,10. P. 6,1,190. DatTas, Datta/s 8,2,38. daDma/s, daDma/si, DatTa/, da/Da…<br>4. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/3-0565?w=dA" target="_blank" rel="noopener">dā</a></b> <code>dA</code><br>&nbsp;&nbsp;DE: — B. allgemeine Formen: aor. adAt ( P. 2,4,77. VOP. 8,25. 87), ved. dAt, dAtAm, dAta, adus, dus; dA…<br>&nbsp;&nbsp;RU: — B. Общие формы: aor. adAt (P. 2,4,77. VOP. 8,25. 87), ved. dAt, dAtAm, dAta, adus, dus; dA/sati N…<br>5. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/2-0719?w=gA" target="_blank" rel="noopener">gā</a></b> <code>gA</code><br>&nbsp;&nbsp;DE: gA¦ (vgl. gam), ji/gAti; agAm (P. 2,4,45. 77. VOP. 9,13.) gAs, gAt, gus, agan (3te pl. BHĀG. P. 1,9…<br>&nbsp;&nbsp;RU: gA¦ (vgl. gam), ji/gAti; agAm (P. 2,4,45. 77. VOP. 9,13.) gAs, gAt, gus, agan (3te pl. BHĀG. P. 1,9…</div></div><div class="panel"><h4>прецедент</h4><pre>DA-vote N5 (19-07-2026): &quot;Abbreviations like Aor. cannot stay untranslated; only Latin ones stay, by common agreement, via a ratified unified list&quot;</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="своя формулировка / комментарий (принять RU / stay-Latin)"></textarea>
+  </section>
+
+  <section class="card" data-id="rule:grammatical--non-finite---pos---syntax" data-filt="rule">
+    <header><div class="hw">grammatical: non-finite / POS / syntax <span class="badge">34×</span><span class="badge">без остатка</span><span class="badge">gram</span></div><span class="idchip" title="card id — cite this id back when discussing this card">rule:grammatical--non-finite---pos---syntax</span></header>
+    <div class="question"><b>Раздел:</b> grammatical: non-finite / POS / syntax&nbsp;&mdash;&nbsp;<b>34</b> токенов, 551 вхождений в store.<br><b>Принять</b> = утвердить отображаемые соответствия (ниже: expansion + n=) для всех bulk-семей раздела разом. <b>Отклонить</b> = вернуть раздел к статус-кво (латиница/оригинал + тултип). <b>Отложить</b> = обсудить. Для voice/tense/прочей грамматики: interim-рекомендация — <b>оставить латиницу + русское полное имя в тултипе</b>, пока H2048 не даст crosswalk; не изобретать calques (фут., прекат.) без источника. N8 (Caus.→кауз.) — <em>одна</em> prior-vote note, не blank cheque.</div>
+    <div class="panel"><h4>состав (surface · expansion · proposal · n=; case-fold семьи вместе)</h4><pre>partic. (Participium, n=274) · Partic. (Participium, n=62)  →  предложение: прич. (см. H2048 / N8 notes)
+infin. (Infinitiv, n=28) · Infin. (Infinitiv, n=24)  →  предложение: инф. (см. H2048 / N8 notes)
+absol. (Absolutiv, n=21) · Absol. (—, n=20)  →  предложение: абс. (см. H2048 / N8 notes)
+inf. (Infinitiv, n=15) · Inf. (Infinitiv, n=1)  →  предложение: инф. (см. H2048 / N8 notes)
+obj. (Objekt, n=14) · Obj. (Objekt, n=4)  →  предложение: объект (см. H2048 / N8 notes)
+nom. act. (nomen actionis / action noun)  · имя действия · (n=12)
+Nom. abstr. (Nomen abstractum, n=7) · nom. abstr. (Nomen abstractum, n=5)  →  предложение: абстр. имя (см. H2048 / N8 notes)
+nom. ag. (nomen agentis, n=7) · Nom. ag. (—, n=2)  →  предложение: имя деятеля (см. H2048 / N8 notes)
+praed. (Praedikat / predicate)  · предик. · (n=7)
+praepp. (Praepositionen / prepositions)  · предл. · (n=7)
+gerund. (Gerundium / gerund)  · герунд. · (n=6)
+absolut. (Absolutiv / absolutive (case))  · абс. · (n=5)
+subst. (Substantiv, n=5) · Subst. (Substantiv, n=2)  →  предложение: сущ. (см. H2048 / N8 notes)
+subj. (Subjekt / subject)  · субъект · (n=4)
+fin. (finit / finite)  · финитн. · (n=3)
+indecl. (Indeclinabilum / indeclinable)  · нескл. · (n=3)
+Praep. (Praeposition, n=2) · praep. (Praeposition, n=1)  →  предложение: предл. (см. H2048 / N8 notes)
+Verb. (Verbum / verb)  · глаг. · (n=2)
+part. (Particip / participle)  · прич. · (n=2)
+Interj. (Interjection)  · межд. · (n=1)
+Ortsadv. (Ortsadverb / locative adverb)  · нареч. места · (n=1)
+dem. (Demonstrativ / demonstrative)  · указ. · (n=1)
+infinit. (Infinitiv / infinitive)  · инф. · (n=1)
+nomm. (nomina / nouns)  · имена · (n=1)
+pronomm. (Pronomina / pronouns)  · мест. · (n=1)</pre></div><div class="panel"><h4>примеры (до 5, семья с max freq: partic. / Partic.)</h4><div class="kwic">1. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/1-0649?w=Ap" target="_blank" rel="noopener">āp</a></b> <code>Ap</code><br>&nbsp;&nbsp;DE: — 4) = Ap DHĀTUP. 34,32. — desid. I/psati P. 7,4,55. VOP. 19,10. zu erreichen, zu erlangen streben:…<br>&nbsp;&nbsp;RU: 4) = Ap DHĀTUP. 34,32. — desid. I/psati P. 7,4,55. VOP. 19,10. стремиться достигнуть, стремиться по…<br>2. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/1-0728?w=As" target="_blank" rel="noopener">ās</a></b> <code>As</code><br>&nbsp;&nbsp;DE: 2. As¦, A/ste (ved. und ep. auch A/sate, ep. auch act.), Asse, 3. pl. ep. Asante; 2. du. potent. ep…<br>&nbsp;&nbsp;RU: 2. As¦, A/ste (ved. и эп. также A/sate, эп. также act.), Asse, 3. pl. эп. Asante; 2. du. potent. эп…<br>3. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/5-0281?w=Bid" target="_blank" rel="noopener">prodbhid</a></b> <code>Bid</code><br>&nbsp;&nbsp;DE: — prod, partic. prodBinna hervorgeschossen, hervorgebrochen: ˚romodgamA Spr. 830. ˚kAntidrava ŚĀK. …<br>&nbsp;&nbsp;RU: — prod, partic. prodBinna вырвавшийся наружу, прорвавшийся: ˚romodgamA Spr. 830. ˚kAntidrava ŚĀK. C…<br>4. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/5-0300?w=Buj" target="_blank" rel="noopener">bhuj</a></b> <code>Buj</code><br>&nbsp;&nbsp;DE: 1. Buj¦, Buja/ti biegen DHĀTUP. 28,124. partic. Bugna P. 8,2,45. VOP. 26,88. fg. gebogen, gekrümmt,…<br>&nbsp;&nbsp;RU: 1. Buj¦, Buja/ti «гнуть, сгибать» DHĀTUP. 28,124. partic. Bugna P. 8,2,45. VOP. 26,88. fg. «согнуты…<br>5. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/3-0901?w=DA" target="_blank" rel="noopener">dhā</a></b> <code>DA</code><br>&nbsp;&nbsp;DE: 1. DA¦, da/DAti DHĀTUP. 25,10. P. 6,1,190. DatTas, Datta/s 8,2,38. daDma/s, daDma/si, DatTa/, da/Da…<br>&nbsp;&nbsp;RU: 1. DA¦, da/DAti DHĀTUP. 25,10. P. 6,1,190. DatTas, Datta/s 8,2,38. daDma/s, daDma/si, DatTa/, da/Da…</div></div><div class="panel"><h4>прецедент</h4><pre>DA-vote N3/N5/N8 (19-07-2026), same grammatical-translate policy</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="своя формулировка / комментарий (принять RU / stay-Latin)"></textarea>
+  </section>
+
+  <section class="card" data-id="rule:grammatical--valency---diathesis-adjacen" data-filt="rule">
+    <header><div class="hw">grammatical: valency / diathesis-adjacent <span class="badge">13×</span><span class="badge">без остатка</span><span class="badge">gram</span></div><span class="idchip" title="card id — cite this id back when discussing this card">rule:grammatical--valency---diathesis-adjacen</span></header>
+    <div class="question"><b>Раздел:</b> grammatical: valency / diathesis-adjacent&nbsp;&mdash;&nbsp;<b>13</b> токенов, 118 вхождений в store.<br><b>Принять</b> = утвердить отображаемые соответствия (ниже: expansion + n=) для всех bulk-семей раздела разом. <b>Отклонить</b> = вернуть раздел к статус-кво (латиница/оригинал + тултип). <b>Отложить</b> = обсудить. Для voice/tense/прочей грамматики: interim-рекомендация — <b>оставить латиницу + русское полное имя в тултипе</b>, пока H2048 не даст crosswalk; не изобретать calques (фут., прекат.) без источника. N8 (Caus.→кауз.) — <em>одна</em> prior-vote note, не blank cheque.</div>
+    <div class="panel"><h4>состав (surface · expansion · proposal · n=; case-fold семьи вместе)</h4><pre>impers. (impersonal, n=40) · Impers. (—, n=1)  →  предложение: безл. (см. H2048 / N8 notes)
+intrans. (intransitiv, n=26) · Intrans. (—, n=1)  →  предложение: неперех. (см. H2048 / N8 notes)
+dopp. (doppelt / double)  · двойн. · (n=21)
+trans. (transitiv, n=19) · Trans. (—, n=2)  →  предложение: перех. (см. H2048 / N8 notes)
+intr. (intransitiv / intransitive)  · неперех. · (n=2)
+transit. (transitiv / transitive)  · перех. · (n=2)
+instrans. (intransitiv (typo) / intransitive (likely typo))  · неперех. · (n=1)
+intransit. (intransitiv / intransitive)  · неперех. · (n=1)
+neg. (negativ / negative)  · отриц. · (n=1)
+tr. (нет в pwgab)  · перех. · (n=1)</pre></div><div class="panel"><h4>примеры (до 5, семья с max freq: impers. / Impers.)</h4><div class="kwic">1. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/1-0649?w=Ap" target="_blank" rel="noopener">āp</a></b> <code>Ap</code><br>&nbsp;&nbsp;DE: √Ap¦ mit anu Desid. einstimmen. indreRa bAQamityevamanvIpsitam (impers.) VP. 4,2,11. — Mit paryava …<br>&nbsp;&nbsp;RU: √Ap¦ mit anu Desid. соглашаться, одобрять. indreRa bAQamityevamanvIpsitam (impers.) VP. 4,2,11. — С…<br>2. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/1-0728?w=As" target="_blank" rel="noopener">ās</a></b> <code>As</code><br>&nbsp;&nbsp;DE: 1) sitzen, sich setzen DHĀTUP. 24,11. ya Aste\ yaSca\ cara^ti ṚV. 7,55,6. su\te sacA\ maDO\ na makz…<br>&nbsp;&nbsp;RU: 1) сидеть, садиться DHĀTUP. 24,11. ya Aste\ yaSca\ cara^ti ṚV. 7,55,6. su\te sacA\ maDO\ na makza\ …<br>3. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/3-0901?w=DA" target="_blank" rel="noopener">dhā</a></b> <code>DA</code><br>&nbsp;&nbsp;DE: — 3〉 sich versenken in (Loc.), aufmerken, Acht geben, die Aufmerksamkeit richten auf. Vom Verbum fi…<br>&nbsp;&nbsp;RU: погружаться в (Loc.), внимать, наблюдать, сосредотачивать внимание на. От глагола fin. только avaDI…<br>4. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/7-0071?w=Sam" target="_blank" rel="noopener">śam</a></b> <code>Sam</code><br>&nbsp;&nbsp;DE: 2. √Sam¦, SA/myati (metrisch auch Med. und Samet; *Pass. impers. Samyate, aSami) — 1〉 ruhig —, stil…<br>&nbsp;&nbsp;RU: 2. √Sam¦, SA/myati (metrisch также Med. и Samet; *Pass. impers. Samyate, aSami) — 1〉 успокаиваться,…<br>5. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/7-0375?w=Sru" target="_blank" rel="noopener">śru</a></b> <code>Sru</code><br>&nbsp;&nbsp;DE: — 3) med. (im Veda) in pass. Bed. und pass. SrUyate u. s. w. (nach-vedisch): sa Goza^H SfRve &#x27;va\mE…<br>&nbsp;&nbsp;RU: — 3) med. (im Veda) в pass. Bed. и pass. SrUyate u. s. w. (поствед.): sa Goza^H SfRve &#x27;va\mEra\mitr…</div></div><div class="panel"><h4>прецедент</h4><pre>DA-vote N3/N5/N8 (19-07-2026), same grammatical-translate policy</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="своя формулировка / комментарий (принять RU / stay-Latin)"></textarea>
+  </section>
+
+  <section class="card" data-id="rule:grammatical--word-formation---morphology" data-filt="rule">
+    <header><div class="hw">grammatical: word formation / morphology / degree <span class="badge">26×</span><span class="badge">без остатка</span><span class="badge">gram</span></div><span class="idchip" title="card id — cite this id back when discussing this card">rule:grammatical--word-formation---morphology</span></header>
+    <div class="question"><b>Раздел:</b> grammatical: word formation / morphology / degree&nbsp;&mdash;&nbsp;<b>26</b> токенов, 301 вхождений в store.<br><b>Принять</b> = утвердить отображаемые соответствия (ниже: expansion + n=) для всех bulk-семей раздела разом. <b>Отклонить</b> = вернуть раздел к статус-кво (латиница/оригинал + тултип). <b>Отложить</b> = обсудить. Для voice/tense/прочей грамматики: interim-рекомендация — <b>оставить латиницу + русское полное имя в тултипе</b>, пока H2048 не даст crosswalk; не изобретать calques (фут., прекат.) без источника. N8 (Caus.→кауз.) — <em>одна</em> prior-vote note, не blank cheque.</div>
+    <div class="panel"><h4>состав (surface · expansion · proposal · n=; case-fold семьи вместе)</h4><pre>Comp. (Compositum, n=147) · comp. (Compositum, n=44)  →  предложение: комп. (см. H2048 / N8 notes)
+ved. (vedisch / Vedic (Sanskrit))  · вед. · (n=57)
+adj. Comp. (—, n=9) · adj. comp. (adjektivisches Compositum, n=4)  →  предложение: адъект. комп. (см. H2048 / N8 notes)
+compp. (composita, n=6) · Compp. (Composita, n=1)  →  предложение: комп. (см. H2048 / N8 notes)
+Gramm. (Grammatik, n=5) · gramm. (Grammatik, n=2)  →  предложение: грамм. (см. H2048 / N8 notes)
+Superl. (Superlativ, n=4) · superl. (Superlativ, n=2)  →  предложение: превосх. (см. H2048 / N8 notes)
+Compar. (Comparativ, n=2) · compar. (Comparativ, n=2)  →  предложение: сравн. (см. H2048 / N8 notes)
+oxyt. (Oxyton / oxytone)  · оксит. · (n=2)
+suff. (Suffix)  · суфф. · (n=2)
+unregelm. (unregelmäßig / irregular)  · неправ. · (n=2)
+Augm. (Augment / augment (verbal prefix a-))  · аугм. · (n=1)
+Declin. (Declination / declension)  · скл. · (n=1)
+Patron. (Patronym)  · патрон. · (n=1)
+Redupl. (Reduplicativ / reduplicative)  · редупл. · (n=1)
+adv. Comp. (нет в pwgab)  · адверб. комп. · (n=1)
+compon. (Componente / component)  · компонент · (n=1)
+defect. (defectiv / defective)  · дефект. · (n=1)
+partit. (Partitiv / partitive)  · партит. · (n=1)
+priv. (privativ / privative)  · прив. · (n=1)
+ungramm. (ungrammatisch / ungrammatical)  · неграмм. · (n=1)</pre></div><div class="panel"><h4>примеры (до 5, семья с max freq: Comp. / comp.)</h4><div class="kwic">1. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/5-0281?w=Bid" target="_blank" rel="noopener">bhid</a></b> <code>Bid</code><br>&nbsp;&nbsp;DE: — 12〉 unterscheiden, einen [Page4-266-b] Unterschied machen; Pass. verschieden sein, sich untersche…<br>&nbsp;&nbsp;RU: 12〉 различать, проводить различие; Pass. отличаться, быть отличным от (Abl.). Binna отличный, — от …<br>2. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/5-0300?w=Buj" target="_blank" rel="noopener">bhuj</a></b> <code>Buj</code><br>&nbsp;&nbsp;DE: 4. Bu/j¦ — 1〉 f. das Nutzenbringen, Zugutekommen, Frommen; Genuss, Vortheil, Nutzen; das Haben, die…<br>&nbsp;&nbsp;RU: 4. Bu/j¦ — 1〉 f. принесение пользы, содействие благу, служение на благо; наслаждение, выгода, польз…<br>3. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/2-1089?w=Cid" target="_blank" rel="noopener">chid</a></b> <code>Cid</code><br>&nbsp;&nbsp;DE: — 7〉 *Cinna am Ende eines Comp. herabgekommen —, entkräftet —, ermüdet durch oder von.<br>&nbsp;&nbsp;RU: — 7〉 *Cinna в конце Comp. павший —, обессиленный —, утомленный от чего-л. или чем-л.<br>4. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/3-0901?w=DA" target="_blank" rel="noopener">dhā</a></b> <code>DA</code><br>&nbsp;&nbsp;DE: — b〉 bedeckt, — mit (im Comp. vorangehend).<br>&nbsp;&nbsp;RU: покрытый, — чем-либо (в Comp. предшествующем).<br>5. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/5-0006?w=banD" target="_blank" rel="noopener">bandh</a></b> <code>banD</code><br>&nbsp;&nbsp;DE: — Mit sam — 1〉 zusammenbinden, verknüpfen, anbinden. Pass. sich verbinden, zusammenkleben, verbunde…<br>&nbsp;&nbsp;RU: — С sam — 1〉 связывать вместе, соединять, привязывать. Pass. соединяться, слипаться, быть связанным…</div></div><div class="panel"><h4>прецедент</h4><pre>DA-vote N3/N5/N8 (19-07-2026), same grammatical-translate policy</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="своя формулировка / комментарий (принять RU / stay-Latin)"></textarea>
+  </section>
+
+  <section class="card" data-id="rule:source---citation-mechanics" data-filt="rule">
+    <header><div class="hw">source / citation mechanics <span class="badge">30×</span><span class="badge">1 неоднозн.</span><span class="badge">rule</span></div><span class="idchip" title="card id — cite this id back when discussing this card">rule:source---citation-mechanics</span></header>
+    <div class="question"><b>Раздел:</b> source / citation mechanics&nbsp;&mdash;&nbsp;<b>30</b> токенов, 943 вхождений в store.<br><b>Принять</b> = утвердить отображаемые соответствия (ниже: expansion + n=) для всех bulk-семей раздела разом. <b>Отклонить</b> = вернуть раздел к статус-кво (латиница/оригинал + тултип). <b>Отложить</b> = обсудить.</div>
+    <div class="panel"><h4>состав (surface · expansion · proposal · n=; case-fold семьи вместе)</h4><pre>Sch. (Scholion / Scholiast or Commentator)  · схол. · (n=294)
+Schol. (Scholion)  · схол. · (n=281)
+Z. (Zeile / line)  · стк. · (n=87)
+Comm. (Commentar / commentary)  · коммент. · (n=74)
+Ausg. (Ausgabe / edition)  · изд. · (n=73)
+v. u. (von unten / line number counted from below, from the last line up)  · снизу · (n=25)
+Inschr. (Inschrift / inscription)  · надпись · (n=16)
+Ausgg. (Ausgaben / editions)  · изд. · (n=12)
+Anf. (Anfang / beginning)  · начало · (n=10)
+Cit. (Citation)  · цит. · (n=10)
+gedr. (gedruckte / printed)  · печ. · (n=8)
+p. (pagina / page (Latin))  · стр. · (n=8)
+Einl. (Einleitung / introduction)  · введ. · (n=7)
+Hdschr. (Handschrift / manuscript)  · рукоп. · (n=5)
+Hdschrr. (Handschrifte / manuscripts)  · рукоп. · (n=5)
+Scholl. (Scholiasten / Scholiasts or Commentators)  · схол. · (n=5)
+Calc. Ausg. (Calcuttaer Ausgabe / Calcutta edition)  · калькутт. изд. · (n=4)
+ed. (- edition)  · изд. · (n=3)
+Aut. (Autor / author)  · авт. · (n=2)
+Th. (Theil / part)  · ч. · (n=2)
+Unterschr. (unterschrift / caption, signature)  · подпись · (n=2)
+a. a. O. (am angeführten Ort / in the place cited (op. cit.))  · указ. соч. · (n=2)
+Anm. (Anmerkung / annotation, note)  · прим. · (n=1)
+Aufl. (Auflage / edition / printing)  · изд. · (n=1)
+Rec. (Recension / recension (text version))  · ред. · (n=1)
+St. (Stelle / place / passage)  · место · (n=1)
+Uebers. (uebersetzung / translation)  · пер. · (n=1)
+Wörterb. (Wörterbuch / dictionary)  · словарь · (n=1)
+lith. (lithografisch / lithographic)  · литогр. · (n=1)
+ungedr. (ungedrukte / unprinted)  · неизд. · (n=1)</pre></div><div class="panel"><h4>примеры (до 5, семья с max freq: Sch.)</h4><div class="kwic">1. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/1-0649?w=Ap" target="_blank" rel="noopener">āp</a></b> <code>Ap</code><br>&nbsp;&nbsp;DE: — 2) von einer Autorität festgesetzt, anerkannt: asyAH pESAcyAH prakftiH SOrasenIpsitA Sch. zu VARA…<br>&nbsp;&nbsp;RU: 2) установленный, признанный авторитетом: asyAH pESAcyAH prakftiH SOrasenIpsitA Sch. к VARARUCI 10,…<br>2. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/1-0728?w=As" target="_blank" rel="noopener">ās</a></b> <code>As</code><br>&nbsp;&nbsp;DE: — 2) sich aufhalten, wohnen, seinen Wohnsitz aufschlagen: di\vi de\vAsa\ Asa^te ṚV. 1,20,6. 9,15,2.…<br>&nbsp;&nbsp;RU: — 2) пребывать, жить, обустраивать жилище: di\vi de\vAsa\ Asa^te ṚV. 1,20,6. 9,15,2. yatrAsa^te su\…<br>3. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/5-0281?w=Bid" target="_blank" rel="noopener">bhid</a></b> <code>Bid</code><br>&nbsp;&nbsp;DE: Bid¦, Bina/tti, Bintte DHĀTUP. 29,2. a/Binad, Bina/d,2. p. aBinas und aBinad ( Sch. zu P. 6,1,68. 8…<br>&nbsp;&nbsp;RU: Bid¦, Bina/tti, Bintte DHĀTUP. 29,2. a/Binad, Bina/d, 2. p. aBinas и aBinad ( Sch. к P. 6,1,68. 8,2…<br>4. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/5-0300?w=Buj" target="_blank" rel="noopener">bhuj</a></b> <code>Buj</code><br>&nbsp;&nbsp;DE: — pari umspannen, umfangen: tayA\smAnvi\Svata\stvama^ya\kzmayA pari^ Buja VS. 16,11. yasyAja^sra\M …<br>&nbsp;&nbsp;RU: — pari охватывать, обнимать: tayA\smAnvi\Svata\stvama^ya\kzmayA pari^ Buja VS. 16,11. yasyAja^sra\M…<br>5. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/2-1089?w=Cid" target="_blank" rel="noopener">chid</a></b> <code>Cid</code><br>&nbsp;&nbsp;DE: Cid¦, Cina/tti und Cintte DHĀTUP. 29,3. CindDi/ (CinDi/) P. 6,4,101. 2. pl. imperf. acCinad und acC…<br>&nbsp;&nbsp;RU: Cid¦, Cina/tti и Cintte DHĀTUP. 29,3. CindDi/ (CinDi/) P. 6,4,101. 2. pl. imperf. acCinad и acCinas…</div></div><div class="panel"><h4>прецедент</h4><pre>DA-vote N4 (ed. Bomb. = Бомбейская ред.) + N9 (Verz. d. Oxf. H.); Sch./Schol./Comm. translated as native Russian classical-philology forms (схол./коммент.), same rationale as the &quot;see/cf.&quot; family</pre></div><div class="panel"><h4>вынесено как неоднозначные (см. ниже)</h4><pre>v. l.</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="своя формулировка / комментарий (принять RU / stay-Latin)"></textarea>
+  </section>
+
+  <section class="card" data-id="ab:ebend." data-filt="ambig">
+    <header><div class="hw">ebend. <span class="badge">47×</span><span class="badge">нем</span></div><span class="idchip" title="card id — cite this id back when discussing this card">ab:ebend.</span></header>
+    <div class="question"><b>ebend.</b>&nbsp;→&nbsp;<b><mark class="hl">там</mark> <mark class="hl">же</mark></b>&nbsp;&nbsp;<span class="muted">(раздел: meaning / designation / usage labels)</span></div>
+    <div class="panel"><h4>данные</h4><pre>ebend. (ebenda / ibid. (ibidem) - in the same source)  · там же · (n=47)
+частота в store: 47
+уже в RU_MAP: «там же»</pre></div><div class="panel"><h4>примеры (до 5, кликабельные)</h4><div class="kwic">1. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/1-0728?w=As" target="_blank" rel="noopener">ās</a></b> <code>As</code><br>&nbsp;&nbsp;DE: 1) adj. a) der gesessen oder gewohnt hat: AsitaH saH P. 3,4,76, Sch. — b) gesessen oder gewohnt wor…<br>&nbsp;&nbsp;RU: 1) adj. a) «тот, кто сидел или обитал»: AsitaH saH P. 3,4,76, Sch. — b) «место, где сидели или обит…<br>2. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/5-0300?w=Buj" target="_blank" rel="noopener">bhuj</a></b> <code>Buj</code><br>&nbsp;&nbsp;DE: Buj¦ mit ni beugen, senken: niBujati jAnuSirasI PAT. a. a. O. 1,254,a. [Page7-1785] — pra falten, z…<br>&nbsp;&nbsp;RU: Buj¦ с ni сгибать, склонять: niBujati jAnuSirasI PAT. a. a. O. 1,254,a. [Page7-1785] — pra складыва…<br>3. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/3-0901?w=DA" target="_blank" rel="noopener">dhā</a></b> <code>DA</code><br>&nbsp;&nbsp;DE: — 8) halten (in der Hand), fassen, tragen, behalten; med. ṚV. 1,85,9. 82,6. hasta^yoraDiTAH kf\zwIH…<br>&nbsp;&nbsp;RU: 8) держать (в руке), обхватывать, носить, удерживать; med. ṚV. 1,85,9. 82,6. hasta^yoraDiTAH kf\zwI…<br>4. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/7-0071?w=Sam" target="_blank" rel="noopener">śam</a></b> <code>Sam</code><br>&nbsp;&nbsp;DE: a) beruhigen, stillen, beschwichtigen; zurechtbringen überh.; einen Fehler gut machen, placare: rog…<br>&nbsp;&nbsp;RU: a) успокаивать, утолять, умиротворять; приводить в порядок überh.; загладить вину, placare: roga^m …<br>5. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/5-0006?w=banD" target="_blank" rel="noopener">bandh</a></b> <code>banD</code><br>&nbsp;&nbsp;DE: 1) binden, anbinden, anheften, fesseln. gefangen nehmen ṚV. 10,85,24. mi\trastvA^ pa\di ba^DnI\tAm …<br>&nbsp;&nbsp;RU: 1) связывать, привязывать, прикреплять, заковывать в оковы; брать в плен ṚV. 10,85,24. mi\trastvA^ …</div></div><div class="panel"><h4>примечание (почему это неоднозначно)</h4><pre>H1323: на hUNgarAI стоит дважды подряд — вопрос к источнику (Cologne), не к списку</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="своя формулировка / комментарий"></textarea>
+  </section>
+
+  <section class="card" data-id="ab:W." data-filt="ambig">
+    <header><div class="hw">W. <span class="badge">5×</span><span class="badge">конт</span></div><span class="idchip" title="card id — cite this id back when discussing this card">ab:W.</span></header>
+    <div class="question"><b>W.</b>&nbsp;→&nbsp;<b><mark class="hl">слово</mark></b>&nbsp;&nbsp;<span class="muted">(раздел: meaning / designation / usage labels)</span></div>
+    <div class="panel"><h4>данные</h4><pre>W. (Wort / word)  · слово · (n=5)
+частота в store: 5
+уже в RU_MAP: «слово»</pre></div><div class="panel"><h4>примеры (до 5, кликабельные)</h4><div class="kwic">1. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/3-0901?w=DA" target="_blank" rel="noopener">dhā</a></b> <code>DA</code><br>&nbsp;&nbsp;DE: — Mit tiras s. u. d. W.<br>&nbsp;&nbsp;RU: — С tiras s. u. d. W.<br>2. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/3-0565?w=dA" target="_blank" rel="noopener">dā</a></b> <code>dA</code><br>&nbsp;&nbsp;DE: — 10〉 legen —, stellen —, setzen auf, an oder in (Loc.), anlegen (auch in medic. Sinne), anbringen …<br>&nbsp;&nbsp;RU: — 10〉 класть —, ставить —, помещать на, к или в (Loc.), прикладывать (также в medic. смысле), прикр…<br>3. <b>avidita</b> <code>avidita</code><br>&nbsp;&nbsp;DE: avidita¦, ˚taH pitroH ohne Wissen der Eltern, ˚te pituH o. W. des Vaters, ˚taM (Adv.) tasya o. sein…<br>&nbsp;&nbsp;RU: avidita¦, ˚taH pitroH без ведома родителей, ˚te pituH o. W. отца, ˚taM (Adv.) tasya o. быть W.</div></div><div class="panel"><h4>примечание (почему это неоднозначно)</h4><pre>ОСТОРОЖНО: в store встречается n=&quot;Wange&quot; (щека) — фиксированное «слово» неверно; переводить по n=-атрибуту</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="своя формулировка / комментарий"></textarea>
+  </section>
+
+  <section class="card" data-id="ab:geder." data-filt="ambig">
+    <header><div class="hw">geder. <span class="badge">1×</span><span class="badge">OCR</span></div><span class="idchip" title="card id — cite this id back when discussing this card">ab:geder.</span></header>
+    <div class="question"><b>geder.</b>&nbsp;→&nbsp;<b>оставить оригинал + тултип (не изобретать RU)</b>&nbsp;&nbsp;<span class="muted">(раздел: meaning / designation / usage labels)</span></div>
+    <div class="panel"><h4>данные</h4><pre>geder. (gedeutet? / interpreted (?))  · без фикс. RU (оставить + тултип) · (n=1)
+частота в store: 1
+сейчас: латиница/оригинал + тултип</pre></div><div class="panel"><h4>примеры (до 5, кликабельные)</h4><div class="kwic">1. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/7-0071?w=Sam" target="_blank" rel="noopener">śam</a></b> <code>Sam</code><br>&nbsp;&nbsp;DE: 2. Sam¦, SA/myati DHĀTUP. 26,92 (upaSame). P. 7,3,74. VOP. 11,3. 5. (pra) Samet R. GORR. 1,8,14. Sa…<br>&nbsp;&nbsp;RU: 2. Sam¦, SA/myati DHĀTUP. 26,92 (upaSame). P. 7,3,74. VOP. 11,3. 5. (pra) Samet R. GORR. 1,8,14. Sa…</div></div><div class="panel"><h4>примечание (почему это неоднозначно)</h4><pre>gedeutet? — OCR-шум, вопрос к источнику</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="своя формулировка / комментарий"></textarea>
+  </section>
+
+  <section class="card" data-id="ab:e." data-filt="ambig">
+    <header><div class="hw">e. <span class="badge">2×</span><span class="badge">конт</span></div><span class="idchip" title="card id — cite this id back when discussing this card">ab:e.</span></header>
+    <div class="question"><b>e.</b>&nbsp;→&nbsp;<b>оставить оригинал + тултип (не изобретать RU)</b>&nbsp;&nbsp;<span class="muted">(раздел: contextual German word-abbreviations (n=-attribute class))</span></div>
+    <div class="panel"><h4>данные</h4><pre>e. (нет в pwgab)  · без фикс. RU (оставить + тултип) · (n=2)
+частота в store: 2
+сейчас: латиница/оригинал + тултип</pre></div><div class="panel"><h4>примеры (до 5, кликабельные)</h4><div class="kwic">1. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/2-1089?w=Cid" target="_blank" rel="noopener">chid</a></b> <code>Cid</code><br>&nbsp;&nbsp;DE: — Mit vyava — 1〉 abschneiden. — 2〉 abschneiden, abtrennen, scheiden, — von (Abl.). — 3〉 [Page2-244-…<br>&nbsp;&nbsp;RU: — С vyava — 1〉 срезать. — 2〉 срезать, отделять, разлучать, — от (Abl.). — 3〉 [Page2-244-c] разрыват…<br>2. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/4-0615?w=pA" target="_blank" rel="noopener">pā</a></b> <code>pA</code><br>&nbsp;&nbsp;DE: — β〉 eingesogen, so v. a. mit den Ohren e.<br>&nbsp;&nbsp;RU: — β〉 всосанный, так v. a. воспринятый на слух e.</div></div><div class="panel"><h4>примечание (почему это неоднозначно)</h4><pre>n=&quot;einander&quot;/&quot;eingesogen&quot;</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="своя формулировка / комментарий"></textarea>
+  </section>
+
+  <section class="card" data-id="ab:H." data-filt="ambig">
+    <header><div class="hw">H. <span class="badge">2×</span><span class="badge">конт</span></div><span class="idchip" title="card id — cite this id back when discussing this card">ab:H.</span></header>
+    <div class="question"><b>H.</b>&nbsp;→&nbsp;<b>оставить оригинал + тултип (не изобретать RU)</b>&nbsp;&nbsp;<span class="muted">(раздел: contextual German word-abbreviations (n=-attribute class))</span></div>
+    <div class="panel"><h4>данные</h4><pre>H. (нет в pwgab)  · без фикс. RU (оставить + тултип) · (n=2)
+частота в store: 2
+сейчас: латиница/оригинал + тултип</pre></div><div class="panel"><h4>примеры (до 5, кликабельные)</h4><div class="kwic">1. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/3-0901?w=DA" target="_blank" rel="noopener">dhā</a></b> <code>DA</code><br>&nbsp;&nbsp;DE: — 10〉 vollbringen, verrichten, bewerkstelligen, bereiten, verursachen, einrichten, machen, thun. ma…<br>&nbsp;&nbsp;RU: 10〉 совершать, исполнять, осуществлять, готовить, причинять, устраивать, делать, творить. mantram д…<br>2. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/3-0565?w=dA" target="_blank" rel="noopener">dā</a></b> <code>dA</code><br>&nbsp;&nbsp;DE: — 10〉 legen —, stellen —, setzen auf, an oder in (Loc.), anlegen (auch in medic. Sinne), anbringen …<br>&nbsp;&nbsp;RU: — 10〉 класть —, ставить —, помещать на, к или в (Loc.), прикладывать (также в medic. смысле), прикр…</div></div><div class="panel"><h4>примечание (почему это неоднозначно)</h4><pre>n=&quot;Herrschaft&quot;/&quot;Hand&quot; — переводить по n=-атрибуту, фиксированного соответствия нет</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="своя формулировка / комментарий"></textarea>
+  </section>
+
+  <section class="card" data-id="ab:o. W." data-filt="ambig">
+    <header><div class="hw">o. W. <span class="badge">2×</span><span class="badge">конт</span></div><span class="idchip" title="card id — cite this id back when discussing this card">ab:o. W.</span></header>
+    <div class="question"><b>o. W.</b>&nbsp;→&nbsp;<b>оставить оригинал + тултип (не изобретать RU)</b>&nbsp;&nbsp;<span class="muted">(раздел: contextual German word-abbreviations (n=-attribute class))</span></div>
+    <div class="panel"><h4>данные</h4><pre>o. W. (нет в pwgab)  · без фикс. RU (оставить + тултип) · (n=2)
+частота в store: 2
+сейчас: латиница/оригинал + тултип</pre></div><div class="panel"><h4>примеры (до 5, кликабельные)</h4><div class="kwic">1. <b>avidita</b> <code>avidita</code><br>&nbsp;&nbsp;DE: avidita¦, ˚taH pitroH ohne Wissen der Eltern, ˚te pituH o. W. des Vaters, ˚taM (Adv.) tasya o. sein…<br>&nbsp;&nbsp;RU: avidita¦, ˚taH pitroH без ведома родителей, ˚te pituH o. W. отца, ˚taM (Adv.) tasya o. быть W.</div></div><div class="panel"><h4>примечание (почему это неоднозначно)</h4><pre>n=&quot;ohne Wissen&quot; = «без ведома»</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="своя формулировка / комментарий"></textarea>
+  </section>
+
+  <section class="card" data-id="ab:o." data-filt="ambig">
+    <header><div class="hw">o. <span class="badge">2×</span><span class="badge">конт</span></div><span class="idchip" title="card id — cite this id back when discussing this card">ab:o.</span></header>
+    <div class="question"><b>o.</b>&nbsp;→&nbsp;<b>оставить оригинал + тултип (не изобретать RU)</b>&nbsp;&nbsp;<span class="muted">(раздел: contextual German word-abbreviations (n=-attribute class))</span></div>
+    <div class="panel"><h4>данные</h4><pre>o. (нет в pwgab)  · без фикс. RU (оставить + тултип) · (n=2)
+частота в store: 2
+сейчас: латиница/оригинал + тултип</pre></div><div class="panel"><h4>примеры (до 5, кликабельные)</h4><div class="kwic">1. <b>avidita</b> <code>avidita</code><br>&nbsp;&nbsp;DE: avidita¦, ˚taH pitroH ohne Wissen der Eltern, ˚te pituH o. W. des Vaters, ˚taM (Adv.) tasya o. sein…<br>&nbsp;&nbsp;RU: avidita¦, ˚taH pitroH без ведома родителей, ˚te pituH o. W. отца, ˚taM (Adv.) tasya o. быть W.</div></div><div class="panel"><h4>примечание (почему это неоднозначно)</h4><pre>n=&quot;ohne&quot;</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="своя формулировка / комментарий"></textarea>
+  </section>
+
+  <section class="card" data-id="ab:schl." data-filt="ambig">
+    <header><div class="hw">schl. <span class="badge">1×</span><span class="badge">конт</span></div><span class="idchip" title="card id — cite this id back when discussing this card">ab:schl.</span></header>
+    <div class="question"><b>schl.</b>&nbsp;→&nbsp;<b>оставить оригинал + тултип (не изобретать RU)</b>&nbsp;&nbsp;<span class="muted">(раздел: contextual German word-abbreviations (n=-attribute class))</span></div>
+    <div class="panel"><h4>данные</h4><pre>schl. (нет в pwgab)  · без фикс. RU (оставить + тултип) · (n=1)
+частота в store: 1
+сейчас: латиница/оригинал + тултип</pre></div><div class="panel"><h4>примеры (до 5, кликабельные)</h4><div class="kwic">1. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/3-0901?w=DA" target="_blank" rel="noopener">dhā</a></b> <code>DA</code><br>&nbsp;&nbsp;DE: — 10〉 vollbringen, verrichten, bewerkstelligen, bereiten, verursachen, einrichten, machen, thun. ma…<br>&nbsp;&nbsp;RU: 10〉 совершать, исполнять, осуществлять, готовить, причинять, устраивать, делать, творить. mantram д…</div></div><div class="panel"><h4>примечание (почему это неоднозначно)</h4><pre>n=&quot;schliessen&quot;</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="своя формулировка / комментарий"></textarea>
+  </section>
+
+  <section class="card" data-id="ab:d." data-filt="ambig">
+    <header><div class="hw">d. <span class="badge">1×</span><span class="badge">конт</span></div><span class="idchip" title="card id — cite this id back when discussing this card">ab:d.</span></header>
+    <div class="question"><b>d.</b>&nbsp;→&nbsp;<b>оставить оригинал + тултип (не изобретать RU)</b>&nbsp;&nbsp;<span class="muted">(раздел: contextual German word-abbreviations (n=-attribute class))</span></div>
+    <div class="panel"><h4>данные</h4><pre>d. (der / die / das / the (definite article — ambiguous))  · без фикс. RU (оставить + тултип) · (n=1)
+частота в store: 1
+сейчас: латиница/оригинал + тултип</pre></div><div class="panel"><h4>примеры (до 5, кликабельные)</h4><div class="kwic">1. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/2-0952?w=car" target="_blank" rel="noopener">car</a></b> <code>car</code><br>&nbsp;&nbsp;DE: — b) mit einem partic., zuweilen auch mit einem absolut. umschreibend; meist von einer anhaltenden …<br>&nbsp;&nbsp;RU: — b) с partic., иногда также с absolut. описательно; преимущественно о длящемся действии или состоя…</div></div><div class="panel"><h4>примечание (почему это неоднозначно)</h4><pre>der/die/das перед контекстным сокращением</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="своя формулировка / комментарий"></textarea>
+  </section>
+
+  <section class="card" data-id="ab:M." data-filt="ambig">
+    <header><div class="hw">M. <span class="badge">1×</span><span class="badge">конт</span></div><span class="idchip" title="card id — cite this id back when discussing this card">ab:M.</span></header>
+    <div class="question"><b>M.</b>&nbsp;→&nbsp;<b>оставить оригинал + тултип (не изобретать RU)</b>&nbsp;&nbsp;<span class="muted">(раздел: contextual German word-abbreviations (n=-attribute class))</span></div>
+    <div class="panel"><h4>данные</h4><pre>M. (нет в pwgab)  · без фикс. RU (оставить + тултип) · (n=1)
+частота в store: 1
+сейчас: латиница/оригинал + тултип</pre></div><div class="panel"><h4>примеры (до 5, кликабельные)</h4><div class="kwic">1. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/2-0666?w=gam" target="_blank" rel="noopener">gam</a></b> <code>gam</code><br>&nbsp;&nbsp;DE: — 4〉 kommen zu, erlangen, erhalten, theilhaftig werden. bartAram zu einem Manne kommen, einen M. ne…<br>&nbsp;&nbsp;RU: — 4) приходить к чему-либо, обретать, получать, становиться причастным. bartAram — приходить к мужч…</div></div><div class="panel"><h4>примечание (почему это неоднозначно)</h4><pre>n=&quot;Mann&quot;</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="своя формулировка / комментарий"></textarea>
+  </section>
+
+  <section class="card" data-id="ab:r. V." data-filt="ambig">
+    <header><div class="hw">r. V. <span class="badge">1×</span><span class="badge">конт</span></div><span class="idchip" title="card id — cite this id back when discussing this card">ab:r. V.</span></header>
+    <div class="question"><b>r. V.</b>&nbsp;→&nbsp;<b>оставить оригинал + тултип (не изобретать RU)</b>&nbsp;&nbsp;<span class="muted">(раздел: contextual German word-abbreviations (n=-attribute class))</span></div>
+    <div class="panel"><h4>данные</h4><pre>r. V. (нет в pwgab)  · без фикс. RU (оставить + тултип) · (n=1)
+частота в store: 1
+сейчас: латиница/оригинал + тултип</pre></div><div class="panel"><h4>примеры (до 5, кликабельные)</h4><div class="kwic">1. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/5-0679?w=mA" target="_blank" rel="noopener">mā</a></b> <code>mA</code><br>&nbsp;&nbsp;DE: — 3〉 sich eine richtige Vorstellung bilden über (Acc.). pramita worüber man sich eine r. V. gebilde…<br>&nbsp;&nbsp;RU: — 3〉 составить себе правильное представление о (Acc.). pramita о чем составлено r. V..</div></div><div class="panel"><h4>примечание (почему это неоднозначно)</h4><pre>n=&quot;richtige Vorstellung&quot;</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="своя формулировка / комментарий"></textarea>
+  </section>
+
+  <section class="card" data-id="ab:d. r. V." data-filt="ambig">
+    <header><div class="hw">d. r. V. <span class="badge">1×</span><span class="badge">конт</span></div><span class="idchip" title="card id — cite this id back when discussing this card">ab:d. r. V.</span></header>
+    <div class="question"><b>d. r. V.</b>&nbsp;→&nbsp;<b>оставить оригинал + тултип (не изобретать RU)</b>&nbsp;&nbsp;<span class="muted">(раздел: contextual German word-abbreviations (n=-attribute class))</span></div>
+    <div class="panel"><h4>данные</h4><pre>d. r. V. (нет в pwgab)  · без фикс. RU (оставить + тултип) · (n=1)
+частота в store: 1
+сейчас: латиница/оригинал + тултип</pre></div><div class="panel"><h4>примеры (до 5, кликабельные)</h4><div class="kwic">1. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/5-0467?w=mad" target="_blank" rel="noopener">mad</a></b> <code>mad</code><br>&nbsp;&nbsp;DE: — 2〉 verworren werden, aus der richtigen Verfassung kommen. vimatta aus d. r. V. gekommen.<br>&nbsp;&nbsp;RU: — 2〉 приходить в смятение, выходить из правильного состояния. vimatta вышедший из d. r. V..</div></div><div class="panel"><h4>примечание (почему это неоднозначно)</h4><pre>n=&quot;der richtigen Verfassung&quot;</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="своя формулировка / комментарий"></textarea>
+  </section>
+
+  <section class="card" data-id="ab:Fr." data-filt="ambig">
+    <header><div class="hw">Fr. <span class="badge">1×</span><span class="badge">конт</span></div><span class="idchip" title="card id — cite this id back when discussing this card">ab:Fr.</span></header>
+    <div class="question"><b>Fr.</b>&nbsp;→&nbsp;<b>оставить оригинал + тултип (не изобретать RU)</b>&nbsp;&nbsp;<span class="muted">(раздел: contextual German word-abbreviations (n=-attribute class))</span></div>
+    <div class="panel"><h4>данные</h4><pre>Fr. (нет в pwgab)  · без фикс. RU (оставить + тултип) · (n=1)
+частота в store: 1
+сейчас: латиница/оригинал + тултип</pre></div><div class="panel"><h4>примеры (до 5, кликабельные)</h4><div class="kwic">1. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/6-0825?w=vas" target="_blank" rel="noopener">vas</a></b> <code>vas</code><br>&nbsp;&nbsp;DE: — Mit vipra — 1〉 verreisen, in die Fremde ziehen, in der Fr. weilen. viprozya nach einer Reise GAUT…<br>&nbsp;&nbsp;RU: — С vipra 1) отправляться в путь, уезжать на чужбину, пребывать в Fr.. viprozya после путешествия G…</div></div><div class="panel"><h4>примечание (почему это неоднозначно)</h4><pre>n=&quot;Fremde&quot;</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="своя формулировка / комментарий"></textarea>
+  </section>
+
+  <section class="card" data-id="ab:neutr." data-filt="ambig">
+    <header><div class="hw">neutr. <span class="badge">2×</span><span class="badge">лат</span></div><span class="idchip" title="card id — cite this id back when discussing this card">ab:neutr.</span></header>
+    <div class="question"><b>neutr.</b>&nbsp;→&nbsp;<b><mark class="hl">ср</mark>. <mark class="hl">р</mark>.</b>&nbsp;&nbsp;<span class="muted">(раздел: grammatical: number / gender / person)</span></div>
+    <div class="panel"><h4>данные</h4><pre>neutr. (Neutrum / neuter)  · ср. р. · (n=2)
+частота в store: 2
+сейчас: латиница/оригинал + тултип</pre></div><div class="panel"><h4>примеры (до 5, кликабельные)</h4><div class="kwic">1. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/4-0393?w=pat" target="_blank" rel="noopener">pat</a></b> <code>pat</code><br>&nbsp;&nbsp;DE: — 3) herabfallen, niederfallen, herabstürzen, zusammenstürzen, einstürzen, umfallen, abfallen, ausf…<br>&nbsp;&nbsp;RU: — 3) падать, упасть, рухнуть, обрушиться, рассыпаться, свалиться, отпасть, выпасть: naBaH patizyant…<br>2. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/7-1019?w=su" target="_blank" rel="noopener">su</a></b> <code>su</code><br>&nbsp;&nbsp;DE: 1. su¦, suno/ti DHĀTUP. 27,1 (aBizave, saMDAkledapIqAmanTe VOP.). suno/ta ṚV. 7,32,8. suno/tana 5,3…<br>&nbsp;&nbsp;RU: su¦, suno/ti DHĀTUP. 27,1 (aBizave, saMDAkledapIqAmanTe VOP.). suno/ta ṚV. 7,32,8. suno/tana 5,34,1…</div></div><div class="panel"><h4>примечание (почему это неоднозначно)</h4><pre>не «ср.» — коллизия со «ср.» = vgl.</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="своя формулировка / комментарий"></textarea>
+  </section>
+
+  <section class="card" data-id="ab:3." data-filt="ambig">
+    <header><div class="hw">3. <span class="badge">1×</span><span class="badge">OCR</span></div><span class="idchip" title="card id — cite this id back when discussing this card">ab:3.</span></header>
+    <div class="question"><b>3.</b>&nbsp;→&nbsp;<b>оставить оригинал + тултип (не изобретать RU)</b>&nbsp;&nbsp;<span class="muted">(раздел: grammatical: number / gender / person)</span></div>
+    <div class="panel"><h4>данные</h4><pre>3. (нет в pwgab)  · без фикс. RU (оставить + тултип) · (n=1)
+частота в store: 1
+сейчас: латиница/оригинал + тултип</pre></div><div class="panel"><h4>примеры (до 5, кликабельные)</h4><div class="kwic">1. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/7-1494?w=han" target="_blank" rel="noopener">han</a></b> <code>han</code><br>&nbsp;&nbsp;DE: 1. √han¦, ha/nti (jahi/ Imperat., jahIhi [mit 2. hA verwechselt] R. ed. Bomb. 4,24,33), hananti st.…<br>&nbsp;&nbsp;RU: 1. √han¦, ha/nti (jahi/ Imperat., jahIhi [смешивается с 2. hA] R. ed. Bomb. 4,24,33), hananti st. G…</div></div><div class="panel"><h4>примечание (почему это неоднозначно)</h4><pre>«3. Sg. Med.» — разметочный артефакт (цифра лица в &lt;ab&gt;), вопрос к источнику</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="своя формулировка / комментарий"></textarea>
+  </section>
+
+  <section class="card" data-id="ab:Med." data-filt="ambig">
+    <header><div class="hw">Med. <span class="badge">283×</span><span class="badge">лат</span></div><span class="idchip" title="card id — cite this id back when discussing this card">ab:Med.</span></header>
+    <div class="question"><b>Med.</b>&nbsp;→&nbsp;<b><mark class="hl">медий</mark></b>&nbsp;&nbsp;<span class="muted">(раздел: grammatical: voice / secondary stems)</span></div>
+    <div class="panel"><h4>данные</h4><pre>Med. (нет в pwgab)  · медий · (n=283)
+частота в store: 283
+сейчас: латиница/оригинал + тултип</pre></div><div class="panel"><h4>примеры (до 5, кликабельные)</h4><div class="kwic">1. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/5-0281?w=Bid" target="_blank" rel="noopener">bhid</a></b> <code>Bid</code><br>&nbsp;&nbsp;DE: 1. √Bid¦, Ba/dati, Bina/tti; ausnahmsweise auch Med. (BindAna/ ṚV. 6,27,6).<br>&nbsp;&nbsp;RU: 1. √Bid¦, Ba/dati, Bina/tti; в виде исключения также Med. (BindAna/ ṚV. 6,27,6).<br>2. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/5-0300?w=Buj" target="_blank" rel="noopener">bhuj</a></b> <code>Buj</code><br>&nbsp;&nbsp;DE: — 1〉 geniessen, Etwas zu geniessen haben, sowohl zu Nutzen haben, mit Nutzen besitzen, benutzen, si…<br>&nbsp;&nbsp;RU: — 1〉 наслаждаться, иметь нечто в пользование, как извлекать пользу, владеть с пользой, пользоваться…<br>3. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/3-0901?w=DA" target="_blank" rel="noopener">dhā</a></b> <code>DA</code><br>&nbsp;&nbsp;DE: 1. DA¦, Präsensstämme: da/DA (Act.), da/D (Act. Med.), da/Da (Act. Med.) und DA/ (Act. Med.); Absol…<br>&nbsp;&nbsp;RU: 1. DA¦, основы настоящего времени: da/DA (Act.), da/D (Act. Med.), da/Da (Act. Med.) и DA/ (Act. Me…<br>4. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/7-0071?w=Sam" target="_blank" rel="noopener">śam</a></b> <code>Sam</code><br>&nbsp;&nbsp;DE: 2. √Sam¦, SA/myati (metrisch auch Med. und Samet; *Pass. impers. Samyate, aSami) — 1〉 ruhig —, stil…<br>&nbsp;&nbsp;RU: 2. √Sam¦, SA/myati (metrisch также Med. и Samet; *Pass. impers. Samyate, aSami) — 1〉 успокаиваться,…<br>5. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/5-0006?w=banD" target="_blank" rel="noopener">bandh</a></b> <code>banD</code><br>&nbsp;&nbsp;DE: — Mit A Med. sich erhängen R. ed. Bomb. 3,45,36.<br>&nbsp;&nbsp;RU: — С A Med. вешаться (самоповешение) R. ed. Bomb. 3,45,36.</div></div><div class="panel"><h4>примечание (почему это неоднозначно)</h4><pre>медий (атманепада), НЕ «мед.» — коллизия с med. = Medizin; 283 употр., в pwgab отсутствует (регистрозависимая пара)</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="своя формулировка / комментарий"></textarea>
+  </section>
+
+  <section class="card" data-id="ab:v. l." data-filt="ambig">
+    <header><div class="hw">v. l. <span class="badge">284×</span><span class="badge">лат</span></div><span class="idchip" title="card id — cite this id back when discussing this card">ab:v. l.</span></header>
+    <div class="question"><b>v. l.</b>&nbsp;→&nbsp;<b><mark class="hl">разночт</mark>.</b>&nbsp;&nbsp;<span class="muted">(раздел: source / citation mechanics)</span></div>
+    <div class="panel"><h4>данные</h4><pre>v. l. (varia lectio / variant reading)  · разночт. · (n=284)
+частота в store: 284
+сейчас: латиница/оригинал + тултип</pre></div><div class="panel"><h4>примеры (до 5, кликабельные)</h4><div class="kwic">1. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/1-0649?w=Ap" target="_blank" rel="noopener">pra+āp</a></b> <code>Ap</code><br>&nbsp;&nbsp;DE: — 5) gekommen, angelangt, da seiend: saBAntaH sAkziRaH prAptAn M. 8,79. kAle prAptaH 3,105. 112. pr…<br>&nbsp;&nbsp;RU: — 5) пришедший, прибывший, находящийся здесь: saBAntaH sAkziRaH prAptAn M. 8,79. kAle prAptaH 3,105…<br>2. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/1-0728?w=As" target="_blank" rel="noopener">ās</a></b> <code>As</code><br>&nbsp;&nbsp;DE: As¦ interj. der Freude und des Unwillens: AH vor ka, pa und sa MṚCCH. 67,3. PAÑCAT. 36,21. 46,2. HI…<br>&nbsp;&nbsp;RU: As¦ interj. der Freude und des Unwillens: AH перед ka, pa и sa MṚCCH. 67,3. PAÑCAT. 36,21. 46,2. HI…<br>3. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/5-0281?w=Bid" target="_blank" rel="noopener">bhid</a></b> <code>Bid</code><br>&nbsp;&nbsp;DE: — 11) Binna vermischt —, verbunden mit (instr.); = saMgata H. an. 2,277. MED. n. 14. = miSra, saMva…<br>&nbsp;&nbsp;RU: — 11) Binna смешанный с —, связанный с (instr.); = saMgata H. an. 2,277. MED. n. 14. = miSra, saMva…<br>4. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/5-0300?w=Buj" target="_blank" rel="noopener">bhuj</a></b> <code>Buj</code><br>&nbsp;&nbsp;DE: — vyA, partic. vyABugna gebogen: keSivaktravilagnastu kfzRavAhuraSoBata . vyABugna iva GarmAnte can…<br>&nbsp;&nbsp;RU: — vyA, partic. vyABugna согнутый, изогнутый: keSivaktravilagnastu kfzRavAhuraSoBata . vyABugna iva …<br>5. <b><a href="https://gasyoun.github.io/kosha/colocation/#pwg/2-1089?w=Cid" target="_blank" rel="noopener">chid</a></b> <code>Cid</code><br>&nbsp;&nbsp;DE: — prati abreissen, abschneiden: tfRamuBayataH praticCidya (v. l. pracCidya) ŚĀṄKH. ŚR. 1,6,6. mit Z…<br>&nbsp;&nbsp;RU: — prati отрывать, отрезать: tfRamuBayataH praticCidya (v. l. pracCidya) ŚĀṄKH. ŚR. 1,6,6. отвечать …</div></div><div class="panel"><h4>примечание (почему это неоднозначно)</h4><pre>varia lectio; латинский текстологический термин — кандидат на «оставить по общему согласию» (N5)</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="своя формулировка / комментарий"></textarea>
+  </section>
+
+  <section class="card" data-id="ls:ed. Bomb." data-filt="ls">
+    <header><div class="hw">ed. Bomb. <span class="badge">221</span><span class="badge">ls-сигла</span></div><span class="idchip" title="card id — cite this id back when discussing this card">ls:ed. Bomb.</span></header>
+    <div class="question"><b>ed. Bomb.</b>&nbsp;→&nbsp;<b><mark class="hl">Бомбейская</mark> <mark class="hl">ред</mark>.</b></div>
+    <div class="panel"><h4>данные</h4><pre>расшифровка: Bombay edition</pre></div><div class="panel"><h4>примечание</h4><pre>зафиксировано MG 19-07-2026 (N4); ls-территория, применение с H1307</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="своя формулировка / комментарий"></textarea>
+  </section>
+
+  <section class="card" data-id="ls:Verz. d. Oxf. H." data-filt="ls">
+    <header><div class="hw">Verz. d. Oxf. H. <span class="badge">в ls-ссылках</span><span class="badge">ls-сигла</span></div><span class="idchip" title="card id — cite this id back when discussing this card">ls:Verz. d. Oxf. H.</span></header>
+    <div class="question"><b>Verz. d. Oxf. H.</b>&nbsp;→&nbsp;<b><mark class="hl">Кат</mark>. <mark class="hl">оксф</mark>. <mark class="hl">рукоп</mark>.</b></div>
+    <div class="panel"><h4>данные</h4><pre>расшифровка: Verzeichniss der Oxforder Handschriften (Aufrecht 1864)</pre></div><div class="panel"><h4>примечание</h4><pre>N9: не оставлять по-немецки; ls-территория</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="своя формулировка / комментарий"></textarea>
+  </section>
+
+  <section class="card" data-id="ls:Spr. / Spr. (II)" data-filt="ls">
+    <header><div class="hw">Spr. / Spr. (II) <span class="badge">десятки</span><span class="badge">ls-сигла</span></div><span class="idchip" title="card id — cite this id back when discussing this card">ls:Spr. / Spr. (II)</span></header>
+    <div class="question"><b>Spr. / Spr. (II)</b>&nbsp;→&nbsp;<b><mark class="hl">оставить</mark> <mark class="hl">сиглой</mark> + <mark class="hl">тултип</mark> «<mark class="hl">Индийские</mark> <mark class="hl">изречения</mark>»</b></div>
+    <div class="panel"><h4>данные</h4><pre>расшифровка: Indische Sprüche (Böhtlingk)</pre></div><div class="panel"><h4>примечание</h4><pre>заглавие источника, как ṚV.; ls-территория</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="своя формулировка / комментарий"></textarea>
+  </section>
+
+  <section class="card" data-id="meta:architecture" data-filt="meta">
+    <header><div class="hw">МЕТА: где применяется утвержденный список? <span class="badge">архитектура</span></div><span class="idchip" title="card id — cite this id back when discussing this card">meta:architecture</span></header>
+    <div class="question"><b>Принять</b> = применять только на этапе рендеринга (архитектура 10-07-2026: store хранит исходные теги, переводит генератор сайта — покрывает все будущие корни). <b>Отклонить</b> = список должен также переписать сам store (отдельный шаг с translation_memory/промоушен-механикой). <b>Отложить</b> = обсудить.</div>
+    <div class="panel"><h4>контекст</h4><pre>ABBREVIATIONS_RU.md § "Architecture decision: fix at RENDER TIME"
+Решение 10-07 остается в силе, пока эта карточка не проголосована иначе. Перенесено из h1303_abbrev без изменений (H1682). H2047: content remake only.</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="комментарий"></textarea>
+  </section>
+</main>
+<footer class="hint">Экспорт: pwg_ru/eval/h1682_abbrev_rules.decisions.json. H2047 executor override: Grok 4.5 (grok-4.5) for Opus comparison. Cases locked Latin-stay MG 31-07; non-case grammar awaits H2048 crosswalk. Keyboard: <kbd>a</kbd> принять &middot; <kbd>r</kbd> оставить как есть
+  &middot; <kbd>d</kbd> defer &middot; <kbd>&darr;</kbd>/<kbd>&uarr;</kbd> next/prev. Votes autosave to
+  this browser's localStorage; click "Download decisions.json" when done (unvoted items export with
+  decision:null).</footer>
+<div class="legend" style="max-width:980px;margin:0 auto 20px;padding:0 20px;color:var(--muted);font-size:12px">
+  <b>Approve</b> = accept the proposed change/answer shown on the card (no separate "approve as-is" —
+  approving means agreeing as written). <b>Reject</b> = keep the current entry/answer unchanged.
+  <b>Defer</b> = not sure yet, decide later. The note field is for requesting a partial tweak instead
+  of an outright reject.
+</div>
+<script>
+(function () {
+  var SHEET_ID = "h1682_abbrev_rules";
+  var CONTENT_HASH = "sha256:88f7db782d96a824651f38b74edb3a20ffa3676f872c04b9df9b4d53c0247d0f";
+  var STORE_KEY = 'review-sheet:' + SHEET_ID;
+  var ids = ["rule:cross-reference---deictic--ru-map-ratifi", "rule:meaning---designation---usage-labels", "rule:domain-labels", "rule:contextual-german-word-abbreviations--n-", "rule:grammatical--cases--uniform-internationa", "rule:grammatical--number---gender---person", "rule:grammatical--voice---secondary-stems", "rule:grammatical--tense---mood", "rule:grammatical--non-finite---pos---syntax", "rule:grammatical--valency---diathesis-adjacen", "rule:grammatical--word-formation---morphology", "rule:source---citation-mechanics", "ab:ebend.", "ab:W.", "ab:geder.", "ab:e.", "ab:H.", "ab:o. W.", "ab:o.", "ab:schl.", "ab:d.", "ab:M.", "ab:r. V.", "ab:d. r. V.", "ab:Fr.", "ab:neutr.", "ab:3.", "ab:Med.", "ab:v. l.", "ls:ed. Bomb.", "ls:Verz. d. Oxf. H.", "ls:Spr. / Spr. (II)", "meta:architecture"];
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(STORE_KEY) || '{}') || {}; } catch (e) { state = {}; }
+  function tally() {
+    var c = { approve:0, reject:0, defer:0 };
+    ids.forEach(function (id) { var v = state[id] && state[id].decision; if (v && c.hasOwnProperty(v)) c[v]++; });
+    document.getElementById('c-approve').textContent = c.approve;
+    document.getElementById('c-reject').textContent = c.reject;
+    document.getElementById('c-defer').textContent = c.defer;
+    document.getElementById('c-unvoted').textContent = ids.length - c.approve - c.reject - c.defer;
+  }
+  function applyCardUI(card) {
+    var id = card.getAttribute('data-id'); var rec = state[id] || {};
+    card.classList.remove('voted-approve','voted-reject','voted-defer');
+    card.querySelectorAll('button.vote').forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-vote') === rec.decision); });
+    card.querySelector('.vote-state').textContent = rec.decision ? rec.decision : 'unvoted';
+    if (rec.decision) card.classList.add('voted-' + rec.decision);
+    var ta = card.querySelector('textarea.note'); if (rec.note && !ta.value) ta.value = rec.note;
+  }
+  function save() { localStorage.setItem(STORE_KEY, JSON.stringify(state)); tally(); }
+  // H1523 residual / csl-pyutil#1 Part 1: always re-read the live textarea on vote
+  // and before export so a second vote click (or a missed `input` event) cannot
+  // drop a note that is still visible in the card.
+  function syncNoteFromDom(id) {
+    state[id] = state[id] || {};
+    var card = document.querySelector('.card[data-id="' + id + '"]');
+    if (!card) return;
+    var ta = card.querySelector('textarea.note');
+    if (ta) state[id].note = ta.value;
+  }
+  function vote(id, d) { syncNoteFromDom(id); state[id].decision = d; save(); }
+  function noteChange(id, t) { state[id] = state[id] || {}; state[id].note = t; save(); }
+  document.querySelectorAll('.card').forEach(function (card) {
+    var id = card.getAttribute('data-id'); applyCardUI(card);
+    card.querySelectorAll('button.vote').forEach(function (btn) {
+      btn.addEventListener('click', function () { vote(id, btn.getAttribute('data-vote')); applyCardUI(card); });
+    });
+    var ta = card.querySelector('textarea.note'); ta.addEventListener('input', function () { noteChange(id, ta.value); });
+  });
+  tally();
+  document.getElementById('downloadBtn').addEventListener('click', function () {
+    ids.forEach(function (id) { syncNoteFromDom(id); });
+    var decided = ids.filter(function (id) { return state[id] && state[id].decision; }).length;
+    var payload = { sheet_id: SHEET_ID, content_hash: CONTENT_HASH, generated: "2026-07-31", decided: decided,
+      items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '' }; }) };
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
+    var url = URL.createObjectURL(blob); var a = document.createElement('a');
+    a.href = url; a.download = SHEET_ID + '_decisions.json'; document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+  });
+  var filterbar = document.getElementById('filterbar');
+  filterbar.addEventListener('click', function (e) {
+    var btn = e.target.closest('button[data-filter]'); if (!btn) return;
+    filterbar.querySelectorAll('button').forEach(function (b) { b.classList.remove('active'); });
+    btn.classList.add('active'); var f = btn.getAttribute('data-filter');
+    document.querySelectorAll('.card').forEach(function (card) {
+      var show = true;
+      if (f === 'unvoted') { var id = card.getAttribute('data-id'); show = !(state[id] && state[id].decision); }
+      else if (f !== 'all') { show = card.getAttribute('data-filt') === f; }
+      card.style.display = show ? '' : 'none';
+    });
+  });
+  var cardsEl = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  var activeIdx = 0;
+  function visibleCards() { return cardsEl.filter(function (c) { return c.style.display !== 'none'; }); }
+  document.addEventListener('keydown', function (e) {
+    if (e.target.tagName === 'TEXTAREA') return;
+    var vis = visibleCards(); if (!vis.length) return;
+    if (activeIdx >= vis.length) activeIdx = vis.length - 1;
+    var card = vis[activeIdx]; var id = card.getAttribute('data-id');
+    if (e.key === 'a') { vote(id, 'approve'); applyCardUI(card); }
+    else if (e.key === 'r') { vote(id, 'reject'); applyCardUI(card); }
+    else if (e.key === 'd') { vote(id, 'defer'); applyCardUI(card); }
+    else if (e.key === 'ArrowDown') { activeIdx = Math.min(activeIdx + 1, vis.length - 1); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'center'}); }
+    else if (e.key === 'ArrowUp') { activeIdx = Math.max(activeIdx - 1, 0); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'center'}); }
+    else return;
+    e.preventDefault();
+  });
+
+  var saveHandle = null, saveTimer = null;
+  function exportPayload() {
+    if (typeof syncNoteFromDom === 'function') {
+      ids.forEach(function (id) { syncNoteFromDom(id); });
+    }
+    var decided = ids.filter(function (id) { return state[id] && state[id].decision; }).length;
+    return JSON.stringify({ sheet_id: SHEET_ID, content_hash: CONTENT_HASH, generated: new Date().toISOString(), decided: decided,
+      items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '' }; }) }, null, 2);
+  }
+  function scheduleAutosave() {
+    if (!saveHandle) return;
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(function () {
+      saveHandle.createWritable().then(function (w) {
+        w.write(exportPayload()).then(function () { w.close(); });
+      }).catch(function () {});
+    }, 1000);
+  }
+  var _origSave = save;
+  save = function () { _origSave(); scheduleAutosave(); };
+  if (window.showSaveFilePicker) {
+    var saveBtn = document.getElementById('saveBtn');
+    saveBtn.style.display = '';
+    saveBtn.addEventListener('click', function () {
+      window.showSaveFilePicker({suggestedName: SHEET_ID + '_decisions.json'}).then(function (h) {
+        saveHandle = h; scheduleAutosave();
+      }).catch(function () {});
+    });
+  }
+
+  var FS_KEY = STORE_KEY + ':fs', FS_DEFAULT = 1.5;
+  function fsGet() {
+    var v = parseFloat(localStorage.getItem(FS_KEY));
+    return (isFinite(v) && v >= 0.7 && v <= 3) ? v : FS_DEFAULT;
+  }
+  function fsApply(v) {
+    document.documentElement.style.setProperty('--fs', String(v));
+    document.getElementById('fsVal').textContent = Math.round(v * 100) + '%';
+  }
+  function fsSet(v) {
+    v = Math.min(3, Math.max(0.7, Math.round(v * 10) / 10));
+    localStorage.setItem(FS_KEY, String(v)); fsApply(v);
+  }
+  fsApply(fsGet());
+  document.getElementById('fsDown').addEventListener('click', function () { fsSet(fsGet() - 0.1); });
+  document.getElementById('fsUp').addEventListener('click', function () { fsSet(fsGet() + 0.1); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>H180 · addenda-typology κ-label — 73 items</title>
+<style>
+  :root { --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --text:#e6e6e6; --muted:#9aa0aa;
+          --accent:#5b8cff; --ok:#3fb950; --bad:#f85149; --defer:#d29922; --border:#2a2f3a; }
+  * { box-sizing: border-box; }
+  body { background:var(--bg); color:var(--text); font-family:-apple-system,Segoe UI,Roboto,sans-serif;
+         margin:0; padding:0 0 120px 0; }
+  header.top { position:sticky; top:0; z-index:10; background:var(--panel); border-bottom:1px solid var(--border);
+               padding:14px 20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+  header.top h1 { font-size:16px; margin:0; }
+  header.top .sub { color:var(--muted); font-size:12px; max-width:760px; }
+  .tally { display:flex; gap:14px; font-size:13px; }
+  .tally span.count { font-weight:700; }
+  .tally .approve { color:var(--ok); } .tally .reject { color:var(--bad); }
+  .tally .defer { color:var(--defer); } .tally .unvoted { color:var(--muted); }
+  .toolbar { padding:10px 20px; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  button.dl { background:var(--accent); color:#fff; border:none; padding:8px 14px; border-radius:6px;
+              cursor:pointer; font-size:13px; }
+  button.dl:hover { opacity:.9; }
+  .filterbar { display:flex; gap:6px; flex-wrap:wrap; }
+  .filterbar button { background:var(--panel2); border:1px solid var(--border); color:var(--text);
+                       padding:6px 10px; border-radius:14px; font-size:12px; cursor:pointer; }
+  .filterbar button.active { border-color:var(--accent); color:var(--accent); }
+  main { max-width:980px; margin:0 auto; padding:10px 20px; }
+  .card { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:16px;
+          margin-bottom:16px; }
+  .card.voted-approve { border-left:4px solid var(--ok); }
+  .card.voted-reject { border-left:4px solid var(--bad); }
+  .card.voted-defer { border-left:4px solid var(--defer); }
+  .card header { display:flex; justify-content:space-between; align-items:baseline; }
+  .card .hw { font-size:18px; font-weight:700; }
+  .badge { font-size:11px; background:var(--panel2); padding:2px 8px; border-radius:10px;
+           margin-left:8px; color:var(--muted); }
+  .question { margin:8px 0 12px; font-size:14px; }
+  .panel { background:var(--panel2); border-radius:8px; padding:10px 12px; font-size:13px; margin-bottom:10px; }
+  .panel h4 { margin:0 0 6px; font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+  .panel pre { white-space:pre-wrap; word-break:break-word; margin:0; font-size:12px; line-height:1.45; }
+  .chip { display:inline-block; background:#263042; border-radius:5px; padding:2px 7px; margin:2px 3px 2px 0; font-size:12px; }
+  .muted { color:var(--muted); font-style:italic; }
+  .controls { display:flex; align-items:center; gap:8px; margin-top:4px; }
+  button.vote { border:1px solid var(--border); background:var(--panel2); color:var(--text);
+                padding:7px 12px; border-radius:6px; cursor:pointer; font-size:13px; }
+  button.vote.approve.active { background:var(--ok); border-color:var(--ok); color:#04240b; }
+  button.vote.reject.active { background:var(--bad); border-color:var(--bad); color:#2a0a08; }
+  button.vote.defer.active { background:var(--defer); border-color:var(--defer); color:#2a1d02; }
+  .vote-state { margin-left:6px; font-size:12px; color:var(--muted); }
+  textarea.note { width:100%; margin-top:10px; min-height:88px; background:#11141a; color:var(--text);
+                  border:1px solid var(--border); border-radius:6px; padding:8px; font-size:13px;
+                  font-family:inherit; resize:vertical; }
+  footer.hint { max-width:980px; margin:20px auto; padding:0 20px; color:var(--muted); font-size:12px; }
+  kbd { background:#263042; border-radius:4px; padding:1px 5px; font-size:11px; }
+  .idchip { font-family:ui-monospace,Consolas,monospace; font-size:11px; color:var(--muted);
+            background:var(--panel2); border:1px solid var(--border); padding:2px 7px;
+            border-radius:6px; user-select:all; }
+  .card header { gap:10px; }
+  .hw a.hwlink { color:inherit; text-decoration:underline dotted; text-underline-offset:3px; }
+  .hw a.hwlink:hover { color:var(--accent); }
+  mark.hl { background:#453407; color:#ffd75e; padding:0 2px; border-radius:3px; }
+  .savebanner { max-width:980px; margin:10px auto 0; padding:8px 20px; font-size:12.5px; }
+  .savebanner code { background:var(--panel2); border:1px solid var(--border); padding:1px 6px; border-radius:5px; }
+  .ratingrow { display:flex; align-items:center; gap:6px; margin-top:10px; flex-wrap:wrap; }
+  .ratinglabel { font-size:12px; color:var(--muted); margin-right:4px; }
+  button.rate { border:1px solid var(--border); background:var(--panel2); color:var(--text);
+                width:34px; padding:6px 0; border-radius:6px; cursor:pointer; font-size:13px; }
+  button.rate.active { background:var(--accent); border-color:var(--accent); color:#fff; }
+  button.rate.active.below { background:var(--defer); border-color:var(--defer); color:#2a1d02; }
+  .rate-state { font-size:12px; color:var(--muted); margin-left:4px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>H180 · addenda-typology κ-label — 73 items</h1>
+    <div class="sub">Generated 2026-07-06 &middot; sheet_id <code>h180-typology-kappa-2026-07-06</code> &middot; confirm/correct the LLM-proposed relationship subtype (7 five-layer roots + 30-item tail)</div>
+  </div>
+  <div class="tally" id="tally">
+    <span class="approve">&#9989; <span class="count" id="c-approve">0</span></span>
+    <span class="reject">&#10060; <span class="count" id="c-reject">0</span></span>
+    <span class="defer">&#9208; <span class="count" id="c-defer">0</span></span>
+    <span class="unvoted">&#9711; <span class="count" id="c-unvoted">73</span></span>
+  </div>
+</header>
+<div class="savebanner">&#128229; Your export downloads as <code>h180-typology-kappa-2026-07-06_decisions.json</code> &rarr; save it to <code>RussianTranslation\pwg_ru\eval\h180_typology.decisions.json</code> (the <code>sheet_id</code> inside the file is <code>h180-typology-kappa-2026-07-06</code> — that is how a later session knows which sheet these decisions belong to).</div>
+<div class="toolbar">
+  <button class="dl" id="downloadBtn">Download decisions.json</button><button class="dl" id="saveBtn" style="display:none;margin-left:8px">Save to folder…</button>
+  <div class="filterbar" id="filterbar"><button data-filter="all" class="active">all</button><button data-filter="pw">pw</button><button data-filter="sch">sch</button><button data-filter="pwkvn">pwkvn</button><button data-filter="nws">nws</button><button data-filter="unvoted">unvoted only</button></div>
+</div>
+<main id="cards">
+
+  <section class="card" data-id="_cid~~h0_zz_nws00::NWS-1" data-filt="nws">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/2-1089?w=Cid" target="_blank" rel="noopener">chid · nws · sense NWS-1</a> <span class="badge">foreign_fragment</span><span class="badge">5-layer</span></div><span class="idchip" title="card id — cite this id back when discussing this card">_cid~~h0_zz_nws00::NWS-1</span></header>
+    <div class="question">Is the proposed subtype <b>«foreign_fragment»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>foreign_fragment</b>
+op/dir    : add / additive
+target    : *new (anchor sense)
+evidence  : NWS fragment in EN (heuristic); sense_tag=&#x27;NWS-1&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>{#chid#} [Gen , unsp] ( chinátti, chintte VII ) (<mark class="hl">в</mark> <mark class="hl">математике</mark>) <mark class="hl">делить</mark>. Sūryas iv, 26</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>{#chid#} [Gen , unsp] ( chinátti, chintte VII ) (in math.) to divide. Sūryas iv, 26</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="_cid~~h0_zz_nws00::NWS-17" data-filt="nws">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/2-1089?w=Cid" target="_blank" rel="noopener">chid · nws · sense NWS-17</a> <span class="badge">foreign_fragment</span><span class="badge">5-layer</span></div><span class="idchip" title="card id — cite this id back when discussing this card">_cid~~h0_zz_nws00::NWS-17</span></header>
+    <div class="question">Is the proposed subtype <b>«foreign_fragment»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>foreign_fragment</b>
+op/dir    : add / additive
+target    : *new (anchor sense)
+evidence  : NWS fragment in EN (heuristic); sense_tag=&#x27;NWS-17&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>[ chinná ] <mark class="hl">разделённый</mark>, <mark class="hl">разорванный</mark>, <mark class="hl">разрезанный</mark>, <mark class="hl">прободённый</mark>. AV . <mark class="hl">раскрытый</mark> (<mark class="hl">о</mark> <mark class="hl">ране</mark>). Suś . <mark class="hl">потревоженный</mark>, <mark class="hl">расстроенный</mark>. Hariv 16258 , Mṛcch . kiṃ naś chinnam : «<mark class="hl">что</mark> <mark class="hl">нам</mark> <mark class="hl">до</mark> <mark class="hl">этого</mark>?» — <mark class="hl">нет</mark> <mark class="hl">ничего</mark>, <mark class="hl">о</mark> <mark class="hl">чём</mark> <mark class="hl">стоит</mark> <mark class="hl">беспокоиться</mark>. Amaru . ? . Suś . [ <mark class="hl">говорится</mark> <mark class="hl">о</mark> <mark class="hl">брюхе</mark> <mark class="hl">пиявки</mark>. ] <mark class="hl">ограниченный</mark> <mark class="hl">чем-л</mark>. (<mark class="hl">в</mark> <mark class="hl">слож</mark>.). Bhartṛ(MW) iii, 20 . <mark class="hl">изъятый</mark>, <mark class="hl">отнятый</mark>. R ii, 56, 23 , Ragh xii, 80 . ifc: <mark class="hl">истощённый</mark>, <mark class="hl">подорванный</mark> <mark class="hl">чем-л</mark>. Buddh(MW) , Lex(MW) . MW : 406 (s.v. chinná )</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>[ chinná ] divided, torn, cut through, perforated. AV . opened (a wound). Suś . disturbed. Hariv 16258 , Mṛcch . kiṃ naś chinnam : &#x27;what is there in this to disturb us?&#x27; there is nothing to care about. Amaru . ? . Suś . [ said of the belly of a leach. ] limited by (in comp.). Bhartṛ(MW) iii, 20 . taken away or out of. R ii, 56, 23 , Ragh xii, 80 . ifc: decaying or exhausted by. Buddh(MW) , Lex(MW) . MW : 406 (s.v. chinná )</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="_sam~~h0_zz_nws00::NWS-11" data-filt="nws">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/7-0071?w=Sam" target="_blank" rel="noopener">śam · nws · sense NWS-11</a> <span class="badge">foreign_fragment</span><span class="badge">5-layer</span></div><span class="idchip" title="card id — cite this id back when discussing this card">_sam~~h0_zz_nws00::NWS-11</span></header>
+    <div class="question">Is the proposed subtype <b>«foreign_fragment»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>foreign_fragment</b>
+op/dir    : add / additive
+target    : *new (anchor sense)
+evidence  : NWS fragment in EN (heuristic); sense_tag=&#x27;NWS-11&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>{#+ prati : (° śāmayati , also ° śam ° and erroneously ° śrām °, ° sam °) (1) stores away (property); (2) puts away (a monk’s bowl and robe, after his begging-round); (3) harbors (a person), entertains (privately). SaddhP 114.13 , Mvu i.56.2 , MSV ii.99.15 .#} [Buddh , unsp (s.v. pratiśāmayati )] – (° śāmaya -, ° śāme -): <mark class="hl">откладывать</mark> <mark class="hl">в</mark> <mark class="hl">сторону</mark>, <mark class="hl">убирать</mark>; <mark class="hl">приводить</mark> <mark class="hl">в</mark> <mark class="hl">порядок</mark>. AbhisDh § 8.5.9A2 . Buddh , unsp. [NWS: Karashima 2012 : 378 (s.v. prati - śāmaya -)]</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>{#+ prati : (° śāmayati , also ° śam ° and erroneously ° śrām °, ° sam °) (1) stores away (property); (2) puts away (a monk’s bowl and robe, after his begging-round); (3) harbors (a person), entertains (privately). SaddhP 114.13 , Mvu i.56.2 , MSV ii.99.15 .#} [Buddh , unsp (s.v. pratiśāmayati )] – (° śāmaya -, ° śāme -): weglegen, wegstellen; aufräumen. AbhisDh § 8.5.9A2 . Buddh , unsp</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="_sam~~h0_zz_nws00::NWS-3" data-filt="nws">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/7-0071?w=Sam" target="_blank" rel="noopener">śam · nws · sense NWS-3</a> <span class="badge">foreign_fragment</span><span class="badge">5-layer</span></div><span class="idchip" title="card id — cite this id back when discussing this card">_sam~~h0_zz_nws00::NWS-3</span></header>
+    <div class="question">Is the proposed subtype <b>«foreign_fragment»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>foreign_fragment</b>
+op/dir    : add / additive
+target    : *new (anchor sense)
+evidence  : NWS fragment in EN (heuristic); sense_tag=&#x27;NWS-3&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>[Ved , unsp] <mark class="hl">трудиться</mark>, <mark class="hl">совершать</mark> <mark class="hl">богослужение</mark>, <mark class="hl">восхвалять</mark>. ṚV I,85,12. [NWS: Vedic Hymns I : 516]</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>[Ved , unsp] to work, to perform worship, to praise. ṚV I,85,12</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="g_a~~h0_zz_nws01::NWS:34" data-filt="nws">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/2-0719?w=gA" target="_blank" rel="noopener">gā · nws · sense NWS:34</a> <span class="badge">foreign_fragment</span><span class="badge">5-layer</span></div><span class="idchip" title="card id — cite this id back when discussing this card">g_a~~h0_zz_nws01::NWS:34</span></header>
+    <div class="question">Is the proposed subtype <b>«foreign_fragment»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>foreign_fragment</b>
+op/dir    : add / additive
+target    : *new (anchor sense)
+evidence  : NWS fragment in EN (heuristic); sense_tag=&#x27;NWS:34&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>{#+ áccha : jemanden (Akk) herbeisingen, d. h. ihn durch Singen herbeischaffen.#} [Ved , unsp] + anu : (ppp.) <mark class="hl">воспетый</mark> <mark class="hl">в</mark> <mark class="hl">согласии</mark> <mark class="hl">с</mark> (<mark class="hl">предшествующим</mark> <mark class="hl">отрывком</mark>). Mvu i.42.5 . Buddh , unsp ; BHSD : 26 (s.v. anugīta )</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>{#+ áccha : jemanden (Akk) herbeisingen, d. h. ihn durch Singen herbeischaffen.#} [Ved , unsp] + anu : (ppp.) sung in conformity with (a preceding passage). Mvu i.42.5 . Buddh , unsp ; BHSD : 26 (s.v. anugīta )</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="g_a~~h0_zz_nws01::NWS:45" data-filt="nws">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/2-0719?w=gA" target="_blank" rel="noopener">gā · nws · sense NWS:45</a> <span class="badge">foreign_fragment</span><span class="badge">5-layer</span></div><span class="idchip" title="card id — cite this id back when discussing this card">g_a~~h0_zz_nws01::NWS:45</span></header>
+    <div class="question">Is the proposed subtype <b>«foreign_fragment»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>foreign_fragment</b>
+op/dir    : add / additive
+target    : *new (anchor sense)
+evidence  : NWS fragment in EN (heuristic); sense_tag=&#x27;NWS:45&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>{#gā#} [Śā , Ling] <mark class="hl">заместительная</mark> <mark class="hl">морфема</mark> <mark class="hl">для</mark> i ṇ <mark class="hl">в</mark> <mark class="hl">формах</mark> <mark class="hl">аориста</mark>. Pāṇ 2.4.45</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>{#gā#} [Śā , Ling] substitute morpheme for i ṇ in aor. forms. Pāṇ 2.4.45</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="rakz~~h0_zz_nws00::NWS-1" data-filt="nws">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/6-0214?w=rakz" target="_blank" rel="noopener">rakṣ · nws · sense NWS-1</a> <span class="badge">foreign_fragment</span><span class="badge">5-layer</span></div><span class="idchip" title="card id — cite this id back when discussing this card">rakz~~h0_zz_nws00::NWS-1</span></header>
+    <div class="question">Is the proposed subtype <b>«foreign_fragment»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>foreign_fragment</b>
+op/dir    : add / additive
+target    : *new (anchor sense)
+evidence  : NWS fragment in EN (heuristic); sense_tag=&#x27;NWS-1&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>{#rakṣ#} [Gen , unsp] ( rákṣati I P ) <mark class="hl">хранить</mark> (<mark class="hl">тайну</mark>). Kathās . <mark class="hl">щадить</mark>, <mark class="hl">считаться</mark> <mark class="hl">с</mark> (<mark class="hl">чужими</mark> <mark class="hl">чувствами</mark>). Mālav . <mark class="hl">остерегаться</mark>, <mark class="hl">отражать</mark>, <mark class="hl">удалять</mark>, <mark class="hl">предотвращать</mark>, <mark class="hl">расстраивать</mark>, <mark class="hl">причинять</mark> <mark class="hl">вред</mark>. AV v, 1 . <mark class="hl">скрываться</mark>, <mark class="hl">бояться</mark> (?). ṚV x, 68, 1</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>{#rakṣ#} [Gen , unsp] ( rákṣati I P ) to keep (a secret). Kathās . to spare, have regard to (another&#x27;s feelings). Mālav . to guard against, ward off, keep away, prevent, frustrate, injure. AV v, 1 . to conceal one&#x27;s self, be afraid (?). ṚV x, 68, 1</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="vraj~~h0_zz_nws00::NWS-1" data-filt="nws">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/6-1488?w=vraj" target="_blank" rel="noopener">vraj · nws · sense NWS-1</a> <span class="badge">foreign_fragment</span><span class="badge">5-layer</span></div><span class="idchip" title="card id — cite this id back when discussing this card">vraj~~h0_zz_nws00::NWS-1</span></header>
+    <div class="question">Is the proposed subtype <b>«foreign_fragment»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>foreign_fragment</b>
+op/dir    : add / additive
+target    : *new (anchor sense)
+evidence  : NWS fragment in EN (heuristic); sense_tag=&#x27;NWS-1&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>{#vraj#} [Gen , unsp] ( vrájati I P ) {%<mark class="hl">идти</mark>, <mark class="hl">ходить</mark>, <mark class="hl">двигаться</mark>, <mark class="hl">путешествовать</mark>, <mark class="hl">странствовать</mark>, <mark class="hl">перемещаться</mark>%}. ṚV . [<mark class="hl">с</mark> padbhyām <mark class="hl">или</mark> scil.: «<mark class="hl">идти</mark> <mark class="hl">пешком</mark>»; <mark class="hl">с</mark> upānadbhyām: <mark class="hl">то</mark> <mark class="hl">же</mark>, <mark class="hl">букв</mark>. «<mark class="hl">в</mark> <mark class="hl">обуви</mark>»; <mark class="hl">с</mark> dhūryais: «<mark class="hl">путешествовать</mark> <mark class="hl">с</mark> <mark class="hl">помощью</mark> <mark class="hl">вьючных</mark> <mark class="hl">животных</mark>»; <mark class="hl">с</mark> paramāṃ gatim: «<mark class="hl">достигать</mark> <mark class="hl">высшего</mark> <mark class="hl">блаженства</mark>»; <mark class="hl">с</mark> antam <mark class="hl">и</mark> gen.: «<mark class="hl">доходить</mark> <mark class="hl">до</mark> <mark class="hl">конца</mark>»; <mark class="hl">с</mark> anyena, anyatra <mark class="hl">или</mark> anyatas: «<mark class="hl">идти</mark> <mark class="hl">другим</mark> <mark class="hl">путём</mark> <mark class="hl">или</mark> <mark class="hl">в</mark> <mark class="hl">другое</mark> <mark class="hl">место</mark>»; <mark class="hl">с</mark> adhas: <mark class="hl">либо</mark> «<mark class="hl">опускаться</mark> [<mark class="hl">в</mark> <mark class="hl">ад</mark>]», <mark class="hl">либо</mark> «<mark class="hl">перевариваться</mark> [<mark class="hl">о</mark> <mark class="hl">пище</mark>]».] {%<mark class="hl">идти</mark> <mark class="hl">с</mark> <mark class="hl">целью</mark>, <mark class="hl">собираться</mark>%} (dat. inf. <mark class="hl">или</mark> <mark class="hl">прил</mark>. <mark class="hl">на</mark> -aka [<mark class="hl">напр</mark>. bhojako vrajati: «<mark class="hl">он</mark> <mark class="hl">собирается</mark> <mark class="hl">есть</mark>»]. Pāṇ ii, 3, 15; iii, 3, 10. {%<mark class="hl">становиться</mark>%}. [<mark class="hl">особ</mark>. <mark class="hl">с</mark> <mark class="hl">вин</mark>. <mark class="hl">пад</mark>. <mark class="hl">отвлечённого</mark> <mark class="hl">сущ</mark>., <mark class="hl">напр</mark>. <mark class="hl">с</mark> vināśam: «<mark class="hl">идти</mark> <mark class="hl">к</mark> <mark class="hl">гибели</mark>, <mark class="hl">погибать</mark>»; <mark class="hl">с</mark> chattratām: «<mark class="hl">становиться</mark> <mark class="hl">учеником</mark>»; <mark class="hl">с</mark> nirvṛtim: «<mark class="hl">становиться</mark> <mark class="hl">счастливым</mark>» [<mark class="hl">ср</mark>. √ gam, yā &amp;]; <mark class="hl">с</mark> sukham: «<mark class="hl">чувствовать</mark> <mark class="hl">себя</mark> <mark class="hl">хорошо</mark>»; <mark class="hl">с</mark> jīvan: «<mark class="hl">спастись</mark> <mark class="hl">живым</mark>». Mbh, Kāvya(MW).] Caus. <mark class="hl">или</mark> X P (vrājayati): {%<mark class="hl">посылать</mark>, <mark class="hl">гнать</mark>; <mark class="hl">приготовлять</mark>, <mark class="hl">украшать</mark>%}. AĀr, DhātuPā(MW). Intens. (vāvrajyate, vāvrakti): {%<mark class="hl">идти</mark> <mark class="hl">криво</mark>%}. Pāṇ iii, 1, 23, Scholiast. MW : 1041</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>{#vraj#} [Gen , unsp] ( vrájati I P ) to go, walk, proceed, travel, wander, move. ṚV . [ with or scil. padbhyām : &#x27;to go on foot&#x27;; with upānadbhyām : id. lit. &#x27;with shoes&#x27;; with dhūryais : &#x27;to travel by means of beasts of burden&#x27;; with paramāṃ gatim : &#x27;to attain supreme bliss&#x27;; with antam and gen: &#x27;to come to the end of&#x27;; with anyena , anyatra or anyatas : &#x27;to go another way or elsewhere&#x27;; with adhas : either &#x27;to sink down [to hell]&#x27; or &#x27;to be digested [as food]&#x27;. ] to go in order to, be going to (dat. inf. or an adj. ending in - aka [e.g. bhojako vrajati : &#x27;he is going to eat&#x27;]. Pāṇ ii, 3, 15; iii, 3, 10 . become. [ esp. with acc. of an abstract noun e.g. with vināśam : &#x27;to go to destruction, become destroyed&#x27;; with chattratām : &#x27;to become a pupil&#x27;; with nirvṛtim : &#x27;to grow happy&#x27; [cf. √ gam , yā &amp;]; with sukham : &#x27;to feel well&#x27;; with jīvan : &#x27;to escape alive&#x27;. Mbh , Kāvya(MW) . ] Caus or X P ( vrājayati ): to send, drive; to prepare, decorate. AĀr , DhātuPā(MW) . Intens ( vāvrajyate , vāvrakti ): to go crookedly. Pāṇ iii, 1, 23, Scholiast</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="_cid~~h0_zz_nws00::NWS-10" data-filt="nws">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/2-1089?w=Cid" target="_blank" rel="noopener">chid · nws · sense NWS-10</a> <span class="badge">nws_at_sense</span><span class="badge">5-layer</span></div><span class="idchip" title="card id — cite this id back when discussing this card">_cid~~h0_zz_nws00::NWS-10</span></header>
+    <div class="question">Is the proposed subtype <b>«nws_at_sense»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>nws_at_sense</b>
+op/dir    : add / additive
+target    : *new (anchor sense)
+evidence  : NWS additive at PWG sense *new; sense_tag=&#x27;NWS-10&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>{#– ; rings beschneiden und - abschneiden. ṚV 7,33,6 .#} [Ved , unsp] – ( parichinatti ): <mark class="hl">жать</mark> (<mark class="hl">зерно</mark>). Kāraṇḍ 71.7 . Buddh , unsp ; BHSD : 322 (s.v. parichinatti )</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>{#– ; rings beschneiden und - abschneiden. ṚV 7,33,6 .#} [Ved , unsp] – ( parichinatti ): reaps (grain). Kāraṇḍ 71.7 . Buddh , unsp ; BHSD : 322 (s.v. parichinatti )</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="_cid~~h0_zz_nws00::NWS-7" data-filt="nws">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/2-1089?w=Cid" target="_blank" rel="noopener">chid · nws · sense NWS-7</a> <span class="badge">nws_at_sense</span><span class="badge">5-layer</span></div><span class="idchip" title="card id — cite this id back when discussing this card">_cid~~h0_zz_nws00::NWS-7</span></header>
+    <div class="question">Is the proposed subtype <b>«nws_at_sense»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>nws_at_sense</b>
+op/dir    : add / additive
+target    : *new (anchor sense)
+evidence  : NWS additive at PWG sense *new; sense_tag=&#x27;NWS-7&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>{#+ apa ( apacchinna ): snatched away. KA 7.16.16 .#} [Śā , Soc (s.v. apacchinna )] + ā . acchindati . Buddh , unsp ; BHSD : 7 (s.v. acchindati )</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>{#+ apa ( apacchinna ): snatched away. KA 7.16.16 .#} [Śā , Soc (s.v. apacchinna )] + ā . acchindati . Buddh , unsp ; BHSD : 7 (s.v. acchindati )</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="_sam~~h0_zz_nws00::NWS-23" data-filt="nws">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/7-0071?w=Sam" target="_blank" rel="noopener">śam · nws · sense NWS-23</a> <span class="badge">nws_at_sense</span><span class="badge">5-layer</span></div><span class="idchip" title="card id — cite this id back when discussing this card">_sam~~h0_zz_nws00::NWS-23</span></header>
+    <div class="question">Is the proposed subtype <b>«nws_at_sense»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>nws_at_sense</b>
+op/dir    : add / additive
+target    : *new (anchor sense)
+evidence  : NWS additive at PWG sense *new; sense_tag=&#x27;NWS-23&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>[Ved , unsp] = arcan . Naigh 3,14 . = śaṃsamāna . Nir 6,8 . <mark class="hl">тот</mark>, <mark class="hl">кто</mark> <mark class="hl">выполнил</mark> <mark class="hl">свою</mark> <mark class="hl">работу</mark>; <mark class="hl">готовый</mark>. ṚV 10,142,6 . <mark class="hl">в</mark> <mark class="hl">особенности</mark>: <mark class="hl">тот</mark>, <mark class="hl">кто</mark> <mark class="hl">правильно</mark> <mark class="hl">произвёл</mark> <mark class="hl">все</mark> <mark class="hl">приготовления</mark> <mark class="hl">и</mark> <mark class="hl">работы</mark> <mark class="hl">для</mark> <mark class="hl">жертвы</mark>; <mark class="hl">снаряжённый</mark>, <mark class="hl">подготовленный</mark>, <mark class="hl">готовый</mark>, <mark class="hl">готовый</mark> <mark class="hl">к</mark> <mark class="hl">жертвоприношению</mark>. ṚV 5,29,12 . + Instr: <mark class="hl">прислуживающий</mark> <mark class="hl">посредством</mark>. ṚV 1,151,7 . pass: (<mark class="hl">для</mark> <mark class="hl">жертвы</mark>) <mark class="hl">приготовленный</mark>. AV 2,34,2 . <mark class="hl">готовый</mark>, <mark class="hl">подготовленный</mark>. ṚV 1,24,4 . [NWS: Geldner 1907 : 177 (s.v. śam)]</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>[Ved , unsp] = arcan . Naigh 3,14 . = śaṃsamāna . Nir 6,8 . der seine Arbeit getan hat, fertig. ṚV 10,142,6 . insbes: der alle Vorbereitungen und Arbeiten für das Opfer richtig gemacht hat, gerüstet, vorbereitet, fertig, opferbereit. ṚV 5,29,12 . + Instr: aufwartend mit. ṚV 1,151,7 . pass: (zum Opfer) hergerichtet. AV 2,34,2 . fertig, bereit. ṚV 1,24,4 . Geldner 1907 : 177 (s.v. śam )</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="g_a~~h0_zz_nws00::14" data-filt="nws">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/2-0719?w=gA" target="_blank" rel="noopener">gā · nws · sense 14</a> <span class="badge">nws_at_sense</span><span class="badge">5-layer</span></div><span class="idchip" title="card id — cite this id back when discussing this card">g_a~~h0_zz_nws00::14</span></header>
+    <div class="question">Is the proposed subtype <b>«nws_at_sense»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>nws_at_sense</b>
+op/dir    : add / additive
+target    : 14 (anchor sense)
+evidence  : NWS additive at PWG sense 14; sense_tag=&#x27;14&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>{#+ abhí úd : aufgehen über (Akk), von der Sonne.#} + áva: <mark class="hl">соединяться</mark> <mark class="hl">с</mark>, <mark class="hl">идти</mark> <mark class="hl">к</mark> (Instr).</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>{#+ abhí úd : aufgehen über (Akk), von der Sonne.#} [Ved , unsp] + áva : sich vereinen mit, gehen zu (Instr). Ved , unsp</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="g_a~~h0_zz_nws00::3" data-filt="nws">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/2-0719?w=gA" target="_blank" rel="noopener">gā · nws · sense 3</a> <span class="badge">nws_at_sense</span><span class="badge">5-layer</span></div><span class="idchip" title="card id — cite this id back when discussing this card">g_a~~h0_zz_nws00::3</span></header>
+    <div class="question">Is the proposed subtype <b>«nws_at_sense»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>nws_at_sense</b>
+op/dir    : add / additive
+target    : 3 (anchor sense)
+evidence  : NWS additive at PWG sense 3; sense_tag=&#x27;3&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre><mark class="hl">идти</mark>, <mark class="hl">уходить</mark>; <mark class="hl">приходить</mark> <mark class="hl">в</mark> <mark class="hl">движение</mark>, <mark class="hl">приходить</mark>; <mark class="hl">достигать</mark>. ṚV 10,108,9 , ṚV 1,2,3 , ṚV 3,31,1</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>[Ved , unsp] gehen, fortgehen; sich in Bewegung setzen, kommen; gelangen zu. ṚV 10,108,9 , ṚV 1,2,3 , ṚV 3,31,1</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="g_a~~h0_zz_nws01::NWS:33" data-filt="nws">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/2-0719?w=gA" target="_blank" rel="noopener">gā · nws · sense NWS:33</a> <span class="badge">nws_at_sense</span><span class="badge">5-layer</span></div><span class="idchip" title="card id — cite this id back when discussing this card">g_a~~h0_zz_nws01::NWS:33</span></header>
+    <div class="question">Is the proposed subtype <b>«nws_at_sense»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>nws_at_sense</b>
+op/dir    : add / additive
+target    : *new (anchor sense)
+evidence  : NWS additive at PWG sense *new; sense_tag=&#x27;NWS:33&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>[Reg , unsp] ( gāyati ) <mark class="hl">восхвалять</mark>, <mark class="hl">прославлять</mark>. SHK, 24,8 . Ensink 1964 : 60 (s.v. √ gai )</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>[Reg , unsp] ( gāyati ) to praise. SHK, 24,8 . Ensink 1964 : 60 (s.v. √ gai )</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="rakz~~h0_zz_nws00::NWS-11" data-filt="nws">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/6-0214?w=rakz" target="_blank" rel="noopener">rakṣ · nws · sense NWS-11</a> <span class="badge">nws_at_sense</span><span class="badge">5-layer</span></div><span class="idchip" title="card id — cite this id back when discussing this card">rakz~~h0_zz_nws00::NWS-11</span></header>
+    <div class="question">Is the proposed subtype <b>«nws_at_sense»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>nws_at_sense</b>
+op/dir    : add / additive
+target    : *new (anchor sense)
+evidence  : NWS additive at PWG sense *new; sense_tag=&#x27;NWS-11&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>{#+ upa ( uparakṣita ): „kept in custody“. EI X, S. 213-224 (Index) .#} [Epigr , unsp (s.v. uparakṣita )] + pari ( parirakṣita ): <mark class="hl">хорошо</mark> <mark class="hl">охраняемый</mark>, <mark class="hl">сохранённый</mark>, <mark class="hl">содержимый</mark>. Mbh , Kāvya(MW) . Gen , unsp ; MW : 599 (s.v. parirakṣ )</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>{#+ upa ( uparakṣita ): „kept in custody“. EI X, S. 213-224 (Index) .#} [Epigr , unsp (s.v. uparakṣita )] + pari ( parirakṣita ): well guarded or preserved or kept. Mbh , Kāvya(MW) . Gen , unsp ; MW : 599 (s.v. parirakṣ )</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="yat~~h0_zz_nws00::NWS-02" data-filt="nws">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/6-0024?w=yat" target="_blank" rel="noopener">yat · nws · sense NWS-02</a> <span class="badge">nws_at_sense</span><span class="badge">5-layer</span></div><span class="idchip" title="card id — cite this id back when discussing this card">yat~~h0_zz_nws00::NWS-02</span></header>
+    <div class="question">Is the proposed subtype <b>«nws_at_sense»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>nws_at_sense</b>
+op/dir    : add / additive
+target    : *new (anchor sense)
+evidence  : NWS additive at PWG sense *new; sense_tag=&#x27;NWS-02&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>[NWS:] (se) diriger — <mark class="hl">направляться</mark>. [<mark class="hl">полисемия</mark>, <mark class="hl">неоднозначно</mark> <mark class="hl">исходящая</mark> <mark class="hl">из</mark>. Renou 1997, S. 58.] Renou 1997 : 1009</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>[Gen , unsp] (se) diriger. [ polysémie ambivalente à partir de. Renou 1997, S. 58 . ]</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="_cid~~h0_zz_pw::1" data-filt="pw">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/2-1089?w=Cid" target="_blank" rel="noopener">chid · pw · sense 1</a> <span class="badge">restate</span><span class="badge">5-layer</span></div><span class="idchip" title="card id — cite this id back when discussing this card">_cid~~h0_zz_pw::1</span></header>
+    <div class="question">Is the proposed subtype <b>«restate»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>restate</b>
+op/dir    : restate / abridging
+target    : 1 (anchor sense)
+evidence  : PW abridging restatement; sense_tag=&#x27;1&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>&lt;hom&gt;1.&lt;/hom&gt; √{#Cid#}¦ II. 6. <mark class="hl">Также</mark> <mark class="hl">разрешать</mark>, <mark class="hl">решать</mark> (<mark class="hl">сомнение</mark>) &lt;ls&gt;MBH. 1,71,17&lt;/ls&gt;.
+&lt;div n=&quot;p&quot;&gt;— <mark class="hl">С</mark> {#vipra#} 4.</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>&lt;hom&gt;1.&lt;/hom&gt; √{#Cid#}¦ II. 6. Auch {%lösen, entscheiden%} (einen Zweifel) &lt;ls&gt;MBH. 1,71,17&lt;/ls&gt;.
+&lt;div n=&quot;p&quot;&gt;— Mit {#vipra#} 4.&lt;info n=&quot;sup_7&quot;/&gt;</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="_sam~~h0_zz_pw00::apani-prefix" data-filt="pw">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/7-0071?w=Sam" target="_blank" rel="noopener">śam · pw · sense apani-prefix</a> <span class="badge">restate</span><span class="badge">5-layer</span></div><span class="idchip" title="card id — cite this id back when discussing this card">_sam~~h0_zz_pw00::apani-prefix</span></header>
+    <div class="question">Is the proposed subtype <b>«restate»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>restate</b>
+op/dir    : restate / abridging
+target    : *new (anchor sense)
+evidence  : PW abridging restatement; sense_tag=&#x27;apani-prefix&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>&lt;div n=&quot;p&quot;&gt;— <mark class="hl">С</mark> {#anupra#} in {#anupraSaman#}.</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>&lt;div n=&quot;p&quot;&gt;— Mit {#anupra#} in {#anupraSaman#}.</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="_sam~~h0_zz_pw00::visam-prefix-1" data-filt="pw">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/7-0071?w=Sam" target="_blank" rel="noopener">śam · pw · sense visam-prefix-1</a> <span class="badge">restate</span><span class="badge">5-layer</span></div><span class="idchip" title="card id — cite this id back when discussing this card">_sam~~h0_zz_pw00::visam-prefix-1</span></header>
+    <div class="question">Is the proposed subtype <b>«restate»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>restate</b>
+op/dir    : restate / abridging
+target    : *new (anchor sense)
+evidence  : PW abridging restatement; sense_tag=&#x27;visam-prefix-1&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>&lt;div n=&quot;p&quot;&gt;— <mark class="hl">С</mark> {#sam#}
+&lt;div n=&quot;1&quot;&gt;— 1〉 {%<mark class="hl">полностью</mark> <mark class="hl">обретать</mark> <mark class="hl">покой</mark>%}.</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>&lt;div n=&quot;p&quot;&gt;— Mit {#sam#}
+&lt;div n=&quot;1&quot;&gt;— 1〉 {%vollständig zur Ruhe gelangen%}.</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="g_a~~h0_zz_pw00::Mit T135-1" data-filt="pw">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/2-0719?w=gA" target="_blank" rel="noopener">gā · pw · sense Mit T135-1</a> <span class="badge">restate</span><span class="badge">5-layer</span></div><span class="idchip" title="card id — cite this id back when discussing this card">g_a~~h0_zz_pw00::Mit T135-1</span></header>
+    <div class="question">Is the proposed subtype <b>«restate»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>restate</b>
+op/dir    : restate / abridging
+target    : *new (anchor sense)
+evidence  : PW abridging restatement; sense_tag=&#x27;Mit T135-1&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>— <mark class="hl">С</mark> {#pra#} — 1〉 <mark class="hl">идти</mark> <mark class="hl">вперёд</mark>, <mark class="hl">продвигаться</mark>, <mark class="hl">приходить</mark> <mark class="hl">в</mark> <mark class="hl">движение</mark>, <mark class="hl">шагать</mark> <mark class="hl">к</mark> (&lt;ab&gt;Acc.&lt;/ab&gt;).</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>— Mit {#pra#} — 1〉 {%vorwärts gehen, vorschreiten, sich in Bewegung setzen, hinschreiten zu%} (&lt;ab&gt;Acc.&lt;/ab&gt;).</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="g_a~~h0_zz_pw01::addendum-II-3-main" data-filt="pw">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/2-0719?w=gA" target="_blank" rel="noopener">gā · pw · sense addendum-II-3-main</a> <span class="badge">restate</span><span class="badge">5-layer</span></div><span class="idchip" title="card id — cite this id back when discussing this card">g_a~~h0_zz_pw01::addendum-II-3-main</span></header>
+    <div class="question">Is the proposed subtype <b>«restate»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>restate</b>
+op/dir    : restate / abridging
+target    : *new (anchor sense)
+evidence  : PW abridging restatement; sense_tag=&#x27;addendum-II-3-main&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>&lt;hom&gt;3.&lt;/hom&gt; √{#gA#}¦ II. 5.</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>&lt;hom&gt;3.&lt;/hom&gt; √{#gA#}¦ II. 5.</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="j_iv~~h0_zz_pw::anu- 1" data-filt="pw">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/3-0111?w=jIv" target="_blank" rel="noopener">jīv · pw · sense anu- 1</a> <span class="badge">restate</span><span class="badge">5-layer</span></div><span class="idchip" title="card id — cite this id back when discussing this card">j_iv~~h0_zz_pw::anu- 1</span></header>
+    <div class="question">Is the proposed subtype <b>«restate»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>restate</b>
+op/dir    : restate / abridging
+target    : *new (anchor sense)
+evidence  : PW abridging restatement; sense_tag=&#x27;anu- 1&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>&lt;div n=&quot;p&quot;&gt;— <mark class="hl">С</mark> {#anu#}
+&lt;div n=&quot;1&quot;&gt;— 1〉 {%<mark class="hl">жить</mark> <mark class="hl">вслед</mark> <mark class="hl">за</mark> <mark class="hl">кем-л</mark>.,%} <mark class="hl">так</mark> &lt;ab&gt;v. a.&lt;/ab&gt; {%<mark class="hl">жить</mark> <mark class="hl">так</mark> <mark class="hl">же</mark>, <mark class="hl">как</mark>%} —; <mark class="hl">с</mark> &lt;ab&gt;Acc.&lt;/ab&gt;</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>&lt;div n=&quot;p&quot;&gt;— Mit {#anu#}
+&lt;div n=&quot;1&quot;&gt;— 1〉 {%Jmd nachleben,%} so &lt;ab&gt;v. a.&lt;/ab&gt; {%so leben wie%} —; mit &lt;ab&gt;Acc.&lt;/ab&gt;</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="vraj~~h0_zz_pw::PW-a-2" data-filt="pw">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/6-1488?w=vraj" target="_blank" rel="noopener">vraj · pw · sense PW-a-2</a> <span class="badge">restate</span><span class="badge">5-layer</span></div><span class="idchip" title="card id — cite this id back when discussing this card">vraj~~h0_zz_pw::PW-a-2</span></header>
+    <div class="question">Is the proposed subtype <b>«restate»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>restate</b>
+op/dir    : restate / abridging
+target    : *new (anchor sense)
+evidence  : PW abridging restatement; sense_tag=&#x27;PW-a-2&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>2〉 <mark class="hl">возвращаться</mark>, <mark class="hl">возвращаться</mark> <mark class="hl">домой</mark>, <mark class="hl">снова</mark> <mark class="hl">отходить</mark> (<mark class="hl">о</mark> <mark class="hl">клизме</mark>). <mark class="hl">Часто</mark> <mark class="hl">с</mark> <mark class="hl">добавлением</mark> {#punar#}.</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>&lt;div n=&quot;1&quot;&gt;— 2〉 {%zurückkommen, heimkehren, wieder abgehen%} (von einem Klystier). Häufig mit Hinzufügung von {#punar#}.</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="yat~~h0_zz_pw::PW_anirnis" data-filt="pw">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/6-0024?w=yat" target="_blank" rel="noopener">yat · pw · sense PW_anirnis</a> <span class="badge">restate</span><span class="badge">5-layer</span></div><span class="idchip" title="card id — cite this id back when discussing this card">yat~~h0_zz_pw::PW_anirnis</span></header>
+    <div class="question">Is the proposed subtype <b>«restate»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>restate</b>
+op/dir    : restate / abridging
+target    : *new (anchor sense)
+evidence  : PW abridging restatement; sense_tag=&#x27;PW_anirnis&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>&lt;div n=&quot;p&quot;&gt;— <mark class="hl">С</mark> {#pratinis#} &lt;ab&gt;Caus.&lt;/ab&gt; {%<mark class="hl">снова</mark> <mark class="hl">выдавать</mark>, <mark class="hl">возвращать</mark>%}.</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>&lt;div n=&quot;p&quot;&gt;— Mit {#pratinis#} &lt;ab&gt;Caus.&lt;/ab&gt; {%wieder ausliefern, zurückgeben%}.</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="_cid~~h0_zz_pwkvn::PWKVN-chindatprani" data-filt="pwkvn">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/2-1089?w=Cid" target="_blank" rel="noopener">chid · pwkvn · sense PWKVN-chindatprani</a> <span class="badge">a2a</span><span class="badge">5-layer</span></div><span class="idchip" title="card id — cite this id back when discussing this card">_cid~~h0_zz_pwkvn::PWKVN-chindatprani</span></header>
+    <div class="question">Is the proposed subtype <b>«a2a»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>a2a</b>
+op/dir    : relocate / additive
+target    : *new (anchor sense)
+evidence  : PWKVN Nachtraege-to-Nachtraege (addenda-to-addenda); sense_tag=&#x27;PWKVN-chindatprani&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>&lt;hom&gt;1.&lt;/hom&gt; {#Cid#}¦, {#CindatprARi#} (&lt;ab&gt;Nomin.&lt;/ab&gt;) — «<mark class="hl">травоядное</mark> <mark class="hl">животное</mark>» &lt;ls&gt;ĀPAST. ŚR. 9,13,1&lt;/ls&gt;. &lt;ls n=&quot;ĀPAST. ŚR. 9,&quot;&gt;16,8&lt;/ls&gt;.</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>&lt;hom&gt;1.&lt;/hom&gt; {#Cid#}¦, {#CindatprARi#} (&lt;ab&gt;Nomin.&lt;/ab&gt;) {%ein grasfressendes Thier%} &lt;ls&gt;ĀPAST. ŚR. 9,13,1&lt;/ls&gt;. &lt;ls n=&quot;ĀPAST. ŚR. 9,&quot;&gt;16,8&lt;/ls&gt;.</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="_cid~~h0_zz_pwkvn::PWKVN-lösen" data-filt="pwkvn">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/2-1089?w=Cid" target="_blank" rel="noopener">chid · pwkvn · sense PWKVN-lösen</a> <span class="badge">a2a</span><span class="badge">5-layer</span></div><span class="idchip" title="card id — cite this id back when discussing this card">_cid~~h0_zz_pwkvn::PWKVN-lösen</span></header>
+    <div class="question">Is the proposed subtype <b>«a2a»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>a2a</b>
+op/dir    : relocate / additive
+target    : *new (anchor sense)
+evidence  : PWKVN Nachtraege-to-Nachtraege (addenda-to-addenda); sense_tag=&#x27;PWKVN-lösen&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>&lt;hom&gt;1.&lt;/hom&gt; {#Cid#}¦ II. 6. <mark class="hl">Также</mark> — «<mark class="hl">разрешать</mark>, <mark class="hl">решать</mark>» (<mark class="hl">сомнение</mark>) &lt;ls&gt;MBH. 1,71,17&lt;/ls&gt;. — <mark class="hl">С</mark> {#vipra#} 4.</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>&lt;hom&gt;1.&lt;/hom&gt; {#Cid#}¦ II. 6. Auch {%lösen, entscheiden%} (einen Zweifel) &lt;ls&gt;MBH. 1,71,17&lt;/ls&gt;. — Mit {#vipra#} 4.</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="_cid~~h0_zz_pwkvn::PWKVN-vipra" data-filt="pwkvn">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/2-1089?w=Cid" target="_blank" rel="noopener">chid · pwkvn · sense PWKVN-vipra</a> <span class="badge">a2a</span><span class="badge">5-layer</span></div><span class="idchip" title="card id — cite this id back when discussing this card">_cid~~h0_zz_pwkvn::PWKVN-vipra</span></header>
+    <div class="question">Is the proposed subtype <b>«a2a»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>a2a</b>
+op/dir    : relocate / additive
+target    : *new (anchor sense)
+evidence  : PWKVN Nachtraege-to-Nachtraege (addenda-to-addenda); sense_tag=&#x27;PWKVN-vipra&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>{#Cid#}¦ <mark class="hl">с</mark> {#vipra#} — «<mark class="hl">разделять</mark>» &lt;ls&gt;ĀPAST. ŚR. 10,15,12&lt;/ls&gt;. &lt;ls n=&quot;ĀPAST. ŚR. 10,&quot;&gt;19,14&lt;/ls&gt;.</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>{#Cid#}¦ mit {#vipra#} {%trennen%} &lt;ls&gt;ĀPAST. ŚR. 10,15,12&lt;/ls&gt;. &lt;ls n=&quot;ĀPAST. ŚR. 10,&quot;&gt;19,14&lt;/ls&gt;.</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="_sam~~h0_zz_pwkvn::ni_erlöschen" data-filt="pwkvn">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/7-0071?w=Sam" target="_blank" rel="noopener">śam · pwkvn · sense ni_erlöschen</a> <span class="badge">a2a</span><span class="badge">5-layer</span></div><span class="idchip" title="card id — cite this id back when discussing this card">_sam~~h0_zz_pwkvn::ni_erlöschen</span></header>
+    <div class="question">Is the proposed subtype <b>«a2a»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>a2a</b>
+op/dir    : relocate / additive
+target    : *new (anchor sense)
+evidence  : PWKVN Nachtraege-to-Nachtraege (addenda-to-addenda); sense_tag=&#x27;ni_erlöschen&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>&lt;hom&gt;1.&lt;/hom&gt; {#Sam#}¦ <mark class="hl">с</mark> {#ni#} VI. <mark class="hl">угасать</mark> &lt;ls&gt;DHARMAŚARM. 13,41&lt;/ls&gt;.</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>&lt;hom&gt;1.&lt;/hom&gt; {#Sam#}¦ mit {#ni#} VI. {%erlöschen%} &lt;ls&gt;DHARMAŚARM. 13,41&lt;/ls&gt;.</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="g_a~~h0_zz_pwkvn::main" data-filt="pwkvn">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/2-0719?w=gA" target="_blank" rel="noopener">gā · pwkvn · sense main</a> <span class="badge">a2a</span><span class="badge">5-layer</span></div><span class="idchip" title="card id — cite this id back when discussing this card">g_a~~h0_zz_pwkvn::main</span></header>
+    <div class="question">Is the proposed subtype <b>«a2a»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>a2a</b>
+op/dir    : relocate / additive
+target    : *new (anchor sense)
+evidence  : PWKVN Nachtraege-to-Nachtraege (addenda-to-addenda); sense_tag=&#x27;main&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>&lt;hom&gt;3.&lt;/hom&gt; {#gA#}¦ II. 5. — <mark class="hl">С</mark> {#ava#} II. {#˚gIta#} <mark class="hl">ослабленное</mark> ({#Soka#}) &lt;ls&gt;JĀTAKAM. 2&lt;/ls&gt;. <mark class="hl">ставший</mark> <mark class="hl">надоедливым</mark> &lt;ls n=&quot;JĀTAKAM.&quot;&gt;10,1&lt;/ls&gt;.</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>&lt;hom&gt;3.&lt;/hom&gt; {#gA#}¦ II. 5. — Mit {#ava#} II. {#˚gIta#} {%abgeschwächt%} ({#Soka#}) &lt;ls&gt;JĀTAKAM. 2&lt;/ls&gt;. {%zum Ueberdruss geworden%} &lt;ls n=&quot;JĀTAKAM.&quot;&gt;10,1&lt;/ls&gt;.</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="g_a~~h0_zz_pwkvn::main" data-filt="pwkvn">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/2-0719?w=gA" target="_blank" rel="noopener">gā · pwkvn · sense main</a> <span class="badge">a2a</span><span class="badge">5-layer</span></div><span class="idchip" title="card id — cite this id back when discussing this card">g_a~~h0_zz_pwkvn::main</span></header>
+    <div class="question">Is the proposed subtype <b>«a2a»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>a2a</b>
+op/dir    : relocate / additive
+target    : *new (anchor sense)
+evidence  : PWKVN Nachtraege-to-Nachtraege (addenda-to-addenda); sense_tag=&#x27;main&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>&lt;hom&gt;3.&lt;/hom&gt; {#gA#}¦ II. 5. — <mark class="hl">С</mark> {#ava#} II. {#˚gIta#} <mark class="hl">ослабленное</mark> ({#Soka#}) &lt;ls&gt;JĀTAKAM. 2&lt;/ls&gt;. <mark class="hl">ставший</mark> <mark class="hl">надоедливым</mark> &lt;ls n=&quot;JĀTAKAM.&quot;&gt;10,1&lt;/ls&gt;.</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>&lt;hom&gt;3.&lt;/hom&gt; {#gA#}¦ II. 5. — Mit {#ava#} II. {#˚gIta#} {%abgeschwächt%} ({#Soka#}) &lt;ls&gt;JĀTAKAM. 2&lt;/ls&gt;. {%zum Ueberdruss geworden%} &lt;ls n=&quot;JĀTAKAM.&quot;&gt;10,1&lt;/ls&gt;.</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="g_a~~h0_zz_pwkvn::main" data-filt="pwkvn">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/2-0719?w=gA" target="_blank" rel="noopener">gā · pwkvn · sense main</a> <span class="badge">a2a</span><span class="badge">5-layer</span></div><span class="idchip" title="card id — cite this id back when discussing this card">g_a~~h0_zz_pwkvn::main</span></header>
+    <div class="question">Is the proposed subtype <b>«a2a»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>a2a</b>
+op/dir    : relocate / additive
+target    : *new (anchor sense)
+evidence  : PWKVN Nachtraege-to-Nachtraege (addenda-to-addenda); sense_tag=&#x27;main&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>&lt;hom&gt;3.&lt;/hom&gt; {#gA#}¦ II. 5. — <mark class="hl">С</mark> {#ava#} II. {#˚gIta#} <mark class="hl">ослабленное</mark> ({#Soka#}) &lt;ls&gt;JĀTAKAM. 2&lt;/ls&gt;. <mark class="hl">ставший</mark> <mark class="hl">надоедливым</mark> &lt;ls n=&quot;JĀTAKAM.&quot;&gt;10,1&lt;/ls&gt;.</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>&lt;hom&gt;3.&lt;/hom&gt; {#gA#}¦ II. 5. — Mit {#ava#} II. {#˚gIta#} {%abgeschwächt%} ({#Soka#}) &lt;ls&gt;JĀTAKAM. 2&lt;/ls&gt;. {%zum Ueberdruss geworden%} &lt;ls n=&quot;JĀTAKAM.&quot;&gt;10,1&lt;/ls&gt;.</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="g_a~~h0_zz_pwkvn::main" data-filt="pwkvn">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/2-0719?w=gA" target="_blank" rel="noopener">gā · pwkvn · sense main</a> <span class="badge">a2a</span><span class="badge">5-layer</span></div><span class="idchip" title="card id — cite this id back when discussing this card">g_a~~h0_zz_pwkvn::main</span></header>
+    <div class="question">Is the proposed subtype <b>«a2a»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>a2a</b>
+op/dir    : relocate / additive
+target    : *new (anchor sense)
+evidence  : PWKVN Nachtraege-to-Nachtraege (addenda-to-addenda); sense_tag=&#x27;main&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>&lt;hom&gt;3.&lt;/hom&gt; {#gA#}¦ II. 5. — <mark class="hl">С</mark> {#ava#} II. {#˚gIta#} <mark class="hl">ослабленное</mark> ({#Soka#}) &lt;ls&gt;JĀTAKAM. 2&lt;/ls&gt;. <mark class="hl">ставший</mark> <mark class="hl">надоедливым</mark> &lt;ls n=&quot;JĀTAKAM.&quot;&gt;10,1&lt;/ls&gt;.</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>&lt;hom&gt;3.&lt;/hom&gt; {#gA#}¦ II. 5. — Mit {#ava#} II. {#˚gIta#} {%abgeschwächt%} ({#Soka#}) &lt;ls&gt;JĀTAKAM. 2&lt;/ls&gt;. {%zum Ueberdruss geworden%} &lt;ls n=&quot;JĀTAKAM.&quot;&gt;10,1&lt;/ls&gt;.</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="j_iv~~h0_zz_pwkvn::adhi- caus." data-filt="pwkvn">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/3-0111?w=jIv" target="_blank" rel="noopener">jīv · pwkvn · sense adhi- caus.</a> <span class="badge">derived_sense</span><span class="badge">5-layer</span></div><span class="idchip" title="card id — cite this id back when discussing this card">j_iv~~h0_zz_pwkvn::adhi- caus.</span></header>
+    <div class="question">Is the proposed subtype <b>«derived_sense»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>derived_sense</b>
+op/dir    : add / additive
+target    : *new (anchor sense)
+evidence  : PWKVN grammar-derived; sense_tag=&#x27;adhi- caus.&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>{#jIv#}¦ <mark class="hl">с</mark> {#aDi#} &lt;ab&gt;Caus.&lt;/ab&gt; {%<mark class="hl">оживлять</mark>%} &lt;ls&gt;DHARMAŚARM. 15,1&lt;/ls&gt;.</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>{#jIv#}¦ mit {#aDi#} &lt;ab&gt;Caus.&lt;/ab&gt; {%beleben%} &lt;ls&gt;DHARMAŚARM. 15,1&lt;/ls&gt;.</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="j_iv~~h0_zz_sch::adhi- caus." data-filt="sch">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/3-0111?w=jIv" target="_blank" rel="noopener">jīv · sch · sense adhi- caus.</a> <span class="badge">derived_sense</span><span class="badge">5-layer</span></div><span class="idchip" title="card id — cite this id back when discussing this card">j_iv~~h0_zz_sch::adhi- caus.</span></header>
+    <div class="question">Is the proposed subtype <b>«derived_sense»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>derived_sense</b>
+op/dir    : add / additive
+target    : *new (anchor sense)
+evidence  : SCH additive; sense_tag=&#x27;adhi- caus.&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>{%jīv%}¦ <mark class="hl">с</mark> {%adhi%} &lt;ls&gt;Kaus.&lt;/ls&gt; <mark class="hl">оживлять</mark>, &lt;ls&gt;Dharmaśarm. 15,1.&lt;/ls&gt;</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>{%jīv%}¦ mit {%adhi%} &lt;ls&gt;Kaus.&lt;/ls&gt; beleben, &lt;ls&gt;Dharmaśarm. 15,1.&lt;/ls&gt;</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="vraj~~h0_zz_sch::SCH-pra" data-filt="sch">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/6-1488?w=vraj" target="_blank" rel="noopener">vraj · sch · sense SCH-pra</a> <span class="badge">derived_sense</span><span class="badge">5-layer</span></div><span class="idchip" title="card id — cite this id back when discussing this card">vraj~~h0_zz_sch::SCH-pra</span></header>
+    <div class="question">Is the proposed subtype <b>«derived_sense»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>derived_sense</b>
+op/dir    : add / additive
+target    : *new (anchor sense)
+evidence  : SCH additive; sense_tag=&#x27;SCH-pra&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>vraj <mark class="hl">с</mark> pra &lt;ls&gt;Kaus. 2.&lt;/ls&gt; pravrājita &lt;ls&gt;Divyāvad. 236,27.&lt;/ls&gt;</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>{%vraj%}¦ mit {%pra%} &lt;ls&gt;Kaus. 2.&lt;/ls&gt; {%pravrājita%} &lt;ls&gt;Divyāvad. 236,27.&lt;/ls&gt;</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="_cid~~h0_zz_sch::SCH-chindatprani" data-filt="sch">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/2-1089?w=Cid" target="_blank" rel="noopener">chid · sch · sense SCH-chindatprani</a> <span class="badge">sch_star</span><span class="badge">5-layer</span></div><span class="idchip" title="card id — cite this id back when discussing this card">_cid~~h0_zz_sch::SCH-chindatprani</span></header>
+    <div class="question">Is the proposed subtype <b>«sch_star»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>sch_star</b>
+op/dir    : add / additive
+target    : *new (anchor sense)
+evidence  : SCH additive; sense_tag=&#x27;SCH-chindatprani&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>{%chindatprāṇi%} (Nomin.) — «<mark class="hl">травоядное</mark> <mark class="hl">животное</mark>», &lt;ls&gt;Āpast. Śr. 9,13,1; 16,8.&lt;/ls&gt;</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>{%chindatprāṇi%} (Nomin.) ein grasfressendes Tier, &lt;ls&gt;Āpast. Śr. 9,13,1; 16,8.&lt;/ls&gt;</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="_cid~~h0_zz_sch::SCH-lösen" data-filt="sch">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/2-1089?w=Cid" target="_blank" rel="noopener">chid · sch · sense SCH-lösen</a> <span class="badge">sch_star</span><span class="badge">5-layer</span></div><span class="idchip" title="card id — cite this id back when discussing this card">_cid~~h0_zz_sch::SCH-lösen</span></header>
+    <div class="question">Is the proposed subtype <b>«sch_star»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>sch_star</b>
+op/dir    : add / additive
+target    : *new (anchor sense)
+evidence  : SCH additive; sense_tag=&#x27;SCH-lösen&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>1. {%chid%}¦ <mark class="hl">также</mark> — «<mark class="hl">разрешать</mark>, <mark class="hl">решать</mark>» (<mark class="hl">сомнение</mark>), &lt;ls&gt;MBh. 1,71,17.&lt;/ls&gt;</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>1. {%chid%}¦ auch lösen, entscheiden (einen Zweifel), &lt;ls&gt;MBh. 1,71,17.&lt;/ls&gt;</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="_cid~~h0_zz_sch::SCH-vipra" data-filt="sch">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/2-1089?w=Cid" target="_blank" rel="noopener">chid · sch · sense SCH-vipra</a> <span class="badge">sch_star</span><span class="badge">5-layer</span></div><span class="idchip" title="card id — cite this id back when discussing this card">_cid~~h0_zz_sch::SCH-vipra</span></header>
+    <div class="question">Is the proposed subtype <b>«sch_star»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>sch_star</b>
+op/dir    : add / additive
+target    : *new (anchor sense)
+evidence  : SCH additive; sense_tag=&#x27;SCH-vipra&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre><mark class="hl">С</mark> {%vipra%} — «<mark class="hl">разделять</mark>», &lt;ls&gt;Āpast. Śr. 10,15,12; 19,14.&lt;/ls&gt; {part=,seq=13779,type=,n=5}</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>Mit {%vipra%} trennen, &lt;ls&gt;Āpast. Śr. 10,15,12; 19,14.&lt;/ls&gt; {part=,seq=13779,type=,n=5}</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="_sam~~h0_zz_sch::ni_erlöschen" data-filt="sch">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/7-0071?w=Sam" target="_blank" rel="noopener">śam · sch · sense ni_erlöschen</a> <span class="badge">sch_star</span><span class="badge">5-layer</span></div><span class="idchip" title="card id — cite this id back when discussing this card">_sam~~h0_zz_sch::ni_erlöschen</span></header>
+    <div class="question">Is the proposed subtype <b>«sch_star»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>sch_star</b>
+op/dir    : add / additive
+target    : *new (anchor sense)
+evidence  : SCH additive; sense_tag=&#x27;ni_erlöschen&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>1. {%śam%} <mark class="hl">с</mark> {%ni%}: <mark class="hl">угасать</mark>, &lt;ls&gt;Dharmaśarm. 13,41.&lt;/ls&gt; {part=,seq=25149,type=,n=2}</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>1. {%śam%} mit {%ni%} erlöschen, &lt;ls&gt;Dharmaśarm. 13,41.&lt;/ls&gt; {part=,seq=25149,type=,n=2}</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="g_a~~h0_zz_sch::SCH_1_gaa" data-filt="sch">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/2-0719?w=gA" target="_blank" rel="noopener">gā · sch · sense SCH_1_gaa</a> <span class="badge">sch_star</span><span class="badge">5-layer</span></div><span class="idchip" title="card id — cite this id back when discussing this card">g_a~~h0_zz_sch::SCH_1_gaa</span></header>
+    <div class="question">Is the proposed subtype <b>«sch_star»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>sch_star</b>
+op/dir    : add / additive
+target    : *new (anchor sense)
+evidence  : SCH additive; sense_tag=&#x27;SCH_1_gaa&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>1. {%gā%}¦ {%jagāyāt%} &lt;ls&gt;ṚV. 10,28,1.&lt;/ls&gt; — <mark class="hl">С</mark> {%adhi%} &lt;ls&gt;Kaus.&lt;/ls&gt; {%adhyajīgapat%}, &lt;ls&gt;Hem. Par. 1,398.&lt;/ls&gt; — <mark class="hl">С</mark> {%ava%} {%<mark class="hl">понимать</mark>, <mark class="hl">знать</mark>%}, &lt;ls&gt;Kir. 12,34.&lt;/ls&gt; — <mark class="hl">С</mark> {%pra%} 2. <mark class="hl">читать</mark>: 27,10 <mark class="hl">сл</mark>. — <mark class="hl">С</mark> {%vi%} {%<mark class="hl">вступать</mark> <mark class="hl">между</mark>, <mark class="hl">разделять</mark>;%} <mark class="hl">с</mark> Akk. &lt;ls&gt;Śāṅkh. Br. 13,9.&lt;/ls&gt;</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>1. {%gā%}¦ {%jagāyāt%} &lt;ls&gt;ṚV. 10,28,1.&lt;/ls&gt; — Mit {%adhi%} &lt;ls&gt;Kaus.&lt;/ls&gt; {%adhyajīgapat%}, &lt;ls&gt;Hem. Par. 1,398.&lt;/ls&gt; — Mit {%ava%} verstehen, wissen, &lt;ls&gt;Kir. 12,34.&lt;/ls&gt; — Mit {%pra%} 2. lies: 27,10 ff. — Mit {%vi%} dazwischen treten, trennen; mit Akk. &lt;ls&gt;Śāṅkh. Br. 13,9.&lt;/ls&gt; {part=,seq=12430,type=,n=7}</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="g_a~~h0_zz_sch::SCH_3_gaa" data-filt="sch">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/2-0719?w=gA" target="_blank" rel="noopener">gā · sch · sense SCH_3_gaa</a> <span class="badge">sch_star</span><span class="badge">5-layer</span></div><span class="idchip" title="card id — cite this id back when discussing this card">g_a~~h0_zz_sch::SCH_3_gaa</span></header>
+    <div class="question">Is the proposed subtype <b>«sch_star»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>sch_star</b>
+op/dir    : add / additive
+target    : *new (anchor sense)
+evidence  : SCH additive; sense_tag=&#x27;SCH_3_gaa&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>3. {%gā%}¦ <mark class="hl">также</mark> {%<mark class="hl">говорить</mark>, <mark class="hl">изрекать</mark>%}, <mark class="hl">к</mark> <mark class="hl">кому-л</mark>. (Akk.), Campaka 126. 137. 338. 438. 472; &lt;ls&gt;Uttamac. 107. 285.&lt;/ls&gt; — <mark class="hl">С</mark> {%ava, ˚gīta%} {%<mark class="hl">в</mark> <mark class="hl">ослабленном</mark> <mark class="hl">значении</mark>%} ({%śoka%}), &lt;ls&gt;Jātakam. 2&lt;/ls&gt;; {%<mark class="hl">ставший</mark> <mark class="hl">надоедливым</mark>%}, 10,1.</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>3. {%gā%}¦ auch sagen, sprechen, -x- zu jemand (Akk.), Campaka 126. 137. 338. 438. 472; &lt;ls&gt;Uttamac. 107. 285.&lt;/ls&gt; — Mit {%ava, ˚gīta%} abgeschwächt ({%śoka%}), &lt;ls&gt;Jātakam. 2&lt;/ls&gt;; zum Überdruß geworden,10,1. {part=,seq=12431,type=,n=6}</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="j_iv~~h0_zz_sch::abhi-" data-filt="sch">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/3-0111?w=jIv" target="_blank" rel="noopener">jīv · sch · sense abhi-</a> <span class="badge">sch_star</span><span class="badge">5-layer</span></div><span class="idchip" title="card id — cite this id back when discussing this card">j_iv~~h0_zz_sch::abhi-</span></header>
+    <div class="question">Is the proposed subtype <b>«sch_star»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>sch_star</b>
+op/dir    : add / additive
+target    : *new (anchor sense)
+evidence  : SCH additive; sense_tag=&#x27;abhi-&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre><mark class="hl">С</mark> {%abhi%} <mark class="hl">жить</mark> <mark class="hl">счастливее</mark>, <mark class="hl">чем</mark> (Abl.), &lt;ls&gt;R. ed. Bomb. 3,34,19.&lt;/ls&gt; {part=,seq=14151,type=,n=4}</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>Mit {%abhi%} glücklicher im Leben sich befinden als (Abl.), &lt;ls&gt;R. ed. Bomb. 3,34,19.&lt;/ls&gt; {part=,seq=14151,type=,n=4}</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="rakz~~h0_zz_sch::samanu" data-filt="sch">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/6-0214?w=rakz" target="_blank" rel="noopener">rakṣ · sch · sense samanu</a> <span class="badge">sch_star</span><span class="badge">5-layer</span></div><span class="idchip" title="card id — cite this id back when discussing this card">rakz~~h0_zz_sch::samanu</span></header>
+    <div class="question">Is the proposed subtype <b>«sch_star»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>sch_star</b>
+op/dir    : add / additive
+target    : *new (anchor sense)
+evidence  : SCH additive; sense_tag=&#x27;samanu&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>1. {%rakṣ%}¦ <mark class="hl">с</mark> {%samanu%} <mark class="hl">блюсти</mark>, <mark class="hl">охранять</mark>, &lt;ls&gt;Divyāvad. 104,13; 105,18.&lt;/ls&gt; {part=,seq=22638,type=,n=2}</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>1. {%rakṣ%}¦ mit {%samanu%} in Acht nehmen, hüten, &lt;ls&gt;Divyāvad. 104,13; 105,18.&lt;/ls&gt; {part=,seq=22638,type=,n=2}</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="_ap~~h0_zz_pw01::4" data-filt="pw">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/1-0649?w=Ap" target="_blank" rel="noopener">āp · pw · sense 4</a> <span class="badge">restate</span><span class="badge">tail</span></div><span class="idchip" title="card id — cite this id back when discussing this card">_ap~~h0_zz_pw01::4</span></header>
+    <div class="question">Is the proposed subtype <b>«restate»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>restate</b>
+op/dir    : restate / abridging
+target    : 4 (anchor sense)
+evidence  : PW abridging restatement; sense_tag=&#x27;4&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>&lt;div n=&quot;1&quot;&gt;— 4〉 {%<mark class="hl">достигший</mark>, <mark class="hl">попавший</mark> <mark class="hl">в</mark>%} (<mark class="hl">несчастье</mark>).</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>&lt;div n=&quot;1&quot;&gt;— 4〉 {%erlangt habend, gerathen in%} (ein Ungemach).</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="_bid~~h0_zz_pw01::1a" data-filt="pw">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/5-0281?w=Bid" target="_blank" rel="noopener">bhid · pw · sense 1a</a> <span class="badge">restate</span><span class="badge">tail</span></div><span class="idchip" title="card id — cite this id back when discussing this card">_bid~~h0_zz_pw01::1a</span></header>
+    <div class="question">Is the proposed subtype <b>«restate»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>restate</b>
+op/dir    : restate / abridging
+target    : 1 (anchor sense)
+evidence  : PW abridging restatement; sense_tag=&#x27;1a&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>a〉 <mark class="hl">разбивающий</mark>, <mark class="hl">сокрушающий</mark>, <mark class="hl">прорывающий</mark>, <mark class="hl">пронзающий</mark>, <mark class="hl">поражающий</mark> (<mark class="hl">цель</mark>).</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>&lt;div n=&quot;2&quot;&gt;— a〉 {%zerbrechend, zermalmend, durchbrechend, durchbohrend, treffend%} (ein Ziel).</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="_d_a~~h0_zz_pw00::preverb_vi_caus" data-filt="pw">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/3-0901?w=DA" target="_blank" rel="noopener">dhā · pw · sense preverb_vi_caus</a> <span class="badge">restate</span><span class="badge">tail</span></div><span class="idchip" title="card id — cite this id back when discussing this card">_d_a~~h0_zz_pw00::preverb_vi_caus</span></header>
+    <div class="question">Is the proposed subtype <b>«restate»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>restate</b>
+op/dir    : restate / abridging
+target    : *new (anchor sense)
+evidence  : PW abridging restatement; sense_tag=&#x27;preverb_vi_caus&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>&lt;ab&gt;Caus.&lt;/ab&gt; <mark class="hl">велеть</mark> <mark class="hl">вкладывать</mark> —, <mark class="hl">вставлять</mark> <mark class="hl">в</mark> (&lt;ab&gt;Loc.&lt;/ab&gt;).</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>&lt;div n=&quot;m&quot;&gt;— &lt;ab&gt;Caus.&lt;/ab&gt; {%einlegen —, einstecken lassen in%} (&lt;ab&gt;Loc.&lt;/ab&gt;).</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="_d_a~~h0_zz_pw02::mit_T177_caus_1" data-filt="pw">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/3-0901?w=DA" target="_blank" rel="noopener">dhā · pw · sense mit_T177_caus_1</a> <span class="badge">restate</span><span class="badge">tail</span></div><span class="idchip" title="card id — cite this id back when discussing this card">_d_a~~h0_zz_pw02::mit_T177_caus_1</span></header>
+    <div class="question">Is the proposed subtype <b>«restate»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>restate</b>
+op/dir    : restate / abridging
+target    : *new (anchor sense)
+evidence  : PW abridging restatement; sense_tag=&#x27;mit_T177_caus_1&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>&lt;div n=&quot;1&quot;&gt;— 1〉 <mark class="hl">приближать</mark>, <mark class="hl">представлять</mark> <mark class="hl">себе</mark>.</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>&lt;div n=&quot;1&quot;&gt;— 1〉 {%in die Nähe bringen, sich vergegenwärtigen%}.</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="_d_a~~h0_zz_pw05::Mit {T38}" data-filt="pw">
+    <header><div class="hw">dhā · pw · sense Mit {T38} <span class="badge">restate</span><span class="badge">tail</span></div><span class="idchip" title="card id — cite this id back when discussing this card">_d_a~~h0_zz_pw05::Mit {T38}</span></header>
+    <div class="question">Is the proposed subtype <b>«restate»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>restate</b>
+op/dir    : restate / abridging
+target    : *new (anchor sense)
+evidence  : PW abridging restatement; sense_tag=&#x27;Mit {T38}&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>(body not found)</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre></pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="car~~h0_zz_pw02::pw-mit-T27-5" data-filt="pw">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/2-0952?w=car" target="_blank" rel="noopener">car · pw · sense pw-mit-T27-5</a> <span class="badge">restate</span><span class="badge">tail</span></div><span class="idchip" title="card id — cite this id back when discussing this card">car~~h0_zz_pw02::pw-mit-T27-5</span></header>
+    <div class="question">Is the proposed subtype <b>«restate»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>restate</b>
+op/dir    : restate / abridging
+target    : *new (anchor sense)
+evidence  : PW abridging restatement; sense_tag=&#x27;pw-mit-T27-5&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>&lt;div n=&quot;1&quot;&gt;— 5) {%<mark class="hl">блуждать</mark> <mark class="hl">кругом</mark>%}.</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>&lt;div n=&quot;1&quot;&gt;— 5〉 {%umherirren%}.</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="d_a~~h0_zz_pw01::mit_T50_1" data-filt="pw">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/3-0565?w=dA" target="_blank" rel="noopener">dā · pw · sense mit_T50_1</a> <span class="badge">restate</span><span class="badge">tail</span></div><span class="idchip" title="card id — cite this id back when discussing this card">d_a~~h0_zz_pw01::mit_T50_1</span></header>
+    <div class="question">Is the proposed subtype <b>«restate»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>restate</b>
+op/dir    : restate / abridging
+target    : *new (anchor sense)
+evidence  : PW abridging restatement; sense_tag=&#x27;mit_T50_1&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>&lt;div n=&quot;1&quot;&gt;— 1〉 <mark class="hl">отдавать</mark>, <mark class="hl">предавать</mark>, <mark class="hl">передавать</mark>.</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>&lt;div n=&quot;1&quot;&gt;— 1〉 {%hingeben, überliefern%}.</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="di_s~~h0_zz_pw01::Mit {T63} 4〉" data-filt="pw">
+    <header><div class="hw">diś · pw · sense Mit {T63} 4〉 <span class="badge">restate</span><span class="badge">tail</span></div><span class="idchip" title="card id — cite this id back when discussing this card">di_s~~h0_zz_pw01::Mit {T63} 4〉</span></header>
+    <div class="question">Is the proposed subtype <b>«restate»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>restate</b>
+op/dir    : restate / abridging
+target    : *new (anchor sense)
+evidence  : PW abridging restatement; sense_tag=&#x27;Mit {T63} 4〉&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>(body not found)</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre></pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="gam~~h0_zz_pw01::pw_234_2" data-filt="pw">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/2-0666?w=gam" target="_blank" rel="noopener">gam · pw · sense pw_234_2</a> <span class="badge">restate</span><span class="badge">tail</span></div><span class="idchip" title="card id — cite this id back when discussing this card">gam~~h0_zz_pw01::pw_234_2</span></header>
+    <div class="question">Is the proposed subtype <b>«restate»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>restate</b>
+op/dir    : restate / abridging
+target    : *new (anchor sense)
+evidence  : PW abridging restatement; sense_tag=&#x27;pw_234_2&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>&lt;div n=&quot;1&quot;&gt;— 2〉 {%<mark class="hl">приходить</mark> <mark class="hl">снова</mark>, <mark class="hl">возвращаться</mark>%}. <mark class="hl">Обычно</mark> <mark class="hl">с</mark> {#pu/nar#} &lt;ls n=&quot;Chr.&quot;&gt;21,27&lt;/ls&gt;. &lt;ls n=&quot;Chr.&quot;&gt;29,25&lt;/ls&gt;.</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>&lt;div n=&quot;1&quot;&gt;— 2〉 {%wiederkommen, zurückkehren%}. Gewöhnlich mit {#pu/nar#} &lt;ls n=&quot;Chr.&quot;&gt;21,27&lt;/ls&gt;. &lt;ls n=&quot;Chr.&quot;&gt;29,25&lt;/ls&gt;.</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="gam~~h0_zz_pw03::X75.header" data-filt="pw">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/2-0666?w=gam" target="_blank" rel="noopener">gam · pw · sense X75.header</a> <span class="badge">restate</span><span class="badge">tail</span></div><span class="idchip" title="card id — cite this id back when discussing this card">gam~~h0_zz_pw03::X75.header</span></header>
+    <div class="question">Is the proposed subtype <b>«restate»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>restate</b>
+op/dir    : restate / abridging
+target    : *new (anchor sense)
+evidence  : PW abridging restatement; sense_tag=&#x27;X75.header&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>&lt;div n=&quot;p&quot;&gt;— <mark class="hl">С</mark> {#aBisam#}</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>&lt;div n=&quot;p&quot;&gt;— Mit {#aBisam#}</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="han~~h0_zz_pw00::12" data-filt="pw">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/7-1494?w=han" target="_blank" rel="noopener">han · pw · sense 12</a> <span class="badge">restate</span><span class="badge">tail</span></div><span class="idchip" title="card id — cite this id back when discussing this card">han~~h0_zz_pw00::12</span></header>
+    <div class="question">Is the proposed subtype <b>«restate»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>restate</b>
+op/dir    : restate / abridging
+target    : 12 (anchor sense)
+evidence  : PW abridging restatement; sense_tag=&#x27;12&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>&lt;div n=&quot;1&quot;&gt;— 12〉 {%<mark class="hl">препятствовать</mark>, <mark class="hl">мешать</mark>%}.</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>&lt;div n=&quot;1&quot;&gt;— 12〉 {%hindern, verhindern%}.</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="han~~h0_zz_pw01::ud-han-6k" data-filt="pw">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/7-1494?w=han" target="_blank" rel="noopener">han · pw · sense ud-han-6k</a> <span class="badge">restate</span><span class="badge">tail</span></div><span class="idchip" title="card id — cite this id back when discussing this card">han~~h0_zz_pw01::ud-han-6k</span></header>
+    <div class="question">Is the proposed subtype <b>«restate»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>restate</b>
+op/dir    : restate / abridging
+target    : *new (anchor sense)
+evidence  : PW abridging restatement; sense_tag=&#x27;ud-han-6k&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>&lt;div n=&quot;2&quot;&gt;— k〉 <mark class="hl">приведённый</mark> <mark class="hl">в</mark> <mark class="hl">движение</mark>, <mark class="hl">возбуждённый</mark>. <mark class="hl">Правильнее</mark> {#udDuta#} <mark class="hl">или</mark> {#udDUta#}.</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>&lt;div n=&quot;2&quot;&gt;— k〉 {%in Bewegung versetzt, erregt%}. Richtiger {#udDuta#} oder {#udDUta#}.</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="han~~h0_zz_pw03::mit-T46-8" data-filt="pw">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/7-1494?w=han" target="_blank" rel="noopener">han · pw · sense mit-T46-8</a> <span class="badge">restate</span><span class="badge">tail</span></div><span class="idchip" title="card id — cite this id back when discussing this card">han~~h0_zz_pw03::mit-T46-8</span></header>
+    <div class="question">Is the proposed subtype <b>«restate»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>restate</b>
+op/dir    : restate / abridging
+target    : *new (anchor sense)
+evidence  : PW abridging restatement; sense_tag=&#x27;mit-T46-8&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>&lt;div n=&quot;1&quot;&gt;— 8〉 {%<mark class="hl">утаивать</mark>, <mark class="hl">не</mark> <mark class="hl">давать</mark>%}.</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>&lt;div n=&quot;1&quot;&gt;— 8〉 {%vorenthalten%}.</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="jan~~h0_zz_pw00::pw_1a" data-filt="pw">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/3-0016?w=jan" target="_blank" rel="noopener">jan · pw · sense pw_1a</a> <span class="badge">restate</span><span class="badge">tail</span></div><span class="idchip" title="card id — cite this id back when discussing this card">jan~~h0_zz_pw00::pw_1a</span></header>
+    <div class="question">Is the proposed subtype <b>«restate»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>restate</b>
+op/dir    : restate / abridging
+target    : *new (anchor sense)
+evidence  : PW abridging restatement; sense_tag=&#x27;pw_1a&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>&lt;div n=&quot;2&quot;&gt;— a〉 {%<mark class="hl">порождать</mark>, — <mark class="hl">с</mark>%} (&lt;ab&gt;Loc.&lt;/ab&gt;), {%<mark class="hl">рождать</mark>, — <mark class="hl">от</mark>%} (&lt;ab&gt;Abl.&lt;/ab&gt;); {%<mark class="hl">производить</mark>, <mark class="hl">порождать</mark>, <mark class="hl">вызывать</mark>, gignere%}.</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>&lt;div n=&quot;2&quot;&gt;— a〉 {%zeugen, — mit%} (&lt;ab&gt;Loc.&lt;/ab&gt;), {%gebären, — von%} (&lt;ab&gt;Abl.&lt;/ab&gt;); {%erzeugen, hervorbringen, verursachen, gignere%}.</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="ji~~h0_zz_nws00::NWS-3" data-filt="nws">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/3-0095?w=ji" target="_blank" rel="noopener">ji · nws · sense NWS-3</a> <span class="badge">foreign_fragment</span><span class="badge">tail</span></div><span class="idchip" title="card id — cite this id back when discussing this card">ji~~h0_zz_nws00::NWS-3</span></header>
+    <div class="question">Is the proposed subtype <b>«foreign_fragment»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>foreign_fragment</b>
+op/dir    : add / additive
+target    : *new (anchor sense)
+evidence  : NWS fragment in EN (heuristic); sense_tag=&#x27;NWS-3&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>{#ji (=pw ji 1)#} [<mark class="hl">Общ</mark>., <mark class="hl">без</mark> <mark class="hl">уточн</mark>.] (jáyati, °te I) Kaus. Pass. (jāpyate): <mark class="hl">быть</mark> <mark class="hl">побеждаемым</mark>/<mark class="hl">принуждаемым</mark> <mark class="hl">победить</mark>. W(MW). [NWS: MW : 420]</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>{#ji (=pw ji 1)#} [Gen, unsp] (jáyati, °te I) Kaus Pass (jāpyate): to be made to conquer. W(MW)</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="m_a~~h0_zz_pwkvn::PWKVN-3-V5" data-filt="pwkvn">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/5-0679?w=mA" target="_blank" rel="noopener">mā · pwkvn · sense PWKVN-3-V5</a> <span class="badge">a2a</span><span class="badge">tail</span></div><span class="idchip" title="card id — cite this id back when discussing this card">m_a~~h0_zz_pwkvn::PWKVN-3-V5</span></header>
+    <div class="question">Is the proposed subtype <b>«a2a»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>a2a</b>
+op/dir    : relocate / additive
+target    : *new (anchor sense)
+evidence  : PWKVN Nachtraege-to-Nachtraege (addenda-to-addenda); sense_tag=&#x27;PWKVN-3-V5&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>V. 5.</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>&lt;hom&gt;3.&lt;/hom&gt; {#mA#}¦ V. 5.</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="muc~~h0_zz_pw00::preverb_pari_1c" data-filt="pw">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/5-0810?w=muc" target="_blank" rel="noopener">muc · pw · sense preverb_pari_1c</a> <span class="badge">restate</span><span class="badge">tail</span></div><span class="idchip" title="card id — cite this id back when discussing this card">muc~~h0_zz_pw00::preverb_pari_1c</span></header>
+    <div class="question">Is the proposed subtype <b>«restate»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>restate</b>
+op/dir    : restate / abridging
+target    : *new (anchor sense)
+evidence  : PW abridging restatement; sense_tag=&#x27;preverb_pari_1c&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>&lt;div n=&quot;2&quot;&gt;— c〉 {%<mark class="hl">облачённый</mark> <mark class="hl">в</mark>%} (&lt;ab&gt;Acc.&lt;/ab&gt;).</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>&lt;div n=&quot;2&quot;&gt;— c〉 {%gekleidet in%} (&lt;ab&gt;Acc.&lt;/ab&gt;).</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="n_i~~h0_zz_pw01::PW-prefix-T4" data-filt="pw">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/4-0265?w=nI" target="_blank" rel="noopener">nī · pw · sense PW-prefix-T4</a> <span class="badge">restate</span><span class="badge">tail</span></div><span class="idchip" title="card id — cite this id back when discussing this card">n_i~~h0_zz_pw01::PW-prefix-T4</span></header>
+    <div class="question">Is the proposed subtype <b>«restate»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>restate</b>
+op/dir    : restate / abridging
+target    : *new (anchor sense)
+evidence  : PW abridging restatement; sense_tag=&#x27;PW-prefix-T4&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>&lt;div n=&quot;p&quot;&gt;— <mark class="hl">С</mark> {#samudA#} <mark class="hl">в</mark> <mark class="hl">значении</mark> {#samudAnaya#}; &lt;ab&gt;vgl.&lt;/ab&gt; {#samudAnay#}.</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>&lt;div n=&quot;p&quot;&gt;— Mit {#samudA#} in {#samudAnaya#}; &lt;ab&gt;vgl.&lt;/ab&gt; {#samudAnay#}.</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="na_s~~h0_zz_nws00::NWS 1" data-filt="nws">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/4-0076?w=naS" target="_blank" rel="noopener">naś · nws · sense NWS 1</a> <span class="badge">foreign_fragment</span><span class="badge">tail</span></div><span class="idchip" title="card id — cite this id back when discussing this card">na_s~~h0_zz_nws00::NWS 1</span></header>
+    <div class="question">Is the proposed subtype <b>«foreign_fragment»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>foreign_fragment</b>
+op/dir    : add / additive
+target    : *new (anchor sense)
+evidence  : NWS fragment in EN (heuristic); sense_tag=&#x27;NWS 1&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>{#naś (=pw naś 1)#} [Gen , unsp] ( náśyati, <mark class="hl">реже</mark> °te <mark class="hl">и</mark> naśati IV P, <mark class="hl">реже</mark> I P ) <mark class="hl">сходить</mark> <mark class="hl">на</mark> <mark class="hl">нет</mark>, <mark class="hl">быть</mark> <mark class="hl">несостоявшимся</mark> <mark class="hl">или</mark> <mark class="hl">безуспешным</mark>. MānDhŚ , Mbh , Kāvya(MW) . Kaus. ( nāśayati , ep. <mark class="hl">также</mark> ° te ): <mark class="hl">отказываться</mark>, <mark class="hl">бросать</mark>. Mbh , Kāvya(MW) , Pañcat [NWS: MW : 532]</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>{#naś (=pw naś 1)#} [Gen , unsp] ( náśyati, rarely °te and naśati IV P, rarely I P ) to come to nothing, be frustrated or unsuccessful. MānDhŚ , Mbh , Kāvya(MW) . Kaus. ( nāśayati , ep. also ° te ): to give up. Mbh , Kāvya(MW) , Pañcat</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="pa_s~~h0_zz_pw00::mit_T57_1" data-filt="pw">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/4-0600?w=paS" target="_blank" rel="noopener">paś · pw · sense mit_T57_1</a> <span class="badge">restate</span><span class="badge">tail</span></div><span class="idchip" title="card id — cite this id back when discussing this card">pa_s~~h0_zz_pw00::mit_T57_1</span></header>
+    <div class="question">Is the proposed subtype <b>«restate»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>restate</b>
+op/dir    : restate / abridging
+target    : *new (anchor sense)
+evidence  : PW abridging restatement; sense_tag=&#x27;mit_T57_1&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>&lt;div n=&quot;1&quot;&gt;— 1〉 {%<mark class="hl">видеть</mark> <mark class="hl">наверху</mark>, <mark class="hl">замечать</mark> <mark class="hl">в</mark> <mark class="hl">вышине</mark>%}.</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>&lt;div n=&quot;1&quot;&gt;— 1〉 {%in der Höhe erblicken%}.</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="pat~~h0_zz_pw01::caus_4" data-filt="pw">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/4-0393?w=pat" target="_blank" rel="noopener">pat · pw · sense caus_4</a> <span class="badge">restate</span><span class="badge">tail</span></div><span class="idchip" title="card id — cite this id back when discussing this card">pat~~h0_zz_pw01::caus_4</span></header>
+    <div class="question">Is the proposed subtype <b>«restate»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>restate</b>
+op/dir    : restate / abridging
+target    : *new (anchor sense)
+evidence  : PW abridging restatement; sense_tag=&#x27;caus_4&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>&lt;div n=&quot;1&quot;&gt;— 4〉 {%<mark class="hl">давать</mark> <mark class="hl">капать</mark>,%} <mark class="hl">так</mark> &lt;ab&gt;v. a.&lt;/ab&gt; {%<mark class="hl">капать</mark>%}.</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>&lt;div n=&quot;1&quot;&gt;— 4〉 {%herabfallen lassen,%} so &lt;ab&gt;v. a.&lt;/ab&gt; {%tröpfeln%}.</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="si_d~~h0_zz_pw00::para" data-filt="pw">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/7-0999?w=siD" target="_blank" rel="noopener">sidh · pw · sense para</a> <span class="badge">restate</span><span class="badge">tail</span></div><span class="idchip" title="card id — cite this id back when discussing this card">si_d~~h0_zz_pw00::para</span></header>
+    <div class="question">Is the proposed subtype <b>«restate»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>restate</b>
+op/dir    : restate / abridging
+target    : *new (anchor sense)
+evidence  : PW abridging restatement; sense_tag=&#x27;para&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>— <mark class="hl">С</mark> {#ud#} {%<mark class="hl">оттеснять</mark> <mark class="hl">в</mark> <mark class="hl">сторону</mark>%}.</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>&lt;div n=&quot;p&quot;&gt;— Mit {#ud#} {%bei Seite treiben%}.</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="v_a~~h0_zz_pw00::mit_vi_3" data-filt="pw">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/6-0873?w=vA" target="_blank" rel="noopener">vā · pw · sense mit_vi_3</a> <span class="badge">restate</span><span class="badge">tail</span></div><span class="idchip" title="card id — cite this id back when discussing this card">v_a~~h0_zz_pw00::mit_vi_3</span></header>
+    <div class="question">Is the proposed subtype <b>«restate»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>restate</b>
+op/dir    : restate / abridging
+target    : *new (anchor sense)
+evidence  : PW abridging restatement; sense_tag=&#x27;mit_vi_3&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>&lt;div n=&quot;1&quot;&gt;— 3〉 {%<mark class="hl">дуть</mark> <mark class="hl">в</mark> <mark class="hl">разные</mark> <mark class="hl">стороны</mark>%}.</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>&lt;div n=&quot;1&quot;&gt;— 3〉 {%nach verschiedenen Richtungen hin wehen%}.</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="vad~~h0_zz_pw01::pref-ud3-5" data-filt="pw">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/6-0649?w=vad" target="_blank" rel="noopener">vad · pw · sense pref-ud3-5</a> <span class="badge">restate</span><span class="badge">tail</span></div><span class="idchip" title="card id — cite this id back when discussing this card">vad~~h0_zz_pw01::pref-ud3-5</span></header>
+    <div class="question">Is the proposed subtype <b>«restate»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>restate</b>
+op/dir    : restate / abridging
+target    : *new (anchor sense)
+evidence  : PW abridging restatement; sense_tag=&#x27;pref-ud3-5&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>5〉 <mark class="hl">предлагать</mark>, <mark class="hl">выставлять</mark> <mark class="hl">на</mark> <mark class="hl">продажу</mark>; <mark class="hl">с</mark> &lt;ab&gt;Instr.&lt;/ab&gt; <mark class="hl">цены</mark>.</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>&lt;div n=&quot;1&quot;&gt;— 5〉 {%anbieten, ausbieten zum Verkauf;%} mit &lt;ab&gt;Instr.&lt;/ab&gt; des Preises.</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="vah~~h0_zz_pw01::mit68-1" data-filt="pw">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/6-0859?w=vah" target="_blank" rel="noopener">vah · pw · sense mit68-1</a> <span class="badge">restate</span><span class="badge">tail</span></div><span class="idchip" title="card id — cite this id back when discussing this card">vah~~h0_zz_pw01::mit68-1</span></header>
+    <div class="question">Is the proposed subtype <b>«restate»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>restate</b>
+op/dir    : restate / abridging
+target    : *new (anchor sense)
+evidence  : PW abridging restatement; sense_tag=&#x27;mit68-1&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>&lt;div n=&quot;1&quot;&gt;— 1) {%<mark class="hl">водить</mark> <mark class="hl">кругом</mark>, — <mark class="hl">носить</mark>%}.</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>&lt;div n=&quot;1&quot;&gt;— 1〉 {%herumführen, — tragen%}.</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="vas~~h0_zz_pw01::3" data-filt="pw">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/6-0825?w=vas" target="_blank" rel="noopener">vas · pw · sense 3</a> <span class="badge">restate</span><span class="badge">tail</span></div><span class="idchip" title="card id — cite this id back when discussing this card">vas~~h0_zz_pw01::3</span></header>
+    <div class="question">Is the proposed subtype <b>«restate»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>restate</b>
+op/dir    : restate / abridging
+target    : 3 (anchor sense)
+evidence  : PW abridging restatement; sense_tag=&#x27;3&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>&lt;div n=&quot;1&quot;&gt; — 3) {%<mark class="hl">иметь</mark> <mark class="hl">половую</mark> <mark class="hl">близость</mark>,%} <mark class="hl">с</mark> &lt;ab&gt;Acc.&lt;/ab&gt;</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>&lt;div n=&quot;1&quot;&gt;— 3〉 {%geschlechtlich beiwohnen,%} mit &lt;ab&gt;Acc.&lt;/ab&gt;</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="vi_s~~h0_zz_pw00::aa-7b-beta" data-filt="pw">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/6-1187?w=viS" target="_blank" rel="noopener">viś · pw · sense aa-7b-beta</a> <span class="badge">restate</span><span class="badge">tail</span></div><span class="idchip" title="card id — cite this id back when discussing this card">vi_s~~h0_zz_pw00::aa-7b-beta</span></header>
+    <div class="question">Is the proposed subtype <b>«restate»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>restate</b>
+op/dir    : restate / abridging
+target    : *new (anchor sense)
+evidence  : PW abridging restatement; sense_tag=&#x27;aa-7b-beta&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>&lt;div n=&quot;3&quot;&gt;— β〉 {%<mark class="hl">поражённый</mark>%} (<mark class="hl">стрелой</mark>, &lt;ab&gt;Instr.&lt;/ab&gt; <mark class="hl">или</mark> <mark class="hl">с</mark> <mark class="hl">предшествующим</mark> &lt;ab&gt;Comp.&lt;/ab&gt;).</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>&lt;div n=&quot;3&quot;&gt;— β〉 {%getroffen von%} (einem Pfeile, &lt;ab&gt;Instr.&lt;/ab&gt; oder im &lt;ab&gt;Comp.&lt;/ab&gt; vorangehend).</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="vi_s~~h0_zz_pw01::268" data-filt="pw">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/6-1187?w=viS" target="_blank" rel="noopener">viś · pw · sense 268</a> <span class="badge">restate</span><span class="badge">tail</span></div><span class="idchip" title="card id — cite this id back when discussing this card">vi_s~~h0_zz_pw01::268</span></header>
+    <div class="question">Is the proposed subtype <b>«restate»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>restate</b>
+op/dir    : restate / abridging
+target    : 268 (anchor sense)
+evidence  : PW abridging restatement; sense_tag=&#x27;268&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>&lt;div n=&quot;m&quot;&gt;— &lt;ab&gt;Caus.&lt;/ab&gt;</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>&lt;div n=&quot;m&quot;&gt;— &lt;ab&gt;Caus.&lt;/ab&gt;</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="vid~~h0_zz_pw00::3" data-filt="pw">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/6-1041?w=vid" target="_blank" rel="noopener">vid · pw · sense 3</a> <span class="badge">restate</span><span class="badge">tail</span></div><span class="idchip" title="card id — cite this id back when discussing this card">vid~~h0_zz_pw00::3</span></header>
+    <div class="question">Is the proposed subtype <b>«restate»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>restate</b>
+op/dir    : restate / abridging
+target    : 3 (anchor sense)
+evidence  : PW abridging restatement; sense_tag=&#x27;3&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>&lt;div n=&quot;1&quot;&gt;— 3〉 &lt;lex&gt;f.&lt;/lex&gt; {%<mark class="hl">знание</mark>, <mark class="hl">познание</mark>%}. &lt;ab&gt;Pl.&lt;/ab&gt; &lt;ls&gt;BHĀM. V. 4,19&lt;/ls&gt;.</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>&lt;div n=&quot;1&quot;&gt;— 3〉 &lt;lex&gt;f.&lt;/lex&gt; {%das Wissen, Erkenntniss%}. &lt;ab&gt;Pl.&lt;/ab&gt; &lt;ls&gt;BHĀM. V. 4,19&lt;/ls&gt;.</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+
+  <section class="card" data-id="y_a~~h0_zz_pw01::T243—Mit T70" data-filt="pw">
+    <header><div class="hw"><a class="hwlink" href="https://gasyoun.github.io/kosha/colocation/#pwg/6-0097?w=yA" target="_blank" rel="noopener">yā · pw · sense T243—Mit T70</a> <span class="badge">restate</span><span class="badge">tail</span></div><span class="idchip" title="card id — cite this id back when discussing this card">y_a~~h0_zz_pw01::T243—Mit T70</span></header>
+    <div class="question">Is the proposed subtype <b>«restate»</b> correct for this sub-card? <span class="muted">(reject → write the correct subtype in the note, for κ)</span></div>
+    <div class="panel"><h4>LLM proposal (confidence: llm)</h4><pre>subtype   : <b>restate</b>
+op/dir    : restate / abridging
+target    : *new (anchor sense)
+evidence  : PW abridging restatement; sense_tag=&#x27;T243—Mit T70&#x27;</pre></div><div class="panel"><h4>Sub-card — Russian (ru)</h4><pre>&lt;div n=&quot;p&quot;&gt;— <mark class="hl">С</mark> {#praRi#} {%<mark class="hl">попадать</mark> <mark class="hl">в</mark>%} (&lt;ab&gt;Acc.&lt;/ab&gt;) &lt;ls&gt;BHAṬṬ.&lt;/ls&gt;</pre></div><div class="panel"><h4>Sub-card — source (de)</h4><pre>&lt;div n=&quot;p&quot;&gt;— Mit {#praRi#} {%gerathen in%} (&lt;ab&gt;Acc.&lt;/ab&gt;) &lt;ls&gt;BHAṬṬ.&lt;/ls&gt;</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Correct</button>
+      <button class="vote reject" data-vote="reject">&#10060; Wrong</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if reject: correct subtype + why (e.g. &#x27;nws_at_sense, attaches to sense 2&#x27;)"></textarea>
+  </section>
+</main>
+<footer class="hint">Approve = the LLM subtype is right · Reject = wrong (write the correct subtype in the note — this is the second signal for κ) · Defer = can't tell. Keyboard: <kbd>a</kbd> Correct &middot; <kbd>r</kbd> Wrong
+  &middot; <kbd>d</kbd> defer &middot; <kbd>&darr;</kbd>/<kbd>&uarr;</kbd> next/prev. Votes autosave to
+  this browser's localStorage; click "Download decisions.json" when done (unvoted items export with
+  decision:null).</footer>
+<div class="legend" style="max-width:980px;margin:0 auto 20px;padding:0 20px;color:var(--muted);font-size:12px">
+  <b>Approve</b> = accept the proposed change/answer shown on the card (no separate "approve as-is" —
+  approving means agreeing as written). <b>Reject</b> = keep the current entry/answer unchanged.
+  <b>Defer</b> = not sure yet, decide later. The note field is for requesting a partial tweak instead
+  of an outright reject.
+</div>
+<script>
+(function () {
+  var SHEET_ID = "h180-typology-kappa-2026-07-06";
+  var STORE_KEY = 'review-sheet:' + SHEET_ID;
+  var ids = ["_cid~~h0_zz_nws00::NWS-1", "_cid~~h0_zz_nws00::NWS-17", "_sam~~h0_zz_nws00::NWS-11", "_sam~~h0_zz_nws00::NWS-3", "g_a~~h0_zz_nws01::NWS:34", "g_a~~h0_zz_nws01::NWS:45", "rakz~~h0_zz_nws00::NWS-1", "vraj~~h0_zz_nws00::NWS-1", "_cid~~h0_zz_nws00::NWS-10", "_cid~~h0_zz_nws00::NWS-7", "_sam~~h0_zz_nws00::NWS-23", "g_a~~h0_zz_nws00::14", "g_a~~h0_zz_nws00::3", "g_a~~h0_zz_nws01::NWS:33", "rakz~~h0_zz_nws00::NWS-11", "yat~~h0_zz_nws00::NWS-02", "_cid~~h0_zz_pw::1", "_sam~~h0_zz_pw00::apani-prefix", "_sam~~h0_zz_pw00::visam-prefix-1", "g_a~~h0_zz_pw00::Mit T135-1", "g_a~~h0_zz_pw01::addendum-II-3-main", "j_iv~~h0_zz_pw::anu- 1", "vraj~~h0_zz_pw::PW-a-2", "yat~~h0_zz_pw::PW_anirnis", "_cid~~h0_zz_pwkvn::PWKVN-chindatprani", "_cid~~h0_zz_pwkvn::PWKVN-l\u00f6sen", "_cid~~h0_zz_pwkvn::PWKVN-vipra", "_sam~~h0_zz_pwkvn::ni_erl\u00f6schen", "g_a~~h0_zz_pwkvn::main", "g_a~~h0_zz_pwkvn::main", "g_a~~h0_zz_pwkvn::main", "g_a~~h0_zz_pwkvn::main", "j_iv~~h0_zz_pwkvn::adhi- caus.", "j_iv~~h0_zz_sch::adhi- caus.", "vraj~~h0_zz_sch::SCH-pra", "_cid~~h0_zz_sch::SCH-chindatprani", "_cid~~h0_zz_sch::SCH-l\u00f6sen", "_cid~~h0_zz_sch::SCH-vipra", "_sam~~h0_zz_sch::ni_erl\u00f6schen", "g_a~~h0_zz_sch::SCH_1_gaa", "g_a~~h0_zz_sch::SCH_3_gaa", "j_iv~~h0_zz_sch::abhi-", "rakz~~h0_zz_sch::samanu", "_ap~~h0_zz_pw01::4", "_bid~~h0_zz_pw01::1a", "_d_a~~h0_zz_pw00::preverb_vi_caus", "_d_a~~h0_zz_pw02::mit_T177_caus_1", "_d_a~~h0_zz_pw05::Mit {T38}", "car~~h0_zz_pw02::pw-mit-T27-5", "d_a~~h0_zz_pw01::mit_T50_1", "di_s~~h0_zz_pw01::Mit {T63} 4\u3009", "gam~~h0_zz_pw01::pw_234_2", "gam~~h0_zz_pw03::X75.header", "han~~h0_zz_pw00::12", "han~~h0_zz_pw01::ud-han-6k", "han~~h0_zz_pw03::mit-T46-8", "jan~~h0_zz_pw00::pw_1a", "ji~~h0_zz_nws00::NWS-3", "m_a~~h0_zz_pwkvn::PWKVN-3-V5", "muc~~h0_zz_pw00::preverb_pari_1c", "n_i~~h0_zz_pw01::PW-prefix-T4", "na_s~~h0_zz_nws00::NWS 1", "pa_s~~h0_zz_pw00::mit_T57_1", "pat~~h0_zz_pw01::caus_4", "si_d~~h0_zz_pw00::para", "v_a~~h0_zz_pw00::mit_vi_3", "vad~~h0_zz_pw01::pref-ud3-5", "vah~~h0_zz_pw01::mit68-1", "vas~~h0_zz_pw01::3", "vi_s~~h0_zz_pw00::aa-7b-beta", "vi_s~~h0_zz_pw01::268", "vid~~h0_zz_pw00::3", "y_a~~h0_zz_pw01::T243\u2014Mit T70"];
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(STORE_KEY) || '{}') || {}; } catch (e) { state = {}; }
+  function tally() {
+    var c = { approve:0, reject:0, defer:0 };
+    ids.forEach(function (id) { var v = state[id] && state[id].decision; if (v && c.hasOwnProperty(v)) c[v]++; });
+    document.getElementById('c-approve').textContent = c.approve;
+    document.getElementById('c-reject').textContent = c.reject;
+    document.getElementById('c-defer').textContent = c.defer;
+    document.getElementById('c-unvoted').textContent = ids.length - c.approve - c.reject - c.defer;
+  }
+  function applyCardUI(card) {
+    var id = card.getAttribute('data-id'); var rec = state[id] || {};
+    card.classList.remove('voted-approve','voted-reject','voted-defer');
+    card.querySelectorAll('button.vote').forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-vote') === rec.decision); });
+    card.querySelector('.vote-state').textContent = rec.decision ? rec.decision : 'unvoted';
+    if (rec.decision) card.classList.add('voted-' + rec.decision);
+    var ta = card.querySelector('textarea.note'); if (rec.note && !ta.value) ta.value = rec.note;
+  }
+  function save() { localStorage.setItem(STORE_KEY, JSON.stringify(state)); tally(); }
+  function vote(id, d) { state[id] = state[id] || {}; state[id].decision = d; save(); }
+  function noteChange(id, t) { state[id] = state[id] || {}; state[id].note = t; save(); }
+  document.querySelectorAll('.card').forEach(function (card) {
+    var id = card.getAttribute('data-id'); applyCardUI(card);
+    card.querySelectorAll('button.vote').forEach(function (btn) {
+      btn.addEventListener('click', function () { vote(id, btn.getAttribute('data-vote')); applyCardUI(card); });
+    });
+    var ta = card.querySelector('textarea.note'); ta.addEventListener('input', function () { noteChange(id, ta.value); });
+  });
+  tally();
+  document.getElementById('downloadBtn').addEventListener('click', function () {
+    var decided = ids.filter(function (id) { return state[id] && state[id].decision; }).length;
+    var payload = { sheet_id: SHEET_ID, generated: "2026-07-06", decided: decided,
+      items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '' }; }) };
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
+    var url = URL.createObjectURL(blob); var a = document.createElement('a');
+    a.href = url; a.download = SHEET_ID + '_decisions.json'; document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+  });
+  var filterbar = document.getElementById('filterbar');
+  filterbar.addEventListener('click', function (e) {
+    var btn = e.target.closest('button[data-filter]'); if (!btn) return;
+    filterbar.querySelectorAll('button').forEach(function (b) { b.classList.remove('active'); });
+    btn.classList.add('active'); var f = btn.getAttribute('data-filter');
+    document.querySelectorAll('.card').forEach(function (card) {
+      var show = true;
+      if (f === 'unvoted') { var id = card.getAttribute('data-id'); show = !(state[id] && state[id].decision); }
+      else if (f !== 'all') { show = card.getAttribute('data-filt') === f; }
+      card.style.display = show ? '' : 'none';
+    });
+  });
+  var cardsEl = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  var activeIdx = 0;
+  function visibleCards() { return cardsEl.filter(function (c) { return c.style.display !== 'none'; }); }
+  document.addEventListener('keydown', function (e) {
+    if (e.target.tagName === 'TEXTAREA') return;
+    var vis = visibleCards(); if (!vis.length) return;
+    if (activeIdx >= vis.length) activeIdx = vis.length - 1;
+    var card = vis[activeIdx]; var id = card.getAttribute('data-id');
+    if (e.key === 'a') { vote(id, 'approve'); applyCardUI(card); }
+    else if (e.key === 'r') { vote(id, 'reject'); applyCardUI(card); }
+    else if (e.key === 'd') { vote(id, 'defer'); applyCardUI(card); }
+    else if (e.key === 'ArrowDown') { activeIdx = Math.min(activeIdx + 1, vis.length - 1); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'center'}); }
+    else if (e.key === 'ArrowUp') { activeIdx = Math.max(activeIdx - 1, 0); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'center'}); }
+    else return;
+    e.preventDefault();
+  });
+
+  var saveHandle = null, saveTimer = null;
+  function exportPayload() {
+    var decided = ids.filter(function (id) { return state[id] && state[id].decision; }).length;
+    return JSON.stringify({ sheet_id: SHEET_ID, generated: new Date().toISOString(), decided: decided,
+      items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '' }; }) }, null, 2);
+  }
+  function scheduleAutosave() {
+    if (!saveHandle) return;
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(function () {
+      saveHandle.createWritable().then(function (w) {
+        w.write(exportPayload()).then(function () { w.close(); });
+      }).catch(function () {});
+    }, 1000);
+  }
+  var _origSave = save;
+  save = function () { _origSave(); scheduleAutosave(); };
+  if (window.showSaveFilePicker) {
+    var saveBtn = document.getElementById('saveBtn');
+    saveBtn.style.display = '';
+    saveBtn.addEventListener('click', function () {
+      window.showSaveFilePicker({suggestedName: SHEET_ID + '_decisions.json'}).then(function (h) {
+        saveHandle = h; scheduleAutosave();
+      }).catch(function () {});
+    });
+  }
+})();
+</script>
+</body>
+</html>

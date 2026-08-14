@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Vote — review sheets (PWG → RU)</title>
+<style>
+  :root { color-scheme: dark;
+    --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --text:#e6e6e6; --muted:#9aa0aa;
+    --accent:#5b8cff; --ok:#3fb950; --warn:#d29922; --bad:#f85149; --border:#2a2f3a; }
+  * { box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); margin:0; padding:0 0 80px;
+    font:16px/1.55 -apple-system,Segoe UI,Roboto,sans-serif; }
+  .wrap { max-width:1100px; margin:0 auto; padding:0 20px; }
+  header { border-bottom:1px solid var(--border); background:var(--panel); padding:28px 0 22px; margin-bottom:28px; }
+  h1 { margin:0 0 6px; font-size:26px; letter-spacing:-.01em; }
+  h2 { font-size:19px; margin:34px 0 10px; }
+  .sub { color:var(--muted); font-size:14px; margin:0; }
+  .tablewrap { overflow-x:auto; border:1px solid var(--border); border-radius:10px; background:var(--panel); }
+  table { border-collapse:collapse; width:100%; min-width:760px; font-size:14px; }
+  th, td { text-align:left; padding:10px 12px; border-bottom:1px solid var(--border); vertical-align:top; }
+  th { background:var(--panel2); font-weight:600; color:var(--muted); font-size:12px;
+    text-transform:uppercase; letter-spacing:.04em; white-space:nowrap; }
+  tr:last-child td { border-bottom:none; }
+  td.n { text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; }
+  a { color:var(--accent); text-decoration:none; }
+  a:hover { text-decoration:underline; }
+  .go { display:inline-block; padding:4px 12px; border-radius:6px; background:var(--accent);
+    color:#0b0e14; font-weight:600; font-size:13px; white-space:nowrap; }
+  .go:hover { text-decoration:none; filter:brightness(1.1); }
+  .light { font-size:15px; white-space:nowrap; }
+  .card { background:var(--panel); border:1px solid var(--border); border-radius:10px;
+    padding:16px 18px; margin:0 0 16px; }
+  .card p { margin:0 0 8px; }
+  .card p:last-child { margin-bottom:0; }
+  code { background:var(--panel2); padding:2px 6px; border-radius:4px; font-size:13px; }
+  ol { margin:8px 0 0; padding-left:22px; }
+  li { margin-bottom:6px; }
+  .muted { color:var(--muted); }
+  footer { margin-top:44px; padding-top:18px; border-top:1px solid var(--border);
+    color:var(--muted); font-size:13px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>Vote — review sheets</h1>
+    <p class="sub">Голосование по карточкам PWG → RU. Открывается в браузере, работает офлайн,
+      экспорт решений одним файлом. Снимок 14-08-2026.</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+<div class="card">
+  <p><strong>Как голосовать.</strong></p>
+  <ol>
+    <li>Откройте лист кнопкой <span class="go">Открыть</span> — он загрузится целиком, интернет дальше не нужен.</li>
+    <li>Проголосуйте по карточкам (approve / reject / defer).</li>
+    <li>Внизу листа нажмите экспорт — скачается <code>&lt;имя&gt;.decisions.json</code>.</li>
+    <li>Отдайте этот файл агенту: <code>/decisions-apply</code> применит решения в нужном репозитории.</li>
+  </ol>
+  <p class="muted">Прогресс хранится в браузере (localStorage), но не синхронизируется между
+    устройствами — голосуйте один лист на одном устройстве и экспортируйте до закрытия вкладки.</p>
+</div>
+
+<h2>Ждут голоса</h2>
+<p class="sub">Отсортировано от самого короткого. Светофор = насколько тяжело <em>голосовать</em>,
+  не насколько тяжело было собрать лист. 🟢 ≤15 карточек, 5–15 мин · 🟡 16–50, 20–45 мин ·
+  🔴 51–200, 1–3 ч · ⚫ 200+, несколько заходов.</p>
+
+<div class="tablewrap">
+<table>
+<thead><tr>
+  <th>Лист</th><th class="n">Карточек</th><th>Труд</th><th>Что решаете</th><th>Что разблокирует</th><th></th>
+</tr></thead>
+<tbody>
+<tr>
+  <td>h1306 · стиль</td><td class="n">9</td><td class="light">🟢</td>
+  <td>По одному варианту для дублетов, <code>v. l.</code> и <em>im Comp.</em></td>
+  <td>H1624 G5 · применение H1627 · правила промпта</td>
+  <td><a class="go" href="sheets/h1306_style.html">Открыть</a></td>
+</tr>
+<tr>
+  <td>h180 · re-glue</td><td class="n">15</td><td class="light">🟢</td>
+  <td>Выборочная проверка 15 склеенных карточек</td>
+  <td>H180, поставка 3</td>
+  <td><a class="go" href="sheets/h180_reglue.html">Открыть</a></td>
+</tr>
+<tr>
+  <td>h1682 · аббревиатуры</td><td class="n">33</td><td class="light">🟡</td>
+  <td>Ратификация 12 правил разделов + 17 спорных токенов + 3 <code>ls</code> + 1 мета.
+    Это <strong>не</strong> старый список на 273 карточки.</td>
+  <td>CONTRADICTIONS §4 · применение H1626 · RU_MAP</td>
+  <td><a class="go" href="sheets/h1682_abbrev_rules.html">Открыть</a></td>
+</tr>
+<tr>
+  <td>Правила композитов · ratify30</td><td class="n">30</td><td class="light">🟡</td>
+  <td>Работает ли каждое из 7 правил адъюдикатора на этой карточке?
+    Одобрить все семь — снимает <strong>3 975</strong> строк <code>differs</code>.</td>
+  <td>Очередь композитов (заменяет два листа 200/232)</td>
+  <td><a class="go" href="sheets/compound_rules_30.html">Открыть</a></td>
+</tr>
+<tr>
+  <td>Глоссы PD · 4 леммы</td><td class="n">32</td><td class="light">🟡</td>
+  <td>Принять/отклонить правки русской глоссы:
+    <a href="sheets/gloss_agni.html">agni 11</a> ·
+    <a href="sheets/gloss_aksara.html">akṣara 6</a> ·
+    <a href="sheets/gloss_ananta.html">ananta 9</a> ·
+    <a href="sheets/gloss_anya.html">anya 6</a></td>
+  <td>Оверлеи сравнения статей</td>
+  <td><a class="go" href="sheets/gloss_agni.html">Открыть</a></td>
+</tr>
+<tr>
+  <td>h180 · learner-core</td><td class="n">60</td><td class="light">🔴</td>
+  <td>Входит ли это заглавное слово PWG в базовый учебный корпус?</td>
+  <td>H180, порог поставки 4</td>
+  <td><a class="go" href="sheets/h180_learner.html">Открыть</a></td>
+</tr>
+<tr>
+  <td>Гипотезы Рену · v2</td><td class="n">70</td><td class="light">🔴</td>
+  <td>Переголосование с нуля. Первые 3 голоса v1 (все reject) вскрыли
+    лемма-глобальные свидетельства под вопросами о конкретном состоянии.</td>
+  <td>Программа H062</td>
+  <td><a class="go" href="sheets/renou_hypotheses_v2.html">Открыть</a></td>
+</tr>
+<tr>
+  <td>h180 · типология</td><td class="n">73</td><td class="light">🔴</td>
+  <td>Подтвердить/исправить подтип типологии addenda, предложенный моделью</td>
+  <td>H180: κ против LLM</td>
+  <td><a class="go" href="sheets/h180_typology.html">Открыть</a></td>
+</tr>
+<tr>
+  <td>RV · гейт расхождений v5</td><td class="n">100</td><td class="light">🔴</td>
+  <td>Калибровка 4-классовой типологии (5 переводчиков). ≥80 % согласия запускает
+    прогон на 10 552 строфы. Машинная κ на <code>lexical_variant</code> vs
+    <code>semantic_shift</code> — на уровне случайности, этот голос и есть арбитр.</td>
+  <td>H1844, шаг 9 (никогда не самоодобряется)</td>
+  <td><a class="go" href="sheets/rv_divergence_gate_v5.html">Открыть</a></td>
+</tr>
+<tr>
+  <td>g5 · batch1 v3</td><td class="n">150</td><td class="light">🔴</td>
+  <td>Печатная готовность карточек живой очереди (немецкий остаток отфильтрован)</td>
+  <td>Лист gold-cut H1665 · печатный гейт</td>
+  <td><a class="go" href="sheets/g5_batch1v3.html">Открыть</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="card" style="margin-top:16px">
+  <p><strong>Если только один заход:</strong> h1306 (9) → h1682 (33) → правила композитов (30) → стоп.
+    Эти три снимают теги G5, противоречие по аббревиатурам и ~4 тыс. строк композитов.
+    g5 (150) и BLI (500) — отдельные вечера.</p>
+</div>
+
+<h2>Не голосовать</h2>
+<div class="tablewrap">
+<table>
+<thead><tr><th>Лист</th><th class="n">n</th><th>Почему</th></tr></thead>
+<tbody>
+<tr><td><code>h178_mqm</code> / <code>h178_likert</code> / <code>h178_pairwise</code></td><td class="n">30×3</td>
+  <td>Сняты 26-07 (A2). Считается из <code>h178_da</code> + прогон агента (H274).</td></tr>
+<tr><td><code>h178_da</code></td><td class="n">30</td><td>Уже проголосован, 27/3.</td></tr>
+<tr><td><code>h1303_abbrev</code></td><td class="n">273</td><td>Заменён листом h1682 (33), не голосовался.</td></tr>
+<tr><td>compound-differs 200 + arm2 232</td><td class="n">432</td>
+  <td>Заменены 29-07 ратификацией 30 <em>правил</em>: незачем голосовать строки, по которым машина уже вынесла решение.</td></tr>
+<tr><td><code>rv_divergence_gate</code> v2</td><td class="n">100</td><td>Используйте v5 (пять переводчиков).</td></tr>
+<tr><td><code>g5_batch1</code></td><td class="n">150</td><td>Прерван — протёк немецкий. Заменён на v3.</td></tr>
+<tr><td><code>g6_mqm_starter</code></td><td class="n">20</td><td>Проголосован и применён с адъюдикацией (H1796).</td></tr>
+</tbody>
+</table>
+</div>
+
+<h2>Ещё не собрано</h2>
+<div class="card">
+  <p><strong>BLI gold B1</strong> (500, ⚫) и <strong>h1210 A/B blind</strong> (40, 🟡) числятся
+  открытыми в индексе листов, но HTML-файлов на диске нет — их нужно пересобрать
+  (<code>/review-sheet</code>) прежде, чем они появятся здесь.</p>
+  <p><strong>Золотой набор H215</strong> (320 строк) — лист ещё не сделан. Это он разблокирует
+  G6 → G7 → G10 публикационного релиза Sa→Ru TM; оценка ручного труда — 5–11 ч.</p>
+</div>
+
+<footer>
+  Листы самодостаточны: один HTML-файл, без внешних запросов, голоса не уходят на сервер.
+  Источник и статусы — <code>REVIEW_SHEETS_INDEX.md</code> и
+  <code>docs/PWG_TRANSLATION_UNEXECUTED_HANDOFFS_DEEPSEEK_TM_CACHE_2026-08-14.md</code>
+  в приватном хабе Uprava. H2755, 14-08-2026.
+</footer>
+
+</div>
+</body>
+</html>
