@@ -16,6 +16,8 @@
   header { border-bottom:1px solid var(--border); background:var(--panel); padding:28px 0 22px; margin-bottom:28px; }
   h1 { margin:0 0 6px; font-size:26px; letter-spacing:-.01em; }
   h2 { font-size:19px; margin:34px 0 10px; }
+  h3 { font-size:15px; margin:24px 0 8px; color:var(--muted);
+    text-transform:uppercase; letter-spacing:.05em; }
   .sub { color:var(--muted); font-size:14px; margin:0; }
   .tablewrap { overflow-x:auto; border:1px solid var(--border); border-radius:10px; background:var(--panel); }
   table { border-collapse:collapse; width:100%; min-width:760px; font-size:14px; }
@@ -47,7 +49,8 @@
   <div class="wrap">
     <h1>Vote — review sheets</h1>
     <p class="sub">Голосование по карточкам PWG → RU. Открывается в браузере, работает офлайн,
-      экспорт решений одним файлом. Снимок 14-08-2026.</p>
+      экспорт решений одним файлом. Снимок 15-08-2026.
+      Каждый новый лист попадает сюда по умолчанию, отдельной просьбы не требуется.</p>
   </div>
 </header>
 
@@ -66,9 +69,12 @@
 </div>
 
 <h2>Ждут голоса</h2>
-<p class="sub">Отсортировано от самого короткого. Светофор = насколько тяжело <em>голосовать</em>,
+<p class="sub">Сначала PWG → RU, ниже — всё остальное; внутри каждой группы от самого короткого.
+  Светофор = насколько тяжело <em>голосовать</em>,
   не насколько тяжело было собрать лист. 🟢 ≤15 карточек, 5–15 мин · 🟡 16–50, 20–45 мин ·
   🔴 51–200, 1–3 ч · ⚫ 200+, несколько заходов.</p>
+
+<h3>PWG → RU</h3>
 
 <div class="tablewrap">
 <table>
@@ -103,6 +109,46 @@
   <td><a class="go" href="sheets/compound_rules_30.html">Открыть</a></td>
 </tr>
 <tr>
+  <td>h180 · learner-core</td><td class="n">60</td><td class="light">🔴</td>
+  <td>Входит ли это заглавное слово PWG в базовый учебный корпус?</td>
+  <td>H180, порог поставки 4</td>
+  <td><a class="go" href="sheets/h180_learner.html">Открыть</a></td>
+</tr>
+<tr>
+  <td>h180 · типология</td><td class="n">73</td><td class="light">🔴</td>
+  <td>Подтвердить/исправить подтип типологии addenda, предложенный моделью</td>
+  <td>H180: κ против LLM</td>
+  <td><a class="go" href="sheets/h180_typology.html">Открыть</a></td>
+</tr>
+<tr>
+  <td>g5 · batch1 v3</td><td class="n">150</td><td class="light">🔴</td>
+  <td>Печатная готовность карточек живой очереди (немецкий остаток отфильтрован)</td>
+  <td>Лист gold-cut H1665 · печатный гейт</td>
+  <td><a class="go" href="sheets/g5_batch1v3.html">Открыть</a></td>
+</tr>
+<tr>
+  <td>G6 · золотой набор H215, полные 320</td><td class="n">320</td><td class="light">⚫</td>
+  <td>Верна ли LLM-метка по типологии из 6 значений
+    (<code>correct · lemma-variant · proper-name · partial · wrong-sense · hallucinated</code>).
+    Каждая карточка несёт доказательства ДО голоса: словарные значения с маршрутизацией по периоду,
+    корень по Уитни, засвидетельствованные контексты из своей работы, ранжированную глоссу.
+    Стартовые 20 карточек уже проголосованы (H1796) — здесь полный набор.</td>
+  <td>G6 → G7 → G10 публикационного релиза Sa→Ru TM</td>
+  <td><a class="go" href="sheets/h215_gold_full_320.html">Открыть</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<h3>Остальное</h3>
+
+<div class="tablewrap">
+<table>
+<thead><tr>
+  <th>Лист</th><th class="n">Карточек</th><th>Труд</th><th>Что решаете</th><th>Что разблокирует</th><th></th>
+</tr></thead>
+<tbody>
+<tr>
   <td>Глоссы PD · 4 леммы</td><td class="n">32</td><td class="light">🟡</td>
   <td>Принять/отклонить правки русской глоссы:
     <a href="sheets/gloss_agni.html">agni 11</a> ·
@@ -113,10 +159,11 @@
   <td><a class="go" href="sheets/gloss_agni.html">Открыть</a></td>
 </tr>
 <tr>
-  <td>h180 · learner-core</td><td class="n">60</td><td class="light">🔴</td>
-  <td>Входит ли это заглавное слово PWG в базовый учебный корпус?</td>
-  <td>H180, порог поставки 4</td>
-  <td><a class="go" href="sheets/h180_learner.html">Открыть</a></td>
+  <td>csl-atlas · xref shared-core</td><td class="n">40</td><td class="light">🟡</td>
+  <td>Проверка по источнику для рёбер xref общего ядра MW/PWG
+    (10 из 50 сняты автоматически как префиксные контроли, 40 остались человеку).</td>
+  <td>Слой перекрёстных ссылок csl-atlas</td>
+  <td><a class="go" href="sheets/csl_atlas_xref_40.html">Открыть</a></td>
 </tr>
 <tr>
   <td>Гипотезы Рену · v2</td><td class="n">70</td><td class="light">🔴</td>
@@ -126,24 +173,12 @@
   <td><a class="go" href="sheets/renou_hypotheses_v2.html">Открыть</a></td>
 </tr>
 <tr>
-  <td>h180 · типология</td><td class="n">73</td><td class="light">🔴</td>
-  <td>Подтвердить/исправить подтип типологии addenda, предложенный моделью</td>
-  <td>H180: κ против LLM</td>
-  <td><a class="go" href="sheets/h180_typology.html">Открыть</a></td>
-</tr>
-<tr>
   <td>RV · гейт расхождений v5</td><td class="n">100</td><td class="light">🔴</td>
   <td>Калибровка 4-классовой типологии (5 переводчиков). ≥80 % согласия запускает
     прогон на 10 552 строфы. Машинная κ на <code>lexical_variant</code> vs
     <code>semantic_shift</code> — на уровне случайности, этот голос и есть арбитр.</td>
   <td>H1844, шаг 9 (никогда не самоодобряется)</td>
   <td><a class="go" href="sheets/rv_divergence_gate_v5.html">Открыть</a></td>
-</tr>
-<tr>
-  <td>g5 · batch1 v3</td><td class="n">150</td><td class="light">🔴</td>
-  <td>Печатная готовность карточек живой очереди (немецкий остаток отфильтрован)</td>
-  <td>Лист gold-cut H1665 · печатный гейт</td>
-  <td><a class="go" href="sheets/g5_batch1v3.html">Открыть</a></td>
 </tr>
 </tbody>
 </table>
@@ -178,15 +213,16 @@
   <p><strong>BLI gold B1</strong> (500, ⚫) и <strong>h1210 A/B blind</strong> (40, 🟡) числятся
   открытыми в индексе листов, но HTML-файлов на диске нет — их нужно пересобрать
   (<code>/review-sheet</code>) прежде, чем они появятся здесь.</p>
-  <p><strong>Золотой набор H215</strong> (320 строк) — лист ещё не сделан. Это он разблокирует
-  G6 → G7 → G10 публикационного релиза Sa→Ru TM; оценка ручного труда — 5–11 ч.</p>
+  <p class="muted">Золотой набор H215 (320) собран 15-08-2026 и лежит выше, в разделе PWG → RU.
+  Лист xref csl-atlas (40) тоже теперь размещён здесь — оба residual'а H2755 закрыты.</p>
 </div>
 
 <footer>
   Листы самодостаточны: один HTML-файл, без внешних запросов, голоса не уходят на сервер.
   Источник и статусы — <code>REVIEW_SHEETS_INDEX.md</code> и
   <code>docs/PWG_TRANSLATION_UNEXECUTED_HANDOFFS_DEEPSEEK_TM_CACHE_2026-08-14.md</code>
-  в приватном хабе Uprava. H2755, 14-08-2026.
+  в приватном хабе Uprava. H2755, 14-08-2026 · H2774, 15-08-2026 (золотой набор H215 320,
+  xref csl-atlas 40, порядок «PWG сверху»).
 </footer>
 
 </div>
