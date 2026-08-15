@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="color-scheme" content="dark">
+<title>GTD-харвест: 66 кандидатов, требующих человека — 66 items</title>
+<style>
+  :root { color-scheme: dark; --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --text:#e6e6e6; --muted:#9aa0aa;
+          --accent:#5b8cff; --ok:#3fb950; --bad:#f85149; --defer:#d29922; --border:#2a2f3a; }
+  * { box-sizing: border-box; }
+  body { background:var(--bg); color:var(--text); font-family:-apple-system,Segoe UI,Roboto,sans-serif;
+         margin:0; padding:0 0 120px 0; }
+  header.top { position:sticky; top:0; z-index:10; background:var(--panel); border-bottom:1px solid var(--border);
+               padding:14px 20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+  header.top h1 { font-size:16px; margin:0; }
+  header.top .sub { color:var(--muted); font-size:12px; max-width:760px; }
+  .tally { display:flex; gap:14px; font-size:13px; }
+  .tally span.count { font-weight:700; }
+  .tally .approve { color:var(--ok); } .tally .reject { color:var(--bad); }
+  .tally .defer { color:var(--defer); } .tally .unvoted { color:var(--muted); }
+  .toolbar { padding:10px 20px; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  button.dl { background:var(--accent); color:#fff; border:none; padding:8px 14px; border-radius:6px;
+              cursor:pointer; font-size:13px; }
+  button.dl:hover { opacity:.9; }
+  .filterbar { display:flex; gap:6px; flex-wrap:wrap; }
+  .filterbar button { background:var(--panel2); border:1px solid var(--border); color:var(--text);
+                       padding:6px 10px; border-radius:14px; font-size:12px; cursor:pointer; }
+  .filterbar button.active { border-color:var(--accent); color:var(--accent); }
+  main { max-width:980px; margin:0 auto; padding:10px 20px; }
+  .card { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:16px;
+          margin-bottom:16px; }
+  .card.voted-approve { border-left:4px solid var(--ok); }
+  .card.voted-reject { border-left:4px solid var(--bad); }
+  .card.voted-defer { border-left:4px solid var(--defer); }
+  .card header { display:flex; justify-content:space-between; align-items:baseline; }
+  .card .hw { font-size:18px; font-weight:700; }
+  .badge { font-size:11px; background:var(--panel2); padding:2px 8px; border-radius:10px;
+           margin-left:8px; color:var(--muted); }
+  .question { margin:8px 0 12px; font-size:14px; }
+  .panel { background:var(--panel2); border-radius:8px; padding:10px 12px; font-size:13px; margin-bottom:10px; }
+  .panel h4 { margin:0 0 6px; font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+  .panel pre { white-space:pre-wrap; word-break:break-word; margin:0; font-size:12px; line-height:1.45; }
+  .chip { display:inline-block; background:#263042; border-radius:5px; padding:2px 7px; margin:2px 3px 2px 0; font-size:12px; }
+  .muted { color:var(--muted); font-style:italic; }
+  .controls { display:flex; align-items:center; gap:8px; margin-top:4px; }
+  button.vote { border:1px solid var(--border); background:var(--panel2); color:var(--text);
+                padding:7px 12px; border-radius:6px; cursor:pointer; font-size:13px; }
+  button.vote.approve.active { background:var(--ok); border-color:var(--ok); color:#04240b; }
+  button.vote.reject.active { background:var(--bad); border-color:var(--bad); color:#2a0a08; }
+  button.vote.defer.active { background:var(--defer); border-color:var(--defer); color:#2a1d02; }
+  .vote-state { margin-left:6px; font-size:12px; color:var(--muted); }
+  textarea.note { width:100%; margin-top:10px; min-height:88px; background:#11141a !important; color:#e6e6e6 !important;
+                  -webkit-text-fill-color:#e6e6e6; border:1px solid var(--border); border-radius:6px; padding:8px; font-size:13px;
+                  font-family:inherit; resize:vertical; }
+  textarea.note::placeholder { color:var(--muted); opacity:1; }
+  footer.hint { max-width:980px; margin:20px auto; padding:0 20px; color:var(--muted); font-size:12px; }
+  kbd { background:#263042; border-radius:4px; padding:1px 5px; font-size:11px; }
+
+  .screening-banner { margin: 0 20px 12px; padding: 10px 14px; border-radius: 8px;
+    border: 1px solid var(--accent); background: #152033; font-size: 12px; line-height: 1.45;
+    color: var(--text); max-width: 980px; }
+  .screening-banner code { font-size: 11px; color: var(--accent); }
+  .screening-banner .sc-d { color: var(--defer); font-weight: 700; }
+
+  .idchip { font-family:ui-monospace,Consolas,monospace; font-size:11px; color:var(--muted);
+            background:var(--panel2); border:1px solid var(--border); padding:2px 7px;
+            border-radius:6px; user-select:all; }
+  .card header { gap:10px; }
+  .hw a.hwlink { color:inherit; text-decoration:underline dotted; text-underline-offset:3px; }
+  .hw a.hwlink:hover { color:var(--accent); }
+  mark.hl { background:#453407; color:#ffd75e; padding:0 2px; border-radius:3px; }
+  .savebanner { max-width:980px; margin:10px auto 0; padding:8px 20px; font-size:12.5px; }
+  .savebanner code { background:var(--panel2); border:1px solid var(--border); padding:1px 6px; border-radius:5px; }
+  .ratingrow { display:flex; align-items:center; gap:6px; margin-top:10px; flex-wrap:wrap; }
+  .ratinglabel { font-size:12px; color:var(--muted); margin-right:4px; }
+  button.rate { border:1px solid var(--border); background:var(--panel2); color:var(--text);
+                width:34px; padding:6px 0; border-radius:6px; cursor:pointer; font-size:13px; }
+  button.rate.active { background:var(--accent); border-color:var(--accent); color:#fff; }
+  button.rate.active.below { background:var(--defer); border-color:var(--defer); color:#2a1d02; }
+  .rate-state { font-size:12px; color:var(--muted); margin-left:4px; }
+  :root { --fs:1.5; }
+  header.top h1 { font-size:calc(16px * var(--fs)) !important; }
+  header.top .sub { font-size:calc(12px * var(--fs)) !important; }
+  .tally, button.dl, button.vote, button.rate, textarea.note, .reject-label-select,
+  #strictReviewerWrap, #strictReviewerWrap input { font-size:calc(13px * var(--fs)) !important; }
+  .filterbar button, .fsctl button, .fsctl .fsval, .chip, .vote-state, .rate-state,
+  .ratinglabel, .rejectlabellabel, footer.hint, div.legend,
+  #strictReviewError { font-size:calc(12px * var(--fs)) !important; }
+  .card .hw { font-size:calc(18px * var(--fs)) !important; }
+  .badge, .panel h4, kbd, .idchip { font-size:calc(11px * var(--fs)) !important; }
+  .question { font-size:calc(14px * var(--fs)) !important; }
+  .panel { font-size:calc(13px * var(--fs)) !important; }
+  .panel pre { font-size:calc(13.5px * var(--fs)) !important; line-height:1.55; }
+  .panel .anatomy { font-size:calc(12.5px * var(--fs)) !important; }
+  .savebanner { font-size:calc(12.5px * var(--fs)) !important; }
+  .fsctl { display:flex; align-items:center; gap:4px; }
+  .fsctl button { background:var(--panel2); border:1px solid var(--border); color:var(--text);
+                  padding:6px 10px; border-radius:14px; cursor:pointer; line-height:1; }
+  .fsctl .fsval { color:var(--muted); min-width:3.4em; text-align:center; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>GTD-харвест: 66 кандидатов, требующих человека — 66 items</h1>
+    <div class="sub">Generated 15-08-2026 &middot; sheet_id <code>uprava-gtd-harvest_human-gated-66</code> &middot; Сырой обход <code>.ai_state.md</code> дал 1180 строк. Из них отсеяно: 427 уже выполненных или пустых (36,2 % от 1180), 618 выполнимых агентом без человека (52,4 % от 1180), 69 дублей из связанных worktree-копий (5,8 % от 1180). Осталось 66 (5,6 % от 1180) в 30 репозиториях. Вопрос по каждой карточке один: это действительно задача для человека — и должна ли она стоять в хабе?</div>
+  </div>
+  <div class="tally" id="tally">
+    <span class="approve">&#9989; <span class="count" id="c-approve">0</span></span>
+    <span class="reject">&#10060; <span class="count" id="c-reject">0</span></span>
+    <span class="defer">&#9208; <span class="count" id="c-defer">0</span></span>
+    <span class="unvoted">&#9711; <span class="count" id="c-unvoted">66</span></span>
+  </div>
+</header>
+<aside class="screening-banner" role="status" data-screening="1"><strong>Screening (H1649)</strong> — only human-required cards are below. Off the plate: <span class="sc-a">deterministic 427</span> · <span class="sc-b">dataset lookup 69</span> · <span class="sc-c">agent adjudication 618</span> (total screened 1114). Human cards: <span class="sc-d">66</span>. Evidence: <code>GTD_HARVEST_HUMAN_GATED_15.08.26.md</code>. Rules: done-marker-regex, noise-placeholder-regex, worktree-parent-collapse, human-gate-keyword.</aside>
+<div class="savebanner">&#128229; Your export downloads as <code>uprava-gtd-harvest_human-gated-66_decisions.json</code> &rarr; save it to <code>Uprava\review\uprava-gtd-harvest_human-gated-66_decisions.json</code> (the <code>sheet_id</code> inside the file is <code>uprava-gtd-harvest_human-gated-66</code> — that is how a later session knows which sheet these decisions belong to).</div>
+<div class="toolbar">
+  <button class="dl" id="downloadBtn">Download decisions.json</button><button class="dl" id="saveBtn" style="display:none;margin-left:8px">Save to folder…</button>
+  <div class="fsctl" title="text size — persists in this browser"><button type="button" id="fsDown" aria-label="smaller text">A&minus;</button><span class="fsval" id="fsVal"></span><button type="button" id="fsUp" aria-label="larger text">A+</button></div>
+  <div class="filterbar" id="filterbar"><button data-filter="all" class="active">all</button><button data-filter="credential">credential</button><button data-filter="decision">decision</button><button data-filter="merge">merge</button><button data-filter="sheet">sheet</button><button data-filter="outreach">outreach</button><button data-filter="money">money</button><button data-filter="other">other</button><button data-filter="unvoted">unvoted only</button></div>
+</div>
+<main id="cards">
+
+  <section class="card" data-id="afanasiynikitin-if-en-narrative-translation-is-ever-wanted-put" data-filt="decision">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/AfanasiyNikitin/blob/main/.ai_state.md" target="_blank" rel="noopener">AfanasiyNikitin — If EN narrative translation is ever wanted: `put-docs/` is still RU-only by MG&#x27;s explicit …</a> <span class="badge">AfanasiyNikitin</span><span class="badge">decision</span></div><span class="idchip" title="card id — cite this id back when discussing this card">afanasiynikitin-if-en-narrative-translation-is-ever-wanted-put</span></header>
+    <div class="question"><p>If EN narrative translation is ever wanted: `put-docs/` is still RU-only by MG's explicit ruling (10-07-2026) — only re-open if that ruling changes.</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/gasyoun/AfanasiyNikitin/blob/main/.ai_state.md'>AfanasiyNikitin/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="ap90-revisit-ap90-markup-issue-14-only-with-a-narrow" data-filt="other">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/sanskrit-lexicon/AP90/blob/master/.ai_state.md" target="_blank" rel="noopener">AP90 — Revisit AP90 markup issue #14 only with a narrower sub-pattern or maintainer-approved batc…</a> <span class="badge">AP90</span><span class="badge">other</span></div><span class="idchip" title="card id — cite this id back when discussing this card">ap90-revisit-ap90-markup-issue-14-only-with-a-narrow</span></header>
+    <div class="question"><p>Revisit AP90 markup issue #14 only with a narrower sub-pattern or maintainer-approved batch scope; current broad `{#(...)#}` sampling returns thousands of mixed cases.</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/sanskrit-lexicon/AP90/blob/master/.ai_state.md'>AP90/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-sanskrit-book-waiting-upstream-9-pr-alexander-myltsev-buh" data-filt="merge">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/buhler-sanskrit-book/blob/main/.ai_state.md" target="_blank" rel="noopener">buhler-sanskrit-book — @WAITING upstream: 9 PR в [alexander-myltsev/buhler-sanskrit-book](https://github.com/alex…</a> <span class="badge">buhler-sanskrit-book</span><span class="badge">merge</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-sanskrit-book-waiting-upstream-9-pr-alexander-myltsev-buh</span></header>
+    <div class="question"><p>@WAITING upstream: 9 PR <mark class="hl">в</mark> [alexander-myltsev/buhler-sanskrit-book](https://github.com/alexander-myltsev/buhler-sanskrit-book/pulls) <mark class="hl">ждут</mark> <mark class="hl">внешнего</mark> <mark class="hl">владельца</mark> (<mark class="hl">состояние</mark> <mark class="hl">на</mark> 11-07-2026, GTD-<mark class="hl">строка</mark> <mark class="hl">есть</mark>).</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/gasyoun/buhler-sanskrit-book/blob/main/.ai_state.md'>buhler-sanskrit-book/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-sanskrit-book-do-mg-one-click-cross-org-upstream-pr-d" data-filt="merge">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/buhler-sanskrit-book/blob/main/.ai_state.md" target="_blank" rel="noopener">buhler-sanskrit-book — @DO (MG, one-click): cross-org upstream-PR для D5-атрибуции — подготовлен H713 11-07-2026,…</a> <span class="badge">buhler-sanskrit-book</span><span class="badge">merge</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-sanskrit-book-do-mg-one-click-cross-org-upstream-pr-d</span></header>
+    <div class="question"><p>@DO (MG, one-click): cross-org upstream-PR <mark class="hl">для</mark> D5-<mark class="hl">атрибуции</mark> — <mark class="hl">подготовлен</mark> H713 11-07-2026, <mark class="hl">ссылка</mark> <mark class="hl">в</mark> GTD.</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/gasyoun/buhler-sanskrit-book/blob/main/.ai_state.md'>buhler-sanskrit-book/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="cologne-mg-review-docs-cleanup-taxonomy-summary-md-do" data-filt="merge">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/sanskrit-lexicon/COLOGNE/blob/main/.ai_state.md" target="_blank" rel="noopener">COLOGNE — MG: review [docs/cleanup/taxonomy_summary.md](docs/cleanup/taxonomy_summary.md) § Human Ap…</a> <span class="badge">COLOGNE</span><span class="badge">merge</span></div><span class="idchip" title="card id — cite this id back when discussing this card">cologne-mg-review-docs-cleanup-taxonomy-summary-md-do</span></header>
+    <div class="question"><p>MG: review [docs/cleanup/taxonomy_summary.md](docs/cleanup/taxonomy_summary.md) § Human Approval Queue (6 priority groups — transliteration consolidation, `updateByLine.py` copies, Python-3-failing scripts, `issues/issue445/` API prototy...</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/sanskrit-lexicon/COLOGNE/blob/main/.ai_state.md'>COLOGNE/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="commentarystrategies-r1-2-r" data-filt="decision">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/CommentaryStrategies/blob/main/.ai_state.md" target="_blank" rel="noopener">CommentaryStrategies — **R1** — гейт пилота Фазы-2 проходит М.Г. сам (review.html → decisions.json); Леонов/Кости…</a> <span class="badge">CommentaryStrategies</span><span class="badge">decision</span></div><span class="idchip" title="card id — cite this id back when discussing this card">commentarystrategies-r1-2-r</span></header>
+    <div class="question"><p>**R1** — <mark class="hl">гейт</mark> <mark class="hl">пилота</mark> <mark class="hl">Фазы-</mark>2 <mark class="hl">проходит</mark> <mark class="hl">М</mark>.<mark class="hl">Г</mark>. <mark class="hl">сам</mark> (review.html → decisions.json); <mark class="hl">Леонов</mark>/<mark class="hl">Костина</mark> <mark class="hl">гейтят</mark> <mark class="hl">итоговую</mark> <mark class="hl">сборку</mark>.</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/gasyoun/CommentaryStrategies/blob/main/.ai_state.md'>CommentaryStrategies/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="commentarystrategies-r3-per-sarga-5" data-filt="other">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/CommentaryStrategies/blob/main/.ai_state.md" target="_blank" rel="noopener">CommentaryStrategies — **R3** — сводный per-sarga аппарат (5 источников, интерактивный HTML) строить сейчас, пило…</a> <span class="badge">CommentaryStrategies</span><span class="badge">other</span></div><span class="idchip" title="card id — cite this id back when discussing this card">commentarystrategies-r3-per-sarga-5</span></header>
+    <div class="question"><p>**R3** — <mark class="hl">сводный</mark> per-sarga <mark class="hl">аппарат</mark> (5 <mark class="hl">источников</mark>, <mark class="hl">интерактивный</mark> HTML) <mark class="hl">строить</mark> <mark class="hl">сейчас</mark>, <mark class="hl">пилот</mark> 35/36/37.</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/gasyoun/CommentaryStrategies/blob/main/.ai_state.md'>CommentaryStrategies/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="commentarystrategies-do-2011" data-filt="decision">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/CommentaryStrategies/blob/main/.ai_state.md" target="_blank" rel="noopener">CommentaryStrategies — **[@DO М.Г.] Книжная сверка Парибок 2011** — точные формулировки П/К/Д (с. 86) + выходные …</a> <span class="badge">CommentaryStrategies</span><span class="badge">decision</span></div><span class="idchip" title="card id — cite this id back when discussing this card">commentarystrategies-do-2011</span></header>
+    <div class="question"><p>**[@DO <mark class="hl">М</mark>.<mark class="hl">Г</mark>.] <mark class="hl">Книжная</mark> <mark class="hl">сверка</mark> <mark class="hl">Парибок</mark> 2011** — <mark class="hl">точные</mark> <mark class="hl">формулировки</mark> <mark class="hl">П</mark>/<mark class="hl">К</mark>/<mark class="hl">Д</mark> (<mark class="hl">с</mark>. 86) + <mark class="hl">выходные</mark> <mark class="hl">данные</mark> <mark class="hl">тома</mark> (<mark class="hl">редакторы</mark>/<mark class="hl">выпуск</mark>/<mark class="hl">страницы</mark>/<mark class="hl">заглавие</mark> <mark class="hl">статьи</mark>); <mark class="hl">гейт</mark> <mark class="hl">для</mark> <mark class="hl">обеих</mark> <mark class="hl">статей</mark> — [docs/AXIS4_KD_DECISION.md](https://github.com/gasyoun/CommentaryS...</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/gasyoun/CommentaryStrategies/blob/main/.ai_state.md'>CommentaryStrategies/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="commentarystrategies-orcid-2026-06-28-pr-26-0000-00" data-filt="merge">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/CommentaryStrategies/blob/main/.ai_state.md" target="_blank" rel="noopener">CommentaryStrategies — **ORCID вставлен (2026-06-28, PR #26)**: 0000-0003-4513-884X (канон — `Uprava/AUTHOR.md`) …</a> <span class="badge">CommentaryStrategies</span><span class="badge">merge</span></div><span class="idchip" title="card id — cite this id back when discussing this card">commentarystrategies-orcid-2026-06-28-pr-26-0000-00</span></header>
+    <div class="question"><p>**ORCID <mark class="hl">вставлен</mark> (2026-06-28, PR #26)**: 0000-0003-4513-884X (<mark class="hl">канон</mark> — `Uprava/AUTHOR.md`) <mark class="hl">в</mark> frontmatter `articles/article1_vya.md` (+ affiliation «<mark class="hl">независимый</mark> <mark class="hl">исследователь</mark>» + email) <mark class="hl">и</mark> <mark class="hl">в</mark> `articles/cover_letter_A19.md` (<mark class="hl">строка</mark> ORCID + <mark class="hl">кон</mark>...</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/gasyoun/CommentaryStrategies/blob/main/.ai_state.md'>CommentaryStrategies/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="commentarystrategies-7-7-1-7-4" data-filt="outreach">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/CommentaryStrategies/blob/main/.ai_state.md" target="_blank" rel="noopener">CommentaryStrategies — Написать §7 (заключение §§7.1–7.4: основной результат, конвергенция, инверсия, ограничения…</a> <span class="badge">CommentaryStrategies</span><span class="badge">outreach</span></div><span class="idchip" title="card id — cite this id back when discussing this card">commentarystrategies-7-7-1-7-4</span></header>
+    <div class="question"><p><mark class="hl">Написать</mark> §7 (<mark class="hl">заключение</mark> §§7.1–7.4: <mark class="hl">основной</mark> <mark class="hl">результат</mark>, <mark class="hl">конвергенция</mark>, <mark class="hl">инверсия</mark>, <mark class="hl">ограничения</mark>)</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/gasyoun/CommentaryStrategies/blob/main/.ai_state.md'>CommentaryStrategies/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="commentarystrategies-ru-en" data-filt="outreach">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/CommentaryStrategies/blob/main/.ai_state.md" target="_blank" rel="noopener">CommentaryStrategies — Написать аннотации RU + EN</a> <span class="badge">CommentaryStrategies</span><span class="badge">outreach</span></div><span class="idchip" title="card id — cite this id back when discussing this card">commentarystrategies-ru-en</span></header>
+    <div class="question"><p><mark class="hl">Написать</mark> <mark class="hl">аннотации</mark> RU + EN</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/gasyoun/CommentaryStrategies/blob/main/.ai_state.md'>CommentaryStrategies/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="csl-apidev-waiting-jim-server-checkout-pull-for-pr" data-filt="merge">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/sanskrit-lexicon/csl-apidev/blob/main/.ai_state.md" target="_blank" rel="noopener">csl-apidev — **@WAITING (Jim):** server-checkout pull for [PR #63](https://github.com/sanskrit-lexicon/…</a> <span class="badge">csl-apidev</span><span class="badge">merge</span></div><span class="idchip" title="card id — cite this id back when discussing this card">csl-apidev-waiting-jim-server-checkout-pull-for-pr</span></header>
+    <div class="question"><p>**@WAITING (Jim):** server-checkout pull for [PR #63](https://github.com/sanskrit-lexicon/csl-apidev/pull/63)</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/sanskrit-lexicon/csl-apidev/blob/main/.ai_state.md'>csl-apidev/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="csl-atlas-human-review-the-strict-interactive-skd-iti-sh" data-filt="decision">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/sanskrit-lexicon/csl-atlas/blob/main/.ai_state.md" target="_blank" rel="noopener">csl-atlas — Human-review the strict interactive SKD *iti* sheet first (102 decisions);</a> <span class="badge">csl-atlas</span><span class="badge">decision</span></div><span class="idchip" title="card id — cite this id back when discussing this card">csl-atlas-human-review-the-strict-interactive-skd-iti-sh</span></header>
+    <div class="question"><p>Human-review the strict interactive SKD *iti* sheet first (102 decisions);</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/sanskrit-lexicon/csl-atlas/blob/main/.ai_state.md'>csl-atlas/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="csl-atlas-begin-the-v0-3-0-researcher-first-ia-only-after" data-filt="other">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/sanskrit-lexicon/csl-atlas/blob/main/.ai_state.md" target="_blank" rel="noopener">csl-atlas — Begin the v0.3.0 researcher-first IA only after remaining human exports have</a> <span class="badge">csl-atlas</span><span class="badge">other</span></div><span class="idchip" title="card id — cite this id back when discussing this card">csl-atlas-begin-the-v0-3-0-researcher-first-ia-only-after</span></header>
+    <div class="question"><p>Begin the v0.3.0 researcher-first IA only after remaining human exports have</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/sanskrit-lexicon/csl-atlas/blob/main/.ai_state.md'>csl-atlas/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="csl-corrections-m4-automate-observatory-refresh-csl-observ" data-filt="credential">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/sanskrit-lexicon/csl-corrections/blob/main/.ai_state.md" target="_blank" rel="noopener">csl-corrections — **M4** automate observatory refresh ([csl-observatory#12](https://github.com/sanskrit-lexi…</a> <span class="badge">csl-corrections</span><span class="badge">credential</span></div><span class="idchip" title="card id — cite this id back when discussing this card">csl-corrections-m4-automate-observatory-refresh-csl-observ</span></header>
+    <div class="question"><p>**M4** automate observatory refresh ([csl-observatory#12](https://github.com/sanskrit-lexicon/csl-observatory/issues/12)) — needs a token + touches the live dashboard workflow; left for supervised run.</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/sanskrit-lexicon/csl-corrections/blob/main/.ai_state.md'>csl-corrections/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="csl-devanagari-await-maintainer-review-of-pr-45-after-merge" data-filt="merge">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/sanskrit-lexicon/csl-devanagari/blob/main/.ai_state.md" target="_blank" rel="noopener">csl-devanagari — Await maintainer review of PR #45; after merge, regenerate server-side `v02/*` outputs fro…</a> <span class="badge">csl-devanagari</span><span class="badge">merge</span></div><span class="idchip" title="card id — cite this id back when discussing this card">csl-devanagari-await-maintainer-review-of-pr-45-after-merge</span></header>
+    <div class="question"><p>Await maintainer review of PR #45; after merge, regenerate server-side `v02/*` outputs from the patched converter.</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/sanskrit-lexicon/csl-devanagari/blob/main/.ai_state.md'>csl-devanagari/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="csl-guides-nmmb-pwkvn-promo-tweet-queued-blocked-on-mg" data-filt="credential">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/sanskrit-lexicon/csl-guides/blob/main/.ai_state.md" target="_blank" rel="noopener">csl-guides — **NMMB/PWKVN promo tweet — QUEUED, blocked on MG creating an X account** (2026-07-03: MG</a> <span class="badge">csl-guides</span><span class="badge">credential</span></div><span class="idchip" title="card id — cite this id back when discussing this card">csl-guides-nmmb-pwkvn-promo-tweet-queued-blocked-on-mg</span></header>
+    <div class="question"><p>**NMMB/PWKVN promo tweet — QUEUED, blocked on MG creating an X account** (2026-07-03: MG</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/sanskrit-lexicon/csl-guides/blob/main/.ai_state.md'>csl-guides/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="csl-observatory-phase-2-rethink-queued-tracks-mg-decisions-20" data-filt="decision">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/sanskrit-lexicon/csl-observatory/blob/main/.ai_state.md" target="_blank" rel="noopener">csl-observatory — **Phase-2 rethink queued tracks (MG decisions 2026-07-03: scholars-first audience; all fou…</a> <span class="badge">csl-observatory</span><span class="badge">decision</span></div><span class="idchip" title="card id — cite this id back when discussing this card">csl-observatory-phase-2-rethink-queued-tracks-mg-decisions-20</span></header>
+    <div class="question"><p>**Phase-2 rethink queued tracks (MG decisions 2026-07-03: scholars-first audience; all four visual forms; active monitor).** Roadmap Workstream G in [`docs/OBSERVATORY_ROADMAP.md`](https://github.com/sanskrit-lexicon/csl-observatory/blob...</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/sanskrit-lexicon/csl-observatory/blob/main/.ai_state.md'>csl-observatory/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="csl-observatory-open-prs-to-merge-jim-dhaval-csl-orig-2866-28" data-filt="merge">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/sanskrit-lexicon/csl-observatory/blob/main/.ai_state.md" target="_blank" rel="noopener">csl-observatory — Open PRs to merge (Jim/Dhaval): csl-orig#2866/2867/2868/2869/2870/2871/2872, csl-pywork#62…</a> <span class="badge">csl-observatory</span><span class="badge">merge</span></div><span class="idchip" title="card id — cite this id back when discussing this card">csl-observatory-open-prs-to-merge-jim-dhaval-csl-orig-2866-28</span></header>
+    <div class="question"><p>Open PRs to merge (Jim/Dhaval): csl-orig#2866/2867/2868/2869/2870/2871/2872, csl-pywork#62, csl-websanlexicon#74, csl-apidev#61.</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/sanskrit-lexicon/csl-observatory/blob/main/.ai_state.md'>csl-observatory/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="csl-orig-review-v02-etymology-stats-nearest-root-audit-s" data-filt="merge">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/sanskrit-lexicon/csl-orig/blob/main/.ai_state.md" target="_blank" rel="noopener">csl-orig — Review `v02/etymology_stats/nearest_root_audit_sample.csv` and mark `audit_status` / `audi…</a> <span class="badge">csl-orig</span><span class="badge">merge</span></div><span class="idchip" title="card id — cite this id back when discussing this card">csl-orig-review-v02-etymology-stats-nearest-root-audit-s</span></header>
+    <div class="question"><p>Review `v02/etymology_stats/nearest_root_audit_sample.csv` and mark `audit_status` / `auditor_notes`.</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/sanskrit-lexicon/csl-orig/blob/main/.ai_state.md'>csl-orig/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="csl-santam-resolve-the-pahlavi-dictionary-id-4-outre" data-filt="outreach">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/sanskrit-lexicon/csl-santam/blob/master/.ai_state.md" target="_blank" rel="noopener">csl-santam — **Resolve the Pahlavi dictionary (id 4).** Outreach **finalized 05-07-2026, READY TO SEND*…</a> <span class="badge">csl-santam</span><span class="badge">outreach</span></div><span class="idchip" title="card id — cite this id back when discussing this card">csl-santam-resolve-the-pahlavi-dictionary-id-4-outre</span></header>
+    <div class="question"><p>**Resolve the Pahlavi dictionary (id 4).** Outreach **finalized 05-07-2026, READY TO SEND** (awaiting MG to email it; agent never sends): [Uprava/handoffs/OUTREACH_2026-07-03_thomas_malten_pahlavi.md](https://github.com/gasyoun/Uprava/bl...</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/sanskrit-lexicon/csl-santam/blob/master/.ai_state.md'>csl-santam/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="indologyscholars-zenodo-deposit-human-zeno" data-filt="other">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/IndologyScholars/blob/main/.ai_state.md" target="_blank" rel="noopener">IndologyScholars — **Zenodo deposit (human):** залогиниться на Zenodo, выгрузить</a> <span class="badge">IndologyScholars</span><span class="badge">other</span></div><span class="idchip" title="card id — cite this id back when discussing this card">indologyscholars-zenodo-deposit-human-zeno</span></header>
+    <div class="question"><p>**Zenodo deposit (human):** <mark class="hl">залогиниться</mark> <mark class="hl">на</mark> Zenodo, <mark class="hl">выгрузить</mark></p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/gasyoun/IndologyScholars/blob/main/.ai_state.md'>IndologyScholars/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="indologyscholars-irr" data-filt="sheet">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/IndologyScholars/blob/main/.ai_state.md" target="_blank" rel="noopener">IndologyScholars — **IRR (человек):** передать второму кодировщику `analytics_output/interrater_sample_blind.…</a> <span class="badge">IndologyScholars</span><span class="badge">sheet</span></div><span class="idchip" title="card id — cite this id back when discussing this card">indologyscholars-irr</span></header>
+    <div class="question"><p>**IRR (<mark class="hl">человек</mark>):** <mark class="hl">передать</mark> <mark class="hl">второму</mark> <mark class="hl">кодировщику</mark> `analytics_output/interrater_sample_blind.csv` (<mark class="hl">БЕЗ</mark> key-<mark class="hl">файла</mark>!) + <mark class="hl">инструкцию</mark> <mark class="hl">из</mark> `tools/build_interrater_sample.py`; <mark class="hl">затем</mark> `python tools/compute_interrater_agreement.py`. <mark class="hl">Кросс-модельная</mark> <mark class="hl">све</mark>...</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/gasyoun/IndologyScholars/blob/main/.ai_state.md'>IndologyScholars/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="indologyscholars-email" data-filt="decision">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/IndologyScholars/blob/main/.ai_state.md" target="_blank" rel="noopener">IndologyScholars — **Голосование:** создать Яндекс Форму (email/имя/«JSON выгрузки»), вписать её URL в `VOTE_…</a> <span class="badge">IndologyScholars</span><span class="badge">decision</span></div><span class="idchip" title="card id — cite this id back when discussing this card">indologyscholars-email</span></header>
+    <div class="question"><p>**<mark class="hl">Голосование</mark>:** <mark class="hl">создать</mark> <mark class="hl">Яндекс</mark> <mark class="hl">Форму</mark> (email/<mark class="hl">имя</mark>/«JSON <mark class="hl">выгрузки</mark>»), <mark class="hl">вписать</mark> <mark class="hl">её</mark> URL <mark class="hl">в</mark> `VOTE_TEACHER_FORM_URL` (`generate_publication_pages.py`), <mark class="hl">пересобрать</mark>; <mark class="hl">после</mark> <mark class="hl">занятия</mark> — `tools/merge_votes.py responses.csv --json-column "JSON <mark class="hl">выгрузки</mark>"`</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/gasyoun/IndologyScholars/blob/main/.ai_state.md'>IndologyScholars/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="indologyscholars-mg-decide-the-2-030-attachments-367-book-li" data-filt="decision">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/IndologyScholars/blob/main/nagari/.ai_state.md" target="_blank" rel="noopener">IndologyScholars — MG `@DECIDE`: the 2 030 attachments (367 book-like, 294 PDF, 216 MB) have **no</a> <span class="badge">IndologyScholars</span><span class="badge">decision</span></div><span class="idchip" title="card id — cite this id back when discussing this card">indologyscholars-mg-decide-the-2-030-attachments-367-book-li</span></header>
+    <div class="question"><p>MG `@DECIDE`: the 2 030 attachments (367 book-like, 294 PDF, 216 MB) have **no</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/gasyoun/IndologyScholars/blob/main/nagari/.ai_state.md'>IndologyScholars/nagari/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="indologyscholars-optional-author-identity-normalization-merge" data-filt="merge">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/IndologyScholars/blob/main/nagari/.ai_state.md" target="_blank" rel="noopener">IndologyScholars — Optional: author-identity normalization (merge `tvitaly1`↔`Тихвинский</a> <span class="badge">IndologyScholars</span><span class="badge">merge</span></div><span class="idchip" title="card id — cite this id back when discussing this card">indologyscholars-optional-author-identity-normalization-merge</span></header>
+    <div class="question"><p>Optional: author-identity normalization (merge `tvitaly1`↔`<mark class="hl">Тихвинский</mark></p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/gasyoun/IndologyScholars/blob/main/nagari/.ai_state.md'>IndologyScholars/nagari/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="kosha-the-h2681-retrospective-found-no-open-p0-p1-so" data-filt="merge">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/kosha/blob/main/.ai_state.md" target="_blank" rel="noopener">kosha — The H2681 retrospective found no open P0/P1, so the technical W0 review</a> <span class="badge">kosha</span><span class="badge">merge</span></div><span class="idchip" title="card id — cite this id back when discussing this card">kosha-the-h2681-retrospective-found-no-open-p0-p1-so</span></header>
+    <div class="question"><p>The H2681 retrospective found no open P0/P1, so the technical W0 review</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/gasyoun/kosha/blob/main/.ai_state.md'>kosha/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="mwinflect-for-mwinflect-48-research-the-exact-scope-of-l" data-filt="decision">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/sanskrit-lexicon/MWinflect/blob/master/.ai_state.md" target="_blank" rel="noopener">MWinflect — For MWinflect #48, research the exact scope of long `A` in `sah`/`zah` compounds before ed…</a> <span class="badge">MWinflect</span><span class="badge">decision</span></div><span class="idchip" title="card id — cite this id back when discussing this card">mwinflect-for-mwinflect-48-research-the-exact-scope-of-l</span></header>
+    <div class="question"><p>For MWinflect #48, research the exact scope of long `A` in `sah`/`zah` compounds before editing code: decide whether MW's nom.sg. `zAw` evidence applies only to nominative/vocative singular, also neuter 1/2/8 singular, or the whole non-v...</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/sanskrit-lexicon/MWinflect/blob/master/.ai_state.md'>MWinflect/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="mwinflect-for-mwinflect-44-decide-whether-the-labial-st" data-filt="decision">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/sanskrit-lexicon/MWinflect/blob/master/.ai_state.md" target="_blank" rel="noopener">MWinflect — For MWinflect #44, decide whether the labial `stems_problem.txt` entries (`gardaB`, `gfB`,…</a> <span class="badge">MWinflect</span><span class="badge">decision</span></div><span class="idchip" title="card id — cite this id back when discussing this card">mwinflect-for-mwinflect-44-decide-whether-the-labial-st</span></header>
+    <div class="question"><p>For MWinflect #44, decide whether the labial `stems_problem.txt` entries (`gardaB`, `gfB`, `sute-gfB`, `syUma-gfB`, `ap`, `bahv-ap`, `rIty-ap`, `sv-ap`) should be promoted into the known 1-stem assignment list, and confirm any neuter lab...</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/sanskrit-lexicon/MWinflect/blob/master/.ai_state.md'>MWinflect/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="mwinflect-if-the-rule-is-approved-patch-the-decline-1-h" data-filt="other">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/sanskrit-lexicon/MWinflect/blob/master/.ai_state.md" target="_blank" rel="noopener">MWinflect — If the rule is approved, patch the `Decline_1` h-ending branch used via `nominals/pysanskr…</a> <span class="badge">MWinflect</span><span class="badge">other</span></div><span class="idchip" title="card id — cite this id back when discussing this card">mwinflect-if-the-rule-is-approved-patch-the-decline-1-h</span></header>
+    <div class="question"><p>If the rule is approved, patch the `Decline_1` h-ending branch used via `nominals/pysanskritv2/tables/decline_file.py` and add focused `decline_checks.txt` examples for at least `aBI-zah`, `jalA-zah`, `niz-zah`, and one `sah` compound.</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/sanskrit-lexicon/MWinflect/blob/master/.ai_state.md'>MWinflect/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="mws-do-m-g-citation-verification-for-paper-md-r" data-filt="merge">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/sanskrit-lexicon/MWS/blob/master/.ai_state.md" target="_blank" rel="noopener">MWS — @DO (M.G.): citation verification for PAPER.md references flagged in A16 review</a> <span class="badge">MWS</span><span class="badge">merge</span></div><span class="idchip" title="card id — cite this id back when discussing this card">mws-do-m-g-citation-verification-for-paper-md-r</span></header>
+    <div class="question"><p>@DO (M.G.): citation verification for PAPER.md references flagged in A16 review</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/sanskrit-lexicon/MWS/blob/master/.ai_state.md'>MWS/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="ors-faq-yandex-direct-md" data-filt="credential">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/ORS-FAQ/blob/main/.ai_state.md" target="_blank" rel="noopener">ORS-FAQ — **Безопасность:** из `yandex.direct.md` утек живой OAuth-токен Яндекса (untracked,</a> <span class="badge">ORS-FAQ</span><span class="badge">credential</span></div><span class="idchip" title="card id — cite this id back when discussing this card">ors-faq-yandex-direct-md</span></header>
+    <div class="question"><p>**<mark class="hl">Безопасность</mark>:** <mark class="hl">из</mark> `yandex.direct.md` <mark class="hl">утек</mark> <mark class="hl">живой</mark> OAuth-<mark class="hl">токен</mark> <mark class="hl">Яндекса</mark> (untracked,</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/gasyoun/ORS-FAQ/blob/main/.ai_state.md'>ORS-FAQ/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="ors-faq-git-publish-py-pii-push" data-filt="outreach">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/ORS-FAQ/blob/main/.ai_state.md" target="_blank" rel="noopener">ORS-FAQ — `git_publish.py`: PII-гейт — авто-push блокируется, если в wiki-диффе телефон/email</a> <span class="badge">ORS-FAQ</span><span class="badge">outreach</span></div><span class="idchip" title="card id — cite this id back when discussing this card">ors-faq-git-publish-py-pii-push</span></header>
+    <div class="question"><p>`git_publish.py`: PII-<mark class="hl">гейт</mark> — <mark class="hl">авто-</mark>push <mark class="hl">блокируется</mark>, <mark class="hl">если</mark> <mark class="hl">в</mark> wiki-<mark class="hl">диффе</mark> <mark class="hl">телефон</mark>/email</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/gasyoun/ORS-FAQ/blob/main/.ai_state.md'>ORS-FAQ/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="pwk-if-revisiting-pwk-58-inspect-each-live-sic" data-filt="merge">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/sanskrit-lexicon/PWK/blob/main/.ai_state.md" target="_blank" rel="noopener">PWK — If revisiting PWK #58, inspect each live `&lt;sic/&gt;` marker semantically before patching; the…</a> <span class="badge">PWK</span><span class="badge">merge</span></div><span class="idchip" title="card id — cite this id back when discussing this card">pwk-if-revisiting-pwk-58-inspect-each-live-sic</span></header>
+    <div class="question"><p>If revisiting PWK #58, inspect each live `&lt;sic/&gt;` marker semantically before patching; the current evidence supports review-only status, not a mechanical markup replacement.</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/sanskrit-lexicon/PWK/blob/main/.ai_state.md'>PWK/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="pwk-treat-pwk-15-and-65-as-question-human-review-b" data-filt="merge">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/sanskrit-lexicon/PWK/blob/main/.ai_state.md" target="_blank" rel="noopener">PWK — Treat PWK #15 and #65 as question/human-review bibliography cases unless a maintainer supp…</a> <span class="badge">PWK</span><span class="badge">merge</span></div><span class="idchip" title="card id — cite this id back when discussing this card">pwk-treat-pwk-15-and-65-as-question-human-review-b</span></header>
+    <div class="question"><p>Treat PWK #15 and #65 as question/human-review bibliography cases unless a maintainer supplies exact link-resolution or abbreviation-merging rules.</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/sanskrit-lexicon/PWK/blob/main/.ai_state.md'>PWK/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="ruwritingstyles-author-publication-actions-mint-the-zenodo" data-filt="decision">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/RuWritingStyles/blob/main/.ai_state.md" target="_blank" rel="noopener">RuWritingStyles — **Author publication actions:** mint the Zenodo DOI and add it to `CITATION.cff`; finalize…</a> <span class="badge">RuWritingStyles</span><span class="badge">decision</span></div><span class="idchip" title="card id — cite this id back when discussing this card">ruwritingstyles-author-publication-actions-mint-the-zenodo</span></header>
+    <div class="question"><p>**Author publication actions:** mint the Zenodo DOI and add it to `CITATION.cff`; finalize and submit the methodology paper; decide whether to publish the Obsidian plugin as its own release.</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/gasyoun/RuWritingStyles/blob/main/.ai_state.md'>RuWritingStyles/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="samasachakram-waiting-16-07-202" data-filt="other">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/SamasaChakram/blob/main/.ai_state.md" target="_blank" rel="noopener">SamasaChakram — @WAITING (Э. Лейтан, письмо отправлено 16-07-2026): по ответу — правки →</a> <span class="badge">SamasaChakram</span><span class="badge">other</span></div><span class="idchip" title="card id — cite this id back when discussing this card">samasachakram-waiting-16-07-202</span></header>
+    <div class="question"><p>@WAITING (<mark class="hl">Э</mark>. <mark class="hl">Лейтан</mark>, <mark class="hl">письмо</mark> <mark class="hl">отправлено</mark> 16-07-2026): <mark class="hl">по</mark> <mark class="hl">ответу</mark> — <mark class="hl">правки</mark> →</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/gasyoun/SamasaChakram/blob/main/.ai_state.md'>SamasaChakram/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="samudramanthanam-w5-outreach-human-after-w4-mg-do" data-filt="other">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/SamudraManthanam/blob/main/.ai_state.md" target="_blank" rel="noopener">SamudraManthanam — W5 outreach (human, after W4) — MG `@DO`.</a> <span class="badge">SamudraManthanam</span><span class="badge">other</span></div><span class="idchip" title="card id — cite this id back when discussing this card">samudramanthanam-w5-outreach-human-after-w4-mg-do</span></header>
+    <div class="question"><p>W5 outreach (human, after W4) — MG `@DO`.</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/gasyoun/SamudraManthanam/blob/main/.ai_state.md'>SamudraManthanam/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="sanskritgrammar-kochergina-errata-from-a-printed-sheet-waiti" data-filt="sheet">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/SanskritGrammar/blob/main/.ai_state.md" target="_blank" rel="noopener">SanskritGrammar — **Kochergina errata from a printed sheet — WAITING on MG for the source (06-07-2026).** [`…</a> <span class="badge">SanskritGrammar</span><span class="badge">sheet</span></div><span class="idchip" title="card id — cite this id back when discussing this card">sanskritgrammar-kochergina-errata-from-a-printed-sheet-waiti</span></header>
+    <div class="question"><p>**Kochergina errata from a printed sheet — WAITING on MG for the source (06-07-2026).** [`KocherginaUchebnik_1998/errata.yml`](https://github.com/gasyoun/SanskritGrammar/blob/main/KocherginaUchebnik_1998/errata.yml) is empty; there is no...</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/gasyoun/SanskritGrammar/blob/main/.ai_state.md'>SanskritGrammar/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="sanskritgrammar-a61-human-submission-gates-add-timestamps-a" data-filt="other">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/SanskritGrammar/blob/main/TolchelnikovTalmud_2026/.ai_state.md" target="_blank" rel="noopener">SanskritGrammar — **A61 human submission gates:** add timestamps and confirm speaker attributions for</a> <span class="badge">SanskritGrammar</span><span class="badge">other</span></div><span class="idchip" title="card id — cite this id back when discussing this card">sanskritgrammar-a61-human-submission-gates-add-timestamps-a</span></header>
+    <div class="question"><p>**A61 human submission gates:** add timestamps and confirm speaker attributions for</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/gasyoun/SanskritGrammar/blob/main/TolchelnikovTalmud_2026/.ai_state.md'>SanskritGrammar/TolchelnikovTalmud_2026/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="sanskritgrammar-new-workstream-samskrtam-ru-z-integration" data-filt="other">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/SanskritGrammar/blob/main/TolchelnikovTalmud_2026/.ai_state.md" target="_blank" rel="noopener">SanskritGrammar — **NEW workstream — `samskrtam.ru/z/` integration (MG-approved 07-07-2026).** `/z/` is</a> <span class="badge">SanskritGrammar</span><span class="badge">other</span></div><span class="idchip" title="card id — cite this id back when discussing this card">sanskritgrammar-new-workstream-samskrtam-ru-z-integration</span></header>
+    <div class="question"><p>**NEW workstream — `samskrtam.ru/z/` integration (MG-approved 07-07-2026).** `/z/` is</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/gasyoun/SanskritGrammar/blob/main/TolchelnikovTalmud_2026/.ai_state.md'>SanskritGrammar/TolchelnikovTalmud_2026/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="sanskritkaraoke-first-real-end-to-end-render-blocked-ch" data-filt="other">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/SanskritKaraoke/blob/main/.ai_state.md" target="_blank" rel="noopener">SanskritKaraoke — First **real** end-to-end render — **BLOCKED: chapter audio not yet supplied.** An approve…</a> <span class="badge">SanskritKaraoke</span><span class="badge">other</span></div><span class="idchip" title="card id — cite this id back when discussing this card">sanskritkaraoke-first-real-end-to-end-render-blocked-ch</span></header>
+    <div class="question"><p>First **real** end-to-end render — **BLOCKED: chapter audio not yet supplied.** An approved reference `sample.mp4` is present locally; MG will provide its original audio and Timing Editor/session JSON. When <mark class="hl">Уша</mark> <mark class="hl">Санка</mark>'s chapter audio land...</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/gasyoun/SanskritKaraoke/blob/main/.ai_state.md'>SanskritKaraoke/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="sanskritkaraoke-adr-0004-next-ingest-original-audio-autom" data-filt="other">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/SanskritKaraoke/blob/main/.ai_state.md" target="_blank" rel="noopener">SanskritKaraoke — **ADR-0004 next:** ingest original audio + automatic-before JSON + human-approved-after JS…</a> <span class="badge">SanskritKaraoke</span><span class="badge">other</span></div><span class="idchip" title="card id — cite this id back when discussing this card">sanskritkaraoke-adr-0004-next-ingest-original-audio-autom</span></header>
+    <div class="question"><p>**ADR-0004 next:** ingest original audio + automatic-before JSON + human-approved-after JSON in comparison mode; produce per-syllable deltas, hold out evaluation recordings, then replace independent snapping with Usha-calibrated monotoni...</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/gasyoun/SanskritKaraoke/blob/main/.ai_state.md'>SanskritKaraoke/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="sanskritkaraoke-verify-google-login-logout-against-deployed-orig" data-filt="credential">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/SanskritKaraoke/blob/main/.ai_state.md" target="_blank" rel="noopener">SanskritKaraoke — Verify Google login/logout against deployed origin (blocked at password/2FA on last attemp…</a> <span class="badge">SanskritKaraoke</span><span class="badge">credential</span></div><span class="idchip" title="card id — cite this id back when discussing this card">sanskritkaraoke-verify-google-login-logout-against-deployed-orig</span></header>
+    <div class="question"><p>Verify Google login/logout against deployed origin (blocked at password/2FA on last attempt — needs M.G. at the screen).</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/gasyoun/SanskritKaraoke/blob/main/.ai_state.md'>SanskritKaraoke/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="sanskritkaraoke-sementsov-agreement-sk-lic-2026-002-permi" data-filt="other">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/SanskritKaraoke/blob/main/.ai_state.md" target="_blank" rel="noopener">SanskritKaraoke — **Sementsov agreement (SK-LIC-2026-002):** permission already granted by the daughter&#x27;s (h…</a> <span class="badge">SanskritKaraoke</span><span class="badge">other</span></div><span class="idchip" title="card id — cite this id back when discussing this card">sanskritkaraoke-sementsov-agreement-sk-lic-2026-002-permi</span></header>
+    <div class="question"><p>**Sementsov agreement (SK-LIC-2026-002):** permission already granted by the daughter's (heir's) letter — agreement formalizes existing consent; product docs already `status=cleared`. Optional: name/date/scope on formal .docx if MG suppl...</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/gasyoun/SanskritKaraoke/blob/main/.ai_state.md'>SanskritKaraoke/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="sanskritlexicography-send-the-consolidated-german-erratum-email-to" data-filt="outreach">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/SanskritLexicography/blob/master/.ai_state.md" target="_blank" rel="noopener">SanskritLexicography — **Send the consolidated German erratum email to the Halle NWS team.** — _status: drafted; …</a> <span class="badge">SanskritLexicography</span><span class="badge">outreach</span></div><span class="idchip" title="card id — cite this id back when discussing this card">sanskritlexicography-send-the-consolidated-german-erratum-email-to</span></header>
+    <div class="question"><p>**Send the consolidated German erratum email to the Halle NWS team.** — _status: drafted; date: 2026-06-23; source: current-session._</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/gasyoun/SanskritLexicography/blob/master/.ai_state.md'>SanskritLexicography/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="sanskritlexicography-materialize-the-human-review-queue-for-legacy" data-filt="merge">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/SanskritLexicography/blob/master/.ai_state.md" target="_blank" rel="noopener">SanskritLexicography — **Materialize the human review queue for legacy/store cards.** — _status: complete; date: …</a> <span class="badge">SanskritLexicography</span><span class="badge">merge</span></div><span class="idchip" title="card id — cite this id back when discussing this card">sanskritlexicography-materialize-the-human-review-queue-for-legacy</span></header>
+    <div class="question"><p>**Materialize the human review queue for legacy/store cards.** — _status: complete; date: 2026-06-19; source: current-session._</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/gasyoun/SanskritLexicography/blob/master/.ai_state.md'>SanskritLexicography/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="sanskritlexicography-make-the-review-queue-spreadsheet-friendly" data-filt="merge">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/SanskritLexicography/blob/master/.ai_state.md" target="_blank" rel="noopener">SanskritLexicography — **Make the review queue spreadsheet-friendly.** — _status: complete; date: 2026-06-19; sou…</a> <span class="badge">SanskritLexicography</span><span class="badge">merge</span></div><span class="idchip" title="card id — cite this id back when discussing this card">sanskritlexicography-make-the-review-queue-spreadsheet-friendly</span></header>
+    <div class="question"><p>**Make the review queue spreadsheet-friendly.** — _status: complete; date: 2026-06-19; source: current-session._</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/gasyoun/SanskritLexicography/blob/master/.ai_state.md'>SanskritLexicography/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="sanskritlexicography-design-the-human-gold-set-scaffold-statu" data-filt="sheet">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/SanskritLexicography/blob/master/.ai_state.md" target="_blank" rel="noopener">SanskritLexicography — **Design the human gold-set scaffold.** — _status: partial; date: 2026-06-19; source: curr…</a> <span class="badge">SanskritLexicography</span><span class="badge">sheet</span></div><span class="idchip" title="card id — cite this id back when discussing this card">sanskritlexicography-design-the-human-gold-set-scaffold-statu</span></header>
+    <div class="question"><p>**Design the human gold-set scaffold.** — _status: partial; date: 2026-06-19; source: current-session._</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/gasyoun/SanskritLexicography/blob/master/.ai_state.md'>SanskritLexicography/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="sanskritlexicography-fill-and-adjudicate-the-human-gold-set-s" data-filt="sheet">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/SanskritLexicography/blob/master/.ai_state.md" target="_blank" rel="noopener">SanskritLexicography — **Fill and adjudicate the human gold set.** — _status: queued; date: 2026-06-19; source: c…</a> <span class="badge">SanskritLexicography</span><span class="badge">sheet</span></div><span class="idchip" title="card id — cite this id back when discussing this card">sanskritlexicography-fill-and-adjudicate-the-human-gold-set-s</span></header>
+    <div class="question"><p>**Fill and adjudicate the human gold set.** — _status: queued; date: 2026-06-19; source: current-session._</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/gasyoun/SanskritLexicography/blob/master/.ai_state.md'>SanskritLexicography/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="sanskritlexicography-author-voice-pass-over-the-glue-mg-do" data-filt="other">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/SanskritLexicography/blob/master/Digital_Sanskrit_Lexicography-BOOK/.ai_state.md" target="_blank" rel="noopener">SanskritLexicography — **Author voice pass over the glue (MG `@DO`)** — rule on the 12 framing calls in</a> <span class="badge">SanskritLexicography</span><span class="badge">other</span></div><span class="idchip" title="card id — cite this id back when discussing this card">sanskritlexicography-author-voice-pass-over-the-glue-mg-do</span></header>
+    <div class="question"><p>**Author voice pass over the glue (MG `@DO`)** — rule on the 12 framing calls in</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/gasyoun/SanskritLexicography/blob/master/Digital_Sanskrit_Lexicography-BOOK/.ai_state.md'>SanskritLexicography/Digital_Sanskrit_Lexicography-BOOK/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="sanskritlexicography-fair-doi-sprint-deferred-one-month-by" data-filt="other">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/SanskritLexicography/blob/master/Digital_Sanskrit_Lexicography-BOOK/.ai_state.md" target="_blank" rel="noopener">SanskritLexicography — **FAIR/DOI sprint** — ⏸ **DEFERRED one month by MG 09-07-2026, revisit ~09-08-2026;</a> <span class="badge">SanskritLexicography</span><span class="badge">other</span></div><span class="idchip" title="card id — cite this id back when discussing this card">sanskritlexicography-fair-doi-sprint-deferred-one-month-by</span></header>
+    <div class="question"><p>**FAIR/DOI sprint** — ⏸ **DEFERRED one month by MG 09-07-2026, revisit ~09-08-2026;</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/gasyoun/SanskritLexicography/blob/master/Digital_Sanskrit_Lexicography-BOOK/.ai_state.md'>SanskritLexicography/Digital_Sanskrit_Lexicography-BOOK/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="sanskritlexicography-get-a-metered-transport-direct-https-to-h" data-filt="credential">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/SanskritLexicography/blob/master/RussianTranslation/.ai_state.md" target="_blank" rel="noopener">SanskritLexicography — **Get a metered transport** — direct HTTPS to `https://router.cheap` with a credential</a> <span class="badge">SanskritLexicography</span><span class="badge">credential</span></div><span class="idchip" title="card id — cite this id back when discussing this card">sanskritlexicography-get-a-metered-transport-direct-https-to-h</span></header>
+    <div class="question"><p>**Get a metered transport** — direct HTTPS to `https://router.cheap` with a credential</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/gasyoun/SanskritLexicography/blob/master/RussianTranslation/.ai_state.md'>SanskritLexicography/RussianTranslation/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="sanskritlexicography-vote-review-h1303-abbrev-sheet-html-pwg-ru-eva" data-filt="decision">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/SanskritLexicography/blob/master/RussianTranslation/.ai_state.md" target="_blank" rel="noopener">SanskritLexicography — Vote review/h1303_abbrev_sheet.html → pwg_ru/eval/h1303_abbrev.decisions.json → H1626</a> <span class="badge">SanskritLexicography</span><span class="badge">decision</span></div><span class="idchip" title="card id — cite this id back when discussing this card">sanskritlexicography-vote-review-h1303-abbrev-sheet-html-pwg-ru-eva</span></header>
+    <div class="question"><p>Vote review/h1303_abbrev_sheet.html → pwg_ru/eval/h1303_abbrev.decisions.json → H1626</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/gasyoun/SanskritLexicography/blob/master/RussianTranslation/.ai_state.md'>SanskritLexicography/RussianTranslation/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="sanskritlexicography-vote-review-h1306-style-sheet-html-pwg-ru-eval" data-filt="decision">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/SanskritLexicography/blob/master/RussianTranslation/.ai_state.md" target="_blank" rel="noopener">SanskritLexicography — Vote review/h1306_style_sheet.html → pwg_ru/eval/h1306_style.decisions.json → H1627</a> <span class="badge">SanskritLexicography</span><span class="badge">decision</span></div><span class="idchip" title="card id — cite this id back when discussing this card">sanskritlexicography-vote-review-h1306-style-sheet-html-pwg-ru-eval</span></header>
+    <div class="question"><p>Vote review/h1306_style_sheet.html → pwg_ru/eval/h1306_style.decisions.json → H1627</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/gasyoun/SanskritLexicography/blob/master/RussianTranslation/.ai_state.md'>SanskritLexicography/RussianTranslation/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="sanskritlexicography-gated-next-needs-a-real-sample-mg-do" data-filt="other">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/SanskritLexicography/blob/master/RussianTranslation/.ai_state.md" target="_blank" rel="noopener">SanskritLexicography — **Gated next (needs a real sample — MG `@DO`):** calibrate detector/classifier on one real…</a> <span class="badge">SanskritLexicography</span><span class="badge">other</span></div><span class="idchip" title="card id — cite this id back when discussing this card">sanskritlexicography-gated-next-needs-a-real-sample-mg-do</span></header>
+    <div class="question"><p>**Gated next (needs a real sample — MG `@DO`):** calibrate detector/classifier on one real transcript+PDF;</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/gasyoun/SanskritLexicography/blob/master/RussianTranslation/.ai_state.md'>SanskritLexicography/RussianTranslation/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="sanskritlexicography-s7-quality-follow-through-queued-as-its-own" data-filt="decision">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/SanskritLexicography/blob/master/RussianTranslation/.ai_state.md" target="_blank" rel="noopener">SanskritLexicography — **S7 quality follow-through — QUEUED as its own handoff (MG decision 2026-07-02;</a> <span class="badge">SanskritLexicography</span><span class="badge">decision</span></div><span class="idchip" title="card id — cite this id back when discussing this card">sanskritlexicography-s7-quality-follow-through-queued-as-its-own</span></header>
+    <div class="question"><p>**S7 quality follow-through — QUEUED as its own handoff (MG decision 2026-07-02;</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/gasyoun/SanskritLexicography/blob/master/RussianTranslation/.ai_state.md'>SanskritLexicography/RussianTranslation/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="sanskritlexicography-track-b-agni-human-sign-off-open-gate" data-filt="other">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/SanskritLexicography/blob/master/RussianTranslation/.ai_state.md" target="_blank" rel="noopener">SanskritLexicography — **Track B — agni human sign-off (open gate).**</a> <span class="badge">SanskritLexicography</span><span class="badge">other</span></div><span class="idchip" title="card id — cite this id back when discussing this card">sanskritlexicography-track-b-agni-human-sign-off-open-gate</span></header>
+    <div class="question"><p>**Track B — agni human sign-off (open gate).**</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/gasyoun/SanskritLexicography/blob/master/RussianTranslation/.ai_state.md'>SanskritLexicography/RussianTranslation/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="sanskritspellcheck-engineering-hardening-pr-45-waiting-on-exte" data-filt="merge">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/drdhaval2785/SanskritSpellCheck/blob/master/.ai_state.md" target="_blank" rel="noopener">SanskritSpellCheck — **Engineering hardening PR #45 — WAITING on external maintainer.** Review/merge</a> <span class="badge">SanskritSpellCheck</span><span class="badge">merge</span></div><span class="idchip" title="card id — cite this id back when discussing this card">sanskritspellcheck-engineering-hardening-pr-45-waiting-on-exte</span></header>
+    <div class="question"><p>**Engineering hardening PR #45 — WAITING on external maintainer.** Review/merge</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/drdhaval2785/SanskritSpellCheck/blob/master/.ai_state.md'>SanskritSpellCheck/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="socks5-vps-merge-add-socks5-vp" data-filt="merge">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/SOCKS5-VPS/blob/main/.ai_state.md" target="_blank" rel="noopener">SOCKS5-VPS — После успешного прогона — **merge `add-socks5-vps-toolkit` → `main`** (PR</a> <span class="badge">SOCKS5-VPS</span><span class="badge">merge</span></div><span class="idchip" title="card id — cite this id back when discussing this card">socks5-vps-merge-add-socks5-vp</span></header>
+    <div class="question"><p><mark class="hl">После</mark> <mark class="hl">успешного</mark> <mark class="hl">прогона</mark> — **merge `add-socks5-vps-toolkit` → `main`** (PR</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/gasyoun/SOCKS5-VPS/blob/main/.ai_state.md'>SOCKS5-VPS/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="spoken-sanskrit-corpus-mined-tier-quality-gate-dual-model-adjudi" data-filt="decision">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/spoken-sanskrit-corpus/blob/main/.ai_state.md" target="_blank" rel="noopener">spoken-sanskrit-corpus — **`mined`-tier quality gate** (dual-model adjudication, MG ruling 07-07-2026) before any</a> <span class="badge">spoken-sanskrit-corpus</span><span class="badge">decision</span></div><span class="idchip" title="card id — cite this id back when discussing this card">spoken-sanskrit-corpus-mined-tier-quality-gate-dual-model-adjudi</span></header>
+    <div class="question"><p>**`mined`-tier quality gate** (dual-model adjudication, MG ruling 07-07-2026) before any</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/gasyoun/spoken-sanskrit-corpus/blob/main/.ai_state.md'>spoken-sanskrit-corpus/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="uprava-tier-0-autumn-revenue-membership-ask-comp" data-filt="decision">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/Uprava/blob/main/.ai_state.md" target="_blank" rel="noopener">Uprava — **Tier-0 autumn revenue + membership `/ask` COMPLETE 14-08-2026 (Codex Sol, `gpt-5.6-sol`)…</a> <span class="badge">Uprava</span><span class="badge">decision</span></div><span class="idchip" title="card id — cite this id back when discussing this card">uprava-tier-0-autumn-revenue-membership-ask-comp</span></header>
+    <div class="question"><p>**Tier-0 autumn revenue + membership `/ask` COMPLETE 14-08-2026 (Codex Sol, `gpt-5.6-sol`):** 30 MG rulings are locked in [PLAN_UPRAVA_TIER0_AUTUMN_MEMBERSHIP_2026H2.md](https://github.com/gasyoun/Uprava/blob/main/docs/PLAN_UPRAVA_TIER0_...</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/gasyoun/Uprava/blob/main/.ai_state.md'>Uprava/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="uprava-megabook-sangram-implementation-plan-11-07" data-filt="decision">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/Uprava/blob/main/.ai_state.md" target="_blank" rel="noopener">Uprava — **MEGABOOK × Sangram implementation plan (11-07-2026):** author rulings fix Q4 2026 rough …</a> <span class="badge">Uprava</span><span class="badge">decision</span></div><span class="idchip" title="card id — cite this id back when discussing this card">uprava-megabook-sangram-implementation-plan-11-07</span></header>
+    <div class="question"><p>**MEGABOOK × Sangram implementation plan (11-07-2026):** author rulings fix Q4 2026 rough alpha, 10–20 evidence-ready morphology articles, mandatory MG sign-off per public article, quarterly releases plus annual edition, and equal-status...</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/gasyoun/Uprava/blob/main/.ai_state.md'>Uprava/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="uprava-next-issue-mg-telegram-interactive-login" data-filt="credential">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/Uprava/blob/main/.ai_state.md" target="_blank" rel="noopener">Uprava — **⭐ NEXT ISSUE — MG Telegram interactive login** (top human unblocker; frees the Uprava da…</a> <span class="badge">Uprava</span><span class="badge">credential</span></div><span class="idchip" title="card id — cite this id back when discussing this card">uprava-next-issue-mg-telegram-interactive-login</span></header>
+    <div class="question"><p>**⭐ NEXT ISSUE — MG Telegram interactive login** (top human unblocker; frees the Uprava daily-digest bot + confirms the Systema support dashboard). Step-by-step: [TELEGRAM_LOGIN_BRIEF.md](https://github.com/gasyoun/Uprava/blob/main/TELEG...</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/gasyoun/Uprava/blob/main/.ai_state.md'>Uprava/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="uprava-handoff-fill-1911-1913-megabook-sangram-implementation-plan-11-07" data-filt="decision">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/Uprava/blob/main/.ai_state.md" target="_blank" rel="noopener">Uprava-handoff-fill-1911-1913 — **MEGABOOK × Sangram implementation plan (11-07-2026):** author rulings fix Q4 2026 rough …</a> <span class="badge">Uprava-handoff-fill-1911-1913</span><span class="badge">decision</span></div><span class="idchip" title="card id — cite this id back when discussing this card">uprava-handoff-fill-1911-1913-megabook-sangram-implementation-plan-11-07</span></header>
+    <div class="question"><p>**MEGABOOK × Sangram implementation plan (11-07-2026):** author rulings fix Q4 2026 rough alpha, 10–20 evidence-ready morphology articles, mandatory MG sign-off per public article, quarterly releases plus annual edition, and equal-status...</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/gasyoun/Uprava/blob/main/.ai_state.md'>Uprava-handoff-fill-1911-1913/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+
+  <section class="card" data-id="uprava-handoff-fill-1911-1913-next-issue-mg-telegram-interactive-login" data-filt="credential">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/Uprava/blob/main/.ai_state.md" target="_blank" rel="noopener">Uprava-handoff-fill-1911-1913 — **⭐ NEXT ISSUE — MG Telegram interactive login** (top human unblocker; frees the Uprava da…</a> <span class="badge">Uprava-handoff-fill-1911-1913</span><span class="badge">credential</span></div><span class="idchip" title="card id — cite this id back when discussing this card">uprava-handoff-fill-1911-1913-next-issue-mg-telegram-interactive-login</span></header>
+    <div class="question"><p>**⭐ NEXT ISSUE — MG Telegram interactive login** (top human unblocker; frees the Uprava daily-digest bot + confirms the Systema support dashboard). Step-by-step: [TELEGRAM_LOGIN_BRIEF.md](https://github.com/gasyoun/Uprava/blob/main/TELEG...</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Принять</b> — строка попадёт в <code>GTD_NEXT_ACTIONS.md</code> как человеческая задача (Do Today или Waiting), с владельцем MG; агенты перестанут её трогать и будут ждать человека.<br><b>❌ Отклонить</b> — это не человеческая задача: строка остаётся только в <code>.ai_state.md</code> своего репозитория как точка возобновления для агента, в хаб не идёт.<br><b>⏸ Отложить</b> — решение позже; строка никуда не переносится и придёт снова в следующем харвесте.</p></div>
+    <div class="panel"><h4>Источник</h4><p>Строка взята из <a href='https://github.com/gasyoun/Uprava/blob/main/.ai_state.md'>Uprava-handoff-fill-1911-1913/.ai_state.md</a> (раздел Next Steps).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ В хаб (задача человека)</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не в хаб (агент сам)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Переформулировать? Другой владелец? Указать здесь."></textarea>
+  </section>
+</main>
+<footer class="hint">✅ Принять — строка становится человеческой задачей в GTD-хабе. ❌ Отклонить — остаётся точкой возобновления для агента в своём репозитории. ⏸ Отложить — вернётся в следующем харвесте. Поле заметки — чтобы переформулировать строку или сменить владельца вместо отказа. Keyboard: <kbd>a</kbd> ✅ В хаб (задача человека) &middot; <kbd>r</kbd> ❌ Не в хаб (агент сам)
+  &middot; <kbd>d</kbd> defer &middot; <kbd>&darr;</kbd>/<kbd>&uarr;</kbd> next/prev. Votes autosave to
+  this browser's localStorage; click "Download decisions.json" when done (unvoted items export with
+  decision:null).</footer>
+<div class="legend" style="max-width:980px;margin:0 auto 20px;padding:0 20px;color:var(--muted);font-size:12px">
+  <b>Approve</b> = accept the proposed change/answer shown on the card (no separate "approve as-is" —
+  approving means agreeing as written). <b>Reject</b> = keep the current entry/answer unchanged.
+  <b>Defer</b> = not sure yet, decide later. The note field is for requesting a partial tweak instead
+  of an outright reject.
+</div>
+<script>
+(function () {
+  var SHEET_ID = "uprava-gtd-harvest_human-gated-66";
+  var STORE_KEY = 'review-sheet:' + SHEET_ID;
+  var ids = ["afanasiynikitin-if-en-narrative-translation-is-ever-wanted-put", "ap90-revisit-ap90-markup-issue-14-only-with-a-narrow", "buhler-sanskrit-book-waiting-upstream-9-pr-alexander-myltsev-buh", "buhler-sanskrit-book-do-mg-one-click-cross-org-upstream-pr-d", "cologne-mg-review-docs-cleanup-taxonomy-summary-md-do", "commentarystrategies-r1-2-r", "commentarystrategies-r3-per-sarga-5", "commentarystrategies-do-2011", "commentarystrategies-orcid-2026-06-28-pr-26-0000-00", "commentarystrategies-7-7-1-7-4", "commentarystrategies-ru-en", "csl-apidev-waiting-jim-server-checkout-pull-for-pr", "csl-atlas-human-review-the-strict-interactive-skd-iti-sh", "csl-atlas-begin-the-v0-3-0-researcher-first-ia-only-after", "csl-corrections-m4-automate-observatory-refresh-csl-observ", "csl-devanagari-await-maintainer-review-of-pr-45-after-merge", "csl-guides-nmmb-pwkvn-promo-tweet-queued-blocked-on-mg", "csl-observatory-phase-2-rethink-queued-tracks-mg-decisions-20", "csl-observatory-open-prs-to-merge-jim-dhaval-csl-orig-2866-28", "csl-orig-review-v02-etymology-stats-nearest-root-audit-s", "csl-santam-resolve-the-pahlavi-dictionary-id-4-outre", "indologyscholars-zenodo-deposit-human-zeno", "indologyscholars-irr", "indologyscholars-email", "indologyscholars-mg-decide-the-2-030-attachments-367-book-li", "indologyscholars-optional-author-identity-normalization-merge", "kosha-the-h2681-retrospective-found-no-open-p0-p1-so", "mwinflect-for-mwinflect-48-research-the-exact-scope-of-l", "mwinflect-for-mwinflect-44-decide-whether-the-labial-st", "mwinflect-if-the-rule-is-approved-patch-the-decline-1-h", "mws-do-m-g-citation-verification-for-paper-md-r", "ors-faq-yandex-direct-md", "ors-faq-git-publish-py-pii-push", "pwk-if-revisiting-pwk-58-inspect-each-live-sic", "pwk-treat-pwk-15-and-65-as-question-human-review-b", "ruwritingstyles-author-publication-actions-mint-the-zenodo", "samasachakram-waiting-16-07-202", "samudramanthanam-w5-outreach-human-after-w4-mg-do", "sanskritgrammar-kochergina-errata-from-a-printed-sheet-waiti", "sanskritgrammar-a61-human-submission-gates-add-timestamps-a", "sanskritgrammar-new-workstream-samskrtam-ru-z-integration", "sanskritkaraoke-first-real-end-to-end-render-blocked-ch", "sanskritkaraoke-adr-0004-next-ingest-original-audio-autom", "sanskritkaraoke-verify-google-login-logout-against-deployed-orig", "sanskritkaraoke-sementsov-agreement-sk-lic-2026-002-permi", "sanskritlexicography-send-the-consolidated-german-erratum-email-to", "sanskritlexicography-materialize-the-human-review-queue-for-legacy", "sanskritlexicography-make-the-review-queue-spreadsheet-friendly", "sanskritlexicography-design-the-human-gold-set-scaffold-statu", "sanskritlexicography-fill-and-adjudicate-the-human-gold-set-s", "sanskritlexicography-author-voice-pass-over-the-glue-mg-do", "sanskritlexicography-fair-doi-sprint-deferred-one-month-by", "sanskritlexicography-get-a-metered-transport-direct-https-to-h", "sanskritlexicography-vote-review-h1303-abbrev-sheet-html-pwg-ru-eva", "sanskritlexicography-vote-review-h1306-style-sheet-html-pwg-ru-eval", "sanskritlexicography-gated-next-needs-a-real-sample-mg-do", "sanskritlexicography-s7-quality-follow-through-queued-as-its-own", "sanskritlexicography-track-b-agni-human-sign-off-open-gate", "sanskritspellcheck-engineering-hardening-pr-45-waiting-on-exte", "socks5-vps-merge-add-socks5-vp", "spoken-sanskrit-corpus-mined-tier-quality-gate-dual-model-adjudi", "uprava-tier-0-autumn-revenue-membership-ask-comp", "uprava-megabook-sangram-implementation-plan-11-07", "uprava-next-issue-mg-telegram-interactive-login", "uprava-handoff-fill-1911-1913-megabook-sangram-implementation-plan-11-07", "uprava-handoff-fill-1911-1913-next-issue-mg-telegram-interactive-login"];
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(STORE_KEY) || '{}') || {}; } catch (e) { state = {}; }
+  function tally() {
+    var c = { approve:0, reject:0, defer:0 };
+    ids.forEach(function (id) { var v = state[id] && state[id].decision; if (v && c.hasOwnProperty(v)) c[v]++; });
+    document.getElementById('c-approve').textContent = c.approve;
+    document.getElementById('c-reject').textContent = c.reject;
+    document.getElementById('c-defer').textContent = c.defer;
+    document.getElementById('c-unvoted').textContent = ids.length - c.approve - c.reject - c.defer;
+  }
+  function applyCardUI(card) {
+    var id = card.getAttribute('data-id'); var rec = state[id] || {};
+    card.classList.remove('voted-approve','voted-reject','voted-defer');
+    card.querySelectorAll('button.vote').forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-vote') === rec.decision); });
+    card.querySelector('.vote-state').textContent = rec.decision ? rec.decision : 'unvoted';
+    if (rec.decision) card.classList.add('voted-' + rec.decision);
+    var ta = card.querySelector('textarea.note'); if (rec.note && !ta.value) ta.value = rec.note;
+  }
+  function save() { localStorage.setItem(STORE_KEY, JSON.stringify(state)); tally(); }
+  // H1523 residual / csl-pyutil#1 Part 1: always re-read the live textarea on vote
+  // and before export so a second vote click (or a missed `input` event) cannot
+  // drop a note that is still visible in the card.
+  function syncNoteFromDom(id) {
+    state[id] = state[id] || {};
+    var card = document.querySelector('.card[data-id="' + id + '"]');
+    if (!card) return;
+    var ta = card.querySelector('textarea.note');
+    if (ta) state[id].note = ta.value;
+  }
+  function vote(id, d) { syncNoteFromDom(id); state[id].decision = d; save(); }
+  function noteChange(id, t) { state[id] = state[id] || {}; state[id].note = t; save(); }
+  document.querySelectorAll('.card').forEach(function (card) {
+    var id = card.getAttribute('data-id'); applyCardUI(card);
+    card.querySelectorAll('button.vote').forEach(function (btn) {
+      btn.addEventListener('click', function () { vote(id, btn.getAttribute('data-vote')); applyCardUI(card); });
+    });
+    var ta = card.querySelector('textarea.note'); ta.addEventListener('input', function () { noteChange(id, ta.value); });
+  });
+  tally();
+  document.getElementById('downloadBtn').addEventListener('click', function () {
+    ids.forEach(function (id) { syncNoteFromDom(id); });
+    var decided = ids.filter(function (id) { return state[id] && state[id].decision; }).length;
+    var payload = { sheet_id: SHEET_ID, generated: "15-08-2026", decided: decided,
+      items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '' }; }) };
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
+    var url = URL.createObjectURL(blob); var a = document.createElement('a');
+    a.href = url; a.download = SHEET_ID + '_decisions.json'; document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+  });
+  var filterbar = document.getElementById('filterbar');
+  filterbar.addEventListener('click', function (e) {
+    var btn = e.target.closest('button[data-filter]'); if (!btn) return;
+    filterbar.querySelectorAll('button').forEach(function (b) { b.classList.remove('active'); });
+    btn.classList.add('active'); var f = btn.getAttribute('data-filter');
+    document.querySelectorAll('.card').forEach(function (card) {
+      var show = true;
+      if (f === 'unvoted') { var id = card.getAttribute('data-id'); show = !(state[id] && state[id].decision); }
+      else if (f !== 'all') { show = card.getAttribute('data-filt') === f; }
+      card.style.display = show ? '' : 'none';
+    });
+  });
+  var cardsEl = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  var activeIdx = 0;
+  function visibleCards() { return cardsEl.filter(function (c) { return c.style.display !== 'none'; }); }
+  document.addEventListener('keydown', function (e) {
+    if (e.target.tagName === 'TEXTAREA') return;
+    var vis = visibleCards(); if (!vis.length) return;
+    if (activeIdx >= vis.length) activeIdx = vis.length - 1;
+    var card = vis[activeIdx]; var id = card.getAttribute('data-id');
+    if (e.key === 'a') { vote(id, 'approve'); applyCardUI(card); }
+    else if (e.key === 'r') { vote(id, 'reject'); applyCardUI(card); }
+    else if (e.key === 'd') { vote(id, 'defer'); applyCardUI(card); }
+    else if (e.key === 'ArrowDown') { activeIdx = Math.min(activeIdx + 1, vis.length - 1); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'center'}); }
+    else if (e.key === 'ArrowUp') { activeIdx = Math.max(activeIdx - 1, 0); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'center'}); }
+    else return;
+    e.preventDefault();
+  });
+
+  var saveHandle = null, saveTimer = null;
+  function exportPayload() {
+    if (typeof syncNoteFromDom === 'function') {
+      ids.forEach(function (id) { syncNoteFromDom(id); });
+    }
+    var decided = ids.filter(function (id) { return state[id] && state[id].decision; }).length;
+    return JSON.stringify({ sheet_id: SHEET_ID, generated: new Date().toISOString(), decided: decided,
+      items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '' }; }) }, null, 2);
+  }
+  function scheduleAutosave() {
+    if (!saveHandle) return;
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(function () {
+      saveHandle.createWritable().then(function (w) {
+        w.write(exportPayload()).then(function () { w.close(); });
+      }).catch(function () {});
+    }, 1000);
+  }
+  var _origSave = save;
+  save = function () { _origSave(); scheduleAutosave(); };
+  if (window.showSaveFilePicker) {
+    var saveBtn = document.getElementById('saveBtn');
+    saveBtn.style.display = '';
+    saveBtn.addEventListener('click', function () {
+      window.showSaveFilePicker({suggestedName: SHEET_ID + '_decisions.json'}).then(function (h) {
+        saveHandle = h; scheduleAutosave();
+      }).catch(function () {});
+    });
+  }
+
+  var FS_KEY = STORE_KEY + ':fs', FS_DEFAULT = 1.5;
+  function fsGet() {
+    var v = parseFloat(localStorage.getItem(FS_KEY));
+    return (isFinite(v) && v >= 0.7 && v <= 3) ? v : FS_DEFAULT;
+  }
+  function fsApply(v) {
+    document.documentElement.style.setProperty('--fs', String(v));
+    document.getElementById('fsVal').textContent = Math.round(v * 100) + '%';
+  }
+  function fsSet(v) {
+    v = Math.min(3, Math.max(0.7, Math.round(v * 10) / 10));
+    localStorage.setItem(FS_KEY, String(v)); fsApply(v);
+  }
+  fsApply(fsGet());
+  document.getElementById('fsDown').addEventListener('click', function () { fsSet(fsGet() - 0.1); });
+  document.getElementById('fsUp').addEventListener('click', function () { fsSet(fsGet() + 0.1); });
+})();
+</script>
+</body>
+</html>
