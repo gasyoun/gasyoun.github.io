@@ -49,7 +49,7 @@
   <div class="wrap">
     <h1>Vote — review sheets</h1>
     <p class="sub">Голосование по карточкам PWG → RU. Открывается в браузере, работает офлайн,
-      экспорт решений одним файлом. Снимок 15-08-2026.
+      экспорт решений одним файлом. Снимок 16-08-2026.
       Каждый новый лист попадает сюда по умолчанию, отдельной просьбы не требуется.</p>
   </div>
 </header>
@@ -72,9 +72,7 @@
 <p class="sub">Сначала PWG → RU, ниже — всё остальное; внутри каждой группы от самого короткого.
   Светофор = насколько тяжело <em>голосовать</em>,
   не насколько тяжело было собрать лист. 🟢 ≤15 карточек, 5–15 мин · 🟡 16–50, 20–45 мин ·
-  🔴 51–200, 1–3 ч · ⚫ 200+, несколько заходов. Где лист уже мерил время (⏱, csl-pyutil V11),
-  светофор ставится по <em>замеренным</em> минутам, а не по числу карточек — минуты и есть
-  то, что светофор обещает.</p>
+  🔴 51–200, 1–3 ч · ⚫ 200+, несколько заходов.</p>
 
 <h3>PWG → RU</h3>
 
@@ -85,92 +83,64 @@
 </tr></thead>
 <tbody>
 <tr>
-  <td>h2805 · развёртка кружка (Comp.)</td><td class="n">7</td><td class="light">🟢</td>
-  <td>Форма уже постановлена (кружок по Кочергиной, не слова). Три вопроса развёртки:
-    слой (рендер / база карточек) · глиф (<code>˚</code> U+02DA · <code>°</code> U+00B0 ·
-    <code>॰</code> U+0970 — шрифтовый замер в листе) · тултип. По 8 реальных карточек
-    на вариант.</td>
-  <td>Свод §6.3 · развёртка на 102 карточки + ~2,1 тыс. корпусных вхождений (H2805)</td>
+  <td>sanskritlexicography-article-comparison_aksara</td><td class="n">6</td><td class="light">🟢</td>
+  <td>Gloss-review akṣara (55 glosses): 6 edits — 2 M (kūṭa glyph U+04EF + Śrīvidyā hint; Mahat as Sāṃkhya term) + 4 add-glosses; ported from the retired md sheet (H739).</td>
+  <td>unlike agni, which has its own _build_agni_ru.py), and aksara.persense-ru.md holds a third copy — move all three, plus stamp the verdicts into  or the apply…</td>
+  <td><a class="go" href="sheets/gloss_aksara.html">Открыть</a></td>
+</tr>
+<tr>
+  <td>sanskritlexicography-article-comparison_anya</td><td class="n">6</td><td class="light">🟢</td>
+  <td>Gloss-review anya (77 rows, NEW Fable 5 claude-fable-5 pass): 6 edits — 1 M (5Biii «противосложение» music-theory false friend for countersubject), 4 L + 1 add-gloss (H739).</td>
+  <td>move all three, plus stamp the verdicts into  or the apply reverts on the next build.</td>
+  <td><a class="go" href="sheets/gloss_anya.html">Открыть</a></td>
+</tr>
+<tr>
+  <td>h2805_q3_deploy</td><td class="n">7</td><td class="light">🟢</td>
+  <td>H2805 — развёртка постановленной графической пометы позиции в сложном слове (кружок по Кочергиной).</td>
+  <td>/decisions-apply закрывает свод §6.3 (слой+глиф+тултип) и запускает применяющий проход</td>
   <td><a class="go" href="sheets/h2805_q3_deploy.html">Открыть</a></td>
 </tr>
 <tr>
-  <td>h180 · re-glue <strong>v2</strong></td><td class="n">15</td><td class="light">🟢</td>
-  <td>Те же 15 склеенных карточек, но переделанные (H2827): типология клейки видна
-    чипами (<strong>＋ добавленный смысл</strong> · <strong>≈ пересказ</strong> ·
-    <strong>✕ отмена/правка</strong>), 3 677 цитат <code>&lt;ls&gt;</code> стали
-    рабочими ссылками на кёльнские сканы, непокрытые помечены
-    <code>⚑</code> (есть локус, нет цели — это и надо чеканить) и <code>∅</code>
-    (голая аббревиатура, указывать не на что), цепочки глосс NWS разбиты по
-    кластерам вместо точек. Решаете: верны ли типология и место каждой добавки.</td>
-  <td>H180, поставка 3 · критерий (d)</td>
+  <td>sanskritlexicography-article-comparison_ananta</td><td class="n">9</td><td class="light">🟢</td>
+  <td>Gloss-review ananta (102 glosses, NEW Fable 5 claude-fable-5 pass): 9 edits — 1 H (m</td>
+  <td>move all three, plus stamp the verdicts into  or the apply reverts on the next build.</td>
+  <td><a class="go" href="sheets/gloss_ananta.html">Открыть</a></td>
+</tr>
+<tr>
+  <td>h180-reglue-spotcheck-v2-2026-08-15</td><td class="n">15</td><td class="light">🟢</td>
+  <td>H2827 — the same 15 re-glue pilot cards, rebuilt.</td>
+  <td>/decisions-apply → H180 Deliverable 3, success criterion (d)</td>
   <td><a class="go" href="sheets/h180_reglue_v2.html">Открыть</a></td>
 </tr>
 <tr>
-  <td>h180 · re-glue (v1, устарел)</td><td class="n">15</td><td class="light">🟢</td>
-  <td>Первая версия: карточки одним блоком, без типологии и без ссылок. Оставлена
-    только для сверки — голосовать надо в v2.</td>
-  <td>H180, поставка 3</td>
+  <td>h180-reglue-spotcheck-2026-07-06</td><td class="n">15</td><td class="light">⚫</td>
+  <td>SUPERSEDED 15-08-2026 by the v2 row above (H2827)</td>
+  <td>vote the v2 row instead</td>
   <td><a class="go" href="sheets/h180_reglue.html">Открыть</a></td>
 </tr>
 <tr>
-  <td>h1210 · слепой A/B, 40</td><td class="n">40</td><td class="light">🟡</td>
-  <td>Годен ли русский перевод к публикации как есть — точен к немецкому, полон,
-    в научном регистре? Карточки <strong>не подписаны</strong>: два генератора вперемешку,
-    соответствие «карточка → плечо» лежит только в локе. Отбираются лишь карточки,
-    прошедшие канонический аудит.</td>
-  <td>Сравнение генераторов (H1210 / H2787); ни один из них не самоодобряется</td>
-  <td><a class="go" href="sheets/h1210_ab_blind_40.html">Открыть</a></td>
-</tr>
-<tr>
-  <td>h1682 · аббревиатуры</td><td class="n">33</td><td class="light">🟡</td>
-  <td>Ратификация 12 правил разделов + 17 спорных токенов + 3 <code>ls</code> + 1 мета.
-    Это <strong>не</strong> старый список на 273 карточки.</td>
-  <td>CONTRADICTIONS §4 · применение H1626 · RU_MAP</td>
-  <td><a class="go" href="sheets/h1682_abbrev_rules.html">Открыть</a></td>
-</tr>
-<tr>
-  <td>Правила композитов · ratify30</td><td class="n">30</td><td class="light">🟡</td>
-  <td>Работает ли каждое из 7 правил адъюдикатора на этой карточке?
-    Одобрить все семь — снимает <strong>3 975</strong> строк <code>differs</code>.</td>
-  <td>Очередь композитов (заменяет два листа 200/232)</td>
+  <td>sanskritlexicography-pwg-compound-rules_ratify30</td><td class="n">30</td><td class="light">🟢</td>
+  <td>H1887 — ратификация ПРАВИЛ, а не строк.</td>
+  <td>приняв правило, его класс продвигается целиком; отклонив — класс возвращается в очередь</td>
   <td><a class="go" href="sheets/compound_rules_30.html">Открыть</a></td>
 </tr>
 <tr>
-  <td>h180 · learner-core</td><td class="n">60</td><td class="light">🔴</td>
-  <td>Входит ли это заглавное слово PWG в базовый учебный корпус?</td>
-  <td>H180, порог поставки 4</td>
-  <td><a class="go" href="sheets/h180_learner.html">Открыть</a></td>
+  <td>h1682_abbrev_rules</td><td class="n">33</td><td class="light">🟢</td>
+  <td>H1682 — rule-level collapse of h1303_abbrev.</td>
+  <td>apply extends RU_MAP/pwg_ab_ru.py per-rule (bulk) and per-token (ambiguous), then CONTRADICTIONS §4 → D##.</td>
+  <td><a class="go" href="sheets/h1682_abbrev_rules.html">Открыть</a></td>
 </tr>
 <tr>
-  <td>h180 · типология</td><td class="n">73</td><td class="light">🔴</td>
-  <td>Подтвердить/исправить подтип типологии addenda, предложенный моделью</td>
-  <td>H180: κ против LLM</td>
-  <td><a class="go" href="sheets/h180_typology.html">Открыть</a></td>
-</tr>
-<tr>
-  <td>g5 · batch1 v3</td><td class="n">150</td><td class="light">🔴</td>
-  <td>Печатная готовность карточек живой очереди (немецкий остаток отфильтрован)</td>
-  <td>Лист gold-cut H1665 · печатный гейт</td>
-  <td><a class="go" href="sheets/g5_batch1v3.html">Открыть</a></td>
-</tr>
-<tr>
-  <td>BLI · золотой набор B1, проход 1</td><td class="n">500</td><td class="light">⚫</td>
-  <td>Аннотация, а не голосование: в поле заметки — множество приемлемых русских
-    эквивалентов через запятую. Reject = SKIP с причиной (только отсылка ·
-    имя собственное · грамматический аппарат). На карточке заглавное слово SLP1 + IAST +
-    полная глосса Кочергиной + бэйджи полосы/части речи/полисемии.</td>
-  <td>Скоринг P@1/P@5/MRR (H2402); проход 2 не запускается до заморозки прохода 1</td>
-  <td><a class="go" href="sheets/bli_gold_b1_500.html">Открыть</a></td>
-</tr>
-<tr>
-  <td>G6 · золотой набор H215, полные 320</td><td class="n">320</td><td class="light">⚫</td>
-  <td>Верна ли LLM-метка по типологии из 6 значений
-    (<code>correct · lemma-variant · proper-name · partial · wrong-sense · hallucinated</code>).
-    Каждая карточка несёт доказательства ДО голоса: словарные значения с маршрутизацией по периоду,
-    корень по Уитни, засвидетельствованные контексты из своей работы, ранжированную глоссу.
-    Стартовые 20 карточек уже проголосованы (H1796) — здесь полный набор.</td>
-  <td>G6 → G7 → G10 публикационного релиза Sa→Ru TM</td>
+  <td>h215-gold-full-320-2026-08-14</td><td class="n">320</td><td class="light">🔴</td>
+  <td>H2769 — the FULL G6 gold set, all 320 cards</td>
+  <td>/decisions-apply (apply_decisions.py --gate G6). Gates G6 → G7 → G10 of the Sa→Ru TM publication release</td>
   <td><a class="go" href="sheets/h215_gold_full_320.html">Открыть</a></td>
+</tr>
+<tr>
+  <td>sanskritlexicography-bli_gold_b1_500_review</td><td class="n">500</td><td class="light">🔴</td>
+  <td>H2551 — MG pass-1 BLI gold annotation (Sa→Ru), 500 cards.</td>
+  <td>feeds H2402's scorer once labeled</td>
+  <td><a class="go" href="sheets/bli_gold_b1_500.html">Открыть</a></td>
 </tr>
 </tbody>
 </table>
@@ -185,109 +155,25 @@
 </tr></thead>
 <tbody>
 <tr>
-  <td>Сундараканда · смешанная письменность в примечаниях</td><td class="n">24</td><td class="light">🟡</td>
-  <td><strong>Три правила и 21 слово.</strong> Замечание по бюллетеню песни 1
-    («что за мусор с транслитерацией?») указывало на одно слово, а таких мест в
-    корпусе оказалось 643. 553 исправлены машинно; здесь только то, чего машина
-    не вправе решать. Первые три карточки — <em>правила</em>, и они закрывают
-    пачками: таблица русской практической транскрипции (ṭ→т, ṇ→н, ś→ш…), две
-    её спорные строки (слоговое <em>ṛ</em> и анусвара <em>ṃ</em> — конкурирующие
-    нормы), и вопрос объёма: чинить ли служебные поля, которых рецензент не
-    видит. Дальше — по слову, каждое со своей фразой и машинными вариантами;
-    дефектная буква подсвечена красным прямо в предложении. Своё чтение в
-    примечании перевешивает кнопку.</td>
-  <td>Гейт `translit_hygiene.py --check` в CI · чистая транслитерация в печатном аппарате</td>
-  <td><a class="go" href="sheets/h2864_translit_residue.html">Открыть</a></td>
-</tr>
-<tr>
-  <td>Нилакантха · отступления от Панини, признанные традицией</td><td class="n">46</td><td class="light">🟡</td>
-  <td><strong>Регистр уже собран — голос его правит, а не создаёт.</strong> По всем
-    24 694 шлокам с ṭīkā «Бхаратабхавадипы» найдено 165 мест, где Нилакантха сам
-    защищает форму как <em>ārṣa</em> / <em>chāndasa</em>; 151 попало в регистр,
-    14 отклонено как омоним (<em>ārṣa</em> — вид брака, «относящийся к риши»,
-    «Веда»). Первые 16 карточек — ручные решения: каждая показывает цитату,
-    вердикт и обоснование. Остальные 30 — воспроизводимая выборка (seed 2860)
-    строк, тип которых выведен машинно из грамматического термина, названного
-    рядом со словом-лицензией; здесь проверяется <em>перевод термина в тип</em>,
-    а не сам факт лицензии. Каждая карточка говорит, что именно сделают
-    «согласен» и «не согласен» — со строкой и с измеренной точностью 91,5 %.</td>
-  <td>H2860 · регистр как датасет/статья · слой привязки к сутрам Панини</td>
-  <td><a class="go" href="sheets/nilakantha_licence_46.html">Открыть</a></td>
-</tr>
-<tr>
-  <td>BookIndex · крест «видео ↔ главы» <strong>v3</strong></td><td class="n">210</td><td class="light">🔴</td>
-  <td><strong>≈70 мин</strong> — не на глаз: заход 15-08 дал 44 решения за 868 с
-    активного времени, 20 с на карточку. Остаток после него: 30 принято,
-    14 отклонено — применено к данным и с листа снято, второй раз не спрашиваем.
-    Карточка называет запись по
-    имени, показывает термин указателя с книжным контекстом, у LLM-рёбер метод
-    отделён от доказательства (25/30 цитат помечены «источник не найден —
-    проверить»). Кончилось время — <strong>⏸</strong> останавливает таймер,
-    <strong>«Сдать сколько успел»</strong> выгружает проголосованное, остальное
-    остаётся в браузере до следующего захода. Одобренное ребро попадает на
-    печатный разворот 4–5.</td>
-  <td>Печатный разворот 4–5 (H2707) · разбор 7 дублей каталога</td>
-  <td><a class="go" href="sheets/h2707_crosswalk_gate.html">Открыть</a></td>
-</tr>
-<tr>
-  <td>Глоссы PD · 4 леммы</td><td class="n">21</td><td class="light">🟡</td>
-  <td>Принять/отклонить правки русской глоссы:
-    <a href="sheets/gloss_agni.html">agni 11</a> ✅ отголосовано и внесено 15-08-2026 (9 принято · 1 отклонено · 1 отложено) ·
-    <a href="sheets/gloss_aksara.html">akṣara 6</a> ·
-    <a href="sheets/gloss_ananta.html">ananta 9</a> ·
-    <a href="sheets/gloss_anya.html">anya 6</a></td>
-  <td>Оверлеи сравнения статей</td>
-  <td><a class="go" href="sheets/gloss_aksara.html">Открыть</a></td>
-</tr>
-<tr>
-  <td>Uprava · GTD-харвест</td><td class="n">66</td><td class="light">🔴</td>
-  <td>По каждой строке: это задача для человека — или агент сделает сам?
-    Сырой обход <code>.ai_state.md</code> дал 1180 строк; 427 уже выполнены,
-    618 выполнимы агентом, 69 — дубли worktree-копий. Осталось 66 в 30 репозиториях.</td>
-  <td>Чистый список «что ждёт человека» в хабе GTD</td>
-  <td><a class="go" href="sheets/uprava_gtd_harvest_66.html">Открыть</a></td>
-</tr>
-<tr>
-  <td>Uprava · GTD-харвест, 2-й заход</td><td class="n">22</td><td class="light">🟢</td>
-  <td>Тот же вопрос на новом остатке: человек или агент?
-    Харвестер теперь сам отбрасывает уже отклонённые строки и копии одной
-    строки из разных чекаутов, так что 423 кандидата свелись к 22 —
-    148 отчитываются о сделанном, 7 заглушки, 246 агент сделает сам.</td>
-  <td>Чистый список «что ждёт человека» в хабе GTD</td>
+  <td>uprava-gtd-harvest-triage_human-gated-22</td><td class="n">22</td><td class="light">🟢</td>
+  <td>Second pass on the harvest backlog: which remaining .ai_state.md Next Steps lines need a HUMAN?</td>
+  <td>approved rows become hub rows; rejected ids appended to  so the next harvest drops them. Decisions:</td>
   <td><a class="go" href="sheets/uprava_gtd_harvest_triage_22.html">Открыть</a></td>
 </tr>
 <tr>
-  <td>csl-atlas · xref shared-core</td><td class="n">40</td><td class="light">🟡</td>
-  <td>Проверка по источнику для рёбер xref общего ядра MW/PWG
-    (10 из 50 сняты автоматически как префиксные контроли, 40 остались человеку).</td>
-  <td>Слой перекрёстных ссылок csl-atlas</td>
-  <td><a class="go" href="sheets/csl_atlas_xref_40.html">Открыть</a></td>
+  <td>commentarystrategies-nilakantha-licence_h2860</td><td class="n">46</td><td class="light">🟡</td>
+  <td>Регистр отступлений от Панини, признанных традицией — Нилакантха, «Бхаратабхавадипа».</td>
+  <td>правка  → python scripts/build_licence_register_nilakantha.py (нужен восстановленный скрейп: python mahabharata-nilakantha/nilakantha_parser.py scrape). Ничто…</td>
+  <td><a class="go" href="sheets/nilakantha_licence_46.html">Открыть</a></td>
 </tr>
 <tr>
-  <td>Гипотезы Рену · v2</td><td class="n">70</td><td class="light">🔴</td>
-  <td>Переголосование с нуля. Первые 3 голоса v1 (все reject) вскрыли
-    лемма-глобальные свидетельства под вопросами о конкретном состоянии.</td>
-  <td>Программа H062</td>
-  <td><a class="go" href="sheets/renou_hypotheses_v2.html">Открыть</a></td>
-</tr>
-<tr>
-  <td>RV · гейт расхождений v5</td><td class="n">100</td><td class="light">🔴</td>
-  <td>Калибровка 4-классовой типологии (5 переводчиков). ≥80 % согласия запускает
-    прогон на 10 552 строфы. Машинная κ на <code>lexical_variant</code> vs
-    <code>semantic_shift</code> — на уровне случайности, этот голос и есть арбитр.</td>
-  <td>H1844, шаг 9 (никогда не самоодобряется)</td>
-  <td><a class="go" href="sheets/rv_divergence_gate_v5.html">Открыть</a></td>
+  <td>bookindex-crosswalk-video-chapter-v2</td><td class="n">255</td><td class="light">⚫</td>
+  <td>Кураторский гейт креста «видео ↔ главы» (W1, H2711/остаток H2706):</td>
+  <td>python scripts/crosswalk/apply_gate_decisions.py &lt;файл&gt; (статусы рёбер + duplicate_of + телеметрия времени) → npm run data:assemble</td>
+  <td><a class="go" href="sheets/h2707_crosswalk_gate.html">Открыть</a></td>
 </tr>
 </tbody>
 </table>
-</div>
-
-<div class="card" style="margin-top:16px">
-  <p><strong>Если только один заход:</strong> h1682 (33) → правила композитов (30) → стоп.
-    Эти два снимают противоречие по аббревиатурам и ~4 тыс. строк композитов.
-    g5 (150) и BLI (500) — отдельные вечера.</p>
-  <p class="muted">h1306 (9) снят 15-08-2026: проголосован и применён — теги G5 и правила промпта
-    по дублетам и <code>v. l.</code> разблокированы.</p>
 </div>
 
 <h2>Не голосовать</h2>
@@ -295,42 +181,104 @@
 <table>
 <thead><tr><th>Лист</th><th class="n">n</th><th>Почему</th></tr></thead>
 <tbody>
-<tr><td><code>h178_mqm</code> / <code>h178_likert</code> / <code>h178_pairwise</code></td><td class="n">30×3</td>
-  <td>Сняты 26-07 (A2). Считается из <code>h178_da</code> + прогон агента (H274).</td></tr>
-<tr><td><code>h178_da</code></td><td class="n">30</td><td>Уже проголосован, 27/3.</td></tr>
-<tr><td><code>h1303_abbrev</code></td><td class="n">273</td><td>Заменён листом h1682 (33), не голосовался.</td></tr>
-<tr><td>compound-differs 200 + arm2 232</td><td class="n">432</td>
-  <td>Заменены 29-07 ратификацией 30 <em>правил</em>: незачем голосовать строки, по которым машина уже вынесла решение.</td></tr>
-<tr><td><code>rv_divergence_gate</code> v2</td><td class="n">100</td><td>Используйте v5 (пять переводчиков).</td></tr>
-<tr><td><code>g5_batch1</code></td><td class="n">150</td><td>Прерван — протёк немецкий. Заменён на v3.</td></tr>
-<tr><td><code>g6_mqm_starter</code></td><td class="n">20</td><td>Проголосован и применён с адъюдикацией (H1796).</td></tr>
-<tr><td><code>h1306_style</code></td><td class="n">9</td><td>Проголосован 15-08-2026 (9/9) и применён (H2804). Приняты A1 и B1; по <em>im Comp.</em> отклонены все три варианта, принято графическое <code>॰-</code> / <code>-॰</code> — форма развёртки уходит на отдельный лист (H2805).</td></tr>
+<tr><td>review-vedic-r02-adjudication.html</td><td class="n">1</td><td>substantive_detection (вариант Б из verdict-variants) — зачесть содержательную детекцию, репортить оба слоя раздельно; add_alias отклонён.</td></tr>
+<tr><td>uprava-fable-unique-lens-c13-u9</td><td class="n">2</td><td>C13 + U9 approve</td></tr>
+<tr><td>uprava-nagari2013-okas-guda-sphic_4lemmas</td><td class="n">4</td><td>4/4 approve (guda note: keep anus secondary, trust PWG/Borissov/KEWA-EWA over the Vasmer cognate)</td></tr>
+<tr><td>sanskritgrammar-m03-ch1-inserts-visa_15.07.26</td><td class="n">5</td><td>5/5 approve (заметки-уточнения: V1 дефективность=норма + 105 корней в «Талмуде»; I2 продуктивность топ-50≈70%; I3 Панини пандиахроничен; I5 &gt;2000 лет + запрос Приложения ~750 подлинных корней MW)</td></tr>
+<tr><td>systema-sanscriticum-deploy-gate_options5_review.html</td><td class="n">5</td><td>A + B approve, C + D reject</td></tr>
+<tr><td>uprava-skill-mine_h900-h1050</td><td class="n">5</td><td>5 approve · 0 reject</td></tr>
+<tr><td>claudeconfig-leitan-klammerdiagramm_crosswalk-d1-d6</td><td class="n">6</td><td>D1/D2/D3/D6 rulings; D4 = REJECT → ghost-member notation built; D5 override (uddāma recut to Leitan, plate preserved historical)</td></tr>
+<tr><td>uprava-skills-to-subagents-h1162_6candidates</td><td class="n">6</td><td>6/6 approved, 0 rejected — SA-1 approved as its own agent (the fact-check-against-source-reuse third path declined)</td></tr>
+<tr><td>uprava-skill-mine_h1661-h1778_28-07-26</td><td class="n">6</td><td>5 approve · 1 reject</td></tr>
+<tr><td>uprava-skill-mine_h1098-h1610_24-07-26</td><td class="n">6</td><td>6 approve · 0 reject</td></tr>
+<tr><td>sangram-sg-mo-002-a-stems-visa_15.07.26</td><td class="n">7</td><td>7/7 approve (заметки: A2 «звательная форма, не падеж» + запрос обоснования универсума; A5 вопрос о ведийском расслоении; A6 «восстанови»)</td></tr>
+<tr><td>uprava-subagent-fit-h1161_5candidates</td><td class="n">7</td><td>7/7 approve (build all)</td></tr>
+<tr><td>sanskritgrammar-precative-label-dcs2026-visa_17.07.26</td><td class="n">7</td><td>7/7 voted — P1 ratified variant B; P6 = reject, intentionally not applied (no replacement wording given, routed to @DECIDE with P4)</td></tr>
+<tr><td>uprava-fable-footprint-refresh3_c11-c12-updates</td><td class="n">7</td><td>7/7 approve</td></tr>
+<tr><td>sangram-sg-wf-003-krt-suffixes-visa_15.07.26</td><td class="n">8</td><td>✅ применена по прямому указанию MG (без decisions.json)</td></tr>
+<tr><td>sangram-sg-mo-017-perfect-visa_15.07.26</td><td class="n">8</td><td>8/8 approve (заметки: A1 уточняющий вопрос про DCS-оговорку; A4 задокументировать распределение as/kṛ/bhū для методички Кочергиной Занятие 22 с.153; A5 предложение проверить по списку известных…</td></tr>
+<tr><td>sangram-sg-mo-001-declension-overview-visa_16.07.26</td><td class="n">8</td><td>8/8 approve (A4: заменить приближение по финали леммы настоящей парадигматической классификацией — исполнено: attested-Ins.Sg, -a 62,9 %→52,6 %)</td></tr>
+<tr><td>sanskritgrammar-sg-wf-004-taddhita-revisa_visa</td><td class="n">8</td><td>8/8 approve — статья ОПУБЛИКОВАНА (плашка кандидата снята, вердикт «в основном счётна» принят)</td></tr>
+<tr><td>sanskritgrammar-metodichka-apte-v1_17.07.26</td><td class="n">9</td><td>8/9 approve, 1 unvoted (zan-29)</td></tr>
+<tr><td>sanskritgrammar-sg-mo-021-future_visa</td><td class="n">9</td><td>9/9 approve — published</td></tr>
+<tr><td>sanskritgrammar-a65-verdict-validation-disagreements_16.07.26</td><td class="n">9</td><td>9/9 approve (register upheld)</td></tr>
+<tr><td>sangram-sg-wf-008-tatpurusha-visa_15.07.26</td><td class="n">9</td><td>⚫ MOOT — не голосовался (реализация H990 замещена канонической H989)</td></tr>
+<tr><td>uprava-decide-retire_h1341</td><td class="n">9</td><td>9 approve · 0 reject · 0 defer</td></tr>
+<tr><td>sangram-prose-style-guide-visa_16.07.26</td><td class="n">10</td><td>10/10 approve — guide itself visaed</td></tr>
+<tr><td>sanskritgrammar-sg-mo-028-causative_visa</td><td class="n">10</td><td>10/10 approve — published</td></tr>
+<tr><td>sanskritgrammar-sg-wf-004-taddhita_visa</td><td class="n">10</td><td>8/10 decided — 6 approve + 2 defer + 1 reject (вердикт-карта 07 отклонена → статья остаётся кандидатом)</td></tr>
+<tr><td>sanskritlexicography-article-comparison_agni</td><td class="n">11</td><td>9 approve · 1 reject · 1 defer (11/11 voted)</td></tr>
+<tr><td>sangram-w2-core-11candidates-visa_17.07.26</td><td class="n">11</td><td>12/12 approve (11 + 1 duplicate MO-028 card)</td></tr>
+<tr><td>uprava-fable-footprint-skills_org</td><td class="n">11</td><td>11/11 approve</td></tr>
+<tr><td>uprava-weekly-decide_27-07-2026</td><td class="n">12</td><td>10 approve · 2 reject · 0 defer</td></tr>
+<tr><td>sanskritgrammar-metodichka-kochergina-v1_16.07.26</td><td class="n">13</td><td>12 approve · 1 reject · 0 defer</td></tr>
+<tr><td>sanskritgrammar-m03-phase0-visa-pack_13.07.26</td><td class="n">14</td><td>14/14 approve (заметки: P10 индо-арабское понятие корня по устн</td></tr>
+<tr><td>uprava-frozen2026h2_wip-cap-census</td><td class="n">15</td><td>0 freeze · 2 defer (R-RVC, R-SOCKS5) · 13 keep</td></tr>
+<tr><td>commentarystrategies-sundarakanda-commentaries_35-37_review.</td><td class="n">16</td><td>applied (9 accept / 7 edit / 0 reject)</td></tr>
+<tr><td>sanskritgrammar-pwg-ghostword-residue_h1323</td><td class="n">16</td><td>11 confirmed ghost-words / 5 rejected (rejects: BAgApahArajAti decomposable, bfhatsUryasidDAnt technical term, ISvare/KamBAyatabindara/babakARa untranslated German residue)</td></tr>
+<tr><td>uprava-weekly-decide_13-07-2026</td><td class="n">17</td><td>AGENT-RULEABLE supersession check — 7/17 superseded by an applied ruling elsewhere, 10/17 still-open survivors folded forward (unseen-reset, not re-asked from this stale sheet)</td></tr>
+<tr><td>g6-mqm-gold-starter-2026-07-25</td><td class="n">20</td><td>16 approve · 3 reject · 1 defer (после адъюдикации; сырой экспорт был 14/6/0)</td></tr>
+<tr><td>uprava-portfolio-disposition_org</td><td class="n">23</td><td>23 approve · 0 reject · 0 defer</td></tr>
+<tr><td>h2864_translit_residue</td><td class="n">24</td><td>23 решения за 632 с</td></tr>
+<tr><td>h178_da</td><td class="n">30</td><td>27 approve / 3 reject, DA numeric channel 15/30</td></tr>
+<tr><td>sanskritlexicography-gorresio-southern-map_audit-26-07-26</td><td class="n">32</td><td>28 approve · 4 reject · 0 defer</td></tr>
+<tr><td>uprava-weekly-decide_20-07-2026</td><td class="n">34</td><td>34 approve · 0 reject · 0 defer</td></tr>
+<tr><td>uprava-weekly-decide_22-07-2026</td><td class="n">40</td><td>37 approve · 3 reject · 0 defer</td></tr>
+<tr><td>uprava-gtd-harvest_human-gated-66</td><td class="n">66</td><td>47 approve · 19 reject · 0 defer (66/66 voted, 1:1 with the manifest)</td></tr>
+<tr><td>uprava-weekly-decide_11-07-2026</td><td class="n">82</td><td>74 approve · 5 reject · 3 unvoted-but-ruled</td></tr>
+<tr><td>g5-live-queue-batch1-2026-07-25</td><td class="n">150</td><td>3 approve · 2 reject · 145 unvoted (abort)</td></tr>
 </tbody>
 </table>
 </div>
 
 <h2>Ещё не собрано</h2>
 <div class="card">
-  <p><strong>h1210 A/B blind</strong> (40, 🟡) — единственный лист, который пересобрать нельзя.
-  Генератор на месте, но его входы (<code>arm_a/arm_b.canonical_audit.json</code>,
-  <code>slice_result</code>) gitignored и удалены с диска; восстановить их — значит заново
-  прогнать платный эксперимент (плечо B — вызовы DeepSeek). Плюс в коммитнутом локе уже лежит
-  ключ разослепления на фиксированные 40 карточек: новый прогон по новым данным этот ключ
-  обесценит. Нужно решение человека о трате, а не пересборка листа.</p>
-  <p class="muted">BLI gold B1 (500) пересобран 15-08-2026 — байт в байт та же генерация
-  12-08-2026 (хеш лока совпал), лежит выше.</p>
-  <p class="muted">Золотой набор H215 (320) собран 15-08-2026 и лежит выше, в разделе PWG → RU.
-  Лист xref csl-atlas (40) тоже теперь размещён здесь — оба residual'а H2755 закрыты.</p>
+<p>uprava-stenogrammy-path-names_h2839 (19, 🟡) — ещё не скопирован в клон хаба.</p>
+<p>uprava-weekly-decide_03-08-2026 (3, 🟢) — ещё не скопирован в клон хаба.</p>
+<p>rv_divergence_gate_2026-07-30-v5 (100, 🟢) — ещё не скопирован в клон хаба.</p>
+<p>rv_divergence_gate_2026-07-29-v2 (100, 🔴) — ещё не скопирован в клон хаба.</p>
+<p>h1210-ab-blind-100card-2026-07-29 (40, 🟢) — ещё не скопирован в клон хаба.</p>
+<p>bookindex-authority_decide-tier (34, 🟢) — ещё не скопирован в клон хаба.</p>
+<p>sanskritlexicography-pwg-compound-differs_stratified200 (200, ⚖️) — ещё не скопирован в клон хаба.</p>
+<p>sanskritlexicography-pwg-compound-differs_rulestrat_arm2 (232, ⚖️) — ещё не скопирован в клон хаба.</p>
+<p>sanskritlexicography-acc_ncc_p2_spotcheck (1, 🔴) — ещё не скопирован в клон хаба.</p>
+<p>g5-live-queue-batch1v3-2026-07-26 (150, 🟡) — ещё не скопирован в клон хаба.</p>
+<p>h1303_abbrev (273, ⚠️) — ещё не скопирован в клон хаба.</p>
+<p>uprava-weekly-decide_29-07-2026 (?, 🟢) — ещё не скопирован в клон хаба.</p>
+<p>csl-atlas-h1684-spotcheck_61rows (61, 🟡) — ещё не скопирован в клон хаба.</p>
+<p>csl-atlas-xref-shared-core_40edges (40, 🟢) — ещё не скопирован в клон хаба.</p>
+<p>sanskritlexicography-kochergina-okas-guda-sphic_4rows (4, 🟢) — ещё не скопирован в клон хаба.</p>
+<p>samudramanthanam-nkrya-3path-lemma_adjudication51 (51, 🟡) — ещё не скопирован в клон хаба.</p>
+<p>samudramanthanam-kss_book12-14-lowconf (43, 🟡) — ещё не скопирован в клон хаба.</p>
+<p>sanskritspellcheck-filefirst-scanverify_109rows_review.html (109, 🟡) — ещё не скопирован в клон хаба.</p>
+<p>indologyscholars-renou-precision_gold150_review.html (150, 🟡) — ещё не скопирован в клон хаба.</p>
+<p>commentarystrategies-sundarakanda-commentaries_batch2_review (38, ⚖️) — ещё не скопирован в клон хаба.</p>
+<p>commentarystrategies-sundarakanda-commentaries_batch3_review (227, ⚖️) — ещё не скопирован в клон хаба.</p>
+<p>commentarystrategies-sundarakanda-lexical_all68_review.html (611, ⚖️) — ещё не скопирован в клон хаба.</p>
+<p>commentarystrategies-edition-footnotes_v1_review.html ~~foot (1013, ⚖️) — ещё не скопирован в клон хаба.</p>
+<p>commentarystrategies-h1685-adjudication-spotcheck (133, 🟡) — ещё не скопирован в клон хаба.</p>
+<p>sanskritlexicography-renou-hypotheses_pilot_review.html ~~re (70, 🟡) — ещё не скопирован в клон хаба.</p>
+<p>sanskritlexicography-acc_ncc_p2_c_d_review.html (49, 🔄) — ещё не скопирован в клон хаба.</p>
+<p>sanskritlexicography-acc_ncc_p2_spotcheck.html (1, 🔴) — ещё не скопирован в клон хаба.</p>
+<p>csl-atlas-lrv-fri-patel_l0dictset_review.html ~~lrv_fri_pate (10, 🟢) — ещё не скопирован в клон хаба.</p>
+<p>h180-typology-kappa-2026-07-06 (73, 🟡) — ещё не скопирован в клон хаба.</p>
+<p>h180-learner-threshold-2026-07-06 (60, 🟡) — ещё не скопирован в клон хаба.</p>
+<p>h178_mqm (30, ⛔) — ещё не скопирован в клон хаба.</p>
+<p>h178_likert (30, ⛔) — ещё не скопирован в клон хаба.</p>
+<p>h178_pairwise (30, ⛔) — ещё не скопирован в клон хаба.</p>
+<p>MWS A18 citation-register verification sheet (50, 🟡) — ещё не скопирован в клон хаба.</p>
+<p>whitneyroots-queue-a_kept-class-additions (16, 🟢) — ещё не скопирован в клон хаба.</p>
+<p>whitneyroots-queue-b_suspicious-high-freq-ppp (12, 🟢) — ещё не скопирован в клон хаба.</p>
+<p>whitneyroots-queue-c_malformed-ppp (76, 🟢) — ещё не скопирован в клон хаба.</p>
+<p>whitneyroots-queue-d_grammar-exception-tags (101, 🟢) — ещё не скопирован в клон хаба.</p>
+<p>whitneyroots-queue-e_reverted-ivi-pairs (118, 🟡) — ещё не скопирован в клон хаба.</p>
 </div>
 
 <footer>
   Листы самодостаточны: один HTML-файл, без внешних запросов, голоса не уходят на сервер.
-  Источник и статусы — <code>REVIEW_SHEETS_INDEX.md</code> и
-  <code>docs/PWG_TRANSLATION_UNEXECUTED_HANDOFFS_DEEPSEEK_TM_CACHE_2026-08-14.md</code>
-  в приватном хабе Uprava. H2755, 14-08-2026 · H2774, 15-08-2026 (золотой набор H215 320,
-  xref csl-atlas 40, порядок «PWG сверху») · H2787, 15-08-2026 (слепой A/B на 40 карточках,
-  оба плеча прогнаны заново) · H2778, 15-08-2026 (BLI gold B1 500 пересобран
-  и размещён; h1210 не пересобирается — входы удалены).
+  Источник и статусы — <code>REVIEW_SHEETS_INDEX.md</code> в приватном хабе Uprava.
+  Эта страница сгенерирована <code>Uprava/tools/build_vote_hub_index.py</code> (H2854 шаг 3) —
+  руками не редактируется, правьте реестр и перезапускайте генератор.
 </footer>
 
 </div>
