@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="color-scheme" content="dark">
+<title>Смешанная письменность в примечаниях Сундараканды — остаток — 24 items</title>
+<style>
+  :root { color-scheme: dark; --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --text:#e6e6e6; --muted:#9aa0aa;
+          --accent:#5b8cff; --ok:#3fb950; --bad:#f85149; --defer:#d29922; --border:#2a2f3a; }
+  * { box-sizing: border-box; }
+  body { background:var(--bg); color:var(--text); font-family:-apple-system,Segoe UI,Roboto,sans-serif;
+         margin:0; padding:0 0 120px 0; }
+  header.top { position:sticky; top:0; z-index:10; background:var(--panel); border-bottom:1px solid var(--border);
+               padding:14px 20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+  header.top h1 { font-size:16px; margin:0; }
+  header.top .sub { color:var(--muted); font-size:12px; max-width:760px; }
+  .tally { display:flex; gap:14px; font-size:13px; }
+  .tally span.count { font-weight:700; }
+  .tally .approve { color:var(--ok); } .tally .reject { color:var(--bad); }
+  .tally .defer { color:var(--defer); } .tally .unvoted { color:var(--muted); }
+  .toolbar { padding:10px 20px; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  button.dl { background:var(--accent); color:#fff; border:none; padding:8px 14px; border-radius:6px;
+              cursor:pointer; font-size:13px; }
+  button.dl:hover { opacity:.9; }
+  .filterbar { display:flex; gap:6px; flex-wrap:wrap; }
+  .filterbar button { background:var(--panel2); border:1px solid var(--border); color:var(--text);
+                       padding:6px 10px; border-radius:14px; font-size:12px; cursor:pointer; }
+  .filterbar button.active { border-color:var(--accent); color:var(--accent); }
+  main { max-width:980px; margin:0 auto; padding:10px 20px; }
+  .card { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:16px;
+          margin-bottom:16px; }
+  .card.voted-approve { border-left:4px solid var(--ok); }
+  .card.voted-reject { border-left:4px solid var(--bad); }
+  .card.voted-defer { border-left:4px solid var(--defer); }
+  .card header { display:flex; justify-content:space-between; align-items:baseline; }
+  .card .hw { font-size:18px; font-weight:700; }
+  .badge { font-size:11px; background:var(--panel2); padding:2px 8px; border-radius:10px;
+           margin-left:8px; color:var(--muted); }
+  .question { margin:8px 0 12px; font-size:14px; }
+  .panel { background:var(--panel2); border-radius:8px; padding:10px 12px; font-size:13px; margin-bottom:10px; }
+  .panel h4 { margin:0 0 6px; font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+  .panel pre { white-space:pre-wrap; word-break:break-word; margin:0; font-size:12px; line-height:1.45; }
+  .chip { display:inline-block; background:#263042; border-radius:5px; padding:2px 7px; margin:2px 3px 2px 0; font-size:12px; }
+  .muted { color:var(--muted); font-style:italic; }
+  .controls { display:flex; align-items:center; gap:8px; margin-top:4px; }
+  button.vote { border:1px solid var(--border); background:var(--panel2); color:var(--text);
+                padding:7px 12px; border-radius:6px; cursor:pointer; font-size:13px; }
+  button.vote.approve.active { background:var(--ok); border-color:var(--ok); color:#04240b; }
+  button.vote.reject.active { background:var(--bad); border-color:var(--bad); color:#2a0a08; }
+  button.vote.defer.active { background:var(--defer); border-color:var(--defer); color:#2a1d02; }
+  .vote-state { margin-left:6px; font-size:12px; color:var(--muted); }
+  textarea.note { width:100%; margin-top:10px; min-height:88px; background:#11141a !important; color:#e6e6e6 !important;
+                  -webkit-text-fill-color:#e6e6e6; border:1px solid var(--border); border-radius:6px; padding:8px; font-size:13px;
+                  font-family:inherit; resize:vertical; }
+  textarea.note::placeholder { color:var(--muted); opacity:1; }
+  footer.hint { max-width:980px; margin:20px auto; padding:0 20px; color:var(--muted); font-size:12px; }
+  kbd { background:#263042; border-radius:4px; padding:1px 5px; font-size:11px; }
+
+  .screening-banner { margin: 0 20px 12px; padding: 10px 14px; border-radius: 8px;
+    border: 1px solid var(--accent); background: #152033; font-size: 12px; line-height: 1.45;
+    color: var(--text); max-width: 980px; }
+  .screening-banner code { font-size: 11px; color: var(--accent); }
+  .screening-banner .sc-d { color: var(--defer); font-weight: 700; }
+
+  .idchip { font-family:ui-monospace,Consolas,monospace; font-size:11px; color:var(--muted);
+            background:var(--panel2); border:1px solid var(--border); padding:2px 7px;
+            border-radius:6px; user-select:all; }
+  .card header { gap:10px; }
+  .hw a.hwlink { color:inherit; text-decoration:underline dotted; text-underline-offset:3px; }
+  .hw a.hwlink:hover { color:var(--accent); }
+  mark.hl { background:#453407; color:#ffd75e; padding:0 2px; border-radius:3px; }
+  .savebanner { max-width:980px; margin:10px auto 0; padding:8px 20px; font-size:12.5px; }
+  .savebanner code { background:var(--panel2); border:1px solid var(--border); padding:1px 6px; border-radius:5px; }
+  .ratingrow { display:flex; align-items:center; gap:6px; margin-top:10px; flex-wrap:wrap; }
+  .ratinglabel { font-size:12px; color:var(--muted); margin-right:4px; }
+  button.rate { border:1px solid var(--border); background:var(--panel2); color:var(--text);
+                width:34px; padding:6px 0; border-radius:6px; cursor:pointer; font-size:13px; }
+  button.rate.active { background:var(--accent); border-color:var(--accent); color:#fff; }
+  button.rate.active.below { background:var(--defer); border-color:var(--defer); color:#2a1d02; }
+  .rate-state { font-size:12px; color:var(--muted); margin-left:4px; }
+  :root { --fs:1.5; }
+  header.top h1 { font-size:calc(16px * var(--fs)) !important; }
+  header.top .sub { font-size:calc(12px * var(--fs)) !important; }
+  .tally, button.dl, button.vote, button.rate, textarea.note, .reject-label-select,
+  #strictReviewerWrap, #strictReviewerWrap input { font-size:calc(13px * var(--fs)) !important; }
+  .filterbar button, .fsctl button, .fsctl .fsval, .chip, .vote-state, .rate-state,
+  .ratinglabel, .rejectlabellabel, footer.hint, div.legend,
+  #strictReviewError { font-size:calc(12px * var(--fs)) !important; }
+  .card .hw { font-size:calc(18px * var(--fs)) !important; }
+  .badge, .panel h4, kbd, .idchip { font-size:calc(11px * var(--fs)) !important; }
+  .question { font-size:calc(14px * var(--fs)) !important; }
+  .panel { font-size:calc(13px * var(--fs)) !important; }
+  .panel pre { font-size:calc(13.5px * var(--fs)) !important; line-height:1.55; }
+  .panel .anatomy { font-size:calc(12.5px * var(--fs)) !important; }
+  .savebanner { font-size:calc(12.5px * var(--fs)) !important; }
+  .fsctl { display:flex; align-items:center; gap:4px; }
+  .fsctl button { background:var(--panel2); border:1px solid var(--border); color:var(--text);
+                  padding:6px 10px; border-radius:14px; cursor:pointer; line-height:1; }
+  .fsctl .fsval { color:var(--muted); min-width:3.4em; text-align:center; }
+  .tally .time { color:var(--muted); }
+  .dl.handin { background:#243447; }
+  .tally .pausebtn { background:none; border:1px solid var(--border); color:var(--muted);
+                     border-radius:6px; padding:0 6px; margin-left:4px; cursor:pointer;
+                     font-size:inherit; font-family:inherit; line-height:1.6; }
+  .tally .pausebtn.on { color:#ffd479; border-color:#ffd479; }
+  .tally .time.paused { opacity:.45; }
+  .handin-said { color:var(--muted); font-size:12px; margin-left:10px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>Смешанная письменность в примечаниях Сундараканды — остаток — 24 items</h1>
+    <div class="sub">Generated 16-08-2026 &middot; sheet_id <code>h2864_translit_residue</code> &middot; 24 карточек · поднято votes/sarga.md п.14 · H2864. Машинно исправлено 553 места; здесь только то, чего машина не вправе решать.</div>
+  </div>
+  <div class="tally" id="tally">
+    <span class="approve">&#9989; <span class="count" id="c-approve">0</span></span>
+    <span class="reject">&#10060; <span class="count" id="c-reject">0</span></span>
+    <span class="defer">&#9208; <span class="count" id="c-defer">0</span></span>
+    <span class="time" title="active time on this sheet (while the tab is visible)">&#9201; <span class="count" id="t-total">0:00</span></span>
+    <button type="button" class="pausebtn" id="pauseBtn" title="pause the clock — a break is not review time">&#9208;</button>
+    <span class="unvoted">&#9711; <span class="count" id="c-unvoted">24</span></span>
+  </div>
+</header>
+<aside class="screening-banner" role="status" data-screening="1"><strong>Screening (H1649)</strong> — only human-required cards are below. Off the plate: <span class="sc-a">deterministic 5</span> · <span class="sc-b">dataset lookup 0</span> · <span class="sc-c">agent adjudication 0</span> (total screened 5). Human cards: <span class="sc-d">24</span>. Evidence: <code>review/screening_evidence_h2864_translit_residue.md</code>. Rules: reconstruction-is-not-junk, slp1-in-rejected-lemma.</aside>
+<div class="savebanner">&#128229; Your export downloads as <code>h2864_translit_residue_decisions.json</code> &rarr; save it to <code>CommentaryStrategies\review\h2864_translit_residue_decisions.json</code> (the <code>sheet_id</code> inside the file is <code>h2864_translit_residue</code> — that is how a later session knows which sheet these decisions belong to).</div>
+<div class="toolbar">
+  <button class="dl" id="downloadBtn">Download decisions.json</button><button class="dl handin" id="handinBtn" title="stop the clock and export the votes made so far; the rest stay saved in this browser">Hand in what I got</button><span class="handin-said" id="handinSaid"></span><button class="dl" id="saveBtn" style="display:none;margin-left:8px">Save to folder…</button>
+  <div class="fsctl" title="text size — persists in this browser"><button type="button" id="fsDown" aria-label="smaller text">A&minus;</button><span class="fsval" id="fsVal"></span><button type="button" id="fsUp" aria-label="larger text">A+</button></div>
+  <div class="filterbar" id="filterbar"><button data-filter="all" class="active">all</button><button data-filter="policy">правила</button><button data-filter="reader">видит рецензент</button><button data-filter="qa">служебные поля</button><button data-filter="unvoted">unvoted only</button></div>
+</div>
+<main id="cards">
+
+  <section class="card" data-id="policy-translit-table" data-filt="policy">
+    <header><div class="hw">Правило: диакритика IAST внутри русского слова передаётся русской практической транскрипцией <span class="badge">16 слов</span><span class="badge">решает пачкой</span></div><span class="idchip" title="card id — cite this id back when discussing this card">policy-translit-table</span></header>
+    <div class="question"><p>В русских словах корпуса застряли отдельные знаки IAST: <code><span style="color:#f85149;font-weight:700">п</span><span style="color:#f85149;font-weight:700">ā</span><span style="color:#f85149;font-weight:700">ṭ</span><span style="color:#f85149;font-weight:700">х</span><span style="color:#f85149;font-weight:700">ā</span><span style="color:#f85149;font-weight:700">н</span>тара</code>, <code>анукар<span style="color:#f85149;font-weight:700">а</span><span style="color:#f85149;font-weight:700">ṇ</span><span style="color:#f85149;font-weight:700">а</span>р</code>, <code>н<span style="color:#f85149;font-weight:700">а</span><span style="color:#f85149;font-weight:700">ṭ</span><span style="color:#f85149;font-weight:700">а</span>вад</code>, <code><span style="color:#f85149;font-weight:700">а</span><span style="color:#f85149;font-weight:700">ś</span><span style="color:#f85149;font-weight:700">о</span>кового</code>, <code>брахм<span style="color:#f85149;font-weight:700">а</span><span style="color:#f85149;font-weight:700">ṇ</span><span style="color:#f85149;font-weight:700">ḍ</span><span style="color:#f85149;font-weight:700">а</span></code>, <code>в<span style="color:#f85149;font-weight:700">и</span><span style="color:#f85149;font-weight:700">ṣ</span><span style="color:#f85149;font-weight:700">ṇ</span><span style="color:#f85149;font-weight:700">у</span></code>, <code><span style="color:#f85149;font-weight:700">к</span><span style="color:#f85149;font-weight:700">ā</span><span style="color:#f85149;font-weight:700">р</span><span style="color:#f85149;font-weight:700">а</span><span style="color:#f85149;font-weight:700">ṇ</span><span style="color:#f85149;font-weight:700">ḍ</span><span style="color:#f85149;font-weight:700">а</span>вами</code>, <code>кам<span style="color:#f85149;font-weight:700">а</span><span style="color:#f85149;font-weight:700">ṭ</span><span style="color:#f85149;font-weight:700">х</span>а</code>, <code>ман<span style="color:#f85149;font-weight:700">у</span><span style="color:#f85149;font-weight:700">ṣ</span><span style="color:#f85149;font-weight:700">я</span>лока</code>, <code>к<span style="color:#f85149;font-weight:700">и</span><span style="color:#f85149;font-weight:700">ṅ</span><span style="color:#f85149;font-weight:700">к</span>аров</code>, <code>кар<span style="color:#f85149;font-weight:700">у</span><span style="color:#f85149;font-weight:700">ṇ</span>a</code>, <code>В<span style="color:#f85149;font-weight:700">и</span><span style="color:#f85149;font-weight:700">ṣ</span><span style="color:#f85149;font-weight:700">ṇ</span><span style="color:#f85149;font-weight:700">у</span>р</code>, <code><span style="color:#f85149;font-weight:700">а</span><span style="color:#f85149;font-weight:700">ṇ</span><span style="color:#f85149;font-weight:700">и</span><span style="color:#f85149;font-weight:700">м</span><span style="color:#f85149;font-weight:700">ā</span></code>, <code>к<span style="color:#f85149;font-weight:700">и</span><span style="color:#f85149;font-weight:700">ṅ</span><span style="color:#f85149;font-weight:700">к</span>ары</code>, <code>кра<span style="color:#f85149;font-weight:700">у</span><span style="color:#f85149;font-weight:700">ñ</span><span style="color:#f85149;font-weight:700">ч</span>а</code>, <code>смар<span style="color:#f85149;font-weight:700">а</span><span style="color:#f85149;font-weight:700">ṇ</span><span style="color:#f85149;font-weight:700">а</span></code>. Слово при этом читается по-русски — «<span style="color:#f85149;font-weight:700">п</span><span style="color:#f85149;font-weight:700">ā</span><span style="color:#f85149;font-weight:700">ṭ</span><span style="color:#f85149;font-weight:700">х</span><span style="color:#f85149;font-weight:700">ā</span><span style="color:#f85149;font-weight:700">н</span>тара» это «патхантара», а не латинское <i>pāṭhāntara</i>.</p><p><b>Принять</b> — применить таблицу ниже ко всем этим словам (16 слов) одним проходом; в русском тексте диакритики не остаётся.<br><b>Отклонить</b> — не применять: значит, эти слова должны стать целиком латинскими (<i>pāṭhāntara</i> курсивом), и это уже другая правка, её нужно назвать в примечании.</p><table style="width:100%;border-collapse:collapse"><tr><th style="text-align:left">знак</th><th style="text-align:left">по-русски</th><th style="text-align:left">пример из нашего корпуса</th></tr><tr><td><b>ṭ</b></td><td><b>т</b></td><td>п<span style="color:#f85149;font-weight:700">а</span><span style="color:#f85149;font-weight:700">ṭ</span><span style="color:#f85149;font-weight:700">х</span>а → <mark class="hl">патха</mark></td></tr><tr><td><b>ḍ</b></td><td><b>д</b></td><td>брах<span style="color:#f85149;font-weight:700">м</span><span style="color:#f85149;font-weight:700">ā</span>ṇ<span style="color:#f85149;font-weight:700">ḍ</span><span style="color:#f85149;font-weight:700">а</span> → <mark class="hl">брахманда</mark></td></tr><tr><td><b>ṇ</b></td><td><b>н</b></td><td>кар<span style="color:#f85149;font-weight:700">а</span><span style="color:#f85149;font-weight:700">ṇ</span><span style="color:#f85149;font-weight:700">а</span> → <mark class="hl">карана</mark></td></tr><tr><td><b>ś</b></td><td><b>ш</b></td><td><span style="color:#f85149;font-weight:700">а</span><span style="color:#f85149;font-weight:700">ś</span><span style="color:#f85149;font-weight:700">о</span>ка → <mark class="hl">ашока</mark></td></tr><tr><td><b>ṣ</b></td><td><b>ш</b></td><td>в<span style="color:#f85149;font-weight:700">и</span><span style="color:#f85149;font-weight:700">ṣ</span><span style="color:#f85149;font-weight:700">ṇ</span><span style="color:#f85149;font-weight:700">у</span> → <mark class="hl">вишну</mark></td></tr><tr><td><b>ṅ</b></td><td><b>н</b></td><td>к<span style="color:#f85149;font-weight:700">и</span><span style="color:#f85149;font-weight:700">ṅ</span><span style="color:#f85149;font-weight:700">к</span>ара → <mark class="hl">кинкара</mark></td></tr><tr><td><b>ñ</b></td><td><b>н</b></td><td>кра<span style="color:#f85149;font-weight:700">у</span><span style="color:#f85149;font-weight:700">ñ</span><span style="color:#f85149;font-weight:700">ч</span>а → <mark class="hl">краунча</mark></td></tr><tr><td><b>ā</b></td><td><b>а</b></td><td><span style="color:#f85149;font-weight:700">к</span><span style="color:#f85149;font-weight:700">ā</span><span style="color:#f85149;font-weight:700">р</span><span style="color:#f85149;font-weight:700">а</span><span style="color:#f85149;font-weight:700">ṇ</span><span style="color:#f85149;font-weight:700">ḍ</span><span style="color:#f85149;font-weight:700">а</span> → <mark class="hl">каранда</mark></td></tr><tr><td><b>ī</b></td><td><b>и</b></td><td><span style="color:#f85149;font-weight:700">г</span><span style="color:#f85149;font-weight:700">ī</span><span style="color:#f85149;font-weight:700">т</span>а → <mark class="hl">гита</mark></td></tr><tr><td><b>ū</b></td><td><b>у</b></td><td>б<span style="color:#f85149;font-weight:700">х</span><span style="color:#f85149;font-weight:700">ū</span><span style="color:#f85149;font-weight:700">т</span>а → <mark class="hl">бхута</mark></td></tr></table></div>
+    <div class="panel"><h4>пример 1 — 4 мест</h4><div style="margin:6px 0"><code>note_ru</code> <span class="badge">виден рецензенту</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch3/batch3_candidates.json">data/analysis/phase2_batch3/batch3_candidates.json</a><br>По Тилаке, у этого места известен вариант чтения (<span style="color:#f85149;font-weight:700">п</span><span style="color:#f85149;font-weight:700">ā</span><span style="color:#f85149;font-weight:700">ṭ</span><span style="color:#f85149;font-weight:700">х</span><span style="color:#f85149;font-weight:700">ā</span><span style="color:#f85149;font-weight:700">н</span>тара), но, по замечанию Катаки, он нетрадиционен (асампрадайика); перевод следует основному чтению.</div><div style="margin:6px 0"><code>note_ru</code> <span class="badge">виден рецензенту</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch3/batch3_candidates.json">data/analysis/phase2_batch3/batch3_candidates.json</a><br>В «Тилаке» у фразы «не время предаваться скорби» (na kālaḥ pariśocitum) отмечен вариант чтения (<span style="color:#f85149;font-weight:700">п</span><span style="color:#f85149;font-weight:700">ā</span><span style="color:#f85149;font-weight:700">ṭ</span><span style="color:#f85149;font-weight:700">х</span><span style="color:#f85149;font-weight:700">ā</span><span style="color:#f85149;font-weight:700">н</span>тара): вместо «не время горевать» — «не время долго оставаться в Ланке» (ciraṃ laṅkāyām āsituṃ na kālaḥ); перевод следует основному чтению, но вариант мен…</div><div class="muted">…и ещё 2</div></div><div class="panel"><h4>пример 2 — 4 мест</h4><div style="margin:6px 0"><code>note_ru</code> <span class="badge">виден рецензенту</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch3/batch3_candidates.json">data/analysis/phase2_batch3/batch3_candidates.json</a><br>По Тилаке, вся речь Ситы перед ракшаси — это речь актёра, играющего роль (н<span style="color:#f85149;font-weight:700">а</span><span style="color:#f85149;font-weight:700">ṭ</span><span style="color:#f85149;font-weight:700">а</span>вад анукар<span style="color:#f85149;font-weight:700">а</span><span style="color:#f85149;font-weight:700">ṇ</span><span style="color:#f85149;font-weight:700">а</span>рӯпа), поскольку она приняла человеческое тело; комментатор напоминает, что перед читателем не обычная испуганная женщина, а богиня, чьё отчаяние — час…</div><div style="margin:6px 0"><code>reason</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch3/batch3_candidates.json">data/analysis/phase2_batch3/batch3_candidates.json</a><br>… genuinely absent from подстрочник/tier-1/Phase-1. Register issue: the embedded Sanskrit term is rendered as a garbled Cyrillic/IAST hybrid (&#x27;н<span style="color:#f85149;font-weight:700">а</span><span style="color:#f85149;font-weight:700">ṭ</span><span style="color:#f85149;font-weight:700">а</span>вад анукар<span style="color:#f85149;font-weight:700">а</span><span style="color:#f85149;font-weight:700">ṇ</span><span style="color:#f85149;font-weight:700">а</span>рӯпа&#x27;) — fix by giving it as clean IAST (naṭavad anukaraṇarūpa) set off from the Cyrillic prose, consistent with the note&#x27;s own lemma_iast convention.</div><div class="muted">…и ещё 2</div></div><div class="panel"><h4>пример 3 — 4 мест</h4><div style="margin:6px 0"><code>note_ru</code> <span class="badge">виден рецензенту</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch3/batch3_candidates.json">data/analysis/phase2_batch3/batch3_candidates.json</a><br>По Тилаке, вся речь Ситы перед ракшаси — это речь актёра, играющего роль (н<span style="color:#f85149;font-weight:700">а</span><span style="color:#f85149;font-weight:700">ṭ</span><span style="color:#f85149;font-weight:700">а</span>вад анукар<span style="color:#f85149;font-weight:700">а</span><span style="color:#f85149;font-weight:700">ṇ</span><span style="color:#f85149;font-weight:700">а</span>рӯпа), поскольку она приняла человеческое тело; комментатор напоминает, что перед читателем не обычная испуганная женщина, а богиня, чьё отч…</div><div style="margin:6px 0"><code>reason</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch3/batch3_candidates.json">data/analysis/phase2_batch3/batch3_candidates.json</a><br>…odhyam); genuinely absent from подстрочник/tier-1/Phase-1. Register issue: the embedded Sanskrit term is rendered as a garbled Cyrillic/IAST hybrid (&#x27;н<span style="color:#f85149;font-weight:700">а</span><span style="color:#f85149;font-weight:700">ṭ</span><span style="color:#f85149;font-weight:700">а</span>вад анукар<span style="color:#f85149;font-weight:700">а</span><span style="color:#f85149;font-weight:700">ṇ</span><span style="color:#f85149;font-weight:700">а</span>рӯпа&#x27;) — fix by giving it as clean IAST (naṭavad anukaraṇarūpa) set off from the Cyrillic prose, consistent with the note&#x27;s own lemma_iast c…</div><div class="muted">…и ещё 2</div></div><div class="panel"><h4>пример 4 — 2 мест</h4><div style="margin:6px 0"><code>note_ru</code> <span class="badge">виден рецензенту</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch2/batch2_candidates.json">data/analysis/phase2_batch2/batch2_candidates.json</a><br>…на снимает кажущееся противоречие: дерево, названное здесь aśoka, в предыдущих саргах именовалось śiṃśapā — по его пояснению, это одно и то же дерево <span style="color:#f85149;font-weight:700">а</span><span style="color:#f85149;font-weight:700">ś</span><span style="color:#f85149;font-weight:700">о</span>кового сада, которое комментаторская традиция называет то по роду сада, то по собственному видовому имени («śiṃśupā aśoka-saṃvalitā»), так что ошибки в текс…</div><div style="margin:6px 0"><code>note_ru</code> <span class="badge">виден рецензенту</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch2/sarga_34_candidates.json">data/analysis/phase2_batch2/sarga_34_candidates.json</a><br>…на снимает кажущееся противоречие: дерево, названное здесь aśoka, в предыдущих саргах именовалось śiṃśapā — по его пояснению, это одно и то же дерево <span style="color:#f85149;font-weight:700">а</span><span style="color:#f85149;font-weight:700">ś</span><span style="color:#f85149;font-weight:700">о</span>кового сада, которое комментаторская традиция называет то по роду сада, то по собственному видовому имени («śiṃśupā aśoka-saṃvalitā»), так что ошибки в текс…</div></div><div class="panel"><h4>пример 5 — 2 мест</h4><div style="margin:6px 0"><code>note_ru</code> <span class="badge">виден рецензенту</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/lexical/ch54.json">data/lexical/ch54.json</a><br>Aṇḍa-бхеда (aṇḍa-bheda, m.) — «раскалывающий яйцо [вселенной]» (bhid-, «раскалывать», класс VII, Whitney #1046). В космогонии хираньягарбха / брахм<span style="color:#f85149;font-weight:700">а</span><span style="color:#f85149;font-weight:700">ṇ</span><span style="color:#f85149;font-weight:700">ḍ</span><span style="color:#f85149;font-weight:700">а</span> «яйцо Брахмы» (brahmaṇḍa) — это первичная вселенная, из которой возник мир. «Огонь, раскалывающий яйцо» — эсхатологический образ, описывающий огонь p…</div><div style="margin:6px 0"><code>note_ru</code> <span class="badge">виден рецензенту</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/sundara_commentary_to_add.json">data/sundara_commentary_to_add.json</a><br>Aṇḍa-бхеда (aṇḍa-bheda, m.) — «раскалывающий яйцо [вселенной]» (bhid-, «раскалывать», класс VII, Whitney #1046). В космогонии хираньягарбха / брахм<span style="color:#f85149;font-weight:700">а</span><span style="color:#f85149;font-weight:700">ṇ</span><span style="color:#f85149;font-weight:700">ḍ</span><span style="color:#f85149;font-weight:700">а</span> «яйцо Брахмы» (brahmaṇḍa) — это первичная вселенная, из которой возник мир. «Огонь, раскалывающий яйцо» — эсхатологический образ, описывающий огонь p…</div></div><div class="panel"><h4>пример 6 — 2 мест</h4><div style="margin:6px 0"><code>note_ru</code> <span class="badge">виден рецензенту</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/crosstext/gita.json">data/crosstext/gita.json</a><br>…переди, сзади! Слава Тебе отовсюду, Всебоже! Ты — бесконечная сила и доблесть! Всем обладаешь, поэтому всё — Ты!». Помета фиксирует, что рамаяновские в<span style="color:#f85149;font-weight:700">и</span><span style="color:#f85149;font-weight:700">ṣ</span><span style="color:#f85149;font-weight:700">ṇ</span><span style="color:#f85149;font-weight:700">у</span>-сравнения Рамы — не случайная метафора, а часть последовательной идентификации героя с Вишну, которую вайшнавская традиция читала буквально (аватара)…</div><div style="margin:6px 0"><code>note_ru</code> <span class="badge">виден рецензенту</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/sundara_commentary_to_add.json">data/sundara_commentary_to_add.json</a><br>…переди, сзади! Слава Тебе отовсюду, Всебоже! Ты — бесконечная сила и доблесть! Всем обладаешь, поэтому всё — Ты!». Помета фиксирует, что рамаяновские в<span style="color:#f85149;font-weight:700">и</span><span style="color:#f85149;font-weight:700">ṣ</span><span style="color:#f85149;font-weight:700">ṇ</span><span style="color:#f85149;font-weight:700">у</span>-сравнения Рамы — не случайная метафора, а часть последовательной идентификации героя с Вишну, которую вайшнавская традиция читала буквально (аватара)…</div></div><div class="panel"><h4>пример 7 — 2 мест</h4><div style="margin:6px 0"><code>note_ru</code> <span class="badge">виден рецензенту</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/lexical/ch2.json">data/lexical/ch2.json</a><br>…g.) the soul or spirit, Brahma». Kāraṇḍava — MW: «a species of duck (Anas Casarca, or Casarcoides)». В V.2.12 haṃsakāraṇḍavākīrṇā — «кишащие гусями и <span style="color:#f85149;font-weight:700">к</span><span style="color:#f85149;font-weight:700">ā</span><span style="color:#f85149;font-weight:700">р</span><span style="color:#f85149;font-weight:700">а</span><span style="color:#f85149;font-weight:700">ṇ</span><span style="color:#f85149;font-weight:700">ḍ</span><span style="color:#f85149;font-weight:700">а</span>вами». Двойная ценность haṃsa: 1) птица-гусь (зоологически); 2) «хамса» как метафора «чистой души» / «Брахмана» / «солнечного принципа» в упанишадах. Haṃs…</div><div style="margin:6px 0"><code>note_ru</code> <span class="badge">виден рецензенту</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/sundara_commentary_to_add.json">data/sundara_commentary_to_add.json</a><br>…g.) the soul or spirit, Brahma». Kāraṇḍava — MW: «a species of duck (Anas Casarca, or Casarcoides)». В V.2.12 haṃsakāraṇḍavākīrṇā — «кишащие гусями и <span style="color:#f85149;font-weight:700">к</span><span style="color:#f85149;font-weight:700">ā</span><span style="color:#f85149;font-weight:700">р</span><span style="color:#f85149;font-weight:700">а</span><span style="color:#f85149;font-weight:700">ṇ</span><span style="color:#f85149;font-weight:700">ḍ</span><span style="color:#f85149;font-weight:700">а</span>вами». Двойная ценность haṃsa: 1) птица-гусь (зоологически); 2) «хамса» как метафора «чистой души» / «Брахмана» / «солнечного принципа» в упанишадах. Haṃs…</div></div><div class="panel"><h4>пример 8 — 2 мест</h4><div style="margin:6px 0"><code>note_ru</code> <span class="badge">виден рецензенту</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch3/batch3_candidates.json">data/analysis/phase2_batch3/batch3_candidates.json</a><br>По Тилаке и Широмани, «будто уйдя в себя» означает буквально «сжавшаяся телом от страха, как черепаха (кам<span style="color:#f85149;font-weight:700">а</span><span style="color:#f85149;font-weight:700">ṭ</span><span style="color:#f85149;font-weight:700">х</span>а)»: образ втягивающейся в панцирь черепахи поясняет сравнение, которое подстрочник передаёт нейтральным «будто уйдя в себя».</div><div style="margin:6px 0"><code>note_ru</code> <span class="badge">виден рецензенту</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch3/sarga_25_candidates.json">data/analysis/phase2_batch3/sarga_25_candidates.json</a><br>По Тилаке и Широмани, «будто уйдя в себя» означает буквально «сжавшаяся телом от страха, как черепаха (кам<span style="color:#f85149;font-weight:700">а</span><span style="color:#f85149;font-weight:700">ṭ</span><span style="color:#f85149;font-weight:700">х</span>а)»: образ втягивающейся в панцирь черепахи поясняет сравнение, которое подстрочник передаёт нейтральным «будто уйдя в себя».</div></div><div class="panel"><h4>пример 9 — 2 мест</h4><div style="margin:6px 0"><code>note_ru</code> <span class="badge">виден рецензенту</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/lexical/ch24.json">data/lexical/ch24.json</a><br>…я вертикаль индийской космологии: svarga (небо), antarikṣa (воздушное пространство/средний мир) и pṛthivī (земля), или в эпической версии — дэвалока, ман<span style="color:#f85149;font-weight:700">у</span><span style="color:#f85149;font-weight:700">ṣ</span><span style="color:#f85149;font-weight:700">я</span>лока, патала. MW: trailokya &#x27;the 3 Lokas or worlds&#x27;. Равана назван trailokya-vasu-bhoktā — «потребляющим (bhoktā от √bhuj-) богатства (vasu) всей тройной …</div><div style="margin:6px 0"><code>note_ru</code> <span class="badge">виден рецензенту</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/sundara_commentary_to_add.json">data/sundara_commentary_to_add.json</a><br>…я вертикаль индийской космологии: svarga (небо), antarikṣa (воздушное пространство/средний мир) и pṛthivī (земля), или в эпической версии — дэвалока, ман<span style="color:#f85149;font-weight:700">у</span><span style="color:#f85149;font-weight:700">ṣ</span><span style="color:#f85149;font-weight:700">я</span>лока, патала. MW: trailokya &#x27;the 3 Lokas or worlds&#x27;. Равана назван trailokya-vasu-bhoktā — «потребляющим (bhoktā от √bhuj-) богатства (vasu) всей тройной …</div></div><div class="panel"><h4>пример 10 — 5 мест</h4><div style="margin:6px 0"><code>reason</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch3/batch3_rejected.json">data/analysis/phase2_batch3/batch3_rejected.json</a><br>бхушана лишь повторяет текст стиха (Равана посылает к<span style="color:#f85149;font-weight:700">и</span><span style="color:#f85149;font-weight:700">ṅ</span><span style="color:#f85149;font-weight:700">к</span>аров) без нового содержания</div><div style="margin:6px 0"><code>reason</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch3/batch3_rejected.json">data/analysis/phase2_batch3/batch3_rejected.json</a><br>бхушана и широмани пересказывают избиение восьмидесяти тысяч к<span style="color:#f85149;font-weight:700">и</span><span style="color:#f85149;font-weight:700">ṅ</span><span style="color:#f85149;font-weight:700">к</span>аров железной балкой без нового содержания сверх подстрочника</div><div class="muted">…и ещё 3</div></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ Принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не дефект</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Если какая-то строка таблицы неверна — напишите её здесь в правильном виде."></textarea>
+  </section>
+
+  <section class="card" data-id="policy-fork-rows" data-filt="policy">
+    <header><div class="hw">Две спорные строки той же таблицы: слоговое ṛ и анусвара ṃ <span class="badge">3 слова</span><span class="badge">конкурирующие нормы</span></div><span class="idchip" title="card id — cite this id back when discussing this card">policy-fork-rows</span></header>
+    <div class="question"><p>Остальные строки таблицы однозначны, эти две — нет, поэтому они вынесены отдельно.</p><p><b>ṛ</b> — «<span style="color:#f85149;font-weight:700">к</span><span style="color:#f85149;font-weight:700">ṛ</span><span style="color:#f85149;font-weight:700">т</span>ья» (kṛtya, «герундив»): в русской индологии пишут и «критья», и «кртья», у Гринцера встречается «ри».<br><b>ṃ</b> — «п<span style="color:#f85149;font-weight:700">у</span><span style="color:#f85149;font-weight:700">ṃ</span><span style="color:#f85149;font-weight:700">н</span>ага» (puṃnāga, сандхи-форма от punnāga): «пумнага» по знаку, «пуннага» по звучанию.</p><p><b>Принять</b> — берём ṛ→«ри», ṃ→«м» (по знаку).<br><b>Отклонить</b> — берём ṛ→«р», ṃ→ассимиляция по следующему согласному («пуннага»).<br>Любой третий вариант — в примечание, он и будет решением.</p></div>
+    <div class="panel"><h4>пример 1 — 2 мест</h4><div style="margin:6px 0"><code>note_ru</code> <span class="badge">виден рецензенту</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/lexical/ch28.json">data/lexical/ch28.json</a><br>Вадхья (vadhyā, f., adj.) — «подлежащая казни, обречённая на уничтожение» — герундив (<span style="color:#f85149;font-weight:700">к</span><span style="color:#f85149;font-weight:700">ṛ</span><span style="color:#f85149;font-weight:700">т</span>ья) от √vadh- «поражать, убивать» (или от √han- в особой форме, MW указывает vadhya как gerundive to vadh/han). MW: vadhya &#x27;to be killed, deserving deat…</div><div style="margin:6px 0"><code>note_ru</code> <span class="badge">виден рецензенту</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/sundara_commentary_to_add.json">data/sundara_commentary_to_add.json</a><br>Вадхья (vadhyā, f., adj.) — «подлежащая казни, обречённая на уничтожение» — герундив (<span style="color:#f85149;font-weight:700">к</span><span style="color:#f85149;font-weight:700">ṛ</span><span style="color:#f85149;font-weight:700">т</span>ья) от √vadh- «поражать, убивать» (или от √han- в особой форме, MW указывает vadhya как gerundive to vadh/han). MW: vadhya &#x27;to be killed, deserving deat…</div></div><div class="panel"><h4>пример 2 — 2 мест</h4><div style="margin:6px 0"><code>reason</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/lexical/ch10.json">data/lexical/ch10.json</a><br>anchor_precheck=absent — ложное срабатывание: п<span style="color:#f85149;font-weight:700">у</span><span style="color:#f85149;font-weight:700">ṃ</span><span style="color:#f85149;font-weight:700">н</span>ага в стихе (&quot;cūtapuṃnāgasurabhir&quot;) — сандхи-форма punnāga (n→ṃ перед s). Anchoring исправлен на 2. Ботаническая идентификация и триада ароматов небаналь…</div><div style="margin:6px 0"><code>reason</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/sundara_commentary_to_add.json">data/sundara_commentary_to_add.json</a><br>anchor_precheck=absent — ложное срабатывание: п<span style="color:#f85149;font-weight:700">у</span><span style="color:#f85149;font-weight:700">ṃ</span><span style="color:#f85149;font-weight:700">н</span>ага в стихе (&quot;cūtapuṃnāgasurabhir&quot;) — сандхи-форма punnāga (n→ṃ перед s). Anchoring исправлен на 2. Ботаническая идентификация и триада ароматов небаналь…</div></div><div class="panel"><h4>пример 3 — 2 мест</h4><div style="margin:6px 0"><code>reason</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch3/batch3_rejected.json">data/analysis/phase2_batch3/batch3_rejected.json</a><br>…кий гласный как архаизм в lakṣmivardhana), содержательно относящуюся к стиху 4; Бхушана даёт риторико-грамматический разбор альтернативного значения «с<span style="color:#f85149;font-weight:700">а</span><span style="color:#f85149;font-weight:700">ṃ</span>śrava» без нового образа, доступного русскому читателю</div><div style="margin:6px 0"><code>reason</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch3/sarga_31_candidates.json">data/analysis/phase2_batch3/sarga_31_candidates.json</a><br>…кий гласный как архаизм в lakṣmivardhana), содержательно относящуюся к стиху 4; Бхушана даёт риторико-грамматический разбор альтернативного значения «с<span style="color:#f85149;font-weight:700">а</span><span style="color:#f85149;font-weight:700">ṃ</span>śrava» без нового образа, доступного русскому читателю</div></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ Принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не дефект</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Например: «ṛ→ри, но ṃ по звучанию»."></textarea>
+  </section>
+
+  <section class="card" data-id="policy-qa-scope" data-filt="policy">
+    <header><div class="hw">Чинить ли смешение письменности в служебных полях (reason / verify_note), которых рецензент не видит <span class="badge">18 слов</span><span class="badge">объём работ</span></div><span class="idchip" title="card id — cite this id back when discussing this card">policy-qa-scope</span></header>
+    <div class="question"><p>Часть найденных мест лежит не в тексте примечаний, а в служебных полях — причинах отклонения кандидатов и заметках проверки: <code>implici<span style="color:#f85149;font-weight:700">t</span><span style="color:#f85149;font-weight:700">н</span>ую</code>, <code>ce<span style="color:#f85149;font-weight:700">s</span><span style="color:#f85149;font-weight:700">т</span>ита</code>, <code>c<span style="color:#f85149;font-weight:700">h</span><span style="color:#f85149;font-weight:700">ь</span>е</code>, <code>commen<span style="color:#f85149;font-weight:700">t</span><span style="color:#f85149;font-weight:700">а</span>рий</code>, <code>glos<span style="color:#f85149;font-weight:700">s</span><span style="color:#f85149;font-weight:700">у</span></code>, <code>glos<span style="color:#f85149;font-weight:700">s</span><span style="color:#f85149;font-weight:700">ы</span></code>, <code>var<span style="color:#f85149;font-weight:700">y</span><span style="color:#f85149;font-weight:700">и</span>рование</code>, <code>ver<span style="color:#f85149;font-weight:700">s</span><span style="color:#f85149;font-weight:700">и</span>я</code>, <code>В<span style="color:#f85149;font-weight:700">и</span><span style="color:#f85149;font-weight:700">ṣ</span><span style="color:#f85149;font-weight:700">ṇ</span><span style="color:#f85149;font-weight:700">у</span>р</code>, <code><span style="color:#f85149;font-weight:700">а</span><span style="color:#f85149;font-weight:700">ṇ</span><span style="color:#f85149;font-weight:700">и</span><span style="color:#f85149;font-weight:700">м</span><span style="color:#f85149;font-weight:700">ā</span></code>, <code>п<span style="color:#f85149;font-weight:700">у</span><span style="color:#f85149;font-weight:700">ṃ</span><span style="color:#f85149;font-weight:700">н</span>ага</code>, <code><span style="color:#f85149;font-weight:700">с</span><span style="color:#f85149;font-weight:700">a</span></code>, <code>с<span style="color:#f85149;font-weight:700">а</span><span style="color:#f85149;font-weight:700">ṃ</span>śrava</code>, <code>ety<span style="color:#f85149;font-weight:700">m</span><span style="color:#f85149;font-weight:700">о</span>логия</code>, <code>paYcāsya</code>, <code>к<span style="color:#f85149;font-weight:700">и</span><span style="color:#f85149;font-weight:700">ṅ</span><span style="color:#f85149;font-weight:700">к</span>ары</code>, <code>кра<span style="color:#f85149;font-weight:700">у</span><span style="color:#f85149;font-weight:700">ñ</span><span style="color:#f85149;font-weight:700">ч</span>а</code>, <code>смар<span style="color:#f85149;font-weight:700">а</span><span style="color:#f85149;font-weight:700">ṇ</span><span style="color:#f85149;font-weight:700">а</span></code>. В бюллетень они не попадают никогда.</p><p><b>Принять</b> — чиним и там: единый корпус, поиск работает везде.<br><b>Отклонить</b> — служебные поля оставляем как есть; правило гигиены в CI ограничиваем полями, которые видит читатель, и тогда гейт можно включить сразу.</p></div>
+    <div class="panel"><h4>пример 1 — 4 мест</h4><div style="margin:6px 0"><code>why_proposed</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch2/batch2_candidates.json">data/analysis/phase2_batch2/batch2_candidates.json</a><br>разъясняет implici<span style="color:#f85149;font-weight:700">t</span><span style="color:#f85149;font-weight:700">н</span>ую мотивацию Ханумана (почему подвиг должен совершить Рама, а не он сам), не выраженную явно в подстрочнике</div><div style="margin:6px 0"><code>why_proposed</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch2/sarga_39_candidates.json">data/analysis/phase2_batch2/sarga_39_candidates.json</a><br>разъясняет implici<span style="color:#f85149;font-weight:700">t</span><span style="color:#f85149;font-weight:700">н</span>ую мотивацию Ханумана (почему подвиг должен совершить Рама, а не он сам), не выраженную явно в подстрочнике</div><div class="muted">…и ещё 2</div></div><div class="panel"><h4>пример 2 — 2 мест</h4><div style="margin:6px 0"><code>reason</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch3/batch3_rejected.json">data/analysis/phase2_batch3/batch3_rejected.json</a><br>Тилака/Бхушана поясняют ce<span style="color:#f85149;font-weight:700">s</span><span style="color:#f85149;font-weight:700">т</span>ита как «плач и подобное» — тождественно подстрочнику; Широмани формулирует переход, не давая новой информации.</div><div style="margin:6px 0"><code>reason</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch3/sarga_38_candidates.json">data/analysis/phase2_batch3/sarga_38_candidates.json</a><br>Тилака/Бхушана поясняют ce<span style="color:#f85149;font-weight:700">s</span><span style="color:#f85149;font-weight:700">т</span>ита как «плач и подобное» — тождественно подстрочнику; Широмани формулирует переход, не давая новой информации.</div></div><div class="panel"><h4>пример 3 — 2 мест</h4><div style="margin:6px 0"><code>reason</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/lexical/ch54.json">data/lexical/ch54.json</a><br>…ṛta+manoratha and MW gloss are accurate; note explains why the compound opens the chapter (task-completion cezura) — real gain over the crib&#x27;s plain &#x27;c<span style="color:#f85149;font-weight:700">h</span><span style="color:#f85149;font-weight:700">ь</span>е желание исполнилось&#x27;. Lemma clearly anchored (kṛtamanorathaḥ).</div><div style="margin:6px 0"><code>reason</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/sundara_commentary_to_add.json">data/sundara_commentary_to_add.json</a><br>…ṛta+manoratha and MW gloss are accurate; note explains why the compound opens the chapter (task-completion cezura) — real gain over the crib&#x27;s plain &#x27;c<span style="color:#f85149;font-weight:700">h</span><span style="color:#f85149;font-weight:700">ь</span>е желание исполнилось&#x27;. Lemma clearly anchored (kṛtamanorathaḥ).</div></div><div class="panel"><h4>пример 4 — 2 мест</h4><div style="margin:6px 0"><code>reason</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch2/batch2_rejected.json">data/analysis/phase2_batch2/batch2_rejected.json</a><br>commen<span style="color:#f85149;font-weight:700">t</span><span style="color:#f85149;font-weight:700">а</span>рий Бхушаны — точный падапатха стиха без самостоятельного толкования; жанровая параллель вилапы уже покрыта Phase-1 (crosstext, Raghuvamsha)</div><div style="margin:6px 0"><code>reason</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch2/sarga_26_candidates.json">data/analysis/phase2_batch2/sarga_26_candidates.json</a><br>commen<span style="color:#f85149;font-weight:700">t</span><span style="color:#f85149;font-weight:700">а</span>рий Бхушаны — точный падапатха стиха без самостоятельного толкования; жанровая параллель вилапы уже покрыта Phase-1 (crosstext, Raghuvamsha)</div></div><div class="panel"><h4>пример 5 — 2 мест</h4><div style="margin:6px 0"><code>reason</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch3/batch3_rejected.json">data/analysis/phase2_batch3/batch3_rejected.json</a><br>дублирует собственное примечание Леонова/Костиной (comment_4_6 уже приводит и глоссу Айраваты у Бхушаны, и glos<span style="color:#f85149;font-weight:700">s</span><span style="color:#f85149;font-weight:700">у</span> vajrajāla=gavākṣa у Тилаки).</div><div style="margin:6px 0"><code>reason</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch3/sarga_04_candidates.json">data/analysis/phase2_batch3/sarga_04_candidates.json</a><br>дублирует собственное примечание Леонова/Костиной (comment_4_6 уже приводит и глоссу Айраваты у Бхушаны, и glos<span style="color:#f85149;font-weight:700">s</span><span style="color:#f85149;font-weight:700">у</span> vajrajāla=gavākṣa у Тилаки).</div></div><div class="panel"><h4>пример 6 — 2 мест</h4><div style="margin:6px 0"><code>reason</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch3/batch3_rejected.json">data/analysis/phase2_batch3/batch3_rejected.json</a><br>ambiguous_marker: слитный диапазон стихов 10–14, не привязанный к одному стиху; лексические glos<span style="color:#f85149;font-weight:700">s</span><span style="color:#f85149;font-weight:700">ы</span> (janasthānavadham, amarṣeṇāpahṛtāḥ) дублируют материал, уже учтённый в примечании Фазы-1 к стиху 10</div><div style="margin:6px 0"><code>reason</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch3/sarga_31_candidates.json">data/analysis/phase2_batch3/sarga_31_candidates.json</a><br>ambiguous_marker: слитный диапазон стихов 10–14, не привязанный к одному стиху; лексические glos<span style="color:#f85149;font-weight:700">s</span><span style="color:#f85149;font-weight:700">ы</span> (janasthānavadham, amarṣeṇāpahṛtāḥ) дублируют материал, уже учтённый в примечании Фазы-1 к стиху 10</div></div><div class="panel"><h4>пример 7 — 2 мест</h4><div style="margin:6px 0"><code>why_proposed</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch3/batch3_candidates.json">data/analysis/phase2_batch3/batch3_candidates.json</a><br>…оумение читателя по поводу видимого повтора (свита Раваны уже описана двумя стихами ранее) — подстрочник не поясняет, что это намеренное риторическое var<span style="color:#f85149;font-weight:700">y</span><span style="color:#f85149;font-weight:700">и</span>рование, а не тавтология.</div><div style="margin:6px 0"><code>why_proposed</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch3/sarga_18_candidates.json">data/analysis/phase2_batch3/sarga_18_candidates.json</a><br>…оумение читателя по поводу видимого повтора (свита Раваны уже описана двумя стихами ранее) — подстрочник не поясняет, что это намеренное риторическое var<span style="color:#f85149;font-weight:700">y</span><span style="color:#f85149;font-weight:700">и</span>рование, а не тавтология.</div></div><div class="panel"><h4>пример 8 — 2 мест</h4><div style="margin:6px 0"><code>reason</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch3/batch3_rejected.json">data/analysis/phase2_batch3/batch3_rejected.json</a><br>дублирует собственное примечание Леонова/Костиной (ver<span style="color:#f85149;font-weight:700">s</span><span style="color:#f85149;font-weight:700">и</span>я Тилаки vimāna=ложе или Пушпака, и глосса Широмани vimāna=paryaṅka, уже приведены дословно)</div><div style="margin:6px 0"><code>reason</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch3/sarga_10_candidates.json">data/analysis/phase2_batch3/sarga_10_candidates.json</a><br>дублирует собственное примечание Леонова/Костиной (ver<span style="color:#f85149;font-weight:700">s</span><span style="color:#f85149;font-weight:700">и</span>я Тилаки vimāna=ложе или Пушпака, и глосса Широмани vimāna=paryaṅka, уже приведены дословно)</div></div><div class="panel"><h4>пример 9 — 2 мест</h4><div style="margin:6px 0"><code>reason</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch3/batch3_rejected.json">data/analysis/phase2_batch3/batch3_rejected.json</a><br>ambiguous_marker: слитный диапазон стихов 18–21; содержит вторую помету об интерполяции («В<span style="color:#f85149;font-weight:700">и</span><span style="color:#f85149;font-weight:700">ṣ</span><span style="color:#f85149;font-weight:700">ṇ</span><span style="color:#f85149;font-weight:700">у</span>р эва svayaṃ bhūtvā»), но как несамостоятельный слитный токен не даёт независимого толкования отдельного стиха</div><div style="margin:6px 0"><code>reason</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch3/sarga_27_candidates.json">data/analysis/phase2_batch3/sarga_27_candidates.json</a><br>ambiguous_marker: слитный диапазон стихов 18–21; содержит вторую помету об интерполяции («В<span style="color:#f85149;font-weight:700">и</span><span style="color:#f85149;font-weight:700">ṣ</span><span style="color:#f85149;font-weight:700">ṇ</span><span style="color:#f85149;font-weight:700">у</span>р эва svayaṃ bhūtvā»), но как несамостоятельный слитный токен не даёт независимого толкования отдельного стиха</div></div><div class="panel"><h4>пример 10 — 2 мест</h4><div style="margin:6px 0"><code>reason</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch3/batch3_rejected.json">data/analysis/phase2_batch3/batch3_rejected.json</a><br>дублирует Phase-1 заметку (V.58.31, aṅguṣṭha-saṃmita — сиддхи <span style="color:#f85149;font-weight:700">а</span><span style="color:#f85149;font-weight:700">ṇ</span><span style="color:#f85149;font-weight:700">и</span><span style="color:#f85149;font-weight:700">м</span><span style="color:#f85149;font-weight:700">ā</span> уже пояснена); тилака и бхушана лишь пересказывают уменьшение тела</div><div style="margin:6px 0"><code>reason</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch3/sarga_58_candidates.json">data/analysis/phase2_batch3/sarga_58_candidates.json</a><br>дублирует Phase-1 заметку (V.58.31, aṅguṣṭha-saṃmita — сиддхи <span style="color:#f85149;font-weight:700">а</span><span style="color:#f85149;font-weight:700">ṇ</span><span style="color:#f85149;font-weight:700">и</span><span style="color:#f85149;font-weight:700">м</span><span style="color:#f85149;font-weight:700">ā</span> уже пояснена); тилака и бхушана лишь пересказывают уменьшение тела</div></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ Принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не дефект</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder=""></textarea>
+  </section>
+
+  <section class="card" data-id="translit-004" data-filt="reader">
+    <header><div class="hw">саститель / цаститель — какое чтение верное? <span class="badge">2 мест</span><span class="badge">виден рецензенту</span></div><span class="idchip" title="card id — cite this id back when discussing this card">translit-004</span></header>
+    <div class="question"><p>Слово <code>c<span style="color:#f85149;font-weight:700">a</span><span style="color:#f85149;font-weight:700">с</span>титель</code> смешивает две письменности, и корпус не помог выбрать чтение: ни один вариант в нём не встречается чисто, либо встречаются оба.</p><p><b>Машинные варианты:</b> <span class="chip"><mark class="hl">саститель</mark></span><span class="chip"><mark class="hl">цаститель</mark></span></p><p><b>Принять</b> — взять единственный/первый вариант выше. <b>Отклонить</b> — это не дефект, оставить как есть. Любое другое чтение — в примечание, оно и будет применено.</p></div>
+    <div class="panel"><h4>Где встречается</h4><div style="margin:6px 0"><code>note_ru</code> <span class="badge">виден рецензенту</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/crosstext/mbh_gnomic.json">data/crosstext/mbh_gnomic.json</a><br>…Шантипарве: «na ca rājyasamo dharmaḥ kaścid asti parantapa । dharmaṃ śaṃsanti te rājñām...» (MBh XII.128.47) — «Нет дхармы, равной [долгу] царства, о c<span style="color:#f85149;font-weight:700">a</span><span style="color:#f85149;font-weight:700">с</span>титель врагов; дхарму провозглашают [мудрые] для царей...». Параллель показывает, что отповедь Ситы построена по модели царской дидактики: похищение чужой ж…</div><div style="margin:6px 0"><code>note_ru</code> <span class="badge">виден рецензенту</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/sundara_commentary_to_add.json">data/sundara_commentary_to_add.json</a><br>…Шантипарве: «na ca rājyasamo dharmaḥ kaścid asti parantapa । dharmaṃ śaṃsanti te rājñām...» (MBh XII.128.47) — «Нет дхармы, равной [долгу] царства, о c<span style="color:#f85149;font-weight:700">a</span><span style="color:#f85149;font-weight:700">с</span>титель врагов; дхарму провозглашают [мудрые] для царей...». Параллель показывает, что отповедь Ситы построена по модели царской дидактики: похищение чужой ж…</div></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ Принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не дефект</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Правильное чтение, если оно не из списка."></textarea>
+  </section>
+
+  <section class="card" data-id="translit-005" data-filt="reader">
+    <header><div class="hw">Смешанное слово, машинного варианта нет — 2 мест <span class="badge">2 мест</span><span class="badge">виден рецензенту</span></div><span class="idchip" title="card id — cite this id back when discussing this card">translit-005</span></header>
+    <div class="question"><p>Слово <code>her<span style="color:#f85149;font-weight:700">o</span><span style="color:#f85149;font-weight:700">я</span></code> смешивает две письменности, и корпус не помог выбрать чтение: ни один вариант в нём не встречается чисто, либо встречаются оба.</p><p><b>Машинные варианты:</b> <span class="muted">машинного варианта нет — нужно ваше чтение</span></p><p><b>Принять</b> — взять единственный/первый вариант выше. <b>Отклонить</b> — это не дефект, оставить как есть. Любое другое чтение — в примечание, оно и будет применено.</p></div>
+    <div class="panel"><h4>Где встречается</h4><div style="margin:6px 0"><code>note_ru</code> <span class="badge">виден рецензенту</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/lexical/ch38.json">data/lexical/ch38.json</a><br>…львиноплечий» (siṃha «лев» + skandha «плечо, ствол»). MW: skandha m. &#x27;the shoulder; the trunk of a tree&#x27;. siṃhaskandha — стандартный эпический эпитет her<span style="color:#f85149;font-weight:700">o</span><span style="color:#f85149;font-weight:700">я</span>/кшатрия: плечи льва = широкие и мощные. MW также: skandha как «ствол дерева» — Лакшмана = опора (ствол) для Рамы.</div><div style="margin:6px 0"><code>note_ru</code> <span class="badge">виден рецензенту</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/sundara_commentary_to_add.json">data/sundara_commentary_to_add.json</a><br>…львиноплечий» (siṃha «лев» + skandha «плечо, ствол»). MW: skandha m. &#x27;the shoulder; the trunk of a tree&#x27;. siṃhaskandha — стандартный эпический эпитет her<span style="color:#f85149;font-weight:700">o</span><span style="color:#f85149;font-weight:700">я</span>/кшатрия: плечи льва = широкие и мощные. MW также: skandha как «ствол дерева» — Лакшмана = опора (ствол) для Рамы.</div></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ Принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не дефект</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Правильное чтение, если оно не из списка."></textarea>
+  </section>
+
+  <section class="card" data-id="translit-006" data-filt="reader">
+    <header><div class="hw">perc / pers — какое чтение верное? <span class="badge">2 мест</span><span class="badge">виден рецензенту</span></div><span class="idchip" title="card id — cite this id back when discussing this card">translit-006</span></header>
+    <div class="question"><p>Слово <code>pe<span style="color:#f85149;font-weight:700">r</span><span style="color:#f85149;font-weight:700">с</span></code> смешивает две письменности, и корпус не помог выбрать чтение: ни один вариант в нём не встречается чисто, либо встречаются оба.</p><p><b>Машинные варианты:</b> <span class="chip">perc</span><span class="chip">pers</span></p><p><b>Принять</b> — взять единственный/первый вариант выше. <b>Отклонить</b> — это не дефект, оставить как есть. Любое другое чтение — в примечание, оно и будет применено.</p></div>
+    <div class="panel"><h4>Где встречается</h4><div style="margin:6px 0"><code>note_ru</code> <span class="badge">виден рецензенту</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/lexical/ch9.json">data/lexical/ch9.json</a><br>Шаркарасава (śarkarā-āsava, m.) — «сахарное вино, сладкое хмельное»: śarkarā «сахар, гравий» (от √śarkar-, ср. pe<span style="color:#f85149;font-weight:700">r</span><span style="color:#f85149;font-weight:700">с</span>. shakar, англ. sugar) + āsava «перегнанный/настоянный напиток» (от √su- «выжимать, гнать»). MW: śarkarā &#x27;gravel, grit; sugar&#x27;; āsava &#x27;a spirituous li…</div><div style="margin:6px 0"><code>note_ru</code> <span class="badge">виден рецензенту</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/sundara_commentary_to_add.json">data/sundara_commentary_to_add.json</a><br>Шаркарасава (śarkarā-āsava, m.) — «сахарное вино, сладкое хмельное»: śarkarā «сахар, гравий» (от √śarkar-, ср. pe<span style="color:#f85149;font-weight:700">r</span><span style="color:#f85149;font-weight:700">с</span>. shakar, англ. sugar) + āsava «перегнанный/настоянный напиток» (от √su- «выжимать, гнать»). MW: śarkarā &#x27;gravel, grit; sugar&#x27;; āsava &#x27;a spirituous li…</div></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ Принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не дефект</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Правильное чтение, если оно не из списка."></textarea>
+  </section>
+
+  <section class="card" data-id="translit-008" data-filt="reader">
+    <header><div class="hw">зияющим / сияющим — какое чтение верное? <span class="badge">2 мест</span><span class="badge">виден рецензенту</span></div><span class="idchip" title="card id — cite this id back when discussing this card">translit-008</span></header>
+    <div class="question"><p>Слово <code><span style="color:#f85149;font-weight:700">s</span><span style="color:#f85149;font-weight:700">и</span>яющим</code> смешивает две письменности, и корпус не помог выбрать чтение: ни один вариант в нём не встречается чисто, либо встречаются оба.</p><p><b>Машинные варианты:</b> <span class="chip"><mark class="hl">зияющим</mark></span><span class="chip"><mark class="hl">сияющим</mark></span></p><p><b>Принять</b> — взять единственный/первый вариант выше. <b>Отклонить</b> — это не дефект, оставить как есть. Любое другое чтение — в примечание, оно и будет применено.</p></div>
+    <div class="panel"><h4>Где встречается</h4><div style="margin:6px 0"><code>note_ru</code> <span class="badge">виден рецензенту</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/lexical/ch53.json">data/lexical/ch53.json</a><br>…ālin) И «гирлянда языков пламени» = горящий хвост. Последний стих главы использует ту же лексему в двух значениях одновременно: Хануман сопоставлен с <span style="color:#f85149;font-weight:700">s</span><span style="color:#f85149;font-weight:700">и</span>яющим солнцем (āditya ivārcimālī) — та же формула вернётся в 54.48. Это преднамеренное замыкание: хвост-факел = солнце в зените.</div><div style="margin:6px 0"><code>note_ru</code> <span class="badge">виден рецензенту</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/sundara_commentary_to_add.json">data/sundara_commentary_to_add.json</a><br>…ālin) И «гирлянда языков пламени» = горящий хвост. Последний стих главы использует ту же лексему в двух значениях одновременно: Хануман сопоставлен с <span style="color:#f85149;font-weight:700">s</span><span style="color:#f85149;font-weight:700">и</span>яющим солнцем (āditya ivārcimālī) — та же формула вернётся в 54.48. Это преднамеренное замыкание: хвост-факел = солнце в зените.</div></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ Принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не дефект</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Правильное чтение, если оно не из списка."></textarea>
+  </section>
+
+  <section class="card" data-id="translit-009" data-filt="reader">
+    <header><div class="hw">Curasu / Curasy / Cyrasu — какое чтение верное? <span class="badge">2 мест</span><span class="badge">виден рецензенту</span></div><span class="idchip" title="card id — cite this id back when discussing this card">translit-009</span></header>
+    <div class="question"><p>Слово <code>С<span style="color:#f85149;font-weight:700">у</span><span style="color:#f85149;font-weight:700">r</span>a<span style="color:#f85149;font-weight:700">s</span><span style="color:#f85149;font-weight:700">у</span></code> смешивает две письменности, и корпус не помог выбрать чтение: ни один вариант в нём не встречается чисто, либо встречаются оба.</p><p><b>Машинные варианты:</b> <span class="chip">Curasu</span><span class="chip">Curasy</span><span class="chip">Cyrasu</span><span class="chip">Cyrasy</span><span class="chip">Surasu</span><span class="chip">Surasy</span><span class="chip">Syrasu</span><span class="chip">Syrasy</span></p><p><b>Принять</b> — взять единственный/первый вариант выше. <b>Отклонить</b> — это не дефект, оставить как есть. Любое другое чтение — в примечание, оно и будет применено.</p></div>
+    <div class="panel"><h4>Где встречается</h4><div style="margin:6px 0"><code>note_ru</code> <span class="badge">виден рецензенту</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/lexical/ch1.json">data/lexical/ch1.json</a><br>Мать нагов (nāgamātā) — букв. «мать (mātā) нагов (nāga)». В V.1.144 sūryasaṃkāśāṃ surasāṃ nāgamātaram — «С<span style="color:#f85149;font-weight:700">у</span><span style="color:#f85149;font-weight:700">r</span>a<span style="color:#f85149;font-weight:700">s</span><span style="color:#f85149;font-weight:700">у</span>, сияющую как солнце, мать нагов». Сураса — не просто «мать» биологическая, а мифологический архетип «матери-прародительницы нагов»; её рождение связы…</div><div style="margin:6px 0"><code>note_ru</code> <span class="badge">виден рецензенту</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/sundara_commentary_to_add.json">data/sundara_commentary_to_add.json</a><br>Мать нагов (nāgamātā) — букв. «мать (mātā) нагов (nāga)». В V.1.144 sūryasaṃkāśāṃ surasāṃ nāgamātaram — «С<span style="color:#f85149;font-weight:700">у</span><span style="color:#f85149;font-weight:700">r</span>a<span style="color:#f85149;font-weight:700">s</span><span style="color:#f85149;font-weight:700">у</span>, сияющую как солнце, мать нагов». Сураса — не просто «мать» биологическая, а мифологический архетип «матери-прародительницы нагов»; её рождение связы…</div></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ Принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не дефект</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Правильное чтение, если оно не из списка."></textarea>
+  </section>
+
+  <section class="card" data-id="translit-017" data-filt="reader">
+    <header><div class="hw">муниз / мунис — какое чтение верное? <span class="badge">2 мест</span><span class="badge">виден рецензенту</span></div><span class="idchip" title="card id — cite this id back when discussing this card">translit-017</span></header>
+    <div class="question"><p>Слово <code>му<span style="color:#f85149;font-weight:700">н</span><span style="color:#f85149;font-weight:700">i</span>s</code> смешивает две письменности, и корпус не помог выбрать чтение: ни один вариант в нём не встречается чисто, либо встречаются оба.</p><p><b>Машинные варианты:</b> <span class="chip"><mark class="hl">муниз</mark></span><span class="chip"><mark class="hl">мунис</mark></span></p><p><b>Принять</b> — взять единственный/первый вариант выше. <b>Отклонить</b> — это не дефект, оставить как есть. Любое другое чтение — в примечание, оно и будет применено.</p></div>
+    <div class="panel"><h4>Где встречается</h4><div style="margin:6px 0"><code>note_ru</code> <span class="badge">виден рецензенту</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch2/batch2_candidates.json">data/analysis/phase2_batch2/batch2_candidates.json</a><br>Бхушана даёт разночтение эпитета му<span style="color:#f85149;font-weight:700">н</span><span style="color:#f85149;font-weight:700">i</span>s: вместо satyasammatāḥ («почитаемые за правдивость», основной текст) — tyakta-kilbiṣāḥ («свободные от греха»). Смысловой сдвиг существен: одно чтение …</div><div style="margin:6px 0"><code>note_ru</code> <span class="badge">виден рецензенту</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch2/sarga_26_candidates.json">data/analysis/phase2_batch2/sarga_26_candidates.json</a><br>Бхушана даёт разночтение эпитета му<span style="color:#f85149;font-weight:700">н</span><span style="color:#f85149;font-weight:700">i</span>s: вместо satyasammatāḥ («почитаемые за правдивость», основной текст) — tyakta-kilbiṣāḥ («свободные от греха»). Смысловой сдвиг существен: одно чтение …</div></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ Принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не дефект</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Правильное чтение, если оно не из списка."></textarea>
+  </section>
+
+  <section class="card" data-id="translit-018" data-filt="reader">
+    <header><div class="hw">cmritis / smritis — какое чтение верное? <span class="badge">2 мест</span><span class="badge">виден рецензенту</span></div><span class="idchip" title="card id — cite this id back when discussing this card">translit-018</span></header>
+    <div class="question"><p>Слово <code>с<span style="color:#f85149;font-weight:700">м</span><span style="color:#f85149;font-weight:700">r</span>itis</code> смешивает две письменности, и корпус не помог выбрать чтение: ни один вариант в нём не встречается чисто, либо встречаются оба.</p><p><b>Машинные варианты:</b> <span class="chip">cmritis</span><span class="chip">smritis</span></p><p><b>Принять</b> — взять единственный/первый вариант выше. <b>Отклонить</b> — это не дефект, оставить как есть. Любое другое чтение — в примечание, оно и будет применено.</p></div>
+    <div class="panel"><h4>Где встречается</h4><div style="margin:6px 0"><code>note_ru</code> <span class="badge">виден рецензенту</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/lexical/ch16.json">data/lexical/ch16.json</a><br>…tulyābhijanalakṣaṇa «равные родовые знаки». Abhijana — последний и решающий критерий: родовое достоинство. Эта классификация совпадает с нормами Ману-с<span style="color:#f85149;font-weight:700">м</span><span style="color:#f85149;font-weight:700">r</span>itis о браке в пределах равного варны и рода. Хануман формулирует тезис как правовую/ритуальную норму, а не лирическое чувство.</div><div style="margin:6px 0"><code>note_ru</code> <span class="badge">виден рецензенту</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/sundara_commentary_to_add.json">data/sundara_commentary_to_add.json</a><br>…tulyābhijanalakṣaṇa «равные родовые знаки». Abhijana — последний и решающий критерий: родовое достоинство. Эта классификация совпадает с нормами Ману-с<span style="color:#f85149;font-weight:700">м</span><span style="color:#f85149;font-weight:700">r</span>itis о браке в пределах равного варны и рода. Хануман формулирует тезис как правовую/ритуальную норму, а не лирическое чувство.</div></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ Принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не дефект</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Правильное чтение, если оно не из списка."></textarea>
+  </section>
+
+  <section class="card" data-id="translit-019" data-filt="reader">
+    <header><div class="hw">Смешанное слово, машинного варианта нет — 2 мест <span class="badge">2 мест</span><span class="badge">виден рецензенту</span></div><span class="idchip" title="card id — cite this id back when discussing this card">translit-019</span></header>
+    <div class="question"><p>Слово <code><span style="color:#f85149;font-weight:700">ш</span><span style="color:#f85149;font-weight:700">ā</span>popahata</code> смешивает две письменности, и корпус не помог выбрать чтение: ни один вариант в нём не встречается чисто, либо встречаются оба.</p><p><b>Машинные варианты:</b> <span class="muted">машинного варианта нет — нужно ваше чтение</span></p><p><b>Принять</b> — взять единственный/первый вариант выше. <b>Отклонить</b> — это не дефект, оставить как есть. Любое другое чтение — в примечание, оно и будет применено.</p></div>
+    <div class="panel"><h4>Где встречается</h4><div style="margin:6px 0"><code>note_ru</code> <span class="badge">виден рецензенту</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/lexical/ch54.json">data/lexical/ch54.json</a><br>…щнейшей формой ритуального наказания в эпосе. Śāpa в индийской традиции — непреодолимая сила: проклятие риши неотвратимо. Ланка сравнивается именно с <span style="color:#f85149;font-weight:700">ш</span><span style="color:#f85149;font-weight:700">ā</span>popahata — это не просто «разрушена», а «поражена неотвратимым возмездием», что переводит событие в разряд кармической необходимости.</div><div style="margin:6px 0"><code>note_ru</code> <span class="badge">виден рецензенту</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/sundara_commentary_to_add.json">data/sundara_commentary_to_add.json</a><br>…щнейшей формой ритуального наказания в эпосе. Śāpa в индийской традиции — непреодолимая сила: проклятие риши неотвратимо. Ланка сравнивается именно с <span style="color:#f85149;font-weight:700">ш</span><span style="color:#f85149;font-weight:700">ā</span>popahata — это не просто «разрушена», а «поражена неотвратимым возмездием», что переводит событие в разряд кармической необходимости.</div></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ Принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не дефект</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Правильное чтение, если оно не из списка."></textarea>
+  </section>
+
+  <section class="card" data-id="translit-024" data-filt="reader">
+    <header><div class="hw">maharJayai — какое чтение верное? <span class="badge">1 мест</span><span class="badge">виден рецензенту</span></div><span class="idchip" title="card id — cite this id back when discussing this card">translit-024</span></header>
+    <div class="question"><p>Слово <code>maharJayai</code> смешивает две письменности, и корпус не помог выбрать чтение: ни один вариант в нём не встречается чисто, либо встречаются оба.</p><p><b>Машинные варианты:</b> <span class="chip">maharJayai <b>(есть в корпусе)</b></span></p><p><b>Принять</b> — взять единственный/первый вариант выше. <b>Отклонить</b> — это не дефект, оставить как есть. Любое другое чтение — в примечание, оно и будет применено.</p></div>
+    <div class="panel"><h4>Где встречается</h4><div style="margin:6px 0"><code>raw_text</code> <span class="badge">виден рецензенту</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/leonov_own_notes.json">data/leonov_own_notes.json</a><br>[Е. Костина] «чакрачары и» Нужен комм. Голдмэны приклеивают чакрачаров к риши, как и раньше - maharJayai cakra- carah (стр. 483). Г-пр - к сиддхам (сиддхи, которые ходят по небу)</div></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ Принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не дефект</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Правильное чтение, если оно не из списка."></textarea>
+  </section>
+
+  <section class="card" data-id="translit-026" data-filt="reader">
+    <header><div class="hw">ofJanaka — какое чтение верное? <span class="badge">1 мест</span><span class="badge">виден рецензенту</span></div><span class="idchip" title="card id — cite this id back when discussing this card">translit-026</span></header>
+    <div class="question"><p>Слово <code>ofJanaka</code> смешивает две письменности, и корпус не помог выбрать чтение: ни один вариант в нём не встречается чисто, либо встречаются оба.</p><p><b>Машинные варианты:</b> <span class="chip">ofJanaka <b>(есть в корпусе)</b></span></p><p><b>Принять</b> — взять единственный/первый вариант выше. <b>Отклонить</b> — это не дефект, оставить как есть. Любое другое чтение — в примечание, оно и будет применено.</p></div>
+    <div class="panel"><h4>Где встречается</h4><div style="margin:6px 0"><code>raw_text</code> <span class="badge">виден рецензенту</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/leonov_own_notes.json">data/leonov_own_notes.json</a><br>[Е. Костина] «припадем» Голдмэны полагают, что они припали к стопам, что это уже не план Then they propitiated Maithili, the shy, young daughter ofJanaka, by falling at her feet. По Г-пр это слова ракшаси, но делается акцент на hi - достаточно всего лишь поклониться ей, и она смягчится и нас спасет</div></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ Принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не дефект</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Правильное чтение, если оно не из списка."></textarea>
+  </section>
+
+  <section class="card" data-id="translit-028" data-filt="qa">
+    <header><div class="hw">Смешанное слово, машинного варианта нет — 4 мест <span class="badge">4 мест</span><span class="badge">только QA</span></div><span class="idchip" title="card id — cite this id back when discussing this card">translit-028</span></header>
+    <div class="question"><p>Слово <code>implici<span style="color:#f85149;font-weight:700">t</span><span style="color:#f85149;font-weight:700">н</span>ую</code> смешивает две письменности, и корпус не помог выбрать чтение: ни один вариант в нём не встречается чисто, либо встречаются оба.</p><p><b>Машинные варианты:</b> <span class="muted">машинного варианта нет — нужно ваше чтение</span></p><p><b>Принять</b> — взять единственный/первый вариант выше. <b>Отклонить</b> — это не дефект, оставить как есть. Любое другое чтение — в примечание, оно и будет применено.</p></div>
+    <div class="panel"><h4>Где встречается</h4><div style="margin:6px 0"><code>why_proposed</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch2/batch2_candidates.json">data/analysis/phase2_batch2/batch2_candidates.json</a><br>разъясняет implici<span style="color:#f85149;font-weight:700">t</span><span style="color:#f85149;font-weight:700">н</span>ую мотивацию Ханумана (почему подвиг должен совершить Рама, а не он сам), не выраженную явно в подстрочнике</div><div style="margin:6px 0"><code>why_proposed</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch2/sarga_39_candidates.json">data/analysis/phase2_batch2/sarga_39_candidates.json</a><br>разъясняет implici<span style="color:#f85149;font-weight:700">t</span><span style="color:#f85149;font-weight:700">н</span>ую мотивацию Ханумана (почему подвиг должен совершить Рама, а не он сам), не выраженную явно в подстрочнике</div><div style="margin:6px 0"><code>why_proposed</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch3/batch3_candidates.json">data/analysis/phase2_batch3/batch3_candidates.json</a><br>Извлекает из бытовой детали (опахала) implici<span style="color:#f85149;font-weight:700">t</span><span style="color:#f85149;font-weight:700">н</span>ую климатическую характеристику Ланки — вечное тепло без зимы, — которую подстрочник не проговаривает.</div><div style="margin:6px 0"><code>why_proposed</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch3/sarga_18_candidates.json">data/analysis/phase2_batch3/sarga_18_candidates.json</a><br>Извлекает из бытовой детали (опахала) implici<span style="color:#f85149;font-weight:700">t</span><span style="color:#f85149;font-weight:700">н</span>ую климатическую характеристику Ланки — вечное тепло без зимы, — которую подстрочник не проговаривает.</div></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ Принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не дефект</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Правильное чтение, если оно не из списка."></textarea>
+  </section>
+
+  <section class="card" data-id="translit-029" data-filt="qa">
+    <header><div class="hw">сезтита / сестита / цезтита — какое чтение верное? <span class="badge">2 мест</span><span class="badge">только QA</span></div><span class="idchip" title="card id — cite this id back when discussing this card">translit-029</span></header>
+    <div class="question"><p>Слово <code>ce<span style="color:#f85149;font-weight:700">s</span><span style="color:#f85149;font-weight:700">т</span>ита</code> смешивает две письменности, и корпус не помог выбрать чтение: ни один вариант в нём не встречается чисто, либо встречаются оба.</p><p><b>Машинные варианты:</b> <span class="chip"><mark class="hl">сезтита</mark></span><span class="chip"><mark class="hl">сестита</mark></span><span class="chip"><mark class="hl">цезтита</mark></span><span class="chip"><mark class="hl">цестита</mark></span></p><p><b>Принять</b> — взять единственный/первый вариант выше. <b>Отклонить</b> — это не дефект, оставить как есть. Любое другое чтение — в примечание, оно и будет применено.</p></div>
+    <div class="panel"><h4>Где встречается</h4><div style="margin:6px 0"><code>reason</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch3/batch3_rejected.json">data/analysis/phase2_batch3/batch3_rejected.json</a><br>Тилака/Бхушана поясняют ce<span style="color:#f85149;font-weight:700">s</span><span style="color:#f85149;font-weight:700">т</span>ита как «плач и подобное» — тождественно подстрочнику; Широмани формулирует переход, не давая новой информации.</div><div style="margin:6px 0"><code>reason</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch3/sarga_38_candidates.json">data/analysis/phase2_batch3/sarga_38_candidates.json</a><br>Тилака/Бхушана поясняют ce<span style="color:#f85149;font-weight:700">s</span><span style="color:#f85149;font-weight:700">т</span>ита как «плач и подобное» — тождественно подстрочнику; Широмани формулирует переход, не давая новой информации.</div></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ Принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не дефект</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Правильное чтение, если оно не из списка."></textarea>
+  </section>
+
+  <section class="card" data-id="translit-030" data-filt="qa">
+    <header><div class="hw">Смешанное слово, машинного варианта нет — 2 мест <span class="badge">2 мест</span><span class="badge">только QA</span></div><span class="idchip" title="card id — cite this id back when discussing this card">translit-030</span></header>
+    <div class="question"><p>Слово <code>c<span style="color:#f85149;font-weight:700">h</span><span style="color:#f85149;font-weight:700">ь</span>е</code> смешивает две письменности, и корпус не помог выбрать чтение: ни один вариант в нём не встречается чисто, либо встречаются оба.</p><p><b>Машинные варианты:</b> <span class="muted">машинного варианта нет — нужно ваше чтение</span></p><p><b>Принять</b> — взять единственный/первый вариант выше. <b>Отклонить</b> — это не дефект, оставить как есть. Любое другое чтение — в примечание, оно и будет применено.</p></div>
+    <div class="panel"><h4>Где встречается</h4><div style="margin:6px 0"><code>reason</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/lexical/ch54.json">data/lexical/ch54.json</a><br>…ṛta+manoratha and MW gloss are accurate; note explains why the compound opens the chapter (task-completion cezura) — real gain over the crib&#x27;s plain &#x27;c<span style="color:#f85149;font-weight:700">h</span><span style="color:#f85149;font-weight:700">ь</span>е желание исполнилось&#x27;. Lemma clearly anchored (kṛtamanorathaḥ).</div><div style="margin:6px 0"><code>reason</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/sundara_commentary_to_add.json">data/sundara_commentary_to_add.json</a><br>…ṛta+manoratha and MW gloss are accurate; note explains why the compound opens the chapter (task-completion cezura) — real gain over the crib&#x27;s plain &#x27;c<span style="color:#f85149;font-weight:700">h</span><span style="color:#f85149;font-weight:700">ь</span>е желание исполнилось&#x27;. Lemma clearly anchored (kṛtamanorathaḥ).</div></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ Принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не дефект</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Правильное чтение, если оно не из списка."></textarea>
+  </section>
+
+  <section class="card" data-id="translit-031" data-filt="qa">
+    <header><div class="hw">Смешанное слово, машинного варианта нет — 2 мест <span class="badge">2 мест</span><span class="badge">только QA</span></div><span class="idchip" title="card id — cite this id back when discussing this card">translit-031</span></header>
+    <div class="question"><p>Слово <code>commen<span style="color:#f85149;font-weight:700">t</span><span style="color:#f85149;font-weight:700">а</span>рий</code> смешивает две письменности, и корпус не помог выбрать чтение: ни один вариант в нём не встречается чисто, либо встречаются оба.</p><p><b>Машинные варианты:</b> <span class="muted">машинного варианта нет — нужно ваше чтение</span></p><p><b>Принять</b> — взять единственный/первый вариант выше. <b>Отклонить</b> — это не дефект, оставить как есть. Любое другое чтение — в примечание, оно и будет применено.</p></div>
+    <div class="panel"><h4>Где встречается</h4><div style="margin:6px 0"><code>reason</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch2/batch2_rejected.json">data/analysis/phase2_batch2/batch2_rejected.json</a><br>commen<span style="color:#f85149;font-weight:700">t</span><span style="color:#f85149;font-weight:700">а</span>рий Бхушаны — точный падапатха стиха без самостоятельного толкования; жанровая параллель вилапы уже покрыта Phase-1 (crosstext, Raghuvamsha)</div><div style="margin:6px 0"><code>reason</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch2/sarga_26_candidates.json">data/analysis/phase2_batch2/sarga_26_candidates.json</a><br>commen<span style="color:#f85149;font-weight:700">t</span><span style="color:#f85149;font-weight:700">а</span>рий Бхушаны — точный падапатха стиха без самостоятельного толкования; жанровая параллель вилапы уже покрыта Phase-1 (crosstext, Raghuvamsha)</div></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ Принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не дефект</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Правильное чтение, если оно не из списка."></textarea>
+  </section>
+
+  <section class="card" data-id="translit-032" data-filt="qa">
+    <header><div class="hw">glossu / glossy — какое чтение верное? <span class="badge">2 мест</span><span class="badge">только QA</span></div><span class="idchip" title="card id — cite this id back when discussing this card">translit-032</span></header>
+    <div class="question"><p>Слово <code>glos<span style="color:#f85149;font-weight:700">s</span><span style="color:#f85149;font-weight:700">у</span></code> смешивает две письменности, и корпус не помог выбрать чтение: ни один вариант в нём не встречается чисто, либо встречаются оба.</p><p><b>Машинные варианты:</b> <span class="chip">glossu</span><span class="chip">glossy</span></p><p><b>Принять</b> — взять единственный/первый вариант выше. <b>Отклонить</b> — это не дефект, оставить как есть. Любое другое чтение — в примечание, оно и будет применено.</p></div>
+    <div class="panel"><h4>Где встречается</h4><div style="margin:6px 0"><code>reason</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch3/batch3_rejected.json">data/analysis/phase2_batch3/batch3_rejected.json</a><br>дублирует собственное примечание Леонова/Костиной (comment_4_6 уже приводит и глоссу Айраваты у Бхушаны, и glos<span style="color:#f85149;font-weight:700">s</span><span style="color:#f85149;font-weight:700">у</span> vajrajāla=gavākṣa у Тилаки).</div><div style="margin:6px 0"><code>reason</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch3/sarga_04_candidates.json">data/analysis/phase2_batch3/sarga_04_candidates.json</a><br>дублирует собственное примечание Леонова/Костиной (comment_4_6 уже приводит и глоссу Айраваты у Бхушаны, и glos<span style="color:#f85149;font-weight:700">s</span><span style="color:#f85149;font-weight:700">у</span> vajrajāla=gavākṣa у Тилаки).</div></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ Принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не дефект</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Правильное чтение, если оно не из списка."></textarea>
+  </section>
+
+  <section class="card" data-id="translit-033" data-filt="qa">
+    <header><div class="hw">glossi / glossy — какое чтение верное? <span class="badge">2 мест</span><span class="badge">только QA</span></div><span class="idchip" title="card id — cite this id back when discussing this card">translit-033</span></header>
+    <div class="question"><p>Слово <code>glos<span style="color:#f85149;font-weight:700">s</span><span style="color:#f85149;font-weight:700">ы</span></code> смешивает две письменности, и корпус не помог выбрать чтение: ни один вариант в нём не встречается чисто, либо встречаются оба.</p><p><b>Машинные варианты:</b> <span class="chip">glossi</span><span class="chip">glossy</span></p><p><b>Принять</b> — взять единственный/первый вариант выше. <b>Отклонить</b> — это не дефект, оставить как есть. Любое другое чтение — в примечание, оно и будет применено.</p></div>
+    <div class="panel"><h4>Где встречается</h4><div style="margin:6px 0"><code>reason</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch3/batch3_rejected.json">data/analysis/phase2_batch3/batch3_rejected.json</a><br>ambiguous_marker: слитный диапазон стихов 10–14, не привязанный к одному стиху; лексические glos<span style="color:#f85149;font-weight:700">s</span><span style="color:#f85149;font-weight:700">ы</span> (janasthānavadham, amarṣeṇāpahṛtāḥ) дублируют материал, уже учтённый в примечании Фазы-1 к стиху 10</div><div style="margin:6px 0"><code>reason</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch3/sarga_31_candidates.json">data/analysis/phase2_batch3/sarga_31_candidates.json</a><br>ambiguous_marker: слитный диапазон стихов 10–14, не привязанный к одному стиху; лексические glos<span style="color:#f85149;font-weight:700">s</span><span style="color:#f85149;font-weight:700">ы</span> (janasthānavadham, amarṣeṇāpahṛtāḥ) дублируют материал, уже учтённый в примечании Фазы-1 к стиху 10</div></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ Принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не дефект</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Правильное чтение, если оно не из списка."></textarea>
+  </section>
+
+  <section class="card" data-id="translit-034" data-filt="qa">
+    <header><div class="hw">варйирование / варуирование — какое чтение верное? <span class="badge">2 мест</span><span class="badge">только QA</span></div><span class="idchip" title="card id — cite this id back when discussing this card">translit-034</span></header>
+    <div class="question"><p>Слово <code>var<span style="color:#f85149;font-weight:700">y</span><span style="color:#f85149;font-weight:700">и</span>рование</code> смешивает две письменности, и корпус не помог выбрать чтение: ни один вариант в нём не встречается чисто, либо встречаются оба.</p><p><b>Машинные варианты:</b> <span class="chip"><mark class="hl">варйирование</mark></span><span class="chip"><mark class="hl">варуирование</mark></span></p><p><b>Принять</b> — взять единственный/первый вариант выше. <b>Отклонить</b> — это не дефект, оставить как есть. Любое другое чтение — в примечание, оно и будет применено.</p></div>
+    <div class="panel"><h4>Где встречается</h4><div style="margin:6px 0"><code>why_proposed</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch3/batch3_candidates.json">data/analysis/phase2_batch3/batch3_candidates.json</a><br>…оумение читателя по поводу видимого повтора (свита Раваны уже описана двумя стихами ранее) — подстрочник не поясняет, что это намеренное риторическое var<span style="color:#f85149;font-weight:700">y</span><span style="color:#f85149;font-weight:700">и</span>рование, а не тавтология.</div><div style="margin:6px 0"><code>why_proposed</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch3/sarga_18_candidates.json">data/analysis/phase2_batch3/sarga_18_candidates.json</a><br>…оумение читателя по поводу видимого повтора (свита Раваны уже описана двумя стихами ранее) — подстрочник не поясняет, что это намеренное риторическое var<span style="color:#f85149;font-weight:700">y</span><span style="color:#f85149;font-weight:700">и</span>рование, а не тавтология.</div></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ Принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не дефект</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Правильное чтение, если оно не из списка."></textarea>
+  </section>
+
+  <section class="card" data-id="translit-035" data-filt="qa">
+    <header><div class="hw">Смешанное слово, машинного варианта нет — 2 мест <span class="badge">2 мест</span><span class="badge">только QA</span></div><span class="idchip" title="card id — cite this id back when discussing this card">translit-035</span></header>
+    <div class="question"><p>Слово <code>ver<span style="color:#f85149;font-weight:700">s</span><span style="color:#f85149;font-weight:700">и</span>я</code> смешивает две письменности, и корпус не помог выбрать чтение: ни один вариант в нём не встречается чисто, либо встречаются оба.</p><p><b>Машинные варианты:</b> <span class="muted">машинного варианта нет — нужно ваше чтение</span></p><p><b>Принять</b> — взять единственный/первый вариант выше. <b>Отклонить</b> — это не дефект, оставить как есть. Любое другое чтение — в примечание, оно и будет применено.</p></div>
+    <div class="panel"><h4>Где встречается</h4><div style="margin:6px 0"><code>reason</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch3/batch3_rejected.json">data/analysis/phase2_batch3/batch3_rejected.json</a><br>дублирует собственное примечание Леонова/Костиной (ver<span style="color:#f85149;font-weight:700">s</span><span style="color:#f85149;font-weight:700">и</span>я Тилаки vimāna=ложе или Пушпака, и глосса Широмани vimāna=paryaṅka, уже приведены дословно)</div><div style="margin:6px 0"><code>reason</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch3/sarga_10_candidates.json">data/analysis/phase2_batch3/sarga_10_candidates.json</a><br>дублирует собственное примечание Леонова/Костиной (ver<span style="color:#f85149;font-weight:700">s</span><span style="color:#f85149;font-weight:700">и</span>я Тилаки vimāna=ложе или Пушпака, и глосса Широмани vimāna=paryaṅka, уже приведены дословно)</div></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ Принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не дефект</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Правильное чтение, если оно не из списка."></textarea>
+  </section>
+
+  <section class="card" data-id="translit-039" data-filt="qa">
+    <header><div class="hw">ca / sa — какое чтение верное? <span class="badge">2 мест</span><span class="badge">только QA</span></div><span class="idchip" title="card id — cite this id back when discussing this card">translit-039</span></header>
+    <div class="question"><p>Слово <code><span style="color:#f85149;font-weight:700">с</span><span style="color:#f85149;font-weight:700">a</span></code> смешивает две письменности, и корпус не помог выбрать чтение: ни один вариант в нём не встречается чисто, либо встречаются оба.</p><p><b>Машинные варианты:</b> <span class="chip">ca</span><span class="chip">sa</span></p><p><b>Принять</b> — взять единственный/первый вариант выше. <b>Отклонить</b> — это не дефект, оставить как есть. Любое другое чтение — в примечание, оно и будет применено.</p></div>
+    <div class="panel"><h4>Где встречается</h4><div style="margin:6px 0"><code>reason</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch3/batch3_rejected.json">data/analysis/phase2_batch3/batch3_rejected.json</a><br>текст Бхушаны частично смещён (относится к описанию ушей у стиха 5); собственно к стиху 3 — синтаксическое уточнение субъекта (<span style="color:#f85149;font-weight:700">с</span><span style="color:#f85149;font-weight:700">a</span>=Хануман), не даёт содержания сверх подстрочника</div><div style="margin:6px 0"><code>reason</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/analysis/phase2_batch3/sarga_17_candidates.json">data/analysis/phase2_batch3/sarga_17_candidates.json</a><br>текст Бхушаны частично смещён (относится к описанию ушей у стиха 5); собственно к стиху 3 — синтаксическое уточнение субъекта (<span style="color:#f85149;font-weight:700">с</span><span style="color:#f85149;font-weight:700">a</span>=Хануман), не даёт содержания сверх подстрочника</div></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ Принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не дефект</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Правильное чтение, если оно не из списка."></textarea>
+  </section>
+
+  <section class="card" data-id="translit-041" data-filt="qa">
+    <header><div class="hw">етймология / етумология — какое чтение верное? <span class="badge">1 мест</span><span class="badge">только QA</span></div><span class="idchip" title="card id — cite this id back when discussing this card">translit-041</span></header>
+    <div class="question"><p>Слово <code>ety<span style="color:#f85149;font-weight:700">m</span><span style="color:#f85149;font-weight:700">о</span>логия</code> смешивает две письменности, и корпус не помог выбрать чтение: ни один вариант в нём не встречается чисто, либо встречаются оба.</p><p><b>Машинные варианты:</b> <span class="chip"><mark class="hl">етймология</mark></span><span class="chip"><mark class="hl">етумология</mark></span></p><p><b>Принять</b> — взять единственный/первый вариант выше. <b>Отклонить</b> — это не дефект, оставить как есть. Любое другое чтение — в примечание, оно и будет применено.</p></div>
+    <div class="panel"><h4>Где встречается</h4><div style="margin:6px 0"><code>reason</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/lexical/ch6.rejected.json">data/lexical/ch6.rejected.json</a><br>vajradaṃṣṭra (&#x27;алмазноклыкий&#x27;) — имя ракшаса; ety<span style="color:#f85149;font-weight:700">m</span><span style="color:#f85149;font-weight:700">о</span>логия vajra+daṃṣṭra прозрачна. Proper name из реестра без дополнительной нарративной роли в этой главе. Reject.</div></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ Принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не дефект</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Правильное чтение, если оно не из списка."></textarea>
+  </section>
+
+  <section class="card" data-id="translit-042" data-filt="qa">
+    <header><div class="hw">paYcāsya — какое чтение верное? <span class="badge">1 мест</span><span class="badge">только QA</span></div><span class="idchip" title="card id — cite this id back when discussing this card">translit-042</span></header>
+    <div class="question"><p>Слово <code>paYcāsya</code> смешивает две письменности, и корпус не помог выбрать чтение: ни один вариант в нём не встречается чисто, либо встречаются оба.</p><p><b>Машинные варианты:</b> <span class="chip">paYcāsya <b>(есть в корпусе)</b></span></p><p><b>Принять</b> — взять единственный/первый вариант выше. <b>Отклонить</b> — это не дефект, оставить как есть. Любое другое чтение — в примечание, оно и будет применено.</p></div>
+    <div class="panel"><h4>Где встречается</h4><div style="margin:6px 0"><code>candidate_lemma</code> <span class="badge">только QA</span><br><a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/lexical/ch1.rejected.json">data/lexical/ch1.rejected.json</a><br>paYcāsya</div></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; ✅ Принять</button>
+      <button class="vote reject" data-vote="reject">&#10060; ❌ Не дефект</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Правильное чтение, если оно не из списка."></textarea>
+  </section>
+</main>
+<footer class="hint">Принять — применить показанное решение. Отклонить — это не дефект, оставить как есть. Отложить — решить позже. Своё чтение пишите в примечании: оно перевесит кнопку. Keyboard: <kbd>a</kbd> ✅ Принять &middot; <kbd>r</kbd> ❌ Не дефект
+  &middot; <kbd>d</kbd> defer &middot; <kbd>&darr;</kbd>/<kbd>&uarr;</kbd> next/prev. Votes autosave to
+  this browser's localStorage; click "Download decisions.json" when done (unvoted items export with
+  decision:null).</footer>
+<div class="legend" style="max-width:980px;margin:0 auto 20px;padding:0 20px;color:var(--muted);font-size:12px">
+  <b>Approve</b> = accept the proposed change/answer shown on the card (no separate "approve as-is" —
+  approving means agreeing as written). <b>Reject</b> = keep the current entry/answer unchanged.
+  <b>Defer</b> = not sure yet, decide later. The note field is for requesting a partial tweak instead
+  of an outright reject.
+</div>
+<script>
+(function () {
+  var SHEET_ID = "h2864_translit_residue";
+  var STORE_KEY = 'review-sheet:' + SHEET_ID;
+  var GENERATED = "16-08-2026";
+  var ids = ["policy-translit-table", "policy-fork-rows", "policy-qa-scope", "translit-004", "translit-005", "translit-006", "translit-008", "translit-009", "translit-017", "translit-018", "translit-019", "translit-024", "translit-026", "translit-028", "translit-029", "translit-030", "translit-031", "translit-032", "translit-033", "translit-034", "translit-035", "translit-039", "translit-041", "translit-042"];
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(STORE_KEY) || '{}') || {}; } catch (e) { state = {}; }
+  function tally() {
+    var c = { approve:0, reject:0, defer:0 };
+    ids.forEach(function (id) { var v = state[id] && state[id].decision; if (v && c.hasOwnProperty(v)) c[v]++; });
+    document.getElementById('c-approve').textContent = c.approve;
+    document.getElementById('c-reject').textContent = c.reject;
+    document.getElementById('c-defer').textContent = c.defer;
+    document.getElementById('c-unvoted').textContent = ids.length - c.approve - c.reject - c.defer;
+  }
+  function applyCardUI(card) {
+    var id = card.getAttribute('data-id'); var rec = state[id] || {};
+    card.classList.remove('voted-approve','voted-reject','voted-defer');
+    card.querySelectorAll('button.vote').forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-vote') === rec.decision); });
+    card.querySelector('.vote-state').textContent = rec.decision ? rec.decision : 'unvoted';
+    if (rec.decision) card.classList.add('voted-' + rec.decision);
+    var ta = card.querySelector('textarea.note'); if (rec.note && !ta.value) ta.value = rec.note;
+  }
+  function save() { localStorage.setItem(STORE_KEY, JSON.stringify(state)); tally(); }
+  // H1523 residual / csl-pyutil#1 Part 1: always re-read the live textarea on vote
+  // and before export so a second vote click (or a missed `input` event) cannot
+  // drop a note that is still visible in the card.
+  function syncNoteFromDom(id) {
+    state[id] = state[id] || {};
+    var card = document.querySelector('.card[data-id="' + id + '"]');
+    if (!card) return;
+    var ta = card.querySelector('textarea.note');
+    if (ta) state[id].note = ta.value;
+  }
+  function vote(id, d) { syncNoteFromDom(id); state[id].decision = d; save(); }
+  function noteChange(id, t) { state[id] = state[id] || {}; state[id].note = t; save(); }
+  document.querySelectorAll('.card').forEach(function (card) {
+    var id = card.getAttribute('data-id'); applyCardUI(card);
+    card.querySelectorAll('button.vote').forEach(function (btn) {
+      btn.addEventListener('click', function () { vote(id, btn.getAttribute('data-vote')); applyCardUI(card); });
+    });
+    var ta = card.querySelector('textarea.note'); ta.addEventListener('input', function () { noteChange(id, ta.value); });
+  });
+  tally();
+  document.getElementById('downloadBtn').addEventListener('click', function () {
+    ids.forEach(function (id) { syncNoteFromDom(id); });
+    var decided = ids.filter(function (id) { return state[id] && state[id].decision; }).length;
+    var payload = { sheet_id: SHEET_ID, generated: "16-08-2026", decided: decided, time_total_seconds: __timeTotal(),
+      items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '', time_seconds: __timeFor(id) }; }) };
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
+    var url = URL.createObjectURL(blob); var a = document.createElement('a');
+    a.href = url; a.download = SHEET_ID + '_decisions.json'; document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+  });
+  var filterbar = document.getElementById('filterbar');
+  filterbar.addEventListener('click', function (e) {
+    var btn = e.target.closest('button[data-filter]'); if (!btn) return;
+    filterbar.querySelectorAll('button').forEach(function (b) { b.classList.remove('active'); });
+    btn.classList.add('active'); var f = btn.getAttribute('data-filter');
+    document.querySelectorAll('.card').forEach(function (card) {
+      var show = true;
+      if (f === 'unvoted') { var id = card.getAttribute('data-id'); show = !(state[id] && state[id].decision); }
+      else if (f !== 'all') { show = card.getAttribute('data-filt') === f; }
+      card.style.display = show ? '' : 'none';
+    });
+  });
+  var cardsEl = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  var activeIdx = 0;
+  function visibleCards() { return cardsEl.filter(function (c) { return c.style.display !== 'none'; }); }
+  document.addEventListener('keydown', function (e) {
+    if (e.target.tagName === 'TEXTAREA') return;
+    var vis = visibleCards(); if (!vis.length) return;
+    if (activeIdx >= vis.length) activeIdx = vis.length - 1;
+    var card = vis[activeIdx]; var id = card.getAttribute('data-id');
+    if (e.key === 'a') { vote(id, 'approve'); applyCardUI(card); }
+    else if (e.key === 'r') { vote(id, 'reject'); applyCardUI(card); }
+    else if (e.key === 'd') { vote(id, 'defer'); applyCardUI(card); }
+    else if (e.key === 'ArrowDown') { activeIdx = Math.min(activeIdx + 1, vis.length - 1); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'center'}); }
+    else if (e.key === 'ArrowUp') { activeIdx = Math.max(activeIdx - 1, 0); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'center'}); }
+    else return;
+    e.preventDefault();
+  });
+
+  var saveHandle = null, saveTimer = null;
+  function exportPayload() {
+    if (typeof syncNoteFromDom === 'function') {
+      ids.forEach(function (id) { syncNoteFromDom(id); });
+    }
+    var decided = ids.filter(function (id) { return state[id] && state[id].decision; }).length;
+    return JSON.stringify({ sheet_id: SHEET_ID, generated: new Date().toISOString(), decided: decided, time_total_seconds: __timeTotal(),
+      items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '', time_seconds: __timeFor(id) }; }) }, null, 2);
+  }
+  function scheduleAutosave() {
+    if (!saveHandle) return;
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(function () {
+      saveHandle.createWritable().then(function (w) {
+        w.write(exportPayload()).then(function () { w.close(); });
+      }).catch(function () {});
+    }, 1000);
+  }
+  var _origSave = save;
+  save = function () { _origSave(); scheduleAutosave(); };
+  if (window.showSaveFilePicker) {
+    var saveBtn = document.getElementById('saveBtn');
+    saveBtn.style.display = '';
+    saveBtn.addEventListener('click', function () {
+      window.showSaveFilePicker({suggestedName: SHEET_ID + '_decisions.json'}).then(function (h) {
+        saveHandle = h; scheduleAutosave();
+      }).catch(function () {});
+    });
+  }
+
+  var FS_KEY = STORE_KEY + ':fs', FS_DEFAULT = 1.5;
+  function fsGet() {
+    var v = parseFloat(localStorage.getItem(FS_KEY));
+    return (isFinite(v) && v >= 0.7 && v <= 3) ? v : FS_DEFAULT;
+  }
+  function fsApply(v) {
+    document.documentElement.style.setProperty('--fs', String(v));
+    document.getElementById('fsVal').textContent = Math.round(v * 100) + '%';
+  }
+  function fsSet(v) {
+    v = Math.min(3, Math.max(0.7, Math.round(v * 10) / 10));
+    localStorage.setItem(FS_KEY, String(v)); fsApply(v);
+  }
+  fsApply(fsGet());
+  document.getElementById('fsDown').addEventListener('click', function () { fsSet(fsGet() - 0.1); });
+  document.getElementById('fsUp').addEventListener('click', function () { fsSet(fsGet() + 0.1); });
+
+  var TIME_KEY = STORE_KEY + ':timing';
+  var __timing = { total: 0, per: {} };
+  try {
+    var __t0 = JSON.parse(localStorage.getItem(TIME_KEY) || 'null');
+    if (__t0 && typeof __t0.total === 'number') __timing = __t0;
+  } catch (e) {}
+  if (!__timing.per) __timing.per = {};
+  function __timeFor(id) { return Math.round(__timing.per[id] || 0); }
+  function __timeTotal() { return Math.round(__timing.total || 0); }
+  function __timeFmt(s) {
+    s = Math.round(s); var m = Math.floor(s / 60);
+    return (m >= 60 ? Math.floor(m / 60) + ':' + ('0' + (m - Math.floor(m / 60) * 60)).slice(-2) : m)
+      + ':' + ('0' + (s - m * 60)).slice(-2);
+  }
+  function __timeShow() {
+    var el = document.getElementById('t-total');
+    if (el) el.textContent = __timeFmt(__timing.total);
+  }
+  var __timeLast = Date.now(), __timeDirty = 0;
+  var __timeCards = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  function __timeActiveId() {
+    var mid = window.innerHeight / 2, best = null, bestd = Infinity;
+    for (var i = 0; i < __timeCards.length; i++) {
+      var c = __timeCards[i];
+      if (c.style.display === 'none') continue;
+      var r = c.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > window.innerHeight) continue;
+      var center = (Math.max(r.top, 0) + Math.min(r.bottom, window.innerHeight)) / 2;
+      var d = Math.abs(center - mid);
+      if (d < bestd) { bestd = d; best = c; }
+    }
+    return best ? best.getAttribute('data-id') : null;
+  }
+  function __timeFlush() {
+    try { localStorage.setItem(TIME_KEY, JSON.stringify(__timing)); } catch (e) {}
+  }
+  // V12 (H2858): the clock is stoppable. `paused` rides in the same persisted
+  // record as the totals, so a reviewer who pauses and closes the tab does not
+  // come back to a clock that ran all night.
+  var __timePaused = !!__timing.paused;
+  function __timePauseSet(v) {
+    __timePaused = !!v; __timing.paused = __timePaused; __timeLast = Date.now(); __timeFlush();
+  }
+  setInterval(function () {
+    var now = Date.now(), dt = (now - __timeLast) / 1000;
+    __timeLast = now;
+    if (document.hidden || __timePaused || dt <= 0 || dt > 4) return;
+    __timing.total += dt;
+    var id = __timeActiveId();
+    if (id) __timing.per[id] = (__timing.per[id] || 0) + dt;
+    __timeDirty += dt;
+    if (__timeDirty >= 5) { __timeDirty = 0; __timeFlush(); }
+    __timeShow();
+  }, 1000);
+  document.addEventListener('visibilitychange', function () { __timeLast = Date.now(); });
+  window.addEventListener('beforeunload', __timeFlush);
+  __timeShow();
+
+  var HANDIN_SAID = 'handed in {n} of {total} — clock stopped, the rest stay saved in this browser';
+  var __handinBtn = document.getElementById('handinBtn');
+  var __handinSaid = document.getElementById('handinSaid');
+
+  var __pauseBtn = document.getElementById('pauseBtn');
+  function __pauseShow() {
+    __pauseBtn.classList.toggle('on', __timePaused);
+    __pauseBtn.innerHTML = __timePaused ? '&#9654;' : '&#9208;';
+    var chip = document.querySelector('.tally .time');
+    if (chip) chip.classList.toggle('paused', __timePaused);
+  }
+  __pauseBtn.addEventListener('click', function () { __timePauseSet(!__timePaused); __pauseShow(); });
+  __pauseShow();
+  __handinBtn.addEventListener('click', function () {
+    ids.forEach(function (id) { syncNoteFromDom(id); });
+    __timePauseSet(true); __pauseShow();
+    var items = ids.map(function (id) {
+      var rec = state[id] || {};
+      var item = { id: id, decision: rec.decision || null };
+      item.note = rec.note || '';
+      item.time_seconds = __timeFor(id);
+      return item;
+    });
+    var decided = items.filter(function (it) { return !!it.decision; }).length;
+    var payload = { sheet_id: SHEET_ID, generated: GENERATED, decided: decided,
+      partial: true, complete: false, undecided: items.length - decided, items: items };
+    payload.time_total_seconds = __timeTotal();
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
+    var url = URL.createObjectURL(blob); var a = document.createElement('a');
+    a.href = url; a.download = SHEET_ID + '_decisions_partial.json';
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+    __handinSaid.textContent = HANDIN_SAID.replace('{n}', decided).replace('{total}', items.length);
+  });
+})();
+</script>
+</body>
+</html>
