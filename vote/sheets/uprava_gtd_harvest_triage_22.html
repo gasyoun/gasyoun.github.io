@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="color-scheme" content="dark">
+<meta name="generator" content="csl-pyutil/0.13.0">
+<title>Harvested Next Steps — which of these actually need a human? — 22 items</title>
+<style>
+  :root { color-scheme: dark; --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --text:#e6e6e6; --muted:#9aa0aa;
+          --accent:#5b8cff; --ok:#3fb950; --bad:#f85149; --defer:#d29922; --border:#2a2f3a; }
+  * { box-sizing: border-box; }
+  body { background:var(--bg); color:var(--text); font-family:-apple-system,Segoe UI,Roboto,sans-serif;
+         margin:0; padding:0 0 120px 0; }
+  header.top { position:sticky; top:0; z-index:10; background:var(--panel); border-bottom:1px solid var(--border);
+               padding:14px 20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+  header.top h1 { font-size:16px; margin:0; }
+  header.top .sub { color:var(--muted); font-size:12px; max-width:760px; }
+  .tally { display:flex; gap:14px; font-size:13px; }
+  .tally span.count { font-weight:700; }
+  .tally .approve { color:var(--ok); } .tally .reject { color:var(--bad); }
+  .tally .defer { color:var(--defer); } .tally .unvoted { color:var(--muted); }
+  .toolbar { padding:10px 20px; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  button.dl { background:var(--accent); color:#fff; border:none; padding:8px 14px; border-radius:6px;
+              cursor:pointer; font-size:13px; }
+  button.dl:hover { opacity:.9; }
+  .filterbar { display:flex; gap:6px; flex-wrap:wrap; }
+  .filterbar button { background:var(--panel2); border:1px solid var(--border); color:var(--text);
+                       padding:6px 10px; border-radius:14px; font-size:12px; cursor:pointer; }
+  .filterbar button.active { border-color:var(--accent); color:var(--accent); }
+  main { max-width:980px; margin:0 auto; padding:10px 20px; }
+  .card { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:16px;
+          margin-bottom:16px; }
+  .card.voted-approve { border-left:4px solid var(--ok); }
+  .card.voted-reject { border-left:4px solid var(--bad); }
+  .card.voted-defer { border-left:4px solid var(--defer); }
+  .card header { display:flex; justify-content:space-between; align-items:baseline; }
+  .card .hw { font-size:18px; font-weight:700; }
+  .badge { font-size:11px; background:var(--panel2); padding:2px 8px; border-radius:10px;
+           margin-left:8px; color:var(--muted); }
+  .question { margin:8px 0 12px; font-size:14px; }
+  .panel { background:var(--panel2); border-radius:8px; padding:10px 12px; font-size:13px; margin-bottom:10px; }
+  .panel h4 { margin:0 0 6px; font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+  .panel pre { white-space:pre-wrap; word-break:break-word; margin:0; font-size:12px; line-height:1.45; }
+  .chip { display:inline-block; background:#263042; border-radius:5px; padding:2px 7px; margin:2px 3px 2px 0; font-size:12px; }
+  .muted { color:var(--muted); font-style:italic; }
+  .controls { display:flex; align-items:center; gap:8px; margin-top:4px; }
+  button.vote { border:1px solid var(--border); background:var(--panel2); color:var(--text);
+                padding:7px 12px; border-radius:6px; cursor:pointer; font-size:13px; }
+  button.vote.approve.active { background:var(--ok); border-color:var(--ok); color:#04240b; }
+  button.vote.reject.active { background:var(--bad); border-color:var(--bad); color:#2a0a08; }
+  button.vote.defer.active { background:var(--defer); border-color:var(--defer); color:#2a1d02; }
+  .vote-state { margin-left:6px; font-size:12px; color:var(--muted); }
+  textarea.note { width:100%; margin-top:10px; min-height:44px; background:#11141a !important; color:#e6e6e6 !important;
+                  -webkit-text-fill-color:#e6e6e6; border:1px solid var(--border); border-radius:6px; padding:8px; font-size:13px;
+                  font-family:inherit; resize:vertical; }
+  textarea.note::placeholder { color:var(--muted); opacity:1; }
+  footer.hint { max-width:980px; margin:20px auto; padding:0 20px; color:var(--muted); font-size:12px; }
+  kbd { background:#263042; border-radius:4px; padding:1px 5px; font-size:11px; }
+
+  .screening-banner { margin: 0 20px 12px; padding: 10px 14px; border-radius: 8px;
+    border: 1px solid var(--accent); background: #152033; font-size: 12px; line-height: 1.45;
+    color: var(--text); max-width: 980px; }
+  .screening-banner code { font-size: 11px; color: var(--accent); }
+  .screening-banner .sc-d { color: var(--defer); font-weight: 700; }
+
+  :root { --fs:1.5; }
+  header.top h1 { font-size:calc(16px * var(--fs)) !important; }
+  header.top .sub { font-size:calc(12px * var(--fs)) !important; }
+  .tally, button.dl, button.vote, button.rate, textarea.note, .reject-label-select,
+  #strictReviewerWrap, #strictReviewerWrap input { font-size:calc(13px * var(--fs)) !important; }
+  .filterbar button, .fsctl button, .fsctl .fsval, .chip, .vote-state, .rate-state,
+  .ratinglabel, .rejectlabellabel, footer.hint, div.legend,
+  #strictReviewError { font-size:calc(12px * var(--fs)) !important; }
+  .card .hw { font-size:calc(18px * var(--fs)) !important; }
+  .badge, .panel h4, kbd, .idchip { font-size:calc(11px * var(--fs)) !important; }
+  .question { font-size:calc(14px * var(--fs)) !important; }
+  .panel { font-size:calc(13px * var(--fs)) !important; }
+  .panel pre { font-size:calc(13.5px * var(--fs)) !important; line-height:1.55; }
+  .panel .anatomy { font-size:calc(12.5px * var(--fs)) !important; }
+  .savebanner { font-size:calc(12.5px * var(--fs)) !important; }
+  .fsctl { display:flex; align-items:center; gap:4px; }
+  .fsctl button { background:var(--panel2); border:1px solid var(--border); color:var(--text);
+                  padding:6px 10px; border-radius:14px; cursor:pointer; line-height:1; }
+  .fsctl .fsval { color:var(--muted); min-width:3.4em; text-align:center; }
+  @media (max-width: 640px) {
+    header.top { padding: 10px 14px; flex-direction: column; align-items: stretch; }
+    header.top h1 { font-size: 15px; }
+    .tally { gap: 8px; font-size: 11px; }
+    .toolbar { padding: 8px 14px; }
+    main { padding: 8px 12px; }
+    .card { padding: 12px; }
+    .filterbar { flex-wrap: wrap; }
+    button.dl, button.vote, button.rate, .fsctl button, #saveBtn, #handinBtn, #pauseBtn {
+      min-height: 44px; min-width: 44px; padding: 10px 14px;
+    }
+    .controls { flex-wrap: wrap; }
+    .panel { padding: 8px 10px; }
+    textarea.note { min-height: 60px; }
+  }
+  .tally .time { color:var(--muted); }
+  .dl.handin { background:#243447; }
+  .tally .pausebtn { background:none; border:1px solid var(--border); color:var(--muted);
+                     border-radius:6px; padding:0 6px; margin-left:4px; cursor:pointer;
+                     font-size:inherit; font-family:inherit; line-height:1.6; }
+  .tally .pausebtn.on { color:#ffd479; border-color:#ffd479; }
+  .tally .time.paused { opacity:.45; }
+  .handin-said { color:var(--muted); font-size:12px; margin-left:10px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>Harvested Next Steps — which of these actually need a human? — 22 items</h1>
+    <div class="sub">Generated 16-08-2026 &middot; sheet_id <code>uprava-gtd-harvest-triage_human-gated-22</code> &middot; 423 unfiltered <code>.ai_state.md</code> Next Steps lines, cut in four counted stages (148 report finished work · 7 placeholders · 246 agent-doable) down to <b>22 human-gated candidates</b>. Approve puts the line in the hub under MG; reject sends it back to its repo AND onto the denylist so it never returns.</div>
+  </div>
+  <div class="tally" id="tally">
+    <span class="approve">&#9989; <span class="count" id="c-approve">0</span></span>
+    <span class="reject">&#10060; <span class="count" id="c-reject">0</span></span>
+    <span class="defer">&#9208; <span class="count" id="c-defer">0</span></span>
+    <span class="time" title="active time on this sheet (while the tab is visible)">&#9201; <span class="count" id="t-total">0:00</span></span>
+    <button type="button" class="pausebtn" id="pauseBtn" title="pause the clock — a break is not review time">&#9208;</button>
+    <span class="unvoted">&#9711; <span class="count" id="c-unvoted">22</span></span>
+  </div>
+</header>
+<aside class="screening-banner" role="status" data-screening="1"><strong>Screening (H1649)</strong> — only human-required cards are below. Off the plate: <span class="sc-a">deterministic 155</span> · <span class="sc-b">dataset lookup 0</span> · <span class="sc-c">agent adjudication 246</span> (total screened 401). Human cards: <span class="sc-d">22</span>. Evidence: <code>tools/gtd_harvest_triage.py (DONE_RE · NOISE_RE · GATES)</code>. Rules: author-desk, credential, decision, deploy/flag, external party, merge, named human owner, vote/sheet.</aside>
+<div class="toolbar">
+  <button class="dl" id="downloadBtn">Download decisions.json</button><button class="dl handin" id="handinBtn" title="stop the clock and export the votes made so far; the rest stay saved in this browser">Hand in what I got</button><span class="handin-said" id="handinSaid"></span><button class="dl" id="saveBtn" style="display:none;margin-left:8px">Save to folder…</button>
+  <div class="fsctl" title="text size — persists in this browser"><button type="button" id="fsDown" aria-label="smaller text">A&minus;</button><span class="fsval" id="fsVal"></span><button type="button" id="fsUp" aria-label="larger text">A+</button></div>
+  <div class="filterbar" id="filterbar"><button data-filter="all" class="active">all</button><button data-filter="all">All</button><button data-filter="author-desk">author-desk</button><button data-filter="credential">credential</button><button data-filter="decision">decision</button><button data-filter="deploy-flag">deploy/flag</button><button data-filter="external party">external party</button><button data-filter="merge">merge</button><button data-filter="named human owner">named human owner</button><button data-filter="vote-sheet">vote/sheet</button><button data-filter="unvoted">unvoted only</button></div>
+</div>
+<main id="cards">
+
+  <section class="card" data-id="cologne-mg-review-docs-cleanup-taxonomy-summary-md-docs-clea" data-filt="decision">
+    <header><div class="hw">COLOGNE — MG: review [docs/cleanup/taxonomy_summary.md](docs/cleanup/taxonomy_summary.md) § Human Ap <span class="badge">COLOGNE</span><span class="badge">decision</span></div></header>
+    <div class="question"><p>MG: review [docs/cleanup/taxonomy_summary.md](docs/cleanup/taxonomy_summary.md) § Human Approval Queue (6 priority groups — transliteration consolidation, `updateByLine.py` copies, Python-3-failing scripts, `issues/issue445/` API prototy...</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Approve</b> — this is human work: it becomes an MG row in the hub and agents stop treating it as their own resume point.<br><b>❌ Reject</b> — not human work: it stays in its repo's <code>.ai_state.md</code> as an agent resume point and is added to the harvest denylist, so it never returns to a sheet.<br><b>⏸ Defer</b> — decide later; it comes back next harvest.</p></div>
+    <div class="panel"><h4>Source</h4><p>Line taken from <a href='https://github.com/sanskrit-lexicon/COLOGNE/blob/main/.ai_state.md'>COLOGNE/.ai_state.md</a> (Next Steps section).</p></div><div class="panel"><h4>Why this card is here</h4><p>The funnel kept it on the <b>decision</b> rule, matching <code>'Approval'</code>.</p><p>The rule is lexical and recall-oriented, so a kept row can still turn out to be ordinary agent work, or a line that merely <i>reports</i> finished work. Rejecting those is the point of the vote — it is not an error to correct before voting.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; In the hub (human task)</button>
+      <button class="vote reject" data-vote="reject">&#10060; Not human (agent keeps it)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="reword, reassign, or say why this is not human work"></textarea>
+  </section>
+
+  <section class="card" data-id="commentarystrategies-decide-n-ga-7-1-leonov-ru" data-filt="decision">
+    <header><div class="hw">CommentaryStrategies — **[@DECIDE человек]** `nāga` в шлоке 7 песни 1: перевод даёт «слон», наше же примечание со <span class="badge">CommentaryStrategies</span><span class="badge">decision</span></div></header>
+    <div class="question"><p>**[@DECIDE человек]** `nāga` в шлоке 7 песни 1: перевод даёт «слон», наше же примечание сообщает, что большинство и Голдмены — за «наг». Выбрать вариант в `leonov_ru` или дописать обоснование.</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Approve</b> — this is human work: it becomes an MG row in the hub and agents stop treating it as their own resume point.<br><b>❌ Reject</b> — not human work: it stays in its repo's <code>.ai_state.md</code> as an agent resume point and is added to the harvest denylist, so it never returns to a sheet.<br><b>⏸ Defer</b> — decide later; it comes back next harvest.</p></div>
+    <div class="panel"><h4>Source</h4><p>Line taken from <a href='https://github.com/gasyoun/CommentaryStrategies/blob/main/.ai_state.md'>CommentaryStrategies/.ai_state.md</a> (Next Steps section).</p></div><div class="panel"><h4>Why this card is here</h4><p>The funnel kept it on the <b>decision</b> rule, matching <code>'@DECIDE'</code>.</p><p>The rule is lexical and recall-oriented, so a kept row can still turn out to be ordinary agent work, or a line that merely <i>reports</i> finished work. Rejecting those is the point of the vote — it is not an error to correct before voting.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; In the hub (human task)</button>
+      <button class="vote reject" data-vote="reject">&#10060; Not human (agent keeps it)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="reword, reassign, or say why this is not human work"></textarea>
+  </section>
+
+  <section class="card" data-id="commentarystrategies-a19-02-07-2026-3-2025-29-dev-articles-s" data-filt="vote-sheet">
+    <header><div class="hw">CommentaryStrategies — A19: применить фикс-лист верификации 02-07-2026 (нумерация таблиц с учетом сдвига +3, Каза <span class="badge">CommentaryStrategies</span><span class="badge">vote/sheet</span></div></header>
+    <div class="question"><p>A19: применить фикс-лист верификации 02-07-2026 (нумерация таблиц с учетом сдвига +3, Казанский 2025 → ИЕЯКФ 29, «Мāрцис»→«Марцис» в письме, «Арааньяканда», dev-комментарии) — [articles/SUBMISSION_READINESS_A19.md](https://github.com/gas...</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Approve</b> — this is human work: it becomes an MG row in the hub and agents stop treating it as their own resume point.<br><b>❌ Reject</b> — not human work: it stays in its repo's <code>.ai_state.md</code> as an agent resume point and is added to the harvest denylist, so it never returns to a sheet.<br><b>⏸ Defer</b> — decide later; it comes back next harvest.</p></div>
+    <div class="panel"><h4>Source</h4><p>Line taken from <a href='https://github.com/gasyoun/CommentaryStrategies/blob/main/.ai_state.md'>CommentaryStrategies/.ai_state.md</a> (Next Steps section).</p></div><div class="panel"><h4>Why this card is here</h4><p>The funnel kept it on the <b>vote/sheet</b> rule, matching <code>'лист'</code>.</p><p>The rule is lexical and recall-oriented, so a kept row can still turn out to be ordinary agent work, or a line that merely <i>reports</i> finished work. Rejecting those is the point of the vote — it is not an error to correct before voting.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; In the hub (human task)</button>
+      <button class="vote reject" data-vote="reject">&#10060; Not human (agent keeps it)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="reword, reassign, or say why this is not human work"></textarea>
+  </section>
+
+  <section class="card" data-id="commentarystrategies-7-1-2-3-d-4" data-filt="author-desk">
+    <header><div class="hw">CommentaryStrategies — Финальная вычитка: §7.1 (Васильков), §2.3 (значение D), библиография (4 записи) <span class="badge">CommentaryStrategies</span><span class="badge">author-desk</span></div></header>
+    <div class="question"><p>Финальная вычитка: §7.1 (Васильков), §2.3 (значение D), библиография (4 записи)</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Approve</b> — this is human work: it becomes an MG row in the hub and agents stop treating it as their own resume point.<br><b>❌ Reject</b> — not human work: it stays in its repo's <code>.ai_state.md</code> as an agent resume point and is added to the harvest denylist, so it never returns to a sheet.<br><b>⏸ Defer</b> — decide later; it comes back next harvest.</p></div>
+    <div class="panel"><h4>Source</h4><p>Line taken from <a href='https://github.com/gasyoun/CommentaryStrategies/blob/main/.ai_state.md'>CommentaryStrategies/.ai_state.md</a> (Next Steps section).</p></div><div class="panel"><h4>Why this card is here</h4><p>The funnel kept it on the <b>author-desk</b> rule, matching <code>'вычитк'</code>.</p><p>The rule is lexical and recall-oriented, so a kept row can still turn out to be ordinary agent work, or a line that merely <i>reports</i> finished work. Rejecting those is the point of the vote — it is not an error to correct before voting.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; In the hub (human task)</button>
+      <button class="vote reject" data-vote="reject">&#10060; Not human (agent keeps it)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="reword, reassign, or say why this is not human work"></textarea>
+  </section>
+
+  <section class="card" data-id="commentarystrategies-1788" data-filt="author-desk">
+    <header><div class="hw">CommentaryStrategies — Верификация Петров 1788 (атрибуция и выходные данные) — архивная работа <span class="badge">CommentaryStrategies</span><span class="badge">author-desk</span></div></header>
+    <div class="question"><p>Верификация Петров 1788 (атрибуция и выходные данные) — архивная работа</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Approve</b> — this is human work: it becomes an MG row in the hub and agents stop treating it as their own resume point.<br><b>❌ Reject</b> — not human work: it stays in its repo's <code>.ai_state.md</code> as an agent resume point and is added to the harvest denylist, so it never returns to a sheet.<br><b>⏸ Defer</b> — decide later; it comes back next harvest.</p></div>
+    <div class="panel"><h4>Source</h4><p>Line taken from <a href='https://github.com/gasyoun/CommentaryStrategies/blob/main/.ai_state.md'>CommentaryStrategies/.ai_state.md</a> (Next Steps section).</p></div><div class="panel"><h4>Why this card is here</h4><p>The funnel kept it on the <b>author-desk</b> rule, matching <code>'архивная работа'</code>.</p><p>The rule is lexical and recall-oriented, so a kept row can still turn out to be ordinary agent work, or a line that merely <i>reports</i> finished work. Rejecting those is the point of the vote — it is not an error to correct before voting.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; In the hub (human task)</button>
+      <button class="vote reject" data-vote="reject">&#10060; Not human (agent keeps it)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="reword, reassign, or say why this is not human work"></textarea>
+  </section>
+
+  <section class="card" data-id="commentarystrategies" data-filt="author-desk">
+    <header><div class="hw">CommentaryStrategies — Финальная вычитка и отправка в ВЯ <span class="badge">CommentaryStrategies</span><span class="badge">author-desk</span></div></header>
+    <div class="question"><p>Финальная вычитка и отправка в ВЯ</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Approve</b> — this is human work: it becomes an MG row in the hub and agents stop treating it as their own resume point.<br><b>❌ Reject</b> — not human work: it stays in its repo's <code>.ai_state.md</code> as an agent resume point and is added to the harvest denylist, so it never returns to a sheet.<br><b>⏸ Defer</b> — decide later; it comes back next harvest.</p></div>
+    <div class="panel"><h4>Source</h4><p>Line taken from <a href='https://github.com/gasyoun/CommentaryStrategies/blob/main/.ai_state.md'>CommentaryStrategies/.ai_state.md</a> (Next Steps section).</p></div><div class="panel"><h4>Why this card is here</h4><p>The funnel kept it on the <b>author-desk</b> rule, matching <code>'вычитк'</code>.</p><p>The rule is lexical and recall-oriented, so a kept row can still turn out to be ordinary agent work, or a line that merely <i>reports</i> finished work. Rejecting those is the point of the vote — it is not an error to correct before voting.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; In the hub (human task)</button>
+      <button class="vote reject" data-vote="reject">&#10060; Not human (agent keeps it)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="reword, reassign, or say why this is not human work"></textarea>
+  </section>
+
+  <section class="card" data-id="commentarystrategies-b-b1-rights-b2-urn-b3-tei-b4-build-page" data-filt="credential">
+    <header><div class="hw">CommentaryStrategies — Сделано в B-треке: B1 (RIGHTS), B2 (URN+схема), B3 (TEI), B4 (build_pages), B6-частично. О <span class="badge">CommentaryStrategies</span><span class="badge">credential</span></div></header>
+    <div class="question"><p>Сделано в B-треке: B1 (RIGHTS), B2 (URN+схема), B3 (TEI), B4 (build_pages), B6-частично. Осталось: B5 (2-й кодировщик + API-ключ — человек), Zenodo-депозит (человек), вынос веб-дампов из git.</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Approve</b> — this is human work: it becomes an MG row in the hub and agents stop treating it as their own resume point.<br><b>❌ Reject</b> — not human work: it stays in its repo's <code>.ai_state.md</code> as an agent resume point and is added to the harvest denylist, so it never returns to a sheet.<br><b>⏸ Defer</b> — decide later; it comes back next harvest.</p></div>
+    <div class="panel"><h4>Source</h4><p>Line taken from <a href='https://github.com/gasyoun/CommentaryStrategies/blob/main/.ai_state.md'>CommentaryStrategies/.ai_state.md</a> (Next Steps section).</p></div><div class="panel"><h4>Why this card is here</h4><p>The funnel kept it on the <b>credential</b> rule, matching <code>'ключ'</code>.</p><p>The rule is lexical and recall-oriented, so a kept row can still turn out to be ordinary agent work, or a line that merely <i>reports</i> finished work. Rejecting those is the point of the vote — it is not an error to correct before voting.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; In the hub (human task)</button>
+      <button class="vote reject" data-vote="reject">&#10060; Not human (agent keeps it)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="reword, reassign, or say why this is not human work"></textarea>
+  </section>
+
+  <section class="card" data-id="csl-apidev-wire-it-in-jim-point-init-word-frequency-v1-1-get" data-filt="external party">
+    <header><div class="hw">csl-apidev — **Wire it in (Jim):** point `init_word_frequency()` (v1.1/getword_list_1.0_main.php) <span class="badge">csl-apidev</span><span class="badge">external party</span></div></header>
+    <div class="question"><p>**Wire it in (Jim):** point `init_word_frequency()` (v1.1/getword_list_1.0_main.php)</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Approve</b> — this is human work: it becomes an MG row in the hub and agents stop treating it as their own resume point.<br><b>❌ Reject</b> — not human work: it stays in its repo's <code>.ai_state.md</code> as an agent resume point and is added to the harvest denylist, so it never returns to a sheet.<br><b>⏸ Defer</b> — decide later; it comes back next harvest.</p></div>
+    <div class="panel"><h4>Source</h4><p>Line taken from <a href='https://github.com/sanskrit-lexicon/csl-apidev/blob/main/.ai_state.md'>csl-apidev/.ai_state.md</a> (Next Steps section).</p></div><div class="panel"><h4>Why this card is here</h4><p>The funnel kept it on the <b>external party</b> rule, matching <code>'Jim'</code>.</p><p>The rule is lexical and recall-oriented, so a kept row can still turn out to be ordinary agent work, or a line that merely <i>reports</i> finished work. Rejecting those is the point of the vote — it is not an error to correct before voting.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; In the hub (human task)</button>
+      <button class="vote reject" data-vote="reject">&#10060; Not human (agent keeps it)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="reword, reassign, or say why this is not human work"></textarea>
+  </section>
+
+  <section class="card" data-id="csl-apidev-jim-implement-v1-2-from-simple-search-roadmap-v1-" data-filt="external party">
+    <header><div class="hw">csl-apidev — Jim: implement v1.2 from `simple-search/roadmap_v1.2.md`, milestones M1→M5 <span class="badge">csl-apidev</span><span class="badge">external party</span></div></header>
+    <div class="question"><p>Jim: implement v1.2 from `simple-search/roadmap_v1.2.md`, milestones M1→M5</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Approve</b> — this is human work: it becomes an MG row in the hub and agents stop treating it as their own resume point.<br><b>❌ Reject</b> — not human work: it stays in its repo's <code>.ai_state.md</code> as an agent resume point and is added to the harvest denylist, so it never returns to a sheet.<br><b>⏸ Defer</b> — decide later; it comes back next harvest.</p></div>
+    <div class="panel"><h4>Source</h4><p>Line taken from <a href='https://github.com/sanskrit-lexicon/csl-apidev/blob/main/.ai_state.md'>csl-apidev/.ai_state.md</a> (Next Steps section).</p></div><div class="panel"><h4>Why this card is here</h4><p>The funnel kept it on the <b>external party</b> rule, matching <code>'Jim'</code>.</p><p>The rule is lexical and recall-oriented, so a kept row can still turn out to be ordinary agent work, or a line that merely <i>reports</i> finished work. Rejecting those is the point of the vote — it is not an error to correct before voting.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; In the hub (human task)</button>
+      <button class="vote reject" data-vote="reject">&#10060; Not human (agent keeps it)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="reword, reassign, or say why this is not human work"></textarea>
+  </section>
+
+  <section class="card" data-id="csl-guides-next-lead-needs-maintainer-direction-open-candida" data-filt="merge">
+    <header><div class="hw">csl-guides — ⚠️ **NEXT LEAD — needs maintainer direction.** Open candidates: **more quiz topics** <span class="badge">csl-guides</span><span class="badge">merge</span></div></header>
+    <div class="question"><p>⚠️ **NEXT LEAD — needs maintainer direction.** Open candidates: **more quiz topics**</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Approve</b> — this is human work: it becomes an MG row in the hub and agents stop treating it as their own resume point.<br><b>❌ Reject</b> — not human work: it stays in its repo's <code>.ai_state.md</code> as an agent resume point and is added to the harvest denylist, so it never returns to a sheet.<br><b>⏸ Defer</b> — decide later; it comes back next harvest.</p></div>
+    <div class="panel"><h4>Source</h4><p>Line taken from <a href='https://github.com/sanskrit-lexicon/csl-guides/blob/main/.ai_state.md'>csl-guides/.ai_state.md</a> (Next Steps section).</p></div><div class="panel"><h4>Why this card is here</h4><p>The funnel kept it on the <b>merge</b> rule, matching <code>'maintainer'</code>.</p><p>The rule is lexical and recall-oriented, so a kept row can still turn out to be ordinary agent work, or a line that merely <i>reports</i> finished work. Rejecting those is the point of the vote — it is not an error to correct before voting.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; In the hub (human task)</button>
+      <button class="vote reject" data-vote="reject">&#10060; Not human (agent keeps it)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="reword, reassign, or say why this is not human work"></textarea>
+  </section>
+
+  <section class="card" data-id="csl-standards-2026-06-20-salt-phase-1-host-deploy-parity-is-" data-filt="deploy-flag">
+    <header><div class="hw">csl-standards — [2026-06-20] **Salt Phase 1 host deploy/parity is next.** GitHub-side <span class="badge">csl-standards</span><span class="badge">deploy/flag</span></div></header>
+    <div class="question"><p>[2026-06-20] **Salt Phase 1 host deploy/parity is next.** GitHub-side</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Approve</b> — this is human work: it becomes an MG row in the hub and agents stop treating it as their own resume point.<br><b>❌ Reject</b> — not human work: it stays in its repo's <code>.ai_state.md</code> as an agent resume point and is added to the harvest denylist, so it never returns to a sheet.<br><b>⏸ Defer</b> — decide later; it comes back next harvest.</p></div>
+    <div class="panel"><h4>Source</h4><p>Line taken from <a href='https://github.com/sanskrit-lexicon/csl-standards/blob/main/.ai_state.md'>csl-standards/.ai_state.md</a> (Next Steps section).</p></div><div class="panel"><h4>Why this card is here</h4><p>The funnel kept it on the <b>deploy/flag</b> rule, matching <code>'deploy'</code>.</p><p>The rule is lexical and recall-oriented, so a kept row can still turn out to be ordinary agent work, or a line that merely <i>reports</i> finished work. Rejecting those is the point of the vote — it is not an error to correct before voting.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; In the hub (human task)</button>
+      <button class="vote reject" data-vote="reject">&#10060; Not human (agent keeps it)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="reword, reassign, or say why this is not human work"></textarea>
+  </section>
+
+  <section class="card" data-id="mws-spec-5-217-verdict-application-gated-on-maintainer-ack-8" data-filt="merge">
+    <header><div class="hw">MWS — SPEC-5: #217 verdict application (GATED on maintainer ack) + #86 correction queue + close  <span class="badge">MWS</span><span class="badge">merge</span></div></header>
+    <div class="question"><p>SPEC-5: #217 verdict application (GATED on maintainer ack) + #86 correction queue + close #168/#90 ([SPEC-5](https://github.com/sanskrit-lexicon/MWS/blob/master/planning/specs/2026-07/SPEC-5-w1a-residuals-hygiene.md)). §3 (#215 lex-type ...</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Approve</b> — this is human work: it becomes an MG row in the hub and agents stop treating it as their own resume point.<br><b>❌ Reject</b> — not human work: it stays in its repo's <code>.ai_state.md</code> as an agent resume point and is added to the harvest denylist, so it never returns to a sheet.<br><b>⏸ Defer</b> — decide later; it comes back next harvest.</p></div>
+    <div class="panel"><h4>Source</h4><p>Line taken from <a href='https://github.com/sanskrit-lexicon/MWS/blob/master/.ai_state.md'>MWS/.ai_state.md</a> (Next Steps section).</p></div><div class="panel"><h4>Why this card is here</h4><p>The funnel kept it on the <b>merge</b> rule, matching <code>'maintainer'</code>.</p><p>The rule is lexical and recall-oriented, so a kept row can still turn out to be ordinary agent work, or a line that merely <i>reports</i> finished work. Rejecting those is the point of the vote — it is not an error to correct before voting.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; In the hub (human task)</button>
+      <button class="vote reject" data-vote="reject">&#10060; Not human (agent keeps it)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="reword, reassign, or say why this is not human work"></textarea>
+  </section>
+
+  <section class="card" data-id="mws-195-https-github-com-sanskrit-lexicon-mws-issues-195-doc" data-filt="merge">
+    <header><div class="hw">MWS — [#195](https://github.com/sanskrit-lexicon/MWS/issues/195) docs-pass → master merge: ruled <span class="badge">MWS</span><span class="badge">merge</span></div></header>
+    <div class="question"><p>[#195](https://github.com/sanskrit-lexicon/MWS/issues/195) docs-pass → master merge: ruled end-of-July default absent maintainer objection (Fable S2).</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Approve</b> — this is human work: it becomes an MG row in the hub and agents stop treating it as their own resume point.<br><b>❌ Reject</b> — not human work: it stays in its repo's <code>.ai_state.md</code> as an agent resume point and is added to the harvest denylist, so it never returns to a sheet.<br><b>⏸ Defer</b> — decide later; it comes back next harvest.</p></div>
+    <div class="panel"><h4>Source</h4><p>Line taken from <a href='https://github.com/sanskrit-lexicon/MWS/blob/master/.ai_state.md'>MWS/.ai_state.md</a> (Next Steps section).</p></div><div class="panel"><h4>Why this card is here</h4><p>The funnel kept it on the <b>merge</b> rule, matching <code>'merge'</code>.</p><p>The rule is lexical and recall-oriented, so a kept row can still turn out to be ordinary agent work, or a line that merely <i>reports</i> finished work. Rejecting those is the point of the vote — it is not an error to correct before voting.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; In the hub (human task)</button>
+      <button class="vote reject" data-vote="reject">&#10060; Not human (agent keeps it)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="reword, reassign, or say why this is not human work"></textarea>
+  </section>
+
+  <section class="card" data-id="ors-faq-1-kb-sync-pr-32-feat-bot-kb-sync" data-filt="merge">
+    <header><div class="hw">ORS-FAQ — **#1 KB-sync (В РАБОТЕ, PR #32, ветка `feat/bot-kb-sync`).** Живой ИИ-куратор-бот <span class="badge">ORS-FAQ</span><span class="badge">merge</span></div></header>
+    <div class="question"><p>**#1 KB-sync (В РАБОТЕ, PR #32, ветка `feat/bot-kb-sync`).** Живой ИИ-куратор-бот</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Approve</b> — this is human work: it becomes an MG row in the hub and agents stop treating it as their own resume point.<br><b>❌ Reject</b> — not human work: it stays in its repo's <code>.ai_state.md</code> as an agent resume point and is added to the harvest denylist, so it never returns to a sheet.<br><b>⏸ Defer</b> — decide later; it comes back next harvest.</p></div>
+    <div class="panel"><h4>Source</h4><p>Line taken from <a href='https://github.com/gasyoun/ORS-FAQ/blob/main/.ai_state.md'>ORS-FAQ/.ai_state.md</a> (Next Steps section).</p></div><div class="panel"><h4>Why this card is here</h4><p>The funnel kept it on the <b>merge</b> rule, matching <code>'PR #32'</code>.</p><p>The rule is lexical and recall-oriented, so a kept row can still turn out to be ordinary agent work, or a line that merely <i>reports</i> finished work. Rejecting those is the point of the vote — it is not an error to correct before voting.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; In the hub (human task)</button>
+      <button class="vote reject" data-vote="reject">&#10060; Not human (agent keeps it)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="reword, reassign, or say why this is not human work"></textarea>
+  </section>
+
+  <section class="card" data-id="pwk-if-a-maintainer-wants-display-work-for-pwk-66-verify-whe" data-filt="merge">
+    <header><div class="hw">PWK — If a maintainer wants display work for PWK #66, verify whether the live CDSL display resol <span class="badge">PWK</span><span class="badge">merge</span></div></header>
+    <div class="question"><p>If a maintainer wants display work for PWK #66, verify whether the live CDSL display resolves `<ab>s. u.</ab>` cross-references as links; route as DTB/linking work, not a source-text correction.</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Approve</b> — this is human work: it becomes an MG row in the hub and agents stop treating it as their own resume point.<br><b>❌ Reject</b> — not human work: it stays in its repo's <code>.ai_state.md</code> as an agent resume point and is added to the harvest denylist, so it never returns to a sheet.<br><b>⏸ Defer</b> — decide later; it comes back next harvest.</p></div>
+    <div class="panel"><h4>Source</h4><p>Line taken from <a href='https://github.com/sanskrit-lexicon/PWK/blob/docs/preface-enrichment-support-plan/.ai_state.md'>PWK/.ai_state.md</a> (Next Steps section).</p></div><div class="panel"><h4>Why this card is here</h4><p>The funnel kept it on the <b>merge</b> rule, matching <code>'maintainer'</code>.</p><p>The rule is lexical and recall-oriented, so a kept row can still turn out to be ordinary agent work, or a line that merely <i>reports</i> finished work. Rejecting those is the point of the vote — it is not an error to correct before voting.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; In the hub (human task)</button>
+      <button class="vote reject" data-vote="reject">&#10060; Not human (agent keeps it)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="reword, reassign, or say why this is not human work"></textarea>
+  </section>
+
+  <section class="card" data-id="russianramayana-1-2026-06-13-ia-raw-github-docs-ia-upload-md" data-filt="decision">
+    <header><div class="hw">RussianRamayana — Фаза 1 ОТЛОЖЕНА (решение М.Г. 2026-06-13): права на текст Потаповой не урегулированы → IA  <span class="badge">RussianRamayana</span><span class="badge">decision</span></div></header>
+    <div class="question"><p>Фаза 1 ОТЛОЖЕНА (решение М.Г. 2026-06-13): права на текст Потаповой не урегулированы → IA откладываем. Аудио остаётся на raw.github как есть. Манифест docs/ia-upload.md готов к реактивации, когда/если решится вопрос прав. Чистка истории ...</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Approve</b> — this is human work: it becomes an MG row in the hub and agents stop treating it as their own resume point.<br><b>❌ Reject</b> — not human work: it stays in its repo's <code>.ai_state.md</code> as an agent resume point and is added to the harvest denylist, so it never returns to a sheet.<br><b>⏸ Defer</b> — decide later; it comes back next harvest.</p></div>
+    <div class="panel"><h4>Source</h4><p>Line taken from <a href='https://github.com/gasyoun/RussianRamayana/blob/main/.ai_state.md'>RussianRamayana/.ai_state.md</a> (Next Steps section).</p></div><div class="panel"><h4>Why this card is here</h4><p>The funnel kept it on the <b>decision</b> rule, matching <code>'решит'</code>.</p><p>The rule is lexical and recall-oriented, so a kept row can still turn out to be ordinary agent work, or a line that merely <i>reports</i> finished work. Rejecting those is the point of the vote — it is not an error to correct before voting.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; In the hub (human task)</button>
+      <button class="vote reject" data-vote="reject">&#10060; Not human (agent keeps it)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="reword, reassign, or say why this is not human work"></textarea>
+  </section>
+
+  <section class="card" data-id="russianramayana-3-wikidata-item-v-vi-minor-2026-06-13-zenodo" data-filt="named human owner">
+    <header><div class="hw">RussianRamayana — Фаза 3 (остаток): Wikidata-item Леонова (после выхода книг V–VI). Кривецкий — minor, отлож <span class="badge">RussianRamayana</span><span class="badge">named human owner</span></div></header>
+    <div class="question"><p>Фаза 3 (остаток): Wikidata-item Леонова (после выхода книг V–VI). Кривецкий — minor, отложен (решение М.Г. 2026-06-13). Zenodo DOI → вписать в CITATION.cff.</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Approve</b> — this is human work: it becomes an MG row in the hub and agents stop treating it as their own resume point.<br><b>❌ Reject</b> — not human work: it stays in its repo's <code>.ai_state.md</code> as an agent resume point and is added to the harvest denylist, so it never returns to a sheet.<br><b>⏸ Defer</b> — decide later; it comes back next harvest.</p></div>
+    <div class="panel"><h4>Source</h4><p>Line taken from <a href='https://github.com/gasyoun/RussianRamayana/blob/main/.ai_state.md'>RussianRamayana/.ai_state.md</a> (Next Steps section).</p></div><div class="panel"><h4>Why this card is here</h4><p>The funnel kept it on the <b>named human owner</b> rule, matching <code>'М.Г'</code>.</p><p>The rule is lexical and recall-oriented, so a kept row can still turn out to be ordinary agent work, or a line that merely <i>reports</i> finished work. Rejecting those is the point of the vote — it is not an error to correct before voting.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; In the hub (human task)</button>
+      <button class="vote reject" data-vote="reject">&#10060; Not human (agent keeps it)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="reword, reassign, or say why this is not human work"></textarea>
+  </section>
+
+  <section class="card" data-id="sanskritlexicography-russiantranslation-h818-observability-1" data-filt="credential">
+    <header><div class="hw">SanskritLexicography — **RussianTranslation H818 observability (13-07-2026, Codex/GPT-5):** PR #416 now includes  <span class="badge">SanskritLexicography</span><span class="badge">credential</span></div></header>
+    <div class="question"><p>**RussianTranslation H818 observability (13-07-2026, Codex/GPT-5):** PR #416 now includes a credential-safe joined event stream, derived bug census, strict accounting/store-delta GO gates, presplit live canary, and fault injection. Live ...</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Approve</b> — this is human work: it becomes an MG row in the hub and agents stop treating it as their own resume point.<br><b>❌ Reject</b> — not human work: it stays in its repo's <code>.ai_state.md</code> as an agent resume point and is added to the harvest denylist, so it never returns to a sheet.<br><b>⏸ Defer</b> — decide later; it comes back next harvest.</p></div>
+    <div class="panel"><h4>Source</h4><p>Line taken from <a href='https://github.com/gasyoun/SanskritLexicography/blob/master/.ai_state.md'>SanskritLexicography/.ai_state.md</a> (Next Steps section).</p></div><div class="panel"><h4>Why this card is here</h4><p>The funnel kept it on the <b>credential</b> rule, matching <code>'credential'</code>.</p><p>The rule is lexical and recall-oriented, so a kept row can still turn out to be ordinary agent work, or a line that merely <i>reports</i> finished work. Rejecting those is the point of the vote — it is not an error to correct before voting.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; In the hub (human task)</button>
+      <button class="vote reject" data-vote="reject">&#10060; Not human (agent keeps it)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="reword, reassign, or say why this is not human work"></textarea>
+  </section>
+
+  <section class="card" data-id="sanskritlexicography-h818-observability-hardening-code-compl" data-filt="credential">
+    <header><div class="hw">SanskritLexicography — **H818 observability hardening — ✅ CODE COMPLETE; LIVE MAX STILL OWNER-GATED (13-07-2026,  <span class="badge">SanskritLexicography</span><span class="badge">credential</span></div></header>
+    <div class="question"><p>**H818 observability hardening — ✅ CODE COMPLETE; LIVE MAX STILL OWNER-GATED (13-07-2026, Codex/GPT-5).** PR #416 rebased; added credential-safe `pwg.run_event.v1`, derived bug census, strict unique headword/subcard accounting, hard-fail...</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Approve</b> — this is human work: it becomes an MG row in the hub and agents stop treating it as their own resume point.<br><b>❌ Reject</b> — not human work: it stays in its repo's <code>.ai_state.md</code> as an agent resume point and is added to the harvest denylist, so it never returns to a sheet.<br><b>⏸ Defer</b> — decide later; it comes back next harvest.</p></div>
+    <div class="panel"><h4>Source</h4><p>Line taken from <a href='https://github.com/gasyoun/SanskritLexicography/blob/master/RussianTranslation/.ai_state.md'>SanskritLexicography/RussianTranslation/.ai_state.md</a> (Next Steps section).</p></div><div class="panel"><h4>Why this card is here</h4><p>The funnel kept it on the <b>credential</b> rule, matching <code>'credential'</code>.</p><p>The rule is lexical and recall-oriented, so a kept row can still turn out to be ordinary agent work, or a line that merely <i>reports</i> finished work. Rejecting those is the point of the vote — it is not an error to correct before voting.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; In the hub (human task)</button>
+      <button class="vote reject" data-vote="reject">&#10060; Not human (agent keeps it)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="reword, reassign, or say why this is not human work"></textarea>
+  </section>
+
+  <section class="card" data-id="sanskritlexicography-h818-four-account-max-orchestration-liv" data-filt="credential">
+    <header><div class="hw">SanskritLexicography — **H818 four-account Max orchestration — 🟠 LIVE-PROOF BLOCKED (12-07-2026, Codex/GPT-5).**  <span class="badge">SanskritLexicography</span><span class="badge">credential</span></div></header>
+    <div class="question"><p>**H818 four-account Max orchestration — 🟠 LIVE-PROOF BLOCKED (12-07-2026, Codex/GPT-5).** The local ≥5 KB Claude probe returned 401 with zero tokens, and no four authenticated foreign-server profiles were available. The code gap is close...</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Approve</b> — this is human work: it becomes an MG row in the hub and agents stop treating it as their own resume point.<br><b>❌ Reject</b> — not human work: it stays in its repo's <code>.ai_state.md</code> as an agent resume point and is added to the harvest denylist, so it never returns to a sheet.<br><b>⏸ Defer</b> — decide later; it comes back next harvest.</p></div>
+    <div class="panel"><h4>Source</h4><p>Line taken from <a href='https://github.com/gasyoun/SanskritLexicography/blob/master/RussianTranslation/.ai_state.md'>SanskritLexicography/RussianTranslation/.ai_state.md</a> (Next Steps section).</p></div><div class="panel"><h4>Why this card is here</h4><p>The funnel kept it on the <b>credential</b> rule, matching <code>'account'</code>.</p><p>The rule is lexical and recall-oriented, so a kept row can still turn out to be ordinary agent work, or a line that merely <i>reports</i> finished work. Rejecting those is the point of the vote — it is not an error to correct before voting.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; In the hub (human task)</button>
+      <button class="vote reject" data-vote="reject">&#10060; Not human (agent keeps it)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="reword, reassign, or say why this is not human work"></textarea>
+  </section>
+
+  <section class="card" data-id="socks5-vps-vps-ubuntu-24-04" data-filt="deploy-flag">
+    <header><div class="hw">SOCKS5-VPS — **Боевой прогон** на реальном зарубежном VPS (Ubuntu 24.04) + РФ-сервере, <span class="badge">SOCKS5-VPS</span><span class="badge">deploy/flag</span></div></header>
+    <div class="question"><p>**Боевой прогон** на реальном зарубежном VPS (Ubuntu 24.04) + РФ-сервере,</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Approve</b> — this is human work: it becomes an MG row in the hub and agents stop treating it as their own resume point.<br><b>❌ Reject</b> — not human work: it stays in its repo's <code>.ai_state.md</code> as an agent resume point and is added to the harvest denylist, so it never returns to a sheet.<br><b>⏸ Defer</b> — decide later; it comes back next harvest.</p></div>
+    <div class="panel"><h4>Source</h4><p>Line taken from <a href='https://github.com/gasyoun/SOCKS5-VPS/blob/main/.ai_state.md'>SOCKS5-VPS/.ai_state.md</a> (Next Steps section).</p></div><div class="panel"><h4>Why this card is here</h4><p>The funnel kept it on the <b>deploy/flag</b> rule, matching <code>'Боевой'</code>.</p><p>The rule is lexical and recall-oriented, so a kept row can still turn out to be ordinary agent work, or a line that merely <i>reports</i> finished work. Rejecting those is the point of the vote — it is not an error to correct before voting.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; In the hub (human task)</button>
+      <button class="vote reject" data-vote="reject">&#10060; Not human (agent keeps it)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="reword, reassign, or say why this is not human work"></textarea>
+  </section>
+
+  <section class="card" data-id="telegram-sanskrit-corpus-prod-harvest-is-a-standing-feed-now" data-filt="deploy-flag">
+    <header><div class="hw">telegram-sanskrit-corpus — Prod harvest is a **standing feed** now (`TELEGRAM_HARVEST_ENABLED`/`_DAILY_ENABLED=true`, <span class="badge">telegram-sanskrit-corpus</span><span class="badge">deploy/flag</span></div></header>
+    <div class="question"><p>Prod harvest is a **standing feed** now (`TELEGRAM_HARVEST_ENABLED`/`_DAILY_ENABLED=true`,</p><p style='margin:.6em 0 0;padding:.5em .7em;border-left:3px solid #6b8;background:rgba(110,160,140,.12)'><b>✅ Approve</b> — this is human work: it becomes an MG row in the hub and agents stop treating it as their own resume point.<br><b>❌ Reject</b> — not human work: it stays in its repo's <code>.ai_state.md</code> as an agent resume point and is added to the harvest denylist, so it never returns to a sheet.<br><b>⏸ Defer</b> — decide later; it comes back next harvest.</p></div>
+    <div class="panel"><h4>Source</h4><p>Line taken from <a href='https://github.com/gasyoun/telegram-sanskrit-corpus/blob/main/.ai_state.md'>telegram-sanskrit-corpus/.ai_state.md</a> (Next Steps section).</p></div><div class="panel"><h4>Why this card is here</h4><p>The funnel kept it on the <b>deploy/flag</b> rule, matching <code>'Prod'</code>.</p><p>The rule is lexical and recall-oriented, so a kept row can still turn out to be ordinary agent work, or a line that merely <i>reports</i> finished work. Rejecting those is the point of the vote — it is not an error to correct before voting.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; In the hub (human task)</button>
+      <button class="vote reject" data-vote="reject">&#10060; Not human (agent keeps it)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="reword, reassign, or say why this is not human work"></textarea>
+  </section>
+</main>
+<footer class="hint">Funnel: tools/gtd_harvest_triage.py. The cut is lexical and recall-oriented — a gate phrased without a gate word was dropped as agent-doable, so this sheet under-collects rather than over-collects. Keyboard: <kbd>a</kbd> In the hub (human task) &middot; <kbd>r</kbd> Not human (agent keeps it)
+  &middot; <kbd>d</kbd> defer &middot; <kbd>&darr;</kbd>/<kbd>&uarr;</kbd> next/prev. Votes autosave to
+  this browser's localStorage; click "Download decisions.json" when done (unvoted items export with
+  decision:null).</footer>
+<div class="legend" style="max-width:980px;margin:0 auto 20px;padding:0 20px;color:var(--muted);font-size:12px">
+  <b>Approve</b> = accept the proposed change/answer shown on the card (no separate "approve as-is" —
+  approving means agreeing as written). <b>Reject</b> = keep the current entry/answer unchanged.
+  <b>Defer</b> = not sure yet, decide later. The note field is for requesting a partial tweak instead
+  of an outright reject.
+</div>
+<script>
+(function () {
+  var SHEET_ID = "uprava-gtd-harvest-triage_human-gated-22";
+  var STORE_KEY = 'review-sheet:' + SHEET_ID;
+  var GENERATED = "16-08-2026";
+  var ids = ["cologne-mg-review-docs-cleanup-taxonomy-summary-md-docs-clea", "commentarystrategies-decide-n-ga-7-1-leonov-ru", "commentarystrategies-a19-02-07-2026-3-2025-29-dev-articles-s", "commentarystrategies-7-1-2-3-d-4", "commentarystrategies-1788", "commentarystrategies", "commentarystrategies-b-b1-rights-b2-urn-b3-tei-b4-build-page", "csl-apidev-wire-it-in-jim-point-init-word-frequency-v1-1-get", "csl-apidev-jim-implement-v1-2-from-simple-search-roadmap-v1-", "csl-guides-next-lead-needs-maintainer-direction-open-candida", "csl-standards-2026-06-20-salt-phase-1-host-deploy-parity-is-", "mws-spec-5-217-verdict-application-gated-on-maintainer-ack-8", "mws-195-https-github-com-sanskrit-lexicon-mws-issues-195-doc", "ors-faq-1-kb-sync-pr-32-feat-bot-kb-sync", "pwk-if-a-maintainer-wants-display-work-for-pwk-66-verify-whe", "russianramayana-1-2026-06-13-ia-raw-github-docs-ia-upload-md", "russianramayana-3-wikidata-item-v-vi-minor-2026-06-13-zenodo", "sanskritlexicography-russiantranslation-h818-observability-1", "sanskritlexicography-h818-observability-hardening-code-compl", "sanskritlexicography-h818-four-account-max-orchestration-liv", "socks5-vps-vps-ubuntu-24-04", "telegram-sanskrit-corpus-prod-harvest-is-a-standing-feed-now"];
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(STORE_KEY) || '{}') || {}; } catch (e) { state = {}; }
+  function tally() {
+    var c = { approve:0, reject:0, defer:0 };
+    ids.forEach(function (id) { var v = state[id] && state[id].decision; if (v && c.hasOwnProperty(v)) c[v]++; });
+    document.getElementById('c-approve').textContent = c.approve;
+    document.getElementById('c-reject').textContent = c.reject;
+    document.getElementById('c-defer').textContent = c.defer;
+    document.getElementById('c-unvoted').textContent = ids.length - c.approve - c.reject - c.defer;
+  }
+  function applyCardUI(card) {
+    var id = card.getAttribute('data-id'); var rec = state[id] || {};
+    card.classList.remove('voted-approve','voted-reject','voted-defer');
+    card.querySelectorAll('button.vote').forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-vote') === rec.decision); });
+    card.querySelector('.vote-state').textContent = rec.decision ? rec.decision : 'unvoted';
+    if (rec.decision) card.classList.add('voted-' + rec.decision);
+    var ta = card.querySelector('textarea.note'); if (rec.note && !ta.value) ta.value = rec.note;
+  }
+  function save() { localStorage.setItem(STORE_KEY, JSON.stringify(state)); tally(); }
+  // H1523 residual / csl-pyutil#1 Part 1: always re-read the live textarea on vote
+  // and before export so a second vote click (or a missed `input` event) cannot
+  // drop a note that is still visible in the card.
+  function syncNoteFromDom(id) {
+    state[id] = state[id] || {};
+    var card = document.querySelector('.card[data-id="' + id + '"]');
+    if (!card) return;
+    var ta = card.querySelector('textarea.note');
+    if (ta) state[id].note = ta.value;
+  }
+  function vote(id, d) { syncNoteFromDom(id); state[id].decision = d; save(); }
+  function noteChange(id, t) { state[id] = state[id] || {}; state[id].note = t; save(); }
+  document.querySelectorAll('.card').forEach(function (card) {
+    var id = card.getAttribute('data-id'); applyCardUI(card);
+    card.querySelectorAll('button.vote').forEach(function (btn) {
+      btn.addEventListener('click', function () { vote(id, btn.getAttribute('data-vote')); applyCardUI(card); });
+    });
+    var ta = card.querySelector('textarea.note'); ta.addEventListener('input', function () { noteChange(id, ta.value); });
+  });
+  tally();
+  document.getElementById('downloadBtn').addEventListener('click', function () {
+    ids.forEach(function (id) { syncNoteFromDom(id); });
+    var decided = ids.filter(function (id) { return state[id] && state[id].decision; }).length;
+    var payload = { sheet_id: SHEET_ID, generated: "16-08-2026", decided: decided, time_total_seconds: __timeTotal(),
+      items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '', time_seconds: __timeFor(id) }; }) };
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
+    var url = URL.createObjectURL(blob); var a = document.createElement('a');
+    a.href = url; a.download = SHEET_ID + '_decisions.json'; document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+  });
+  var filterbar = document.getElementById('filterbar');
+  filterbar.addEventListener('click', function (e) {
+    var btn = e.target.closest('button[data-filter]'); if (!btn) return;
+    filterbar.querySelectorAll('button').forEach(function (b) { b.classList.remove('active'); });
+    btn.classList.add('active'); var f = btn.getAttribute('data-filter');
+    document.querySelectorAll('.card').forEach(function (card) {
+      var show = true;
+      if (f === 'unvoted') { var id = card.getAttribute('data-id'); show = !(state[id] && state[id].decision); }
+      else if (f !== 'all') { show = card.getAttribute('data-filt') === f; }
+      card.style.display = show ? '' : 'none';
+    });
+  });
+  var cardsEl = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  var activeIdx = 0;
+  function visibleCards() { return cardsEl.filter(function (c) { return c.style.display !== 'none'; }); }
+  document.addEventListener('keydown', function (e) {
+    if (e.target.tagName === 'TEXTAREA') return;
+    var vis = visibleCards(); if (!vis.length) return;
+    if (activeIdx >= vis.length) activeIdx = vis.length - 1;
+    var card = vis[activeIdx]; var id = card.getAttribute('data-id');
+    if (e.key === 'a') { vote(id, 'approve'); applyCardUI(card); }
+    else if (e.key === 'r') { vote(id, 'reject'); applyCardUI(card); }
+    else if (e.key === 'd') { vote(id, 'defer'); applyCardUI(card); }
+    else if (e.key === 'ArrowDown') { activeIdx = Math.min(activeIdx + 1, vis.length - 1); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'center'}); }
+    else if (e.key === 'ArrowUp') { activeIdx = Math.max(activeIdx - 1, 0); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'center'}); }
+    else return;
+    e.preventDefault();
+  });
+
+  var saveHandle = null, saveTimer = null;
+  function exportPayload() {
+    if (typeof syncNoteFromDom === 'function') {
+      ids.forEach(function (id) { syncNoteFromDom(id); });
+    }
+    var decided = ids.filter(function (id) { return state[id] && state[id].decision; }).length;
+    return JSON.stringify({ sheet_id: SHEET_ID, generated: new Date().toISOString(), decided: decided, time_total_seconds: __timeTotal(),
+      items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '', time_seconds: __timeFor(id) }; }) }, null, 2);
+  }
+  function scheduleAutosave() {
+    if (!saveHandle) return;
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(function () {
+      saveHandle.createWritable().then(function (w) {
+        w.write(exportPayload()).then(function () { w.close(); });
+      }).catch(function () {});
+    }, 1000);
+  }
+  var _origSave = save;
+  save = function () { _origSave(); scheduleAutosave(); };
+  if (window.showSaveFilePicker) {
+    var saveBtn = document.getElementById('saveBtn');
+    saveBtn.style.display = '';
+    saveBtn.addEventListener('click', function () {
+      window.showSaveFilePicker({suggestedName: SHEET_ID + '_decisions.json'}).then(function (h) {
+        saveHandle = h; scheduleAutosave();
+      }).catch(function () {});
+    });
+  }
+
+  var FS_KEY = STORE_KEY + ':fs', FS_DEFAULT = 1.5;
+  function fsGet() {
+    var v = parseFloat(localStorage.getItem(FS_KEY));
+    return (isFinite(v) && v >= 0.7 && v <= 3) ? v : FS_DEFAULT;
+  }
+  function fsApply(v) {
+    document.documentElement.style.setProperty('--fs', String(v));
+    document.getElementById('fsVal').textContent = Math.round(v * 100) + '%';
+  }
+  function fsSet(v) {
+    v = Math.min(3, Math.max(0.7, Math.round(v * 10) / 10));
+    localStorage.setItem(FS_KEY, String(v)); fsApply(v);
+  }
+  fsApply(fsGet());
+  document.getElementById('fsDown').addEventListener('click', function () { fsSet(fsGet() - 0.1); });
+  document.getElementById('fsUp').addEventListener('click', function () { fsSet(fsGet() + 0.1); });
+
+  var TIME_KEY = STORE_KEY + ':timing';
+  var __timing = { total: 0, per: {} };
+  try {
+    var __t0 = JSON.parse(localStorage.getItem(TIME_KEY) || 'null');
+    if (__t0 && typeof __t0.total === 'number') __timing = __t0;
+  } catch (e) {}
+  if (!__timing.per) __timing.per = {};
+  function __timeFor(id) { return Math.round(__timing.per[id] || 0); }
+  function __timeTotal() { return Math.round(__timing.total || 0); }
+  function __timeFmt(s) {
+    s = Math.round(s); var m = Math.floor(s / 60);
+    return (m >= 60 ? Math.floor(m / 60) + ':' + ('0' + (m - Math.floor(m / 60) * 60)).slice(-2) : m)
+      + ':' + ('0' + (s - m * 60)).slice(-2);
+  }
+  function __timeShow() {
+    var el = document.getElementById('t-total');
+    if (el) el.textContent = __timeFmt(__timing.total);
+  }
+  var __timeLast = Date.now(), __timeDirty = 0;
+  var __timeCards = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  function __timeActiveId() {
+    var mid = window.innerHeight / 2, best = null, bestd = Infinity;
+    for (var i = 0; i < __timeCards.length; i++) {
+      var c = __timeCards[i];
+      if (c.style.display === 'none') continue;
+      var r = c.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > window.innerHeight) continue;
+      var center = (Math.max(r.top, 0) + Math.min(r.bottom, window.innerHeight)) / 2;
+      var d = Math.abs(center - mid);
+      if (d < bestd) { bestd = d; best = c; }
+    }
+    return best ? best.getAttribute('data-id') : null;
+  }
+  function __timeFlush() {
+    try { localStorage.setItem(TIME_KEY, JSON.stringify(__timing)); } catch (e) {}
+  }
+  // V12 (H2858): the clock is stoppable. `paused` rides in the same persisted
+  // record as the totals, so a reviewer who pauses and closes the tab does not
+  // come back to a clock that ran all night.
+  var __timePaused = !!__timing.paused;
+  function __timePauseSet(v) {
+    __timePaused = !!v; __timing.paused = __timePaused; __timeLast = Date.now(); __timeFlush();
+  }
+  setInterval(function () {
+    var now = Date.now(), dt = (now - __timeLast) / 1000;
+    __timeLast = now;
+    if (document.hidden || __timePaused || dt <= 0 || dt > 4) return;
+    __timing.total += dt;
+    var id = __timeActiveId();
+    if (id) __timing.per[id] = (__timing.per[id] || 0) + dt;
+    __timeDirty += dt;
+    if (__timeDirty >= 5) { __timeDirty = 0; __timeFlush(); }
+    __timeShow();
+  }, 1000);
+  document.addEventListener('visibilitychange', function () { __timeLast = Date.now(); });
+  window.addEventListener('beforeunload', __timeFlush);
+  __timeShow();
+
+  var HANDIN_SAID = 'handed in {n} of {total} — clock stopped, the rest stay saved in this browser';
+  var __handinBtn = document.getElementById('handinBtn');
+  var __handinSaid = document.getElementById('handinSaid');
+
+  var __pauseBtn = document.getElementById('pauseBtn');
+  function __pauseShow() {
+    __pauseBtn.classList.toggle('on', __timePaused);
+    __pauseBtn.innerHTML = __timePaused ? '&#9654;' : '&#9208;';
+    var chip = document.querySelector('.tally .time');
+    if (chip) chip.classList.toggle('paused', __timePaused);
+  }
+  __pauseBtn.addEventListener('click', function () { __timePauseSet(!__timePaused); __pauseShow(); });
+  __pauseShow();
+  __handinBtn.addEventListener('click', function () {
+    ids.forEach(function (id) { syncNoteFromDom(id); });
+    __timePauseSet(true); __pauseShow();
+    var items = ids.map(function (id) {
+      var rec = state[id] || {};
+      var item = { id: id, decision: rec.decision || null };
+      item.note = rec.note || '';
+      item.time_seconds = __timeFor(id);
+      return item;
+    });
+    var decided = items.filter(function (it) { return !!it.decision; }).length;
+    var payload = { sheet_id: SHEET_ID, generated: GENERATED, decided: decided,
+      partial: true, complete: false, undecided: items.length - decided, items: items };
+    payload.time_total_seconds = __timeTotal();
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
+    var url = URL.createObjectURL(blob); var a = document.createElement('a');
+    a.href = url; a.download = SHEET_ID + '_decisions_partial.json';
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+    __handinSaid.textContent = HANDIN_SAID.replace('{n}', decided).replace('{total}', items.length);
+  });
+})();
+</script>
+</body>
+</html>
