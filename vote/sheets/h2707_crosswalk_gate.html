@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="color-scheme" content="dark">
-<title>BookIndex — крест «видео ↔ главы», куратор-гейт v2 (H2841) — 255 items</title>
+<title>BookIndex — крест «видео ↔ главы», куратор-гейт v3 (H2857) — 210 items</title>
 <style>
   :root { color-scheme: dark; --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --text:#e6e6e6; --muted:#9aa0aa;
           --accent:#5b8cff; --ok:#3fb950; --bad:#f85149; --defer:#d29922; --border:#2a2f3a; }
@@ -98,602 +98,38 @@
                   padding:6px 10px; border-radius:14px; cursor:pointer; line-height:1; }
   .fsctl .fsval { color:var(--muted); min-width:3.4em; text-align:center; }
   .tally .time { color:var(--muted); }
+  .dl.handin { background:#243447; }
+  .tally .pausebtn { background:none; border:1px solid var(--border); color:var(--muted);
+                     border-radius:6px; padding:0 6px; margin-left:4px; cursor:pointer;
+                     font-size:inherit; font-family:inherit; line-height:1.6; }
+  .tally .pausebtn.on { color:#ffd479; border-color:#ffd479; }
+  .tally .time.paused { opacity:.45; }
+  .handin-said { color:var(--muted); font-size:12px; margin-left:10px; }
 </style>
 </head>
 <body>
 <header class="top">
   <div>
-    <h1>BookIndex — крест «видео ↔ главы», куратор-гейт v2 (H2841) — 255 items</h1>
-    <div class="sub">Generated 2026-08-15 &middot; sheet_id <code>bookindex-crosswalk-video-chapter-v2</code> &middot; 377 рёбер на 173 из 176 записей каталога; 215 с тайм-кодом. Approve = ребро идёт в печать волны 2; Reject = ребро остаётся в данных со статусом rejected и на полосу не попадает. Десять решений захода 15-08-2026 уже проставлены — их можно менять.</div>
+    <h1>BookIndex — крест «видео ↔ главы», куратор-гейт v3 (H2857) — 210 items</h1>
+    <div class="sub">Generated 2026-08-16 &middot; sheet_id <code>bookindex-crosswalk-video-chapter-v3</code> &middot; 377 рёбер на 173 из 176 записей каталога; 215 с тайм-кодом. Approve = ребро идёт в печать волны 2; Reject = ребро остаётся в данных со статусом rejected и на полосу не попадает. Решённое в заходах 15-08-2026 (30 принято, 14 отклонено) применено к данным и на лист больше не выносится.</div>
   </div>
   <div class="tally" id="tally">
     <span class="approve">&#9989; <span class="count" id="c-approve">0</span></span>
     <span class="reject">&#10060; <span class="count" id="c-reject">0</span></span>
     <span class="defer">&#9208; <span class="count" id="c-defer">0</span></span>
     <span class="time" title="активное время на листе (пока вкладка видима)">&#9201; <span class="count" id="t-total">0:00</span></span>
-    <span class="unvoted">&#9711; <span class="count" id="c-unvoted">255</span></span>
+    <button type="button" class="pausebtn" id="pauseBtn" title="пауза — перерыв не должен считаться работой">&#9208;</button>
+    <span class="unvoted">&#9711; <span class="count" id="c-unvoted">210</span></span>
   </div>
 </header>
-<aside class="screening-banner" role="status" data-screening="1"><strong>Screening (H1649)</strong> — only human-required cards are below. Off the plate: <span class="sc-a">deterministic 252</span> · <span class="sc-b">dataset lookup 215</span> · <span class="sc-c">agent adjudication 38</span> (total screened 505). Human cards: <span class="sc-d">217</span>. Evidence: <code>data/crosswalk/edges_pass_a.json … edges_pass_d.json</code>. Rules: проход A (серии) с уверенностью 0.95 и уверенный KWIC на лист не выносятся: правило цикла и термин указателя со страницей — уже доказательство, ни одно ребро от LLM не попадает на печатную полосу без человеческого «да», дубли не схлопываются автоматически: три пары из семи почти наверняка ложные.</aside>
-<div class="savebanner">&#128229; Your export downloads as <code>bookindex-crosswalk-video-chapter-v2_decisions.json</code> &rarr; save it to <code>review/crosswalk_gate_decisions.json</code> (the <code>sheet_id</code> inside the file is <code>bookindex-crosswalk-video-chapter-v2</code> — that is how a later session knows which sheet these decisions belong to).</div>
+<aside class="screening-banner" role="status" data-screening="1"><strong>Screening (H1649)</strong> — only human-required cards are below. Off the plate: <span class="sc-a">deterministic 252</span> · <span class="sc-b">dataset lookup 215</span> · <span class="sc-c">agent adjudication 27</span> (total screened 494). Human cards: <span class="sc-d">183</span>. Evidence: <code>data/crosswalk/edges_pass_a.json … edges_pass_d.json</code>. Rules: проход A (серии) с уверенностью 0.95 и уверенный KWIC на лист не выносятся: правило цикла и термин указателя со страницей — уже доказательство, ни одно ребро от LLM не попадает на печатную полосу без человеческого «да», дубли не схлопываются автоматически: три пары из семи почти наверняка ложные.</aside>
+<div class="savebanner">&#128229; Your export downloads as <code>bookindex-crosswalk-video-chapter-v3_decisions.json</code> &rarr; save it to <code>review/crosswalk_gate_decisions.json</code> (the <code>sheet_id</code> inside the file is <code>bookindex-crosswalk-video-chapter-v3</code> — that is how a later session knows which sheet these decisions belong to).</div>
 <div class="toolbar">
-  <button class="dl" id="downloadBtn">Download decisions.json</button><button class="dl" id="saveBtn" style="display:none;margin-left:8px">Save to folder…</button>
+  <button class="dl" id="downloadBtn">Download decisions.json</button><button class="dl handin" id="handinBtn" title="остановить таймер и выгрузить уже проголосованное; остальное остаётся сохранённым в этом браузере">Сдать сколько успел</button><span class="handin-said" id="handinSaid"></span><button class="dl" id="saveBtn" style="display:none;margin-left:8px">Save to folder…</button>
   <div class="fsctl" title="text size — persists in this browser"><button type="button" id="fsDown" aria-label="smaller text">A&minus;</button><span class="fsval" id="fsVal"></span><button type="button" id="fsUp" aria-label="larger text">A+</button></div>
-  <div class="filterbar" id="filterbar"><button data-filter="all" class="active">all</button><button data-filter="candidate">кандидаты (38)</button><button data-filter="disputed">спорные (210)</button><button data-filter="duplicate">дубли (7)</button><button data-filter="unvoted">unvoted only</button></div>
+  <div class="filterbar" id="filterbar"><button data-filter="all" class="active">all</button><button data-filter="candidate">кандидаты (27)</button><button data-filter="disputed">спорные (177)</button><button data-filter="duplicate">дубли (6)</button><button data-filter="unvoted">unvoted only</button></div>
 </div>
 <main id="cards">
-
-  <section class="card" data-id="acc001-ch06-kwic" data-filt="disputed">
-    <header><div class="hw"><a class="hwlink" href="https://www.youtube.com/watch?v=tv87ggs0yq4" target="_blank" rel="noopener">«А.А. Зализняк. Коротко об арабском языке» ↔ ch06 «История русского языка»</a> <span class="badge">kwic</span><span class="badge">0.56</span><span class="badge">дополняет главу</span></div><span class="idchip" title="card id — cite this id back when discussing this card">acc001-ch06-kwic</span></header>
-    <div class="question">Дополнить главу <b>ch06 «История русского языка» (с. 176–209)</b> ссылкой на запись <b>acc001 «А.А. Зализняк. Коротко об арабском языке»</b> (2:04:24)? Тип связи: <b>дополняет главу</b> (<code>expands</code>), проход <code>kwic</code>, уверенность 0.56 ▸ 30:54. Связь значит «чем запись дополняет главу», а не «это запись этой главы».</div>
-    <div class="panel"><h4>Что это за запись</h4><div><a href="https://www.youtube.com/watch?v=tv87ggs0yq4" target="_blank" rel="noopener">А.А. Зализняк. Коротко об арабском языке</a> — 2:04:24; темы: ЛЛШ</div></div><div class="panel"><h4>Глава книги</h4><div><b>История русского языка</b>, с. 176–209: Как современный русский вырос из древнерусского, что такое церковнославянский и почему он так на нас повлиял.</div></div><div class="panel"><h4>Термин в книге</h4><div>Статья указателя (лексикон): <b>изумруд</b>, с. 185, 188.<br>«……оже немало таких, которые могут нас удивить. Нас не удивит, что слово изумруд иностранное: изумруд действительно не слишком часто встречается в рус……»<br>«……орые могут нас удивить. Нас не удивит, что слово изумруд иностранное: изумруд действительно не слишком часто встречается в русском быту. А вот слов……»</div></div><div class="panel"><h4>Цитата из записи</h4><pre>а в арабском синтаксисе. но тут, к сожалению, должен сдаться. в коротком изложении показать вам действительно бриллиант изумруды арабского с</pre><div class="muted">файл <code>А.А.-Зализняк.-Коротко-об-арабском-языке.srt</code>, смещение 30:54</div></div>
-    <div class="controls">
-      <button class="vote approve" data-vote="approve">&#9989; Принять связь</button>
-      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
-      <span class="vote-state">unvoted</span>
-    </div>
-    <textarea class="note" placeholder="если глава другая — впишите ch01…ch11; apply-скрипт читает только approve/reject, заметка идёт в аудит-след"></textarea>
-  </section>
-
-  <section class="card" data-id="acc004-ch06-kwic" data-filt="disputed">
-    <header><div class="hw"><a class="hwlink" href="https://www.youtube.com/watch?v=qrzM9kqAD40" target="_blank" rel="noopener">«А.А. Зализняк. Как изменяется внешняя сторона слова» ↔ ch06 «История русского языка»</a> <span class="badge">kwic</span><span class="badge">0.64</span><span class="badge">лекция по теме главы</span></div><span class="idchip" title="card id — cite this id back when discussing this card">acc004-ch06-kwic</span></header>
-    <div class="question">Дополнить главу <b>ch06 «История русского языка» (с. 176–209)</b> ссылкой на запись <b>acc004 «А.А. Зализняк. Как изменяется внешняя сторона слова»</b> (2:04:46)? Тип связи: <b>лекция по теме главы</b> (<code>lecture_of</code>), проход <code>kwic</code>, уверенность 0.64 ▸ 112:04. Связь значит «чем запись дополняет главу», а не «это запись этой главы».</div>
-    <div class="panel"><h4>Что это за запись</h4><div><a href="https://www.youtube.com/watch?v=qrzM9kqAD40" target="_blank" rel="noopener">А.А. Зализняк. Как изменяется внешняя сторона слова</a> — 2:04:46; темы: ЛЛШ</div></div><div class="panel"><h4>Глава книги</h4><div><b>История русского языка</b>, с. 176–209: Как современный русский вырос из древнерусского, что такое церковнославянский и почему он так на нас повлиял.</div></div><div class="panel"><h4>Термин в книге</h4><div>Статья указателя (лексикон): <b>изъян</b>, с. 188, 208.<br>«……А. Б. Кокорева (учитель географии): У меня вопрос по поводу глаголов изъять и зиять. Допускает ли лингвистика такую вещь, что в разных, совершенн……»<br>«……ва: Тогда встает вопрос, что является доказательством того, что слово изъять является персидским по происхождению? А. З.: Дело в том, что слово эт……»</div></div><div class="panel"><h4>Цитата из записи</h4><pre>звучит? понятно. совершенно точно изъяли из человека что-то полезное. вот осталось только что-то вредное. это получился изъян. это чистая пе</pre><div class="muted">файл <code>А.А.-Зализняк.-Как-изменяется-внешняя-сторона-слова.srt</code>, смещение 1:52:04</div></div>
-    <div class="controls">
-      <button class="vote approve" data-vote="approve">&#9989; Принять связь</button>
-      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
-      <span class="vote-state">unvoted</span>
-    </div>
-    <textarea class="note" placeholder="если глава другая — впишите ch01…ch11; apply-скрипт читает только approve/reject, заметка идёт в аудит-след"></textarea>
-  </section>
-
-  <section class="card" data-id="acc004-ch10-kwic" data-filt="disputed">
-    <header><div class="hw"><a class="hwlink" href="https://www.youtube.com/watch?v=qrzM9kqAD40" target="_blank" rel="noopener">«А.А. Зализняк. Как изменяется внешняя сторона слова» ↔ ch10 «О жизни слов»</a> <span class="badge">kwic</span><span class="badge">0.55</span><span class="badge">дополняет главу</span></div><span class="idchip" title="card id — cite this id back when discussing this card">acc004-ch10-kwic</span></header>
-    <div class="question">Дополнить главу <b>ch10 «О жизни слов» (с. 322–359)</b> ссылкой на запись <b>acc004 «А.А. Зализняк. Как изменяется внешняя сторона слова»</b> (2:04:46)? Тип связи: <b>дополняет главу</b> (<code>expands</code>), проход <code>kwic</code>, уверенность 0.55 ▸ 114:46. Связь значит «чем запись дополняет главу», а не «это запись этой главы».</div>
-    <div class="panel"><h4>Что это за запись</h4><div><a href="https://www.youtube.com/watch?v=qrzM9kqAD40" target="_blank" rel="noopener">А.А. Зализняк. Как изменяется внешняя сторона слова</a> — 2:04:46; темы: ЛЛШ</div></div><div class="panel"><h4>Глава книги</h4><div><b>О жизни слов</b>, с. 322–359: Откуда берутся слова, как они меняют значение, что такое заимствование и почему «вокзал» от английского «Vauxhall».</div></div><div class="panel"><h4>Термин в книге</h4><div>Статья указателя (лексикон): <b>ножик</b>, с. 341.<br><span class="muted">контекст в указателе не сохранён</span></div></div><div class="panel"><h4>Цитата из записи</h4><pre>своими глазами, потому что массе слов еще есть и то, и другое. можете выбирать. значения практически одинаковые. нож и ножик. наверное, како</pre><div class="muted">файл <code>А.А.-Зализняк.-Как-изменяется-внешняя-сторона-слова.srt</code>, смещение 1:54:46</div></div>
-    <div class="controls">
-      <button class="vote approve" data-vote="approve">&#9989; Принять связь</button>
-      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
-      <span class="vote-state">unvoted</span>
-    </div>
-    <textarea class="note" placeholder="если глава другая — впишите ch01…ch11; apply-скрипт читает только approve/reject, заметка идёт в аудит-след"></textarea>
-  </section>
-
-  <section class="card" data-id="acc005-ch06-kwic" data-filt="disputed">
-    <header><div class="hw"><a class="hwlink" href="https://www.youtube.com/watch?v=Xf2GBzzKb_0" target="_blank" rel="noopener">«А.А. Зализняк. Новгородские берестяные грамоты» ↔ ch06 «История русского языка»</a> <span class="badge">kwic</span><span class="badge">0.57</span><span class="badge">лекция по теме главы</span></div><span class="idchip" title="card id — cite this id back when discussing this card">acc005-ch06-kwic</span></header>
-    <div class="question">Дополнить главу <b>ch06 «История русского языка» (с. 176–209)</b> ссылкой на запись <b>acc005 «А.А. Зализняк. Новгородские берестяные грамоты»</b> (2:19:00)? Тип связи: <b>лекция по теме главы</b> (<code>lecture_of</code>), проход <code>kwic</code>, уверенность 0.57 ▸ 112:14. Связь значит «чем запись дополняет главу», а не «это запись этой главы».</div>
-    <div class="panel"><h4>Что это за запись</h4><div><a href="https://www.youtube.com/watch?v=Xf2GBzzKb_0" target="_blank" rel="noopener">А.А. Зализняк. Новгородские берестяные грамоты</a> — 2:19:00; темы: ЛЛШ</div></div><div class="panel"><h4>Глава книги</h4><div><b>История русского языка</b>, с. 176–209: Как современный русский вырос из древнерусского, что такое церковнославянский и почему он так на нас повлиял.</div></div><div class="panel"><h4>Термин в книге</h4><div>Статья указателя (лексикон): <b>благословение</b>, с. 186.<br>«…Благословение — слово сакрального круга, записывавшееся сокращённо (под титлом); пример на с. 186.…»</div></div><div class="panel"><h4>Цитата из записи</h4><pre>ащать. кроме того, заметьте, сокращение - это вообще говоря, нормально, способ записи слов сакрального задержания. пух, благословение, церко</pre><div class="muted">файл <code>А.А.-Зализняк.-Новгородские-берестяные-грамоты.srt</code>, смещение 1:52:14</div></div>
-    <div class="controls">
-      <button class="vote approve" data-vote="approve">&#9989; Принять связь</button>
-      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
-      <span class="vote-state">unvoted</span>
-    </div>
-    <textarea class="note" placeholder="если глава другая — впишите ch01…ch11; apply-скрипт читает только approve/reject, заметка идёт в аудит-след"></textarea>
-  </section>
-
-  <section class="card" data-id="acc005-ch08-kwic" data-filt="disputed">
-    <header><div class="hw"><a class="hwlink" href="https://www.youtube.com/watch?v=Xf2GBzzKb_0" target="_blank" rel="noopener">«А.А. Зализняк. Новгородские берестяные грамоты» ↔ ch08 «Из русского ударения»</a> <span class="badge">kwic</span><span class="badge">0.56</span><span class="badge">дополняет главу</span></div><span class="idchip" title="card id — cite this id back when discussing this card">acc005-ch08-kwic</span></header>
-    <div class="question">Дополнить главу <b>ch08 «Из русского ударения» (с. 236–271)</b> ссылкой на запись <b>acc005 «А.А. Зализняк. Новгородские берестяные грамоты»</b> (2:19:00)? Тип связи: <b>дополняет главу</b> (<code>expands</code>), проход <code>kwic</code>, уверенность 0.56 ▸ 101:49. Связь значит «чем запись дополняет главу», а не «это запись этой главы».</div>
-    <div class="panel"><h4>Что это за запись</h4><div><a href="https://www.youtube.com/watch?v=Xf2GBzzKb_0" target="_blank" rel="noopener">А.А. Зализняк. Новгородские берестяные грамоты</a> — 2:19:00; темы: ЛЛШ</div></div><div class="panel"><h4>Глава книги</h4><div><b>Из русского ударения</b>, с. 236–271: Почему «во́ды» и «воды́» — разные формы, как ударение перемещалось в истории русского языка, и почему это так сложно для иностранцев.</div></div><div class="panel"><h4>Термин в книге</h4><div>Статья указателя (лексикон): <b>семнадцать</b>, с. 256, 257.<br>«……семна́дцать это старое различие, увы, потеряли; было се́мнадцать и во́семнадцать, но уже в XVII веке это изменилось. И заметьте, только русский язык с……»<br>«……но было быть со словами пятна́дцать, шестна́дцать, но се́мнадцать, во́семнадцать, затем девятна́дцать. И точно так же, наконец, должно было быть пятьд……»</div></div><div class="panel"><h4>Цитата из записи</h4><pre>анных, один из самых, я бы сказал, хорошо обеспеченных письменным материалом. человек, которому так или иначе посвящено семнадцать писем. се</pre><div class="muted">файл <code>А.А.-Зализняк.-Новгородские-берестяные-грамоты.srt</code>, смещение 1:41:49</div></div>
-    <div class="controls">
-      <button class="vote approve" data-vote="approve">&#9989; Принять связь</button>
-      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
-      <span class="vote-state">unvoted</span>
-    </div>
-    <textarea class="note" placeholder="если глава другая — впишите ch01…ch11; apply-скрипт читает только approve/reject, заметка идёт в аудит-след"></textarea>
-  </section>
-
-  <section class="card" data-id="acc006-ch06-kwic" data-filt="candidate">
-    <header><div class="hw"><a class="hwlink" href="https://www.youtube.com/watch?v=YnFUfF18Pzk" target="_blank" rel="noopener">«Зализняк. Контуры истории русского языка. 2012» ↔ ch06 «История русского языка»</a> <span class="badge">kwic</span><span class="badge">0.79</span><span class="badge">лекция по теме главы</span></div><span class="idchip" title="card id — cite this id back when discussing this card">acc006-ch06-kwic</span></header>
-    <div class="question">Дополнить главу <b>ch06 «История русского языка» (с. 176–209)</b> ссылкой на запись <b>acc006 «Зализняк. Контуры истории русского языка. 2012»</b> (2:07:48)? Тип связи: <b>лекция по теме главы</b> (<code>lecture_of</code>), проход <code>kwic</code>, уверенность 0.79 ▸ 64:44. Связь значит «чем запись дополняет главу», а не «это запись этой главы».</div>
-    <div class="panel"><h4>Что это за запись</h4><div><a href="https://www.youtube.com/watch?v=YnFUfF18Pzk" target="_blank" rel="noopener">Зализняк. Контуры истории русского языка. 2012</a> — 2:07:48; темы: ЛЛШ</div></div><div class="panel"><h4>Глава книги</h4><div><b>История русского языка</b>, с. 176–209: Как современный русский вырос из древнерусского, что такое церковнославянский и почему он так на нас повлиял.</div></div><div class="panel"><h4>Термин в книге</h4><div>Статья указателя (языки): <b>южнославянские</b>, с. 180, 199.<br>«……лавянства, посмотрим на западнославянскую территорию (поляки, чехи) и южнославянскую территорию (сербы, болгары)? И попытаемся как-то продолжить в этих зо……»<br>«……янская, достаточно вам известная, традиционно членится на три группы: южнославянские, западнославянские и восточнославянские языки. Сейчас к этому традици……»</div></div><div class="panel"><h4>Цитата из записи</h4><pre>гие славянские языки. к северу остаются нижнелужицкий, польский и севернеликорусский, где везде &quot;г&quot;. к югу остаются все южнославянские языки</pre><div class="muted">файл <code>Зализняк.-Контуры-истории-русского-языка.-2012.srt</code>, смещение 1:04:44</div></div>
-    <div class="controls">
-      <button class="vote approve" data-vote="approve">&#9989; Принять связь</button>
-      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
-      <span class="vote-state">unvoted</span>
-    </div>
-    <textarea class="note" placeholder="если глава другая — впишите ch01…ch11; apply-скрипт читает только approve/reject, заметка идёт в аудит-след"></textarea>
-  </section>
-
-  <section class="card" data-id="acc007-ch06-kwic" data-filt="disputed">
-    <header><div class="hw"><a class="hwlink" href="https://www.youtube.com/watch?v=bHRD_IHAwQo" target="_blank" rel="noopener">«Зализняк. О Велесовой книге. 2008» ↔ ch06 «История русского языка»</a> <span class="badge">kwic</span><span class="badge">0.55</span><span class="badge">дополняет главу</span></div><span class="idchip" title="card id — cite this id back when discussing this card">acc007-ch06-kwic</span></header>
-    <div class="question">Дополнить главу <b>ch06 «История русского языка» (с. 176–209)</b> ссылкой на запись <b>acc007 «Зализняк. О Велесовой книге. 2008»</b> (1:28:23)? Тип связи: <b>дополняет главу</b> (<code>expands</code>), проход <code>kwic</code>, уверенность 0.55 ▸ 34:50. Связь значит «чем запись дополняет главу», а не «это запись этой главы».</div>
-    <div class="panel"><h4>Что это за запись</h4><div><a href="https://www.youtube.com/watch?v=bHRD_IHAwQo" target="_blank" rel="noopener">Зализняк. О Велесовой книге. 2008</a> — 1:28:23; темы: ЛЛШ</div></div><div class="panel"><h4>Глава книги</h4><div><b>История русского языка</b>, с. 176–209: Как современный русский вырос из древнерусского, что такое церковнославянский и почему он так на нас повлиял.</div></div><div class="panel"><h4>Термин в книге</h4><div>Статья указателя (этнонимы): <b>татары</b>, с. 204.<br>«……волгари, мы вологодские, мы псковские». Он не скажет, что он русский, татарин или француз, а назовет сравнительно узкую область. Это никакая не нац……»</div></div><div class="panel"><h4>Цитата из записи</h4><pre>ь. &quot;придя весть из руси зла, як ухотя татару и тамгы, и десяти на новый эдвард&quot;. то есть пришла из руси злая весть, что татары требуют дани </pre><div class="muted">файл <code>Зализняк.-О-Велесовой-книге.-2008.srt</code>, смещение 34:50</div></div>
-    <div class="controls">
-      <button class="vote approve" data-vote="approve">&#9989; Принять связь</button>
-      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
-      <span class="vote-state">unvoted</span>
-    </div>
-    <textarea class="note" placeholder="если глава другая — впишите ch01…ch11; apply-скрипт читает только approve/reject, заметка идёт в аудит-след"></textarea>
-  </section>
-
-  <section class="card" data-id="acc007-ch08-kwic" data-filt="disputed">
-    <header><div class="hw"><a class="hwlink" href="https://www.youtube.com/watch?v=bHRD_IHAwQo" target="_blank" rel="noopener">«Зализняк. О Велесовой книге. 2008» ↔ ch08 «Из русского ударения»</a> <span class="badge">kwic</span><span class="badge">0.72</span><span class="badge">лекция по теме главы</span></div><span class="idchip" title="card id — cite this id back when discussing this card">acc007-ch08-kwic</span></header>
-    <div class="question">Дополнить главу <b>ch08 «Из русского ударения» (с. 236–271)</b> ссылкой на запись <b>acc007 «Зализняк. О Велесовой книге. 2008»</b> (1:28:23)? Тип связи: <b>лекция по теме главы</b> (<code>lecture_of</code>), проход <code>kwic</code>, уверенность 0.72 ▸ 60:34. Связь значит «чем запись дополняет главу», а не «это запись этой главы».</div>
-    <div class="panel"><h4>Что это за запись</h4><div><a href="https://www.youtube.com/watch?v=bHRD_IHAwQo" target="_blank" rel="noopener">Зализняк. О Велесовой книге. 2008</a> — 1:28:23; темы: ЛЛШ</div></div><div class="panel"><h4>Глава книги</h4><div><b>Из русского ударения</b>, с. 236–271: Почему «во́ды» и «воды́» — разные формы, как ударение перемещалось в истории русского языка, и почему это так сложно для иностранцев.</div></div><div class="panel"><h4>Термин в книге</h4><div>Статья указателя (лексикон): <b>пятью</b>, с. 255.<br><span class="muted">контекст в указателе не сохранён</span></div></div><div class="panel"><h4>Цитата из записи</h4><pre>ом разных способов. вот я вам сказал, там слово князь пишется десятью способом, может и все достигают цифры десять. там пятью, четырьмя, тре</pre><div class="muted">файл <code>Зализняк.-О-Велесовой-книге.-2008.srt</code>, смещение 1:00:34</div></div>
-    <div class="controls">
-      <button class="vote approve" data-vote="approve">&#9989; Принять связь</button>
-      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
-      <span class="vote-state">unvoted</span>
-    </div>
-    <textarea class="note" placeholder="если глава другая — впишите ch01…ch11; apply-скрипт читает только approve/reject, заметка идёт в аудит-след"></textarea>
-  </section>
-
-  <section class="card" data-id="acc009-ch06-title_topics" data-filt="disputed">
-    <header><div class="hw"><a class="hwlink" href="https://www.youtube.com/watch?v=hkaJuyLERgE" target="_blank" rel="noopener">«ACADEMIA. Андрей Зализняк. Читаем «Слово о полку Игореве». 1 лекция. Канал Культура» ↔ ch06 «История русского языка»</a> <span class="badge">title_topics</span><span class="badge">0.55</span><span class="badge">другая книга</span></div><span class="idchip" title="card id — cite this id back when discussing this card">acc009-ch06-title_topics</span></header>
-    <div class="question">Дополнить главу <b>ch06 «История русского языка» (с. 176–209)</b> ссылкой на запись <b>acc009 «ACADEMIA. Андрей Зализняк. Читаем «Слово о полку Игореве». 1 лекция. Канал Культура»</b> (39:22)? Тип связи: <b>другая книга</b> (<code>other_book</code>), проход <code>title_topics</code>, уверенность 0.55. Связь значит «чем запись дополняет главу», а не «это запись этой главы».</div>
-    <div class="panel"><h4>Что это за запись</h4><div><a href="https://www.youtube.com/watch?v=hkaJuyLERgE" target="_blank" rel="noopener">ACADEMIA. Андрей Зализняк. Читаем «Слово о полку Игореве». 1 лекция. Канал Культура</a> — 39:22</div></div><div class="panel"><h4>Глава книги</h4><div><b>История русского языка</b>, с. 176–209: Как современный русский вырос из древнерусского, что такое церковнославянский и почему он так на нас повлиял.</div></div><div class="panel"><h4>Прочие сигналы</h4><div>совпало по title: «Слово о полку»</div></div>
-    <div class="controls">
-      <button class="vote approve" data-vote="approve">&#9989; Принять связь</button>
-      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
-      <span class="vote-state">unvoted</span>
-    </div>
-    <textarea class="note" placeholder="если глава другая — впишите ch01…ch11; apply-скрипт читает только approve/reject, заметка идёт в аудит-след"></textarea>
-  </section>
-
-  <section class="card" data-id="acc009-ch09-llm" data-filt="candidate">
-    <header><div class="hw"><a class="hwlink" href="https://www.youtube.com/watch?v=hkaJuyLERgE" target="_blank" rel="noopener">«ACADEMIA. Андрей Зализняк. Читаем «Слово о полку Игореве». 1 лекция. Канал Культура» ↔ ch09 «Берестяные грамоты»</a> <span class="badge">llm</span><span class="badge">0.90</span><span class="badge">лекция по теме главы</span></div><span class="idchip" title="card id — cite this id back when discussing this card">acc009-ch09-llm</span></header>
-    <div class="question">Дополнить главу <b>ch09 «Берестяные грамоты» (с. 272–321)</b> ссылкой на запись <b>acc009 «ACADEMIA. Андрей Зализняк. Читаем «Слово о полку Игореве». 1 лекция. Канал Культура»</b> (39:22)? Тип связи: <b>лекция по теме главы</b> (<code>lecture_of</code>), проход <code>llm</code>, уверенность 0.90. Связь значит «чем запись дополняет главу», а не «это запись этой главы».</div>
-    <div class="panel"><h4>Что это за запись</h4><div><a href="https://www.youtube.com/watch?v=hkaJuyLERgE" target="_blank" rel="noopener">ACADEMIA. Андрей Зализняк. Читаем «Слово о полку Игореве». 1 лекция. Канал Культура</a> — 39:22</div></div><div class="panel"><h4>Глава книги</h4><div><b>Берестяные грамоты</b>, с. 272–321: Главное открытие русской медиевистики XX века: тысячи писем простых новгородцев XI–XV веков, написанных на берёзовой коре.</div></div><div class="panel"><h4>Цитата из записи</h4><pre>Известен своими исследованиями по выявлению специфических особенностей древненовгородского диалекта, его отличия от наддиалектного древнерус</pre><div class="muted">источник не назван</div></div><div class="panel"><h4>Метод (не доказательство)</h4><div>Ребро предложила модель <code>deepseek-v4-flash</code> (промпт <code></code>) по аннотациям глав и метаданным записи. Имя модели — способ получения связи; доказательство — приведённая ею цитата: ⚠ источник цитаты в данных репозитория НЕ найден — модель могла её пересказать или выдумать; перед approve проверьте вручную.</div></div>
-    <div class="controls">
-      <button class="vote approve" data-vote="approve">&#9989; Принять связь</button>
-      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
-      <span class="vote-state">unvoted</span>
-    </div>
-    <textarea class="note" placeholder="если глава другая — впишите ch01…ch11; apply-скрипт читает только approve/reject, заметка идёт в аудит-след"></textarea>
-  </section>
-
-  <section class="card" data-id="acc009-ch10-kwic" data-filt="disputed">
-    <header><div class="hw"><a class="hwlink" href="https://www.youtube.com/watch?v=hkaJuyLERgE" target="_blank" rel="noopener">«ACADEMIA. Андрей Зализняк. Читаем «Слово о полку Игореве». 1 лекция. Канал Культура» ↔ ch10 «О жизни слов»</a> <span class="badge">kwic</span><span class="badge">0.59</span><span class="badge">лекция по теме главы</span></div><span class="idchip" title="card id — cite this id back when discussing this card">acc009-ch10-kwic</span></header>
-    <div class="question">Дополнить главу <b>ch10 «О жизни слов» (с. 322–359)</b> ссылкой на запись <b>acc009 «ACADEMIA. Андрей Зализняк. Читаем «Слово о полку Игореве». 1 лекция. Канал Культура»</b> (39:22)? Тип связи: <b>лекция по теме главы</b> (<code>lecture_of</code>), проход <code>kwic</code>, уверенность 0.59 ▸ 09:14. Связь значит «чем запись дополняет главу», а не «это запись этой главы».</div>
-    <div class="panel"><h4>Что это за запись</h4><div><a href="https://www.youtube.com/watch?v=hkaJuyLERgE" target="_blank" rel="noopener">ACADEMIA. Андрей Зализняк. Читаем «Слово о полку Игореве». 1 лекция. Канал Культура</a> — 39:22</div></div><div class="panel"><h4>Глава книги</h4><div><b>О жизни слов</b>, с. 322–359: Откуда берутся слова, как они меняют значение, что такое заимствование и почему «вокзал» от английского «Vauxhall».</div></div><div class="panel"><h4>Термин в книге</h4><div>Статья указателя (лексикон): <b>устоял</b>, с. 353.<br><span class="muted">контекст в указателе не сохранён</span></div></div><div class="panel"><h4>Цитата из записи</h4><pre>о очень типичное для той эпохи. ну, вам, к счастью, для вас эта эпоха уже чуждана и далека, но тем не менее тогда жизнь устояла именно таким</pre><div class="muted">файл <code>ACADEMIA.-Андрей-Зализняк.-Читаем-«Слово-о-полку-Игореве».-1-лекция.-Канал-Культура.srt</code>, смещение 9:14</div></div>
-    <div class="controls">
-      <button class="vote approve" data-vote="approve">&#9989; Принять связь</button>
-      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
-      <span class="vote-state">unvoted</span>
-    </div>
-    <textarea class="note" placeholder="если глава другая — впишите ch01…ch11; apply-скрипт читает только approve/reject, заметка идёт в аудит-след"></textarea>
-  </section>
-
-  <section class="card" data-id="acc009-ch11-kwic" data-filt="disputed">
-    <header><div class="hw"><a class="hwlink" href="https://www.youtube.com/watch?v=hkaJuyLERgE" target="_blank" rel="noopener">«ACADEMIA. Андрей Зализняк. Читаем «Слово о полку Игореве». 1 лекция. Канал Культура» ↔ ch11 «Или и уже»</a> <span class="badge">kwic</span><span class="badge">0.55</span><span class="badge">дополняет главу</span></div><span class="idchip" title="card id — cite this id back when discussing this card">acc009-ch11-kwic</span></header>
-    <div class="question">Дополнить главу <b>ch11 «Или и уже» (с. 360–392)</b> ссылкой на запись <b>acc009 «ACADEMIA. Андрей Зализняк. Читаем «Слово о полку Игореве». 1 лекция. Канал Культура»</b> (39:22)? Тип связи: <b>дополняет главу</b> (<code>expands</code>), проход <code>kwic</code>, уверенность 0.55 ▸ 21:02. Связь значит «чем запись дополняет главу», а не «это запись этой главы».</div>
-    <div class="panel"><h4>Что это за запись</h4><div><a href="https://www.youtube.com/watch?v=hkaJuyLERgE" target="_blank" rel="noopener">ACADEMIA. Андрей Зализняк. Читаем «Слово о полку Игореве». 1 лекция. Канал Культура</a> — 39:22</div></div><div class="panel"><h4>Глава книги</h4><div><b>Или и уже</b>, с. 360–391: Как маленькие служебные слова «или», «уже», «же», «ли» хранят следы древних грамматических правил и помогают понять историю языка.</div></div><div class="panel"><h4>Термин в книге</h4><div>Статья указателя (лексикон): <b>перёд</b>, с. 386.<br><span class="muted">контекст в указателе не сохранён</span></div></div><div class="panel"><h4>Цитата из записи</h4><pre>у всё-таки к тому, что же дает нынешний современный лингвистический анализ этого произведения. абсолютно не загадывая наперёд, что хотеть по</pre><div class="muted">файл <code>ACADEMIA.-Андрей-Зализняк.-Читаем-«Слово-о-полку-Игореве».-1-лекция.-Канал-Культура.srt</code>, смещение 21:02</div></div>
-    <div class="controls">
-      <button class="vote approve" data-vote="approve">&#9989; Принять связь</button>
-      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
-      <span class="vote-state">unvoted</span>
-    </div>
-    <textarea class="note" placeholder="если глава другая — впишите ch01…ch11; apply-скрипт читает только approve/reject, заметка идёт в аудит-след"></textarea>
-  </section>
-
-  <section class="card" data-id="acc010-ch06-kwic" data-filt="disputed">
-    <header><div class="hw"><a class="hwlink" href="https://www.youtube.com/watch?v=sjTVG_aUtl4" target="_blank" rel="noopener">«ACADEMIA. Андрей Зализняк. Берестяные грамоты. 2 лекция. Канал Культура» ↔ ch06 «История русского языка»</a> <span class="badge">kwic</span><span class="badge">0.55</span><span class="badge">дополняет главу</span></div><span class="idchip" title="card id — cite this id back when discussing this card">acc010-ch06-kwic</span></header>
-    <div class="question">Дополнить главу <b>ch06 «История русского языка» (с. 176–209)</b> ссылкой на запись <b>acc010 «ACADEMIA. Андрей Зализняк. Берестяные грамоты. 2 лекция. Канал Культура»</b> (43:47)? Тип связи: <b>дополняет главу</b> (<code>expands</code>), проход <code>kwic</code>, уверенность 0.55 ▸ 31:50. Связь значит «чем запись дополняет главу», а не «это запись этой главы».</div>
-    <div class="panel"><h4>Что это за запись</h4><div><a href="https://www.youtube.com/watch?v=sjTVG_aUtl4" target="_blank" rel="noopener">ACADEMIA. Андрей Зализняк. Берестяные грамоты. 2 лекция. Канал Культура</a> — 43:47</div></div><div class="panel"><h4>Глава книги</h4><div><b>История русского языка</b>, с. 176–209: Как современный русский вырос из древнерусского, что такое церковнославянский и почему он так на нас повлиял.</div></div><div class="panel"><h4>Термин в книге</h4><div>Статья указателя (лексикон): <b>везе</b>, с. 202.<br><span class="muted">контекст в указателе не сохранён</span></div></div><div class="panel"><h4>Цитата из записи</h4><pre>о родам и числам, в одной и той же строке сохранившиеся тем же чудом, это вот как хотите можете понимать какое огромное везение для филологи</pre><div class="muted">файл <code>ACADEMIA.-Андрей-Зализняк.-Берестяные-грамоты.-2-лекция.-Кан.srt</code>, смещение 31:50</div></div>
-    <div class="controls">
-      <button class="vote approve" data-vote="approve">&#9989; Принять связь</button>
-      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
-      <span class="vote-state">unvoted</span>
-    </div>
-    <textarea class="note" placeholder="если глава другая — впишите ch01…ch11; apply-скрипт читает только approve/reject, заметка идёт в аудит-след"></textarea>
-  </section>
-
-  <section class="card" data-id="acc011-ch06-kwic" data-filt="disputed">
-    <header><div class="hw"><a class="hwlink" href="https://www.youtube.com/watch?v=LJlxadWkzPc" target="_blank" rel="noopener">«ACADEMIA. Андрей Зализняк. Берестяные грамоты. 1 лекция. Канал Культура» ↔ ch06 «История русского языка»</a> <span class="badge">kwic</span><span class="badge">0.71</span><span class="badge">лекция по теме главы</span></div><span class="idchip" title="card id — cite this id back when discussing this card">acc011-ch06-kwic</span></header>
-    <div class="question">Дополнить главу <b>ch06 «История русского языка» (с. 176–209)</b> ссылкой на запись <b>acc011 «ACADEMIA. Андрей Зализняк. Берестяные грамоты. 1 лекция. Канал Культура»</b> (43:54)? Тип связи: <b>лекция по теме главы</b> (<code>lecture_of</code>), проход <code>kwic</code>, уверенность 0.71 ▸ 40:26. Связь значит «чем запись дополняет главу», а не «это запись этой главы».</div>
-    <div class="panel"><h4>Что это за запись</h4><div><a href="https://www.youtube.com/watch?v=LJlxadWkzPc" target="_blank" rel="noopener">ACADEMIA. Андрей Зализняк. Берестяные грамоты. 1 лекция. Канал Культура</a> — 43:54</div></div><div class="panel"><h4>Глава книги</h4><div><b>История русского языка</b>, с. 176–209: Как современный русский вырос из древнерусского, что такое церковнославянский и почему он так на нас повлиял.</div></div><div class="panel"><h4>Термин в книге</h4><div>Статья указателя (лексикон): <b>корове</b>, с. 202.<br><span class="muted">контекст в указателе не сохранён</span></div></div><div class="panel"><h4>Цитата из записи</h4><pre>ежали. о коне, ну вот здесь есть снова вместо ятия, в данном случае это множественное число. так же, как у нас там было корове. о коне не ве</pre><div class="muted">файл <code>ACADEMIA.-Андрей-Зализняк.-Берестяные-грамоты.-1-лекция.-Кан.srt</code>, смещение 40:26</div></div>
-    <div class="controls">
-      <button class="vote approve" data-vote="approve">&#9989; Принять связь</button>
-      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
-      <span class="vote-state">unvoted</span>
-    </div>
-    <textarea class="note" placeholder="если глава другая — впишите ch01…ch11; apply-скрипт читает только approve/reject, заметка идёт в аудит-след"></textarea>
-  </section>
-
-  <section class="card" data-id="acc011-ch08-kwic" data-filt="disputed">
-    <header><div class="hw"><a class="hwlink" href="https://www.youtube.com/watch?v=LJlxadWkzPc" target="_blank" rel="noopener">«ACADEMIA. Андрей Зализняк. Берестяные грамоты. 1 лекция. Канал Культура» ↔ ch08 «Из русского ударения»</a> <span class="badge">kwic</span><span class="badge">0.55</span><span class="badge">дополняет главу</span></div><span class="idchip" title="card id — cite this id back when discussing this card">acc011-ch08-kwic</span></header>
-    <div class="question">Дополнить главу <b>ch08 «Из русского ударения» (с. 236–271)</b> ссылкой на запись <b>acc011 «ACADEMIA. Андрей Зализняк. Берестяные грамоты. 1 лекция. Канал Культура»</b> (43:54)? Тип связи: <b>дополняет главу</b> (<code>expands</code>), проход <code>kwic</code>, уверенность 0.55 ▸ 11:54. Связь значит «чем запись дополняет главу», а не «это запись этой главы».</div>
-    <div class="panel"><h4>Что это за запись</h4><div><a href="https://www.youtube.com/watch?v=LJlxadWkzPc" target="_blank" rel="noopener">ACADEMIA. Андрей Зализняк. Берестяные грамоты. 1 лекция. Канал Культура</a> — 43:54</div></div><div class="panel"><h4>Глава книги</h4><div><b>Из русского ударения</b>, с. 236–271: Почему «во́ды» и «воды́» — разные формы, как ударение перемещалось в истории русского языка, и почему это так сложно для иностранцев.</div></div><div class="panel"><h4>Термин в книге</h4><div>Статья указателя (лексикон): <b>сёла</b>, с. 263, 265.<br>«……моря́ и мо́ря мо́ре — моря́ село́ — по говорам се́ла и села́ село́ — сёла дѣ́ло — дѣ́ла де́ло — дела́ зе́рно — зе́рна зерно́ — зёрна дымъ, ды́……»<br>«……ам — во всем множественном. ́ Мо́ре, но моря́; село́, но, наоборот, — сёла; де́ло, но дела́; ́ зерно́, но зёрна. И так далее. ́ Из зала: Почему……»</div></div><div class="panel"><h4>Цитата из записи</h4><pre>вно &quot;ё&quot; почти не использовали, и до сих пор, строго говоря, вы в каких-то случаях можете писать там, там, какой-нибудь &quot;сёла&quot;, можете написа</pre><div class="muted">файл <code>ACADEMIA.-Андрей-Зализняк.-Берестяные-грамоты.-1-лекция.-Кан.srt</code>, смещение 11:54</div></div>
-    <div class="controls">
-      <button class="vote approve" data-vote="approve">&#9989; Принять связь</button>
-      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
-      <span class="vote-state">unvoted</span>
-    </div>
-    <textarea class="note" placeholder="если глава другая — впишите ch01…ch11; apply-скрипт читает только approve/reject, заметка идёт в аудит-след"></textarea>
-  </section>
-
-  <section class="card" data-id="acc013-ch06-kwic" data-filt="disputed">
-    <header><div class="hw"><a class="hwlink" href="https://www.youtube.com/watch?v=fo10NKM_0JM" target="_blank" rel="noopener">«ACADEMIA. Андрей Зализняк. Читаем «Слово о полку Игореве». 2 лекция. Канал Культура» ↔ ch06 «История русского языка»</a> <span class="badge">kwic</span><span class="badge">0.59</span><span class="badge">лекция по теме главы</span></div><span class="idchip" title="card id — cite this id back when discussing this card">acc013-ch06-kwic</span></header>
-    <div class="question">Дополнить главу <b>ch06 «История русского языка» (с. 176–209)</b> ссылкой на запись <b>acc013 «ACADEMIA. Андрей Зализняк. Читаем «Слово о полку Игореве». 2 лекция. Канал Культура»</b> (40:47)? Тип связи: <b>лекция по теме главы</b> (<code>lecture_of</code>), проход <code>kwic</code>, уверенность 0.59 ▸ 11:23. Связь значит «чем запись дополняет главу», а не «это запись этой главы».</div>
-    <div class="panel"><h4>Что это за запись</h4><div><a href="https://www.youtube.com/watch?v=fo10NKM_0JM" target="_blank" rel="noopener">ACADEMIA. Андрей Зализняк. Читаем «Слово о полку Игореве». 2 лекция. Канал Культура</a> — 40:47</div></div><div class="panel"><h4>Глава книги</h4><div><b>История русского языка</b>, с. 176–209: Как современный русский вырос из древнерусского, что такое церковнославянский и почему он так на нас повлиял.</div></div><div class="panel"><h4>Термин в книге</h4><div>Статья указателя (лексикон): <b>солдат</b>, с. 191.<br><span class="muted">контекст в указателе не сохранён</span></div></div><div class="panel"><h4>Цитата из записи</h4><pre>пишите его». неужели вы станете переписывать формы букв тамошние? вы увидите, как это читается? там, понятно, написано «солдаты перешли гран</pre><div class="muted">файл <code>ACADEMIA.-Андрей-Зализняк.-Читаем-«Слово-о-полку-Игореве».-2-лекция.-Канал-Культура.srt</code>, смещение 11:23</div></div>
-    <div class="controls">
-      <button class="vote approve" data-vote="approve">&#9989; Принять связь</button>
-      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
-      <span class="vote-state">unvoted</span>
-    </div>
-    <textarea class="note" placeholder="если глава другая — впишите ch01…ch11; apply-скрипт читает только approve/reject, заметка идёт в аудит-след"></textarea>
-  </section>
-
-  <section class="card" data-id="acc013-ch08-kwic" data-filt="disputed">
-    <header><div class="hw"><a class="hwlink" href="https://www.youtube.com/watch?v=fo10NKM_0JM" target="_blank" rel="noopener">«ACADEMIA. Андрей Зализняк. Читаем «Слово о полку Игореве». 2 лекция. Канал Культура» ↔ ch08 «Из русского ударения»</a> <span class="badge">kwic</span><span class="badge">0.56</span><span class="badge">дополняет главу</span></div><span class="idchip" title="card id — cite this id back when discussing this card">acc013-ch08-kwic</span></header>
-    <div class="question">Дополнить главу <b>ch08 «Из русского ударения» (с. 236–271)</b> ссылкой на запись <b>acc013 «ACADEMIA. Андрей Зализняк. Читаем «Слово о полку Игореве». 2 лекция. Канал Культура»</b> (40:47)? Тип связи: <b>дополняет главу</b> (<code>expands</code>), проход <code>kwic</code>, уверенность 0.56 ▸ 08:51. Связь значит «чем запись дополняет главу», а не «это запись этой главы».</div>
-    <div class="panel"><h4>Что это за запись</h4><div><a href="https://www.youtube.com/watch?v=fo10NKM_0JM" target="_blank" rel="noopener">ACADEMIA. Андрей Зализняк. Читаем «Слово о полку Игореве». 2 лекция. Канал Культура</a> — 40:47</div></div><div class="panel"><h4>Глава книги</h4><div><b>Из русского ударения</b>, с. 236–271: Почему «во́ды» и «воды́» — разные формы, как ударение перемещалось в истории русского языка, и почему это так сложно для иностранцев.</div></div><div class="panel"><h4>Термин в книге</h4><div>Статья указателя (лексикон): <b>пятьдесят</b>, с. 256, 257.<br>«……ом знаке (ере) в конце. Тем самым это единственный плюс во всём слове пятьдесят. Пять — минус, десят — минус. И только ер имел плюс. Где ударение? Из……»<br>«……. уже две руки... Три руки — очень хорошо... Ну, пожалуйста. Из зала: Пятьдеся́т, шестьдеся́т, се́мьдесят, во́семьдесят. А. З.: Совершенно правильно……»</div></div><div class="panel"><h4>Цитата из записи</h4><pre>деле это делается на основании двух признаков, а примерно на основании пятидесяти признаков. ясно совершенно, что я вам пятьдесят выписывать</pre><div class="muted">файл <code>ACADEMIA.-Андрей-Зализняк.-Читаем-«Слово-о-полку-Игореве».-2-лекция.-Канал-Культура.srt</code>, смещение 8:51</div></div>
-    <div class="controls">
-      <button class="vote approve" data-vote="approve">&#9989; Принять связь</button>
-      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
-      <span class="vote-state">unvoted</span>
-    </div>
-    <textarea class="note" placeholder="если глава другая — впишите ch01…ch11; apply-скрипт читает только approve/reject, заметка идёт в аудит-след"></textarea>
-  </section>
-
-  <section class="card" data-id="acc013-ch09-llm" data-filt="candidate">
-    <header><div class="hw"><a class="hwlink" href="https://www.youtube.com/watch?v=fo10NKM_0JM" target="_blank" rel="noopener">«ACADEMIA. Андрей Зализняк. Читаем «Слово о полку Игореве». 2 лекция. Канал Культура» ↔ ch09 «Берестяные грамоты»</a> <span class="badge">llm</span><span class="badge">0.90</span><span class="badge">лекция по теме главы</span></div><span class="idchip" title="card id — cite this id back when discussing this card">acc013-ch09-llm</span></header>
-    <div class="question">Дополнить главу <b>ch09 «Берестяные грамоты» (с. 272–321)</b> ссылкой на запись <b>acc013 «ACADEMIA. Андрей Зализняк. Читаем «Слово о полку Игореве». 2 лекция. Канал Культура»</b> (40:47)? Тип связи: <b>лекция по теме главы</b> (<code>lecture_of</code>), проход <code>llm</code>, уверенность 0.90. Связь значит «чем запись дополняет главу», а не «это запись этой главы».</div>
-    <div class="panel"><h4>Что это за запись</h4><div><a href="https://www.youtube.com/watch?v=fo10NKM_0JM" target="_blank" rel="noopener">ACADEMIA. Андрей Зализняк. Читаем «Слово о полку Игореве». 2 лекция. Канал Культура</a> — 40:47</div></div><div class="panel"><h4>Глава книги</h4><div><b>Берестяные грамоты</b>, с. 272–321: Главное открытие русской медиевистики XX века: тысячи писем простых новгородцев XI–XV веков, написанных на берёзовой коре.</div></div><div class="panel"><h4>Цитата из записи</h4><pre>Самый лучший из них – вы теперь знаете – это «Берестяные грамоты».</pre><div class="muted">источник не назван</div></div><div class="panel"><h4>Метод (не доказательство)</h4><div>Ребро предложила модель <code>deepseek-v4-flash</code> (промпт <code></code>) по аннотациям глав и метаданным записи. Имя модели — способ получения связи; доказательство — приведённая ею цитата: ⚠ источник цитаты в данных репозитория НЕ найден — модель могла её пересказать или выдумать; перед approve проверьте вручную.</div></div>
-    <div class="controls">
-      <button class="vote approve" data-vote="approve">&#9989; Принять связь</button>
-      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
-      <span class="vote-state">unvoted</span>
-    </div>
-    <textarea class="note" placeholder="если глава другая — впишите ch01…ch11; apply-скрипт читает только approve/reject, заметка идёт в аудит-след"></textarea>
-  </section>
-
-  <section class="card" data-id="acc014-ch08-kwic" data-filt="disputed">
-    <header><div class="hw"><a class="hwlink" href="https://www.youtube.com/watch?v=yBdll96bosQ" target="_blank" rel="noopener">«Зализняк. О прошлом и будущем русского языка (Очевидное-невероятное, 2009)» ↔ ch08 «Из русского ударения»</a> <span class="badge">kwic</span><span class="badge">0.59</span><span class="badge">лекция по теме главы</span></div><span class="idchip" title="card id — cite this id back when discussing this card">acc014-ch08-kwic</span></header>
-    <div class="question">Дополнить главу <b>ch08 «Из русского ударения» (с. 236–271)</b> ссылкой на запись <b>acc014 «Зализняк. О прошлом и будущем русского языка (Очевидное-невероятное, 2009)»</b> (25:41)? Тип связи: <b>лекция по теме главы</b> (<code>lecture_of</code>), проход <code>kwic</code>, уверенность 0.59 ▸ 23:02. Связь значит «чем запись дополняет главу», а не «это запись этой главы».</div>
-    <div class="panel"><h4>Что это за запись</h4><div><a href="https://www.youtube.com/watch?v=yBdll96bosQ" target="_blank" rel="noopener">Зализняк. О прошлом и будущем русского языка (Очевидное-невероятное, 2009)</a> — 25:41</div></div><div class="panel"><h4>Глава книги</h4><div><b>Из русского ударения</b>, с. 236–271: Почему «во́ды» и «воды́» — разные формы, как ударение перемещалось в истории русского языка, и почему это так сложно для иностранцев.</div></div><div class="panel"><h4>Термин в книге</h4><div>Статья указателя (лексикон): <b>доложил</b>, с. 268.<br><span class="muted">контекст в указателе не сохранён</span></div></div><div class="panel"><h4>Цитата из записи</h4><pre>то дверь, замок цел, и дверь цела. и дальше идёт совершенно понятный текст, а накажите того обвинителя, который это вам доложил, который это</pre><div class="muted">файл <code>Зализняк.-О-прошлом-и-будущем-русского-языка-Очевидное-невероятное,-2009.srt</code>, смещение 23:02</div></div>
-    <div class="controls">
-      <button class="vote approve" data-vote="approve">&#9989; Принять связь</button>
-      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
-      <span class="vote-state">unvoted</span>
-    </div>
-    <textarea class="note" placeholder="если глава другая — впишите ch01…ch11; apply-скрипт читает только approve/reject, заметка идёт в аудит-след"></textarea>
-  </section>
-
-  <section class="card" data-id="acc014-ch09-kwic" data-filt="disputed">
-    <header><div class="hw"><a class="hwlink" href="https://www.youtube.com/watch?v=yBdll96bosQ" target="_blank" rel="noopener">«Зализняк. О прошлом и будущем русского языка (Очевидное-невероятное, 2009)» ↔ ch09 «Берестяные грамоты»</a> <span class="badge">kwic</span><span class="badge">0.55</span><span class="badge">дополняет главу</span></div><span class="idchip" title="card id — cite this id back when discussing this card">acc014-ch09-kwic</span></header>
-    <div class="question">Дополнить главу <b>ch09 «Берестяные грамоты» (с. 272–321)</b> ссылкой на запись <b>acc014 «Зализняк. О прошлом и будущем русского языка (Очевидное-невероятное, 2009)»</b> (25:41)? Тип связи: <b>дополняет главу</b> (<code>expands</code>), проход <code>kwic</code>, уверенность 0.55 ▸ 18:59. Связь значит «чем запись дополняет главу», а не «это запись этой главы».</div>
-    <div class="panel"><h4>Что это за запись</h4><div><a href="https://www.youtube.com/watch?v=yBdll96bosQ" target="_blank" rel="noopener">Зализняк. О прошлом и будущем русского языка (Очевидное-невероятное, 2009)</a> — 25:41</div></div><div class="panel"><h4>Глава книги</h4><div><b>Берестяные грамоты</b>, с. 272–321: Главное открытие русской медиевистики XX века: тысячи писем простых новгородцев XI–XV веков, написанных на берёзовой коре.</div></div><div class="panel"><h4>Термин в книге</h4><div>Статья указателя (лексикон): <b>господарь</b>, с. 316, 317, 320.<br>«……… 0 1 2 3 4 5 см С разделением на слова: а замъке кѣлеа, двьри кѣлѣа, господарь. Слова замъке, двьри и господарь вам известны, они обозначены черным,……»<br>«……т с этим справиться. азамъкекѣлеадвьрикѣлѣагосподарь… Из зала: Я вижу господарь. А. З.: Господарь. Совершенно правильно! Из зала: Двери и замок. А. З……»</div></div><div class="panel"><h4>Цитата из записи</h4><pre>а, это ведь сударь так сокращалось, а сударь в свою очередь – это сокращение от государь, а государь – это упрощение от господарь. первонача</pre><div class="muted">файл <code>Зализняк.-О-прошлом-и-будущем-русского-языка-Очевидное-невероятное,-2009.srt</code>, смещение 18:59</div></div>
-    <div class="controls">
-      <button class="vote approve" data-vote="approve">&#9989; Принять связь</button>
-      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
-      <span class="vote-state">unvoted</span>
-    </div>
-    <textarea class="note" placeholder="если глава другая — впишите ch01…ch11; apply-скрипт читает только approve/reject, заметка идёт в аудит-след"></textarea>
-  </section>
-
-  <section class="card" data-id="acc015-ch01-llm" data-filt="candidate">
-    <header><div class="hw"><a class="hwlink" href="https://www.youtube.com/watch?v=mBKJLH0EU7M" target="_blank" rel="noopener">«Яндекс Гугл и алгоритм Зализняка Острова Телеканал Культура» ↔ ch01 «От редколлегии и предисловие»</a> <span class="badge">llm</span><span class="badge">0.90</span><span class="badge">о самом Зализняке</span></div><span class="idchip" title="card id — cite this id back when discussing this card">acc015-ch01-llm</span></header>
-    <div class="question">Дополнить главу <b>ch01 «От редколлегии и предисловие» (с. 6–13)</b> ссылкой на запись <b>acc015 «Яндекс Гугл и алгоритм Зализняка Острова Телеканал Культура»</b> (38:53)? Тип связи: <b>о самом Зализняке</b> (<code>about_zaliznyak</code>), проход <code>llm</code>, уверенность 0.90. Связь значит «чем запись дополняет главу», а не «это запись этой главы».</div>
-    <div class="panel"><h4>Что это за запись</h4><div><a href="https://www.youtube.com/watch?v=mBKJLH0EU7M" target="_blank" rel="noopener">Яндекс Гугл и алгоритм Зализняка Острова Телеканал Культура</a> — 38:53</div></div><div class="panel"><h4>Глава книги</h4><div><b>От редколлегии и предисловие</b>, с. 6–13: Как создавалась книга: десять лекций А. А. Зализняка в школе «Муми-тролль» с 2005 по 2017 год.</div></div><div class="panel"><h4>Цитата из записи</h4><pre>Литературное премие Александра Солженицына 2007 года. Решение в жюри от 5 февраля 2007 года предсуждено Андрею Анатольевичу Залезняку за фун</pre><div class="muted">источник не назван</div></div><div class="panel"><h4>Метод (не доказательство)</h4><div>Ребро предложила модель <code>deepseek-v4-flash</code> (промпт <code></code>) по аннотациям глав и метаданным записи. Имя модели — способ получения связи; доказательство — приведённая ею цитата: ⚠ источник цитаты в данных репозитория НЕ найден — модель могла её пересказать или выдумать; перед approve проверьте вручную.</div></div>
-    <div class="controls">
-      <button class="vote approve" data-vote="approve">&#9989; Принять связь</button>
-      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
-      <span class="vote-state">unvoted</span>
-    </div>
-    <textarea class="note" placeholder="если глава другая — впишите ch01…ch11; apply-скрипт читает только approve/reject, заметка идёт в аудит-след"></textarea>
-  </section>
-
-  <section class="card" data-id="acc015-ch06-kwic" data-filt="disputed">
-    <header><div class="hw"><a class="hwlink" href="https://www.youtube.com/watch?v=mBKJLH0EU7M" target="_blank" rel="noopener">«Яндекс Гугл и алгоритм Зализняка Острова Телеканал Культура» ↔ ch06 «История русского языка»</a> <span class="badge">kwic</span><span class="badge">0.55</span><span class="badge">дополняет главу</span></div><span class="idchip" title="card id — cite this id back when discussing this card">acc015-ch06-kwic</span></header>
-    <div class="question">Дополнить главу <b>ch06 «История русского языка» (с. 176–209)</b> ссылкой на запись <b>acc015 «Яндекс Гугл и алгоритм Зализняка Острова Телеканал Культура»</b> (38:53)? Тип связи: <b>дополняет главу</b> (<code>expands</code>), проход <code>kwic</code>, уверенность 0.55 ▸ 19:05. Связь значит «чем запись дополняет главу», а не «это запись этой главы».</div>
-    <div class="panel"><h4>Что это за запись</h4><div><a href="https://www.youtube.com/watch?v=mBKJLH0EU7M" target="_blank" rel="noopener">Яндекс Гугл и алгоритм Зализняка Острова Телеканал Культура</a> — 38:53</div></div><div class="panel"><h4>Глава книги</h4><div><b>История русского языка</b>, с. 176–209: Как современный русский вырос из древнерусского, что такое церковнославянский и почему он так на нас повлиял.</div></div><div class="panel"><h4>Термин в книге</h4><div>Статья указателя (лексикон): <b>ворог</b>, с. 193.<br><span class="muted">контекст в указателе не сохранён</span></div></div><div class="panel"><h4>Цитата из записи</h4><pre>гато, в день вообще богато, ничего не было. ночью изысканно. сыр какой-то такой. и я спросил его, а едят ли во франции творог. мне очень пон</pre><div class="muted">файл <code>Яндекс-Гугл-и-алгоритм-Зализняка-Острова-Телеканал-Культура-mBKJLH0EU7M-480pp-1713273916.srt</code>, смещение 19:05</div></div>
-    <div class="controls">
-      <button class="vote approve" data-vote="approve">&#9989; Принять связь</button>
-      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
-      <span class="vote-state">unvoted</span>
-    </div>
-    <textarea class="note" placeholder="если глава другая — впишите ch01…ch11; apply-скрипт читает только approve/reject, заметка идёт в аудит-след"></textarea>
-  </section>
-
-  <section class="card" data-id="acc015-ch08-kwic" data-filt="disputed">
-    <header><div class="hw"><a class="hwlink" href="https://www.youtube.com/watch?v=mBKJLH0EU7M" target="_blank" rel="noopener">«Яндекс Гугл и алгоритм Зализняка Острова Телеканал Культура» ↔ ch08 «Из русского ударения»</a> <span class="badge">kwic</span><span class="badge">0.70</span><span class="badge">лекция по теме главы</span></div><span class="idchip" title="card id — cite this id back when discussing this card">acc015-ch08-kwic</span></header>
-    <div class="question">Дополнить главу <b>ch08 «Из русского ударения» (с. 236–271)</b> ссылкой на запись <b>acc015 «Яндекс Гугл и алгоритм Зализняка Острова Телеканал Культура»</b> (38:53)? Тип связи: <b>лекция по теме главы</b> (<code>lecture_of</code>), проход <code>kwic</code>, уверенность 0.70 ▸ 35:44. Связь значит «чем запись дополняет главу», а не «это запись этой главы».</div>
-    <div class="panel"><h4>Что это за запись</h4><div><a href="https://www.youtube.com/watch?v=mBKJLH0EU7M" target="_blank" rel="noopener">Яндекс Гугл и алгоритм Зализняка Острова Телеканал Культура</a> — 38:53</div></div><div class="panel"><h4>Глава книги</h4><div><b>Из русского ударения</b>, с. 236–271: Почему «во́ды» и «воды́» — разные формы, как ударение перемещалось в истории русского языка, и почему это так сложно для иностранцев.</div></div><div class="panel"><h4>Термин в книге</h4><div>Статья указателя (лексикон): <b>Лотман</b>, с. 246.<br><span class="muted">контекст в указателе не сохранён</span></div></div><div class="panel"><h4>Цитата из записи</h4><pre>от тут вот. и тут рядом был мой брат, борис андреевич успеанский, специалист по древнерусскому языку, и юрий михайлович лотман, специалист п</pre><div class="muted">файл <code>Яндекс-Гугл-и-алгоритм-Зализняка-Острова-Телеканал-Культура-mBKJLH0EU7M-480pp-1713273916.srt</code>, смещение 35:44</div></div>
-    <div class="controls">
-      <button class="vote approve" data-vote="approve">&#9989; Принять связь</button>
-      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
-      <span class="vote-state">unvoted</span>
-    </div>
-    <textarea class="note" placeholder="если глава другая — впишите ch01…ch11; apply-скрипт читает только approve/reject, заметка идёт в аудит-след"></textarea>
-  </section>
-
-  <section class="card" data-id="acc017-ch06-kwic" data-filt="candidate">
-    <header><div class="hw"><a class="hwlink" href="https://www.youtube.com/watch?v=P0G948VmXtM" target="_blank" rel="noopener">«Андрей Зализняк Интереснейшая история русского языка» ↔ ch06 «История русского языка»</a> <span class="badge">kwic</span><span class="badge">0.79</span><span class="badge">лекция по теме главы</span></div><span class="idchip" title="card id — cite this id back when discussing this card">acc017-ch06-kwic</span></header>
-    <div class="question">Дополнить главу <b>ch06 «История русского языка» (с. 176–209)</b> ссылкой на запись <b>acc017 «Андрей Зализняк Интереснейшая история русского языка»</b> (1:04:12)? Тип связи: <b>лекция по теме главы</b> (<code>lecture_of</code>), проход <code>kwic</code>, уверенность 0.79 ▸ 16:47. Связь значит «чем запись дополняет главу», а не «это запись этой главы».</div>
-    <div class="panel"><h4>Что это за запись</h4><div><a href="https://www.youtube.com/watch?v=P0G948VmXtM" target="_blank" rel="noopener">Андрей Зализняк Интереснейшая история русского языка</a> — 1:04:12</div></div><div class="panel"><h4>Глава книги</h4><div><b>История русского языка</b>, с. 176–209: Как современный русский вырос из древнерусского, что такое церковнославянский и почему он так на нас повлиял.</div></div><div class="panel"><h4>Термин в книге</h4><div>Статья указателя (лексикон): <b>лежачий</b>, с. 194.<br><span class="muted">контекст в указателе не сохранён</span></div></div><div class="panel"><h4>Цитата из записи</h4><pre>форма церковно-славянская, лежащий, горящий, а эти же слова существуют и с &quot;че&quot;, они русские, пожалуйста, &quot;бродячий&quot;, &quot;лежачий&quot;, &quot;горячий&quot;, </pre><div class="muted">файл <code>Андрей-Зализняк-Интереснейшая-история-русского-языка.srt</code>, смещение 16:47</div></div>
-    <div class="controls">
-      <button class="vote approve" data-vote="approve">&#9989; Принять связь</button>
-      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
-      <span class="vote-state">unvoted</span>
-    </div>
-    <textarea class="note" placeholder="если глава другая — впишите ch01…ch11; apply-скрипт читает только approve/reject, заметка идёт в аудит-след"></textarea>
-  </section>
-
-  <section class="card" data-id="acc018-ch06-kwic" data-filt="candidate">
-    <header><div class="hw"><a class="hwlink" href="https://www.youtube.com/watch?v=uzzjnpPmEDQ" target="_blank" rel="noopener">«Андрей Зализняк. История русского языка» ↔ ch06 «История русского языка»</a> <span class="badge">kwic</span><span class="badge">0.79</span><span class="badge">лекция по теме главы</span></div><span class="idchip" title="card id — cite this id back when discussing this card">acc018-ch06-kwic</span></header>
-    <div class="question">Дополнить главу <b>ch06 «История русского языка» (с. 176–209)</b> ссылкой на запись <b>acc018 «Андрей Зализняк. История русского языка»</b> (1:04:12)? Тип связи: <b>лекция по теме главы</b> (<code>lecture_of</code>), проход <code>kwic</code>, уверенность 0.79 ▸ 16:47. Связь значит «чем запись дополняет главу», а не «это запись этой главы».</div>
-    <div class="panel"><h4>Что это за запись</h4><div><a href="https://www.youtube.com/watch?v=uzzjnpPmEDQ" target="_blank" rel="noopener">Андрей Зализняк. История русского языка</a> — 1:04:12</div></div><div class="panel"><h4>Глава книги</h4><div><b>История русского языка</b>, с. 176–209: Как современный русский вырос из древнерусского, что такое церковнославянский и почему он так на нас повлиял.</div></div><div class="panel"><h4>Термин в книге</h4><div>Статья указателя (лексикон): <b>лежачий</b>, с. 194.<br><span class="muted">контекст в указателе не сохранён</span></div></div><div class="panel"><h4>Цитата из записи</h4><pre>форма церковно-славянская, лежащий, горящий, а эти же слова существуют и с &quot;че&quot;, они русские, пожалуйста, &quot;бродячий&quot;, &quot;лежачий&quot;, &quot;горячий&quot;, </pre><div class="muted">файл <code>Андрей-Зализняк-Интереснейшая-история-русского-языка.srt</code>, смещение 16:47</div></div>
-    <div class="controls">
-      <button class="vote approve" data-vote="approve">&#9989; Принять связь</button>
-      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
-      <span class="vote-state">unvoted</span>
-    </div>
-    <textarea class="note" placeholder="если глава другая — впишите ch01…ch11; apply-скрипт читает только approve/reject, заметка идёт в аудит-след"></textarea>
-  </section>
-
-  <section class="card" data-id="acc019-ch01-llm" data-filt="candidate">
-    <header><div class="hw"><a class="hwlink" href="https://www.youtube.com/watch?v=BZQgfGBtCho" target="_blank" rel="noopener">«Фильм о А.А.Зализняке «Коэффициент достоверности», 2019» ↔ ch01 «От редколлегии и предисловие»</a> <span class="badge">llm</span><span class="badge">0.90</span><span class="badge">о самом Зализняке</span></div><span class="idchip" title="card id — cite this id back when discussing this card">acc019-ch01-llm</span></header>
-    <div class="question">Дополнить главу <b>ch01 «От редколлегии и предисловие» (с. 6–13)</b> ссылкой на запись <b>acc019 «Фильм о А.А.Зализняке «Коэффициент достоверности», 2019»</b> (26:16)? Тип связи: <b>о самом Зализняке</b> (<code>about_zaliznyak</code>), проход <code>llm</code>, уверенность 0.90. Связь значит «чем запись дополняет главу», а не «это запись этой главы».</div>
-    <div class="panel"><h4>Что это за запись</h4><div><a href="https://www.youtube.com/watch?v=BZQgfGBtCho" target="_blank" rel="noopener">Фильм о А.А.Зализняке «Коэффициент достоверности», 2019</a> — 26:16</div></div><div class="panel"><h4>Глава книги</h4><div><b>От редколлегии и предисловие</b>, с. 6–13: Как создавалась книга: десять лекций А. А. Зализняка в школе «Муми-тролль» с 2005 по 2017 год.</div></div><div class="panel"><h4>Цитата из записи</h4><pre>Фильм о А.А.Зализняке «Коэффициент достоверности», 2019</pre><div class="muted">источник не назван</div></div><div class="panel"><h4>Метод (не доказательство)</h4><div>Ребро предложила модель <code>deepseek-v4-flash</code> (промпт <code></code>) по аннотациям глав и метаданным записи. Имя модели — способ получения связи; доказательство — приведённая ею цитата: цитата найдена в: каталог записей (video_catalog_public.v2.json).</div></div>
-    <div class="controls">
-      <button class="vote approve" data-vote="approve">&#9989; Принять связь</button>
-      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
-      <span class="vote-state">unvoted</span>
-    </div>
-    <textarea class="note" placeholder="если глава другая — впишите ch01…ch11; apply-скрипт читает только approve/reject, заметка идёт в аудит-след"></textarea>
-  </section>
-
-  <section class="card" data-id="acc019-ch08-kwic" data-filt="disputed">
-    <header><div class="hw"><a class="hwlink" href="https://www.youtube.com/watch?v=BZQgfGBtCho" target="_blank" rel="noopener">«Фильм о А.А.Зализняке «Коэффициент достоверности», 2019» ↔ ch08 «Из русского ударения»</a> <span class="badge">kwic</span><span class="badge">0.62</span><span class="badge">лекция по теме главы</span></div><span class="idchip" title="card id — cite this id back when discussing this card">acc019-ch08-kwic</span></header>
-    <div class="question">Дополнить главу <b>ch08 «Из русского ударения» (с. 236–271)</b> ссылкой на запись <b>acc019 «Фильм о А.А.Зализняке «Коэффициент достоверности», 2019»</b> (26:16)? Тип связи: <b>лекция по теме главы</b> (<code>lecture_of</code>), проход <code>kwic</code>, уверенность 0.62 ▸ 05:42. Связь значит «чем запись дополняет главу», а не «это запись этой главы».</div>
-    <div class="panel"><h4>Что это за запись</h4><div><a href="https://www.youtube.com/watch?v=BZQgfGBtCho" target="_blank" rel="noopener">Фильм о А.А.Зализняке «Коэффициент достоверности», 2019</a> — 26:16</div></div><div class="panel"><h4>Глава книги</h4><div><b>Из русского ударения</b>, с. 236–271: Почему «во́ды» и «воды́» — разные формы, как ударение перемещалось в истории русского языка, и почему это так сложно для иностранцев.</div></div><div class="panel"><h4>Термин в книге</h4><div>Статья указателя (лексикон): <b>футбол</b>, с. 242, 243, 246.<br>«……а первом слоге. Но кому-нибудь из нас придет в голову сейчас называть футбо́л фу́тболом? Хотя русский язык прекрасно позволяет это произнести. Те……»<br>«……это произнести. Тем не менее это, конечно, совершенно устойчиво будет футбо́л. Или какое-нибудь английское же слово sportsman. Как оно будет по-р……»</div></div><div class="panel"><h4>Цитата из записи</h4><pre>отал, он лучше всех на свет, наверное. поэтому он вязался в любую вещь, так сказать, лишь бы это было живое дело, вроде футбола. причем игра</pre><div class="muted">файл <code>Фильм-о-А.А.Зализняке-«Коэффициент-достоверности»,-2019.srt</code>, смещение 5:42</div></div>
-    <div class="controls">
-      <button class="vote approve" data-vote="approve">&#9989; Принять связь</button>
-      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
-      <span class="vote-state">unvoted</span>
-    </div>
-    <textarea class="note" placeholder="если глава другая — впишите ch01…ch11; apply-скрипт читает только approve/reject, заметка идёт в аудит-след"></textarea>
-  </section>
-
-  <section class="card" data-id="acc019-ch11-kwic" data-filt="disputed">
-    <header><div class="hw"><a class="hwlink" href="https://www.youtube.com/watch?v=BZQgfGBtCho" target="_blank" rel="noopener">«Фильм о А.А.Зализняке «Коэффициент достоверности», 2019» ↔ ch11 «Или и уже»</a> <span class="badge">kwic</span><span class="badge">0.58</span><span class="badge">дополняет главу</span></div><span class="idchip" title="card id — cite this id back when discussing this card">acc019-ch11-kwic</span></header>
-    <div class="question">Дополнить главу <b>ch11 «Или и уже» (с. 360–392)</b> ссылкой на запись <b>acc019 «Фильм о А.А.Зализняке «Коэффициент достоверности», 2019»</b> (26:16)? Тип связи: <b>дополняет главу</b> (<code>expands</code>), проход <code>kwic</code>, уверенность 0.58 ▸ 03:14. Связь значит «чем запись дополняет главу», а не «это запись этой главы».</div>
-    <div class="panel"><h4>Что это за запись</h4><div><a href="https://www.youtube.com/watch?v=BZQgfGBtCho" target="_blank" rel="noopener">Фильм о А.А.Зализняке «Коэффициент достоверности», 2019</a> — 26:16</div></div><div class="panel"><h4>Глава книги</h4><div><b>Или и уже</b>, с. 360–391: Как маленькие служебные слова «или», «уже», «же», «ли» хранят следы древних грамматических правил и помогают понять историю языка.</div></div><div class="panel"><h4>Термин в книге</h4><div>Статья указателя (лексикон): <b>рубль</b>, с. 390.<br><span class="muted">контекст в указателе не сохранён</span></div></div><div class="panel"><h4>Цитата из записи</h4><pre>нт достоверности высказывания андреева, у меня 100%. ничего не могу поделать. вся комбинация вырисовывается очень ясно. рубль таки был пожал</pre><div class="muted">файл <code>Фильм-о-А.А.Зализняке-«Коэффициент-достоверности»,-2019.srt</code>, смещение 3:14</div></div>
-    <div class="controls">
-      <button class="vote approve" data-vote="approve">&#9989; Принять связь</button>
-      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
-      <span class="vote-state">unvoted</span>
-    </div>
-    <textarea class="note" placeholder="если глава другая — впишите ch01…ch11; apply-скрипт читает только approve/reject, заметка идёт в аудит-след"></textarea>
-  </section>
-
-  <section class="card" data-id="acc020-ch08-kwic" data-filt="disputed">
-    <header><div class="hw"><a class="hwlink" href="https://www.youtube.com/watch?v=F3DthX6tsV0" target="_blank" rel="noopener">«Зализняк о древнейшей грамоте и о Новгородском кодексе (цере). 04.08.2000» ↔ ch08 «Из русского ударения»</a> <span class="badge">kwic</span><span class="badge">0.63</span><span class="badge">лекция по теме главы</span></div><span class="idchip" title="card id — cite this id back when discussing this card">acc020-ch08-kwic</span></header>
-    <div class="question">Дополнить главу <b>ch08 «Из русского ударения» (с. 236–271)</b> ссылкой на запись <b>acc020 «Зализняк о древнейшей грамоте и о Новгородском кодексе (цере). 04.08.2000»</b> (54:48)? Тип связи: <b>лекция по теме главы</b> (<code>lecture_of</code>), проход <code>kwic</code>, уверенность 0.63 ▸ 03:38. Связь значит «чем запись дополняет главу», а не «это запись этой главы».</div>
-    <div class="panel"><h4>Что это за запись</h4><div><a href="https://www.youtube.com/watch?v=F3DthX6tsV0" target="_blank" rel="noopener">Зализняк о древнейшей грамоте и о Новгородском кодексе (цере). 04.08.2000</a> — 54:48; темы: русистика</div></div><div class="panel"><h4>Глава книги</h4><div><b>Из русского ударения</b>, с. 236–271: Почему «во́ды» и «воды́» — разные формы, как ударение перемещалось в истории русского языка, и почему это так сложно для иностранцев.</div></div><div class="panel"><h4>Термин в книге</h4><div>Статья указателя (лексикон): <b>пятнадцать</b>, с. 255.<br><span class="muted">контекст в указателе не сохранён</span></div></div><div class="panel"><h4>Цитата из записи</h4><pre>ов одиннадцатого века, в основном, это были образованные документы. и вот уже прошлый год, даже не обману, были найдены пятнадцать граммов, </pre><div class="muted">файл <code>Зализняк-о-древнейшей-грамоте-и-о-Новгородском-кодексе-цере.-04.08.2000.srt</code>, смещение 3:38</div></div>
-    <div class="controls">
-      <button class="vote approve" data-vote="approve">&#9989; Принять связь</button>
-      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
-      <span class="vote-state">unvoted</span>
-    </div>
-    <textarea class="note" placeholder="если глава другая — впишите ch01…ch11; apply-скрипт читает только approve/reject, заметка идёт в аудит-след"></textarea>
-  </section>
-
-  <section class="card" data-id="acc021-ch01-title_topics" data-filt="disputed">
-    <header><div class="hw"><a class="hwlink" href="https://www.youtube.com/watch?v=3xK_iAkr3rY" target="_blank" rel="noopener">«Об Очерке, академике Зализняке и санскрите (презентация книги)» ↔ ch01 «От редколлегии и предисловие»</a> <span class="badge">title_topics</span><span class="badge">0.55</span><span class="badge">о самом Зализняке</span></div><span class="idchip" title="card id — cite this id back when discussing this card">acc021-ch01-title_topics</span></header>
-    <div class="question">Дополнить главу <b>ch01 «От редколлегии и предисловие» (с. 6–13)</b> ссылкой на запись <b>acc021 «Об Очерке, академике Зализняке и санскрите (презентация книги)»</b> (2:35:14)? Тип связи: <b>о самом Зализняке</b> (<code>about_zaliznyak</code>), проход <code>title_topics</code>, уверенность 0.55. Связь значит «чем запись дополняет главу», а не «это запись этой главы».</div>
-    <div class="panel"><h4>Что это за запись</h4><div><a href="https://www.youtube.com/watch?v=3xK_iAkr3rY" target="_blank" rel="noopener">Об Очерке, академике Зализняке и санскрите (презентация книги)</a> — 2:35:14</div></div><div class="panel"><h4>Глава книги</h4><div><b>От редколлегии и предисловие</b>, с. 6–13: Как создавалась книга: десять лекций А. А. Зализняка в школе «Муми-тролль» с 2005 по 2017 год.</div></div><div class="panel"><h4>Прочие сигналы</h4><div>совпало по title: «презентация книги»</div></div>
-    <div class="controls">
-      <button class="vote approve" data-vote="approve">&#9989; Принять связь</button>
-      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
-      <span class="vote-state">unvoted</span>
-    </div>
-    <textarea class="note" placeholder="если глава другая — впишите ch01…ch11; apply-скрипт читает только approve/reject, заметка идёт в аудит-след"></textarea>
-  </section>
-
-  <section class="card" data-id="acc021-ch08-kwic" data-filt="disputed">
-    <header><div class="hw"><a class="hwlink" href="https://www.youtube.com/watch?v=3xK_iAkr3rY" target="_blank" rel="noopener">«Об Очерке, академике Зализняке и санскрите (презентация книги)» ↔ ch08 «Из русского ударения»</a> <span class="badge">kwic</span><span class="badge">0.66</span><span class="badge">лекция по теме главы</span></div><span class="idchip" title="card id — cite this id back when discussing this card">acc021-ch08-kwic</span></header>
-    <div class="question">Дополнить главу <b>ch08 «Из русского ударения» (с. 236–271)</b> ссылкой на запись <b>acc021 «Об Очерке, академике Зализняке и санскрите (презентация книги)»</b> (2:35:14)? Тип связи: <b>лекция по теме главы</b> (<code>lecture_of</code>), проход <code>kwic</code>, уверенность 0.66 ▸ 19:06. Связь значит «чем запись дополняет главу», а не «это запись этой главы».</div>
-    <div class="panel"><h4>Что это за запись</h4><div><a href="https://www.youtube.com/watch?v=3xK_iAkr3rY" target="_blank" rel="noopener">Об Очерке, академике Зализняке и санскрите (презентация книги)</a> — 2:35:14</div></div><div class="panel"><h4>Глава книги</h4><div><b>Из русского ударения</b>, с. 236–271: Почему «во́ды» и «воды́» — разные формы, как ударение перемещалось в истории русского языка, и почему это так сложно для иностранцев.</div></div><div class="panel"><h4>Термин в книге</h4><div>Статья указателя (лексикон): <b>десятью</b>, с. 254, 255.<br>«……падеж от всех? Из зала: пятью́, шестью́, семью́, восемью́, девятью́, десятью́. А. З.: Разница есть? Из зала: Нет. А. З.: Разницы нет. Хорошо. А те……»<br>«……На де́вять! На́ девять! А. З.: Кто за на́ девять? (Рук мало.) А. З.: Десять. Из зала: На́ десять! На де́сять. А. З.: С десятью даже больше, чем с……»</div></div><div class="panel"><h4>Цитата из записи</h4><pre>цикл происходил. не мог систематически заниматься, но многое мне запомнилось. в частности, вот этот знаменитый эпизод с десятью пальцами. то</pre><div class="muted">файл <code>Об-Очерке,-академике-Зализняке-и-санскрите-презентация-книги.srt</code>, смещение 19:06</div></div>
-    <div class="controls">
-      <button class="vote approve" data-vote="approve">&#9989; Принять связь</button>
-      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
-      <span class="vote-state">unvoted</span>
-    </div>
-    <textarea class="note" placeholder="если глава другая — впишите ch01…ch11; apply-скрипт читает только approve/reject, заметка идёт в аудит-след"></textarea>
-  </section>
-
-  <section class="card" data-id="acc022-ch06-kwic" data-filt="candidate">
-    <header><div class="hw"><a class="hwlink" href="https://www.youtube.com/watch?v=IAMi0Lo7tMM" target="_blank" rel="noopener">«Язык берестяных грамот (рассказывает лингвист Андрей Зализняк)» ↔ ch06 «История русского языка»</a> <span class="badge">kwic</span><span class="badge">0.75</span><span class="badge">лекция по теме главы</span></div><span class="idchip" title="card id — cite this id back when discussing this card">acc022-ch06-kwic</span></header>
-    <div class="question">Дополнить главу <b>ch06 «История русского языка» (с. 176–209)</b> ссылкой на запись <b>acc022 «Язык берестяных грамот (рассказывает лингвист Андрей Зализняк)»</b> (47:53)? Тип связи: <b>лекция по теме главы</b> (<code>lecture_of</code>), проход <code>kwic</code>, уверенность 0.75 ▸ 21:15. Связь значит «чем запись дополняет главу», а не «это запись этой главы».</div>
-    <div class="panel"><h4>Что это за запись</h4><div><a href="https://www.youtube.com/watch?v=IAMi0Lo7tMM" target="_blank" rel="noopener">Язык берестяных грамот (рассказывает лингвист Андрей Зализняк)</a> — 47:53; темы: береста</div></div><div class="panel"><h4>Глава книги</h4><div><b>История русского языка</b>, с. 176–209: Как современный русский вырос из древнерусского, что такое церковнославянский и почему он так на нас повлиял.</div></div><div class="panel"><h4>Термин в книге</h4><div>Статья указателя (этнонимы): <b>болгары</b>, с. 199.<br>«……вянскую территорию (поляки, чехи) и южнославянскую территорию (сербы, болгары)? И попытаемся как-то продолжить в этих зонах обнаружившуюся линию ра……»</div></div><div class="panel"><h4>Цитата из записи</h4><pre>о таком эпохе, как 11 век, то между всеми славянами было еще возможное понимание. да? то есть и поляки, и черногорцы, и болгары. конечно, по</pre><div class="muted">файл <code>Язык-берестяных-грамот-рассказывает-лингвист-Андрей-Зализняк.srt</code>, смещение 21:15</div></div>
-    <div class="controls">
-      <button class="vote approve" data-vote="approve">&#9989; Принять связь</button>
-      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
-      <span class="vote-state">unvoted</span>
-    </div>
-    <textarea class="note" placeholder="если глава другая — впишите ch01…ch11; apply-скрипт читает только approve/reject, заметка идёт в аудит-след"></textarea>
-  </section>
-
-  <section class="card" data-id="acc023-ch09-llm" data-filt="candidate">
-    <header><div class="hw"><a class="hwlink" href="https://www.youtube.com/watch?v=nhDdTGqIROE" target="_blank" rel="noopener">«Новые открытия академика Зализняка в 2017 году» ↔ ch09 «Берестяные грамоты»</a> <span class="badge">llm</span><span class="badge">0.95</span><span class="badge">лекция по теме главы</span></div><span class="idchip" title="card id — cite this id back when discussing this card">acc023-ch09-llm</span></header>
-    <div class="question">Дополнить главу <b>ch09 «Берестяные грамоты» (с. 272–321)</b> ссылкой на запись <b>acc023 «Новые открытия академика Зализняка в 2017 году»</b> (2:34:48)? Тип связи: <b>лекция по теме главы</b> (<code>lecture_of</code>), проход <code>llm</code>, уверенность 0.95. Связь значит «чем запись дополняет главу», а не «это запись этой главы».</div>
-    <div class="panel"><h4>Что это за запись</h4><div><a href="https://www.youtube.com/watch?v=nhDdTGqIROE" target="_blank" rel="noopener">Новые открытия академика Зализняка в 2017 году</a> — 2:34:48; темы: береста</div></div><div class="panel"><h4>Глава книги</h4><div><b>Берестяные грамоты</b>, с. 272–321: Главное открытие русской медиевистики XX века: тысячи писем простых новгородцев XI–XV веков, написанных на берёзовой коре.</div></div><div class="panel"><h4>Цитата из записи</h4><pre>Итак, сегодня мне предстоит вам рассказать об итогах очередного археологического сезона, а именно наших лингвистических, феологических итога</pre><div class="muted">источник не назван</div></div><div class="panel"><h4>Метод (не доказательство)</h4><div>Ребро предложила модель <code>deepseek-v4-flash</code> (промпт <code></code>) по аннотациям глав и метаданным записи. Имя модели — способ получения связи; доказательство — приведённая ею цитата: ⚠ источник цитаты в данных репозитория НЕ найден — модель могла её пересказать или выдумать; перед approve проверьте вручную.</div></div>
-    <div class="controls">
-      <button class="vote approve" data-vote="approve">&#9989; Принять связь</button>
-      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
-      <span class="vote-state">unvoted</span>
-    </div>
-    <textarea class="note" placeholder="если глава другая — впишите ch01…ch11; apply-скрипт читает только approve/reject, заметка идёт в аудит-след"></textarea>
-  </section>
-
-  <section class="card" data-id="acc023-ch10-kwic" data-filt="disputed">
-    <header><div class="hw"><a class="hwlink" href="https://www.youtube.com/watch?v=nhDdTGqIROE" target="_blank" rel="noopener">«Новые открытия академика Зализняка в 2017 году» ↔ ch10 «О жизни слов»</a> <span class="badge">kwic</span><span class="badge">0.61</span><span class="badge">лекция по теме главы</span></div><span class="idchip" title="card id — cite this id back when discussing this card">acc023-ch10-kwic</span></header>
-    <div class="question">Дополнить главу <b>ch10 «О жизни слов» (с. 322–359)</b> ссылкой на запись <b>acc023 «Новые открытия академика Зализняка в 2017 году»</b> (2:34:48)? Тип связи: <b>лекция по теме главы</b> (<code>lecture_of</code>), проход <code>kwic</code>, уверенность 0.61 ▸ 62:53. Связь значит «чем запись дополняет главу», а не «это запись этой главы».</div>
-    <div class="panel"><h4>Что это за запись</h4><div><a href="https://www.youtube.com/watch?v=nhDdTGqIROE" target="_blank" rel="noopener">Новые открытия академика Зализняка в 2017 году</a> — 2:34:48; темы: береста</div></div><div class="panel"><h4>Глава книги</h4><div><b>О жизни слов</b>, с. 322–359: Откуда берутся слова, как они меняют значение, что такое заимствование и почему «вокзал» от английского «Vauxhall».</div></div><div class="panel"><h4>Термин в книге</h4><div>Статья указателя (лексикон): <b>беречь</b>, с. 358.<br>«…Глагол беречь (бережёт) в разборе форм из обсуждаемого текста на с. 358.…»</div></div><div class="panel"><h4>Цитата из записи</h4><pre>ножко слишком сложная, но следующая строка замечательным образом начинается с следующих четырех букв. надо знать слово &quot;беречь&quot;. беречь в то</pre><div class="muted">файл <code>Новые-открытия-академика-Зализняка-в-2017-году.srt</code>, смещение 1:02:53</div></div>
-    <div class="controls">
-      <button class="vote approve" data-vote="approve">&#9989; Принять связь</button>
-      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
-      <span class="vote-state">unvoted</span>
-    </div>
-    <textarea class="note" placeholder="если глава другая — впишите ch01…ch11; apply-скрипт читает только approve/reject, заметка идёт в аудит-след"></textarea>
-  </section>
-
-  <section class="card" data-id="acc023-ch11-kwic" data-filt="disputed">
-    <header><div class="hw"><a class="hwlink" href="https://www.youtube.com/watch?v=nhDdTGqIROE" target="_blank" rel="noopener">«Новые открытия академика Зализняка в 2017 году» ↔ ch11 «Или и уже»</a> <span class="badge">kwic</span><span class="badge">0.55</span><span class="badge">дополняет главу</span></div><span class="idchip" title="card id — cite this id back when discussing this card">acc023-ch11-kwic</span></header>
-    <div class="question">Дополнить главу <b>ch11 «Или и уже» (с. 360–392)</b> ссылкой на запись <b>acc023 «Новые открытия академика Зализняка в 2017 году»</b> (2:34:48)? Тип связи: <b>дополняет главу</b> (<code>expands</code>), проход <code>kwic</code>, уверенность 0.55 ▸ 151:35. Связь значит «чем запись дополняет главу», а не «это запись этой главы».</div>
-    <div class="panel"><h4>Что это за запись</h4><div><a href="https://www.youtube.com/watch?v=nhDdTGqIROE" target="_blank" rel="noopener">Новые открытия академика Зализняка в 2017 году</a> — 2:34:48; темы: береста</div></div><div class="panel"><h4>Глава книги</h4><div><b>Или и уже</b>, с. 360–391: Как маленькие служебные слова «или», «уже», «же», «ли» хранят следы древних грамматических правил и помогают понять историю языка.</div></div><div class="panel"><h4>Термин в книге</h4><div>Статья указателя (лексикон): <b>рубель</b>, с. 390.<br><span class="muted">контекст в указателе не сохранён</span></div></div><div class="panel"><h4>Цитата из записи</h4><pre>яла себе писать и в других случаях, и тогда &quot;рубили&quot; с двумя &quot;и&quot; всего лишь является передачей совершеннейшей фонетики &quot;рубель&quot;. больше того</pre><div class="muted">файл <code>Новые-открытия-академика-Зализняка-в-2017-году.srt</code>, смещение 2:31:35</div></div>
-    <div class="controls">
-      <button class="vote approve" data-vote="approve">&#9989; Принять связь</button>
-      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
-      <span class="vote-state">unvoted</span>
-    </div>
-    <textarea class="note" placeholder="если глава другая — впишите ch01…ch11; apply-скрипт читает только approve/reject, заметка идёт в аудит-след"></textarea>
-  </section>
-
-  <section class="card" data-id="acc024-ch01-title_topics" data-filt="disputed">
-    <header><div class="hw"><a class="hwlink" href="https://www.youtube.com/watch?v=ABqHj9_jPec" target="_blank" rel="noopener">«Andrey Zaliznyak presents a book, 24 Dec 2015» ↔ ch01 «От редколлегии и предисловие»</a> <span class="badge">title_topics</span><span class="badge">0.55</span><span class="badge">о самом Зализняке</span></div><span class="idchip" title="card id — cite this id back when discussing this card">acc024-ch01-title_topics</span></header>
-    <div class="question">Дополнить главу <b>ch01 «От редколлегии и предисловие» (с. 6–13)</b> ссылкой на запись <b>acc024 «Andrey Zaliznyak presents a book, 24 Dec 2015»</b> (1:47:11)? Тип связи: <b>о самом Зализняке</b> (<code>about_zaliznyak</code>), проход <code>title_topics</code>, уверенность 0.55. Связь значит «чем запись дополняет главу», а не «это запись этой главы».</div>
-    <div class="panel"><h4>Что это за запись</h4><div><a href="https://www.youtube.com/watch?v=ABqHj9_jPec" target="_blank" rel="noopener">Andrey Zaliznyak presents a book, 24 Dec 2015</a> — 1:47:11</div></div><div class="panel"><h4>Глава книги</h4><div><b>От редколлегии и предисловие</b>, с. 6–13: Как создавалась книга: десять лекций А. А. Зализняка в школе «Муми-тролль» с 2005 по 2017 год.</div></div><div class="panel"><h4>Прочие сигналы</h4><div>совпало по title: «presents a book»</div></div>
-    <div class="controls">
-      <button class="vote approve" data-vote="approve">&#9989; Принять связь</button>
-      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
-      <span class="vote-state">unvoted</span>
-    </div>
-    <textarea class="note" placeholder="если глава другая — впишите ch01…ch11; apply-скрипт читает только approve/reject, заметка идёт в аудит-след"></textarea>
-  </section>
-
-  <section class="card" data-id="acc024-ch09-llm" data-filt="candidate">
-    <header><div class="hw"><a class="hwlink" href="https://www.youtube.com/watch?v=ABqHj9_jPec" target="_blank" rel="noopener">«Andrey Zaliznyak presents a book, 24 Dec 2015» ↔ ch09 «Берестяные грамоты»</a> <span class="badge">llm</span><span class="badge">0.95</span><span class="badge">лекция по теме главы</span></div><span class="idchip" title="card id — cite this id back when discussing this card">acc024-ch09-llm</span></header>
-    <div class="question">Дополнить главу <b>ch09 «Берестяные грамоты» (с. 272–321)</b> ссылкой на запись <b>acc024 «Andrey Zaliznyak presents a book, 24 Dec 2015»</b> (1:47:11)? Тип связи: <b>лекция по теме главы</b> (<code>lecture_of</code>), проход <code>llm</code>, уверенность 0.95. Связь значит «чем запись дополняет главу», а не «это запись этой главы».</div>
-    <div class="panel"><h4>Что это за запись</h4><div><a href="https://www.youtube.com/watch?v=ABqHj9_jPec" target="_blank" rel="noopener">Andrey Zaliznyak presents a book, 24 Dec 2015</a> — 1:47:11</div></div><div class="panel"><h4>Глава книги</h4><div><b>Берестяные грамоты</b>, с. 272–321: Главное открытие русской медиевистики XX века: тысячи писем простых новгородцев XI–XV веков, написанных на берёзовой коре.</div></div><div class="panel"><h4>Цитата из записи</h4><pre>Ну, вот перед нами эта грамотная версия, с первого века. В том числе, включены грамоты этого года. С Тройского ростов 2 грамма переносили. И</pre><div class="muted">источник не назван</div></div><div class="panel"><h4>Метод (не доказательство)</h4><div>Ребро предложила модель <code>deepseek-v4-flash</code> (промпт <code></code>) по аннотациям глав и метаданным записи. Имя модели — способ получения связи; доказательство — приведённая ею цитата: ⚠ источник цитаты в данных репозитория НЕ найден — модель могла её пересказать или выдумать; перед approve проверьте вручную.</div></div>
-    <div class="controls">
-      <button class="vote approve" data-vote="approve">&#9989; Принять связь</button>
-      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
-      <span class="vote-state">unvoted</span>
-    </div>
-    <textarea class="note" placeholder="если глава другая — впишите ch01…ch11; apply-скрипт читает только approve/reject, заметка идёт в аудит-след"></textarea>
-  </section>
-
-  <section class="card" data-id="acc024-ch11-kwic" data-filt="disputed">
-    <header><div class="hw"><a class="hwlink" href="https://www.youtube.com/watch?v=ABqHj9_jPec" target="_blank" rel="noopener">«Andrey Zaliznyak presents a book, 24 Dec 2015» ↔ ch11 «Или и уже»</a> <span class="badge">kwic</span><span class="badge">0.37</span><span class="badge">лекция по теме главы</span></div><span class="idchip" title="card id — cite this id back when discussing this card">acc024-ch11-kwic</span></header>
-    <div class="question">Дополнить главу <b>ch11 «Или и уже» (с. 360–392)</b> ссылкой на запись <b>acc024 «Andrey Zaliznyak presents a book, 24 Dec 2015»</b> (1:47:11)? Тип связи: <b>лекция по теме главы</b> (<code>lecture_of</code>), проход <code>kwic</code>, уверенность 0.37 ▸ 05:30. Связь значит «чем запись дополняет главу», а не «это запись этой главы».</div>
-    <div class="panel"><h4>Что это за запись</h4><div><a href="https://www.youtube.com/watch?v=ABqHj9_jPec" target="_blank" rel="noopener">Andrey Zaliznyak presents a book, 24 Dec 2015</a> — 1:47:11</div></div><div class="panel"><h4>Глава книги</h4><div><b>Или и уже</b>, с. 360–391: Как маленькие служебные слова «или», «уже», «же», «ли» хранят следы древних грамматических правил и помогают понять историю языка.</div></div><div class="panel"><h4>Термин в книге</h4><div>Статья указателя (лексикон): <b>ветк</b>, с. 368.<br><span class="muted">контекст в указателе не сохранён</span></div></div><div class="panel"><h4>Цитата из записи</h4><pre>вот она уже как бы развернута, растянута, но, как видите, она требует, конечно, реставрации. и тут владимир иванович поветкин упаковывает гр</pre><div class="muted">файл <code>Andrey-Zaliznyak-presents-a-book,-24-Dec-2015.srt</code>, смещение 5:30</div></div><div class="panel"><h4>Прочие сигналы</h4><div>⚠ подозрение на зацикленный фрагмент распознавания — уверенность уже снижена вдвое</div></div>
-    <div class="controls">
-      <button class="vote approve" data-vote="approve">&#9989; Принять связь</button>
-      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
-      <span class="vote-state">unvoted</span>
-    </div>
-    <textarea class="note" placeholder="если глава другая — впишите ch01…ch11; apply-скрипт читает только approve/reject, заметка идёт в аудит-след"></textarea>
-  </section>
-
-  <section class="card" data-id="acc025-ch01-title_topics" data-filt="disputed">
-    <header><div class="hw"><a class="hwlink" href="https://www.youtube.com/watch?v=5lUKwBvBe5g" target="_blank" rel="noopener">«Наблюдатель. Елена Рыбина, Андрей Зализняк, Пётр Гайдуков и Савва Михеев. Эфир от 27.10.2015» ↔ ch01 «От редколлегии и предисловие»</a> <span class="badge">title_topics</span><span class="badge">0.55</span><span class="badge">о самом Зализняке</span></div><span class="idchip" title="card id — cite this id back when discussing this card">acc025-ch01-title_topics</span></header>
-    <div class="question">Дополнить главу <b>ch01 «От редколлегии и предисловие» (с. 6–13)</b> ссылкой на запись <b>acc025 «Наблюдатель. Елена Рыбина, Андрей Зализняк, Пётр Гайдуков и Савва Михеев. Эфир от 27.10.2015»</b> (55:12)? Тип связи: <b>о самом Зализняке</b> (<code>about_zaliznyak</code>), проход <code>title_topics</code>, уверенность 0.55. Связь значит «чем запись дополняет главу», а не «это запись этой главы».</div>
-    <div class="panel"><h4>Что это за запись</h4><div><a href="https://www.youtube.com/watch?v=5lUKwBvBe5g" target="_blank" rel="noopener">Наблюдатель. Елена Рыбина, Андрей Зализняк, Пётр Гайдуков и Савва Михеев. Эфир от 27.10.2015</a> — 55:12; темы: береста</div></div><div class="panel"><h4>Глава книги</h4><div><b>От редколлегии и предисловие</b>, с. 6–13: Как создавалась книга: десять лекций А. А. Зализняка в школе «Муми-тролль» с 2005 по 2017 год.</div></div><div class="panel"><h4>Прочие сигналы</h4><div>совпало по title: «Наблюдатель»</div></div>
-    <div class="controls">
-      <button class="vote approve" data-vote="approve">&#9989; Принять связь</button>
-      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
-      <span class="vote-state">unvoted</span>
-    </div>
-    <textarea class="note" placeholder="если глава другая — впишите ch01…ch11; apply-скрипт читает только approve/reject, заметка идёт в аудит-след"></textarea>
-  </section>
-
-  <section class="card" data-id="acc025-ch06-kwic" data-filt="disputed">
-    <header><div class="hw"><a class="hwlink" href="https://www.youtube.com/watch?v=5lUKwBvBe5g" target="_blank" rel="noopener">«Наблюдатель. Елена Рыбина, Андрей Зализняк, Пётр Гайдуков и Савва Михеев. Эфир от 27.10.2015» ↔ ch06 «История русского языка»</a> <span class="badge">kwic</span><span class="badge">0.55</span><span class="badge">дополняет главу</span></div><span class="idchip" title="card id — cite this id back when discussing this card">acc025-ch06-kwic</span></header>
-    <div class="question">Дополнить главу <b>ch06 «История русского языка» (с. 176–209)</b> ссылкой на запись <b>acc025 «Наблюдатель. Елена Рыбина, Андрей Зализняк, Пётр Гайдуков и Савва Михеев. Эфир от 27.10.2015»</b> (55:12)? Тип связи: <b>дополняет главу</b> (<code>expands</code>), проход <code>kwic</code>, уверенность 0.55 ▸ 46:52. Связь значит «чем запись дополняет главу», а не «это запись этой главы».</div>
-    <div class="panel"><h4>Что это за запись</h4><div><a href="https://www.youtube.com/watch?v=5lUKwBvBe5g" target="_blank" rel="noopener">Наблюдатель. Елена Рыбина, Андрей Зализняк, Пётр Гайдуков и Савва Михеев. Эфир от 27.10.2015</a> — 55:12; темы: береста</div></div><div class="panel"><h4>Глава книги</h4><div><b>История русского языка</b>, с. 176–209: Как современный русский вырос из древнерусского, что такое церковнославянский и почему он так на нас повлиял.</div></div><div class="panel"><h4>Термин в книге</h4><div>Статья указателя (лексикон): <b>руке</b>, с. 202.<br><span class="muted">контекст в указателе не сохранён</span></div></div><div class="panel"><h4>Цитата из записи</h4><pre>ли. адресат остался недоволен этим письмам. он разодрал, часть порыни он бросил на землю, а еще два куска у него было в руке, и запутал в кл</pre><div class="muted">файл <code>Наблюдатель.-Елена-Рыбина,-Андрей-Зализняк,-Пётр-Гайдуков-и-Савва-Михеев.-Эфир-от-27.10.2015.srt</code>, смещение 46:52</div></div>
-    <div class="controls">
-      <button class="vote approve" data-vote="approve">&#9989; Принять связь</button>
-      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
-      <span class="vote-state">unvoted</span>
-    </div>
-    <textarea class="note" placeholder="если глава другая — впишите ch01…ch11; apply-скрипт читает только approve/reject, заметка идёт в аудит-след"></textarea>
-  </section>
-
-  <section class="card" data-id="acc025-ch08-kwic" data-filt="disputed">
-    <header><div class="hw"><a class="hwlink" href="https://www.youtube.com/watch?v=5lUKwBvBe5g" target="_blank" rel="noopener">«Наблюдатель. Елена Рыбина, Андрей Зализняк, Пётр Гайдуков и Савва Михеев. Эфир от 27.10.2015» ↔ ch08 «Из русского ударения»</a> <span class="badge">kwic</span><span class="badge">0.57</span><span class="badge">лекция по теме главы</span></div><span class="idchip" title="card id — cite this id back when discussing this card">acc025-ch08-kwic</span></header>
-    <div class="question">Дополнить главу <b>ch08 «Из русского ударения» (с. 236–271)</b> ссылкой на запись <b>acc025 «Наблюдатель. Елена Рыбина, Андрей Зализняк, Пётр Гайдуков и Савва Михеев. Эфир от 27.10.2015»</b> (55:12)? Тип связи: <b>лекция по теме главы</b> (<code>lecture_of</code>), проход <code>kwic</code>, уверенность 0.57 ▸ 31:06. Связь значит «чем запись дополняет главу», а не «это запись этой главы».</div>
-    <div class="panel"><h4>Что это за запись</h4><div><a href="https://www.youtube.com/watch?v=5lUKwBvBe5g" target="_blank" rel="noopener">Наблюдатель. Елена Рыбина, Андрей Зализняк, Пётр Гайдуков и Савва Михеев. Эфир от 27.10.2015</a> — 55:12; темы: береста</div></div><div class="panel"><h4>Глава книги</h4><div><b>Из русского ударения</b>, с. 236–271: Почему «во́ды» и «воды́» — разные формы, как ударение перемещалось в истории русского языка, и почему это так сложно для иностранцев.</div></div><div class="panel"><h4>Термин в книге</h4><div>Статья указателя (лексикон): <b>семью</b>, с. 255.<br><span class="muted">контекст в указателе не сохранён</span></div></div><div class="panel"><h4>Цитата из записи</h4><pre>ого, когда была найдена грамота номер 94 с упоминанием юрия анцифоровича, который был известным посадником в новгороде. семью, которую, мы з</pre><div class="muted">файл <code>Наблюдатель.-Елена-Рыбина,-Андрей-Зализняк,-Пётр-Гайдуков-и-Савва-Михеев.-Эфир-от-27.10.2015.srt</code>, смещение 31:06</div></div>
-    <div class="controls">
-      <button class="vote approve" data-vote="approve">&#9989; Принять связь</button>
-      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
-      <span class="vote-state">unvoted</span>
-    </div>
-    <textarea class="note" placeholder="если глава другая — впишите ch01…ch11; apply-скрипт читает только approve/reject, заметка идёт в аудит-след"></textarea>
-  </section>
-
-  <section class="card" data-id="acc025-ch09-llm" data-filt="candidate">
-    <header><div class="hw"><a class="hwlink" href="https://www.youtube.com/watch?v=5lUKwBvBe5g" target="_blank" rel="noopener">«Наблюдатель. Елена Рыбина, Андрей Зализняк, Пётр Гайдуков и Савва Михеев. Эфир от 27.10.2015» ↔ ch09 «Берестяные грамоты»</a> <span class="badge">llm</span><span class="badge">0.95</span><span class="badge">лекция по теме главы</span></div><span class="idchip" title="card id — cite this id back when discussing this card">acc025-ch09-llm</span></header>
-    <div class="question">Дополнить главу <b>ch09 «Берестяные грамоты» (с. 272–321)</b> ссылкой на запись <b>acc025 «Наблюдатель. Елена Рыбина, Андрей Зализняк, Пётр Гайдуков и Савва Михеев. Эфир от 27.10.2015»</b> (55:12)? Тип связи: <b>лекция по теме главы</b> (<code>lecture_of</code>), проход <code>llm</code>, уверенность 0.95. Связь значит «чем запись дополняет главу», а не «это запись этой главы».</div>
-    <div class="panel"><h4>Что это за запись</h4><div><a href="https://www.youtube.com/watch?v=5lUKwBvBe5g" target="_blank" rel="noopener">Наблюдатель. Елена Рыбина, Андрей Зализняк, Пётр Гайдуков и Савва Михеев. Эфир от 27.10.2015</a> — 55:12; темы: береста</div></div><div class="panel"><h4>Глава книги</h4><div><b>Берестяные грамоты</b>, с. 272–321: Главное открытие русской медиевистики XX века: тысячи писем простых новгородцев XI–XV веков, написанных на берёзовой коре.</div></div><div class="panel"><h4>Цитата из записи</h4><pre>сегодня мы будем говорить о новгородских берестяных грамотах</pre><div class="muted">источник не назван</div></div><div class="panel"><h4>Метод (не доказательство)</h4><div>Ребро предложила модель <code>deepseek-v4-flash</code> (промпт <code></code>) по аннотациям глав и метаданным записи. Имя модели — способ получения связи; доказательство — приведённая ею цитата: ⚠ источник цитаты в данных репозитория НЕ найден — модель могла её пересказать или выдумать; перед approve проверьте вручную.</div></div>
-    <div class="controls">
-      <button class="vote approve" data-vote="approve">&#9989; Принять связь</button>
-      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
-      <span class="vote-state">unvoted</span>
-    </div>
-    <textarea class="note" placeholder="если глава другая — впишите ch01…ch11; apply-скрипт читает только approve/reject, заметка идёт в аудит-след"></textarea>
-  </section>
-
-  <section class="card" data-id="acc026-ch08-kwic" data-filt="disputed">
-    <header><div class="hw"><a class="hwlink" href="https://www.youtube.com/watch?v=uwdJRBZMmn0" target="_blank" rel="noopener">«А.А.Зализняк читает лекцию о берестяных грамотах студентам-историкам, 08.08.2017» ↔ ch08 «Из русского ударения»</a> <span class="badge">kwic</span><span class="badge">0.60</span><span class="badge">лекция по теме главы</span></div><span class="idchip" title="card id — cite this id back when discussing this card">acc026-ch08-kwic</span></header>
-    <div class="question">Дополнить главу <b>ch08 «Из русского ударения» (с. 236–271)</b> ссылкой на запись <b>acc026 «А.А.Зализняк читает лекцию о берестяных грамотах студентам-историкам, 08.08.2017»</b> (2:18:13)? Тип связи: <b>лекция по теме главы</b> (<code>lecture_of</code>), проход <code>kwic</code>, уверенность 0.60 ▸ 62:20. Связь значит «чем запись дополняет главу», а не «это запись этой главы».</div>
-    <div class="panel"><h4>Что это за запись</h4><div><a href="https://www.youtube.com/watch?v=uwdJRBZMmn0" target="_blank" rel="noopener">А.А.Зализняк читает лекцию о берестяных грамотах студентам-историкам, 08.08.2017</a> — 2:18:13</div></div><div class="panel"><h4>Глава книги</h4><div><b>Из русского ударения</b>, с. 236–271: Почему «во́ды» и «воды́» — разные формы, как ударение перемещалось в истории русского языка, и почему это так сложно для иностранцев.</div></div><div class="panel"><h4>Термин в книге</h4><div>Статья указателя (лексикон): <b>пропил</b>, с. 262.<br><span class="muted">контекст в указателе не сохранён</span></div></div><div class="panel"><h4>Цитата из записи</h4><pre>чень характерным видом нижней строки. смотрите, не случайно, это не вредно, что где-то написано. каждый домец почему-то пропилует. &quot;может он</pre><div class="muted">файл <code>А.А.Зализняк-читает-лекцию-о-берестяных-грамотах-студентам-историкам,-08.08.2017.srt</code>, смещение 1:02:20</div></div>
-    <div class="controls">
-      <button class="vote approve" data-vote="approve">&#9989; Принять связь</button>
-      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
-      <span class="vote-state">unvoted</span>
-    </div>
-    <textarea class="note" placeholder="если глава другая — впишите ch01…ch11; apply-скрипт читает только approve/reject, заметка идёт в аудит-след"></textarea>
-  </section>
-
-  <section class="card" data-id="acc026-ch10-kwic" data-filt="disputed">
-    <header><div class="hw"><a class="hwlink" href="https://www.youtube.com/watch?v=uwdJRBZMmn0" target="_blank" rel="noopener">«А.А.Зализняк читает лекцию о берестяных грамотах студентам-историкам, 08.08.2017» ↔ ch10 «О жизни слов»</a> <span class="badge">kwic</span><span class="badge">0.55</span><span class="badge">дополняет главу</span></div><span class="idchip" title="card id — cite this id back when discussing this card">acc026-ch10-kwic</span></header>
-    <div class="question">Дополнить главу <b>ch10 «О жизни слов» (с. 322–359)</b> ссылкой на запись <b>acc026 «А.А.Зализняк читает лекцию о берестяных грамотах студентам-историкам, 08.08.2017»</b> (2:18:13)? Тип связи: <b>дополняет главу</b> (<code>expands</code>), проход <code>kwic</code>, уверенность 0.55 ▸ 22:39. Связь значит «чем запись дополняет главу», а не «это запись этой главы».</div>
-    <div class="panel"><h4>Что это за запись</h4><div><a href="https://www.youtube.com/watch?v=uwdJRBZMmn0" target="_blank" rel="noopener">А.А.Зализняк читает лекцию о берестяных грамотах студентам-историкам, 08.08.2017</a> — 2:18:13</div></div><div class="panel"><h4>Глава книги</h4><div><b>О жизни слов</b>, с. 322–359: Откуда берутся слова, как они меняют значение, что такое заимствование и почему «вокзал» от английского «Vauxhall».</div></div><div class="panel"><h4>Термин в книге</h4><div>Статья указателя (лексикон): <b>переехать</b>, с. 352.<br><span class="muted">контекст в указателе не сохранён</span></div></div><div class="panel"><h4>Цитата из записи</h4><pre>ь просто переезды из одного города в другой, когда человек переселялся, скажем, переселялся, на части странных, пытался переехать в страну, </pre><div class="muted">файл <code>А.А.Зализняк-читает-лекцию-о-берестяных-грамотах-студентам-историкам,-08.08.2017.srt</code>, смещение 22:39</div></div>
-    <div class="controls">
-      <button class="vote approve" data-vote="approve">&#9989; Принять связь</button>
-      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
-      <span class="vote-state">unvoted</span>
-    </div>
-    <textarea class="note" placeholder="если глава другая — впишите ch01…ch11; apply-скрипт читает только approve/reject, заметка идёт в аудит-след"></textarea>
-  </section>
 
   <section class="card" data-id="acc027-ch06-kwic" data-filt="disputed">
     <header><div class="hw"><a class="hwlink" href="https://www.youtube.com/watch?v=1fhpsEJE2GM" target="_blank" rel="noopener">«Зализняк. О ложной лингвистике и квазиистории. 2011» ↔ ch06 «История русского языка»</a> <span class="badge">kwic</span><span class="badge">0.57</span><span class="badge">лекция по теме главы</span></div><span class="idchip" title="card id — cite this id back when discussing this card">acc027-ch06-kwic</span></header>
@@ -3412,19 +2848,6 @@
     <textarea class="note" placeholder="чем именно записи отличаются, если это не дубль"></textarea>
   </section>
 
-  <section class="card" data-id="dup-005-040" data-filt="duplicate">
-    <header><div class="hw">дубль? «А.А. Зализняк. Новгородские берестяные грамоты» ≡ «Зализняк. Новгородские берестяные грамоты. 2007» <span class="badge">дубль</span><span class="badge">подтверждён</span><span class="badge">139 мин</span></div><span class="idchip" title="card id — cite this id back when discussing this card">dup-005-040</span></header>
-    <div class="question">Считать записи <b>acc005 «А.А. Зализняк. Новгородские берестяные грамоты»</b> и <b>acc040 «Зализняк. Новгородские берестяные грамоты. 2007»</b> одной и той же публикацией (длительность совпадает до секунды)? Approve проставит <code>duplicate_of</code>; запись <b>не удаляется</b> ни при каком решении.</div>
-    <div class="panel"><h4>Заголовки</h4><div>acc005 — А.А. Зализняк. Новгородские берестяные грамоты<br>acc040 — Зализняк. Новгородские берестяные грамоты. 2007</div></div><div class="panel"><h4>Предварительный разбор</h4><div>Один доклад «Новгородские берестяные грамоты» (2007); проставлен `duplicate_of` (машинная оценка: подтверждён)</div></div>
-    <div class="controls">
-      <button class="vote approve" data-vote="approve">&#9989; Принять связь</button>
-      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
-      <span class="vote-state">unvoted</span>
-    </div>
-    <textarea class="note" placeholder="чем именно записи отличаются, если это не дубль"></textarea>
-  </section>
-
   <section class="card" data-id="dup-023-034" data-filt="duplicate">
     <header><div class="hw">дубль? «Новые открытия академика Зализняка в 2017 году» ≡ «Зализняк. О берестяных грамотах из раскопок 2017 года» <span class="badge">дубль</span><span class="badge">вероятен</span><span class="badge">154 мин</span></div><span class="idchip" title="card id — cite this id back when discussing this card">dup-023-034</span></header>
     <div class="question">Считать записи <b>acc023 «Новые открытия академика Зализняка в 2017 году»</b> и <b>acc034 «Зализняк. О берестяных грамотах из раскопок 2017 года»</b> одной и той же публикацией (длительность совпадает до секунды)? Approve проставит <code>duplicate_of</code>; запись <b>не удаляется</b> ни при каком решении.</div>
@@ -3438,7 +2861,7 @@
     <textarea class="note" placeholder="чем именно записи отличаются, если это не дубль"></textarea>
   </section>
 </main>
-<footer class="hint">Секции: кандидаты (LLM и слабый KWIC) · спорные (ниже порога прохода) · дубли (все семь пар одинаковой длительности). Записи каталога не удаляются ни при каком решении. Лист меряет активное время (⏱) — всего и на карточку; секунды уходят в decisions.json. Keyboard: <kbd>a</kbd> Принять связь &middot; <kbd>r</kbd> Отклонить
+<footer class="hint">Секции: кандидаты (LLM и слабый KWIC) · спорные (ниже порога прохода) · дубли (пары одинаковой длительности). Записи каталога не удаляются ни при каком решении. Лист меряет активное время (⏱) — всего и на карточку; секунды уходят в decisions.json. Кончилось время — ⏸ останавливает таймер, «Сдать сколько успел» выгружает проголосованное; остальное остаётся в браузере, заход продолжается. Keyboard: <kbd>a</kbd> Принять связь &middot; <kbd>r</kbd> Отклонить
   &middot; <kbd>d</kbd> defer &middot; <kbd>&darr;</kbd>/<kbd>&uarr;</kbd> next/prev. Votes autosave to
   this browser's localStorage; click "Download decisions.json" when done (unvoted items export with
   decision:null).</footer>
@@ -3450,9 +2873,10 @@
 </div>
 <script>
 (function () {
-  var SHEET_ID = "bookindex-crosswalk-video-chapter-v2";
+  var SHEET_ID = "bookindex-crosswalk-video-chapter-v3";
   var STORE_KEY = 'review-sheet:' + SHEET_ID;
-  var ids = ["acc001-ch06-kwic", "acc004-ch06-kwic", "acc004-ch10-kwic", "acc005-ch06-kwic", "acc005-ch08-kwic", "acc006-ch06-kwic", "acc007-ch06-kwic", "acc007-ch08-kwic", "acc009-ch06-title_topics", "acc009-ch09-llm", "acc009-ch10-kwic", "acc009-ch11-kwic", "acc010-ch06-kwic", "acc011-ch06-kwic", "acc011-ch08-kwic", "acc013-ch06-kwic", "acc013-ch08-kwic", "acc013-ch09-llm", "acc014-ch08-kwic", "acc014-ch09-kwic", "acc015-ch01-llm", "acc015-ch06-kwic", "acc015-ch08-kwic", "acc017-ch06-kwic", "acc018-ch06-kwic", "acc019-ch01-llm", "acc019-ch08-kwic", "acc019-ch11-kwic", "acc020-ch08-kwic", "acc021-ch01-title_topics", "acc021-ch08-kwic", "acc022-ch06-kwic", "acc023-ch09-llm", "acc023-ch10-kwic", "acc023-ch11-kwic", "acc024-ch01-title_topics", "acc024-ch09-llm", "acc024-ch11-kwic", "acc025-ch01-title_topics", "acc025-ch06-kwic", "acc025-ch08-kwic", "acc025-ch09-llm", "acc026-ch08-kwic", "acc026-ch10-kwic", "acc027-ch06-kwic", "acc027-ch08-kwic", "acc029-ch01-llm", "acc029-ch06-kwic", "acc029-ch10-kwic", "acc030-ch01-llm", "acc030-ch08-kwic", "acc030-ch09-kwic", "acc031-ch01-title_topics", "acc031-ch06-kwic", "acc031-ch08-kwic", "acc031-ch09-llm", "acc032-ch04-kwic", "acc032-ch08-kwic", "acc033-ch05-kwic", "acc034-ch10-kwic", "acc034-ch11-kwic", "acc035-ch06-kwic", "acc035-ch08-kwic", "acc036-ch06-kwic", "acc037-ch03-title_topics", "acc037-ch06-kwic", "acc037-ch09-kwic", "acc037-ch10-llm", "acc038-ch01-llm", "acc038-ch08-kwic", "acc038-ch09-kwic", "acc039-ch01-llm", "acc039-ch06-kwic", "acc039-ch08-kwic", "acc040-ch06-kwic", "acc041-ch01-llm", "acc044-ch06-kwic", "acc044-ch08-kwic", "acc044-ch09-llm", "acc045-ch06-kwic", "acc045-ch10-kwic", "acc046-ch10-kwic", "acc047-ch11-kwic", "acc048-ch06-kwic", "acc048-ch08-kwic", "acc049-ch01-title_topics", "acc049-ch08-kwic", "acc049-ch11-kwic", "acc050-ch04-kwic", "acc051-ch01-llm", "acc051-ch04-kwic", "acc052-ch01-llm", "acc055-ch10-kwic", "acc056-ch02-kwic", "acc057-ch06-kwic", "acc057-ch10-kwic", "acc058-ch08-kwic", "acc059-ch06-kwic", "acc059-ch10-kwic", "acc065-ch05-kwic", "acc066-ch02-kwic", "acc068-ch05-kwic", "acc069-ch10-kwic", "acc070-ch10-kwic", "acc071-ch05-kwic", "acc071-ch09-kwic", "acc073-ch06-kwic", "acc074-ch10-kwic", "acc074-ch11-kwic", "acc075-ch06-kwic", "acc076-ch04-kwic", "acc076-ch10-kwic", "acc077-ch10-kwic", "acc079-ch04-kwic", "acc079-ch11-kwic", "acc081-ch10-kwic", "acc082-ch04-kwic", "acc082-ch11-kwic", "acc083-ch06-kwic", "acc084-ch04-kwic", "acc085-ch06-kwic", "acc085-ch10-kwic", "acc087-ch11-kwic", "acc090-ch10-kwic", "acc091-ch06-kwic", "acc092-ch11-kwic", "acc093-ch09-kwic", "acc095-ch10-kwic", "acc096-ch06-kwic", "acc096-ch10-kwic", "acc097-ch06-kwic", "acc098-ch10-kwic", "acc099-ch06-kwic", "acc100-ch10-kwic", "acc100-ch11-kwic", "acc101-ch06-kwic", "acc103-ch10-kwic", "acc103-ch11-kwic", "acc104-ch10-kwic", "acc105-ch11-kwic", "acc106-ch02-kwic", "acc107-ch10-kwic", "acc107-ch11-kwic", "acc108-ch08-kwic", "acc108-ch10-kwic", "acc109-ch11-kwic", "acc110-ch04-kwic", "acc110-ch06-kwic", "acc111-ch04-kwic", "acc112-ch08-kwic", "acc112-ch11-kwic", "acc113-ch06-kwic", "acc113-ch08-kwic", "acc114-ch10-kwic", "acc115-ch10-kwic", "acc116-ch02-kwic", "acc116-ch08-kwic", "acc117-ch08-kwic", "acc119-ch06-kwic", "acc120-ch02-kwic", "acc124-ch05-kwic", "acc124-ch08-kwic", "acc126-ch03-kwic", "acc126-ch11-kwic", "acc127-ch11-kwic", "acc129-ch01-llm", "acc129-ch06-kwic", "acc129-ch10-kwic", "acc130-ch08-kwic", "acc130-ch10-kwic", "acc131-ch06-kwic", "acc131-ch08-kwic", "acc132-ch08-kwic", "acc132-ch09-llm", "acc132-ch10-kwic", "acc133-ch08-kwic", "acc133-ch10-kwic", "acc134-ch01-llm", "acc134-ch08-kwic", "acc134-ch11-kwic", "acc135-ch08-llm", "acc135-ch09-kwic", "acc135-ch11-kwic", "acc136-ch08-kwic", "acc137-ch08-kwic", "acc138-ch08-kwic", "acc139-ch08-kwic", "acc140-ch06-kwic", "acc140-ch08-kwic", "acc141-ch08-kwic", "acc142-ch08-kwic", "acc142-ch10-kwic", "acc143-ch08-kwic", "acc143-ch11-kwic", "acc144-ch04-kwic", "acc144-ch05-kwic", "acc147-ch08-kwic", "acc147-ch09-kwic", "acc148-ch01-llm", "acc148-ch06-kwic", "acc148-ch09-kwic", "acc149-ch08-kwic", "acc151-ch11-kwic", "acc152-ch01-title_topics", "acc152-ch04-kwic", "acc152-ch05-kwic", "acc152-ch09-llm", "acc153-ch06-kwic", "acc154-ch01-title_topics", "acc154-ch06-kwic", "acc154-ch09-llm", "acc154-ch11-kwic", "acc155-ch08-kwic", "acc155-ch10-kwic", "acc156-ch01-llm", "acc156-ch05-kwic", "acc156-ch06-kwic", "acc157-ch06-kwic", "acc159-ch08-llm", "acc159-ch11-kwic", "acc160-ch01-llm", "acc160-ch06-kwic", "acc160-ch10-kwic", "acc161-ch06-kwic", "acc162-ch08-kwic", "acc162-ch11-kwic", "acc163-ch06-kwic", "acc165-ch03-kwic", "acc165-ch06-llm", "acc166-ch10-kwic", "acc167-ch06-kwic", "acc167-ch11-kwic", "acc168-ch06-kwic", "acc168-ch08-kwic", "acc169-ch06-kwic", "acc170-ch06-kwic", "acc170-ch08-kwic", "acc171-ch08-kwic", "acc171-ch10-kwic", "acc172-ch08-kwic", "acc173-ch05-llm", "acc173-ch11-kwic", "acc174-ch06-title_topics", "acc174-ch08-kwic", "acc174-ch09-llm", "acc174-ch11-kwic", "acc175-ch08-kwic", "acc176-ch09-kwic", "dup-008-012", "dup-017-018", "dup-119-173", "dup-088-107", "dup-007-054", "dup-005-040", "dup-023-034"];
+  var GENERATED = "2026-08-16";
+  var ids = ["acc027-ch06-kwic", "acc027-ch08-kwic", "acc029-ch01-llm", "acc029-ch06-kwic", "acc029-ch10-kwic", "acc030-ch01-llm", "acc030-ch08-kwic", "acc030-ch09-kwic", "acc031-ch01-title_topics", "acc031-ch06-kwic", "acc031-ch08-kwic", "acc031-ch09-llm", "acc032-ch04-kwic", "acc032-ch08-kwic", "acc033-ch05-kwic", "acc034-ch10-kwic", "acc034-ch11-kwic", "acc035-ch06-kwic", "acc035-ch08-kwic", "acc036-ch06-kwic", "acc037-ch03-title_topics", "acc037-ch06-kwic", "acc037-ch09-kwic", "acc037-ch10-llm", "acc038-ch01-llm", "acc038-ch08-kwic", "acc038-ch09-kwic", "acc039-ch01-llm", "acc039-ch06-kwic", "acc039-ch08-kwic", "acc040-ch06-kwic", "acc041-ch01-llm", "acc044-ch06-kwic", "acc044-ch08-kwic", "acc044-ch09-llm", "acc045-ch06-kwic", "acc045-ch10-kwic", "acc046-ch10-kwic", "acc047-ch11-kwic", "acc048-ch06-kwic", "acc048-ch08-kwic", "acc049-ch01-title_topics", "acc049-ch08-kwic", "acc049-ch11-kwic", "acc050-ch04-kwic", "acc051-ch01-llm", "acc051-ch04-kwic", "acc052-ch01-llm", "acc055-ch10-kwic", "acc056-ch02-kwic", "acc057-ch06-kwic", "acc057-ch10-kwic", "acc058-ch08-kwic", "acc059-ch06-kwic", "acc059-ch10-kwic", "acc065-ch05-kwic", "acc066-ch02-kwic", "acc068-ch05-kwic", "acc069-ch10-kwic", "acc070-ch10-kwic", "acc071-ch05-kwic", "acc071-ch09-kwic", "acc073-ch06-kwic", "acc074-ch10-kwic", "acc074-ch11-kwic", "acc075-ch06-kwic", "acc076-ch04-kwic", "acc076-ch10-kwic", "acc077-ch10-kwic", "acc079-ch04-kwic", "acc079-ch11-kwic", "acc081-ch10-kwic", "acc082-ch04-kwic", "acc082-ch11-kwic", "acc083-ch06-kwic", "acc084-ch04-kwic", "acc085-ch06-kwic", "acc085-ch10-kwic", "acc087-ch11-kwic", "acc090-ch10-kwic", "acc091-ch06-kwic", "acc092-ch11-kwic", "acc093-ch09-kwic", "acc095-ch10-kwic", "acc096-ch06-kwic", "acc096-ch10-kwic", "acc097-ch06-kwic", "acc098-ch10-kwic", "acc099-ch06-kwic", "acc100-ch10-kwic", "acc100-ch11-kwic", "acc101-ch06-kwic", "acc103-ch10-kwic", "acc103-ch11-kwic", "acc104-ch10-kwic", "acc105-ch11-kwic", "acc106-ch02-kwic", "acc107-ch10-kwic", "acc107-ch11-kwic", "acc108-ch08-kwic", "acc108-ch10-kwic", "acc109-ch11-kwic", "acc110-ch04-kwic", "acc110-ch06-kwic", "acc111-ch04-kwic", "acc112-ch08-kwic", "acc112-ch11-kwic", "acc113-ch06-kwic", "acc113-ch08-kwic", "acc114-ch10-kwic", "acc115-ch10-kwic", "acc116-ch02-kwic", "acc116-ch08-kwic", "acc117-ch08-kwic", "acc119-ch06-kwic", "acc120-ch02-kwic", "acc124-ch05-kwic", "acc124-ch08-kwic", "acc126-ch03-kwic", "acc126-ch11-kwic", "acc127-ch11-kwic", "acc129-ch01-llm", "acc129-ch06-kwic", "acc129-ch10-kwic", "acc130-ch08-kwic", "acc130-ch10-kwic", "acc131-ch06-kwic", "acc131-ch08-kwic", "acc132-ch08-kwic", "acc132-ch09-llm", "acc132-ch10-kwic", "acc133-ch08-kwic", "acc133-ch10-kwic", "acc134-ch01-llm", "acc134-ch08-kwic", "acc134-ch11-kwic", "acc135-ch08-llm", "acc135-ch09-kwic", "acc135-ch11-kwic", "acc136-ch08-kwic", "acc137-ch08-kwic", "acc138-ch08-kwic", "acc139-ch08-kwic", "acc140-ch06-kwic", "acc140-ch08-kwic", "acc141-ch08-kwic", "acc142-ch08-kwic", "acc142-ch10-kwic", "acc143-ch08-kwic", "acc143-ch11-kwic", "acc144-ch04-kwic", "acc144-ch05-kwic", "acc147-ch08-kwic", "acc147-ch09-kwic", "acc148-ch01-llm", "acc148-ch06-kwic", "acc148-ch09-kwic", "acc149-ch08-kwic", "acc151-ch11-kwic", "acc152-ch01-title_topics", "acc152-ch04-kwic", "acc152-ch05-kwic", "acc152-ch09-llm", "acc153-ch06-kwic", "acc154-ch01-title_topics", "acc154-ch06-kwic", "acc154-ch09-llm", "acc154-ch11-kwic", "acc155-ch08-kwic", "acc155-ch10-kwic", "acc156-ch01-llm", "acc156-ch05-kwic", "acc156-ch06-kwic", "acc157-ch06-kwic", "acc159-ch08-llm", "acc159-ch11-kwic", "acc160-ch01-llm", "acc160-ch06-kwic", "acc160-ch10-kwic", "acc161-ch06-kwic", "acc162-ch08-kwic", "acc162-ch11-kwic", "acc163-ch06-kwic", "acc165-ch03-kwic", "acc165-ch06-llm", "acc166-ch10-kwic", "acc167-ch06-kwic", "acc167-ch11-kwic", "acc168-ch06-kwic", "acc168-ch08-kwic", "acc169-ch06-kwic", "acc170-ch06-kwic", "acc170-ch08-kwic", "acc171-ch08-kwic", "acc171-ch10-kwic", "acc172-ch08-kwic", "acc173-ch05-llm", "acc173-ch11-kwic", "acc174-ch06-title_topics", "acc174-ch08-kwic", "acc174-ch09-llm", "acc174-ch11-kwic", "acc175-ch08-kwic", "acc176-ch09-kwic", "dup-008-012", "dup-017-018", "dup-119-173", "dup-088-107", "dup-007-054", "dup-023-034"];
   var state = {};
   try { state = JSON.parse(localStorage.getItem(STORE_KEY) || '{}') || {}; } catch (e) { state = {}; }
   function tally() {
@@ -3495,7 +2919,7 @@
   document.getElementById('downloadBtn').addEventListener('click', function () {
     ids.forEach(function (id) { syncNoteFromDom(id); });
     var decided = ids.filter(function (id) { return state[id] && state[id].decision; }).length;
-    var payload = { sheet_id: SHEET_ID, generated: "2026-08-15", decided: decided, time_total_seconds: __timeTotal(),
+    var payload = { sheet_id: SHEET_ID, generated: "2026-08-16", decided: decided, time_total_seconds: __timeTotal(),
       items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '', time_seconds: __timeFor(id) }; }) };
     var blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
     var url = URL.createObjectURL(blob); var a = document.createElement('a');
@@ -3614,10 +3038,17 @@
   function __timeFlush() {
     try { localStorage.setItem(TIME_KEY, JSON.stringify(__timing)); } catch (e) {}
   }
+  // V12 (H2858): the clock is stoppable. `paused` rides in the same persisted
+  // record as the totals, so a reviewer who pauses and closes the tab does not
+  // come back to a clock that ran all night.
+  var __timePaused = !!__timing.paused;
+  function __timePauseSet(v) {
+    __timePaused = !!v; __timing.paused = __timePaused; __timeLast = Date.now(); __timeFlush();
+  }
   setInterval(function () {
     var now = Date.now(), dt = (now - __timeLast) / 1000;
     __timeLast = now;
-    if (document.hidden || dt <= 0 || dt > 4) return;
+    if (document.hidden || __timePaused || dt <= 0 || dt > 4) return;
     __timing.total += dt;
     var id = __timeActiveId();
     if (id) __timing.per[id] = (__timing.per[id] || 0) + dt;
@@ -3628,13 +3059,48 @@
   document.addEventListener('visibilitychange', function () { __timeLast = Date.now(); });
   window.addEventListener('beforeunload', __timeFlush);
   __timeShow();
+
+  var HANDIN_SAID = 'сдано {n} из {total} — таймер остановлен, остальное осталось в браузере';
+  var __handinBtn = document.getElementById('handinBtn');
+  var __handinSaid = document.getElementById('handinSaid');
+
+  var __pauseBtn = document.getElementById('pauseBtn');
+  function __pauseShow() {
+    __pauseBtn.classList.toggle('on', __timePaused);
+    __pauseBtn.innerHTML = __timePaused ? '&#9654;' : '&#9208;';
+    var chip = document.querySelector('.tally .time');
+    if (chip) chip.classList.toggle('paused', __timePaused);
+  }
+  __pauseBtn.addEventListener('click', function () { __timePauseSet(!__timePaused); __pauseShow(); });
+  __pauseShow();
+  __handinBtn.addEventListener('click', function () {
+    ids.forEach(function (id) { syncNoteFromDom(id); });
+    __timePauseSet(true); __pauseShow();
+    var items = ids.map(function (id) {
+      var rec = state[id] || {};
+      var item = { id: id, decision: rec.decision || null };
+      item.note = rec.note || '';
+      item.time_seconds = __timeFor(id);
+      return item;
+    });
+    var decided = items.filter(function (it) { return !!it.decision; }).length;
+    var payload = { sheet_id: SHEET_ID, generated: GENERATED, decided: decided,
+      partial: true, complete: false, undecided: items.length - decided, items: items };
+    payload.time_total_seconds = __timeTotal();
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
+    var url = URL.createObjectURL(blob); var a = document.createElement('a');
+    a.href = url; a.download = SHEET_ID + '_decisions_partial.json';
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+    __handinSaid.textContent = HANDIN_SAID.replace('{n}', decided).replace('{total}', items.length);
+  });
 })();
 </script>
 
 <script>
 (function () {
-  var K = 'review-sheet:' + "bookindex-crosswalk-video-chapter-v2";
-  var P = {"acc001-ch06-kwic": {"d": "reject", "n": "Связать запись acc001 с главой ch06 «История русского языка» (связь expands, проход kwic, уверенность 0.56) ▸ 30:54? - и как по твоему я должен знать что такое запись acc001? Ты придумал ее, но ты забыл рассказать что это.\nСвязь вредная, потому что изумруд в цитате используется переносно."}, "acc004-ch06-kwic": {"d": "approve", "n": ""}, "acc004-ch10-kwic": {"d": "approve", "n": ""}, "acc005-ch06-kwic": {"d": "approve", "n": ""}, "acc005-ch08-kwic": {"d": "defer", "n": "термин указателя семнадцать - а в книге он на что ссылался? Тоже на семнадцать писем?"}, "acc006-ch06-kwic": {"d": "approve", "n": "с. 180; файл Зализняк - файлов много, надо цитировать точно название файла."}, "acc007-ch06-kwic": {"d": "approve", "n": ""}, "acc007-ch08-kwic": {"d": "reject", "n": ""}, "acc009-ch06-title_topics": {"d": "approve", "n": ""}, "acc009-ch09-llm": {"d": "defer", "n": "Доказательство\nмодель deepseek-v4-flash - это не может быть самим докозательством, а способом получения оного. Связать запись acc009 - не знаю кто это такой. Не понимая кого с кем связываем, трудно ответить. Переделай целиком все голосование согласно началу голосования и моим примечаниям там."}};
+  var K = 'review-sheet:' + "bookindex-crosswalk-video-chapter-v3";
+  var P = {"acc001-ch06-kwic": {"d": "reject", "n": "изумруды арабского - устойчивый оборот, изумруд употреблен условно, художественно"}, "acc004-ch06-kwic": {"d": "approve", "n": ""}, "acc004-ch10-kwic": {"d": "approve", "n": ""}, "acc005-ch06-kwic": {"d": "approve", "n": ""}, "acc005-ch08-kwic": {"d": "reject", "n": ""}, "acc006-ch06-kwic": {"d": "approve", "n": ""}, "acc007-ch06-kwic": {"d": "approve", "n": ""}, "acc007-ch08-kwic": {"d": "reject", "n": "слово пять как объект и слово пять как числительное - совершенно разные функции. Прямая и мета. Их нигде не надо путать, не только здесь."}, "acc009-ch06-title_topics": {"d": "approve", "n": ""}, "acc009-ch09-llm": {"d": "approve", "n": ""}, "acc009-ch10-kwic": {"d": "reject", "n": ""}, "acc009-ch11-kwic": {"d": "reject", "n": ""}, "acc010-ch06-kwic": {"d": "reject", "n": ""}, "acc011-ch06-kwic": {"d": "approve", "n": ""}, "acc011-ch08-kwic": {"d": "approve", "n": ""}, "acc013-ch06-kwic": {"d": "approve", "n": ""}, "acc013-ch08-kwic": {"d": "reject", "n": ""}, "acc013-ch09-llm": {"d": "approve", "n": ""}, "acc014-ch08-kwic": {"d": "approve", "n": ""}, "acc014-ch09-kwic": {"d": "approve", "n": ""}, "acc015-ch01-llm": {"d": "approve", "n": ""}, "acc015-ch06-kwic": {"d": "reject", "n": "Почему вообще предположена связь ворог и творог? Детский сад какой-то, очень грубо"}, "acc015-ch08-kwic": {"d": "approve", "n": ""}, "acc017-ch06-kwic": {"d": "approve", "n": ""}, "acc018-ch06-kwic": {"d": "approve", "n": "Откуда повтор? Две одинаковые карточки подряд, не порядок"}, "acc019-ch01-llm": {"d": "approve", "n": ""}, "acc019-ch08-kwic": {"d": "approve", "n": ""}, "acc019-ch11-kwic": {"d": "approve", "n": ""}, "acc020-ch08-kwic": {"d": "reject", "n": ""}, "acc021-ch01-title_topics": {"d": "approve", "n": ""}, "acc021-ch08-kwic": {"d": "reject", "n": ""}, "acc022-ch06-kwic": {"d": "approve", "n": ""}, "acc023-ch09-llm": {"d": "approve", "n": ""}, "acc023-ch10-kwic": {"d": "approve", "n": ""}, "acc023-ch11-kwic": {"d": "approve", "n": "\"рубили\" с двумя \"и\" всего лишь является передачей совершеннейшей фонетики \"рубель\" - наличие искомого слова в \" \" это почти 100% гарантия, что все подходит. Такие надо отмечать особо, чтобы быстрее видеть, что это надежные"}, "acc024-ch01-title_topics": {"d": "approve", "n": ""}, "acc024-ch09-llm": {"d": "approve", "n": ""}, "acc024-ch11-kwic": {"d": "reject", "n": ""}, "acc025-ch01-title_topics": {"d": "approve", "n": ""}, "acc025-ch06-kwic": {"d": "reject", "n": ""}, "acc025-ch08-kwic": {"d": "reject", "n": ""}, "acc025-ch09-llm": {"d": "approve", "n": ""}, "acc026-ch08-kwic": {"d": "reject", "n": ""}, "acc026-ch10-kwic": {"d": "approve", "n": ""}};
   try {
     var s = JSON.parse(localStorage.getItem(K) || '{}') || {};
     var changed = false;
