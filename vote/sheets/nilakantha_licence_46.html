@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="color-scheme" content="dark">
+<title>Нилакантха: регистр отступлений от Панини, признанных традицией (H2860) — 46 items</title>
+<style>
+  :root { color-scheme: dark; --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --text:#e6e6e6; --muted:#9aa0aa;
+          --accent:#5b8cff; --ok:#3fb950; --bad:#f85149; --defer:#d29922; --border:#2a2f3a; }
+  * { box-sizing: border-box; }
+  body { background:var(--bg); color:var(--text); font-family:-apple-system,Segoe UI,Roboto,sans-serif;
+         margin:0; padding:0 0 120px 0; }
+  header.top { position:sticky; top:0; z-index:10; background:var(--panel); border-bottom:1px solid var(--border);
+               padding:14px 20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+  header.top h1 { font-size:16px; margin:0; }
+  header.top .sub { color:var(--muted); font-size:12px; max-width:760px; }
+  .tally { display:flex; gap:14px; font-size:13px; }
+  .tally span.count { font-weight:700; }
+  .tally .approve { color:var(--ok); } .tally .reject { color:var(--bad); }
+  .tally .defer { color:var(--defer); } .tally .unvoted { color:var(--muted); }
+  .toolbar { padding:10px 20px; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  button.dl { background:var(--accent); color:#fff; border:none; padding:8px 14px; border-radius:6px;
+              cursor:pointer; font-size:13px; }
+  button.dl:hover { opacity:.9; }
+  .filterbar { display:flex; gap:6px; flex-wrap:wrap; }
+  .filterbar button { background:var(--panel2); border:1px solid var(--border); color:var(--text);
+                       padding:6px 10px; border-radius:14px; font-size:12px; cursor:pointer; }
+  .filterbar button.active { border-color:var(--accent); color:var(--accent); }
+  main { max-width:980px; margin:0 auto; padding:10px 20px; }
+  .card { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:16px;
+          margin-bottom:16px; }
+  .card.voted-approve { border-left:4px solid var(--ok); }
+  .card.voted-reject { border-left:4px solid var(--bad); }
+  .card.voted-defer { border-left:4px solid var(--defer); }
+  .card header { display:flex; justify-content:space-between; align-items:baseline; }
+  .card .hw { font-size:18px; font-weight:700; }
+  .badge { font-size:11px; background:var(--panel2); padding:2px 8px; border-radius:10px;
+           margin-left:8px; color:var(--muted); }
+  .question { margin:8px 0 12px; font-size:14px; }
+  .panel { background:var(--panel2); border-radius:8px; padding:10px 12px; font-size:13px; margin-bottom:10px; }
+  .panel h4 { margin:0 0 6px; font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+  .panel pre { white-space:pre-wrap; word-break:break-word; margin:0; font-size:12px; line-height:1.45; }
+  .chip { display:inline-block; background:#263042; border-radius:5px; padding:2px 7px; margin:2px 3px 2px 0; font-size:12px; }
+  .muted { color:var(--muted); font-style:italic; }
+  .controls { display:flex; align-items:center; gap:8px; margin-top:4px; }
+  button.vote { border:1px solid var(--border); background:var(--panel2); color:var(--text);
+                padding:7px 12px; border-radius:6px; cursor:pointer; font-size:13px; }
+  button.vote.approve.active { background:var(--ok); border-color:var(--ok); color:#04240b; }
+  button.vote.reject.active { background:var(--bad); border-color:var(--bad); color:#2a0a08; }
+  button.vote.defer.active { background:var(--defer); border-color:var(--defer); color:#2a1d02; }
+  .vote-state { margin-left:6px; font-size:12px; color:var(--muted); }
+  textarea.note { width:100%; margin-top:10px; min-height:88px; background:#11141a !important; color:#e6e6e6 !important;
+                  -webkit-text-fill-color:#e6e6e6; border:1px solid var(--border); border-radius:6px; padding:8px; font-size:13px;
+                  font-family:inherit; resize:vertical; }
+  textarea.note::placeholder { color:var(--muted); opacity:1; }
+  footer.hint { max-width:980px; margin:20px auto; padding:0 20px; color:var(--muted); font-size:12px; }
+  kbd { background:#263042; border-radius:4px; padding:1px 5px; font-size:11px; }
+
+  .screening-banner { margin: 0 20px 12px; padding: 10px 14px; border-radius: 8px;
+    border: 1px solid var(--accent); background: #152033; font-size: 12px; line-height: 1.45;
+    color: var(--text); max-width: 980px; }
+  .screening-banner code { font-size: 11px; color: var(--accent); }
+  .screening-banner .sc-d { color: var(--defer); font-weight: 700; }
+
+  .idchip { font-family:ui-monospace,Consolas,monospace; font-size:11px; color:var(--muted);
+            background:var(--panel2); border:1px solid var(--border); padding:2px 7px;
+            border-radius:6px; user-select:all; }
+  .card header { gap:10px; }
+  .hw a.hwlink { color:inherit; text-decoration:underline dotted; text-underline-offset:3px; }
+  .hw a.hwlink:hover { color:var(--accent); }
+  mark.hl { background:#453407; color:#ffd75e; padding:0 2px; border-radius:3px; }
+  .savebanner { max-width:980px; margin:10px auto 0; padding:8px 20px; font-size:12.5px; }
+  .savebanner code { background:var(--panel2); border:1px solid var(--border); padding:1px 6px; border-radius:5px; }
+  .ratingrow { display:flex; align-items:center; gap:6px; margin-top:10px; flex-wrap:wrap; }
+  .ratinglabel { font-size:12px; color:var(--muted); margin-right:4px; }
+  button.rate { border:1px solid var(--border); background:var(--panel2); color:var(--text);
+                width:34px; padding:6px 0; border-radius:6px; cursor:pointer; font-size:13px; }
+  button.rate.active { background:var(--accent); border-color:var(--accent); color:#fff; }
+  button.rate.active.below { background:var(--defer); border-color:var(--defer); color:#2a1d02; }
+  .rate-state { font-size:12px; color:var(--muted); margin-left:4px; }
+  :root { --fs:1.5; }
+  header.top h1 { font-size:calc(16px * var(--fs)) !important; }
+  header.top .sub { font-size:calc(12px * var(--fs)) !important; }
+  .tally, button.dl, button.vote, button.rate, textarea.note, .reject-label-select,
+  #strictReviewerWrap, #strictReviewerWrap input { font-size:calc(13px * var(--fs)) !important; }
+  .filterbar button, .fsctl button, .fsctl .fsval, .chip, .vote-state, .rate-state,
+  .ratinglabel, .rejectlabellabel, footer.hint, div.legend,
+  #strictReviewError { font-size:calc(12px * var(--fs)) !important; }
+  .card .hw { font-size:calc(18px * var(--fs)) !important; }
+  .badge, .panel h4, kbd, .idchip { font-size:calc(11px * var(--fs)) !important; }
+  .question { font-size:calc(14px * var(--fs)) !important; }
+  .panel { font-size:calc(13px * var(--fs)) !important; }
+  .panel pre { font-size:calc(13.5px * var(--fs)) !important; line-height:1.55; }
+  .panel .anatomy { font-size:calc(12.5px * var(--fs)) !important; }
+  .savebanner { font-size:calc(12.5px * var(--fs)) !important; }
+  .fsctl { display:flex; align-items:center; gap:4px; }
+  .fsctl button { background:var(--panel2); border:1px solid var(--border); color:var(--text);
+                  padding:6px 10px; border-radius:14px; cursor:pointer; line-height:1; }
+  .fsctl .fsval { color:var(--muted); min-width:3.4em; text-align:center; }
+  .tally .time { color:var(--muted); }
+  .dl.handin { background:#243447; }
+  .tally .pausebtn { background:none; border:1px solid var(--border); color:var(--muted);
+                     border-radius:6px; padding:0 6px; margin-left:4px; cursor:pointer;
+                     font-size:inherit; font-family:inherit; line-height:1.6; }
+  .tally .pausebtn.on { color:#ffd479; border-color:#ffd479; }
+  .tally .time.paused { opacity:.45; }
+  .handin-said { color:var(--muted); font-size:12px; margin-left:10px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>Нилакантха: регистр отступлений от Панини, признанных традицией (H2860) — 46 items</h1>
+    <div class="sub">Generated 16-08-2026 &middot; sheet_id <code>commentarystrategies-nilakantha-licence_h2860</code> &middot; 152 строки из «Бхаратабхавадипы» Нилакантхи по всем 24 694 шлокам с ṭīkā. На голосование вынесены только те карточки, которые правило решить не может: 14 ручных решений и воспроизводимая выборка из 30 авто-типизированных строк (seed 2860).</div>
+  </div>
+  <div class="tally" id="tally">
+    <span class="approve">&#9989; <span class="count" id="c-approve">0</span></span>
+    <span class="reject">&#10060; <span class="count" id="c-reject">0</span></span>
+    <span class="defer">&#9208; <span class="count" id="c-defer">0</span></span>
+    <span class="time" title="active time on this sheet (while the tab is visible)">&#9201; <span class="count" id="t-total">0:00</span></span>
+    <button type="button" class="pausebtn" id="pauseBtn" title="pause the clock — a break is not review time">&#9208;</button>
+    <span class="unvoted">&#9711; <span class="count" id="c-unvoted">46</span></span>
+  </div>
+</header>
+<aside class="screening-banner" role="status" data-screening="1"><strong>Screening (H1649)</strong> — only human-required cards are below. Off the plate: <span class="sc-a">deterministic 5</span> · <span class="sc-b">dataset lookup 0</span> · <span class="sc-c">agent adjudication 121</span> (total screened 126). Human cards: <span class="sc-d">46</span>. Evidence: <code>reports/COMMENTARY_LICENCE_REGISTER_NILAKANTHA_2026.md</code>. Rules: arsa-word-anchor-independent-vowel, arsa-stem-exclusion-arstisena-arsyasrngi-arsabha-arseya, deviation-type-from-named-grammatical-noun.</aside>
+<div class="savebanner">&#128229; Your export downloads as <code>commentarystrategies-nilakantha-licence_h2860_decisions.json</code> &rarr; save it to <code>CommentaryStrategies\review\commentarystrategies-nilakantha-licence_h2860_decisions.json</code> (the <code>sheet_id</code> inside the file is <code>commentarystrategies-nilakantha-licence_h2860</code> — that is how a later session knows which sheet these decisions belong to).</div>
+<div class="toolbar">
+  <button class="dl" id="downloadBtn">Download decisions.json</button><button class="dl handin" id="handinBtn" title="stop the clock and export the votes made so far; the rest stay saved in this browser">Hand in what I got</button><span class="handin-said" id="handinSaid"></span><button class="dl" id="saveBtn" style="display:none;margin-left:8px">Save to folder…</button>
+  <div class="fsctl" title="text size — persists in this browser"><button type="button" id="fsDown" aria-label="smaller text">A&minus;</button><span class="fsval" id="fsVal"></span><button type="button" id="fsUp" aria-label="larger text">A+</button></div>
+  <div class="filterbar" id="filterbar"><button data-filter="all" class="active">all</button><button data-filter="hand-reject">отклонено вручную (13)</button><button data-filter="hand-type">тип назначен вручную (1)</button><button data-filter="auto-sample">выборка авто-типизации (30)</button><button data-filter="unvoted">unvoted only</button></div>
+</div>
+<main id="cards">
+
+  <section class="card" data-id="P01_U05_A013_S029#0@229" data-filt="hand-reject">
+    <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/adiparva?page=5&amp;id=P01_U05_A013_" target="_blank" rel="noopener">MBh 1.13.29 — отклонено как омоним (arsa_marriage_type)</a> <span class="badge">adiparva</span><span class="badge">ārṣa</span><span class="badge">ручное решение</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P01_U05_A013_S029#0@229</span></header>
+    <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षः</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">तपसा जीर्यमाणशरीरत्वं विवक्षितम् । तादृशोऽहं सदृशीमेव भार्यां स्वीकरिष्यामि । &#x27;बन्धुर्मिर्दित्सितामिति ऋत्विजे वितते कर्मणि दद्यादलंकृत्य स दैवो गोमिथुनं दत्वोपयच्छेत स आर्षः&#x27; इत्यार्त्विज्य गोमिथुनपूर्वयोर्दैवार्षयोर्विवाहयोर्व्यावृत्तिर्दर्शिता । भैक्ष्यवदिति तस्या ब्राह्मप्राजापत्यविधिना अलंकृताया अनलंकृताया वा लाभेऽपि अन्नवस्त्रादिना भरण</span></p><p><b>Решение агента:</b> <code>arsa_marriage_type</code> — строка <u>не попадает</u> в регистр.</p></div>
+    <div class="panel"><h4>Обоснование</h4><p>Quotes Āśvalāyana&#x27;s list of marriage rites: &#x27;gomithunaṃ datvopayacchheta sa ārṣaḥ&#x27;. Nīlakaṇṭha is distinguishing the daiva from the ārṣa wedding, not licensing a form.</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка остаётся вне регистра; она уже учтена в измеренной точности 92,1 % (152 из 165) и лежит в <a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/licence_register/nilakantha_licence_rejected.tsv">nilakantha_licence_rejected.tsv</a> вместе с причиной отклонения.</p><p><b>«Не согласен»</b> — строка возвращается в регистр (станет 153), измеренная точность вырастет, и в заметке нужно указать deviation_type, который вы считаете верным: без него строку некуда положить.</p><p><b>«Отложить»</b> — строка остаётся отклонённой до следующего круга; ничего не ломается, но цифра точности остаётся спорной.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
+      <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Если не согласны — какой deviation_type здесь верен?"></textarea>
+  </section>
+
+  <section class="card" data-id="P01_U07_A077_S018#0@0" data-filt="hand-reject">
+    <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/adiparva?page=7&amp;id=P01_U07_A077_" target="_blank" rel="noopener">MBh 1.77.18 — отклонено как омоним (arsa_lexical_gloss)</a> <span class="badge">adiparva</span><span class="badge">ārṣa</span><span class="badge">ручное решение</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P01_U07_A077_S018#0@0</span></header>
+    <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षम्</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">आर्षम् ऋषिप्रणीतं सोदरयोरविवाहं कामतः शप्तोऽस्मि न धर्मतः ॥१८॥</span></p><p><b>Решение агента:</b> <code>arsa_lexical_gloss</code> — строка <u>не попадает</u> в регистр.</p></div>
+    <div class="panel"><h4>Обоснование</h4><p>ārṣam glossed ṛṣi-praṇītam &#x27;composed by the ṛṣis&#x27; — a gloss of the verse&#x27;s own word, in a passage about the marriage of siblings.</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка остаётся вне регистра; она уже учтена в измеренной точности 92,1 % (152 из 165) и лежит в <a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/licence_register/nilakantha_licence_rejected.tsv">nilakantha_licence_rejected.tsv</a> вместе с причиной отклонения.</p><p><b>«Не согласен»</b> — строка возвращается в регистр (станет 153), измеренная точность вырастет, и в заметке нужно указать deviation_type, который вы считаете верным: без него строку некуда положить.</p><p><b>«Отложить»</b> — строка остаётся отклонённой до следующего круга; ничего не ломается, но цифра точности остаётся спорной.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
+      <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Если не согласны — какой deviation_type здесь верен?"></textarea>
+  </section>
+
+  <section class="card" data-id="P01_U07_A102_S015#0@0" data-filt="hand-reject">
+    <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/adiparva?page=7&amp;id=P01_U07_A102_" target="_blank" rel="noopener">MBh 1.102.15 — отклонено как омоним (arsa_marriage_type)</a> <span class="badge">adiparva</span><span class="badge">ārṣa</span><span class="badge">ручное решение</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P01_U07_A102_S015#0@0</span></header>
+    <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षं</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">आर्षं विधिं यज्ञं तेन दैव उक्तः एतेऽष्टौ विवाहाः प्राग्व्याख्याताः । अष्टमं राक्षसं विवाहम् ॥१५॥</span></p><p><b>Решение агента:</b> <code>arsa_marriage_type</code> — строка <u>не попадает</u> в регистр.</p></div>
+    <div class="panel"><h4>Обоснование</h4><p>ārṣaṃ vidhim listed among &#x27;ete &#x27;ṣṭau vivāhāḥ&#x27; — the eight marriage rites, with the rākṣasa as the eighth.</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка остаётся вне регистра; она уже учтена в измеренной точности 92,1 % (152 из 165) и лежит в <a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/licence_register/nilakantha_licence_rejected.tsv">nilakantha_licence_rejected.tsv</a> вместе с причиной отклонения.</p><p><b>«Не согласен»</b> — строка возвращается в регистр (станет 153), измеренная точность вырастет, и в заметке нужно указать deviation_type, который вы считаете верным: без него строку некуда положить.</p><p><b>«Отложить»</b> — строка остаётся отклонённой до следующего круга; ничего не ломается, но цифра точности остаётся спорной.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
+      <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Если не согласны — какой deviation_type здесь верен?"></textarea>
+  </section>
+
+  <section class="card" data-id="P01_U07_A113_S012#0@11" data-filt="hand-reject">
+    <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/adiparva?page=7&amp;id=P01_U07_A113_" target="_blank" rel="noopener">MBh 1.113.12 — отклонено как омоним (arsa_marriage_type)</a> <span class="badge">adiparva</span><span class="badge">ārṣa</span><span class="badge">ручное решение</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P01_U07_A113_S012#0@11</span></header>
+    <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षेऽपि</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">धर्म एषः । आर्षेऽपि विवाहे कन्याशुल्कत्वेन गोमिथुनग्रहस्य विधानात् । तथा च शिष्टादृतत्वादयमपि धर्मः स्वयंभुवा वेदेनैवोक्त इत्यवसेयम् । एतेन विगीतोपि कुलाचारो न त्याज्य इत्युक्तम् ॥१२॥</span></p><p><b>Решение агента:</b> <code>arsa_marriage_type</code> — строка <u>не попадает</u> в регистр.</p></div>
+    <div class="panel"><h4>Обоснование</h4><p>&#x27;ārṣe &#x27;pi vivāhe&#x27; — the bride-price of a cow-pair prescribed in the ārṣa wedding.</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка остаётся вне регистра; она уже учтена в измеренной точности 92,1 % (152 из 165) и лежит в <a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/licence_register/nilakantha_licence_rejected.tsv">nilakantha_licence_rejected.tsv</a> вместе с причиной отклонения.</p><p><b>«Не согласен»</b> — строка возвращается в регистр (станет 153), измеренная точность вырастет, и в заметке нужно указать deviation_type, который вы считаете верным: без него строку некуда положить.</p><p><b>«Отложить»</b> — строка остаётся отклонённой до следующего круга; ничего не ломается, но цифра точности остаётся спорной.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
+      <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Если не согласны — какой deviation_type здесь верен?"></textarea>
+  </section>
+
+  <section class="card" data-id="P01_U07_A118_S001#0@35" data-filt="hand-reject">
+    <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/adiparva?page=7&amp;id=P01_U07_A118_" target="_blank" rel="noopener">MBh 1.118.1 — отклонено как омоним (arsa_lexical_gloss)</a> <span class="badge">adiparva</span><span class="badge">ārṣa</span><span class="badge">ручное решение</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P01_U07_A118_S001#0@35</span></header>
+    <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षः</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">अष्टदशाधिकशततमः अध्यायः कथित इति । आर्षः ऋषिप्रसादहेतुकः । अमनुष्यो मनुष्येष्वदृष्टः । युगपद्बहूनां जननात् ॥१॥</span></p><p><b>Решение агента:</b> <code>arsa_lexical_gloss</code> — строка <u>не попадает</u> в регистр.</p></div>
+    <div class="panel"><h4>Обоснование</h4><p>ārṣaḥ = ṛṣi-prasāda-hetukaḥ &#x27;caused by a ṛṣi&#x27;s favour&#x27; — glossing the birth of the hundred sons, no grammatical operation in sight.</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка остаётся вне регистра; она уже учтена в измеренной точности 92,1 % (152 из 165) и лежит в <a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/licence_register/nilakantha_licence_rejected.tsv">nilakantha_licence_rejected.tsv</a> вместе с причиной отклонения.</p><p><b>«Не согласен»</b> — строка возвращается в регистр (станет 153), измеренная точность вырастет, и в заметке нужно указать deviation_type, который вы считаете верным: без него строку некуда положить.</p><p><b>«Отложить»</b> — строка остаётся отклонённой до следующего круга; ничего не ломается, но цифра точности остаётся спорной.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
+      <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Если не согласны — какой deviation_type здесь верен?"></textarea>
+  </section>
+
+  <section class="card" data-id="P03_U03_A031_S008#0@0" data-filt="hand-reject">
+    <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/vanaparva?page=3&amp;id=P03_U03_A031_" target="_blank" rel="noopener">MBh 3.31.8 — отклонено как омоним (arsa_lexical_gloss)</a> <span class="badge">vanaparva</span><span class="badge">ārṣa</span><span class="badge">ручное решение</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P03_U03_A031_S008#0@0</span></header>
+    <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षम्</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">आर्षम् ऋषयो मन्त्रास्तद्द्रष्टारो मन्वादयो वा धर्ममूलभूतं मन्त्रजातं वा मन्वादिवाक्यं वेत्यर्थः । अर्थे वेति पाठे फले विषये इत्यर्थः। दुर्बलात्मनः विवेकाक्षमचित्तस्य अपेयात्</span></p><p><b>Решение агента:</b> <code>arsa_lexical_gloss</code> — строка <u>не попадает</u> в регистр.</p></div>
+    <div class="panel"><h4>Обоснование</h4><p>ārṣam = &#x27;the ṛṣis, the mantras, or their seers Manu and the rest&#x27; — a dharma-source gloss.</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка остаётся вне регистра; она уже учтена в измеренной точности 92,1 % (152 из 165) и лежит в <a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/licence_register/nilakantha_licence_rejected.tsv">nilakantha_licence_rejected.tsv</a> вместе с причиной отклонения.</p><p><b>«Не согласен»</b> — строка возвращается в регистр (станет 153), измеренная точность вырастет, и в заметке нужно указать deviation_type, который вы считаете верным: без него строку некуда положить.</p><p><b>«Отложить»</b> — строка остаётся отклонённой до следующего круга; ничего не ломается, но цифра точности остаётся спорной.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
+      <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Если не согласны — какой deviation_type здесь верен?"></textarea>
+  </section>
+
+  <section class="card" data-id="P03_U07_A091_S024#0@90" data-filt="hand-reject">
+    <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/vanaparva?page=7&amp;id=P03_U07_A091_" target="_blank" rel="noopener">MBh 3.91.24 — отклонено как омоним (arsa_lexical_gloss)</a> <span class="badge">vanaparva</span><span class="badge">ārṣa</span><span class="badge">ручное решение</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P03_U07_A091_S024#0@90</span></header>
+    <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षेण</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">अपहरिष्यामि कवचकुण्डलापहरणे इन्द्रेण कृते सति तदपि इन्द्रस्यान्तः प्रविश्य सम्पादयिष्यामि आर्षेण अभेददर्शनेन अहं मनुरभवमित्यादिवदहमेवेन्द्ररूपी करिष्यामीति ॥२४॥</span></p><p><b>Решение агента:</b> <code>arsa_lexical_gloss</code> — строка <u>не попадает</u> в регистр.</p></div>
+    <div class="panel"><h4>Обоснование</h4><p>ārṣeṇa abheda-darśanena &#x27;by the ṛṣi-like vision of non-difference&#x27; — an instrumental of manner, glossing Karṇa&#x27;s identification with Indra.</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка остаётся вне регистра; она уже учтена в измеренной точности 92,1 % (152 из 165) и лежит в <a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/licence_register/nilakantha_licence_rejected.tsv">nilakantha_licence_rejected.tsv</a> вместе с причиной отклонения.</p><p><b>«Не согласен»</b> — строка возвращается в регистр (станет 153), измеренная точность вырастет, и в заметке нужно указать deviation_type, который вы считаете верным: без него строку некуда положить.</p><p><b>«Отложить»</b> — строка остаётся отклонённой до следующего круга; ничего не ломается, но цифра точности остаётся спорной.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
+      <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Если не согласны — какой deviation_type здесь верен?"></textarea>
+  </section>
+
+  <section class="card" data-id="P05_U05_A070_S007#0@225" data-filt="hand-reject">
+    <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/udyogaparva?page=5&amp;id=P05_U05_A070_" target="_blank" rel="noopener">MBh 5.70.7 — отклонено как омоним (arsa_lexical_gloss)</a> <span class="badge">udyogaparva</span><span class="badge">ārṣa</span><span class="badge">ручное решение</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P05_U05_A070_S007#0@225</span></header>
+    <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षं</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">इति स्मृतो मत्वर्थीयस्तप्प्रत्ययो बाहुलकात् सत्वशब्दादपि बोध्यः अत्र सत्वेन अत्याज्यः सत्वं च यस्य अत्याज्यं स सत्वतः सत्वत एव सात्वतः- राक्षसवायसादिवत्स्वार्थे तद्धितः- आर्षं वेदस्तेन भातीत्यार्षभ औपनिषदः पुरुषः उपनिषद्वेद्यत्वाद्योगात् वृषभेक्षणः । तथा चायं योगः वृषं धर्मं भासयतीति वृषभो वेदस्तदेव ईक्षणं चक्षुरिव ज्ञापकं यस्य सः वृषभेक्षण इ</span></p><p><b>Решение агента:</b> <code>arsa_lexical_gloss</code> — строка <u>не попадает</u> в регистр.</p></div>
+    <div class="panel"><h4>Обоснование</h4><p>THE FALSE POSITIVE OF THE AUTOMATIC PASS. &#x27;ārṣaṃ vedas tena bhātīty ārṣabha&#x27; — ārṣam is being glossed as &#x27;the Veda&#x27;, and ārṣabha &#x27;illumined by the Veda&#x27; derived from it. The &#x27;svārthe taddhitaḥ&#x27; two characters upstream, which is what triggered the rule, belongs to the PREVIOUS derivation (sattvataḥ &gt; sātvataḥ) and has nothing to do with the ārṣa. The one case in 165 where a genuine grammatical term stands next to a non-grammatical ārṣa; no rule distinguishes them, only reading the sentence does.</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка остаётся вне регистра; она уже учтена в измеренной точности 92,1 % (152 из 165) и лежит в <a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/licence_register/nilakantha_licence_rejected.tsv">nilakantha_licence_rejected.tsv</a> вместе с причиной отклонения.</p><p><b>«Не согласен»</b> — строка возвращается в регистр (станет 153), измеренная точность вырастет, и в заметке нужно указать deviation_type, который вы считаете верным: без него строку некуда положить.</p><p><b>«Отложить»</b> — строка остаётся отклонённой до следующего круга; ничего не ломается, но цифра точности остаётся спорной.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
+      <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Если не согласны — какой deviation_type здесь верен?"></textarea>
+  </section>
+
+  <section class="card" data-id="P12_U01_A012_S017#0@0" data-filt="hand-reject">
+    <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/shantiparva?page=1&amp;id=P12_U01_A012_" target="_blank" rel="noopener">MBh 12.12.17 — отклонено как омоним (arsa_lexical_gloss)</a> <span class="badge">shantiparva</span><span class="badge">ārṣa</span><span class="badge">ручное решение</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P12_U01_A012_S017#0@0</span></header>
+    <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षः</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">आर्षः ऋषीणां हितः ॥१७॥</span></p><p><b>Решение агента:</b> <code>arsa_lexical_gloss</code> — строка <u>не попадает</u> в регистр.</p></div>
+    <div class="panel"><h4>Обоснование</h4><p>The whole ṭīkā is &#x27;ārṣaḥ ṛṣīṇāṃ hitaḥ&#x27; — glossing the verse&#x27;s own ārṣo vidhiḥ as &#x27;the rule beneficial to ṛṣis&#x27;.</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка остаётся вне регистра; она уже учтена в измеренной точности 92,1 % (152 из 165) и лежит в <a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/licence_register/nilakantha_licence_rejected.tsv">nilakantha_licence_rejected.tsv</a> вместе с причиной отклонения.</p><p><b>«Не согласен»</b> — строка возвращается в регистр (станет 153), измеренная точность вырастет, и в заметке нужно указать deviation_type, который вы считаете верным: без него строку некуда положить.</p><p><b>«Отложить»</b> — строка остаётся отклонённой до следующего круга; ничего не ломается, но цифра точности остаётся спорной.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
+      <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Если не согласны — какой deviation_type здесь верен?"></textarea>
+  </section>
+
+  <section class="card" data-id="P12_U02_A132_S017#0@0" data-filt="hand-reject">
+    <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/shantiparva?page=2&amp;id=P12_U02_A132_" target="_blank" rel="noopener">MBh 12.132.17 — отклонено как омоним (arsa_lexical_gloss)</a> <span class="badge">shantiparva</span><span class="badge">ārṣa</span><span class="badge">ручное решение</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P12_U02_A132_S017#0@0</span></header>
+    <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षं</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">आर्षं -</span></p><p><b>Решение агента:</b> <code>arsa_lexical_gloss</code> — строка <u>не попадает</u> в регистр.</p></div>
+    <div class="panel"><h4>Обоснование</h4><p>The ṭīkā is the two characters &#x27;ārṣaṃ -&#x27; and stops: a truncated lemma-gloss of the verse&#x27;s ārṣam (&#x27;scriptural precedent&#x27;), not a licence. Truncation is in the source, not in the scrape.</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка остаётся вне регистра; она уже учтена в измеренной точности 92,1 % (152 из 165) и лежит в <a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/licence_register/nilakantha_licence_rejected.tsv">nilakantha_licence_rejected.tsv</a> вместе с причиной отклонения.</p><p><b>«Не согласен»</b> — строка возвращается в регистр (станет 153), измеренная точность вырастет, и в заметке нужно указать deviation_type, который вы считаете верным: без него строку некуда положить.</p><p><b>«Отложить»</b> — строка остаётся отклонённой до следующего круга; ничего не ломается, но цифра точности остаётся спорной.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
+      <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Если не согласны — какой deviation_type здесь верен?"></textarea>
+  </section>
+
+  <section class="card" data-id="P12_U03_A268_S010#0@9" data-filt="hand-reject">
+    <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/shantiparva?page=3&amp;id=P12_U03_A268_" target="_blank" rel="noopener">MBh 12.268.10 — отклонено как омоним (arsa_lexical_gloss)</a> <span class="badge">shantiparva</span><span class="badge">ārṣa</span><span class="badge">ручное решение</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P12_U03_A268_S010#0@9</span></header>
+    <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षं</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">तपस्विनः आर्षं मन्यन्ते किं विदितात्मनः नित्यज्ञानवतः परमेश्वरस्य व्याहृतम् ’अस्य महतो भूतस्य निःश्वसितमेतद्यदृग्वेदः&#x27; इति श्रुतेर्निःश्वासवदयत्नोच्चारितं च वेदम् अतोऽत्रैकमप्यक्षरमप्</span></p><p><b>Решение агента:</b> <code>arsa_lexical_gloss</code> — строка <u>не попадает</u> в регистр.</p></div>
+    <div class="panel"><h4>Обоснование</h4><p>ārṣam = the Veda, &#x27;breathed out effortlessly by the great Being&#x27; — glossing sarvam ārṣaṃ hi manyante.</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка остаётся вне регистра; она уже учтена в измеренной точности 92,1 % (152 из 165) и лежит в <a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/licence_register/nilakantha_licence_rejected.tsv">nilakantha_licence_rejected.tsv</a> вместе с причиной отклонения.</p><p><b>«Не согласен»</b> — строка возвращается в регистр (станет 153), измеренная точность вырастет, и в заметке нужно указать deviation_type, который вы считаете верным: без него строку некуда положить.</p><p><b>«Отложить»</b> — строка остаётся отклонённой до следующего круга; ничего не ломается, но цифра точности остаётся спорной.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
+      <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Если не согласны — какой deviation_type здесь верен?"></textarea>
+  </section>
+
+  <section class="card" data-id="P13_U01_A019_S002#0@71" data-filt="hand-reject">
+    <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/anushasanaparva?page=1&amp;id=P13_U01_A019_" target="_blank" rel="noopener">MBh 13.19.2 — отклонено как омоним (arsa_marriage_type)</a> <span class="badge">anushasanaparva</span><span class="badge">ārṣa</span><span class="badge">ручное решение</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P13_U01_A019_S002#0@71</span></header>
+    <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्ष</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">धर्मविशेषे एव साहित्यमपेक्ष्यते न सर्वत्रेत्याशङ्क्य धर्मं विकल्पयति - आर्ष इति । ऋषिभिर्मन्त्रैः प्रकाशितः श्रौतस्मार्तक्रियारूप आर्षः केवलं वेदविहितत्वाद्वा । प्राजपत्यः प्रजापतिना सन्तानकर्मणा प्रथितः &#x27;नापुत्रस्य लोकोऽस्ति&#x27; इति श्रुतत्वादकरणे</span></p><p><b>Решение агента:</b> <code>arsa_marriage_type</code> — строка <u>не попадает</u> в регистр.</p></div>
+    <div class="panel"><h4>Обоснование</h4><p>ārṣa heads Nīlakaṇṭha&#x27;s enumeration of dharma-types (ārṣa / prājāpatya / āsura …) — the dharmaśāstra classification, twice in one ṭīkā.</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка остаётся вне регистра; она уже учтена в измеренной точности 92,1 % (152 из 165) и лежит в <a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/licence_register/nilakantha_licence_rejected.tsv">nilakantha_licence_rejected.tsv</a> вместе с причиной отклонения.</p><p><b>«Не согласен»</b> — строка возвращается в регистр (станет 153), измеренная точность вырастет, и в заметке нужно указать deviation_type, который вы считаете верным: без него строку некуда положить.</p><p><b>«Отложить»</b> — строка остаётся отклонённой до следующего круга; ничего не ломается, но цифра точности остаётся спорной.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
+      <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Если не согласны — какой deviation_type здесь верен?"></textarea>
+  </section>
+
+  <section class="card" data-id="P13_U01_A019_S002#0@130" data-filt="hand-reject">
+    <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/anushasanaparva?page=1&amp;id=P13_U01_A019_" target="_blank" rel="noopener">MBh 13.19.2 — отклонено как омоним (arsa_marriage_type)</a> <span class="badge">anushasanaparva</span><span class="badge">ārṣa</span><span class="badge">ручное решение</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P13_U01_A019_S002#0@130</span></header>
+    <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षः</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">धर्मविशेषे एव साहित्यमपेक्ष्यते न सर्वत्रेत्याशङ्क्य धर्मं विकल्पयति - आर्ष इति । ऋषिभिर्मन्त्रैः प्रकाशितः श्रौतस्मार्तक्रियारूप आर्षः केवलं वेदविहितत्वाद्वा । प्राजपत्यः प्रजापतिना सन्तानकर्मणा प्रथितः &#x27;नापुत्रस्य लोकोऽस्ति&#x27; इति श्रुतत्वादकरणेऽनिष्टदर्शनाद्वा आसुरः असुषु रमन्ते तेऽसुरास्तेषामयमासुरः क</span></p><p><b>Решение агента:</b> <code>arsa_marriage_type</code> — строка <u>не попадает</u> в регистр.</p></div>
+    <div class="panel"><h4>Обоснование</h4><p>Second occurrence in the same ṭīkā: &#x27;śrauta-smārta-kriyā-rūpa ārṣaḥ&#x27;.</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка остаётся вне регистра; она уже учтена в измеренной точности 92,1 % (152 из 165) и лежит в <a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/licence_register/nilakantha_licence_rejected.tsv">nilakantha_licence_rejected.tsv</a> вместе с причиной отклонения.</p><p><b>«Не согласен»</b> — строка возвращается в регистр (станет 153), измеренная точность вырастет, и в заметке нужно указать deviation_type, который вы считаете верным: без него строку некуда положить.</p><p><b>«Отложить»</b> — строка остаётся отклонённой до следующего круга; ничего не ломается, но цифра точности остаётся спорной.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
+      <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Если не согласны — какой deviation_type здесь верен?"></textarea>
+  </section>
+
+  <section class="card" data-id="P13_U01_A044_S004#0@206" data-filt="hand-reject">
+    <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/anushasanaparva?page=1&amp;id=P13_U01_A044_" target="_blank" rel="noopener">MBh 13.44.4 — отклонено как омоним (arsa_marriage_type)</a> <span class="badge">anushasanaparva</span><span class="badge">ārṣa</span><span class="badge">ручное решение</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P13_U01_A044_S004#0@206</span></header>
+    <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षः</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">हणं ब्राह्मणयोग्या एते विवाहाः। यदाहाश्वलायनः - ‘अलंकृत्य कन्यामुदकपूर्वां दद्यादेष ब्राह्मो विवाहः । ऋत्विजे वितते कर्मणि दद्यादलंकृत्य स दैवः । गोमिथुनं दत्वोपयच्छेत स आर्षः’ इति । एवम् उक्तगुणवन्तम् आवाह्यं विवाहयोग्यम् आवहेत् आकारयेत् । ततश्च अनुकूलतो धनदानादिना अभिमुखीकृताय दद्यात् । अयं चतुर्थः प्राजापत्यो ब्राह्मणानां क्षत्रियाणां च प्</span></p><p><b>Решение агента:</b> <code>arsa_marriage_type</code> — строка <u>не попадает</u> в регистр.</p></div>
+    <div class="panel"><h4>Обоснование</h4><p>Again Āśvalāyana&#x27;s marriage list, verbatim: &#x27;gomithunaṃ datvopayacchheta sa ārṣaḥ&#x27;.</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка остаётся вне регистра; она уже учтена в измеренной точности 92,1 % (152 из 165) и лежит в <a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/licence_register/nilakantha_licence_rejected.tsv">nilakantha_licence_rejected.tsv</a> вместе с причиной отклонения.</p><p><b>«Не согласен»</b> — строка возвращается в регистр (станет 153), измеренная точность вырастет, и в заметке нужно указать deviation_type, который вы считаете верным: без него строку некуда положить.</p><p><b>«Отложить»</b> — строка остаётся отклонённой до следующего круга; ничего не ломается, но цифра точности остаётся спорной.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
+      <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Если не согласны — какой deviation_type здесь верен?"></textarea>
+  </section>
+
+  <section class="card" data-id="P01_U05_A032_S024#0@128" data-filt="hand-type">
+    <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/adiparva?page=5&amp;id=P01_U05_A032_" target="_blank" rel="noopener">MBh 1.32.24 — принято, тип назначен вручную</a> <span class="badge">adiparva</span><span class="badge">ārṣa</span><span class="badge">ручное решение</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P01_U05_A032_S024#0@128</span></header>
+    <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षः</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">नवत्याः &#x27;नवती: शताधिकाष्टसाहस्री । नवतीरिति बहुवचनात्साप्यनेकगुणा । ततश्चानन्तर्मुखैरित्यर्थः । नवत्यो नवतीरिति पाठे ङितामाडभाव आर्षः ॥२४॥</span></p><p><b>Назначенный тип:</b> <code>absence of the āṭ augment</code> (<span lang="sa">āḍ-abhāva</span>)</p></div>
+    <div class="panel"><h4>Обоснование</h4><p>&#x27;navatyo navatīr iti pāṭhe ṅitām āḍbhāva ārṣaḥ&#x27;. Written ङितामाडभाव, the fused form is indistinguishable from an aḍ-abhāva, and no rule can tell them apart; ṅitām &#x27;of the ṅit endings&#x27; settles it as āṭ (Pāṇini 7.3.112 ṅiti āṭ), so the type is assigned by hand rather than guessed.</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка остаётся в регистре с этим типом и с пометкой <code>classification=hand</code>.</p><p><b>«Не согласен»</b> — тип переписывается по вашей заметке; если это вообще не licence-claim, строка уходит в отклонённые и регистр становится 151-строчным.</p><p><b>«Отложить»</b> — строка остаётся как есть до следующего круга.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
+      <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Другой deviation_type? Или это не licence-claim?"></textarea>
+  </section>
+
+  <section class="card" data-id="P12_U01_A040_S002#0@29" data-filt="hand-type">
+    <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/shantiparva?page=1&amp;id=P12_U01_A040_" target="_blank" rel="noopener">MBh 12.40.2 — принято, тип назначен вручную</a> <span class="badge">shantiparva</span><span class="badge">ārṣa</span><span class="badge">ручное решение</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P12_U01_A040_S002#0@29</span></header>
+    <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षम्</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">निषीदतुरिति निषेदतुरित्यर्थे आर्षम् ॥२॥</span></p><p><b>Назначенный тип:</b> <code>stem vowel — ī for the expected e of the reduplicated perfect</code> (<span lang="sa">niṣīdatuḥ for niṣedatuḥ</span>)</p></div>
+    <div class="panel"><h4>Обоснование</h4><p>&#x27;niṣīdatur iti niṣedatur ity arthe ārṣam&#x27; — Nīlakaṇṭha names no operation, only the two forms: the reduplicated perfect of sad- should show guṇa (niṣedatuḥ), and the epic&#x27;s niṣīdatuḥ keeps the present-stem vowel. The one hit in the whole corpus where the deviation is stated by contrasting forms rather than by naming a rule, which is exactly why it fell out of the automatic pass.</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка остаётся в регистре с этим типом и с пометкой <code>classification=hand</code>.</p><p><b>«Не согласен»</b> — тип переписывается по вашей заметке; если это вообще не licence-claim, строка уходит в отклонённые и регистр становится 151-строчным.</p><p><b>«Отложить»</b> — строка остаётся как есть до следующего круга.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
+      <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Другой deviation_type? Или это не licence-claim?"></textarea>
+  </section>
+
+  <section class="card" data-id="P01_U01_A001_S050|NIL-001" data-filt="auto-sample">
+    <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/adiparva?page=1&amp;id=P01_U01_A001_" target="_blank" rel="noopener">MBh 1.1.50 — absence of sandhi</a> <span class="badge">adiparva</span><span class="badge">chāndasa</span><span class="badge">авто-типизация</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P01_U01_A001_S050|NIL-001</span></header>
+    <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">असीत्यत्रासन्धिप्रछान्दसः</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">्रपाः कर्तन्या इत्यादिस्मृतिमूलभूता धन्वन्निव प्रपा असित्वमग्ने इत्यादयः । हे अग्ने ! त्वं धन्वन् निरुदके प्रदेशे प्रपेवलोकतृप्तिकरोसीति तदर्थः । प्रपा असीत्यत्रासन्धिप्रछान्दसः । इहेति । अनुक्रान्तमनुक्रमेणोक्तं इदमेव यथोक्तं ग्रन्थस्य लक्षणम् । विषयः प्रतिपाद्योऽर्थः ॥५०॥</span></p><p><b>Тип, выведенный автоматически:</b> <code>absence of sandhi</code> — из грамматического термина <span lang="sa">asandhi</span>, который Нилакантха называет рядом со словом-лицензией.</p></div>
+    <div class="panel"><h4>Что проверяется</h4><p>Вопрос карточки — <u>не</u> «licence-claim ли это» (наличие названной грамматической операции рядом со словом-лицензией это уже доказывает), а «верно ли операция переведена в deviation_type».</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка засчитывается как верная в выборке из 30, подтверждая измеренные 100 % точности авто-типизации (151 из 151).</p><p><b>«Не согласен»</b> — точность авто-прохода падает. Это <u>та самая</u> цифра, по которой H2860 объявляется провалившимся, если она уйдёт ниже ~90 %: три несогласия из 30 — ещё порог, четыре — уже провал, и регистр придётся перетипизировать.</p><p><b>«Отложить»</b> — строка выпадает из знаменателя выборки; при большом числе отложенных выборка перестаёт быть 30-строчной и оценку придётся повторить.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
+      <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
+  </section>
+
+  <section class="card" data-id="P01_U02_A002_S010|NIL-002" data-filt="auto-sample">
+    <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/adiparva?page=2&amp;id=P01_U02_A002_" target="_blank" rel="noopener">MBh 1.2.10 — elision — reduplication syllable</a> <span class="badge">adiparva</span><span class="badge">ārṣa</span><span class="badge">авто-типизация</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P01_U02_A002_S010|NIL-002</span></header>
+    <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षः</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">यदिति सार्धेन क्रोधः सर्वे पापायैव हीनबलेषु शस्त्रनिक्षेपादिति भावः ॥ निषिषिधुः निषिद्धवन्तः । अक्षराधिक्यमार्षम् । अभ्यासलोपो वा आर्षः । सिषिधुरिति पाठे शशासुः । हिंसातो विरमस्वेति शिक्षितवन्त इत्यर्थः ॥१०॥</span></p><p><b>Тип, выведенный автоматически:</b> <code>elision — reduplication syllable</code> — из грамматического термина <span lang="sa">abhyāsa-lopa</span>, который Нилакантха называет рядом со словом-лицензией.</p></div>
+    <div class="panel"><h4>Что проверяется</h4><p>Вопрос карточки — <u>не</u> «licence-claim ли это» (наличие названной грамматической операции рядом со словом-лицензией это уже доказывает), а «верно ли операция переведена в deviation_type».</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка засчитывается как верная в выборке из 30, подтверждая измеренные 100 % точности авто-типизации (151 из 151).</p><p><b>«Не согласен»</b> — точность авто-прохода падает. Это <u>та самая</u> цифра, по которой H2860 объявляется провалившимся, если она уйдёт ниже ~90 %: три несогласия из 30 — ещё порог, четыре — уже провал, и регистр придётся перетипизировать.</p><p><b>«Отложить»</b> — строка выпадает из знаменателя выборки; при большом числе отложенных выборка перестаёт быть 30-строчной и оценку придётся повторить.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
+      <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
+  </section>
+
+  <section class="card" data-id="P01_U03_A003_S067|NIL-005" data-filt="auto-sample">
+    <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/adiparva?page=3&amp;id=P01_U03_A003_" target="_blank" rel="noopener">MBh 1.3.67 — gender — neuter</a> <span class="badge">adiparva</span><span class="badge">chāndasa</span><span class="badge">авто-типизация</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P01_U03_A003_S067|NIL-005</span></header>
+    <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">छान्दसं</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">ेतयते नान्यस्ततश्चेतनोस्तीति तद्दूषणपूर्वकं स्वस्य चक्षुः प्रार्थयते । युवानौ मातापितरौ । अन्नात्पुरुष इति श्रुतेः । मुखेनान्नरूपं गर्भं प्रथमं लभेतां ततः एतत् एतं गर्भं छान्दसं क्लीबत्वं पुंसि रेतोरूपेण । योषिति शोणितरूपेण परिणतम् । गतासुरचेतनो देहः प्रपदेन प्रकर्षेण पद्यते सुखमनेनेति प्रपदमुपस्थेन्द्रियम् । सर्वेषामानन्दानामुपस्थ एकायनमिति श्</span></p><p><b>Тип, выведенный автоматически:</b> <code>gender — neuter</code> — из грамматического термина <span lang="sa">klībatva</span>, который Нилакантха называет рядом со словом-лицензией.</p></div>
+    <div class="panel"><h4>Что проверяется</h4><p>Вопрос карточки — <u>не</u> «licence-claim ли это» (наличие названной грамматической операции рядом со словом-лицензией это уже доказывает), а «верно ли операция переведена в deviation_type».</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка засчитывается как верная в выборке из 30, подтверждая измеренные 100 % точности авто-типизации (151 из 151).</p><p><b>«Не согласен»</b> — точность авто-прохода падает. Это <u>та самая</u> цифра, по которой H2860 объявляется провалившимся, если она уйдёт ниже ~90 %: три несогласия из 30 — ещё порог, четыре — уже провал, и регистр придётся перетипизировать.</p><p><b>«Отложить»</b> — строка выпадает из знаменателя выборки; при большом числе отложенных выборка перестаёт быть 30-строчной и оценку придётся повторить.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
+      <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
+  </section>
+
+  <section class="card" data-id="P01_U03_A003_S142|NIL-006" data-filt="auto-sample">
+    <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/adiparva?page=3&amp;id=P01_U03_A003_" target="_blank" rel="noopener">MBh 1.3.142 — elision — initial segment</a> <span class="badge">adiparva</span><span class="badge">ārṣa</span><span class="badge">авто-типизация</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P01_U03_A003_S142|NIL-006</span></header>
+    <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षः</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">महद्युम्नि सूर्ये तत्समीपे नागमुख्यतां प्रार्थयन् कुरुक्षेत्रेऽवसदिति पूर्वेण सम्बन्धः कुरुक्षेत्रवासमात्रादेव महत्स्थानं प्राप्यत इत्याशयः । द्युमानित्यत्रमनिच आदिलोप ́ आर्षः । अत्रायमाख्यायिकातात्पर्यार्थः । कुण्डलरत्नं वस्तुतत्त्वम् । तक्षकेणेव पाखण्डिना अपहृतं परमेश्वरप्रसादलब्धविवेकवज्रबलेन पाखण्डमतबिलमवदार्य विवेकमनुनागराजबिलतुल्यमान्तर</span></p><p><b>Тип, выведенный автоматически:</b> <code>elision — initial segment</code> — из грамматического термина <span lang="sa">ādi-lopa</span>, который Нилакантха называет рядом со словом-лицензией.</p></div>
+    <div class="panel"><h4>Что проверяется</h4><p>Вопрос карточки — <u>не</u> «licence-claim ли это» (наличие названной грамматической операции рядом со словом-лицензией это уже доказывает), а «верно ли операция переведена в deviation_type».</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка засчитывается как верная в выборке из 30, подтверждая измеренные 100 % точности авто-типизации (151 из 151).</p><p><b>«Не согласен»</b> — точность авто-прохода падает. Это <u>та самая</u> цифра, по которой H2860 объявляется провалившимся, если она уйдёт ниже ~90 %: три несогласия из 30 — ещё порог, четыре — уже провал, и регистр придётся перетипизировать.</p><p><b>«Отложить»</b> — строка выпадает из знаменателя выборки; при большом числе отложенных выборка перестаёт быть 30-строчной и оценку придётся повторить.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
+      <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
+  </section>
+
+  <section class="card" data-id="P01_U05_A024_S011|NIL-007" data-filt="auto-sample">
+    <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/adiparva?page=5&amp;id=P01_U05_A024_" target="_blank" rel="noopener">MBh 1.24.11 — absence of the aṭ augment</a> <span class="badge">adiparva</span><span class="badge">ārṣa</span><span class="badge">авто-типизация</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P01_U05_A024_S011|NIL-007</span></header>
+    <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षः</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">सन्तापयत समतापयत । अडभाव आर्षः । तिरोभूत एव सन्नेवं दहत्युदये तु भस्मीकरिष्यति लोकानित्याह तत इत्यादिना ॥११॥</span></p><p><b>Тип, выведенный автоматически:</b> <code>absence of the aṭ augment</code> — из грамматического термина <span lang="sa">aḍ-abhāva</span>, который Нилакантха называет рядом со словом-лицензией.</p></div>
+    <div class="panel"><h4>Что проверяется</h4><p>Вопрос карточки — <u>не</u> «licence-claim ли это» (наличие названной грамматической операции рядом со словом-лицензией это уже доказывает), а «верно ли операция переведена в deviation_type».</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка засчитывается как верная в выборке из 30, подтверждая измеренные 100 % точности авто-типизации (151 из 151).</p><p><b>«Не согласен»</b> — точность авто-прохода падает. Это <u>та самая</u> цифра, по которой H2860 объявляется провалившимся, если она уйдёт ниже ~90 %: три несогласия из 30 — ещё порог, четыре — уже провал, и регистр придётся перетипизировать.</p><p><b>«Отложить»</b> — строка выпадает из знаменателя выборки; при большом числе отложенных выборка перестаёт быть 30-строчной и оценку придётся повторить.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
+      <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
+  </section>
+
+  <section class="card" data-id="P01_U07_A093_S023|NIL-013" data-filt="auto-sample">
+    <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/adiparva?page=7&amp;id=P01_U07_A093_" target="_blank" rel="noopener">MBh 1.93.23 — elision — reduplication syllable</a> <span class="badge">adiparva</span><span class="badge">ārṣa</span><span class="badge">авто-типизация</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P01_U07_A093_S023|NIL-013</span></header>
+    <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षः</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">क्षरति कीर्तनात्&#x27; इत्युक्तेरश्रेयसे स्यात् प्रस्थे दत्वा विपिनं ब्राह्मणेभ्य इतिपाठे ब्राह्मणेभ्यो दत्वा विपिनं वनं प्रस्थे प्रतस्थेऽहं प्रस्थानं कृतवानस्मि । अभ्यासलोप आर्षः । मेध्यानश्वान्यदा देवेभ्यः उत्सृजति तदा देवास्तं पुण्यवन्तं भजन्तीत्यर्थः ॥२३॥</span></p><p><b>Тип, выведенный автоматически:</b> <code>elision — reduplication syllable</code> — из грамматического термина <span lang="sa">abhyāsa-lopa</span>, который Нилакантха называет рядом со словом-лицензией.</p></div>
+    <div class="panel"><h4>Что проверяется</h4><p>Вопрос карточки — <u>не</u> «licence-claim ли это» (наличие названной грамматической операции рядом со словом-лицензией это уже доказывает), а «верно ли операция переведена в deviation_type».</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка засчитывается как верная в выборке из 30, подтверждая измеренные 100 % точности авто-типизации (151 из 151).</p><p><b>«Не согласен»</b> — точность авто-прохода падает. Это <u>та самая</u> цифра, по которой H2860 объявляется провалившимся, если она уйдёт ниже ~90 %: три несогласия из 30 — ещё порог, четыре — уже провал, и регистр придётся перетипизировать.</p><p><b>«Отложить»</b> — строка выпадает из знаменателя выборки; при большом числе отложенных выборка перестаёт быть 30-строчной и оценку придётся повторить.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
+      <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
+  </section>
+
+  <section class="card" data-id="P01_U07_A131_S051|NIL-017" data-filt="auto-sample">
+    <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/adiparva?page=7&amp;id=P01_U07_A131_" target="_blank" rel="noopener">MBh 1.131.51 — absence of the aṭ augment</a> <span class="badge">adiparva</span><span class="badge">ārṣa</span><span class="badge">авто-типизация</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P01_U07_A131_S051|NIL-017</span></header>
+    <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षः</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">दिशः सन्देहयत् दिङ्मोहमजनयत् । अडभाव आर्षः शत्रन्तं वा ॥५१॥</span></p><p><b>Тип, выведенный автоматически:</b> <code>absence of the aṭ augment</code> — из грамматического термина <span lang="sa">aḍ-abhāva</span>, который Нилакантха называет рядом со словом-лицензией.</p></div>
+    <div class="panel"><h4>Что проверяется</h4><p>Вопрос карточки — <u>не</u> «licence-claim ли это» (наличие названной грамматической операции рядом со словом-лицензией это уже доказывает), а «верно ли операция переведена в deviation_type».</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка засчитывается как верная в выборке из 30, подтверждая измеренные 100 % точности авто-типизации (151 из 151).</p><p><b>«Не согласен»</b> — точность авто-прохода падает. Это <u>та самая</u> цифра, по которой H2860 объявляется провалившимся, если она уйдёт ниже ~90 %: три несогласия из 30 — ещё порог, четыре — уже провал, и регистр придётся перетипизировать.</p><p><b>«Отложить»</b> — строка выпадает из знаменателя выборки; при большом числе отложенных выборка перестаёт быть 30-строчной и оценку придётся повторить.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
+      <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
+  </section>
+
+  <section class="card" data-id="P03_U06_A064_S114|NIL-028" data-filt="auto-sample">
+    <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/vanaparva?page=6&amp;id=P03_U06_A064_" target="_blank" rel="noopener">MBh 3.64.114 — elision — reduplication syllable</a> <span class="badge">vanaparva</span><span class="badge">ārṣa</span><span class="badge">авто-типизация</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P03_U06_A064_S114|NIL-028</span></header>
+    <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षः</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">उपसर्प उपससर्प अभ्यासलोप आर्षः वरारोहा विस्तीर्णजघना ॥११४॥</span></p><p><b>Тип, выведенный автоматически:</b> <code>elision — reduplication syllable</code> — из грамматического термина <span lang="sa">abhyāsa-lopa</span>, который Нилакантха называет рядом со словом-лицензией.</p></div>
+    <div class="panel"><h4>Что проверяется</h4><p>Вопрос карточки — <u>не</u> «licence-claim ли это» (наличие названной грамматической операции рядом со словом-лицензией это уже доказывает), а «верно ли операция переведена в deviation_type».</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка засчитывается как верная в выборке из 30, подтверждая измеренные 100 % точности авто-типизации (151 из 151).</p><p><b>«Не согласен»</b> — точность авто-прохода падает. Это <u>та самая</u> цифра, по которой H2860 объявляется провалившимся, если она уйдёт ниже ~90 %: три несогласия из 30 — ещё порог, четыре — уже провал, и регистр придётся перетипизировать.</p><p><b>«Отложить»</b> — строка выпадает из знаменателя выборки; при большом числе отложенных выборка перестаёт быть 30-строчной и оценку придётся повторить.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
+      <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
+  </section>
+
+  <section class="card" data-id="P03_U06_A068_S014|NIL-029" data-filt="auto-sample">
+    <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/vanaparva?page=6&amp;id=P03_U06_A068_" target="_blank" rel="noopener">MBh 3.68.14 — feminine ṭāp ending</a> <span class="badge">vanaparva</span><span class="badge">chāndasa</span><span class="badge">авто-типизация</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P03_U06_A068_S014|NIL-029</span></header>
+    <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">छान्दसं</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">शुष्कस्रोतां शुष्कप्रवाहाम्। छान्दसं टाबन्तत्वम् ॥१४॥</span></p><p><b>Тип, выведенный автоматически:</b> <code>feminine ṭāp ending</code> — из грамматического термина <span lang="sa">ṭāb-antatva</span>, который Нилакантха называет рядом со словом-лицензией.</p></div>
+    <div class="panel"><h4>Что проверяется</h4><p>Вопрос карточки — <u>не</u> «licence-claim ли это» (наличие названной грамматической операции рядом со словом-лицензией это уже доказывает), а «верно ли операция переведена в deviation_type».</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка засчитывается как верная в выборке из 30, подтверждая измеренные 100 % точности авто-типизации (151 из 151).</p><p><b>«Не согласен»</b> — точность авто-прохода падает. Это <u>та самая</u> цифра, по которой H2860 объявляется провалившимся, если она уйдёт ниже ~90 %: три несогласия из 30 — ещё порог, четыре — уже провал, и регистр придётся перетипизировать.</p><p><b>«Отложить»</b> — строка выпадает из знаменателя выборки; при большом числе отложенных выборка перестаёт быть 30-строчной и оценку придётся повторить.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
+      <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
+  </section>
+
+  <section class="card" data-id="P03_U09_A160_S068|NIL-037" data-filt="auto-sample">
+    <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/vanaparva?page=9&amp;id=P03_U09_A160_" target="_blank" rel="noopener">MBh 3.160.68 — bha-stem treatment</a> <span class="badge">vanaparva</span><span class="badge">chāndasa</span><span class="badge">авто-типизация</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P03_U09_A160_S068|NIL-037</span></header>
+    <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">छान्दसं</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">अयस्मयीं छान्दसं ’भत्वम्’ अयोमयीम् ॥६८॥</span></p><p><b>Тип, выведенный автоматически:</b> <code>bha-stem treatment</code> — из грамматического термина <span lang="sa">bhatva</span>, который Нилакантха называет рядом со словом-лицензией.</p></div>
+    <div class="panel"><h4>Что проверяется</h4><p>Вопрос карточки — <u>не</u> «licence-claim ли это» (наличие названной грамматической операции рядом со словом-лицензией это уже доказывает), а «верно ли операция переведена в deviation_type».</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка засчитывается как верная в выборке из 30, подтверждая измеренные 100 % точности авто-типизации (151 из 151).</p><p><b>«Не согласен»</b> — точность авто-прохода падает. Это <u>та самая</u> цифра, по которой H2860 объявляется провалившимся, если она уйдёт ниже ~90 %: три несогласия из 30 — ещё порог, четыре — уже провал, и регистр придётся перетипизировать.</p><p><b>«Отложить»</b> — строка выпадает из знаменателя выборки; при большом числе отложенных выборка перестаёт быть 30-строчной и оценку придётся повторить.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
+      <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
+  </section>
+
+  <section class="card" data-id="P03_U12_A217_S007|NIL-042" data-filt="auto-sample">
+    <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/vanaparva?page=12&amp;id=P03_U12_A217_" target="_blank" rel="noopener">MBh 3.217.7 — absence of the aṭ augment</a> <span class="badge">vanaparva</span><span class="badge">ārṣa</span><span class="badge">авто-типизация</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P03_U12_A217_S007|NIL-042</span></header>
+    <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षः</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">अङ्गिराऽभवत् सन्धिरडभावो वा आर्षः ॥७॥</span></p><p><b>Тип, выведенный автоматически:</b> <code>absence of the aṭ augment</code> — из грамматического термина <span lang="sa">aḍ-abhāva</span>, который Нилакантха называет рядом со словом-лицензией.</p></div>
+    <div class="panel"><h4>Что проверяется</h4><p>Вопрос карточки — <u>не</u> «licence-claim ли это» (наличие названной грамматической операции рядом со словом-лицензией это уже доказывает), а «верно ли операция переведена в deviation_type».</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка засчитывается как верная в выборке из 30, подтверждая измеренные 100 % точности авто-типизации (151 из 151).</p><p><b>«Не согласен»</b> — точность авто-прохода падает. Это <u>та самая</u> цифра, по которой H2860 объявляется провалившимся, если она уйдёт ниже ~90 %: три несогласия из 30 — ещё порог, четыре — уже провал, и регистр придётся перетипизировать.</p><p><b>«Отложить»</b> — строка выпадает из знаменателя выборки; при большом числе отложенных выборка перестаёт быть 30-строчной и оценку придётся повторить.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
+      <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
+  </section>
+
+  <section class="card" data-id="P04_U04_A059_S005|NIL-054" data-filt="auto-sample">
+    <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/virataparva?page=4&amp;id=P04_U04_A059_" target="_blank" rel="noopener">MBh 4.59.5 — absence of the aṭ augment</a> <span class="badge">virataparva</span><span class="badge">ārṣa</span><span class="badge">авто-типизация</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P04_U04_A059_S005|NIL-054</span></header>
+    <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षः</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">न प्रजानन्त अडभाव आर्षः । न च ज्ञातवन्तः ॥५॥</span></p><p><b>Тип, выведенный автоматически:</b> <code>absence of the aṭ augment</code> — из грамматического термина <span lang="sa">aḍ-abhāva</span>, который Нилакантха называет рядом со словом-лицензией.</p></div>
+    <div class="panel"><h4>Что проверяется</h4><p>Вопрос карточки — <u>не</u> «licence-claim ли это» (наличие названной грамматической операции рядом со словом-лицензией это уже доказывает), а «верно ли операция переведена в deviation_type».</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка засчитывается как верная в выборке из 30, подтверждая измеренные 100 % точности авто-типизации (151 из 151).</p><p><b>«Не согласен»</b> — точность авто-прохода падает. Это <u>та самая</u> цифра, по которой H2860 объявляется провалившимся, если она уйдёт ниже ~90 %: три несогласия из 30 — ещё порог, четыре — уже провал, и регистр придётся перетипизировать.</p><p><b>«Отложить»</b> — строка выпадает из знаменателя выборки; при большом числе отложенных выборка перестаёт быть 30-строчной и оценку придётся повторить.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
+      <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
+  </section>
+
+  <section class="card" data-id="P04_U04_A061_S011|NIL-055" data-filt="auto-sample">
+    <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/virataparva?page=4&amp;id=P04_U04_A061_" target="_blank" rel="noopener">MBh 4.61.11 — elision — segment/syllable</a> <span class="badge">virataparva</span><span class="badge">ārṣa</span><span class="badge">авто-типизация</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P04_U04_A061_S011|NIL-055</span></header>
+    <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षः</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">न संधानं न संदधानं वर्णलोप आर्षः ॥११॥</span></p><p><b>Тип, выведенный автоматически:</b> <code>elision — segment/syllable</code> — из грамматического термина <span lang="sa">varṇa-lopa</span>, который Нилакантха называет рядом со словом-лицензией.</p></div>
+    <div class="panel"><h4>Что проверяется</h4><p>Вопрос карточки — <u>не</u> «licence-claim ли это» (наличие названной грамматической операции рядом со словом-лицензией это уже доказывает), а «верно ли операция переведена в deviation_type».</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка засчитывается как верная в выборке из 30, подтверждая измеренные 100 % точности авто-типизации (151 из 151).</p><p><b>«Не согласен»</b> — точность авто-прохода падает. Это <u>та самая</u> цифра, по которой H2860 объявляется провалившимся, если она уйдёт ниже ~90 %: три несогласия из 30 — ещё порог, четыре — уже провал, и регистр придётся перетипизировать.</p><p><b>«Отложить»</b> — строка выпадает из знаменателя выборки; при большом числе отложенных выборка перестаёт быть 30-строчной и оценку придётся повторить.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
+      <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
+  </section>
+
+  <section class="card" data-id="P05_U01_A001_S015|NIL-057" data-filt="auto-sample">
+    <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/udyogaparva?page=1&amp;id=P05_U01_A001_" target="_blank" rel="noopener">MBh 5.1.15 — voice — ātmanepada for parasmaipada</a> <span class="badge">udyogaparva</span><span class="badge">ārṣa</span><span class="badge">авто-типизация</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P05_U01_A001_S015|NIL-057</span></header>
+    <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षः</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">बुभूषेत् प्राप्तुमिच्छेत् तङ्भाव आर्षः ॥१५॥</span></p><p><b>Тип, выведенный автоматически:</b> <code>voice — ātmanepada for parasmaipada</code> — из грамматического термина <span lang="sa">taṅ-bhāva</span>, который Нилакантха называет рядом со словом-лицензией.</p></div>
+    <div class="panel"><h4>Что проверяется</h4><p>Вопрос карточки — <u>не</u> «licence-claim ли это» (наличие названной грамматической операции рядом со словом-лицензией это уже доказывает), а «верно ли операция переведена в deviation_type».</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка засчитывается как верная в выборке из 30, подтверждая измеренные 100 % точности авто-типизации (151 из 151).</p><p><b>«Не согласен»</b> — точность авто-прохода падает. Это <u>та самая</u> цифра, по которой H2860 объявляется провалившимся, если она уйдёт ниже ~90 %: три несогласия из 30 — ещё порог, четыре — уже провал, и регистр придётся перетипизировать.</p><p><b>«Отложить»</b> — строка выпадает из знаменателя выборки; при большом числе отложенных выборка перестаёт быть 30-строчной и оценку придётся повторить.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
+      <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
+  </section>
+
+  <section class="card" data-id="P05_U01_A014_S016|NIL-061" data-filt="auto-sample">
+    <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/udyogaparva?page=1&amp;id=P05_U01_A014_" target="_blank" rel="noopener">MBh 5.14.16 — voice — ātmanepada for parasmaipada</a> <span class="badge">udyogaparva</span><span class="badge">ārṣa</span><span class="badge">авто-типизация</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P05_U01_A014_S016|NIL-061</span></header>
+    <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षः</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">त्रस्यसि पालयिष्यसि तङभाव आर्षः ॥१६॥</span></p><p><b>Тип, выведенный автоматически:</b> <code>voice — ātmanepada for parasmaipada</code> — из грамматического термина <span lang="sa">taṅ-bhāva</span>, который Нилакантха называет рядом со словом-лицензией.</p></div>
+    <div class="panel"><h4>Что проверяется</h4><p>Вопрос карточки — <u>не</u> «licence-claim ли это» (наличие названной грамматической операции рядом со словом-лицензией это уже доказывает), а «верно ли операция переведена в deviation_type».</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка засчитывается как верная в выборке из 30, подтверждая измеренные 100 % точности авто-типизации (151 из 151).</p><p><b>«Не согласен»</b> — точность авто-прохода падает. Это <u>та самая</u> цифра, по которой H2860 объявляется провалившимся, если она уйдёт ниже ~90 %: три несогласия из 30 — ещё порог, четыре — уже провал, и регистр придётся перетипизировать.</p><p><b>«Отложить»</b> — строка выпадает из знаменателя выборки; при большом числе отложенных выборка перестаёт быть 30-строчной и оценку придётся повторить.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
+      <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
+  </section>
+
+  <section class="card" data-id="P05_U02_A027_S014|NIL-062" data-filt="auto-sample">
+    <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/udyogaparva?page=2&amp;id=P05_U02_A027_" target="_blank" rel="noopener">MBh 5.27.14 — voice — ātmanepada for parasmaipada</a> <span class="badge">udyogaparva</span><span class="badge">ārṣa</span><span class="badge">авто-типизация</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P05_U02_A027_S014|NIL-062</span></header>
+    <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षः</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">लाभ इत्यत आह - स इति । सः त्वमेवं निष्कामकर्मकृत् क्रोधजं लोकं नरकं हर्षजं स्वर्गं चेत्युभौ लोकौ चिराय अपुनरावृत्तये मा प्रहासीः मा गच्छ । ओहाङ् गतावितस्य रूपम् । तङभाव आर्षः । कर्मजं फलं त्यक्त्वा परेण वैराग्येण संपन्नो मोक्षार्थं योगाभ्यासमेव कुरुष्व किं राज्येन बन्धुनाशलभ्येनेत्यर्थः ॥१४॥</span></p><p><b>Тип, выведенный автоматически:</b> <code>voice — ātmanepada for parasmaipada</code> — из грамматического термина <span lang="sa">taṅ-bhāva</span>, который Нилакантха называет рядом со словом-лицензией.</p></div>
+    <div class="panel"><h4>Что проверяется</h4><p>Вопрос карточки — <u>не</u> «licence-claim ли это» (наличие названной грамматической операции рядом со словом-лицензией это уже доказывает), а «верно ли операция переведена в deviation_type».</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка засчитывается как верная в выборке из 30, подтверждая измеренные 100 % точности авто-типизации (151 из 151).</p><p><b>«Не согласен»</b> — точность авто-прохода падает. Это <u>та самая</u> цифра, по которой H2860 объявляется провалившимся, если она уйдёт ниже ~90 %: три несогласия из 30 — ещё порог, четыре — уже провал, и регистр придётся перетипизировать.</p><p><b>«Отложить»</b> — строка выпадает из знаменателя выборки; при большом числе отложенных выборка перестаёт быть 30-строчной и оценку придётся повторить.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
+      <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
+  </section>
+
+  <section class="card" data-id="P06_U03_A032_S003|NIL-076" data-filt="auto-sample">
+    <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/bhishmaparva?page=3&amp;id=P06_U03_A032_" target="_blank" rel="noopener">MBh 6.32.3 — absence of the u-substitution</a> <span class="badge">bhishmaparva</span><span class="badge">chāndasa</span><span class="badge">авто-типизация</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P06_U03_A032_S003|NIL-076</span></header>
+    <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">उत्वाभावश्छान्दसः</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">गीतासु “क्षरं प्रधानममृताक्षरं हरः क्षरात्मानावीशते देव एकः” इति श्रुतौ च कूटस्थपदेनामृतपदेन च विशेषितस्याक्षरपदस्य जीववाचित्वदर्शनात्। अमृतोक्षरमित्यपेक्षिते उत्वाभावश्छान्दसः। त(य)थाचाक्षरं जीवाख्यं परमं ब्रह्म। परममिति विशेषणेन सोपाधिकस्य पूर्वाध्यायोक्तस्य व्यावृत्तिः। नहि जीवस्य सोपाधिकस्य ब्रह्मभावः संभवति। व्यावर्तकोपाधौ मायादर्पणे जाग्</span></p><p><b>Тип, выведенный автоматически:</b> <code>absence of the u-substitution</code> — из грамматического термина <span lang="sa">utva-abhāva</span>, который Нилакантха называет рядом со словом-лицензией.</p></div>
+    <div class="panel"><h4>Что проверяется</h4><p>Вопрос карточки — <u>не</u> «licence-claim ли это» (наличие названной грамматической операции рядом со словом-лицензией это уже доказывает), а «верно ли операция переведена в deviation_type».</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка засчитывается как верная в выборке из 30, подтверждая измеренные 100 % точности авто-типизации (151 из 151).</p><p><b>«Не согласен»</b> — точность авто-прохода падает. Это <u>та самая</u> цифра, по которой H2860 объявляется провалившимся, если она уйдёт ниже ~90 %: три несогласия из 30 — ещё порог, четыре — уже провал, и регистр придётся перетипизировать.</p><p><b>«Отложить»</b> — строка выпадает из знаменателя выборки; при большом числе отложенных выборка перестаёт быть 30-строчной и оценку придётся повторить.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
+      <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
+  </section>
+
+  <section class="card" data-id="P06_U03_A035_S048|NIL-078" data-filt="auto-sample">
+    <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/bhishmaparva?page=3&amp;id=P06_U03_A035_" target="_blank" rel="noopener">MBh 6.35.48 — absence of ru-substitution</a> <span class="badge">bhishmaparva</span><span class="badge">ārṣa</span><span class="badge">авто-типизация</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P06_U03_A035_S048|NIL-078</span></header>
+    <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षः</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">च दानैर्न च क्रियाभिः स्मृत्युक्ताभिरापूर्तादिभिर्वापीकूपारामादिभिस्तपोभिः कृच्छ्रचान्द्रयणाद्यैः। उग्रैर्मासोपवासाद्यैः। नृलोके एवंरूपोऽहं द्रष्टुं न शक्यः। रोरुत्वाभाव आर्षः। त्वदन्येन कुरुप्रवीर ॥४८॥</span></p><p><b>Тип, выведенный автоматически:</b> <code>absence of ru-substitution</code> — из грамматического термина <span lang="sa">ru-tva-abhāva</span>, который Нилакантха называет рядом со словом-лицензией.</p></div>
+    <div class="panel"><h4>Что проверяется</h4><p>Вопрос карточки — <u>не</u> «licence-claim ли это» (наличие названной грамматической операции рядом со словом-лицензией это уже доказывает), а «верно ли операция переведена в deviation_type».</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка засчитывается как верная в выборке из 30, подтверждая измеренные 100 % точности авто-типизации (151 из 151).</p><p><b>«Не согласен»</b> — точность авто-прохода падает. Это <u>та самая</u> цифра, по которой H2860 объявляется провалившимся, если она уйдёт ниже ~90 %: три несогласия из 30 — ещё порог, четыре — уже провал, и регистр придётся перетипизировать.</p><p><b>«Отложить»</b> — строка выпадает из знаменателя выборки; при большом числе отложенных выборка перестаёт быть 30-строчной и оценку придётся повторить.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
+      <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
+  </section>
+
+  <section class="card" data-id="P06_U03_A042_S055|NIL-079" data-filt="auto-sample">
+    <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/bhishmaparva?page=3&amp;id=P06_U03_A042_" target="_blank" rel="noopener">MBh 6.42.55 — elision</a> <span class="badge">bhishmaparva</span><span class="badge">chāndasa</span><span class="badge">авто-типизация</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P06_U03_A042_S055|NIL-079</span></header>
+    <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">एकस्तकारश्छान्दस्यां</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">ूपा प्रथममुक्ता। “य एवं वेदाहं ब्रह्मास्मीति स इदं सर्वं भवति”, “स एतमेव पुरुषं ब्रह्म ततममपश्यत्” इत्यादिश्रुतिभ्यो मुक्तानां सार्वात्म्यावगमात्। ततमं तततमम्। एकस्तकारश्छान्दस्यां प्रक्रियायां लुप्तो द्रष्टव्य इति श्रुतिभाष्यम्। अनन्तरं कारणभावापत्तेरनुपदमेव तत् ब्रह्म तच्छब्दाभिधेयम् “तदिति वा एतस्य महतो भूतस्य नाम भवति” इति श्रुतेः। शुद्धं ब</span></p><p><b>Тип, выведенный автоматически:</b> <code>elision</code> — из грамматического термина <span lang="sa">lopa</span>, который Нилакантха называет рядом со словом-лицензией.</p></div>
+    <div class="panel"><h4>Что проверяется</h4><p>Вопрос карточки — <u>не</u> «licence-claim ли это» (наличие названной грамматической операции рядом со словом-лицензией это уже доказывает), а «верно ли операция переведена в deviation_type».</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка засчитывается как верная в выборке из 30, подтверждая измеренные 100 % точности авто-типизации (151 из 151).</p><p><b>«Не согласен»</b> — точность авто-прохода падает. Это <u>та самая</u> цифра, по которой H2860 объявляется провалившимся, если она уйдёт ниже ~90 %: три несогласия из 30 — ещё порог, четыре — уже провал, и регистр придётся перетипизировать.</p><p><b>«Отложить»</b> — строка выпадает из знаменателя выборки; при большом числе отложенных выборка перестаёт быть 30-строчной и оценку придётся повторить.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
+      <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
+  </section>
+
+  <section class="card" data-id="P06_U04_A043_S026|NIL-080" data-filt="auto-sample">
+    <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/bhishmaparva?page=4&amp;id=P06_U04_A043_" target="_blank" rel="noopener">MBh 6.43.26 — absence of an expected elision</a> <span class="badge">bhishmaparva</span><span class="badge">ārṣa</span><span class="badge">авто-типизация</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P06_U04_A043_S026|NIL-080</span></header>
+    <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षः</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">मिथोऽन्योन्यं एषो हीति सुलोपाभाव आर्षः ॥२६॥</span></p><p><b>Тип, выведенный автоматически:</b> <code>absence of an expected elision</code> — из грамматического термина <span lang="sa">lopa-abhāva</span>, который Нилакантха называет рядом со словом-лицензией.</p></div>
+    <div class="panel"><h4>Что проверяется</h4><p>Вопрос карточки — <u>не</u> «licence-claim ли это» (наличие названной грамматической операции рядом со словом-лицензией это уже доказывает), а «верно ли операция переведена в deviation_type».</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка засчитывается как верная в выборке из 30, подтверждая измеренные 100 % точности авто-типизации (151 из 151).</p><p><b>«Не согласен»</b> — точность авто-прохода падает. Это <u>та самая</u> цифра, по которой H2860 объявляется провалившимся, если она уйдёт ниже ~90 %: три несогласия из 30 — ещё порог, четыре — уже провал, и регистр придётся перетипизировать.</p><p><b>«Отложить»</b> — строка выпадает из знаменателя выборки; при большом числе отложенных выборка перестаёт быть 30-строчной и оценку придётся повторить.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
+      <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
+  </section>
+
+  <section class="card" data-id="P08_U01_A010_S045|NIL-091" data-filt="auto-sample">
+    <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/karnaparva?page=1&amp;id=P08_U01_A010_" target="_blank" rel="noopener">MBh 8.10.45 — elision — taddhita suffix</a> <span class="badge">karnaparva</span><span class="badge">ārṣa</span><span class="badge">авто-типизация</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P08_U01_A010_S045|NIL-091</span></header>
+    <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षः</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">विषाणैः द्विपस्य गजस्य दन्तमयैः पात्रैः खड्गस्य गण्डकस्य महर्षभस्य गवयस्य च शृङ्गैः। &#x27;विषाणं दन्तशृङ्गयोः&#x27; इति विश्वः । द्विपखड्गमहर्षभीयैरिति तद्धितलोप आर्षः ॥४५॥</span></p><p><b>Тип, выведенный автоматически:</b> <code>elision — taddhita suffix</code> — из грамматического термина <span lang="sa">taddhita-luk</span>, который Нилакантха называет рядом со словом-лицензией.</p></div>
+    <div class="panel"><h4>Что проверяется</h4><p>Вопрос карточки — <u>не</u> «licence-claim ли это» (наличие названной грамматической операции рядом со словом-лицензией это уже доказывает), а «верно ли операция переведена в deviation_type».</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка засчитывается как верная в выборке из 30, подтверждая измеренные 100 % точности авто-типизации (151 из 151).</p><p><b>«Не согласен»</b> — точность авто-прохода падает. Это <u>та самая</u> цифра, по которой H2860 объявляется провалившимся, если она уйдёт ниже ~90 %: три несогласия из 30 — ещё порог, четыре — уже провал, и регистр придётся перетипизировать.</p><p><b>«Отложить»</b> — строка выпадает из знаменателя выборки; при большом числе отложенных выборка перестаёт быть 30-строчной и оценку придётся повторить.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
+      <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
+  </section>
+
+  <section class="card" data-id="P08_U01_A067_S006|NIL-095" data-filt="auto-sample">
+    <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/karnaparva?page=1&amp;id=P08_U01_A067_" target="_blank" rel="noopener">MBh 8.67.6 — absence of the nuṭ augment</a> <span class="badge">karnaparva</span><span class="badge">ārṣa</span><span class="badge">авто-типизация</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P08_U01_A067_S006|NIL-095</span></header>
+    <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षः</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">अष्टौ गावो यस्मिन् तदष्टागवं शकटं तेषामष्टागवामष्ट अष्टसंख्यानि शकटानि । नुडभावः आर्षः । शतानि बाणान् अनेकशतसंख्यान्वहन्ति ॥६॥</span></p><p><b>Тип, выведенный автоматически:</b> <code>absence of the nuṭ augment</code> — из грамматического термина <span lang="sa">nuḍ-abhāva</span>, который Нилакантха называет рядом со словом-лицензией.</p></div>
+    <div class="panel"><h4>Что проверяется</h4><p>Вопрос карточки — <u>не</u> «licence-claim ли это» (наличие названной грамматической операции рядом со словом-лицензией это уже доказывает), а «верно ли операция переведена в deviation_type».</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка засчитывается как верная в выборке из 30, подтверждая измеренные 100 % точности авто-типизации (151 из 151).</p><p><b>«Не согласен»</b> — точность авто-прохода падает. Это <u>та самая</u> цифра, по которой H2860 объявляется провалившимся, если она уйдёт ниже ~90 %: три несогласия из 30 — ещё порог, четыре — уже провал, и регистр придётся перетипизировать.</p><p><b>«Отложить»</b> — строка выпадает из знаменателя выборки; при большом числе отложенных выборка перестаёт быть 30-строчной и оценку придётся повторить.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
+      <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
+  </section>
+
+  <section class="card" data-id="P08_U01_A080_S018|NIL-096" data-filt="auto-sample">
+    <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/karnaparva?page=1&amp;id=P08_U01_A080_" target="_blank" rel="noopener">MBh 8.80.18 — absence of the aṭ augment</a> <span class="badge">karnaparva</span><span class="badge">ārṣa</span><span class="badge">авто-типизация</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P08_U01_A080_S018|NIL-096</span></header>
+    <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षः</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">विनिर्दहन्नित्यत्राडभाव आर्षः ॥१८॥</span></p><p><b>Тип, выведенный автоматически:</b> <code>absence of the aṭ augment</code> — из грамматического термина <span lang="sa">aḍ-abhāva</span>, который Нилакантха называет рядом со словом-лицензией.</p></div>
+    <div class="panel"><h4>Что проверяется</h4><p>Вопрос карточки — <u>не</u> «licence-claim ли это» (наличие названной грамматической операции рядом со словом-лицензией это уже доказывает), а «верно ли операция переведена в deviation_type».</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка засчитывается как верная в выборке из 30, подтверждая измеренные 100 % точности авто-типизации (151 из 151).</p><p><b>«Не согласен»</b> — точность авто-прохода падает. Это <u>та самая</u> цифра, по которой H2860 объявляется провалившимся, если она уйдёт ниже ~90 %: три несогласия из 30 — ещё порог, четыре — уже провал, и регистр придётся перетипизировать.</p><p><b>«Отложить»</b> — строка выпадает из знаменателя выборки; при большом числе отложенных выборка перестаёт быть 30-строчной и оценку придётся повторить.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
+      <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
+  </section>
+
+  <section class="card" data-id="P09_U01_A001_S001|NIL-097" data-filt="auto-sample">
+    <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/shalyaparva?page=1&amp;id=P09_U01_A001_" target="_blank" rel="noopener">MBh 9.1.1 — elision</a> <span class="badge">shalyaparva</span><span class="badge">ārṣa</span><span class="badge">авто-типизация</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P09_U01_A001_S001|NIL-097</span></header>
+    <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षः</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">श्रीगणेशाय नमः। उक्ता सङ्गतिः कर्णपर्वादौ। एवं निपातित इति। उद्यमं पलायनं वा चक्रुरिति प्रष्टुरभिप्रायः। अल्पाः अवशिष्टा इति च्छेदः। अत्राकारलोप आर्षः॥१॥</span></p><p><b>Тип, выведенный автоматически:</b> <code>elision</code> — из грамматического термина <span lang="sa">lopa</span>, который Нилакантха называет рядом со словом-лицензией.</p></div>
+    <div class="panel"><h4>Что проверяется</h4><p>Вопрос карточки — <u>не</u> «licence-claim ли это» (наличие названной грамматической операции рядом со словом-лицензией это уже доказывает), а «верно ли операция переведена в deviation_type».</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка засчитывается как верная в выборке из 30, подтверждая измеренные 100 % точности авто-типизации (151 из 151).</p><p><b>«Не согласен»</b> — точность авто-прохода падает. Это <u>та самая</u> цифра, по которой H2860 объявляется провалившимся, если она уйдёт ниже ~90 %: три несогласия из 30 — ещё порог, четыре — уже провал, и регистр придётся перетипизировать.</p><p><b>«Отложить»</b> — строка выпадает из знаменателя выборки; при большом числе отложенных выборка перестаёт быть 30-строчной и оценку придётся повторить.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
+      <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
+  </section>
+
+  <section class="card" data-id="P12_U02_A153_S039|NIL-110" data-filt="auto-sample">
+    <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/shantiparva?page=2&amp;id=P12_U02_A153_" target="_blank" rel="noopener">MBh 12.153.39 — transfer — number</a> <span class="badge">shantiparva</span><span class="badge">chāndasa</span><span class="badge">авто-типизация</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P12_U02_A153_S039|NIL-110</span></header>
+    <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">वचनव्यत्ययश्छान्दसः</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">कृथा इति वचनव्यत्ययश्छान्दसः ॥३९॥</span></p><p><b>Тип, выведенный автоматически:</b> <code>transfer — number</code> — из грамматического термина <span lang="sa">vacana-vyatyaya</span>, который Нилакантха называет рядом со словом-лицензией.</p></div>
+    <div class="panel"><h4>Что проверяется</h4><p>Вопрос карточки — <u>не</u> «licence-claim ли это» (наличие названной грамматической операции рядом со словом-лицензией это уже доказывает), а «верно ли операция переведена в deviation_type».</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка засчитывается как верная в выборке из 30, подтверждая измеренные 100 % точности авто-типизации (151 из 151).</p><p><b>«Не согласен»</b> — точность авто-прохода падает. Это <u>та самая</u> цифра, по которой H2860 объявляется провалившимся, если она уйдёт ниже ~90 %: три несогласия из 30 — ещё порог, четыре — уже провал, и регистр придётся перетипизировать.</p><p><b>«Отложить»</b> — строка выпадает из знаменателя выборки; при большом числе отложенных выборка перестаёт быть 30-строчной и оценку придётся повторить.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
+      <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
+  </section>
+
+  <section class="card" data-id="P12_U03_A237_S003|NIL-117" data-filt="auto-sample">
+    <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/shantiparva?page=3&amp;id=P12_U03_A237_" target="_blank" rel="noopener">MBh 12.237.3 — case ending — (a)luk</a> <span class="badge">shantiparva</span><span class="badge">ārṣa</span><span class="badge">авто-типизация</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P12_U03_A237_S003|NIL-117</span></header>
+    <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षोऽलुक्</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">् निरधिष्ठानकां स्वाभाविकीं जगद्भ्रान्तिं वदन् सर्वान् शिष्यान् प्रज्ञया मुक्ताः । ऊहापोहकौशलेन रहिताः हेतवो युक्तयो येषां तान् निर्बुद्धीनित्यर्थः । प्रज्ञयेति तृतीयाया आर्षोऽलुक् । पुष्यते पुष्णाति तादृशेन बोधेन रञ्जयति । अचेतनो मूढः स न किञ्चन तत्त्वं लभते इत्युत्तरेणान्वयः । निरधिष्ठानकभ्रमासंभवात् शून्यवादोऽत्यन्तं हेय इति भावः ॥३॥</span></p><p><b>Тип, выведенный автоматически:</b> <code>case ending — (a)luk</code> — из грамматического термина <span lang="sa">aluk / luk</span>, который Нилакантха называет рядом со словом-лицензией.</p></div>
+    <div class="panel"><h4>Что проверяется</h4><p>Вопрос карточки — <u>не</u> «licence-claim ли это» (наличие названной грамматической операции рядом со словом-лицензией это уже доказывает), а «верно ли операция переведена в deviation_type».</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка засчитывается как верная в выборке из 30, подтверждая измеренные 100 % точности авто-типизации (151 из 151).</p><p><b>«Не согласен»</b> — точность авто-прохода падает. Это <u>та самая</u> цифра, по которой H2860 объявляется провалившимся, если она уйдёт ниже ~90 %: три несогласия из 30 — ещё порог, четыре — уже провал, и регистр придётся перетипизировать.</p><p><b>«Отложить»</b> — строка выпадает из знаменателя выборки; при большом числе отложенных выборка перестаёт быть 30-строчной и оценку придётся повторить.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
+      <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
+  </section>
+
+  <section class="card" data-id="P12_U03_A261_S030|NIL-119" data-filt="auto-sample">
+    <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/shantiparva?page=3&amp;id=P12_U03_A261_" target="_blank" rel="noopener">MBh 12.261.30 — matup-sense suffix</a> <span class="badge">shantiparva</span><span class="badge">ārṣa</span><span class="badge">авто-типизация</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P12_U03_A261_S030|NIL-119</span></header>
+    <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षो</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">पक्षीन् आर्षो मत्वर्थीय इः ॥३०॥</span></p><p><b>Тип, выведенный автоматически:</b> <code>matup-sense suffix</code> — из грамматического термина <span lang="sa">matvarthīya</span>, который Нилакантха называет рядом со словом-лицензией.</p></div>
+    <div class="panel"><h4>Что проверяется</h4><p>Вопрос карточки — <u>не</u> «licence-claim ли это» (наличие названной грамматической операции рядом со словом-лицензией это уже доказывает), а «верно ли операция переведена в deviation_type».</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка засчитывается как верная в выборке из 30, подтверждая измеренные 100 % точности авто-типизации (151 из 151).</p><p><b>«Не согласен»</b> — точность авто-прохода падает. Это <u>та самая</u> цифра, по которой H2860 объявляется провалившимся, если она уйдёт ниже ~90 %: три несогласия из 30 — ещё порог, четыре — уже провал, и регистр придётся перетипизировать.</p><p><b>«Отложить»</b> — строка выпадает из знаменателя выборки; при большом числе отложенных выборка перестаёт быть 30-строчной и оценку придётся повторить.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
+      <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
+  </section>
+
+  <section class="card" data-id="P12_U03_A284_S098|NIL-125" data-filt="auto-sample">
+    <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/shantiparva?page=3&amp;id=P12_U03_A284_" target="_blank" rel="noopener">MBh 12.284.98 — mum augment</a> <span class="badge">shantiparva</span><span class="badge">ārṣa</span><span class="badge">авто-типизация</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P12_U03_A284_S098|NIL-125</span></header>
+    <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षः</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">वृषाय वृष्टिकर्त्रे वृष्याय वृषो धर्मस्तत्र हिताय धर्मवृद्धिकर्त्रे गोवृषाय नन्दिरूपाय वृषाय धर्माय कटंकटाय कटीगतौ नित्यवीप्सयोरिति द्वित्वम् । मुमागम आर्षः । वाय्वादिरूपेण नित्यं गमनशीलायेत्यर्थः । कालाय वा दण्डाय नियन्त्रे । पचपचाय नित्यं भूतानां पाककर्त्रे कटिपच्योः पचाद्यच् ७ ॥९८॥</span></p><p><b>Тип, выведенный автоматически:</b> <code>mum augment</code> — из грамматического термина <span lang="sa">mum-āgama</span>, который Нилакантха называет рядом со словом-лицензией.</p></div>
+    <div class="panel"><h4>Что проверяется</h4><p>Вопрос карточки — <u>не</u> «licence-claim ли это» (наличие названной грамматической операции рядом со словом-лицензией это уже доказывает), а «верно ли операция переведена в deviation_type».</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка засчитывается как верная в выборке из 30, подтверждая измеренные 100 % точности авто-типизации (151 из 151).</p><p><b>«Не согласен»</b> — точность авто-прохода падает. Это <u>та самая</u> цифра, по которой H2860 объявляется провалившимся, если она уйдёт ниже ~90 %: три несогласия из 30 — ещё порог, четыре — уже провал, и регистр придётся перетипизировать.</p><p><b>«Отложить»</b> — строка выпадает из знаменателя выборки; при большом числе отложенных выборка перестаёт быть 30-строчной и оценку придётся повторить.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
+      <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
+  </section>
+
+  <section class="card" data-id="P12_U03_A307_S010|NIL-132" data-filt="auto-sample">
+    <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/shantiparva?page=3&amp;id=P12_U03_A307_" target="_blank" rel="noopener">MBh 12.307.10 — sandhi</a> <span class="badge">shantiparva</span><span class="badge">chāndasa</span><span class="badge">авто-типизация</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P12_U03_A307_S010|NIL-132</span></header>
+    <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">सन्धिश्छान्दसः</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">षरश्चाक्षर एव च&#x27; &#x27;उत्तमः पुरुषस्त्वन्यः&#x27; इति श्रुतिस्मृत्युक्तं पुंत्रैविध्यमुपेत्य क्षराक्षरयोस्तावद्विभागमाहाक्षरं चेति । अमृतो जीवः अक्षरम् इति श्रुतिपदयोरर्थः सन्धिश्छान्दसः ॥१०॥</span></p><p><b>Тип, выведенный автоматически:</b> <code>sandhi</code> — из грамматического термина <span lang="sa">sandhi</span>, который Нилакантха называет рядом со словом-лицензией.</p></div>
+    <div class="panel"><h4>Что проверяется</h4><p>Вопрос карточки — <u>не</u> «licence-claim ли это» (наличие названной грамматической операции рядом со словом-лицензией это уже доказывает), а «верно ли операция переведена в deviation_type».</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка засчитывается как верная в выборке из 30, подтверждая измеренные 100 % точности авто-типизации (151 из 151).</p><p><b>«Не согласен»</b> — точность авто-прохода падает. Это <u>та самая</u> цифра, по которой H2860 объявляется провалившимся, если она уйдёт ниже ~90 %: три несогласия из 30 — ещё порог, четыре — уже провал, и регистр придётся перетипизировать.</p><p><b>«Отложить»</b> — строка выпадает из знаменателя выборки; при большом числе отложенных выборка перестаёт быть 30-строчной и оценку придётся повторить.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
+      <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
+  </section>
+
+  <section class="card" data-id="P13_U01_A099_S007|NIL-149" data-filt="auto-sample">
+    <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/anushasanaparva?page=1&amp;id=P13_U01_A099_" target="_blank" rel="noopener">MBh 13.99.7 — gender — feminine</a> <span class="badge">anushasanaparva</span><span class="badge">ārṣa</span><span class="badge">авто-типизация</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P13_U01_A099_S007|NIL-149</span></header>
+    <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षं</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">लाजाभिः आर्षं स्त्रीत्वम् ॥७ ॥</span></p><p><b>Тип, выведенный автоматически:</b> <code>gender — feminine</code> — из грамматического термина <span lang="sa">strītva</span>, который Нилакантха называет рядом со словом-лицензией.</p></div>
+    <div class="panel"><h4>Что проверяется</h4><p>Вопрос карточки — <u>не</u> «licence-claim ли это» (наличие названной грамматической операции рядом со словом-лицензией это уже доказывает), а «верно ли операция переведена в deviation_type».</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка засчитывается как верная в выборке из 30, подтверждая измеренные 100 % точности авто-типизации (151 из 151).</p><p><b>«Не согласен»</b> — точность авто-прохода падает. Это <u>та самая</u> цифра, по которой H2860 объявляется провалившимся, если она уйдёт ниже ~90 %: три несогласия из 30 — ещё порог, четыре — уже провал, и регистр придётся перетипизировать.</p><p><b>«Отложить»</b> — строка выпадает из знаменателя выборки; при большом числе отложенных выборка перестаёт быть 30-строчной и оценку придётся повторить.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
+      <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
+  </section>
+</main>
+<footer class="hint">Регистр: commentary_licence_register_nilakantha.tsv/.jsonl · отклонённые: nilakantha_licence_rejected.tsv · плотность по парванам: nilakantha_parvan_density.tsv · отчёт: reports/COMMENTARY_LICENCE_REGISTER_NILAKANTHA_2026.md Keyboard: <kbd>a</kbd> Согласен с решением &middot; <kbd>r</kbd> Не согласен (см. заметку)
+  &middot; <kbd>d</kbd> defer &middot; <kbd>&darr;</kbd>/<kbd>&uarr;</kbd> next/prev. Votes autosave to
+  this browser's localStorage; click "Download decisions.json" when done (unvoted items export with
+  decision:null).</footer>
+<div class="legend" style="max-width:980px;margin:0 auto 20px;padding:0 20px;color:var(--muted);font-size:12px">
+  <b>Approve</b> = accept the proposed change/answer shown on the card (no separate "approve as-is" —
+  approving means agreeing as written). <b>Reject</b> = keep the current entry/answer unchanged.
+  <b>Defer</b> = not sure yet, decide later. The note field is for requesting a partial tweak instead
+  of an outright reject.
+</div>
+<script>
+(function () {
+  var SHEET_ID = "commentarystrategies-nilakantha-licence_h2860";
+  var STORE_KEY = 'review-sheet:' + SHEET_ID;
+  var GENERATED = "16-08-2026";
+  var ids = ["P01_U05_A013_S029#0@229", "P01_U07_A077_S018#0@0", "P01_U07_A102_S015#0@0", "P01_U07_A113_S012#0@11", "P01_U07_A118_S001#0@35", "P03_U03_A031_S008#0@0", "P03_U07_A091_S024#0@90", "P05_U05_A070_S007#0@225", "P12_U01_A012_S017#0@0", "P12_U02_A132_S017#0@0", "P12_U03_A268_S010#0@9", "P13_U01_A019_S002#0@71", "P13_U01_A019_S002#0@130", "P13_U01_A044_S004#0@206", "P01_U05_A032_S024#0@128", "P12_U01_A040_S002#0@29", "P01_U01_A001_S050|NIL-001", "P01_U02_A002_S010|NIL-002", "P01_U03_A003_S067|NIL-005", "P01_U03_A003_S142|NIL-006", "P01_U05_A024_S011|NIL-007", "P01_U07_A093_S023|NIL-013", "P01_U07_A131_S051|NIL-017", "P03_U06_A064_S114|NIL-028", "P03_U06_A068_S014|NIL-029", "P03_U09_A160_S068|NIL-037", "P03_U12_A217_S007|NIL-042", "P04_U04_A059_S005|NIL-054", "P04_U04_A061_S011|NIL-055", "P05_U01_A001_S015|NIL-057", "P05_U01_A014_S016|NIL-061", "P05_U02_A027_S014|NIL-062", "P06_U03_A032_S003|NIL-076", "P06_U03_A035_S048|NIL-078", "P06_U03_A042_S055|NIL-079", "P06_U04_A043_S026|NIL-080", "P08_U01_A010_S045|NIL-091", "P08_U01_A067_S006|NIL-095", "P08_U01_A080_S018|NIL-096", "P09_U01_A001_S001|NIL-097", "P12_U02_A153_S039|NIL-110", "P12_U03_A237_S003|NIL-117", "P12_U03_A261_S030|NIL-119", "P12_U03_A284_S098|NIL-125", "P12_U03_A307_S010|NIL-132", "P13_U01_A099_S007|NIL-149"];
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(STORE_KEY) || '{}') || {}; } catch (e) { state = {}; }
+  function tally() {
+    var c = { approve:0, reject:0, defer:0 };
+    ids.forEach(function (id) { var v = state[id] && state[id].decision; if (v && c.hasOwnProperty(v)) c[v]++; });
+    document.getElementById('c-approve').textContent = c.approve;
+    document.getElementById('c-reject').textContent = c.reject;
+    document.getElementById('c-defer').textContent = c.defer;
+    document.getElementById('c-unvoted').textContent = ids.length - c.approve - c.reject - c.defer;
+  }
+  function applyCardUI(card) {
+    var id = card.getAttribute('data-id'); var rec = state[id] || {};
+    card.classList.remove('voted-approve','voted-reject','voted-defer');
+    card.querySelectorAll('button.vote').forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-vote') === rec.decision); });
+    card.querySelector('.vote-state').textContent = rec.decision ? rec.decision : 'unvoted';
+    if (rec.decision) card.classList.add('voted-' + rec.decision);
+    var ta = card.querySelector('textarea.note'); if (rec.note && !ta.value) ta.value = rec.note;
+  }
+  function save() { localStorage.setItem(STORE_KEY, JSON.stringify(state)); tally(); }
+  // H1523 residual / csl-pyutil#1 Part 1: always re-read the live textarea on vote
+  // and before export so a second vote click (or a missed `input` event) cannot
+  // drop a note that is still visible in the card.
+  function syncNoteFromDom(id) {
+    state[id] = state[id] || {};
+    var card = document.querySelector('.card[data-id="' + id + '"]');
+    if (!card) return;
+    var ta = card.querySelector('textarea.note');
+    if (ta) state[id].note = ta.value;
+  }
+  function vote(id, d) { syncNoteFromDom(id); state[id].decision = d; save(); }
+  function noteChange(id, t) { state[id] = state[id] || {}; state[id].note = t; save(); }
+  document.querySelectorAll('.card').forEach(function (card) {
+    var id = card.getAttribute('data-id'); applyCardUI(card);
+    card.querySelectorAll('button.vote').forEach(function (btn) {
+      btn.addEventListener('click', function () { vote(id, btn.getAttribute('data-vote')); applyCardUI(card); });
+    });
+    var ta = card.querySelector('textarea.note'); ta.addEventListener('input', function () { noteChange(id, ta.value); });
+  });
+  tally();
+  document.getElementById('downloadBtn').addEventListener('click', function () {
+    ids.forEach(function (id) { syncNoteFromDom(id); });
+    var decided = ids.filter(function (id) { return state[id] && state[id].decision; }).length;
+    var payload = { sheet_id: SHEET_ID, generated: "16-08-2026", decided: decided, time_total_seconds: __timeTotal(),
+      items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '', time_seconds: __timeFor(id) }; }) };
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
+    var url = URL.createObjectURL(blob); var a = document.createElement('a');
+    a.href = url; a.download = SHEET_ID + '_decisions.json'; document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+  });
+  var filterbar = document.getElementById('filterbar');
+  filterbar.addEventListener('click', function (e) {
+    var btn = e.target.closest('button[data-filter]'); if (!btn) return;
+    filterbar.querySelectorAll('button').forEach(function (b) { b.classList.remove('active'); });
+    btn.classList.add('active'); var f = btn.getAttribute('data-filter');
+    document.querySelectorAll('.card').forEach(function (card) {
+      var show = true;
+      if (f === 'unvoted') { var id = card.getAttribute('data-id'); show = !(state[id] && state[id].decision); }
+      else if (f !== 'all') { show = card.getAttribute('data-filt') === f; }
+      card.style.display = show ? '' : 'none';
+    });
+  });
+  var cardsEl = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  var activeIdx = 0;
+  function visibleCards() { return cardsEl.filter(function (c) { return c.style.display !== 'none'; }); }
+  document.addEventListener('keydown', function (e) {
+    if (e.target.tagName === 'TEXTAREA') return;
+    var vis = visibleCards(); if (!vis.length) return;
+    if (activeIdx >= vis.length) activeIdx = vis.length - 1;
+    var card = vis[activeIdx]; var id = card.getAttribute('data-id');
+    if (e.key === 'a') { vote(id, 'approve'); applyCardUI(card); }
+    else if (e.key === 'r') { vote(id, 'reject'); applyCardUI(card); }
+    else if (e.key === 'd') { vote(id, 'defer'); applyCardUI(card); }
+    else if (e.key === 'ArrowDown') { activeIdx = Math.min(activeIdx + 1, vis.length - 1); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'center'}); }
+    else if (e.key === 'ArrowUp') { activeIdx = Math.max(activeIdx - 1, 0); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'center'}); }
+    else return;
+    e.preventDefault();
+  });
+
+  var saveHandle = null, saveTimer = null;
+  function exportPayload() {
+    if (typeof syncNoteFromDom === 'function') {
+      ids.forEach(function (id) { syncNoteFromDom(id); });
+    }
+    var decided = ids.filter(function (id) { return state[id] && state[id].decision; }).length;
+    return JSON.stringify({ sheet_id: SHEET_ID, generated: new Date().toISOString(), decided: decided, time_total_seconds: __timeTotal(),
+      items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '', time_seconds: __timeFor(id) }; }) }, null, 2);
+  }
+  function scheduleAutosave() {
+    if (!saveHandle) return;
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(function () {
+      saveHandle.createWritable().then(function (w) {
+        w.write(exportPayload()).then(function () { w.close(); });
+      }).catch(function () {});
+    }, 1000);
+  }
+  var _origSave = save;
+  save = function () { _origSave(); scheduleAutosave(); };
+  if (window.showSaveFilePicker) {
+    var saveBtn = document.getElementById('saveBtn');
+    saveBtn.style.display = '';
+    saveBtn.addEventListener('click', function () {
+      window.showSaveFilePicker({suggestedName: SHEET_ID + '_decisions.json'}).then(function (h) {
+        saveHandle = h; scheduleAutosave();
+      }).catch(function () {});
+    });
+  }
+
+  var FS_KEY = STORE_KEY + ':fs', FS_DEFAULT = 1.5;
+  function fsGet() {
+    var v = parseFloat(localStorage.getItem(FS_KEY));
+    return (isFinite(v) && v >= 0.7 && v <= 3) ? v : FS_DEFAULT;
+  }
+  function fsApply(v) {
+    document.documentElement.style.setProperty('--fs', String(v));
+    document.getElementById('fsVal').textContent = Math.round(v * 100) + '%';
+  }
+  function fsSet(v) {
+    v = Math.min(3, Math.max(0.7, Math.round(v * 10) / 10));
+    localStorage.setItem(FS_KEY, String(v)); fsApply(v);
+  }
+  fsApply(fsGet());
+  document.getElementById('fsDown').addEventListener('click', function () { fsSet(fsGet() - 0.1); });
+  document.getElementById('fsUp').addEventListener('click', function () { fsSet(fsGet() + 0.1); });
+
+  var TIME_KEY = STORE_KEY + ':timing';
+  var __timing = { total: 0, per: {} };
+  try {
+    var __t0 = JSON.parse(localStorage.getItem(TIME_KEY) || 'null');
+    if (__t0 && typeof __t0.total === 'number') __timing = __t0;
+  } catch (e) {}
+  if (!__timing.per) __timing.per = {};
+  function __timeFor(id) { return Math.round(__timing.per[id] || 0); }
+  function __timeTotal() { return Math.round(__timing.total || 0); }
+  function __timeFmt(s) {
+    s = Math.round(s); var m = Math.floor(s / 60);
+    return (m >= 60 ? Math.floor(m / 60) + ':' + ('0' + (m - Math.floor(m / 60) * 60)).slice(-2) : m)
+      + ':' + ('0' + (s - m * 60)).slice(-2);
+  }
+  function __timeShow() {
+    var el = document.getElementById('t-total');
+    if (el) el.textContent = __timeFmt(__timing.total);
+  }
+  var __timeLast = Date.now(), __timeDirty = 0;
+  var __timeCards = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  function __timeActiveId() {
+    var mid = window.innerHeight / 2, best = null, bestd = Infinity;
+    for (var i = 0; i < __timeCards.length; i++) {
+      var c = __timeCards[i];
+      if (c.style.display === 'none') continue;
+      var r = c.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > window.innerHeight) continue;
+      var center = (Math.max(r.top, 0) + Math.min(r.bottom, window.innerHeight)) / 2;
+      var d = Math.abs(center - mid);
+      if (d < bestd) { bestd = d; best = c; }
+    }
+    return best ? best.getAttribute('data-id') : null;
+  }
+  function __timeFlush() {
+    try { localStorage.setItem(TIME_KEY, JSON.stringify(__timing)); } catch (e) {}
+  }
+  // V12 (H2858): the clock is stoppable. `paused` rides in the same persisted
+  // record as the totals, so a reviewer who pauses and closes the tab does not
+  // come back to a clock that ran all night.
+  var __timePaused = !!__timing.paused;
+  function __timePauseSet(v) {
+    __timePaused = !!v; __timing.paused = __timePaused; __timeLast = Date.now(); __timeFlush();
+  }
+  setInterval(function () {
+    var now = Date.now(), dt = (now - __timeLast) / 1000;
+    __timeLast = now;
+    if (document.hidden || __timePaused || dt <= 0 || dt > 4) return;
+    __timing.total += dt;
+    var id = __timeActiveId();
+    if (id) __timing.per[id] = (__timing.per[id] || 0) + dt;
+    __timeDirty += dt;
+    if (__timeDirty >= 5) { __timeDirty = 0; __timeFlush(); }
+    __timeShow();
+  }, 1000);
+  document.addEventListener('visibilitychange', function () { __timeLast = Date.now(); });
+  window.addEventListener('beforeunload', __timeFlush);
+  __timeShow();
+
+  var HANDIN_SAID = 'handed in {n} of {total} — clock stopped, the rest stay saved in this browser';
+  var __handinBtn = document.getElementById('handinBtn');
+  var __handinSaid = document.getElementById('handinSaid');
+
+  var __pauseBtn = document.getElementById('pauseBtn');
+  function __pauseShow() {
+    __pauseBtn.classList.toggle('on', __timePaused);
+    __pauseBtn.innerHTML = __timePaused ? '&#9654;' : '&#9208;';
+    var chip = document.querySelector('.tally .time');
+    if (chip) chip.classList.toggle('paused', __timePaused);
+  }
+  __pauseBtn.addEventListener('click', function () { __timePauseSet(!__timePaused); __pauseShow(); });
+  __pauseShow();
+  __handinBtn.addEventListener('click', function () {
+    ids.forEach(function (id) { syncNoteFromDom(id); });
+    __timePauseSet(true); __pauseShow();
+    var items = ids.map(function (id) {
+      var rec = state[id] || {};
+      var item = { id: id, decision: rec.decision || null };
+      item.note = rec.note || '';
+      item.time_seconds = __timeFor(id);
+      return item;
+    });
+    var decided = items.filter(function (it) { return !!it.decision; }).length;
+    var payload = { sheet_id: SHEET_ID, generated: GENERATED, decided: decided,
+      partial: true, complete: false, undecided: items.length - decided, items: items };
+    payload.time_total_seconds = __timeTotal();
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
+    var url = URL.createObjectURL(blob); var a = document.createElement('a');
+    a.href = url; a.download = SHEET_ID + '_decisions_partial.json';
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+    __handinSaid.textContent = HANDIN_SAID.replace('{n}', decided).replace('{total}', items.length);
+  });
+})();
+</script>
+</body>
+</html>
