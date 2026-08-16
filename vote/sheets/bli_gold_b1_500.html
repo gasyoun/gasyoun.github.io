@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="color-scheme" content="dark">
+<meta name="generator" content="csl-pyutil/0.13.0">
 <title>BLI gold B1: Sa→Ru pass-1 (MG) — 500 карточек — 500 items</title>
 <style>
   :root { color-scheme: dark; --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --text:#e6e6e6; --muted:#9aa0aa;
@@ -97,25 +98,50 @@
   .fsctl button { background:var(--panel2); border:1px solid var(--border); color:var(--text);
                   padding:6px 10px; border-radius:14px; cursor:pointer; line-height:1; }
   .fsctl .fsval { color:var(--muted); min-width:3.4em; text-align:center; }
+  @media (max-width: 640px) {
+    header.top { padding: 10px 14px; flex-direction: column; align-items: stretch; }
+    header.top h1 { font-size: 15px; }
+    .tally { gap: 8px; font-size: 11px; }
+    .toolbar { padding: 8px 14px; }
+    main { padding: 8px 12px; }
+    .card { padding: 12px; }
+    .filterbar { flex-wrap: wrap; }
+    button.dl, button.vote, button.rate, .fsctl button, #saveBtn, #handinBtn, #pauseBtn {
+      min-height: 44px; min-width: 44px; padding: 10px 14px;
+    }
+    .controls { flex-wrap: wrap; }
+    .panel { padding: 8px 10px; }
+    textarea.note { min-height: 60px; }
+  }
+  .tally .time { color:var(--muted); }
+  .dl.handin { background:#243447; }
+  .tally .pausebtn { background:none; border:1px solid var(--border); color:var(--muted);
+                     border-radius:6px; padding:0 6px; margin-left:4px; cursor:pointer;
+                     font-size:inherit; font-family:inherit; line-height:1.6; }
+  .tally .pausebtn.on { color:#ffd479; border-color:#ffd479; }
+  .tally .time.paused { opacity:.45; }
+  .handin-said { color:var(--muted); font-size:12px; margin-left:10px; }
 </style>
 </head>
 <body>
 <header class="top">
   <div>
     <h1>BLI gold B1: Sa→Ru pass-1 (MG) — 500 карточек — 500 items</h1>
-    <div class="sub">Generated 12-08-2026 &middot; sheet_id <code>sanskritlexicography-bli_gold_b1_500_review</code> &middot; bound <code class="bindchip" title="content_hash — binds this sheet's decisions.json export to exactly this HTML">sha256:901cd6da84e6…</code> &middot; H2551 · вторая из трёх B1-линий · рамка заморожена H2401 (gold_frame_b1_stratified_500.tsv, seed 20260810)</div>
+    <div class="sub">Generated 12-08-2026 &middot; sheet_id <code>sanskritlexicography-bli_gold_b1_500_review</code> &middot; bound <code class="bindchip" title="content_hash — binds this sheet's decisions.json export to exactly this HTML">sha256:ff2f7beae876…</code> &middot; H2551 · вторая из трёх B1-линий · рамка заморожена H2401 (gold_frame_b1_stratified_500.tsv, seed 20260810)</div>
   </div>
   <div class="tally" id="tally">
     <span class="approve">&#9989; <span class="count" id="c-approve">0</span></span>
     <span class="reject">&#10060; <span class="count" id="c-reject">0</span></span>
     <span class="defer">&#9208; <span class="count" id="c-defer">0</span></span>
+    <span class="time" title="active time on this sheet (while the tab is visible)">&#9201; <span class="count" id="t-total">0:00</span></span>
+    <button type="button" class="pausebtn" id="pauseBtn" title="pause the clock — a break is not review time">&#9208;</button>
     <span class="unvoted">&#9711; <span class="count" id="c-unvoted">500</span></span>
   </div>
 </header>
 <aside class="screening-banner" role="status" data-screening="1"><strong>Screening (H1649)</strong> — only human-required cards are below. Off the plate: <span class="sc-a">deterministic 0</span> · <span class="sc-b">dataset lookup 0</span> · <span class="sc-c">agent adjudication 0</span> (total screened 0). Human cards: <span class="sc-d">500</span>. Evidence: <code>docs/BLI_GOLD_SET_ANNOTATION_PROTOCOL_2026.md#5-annotation-protocol</code>. Rules: none -- human label is the deliverable (protocol section 5).</aside>
 <div class="savebanner">&#128229; Your export downloads as <code>sanskritlexicography-bli_gold_b1_500_review_decisions.json</code> &rarr; save it to <code>RussianTranslation\review\sanskritlexicography-bli_gold_b1_500_review_decisions.json</code> (the <code>sheet_id</code> inside the file is <code>sanskritlexicography-bli_gold_b1_500_review</code> — that is how a later session knows which sheet these decisions belong to).</div>
 <div class="toolbar">
-  <button class="dl" id="downloadBtn">Download decisions.json</button><button class="dl" id="saveBtn" style="display:none;margin-left:8px">Save to folder…</button>
+  <button class="dl" id="downloadBtn">Download decisions.json</button><button class="dl handin" id="handinBtn" title="stop the clock and export the votes made so far; the rest stay saved in this browser">Hand in what I got</button><span class="handin-said" id="handinSaid"></span><button class="dl" id="saveBtn" style="display:none;margin-left:8px">Save to folder…</button>
   <div class="fsctl" title="text size — persists in this browser"><button type="button" id="fsDown" aria-label="smaller text">A&minus;</button><span class="fsval" id="fsVal"></span><button type="button" id="fsUp" aria-label="larger text">A+</button></div>
   <div class="filterbar" id="filterbar"><button data-filter="all" class="active">all</button><button data-filter="band5">band 5 (частотнейшие)</button><button data-filter="band4">band 4</button><button data-filter="band3">band 3</button><button data-filter="band2">band 2</button><button data-filter="band1">band 1 (редкие)</button><button data-filter="unvoted">unvoted only</button></div>
 </div>
@@ -7134,8 +7160,9 @@
 <script>
 (function () {
   var SHEET_ID = "sanskritlexicography-bli_gold_b1_500_review";
-  var CONTENT_HASH = "sha256:901cd6da84e62ddc1c60cb5cc29ad06d02d52eccd4f48a487b94efbc8c92bd92";
+  var CONTENT_HASH = "sha256:ff2f7beae876bae979a0a8f2d6f038798434ced1820b5155962a6245d71c396c";
   var STORE_KEY = 'review-sheet:' + SHEET_ID;
+  var GENERATED = "12-08-2026";
   var ids = ["ASrama", "Aditya", "Baya", "Bojana", "Darma", "Siva", "agni", "kfzRa", "mAhArAjya", "maDya", "muKa", "pARqu", "pfTivI", "prARa", "sEnya", "toya", "vastra", "viDAna", "vipra", "vizaya", "ASri", "Sru", "SuD", "arh", "avAn", "avabAD", "car", "dah", "jIv", "jap", "ji", "man", "ram", "sTA", "samArohay", "stu", "vac", "vad", "vraj", "vyaD", "BrAjizWa", "Gora", "Sakvan", "SuBa", "Suci", "apaha", "dIrGa", "dfQa", "dvitIya", "ja", "kazAya", "laGu", "praTama", "priya", "snigDa", "tikta", "tulya", "ugra", "uttara", "vfdDa", "ASu", "BUyas", "aDas", "aTa", "anyaTA", "atas", "evam", "iha", "kim", "muhur", "pfTak", "purA", "samyak", "sarvatas", "svayam", "tAvat", "taTA", "tadA", "tadvat", "upari", "anya", "apara", "ati", "azwan", "ced", "cit", "dvAdaSan", "eka", "idam", "paYcan", "sahasra", "saptan", "sarva", "uB", "uta", "yAvat", "yadi", "yat", "yatas", "yatra", "SacI", "Uru", "adIna", "apadeSa", "cOra", "hAni", "hAra", "kavi", "kzura", "mAraRa", "mfRAla", "nArAca", "nagara", "navanavati", "niScaya", "nizAda", "pAyasa", "padArTa", "tandrA", "vigraha", "aBitap", "aByaYj", "aBye", "anugam", "anupraviS", "avatAray", "jalp", "kANkz", "laNGay", "lip", "nirvap", "prakalpay", "prakram", "pramuc", "prasad", "upalaB", "vinI", "viruD", "vismi", "vyaT", "Agantu", "SArada", "SmaSruRa", "aByaDika", "aSuBa", "akzaya", "arTin", "aruRa", "atyanta", "buDa", "dvArya", "karkaSa", "kzama", "lola", "niScala", "nyUna", "paScima", "sAmAnya", "sara", "vanya", "Aditas", "Dik", "SanakEs", "alam", "anyatra", "arvAk", "dviDA", "ekadA", "kva", "mfzA", "nUnam", "sAkam", "sakft", "sarvaTA", "sarvatra", "tUzRIm", "triDA", "uparizwAt", "vasantA", "viSvatas", "aDi", "aho", "an", "aneka", "avaDya", "azwAdaSan", "caturdaSan", "ekAdaSan", "hanta", "he", "id", "itara", "kila", "nanu", "ni", "parA", "tya", "vAva", "yasmAt", "zoqaSan", "SESava", "aBiSrI", "avijYAna", "daSaka", "jIvAtu", "karRikAra", "meTana", "nErASya", "naptI", "nizkraya", "pEcCilya", "pratardana", "sAhitya", "svargin", "upAnah", "vAmA", "vanAnta", "vartani", "vilaya", "yavasa", "BaR", "aBinI", "aBivand", "avaDU", "iNg", "jinv", "kAS", "nirBA", "prAraB", "pracar", "pragam", "pravah", "styE", "ujjval", "upasaMDA", "upasic", "uttap", "vinard", "viniyam", "vyapagam", "Dvajin", "Endava", "aliNga", "avicakzaRa", "avirata", "darSata", "mUQa", "maDula", "muKara", "nirASraya", "pAvamAna", "paryaSru", "pratiloma", "pratirUpaka", "prayojaka", "raTira", "sArdra", "varUTin", "viDUma", "viSfNKala", "BAgaSas", "bAhyatas", "daSaDA", "drAk", "itTA", "itaratra", "makzU", "pacCas", "paras", "parastAt", "prage", "prataram", "pratidinam", "pratnaTA", "sadam", "samaSas", "samantikam", "savyatas", "sumat", "zoqaSaDA", "acCinna", "adatta", "agfhIta", "agrAhya", "anAdfta", "anavApya", "anupapanna", "aprAjYa", "aprIti", "apratihata", "asADaka", "asarva", "avicala", "avinASin", "avinIta", "avyaBicArin", "katara", "pUrvokta", "saptadaSan", "yatama", "anukampana", "avyavaDAna", "doraka", "dyumant", "hvAra", "juzwi", "kfzwa", "kumBIra", "miyeDa", "nfti", "parizwi", "prAntara", "prasarga", "rajakI", "sAtmatA", "samunnati", "upakzaya", "upanibanDana", "vikramAditya", "vipariRAma", "Avad", "aBiKyApay", "aBijalp", "anuBuj", "ativah", "avaskand", "kuts", "kuz", "naw", "nivah", "praticakz", "saMDam", "samaBipad", "uYC", "udvezw", "upalih", "upaloBay", "vicft", "vimad", "vinipat", "Sikvan", "aNkuSin", "adAra", "agru", "akavi", "aparicCinna", "apawu", "avidya", "glAsnu", "hAstina", "nIrajaska", "namasyu", "nizkaruRa", "pacata", "paricArin", "paripUraka", "pramanyu", "pratIta", "sajIva", "vAmetara", "F", "SreRiSas", "aticiram", "dus", "ftuSas", "hI", "karhi", "lokatas", "pAkatrA", "pUrvaTA", "parastarAm", "pratigfham", "prativedam", "pratyabdam", "puruzatrA", "samAnatas", "sanat", "sasvar", "vaSatas", "vew", "aSrama", "aSrotra", "akAtara", "akfpaRa", "akopana", "anAvidDa", "anaBivyakta", "ananDa", "anirBinna", "anirjita", "anizidDa", "aprayukta", "asamfdDa", "avastra", "sAmarza", "samaha", "sima", "vapa", "varRatA", "yatara", "DIrya", "Na", "PaR", "azwasaptati", "dIptAkza", "dityavah", "divaseSvara", "hetumant", "kamboja", "krandanu", "kumBila", "mahecCa", "prApaRika", "prAtiSAKya", "pradvAra", "pratImAna", "tAskarya", "vAlka", "vfdDokza", "yUna", "BrI", "Sabd", "aBiprapac", "aDibrU", "anuvilI", "avarAD", "luq", "nyuz", "prahlAd", "pratipravac", "prativand", "protsah", "sPar", "samIq", "samanudiS", "udvA", "udvas", "viGaww", "vipraT", "vyapekz", "AyAsin", "GAtuka", "Gftya", "aBivinIta", "amarta", "aparinizWita", "hasAmuda", "maYjizWa", "nirastra", "niruzman", "pAnasa", "pramfRa", "sAntardIpa", "sAnunaya", "sEkatin", "saretas", "tandrayu", "viDana", "viSUla", "vibanDu", "Ake", "Put", "SAstratas", "SaSvaDA", "Su", "aBinaByam", "apAkA", "huras", "nAmaTA", "pUt", "paredyavi", "pratitaru", "sadivas", "samAnatra", "samaBitas", "stokaSas", "tAjak", "tAvacCas", "vAritas", "viSvyA", "ASita", "Apitva", "BUryojas", "DAva", "DanyatA", "Palodaya", "ahrasva", "akaTita", "amahIyamAna", "apUrvatA", "aparityakta", "asamad", "malimluc", "navadaSan", "nvE", "pUrvatva", "prasup", "sUtatA", "tigmezu", "viDuratA"];
   var state = {};
   try { state = JSON.parse(localStorage.getItem(STORE_KEY) || '{}') || {}; } catch (e) { state = {}; }
@@ -7179,8 +7206,8 @@
   document.getElementById('downloadBtn').addEventListener('click', function () {
     ids.forEach(function (id) { syncNoteFromDom(id); });
     var decided = ids.filter(function (id) { return state[id] && state[id].decision; }).length;
-    var payload = { sheet_id: SHEET_ID, content_hash: CONTENT_HASH, generated: "12-08-2026", decided: decided,
-      items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '', reject_label: rec.reject_label || null }; }) };
+    var payload = { sheet_id: SHEET_ID, content_hash: CONTENT_HASH, generated: "12-08-2026", decided: decided, time_total_seconds: __timeTotal(),
+      items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '', time_seconds: __timeFor(id), reject_label: rec.reject_label || null }; }) };
     var blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
     var url = URL.createObjectURL(blob); var a = document.createElement('a');
     a.href = url; a.download = SHEET_ID + '_decisions.json'; document.body.appendChild(a); a.click();
@@ -7221,8 +7248,8 @@
       ids.forEach(function (id) { syncNoteFromDom(id); });
     }
     var decided = ids.filter(function (id) { return state[id] && state[id].decision; }).length;
-    return JSON.stringify({ sheet_id: SHEET_ID, content_hash: CONTENT_HASH, generated: new Date().toISOString(), decided: decided,
-      items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '', reject_label: rec.reject_label || null }; }) }, null, 2);
+    return JSON.stringify({ sheet_id: SHEET_ID, content_hash: CONTENT_HASH, generated: new Date().toISOString(), decided: decided, time_total_seconds: __timeTotal(),
+      items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '', time_seconds: __timeFor(id), reject_label: rec.reject_label || null }; }) }, null, 2);
   }
   function scheduleAutosave() {
     if (!saveHandle) return;
@@ -7278,6 +7305,100 @@
   fsApply(fsGet());
   document.getElementById('fsDown').addEventListener('click', function () { fsSet(fsGet() - 0.1); });
   document.getElementById('fsUp').addEventListener('click', function () { fsSet(fsGet() + 0.1); });
+
+  var TIME_KEY = STORE_KEY + ':timing';
+  var __timing = { total: 0, per: {} };
+  try {
+    var __t0 = JSON.parse(localStorage.getItem(TIME_KEY) || 'null');
+    if (__t0 && typeof __t0.total === 'number') __timing = __t0;
+  } catch (e) {}
+  if (!__timing.per) __timing.per = {};
+  function __timeFor(id) { return Math.round(__timing.per[id] || 0); }
+  function __timeTotal() { return Math.round(__timing.total || 0); }
+  function __timeFmt(s) {
+    s = Math.round(s); var m = Math.floor(s / 60);
+    return (m >= 60 ? Math.floor(m / 60) + ':' + ('0' + (m - Math.floor(m / 60) * 60)).slice(-2) : m)
+      + ':' + ('0' + (s - m * 60)).slice(-2);
+  }
+  function __timeShow() {
+    var el = document.getElementById('t-total');
+    if (el) el.textContent = __timeFmt(__timing.total);
+  }
+  var __timeLast = Date.now(), __timeDirty = 0;
+  var __timeCards = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  function __timeActiveId() {
+    var mid = window.innerHeight / 2, best = null, bestd = Infinity;
+    for (var i = 0; i < __timeCards.length; i++) {
+      var c = __timeCards[i];
+      if (c.style.display === 'none') continue;
+      var r = c.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > window.innerHeight) continue;
+      var center = (Math.max(r.top, 0) + Math.min(r.bottom, window.innerHeight)) / 2;
+      var d = Math.abs(center - mid);
+      if (d < bestd) { bestd = d; best = c; }
+    }
+    return best ? best.getAttribute('data-id') : null;
+  }
+  function __timeFlush() {
+    try { localStorage.setItem(TIME_KEY, JSON.stringify(__timing)); } catch (e) {}
+  }
+  // V12 (H2858): the clock is stoppable. `paused` rides in the same persisted
+  // record as the totals, so a reviewer who pauses and closes the tab does not
+  // come back to a clock that ran all night.
+  var __timePaused = !!__timing.paused;
+  function __timePauseSet(v) {
+    __timePaused = !!v; __timing.paused = __timePaused; __timeLast = Date.now(); __timeFlush();
+  }
+  setInterval(function () {
+    var now = Date.now(), dt = (now - __timeLast) / 1000;
+    __timeLast = now;
+    if (document.hidden || __timePaused || dt <= 0 || dt > 4) return;
+    __timing.total += dt;
+    var id = __timeActiveId();
+    if (id) __timing.per[id] = (__timing.per[id] || 0) + dt;
+    __timeDirty += dt;
+    if (__timeDirty >= 5) { __timeDirty = 0; __timeFlush(); }
+    __timeShow();
+  }, 1000);
+  document.addEventListener('visibilitychange', function () { __timeLast = Date.now(); });
+  window.addEventListener('beforeunload', __timeFlush);
+  __timeShow();
+
+  var HANDIN_SAID = 'handed in {n} of {total} — clock stopped, the rest stay saved in this browser';
+  var __handinBtn = document.getElementById('handinBtn');
+  var __handinSaid = document.getElementById('handinSaid');
+
+  var __pauseBtn = document.getElementById('pauseBtn');
+  function __pauseShow() {
+    __pauseBtn.classList.toggle('on', __timePaused);
+    __pauseBtn.innerHTML = __timePaused ? '&#9654;' : '&#9208;';
+    var chip = document.querySelector('.tally .time');
+    if (chip) chip.classList.toggle('paused', __timePaused);
+  }
+  __pauseBtn.addEventListener('click', function () { __timePauseSet(!__timePaused); __pauseShow(); });
+  __pauseShow();
+  __handinBtn.addEventListener('click', function () {
+    ids.forEach(function (id) { syncNoteFromDom(id); });
+    __timePauseSet(true); __pauseShow();
+    var items = ids.map(function (id) {
+      var rec = state[id] || {};
+      var item = { id: id, decision: rec.decision || null };
+      item.note = rec.note || '';
+      item.time_seconds = __timeFor(id);
+      item.reject_label = rec.reject_label || null;
+      return item;
+    });
+    var decided = items.filter(function (it) { return !!it.decision; }).length;
+    var payload = { sheet_id: SHEET_ID, content_hash: CONTENT_HASH, generated: GENERATED, decided: decided,
+      partial: true, complete: false, undecided: items.length - decided, items: items };
+    payload.time_total_seconds = __timeTotal();
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
+    var url = URL.createObjectURL(blob); var a = document.createElement('a');
+    a.href = url; a.download = SHEET_ID + '_decisions_partial.json';
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+    __handinSaid.textContent = HANDIN_SAID.replace('{n}', decided).replace('{total}', items.length);
+  });
 })();
 </script>
 </body>
