@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="color-scheme" content="dark">
+<meta name="generator" content="csl-pyutil/0.13.0">
 <title>G6 · золотой стандарт — стартовый лист MQM — 320 items</title>
 <style>
   :root { color-scheme: dark; --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --text:#e6e6e6; --muted:#9aa0aa;
@@ -97,25 +98,50 @@
   .fsctl button { background:var(--panel2); border:1px solid var(--border); color:var(--text);
                   padding:6px 10px; border-radius:14px; cursor:pointer; line-height:1; }
   .fsctl .fsval { color:var(--muted); min-width:3.4em; text-align:center; }
+  @media (max-width: 640px) {
+    header.top { padding: 10px 14px; flex-direction: column; align-items: stretch; }
+    header.top h1 { font-size: 15px; }
+    .tally { gap: 8px; font-size: 11px; }
+    .toolbar { padding: 8px 14px; }
+    main { padding: 8px 12px; }
+    .card { padding: 12px; }
+    .filterbar { flex-wrap: wrap; }
+    button.dl, button.vote, button.rate, .fsctl button, #saveBtn, #handinBtn, #pauseBtn {
+      min-height: 44px; min-width: 44px; padding: 10px 14px;
+    }
+    .controls { flex-wrap: wrap; }
+    .panel { padding: 8px 10px; }
+    textarea.note { min-height: 60px; }
+  }
+  .tally .time { color:var(--muted); }
+  .dl.handin { background:#243447; }
+  .tally .pausebtn { background:none; border:1px solid var(--border); color:var(--muted);
+                     border-radius:6px; padding:0 6px; margin-left:4px; cursor:pointer;
+                     font-size:inherit; font-family:inherit; line-height:1.6; }
+  .tally .pausebtn.on { color:#ffd479; border-color:#ffd479; }
+  .tally .time.paused { opacity:.45; }
+  .handin-said { color:var(--muted); font-size:12px; margin-left:10px; }
 </style>
 </head>
 <body>
 <header class="top">
   <div>
     <h1>G6 · золотой стандарт — стартовый лист MQM — 320 items</h1>
-    <div class="sub">Generated 2026-08-14 &middot; sheet_id <code>h215-gold-full-320-2026-08-14</code> &middot; bound <code class="bindchip" title="content_hash — binds this sheet's decisions.json export to exactly this HTML">sha256:d9125d7d16c5…</code> &middot; 320 карточек из gold/gold_set.jsonl (320), стратификация period × kind; типология из 6 ярлыков; каждая карточка несёт словарь, корень и контексты ДО голоса</div>
+    <div class="sub">Generated 2026-08-14 &middot; sheet_id <code>h215-gold-full-320-2026-08-14</code> &middot; bound <code class="bindchip" title="content_hash — binds this sheet's decisions.json export to exactly this HTML">sha256:de143538e3fc…</code> &middot; 320 карточек из gold/gold_set.jsonl (320), стратификация period × kind; типология из 6 ярлыков; каждая карточка несёт словарь, корень и контексты ДО голоса</div>
   </div>
   <div class="tally" id="tally">
     <span class="approve">&#9989; <span class="count" id="c-approve">0</span></span>
     <span class="reject">&#10060; <span class="count" id="c-reject">0</span></span>
     <span class="defer">&#9208; <span class="count" id="c-defer">0</span></span>
+    <span class="time" title="active time on this sheet (while the tab is visible)">&#9201; <span class="count" id="t-total">0:00</span></span>
+    <button type="button" class="pausebtn" id="pauseBtn" title="pause the clock — a break is not review time">&#9208;</button>
     <span class="unvoted">&#9711; <span class="count" id="c-unvoted">320</span></span>
   </div>
 </header>
 <aside class="screening-banner" role="status" data-screening="1"><strong>Screening (H1649)</strong> — only human-required cards are below. Off the plate: <span class="sc-a">deterministic 0</span> · <span class="sc-b">dataset lookup 320</span> · <span class="sc-c">agent adjudication 320</span> (total screened 640). Human cards: <span class="sc-d">320</span>. Evidence: <code>RussianTranslation/gold/HUMAN_GOLD_PROTOCOL.md</code>. Rules: mqm-6-label-typology, h1801-evidence-before-label, h1802-reject-label-picker.</aside>
 <div class="savebanner">&#128229; Your export downloads as <code>h215-gold-full-320-2026-08-14_decisions.json</code> &rarr; save it to <code>RussianTranslation\review\h215-gold-full-320-2026-08-14_decisions.json</code> (the <code>sheet_id</code> inside the file is <code>h215-gold-full-320-2026-08-14</code> — that is how a later session knows which sheet these decisions belong to).</div>
 <div class="toolbar">
-  <button class="dl" id="downloadBtn">Download decisions.json</button><button class="dl" id="saveBtn" style="display:none;margin-left:8px">Save to folder…</button>
+  <button class="dl" id="downloadBtn">Download decisions.json</button><button class="dl handin" id="handinBtn" title="stop the clock and export the votes made so far; the rest stay saved in this browser">Hand in what I got</button><span class="handin-said" id="handinSaid"></span><button class="dl" id="saveBtn" style="display:none;margin-left:8px">Save to folder…</button>
   <label id="strictReviewerWrap" style="display:flex;align-items:center;gap:6px;font-size:13px">
     Reviewer <input id="strictReviewer" type="text" autocomplete="name" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:7px 9px" />
   </label>
@@ -4618,8 +4644,9 @@
 <script>
 (function () {
   var SHEET_ID = "h215-gold-full-320-2026-08-14";
-  var CONTENT_HASH = "sha256:d9125d7d16c5086160485ccd338416127c464a8ec022848554868c60a0279bce";
+  var CONTENT_HASH = "sha256:de143538e3fc89c3a06116d1a17d68d1e5a13a959c2970e21cdf84c9cdca4354";
   var STORE_KEY = 'review-sheet:' + SHEET_ID;
+  var GENERATED = "2026-08-14";
   var ids = ["5", "3", "6", "9", "4", "2", "0", "1", "10", "7", "18", "15", "22", "11", "8", "20", "41", "13", "23", "19", "24", "17", "12", "29", "44", "16", "31", "21", "54", "35", "14", "37", "51", "27", "32", "25", "58", "48", "30", "47", "73", "39", "33", "26", "59", "52", "34", "50", "74", "42", "46", "28", "65", "69", "38", "55", "75", "60", "56", "36", "66", "77", "40", "71", "76", "81", "57", "43", "68", "86", "45", "91", "79", "98", "61", "53", "78", "93", "49", "113", "88", "99", "67", "63", "84", "104", "62", "115", "103", "101", "83", "70", "89", "107", "64", "116", "112", "110", "85", "82", "102", "109", "72", "117", "118", "128", "92", "87", "105", "120", "80", "122", "119", "135", "97", "90", "111", "121", "94", "123", "129", "140", "100", "96", "124", "133", "95", "136", "156", "141", "106", "108", "126", "134", "125", "144", "163", "154", "114", "130", "150", "137", "127", "155", "179", "164", "142", "131", "153", "139", "132", "174", "188", "167", "147", "143", "157", "149", "138", "176", "193", "169", "148", "145", "159", "171", "146", "196", "199", "170", "165", "152", "161", "177", "151", "212", "209", "175", "166", "158", "162", "183", "182", "229", "210", "181", "172", "160", "168", "185", "197", "230", "217", "190", "173", "195", "180", "186", "203", "265", "219", "192", "178", "214", "184", "191", "218", "266", "221", "201", "189", "224", "187", "205", "225", "269", "222", "208", "198", "227", "194", "206", "231", "273", "223", "238", "204", "249", "200", "213", "241", "275", "233", "247", "207", "257", "202", "216", "248", "276", "236", "254", "211", "258", "220", "239", "250", "280", "237", "259", "215", "267", "226", "244", "253", "282", "242", "260", "228", "270", "232", "245", "262", "285", "243", "261", "235", "272", "234", "246", "277", "297", "283", "263", "240", "287", "252", "251", "279", "298", "284", "264", "256", "290", "255", "268", "296", "300", "301", "281", "278", "291", "271", "286", "313", "302", "308", "288", "293", "294", "274", "289", "316", "304", "310", "305", "311", "303", "292", "299", "317", "309", "314", "312", "315", "307", "295", "306", "318", "319"];
   var state = {};
   try { state = JSON.parse(localStorage.getItem(STORE_KEY) || '{}') || {}; } catch (e) { state = {}; }
@@ -4663,8 +4690,8 @@
   document.getElementById('downloadBtn').addEventListener('click', function () {
     ids.forEach(function (id) { syncNoteFromDom(id); });
     var decided = ids.filter(function (id) { return state[id] && state[id].decision; }).length;
-    var payload = { sheet_id: SHEET_ID, content_hash: CONTENT_HASH, generated: "2026-08-14", decided: decided,
-      items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '', reject_label: rec.reject_label || null }; }) };
+    var payload = { sheet_id: SHEET_ID, content_hash: CONTENT_HASH, generated: "2026-08-14", decided: decided, time_total_seconds: __timeTotal(),
+      items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '', time_seconds: __timeFor(id), reject_label: rec.reject_label || null }; }) };
     var blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
     var url = URL.createObjectURL(blob); var a = document.createElement('a');
     a.href = url; a.download = SHEET_ID + '_decisions.json'; document.body.appendChild(a); a.click();
@@ -4706,7 +4733,7 @@
   function strictItems() {
     return ids.map(function (id) {
       var rec = state[id] || {};
-      return { id: id, decision: rec.decision || null, note: rec.note || '', reject_label: rec.reject_label || null };
+      return { id: id, decision: rec.decision || null, note: rec.note || '', time_seconds: __timeFor(id), reject_label: rec.reject_label || null };
     });
   }
   function strictValidation() {
@@ -4729,7 +4756,7 @@
   function strictPayload() {
     var result = strictValidation();
     var decided = result.items.filter(function (item) { return !!item.decision; }).length;
-    return { sheet_id: SHEET_ID, content_hash: CONTENT_HASH, generated: "2026-08-14", decided: decided,
+    return { sheet_id: SHEET_ID, content_hash: CONTENT_HASH, generated: "2026-08-14", decided: decided, time_total_seconds: __timeTotal(),
       reviewer: result.reviewer, reviewedAt: result.complete ? new Date().toISOString() : null,
       complete: result.complete, items: result.items };
   }
@@ -4811,6 +4838,101 @@
   fsApply(fsGet());
   document.getElementById('fsDown').addEventListener('click', function () { fsSet(fsGet() - 0.1); });
   document.getElementById('fsUp').addEventListener('click', function () { fsSet(fsGet() + 0.1); });
+
+  var TIME_KEY = STORE_KEY + ':timing';
+  var __timing = { total: 0, per: {} };
+  try {
+    var __t0 = JSON.parse(localStorage.getItem(TIME_KEY) || 'null');
+    if (__t0 && typeof __t0.total === 'number') __timing = __t0;
+  } catch (e) {}
+  if (!__timing.per) __timing.per = {};
+  function __timeFor(id) { return Math.round(__timing.per[id] || 0); }
+  function __timeTotal() { return Math.round(__timing.total || 0); }
+  function __timeFmt(s) {
+    s = Math.round(s); var m = Math.floor(s / 60);
+    return (m >= 60 ? Math.floor(m / 60) + ':' + ('0' + (m - Math.floor(m / 60) * 60)).slice(-2) : m)
+      + ':' + ('0' + (s - m * 60)).slice(-2);
+  }
+  function __timeShow() {
+    var el = document.getElementById('t-total');
+    if (el) el.textContent = __timeFmt(__timing.total);
+  }
+  var __timeLast = Date.now(), __timeDirty = 0;
+  var __timeCards = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  function __timeActiveId() {
+    var mid = window.innerHeight / 2, best = null, bestd = Infinity;
+    for (var i = 0; i < __timeCards.length; i++) {
+      var c = __timeCards[i];
+      if (c.style.display === 'none') continue;
+      var r = c.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > window.innerHeight) continue;
+      var center = (Math.max(r.top, 0) + Math.min(r.bottom, window.innerHeight)) / 2;
+      var d = Math.abs(center - mid);
+      if (d < bestd) { bestd = d; best = c; }
+    }
+    return best ? best.getAttribute('data-id') : null;
+  }
+  function __timeFlush() {
+    try { localStorage.setItem(TIME_KEY, JSON.stringify(__timing)); } catch (e) {}
+  }
+  // V12 (H2858): the clock is stoppable. `paused` rides in the same persisted
+  // record as the totals, so a reviewer who pauses and closes the tab does not
+  // come back to a clock that ran all night.
+  var __timePaused = !!__timing.paused;
+  function __timePauseSet(v) {
+    __timePaused = !!v; __timing.paused = __timePaused; __timeLast = Date.now(); __timeFlush();
+  }
+  setInterval(function () {
+    var now = Date.now(), dt = (now - __timeLast) / 1000;
+    __timeLast = now;
+    if (document.hidden || __timePaused || dt <= 0 || dt > 4) return;
+    __timing.total += dt;
+    var id = __timeActiveId();
+    if (id) __timing.per[id] = (__timing.per[id] || 0) + dt;
+    __timeDirty += dt;
+    if (__timeDirty >= 5) { __timeDirty = 0; __timeFlush(); }
+    __timeShow();
+  }, 1000);
+  document.addEventListener('visibilitychange', function () { __timeLast = Date.now(); });
+  window.addEventListener('beforeunload', __timeFlush);
+  __timeShow();
+
+  var HANDIN_SAID = 'handed in {n} of {total} — clock stopped, the rest stay saved in this browser';
+  var __handinBtn = document.getElementById('handinBtn');
+  var __handinSaid = document.getElementById('handinSaid');
+
+  var __pauseBtn = document.getElementById('pauseBtn');
+  function __pauseShow() {
+    __pauseBtn.classList.toggle('on', __timePaused);
+    __pauseBtn.innerHTML = __timePaused ? '&#9654;' : '&#9208;';
+    var chip = document.querySelector('.tally .time');
+    if (chip) chip.classList.toggle('paused', __timePaused);
+  }
+  __pauseBtn.addEventListener('click', function () { __timePauseSet(!__timePaused); __pauseShow(); });
+  __pauseShow();
+  __handinBtn.addEventListener('click', function () {
+    ids.forEach(function (id) { syncNoteFromDom(id); });
+    __timePauseSet(true); __pauseShow();
+    var items = ids.map(function (id) {
+      var rec = state[id] || {};
+      var item = { id: id, decision: rec.decision || null };
+      item.note = rec.note || '';
+      item.time_seconds = __timeFor(id);
+      item.reject_label = rec.reject_label || null;
+      return item;
+    });
+    var decided = items.filter(function (it) { return !!it.decision; }).length;
+    var payload = { sheet_id: SHEET_ID, content_hash: CONTENT_HASH, generated: GENERATED, decided: decided,
+      partial: true, complete: false, undecided: items.length - decided, items: items };
+    payload.time_total_seconds = __timeTotal();
+    payload.reviewer = strictReviewer.value.trim();
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
+    var url = URL.createObjectURL(blob); var a = document.createElement('a');
+    a.href = url; a.download = SHEET_ID + '_decisions_partial.json';
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+    __handinSaid.textContent = HANDIN_SAID.replace('{n}', decided).replace('{total}', items.length);
+  });
 })();
 </script>
 </body>
