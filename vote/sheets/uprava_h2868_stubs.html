@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="color-scheme" content="dark">
+<meta name="generator" content="csl-pyutil/0.13.0">
+<title>H2868 — seven stale mint stubs: fill, retire, or leave queued — 7 items</title>
+<style>
+  :root { color-scheme: dark; --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --text:#e6e6e6; --muted:#9aa0aa;
+          --accent:#5b8cff; --ok:#3fb950; --bad:#f85149; --defer:#d29922; --border:#2a2f3a; }
+  * { box-sizing: border-box; }
+  body { background:var(--bg); color:var(--text); font-family:-apple-system,Segoe UI,Roboto,sans-serif;
+         margin:0; padding:0 0 120px 0; }
+  header.top { position:sticky; top:0; z-index:10; background:var(--panel); border-bottom:1px solid var(--border);
+               padding:14px 20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+  header.top h1 { font-size:16px; margin:0; }
+  header.top .sub { color:var(--muted); font-size:12px; max-width:760px; }
+  .tally { display:flex; gap:14px; font-size:13px; }
+  .tally span.count { font-weight:700; }
+  .tally .approve { color:var(--ok); } .tally .reject { color:var(--bad); }
+  .tally .defer { color:var(--defer); } .tally .unvoted { color:var(--muted); }
+  .toolbar { padding:10px 20px; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  button.dl { background:var(--accent); color:#fff; border:none; padding:8px 14px; border-radius:6px;
+              cursor:pointer; font-size:13px; }
+  button.dl:hover { opacity:.9; }
+  .filterbar { display:flex; gap:6px; flex-wrap:wrap; }
+  .filterbar button { background:var(--panel2); border:1px solid var(--border); color:var(--text);
+                       padding:6px 10px; border-radius:14px; font-size:12px; cursor:pointer; }
+  .filterbar button.active { border-color:var(--accent); color:var(--accent); }
+  main { max-width:980px; margin:0 auto; padding:10px 20px; }
+  .card { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:16px;
+          margin-bottom:16px; }
+  .card.voted-approve { border-left:4px solid var(--ok); }
+  .card.voted-reject { border-left:4px solid var(--bad); }
+  .card.voted-defer { border-left:4px solid var(--defer); }
+  .card header { display:flex; justify-content:space-between; align-items:baseline; }
+  .card .hw { font-size:18px; font-weight:700; }
+  .badge { font-size:11px; background:var(--panel2); padding:2px 8px; border-radius:10px;
+           margin-left:8px; color:var(--muted); }
+  .question { margin:8px 0 12px; font-size:14px; }
+  .panel { background:var(--panel2); border-radius:8px; padding:10px 12px; font-size:13px; margin-bottom:10px; }
+  .panel h4 { margin:0 0 6px; font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+  .panel pre { white-space:pre-wrap; word-break:break-word; margin:0; font-size:12px; line-height:1.45; }
+  .chip { display:inline-block; background:#263042; border-radius:5px; padding:2px 7px; margin:2px 3px 2px 0; font-size:12px; }
+  .muted { color:var(--muted); font-style:italic; }
+  .controls { display:flex; align-items:center; gap:8px; margin-top:4px; }
+  button.vote { border:1px solid var(--border); background:var(--panel2); color:var(--text);
+                padding:7px 12px; border-radius:6px; cursor:pointer; font-size:13px; }
+  button.vote.approve.active { background:var(--ok); border-color:var(--ok); color:#04240b; }
+  button.vote.reject.active { background:var(--bad); border-color:var(--bad); color:#2a0a08; }
+  button.vote.defer.active { background:var(--defer); border-color:var(--defer); color:#2a1d02; }
+  .vote-state { margin-left:6px; font-size:12px; color:var(--muted); }
+  textarea.note { width:100%; margin-top:10px; min-height:88px; background:#11141a !important; color:#e6e6e6 !important;
+                  -webkit-text-fill-color:#e6e6e6; border:1px solid var(--border); border-radius:6px; padding:8px; font-size:13px;
+                  font-family:inherit; resize:vertical; }
+  textarea.note::placeholder { color:var(--muted); opacity:1; }
+  footer.hint { max-width:980px; margin:20px auto; padding:0 20px; color:var(--muted); font-size:12px; }
+  kbd { background:#263042; border-radius:4px; padding:1px 5px; font-size:11px; }
+
+  .screening-banner { margin: 0 20px 12px; padding: 10px 14px; border-radius: 8px;
+    border: 1px solid var(--accent); background: #152033; font-size: 12px; line-height: 1.45;
+    color: var(--text); max-width: 980px; }
+  .screening-banner code { font-size: 11px; color: var(--accent); }
+  .screening-banner .sc-d { color: var(--defer); font-weight: 700; }
+
+  .idchip { font-family:ui-monospace,Consolas,monospace; font-size:11px; color:var(--muted);
+            background:var(--panel2); border:1px solid var(--border); padding:2px 7px;
+            border-radius:6px; user-select:all; }
+  .card header { gap:10px; }
+  .hw a.hwlink { color:inherit; text-decoration:underline dotted; text-underline-offset:3px; }
+  .hw a.hwlink:hover { color:var(--accent); }
+  mark.hl { background:#453407; color:#ffd75e; padding:0 2px; border-radius:3px; }
+  .savebanner { max-width:980px; margin:10px auto 0; padding:8px 20px; font-size:12.5px; }
+  .savebanner code { background:var(--panel2); border:1px solid var(--border); padding:1px 6px; border-radius:5px; }
+  .ratingrow { display:flex; align-items:center; gap:6px; margin-top:10px; flex-wrap:wrap; }
+  .ratinglabel { font-size:12px; color:var(--muted); margin-right:4px; }
+  button.rate { border:1px solid var(--border); background:var(--panel2); color:var(--text);
+                width:34px; padding:6px 0; border-radius:6px; cursor:pointer; font-size:13px; }
+  button.rate.active { background:var(--accent); border-color:var(--accent); color:#fff; }
+  button.rate.active.below { background:var(--defer); border-color:var(--defer); color:#2a1d02; }
+  .rate-state { font-size:12px; color:var(--muted); margin-left:4px; }
+  :root { --fs:1.5; }
+  header.top h1 { font-size:calc(16px * var(--fs)) !important; }
+  header.top .sub { font-size:calc(12px * var(--fs)) !important; }
+  .tally, button.dl, button.vote, button.rate, textarea.note, .reject-label-select,
+  #strictReviewerWrap, #strictReviewerWrap input { font-size:calc(13px * var(--fs)) !important; }
+  .filterbar button, .fsctl button, .fsctl .fsval, .chip, .vote-state, .rate-state,
+  .ratinglabel, .rejectlabellabel, footer.hint, div.legend,
+  #strictReviewError { font-size:calc(12px * var(--fs)) !important; }
+  .card .hw { font-size:calc(18px * var(--fs)) !important; }
+  .badge, .panel h4, kbd, .idchip { font-size:calc(11px * var(--fs)) !important; }
+  .question { font-size:calc(14px * var(--fs)) !important; }
+  .panel { font-size:calc(13px * var(--fs)) !important; }
+  .panel pre { font-size:calc(13.5px * var(--fs)) !important; line-height:1.55; }
+  .panel .anatomy { font-size:calc(12.5px * var(--fs)) !important; }
+  .savebanner { font-size:calc(12.5px * var(--fs)) !important; }
+  .fsctl { display:flex; align-items:center; gap:4px; }
+  .fsctl button { background:var(--panel2); border:1px solid var(--border); color:var(--text);
+                  padding:6px 10px; border-radius:14px; cursor:pointer; line-height:1; }
+  .fsctl .fsval { color:var(--muted); min-width:3.4em; text-align:center; }
+  @media (max-width: 640px) {
+    header.top { padding: 10px 14px; flex-direction: column; align-items: stretch; }
+    header.top h1 { font-size: 15px; }
+    .tally { gap: 8px; font-size: 11px; }
+    .toolbar { padding: 8px 14px; }
+    main { padding: 8px 12px; }
+    .card { padding: 12px; }
+    .filterbar { flex-wrap: wrap; }
+    button.dl, button.vote, button.rate, .fsctl button, #saveBtn, #handinBtn, #pauseBtn {
+      min-height: 44px; min-width: 44px; padding: 10px 14px;
+    }
+    .controls { flex-wrap: wrap; }
+    .panel { padding: 8px 10px; }
+    textarea.note { min-height: 60px; }
+  }
+  .tally .time { color:var(--muted); }
+  .dl.handin { background:#243447; }
+  .tally .pausebtn { background:none; border:1px solid var(--border); color:var(--muted);
+                     border-radius:6px; padding:0 6px; margin-left:4px; cursor:pointer;
+                     font-size:inherit; font-family:inherit; line-height:1.6; }
+  .tally .pausebtn.on { color:#ffd479; border-color:#ffd479; }
+  .tally .time.paused { opacity:.45; }
+  .handin-said { color:var(--muted); font-size:12px; margin-left:10px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>H2868 — seven stale mint stubs: fill, retire, or leave queued — 7 items</h1>
+    <div class="sub">Generated 17-08-2026 &middot; sheet_id <code>uprava-h2868-stubs_17-08-26</code> &middot; Every card already carries its evidence and a recommended verdict. The question is never «was this delivered» — that is settled in the digest — but «is this still wanted».</div>
+  </div>
+  <div class="tally" id="tally">
+    <span class="approve">&#9989; <span class="count" id="c-approve">0</span></span>
+    <span class="reject">&#10060; <span class="count" id="c-reject">0</span></span>
+    <span class="defer">&#9208; <span class="count" id="c-defer">0</span></span>
+    <span class="time" title="active time on this sheet (while the tab is visible)">&#9201; <span class="count" id="t-total">0:00</span></span>
+    <button type="button" class="pausebtn" id="pauseBtn" title="pause the clock — a break is not review time">&#9208;</button>
+    <span class="unvoted">&#9711; <span class="count" id="c-unvoted">7</span></span>
+  </div>
+</header>
+<aside class="screening-banner" role="status" data-screening="1"><strong>Screening (H1649)</strong> — only human-required cards are below. Off the plate: <span class="sc-a">deterministic 14</span> · <span class="sc-b">dataset lookup 1</span> · <span class="sc-c">agent adjudication 0</span> (total screened 15). Human cards: <span class="sc-d">7</span>. Evidence: <code>review/screening_evidence_uprava-h2868-stubs_17-08-26.md</code>. Rules: mint-date == today =&gt; today&#x27;s mint wave, not stale debt, filled file + auto-corrected row =&gt; census false positive, merged PR titled or body-linked to the id =&gt; close, never ask.</aside>
+<div class="savebanner">&#128229; Your export downloads as <code>uprava-h2868-stubs_17-08-26_decisions.json</code> &rarr; save it to <code>Uprava\review\uprava-h2868-stubs_17-08-26_decisions.json</code> (the <code>sheet_id</code> inside the file is <code>uprava-h2868-stubs_17-08-26</code> — that is how a later session knows which sheet these decisions belong to).</div>
+<div class="toolbar">
+  <button class="dl" id="downloadBtn">Download decisions.json</button><button class="dl handin" id="handinBtn" title="stop the clock and export the votes made so far; the rest stay saved in this browser">Hand in what I got</button><span class="handin-said" id="handinSaid"></span><button class="dl" id="saveBtn" style="display:none;margin-left:8px">Save to folder…</button>
+  <div class="fsctl" title="text size — persists in this browser"><button type="button" id="fsDown" aria-label="smaller text">A&minus;</button><span class="fsval" id="fsVal"></span><button type="button" id="fsUp" aria-label="larger text">A+</button></div>
+  <div class="filterbar" id="filterbar"><button data-filter="all" class="active">all</button><button data-filter="fill">fill the stub</button><button data-filter="decide">needs a call</button><button data-filter="retire">retire it</button><button data-filter="unvoted">unvoted only</button></div>
+</div>
+<main id="cards">
+
+  <section class="card" data-id="S1" data-filt="fill">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H944-Fable_RuWritingStyles_orient-leningrad-vostokoved-passports_14.07.26.md" target="_blank" rel="noopener">H944 — orient_leningrad: cluster shipped, individual востоковед passports still corpus-gated</a> <span class="badge">fill</span><span class="badge">RuWritingStyles</span><span class="badge">corpus-gated</span><span class="badge">Fable</span></div><span class="idchip" title="card id — cite this id back when discussing this card">S1</span></header>
+    <div class="question"><p><b>Minted:</b> 14-07-2026 (Fable), stub never filled</p><p><b>What the mint title asks for:</b> the orient_leningrad cluster plus individual passports for named Leningrad orientalists; the mint title itself already says the passports are pending corpus</p><p><b>Evidence gathered 17-08-2026:</b> the cluster shipped in <a href="https://github.com/gasyoun/RuWritingStyles/pull/84">RuWritingStyles #84</a> (styles/clusters/orient_leningrad.yml, the ClaudeStyles card, manifest and whois-list rows). <a href="https://github.com/gasyoun/RuWritingStyles/pull/129">#129</a> has since repaired <code>rws generate-passport</code> and shipped Lotman + Meletinsky passports — so the generator is no longer the blocker; the missing input is a per-author corpus.</p><p><b>Recommended verdict:</b> FILL — write the brief as a corpus-acquisition + per-author passport list, since the tool half is now proven working on two other authors</p><ul><li><b>Approve</b> — fill the stub into a real brief (named authors, corpus source, acceptance)</li><li><b>Reject</b> — retire the row — the cluster was the whole deliverable and the passports are not wanted</li><li><b>Defer</b> — leave it a stub and revisit when a Leningrad-orientalist corpus exists</li></ul><p>No card here asks whether work was <i>delivered</i> — that is already answered in the digest. Each asks only whether the work is still <i>wanted</i>, which no agent may decide alone.</p></div>
+    
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Apply the recommended verdict</button>
+      <button class="vote reject" data-vote="reject">&#10060; Do not — retire or reverse</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="which authors / which corpus source"></textarea>
+  </section>
+
+  <section class="card" data-id="S2" data-filt="fill">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H1518-Sonnet_IndologyScholars_nagari-topic-breakdown_22.07.26.md" target="_blank" rel="noopener">H1518 — build the fuller nagari topic/entity breakdown, now that its PLAN exists</a> <span class="badge">fill</span><span class="badge">IndologyScholars</span><span class="badge">plan-ready</span><span class="badge">Sonnet</span></div><span class="idchip" title="card id — cite this id back when discussing this card">S2</span></header>
+    <div class="question"><p><b>Minted:</b> 22-07-2026 (Sonnet), stub never filled</p><p><b>What the mint title asks for:</b> build the fuller nagari topic/entity breakdown per PLAN</p><p><b>Evidence gathered 17-08-2026:</b> the PLAN it defers to now exists: <a href="https://github.com/gasyoun/IndologyScholars/pull/129">IndologyScholars #129</a> shipped PLAN, ARCHITECTURE, IMPLEMENTATION, VERIFICATION and ROADMAP docs under <code>nagari/docs/</code> (+446 lines, docs-only). That PR's own body says: &laquo;Docs only — no pipeline/page code changes. Build tracked by handoff H1518.&raquo; So the prerequisite is met and the build is the outstanding half.</p><p><b>Recommended verdict:</b> FILL — the brief writes itself from the shipped IMPLEMENTATION + VERIFICATION docs</p><ul><li><b>Approve</b> — fill the stub by pointing it at the shipped layered plan and its acceptance criteria</li><li><b>Reject</b> — retire the row — the topic breakdown is no longer wanted</li><li><b>Defer</b> — leave queued until the nagari lane is scheduled</li></ul><p>No card here asks whether work was <i>delivered</i> — that is already answered in the digest. Each asks only whether the work is still <i>wanted</i>, which no agent may decide alone.</p></div>
+    
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Apply the recommended verdict</button>
+      <button class="vote reject" data-vote="reject">&#10060; Do not — retire or reverse</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="scope trim, if any"></textarea>
+  </section>
+
+  <section class="card" data-id="S3" data-filt="decide">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H2133-Opus_SanskritLexicography_h1650-grok-override-dual-run_01.08.26.md" target="_blank" rel="noopener">H2133 — is the retrospective Opus-vs-Grok dual-run compare still wanted?</a> <span class="badge">decide</span><span class="badge">SanskritLexicography</span><span class="badge">dual-run</span><span class="badge">hard</span><span class="badge">Opus</span></div><span class="idchip" title="card id — cite this id back when discussing this card">S3</span></header>
+    <div class="question"><p><b>Minted:</b> 01-08-2026 (Opus), stub never filled</p><p><b>What the mint title asks for:</b> re-run the H1650 lane on Opus and compare it against the Grok lane that executed it under model-lock override</p><p><b>Evidence gathered 17-08-2026:</b> the parent has since closed and the queue it governed has moved on — H1650, the review-sheet screening release, retired the sheets it was arguing about (see <a href="https://github.com/gasyoun/Uprava/blob/main/REVIEW_SHEETS_INDEX.md">REVIEW_SHEETS_INDEX.md</a>). A dual-run compare is an audit of a decision already acted on; it is rated <b>hard</b> effort. Nothing downstream is blocked on it.</p><p><b>Recommended verdict:</b> DECIDE — this is the only card with no obvious default: an override audit is either worth its cost now or written off explicitly</p><ul><li><b>Approve</b> — keep it, fill the brief, and schedule the compare</li><li><b>Reject</b> — write the override off — retire the row and record that the dual-run debt was not paid</li><li><b>Defer</b> — keep queued but unfilled, revisit at the next dual-run sweep</li></ul><p>No card here asks whether work was <i>delivered</i> — that is already answered in the digest. Each asks only whether the work is still <i>wanted</i>, which no agent may decide alone.</p></div>
+    
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Apply the recommended verdict</button>
+      <button class="vote reject" data-vote="reject">&#10060; Do not — retire or reverse</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if written off, the reason to record"></textarea>
+  </section>
+
+  <section class="card" data-id="S4" data-filt="fill">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H2519-Sonnet_ORS-FAQ_custdev-corpus-refresh-aug2026_09.08.26.md" target="_blank" rel="noopener">H2519 — Telegram corpus refresh to August 2026 plus custdev cache rebuild</a> <span class="badge">fill</span><span class="badge">ORS-FAQ</span><span class="badge">Tier 0</span><span class="badge">Sonnet</span></div><span class="idchip" title="card id — cite this id back when discussing this card">S4</span></header>
+    <div class="question"><p><b>Minted:</b> 09-08-2026 (Sonnet), file is a 24-line stub</p><p><b>What the mint title asks for:</b> refresh the Telegram corpus to August 2026 and rebuild the custdev caches</p><p><b>Evidence gathered 17-08-2026:</b> the <b>registry row already carries the full brief</b> — it names the export as the precondition for the seven remaining custdev layers. Only the handoff <i>file</i> is a stub, so filling it is a mechanical copy from the row, not new specification. The one real question is freshness: the mint is over a week old and the target month has moved.</p><p><b>Recommended verdict:</b> FILL — copy the brief from the registry row; re-date the target window while doing it</p><ul><li><b>Approve</b> — fill the file from the row and keep it queued</li><li><b>Reject</b> — retire — the refresh is superseded or no longer wanted</li><li><b>Defer</b> — leave as-is until the custdev lane is scheduled</li></ul><p>No card here asks whether work was <i>delivered</i> — that is already answered in the digest. Each asks only whether the work is still <i>wanted</i>, which no agent may decide alone.</p></div>
+    
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Apply the recommended verdict</button>
+      <button class="vote reject" data-vote="reject">&#10060; Do not — retire or reverse</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="target window to use instead of «August 2026»"></textarea>
+  </section>
+
+  <section class="card" data-id="S5" data-filt="fill">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H2526-Sonnet_ORS-FAQ_custdev-first-response-speed-conversion-report_09.08.26.md" target="_blank" rel="noopener">H2526 — curator first-response speed against conversion, no LLM, data already on disk</a> <span class="badge">fill</span><span class="badge">ORS-FAQ</span><span class="badge">trivial</span><span class="badge">Tier 0</span><span class="badge">Sonnet</span></div><span class="idchip" title="card id — cite this id back when discussing this card">S5</span></header>
+    <div class="question"><p><b>Minted:</b> 09-08-2026 (Sonnet), file is a 24-line stub</p><p><b>What the mint title asks for:</b> a report correlating curator first-response speed with conversion, without any LLM, on data that already exists</p><p><b>Evidence gathered 17-08-2026:</b> the <b>registry row already carries the brief</b> and states the inputs (<code>first_resp_days</code> and <code>paid</code> are already columns). Effort is rated <b>trivial</b>. This is the cheapest item in the whole stub census and the only one whose data dependency is already satisfied.</p><p><b>Recommended verdict:</b> FILL — mechanical; the row&#x27;s brief plus the two named columns is the whole spec</p><ul><li><b>Approve</b> — fill the file from the row and keep it queued as a trivial win</li><li><b>Reject</b> — retire — the correlation is not wanted</li><li><b>Defer</b> — leave as-is</li></ul><p>No card here asks whether work was <i>delivered</i> — that is already answered in the digest. Each asks only whether the work is still <i>wanted</i>, which no agent may decide alone.</p></div>
+    
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Apply the recommended verdict</button>
+      <button class="vote reject" data-vote="reject">&#10060; Do not — retire or reverse</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="any extra cut (cohort, date range)"></textarea>
+  </section>
+
+  <section class="card" data-id="S6" data-filt="retire">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H2583-Sonnet_SanskritSpellCheck_pr103-merge-finalize_11.08.26.md" target="_blank" rel="noopener">H2583 — «complete PR #103» points at an external maintainer&#x27;s repo, not ours</a> <span class="badge">retire</span><span class="badge">SanskritSpellCheck</span><span class="badge">external-maintainer</span><span class="badge">Sonnet</span></div><span class="idchip" title="card id — cite this id back when discussing this card">S6</span></header>
+    <div class="question"><p><b>Minted:</b> 11-08-2026 (Sonnet), file is a 24-line stub</p><p><b>What the mint title asks for:</b> complete the PR #103 merge — commit, push, verify, clean up</p><p><b>Evidence gathered 17-08-2026:</b> <b>gasyoun/SanskritSpellCheck has no PR #103</b>; that fork's numbering tops out at <a href="https://github.com/gasyoun/SanskritSpellCheck/pull/11">#11</a>, which merged 15-08-2026 and landed the stranded <code>corrections_draft</code>/<code>detectors</code> residue from branch <code>h2632-ssc-h103-fix-residue</code>. The PR the title means is <a href="https://github.com/drdhaval2785/SanskritSpellCheck/pull/103">drdhaval2785/SanskritSpellCheck #103</a> — «A44: double-blind anonymization (four-vector ruling)» — still <b>open</b> on the upstream maintainer's repo. Merging it is that maintainer's act; no agent and no handoff can perform it.</p><p><b>Recommended verdict:</b> RETIRE — move the dependency to MAINTAINER_DEPENDENCIES.md and take the row out of the handoff backlog, where it can never become actionable</p><ul><li><b>Approve</b> — retire the row and record the upstream PR as a maintainer dependency instead</li><li><b>Reject</b> — keep it as a handoff — there is agent-runnable work here that this reading missed</li><li><b>Defer</b> — leave queued until the upstream PR moves</li></ul><p>No card here asks whether work was <i>delivered</i> — that is already answered in the digest. Each asks only whether the work is still <i>wanted</i>, which no agent may decide alone.</p></div>
+    
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Apply the recommended verdict</button>
+      <button class="vote reject" data-vote="reject">&#10060; Do not — retire or reverse</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="if kept, what an agent is supposed to do"></textarea>
+  </section>
+
+  <section class="card" data-id="S7" data-filt="decide">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H2586-Opus_BookIndex_optimize-home-panel-size-budget_11.08.26.md" target="_blank" rel="noopener">H2586 — is the 186 KB gzip budget for the BookIndex home panel still the target?</a> <span class="badge">decide</span><span class="badge">BookIndex</span><span class="badge">measure-first</span><span class="badge">Opus</span></div><span class="idchip" title="card id — cite this id back when discussing this card">S7</span></header>
+    <div class="question"><p><b>Minted:</b> 11-08-2026 (Opus), file is a 24-line stub</p><p><b>What the mint title asks for:</b> optimize the v3_app.js home panel down to a 186 KB gzip budget</p><p><b>Evidence gathered 17-08-2026:</b> the mint title carries a hard number and no evidence that the number is still current. Nothing in this pass's search found a merged PR naming H2586 in any repo, so no part of it has shipped. A fill would have to open with one measurement — current gzip size against the 186 KB line — and that measurement decides whether the handoff has a subject at all.</p><p><b>Recommended verdict:</b> FILL, conditional — write the brief so its first step is the measurement, and let a measured pass under budget close it as premise-stale rather than as work</p><ul><li><b>Approve</b> — fill it as a measure-first brief (measure, then optimize only if over budget)</li><li><b>Reject</b> — retire — the budget target is obsolete</li><li><b>Defer</b> — leave queued until the BookIndex front-end lane is scheduled</li></ul><p>No card here asks whether work was <i>delivered</i> — that is already answered in the digest. Each asks only whether the work is still <i>wanted</i>, which no agent may decide alone.</p></div>
+    
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Apply the recommended verdict</button>
+      <button class="vote reject" data-vote="reject">&#10060; Do not — retire or reverse</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="the budget number to use, if not 186 KB"></textarea>
+  </section>
+</main>
+<footer class="hint">Approve = apply the recommended verdict as written. Reject = do the opposite of the recommendation (usually: retire the row). Defer = leave the stub queued and unfilled. A note overrides the recommendation in whatever direction it states. Keyboard: <kbd>a</kbd> Apply the recommended verdict &middot; <kbd>r</kbd> Do not — retire or reverse
+  &middot; <kbd>d</kbd> defer &middot; <kbd>&darr;</kbd>/<kbd>&uarr;</kbd> next/prev. Votes autosave to
+  this browser's localStorage; click "Download decisions.json" when done (unvoted items export with
+  decision:null).</footer>
+<div class="legend" style="max-width:980px;margin:0 auto 20px;padding:0 20px;color:var(--muted);font-size:12px">
+  <b>Approve</b> = accept the proposed change/answer shown on the card (no separate "approve as-is" —
+  approving means agreeing as written). <b>Reject</b> = keep the current entry/answer unchanged.
+  <b>Defer</b> = not sure yet, decide later. The note field is for requesting a partial tweak instead
+  of an outright reject.
+</div>
+<script>
+(function () {
+  var SHEET_ID = "uprava-h2868-stubs_17-08-26";
+  var STORE_KEY = 'review-sheet:' + SHEET_ID;
+  var GENERATED = "17-08-2026";
+  var ids = ["S1", "S2", "S3", "S4", "S5", "S6", "S7"];
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(STORE_KEY) || '{}') || {}; } catch (e) { state = {}; }
+  function tally() {
+    var c = { approve:0, reject:0, defer:0 };
+    ids.forEach(function (id) { var v = state[id] && state[id].decision; if (v && c.hasOwnProperty(v)) c[v]++; });
+    document.getElementById('c-approve').textContent = c.approve;
+    document.getElementById('c-reject').textContent = c.reject;
+    document.getElementById('c-defer').textContent = c.defer;
+    document.getElementById('c-unvoted').textContent = ids.length - c.approve - c.reject - c.defer;
+  }
+  function applyCardUI(card) {
+    var id = card.getAttribute('data-id'); var rec = state[id] || {};
+    card.classList.remove('voted-approve','voted-reject','voted-defer');
+    card.querySelectorAll('button.vote').forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-vote') === rec.decision); });
+    card.querySelector('.vote-state').textContent = rec.decision ? rec.decision : 'unvoted';
+    if (rec.decision) card.classList.add('voted-' + rec.decision);
+    var ta = card.querySelector('textarea.note'); if (rec.note && !ta.value) ta.value = rec.note;
+  }
+  function save() { localStorage.setItem(STORE_KEY, JSON.stringify(state)); tally(); }
+  // H1523 residual / csl-pyutil#1 Part 1: always re-read the live textarea on vote
+  // and before export so a second vote click (or a missed `input` event) cannot
+  // drop a note that is still visible in the card.
+  function syncNoteFromDom(id) {
+    state[id] = state[id] || {};
+    var card = document.querySelector('.card[data-id="' + id + '"]');
+    if (!card) return;
+    var ta = card.querySelector('textarea.note');
+    if (ta) state[id].note = ta.value;
+  }
+  function vote(id, d) { syncNoteFromDom(id); state[id].decision = d; save(); }
+  function noteChange(id, t) { state[id] = state[id] || {}; state[id].note = t; save(); }
+  document.querySelectorAll('.card').forEach(function (card) {
+    var id = card.getAttribute('data-id'); applyCardUI(card);
+    card.querySelectorAll('button.vote').forEach(function (btn) {
+      btn.addEventListener('click', function () { vote(id, btn.getAttribute('data-vote')); applyCardUI(card); });
+    });
+    var ta = card.querySelector('textarea.note'); ta.addEventListener('input', function () { noteChange(id, ta.value); });
+  });
+  tally();
+  document.getElementById('downloadBtn').addEventListener('click', function () {
+    ids.forEach(function (id) { syncNoteFromDom(id); });
+    var decided = ids.filter(function (id) { return state[id] && state[id].decision; }).length;
+    var payload = { sheet_id: SHEET_ID, generated: "17-08-2026", decided: decided, time_total_seconds: __timeTotal(),
+      items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '', time_seconds: __timeFor(id) }; }) };
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
+    var url = URL.createObjectURL(blob); var a = document.createElement('a');
+    a.href = url; a.download = SHEET_ID + '_decisions.json'; document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+  });
+  var filterbar = document.getElementById('filterbar');
+  filterbar.addEventListener('click', function (e) {
+    var btn = e.target.closest('button[data-filter]'); if (!btn) return;
+    filterbar.querySelectorAll('button').forEach(function (b) { b.classList.remove('active'); });
+    btn.classList.add('active'); var f = btn.getAttribute('data-filter');
+    document.querySelectorAll('.card').forEach(function (card) {
+      var show = true;
+      if (f === 'unvoted') { var id = card.getAttribute('data-id'); show = !(state[id] && state[id].decision); }
+      else if (f !== 'all') { show = card.getAttribute('data-filt') === f; }
+      card.style.display = show ? '' : 'none';
+    });
+  });
+  var cardsEl = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  var activeIdx = 0;
+  function visibleCards() { return cardsEl.filter(function (c) { return c.style.display !== 'none'; }); }
+  document.addEventListener('keydown', function (e) {
+    if (e.target.tagName === 'TEXTAREA') return;
+    var vis = visibleCards(); if (!vis.length) return;
+    if (activeIdx >= vis.length) activeIdx = vis.length - 1;
+    var card = vis[activeIdx]; var id = card.getAttribute('data-id');
+    if (e.key === 'a') { vote(id, 'approve'); applyCardUI(card); }
+    else if (e.key === 'r') { vote(id, 'reject'); applyCardUI(card); }
+    else if (e.key === 'd') { vote(id, 'defer'); applyCardUI(card); }
+    else if (e.key === 'ArrowDown') { activeIdx = Math.min(activeIdx + 1, vis.length - 1); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'center'}); }
+    else if (e.key === 'ArrowUp') { activeIdx = Math.max(activeIdx - 1, 0); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'center'}); }
+    else return;
+    e.preventDefault();
+  });
+
+  var saveHandle = null, saveTimer = null;
+  function exportPayload() {
+    if (typeof syncNoteFromDom === 'function') {
+      ids.forEach(function (id) { syncNoteFromDom(id); });
+    }
+    var decided = ids.filter(function (id) { return state[id] && state[id].decision; }).length;
+    return JSON.stringify({ sheet_id: SHEET_ID, generated: new Date().toISOString(), decided: decided, time_total_seconds: __timeTotal(),
+      items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '', time_seconds: __timeFor(id) }; }) }, null, 2);
+  }
+  function scheduleAutosave() {
+    if (!saveHandle) return;
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(function () {
+      saveHandle.createWritable().then(function (w) {
+        w.write(exportPayload()).then(function () { w.close(); });
+      }).catch(function () {});
+    }, 1000);
+  }
+  var _origSave = save;
+  save = function () { _origSave(); scheduleAutosave(); };
+  if (window.showSaveFilePicker) {
+    var saveBtn = document.getElementById('saveBtn');
+    saveBtn.style.display = '';
+    saveBtn.addEventListener('click', function () {
+      window.showSaveFilePicker({suggestedName: SHEET_ID + '_decisions.json'}).then(function (h) {
+        saveHandle = h; scheduleAutosave();
+      }).catch(function () {});
+    });
+  }
+
+  var FS_KEY = STORE_KEY + ':fs', FS_DEFAULT = 1.5;
+  function fsGet() {
+    var v = parseFloat(localStorage.getItem(FS_KEY));
+    return (isFinite(v) && v >= 0.7 && v <= 3) ? v : FS_DEFAULT;
+  }
+  function fsApply(v) {
+    document.documentElement.style.setProperty('--fs', String(v));
+    document.getElementById('fsVal').textContent = Math.round(v * 100) + '%';
+  }
+  function fsSet(v) {
+    v = Math.min(3, Math.max(0.7, Math.round(v * 10) / 10));
+    localStorage.setItem(FS_KEY, String(v)); fsApply(v);
+  }
+  fsApply(fsGet());
+  document.getElementById('fsDown').addEventListener('click', function () { fsSet(fsGet() - 0.1); });
+  document.getElementById('fsUp').addEventListener('click', function () { fsSet(fsGet() + 0.1); });
+
+  var TIME_KEY = STORE_KEY + ':timing';
+  var __timing = { total: 0, per: {} };
+  try {
+    var __t0 = JSON.parse(localStorage.getItem(TIME_KEY) || 'null');
+    if (__t0 && typeof __t0.total === 'number') __timing = __t0;
+  } catch (e) {}
+  if (!__timing.per) __timing.per = {};
+  function __timeFor(id) { return Math.round(__timing.per[id] || 0); }
+  function __timeTotal() { return Math.round(__timing.total || 0); }
+  function __timeFmt(s) {
+    s = Math.round(s); var m = Math.floor(s / 60);
+    return (m >= 60 ? Math.floor(m / 60) + ':' + ('0' + (m - Math.floor(m / 60) * 60)).slice(-2) : m)
+      + ':' + ('0' + (s - m * 60)).slice(-2);
+  }
+  function __timeShow() {
+    var el = document.getElementById('t-total');
+    if (el) el.textContent = __timeFmt(__timing.total);
+  }
+  var __timeLast = Date.now(), __timeDirty = 0;
+  var __timeCards = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  function __timeActiveId() {
+    var mid = window.innerHeight / 2, best = null, bestd = Infinity;
+    for (var i = 0; i < __timeCards.length; i++) {
+      var c = __timeCards[i];
+      if (c.style.display === 'none') continue;
+      var r = c.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > window.innerHeight) continue;
+      var center = (Math.max(r.top, 0) + Math.min(r.bottom, window.innerHeight)) / 2;
+      var d = Math.abs(center - mid);
+      if (d < bestd) { bestd = d; best = c; }
+    }
+    return best ? best.getAttribute('data-id') : null;
+  }
+  function __timeFlush() {
+    try { localStorage.setItem(TIME_KEY, JSON.stringify(__timing)); } catch (e) {}
+  }
+  // V12 (H2858): the clock is stoppable. `paused` rides in the same persisted
+  // record as the totals, so a reviewer who pauses and closes the tab does not
+  // come back to a clock that ran all night.
+  var __timePaused = !!__timing.paused;
+  function __timePauseSet(v) {
+    __timePaused = !!v; __timing.paused = __timePaused; __timeLast = Date.now(); __timeFlush();
+  }
+  setInterval(function () {
+    var now = Date.now(), dt = (now - __timeLast) / 1000;
+    __timeLast = now;
+    if (document.hidden || __timePaused || dt <= 0 || dt > 4) return;
+    __timing.total += dt;
+    var id = __timeActiveId();
+    if (id) __timing.per[id] = (__timing.per[id] || 0) + dt;
+    __timeDirty += dt;
+    if (__timeDirty >= 5) { __timeDirty = 0; __timeFlush(); }
+    __timeShow();
+  }, 1000);
+  document.addEventListener('visibilitychange', function () { __timeLast = Date.now(); });
+  window.addEventListener('beforeunload', __timeFlush);
+  __timeShow();
+
+  var HANDIN_SAID = 'handed in {n} of {total} — clock stopped, the rest stay saved in this browser';
+  var __handinBtn = document.getElementById('handinBtn');
+  var __handinSaid = document.getElementById('handinSaid');
+
+  var __pauseBtn = document.getElementById('pauseBtn');
+  function __pauseShow() {
+    __pauseBtn.classList.toggle('on', __timePaused);
+    __pauseBtn.innerHTML = __timePaused ? '&#9654;' : '&#9208;';
+    var chip = document.querySelector('.tally .time');
+    if (chip) chip.classList.toggle('paused', __timePaused);
+  }
+  __pauseBtn.addEventListener('click', function () { __timePauseSet(!__timePaused); __pauseShow(); });
+  __pauseShow();
+  __handinBtn.addEventListener('click', function () {
+    ids.forEach(function (id) { syncNoteFromDom(id); });
+    __timePauseSet(true); __pauseShow();
+    var items = ids.map(function (id) {
+      var rec = state[id] || {};
+      var item = { id: id, decision: rec.decision || null };
+      item.note = rec.note || '';
+      item.time_seconds = __timeFor(id);
+      return item;
+    });
+    var decided = items.filter(function (it) { return !!it.decision; }).length;
+    var payload = { sheet_id: SHEET_ID, generated: GENERATED, decided: decided,
+      partial: true, complete: false, undecided: items.length - decided, items: items };
+    payload.time_total_seconds = __timeTotal();
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
+    var url = URL.createObjectURL(blob); var a = document.createElement('a');
+    a.href = url; a.download = SHEET_ID + '_decisions_partial.json';
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+    __handinSaid.textContent = HANDIN_SAID.replace('{n}', decided).replace('{total}', items.length);
+  });
+})();
+</script>
+</body>
+</html>
