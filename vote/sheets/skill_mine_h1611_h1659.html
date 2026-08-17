@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="color-scheme" content="dark">
+<title>Skill-mine delta H1611–H1659 — голосование — 6 items</title>
+<style>
+  :root { color-scheme: dark; --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --text:#e6e6e6; --muted:#9aa0aa;
+          --accent:#5b8cff; --ok:#3fb950; --bad:#f85149; --defer:#d29922; --border:#2a2f3a; }
+  * { box-sizing: border-box; }
+  body { background:var(--bg); color:var(--text); font-family:-apple-system,Segoe UI,Roboto,sans-serif;
+         margin:0; padding:0 0 120px 0; }
+  header.top { position:sticky; top:0; z-index:10; background:var(--panel); border-bottom:1px solid var(--border);
+               padding:14px 20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+  header.top h1 { font-size:16px; margin:0; }
+  header.top .sub { color:var(--muted); font-size:12px; max-width:760px; }
+  .tally { display:flex; gap:14px; font-size:13px; }
+  .tally span.count { font-weight:700; }
+  .tally .approve { color:var(--ok); } .tally .reject { color:var(--bad); }
+  .tally .defer { color:var(--defer); } .tally .unvoted { color:var(--muted); }
+  .toolbar { padding:10px 20px; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  button.dl { background:var(--accent); color:#fff; border:none; padding:8px 14px; border-radius:6px;
+              cursor:pointer; font-size:13px; }
+  button.dl:hover { opacity:.9; }
+  .filterbar { display:flex; gap:6px; flex-wrap:wrap; }
+  .filterbar button { background:var(--panel2); border:1px solid var(--border); color:var(--text);
+                       padding:6px 10px; border-radius:14px; font-size:12px; cursor:pointer; }
+  .filterbar button.active { border-color:var(--accent); color:var(--accent); }
+  main { max-width:980px; margin:0 auto; padding:10px 20px; }
+  .card { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:16px;
+          margin-bottom:16px; }
+  .card.voted-approve { border-left:4px solid var(--ok); }
+  .card.voted-reject { border-left:4px solid var(--bad); }
+  .card.voted-defer { border-left:4px solid var(--defer); }
+  .card header { display:flex; justify-content:space-between; align-items:baseline; }
+  .card .hw { font-size:18px; font-weight:700; }
+  .badge { font-size:11px; background:var(--panel2); padding:2px 8px; border-radius:10px;
+           margin-left:8px; color:var(--muted); }
+  .question { margin:8px 0 12px; font-size:14px; }
+  .panel { background:var(--panel2); border-radius:8px; padding:10px 12px; font-size:13px; margin-bottom:10px; }
+  .panel h4 { margin:0 0 6px; font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+  .panel pre { white-space:pre-wrap; word-break:break-word; margin:0; font-size:12px; line-height:1.45; }
+  .chip { display:inline-block; background:#263042; border-radius:5px; padding:2px 7px; margin:2px 3px 2px 0; font-size:12px; }
+  .muted { color:var(--muted); font-style:italic; }
+  .controls { display:flex; align-items:center; gap:8px; margin-top:4px; }
+  button.vote { border:1px solid var(--border); background:var(--panel2); color:var(--text);
+                padding:7px 12px; border-radius:6px; cursor:pointer; font-size:13px; }
+  button.vote.approve.active { background:var(--ok); border-color:var(--ok); color:#04240b; }
+  button.vote.reject.active { background:var(--bad); border-color:var(--bad); color:#2a0a08; }
+  button.vote.defer.active { background:var(--defer); border-color:var(--defer); color:#2a1d02; }
+  .vote-state { margin-left:6px; font-size:12px; color:var(--muted); }
+  textarea.note { width:100%; margin-top:10px; min-height:44px; background:#11141a !important; color:#e6e6e6 !important;
+                  -webkit-text-fill-color:#e6e6e6; border:1px solid var(--border); border-radius:6px; padding:8px; font-size:13px;
+                  font-family:inherit; resize:vertical; }
+  textarea.note::placeholder { color:var(--muted); opacity:1; }
+  footer.hint { max-width:980px; margin:20px auto; padding:0 20px; color:var(--muted); font-size:12px; }
+  kbd { background:#263042; border-radius:4px; padding:1px 5px; font-size:11px; }
+  .idchip { font-family:ui-monospace,Consolas,monospace; font-size:11px; color:var(--muted);
+            background:var(--panel2); border:1px solid var(--border); padding:2px 7px;
+            border-radius:6px; user-select:all; }
+  .card header { gap:10px; }
+  .hw a.hwlink { color:inherit; text-decoration:underline dotted; text-underline-offset:3px; }
+  .hw a.hwlink:hover { color:var(--accent); }
+  mark.hl { background:#453407; color:#ffd75e; padding:0 2px; border-radius:3px; }
+  .savebanner { max-width:980px; margin:10px auto 0; padding:8px 20px; font-size:12.5px; }
+  .savebanner code { background:var(--panel2); border:1px solid var(--border); padding:1px 6px; border-radius:5px; }
+  .ratingrow { display:flex; align-items:center; gap:6px; margin-top:10px; flex-wrap:wrap; }
+  .ratinglabel { font-size:12px; color:var(--muted); margin-right:4px; }
+  button.rate { border:1px solid var(--border); background:var(--panel2); color:var(--text);
+                width:34px; padding:6px 0; border-radius:6px; cursor:pointer; font-size:13px; }
+  button.rate.active { background:var(--accent); border-color:var(--accent); color:#fff; }
+  button.rate.active.below { background:var(--defer); border-color:var(--defer); color:#2a1d02; }
+  .rate-state { font-size:12px; color:var(--muted); margin-left:4px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>Skill-mine delta H1611–H1659 — голосование — 6 items</h1>
+    <div class="sub">Generated 26-07-2026 &middot; sheet_id <code>uprava-skill-mine_h1611-h1659_26-07-26</code> &middot; Generated 26-07-2026 · sheet_id <code>uprava-skill-mine_h1611-h1659_26-07-26</code> · 6 items (U22–U24 updates + D26–D28 programme DEFER affirmations) · census: SKILL_CANDIDATES_CENSUS_H1611_H1659_26_07_2026.md · H1660 · Grok 4.5 (grok-4.5) · no skills built pre-vote</div>
+  </div>
+  <div class="tally" id="tally">
+    <span class="approve">&#9989; <span class="count" id="c-approve">0</span></span>
+    <span class="reject">&#10060; <span class="count" id="c-reject">0</span></span>
+    <span class="defer">&#9208; <span class="count" id="c-defer">0</span></span>
+    <span class="unvoted">&#9711; <span class="count" id="c-unvoted">6</span></span>
+  </div>
+</header>
+<div class="savebanner">&#128229; Your export downloads as <code>uprava-skill-mine_h1611-h1659_26-07-26_decisions.json</code> &rarr; save it to <code>review/uprava-skill-mine_h1611-h1659_26-07-26_decisions.json</code> (the <code>sheet_id</code> inside the file is <code>uprava-skill-mine_h1611-h1659_26-07-26</code> — that is how a later session knows which sheet these decisions belong to).</div>
+<div class="toolbar">
+  <button class="dl" id="downloadBtn">Download decisions.json</button><button class="dl" id="saveBtn" style="display:none;margin-left:8px">Save to folder…</button>
+  <div class="filterbar" id="filterbar"><button data-filter="all" class="active">all</button><button data-filter="update">UPDATE</button><button data-filter="defer">DEFER</button><button data-filter="unvoted">unvoted only</button></div>
+</div>
+<main id="cards">
+
+  <section class="card" data-id="U22" data-filt="update">
+    <header><div class="hw">U22 — UPDATE /systema-case-feature · режим getcourse <span class="badge">🟢 Tier-0</span><span class="badge">freq 3</span><span class="badge">UPDATE</span></div></header>
+    <div class="question"><p><b>Предложение:</b> добавить в <code>/systema-case-feature</code> явный режим <b>getcourse</b> (один GC-юнит за сессию: segment engine gc-a1, deal kanban gc-c1, Zoom recurring gc-b1) — flag OFF, watcher-safe, <code>/money-pr-land</code> при touch access/money.</p><p><b>Доказательства:</b> H1637, H1641, H1642. После H1617 U19 есть n8n-content и vk-cal; GetCourse в таблице режимов <b>отсутствует</b> — агенты снова лепят лестницу handoff'ами.</p><p><b>Последствия голоса:</b></p><ul><li><b>approve</b> — mint handoff на UPDATE skill + Codex twin (G29) + карточка SKILLS_MANUAL_RU (G34) + SKILLS_INDEX (G35); GetCourse-сессии идут через named mode.</li><li><b>reject</b> — GetCourse остаётся ad-hoc handoff ladder; следующий skill-mine снова поднимет shape.</li><li><b>defer</b> — ждать ещё ≥1 GC-сессию или закрытия H1637–H1642.</li></ul></div>
+    <div class="panel"><h4>Evidence H###</h4><code>H1637</code> gc-a1 segment · <code>H1641</code> gc-c1 deal entity · <code>H1642</code> gc-b1 Zoom recurring</div><div class="panel"><h4>Owner skill today</h4><code>/systema-case-feature</code> modes: finance, channel-parity, media-governance, content-wave, n8n-content, vk-cal, srs-ui, mobile — <b>no getcourse</b></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; approve</button>
+      <button class="vote reject" data-vote="reject">&#10060; reject</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="заметка к U22…"></textarea>
+  </section>
+
+  <section class="card" data-id="U23" data-filt="update">
+    <header><div class="hw">U23 — UPDATE /systema-case-feature · режим crm <span class="badge">🟢 Tier-0</span><span class="badge">freq 3</span><span class="badge">UPDATE</span></div></header>
+    <div class="question"><p><b>Предложение:</b> добавить режим <b>crm</b> в <code>/systema-case-feature</code>: unified stage board, installment/group dedupe, first-paid resurrection guard — CRM-сущности рядом с finance, но не тот же noboring-finance lesson path.</p><p><b>Доказательства:</b> H1645, H1658, H1659.</p><p><b>Последствия:</b></p><ul><li><b>approve</b> — один UPDATE (можно тем же handoff, что U22) с двумя новыми modes; меньше импровизации CRM-лестниц.</li><li><b>reject</b> — CRM остаётся под finance/ad-hoc; risk of finance-mode overstretch.</li><li><b>defer</b> — ждать закрытия H1645/H1658/H1659 как product work без skill text.</li></ul></div>
+    <div class="panel"><h4>Evidence H###</h4><code>H1645</code> first-paid guard · <code>H1658</code> stage board · <code>H1659</code> installment/group dedupe</div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; approve</button>
+      <button class="vote reject" data-vote="reject">&#10060; reject</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="заметка к U23…"></textarea>
+  </section>
+
+  <section class="card" data-id="U24" data-filt="update">
+    <header><div class="hw">U24 — UPDATE /export-consumer-smoke · pedagogy-export hop <span class="badge">🟡 Tier-1/2</span><span class="badge">freq 2</span><span class="badge">UPDATE</span></div></header>
+    <div class="question"><p><b>Предложение:</b> расширить <code>/export-consumer-smoke</code> цепочкой <b>producer adapter → consumer hop smoke</b> (Grammar <code>build_pedagogy_export.py</code> + schema + LAST_MILE measured status → Systema hop smoke). Pointer из <code>/reader-layer</code>.</p><p><b>Доказательства:</b> H1643 (adapter), H1644 (Systema smoke).</p><p><b>Последствия:</b></p><ul><li><b>approve</b> — skill encodes two-repo hop; future pedagogy exports don't re-derive LAST_MILE wiring.</li><li><b>reject</b> — keep as one-off plan under SanskritGrammar LAST_MILE docs only.</li><li><b>defer</b> — wait until a second producer/consumer hop pair appears outside pedagogy.</li></ul></div>
+    <div class="panel"><h4>Evidence H###</h4><code>H1643</code> SanskritGrammar pedagogy_export adapter · <code>H1644</code> Systema pedagogy-export hop smoke</div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; approve</button>
+      <button class="vote reject" data-vote="reject">&#10060; reject</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="заметка к U24…"></textarea>
+  </section>
+
+  <section class="card" data-id="D26" data-filt="defer">
+    <header><div class="hw">D26 — DEFER /pwg-de-editorial (не новый skill) <span class="badge">🔴 programme</span><span class="badge">freq 10</span><span class="badge">DEFER</span></div></header>
+    <div class="question"><p><b>Предложение:</b> <b>подтвердить DEFER</b> — не строить <code>/pwg-de-editorial</code>. 10 сессий на одной словарной editorial/export поверхности (тот же класс, что C19 <code>/rt-fullaudit</code>).</p><p><b>Доказательства:</b> H1622, H1624, H1628–H1635.</p><p><b>Частичное покрытие:</b> <code>/sense-corpus-join</code> · <code>/data-release</code> · <code>/dict-comparative-test</code> · <code>/ghost-stock-audit</code>.</p><p><b>Последствия:</b></p><ul><li><b>approve</b> (= keep DEFER) — no skill; programme handoffs continue; reopen only if a second dictionary needs the same ladder.</li><li><b>reject</b> (= force skill) — mint NEW <code>/pwg-de-editorial</code> (or fold name) despite one-programme risk.</li><li><b>defer</b> — revisit after H1635 public sidecar lands.</li></ul></div>
+    <div class="panel"><h4>IDs</h4>H1622 H1624 H1628 H1629 H1630 H1631 H1632 H1633 H1634 H1635</div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; approve</button>
+      <button class="vote reject" data-vote="reject">&#10060; reject</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="заметка к D26…"></textarea>
+  </section>
+
+  <section class="card" data-id="D27" data-filt="defer">
+    <header><div class="hw">D27 — DEFER /wisdomlib-scrape-estate <span class="badge">🔴 programme</span><span class="badge">freq 3</span><span class="badge">DEFER</span></div></header>
+    <div class="question"><p><b>Предложение:</b> <b>подтвердить DEFER</b> отдельного skill для wisdomlib scrape estate. 3 сессии одной программы.</p><p><b>Доказательства:</b> H1625, H1636, H1653.</p><p><b>Использовать:</b> <code>/license-gated-ingest</code> · <code>/source-health-probe</code> · <code>/crosswalk-build</code>.</p><p><b>Последствия:</b></p><ul><li><b>approve</b> (keep DEFER) — reopen only when a second scrape estate needs the same keep-alive/optimize discipline.</li><li><b>reject</b> (force skill) — mint <code>/scrape-estate-drain</code> now.</li><li><b>defer</b> — wait for H1653 optimize-ask outcome.</li></ul></div>
+    <div class="panel"><h4>IDs</h4>H1625 · H1636 · H1653</div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; approve</button>
+      <button class="vote reject" data-vote="reject">&#10060; reject</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="заметка к D27…"></textarea>
+  </section>
+
+  <section class="card" data-id="D28" data-filt="defer">
+    <header><div class="hw">D28 — DEFER /sangram-freeze-killgate <span class="badge">🔴 programme</span><span class="badge">freq 4</span><span class="badge">DEFER</span></div></header>
+    <div class="question"><p><b>Предложение:</b> <b>подтвердить DEFER</b> skill «SanGram freeze-15 + SE killgate». 4 сессии одной grammar freeze лестницы.</p><p><b>Доказательства:</b> H1611–H1614.</p><p><b>Использовать:</b> <code>/acceptance-gate</code> · <code>/gate-judge</code> · <code>/decisions-apply --visa</code> · <code>/sangram-module</code>.</p><p><b>Последствия:</b></p><ul><li><b>approve</b> (keep DEFER) — reopen only if a second grammar freezes with the same matrix shape.</li><li><b>reject</b> (force skill) — mint freeze-killgate skill now.</li><li><b>defer</b> — wait for H1614 visa sheet outcome.</li></ul></div>
+    <div class="panel"><h4>IDs</h4>H1611 · H1612 · H1613 · H1614</div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; approve</button>
+      <button class="vote reject" data-vote="reject">&#10060; reject</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="заметка к D28…"></textarea>
+  </section>
+</main>
+<footer class="hint">Сохраните decisions.json как <code>Uprava/review/uprava-skill-mine_h1611-h1659_26-07-26_decisions.json</code>. После approve на U*: /handoff-mint build · G29/G34/G35. H1649 (review-sheet screening) уже в полёте — не на этом листе. Keyboard: <kbd>a</kbd> approve &middot; <kbd>r</kbd> reject
+  &middot; <kbd>d</kbd> defer &middot; <kbd>&darr;</kbd>/<kbd>&uarr;</kbd> next/prev. Votes autosave to
+  this browser's localStorage; click "Download decisions.json" when done (unvoted items export with
+  decision:null).</footer>
+<div class="legend" style="max-width:980px;margin:0 auto 20px;padding:0 20px;color:var(--muted);font-size:12px">
+  <b>Approve</b> = accept the proposed change/answer shown on the card (no separate "approve as-is" —
+  approving means agreeing as written). <b>Reject</b> = keep the current entry/answer unchanged.
+  <b>Defer</b> = not sure yet, decide later. The note field is for requesting a partial tweak instead
+  of an outright reject.
+</div>
+<script>
+(function () {
+  var SHEET_ID = "uprava-skill-mine_h1611-h1659_26-07-26";
+  var STORE_KEY = 'review-sheet:' + SHEET_ID;
+  var ids = ["U22", "U23", "U24", "D26", "D27", "D28"];
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(STORE_KEY) || '{}') || {}; } catch (e) { state = {}; }
+  function tally() {
+    var c = { approve:0, reject:0, defer:0 };
+    ids.forEach(function (id) { var v = state[id] && state[id].decision; if (v && c.hasOwnProperty(v)) c[v]++; });
+    document.getElementById('c-approve').textContent = c.approve;
+    document.getElementById('c-reject').textContent = c.reject;
+    document.getElementById('c-defer').textContent = c.defer;
+    document.getElementById('c-unvoted').textContent = ids.length - c.approve - c.reject - c.defer;
+  }
+  function applyCardUI(card) {
+    var id = card.getAttribute('data-id'); var rec = state[id] || {};
+    card.classList.remove('voted-approve','voted-reject','voted-defer');
+    card.querySelectorAll('button.vote').forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-vote') === rec.decision); });
+    card.querySelector('.vote-state').textContent = rec.decision ? rec.decision : 'unvoted';
+    if (rec.decision) card.classList.add('voted-' + rec.decision);
+    var ta = card.querySelector('textarea.note'); if (rec.note && !ta.value) ta.value = rec.note;
+  }
+  function save() { localStorage.setItem(STORE_KEY, JSON.stringify(state)); tally(); }
+  // H1523 residual / csl-pyutil#1 Part 1: always re-read the live textarea on vote
+  // and before export so a second vote click (or a missed `input` event) cannot
+  // drop a note that is still visible in the card.
+  function syncNoteFromDom(id) {
+    state[id] = state[id] || {};
+    var card = document.querySelector('.card[data-id="' + id + '"]');
+    if (!card) return;
+    var ta = card.querySelector('textarea.note');
+    if (ta) state[id].note = ta.value;
+  }
+  function vote(id, d) { syncNoteFromDom(id); state[id].decision = d; save(); }
+  function noteChange(id, t) { state[id] = state[id] || {}; state[id].note = t; save(); }
+  document.querySelectorAll('.card').forEach(function (card) {
+    var id = card.getAttribute('data-id'); applyCardUI(card);
+    card.querySelectorAll('button.vote').forEach(function (btn) {
+      btn.addEventListener('click', function () { vote(id, btn.getAttribute('data-vote')); applyCardUI(card); });
+    });
+    var ta = card.querySelector('textarea.note'); ta.addEventListener('input', function () { noteChange(id, ta.value); });
+  });
+  tally();
+  document.getElementById('downloadBtn').addEventListener('click', function () {
+    ids.forEach(function (id) { syncNoteFromDom(id); });
+    var decided = ids.filter(function (id) { return state[id] && state[id].decision; }).length;
+    var payload = { sheet_id: SHEET_ID, generated: "26-07-2026", decided: decided,
+      items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '' }; }) };
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
+    var url = URL.createObjectURL(blob); var a = document.createElement('a');
+    a.href = url; a.download = SHEET_ID + '_decisions.json'; document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+  });
+  var filterbar = document.getElementById('filterbar');
+  filterbar.addEventListener('click', function (e) {
+    var btn = e.target.closest('button[data-filter]'); if (!btn) return;
+    filterbar.querySelectorAll('button').forEach(function (b) { b.classList.remove('active'); });
+    btn.classList.add('active'); var f = btn.getAttribute('data-filter');
+    document.querySelectorAll('.card').forEach(function (card) {
+      var show = true;
+      if (f === 'unvoted') { var id = card.getAttribute('data-id'); show = !(state[id] && state[id].decision); }
+      else if (f !== 'all') { show = card.getAttribute('data-filt') === f; }
+      card.style.display = show ? '' : 'none';
+    });
+  });
+  var cardsEl = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  var activeIdx = 0;
+  function visibleCards() { return cardsEl.filter(function (c) { return c.style.display !== 'none'; }); }
+  document.addEventListener('keydown', function (e) {
+    if (e.target.tagName === 'TEXTAREA') return;
+    var vis = visibleCards(); if (!vis.length) return;
+    if (activeIdx >= vis.length) activeIdx = vis.length - 1;
+    var card = vis[activeIdx]; var id = card.getAttribute('data-id');
+    if (e.key === 'a') { vote(id, 'approve'); applyCardUI(card); }
+    else if (e.key === 'r') { vote(id, 'reject'); applyCardUI(card); }
+    else if (e.key === 'd') { vote(id, 'defer'); applyCardUI(card); }
+    else if (e.key === 'ArrowDown') { activeIdx = Math.min(activeIdx + 1, vis.length - 1); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'center'}); }
+    else if (e.key === 'ArrowUp') { activeIdx = Math.max(activeIdx - 1, 0); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'center'}); }
+    else return;
+    e.preventDefault();
+  });
+
+  var saveHandle = null, saveTimer = null;
+  function exportPayload() {
+    if (typeof syncNoteFromDom === 'function') {
+      ids.forEach(function (id) { syncNoteFromDom(id); });
+    }
+    var decided = ids.filter(function (id) { return state[id] && state[id].decision; }).length;
+    return JSON.stringify({ sheet_id: SHEET_ID, generated: new Date().toISOString(), decided: decided,
+      items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '' }; }) }, null, 2);
+  }
+  function scheduleAutosave() {
+    if (!saveHandle) return;
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(function () {
+      saveHandle.createWritable().then(function (w) {
+        w.write(exportPayload()).then(function () { w.close(); });
+      }).catch(function () {});
+    }, 1000);
+  }
+  var _origSave = save;
+  save = function () { _origSave(); scheduleAutosave(); };
+  if (window.showSaveFilePicker) {
+    var saveBtn = document.getElementById('saveBtn');
+    saveBtn.style.display = '';
+    saveBtn.addEventListener('click', function () {
+      window.showSaveFilePicker({suggestedName: SHEET_ID + '_decisions.json'}).then(function (h) {
+        saveHandle = h; scheduleAutosave();
+      }).catch(function () {});
+    });
+  }
+})();
+</script>
+</body>
+</html>
