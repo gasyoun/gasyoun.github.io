@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="color-scheme" content="dark">
+<meta name="generator" content="csl-pyutil/0.17.1">
+<title>H2991 — packset demo — 3 packs</title>
+<style>
+  :root { color-scheme: dark; --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --text:#e6e6e6; --muted:#9aa0aa;
+          --accent:#5b8cff; --ok:#3fb950; --border:#2a2f3a; }
+  * { box-sizing: border-box; }
+  body { background:var(--bg); color:var(--text); font-family:-apple-system,Segoe UI,Roboto,sans-serif;
+         margin:0; padding:0 0 80px 0; font-size:15px; }
+  header.top { background:var(--panel); border-bottom:1px solid var(--border); padding:14px 20px; }
+  header.top h1 { font-size:17px; margin:0 0 4px; }
+  header.top .sub { color:var(--muted); font-size:12px; }
+  main { max-width:760px; margin:0 auto; padding:18px 20px; }
+  .overall { background:var(--panel); border:1px solid var(--border); border-radius:10px;
+             padding:14px 16px; margin-bottom:18px; }
+  .bar { height:8px; background:var(--panel2); border-radius:5px; overflow:hidden; margin-top:8px; }
+  .bar > i { display:block; height:100%; background:var(--ok); width:0; transition:width .2s; }
+  ol.packs { list-style:none; margin:0; padding:0; }
+  ol.packs li { margin-bottom:10px; }
+  a.pack { display:flex; align-items:center; justify-content:space-between; gap:12px;
+           background:var(--panel); border:1px solid var(--border); border-radius:10px;
+           padding:13px 16px; color:var(--text); text-decoration:none; }
+  a.pack:hover { border-color:var(--accent); }
+  a.pack .n { font-weight:700; }
+  a.pack .prog { color:var(--muted); font-size:13px; }
+  a.pack.done { border-left:4px solid var(--ok); }
+  a.pack.done .prog { color:var(--ok); }
+  footer.hint { max-width:760px; margin:20px auto; padding:0 20px; color:var(--muted); font-size:12px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>H2991 — packset demo</h1>
+    <div class="sub">Generated 2026-08-18 &middot; sheet_id <code>h2991_demo</code>
+      &middot; 22 items in 3 packs &middot; 22 карточки, 3 пакета — фикстура приёмки V16</div>
+  </div>
+</header>
+<main>
+  <div class="overall">
+    <div><b id="ovText">0 of 22 decided</b></div>
+    <div class="bar"><i id="ovBar"></i></div>
+  </div>
+  <ol class="packs" id="packs">
+    <li><a class="pack" id="pack-01" href="h2991_demo/pack-01.html"><span class="n">Pack 1 of 3</span><span class="prog">0 / 10</span></a></li>
+    <li><a class="pack" id="pack-02" href="h2991_demo/pack-02.html"><span class="n">Pack 2 of 3</span><span class="prog">0 / 10</span></a></li>
+    <li><a class="pack" id="pack-03" href="h2991_demo/pack-03.html"><span class="n">Pack 3 of 3</span><span class="prog">0 / 2</span></a></li>
+  </ol>
+</main>
+<footer class="hint">Approve/Reject/Defer per item. Each pack is its own page; all packs share this
+  sheet_id, so one browser keeps one record of the whole sheet and a pack you
+  finished stays finished when you come back.</footer>
+<script>
+(function () {
+  var SHEET_ID = "h2991_demo";
+  var STORE_KEY = 'review-sheet:' + SHEET_ID;
+  var PACKS = [{"name": "01", "ids": ["D01", "D02", "D03", "D04", "D05", "D06", "D07", "D08", "D09", "D10"]}, {"name": "02", "ids": ["D11", "D12", "D13", "D14", "D15", "D16", "D17", "D18", "D19", "D20"]}, {"name": "03", "ids": ["D21", "D22"]}];
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(STORE_KEY) || '{}') || {}; } catch (e) { state = {}; }
+  var total = 0, done = 0;
+  PACKS.forEach(function (p) {
+    var d = p.ids.filter(function (id) { return state[id] && state[id].decision; }).length;
+    total += p.ids.length; done += d;
+    var el = document.getElementById('pack-' + p.name);
+    if (!el) return;
+    el.querySelector('.prog').textContent = d + ' / ' + p.ids.length;
+    if (d === p.ids.length) el.classList.add('done');
+  });
+  document.getElementById('ovText').textContent = done + ' of ' + total + ' decided';
+  document.getElementById('ovBar').style.width = (total ? (100 * done / total) : 0) + '%';
+})();
+</script>
+</body>
+</html>
