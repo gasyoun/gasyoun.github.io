@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="color-scheme" content="dark">
-<meta name="generator" content="csl-pyutil/0.19.1">
+<meta name="generator" content="csl-pyutil/0.21.0">
 <title>G6 · золотой стандарт — стартовый лист MQM — 10 items</title>
 <style>
   :root { color-scheme: dark; --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --text:#e6e6e6; --muted:#9aa0aa;
@@ -135,13 +135,32 @@
                padding:8px 14px; border-radius:8px; font-size:13px; z-index:50;
                opacity:0; pointer-events:none; transition:opacity .18s; }
   .flowtoast.on { opacity:1; }
+  .dl.inbox { background:#2d6a4f; }
+  .dl.inbox[disabled] { background:var(--panel2); color:var(--muted); cursor:not-allowed; border:1px solid var(--border); }
+  .inboxnote { color:var(--muted); font-size:12px; }
+  .inboxcode { font-family:ui-monospace,Consolas,monospace; font-size:16px; letter-spacing:.12em;
+               background:#11141a; border:1px solid var(--border); border-radius:6px; padding:4px 10px; }
+  .voteprog { flex:1 0 100%; order:99; background:var(--panel);
+              border-top:1px solid var(--border); margin:6px -20px -14px; padding:8px 20px;
+              display:flex; align-items:center; gap:12px; font-size:12px; color:var(--muted); }
+  .voteprog .bar { flex:1 1 auto; height:8px; border-radius:4px; background:var(--panel2);
+                   border:1px solid var(--border); overflow:hidden; }
+  .voteprog .bar i { display:block; height:100%; width:0; background:var(--ok); transition:width .2s; }
+  .voteprog b { color:var(--text); font-weight:700; }
+  .voteprog .eta { white-space:nowrap; }
+  .votebar { position:sticky; bottom:0; z-index:9; background:var(--panel);
+             border-top:1px solid var(--border); padding:10px 20px; margin-top:24px;
+             display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  .votebar .spacer { flex:1 1 auto; }
+  .card { scroll-margin-top:96px; }
+  @media (max-width: 640px) { .voteprog { padding:6px 12px; } .votebar { padding:8px 12px; } }
 </style>
 </head>
 <body>
 <header class="top">
   <div>
     <h1>G6 · золотой стандарт — стартовый лист MQM — 10 items</h1>
-    <div class="sub">Generated 2026-08-14 &middot; sheet_id <code>h215-gold-full-320-2026-08-14</code> &middot; bound <code class="bindchip" title="content_hash — binds this sheet's decisions.json export to exactly this HTML">sha256:bdd7566450ed…</code> &middot; 320 карточек из gold/gold_set.jsonl (320), стратификация period × kind; типология из 6 ярлыков; каждая карточка несёт словарь, корень и контексты ДО голоса</div>
+    <div class="sub">Generated 2026-08-14 &middot; sheet_id <code>h215-gold-full-320-2026-08-14</code> &middot; bound <code class="bindchip" title="content_hash — binds this sheet's decisions.json export to exactly this HTML">sha256:cd982d50d9ac…</code> &middot; 320 карточек из gold/gold_set.jsonl (320), стратификация period × kind; типология из 6 ярлыков; каждая карточка несёт словарь, корень и контексты ДО голоса</div>
   </div>
   <div class="tally" id="tally">
     <span class="approve">&#9989; <span class="count" id="c-approve">0</span></span>
@@ -151,17 +170,18 @@
     <button type="button" class="pausebtn" id="pauseBtn" title="pause the clock — a break is not review time">&#9208;</button>
     <span class="unvoted">&#9711; <span class="count" id="c-unvoted">10</span></span>
   </div>
+<div class="voteprog" id="voteProg"><span id="voteProgText"></span><span class="bar"><i id="voteProgBar"></i></span><span class="eta" id="voteProgEta"></span></div>
 </header>
 <aside class="screening-banner" role="status" data-screening="1"><strong>Screening (H1649)</strong> — only human-required cards are below. Off the plate: <span class="sc-a">deterministic 0</span> · <span class="sc-b">dataset lookup 320</span> · <span class="sc-c">agent adjudication 320</span> (total screened 640). Human cards: <span class="sc-d">320</span>. Evidence: <code>RussianTranslation/gold/HUMAN_GOLD_PROTOCOL.md</code>. Rules: mqm-6-label-typology, h1801-evidence-before-label, h1802-reject-label-picker.</aside>
 <div class="savebanner">&#128229; Your export downloads as <code>h215-gold-full-320-2026-08-14_decisions.json</code> &rarr; save it to <code>RussianTranslation\review\h215-gold-full-320-2026-08-14_decisions.json</code> (the <code>sheet_id</code> inside the file is <code>h215-gold-full-320-2026-08-14</code> — that is how a later session knows which sheet these decisions belong to).</div>
 <div class="toolbar">
-  <button class="dl" id="downloadBtn">Download decisions.json</button><button class="dl handin" id="handinBtn" title="stop the clock and export the votes made so far; the rest stay saved in this browser">Hand in what I got</button><span class="handin-said" id="handinSaid"></span><button class="dl" id="saveBtn" style="display:none;margin-left:8px">Save to folder…</button>
-  <label id="strictReviewerWrap" style="display:flex;align-items:center;gap:6px;font-size:13px">
+  <button data-submit="1" class="dl" id="downloadBtn">Download decisions.json</button><button data-submit="1" type="button" class="dl inbox" id="inboxBtn" title="push this pack's ids and verdicts to the public vote inbox">Save to GitHub</button><span data-submit="1" class="inboxnote" id="inboxNote" role="status"></span><button data-submit="1" class="dl handin" id="handinBtn" title="stop the clock and export the votes made so far; the rest stay saved in this browser">Hand in what I got</button><span class="handin-said" id="handinSaid"></span><button data-submit="1" class="dl" id="saveBtn" style="display:none;margin-left:8px">Save to folder…</button>
+  <label data-submit="1" id="strictReviewerWrap" style="display:flex;align-items:center;gap:6px;font-size:13px">
     Reviewer <input id="strictReviewer" type="text" autocomplete="name" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:7px 9px" />
   </label>
-  <span id="strictReviewError" role="alert" style="color:var(--bad);font-size:12px"></span>
+  <span data-submit="1" id="strictReviewError" role="alert" style="color:var(--bad);font-size:12px"></span>
   <div class="fsctl" title="text size — persists in this browser"><button type="button" id="fsDown" aria-label="smaller text">A&minus;</button><span class="fsval" id="fsVal"></span><button type="button" id="fsUp" aria-label="larger text">A+</button></div>
-  <button type="button" class="dl flowundo" id="flowUndoBtn" title="undo the last decision (z)">&#8630; Undo</button>
+  <button data-submit="1" type="button" class="dl flowundo" id="flowUndoBtn" title="undo the last decision (z)">&#8630; Undo</button>
   <span class="flowprog" id="flowProg"><span class="bar"><i id="flowBar"></i></span><span id="flowProgText"></span><span id="flowEta"></span></span>
   <div class="filterbar" id="filterbar"><button data-filter="all" class="active">all</button><button data-filter="Classical">Classical</button><button data-filter="Epic / early-Classical">Epic / early-Classical</button><button data-filter="Medieval">Medieval</button><button data-filter="Vedic">Vedic</button><button data-filter="unvoted">unvoted only</button></div>
 </div>
@@ -307,6 +327,7 @@
     <textarea class="note" placeholder="необязательный комментарий к решению"></textarea>
   </section>
 </main>
+<div class="votebar" id="voteBar"><span class="spacer"></span></div>
 <footer class="hint">Approve = ярлык LLM верен · Reject = неверен (выберите правильный ярлык из списка) · Defer = на адjudication. Экспорт валидируется против review/locks/h215-gold-full-320-2026-08-14.lock.json. Keyboard: <kbd>a</kbd> Label верен &middot; <kbd>r</kbd> Label неверен
   &middot; <kbd>d</kbd> defer &middot; <kbd>&darr;</kbd>/<kbd>&uarr;</kbd> next/prev. Votes autosave to
   this browser's localStorage; click "Download decisions.json" when done (unvoted items export with
@@ -320,7 +341,7 @@
 <script>
 (function () {
   var SHEET_ID = "h215-gold-full-320-2026-08-14";
-  var CONTENT_HASH = "sha256:bdd7566450edbacba97cc309114fd4eab5debf5733141f3c7219b4776de22117";
+  var CONTENT_HASH = "sha256:cd982d50d9ac7db5332de230b8f24e0560d4ab75833a452c23481c57e429c7d4";
   var STORE_KEY = 'review-sheet:' + SHEET_ID;
   var GENERATED = "2026-08-14";
   var ids = ["88", "99", "67", "63", "84", "104", "62", "115", "103", "101"];
@@ -396,8 +417,8 @@
     if (e.key === 'a') { vote(id, 'approve'); applyCardUI(card); }
     else if (e.key === 'r') { vote(id, 'reject'); applyCardUI(card); }
     else if (e.key === 'd') { vote(id, 'defer'); applyCardUI(card); }
-    else if (e.key === 'ArrowDown') { activeIdx = Math.min(activeIdx + 1, vis.length - 1); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'center'}); }
-    else if (e.key === 'ArrowUp') { activeIdx = Math.max(activeIdx - 1, 0); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'center'}); }
+    else if (e.key === 'ArrowDown') { activeIdx = Math.min(activeIdx + 1, vis.length - 1); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'start'}); }
+    else if (e.key === 'ArrowUp') { activeIdx = Math.max(activeIdx - 1, 0); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'start'}); }
     else return;
     e.preventDefault();
   });
@@ -732,7 +753,7 @@
     var card = __flowCardById(last.id);
     if (card) {
       applyCardUI(card);
-      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      card.scrollIntoView({ behavior: 'smooth', block: 'start' });
       var at = __flowIdxOf(last.id);
       if (at !== -1) activeIdx = at;
       __flowPaint();
@@ -754,7 +775,7 @@
     var at = __flowFirstUndecided();
     if (at === -1) { __flowPaint(); return; }
     activeIdx = at;
-    visibleCards()[at].scrollIntoView({ behavior: 'smooth', block: 'center' });
+    visibleCards()[at].scrollIntoView({ behavior: 'smooth', block: 'start' });
     __flowPaint();
   }
   function __flowDecided() {
@@ -815,10 +836,231 @@
     if (at === -1) return;
     var vis = visibleCards();
     activeIdx = at;
-    vis[at].scrollIntoView({ block: 'center' });
+    vis[at].scrollIntoView({ block: 'start' });
     __flowPaint();
     __flowSay(FLOW_RESUMED.replace('{n}', at + 1).replace('{total}', vis.length));
   })();
+
+  var INBOX = {"repo": "gasyoun/vote-inbox", "branch": "", "client_id": "Ov23lifQmcuDYuTw0ZWv", "device_url": "https://kosha.193.232.229.92.sslip.io/gh-device", "pack": 9, "pack_name": "09", "packs": 32, "enabled": true};
+  var CARD_Q = {"88": "Верен ли ярлык LLM «correct» для этого перевода? (reject → выберите правильный ярлык из списка ниже)", "99": "Верен ли ярлык LLM «correct» для этого перевода? (reject → выберите правильный ярлык из списка ниже)", "67": "Верен ли ярлык LLM «lemma-variant» для этого перевода? (reject → выберите правильный ярлык из списка ниже)", "63": "Верен ли ярлык LLM «correct» для этого перевода? (reject → выберите правильный ярлык из списка ниже)", "84": "Верен ли ярлык LLM «correct» для этого перевода? (reject → выберите правильный ярлык из списка ниже)", "104": "Верен ли ярлык LLM «correct» для этого перевода? (reject → выберите правильный ярлык из списка ниже)", "62": "Верен ли ярлык LLM «lemma-variant» для этого перевода? (reject → выберите правильный ярлык из списка ниже)", "115": "Верен ли ярлык LLM «correct» для этого перевода? (reject → выберите правильный ярлык из списка ниже)", "103": "Верен ли ярлык LLM «lemma-variant» для этого перевода? (reject → выберите правильный ярлык из списка ниже)", "101": "Верен ли ярлык LLM «lemma-variant» для этого перевода? (reject → выберите правильный ярлык из списка ниже)"};
+  var INBOX_PULLING = 'pulling votes from GitHub…';
+  var INBOX_HYDRATED = 'pulled {n} vote(s) from GitHub';
+  var INBOX_SAVED = 'saved pack {pack} to GitHub';
+  var INBOX_DISABLED = 'no OAuth client_id / device relay configured — use Download decisions.json';
+  var INBOX_CODE = 'open {url} and enter code {code}';
+  var INBOX_FAILED = 'GitHub save failed: {why}';
+  var __inboxBtn = document.getElementById('inboxBtn');
+  var __inboxNote = document.getElementById('inboxNote');
+  function __inboxSay(msg) { if (__inboxNote) __inboxNote.textContent = msg; }
+  function __inboxDir() {
+    return 'https://api.github.com/repos/' + INBOX.repo + '/contents/decisions/'
+      + encodeURIComponent(SHEET_ID);
+  }
+  // A public repo must not become a back door onto the card text. A note ships
+  // only when it is short, carries no markup, and is not the card's own question
+  // pasted back — otherwise the decision travels alone.
+  function __inboxNoteOk(id, note) {
+    if (!note) return false;
+    if (note.length > 280) return false;
+    if (note.indexOf('<') >= 0) return false;
+    var q = CARD_Q[id];
+    if (q && q.length > 12 && note.indexOf(q) >= 0) return false;
+    return true;
+  }
+  function __inboxPayload() {
+    var base = JSON.parse(exportPayload());
+    return { sheet_id: base.sheet_id, pack: INBOX.pack, generated: base.generated,
+             decided: base.decided,
+             items: base.items.map(function (it) {
+               var out = { id: it.id, decision: it.decision };
+               if (__inboxNoteOk(it.id, it.note)) out.note = it.note;
+               return out;
+             }) };
+  }
+  // The pull is two network hops, and the second one -- raw.githubusercontent.com,
+  // once per decisions file -- is routinely slow to settle, sometimes past 10 s,
+  // while the api.github.com listing answers in about one. Measured 18-08-2026: the
+  // first hydrate smoke FAILED on a 20 s ceiling against completely correct code.
+  // Without a hint the reviewer sees an unvoted sheet that silently fills in later,
+  // which reads as a bug and invites them to start voting over the top of votes that
+  // are about to arrive. So say so while it is happening, and clear the line if the
+  // pull turns out to bring nothing.
+  function __inboxHydrate() {
+    var said = false;
+    function announce() { if (!said) { said = true; __inboxSay(INBOX_PULLING); } }
+    function done(merged) {
+      if (merged) { __inboxSay(INBOX_HYDRATED.replace('{n}', merged)); return; }
+      if (said) __inboxSay('');
+    }
+    announce();
+    fetch(__inboxDir()).then(function (r) { return r.ok ? r.json() : []; }).then(function (list) {
+      if (!Array.isArray(list) || !list.length) { done(0); return; }
+      var files = list.filter(function (f) { return /\.json$/.test(f.name || ''); });
+      var pending = files.length, merged = 0;
+      if (!pending) { done(0); return; }
+      files.forEach(function (f) {
+        fetch(f.download_url).then(function (r) { return r.ok ? r.json() : null; })
+          .then(function (doc) {
+            if (!doc || !doc.items) return;
+            doc.items.forEach(function (it) {
+              if (!it.decision || ids.indexOf(it.id) < 0) return;
+              // Two machines, one sheet: the inbox is the shared record, so it wins.
+              state[it.id] = state[it.id] || {};
+              if (state[it.id].decision !== it.decision) merged++;
+              state[it.id].decision = it.decision;
+            });
+          })
+          .catch(function () {})
+          .then(function () {
+            if (--pending > 0) return;
+            if (merged) {
+              save();
+              document.querySelectorAll('.card').forEach(function (c) { applyCardUI(c); });
+            }
+            done(merged);
+          });
+      });
+    }).catch(function () { done(0); });
+  }
+  function __inboxPut(token) {
+    var path = 'decisions/' + encodeURIComponent(SHEET_ID) + '/pack-' + INBOX.pack_name + '.json';
+    var url = 'https://api.github.com/repos/' + INBOX.repo + '/contents/' + path;
+    var body = JSON.stringify(__inboxPayload(), null, 2);
+    var enc = btoa(unescape(encodeURIComponent(body)));
+    function send(sha) {
+      var msg = { message: 'vote: ' + SHEET_ID + ' pack-' + INBOX.pack_name,
+                  content: enc };
+      // No branch unless the caller named one: the contents API then writes to the
+      // repo's OWN default branch. Defaulting to 'main' here shipped a bug in
+      // 0.17.0 — gasyoun/vote-inbox defaults to `master`, so the first real save
+      // would have 404'd on a branch that does not exist.
+      if (INBOX.branch) msg.branch = INBOX.branch;
+      if (sha) msg.sha = sha;
+      return fetch(url, { method:'PUT',
+        headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json',
+                   'Accept': 'application/vnd.github+json' },
+        body: JSON.stringify(msg) });
+    }
+    return fetch(url + (INBOX.branch ? '?ref=' + encodeURIComponent(INBOX.branch) : ''),
+                 { headers: { 'Authorization': 'Bearer ' + token } })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (cur) { return send(cur && cur.sha); })
+      .then(function (r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        __inboxSay(INBOX_SAVED.replace('{pack}', INBOX.pack_name));
+      });
+  }
+  // GitHub does not send Access-Control-Allow-Origin on login/device/* (measured
+  // 18-08-2026), so this exchange cannot go straight to github.com from a page.
+  // INBOX.device_url must name a relay that forwards and echoes CORS headers.
+  function __inboxDeviceToken() {
+    var base = INBOX.device_url.replace(/\/$/, '');
+    return fetch(base + '/code', { method:'POST',
+        headers: { 'Content-Type':'application/json', 'Accept':'application/json' },
+        body: JSON.stringify({ client_id: INBOX.client_id, scope: 'public_repo' }) })
+      .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+      .then(function (d) {
+        __inboxSay(INBOX_CODE.replace('{url}', d.verification_uri).replace('{code}', d.user_code));
+        var iv = Math.max(5, d.interval || 5) * 1000, deadline = Date.now() + (d.expires_in || 900) * 1000;
+        return new Promise(function (resolve, reject) {
+          (function poll() {
+            if (Date.now() > deadline) { reject(new Error('expired')); return; }
+            setTimeout(function () {
+              fetch(base + '/token', { method:'POST',
+                  headers: { 'Content-Type':'application/json', 'Accept':'application/json' },
+                  body: JSON.stringify({ client_id: INBOX.client_id, device_code: d.device_code,
+                    grant_type: 'urn:ietf:params:oauth:grant-type:device_code' }) })
+                .then(function (r) { return r.json(); })
+                .then(function (t) {
+                  if (t.access_token) { resolve(t.access_token); return; }
+                  if (t.error === 'authorization_pending' || t.error === 'slow_down') { poll(); return; }
+                  reject(new Error(t.error || 'device flow refused'));
+                })
+                .catch(reject);
+            }, iv);
+          })();
+        });
+      });
+  }
+  if (__inboxBtn) {
+    if (!INBOX.enabled) {
+      __inboxBtn.disabled = true;
+      __inboxSay(INBOX_DISABLED);
+    } else {
+      __inboxBtn.addEventListener('click', function () {
+        __inboxBtn.disabled = true;
+        __inboxDeviceToken()
+          .then(__inboxPut)
+          .catch(function (e) { __inboxSay(INBOX_FAILED.replace('{why}', e && e.message ? e.message : e)); })
+          .then(function () { __inboxBtn.disabled = false; });
+      });
+    }
+  }
+  __inboxHydrate();
+
+  var VOTE_TOTAL = 320;
+  var VOTE_PROGRESS = '{n} of {total} across the whole sheet';
+  var VOTE_ETA = 'about {minutes} min left for all {total}';
+  var VOTE_ETA_ROUGH = 'about {minutes} min left for all {total} (rough)';
+  var VOTE_DONE = 'all {total} decided';
+  (function () {
+    var bar = document.getElementById('voteBar');
+    if (!bar) return;
+    // The build tagged exactly the submit controls this document actually has.
+    // Navigation (filters, facets, the type-scale control) is untagged and stays
+    // on top, where it is used BEFORE deciding.
+    var moved = document.querySelectorAll('[data-submit]');
+    for (var i = 0; i < moved.length; i++) bar.appendChild(moved[i]);
+  })();
+  // One record backs every pack of a packset — STORE_KEY and TIME_KEY are keyed
+  // on sheet_id, not on the pack — so this page can count and time the WHOLE
+  // instrument without loading a single other pack.
+  function __voteDecidedAll() {
+    var n = 0;
+    for (var k in state) {
+      if (Object.prototype.hasOwnProperty.call(state, k) && state[k] && state[k].decision) n++;
+    }
+    return n;
+  }
+  function __voteSecs() {
+    var per = (typeof __timing !== 'undefined' && __timing && __timing.per) ? __timing.per : null;
+    var out = [];
+    if (!per) return out;
+    for (var k in per) {
+      if (!Object.prototype.hasOwnProperty.call(per, k)) continue;
+      if (!(state[k] && state[k].decision)) continue;
+      if (per[k] > 0) out.push(per[k]);
+    }
+    return out;
+  }
+  function __voteEta(decided, total) {
+    var left = Math.max(0, total - decided);
+    if (!left) return VOTE_DONE.replace('{total}', total);
+    var secs = __voteSecs();
+    if (!secs.length) return '';
+    secs.sort(function (a, b) { return a - b; });
+    var mid = Math.floor(secs.length / 2);
+    var med = (secs.length % 2) ? secs[mid] : (secs[mid - 1] + secs[mid]) / 2;
+    var minutes = Math.max(1, Math.round(med * left / 60));
+    return (secs.length >= 5 ? VOTE_ETA : VOTE_ETA_ROUGH)
+      .replace('{minutes}', minutes).replace('{total}', total);
+  }
+  function __voteProgress() {
+    var total = VOTE_TOTAL || ids.length;
+    var n = VOTE_TOTAL ? __voteDecidedAll() : ids.filter(function (id) {
+      return state[id] && state[id].decision; }).length;
+    if (n > total) n = total;
+    var t = document.getElementById('voteProgText');
+    if (t) t.innerHTML = VOTE_PROGRESS.replace('{n}', '<b>' + n + '</b>')
+                                      .replace('{total}', '<b>' + total + '</b>');
+    var b = document.getElementById('voteProgBar');
+    if (b) b.style.width = (total ? Math.round(100 * n / total) : 0) + '%';
+    var e = document.getElementById('voteProgEta');
+    if (e) e.textContent = __voteEta(n, total);
+  }
+  var __voteOrigTally = tally;
+  tally = function () { __voteOrigTally(); __voteProgress(); };
+  __voteProgress();
 })();
 </script>
 <div class="flowtoast" id="flowToast" role="status"></div>
