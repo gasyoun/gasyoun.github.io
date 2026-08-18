@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="color-scheme" content="dark">
+<meta name="generator" content="csl-pyutil/0.19.1">
+<title>G6 · золотой стандарт — стартовый лист MQM — 10 items</title>
+<style>
+  :root { color-scheme: dark; --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --text:#e6e6e6; --muted:#9aa0aa;
+          --accent:#5b8cff; --ok:#3fb950; --bad:#f85149; --defer:#d29922; --border:#2a2f3a; }
+  * { box-sizing: border-box; }
+  body { background:var(--bg); color:var(--text); font-family:-apple-system,Segoe UI,Roboto,sans-serif;
+         margin:0; padding:0 0 120px 0; }
+  header.top { position:sticky; top:0; z-index:10; background:var(--panel); border-bottom:1px solid var(--border);
+               padding:14px 20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+  header.top h1 { font-size:16px; margin:0; }
+  header.top .sub { color:var(--muted); font-size:12px; max-width:760px; }
+  .tally { display:flex; gap:14px; font-size:13px; }
+  .tally span.count { font-weight:700; }
+  .tally .approve { color:var(--ok); } .tally .reject { color:var(--bad); }
+  .tally .defer { color:var(--defer); } .tally .unvoted { color:var(--muted); }
+  .toolbar { padding:10px 20px; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  button.dl { background:var(--accent); color:#fff; border:none; padding:8px 14px; border-radius:6px;
+              cursor:pointer; font-size:13px; }
+  button.dl:hover { opacity:.9; }
+  .filterbar { display:flex; gap:6px; flex-wrap:wrap; }
+  .filterbar button { background:var(--panel2); border:1px solid var(--border); color:var(--text);
+                       padding:6px 10px; border-radius:14px; font-size:12px; cursor:pointer; }
+  .filterbar button.active { border-color:var(--accent); color:var(--accent); }
+  main { max-width:980px; margin:0 auto; padding:10px 20px; }
+  .card { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:16px;
+          margin-bottom:16px; }
+  .card.voted-approve { border-left:4px solid var(--ok); }
+  .card.voted-reject { border-left:4px solid var(--bad); }
+  .card.voted-defer { border-left:4px solid var(--defer); }
+  .card header { display:flex; justify-content:space-between; align-items:baseline; }
+  .card .hw { font-size:18px; font-weight:700; }
+  .badge { font-size:11px; background:var(--panel2); padding:2px 8px; border-radius:10px;
+           margin-left:8px; color:var(--muted); }
+  .question { margin:8px 0 12px; font-size:14px; }
+  .panel { background:var(--panel2); border-radius:8px; padding:10px 12px; font-size:13px; margin-bottom:10px; }
+  .panel h4 { margin:0 0 6px; font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+  .panel pre { white-space:pre-wrap; word-break:break-word; margin:0; font-size:12px; line-height:1.45; }
+  .chip { display:inline-block; background:#263042; border-radius:5px; padding:2px 7px; margin:2px 3px 2px 0; font-size:12px; }
+  .muted { color:var(--muted); font-style:italic; }
+  .controls { display:flex; align-items:center; gap:8px; margin-top:4px; }
+  button.vote { border:1px solid var(--border); background:var(--panel2); color:var(--text);
+                padding:7px 12px; border-radius:6px; cursor:pointer; font-size:13px; }
+  button.vote.approve.active { background:var(--ok); border-color:var(--ok); color:#04240b; }
+  button.vote.reject.active { background:var(--bad); border-color:var(--bad); color:#2a0a08; }
+  button.vote.defer.active { background:var(--defer); border-color:var(--defer); color:#2a1d02; }
+  .vote-state { margin-left:6px; font-size:12px; color:var(--muted); }
+  textarea.note { width:100%; margin-top:10px; min-height:88px; background:#11141a !important; color:#e6e6e6 !important;
+                  -webkit-text-fill-color:#e6e6e6; border:1px solid var(--border); border-radius:6px; padding:8px; font-size:13px;
+                  font-family:inherit; resize:vertical; }
+  textarea.note::placeholder { color:var(--muted); opacity:1; }
+  footer.hint { max-width:980px; margin:20px auto; padding:0 20px; color:var(--muted); font-size:12px; }
+  kbd { background:#263042; border-radius:4px; padding:1px 5px; font-size:11px; }
+
+  .screening-banner { margin: 0 20px 12px; padding: 10px 14px; border-radius: 8px;
+    border: 1px solid var(--accent); background: #152033; font-size: 12px; line-height: 1.45;
+    color: var(--text); max-width: 980px; }
+  .screening-banner code { font-size: 11px; color: var(--accent); }
+  .screening-banner .sc-d { color: var(--defer); font-weight: 700; }
+
+  .idchip { font-family:ui-monospace,Consolas,monospace; font-size:11px; color:var(--muted);
+            background:var(--panel2); border:1px solid var(--border); padding:2px 7px;
+            border-radius:6px; user-select:all; }
+  .card header { gap:10px; }
+  .hw a.hwlink { color:inherit; text-decoration:underline dotted; text-underline-offset:3px; }
+  .hw a.hwlink:hover { color:var(--accent); }
+  mark.hl { background:#453407; color:#ffd75e; padding:0 2px; border-radius:3px; }
+  .savebanner { max-width:980px; margin:10px auto 0; padding:8px 20px; font-size:12.5px; }
+  .savebanner code { background:var(--panel2); border:1px solid var(--border); padding:1px 6px; border-radius:5px; }
+  .ratingrow { display:flex; align-items:center; gap:6px; margin-top:10px; flex-wrap:wrap; }
+  .ratinglabel { font-size:12px; color:var(--muted); margin-right:4px; }
+  button.rate { border:1px solid var(--border); background:var(--panel2); color:var(--text);
+                width:34px; padding:6px 0; border-radius:6px; cursor:pointer; font-size:13px; }
+  button.rate.active { background:var(--accent); border-color:var(--accent); color:#fff; }
+  button.rate.active.below { background:var(--defer); border-color:var(--defer); color:#2a1d02; }
+  .rate-state { font-size:12px; color:var(--muted); margin-left:4px; }
+  .badge-typology { border:1px solid var(--accent); color:var(--text); font-weight:600; }
+  :root { --fs:1.5; }
+  header.top h1 { font-size:calc(16px * var(--fs)) !important; }
+  header.top .sub { font-size:calc(12px * var(--fs)) !important; }
+  .tally, button.dl, button.vote, button.rate, textarea.note, .reject-label-select,
+  #strictReviewerWrap, #strictReviewerWrap input { font-size:calc(13px * var(--fs)) !important; }
+  .filterbar button, .fsctl button, .fsctl .fsval, .chip, .vote-state, .rate-state,
+  .ratinglabel, .rejectlabellabel, footer.hint, div.legend,
+  #strictReviewError { font-size:calc(12px * var(--fs)) !important; }
+  .card .hw { font-size:calc(18px * var(--fs)) !important; }
+  .badge, .panel h4, kbd, .idchip { font-size:calc(11px * var(--fs)) !important; }
+  .question { font-size:calc(14px * var(--fs)) !important; }
+  .panel { font-size:calc(13px * var(--fs)) !important; }
+  .panel pre { font-size:calc(13.5px * var(--fs)) !important; line-height:1.55; }
+  .panel .anatomy { font-size:calc(12.5px * var(--fs)) !important; }
+  .savebanner { font-size:calc(12.5px * var(--fs)) !important; }
+  .fsctl { display:flex; align-items:center; gap:4px; }
+  .fsctl button { background:var(--panel2); border:1px solid var(--border); color:var(--text);
+                  padding:6px 10px; border-radius:14px; cursor:pointer; line-height:1; }
+  .fsctl .fsval { color:var(--muted); min-width:3.4em; text-align:center; }
+  @media (max-width: 640px) {
+    header.top { padding: 10px 14px; flex-direction: column; align-items: stretch; }
+    header.top h1 { font-size: 15px; }
+    .tally { gap: 8px; font-size: 11px; }
+    .toolbar { padding: 8px 14px; }
+    main { padding: 8px 12px; }
+    .card { padding: 12px; }
+    .filterbar { flex-wrap: wrap; }
+    button.dl, button.vote, button.rate, .fsctl button, #saveBtn, #handinBtn, #pauseBtn {
+      min-height: 44px; min-width: 44px; padding: 10px 14px;
+    }
+    .controls { flex-wrap: wrap; }
+    .panel { padding: 8px 10px; }
+    textarea.note { min-height: 60px; }
+  }
+  .tally .time { color:var(--muted); }
+  .dl.handin { background:#243447; }
+  .tally .pausebtn { background:none; border:1px solid var(--border); color:var(--muted);
+                     border-radius:6px; padding:0 6px; margin-left:4px; cursor:pointer;
+                     font-size:inherit; font-family:inherit; line-height:1.6; }
+  .tally .pausebtn.on { color:#ffd479; border-color:#ffd479; }
+  .tally .time.paused { opacity:.45; }
+  .handin-said { color:var(--muted); font-size:12px; margin-left:10px; }
+  .card.kbd-active { outline:2px solid var(--accent); outline-offset:3px; }
+  .tally .tstate { color:var(--muted); font-size:.85em; margin-left:4px; }
+  .tally .tstate.idle { color:var(--defer); }
+  .flowprog { display:inline-flex; align-items:center; gap:8px; color:var(--muted); font-size:12px; }
+  .flowprog .bar { display:inline-block; width:120px; height:6px; border-radius:3px;
+                   background:var(--panel2); border:1px solid var(--border); overflow:hidden; }
+  .flowprog .bar i { display:block; height:6px; background:var(--accent); width:0; }
+  .dl.flowundo { background:#243447; }
+  .flowtoast { position:fixed; left:50%; bottom:24px; transform:translateX(-50%);
+               background:var(--panel2); border:1px solid var(--border); color:var(--text);
+               padding:8px 14px; border-radius:8px; font-size:13px; z-index:50;
+               opacity:0; pointer-events:none; transition:opacity .18s; }
+  .flowtoast.on { opacity:1; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>G6 · золотой стандарт — стартовый лист MQM — 10 items</h1>
+    <div class="sub">Generated 2026-08-14 &middot; sheet_id <code>h215-gold-full-320-2026-08-14</code> &middot; bound <code class="bindchip" title="content_hash — binds this sheet's decisions.json export to exactly this HTML">sha256:29c270e133cb…</code> &middot; 320 карточек из gold/gold_set.jsonl (320), стратификация period × kind; типология из 6 ярлыков; каждая карточка несёт словарь, корень и контексты ДО голоса</div>
+  </div>
+  <div class="tally" id="tally">
+    <span class="approve">&#9989; <span class="count" id="c-approve">0</span></span>
+    <span class="reject">&#10060; <span class="count" id="c-reject">0</span></span>
+    <span class="defer">&#9208; <span class="count" id="c-defer">0</span></span>
+    <span class="time" title="active time on this sheet (while the tab is visible)">&#9201; <span class="count" id="t-total">0:00</span><span class="tstate" id="t-state"></span></span>
+    <button type="button" class="pausebtn" id="pauseBtn" title="pause the clock — a break is not review time">&#9208;</button>
+    <span class="unvoted">&#9711; <span class="count" id="c-unvoted">10</span></span>
+  </div>
+</header>
+<aside class="screening-banner" role="status" data-screening="1"><strong>Screening (H1649)</strong> — only human-required cards are below. Off the plate: <span class="sc-a">deterministic 0</span> · <span class="sc-b">dataset lookup 320</span> · <span class="sc-c">agent adjudication 320</span> (total screened 640). Human cards: <span class="sc-d">320</span>. Evidence: <code>RussianTranslation/gold/HUMAN_GOLD_PROTOCOL.md</code>. Rules: mqm-6-label-typology, h1801-evidence-before-label, h1802-reject-label-picker.</aside>
+<div class="savebanner">&#128229; Your export downloads as <code>h215-gold-full-320-2026-08-14_decisions.json</code> &rarr; save it to <code>RussianTranslation\review\h215-gold-full-320-2026-08-14_decisions.json</code> (the <code>sheet_id</code> inside the file is <code>h215-gold-full-320-2026-08-14</code> — that is how a later session knows which sheet these decisions belong to).</div>
+<div class="toolbar">
+  <button class="dl" id="downloadBtn">Download decisions.json</button><button class="dl handin" id="handinBtn" title="stop the clock and export the votes made so far; the rest stay saved in this browser">Hand in what I got</button><span class="handin-said" id="handinSaid"></span><button class="dl" id="saveBtn" style="display:none;margin-left:8px">Save to folder…</button>
+  <label id="strictReviewerWrap" style="display:flex;align-items:center;gap:6px;font-size:13px">
+    Reviewer <input id="strictReviewer" type="text" autocomplete="name" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:7px 9px" />
+  </label>
+  <span id="strictReviewError" role="alert" style="color:var(--bad);font-size:12px"></span>
+  <div class="fsctl" title="text size — persists in this browser"><button type="button" id="fsDown" aria-label="smaller text">A&minus;</button><span class="fsval" id="fsVal"></span><button type="button" id="fsUp" aria-label="larger text">A+</button></div>
+  <button type="button" class="dl flowundo" id="flowUndoBtn" title="undo the last decision (z)">&#8630; Undo</button>
+  <span class="flowprog" id="flowProg"><span class="bar"><i id="flowBar"></i></span><span id="flowProgText"></span><span id="flowEta"></span></span>
+  <div class="filterbar" id="filterbar"><button data-filter="all" class="active">all</button><button data-filter="Classical">Classical</button><button data-filter="Epic / early-Classical">Epic / early-Classical</button><button data-filter="Medieval">Medieval</button><button data-filter="Vedic">Vedic</button><button data-filter="unvoted">unvoted only</button></div>
+</div>
+<main id="cards">
+
+  <section class="card" data-id="106" data-filt="Epic / early-Classical">
+    <header><div class="hw">jana <span class="badge">Epic / early-Classical</span><span class="badge">commentary</span><span class="badge">12_mahabharata-shantiparva</span></div><span class="idchip" title="card id — cite this id back when discussing this card">106</span></header>
+    <div class="question">Верен ли ярлык LLM <b>«correct»</b> для этого перевода? <span class="muted">(reject → выберите правильный ярлык из списка ниже)</span></div>
+    <div class="panel"><h4>Санскрит (sa)</h4><pre>jana</pre></div><div class="panel"><h4>Русский (ru)</h4><pre><mark class="hl">люди</mark></pre></div><div class="panel"><h4>Словарь (по периоду)</h4><div class="muted">непедийская маршрутизация (period=Epic / early-Classical, work=12_mahabharata-shantiparva) → MW + PWG</div><div><b>MW</b> · <i>Monier-Williams Sanskrit-English</i> · заголовок <b>jana</b> <span class="muted">(SLP1 jana · как в карточке)</span> · L76736 pc410,1<pre>ja/na mf(ī)n. ‘generating’, see puraṃ-</pre></div><div><b>MW</b> · <i>Monier-Williams Sanskrit-English</i> · заголовок <b>jana</b> <span class="muted">(SLP1 jana · как в карточке)</span> · L76737 pc410,1<pre>ja/na m. (g. vfzAdi) creature, living being, man, person, race (pa/ñca ja/nās, ‘the five races’ = p˚ kṛṣṭa/yas, RV. iii, viii ff.; MBh. iii, 14160), people, subjects (the sg. used collectively, e.g. dai/vya or divyā/ j˚, ‘divine race’, the gods collectively, RV.; mahat j˚, many people, R. vi, 101, 2; often ifc. denoting one person or a number of persons collectively, e.g. preṣya-, bandhu-, sakhī- &amp;c., qq.vv.; with names of peoples, VarBṛS. iv, 22 and v, 74; ayaṃ janaḥ, ‘this person, these persons’, I, we, MBh. viii, 709; Hariv. 7110; R. ii, 41, 2; Śak. &amp;c.; eṣa j˚, id., Kāvyād. ii, 75), RV. &amp;c.</pre></div><div><b>MW</b> · <i>Monier-Williams Sanskrit-English</i> · заголовок <b>jana</b> <span class="muted">(SLP1 jana · как в карточке)</span> · L76738 pc410,2<pre>the person nearest to the speaker (also with ayam or asau, ‘this my lover’, Kāvyād. ii, 271; Ratnāv. i, 24/25), Nal. x, 10; Śak.; Mālav.</pre></div></div><div class="panel"><h4>Корень (Whitney)</h4><div class="muted">лемма: jana (NOUN, 1107×)</div><div>√<b>jan</b> · класс 1,10Ā,10P,3Ā,10,4,2Ā,1Ā <span class="muted">(PWG: von ← jana)</span><br>Whitney 249 — √jan “give birth”</div></div><div class="panel"><h4>Контексты из этой же работы</h4><div class="muted">форма внутри сандхи/композита · 3 контекст(ов)</div><div><b>12_mahabharata-shantiparva 12.1.24-34</b><pre>ajānatā mayā saṅkhye rājyalubdhena ghātitaḥ । tanme dahati gātrāṇi tūlarāśimivānalaḥ ॥24॥ na hi taṃ veda pārtho&#x27;pi bhrātaraṃ śveta …</pre><pre>Алчущий власти, по неведению толкнул я его на гибель в битве, и это сжигает меня, как огонь — кучу соломы. Не знали ни Партха, Вла …</pre></div><div><b>12_mahabharata-shantiparva 12.2.1-11</b><pre>sa evamuktastu munirnārado vadatāṃ varaḥ । kathayāmāsa tatsarvaṃ yathā śaptaḥ sa sūtajaḥ ॥1॥ evametanmahābāho yathā vadasi bhārata …</pre><pre>Когда так было сказано, Нарада, лучший из владеющих Словом отшельник, подробно поведал о том, как был проклят сын суты: «Это так, …</pre></div><div><b>12_mahabharata-shantiparva 12.3.1-9</b><pre>karṇasya bāhuvīryeṇa praśrayeṇa damena ca । tutoṣa bhṛguśārdūlo guruśuśrūṣayā tathā ॥1॥ tasmai sa vidhivatkṛtsnaṃ brahmāstraṃ sani …</pre><pre>Тигр среди потомков Бхригу, [Рама] был доволен мощью рук Карны, его смирением, сдержанностью и почтительностью к наставнику. Посте …</pre></div></div><div class="panel"><h4>Как эта форма переводится в корпусе (A2/A4)</h4><div class="muted">146 вариантов перевода этой формы в выровненном корпусе</div><table><tr><th>русский</th><th>n</th><th>работы</th></tr><tr><td>люди</td><td>180</td><td>02_ramayana-ayodhyakanda:25, 03_mahabharata-aranyakaparva:13, 07_mahabharata-dronaparva:9, 05_mahabharata-udyogaparva:8, 09_mahabharata-shalyaparva:8 <b>(в этой работе 2×)</b></td></tr><tr><td>людей</td><td>72</td><td>02_ramayana-ayodhyakanda:16, 07_rigveda:5, 01_mahabharata-adiparva:3, 08_rigveda:3, 12_atharvaveda:3</td></tr><tr><td>человек</td><td>36</td><td>01_rigveda:4, buddhacharita:4, 10_rigveda:3, 05_mahabharata-udyogaparva:3, 07_rigveda:3</td></tr><tr><td>народ</td><td>29</td><td>02_ramayana-ayodhyakanda:3, 06_rigveda:3, 15_mahabharata-ashramavasikaparva:3, 01_mahabharata-adiparva:2, 09_rigveda:2</td></tr><tr><td>род</td><td>22</td><td>10_rigveda:5, 08_rigveda:3, 09_rigveda:3, 05_mahabharata-udyogaparva:2, 06_rigveda:2</td></tr><tr><td>народа</td><td>18</td><td>02_ramayana-ayodhyakanda:3, 06_rigveda:3, 01_ramayana-balakanda:2, 01_mahabharata-adiparva:2, 09_rigveda:2</td></tr><tr><td>людьми</td><td>13</td><td>02_ramayana-ayodhyakanda:2, kama-sutra:2, shv-up:2, 01_mahabharata-adiparva:1, 01_rigveda:1</td></tr><tr><td>человека</td><td>13</td><td>01_rigveda:2, 08_rigveda:2, 05_ramayana-sundarakanda:1, 01_mahabharata-adiparva:1, buddhacharita:1</td></tr></table></div><div class="panel"><h4>Ярлык LLM · типология MQM</h4><pre><b>correct</b></pre><div><span class="chip">correct</span> перевод верен</div><div><span class="chip">lemma-variant</span> вариант той же леммы (не ошибка смысла)</div><div><span class="chip">proper-name</span> имя собственное, переведённое как нарицательное (или наоборот)</div><div><span class="chip">partial</span> переведена только часть значения</div><div><span class="chip">wrong-sense</span> не то значение</div><div><span class="chip">hallucinated</span> перевода в источнике нет / выдумано</div></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Label верен</button>
+      <button class="vote reject" data-vote="reject">&#10060; Label неверен</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="lemma-variant">вариант той же леммы (не ошибка смысла)</option><option value="proper-name">имя собственное, переведённое как нарицательное (или наоборот)</option><option value="partial">переведена только часть значения</option><option value="wrong-sense">не то значение</option><option value="hallucinated">перевода в источнике нет / выдумано</option></select></div>
+    <textarea class="note" placeholder="необязательный комментарий к решению"></textarea>
+  </section>
+
+  <section class="card" data-id="108" data-filt="Epic / early-Classical">
+    <header><div class="hw">nirāmarṣeṣu <span class="badge">Epic / early-Classical</span><span class="badge">translation</span><span class="badge">05_mahabharata-udyogaparva</span></div><span class="idchip" title="card id — cite this id back when discussing this card">108</span></header>
+    <div class="question">Верен ли ярлык LLM <b>«correct»</b> для этого перевода? <span class="muted">(reject → выберите правильный ярлык из списка ниже)</span></div>
+    <div class="panel"><h4>Санскрит (sa)</h4><pre>nirāmarṣeṣu</pre></div><div class="panel"><h4>Русский (ru)</h4><pre><mark class="hl">без</mark> <mark class="hl">гнева</mark></pre></div><div class="panel"><h4>Словарь (по периоду)</h4><div class="muted">непедийская маршрутизация (period=Epic / early-Classical, work=05_mahabharata-udyogaparva) → MW + PWG</div><div><b>MW</b> · <i>Monier-Williams Sanskrit-English</i> · заголовок <b>nirāmarṣa</b> <span class="muted">(SLP1 nirAmarza · лемма DCS)</span> · L106757 pc540,1<pre>nir—āmarṣa</pre></div></div><div class="panel"><h4>Корень (Whitney)</h4><div class="muted"><b>evidence not found</b>: искали — dcs_lemma2root[nirAmarzezu] · mw_etymology[nirAmarzezu] · pwg_etymology[nirAmarzezu] · dcs_lemma2root[nirAmarza] · mw_etymology[nirAmarza] · pwg_etymology[nirAmarza]</div></div><div class="panel"><h4>Контексты из этой же работы</h4><div class="muted">Точное вхождение в тексте не локализовано, но выровненный корпусный лексикон фиксирует форму в этой работе 1×.</div><div class="muted"><b>evidence not found</b>: искали — корпус 05_mahabharata-udyogaparva.jsonl (токен, затем подстрока) · surface_glossary[nirAmarzezu].works[05_mahabharata-udyogaparva]</div></div><div class="panel"><h4>Как эта форма переводится в корпусе (A2/A4)</h4><div class="muted">1 вариантов перевода этой формы в выровненном корпусе</div><table><tr><th>русский</th><th>n</th><th>работы</th></tr><tr><td>без гнева</td><td>1</td><td>05_mahabharata-udyogaparva:1 <b>(в этой работе 1×)</b></td></tr></table></div><div class="panel"><h4>Ярлык LLM · типология MQM</h4><pre><b>correct</b></pre><div><span class="chip">correct</span> перевод верен</div><div><span class="chip">lemma-variant</span> вариант той же леммы (не ошибка смысла)</div><div><span class="chip">proper-name</span> имя собственное, переведённое как нарицательное (или наоборот)</div><div><span class="chip">partial</span> переведена только часть значения</div><div><span class="chip">wrong-sense</span> не то значение</div><div><span class="chip">hallucinated</span> перевода в источнике нет / выдумано</div></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Label верен</button>
+      <button class="vote reject" data-vote="reject">&#10060; Label неверен</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="lemma-variant">вариант той же леммы (не ошибка смысла)</option><option value="proper-name">имя собственное, переведённое как нарицательное (или наоборот)</option><option value="partial">переведена только часть значения</option><option value="wrong-sense">не то значение</option><option value="hallucinated">перевода в источнике нет / выдумано</option></select></div>
+    <textarea class="note" placeholder="необязательный комментарий к решению"></textarea>
+  </section>
+
+  <section class="card" data-id="126" data-filt="Medieval">
+    <header><div class="hw">pratipādana <span class="badge">Medieval</span><span class="badge">commentary</span><span class="badge">gitarthasamgraha-abhinavagupta</span></div><span class="idchip" title="card id — cite this id back when discussing this card">126</span></header>
+    <div class="question">Верен ли ярлык LLM <b>«correct»</b> для этого перевода? <span class="muted">(reject → выберите правильный ярлык из списка ниже)</span></div>
+    <div class="panel"><h4>Санскрит (sa)</h4><pre>pratipādana</pre></div><div class="panel"><h4>Русский (ru)</h4><pre><mark class="hl">разъяснение</mark></pre></div><div class="panel"><h4>Словарь (по периоду)</h4><div class="muted">непедийская маршрутизация (period=Medieval, work=gitarthasamgraha-abhinavagupta) → MW + PWG</div><div><b>MW</b> · <i>Monier-Williams Sanskrit-English</i> · заголовок <b>pratipādana</b> <span class="muted">(SLP1 pratipAdana · как в карточке)</span> · L132571 pc667,2<pre>prati-˚pādana n. causing to attain, giving, granting, bestowing on, presenting to (loc. or comp.), MBh.; Kāv. &amp;c.</pre></div><div><b>MW</b> · <i>Monier-Williams Sanskrit-English</i> · заголовок <b>pratipādana</b> <span class="muted">(SLP1 pratipAdana · как в карточке)</span> · L132572 pc667,2<pre>giving back, restoring, returning, MBh. (a-pratip˚, Kull.)</pre></div><div><b>MW</b> · <i>Monier-Williams Sanskrit-English</i> · заголовок <b>pratipādana</b> <span class="muted">(SLP1 pratipAdana · как в карточке)</span> · L132573 pc667,2<pre>bringing back, R.</pre></div></div><div class="panel"><h4>Корень (Whitney)</h4><div class="muted"><b>evidence not found</b>: искали — dcs_lemma2root[pratipAdana] · mw_etymology[pratipAdana] · pwg_etymology[pratipAdana]</div></div><div class="panel"><h4>Контексты из этой же работы</h4><div class="muted">форма внутри сандхи/композита · 1 контекст(ов)</div><div><b>gitarthasamgraha-abhinavagupta 4.34</b><pre>tadviddhi praṇipātena paripraśnena sevayā | upadekṣyanti te jñānaṃ jñāninastattvadarśinaḥ ||34|| tacca - jñānaṃ praṇipātena - bhak …</pre><pre>Это познай — поклонением, вопрошанием, служением. Тебя наставят знанию знающие, видящие Истину, /34/ Познай это знание почитанием …</pre></div></div><div class="panel"><h4>Как эта форма переводится в корпусе (A2/A4)</h4><div class="muted">10 вариантов перевода этой формы в выровненном корпусе</div><table><tr><th>русский</th><th>n</th><th>работы</th></tr><tr><td>разъяснение</td><td>2</td><td>gitarthasamgraha-abhinavagupta:2 <b>(в этой работе 2×)</b></td></tr><tr><td>подобало</td><td>1</td><td>01_ramayana-balakanda:1</td></tr><tr><td>объяснение</td><td>1</td><td>vedartha-samgraha_ramanuja:1</td></tr><tr><td>разъяснена</td><td>1</td><td>vedartha-samgraha_ramanuja:1</td></tr><tr><td>использовании</td><td>1</td><td>vedartha-samgraha_ramanuja:1</td></tr><tr><td>утверждение</td><td>1</td><td>vedartha-samgraha_ramanuja:1</td></tr><tr><td>суждение</td><td>1</td><td>vedartha-samgraha_ramanuja:1</td></tr><tr><td>разъяснения</td><td>1</td><td>vedartha-samgraha_ramanuja:1</td></tr></table></div><div class="panel"><h4>Ярлык LLM · типология MQM</h4><pre><b>correct</b></pre><div><span class="chip">correct</span> перевод верен</div><div><span class="chip">lemma-variant</span> вариант той же леммы (не ошибка смысла)</div><div><span class="chip">proper-name</span> имя собственное, переведённое как нарицательное (или наоборот)</div><div><span class="chip">partial</span> переведена только часть значения</div><div><span class="chip">wrong-sense</span> не то значение</div><div><span class="chip">hallucinated</span> перевода в источнике нет / выдумано</div></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Label верен</button>
+      <button class="vote reject" data-vote="reject">&#10060; Label неверен</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="lemma-variant">вариант той же леммы (не ошибка смысла)</option><option value="proper-name">имя собственное, переведённое как нарицательное (или наоборот)</option><option value="partial">переведена только часть значения</option><option value="wrong-sense">не то значение</option><option value="hallucinated">перевода в источнике нет / выдумано</option></select></div>
+    <textarea class="note" placeholder="необязательный комментарий к решению"></textarea>
+  </section>
+
+  <section class="card" data-id="134" data-filt="Medieval">
+    <header><div class="hw">śānti <span class="badge">Medieval</span><span class="badge">translation</span><span class="badge">gitarthasamgraha-abhinavagupta</span></div><span class="idchip" title="card id — cite this id back when discussing this card">134</span></header>
+    <div class="question">Верен ли ярлык LLM <b>«correct»</b> для этого перевода? <span class="muted">(reject → выберите правильный ярлык из списка ниже)</span></div>
+    <div class="panel"><h4>Санскрит (sa)</h4><pre>śānti</pre></div><div class="panel"><h4>Русский (ru)</h4><pre><mark class="hl">покоя</mark></pre></div><div class="panel"><h4>Словарь (по периоду)</h4><div class="muted">непедийская маршрутизация (period=Medieval, work=gitarthasamgraha-abhinavagupta) → MW + PWG</div><div><b>MW</b> · <i>Monier-Williams Sanskrit-English</i> · заголовок <b>śānti</b> <span class="muted">(SLP1 SAnti · как в карточке)</span> · L215338 pc1064,3<pre>śā/nti f. tranquillity, peace, quiet, peace or calmness of mind, absence of passion, averting of pain (śānti! śānti! śānti! may the three kinds of pain be averted!), indifference to objects of pleasure or pain, KaṭhUp.; MBh. &amp;c.</pre></div><div><b>MW</b> · <i>Monier-Williams Sanskrit-English</i> · заголовок <b>śānti</b> <span class="muted">(SLP1 SAnti · как в карточке)</span> · L215339 pc1064,3<pre>alleviation (of evil or pain), cessation, abatement, extinction (of fire &amp;c.), AV. &amp;c. &amp;c.</pre></div><div><b>MW</b> · <i>Monier-Williams Sanskrit-English</i> · заголовок <b>śānti</b> <span class="muted">(SLP1 SAnti · как в карточке)</span> · L215340 pc1064,3<pre>a pause, breach, interruption, Hcat.</pre></div></div><div class="panel"><h4>Корень (Whitney)</h4><div class="muted">лемма: SAnti (NOUN, 177×)</div><div>√<b>śam</b> · класс 4P,9 <span class="muted">(PWG: von ← SAnti)</span><br>Whitney 773 — 1 √śam “be quiet”</div></div><div class="panel"><h4>Контексты из этой же работы</h4><div class="muted">форма внутри сандхи/композита · 3 контекст(ов)</div><div><b>gitarthasamgraha-abhinavagupta 2.68</b><pre>nāsti buddhirayuktasya na cāyuktasya bhāvanā | na cābhāvayataḥ śāntiraśāntasya kutaḥ sukham ||68||</pre><pre>Нет разума у необузданного, нет у необузданного Бытия. При отсутствии Бытия нет покоя, а без покоя откуда счастье? /68/</pre></div><div><b>gitarthasamgraha-abhinavagupta 2.72</b><pre>āpūryamāṇamacalapratiṣṭhaṃ samudramāpaḥ praviśanti praviśanti yadvat | tadvatkāmā yaṃ praviśanti sarve sa śāntimāpnoti na kāmakāmī …</pre><pre>Как в полноводный, недвижимо пребывающий океан впадают воды, также в него впадают все желания. Он достигает покоя, а не желающий ж …</pre></div><div><b>gitarthasamgraha-abhinavagupta 2.73</b><pre>vihāya kāmānyaḥ sarvānpumāṃścarati nispṛhaḥ | nirmamo nirahaṅkāraḥ sa śāntimadhigacchati ||73|| sa yogī sarvakāmasaṃnyāsitvāt śānt …</pre><pre>Человек, который желания все оставив, действует не затронутый [ими], беспристрастный, без ахамкары, достигает покоя. /73/ Такой йо …</pre></div></div><div class="panel"><h4>Как эта форма переводится в корпусе (A2/A4)</h4><div class="muted">48 вариантов перевода этой формы в выровненном корпусе</div><table><tr><th>русский</th><th>n</th><th>работы</th></tr><tr><td>покой</td><td>31</td><td>buddhacharita:3, 05_mahabharata-udyogaparva:3, bhagavadgita-1909:3, bhagavadgita-prabhupada:3, 06_mahabharata-bhishmaparva:2 <b>(в этой работе 1×)</b></td></tr><tr><td>покоя</td><td>30</td><td>06_mahabharata-bhishmaparva:5, gitarthasamgraha-abhinavagupta:5, 02_ramayana-ayodhyakanda:4, 07_mahabharata-dronaparva:3, bhagavadgita-sharma:3 <b>(в этой работе 5×)</b></td></tr><tr><td>мир</td><td>24</td><td>05_mahabharata-udyogaparva:5, bhagavadgity:4, bhagavadgita-1914:3, bhagavadgita-smirnov:3, 06_mahabharata-bhishmaparva:2</td></tr><tr><td>мира</td><td>15</td><td>bhagavadgita-smirnov:4, 05_mahabharata-udyogaparva:3, bhagavadgita-1914:3, bhagavadgita-erman:3, 06_mahabharata-bhishmaparva:1</td></tr><tr><td>спокойствие</td><td>8</td><td>05_mahabharata-udyogaparva:2, bhagavadgita-prabhupada:2, 01_mahabharata-adiparva:1, 07_mahabharata-dronaparva:1, bhagavadgita-1909:1</td></tr><tr><td>умиротворенность</td><td>7</td><td>bhagavadgita-burba:2, 06_mahabharata-bhishmaparva:1, bhagavadgita-erman:1, bhagavadgita-sharma:1, bhagavadgita-radha:1</td></tr><tr><td>умиротворение</td><td>6</td><td>06_mahabharata-bhishmaparva:1, 07_mahabharata-dronaparva:1, ramanuja_gitabhashya:1, bhagavadgita-erman:1, bhagavadgita-radha:1</td></tr><tr><td>Покой</td><td>5</td><td>bhagavadgita-burba:2, gitarthasamgraha-abhinavagupta:1, 14_mahabharata-ashvamedhikaparva:1, isha-up:1 <b>(в этой работе 1×)</b></td></tr></table></div><div class="panel"><h4>Ярлык LLM · типология MQM</h4><pre><b>correct</b></pre><div><span class="chip">correct</span> перевод верен</div><div><span class="chip">lemma-variant</span> вариант той же леммы (не ошибка смысла)</div><div><span class="chip">proper-name</span> имя собственное, переведённое как нарицательное (или наоборот)</div><div><span class="chip">partial</span> переведена только часть значения</div><div><span class="chip">wrong-sense</span> не то значение</div><div><span class="chip">hallucinated</span> перевода в источнике нет / выдумано</div></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Label верен</button>
+      <button class="vote reject" data-vote="reject">&#10060; Label неверен</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="lemma-variant">вариант той же леммы (не ошибка смысла)</option><option value="proper-name">имя собственное, переведённое как нарицательное (или наоборот)</option><option value="partial">переведена только часть значения</option><option value="wrong-sense">не то значение</option><option value="hallucinated">перевода в источнике нет / выдумано</option></select></div>
+    <textarea class="note" placeholder="необязательный комментарий к решению"></textarea>
+  </section>
+
+  <section class="card" data-id="125" data-filt="Vedic">
+    <header><div class="hw">sapta <span class="badge">Vedic</span><span class="badge">commentary</span><span class="badge">10_rigveda</span></div><span class="idchip" title="card id — cite this id back when discussing this card">125</span></header>
+    <div class="question">Верен ли ярлык LLM <b>«correct»</b> для этого перевода? <span class="muted">(reject → выберите правильный ярлык из списка ниже)</span></div>
+    <div class="panel"><h4>Санскрит (sa)</h4><pre>sapta</pre></div><div class="panel"><h4>Русский (ru)</h4><pre><mark class="hl">семь</mark></pre></div><div class="panel"><h4>Словарь (по периоду)</h4><div class="muted">ведийская маршрутизация (period=Vedic, work=10_rigveda) → GRA первым</div><div><b>GRA</b> · <i>Grassmann, Wörterbuch zum Rig-Veda</i> · заголовок <b>sapta</b> <span class="muted">(SLP1 sapta · как в карточке)</span> · L9315 pc1474<pre>(sapta), siehe tri-saptá.</pre></div><div><b>GRA</b> · <i>Grassmann, Wörterbuch zum Rig-Veda</i> · заголовок <b>saptan</b> <span class="muted">(SLP1 saptan · лемма DCS)</span> · L9325 pc1474 <span class="muted">(+8 строк цитат)</span><pre>saptán, a., sieben [Cu. 〔337〕], bisweilen 2〉 ohne ausdrücklich beigefügtes Substantiv; 3〉 in Zusammenfügung mit anderen Zahlwörtern, namentlich 4〉 trís saptá.</pre></div><div><b>GRA</b> · <i>Grassmann, Wörterbuch zum Rig-Veda</i> · заголовок <b>saptan</b> <span class="muted">(SLP1 saptan · лемма DCS)</span> · L11261 pc1747-a<pre>1475,5.a: 7; st. 4;</pre></div><div><b>GRA</b> · <i>Grassmann, Wörterbuch zum Rig-Veda</i> · заголовок <b>saptan</b> <span class="muted">(SLP1 saptan · лемма DCS)</span> · L12667 pc1773 <span class="muted">(+2 строк цитат)</span><pre>saptán:</pre></div></div><div class="panel"><h4>Корень (Whitney)</h4><div class="muted"><b>evidence not found</b>: искали — омограф отклонён по частотности: sapta (NOUN) · dcs_lemma2root[sapta] · mw_etymology[sapta] · pwg_etymology[sapta] · saptan (NUM) — не глагольная часть речи, корень не выводится</div></div><div class="panel"><h4>Контексты из этой же работы</h4><div class="muted">точное словоформенное совпадение · 3 контекст(ов)</div><div><b>10_rigveda 5.5</b><pre>sapta svasṝr aruṣīr vāvaśāno vidvān madhva uj jabhārā dṛśe kam । antar yeme antarikṣe purājā icchan vavrim avidat pūṣaṇasya ॥5॥</pre><pre>Желая семь рыжих сестер, Знаток вытащил их из меда, чтобы видеть. От века рожденный медлил в воздушном пространстве. Ища укрытия, …</pre></div><div><b>10_rigveda 5.6</b><pre>sapta maryādāḥ kavayas tatakṣus tāsām ekām id abhy aṃhuro gāt । āyor ha skambha upamasya nīḷe pathāṃ visarge dharuṇeṣu tasthau ॥6॥</pre><pre>Семь границ застолбили поэты. Лишь к одной из них приближается угнетенный. А столб Аю стоит в гнезде Высшего, В конце дорог, на тв …</pre></div><div><b>10_rigveda 8.4</b><pre>uṣa-uṣo hi vaso agram eṣi tvaṃ yamayor abhavo vibhāvā । ṛtāya sapta dadhiṣe padāni janayan mitraṃ tanve svāyai ॥4॥</pre><pre>Ведь ты идешь впереди каждой утренней зари, о благой. Ты был (тем, кто) освещает обоих близнецов. Ради закона ты сделал семь шагов …</pre></div></div><div class="panel"><h4>Как эта форма переводится в корпусе (A2/A4)</h4><div class="muted">17 вариантов перевода этой формы в выровненном корпусе</div><table><tr><th>русский</th><th>n</th><th>работы</th></tr><tr><td>семь</td><td>246</td><td>01_rigveda:26, 09_rigveda:21, 10_rigveda:15, 08_rigveda:12, 05_mahabharata-udyogaparva:10 <b>(в этой работе 15×)</b></td></tr><tr><td>семеро</td><td>43</td><td>01_mahabharata-adiparva:5, 01_rigveda:4, 10_rigveda:4, 06_mahabharata-bhishmaparva:4, 03_rigveda:4 <b>(в этой работе 4×)</b></td></tr><tr><td>Семь</td><td>37</td><td>01_rigveda:4, 03_mahabharata-aranyakaparva:3, 08_rigveda:3, 10_rigveda:2, 09_rigveda:2 <b>(в этой работе 2×)</b></td></tr><tr><td>семи</td><td>21</td><td>08_rigveda:3, 01_mahabharata-adiparva:3, 10_rigveda:2, 09_rigveda:2, 04_rigveda:2 <b>(в этой работе 2×)</b></td></tr><tr><td>Семеро</td><td>19</td><td>10_rigveda:4, 03_rigveda:4, 01_rigveda:2, 04_rigveda:2, 09_atharvaveda:2 <b>(в этой работе 4×)</b></td></tr><tr><td>семерых</td><td>15</td><td>10_rigveda:4, 09_rigveda:2, 05_mahabharata-udyogaparva:2, 04_rigveda:2, buddhacharita:1 <b>(в этой работе 4×)</b></td></tr><tr><td>семью</td><td>14</td><td>10_rigveda:2, 08_rigveda:2, 09_rigveda:2, 03_mahabharata-aranyakaparva:1, 01_rigveda:1 <b>(в этой работе 2×)</b></td></tr><tr><td>семисот</td><td>2</td><td>01_ramayana-balakanda:2</td></tr></table></div><div class="panel"><h4>Ярлык LLM · типология MQM</h4><pre><b>correct</b></pre><div><span class="chip">correct</span> перевод верен</div><div><span class="chip">lemma-variant</span> вариант той же леммы (не ошибка смысла)</div><div><span class="chip">proper-name</span> имя собственное, переведённое как нарицательное (или наоборот)</div><div><span class="chip">partial</span> переведена только часть значения</div><div><span class="chip">wrong-sense</span> не то значение</div><div><span class="chip">hallucinated</span> перевода в источнике нет / выдумано</div></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Label верен</button>
+      <button class="vote reject" data-vote="reject">&#10060; Label неверен</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="lemma-variant">вариант той же леммы (не ошибка смысла)</option><option value="proper-name">имя собственное, переведённое как нарицательное (или наоборот)</option><option value="partial">переведена только часть значения</option><option value="wrong-sense">не то значение</option><option value="hallucinated">перевода в источнике нет / выдумано</option></select></div>
+    <textarea class="note" placeholder="необязательный комментарий к решению"></textarea>
+  </section>
+
+  <section class="card" data-id="144" data-filt="Vedic">
+    <header><div class="hw">pṛthivī <span class="badge">Vedic</span><span class="badge">translation</span><span class="badge">01_rigveda</span></div><span class="idchip" title="card id — cite this id back when discussing this card">144</span></header>
+    <div class="question">Верен ли ярлык LLM <b>«correct»</b> для этого перевода? <span class="muted">(reject → выберите правильный ярлык из списка ниже)</span></div>
+    <div class="panel"><h4>Санскрит (sa)</h4><pre>pṛthivī</pre></div><div class="panel"><h4>Русский (ru)</h4><pre><mark class="hl">Земля</mark></pre></div><div class="panel"><h4>Словарь (по периоду)</h4><div class="muted">ведийская маршрутизация (period=Vedic, work=01_rigveda) → GRA первым</div><div><b>GRA</b> · <i>Grassmann, Wörterbuch zum Rig-Veda</i> · заголовок <b>pṛthivī</b> <span class="muted">(SLP1 pfTivI · как в карточке)</span> · L5760 pc0855 <span class="muted">(+15 строк цитат)</span><pre>pṛthivī́, f., die Erde als die weit ausgedehnte [= pṛthvī́ von pṛthú], bisweilen (wie {550,7}) auch pṛthvī́ zu lesen, sehr häufig neben dem Himmel (dív) genannt; ínsbesondere 2〉 im du. neben dyā́vā Himmel und Erde (vergl. dyā́vāpṛthivī́); 3〉 als Göttin personificirt; namentlich 4〉 neben dem Himmel, so besonders im Dual (vgl. dyā́vāpṛthivī́ und pṛthivī́ -dyā́vā); 5〉 als Göttin neben andern Gottheiten, namentlich wird sie 6〉 als Mutter bezeichnet; daneben häufig der Himmel (dyaús) als Vater ({492,5}; {89,4}; {164,33}; {191,6}; {185,10}) genannt; 7〉 drei Erden, den drei Himmeln entsprechend. — Adj. urú, paramá, máh u. s. w.</pre></div></div><div class="panel"><h4>Корень (Whitney)</h4><div class="muted"><b>evidence not found</b>: искали — dcs_lemma2root[pfTivI] · mw_etymology[pfTivI] · pwg_etymology[pfTivI]</div></div><div class="panel"><h4>Контексты из этой же работы</h4><div class="muted">точное словоформенное совпадение · 3 контекст(ов)</div><div><b>01_rigveda 22.13</b><pre>mahī dyauḥ pṛthivī ca na imaṃ yajñam mimikṣatām । pipṛtāṃ no bharīmabhiḥ ॥13॥</pre><pre>Великие Небо и Земля Пусть окропят нам эту жертву! Пусть они наполнят нас питанием!</pre></div><div><b>01_rigveda 37.8</b><pre>yeṣām ajmeṣu pṛthivī jujurvāṃ iva viśpatiḥ । bhiyā yāmeṣu rejate ॥8॥</pre><pre>От чьих путей (и) выездов Дрожит от страха земля, Как старый вождь племени…</pre></div><div><b>01_rigveda 39.6</b><pre>upo ratheṣu pṛṣatīr ayugdhvam praṣṭir vahati rohitaḥ । ā vo yāmāya pṛthivī cid aśrod abībhayanta mānuṣāḥ ॥6॥</pre><pre>Вы запрягли в колесницы пестрых (антилоп), Рыжая везет как пристяжная. Сама земля прислушалась к вашему выезду, Люди перепугались.</pre></div></div><div class="panel"><h4>Как эта форма переводится в корпусе (A2/A4)</h4><div class="muted">36 вариантов перевода этой формы в выровненном корпусе</div><table><tr><th>русский</th><th>n</th><th>работы</th></tr><tr><td>земля</td><td>346</td><td>br-up:25, ch-up:20, 03_mahabharata-aranyakaparva:17, 01_rigveda:17, 18_atharvaveda:17 <b>(в этой работе 17×)</b></td></tr><tr><td>землю</td><td>151</td><td>03_mahabharata-aranyakaparva:20, 10_rigveda:15, 05_mahabharata-udyogaparva:12, 07_mahabharata-dronaparva:10, 01_ramayana-balakanda:8 <b>(в этой работе 5×)</b></td></tr><tr><td>Земля</td><td>120</td><td>01_rigveda:28, 12_atharvaveda:21, 09_mahabharata-shalyaparva:8, 10_rigveda:6, 07_mahabharata-dronaparva:5 <b>(в этой работе 28×)</b></td></tr><tr><td>земли</td><td>116</td><td>10_rigveda:11, 01_rigveda:9, 09_rigveda:9, nyaya-bhashya:9, 03_rigveda:8 <b>(в этой работе 9×)</b></td></tr><tr><td>земле</td><td>106</td><td>03_mahabharata-aranyakaparva:12, 05_mahabharata-udyogaparva:12, 01_mahabharata-adiparva:6, 12_atharvaveda:5, 02_ramayana-ayodhyakanda:4 <b>(в этой работе 3×)</b></td></tr><tr><td>Землю</td><td>28</td><td>07_mahabharata-dronaparva:5, 05_mahabharata-udyogaparva:5, 10_rigveda:3, 01_ramayana-balakanda:2, 07_rigveda:2 <b>(в этой работе 1×)</b></td></tr><tr><td>землей</td><td>21</td><td>03_mahabharata-aranyakaparva:4, 15_mahabharata-ashramavasikaparva:2, manavadharmashastra:1, 10_rigveda:1, 08_rigveda:1</td></tr><tr><td>землею</td><td>15</td><td>05_mahabharata-udyogaparva:7, 06_mahabharata-bhishmaparva:2, 02_mahabharata-sabhaparva:2, 04_mahabharata-virataparva:2, 01_mahabharata-adiparva:1</td></tr></table></div><div class="panel"><h4>Ярлык LLM · типология MQM</h4><pre><b>correct</b></pre><div><span class="chip">correct</span> перевод верен</div><div><span class="chip">lemma-variant</span> вариант той же леммы (не ошибка смысла)</div><div><span class="chip">proper-name</span> имя собственное, переведённое как нарицательное (или наоборот)</div><div><span class="chip">partial</span> переведена только часть значения</div><div><span class="chip">wrong-sense</span> не то значение</div><div><span class="chip">hallucinated</span> перевода в источнике нет / выдумано</div></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Label верен</button>
+      <button class="vote reject" data-vote="reject">&#10060; Label неверен</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="lemma-variant">вариант той же леммы (не ошибка смысла)</option><option value="proper-name">имя собственное, переведённое как нарицательное (или наоборот)</option><option value="partial">переведена только часть значения</option><option value="wrong-sense">не то значение</option><option value="hallucinated">перевода в источнике нет / выдумано</option></select></div>
+    <textarea class="note" placeholder="необязательный комментарий к решению"></textarea>
+  </section>
+
+  <section class="card" data-id="163" data-filt="Classical">
+    <header><div class="hw">tilaka <span class="badge">Classical</span><span class="badge">commentary</span><span class="badge">kumarasambhava</span></div><span class="idchip" title="card id — cite this id back when discussing this card">163</span></header>
+    <div class="question">Верен ли ярлык LLM <b>«correct»</b> для этого перевода? <span class="muted">(reject → выберите правильный ярлык из списка ниже)</span></div>
+    <div class="panel"><h4>Санскрит (sa)</h4><pre>tilaka</pre></div><div class="panel"><h4>Русский (ru)</h4><pre><mark class="hl">тилак</mark></pre></div><div class="panel"><h4>Словарь (по периоду)</h4><div class="muted">непедийская маршрутизация (period=Classical, work=kumarasambhava) → MW + PWG</div><div><b>MW</b> · <i>Monier-Williams Sanskrit-English</i> · заголовок <b>tilaka</b> <span class="muted">(SLP1 tilaka · как в карточке)</span> · L85306 pc448,2<pre>tilaka m. (g. sTUlAdi) Clerodendrum phlomoides (Symplocos racemosa, L.), MBh. &amp;c.</pre></div><div><b>MW</b> · <i>Monier-Williams Sanskrit-English</i> · заголовок <b>tilaka</b> <span class="muted">(SLP1 tilaka · как в карточке)</span> · L85307 pc448,2<pre>a freckle (compared to a sesamum-seed), VarBṛS. l, 9; lii, 10; Kathās.</pre></div><div><b>MW</b> · <i>Monier-Williams Sanskrit-English</i> · заголовок <b>tilaka</b> <span class="muted">(SLP1 tilaka · как в карточке)</span> · L85309 pc448,2<pre>a kind of skin-eruption, L.</pre></div></div><div class="panel"><h4>Корень (Whitney)</h4><div class="muted">лемма: tilaka (NOUN, 37×)</div><div>√<b>til</b> · класс 1 <span class="muted">(PWG: von ← tilaka)</span><br>Whitney 308 — √til “be greasy”</div></div><div class="panel"><h4>Контексты из этой же работы</h4><div class="muted">форма внутри сандхи/композита · 3 контекст(ов)</div><div><b>kumarasambhava 3.30</b><pre>lagnadvirephāñjanabhakticitram mukhe madhuśrīs tilakaṃ prakāśya rāgeṇa bālāruṇakomalena cūtapravāloṣṭham alaṃcakāra // Ks_3.30</pre><pre>Тилакой лик ненаглядной украсив, Множеством пчел подведя себе очи, Красит зарею весна-чаровница Губы, побеги румяные манго.</pre></div><div><b>kumarasambhava 7.24</b><pre>umāstanodbhedam anupravṛddho manoratho yaḥ prathamo babhūva tam eva menā duhituḥ kathaṃcid vivāhadīkṣātilakaṃ cakāra // Ks_7.24</pre><pre>[без перевода]</pre></div><div><b>kumarasambhava 7.33</b><pre>śaṅkhāntaradyoti vilocanaṃ yad antarniviṣṭāmalapiṅgatāram sānnidhyapakṣe haritālamayyās tad eva jātaṃ tilakakriyāyāḥ // Ks_7.33</pre><pre>[без перевода]</pre></div></div><div class="panel"><h4>Как эта форма переводится в корпусе (A2/A4)</h4><div class="muted">10 вариантов перевода этой формы в выровненном корпусе</div><table><tr><th>русский</th><th>n</th><th>работы</th></tr><tr><td>тилака</td><td>7</td><td>03_ramayana-aranyakanda:3, 02_ramayana-ayodhyakanda:2, 03_mahabharata-aranyakaparva:2</td></tr><tr><td>Тилака</td><td>4</td><td>03_ramayana-aranyakanda:3, 02_ramayana-ayodhyakanda:1</td></tr><tr><td>знак</td><td>3</td><td>gitagovinda:3</td></tr><tr><td>тилак</td><td>2</td><td>05_ramayana-sundarakanda:1, kumarasambhava:1 <b>(в этой работе 1×)</b></td></tr><tr><td>тилакой</td><td>2</td><td>03_ramayana-aranyakanda:1, kumarasambhava:1 <b>(в этой работе 1×)</b></td></tr><tr><td>тилаку</td><td>1</td><td>02_ramayana-ayodhyakanda:1</td></tr><tr><td>Тилаки</td><td>1</td><td>03_ramayana-aranyakanda:1</td></tr><tr><td>знак на лбу</td><td>1</td><td>gitagovinda:1</td></tr></table></div><div class="panel"><h4>Ярлык LLM · типология MQM</h4><pre><b>correct</b></pre><div><span class="chip">correct</span> перевод верен</div><div><span class="chip">lemma-variant</span> вариант той же леммы (не ошибка смысла)</div><div><span class="chip">proper-name</span> имя собственное, переведённое как нарицательное (или наоборот)</div><div><span class="chip">partial</span> переведена только часть значения</div><div><span class="chip">wrong-sense</span> не то значение</div><div><span class="chip">hallucinated</span> перевода в источнике нет / выдумано</div></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Label верен</button>
+      <button class="vote reject" data-vote="reject">&#10060; Label неверен</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="lemma-variant">вариант той же леммы (не ошибка смысла)</option><option value="proper-name">имя собственное, переведённое как нарицательное (или наоборот)</option><option value="partial">переведена только часть значения</option><option value="wrong-sense">не то значение</option><option value="hallucinated">перевода в источнике нет / выдумано</option></select></div>
+    <textarea class="note" placeholder="необязательный комментарий к решению"></textarea>
+  </section>
+
+  <section class="card" data-id="154" data-filt="Classical">
+    <header><div class="hw">etasya <span class="badge">Classical</span><span class="badge">translation</span><span class="badge">pratyabhijna-hridaya_kshemaraja</span></div><span class="idchip" title="card id — cite this id back when discussing this card">154</span></header>
+    <div class="question">Верен ли ярлык LLM <b>«correct»</b> для этого перевода? <span class="muted">(reject → выберите правильный ярлык из списка ниже)</span></div>
+    <div class="panel"><h4>Санскрит (sa)</h4><pre>etasya</pre></div><div class="panel"><h4>Русский (ru)</h4><pre><mark class="hl">этого</mark></pre></div><div class="panel"><h4>Словарь (по периоду)</h4><div class="muted">непедийская маршрутизация (period=Classical, work=pratyabhijna-hridaya_kshemaraja) → MW + PWG</div><div><b>MW</b> · <i>Monier-Williams Sanskrit-English</i> · заголовок <b>etad</b> <span class="muted">(SLP1 etad · лемма DCS)</span> · L40041 pc231,2<pre>eta/d mfn. (Gr. 223; g. sarvAdi, Pāṇ. i, 1, 27) this, this here, here (especially as pointing to what is nearest to the speaker, e.g. eṣa bāṇaḥ, this arrow here in my hand; eṣa yāti panthāḥ, here passes the way; eṣa kālaḥ, here i.e. now, is the time; etad, this here i.e. this world here below)</pre></div><div><b>MW</b> · <i>Monier-Williams Sanskrit-English</i> · заголовок <b>etad</b> <span class="muted">(SLP1 etad · лемма DCS)</span> · L40042 pc231,2<pre>sometimes used to give emphasis to the personal pronouns (e.g. eṣo&#x27;ham, I, this very person here) or with omission of those pronouns (e.g. eṣa tvāṃ svargaṃ nayāmi, I standing here will convey thee to heaven; etau praviṣṭau svaḥ, we two here have entered)</pre></div><div><b>MW</b> · <i>Monier-Williams Sanskrit-English</i> · заголовок <b>etad</b> <span class="muted">(SLP1 etad · лемма DCS)</span> · L40043 pc231,2<pre>as the subject of a sentence it agrees in gender and number with the predicate without reference to the noun to be supplied (e.g. etad eva hi me dhanam, for this [scil. cow] is my only wealth, MBh.)</pre></div></div><div class="panel"><h4>Корень (Whitney)</h4><div class="muted"><b>evidence not found</b>: искали — омограф отклонён по частотности: eta (ADJ) · dcs_lemma2root[etasya] · mw_etymology[etasya] · pwg_etymology[etasya] · etad (PRON) — не глагольная часть речи, корень не выводится</div></div><div class="panel"><h4>Контексты из этой же работы</h4><div class="muted">точное словоформенное совпадение · 1 контекст(ов)</div><div><b>pratyabhijna-hridaya_kshemaraja 1.1.8</b><pre>tadbhūmikāḥ sarvadarśanasthitayaḥ || 8 || sarveṣāṃ cārvākādidarśanānāṃ sthitayaḥ siddhāntāḥ tasya etasya ātmano naṭasyeva svecchāv …</pre><pre>Позиции всех философских систем суть [всего лишь] различные роли этого [атмана]. Все «философские системы» — это как бы выдуманные …</pre></div></div><div class="panel"><h4>Как эта форма переводится в корпусе (A2/A4)</h4><div class="muted">12 вариантов перевода этой формы в выровненном корпусе</div><table><tr><th>русский</th><th>n</th><th>работы</th></tr><tr><td>его</td><td>9</td><td>04_mahabharata-virataparva:3, 01_mahabharata-adiparva:1, 07_mahabharata-dronaparva:1, 05_mahabharata-udyogaparva:1, bhagavadgita-1788:1</td></tr><tr><td>этого</td><td>8</td><td>br-up:2, 05_mahabharata-udyogaparva:1, bhagavadgita-prabhupada:1, 04_mahabharata-virataparva:1, shukasaptati:1 <b>(в этой работе 1×)</b></td></tr><tr><td>этой</td><td>4</td><td>ch-up:2, 01_mahabharata-adiparva:1, bhagavadgita-burba:1</td></tr><tr><td>Этого</td><td>1</td><td>03_ramayana-aranyakanda:1</td></tr><tr><td>такою</td><td>1</td><td>03_ramayana-aranyakanda:1</td></tr><tr><td>Его</td><td>1</td><td>01_mahabharata-adiparva:1</td></tr><tr><td>такого</td><td>1</td><td>06_mahabharata-bhishmaparva:1</td></tr><tr><td>эти</td><td>1</td><td>05_mahabharata-udyogaparva:1</td></tr></table></div><div class="panel"><h4>Ярлык LLM · типология MQM</h4><pre><b>correct</b></pre><div><span class="chip">correct</span> перевод верен</div><div><span class="chip">lemma-variant</span> вариант той же леммы (не ошибка смысла)</div><div><span class="chip">proper-name</span> имя собственное, переведённое как нарицательное (или наоборот)</div><div><span class="chip">partial</span> переведена только часть значения</div><div><span class="chip">wrong-sense</span> не то значение</div><div><span class="chip">hallucinated</span> перевода в источнике нет / выдумано</div></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Label верен</button>
+      <button class="vote reject" data-vote="reject">&#10060; Label неверен</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="lemma-variant">вариант той же леммы (не ошибка смысла)</option><option value="proper-name">имя собственное, переведённое как нарицательное (или наоборот)</option><option value="partial">переведена только часть значения</option><option value="wrong-sense">не то значение</option><option value="hallucinated">перевода в источнике нет / выдумано</option></select></div>
+    <textarea class="note" placeholder="необязательный комментарий к решению"></textarea>
+  </section>
+
+  <section class="card" data-id="114" data-filt="Epic / early-Classical">
+    <header><div class="hw">rāma <span class="badge">Epic / early-Classical</span><span class="badge">commentary</span><span class="badge">07_mahabharata-dronaparva</span></div><span class="idchip" title="card id — cite this id back when discussing this card">114</span></header>
+    <div class="question">Верен ли ярлык LLM <b>«proper-name»</b> для этого перевода? <span class="muted">(reject → выберите правильный ярлык из списка ниже)</span></div>
+    <div class="panel"><h4>Санскрит (sa)</h4><pre>rāma</pre></div><div class="panel"><h4>Русский (ru)</h4><pre><mark class="hl">Рама</mark></pre></div><div class="panel"><h4>Словарь (по периоду)</h4><div class="muted">непедийская маршрутизация (period=Epic / early-Classical, work=07_mahabharata-dronaparva) → MW + PWG</div><div><b>MW</b> · <i>Monier-Williams Sanskrit-English</i> · заголовок <b>rāma</b> <span class="muted">(SLP1 rAma · как в карточке)</span> · L177264 pc877,1<pre>rāma mf(ā/)n. (prob. ‘causing rest’, and in most meanings fr. √ ram) dark, dark-coloured, black (cf. rātri), AV.; TĀr. (rāmaḥ śakuniḥ. a black bird, crow, KāṭhGṛ.; Viṣṇ.)</pre></div><div><b>MW</b> · <i>Monier-Williams Sanskrit-English</i> · заголовок <b>rāma</b> <span class="muted">(SLP1 rAma · как в карточке)</span> · L177265 pc877,1<pre>white (?), L.</pre></div><div><b>MW</b> · <i>Monier-Williams Sanskrit-English</i> · заголовок <b>rāma</b> <span class="muted">(SLP1 rAma · как в карточке)</span> · L177266 pc877,1<pre>pleasing, pleasant, charming, lovely, beautiful, MBh.; Kāv. &amp;c.</pre></div></div><div class="panel"><h4>Корень (Whitney)</h4><div class="muted">лемма: rAma (NOUN, 982×)</div><div>√<b>ram</b> · класс 1Ā,1P <span class="muted">(MW: fr-root ← rAma)</span><br>Whitney 629 — √ram “rest”</div><div>√<b>ram</b> · класс 1Ā,1P <span class="muted">(PWG: von ← rAma)</span><br>Whitney 629 — √ram “rest”</div></div><div class="panel"><h4>Контексты из этой же работы</h4><div class="muted">точное словоформенное совпадение · 1 контекст(ов)</div><div><b>07_mahabharata-dronaparva 7.156.17-24</b><pre>tvaddhitārthaṃ hi naiṣādiraṅguṣṭhena viyojitaḥ । droṇenācāryakaṃ kṛtvā chadmanā satyavikramaḥ ॥17॥ sa tu baddhāṅgulitrāṇo naiṣādir …</pre><pre>Ведь ради твоего блага и сын царя Нишадского, наделенный истинной отвагой, был вероломно лишен своего большого пальца Дроной, взяв …</pre></div></div><div class="panel"><h4>Как эта форма переводится в корпусе (A2/A4)</h4><div class="muted">55 вариантов перевода этой формы в выровненном корпусе</div><table><tr><th>русский</th><th>n</th><th>работы</th></tr><tr><td>Рама</td><td>703</td><td>02_ramayana-ayodhyakanda:193, 03_ramayana-aranyakanda:180, 01_ramayana-balakanda:93, 05_ramayana-sundarakanda:63, 03_mahabharata-aranyakaparva:35 <b>(в этой работе 10×)</b></td></tr><tr><td>Рамы</td><td>205</td><td>02_ramayana-ayodhyakanda:70, 03_ramayana-aranyakanda:52, 05_ramayana-sundarakanda:36, 01_ramayana-balakanda:18, 03_mahabharata-aranyakaparva:11</td></tr><tr><td>Раме</td><td>137</td><td>03_ramayana-aranyakanda:34, 02_ramayana-ayodhyakanda:29, 05_ramayana-sundarakanda:28, 01_ramayana-balakanda:21, 03_mahabharata-aranyakaparva:8 <b>(в этой работе 3×)</b></td></tr><tr><td>Раму</td><td>136</td><td>02_ramayana-ayodhyakanda:57, 03_ramayana-aranyakanda:30, 01_ramayana-balakanda:15, 05_ramayana-sundarakanda:13, 03_mahabharata-aranyakaparva:12</td></tr><tr><td>Рамой</td><td>70</td><td>02_ramayana-ayodhyakanda:21, 05_ramayana-sundarakanda:12, 03_ramayana-aranyakanda:12, 01_ramayana-balakanda:12, raghuvamsha:3</td></tr><tr><td>Рагхава</td><td>22</td><td>03_ramayana-aranyakanda:14, 02_ramayana-ayodhyakanda:5, 01_ramayana-balakanda:3</td></tr><tr><td>рама</td><td>19</td><td>02_ramayana-ayodhyakanda:10, 01_ramayana-balakanda:4, 03_ramayana-aranyakanda:3, 05_ramayana-sundarakanda:2</td></tr><tr><td>Рагхавы</td><td>8</td><td>02_ramayana-ayodhyakanda:5, 03_ramayana-aranyakanda:3</td></tr></table></div><div class="panel"><h4>Ярлык LLM · типология MQM</h4><pre><b>proper-name</b></pre><div><span class="chip">correct</span> перевод верен</div><div><span class="chip">lemma-variant</span> вариант той же леммы (не ошибка смысла)</div><div><span class="chip">proper-name</span> имя собственное, переведённое как нарицательное (или наоборот)</div><div><span class="chip">partial</span> переведена только часть значения</div><div><span class="chip">wrong-sense</span> не то значение</div><div><span class="chip">hallucinated</span> перевода в источнике нет / выдумано</div></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Label верен</button>
+      <button class="vote reject" data-vote="reject">&#10060; Label неверен</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="lemma-variant">вариант той же леммы (не ошибка смысла)</option><option value="proper-name">имя собственное, переведённое как нарицательное (или наоборот)</option><option value="partial">переведена только часть значения</option><option value="wrong-sense">не то значение</option><option value="hallucinated">перевода в источнике нет / выдумано</option></select></div>
+    <textarea class="note" placeholder="необязательный комментарий к решению"></textarea>
+  </section>
+
+  <section class="card" data-id="130" data-filt="Epic / early-Classical">
+    <header><div class="hw">pratijñā <span class="badge">Epic / early-Classical</span><span class="badge">translation</span><span class="badge">07_mahabharata-dronaparva</span></div><span class="idchip" title="card id — cite this id back when discussing this card">130</span></header>
+    <div class="question">Верен ли ярлык LLM <b>«lemma-variant»</b> для этого перевода? <span class="muted">(reject → выберите правильный ярлык из списка ниже)</span></div>
+    <div class="panel"><h4>Санскрит (sa)</h4><pre>pratijñā</pre></div><div class="panel"><h4>Русский (ru)</h4><pre><mark class="hl">клятву</mark></pre></div><div class="panel"><h4>Словарь (по периоду)</h4><div class="muted">непедийская маршрутизация (period=Epic / early-Classical, work=07_mahabharata-dronaparva) → MW + PWG</div><div><b>MW</b> · <i>Monier-Williams Sanskrit-English</i> · заголовок <b>pratijñā</b> <span class="muted">(SLP1 pratijYA · как в карточке)</span> · L132324 pc665,3 <span class="muted">(+6 строк цитат)</span><pre>prati-√ jñā P. Ā. -jānāti, -jānīte, to admit, own, acknowledge, acquiesce in, consent to, approve, RV.; AV.; MBh.;</pre></div><div><b>MW</b> · <i>Monier-Williams Sanskrit-English</i> · заголовок <b>pratijñā</b> <span class="muted">(SLP1 pratijYA · как в карточке)</span> · L132326 pc665,3<pre>prati-˚jñā f. See below.</pre></div><div><b>MW</b> · <i>Monier-Williams Sanskrit-English</i> · заголовок <b>pratijñā</b> <span class="muted">(SLP1 pratijYA · как в карточке)</span> · L132327 pc665,3<pre>pratijñā f. admission, acknowledgment, assent, agreement, promise, vow, MBh.; Kāv. &amp;c.</pre></div></div><div class="panel"><h4>Корень (Whitney)</h4><div class="muted">лемма: pratijYA (NOUN, 123×)</div><div>√<b>jñā</b> · класс 9P,9Ā,3Ā,3P <span class="muted">(DCS: suffix ← pratijYA)</span><br>Whitney 269 — √jñā “know”</div><div>√<b>jñā</b> · класс 9P,9Ā,3Ā,3P <span class="muted">(MW: parse ← pratijYA)</span><br>Whitney 269 — √jñā “know”</div></div><div class="panel"><h4>Контексты из этой же работы</h4><div class="muted">точное словоформенное совпадение · 3 контекст(ов)</div><div><b>07_mahabharata-dronaparva 7.53.9-16</b><pre>tairyatadbhiriyaṃ satyā śrutā satyavatastava । pratijñā sindhurājasya vadhe rājīvalocana ॥9॥ tato vimanasaḥ sarve trastāḥ kṣudramṛ …</pre><pre>В то время как сами они старательно готовились, они узнали на самом деле об этой клятве убить царя Синдху, данной тобою, о Лотосог …</pre></div><div><b>07_mahabharata-dronaparva 7.56.8-15</b><pre>putraśokābhibhūtena pratijñāto mahātmanā । sahasā sindhurājasya vadho gāṇḍīvadhanvanā ॥8॥ tatkathaṃ nu mahābāhurvāsaviḥ paravīrahā …</pre><pre>«Одолеваемый скорбью о сыне, благородный Обладатель лука гандивы опрометчиво дал клятвенное обещание убить царя страны Синдху! Как …</pre></div><div><b>07_mahabharata-dronaparva 7.57.9-18</b><pre>ityukto vāsudevena bībhatsuraparājitaḥ । ābabhāṣe tadā vidvānidaṃ vacanamarthavat ॥9॥ mayā pratijñā mahatī jayadrathavadhe kṛtā । …</pre><pre>Когда так было сказано Васудевой, непобедимый Бибхатсу, наделенный мудростью, промолвил тогда слова, проникнутые глубоким смыслом: …</pre></div></div><div class="panel"><h4>Как эта форма переводится в корпусе (A2/A4)</h4><div class="muted">44 вариантов перевода этой формы в выровненном корпусе</div><table><tr><th>русский</th><th>n</th><th>работы</th></tr><tr><td>обет</td><td>14</td><td>01_mahabharata-adiparva:4, 01_ramayana-balakanda:3, buddhacharita:2, 05_mahabharata-udyogaparva:2, 03_mahabharata-aranyakaparva:1 <b>(в этой работе 1×)</b></td></tr><tr><td>тезис</td><td>13</td><td>nyaya-bhashya:13</td></tr><tr><td>обещание</td><td>12</td><td>02_ramayana-ayodhyakanda:5, 01_ramayana-balakanda:2, buddhacharita:2, 05_ramayana-sundarakanda:1, devi-gita:1</td></tr><tr><td>клятвенное обещание</td><td>12</td><td>07_mahabharata-dronaparva:11, 09_mahabharata-shalyaparva:1 <b>(в этой работе 11×)</b></td></tr><tr><td>клятва</td><td>6</td><td>07_mahabharata-dronaparva:5, 05_mahabharata-udyogaparva:1 <b>(в этой работе 5×)</b></td></tr><tr><td>обещал</td><td>4</td><td>01_ramayana-balakanda:2, 03_mahabharata-aranyakaparva:1, 05_mahabharata-udyogaparva:1</td></tr><tr><td>обете</td><td>3</td><td>03_mahabharata-aranyakaparva:1, 07_mahabharata-dronaparva:1, 08_mahabharata-karnaparva:1 <b>(в этой работе 1×)</b></td></tr><tr><td>клятву</td><td>3</td><td>07_mahabharata-dronaparva:2, 11_mahabharata-striparva:1 <b>(в этой работе 2×)</b></td></tr></table></div><div class="panel"><h4>Ярлык LLM · типология MQM</h4><pre><b>lemma-variant</b></pre><div><span class="chip">correct</span> перевод верен</div><div><span class="chip">lemma-variant</span> вариант той же леммы (не ошибка смысла)</div><div><span class="chip">proper-name</span> имя собственное, переведённое как нарицательное (или наоборот)</div><div><span class="chip">partial</span> переведена только часть значения</div><div><span class="chip">wrong-sense</span> не то значение</div><div><span class="chip">hallucinated</span> перевода в источнике нет / выдумано</div></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Label верен</button>
+      <button class="vote reject" data-vote="reject">&#10060; Label неверен</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="lemma-variant">вариант той же леммы (не ошибка смысла)</option><option value="proper-name">имя собственное, переведённое как нарицательное (или наоборот)</option><option value="partial">переведена только часть значения</option><option value="wrong-sense">не то значение</option><option value="hallucinated">перевода в источнике нет / выдумано</option></select></div>
+    <textarea class="note" placeholder="необязательный комментарий к решению"></textarea>
+  </section>
+</main>
+<footer class="hint">Approve = ярлык LLM верен · Reject = неверен (выберите правильный ярлык из списка) · Defer = на адjudication. Экспорт валидируется против review/locks/h215-gold-full-320-2026-08-14.lock.json. Keyboard: <kbd>a</kbd> Label верен &middot; <kbd>r</kbd> Label неверен
+  &middot; <kbd>d</kbd> defer &middot; <kbd>&darr;</kbd>/<kbd>&uarr;</kbd> next/prev. Votes autosave to
+  this browser's localStorage; click "Download decisions.json" when done (unvoted items export with
+  decision:null).</footer>
+<div class="legend" style="max-width:980px;margin:0 auto 20px;padding:0 20px;color:var(--muted);font-size:12px">
+  <b>Approve</b> = accept the proposed change/answer shown on the card (no separate "approve as-is" —
+  approving means agreeing as written). <b>Reject</b> = keep the current entry/answer unchanged.
+  <b>Defer</b> = not sure yet, decide later. The note field is for requesting a partial tweak instead
+  of an outright reject.
+</div>
+<script>
+(function () {
+  var SHEET_ID = "h215-gold-full-320-2026-08-14";
+  var CONTENT_HASH = "sha256:29c270e133cb9a90002f683749b42c97fed3c1477d22fac2ea1f692fbce99fec";
+  var STORE_KEY = 'review-sheet:' + SHEET_ID;
+  var GENERATED = "2026-08-14";
+  var ids = ["106", "108", "126", "134", "125", "144", "163", "154", "114", "130"];
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(STORE_KEY) || '{}') || {}; } catch (e) { state = {}; }
+  function tally() {
+    var c = { approve:0, reject:0, defer:0 };
+    ids.forEach(function (id) { var v = state[id] && state[id].decision; if (v && c.hasOwnProperty(v)) c[v]++; });
+    document.getElementById('c-approve').textContent = c.approve;
+    document.getElementById('c-reject').textContent = c.reject;
+    document.getElementById('c-defer').textContent = c.defer;
+    document.getElementById('c-unvoted').textContent = ids.length - c.approve - c.reject - c.defer;
+  }
+  function applyCardUI(card) {
+    var id = card.getAttribute('data-id'); var rec = state[id] || {};
+    card.classList.remove('voted-approve','voted-reject','voted-defer');
+    card.querySelectorAll('button.vote').forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-vote') === rec.decision); });
+    card.querySelector('.vote-state').textContent = rec.decision ? rec.decision : 'unvoted';
+    if (rec.decision) card.classList.add('voted-' + rec.decision);
+    var ta = card.querySelector('textarea.note'); if (rec.note && !ta.value) ta.value = rec.note;
+  }
+  function save() { localStorage.setItem(STORE_KEY, JSON.stringify(state)); tally(); }
+  // H1523 residual / csl-pyutil#1 Part 1: always re-read the live textarea on vote
+  // and before export so a second vote click (or a missed `input` event) cannot
+  // drop a note that is still visible in the card.
+  function syncNoteFromDom(id) {
+    state[id] = state[id] || {};
+    var card = document.querySelector('.card[data-id="' + id + '"]');
+    if (!card) return;
+    var ta = card.querySelector('textarea.note');
+    if (ta) state[id].note = ta.value;
+  }
+  function vote(id, d) { syncNoteFromDom(id); state[id].decision = d; save(); }
+  function noteChange(id, t) { state[id] = state[id] || {}; state[id].note = t; save(); }
+  document.querySelectorAll('.card').forEach(function (card) {
+    var id = card.getAttribute('data-id'); applyCardUI(card);
+    card.querySelectorAll('button.vote').forEach(function (btn) {
+      btn.addEventListener('click', function () { vote(id, btn.getAttribute('data-vote')); applyCardUI(card); });
+    });
+    var ta = card.querySelector('textarea.note'); ta.addEventListener('input', function () { noteChange(id, ta.value); });
+  });
+  tally();
+  document.getElementById('downloadBtn').addEventListener('click', function () {
+    ids.forEach(function (id) { syncNoteFromDom(id); });
+    var decided = ids.filter(function (id) { return state[id] && state[id].decision; }).length;
+    var payload = { sheet_id: SHEET_ID, content_hash: CONTENT_HASH, generated: "2026-08-14", decided: decided, time_total_seconds: __timeTotal(),
+      items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '', time_seconds: __timeFor(id), reject_label: rec.reject_label || null }; }) };
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
+    var url = URL.createObjectURL(blob); var a = document.createElement('a');
+    a.href = url; a.download = SHEET_ID + '_decisions.json'; document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+  });
+  var filterbar = document.getElementById('filterbar');
+  filterbar.addEventListener('click', function (e) {
+    var btn = e.target.closest('button[data-filter]'); if (!btn) return;
+    filterbar.querySelectorAll('button').forEach(function (b) { b.classList.remove('active'); });
+    btn.classList.add('active'); var f = btn.getAttribute('data-filter');
+    document.querySelectorAll('.card').forEach(function (card) {
+      var show = true;
+      if (f === 'unvoted') { var id = card.getAttribute('data-id'); show = !(state[id] && state[id].decision); }
+      else if (f !== 'all') { show = card.getAttribute('data-filt') === f; }
+      card.style.display = show ? '' : 'none';
+    });
+  });
+  var cardsEl = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  var activeIdx = 0;
+  function visibleCards() { return cardsEl.filter(function (c) { return c.style.display !== 'none'; }); }
+  document.addEventListener('keydown', function (e) {
+    if (e.target.tagName === 'TEXTAREA') return;
+    var vis = visibleCards(); if (!vis.length) return;
+    if (activeIdx >= vis.length) activeIdx = vis.length - 1;
+    var card = vis[activeIdx]; var id = card.getAttribute('data-id');
+    if (e.key === 'a') { vote(id, 'approve'); applyCardUI(card); }
+    else if (e.key === 'r') { vote(id, 'reject'); applyCardUI(card); }
+    else if (e.key === 'd') { vote(id, 'defer'); applyCardUI(card); }
+    else if (e.key === 'ArrowDown') { activeIdx = Math.min(activeIdx + 1, vis.length - 1); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'center'}); }
+    else if (e.key === 'ArrowUp') { activeIdx = Math.max(activeIdx - 1, 0); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'center'}); }
+    else return;
+    e.preventDefault();
+  });
+
+  var STRICT_REVIEW = {"reviewer": "", "requireAllVotes": true, "requireRejectNote": true, "generated": "2026-08-14"};
+  var strictReviewer = document.getElementById('strictReviewer');
+  var strictError = document.getElementById('strictReviewError');
+  strictReviewer.value = state.__reviewer || STRICT_REVIEW.reviewer || '';
+  function strictItems() {
+    return ids.map(function (id) {
+      var rec = state[id] || {};
+      return { id: id, decision: rec.decision || null, note: rec.note || '', time_seconds: __timeFor(id), reject_label: rec.reject_label || null };
+    });
+  }
+  function strictValidation() {
+    var items = strictItems();
+    var reviewer = strictReviewer.value.trim();
+    var unvoted = STRICT_REVIEW.requireAllVotes ? items.filter(function (item) { return !item.decision; }) : [];
+    var rejectedWithoutNote = STRICT_REVIEW.requireRejectNote ? items.filter(function (item) {
+      return item.decision === 'reject' && !item.note.trim();
+    }) : [];
+    var errors = [];
+    if (!reviewer) errors.push('reviewer is required');
+    if (unvoted.length) errors.push(unvoted.length + ' item(s) remain unvoted');
+    if (rejectedWithoutNote.length) errors.push(rejectedWithoutNote.length + ' rejection(s) need a note');
+    var rejectedWithoutLabel = STRICT_REVIEW.requireRejectNote ? items.filter(function (item) {
+      return item.decision === 'reject' && !item.reject_label;
+    }) : [];
+    if (rejectedWithoutLabel.length) errors.push(rejectedWithoutLabel.length + ' rejection(s) need a label');
+    return { reviewer: reviewer, items: items, complete: errors.length === 0, errors: errors };
+  }
+  function strictPayload() {
+    var result = strictValidation();
+    var decided = result.items.filter(function (item) { return !!item.decision; }).length;
+    return { sheet_id: SHEET_ID, content_hash: CONTENT_HASH, generated: "2026-08-14", decided: decided, time_total_seconds: __timeTotal(),
+      reviewer: result.reviewer, reviewedAt: result.complete ? new Date().toISOString() : null,
+      complete: result.complete, items: result.items };
+  }
+  strictReviewer.addEventListener('input', function () {
+    state.__reviewer = strictReviewer.value;
+    strictError.textContent = '';
+    save();
+  });
+  document.getElementById('downloadBtn').addEventListener('click', function (event) {
+    event.preventDefault(); event.stopImmediatePropagation();
+    var result = strictValidation();
+    if (!result.complete) {
+      strictError.textContent = result.errors.join('; ');
+      if (!result.reviewer) strictReviewer.focus();
+      return;
+    }
+    strictError.textContent = '';
+    var blob = new Blob([JSON.stringify(strictPayload(), null, 2)], { type:'application/json' });
+    var url = URL.createObjectURL(blob); var a = document.createElement('a');
+    a.href = url; a.download = SHEET_ID + '_decisions.json'; document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+  }, true);
+
+  var saveHandle = null, saveTimer = null;
+  function exportPayload() {
+    return JSON.stringify(strictPayload(), null, 2);
+  }
+  function scheduleAutosave() {
+    if (!saveHandle) return;
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(function () {
+      saveHandle.createWritable().then(function (w) {
+        w.write(exportPayload()).then(function () { w.close(); });
+      }).catch(function () {});
+    }, 1000);
+  }
+  var _origSave = save;
+  save = function () { _origSave(); scheduleAutosave(); };
+  if (window.showSaveFilePicker) {
+    var saveBtn = document.getElementById('saveBtn');
+    saveBtn.style.display = '';
+    saveBtn.addEventListener('click', function () {
+      window.showSaveFilePicker({suggestedName: SHEET_ID + '_decisions.json'}).then(function (h) {
+        saveHandle = h; scheduleAutosave();
+      }).catch(function () {});
+    });
+  }
+
+  var REJECT_LABELS = [["lemma-variant", "\u0432\u0430\u0440\u0438\u0430\u043d\u0442 \u0442\u043e\u0439 \u0436\u0435 \u043b\u0435\u043c\u043c\u044b (\u043d\u0435 \u043e\u0448\u0438\u0431\u043a\u0430 \u0441\u043c\u044b\u0441\u043b\u0430)"], ["proper-name", "\u0438\u043c\u044f \u0441\u043e\u0431\u0441\u0442\u0432\u0435\u043d\u043d\u043e\u0435, \u043f\u0435\u0440\u0435\u0432\u0435\u0434\u0451\u043d\u043d\u043e\u0435 \u043a\u0430\u043a \u043d\u0430\u0440\u0438\u0446\u0430\u0442\u0435\u043b\u044c\u043d\u043e\u0435 (\u0438\u043b\u0438 \u043d\u0430\u043e\u0431\u043e\u0440\u043e\u0442)"], ["partial", "\u043f\u0435\u0440\u0435\u0432\u0435\u0434\u0435\u043d\u0430 \u0442\u043e\u043b\u044c\u043a\u043e \u0447\u0430\u0441\u0442\u044c \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u044f"], ["wrong-sense", "\u043d\u0435 \u0442\u043e \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u0435"], ["hallucinated", "\u043f\u0435\u0440\u0435\u0432\u043e\u0434\u0430 \u0432 \u0438\u0441\u0442\u043e\u0447\u043d\u0438\u043a\u0435 \u043d\u0435\u0442 / \u0432\u044b\u0434\u0443\u043c\u0430\u043d\u043e"]];
+  function applyRejectLabelUI(card) {
+    var row = card.querySelector('.rejectlabelrow'); if (!row) return;
+    var id = card.getAttribute('data-id'); var rec = state[id] || {};
+    row.style.display = rec.decision === 'reject' ? '' : 'none';
+    var sel = row.querySelector('select'); if (sel) sel.value = rec.reject_label || '';
+  }
+  function setRejectLabel(id, v) { state[id] = state[id] || {}; state[id].reject_label = v || null; save(); }
+  document.querySelectorAll('.card').forEach(function (card) {
+    var id = card.getAttribute('data-id');
+    var sel = card.querySelector('.rejectlabelrow select');
+    if (sel) sel.addEventListener('change', function () { setRejectLabel(id, sel.value); applyRejectLabelUI(card); });
+    applyRejectLabelUI(card);
+  });
+  var _origApplyCardUI = applyCardUI;
+  applyCardUI = function (card) { _origApplyCardUI(card); applyRejectLabelUI(card); };
+
+  var FS_KEY = STORE_KEY + ':fs', FS_DEFAULT = 1.5;
+  function fsGet() {
+    var v = parseFloat(localStorage.getItem(FS_KEY));
+    return (isFinite(v) && v >= 0.7 && v <= 3) ? v : FS_DEFAULT;
+  }
+  function fsApply(v) {
+    document.documentElement.style.setProperty('--fs', String(v));
+    document.getElementById('fsVal').textContent = Math.round(v * 100) + '%';
+  }
+  function fsSet(v) {
+    v = Math.min(3, Math.max(0.7, Math.round(v * 10) / 10));
+    localStorage.setItem(FS_KEY, String(v)); fsApply(v);
+  }
+  fsApply(fsGet());
+  document.getElementById('fsDown').addEventListener('click', function () { fsSet(fsGet() - 0.1); });
+  document.getElementById('fsUp').addEventListener('click', function () { fsSet(fsGet() + 0.1); });
+
+  var TIME_KEY = STORE_KEY + ':timing';
+  var __timing = { total: 0, per: {} };
+  try {
+    var __t0 = JSON.parse(localStorage.getItem(TIME_KEY) || 'null');
+    if (__t0 && typeof __t0.total === 'number') __timing = __t0;
+  } catch (e) {}
+  if (!__timing.per) __timing.per = {};
+  function __timeFor(id) { return Math.round(__timing.per[id] || 0); }
+  function __timeTotal() { return Math.round(__timing.total || 0); }
+  function __timeFmt(s) {
+    s = Math.round(s); var m = Math.floor(s / 60);
+    return (m >= 60 ? Math.floor(m / 60) + ':' + ('0' + (m - Math.floor(m / 60) * 60)).slice(-2) : m)
+      + ':' + ('0' + (s - m * 60)).slice(-2);
+  }
+  function __timeShow() {
+    var el = document.getElementById('t-total');
+    if (el) el.textContent = __timeFmt(__timing.total);
+  }
+  var __timeLast = Date.now(), __timeDirty = 0;
+  var __timeCards = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  function __timeActiveId() {
+    var mid = window.innerHeight / 2, best = null, bestd = Infinity;
+    for (var i = 0; i < __timeCards.length; i++) {
+      var c = __timeCards[i];
+      if (c.style.display === 'none') continue;
+      var r = c.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > window.innerHeight) continue;
+      var center = (Math.max(r.top, 0) + Math.min(r.bottom, window.innerHeight)) / 2;
+      var d = Math.abs(center - mid);
+      if (d < bestd) { bestd = d; best = c; }
+    }
+    return best ? best.getAttribute('data-id') : null;
+  }
+  function __timeFlush() {
+    try { localStorage.setItem(TIME_KEY, JSON.stringify(__timing)); } catch (e) {}
+  }
+  // V12 (H2858): the clock is stoppable. `paused` rides in the same persisted
+  // record as the totals, so a reviewer who pauses and closes the tab does not
+  // come back to a clock that ran all night.
+  var __timePaused = !!__timing.paused;
+  // V15 (H2887): a legacy record carries `paused` and no reason — read it as
+  // manual, so an auto-rearm can never lift a pause the curator set by hand.
+  var __timePauseReason = __timePaused ? (__timing.pause_reason || 'manual') : null;
+  function __timePauseSet(v, reason) {
+    __timePaused = !!v;
+    __timing.paused = __timePaused;
+    __timePauseReason = __timePaused ? (reason || 'manual') : null;
+    __timing.pause_reason = __timePauseReason;
+    __timeLast = Date.now(); __timeFlush();
+  }
+  setInterval(function () {
+    var now = Date.now(), dt = (now - __timeLast) / 1000;
+    __timeLast = now;
+    if (document.hidden || __timePaused || dt <= 0 || dt > 4) return;
+    __timing.total += dt;
+    var id = __timeActiveId();
+    if (id) __timing.per[id] = (__timing.per[id] || 0) + dt;
+    __timeDirty += dt;
+    if (__timeDirty >= 5) { __timeDirty = 0; __timeFlush(); }
+    __timeShow();
+  }, 1000);
+  document.addEventListener('visibilitychange', function () { __timeLast = Date.now(); });
+  window.addEventListener('beforeunload', __timeFlush);
+  __timeShow();
+
+  var HANDIN_SAID = 'handed in {n} of {total} — clock stopped, the rest stay saved in this browser';
+  var __handinBtn = document.getElementById('handinBtn');
+  var __handinSaid = document.getElementById('handinSaid');
+
+  var __pauseBtn = document.getElementById('pauseBtn');
+  function __pauseShow() {
+    __pauseBtn.classList.toggle('on', __timePaused);
+    __pauseBtn.innerHTML = __timePaused ? '&#9654;' : '&#9208;';
+    var chip = document.querySelector('.tally .time');
+    if (chip) chip.classList.toggle('paused', __timePaused);
+  }
+  __pauseBtn.addEventListener('click', function () { __timePauseSet(!__timePaused); __pauseShow(); });
+  __pauseShow();
+  __handinBtn.addEventListener('click', function () {
+    ids.forEach(function (id) { syncNoteFromDom(id); });
+    __timePauseSet(true, 'export'); __pauseShow();
+    var items = ids.map(function (id) {
+      var rec = state[id] || {};
+      var item = { id: id, decision: rec.decision || null };
+      item.note = rec.note || '';
+      item.time_seconds = __timeFor(id);
+      item.reject_label = rec.reject_label || null;
+      return item;
+    });
+    var decided = items.filter(function (it) { return !!it.decision; }).length;
+    var payload = { sheet_id: SHEET_ID, content_hash: CONTENT_HASH, generated: GENERATED, decided: decided,
+      partial: true, complete: false, undecided: items.length - decided, items: items };
+    payload.time_total_seconds = __timeTotal();
+    payload.reviewer = strictReviewer.value.trim();
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
+    var url = URL.createObjectURL(blob); var a = document.createElement('a');
+    a.href = url; a.download = SHEET_ID + '_decisions_partial.json';
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+    __handinSaid.textContent = HANDIN_SAID.replace('{n}', decided).replace('{total}', items.length);
+  });
+
+  // --- V15 session flow (H2887) ---------------------------------------------
+  var FLOW_IDLE_SECONDS = 90;
+  var FLOW_ETA = 'about {minutes} min left';
+  var FLOW_ETA_ROUGH = 'about {minutes} min left (rough)';
+  var FLOW_CLOCK_RUNNING = 'running';
+  var FLOW_CLOCK_PAUSED = 'paused';
+  var FLOW_CLOCK_IDLE = 'idle';
+  var FLOW_PROGRESS = 'decided {n} of {total}';
+  var FLOW_UNDO_SAID = 'undo: {id} back to {decision}';
+  var FLOW_UNDO_EMPTY = 'nothing to undo';
+  var FLOW_UNDO_NONE = 'no decision';
+  var FLOW_RESUMED = 'resumed at card {n} of {total}';
+  var __flowToast = document.getElementById('flowToast');
+  var __flowToastTimer = null;
+  function __flowSay(text) {
+    if (!__flowToast) return;
+    __flowToast.textContent = text;
+    __flowToast.classList.add('on');
+    clearTimeout(__flowToastTimer);
+    __flowToastTimer = setTimeout(function () { __flowToast.classList.remove('on'); }, 2600);
+  }
+  var __flowCenterId = __timeActiveId;
+  function __flowIdxOf(id) {
+    var vis = visibleCards();
+    for (var i = 0; i < vis.length; i++) {
+      if (vis[i].getAttribute('data-id') === id) return i;
+    }
+    return -1;
+  }
+  function __flowCardById(id) {
+    var found = null;
+    cardsEl.forEach(function (c) { if (c.getAttribute('data-id') === id) found = c; });
+    return found;
+  }
+  // The visible ring IS the target of a/r/d — that identity is the whole point
+  // of this layer, so nothing may move `activeIdx` without repainting.
+  function __flowPaint() {
+    cardsEl.forEach(function (c) { c.classList.remove('kbd-active'); });
+    var vis = visibleCards();
+    if (!vis.length) return;
+    if (activeIdx >= vis.length) activeIdx = vis.length - 1;
+    if (activeIdx < 0) activeIdx = 0;
+    vis[activeIdx].classList.add('kbd-active');
+  }
+  function __flowSync() {
+    var id = __flowCenterId();
+    if (id) { var at = __flowIdxOf(id); if (at !== -1) activeIdx = at; }
+    __flowPaint();
+  }
+  var __flowScrollTimer = null;
+  window.addEventListener('scroll', function () {
+    if (__flowScrollTimer) return;
+    __flowScrollTimer = setTimeout(function () { __flowScrollTimer = null; __flowSync(); }, 120);
+  });
+  // Both bars reset `activeIdx` to 0 as they re-filter; re-derive it from the
+  // viewport on the next tick, or defect 2 returns wearing a filter.
+  ['filterbar'].forEach(function (barId) {
+    var bar = document.getElementById(barId);
+    if (bar) bar.addEventListener('click', function () { setTimeout(__flowSync, 0); });
+  });
+  function __flowClockShow() {
+    var el = document.getElementById('t-state');
+    if (!el) return;
+    var label = FLOW_CLOCK_RUNNING;
+    if (__timePaused) label = (__timePauseReason === 'idle') ? FLOW_CLOCK_IDLE : FLOW_CLOCK_PAUSED;
+    el.textContent = label;
+    el.classList.toggle('idle', !!__timePaused && __timePauseReason === 'idle');
+  }
+  // The V12 ⏸ button drives the clock straight through __timePauseSet, so the
+  // three-state label has to ride along with V12's own repaint or it goes stale
+  // the moment the curator pauses by hand.
+  var __flowOrigPauseShow = __pauseShow;
+  __pauseShow = function () { __flowOrigPauseShow(); __flowClockShow(); };
+  var __flowIdleTimer = null;
+  function __flowIdleArm() {
+    clearTimeout(__flowIdleTimer);
+    __flowIdleTimer = setTimeout(function () {
+      if (__timePaused) return;
+      __timePauseSet(true, 'idle');
+    __pauseShow();
+      __flowClockShow();
+    }, FLOW_IDLE_SECONDS * 1000);
+  }
+  function __flowRearm() {
+    if (__timePaused && __timePauseReason !== 'manual') {
+      __timePauseSet(false);
+    __pauseShow();
+    }
+    __flowClockShow();
+    __flowIdleArm();
+  }
+  // The export GESTURES, caught in the capture phase on `document` so this runs
+  // before any handler bound to the buttons themselves — including the strict
+  // layer's, which calls stopImmediatePropagation() on its own element.
+  document.addEventListener('click', function (e) {
+    var t = e.target;
+    if (!t || !t.closest || !t.closest('#downloadBtn, #saveBtn, #handinBtn')) return;
+    __timePauseSet(true, 'export');
+    __pauseShow();
+    __flowClockShow();
+  }, true);
+  ['keydown', 'pointerdown', 'scroll'].forEach(function (evt) {
+    document.addEventListener(evt, function () { __flowRearm(); }, true);
+  });
+  var __flowUndoStack = [];
+  function __flowUndo() {
+    var last = __flowUndoStack.pop();
+    if (!last) { __flowSay(FLOW_UNDO_EMPTY); return; }
+    state[last.id] = state[last.id] || {};
+    if (last.prev) state[last.id].decision = last.prev;
+    else delete state[last.id].decision;
+    save();
+    var card = __flowCardById(last.id);
+    if (card) {
+      applyCardUI(card);
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      var at = __flowIdxOf(last.id);
+      if (at !== -1) activeIdx = at;
+      __flowPaint();
+    }
+    __flowSay(FLOW_UNDO_SAID.replace('{id}', last.id)
+      .replace('{decision}', last.prev || FLOW_UNDO_NONE));
+  }
+  var __flowUndoBtn = document.getElementById('flowUndoBtn');
+  if (__flowUndoBtn) __flowUndoBtn.addEventListener('click', __flowUndo);
+  function __flowFirstUndecided() {
+    var vis = visibleCards();
+    for (var i = 0; i < vis.length; i++) {
+      var id = vis[i].getAttribute('data-id');
+      if (!(state[id] && state[id].decision)) return i;
+    }
+    return -1;
+  }
+  function __flowAdvance() {
+    var at = __flowFirstUndecided();
+    if (at === -1) { __flowPaint(); return; }
+    activeIdx = at;
+    visibleCards()[at].scrollIntoView({ behavior: 'smooth', block: 'center' });
+    __flowPaint();
+  }
+  function __flowDecided() {
+    var n = 0;
+    ids.forEach(function (id) { if (state[id] && state[id].decision) n++; });
+    return n;
+  }
+  function __flowEtaText(decided, total) {
+    var secs = [];
+    ids.forEach(function (id) {
+      if (!(state[id] && state[id].decision)) return;
+      var s = __timing.per[id] || 0;
+      if (s > 0) secs.push(s);
+    });
+    if (!secs.length) return '';
+    secs.sort(function (a, b) { return a - b; });
+    var mid = Math.floor(secs.length / 2);
+    var med = (secs.length % 2) ? secs[mid] : (secs[mid - 1] + secs[mid]) / 2;
+    var left = Math.max(0, total - decided);
+    if (!left) return '';
+    var minutes = Math.max(1, Math.round(med * left / 60));
+    return (secs.length >= 5 ? FLOW_ETA : FLOW_ETA_ROUGH).replace('{minutes}', minutes);
+  }
+  function __flowProgress() {
+    var n = __flowDecided(), total = ids.length;
+    var txt = document.getElementById('flowProgText');
+    if (txt) txt.textContent = FLOW_PROGRESS.replace('{n}', n).replace('{total}', total);
+    var bar = document.getElementById('flowBar');
+    if (bar) bar.style.width = (total ? Math.round(100 * n / total) : 0) + '%';
+    var etaEl = document.getElementById('flowEta');
+    if (etaEl) etaEl.textContent = __flowEtaText(n, total);
+  }
+  var __flowOrigTally = tally;
+  tally = function () { __flowOrigTally(); __flowProgress(); };
+  var __flowOrigVote = vote;
+  vote = function (id, d) {
+    var rec = state[id] || {};
+    __flowUndoStack.push({ id: id, prev: rec.decision || null });
+    if (__flowUndoStack.length > 100) __flowUndoStack.shift();
+    __flowOrigVote(id, d);
+    __flowRearm();
+    __flowAdvance();
+  };
+  var __flowOrigNote = noteChange;
+  noteChange = function (id, t) { __flowOrigNote(id, t); __flowRearm(); };
+  document.addEventListener('keydown', function (e) {
+    if (e.target.tagName === 'TEXTAREA') return;
+    if (e.key === 'z' || e.key === 'Z') { __flowUndo(); e.preventDefault(); return; }
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') __flowPaint();
+  });
+  __flowProgress();
+  __flowSync();
+  __flowClockShow();
+  __flowIdleArm();
+  (function () {
+    if (!__flowDecided()) return;
+    var at = __flowFirstUndecided();
+    if (at === -1) return;
+    var vis = visibleCards();
+    activeIdx = at;
+    vis[at].scrollIntoView({ block: 'center' });
+    __flowPaint();
+    __flowSay(FLOW_RESUMED.replace('{n}', at + 1).replace('{total}', vis.length));
+  })();
+})();
+</script>
+<div class="flowtoast" id="flowToast" role="status"></div>
+</body>
+</html>
