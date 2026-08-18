@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
 <meta charset="utf-8">
 <meta name="color-scheme" content="dark">
 <meta name="generator" content="csl-pyutil/0.21.0">
-<title>G6 · золотой стандарт — стартовый лист MQM — 10 items</title>
+<title>G6 · золотой стандарт — стартовый лист MQM — 10 карточек</title>
 <style>
   :root { color-scheme: dark; --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --text:#e6e6e6; --muted:#9aa0aa;
           --accent:#5b8cff; --ok:#3fb950; --bad:#f85149; --defer:#d29922; --border:#2a2f3a; }
@@ -159,15 +159,15 @@
 <body>
 <header class="top">
   <div>
-    <h1>G6 · золотой стандарт — стартовый лист MQM — 10 items</h1>
-    <div class="sub">Generated 2026-08-14 &middot; sheet_id <code>h215-gold-full-320-2026-08-14</code> &middot; bound <code class="bindchip" title="content_hash — binds this sheet's decisions.json export to exactly this HTML">sha256:0af200c041de…</code> &middot; 320 карточек из gold/gold_set.jsonl (320), стратификация period × kind; типология из 6 ярлыков; каждая карточка несёт словарь, корень и контексты ДО голоса</div>
+    <h1>G6 · золотой стандарт — стартовый лист MQM — 10 карточек</h1>
+    <div class="sub">Собрано 2026-08-14 &middot; sheet_id <code>h215-gold-full-320-2026-08-14</code> &middot; bound <code class="bindchip" title="content_hash — binds this sheet's decisions.json export to exactly this HTML">sha256:2a93b194b8d4…</code> &middot; 320 карточек из gold/gold_set.jsonl (320), стратификация period × kind; типология из 6 ярлыков; каждая карточка несёт словарь, корень и контексты ДО голоса</div>
   </div>
   <div class="tally" id="tally">
     <span class="approve">&#9989; <span class="count" id="c-approve">0</span></span>
     <span class="reject">&#10060; <span class="count" id="c-reject">0</span></span>
     <span class="defer">&#9208; <span class="count" id="c-defer">0</span></span>
-    <span class="time" title="active time on this sheet (while the tab is visible)">&#9201; <span class="count" id="t-total">0:00</span><span class="tstate" id="t-state"></span></span>
-    <button type="button" class="pausebtn" id="pauseBtn" title="pause the clock — a break is not review time">&#9208;</button>
+    <span class="time" title="активное время на этом листе (пока вкладка видима)">&#9201; <span class="count" id="t-total">0:00</span><span class="tstate" id="t-state"></span></span>
+    <button type="button" class="pausebtn" id="pauseBtn" title="поставить таймер на паузу — перерыв не считается временем ревью">&#9208;</button>
     <span class="unvoted">&#9711; <span class="count" id="c-unvoted">10</span></span>
   </div>
 <div class="voteprog" id="voteProg"><span id="voteProgText"></span><span class="bar"><i id="voteProgBar"></i></span><span class="eta" id="voteProgEta"></span></div>
@@ -175,15 +175,15 @@
 <aside class="screening-banner" role="status" data-screening="1"><strong>Screening (H1649)</strong> — only human-required cards are below. Off the plate: <span class="sc-a">deterministic 0</span> · <span class="sc-b">dataset lookup 320</span> · <span class="sc-c">agent adjudication 320</span> (total screened 640). Human cards: <span class="sc-d">320</span>. Evidence: <code>RussianTranslation/gold/HUMAN_GOLD_PROTOCOL.md</code>. Rules: mqm-6-label-typology, h1801-evidence-before-label, h1802-reject-label-picker.</aside>
 <div class="savebanner">&#128229; Your export downloads as <code>h215-gold-full-320-2026-08-14_decisions.json</code> &rarr; save it to <code>RussianTranslation\review\h215-gold-full-320-2026-08-14_decisions.json</code> (the <code>sheet_id</code> inside the file is <code>h215-gold-full-320-2026-08-14</code> — that is how a later session knows which sheet these decisions belong to).</div>
 <div class="toolbar">
-  <button data-submit="1" class="dl" id="downloadBtn">Download decisions.json</button><button data-submit="1" type="button" class="dl inbox" id="inboxBtn" title="push this pack's ids and verdicts to the public vote inbox">Save to GitHub</button><span data-submit="1" class="inboxnote" id="inboxNote" role="status"></span><button data-submit="1" class="dl handin" id="handinBtn" title="stop the clock and export the votes made so far; the rest stay saved in this browser">Hand in what I got</button><span class="handin-said" id="handinSaid"></span><button data-submit="1" class="dl" id="saveBtn" style="display:none;margin-left:8px">Save to folder…</button>
+  <button data-submit="1" class="dl" id="downloadBtn">Скачать decisions.json</button><button data-submit="1" type="button" class="dl inbox" id="inboxBtn" title="отправить id и вердикты этого пакета в публичный ящик голосов">Сохранить в GitHub</button><span data-submit="1" class="inboxnote" id="inboxNote" role="status"></span><button data-submit="1" class="dl handin" id="handinBtn" title="остановить таймер и экспортировать сделанные голоса; остальное останется сохранённым в этом браузере">Сдать что успел(а)</button><span class="handin-said" id="handinSaid"></span><button data-submit="1" class="dl" id="saveBtn" style="display:none;margin-left:8px">Сохранить в папку…</button>
   <label data-submit="1" id="strictReviewerWrap" style="display:flex;align-items:center;gap:6px;font-size:13px">
     Reviewer <input id="strictReviewer" type="text" autocomplete="name" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:7px 9px" />
   </label>
   <span data-submit="1" id="strictReviewError" role="alert" style="color:var(--bad);font-size:12px"></span>
   <div class="fsctl" title="text size — persists in this browser"><button type="button" id="fsDown" aria-label="smaller text">A&minus;</button><span class="fsval" id="fsVal"></span><button type="button" id="fsUp" aria-label="larger text">A+</button></div>
-  <button data-submit="1" type="button" class="dl flowundo" id="flowUndoBtn" title="undo the last decision (z)">&#8630; Undo</button>
+  <button data-submit="1" type="button" class="dl flowundo" id="flowUndoBtn" title="отменить последнее решение (z)">&#8630; Отменить</button>
   <span class="flowprog" id="flowProg"><span class="bar"><i id="flowBar"></i></span><span id="flowProgText"></span><span id="flowEta"></span></span>
-  <div class="filterbar" id="filterbar"><button data-filter="all" class="active">all</button><button data-filter="Classical">Classical</button><button data-filter="Epic / early-Classical">Epic / early-Classical</button><button data-filter="Medieval">Medieval</button><button data-filter="Vedic">Vedic</button><button data-filter="unvoted">unvoted only</button></div>
+  <div class="filterbar" id="filterbar"><button data-filter="all" class="active">все</button><button data-filter="Classical">Classical</button><button data-filter="Epic / early-Classical">Epic / early-Classical</button><button data-filter="Medieval">Medieval</button><button data-filter="Vedic">Vedic</button><button data-filter="unvoted">только непроголосованные</button></div>
 </div>
 <main id="cards">
 
@@ -194,10 +194,10 @@
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Label верен</button>
       <button class="vote reject" data-vote="reject">&#10060; Label неверен</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
-    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="lemma-variant">вариант той же леммы (не ошибка смысла)</option><option value="proper-name">имя собственное, переведённое как нарицательное (или наоборот)</option><option value="partial">переведена только часть значения</option><option value="wrong-sense">не то значение</option><option value="hallucinated">перевода в источнике нет / выдумано</option></select></div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Причина</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="lemma-variant">вариант той же леммы (не ошибка смысла)</option><option value="proper-name">имя собственное, переведённое как нарицательное (или наоборот)</option><option value="partial">переведена только часть значения</option><option value="wrong-sense">не то значение</option><option value="hallucinated">перевода в источнике нет / выдумано</option></select></div>
     <textarea class="note" placeholder="необязательный комментарий к решению"></textarea>
   </section>
 
@@ -208,10 +208,10 @@
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Label верен</button>
       <button class="vote reject" data-vote="reject">&#10060; Label неверен</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
-    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="lemma-variant">вариант той же леммы (не ошибка смысла)</option><option value="proper-name">имя собственное, переведённое как нарицательное (или наоборот)</option><option value="partial">переведена только часть значения</option><option value="wrong-sense">не то значение</option><option value="hallucinated">перевода в источнике нет / выдумано</option></select></div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Причина</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="lemma-variant">вариант той же леммы (не ошибка смысла)</option><option value="proper-name">имя собственное, переведённое как нарицательное (или наоборот)</option><option value="partial">переведена только часть значения</option><option value="wrong-sense">не то значение</option><option value="hallucinated">перевода в источнике нет / выдумано</option></select></div>
     <textarea class="note" placeholder="необязательный комментарий к решению"></textarea>
   </section>
 
@@ -222,10 +222,10 @@
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Label верен</button>
       <button class="vote reject" data-vote="reject">&#10060; Label неверен</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
-    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="lemma-variant">вариант той же леммы (не ошибка смысла)</option><option value="proper-name">имя собственное, переведённое как нарицательное (или наоборот)</option><option value="partial">переведена только часть значения</option><option value="wrong-sense">не то значение</option><option value="hallucinated">перевода в источнике нет / выдумано</option></select></div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Причина</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="lemma-variant">вариант той же леммы (не ошибка смысла)</option><option value="proper-name">имя собственное, переведённое как нарицательное (или наоборот)</option><option value="partial">переведена только часть значения</option><option value="wrong-sense">не то значение</option><option value="hallucinated">перевода в источнике нет / выдумано</option></select></div>
     <textarea class="note" placeholder="необязательный комментарий к решению"></textarea>
   </section>
 
@@ -236,10 +236,10 @@
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Label верен</button>
       <button class="vote reject" data-vote="reject">&#10060; Label неверен</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
-    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="lemma-variant">вариант той же леммы (не ошибка смысла)</option><option value="proper-name">имя собственное, переведённое как нарицательное (или наоборот)</option><option value="partial">переведена только часть значения</option><option value="wrong-sense">не то значение</option><option value="hallucinated">перевода в источнике нет / выдумано</option></select></div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Причина</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="lemma-variant">вариант той же леммы (не ошибка смысла)</option><option value="proper-name">имя собственное, переведённое как нарицательное (или наоборот)</option><option value="partial">переведена только часть значения</option><option value="wrong-sense">не то значение</option><option value="hallucinated">перевода в источнике нет / выдумано</option></select></div>
     <textarea class="note" placeholder="необязательный комментарий к решению"></textarea>
   </section>
 
@@ -250,10 +250,10 @@
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Label верен</button>
       <button class="vote reject" data-vote="reject">&#10060; Label неверен</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
-    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="lemma-variant">вариант той же леммы (не ошибка смысла)</option><option value="proper-name">имя собственное, переведённое как нарицательное (или наоборот)</option><option value="partial">переведена только часть значения</option><option value="wrong-sense">не то значение</option><option value="hallucinated">перевода в источнике нет / выдумано</option></select></div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Причина</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="lemma-variant">вариант той же леммы (не ошибка смысла)</option><option value="proper-name">имя собственное, переведённое как нарицательное (или наоборот)</option><option value="partial">переведена только часть значения</option><option value="wrong-sense">не то значение</option><option value="hallucinated">перевода в источнике нет / выдумано</option></select></div>
     <textarea class="note" placeholder="необязательный комментарий к решению"></textarea>
   </section>
 
@@ -264,10 +264,10 @@
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Label верен</button>
       <button class="vote reject" data-vote="reject">&#10060; Label неверен</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
-    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="lemma-variant">вариант той же леммы (не ошибка смысла)</option><option value="proper-name">имя собственное, переведённое как нарицательное (или наоборот)</option><option value="partial">переведена только часть значения</option><option value="wrong-sense">не то значение</option><option value="hallucinated">перевода в источнике нет / выдумано</option></select></div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Причина</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="lemma-variant">вариант той же леммы (не ошибка смысла)</option><option value="proper-name">имя собственное, переведённое как нарицательное (или наоборот)</option><option value="partial">переведена только часть значения</option><option value="wrong-sense">не то значение</option><option value="hallucinated">перевода в источнике нет / выдумано</option></select></div>
     <textarea class="note" placeholder="необязательный комментарий к решению"></textarea>
   </section>
 
@@ -278,10 +278,10 @@
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Label верен</button>
       <button class="vote reject" data-vote="reject">&#10060; Label неверен</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
-    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="lemma-variant">вариант той же леммы (не ошибка смысла)</option><option value="proper-name">имя собственное, переведённое как нарицательное (или наоборот)</option><option value="partial">переведена только часть значения</option><option value="wrong-sense">не то значение</option><option value="hallucinated">перевода в источнике нет / выдумано</option></select></div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Причина</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="lemma-variant">вариант той же леммы (не ошибка смысла)</option><option value="proper-name">имя собственное, переведённое как нарицательное (или наоборот)</option><option value="partial">переведена только часть значения</option><option value="wrong-sense">не то значение</option><option value="hallucinated">перевода в источнике нет / выдумано</option></select></div>
     <textarea class="note" placeholder="необязательный комментарий к решению"></textarea>
   </section>
 
@@ -292,10 +292,10 @@
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Label верен</button>
       <button class="vote reject" data-vote="reject">&#10060; Label неверен</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
-    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="lemma-variant">вариант той же леммы (не ошибка смысла)</option><option value="proper-name">имя собственное, переведённое как нарицательное (или наоборот)</option><option value="partial">переведена только часть значения</option><option value="wrong-sense">не то значение</option><option value="hallucinated">перевода в источнике нет / выдумано</option></select></div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Причина</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="lemma-variant">вариант той же леммы (не ошибка смысла)</option><option value="proper-name">имя собственное, переведённое как нарицательное (или наоборот)</option><option value="partial">переведена только часть значения</option><option value="wrong-sense">не то значение</option><option value="hallucinated">перевода в источнике нет / выдумано</option></select></div>
     <textarea class="note" placeholder="необязательный комментарий к решению"></textarea>
   </section>
 
@@ -306,10 +306,10 @@
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Label верен</button>
       <button class="vote reject" data-vote="reject">&#10060; Label неверен</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
-    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="lemma-variant">вариант той же леммы (не ошибка смысла)</option><option value="proper-name">имя собственное, переведённое как нарицательное (или наоборот)</option><option value="partial">переведена только часть значения</option><option value="wrong-sense">не то значение</option><option value="hallucinated">перевода в источнике нет / выдумано</option></select></div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Причина</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="lemma-variant">вариант той же леммы (не ошибка смысла)</option><option value="proper-name">имя собственное, переведённое как нарицательное (или наоборот)</option><option value="partial">переведена только часть значения</option><option value="wrong-sense">не то значение</option><option value="hallucinated">перевода в источнике нет / выдумано</option></select></div>
     <textarea class="note" placeholder="необязательный комментарий к решению"></textarea>
   </section>
 
@@ -320,28 +320,21 @@
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Label верен</button>
       <button class="vote reject" data-vote="reject">&#10060; Label неверен</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
-    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Reason</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="lemma-variant">вариант той же леммы (не ошибка смысла)</option><option value="proper-name">имя собственное, переведённое как нарицательное (или наоборот)</option><option value="partial">переведена только часть значения</option><option value="wrong-sense">не то значение</option><option value="hallucinated">перевода в источнике нет / выдумано</option></select></div>
+    <div class="rejectlabelrow" style="display:none;margin-top:8px"><span class="rejectlabellabel" style="font-size:12px;color:var(--muted);margin-right:6px">Причина</span><select class="reject-label-select" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:6px 8px;font-size:13px"><option value="">— select —</option><option value="lemma-variant">вариант той же леммы (не ошибка смысла)</option><option value="proper-name">имя собственное, переведённое как нарицательное (или наоборот)</option><option value="partial">переведена только часть значения</option><option value="wrong-sense">не то значение</option><option value="hallucinated">перевода в источнике нет / выдумано</option></select></div>
     <textarea class="note" placeholder="необязательный комментарий к решению"></textarea>
   </section>
 </main>
 <div class="votebar" id="voteBar"><span class="spacer"></span></div>
-<footer class="hint">Approve = ярлык LLM верен · Reject = неверен (выберите правильный ярлык из списка) · Defer = на адjudication. Экспорт валидируется против review/locks/h215-gold-full-320-2026-08-14.lock.json. Keyboard: <kbd>a</kbd> Label верен &middot; <kbd>r</kbd> Label неверен
-  &middot; <kbd>d</kbd> defer &middot; <kbd>&darr;</kbd>/<kbd>&uarr;</kbd> next/prev. Votes autosave to
-  this browser's localStorage; click "Download decisions.json" when done (unvoted items export with
-  decision:null).</footer>
-<div class="legend" style="max-width:980px;margin:0 auto 20px;padding:0 20px;color:var(--muted);font-size:12px">
-  <b>Approve</b> = accept the proposed change/answer shown on the card (no separate "approve as-is" —
-  approving means agreeing as written). <b>Reject</b> = keep the current entry/answer unchanged.
-  <b>Defer</b> = not sure yet, decide later. The note field is for requesting a partial tweak instead
-  of an outright reject.
+<footer class="hint">Approve = ярлык LLM верен · Reject = неверен (выберите правильный ярлык из списка) · Defer = на адjudication. Экспорт валидируется против review/locks/h215-gold-full-320-2026-08-14.lock.json. Клавиши: <kbd>a</kbd> одобрить &middot; <kbd>r</kbd> отклонить &middot; <kbd>d</kbd> отложить &middot; <kbd>&darr;</kbd>/<kbd>&uarr;</kbd> дальше/назад. Голоса сохраняются автоматически в localStorage браузера; нажмите «Скачать decisions.json», когда закончите (непроголосованные пункты экспортируются с decision:null).</footer>
+<div class="legend" style="max-width:980px;margin:0 auto 20px;padding:0 20px;color:var(--muted);font-size:12px"><b>Одобрить</b> — принять предложенное изменение/ответ на карточке как есть (нет отдельного «одобрить как есть» — одобрение значит согласие с написанным). <b>Отклонить</b> — оставить текущую запись/ответ без изменений. <b>Отложить</b> — пока не уверен(а), решить позже. Поле заметки — для запроса частичной правки вместо полного отклонения.
 </div>
 <script>
 (function () {
   var SHEET_ID = "h215-gold-full-320-2026-08-14";
-  var CONTENT_HASH = "sha256:0af200c041de9fa213aab99858a2dd118dc048c503306e1952e0200070edf806";
+  var CONTENT_HASH = "sha256:2a93b194b8d4130c8a964360d08b02791a46e4426f226b61ecd0083702ba74af";
   var STORE_KEY = 'review-sheet:' + SHEET_ID;
   var GENERATED = "2026-08-14";
   var ids = ["317", "309", "314", "312", "315", "307", "295", "306", "318", "319"];
@@ -601,7 +594,7 @@
   window.addEventListener('beforeunload', __timeFlush);
   __timeShow();
 
-  var HANDIN_SAID = 'handed in {n} of {total} — clock stopped, the rest stay saved in this browser';
+  var HANDIN_SAID = 'сдано {n} из {total} — таймер остановлен, остальное сохранено в этом браузере';
   var __handinBtn = document.getElementById('handinBtn');
   var __handinSaid = document.getElementById('handinSaid');
 
@@ -640,16 +633,16 @@
 
   // --- V15 session flow (H2887) ---------------------------------------------
   var FLOW_IDLE_SECONDS = 90;
-  var FLOW_ETA = 'about {minutes} min left';
-  var FLOW_ETA_ROUGH = 'about {minutes} min left (rough)';
-  var FLOW_CLOCK_RUNNING = 'running';
-  var FLOW_CLOCK_PAUSED = 'paused';
-  var FLOW_CLOCK_IDLE = 'idle';
-  var FLOW_PROGRESS = 'decided {n} of {total}';
-  var FLOW_UNDO_SAID = 'undo: {id} back to {decision}';
-  var FLOW_UNDO_EMPTY = 'nothing to undo';
-  var FLOW_UNDO_NONE = 'no decision';
-  var FLOW_RESUMED = 'resumed at card {n} of {total}';
+  var FLOW_ETA = 'осталось ≈{minutes} мин';
+  var FLOW_ETA_ROUGH = 'осталось ≈{minutes} мин (оценка грубая)';
+  var FLOW_CLOCK_RUNNING = 'идут';
+  var FLOW_CLOCK_PAUSED = 'пауза';
+  var FLOW_CLOCK_IDLE = 'простой';
+  var FLOW_PROGRESS = 'решено {n} из {total}';
+  var FLOW_UNDO_SAID = 'отменено: {id} → {decision}';
+  var FLOW_UNDO_EMPTY = 'отменять нечего';
+  var FLOW_UNDO_NONE = 'решения не было';
+  var FLOW_RESUMED = 'продолжили с карточки {n} из {total}';
   var __flowToast = document.getElementById('flowToast');
   var __flowToastTimer = null;
   function __flowSay(text) {
@@ -843,12 +836,12 @@
 
   var INBOX = {"repo": "gasyoun/vote-inbox", "branch": "", "client_id": "Ov23lifQmcuDYuTw0ZWv", "device_url": "https://kosha.193.232.229.92.sslip.io/gh-device", "pack": 32, "pack_name": "32", "packs": 32, "enabled": true};
   var CARD_Q = {"317": "Верен ли ярлык LLM «correct» для этого перевода? (reject → выберите правильный ярлык из списка ниже)", "309": "Верен ли ярлык LLM «correct» для этого перевода? (reject → выберите правильный ярлык из списка ниже)", "314": "Верен ли ярлык LLM «correct» для этого перевода? (reject → выберите правильный ярлык из списка ниже)", "312": "Верен ли ярлык LLM «correct» для этого перевода? (reject → выберите правильный ярлык из списка ниже)", "315": "Верен ли ярлык LLM «wrong-sense» для этого перевода? (reject → выберите правильный ярлык из списка ниже)", "307": "Верен ли ярлык LLM «partial» для этого перевода? (reject → выберите правильный ярлык из списка ниже)", "295": "Верен ли ярлык LLM «wrong-sense» для этого перевода? (reject → выберите правильный ярлык из списка ниже)", "306": "Верен ли ярлык LLM «correct» для этого перевода? (reject → выберите правильный ярлык из списка ниже)", "318": "Верен ли ярлык LLM «correct» для этого перевода? (reject → выберите правильный ярлык из списка ниже)", "319": "Верен ли ярлык LLM «correct» для этого перевода? (reject → выберите правильный ярлык из списка ниже)"};
-  var INBOX_PULLING = 'pulling votes from GitHub…';
-  var INBOX_HYDRATED = 'pulled {n} vote(s) from GitHub';
-  var INBOX_SAVED = 'saved pack {pack} to GitHub';
-  var INBOX_DISABLED = 'no OAuth client_id / device relay configured — use Download decisions.json';
-  var INBOX_CODE = 'open {url} and enter code {code}';
-  var INBOX_FAILED = 'GitHub save failed: {why}';
+  var INBOX_PULLING = 'подтягиваю голоса…';
+  var INBOX_HYDRATED = 'подтянуто {n} голос(ов) с GitHub';
+  var INBOX_SAVED = 'пакет {pack} сохранён в GitHub';
+  var INBOX_DISABLED = 'нет OAuth client_id / релея device-flow — используйте «Скачать decisions.json»';
+  var INBOX_CODE = 'откройте {url} и введите код {code}';
+  var INBOX_FAILED = 'сохранить в GitHub не удалось: {why}';
   var __inboxBtn = document.getElementById('inboxBtn');
   var __inboxNote = document.getElementById('inboxNote');
   function __inboxSay(msg) { if (__inboxNote) __inboxNote.textContent = msg; }
@@ -999,10 +992,10 @@
   __inboxHydrate();
 
   var VOTE_TOTAL = 320;
-  var VOTE_PROGRESS = '{n} of {total} across the whole sheet';
-  var VOTE_ETA = 'about {minutes} min left for all {total}';
-  var VOTE_ETA_ROUGH = 'about {minutes} min left for all {total} (rough)';
-  var VOTE_DONE = 'all {total} decided';
+  var VOTE_PROGRESS = '{n} из {total} по всему листу';
+  var VOTE_ETA = '≈{minutes} мин на все {total}';
+  var VOTE_ETA_ROUGH = '≈{minutes} мин на все {total} (оценка грубая)';
+  var VOTE_DONE = 'все {total} решены';
   (function () {
     var bar = document.getElementById('voteBar');
     if (!bar) return;
