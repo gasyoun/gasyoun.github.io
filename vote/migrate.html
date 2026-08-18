@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Перенос голосов в пакеты — vote hub</title>
+<style>
+  :root { color-scheme: dark;
+    --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --text:#e6e6e6; --muted:#9aa0aa;
+    --accent:#5b8cff; --ok:#3fb950; --warn:#d29922; --bad:#f85149; --border:#2a2f3a; }
+  * { box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); margin:0; padding:0 0 80px;
+    font:16px/1.55 -apple-system,Segoe UI,Roboto,sans-serif; }
+  .wrap { max-width:1100px; margin:0 auto; padding:0 20px; }
+  header { border-bottom:1px solid var(--border); background:var(--panel); padding:28px 0 22px; margin-bottom:28px; }
+  h1 { margin:0 0 6px; font-size:26px; letter-spacing:-.01em; }
+  h2 { font-size:17px; margin:0 0 10px; }
+  .sub { color:var(--muted); font-size:14px; margin:0; }
+  .card { background:var(--panel); border:1px solid var(--border); border-radius:10px;
+    padding:16px 18px; margin:0 0 16px; }
+  .card p { margin:0 0 8px; }
+  .card p:last-child { margin-bottom:0; }
+  code { background:var(--panel2); padding:2px 6px; border-radius:4px; font-size:13px; }
+  a { color:var(--accent); text-decoration:none; }
+  a:hover { text-decoration:underline; }
+  .muted { color:var(--muted); }
+  .sheet { border:1px solid var(--border); border-radius:10px; padding:14px 16px; margin:0 0 14px;
+    background:var(--panel2); }
+  .sheet.migrated { opacity:.55; }
+  .sheet h3 { margin:0 0 4px; font-size:15px; }
+  .meta { color:var(--muted); font-size:13px; margin:0 0 10px; }
+  .packs { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 10px; }
+  .pack-btn, .btn { display:inline-block; padding:6px 12px; border-radius:6px; background:var(--panel);
+    border:1px solid var(--border); color:var(--text); font-size:13px; cursor:pointer; }
+  .pack-btn:hover, .btn:hover { border-color:var(--accent); color:var(--accent); }
+  .btn.primary { background:var(--accent); color:#0b0e14; font-weight:600; border-color:var(--accent); }
+  .btn.primary:hover { filter:brightness(1.1); color:#0b0e14; }
+  .btn.confirm { background:var(--ok); color:#0b0e14; font-weight:600; border-color:var(--ok); }
+  .btn.confirm:hover { filter:brightness(1.1); color:#0b0e14; }
+  .empty { color:var(--muted); padding:24px 0; text-align:center; }
+  footer { margin-top:44px; padding-top:18px; border-top:1px solid var(--border);
+    color:var(--muted); font-size:13px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>Перенос голосов в пакеты</h1>
+    <p class="sub">Читает <code>localStorage</code> ЭТОГО браузера на origin <code>gasyoun.github.io</code>,
+      находит все ключи <code>review-sheet:*</code> и режет накопленные голоса на пакеты по 10 —
+      формат <a href="https://github.com/gasyoun/vote-inbox/blob/master/schema/decisions-pack.schema.json">decisions-pack.schema.json</a>.
+      Каждая кнопка скачивает готовый <code>pack-NN.json</code>; закинуть файлы в клон
+      <code>gasyoun/vote-inbox</code> под <code>decisions/&lt;sheet_id&gt;/</code> — ручной шаг
+      до появления device-flow «Сохранить в GitHub» (трек B).</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+<div class="card">
+  <p><strong>Что эта страница НЕ видит</strong> (не баг — свойство браузерного
+    <code>localStorage</code>, у каждого origin своё хранилище):</p>
+  <p>— листы, открытые как <code>file:///…</code> (localStorage привязан к origin
+    <code>file://</code>, странице на <code>https://gasyoun.github.io</code> он недоступен);</p>
+  <p>— листы на другом хосте (например vote-private) — тот же принцип same-origin.</p>
+  <p class="muted">Для таких листов — старый путь: скачать <code>decisions.json</code> прямо с
+    самого листа и передать агенту как раньше.</p>
+</div>
+
+<div id="sheets"></div>
+
+<div id="empty" class="empty" style="display:none">Ключей <code>review-sheet:*</code> в этом браузере
+  не найдено на этом origin.</div>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    H2990 Track A step A3 (перенос без ожидания device-flow трека B).
+    Схема пакета: <a href="https://github.com/gasyoun/vote-inbox/blob/master/schema/decisions-pack.schema.json">vote-inbox/schema/decisions-pack.schema.json</a>.
+  </div>
+</footer>
+
+<script>
+(function () {
+  var PREFIX = 'review-sheet:';
+  var MIGRATED_PREFIX = 'review-sheet-migrated:';
+  var PACK_SIZE = 10;
+
+  function htmlEscape(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function todayDDMMYYYY() {
+    var d = new Date();
+    function pad(n) { return n < 10 ? '0' + n : '' + n; }
+    return pad(d.getDate()) + '-' + pad(d.getMonth() + 1) + '-' + d.getFullYear();
+  }
+
+  function clampNote(note) {
+    note = (note || '').replace(/</g, '');
+    if (note.length > 280) note = note.slice(0, 280);
+    return note;
+  }
+
+  function findSheets() {
+    var sheets = [];
+    for (var i = 0; i < localStorage.length; i++) {
+      var key = localStorage.key(i);
+      if (key.indexOf(PREFIX) !== 0) continue;
+      var sheetId = key.slice(PREFIX.length);
+      var state;
+      try { state = JSON.parse(localStorage.getItem(key) || '{}') || {}; } catch (e) { continue; }
+      var ids = Object.keys(state).sort();
+      if (!ids.length) continue;
+      var items = ids.map(function (id) {
+        var rec = state[id] || {};
+        return { id: id, decision: rec.decision || null, reject_label: null, note: clampNote(rec.note) };
+      });
+      var decided = items.filter(function (it) { return it.decision; }).length;
+      var migrated = localStorage.getItem(MIGRATED_PREFIX + sheetId) === '1';
+      sheets.push({ sheetId: sheetId, items: items, decided: decided, migrated: migrated });
+    }
+    return sheets;
+  }
+
+  function buildPacks(items) {
+    var packs = [];
+    for (var i = 0; i < items.length; i += PACK_SIZE) {
+      packs.push(items.slice(i, i + PACK_SIZE));
+    }
+    return packs;
+  }
+
+  function downloadJSON(filename, obj) {
+    var blob = new Blob([JSON.stringify(obj, null, 2)], { type: 'application/json' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
+  }
+
+  function packPayload(sheetId, packNum, packSize, items) {
+    return {
+      sheet_id: sheetId,
+      pack: packNum,
+      pack_size: packSize,
+      generated: todayDDMMYYYY(),
+      decided: items.filter(function (it) { return it.decision; }).length,
+      items: items,
+    };
+  }
+
+  function render() {
+    var sheets = findSheets();
+    var container = document.getElementById('sheets');
+    var empty = document.getElementById('empty');
+    container.innerHTML = '';
+    if (!sheets.length) { empty.style.display = 'block'; return; }
+    empty.style.display = 'none';
+
+    sheets.forEach(function (sheet) {
+      var packs = buildPacks(sheet.items);
+      var div = document.createElement('div');
+      div.className = 'sheet' + (sheet.migrated ? ' migrated' : '');
+
+      var html = '<h3>' + htmlEscape(sheet.sheetId) + '</h3>'
+        + '<p class="meta">' + sheet.items.length + ' карточек в этом браузере · '
+        + sheet.decided + ' решено · ' + packs.length + ' пакет(ов) по ' + PACK_SIZE
+        + (sheet.migrated ? ' · <strong>отмечено перенесённым</strong>' : '') + '</p>'
+        + '<div class="packs">';
+
+      packs.forEach(function (_, idx) {
+        html += '<button class="pack-btn" data-sheet="' + htmlEscape(sheet.sheetId) + '" data-pack="' + idx + '">'
+          + 'pack-' + String(idx + 1).padStart(2, '0') + '.json (' + packs[idx].length + ')</button>';
+      });
+
+      html += '</div>'
+        + '<button class="btn primary" data-all="' + htmlEscape(sheet.sheetId) + '">Скачать все пакеты</button> '
+        + '<button class="btn confirm" data-confirm="' + htmlEscape(sheet.sheetId) + '">Подтвердить перенос</button>';
+
+      div.innerHTML = html;
+      container.appendChild(div);
+
+      div.querySelectorAll('.pack-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var idx = parseInt(btn.getAttribute('data-pack'), 10);
+          var p = packs[idx];
+          downloadJSON('pack-' + String(idx + 1).padStart(2, '0') + '.json',
+            packPayload(sheet.sheetId, idx + 1, PACK_SIZE, p));
+        });
+      });
+
+      div.querySelector('[data-all]').addEventListener('click', function () {
+        packs.forEach(function (p, idx) {
+          downloadJSON('pack-' + String(idx + 1).padStart(2, '0') + '.json',
+            packPayload(sheet.sheetId, idx + 1, PACK_SIZE, p));
+        });
+      });
+
+      div.querySelector('[data-confirm]').addEventListener('click', function () {
+        localStorage.setItem(MIGRATED_PREFIX + sheet.sheetId, '1');
+        render();
+      });
+    });
+  }
+
+  render();
+})();
+</script>
+</body>
+</html>
