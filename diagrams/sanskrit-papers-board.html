@@ -29,6 +29,11 @@
     svg a:hover rect.chip { stroke: #eb6c36; stroke-width: 1.5; }
     svg a:hover text { fill: #eb6c36; }
     a.repo-link { color: var(--color-link); }
+    .drafts { background: #fff; border: 1px solid var(--color-rule); border-radius: 8px; padding: 1.1rem 1.25rem; margin-top: 1rem; }
+    .drafts .eyebrow { font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-muted); margin-bottom: 0.65rem; }
+    .dgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(64px, 1fr)); gap: 6px; }
+    a.dchip { font-family: var(--font-mono); font-size: 0.68rem; text-align: center; padding: 0.32rem 0; border: 1px solid rgba(45,49,66,0.16); border-radius: 5px; color: var(--color-muted); text-decoration: none; }
+    a.dchip:hover { border-color: #eb6c36; color: #eb6c36; }
     .cards { display: grid; grid-template-columns: 1.1fr 1fr 0.9fr; gap: 1rem; margin-top: 1.5rem; }
     @media (max-width: 820px) { .cards { grid-template-columns: 1fr; } }
     .card { background: #fff; border-radius: 6px; border: 1px solid var(--color-rule); padding: 1.25rem; }
@@ -172,6 +177,87 @@
       </svg>
     </div>
 
+    <div class="drafts">
+      <p class="eyebrow">
+        <span class="l-en">Draft index · every paper's manuscript or registry entry — hover for the target file</span>
+        <span class="l-ru">Индекс черновиков · рукопись или запись реестра каждой статьи — наведите, чтобы увидеть файл</span>
+      </p>
+      <div class="dgrid">
+        <a class="dchip" href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>ARTICLES.md &#8599;</title>A01</a>
+        <a class="dchip" href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>ARTICLES.md &#8599;</title>A02</a>
+        <a class="dchip" href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>ARTICLES.md &#8599;</title>A03</a>
+        <a class="dchip" href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>ARTICLES.md &#8599;</title>A04</a>
+        <a class="dchip" href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>ARTICLES.md &#8599;</title>A05</a>
+        <a class="dchip" href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>ARTICLES.md &#8599;</title>A06</a>
+        <a class="dchip" href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>ARTICLES.md &#8599;</title>A07</a>
+        <a class="dchip" href="https://github.com/sanskrit-lexicon/csl-atlas/blob/main/docs/articles/SIGNOFF_A08_author_pass.md" target="_blank" rel="noopener"><title>SIGNOFF_A08_author_pass.md &#8599;</title>A08</a>
+        <a class="dchip" href="https://github.com/sanskrit-lexicon/csl-atlas/blob/main/docs/PAPER_SENSE_ALIGNMENT.md" target="_blank" rel="noopener"><title>PAPER_SENSE_ALIGNMENT.md &#8599;</title>A09</a>
+        <a class="dchip" href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>ARTICLES.md &#8599;</title>A10</a>
+        <a class="dchip" href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>ARTICLES.md &#8599;</title>A11</a>
+        <a class="dchip" href="https://github.com/sanskrit-lexicon/csl-observatory/blob/main/paper-obs-t-error-typology.md" target="_blank" rel="noopener"><title>paper-obs-t-error-typology.md &#8599;</title>A12</a>
+        <a class="dchip" href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>ARTICLES.md &#8599;</title>A13</a>
+        <a class="dchip" href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>ARTICLES.md &#8599;</title>A14</a>
+        <a class="dchip" href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>ARTICLES.md &#8599;</title>A15</a>
+        <a class="dchip" href="https://github.com/sanskrit-lexicon/MWS/blob/docs-pass/papers/microanalysis/SIGNOFF_A16_citation_dossier.md" target="_blank" rel="noopener"><title>SIGNOFF_A16_citation_dossier.md &#8599;</title>A16</a>
+        <a class="dchip" href="https://github.com/sanskrit-lexicon/MWS/blob/docs-pass/papers/microanalysis/DOUBTS.md" target="_blank" rel="noopener"><title>DOUBTS.md &#8599;</title>A17</a>
+        <a class="dchip" href="https://github.com/sanskrit-lexicon/MWS/blob/master/papers/p3_citation_registers/A18_citation_registers_paper.md" target="_blank" rel="noopener"><title>A18_citation_registers_paper.md &#8599;</title>A18</a>
+        <a class="dchip" href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/EVAL_RESULTS.md" target="_blank" rel="noopener"><title>EVAL_RESULTS.md &#8599;</title>A19</a>
+        <a class="dchip" href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>ARTICLES.md &#8599;</title>A20</a>
+        <a class="dchip" href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>ARTICLES.md &#8599;</title>A21</a>
+        <a class="dchip" href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>ARTICLES.md &#8599;</title>A22</a>
+        <a class="dchip" href="https://github.com/gasyoun/Uprava/blob/main/docs/PORTFOLIO_STATISTICAL_REDTEAM_2026H2.md" target="_blank" rel="noopener"><title>PORTFOLIO_STATISTICAL_REDTEAM_2026H2.md &#8599;</title>A23</a>
+        <a class="dchip" href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>ARTICLES.md &#8599;</title>A24</a>
+        <a class="dchip" href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>ARTICLES.md &#8599;</title>A25</a>
+        <a class="dchip" href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>ARTICLES.md &#8599;</title>A26</a>
+        <a class="dchip" href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>ARTICLES.md &#8599;</title>A27</a>
+        <a class="dchip" href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>ARTICLES.md &#8599;</title>A28</a>
+        <a class="dchip" href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>ARTICLES.md &#8599;</title>A29</a>
+        <a class="dchip" href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>ARTICLES.md &#8599;</title>A30</a>
+        <a class="dchip" href="https://github.com/gasyoun/Uprava/blob/main/docs/PROTOCOL_BLIND_LLM_SECOND_ANNOTATOR_RELIABILITY_2026.md" target="_blank" rel="noopener"><title>PROTOCOL_BLIND_LLM_SECOND_ANNOTATOR_RELIABILITY_2026.md &#8599;</title>A31</a>
+        <a class="dchip" href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>ARTICLES.md &#8599;</title>A32</a>
+        <a class="dchip" href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>ARTICLES.md &#8599;</title>A33</a>
+        <a class="dchip" href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>ARTICLES.md &#8599;</title>A34</a>
+        <a class="dchip" href="https://github.com/sanskrit-lexicon/csl-orig/blob/main/v02/etymology_stats/PAPER_DRAFT.md" target="_blank" rel="noopener"><title>PAPER_DRAFT.md &#8599;</title>A35</a>
+        <a class="dchip" href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>ARTICLES.md &#8599;</title>A36</a>
+        <a class="dchip" href="https://github.com/drdhaval2785/SanskritSpellCheck/blob/master/papers/A37_lchange_companion.md" target="_blank" rel="noopener"><title>A37_lchange_companion.md &#8599;</title>A37</a>
+        <a class="dchip" href="https://github.com/gasyoun/SanskritLexicography/blob/master/FINDINGS.md" target="_blank" rel="noopener"><title>FINDINGS.md &#8599;</title>A38</a>
+        <a class="dchip" href="https://github.com/sanskrit-lexicon/MWS/blob/master/papers/A39_verbal_roots_disagreement_paper.md" target="_blank" rel="noopener"><title>A39_verbal_roots_disagreement_paper.md &#8599;</title>A39</a>
+        <a class="dchip" href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>ARTICLES.md &#8599;</title>A40</a>
+        <a class="dchip" href="https://github.com/gasyoun/SamudraManthanam/blob/main/papers/data/A41_DATA_STATEMENT_SAMUDRA_SA_RU_CORPUS.meta.md" target="_blank" rel="noopener"><title>A41_DATA_STATEMENT_SAMUDRA_SA_RU_CORPUS.meta.md &#8599;</title>A41</a>
+        <a class="dchip" href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>ARTICLES.md &#8599;</title>A42</a>
+        <a class="dchip" href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>ARTICLES.md &#8599;</title>A43</a>
+        <a class="dchip" href="https://github.com/drdhaval2785/SanskritSpellCheck/blob/master/papers/SIGNOFF_A44_author_pass.md" target="_blank" rel="noopener"><title>SIGNOFF_A44_author_pass.md &#8599;</title>A44</a>
+        <a class="dchip" href="https://github.com/sanskrit-lexicon/MWS/blob/master/papers/SIGNOFF_A45_author_pass.md" target="_blank" rel="noopener"><title>SIGNOFF_A45_author_pass.md &#8599;</title>A45</a>
+        <a class="dchip" href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>ARTICLES.md &#8599;</title>A46</a>
+        <a class="dchip" href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>ARTICLES.md &#8599;</title>A47</a>
+        <a class="dchip" href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>ARTICLES.md &#8599;</title>A48</a>
+        <a class="dchip" href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>ARTICLES.md &#8599;</title>A49</a>
+        <a class="dchip" href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>ARTICLES.md &#8599;</title>A50</a>
+        <a class="dchip" href="https://github.com/gasyoun/SanskritLexicography/blob/master/RussianTranslation/pwg_ru/A51_METHODS_DRAFT_DE_LAYERS_RU_PIPELINE.md" target="_blank" rel="noopener"><title>A51_METHODS_DRAFT_DE_LAYERS_RU_PIPELINE.md &#8599;</title>A51</a>
+        <a class="dchip" href="https://github.com/gasyoun/SanskritLexicography/blob/master/RussianTranslation/LAUNCH_STATS.md" target="_blank" rel="noopener"><title>LAUNCH_STATS.md &#8599;</title>A52</a>
+        <a class="dchip" href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>ARTICLES.md &#8599;</title>A53</a>
+        <a class="dchip" href="https://github.com/gasyoun/SanskritGrammar/blob/main/IIL_ZALIZNIAK_ALTERNATIONS_ARTICLE_2027.md" target="_blank" rel="noopener"><title>IIL_ZALIZNIAK_ALTERNATIONS_ARTICLE_2027.md &#8599;</title>A54</a>
+        <a class="dchip" href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>ARTICLES.md &#8599;</title>A55</a>
+        <a class="dchip" href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>ARTICLES.md &#8599;</title>A56</a>
+        <a class="dchip" href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H973-OxAlpha_VisualDCS_sanskrit-lsc-pilot_15.07.26.md" target="_blank" rel="noopener"><title>H973-OxAlpha_VisualDCS_sanskrit-lsc-pilot_15.07.26.md &#8599;</title>A57</a>
+        <a class="dchip" href="https://github.com/gasyoun/SanskritLexicography/blob/master/papers/A58_semdom_amarakosha_crosswalk_paper.md" target="_blank" rel="noopener"><title>A58_semdom_amarakosha_crosswalk_paper.md &#8599;</title>A58</a>
+        <a class="dchip" href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>ARTICLES.md &#8599;</title>A59</a>
+        <a class="dchip" href="https://github.com/gasyoun/SanskritGrammar/blob/main/TolchelnikovTalmud_2026/papers/GrammarClaimsCorpusDenies_A60/DRAFT_grammar-claims-corpus-denies_A60.md" target="_blank" rel="noopener"><title>DRAFT_grammar-claims-corpus-denies_A60.md &#8599;</title>A60</a>
+        <a class="dchip" href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H1284-Fable_SanskritGrammar_a61-signoff-ruling-roadmap-compare_19.07.26.md" target="_blank" rel="noopener"><title>H1284-Fable_SanskritGrammar_a61-signoff-ruling-roadmap-compare_19.07.26.md &#8599;</title>A61</a>
+        <a class="dchip" href="https://github.com/gasyoun/SanskritGrammar/blob/main/TolchelnikovTalmud_2026/papers/DigitalPedagogyAgenda_A62/OUTLINE_digital-sanskrit-pedagogy-agenda_A62.md" target="_blank" rel="noopener"><title>OUTLINE_digital-sanskrit-pedagogy-agenda_A62.md &#8599;</title>A62</a>
+        <a class="dchip" href="https://github.com/gasyoun/SanskritGrammar/blob/main/TolchelnikovTalmud_2026/papers/DifficultyOrdering_A63/OUTLINE_difficulty-ordering_A63.md" target="_blank" rel="noopener"><title>OUTLINE_difficulty-ordering_A63.md &#8599;</title>A63</a>
+        <a class="dchip" href="https://github.com/gasyoun/SanskritGrammar/blob/main/TolchelnikovTalmud_2026/papers/CompoundTypeKappa_A64/DRAFT_compound-type-kappa_A64.md" target="_blank" rel="noopener"><title>DRAFT_compound-type-kappa_A64.md &#8599;</title>A64</a>
+        <a class="dchip" href="https://github.com/gasyoun/SanskritGrammar/blob/main/REPORT_GRAMMAR_CLAIM_VERIFICATION_SYNTHESIS_2026.md" target="_blank" rel="noopener"><title>REPORT_GRAMMAR_CLAIM_VERIFICATION_SYNTHESIS_2026.md &#8599;</title>A65</a>
+        <a class="dchip" href="https://github.com/gasyoun/Uprava/blob/main/REVIEW_SHEETS_INDEX.md" target="_blank" rel="noopener"><title>REVIEW_SHEETS_INDEX.md &#8599;</title>A66</a>
+        <a class="dchip" href="https://github.com/gasyoun/SanskritLexicography/blob/master/papers/A67_negative_results_adjudication_table.md" target="_blank" rel="noopener"><title>A67_negative_results_adjudication_table.md &#8599;</title>A67</a>
+        <a class="dchip" href="https://github.com/sanskrit-lexicon/csl-atlas/blob/main/papers/A68_DCS_REPRESENTATIVENESS_PD_CANON.md" target="_blank" rel="noopener"><title>A68_DCS_REPRESENTATIVENESS_PD_CANON.md &#8599;</title>A68</a>
+        <a class="dchip" href="https://github.com/sanskrit-lexicon/csl-observatory/blob/main/article/A69_pwg_scan_index_campaign.md" target="_blank" rel="noopener"><title>A69_pwg_scan_index_campaign.md &#8599;</title>A69</a>
+        <a class="dchip" href="https://github.com/gasyoun/SanskritLexicography/blob/master/Digital_Sanskrit_Lexicography-BOOK/SIGNOFF_M01_glue_framing_calls.md" target="_blank" rel="noopener"><title>SIGNOFF_M01_glue_framing_calls.md &#8599;</title>M01</a>
+        <a class="dchip" href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>ARTICLES.md &#8599;</title>M02</a>
+        <a class="dchip" href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>ARTICLES.md &#8599;</title>M03</a>
+      </div>
+    </div>
+
     <div class="cards">
       <div class="card">
         <p class="eyebrow"><span class="l-en">THE HEADLINE</span><span class="l-ru">ГЛАВНОЕ</span></p>
@@ -188,7 +274,7 @@
         <ul>
           <li><span class="l-en">Columns follow the n/5 ladder defined in ARTICLES.md</span><span class="l-ru">Колонки — лестница n/5 из ARTICLES.md</span></li>
           <li><span class="l-en">Chips group each column's papers by repo; ×N = paper count</span><span class="l-ru">Чипы группируют статьи колонки по репо; &#215;N — число статей</span></li>
-          <li><span class="l-en">Every chip opens its repo; IDs live in the registry</span><span class="l-ru">Каждый чип открывает репо; ID живут в реестре</span></li>
+          <li><span class="l-en">Every chip opens its repo; the draft index below the board links each paper's manuscript</span><span class="l-ru">Каждый чип открывает репо; индекс черновиков под доской ведёт к рукописи каждой статьи</span></li>
           <li><span class="l-en">Coral column = ready to submit today</span><span class="l-ru">Коралловая колонка = можно подавать сегодня</span></li>
         </ul>
       </div>
