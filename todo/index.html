@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Todo · Mac OpenCode migration runbook</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #faf9f7; --fg: #22211f; --muted: #6d6862;
+    --card: #ffffff; --line: #e4e1dc; --accent: #0b66c3;
+    --code-bg: #f2f0ec; --ok: #1a7f37; --warn-bg: #fff7e0; --warn-line: #e0c96a;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #17181a; --fg: #e8e6e3; --muted: #9a958e;
+      --card: #1f2124; --line: #33363a; --accent: #5aa7ec;
+      --code-bg: #26282c; --ok: #4cc272; --warn-bg: #2e2916; --warn-line: #8a7a35;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0 auto; padding: 24px 16px 64px; max-width: 880px;
+    background: var(--bg); color: var(--fg);
+    font: 16px/1.55 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  h1 { font-size: 1.7rem; margin: 0 0 2px; letter-spacing: -0.01em; }
+  h2 { font-size: 1.18rem; margin: 34px 0 10px; padding-bottom: 6px; border-bottom: 1px solid var(--line); }
+  h3 { font-size: 1rem; margin: 22px 0 6px; }
+  .sub { color: var(--muted); margin: 0 0 6px; font-size: 1.02rem; }
+  .meta { color: var(--muted); font-size: 0.85rem; margin: 0; }
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+    padding: 14px 16px; margin: 14px 0;
+  }
+  table { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
+  th, td { border: 1px solid var(--line); padding: 6px 8px; text-align: left; vertical-align: top; }
+  th { background: var(--code-bg); }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.85em; background: var(--code-bg); padding: 1px 5px; border-radius: 4px; }
+  pre {
+    background: var(--code-bg); border: 1px solid var(--line); border-radius: 8px;
+    padding: 10px 12px; overflow-x: auto; font-size: 0.84rem; line-height: 1.45;
+  }
+  pre code { background: none; padding: 0; }
+  ol.steps { list-style: none; margin: 10px 0; padding: 0; }
+  ol.steps > li { margin: 0 0 12px; padding-left: 30px; position: relative; }
+  ol.steps > li::before { content: ""; position: absolute; left: 0; top: 3px; width: 17px; height: 17px;
+    border: 2px solid var(--muted); border-radius: 4px; cursor: pointer; }
+  ol.steps > li.done::before { background: var(--ok); border-color: var(--ok);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='white' stroke-width='2.5' d='M3 8.5l3.5 3.5L13 4.5'/%3E%3C/svg%3E"); background-size: 15px 15px; background-repeat: no-repeat; background-position: center; }
+  ol.steps > li.done > .step-text { color: var(--muted); text-decoration: line-through; text-decoration-color: color-mix(in srgb, var(--muted) 55%, transparent); }
+  ol.steps > li > input.ckbox { position: absolute; left: -3px; top: 0; width: 25px; height: 25px; opacity: 0; margin: 0; cursor: pointer; }
+  .step-text { cursor: pointer; }
+  .step-body { margin-top: 6px; }
+  .tag { display: inline-block; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.04em;
+    padding: 2px 7px; border-radius: 99px; vertical-align: 2px; margin-left: 6px; }
+  .tag.mac { background: color-mix(in srgb, #7a5af8 18%, transparent); color: #6a48f0; }
+  .tag.win { background: color-mix(in srgb, #0b8bd9 18%, transparent); color: #0b7dc2; }
+  @media (prefers-color-scheme: dark) { .tag.mac { color: #a78bff; } .tag.win { color: #6db8ef; } }
+  .ph { color: var(--accent); font-weight: 600; }
+  .warnbox { background: var(--warn-bg); border: 1px solid var(--warn-line); border-radius: 10px; padding: 12px 16px; margin: 16px 0; }
+  .warnbox ul { margin: 8px 0 0; padding-left: 20px; }
+  .params label { display: inline-flex; align-items: center; gap: 8px; margin-right: 18px; }
+  .params input[type=text] {
+    font: inherit; padding: 5px 9px; border: 1px solid var(--line); border-radius: 7px;
+    background: var(--bg); color: var(--fg); min-width: 180px;
+  }
+  .progress { font-weight: 600; }
+  .progressbar { height: 7px; background: var(--code-bg); border-radius: 99px; overflow: hidden; margin-top: 8px; }
+  .progressbar i { display: block; height: 100%; width: 0; background: var(--ok); transition: width .25s ease; }
+  .hint { color: var(--muted); font-size: 0.83rem; margin: 8px 0 0; }
+  footer { margin-top: 44px; color: var(--muted); font-size: 0.82rem; border-top: 1px solid var(--line); padding-top: 12px; }
+</style>
+</head>
+<body>
+
+<h1>Todo — Mac migration runbook</h1>
+<p class="sub">OpenCode + all skills + GitHub, Windows&nbsp;→&nbsp;macOS parity</p>
+<p class="meta">Created 22-08-2026 · Dr. Mārcis Gasūns · durable checklist — ticks and fields persist in this browser (localStorage)</p>
+
+<div class="card params">
+  <strong>Machine parameters</strong> — fill once, substituted everywhere below.
+  <div style="margin-top:8px">
+    <label>macOS username <input type="text" id="p-user" autocomplete="off" spellcheck="false"></label>
+    <label>Mac hostname <input type="text" id="p-host" autocomplete="off" spellcheck="false"></label>
+  </div>
+  <p class="hint">Find them in Terminal: <code>whoami</code> and <code>scutil --get LocalHostName</code>. Empty fields show the <span class="ph">&lt;placeholder&gt;</span> defaults.</p>
+</div>
+
+<div class="card">
+  <span class="progress">Progress: <span id="done-count">0</span>/<span id="total-count">0</span> steps</span>
+  <div class="progressbar"><i id="bar"></i></div>
+</div>
+
+<h2>Inventory — what moves where</h2>
+<div class="card">
+<table>
+<tr><th>Component</th><th>Windows source</th><th>Mac destination</th><th>Method</th></tr>
+<tr><td>OpenCode binary</td><td>—</td><td><code>~/.opencode/bin</code></td><td>fresh native installer (curl)</td></tr>
+<tr><td>OpenCode global config</td><td><code>C:\Users\user\.config\opencode\</code> (AGENTS.md, opencode.jsonc, package.json, command/, tools/)</td><td><code>~/.config/opencode/</code></td><td>scp (no node_modules) + path rewrite + npm install</td></tr>
+<tr><td>Model logins</td><td><code>C:\Users\user\.local\share\opencode\auth.json</code>, <code>account.json</code></td><td><code>~/.local/share/opencode/</code></td><td>scp</td></tr>
+<tr><td>Claude skills (86)</td><td><code>C:\Users\user\.claude</code> = git <em>gasyoun/claude-config</em> (private)</td><td><code>~/.claude</code></td><td><code>gh repo clone</code></td></tr>
+<tr><td>Codex skills</td><td><code>C:\Users\user\.codex</code> = git <em>gasyoun/codex-config</em> (private)</td><td><code>~/.codex</code></td><td><code>gh repo clone</code></td></tr>
+<tr><td>Agents skills (34)</td><td><code>C:\Users\user\.agents</code> (not git-backed)</td><td><code>~/.agents</code></td><td>scp −r</td></tr>
+<tr><td>Grok CLI skills + login</td><td><code>C:\Users\user\.grok\{skills,rules,agents,workflows}</code>, <code>auth.json</code>, <code>config.toml</code></td><td><code>~/.grok/</code></td><td>scp + fresh grok-cli installer</td></tr>
+<tr><td>GitHub auth</td><td><code>gh</code> keyring token (HTTPS)</td><td>—</td><td>fresh <code>gh auth login</code></td></tr>
+<tr><td>SSH keys + prod trust</td><td><code>C:\Users\user\.ssh\</code> (id_ed25519, ors-faq-deploy, known_hosts)</td><td><code>~/.ssh/</code></td><td>scp + chmod fix</td></tr>
+<tr><td>Secrets</td><td><code>C:\Users\user\.secrets\</code></td><td><code>~/.secrets/</code></td><td>scp (LAN only)</td></tr>
+<tr><td>Repos (~85, Uprava first)</td><td><code>C:\Users\user\Documents\GitHub\</code></td><td><code>~/Documents/GitHub/</code></td><td><code>gh repo clone</code> + hooksPath</td></tr>
+</table>
+</div>
+
+<h2>Phase 0 — Mac prep <span class="tag mac">[MAC]</span></h2>
+<ol class="steps">
+<li><span class="step-text">Open <strong>Terminal</strong> (Cmd+Space → “Terminal” → Enter). Verify Homebrew actually finished:</span>
+<div class="step-body"><pre><code>brew --version</code></pre>
+<p class="hint">If “command not found”: quit Terminal fully (Cmd+Q), reopen, retry once. Still missing → rerun the Homebrew installer script and let it finish completely (it asks for your Mac password midway).</p></div></li>
+
+<li><span class="step-text">Install base tools (pwsh keeps your setup byte-compatible — your opencode config says <code>shell: pwsh</code>):</span>
+<div class="step-body"><pre><code>brew install git gh node python@3.12 ripgrep jq powershell</code></pre></div></li>
+
+<li><span class="step-text">Create target directories for incoming files:</span>
+<div class="step-body"><pre><code>mkdir -p ~/.config/opencode ~/.grok ~/.local/share/opencode ~/.agents ~/.ssh ~/.secrets ~/Documents/GitHub</code></pre></div></li>
+
+<li><span class="step-text">Note your identity for the network transfer:</span>
+<div class="step-body"><pre><code>whoami                          # macOS username
+scutil --get LocalHostName      # Mac hostname</code></pre>
+<p class="hint">Put both into the “Machine parameters” card above.</p></div></li>
+
+<li><span class="step-text">Enable the SSH server: <strong>System Settings → General → Sharing → turn ON “Remote Login”</strong> (allow your user). This is the Mac’s one-toggle equivalent of installing OpenSSH Server on Windows.</span></li>
+</ol>
+
+<h2>Phase 1 — File push over LAN <span class="tag win">[WINDOWS]</span></h2>
+<p>Run from Windows PowerShell. First contact asks to trust the host fingerprint → answer <code>yes</code>, then enter your Mac login password when asked.</p>
+<ol class="steps">
+<li><span class="step-text">Test connectivity:</span>
+<div class="step-body"><pre><code>ssh <span class="ph" data-ph="user">&lt;macuser&gt;</span>@<span class="ph" data-ph="host">&lt;machost&gt;.local</span> "echo ok"</code></pre></div></li>
+
+<li><span class="step-text">Push the non-git skill trees (Grok CLI also reads <code>~/.agents/skills</code>):</span>
+<div class="step-body"><pre><code>scp -r C:\Users\user\.agents <span class="ph" data-ph="user">&lt;macuser&gt;</span>@<span class="ph" data-ph="host">&lt;machost&gt;.local</span>:.agents</code></pre></div></li>
+
+<li><span class="step-text">Push SSH keys + known_hosts (keeps prod hosts trusted):</span>
+<div class="step-body"><pre><code>scp -r C:\Users\user\.ssh <span class="ph" data-ph="user">&lt;macuser&gt;</span>@<span class="ph" data-ph="host">&lt;machost&gt;.local</span>:.ssh</code></pre></div></li>
+
+<li><span class="step-text">Push secrets (LAN only — never through any repo, cloud drive, or email):</span>
+<div class="step-body"><pre><code>scp -r C:\Users\user\.secrets <span class="ph" data-ph="user">&lt;macuser&gt;</span>@<span class="ph" data-ph="host">&lt;machost&gt;.local</span>:.secrets</code></pre></div></li>
+
+<li><span class="step-text">Push OpenCode global config files (node_modules deliberately excluded):</span>
+<div class="step-body"><pre><code>scp C:\Users\user\.config\opencode\AGENTS.md C:\Users\user\.config\opencode\package.json C:\Users\user\.config\opencode\package-lock.json C:\Users\user\.config\opencode\opencode.jsonc <span class="ph" data-ph="user">&lt;macuser&gt;</span>@<span class="ph" data-ph="host">&lt;machost&gt;.local</span>:.config/opencode/
+scp -r C:\Users\user\.config\opencode\command C:\Users\user\.config\opencode\tools <span class="ph" data-ph="user">&lt;macuser&gt;</span>@<span class="ph" data-ph="host">&lt;machost&gt;.local</span>:.config/opencode/</code></pre></div></li>
+
+<li><span class="step-text">Push Grok portable parts:</span>
+<div class="step-body"><pre><code>scp -r C:\Users\user\.grok\skills C:\Users\user\.grok\rules C:\Users\user\.grok\agents C:\Users\user\.grok\workflows <span class="ph" data-ph="user">&lt;macuser&gt;</span>@<span class="ph" data-ph="host">&lt;machost&gt;.local</span>:.grok/
+scp C:\Users\user\.grok\auth.json C:\Users\user\.grok\config.toml <span class="ph" data-ph="user">&lt;macuser&gt;</span>@<span class="ph" data-ph="host">&lt;machost&gt;.local</span>:.grok/</code></pre></div></li>
+
+<li><span class="step-text">Push OpenCode model logins (so no re-login is needed):</span>
+<div class="step-body"><pre><code>scp C:\Users\user\.local\share\opencode\auth.json C:\Users\user\.local\share\opencode\account.json <span class="ph" data-ph="user">&lt;macuser&gt;</span>@<span class="ph" data-ph="host">&lt;machost&gt;.local</span>:.local/share/opencode/</code></pre>
+<p class="hint">If OpenCode still asks for a model login afterwards, run <code>/login</code> inside it.</p></div></li>
+</ol>
+
+<h2>Phase 2 — Assemble on Mac <span class="tag mac">[MAC]</span></h2>
+<ol class="steps">
+<li><span class="step-text">Fix SSH key permissions — macOS <strong>refuses</strong> world-readable private keys:</span>
+<div class="step-body"><pre><code>chmod 700 ~/.ssh
+chmod 600 ~/.ssh/id_ed25519 ~/.ssh/ors-faq-deploy
+chmod 644 ~/.ssh/*.pub ~/.ssh/known_hosts</code></pre></div></li>
+
+<li><span class="step-text">Rewrite the six hardcoded Windows paths in the OpenCode config (<code>C:/Users/user</code> → your home):</span>
+<div class="step-body"><pre><code>sed -i '' "s|C:/Users/user|$HOME|g" ~/.config/opencode/opencode.jsonc
+cat ~/.config/opencode/opencode.jsonc   # eyeball: no C:/ left, shell stays pwsh</code></pre></div></li>
+
+<li><span class="step-text">Rebuild the OpenCode plugin dependencies:</span>
+<div class="step-body"><pre><code>cd ~/.config/opencode &amp;&amp; npm install</code></pre></div></li>
+
+<li><span class="step-text">Install OpenCode natively:</span>
+<div class="step-body"><pre><code>curl -fsSL https://opencode.ai/install | bash</code></pre></div></li>
+
+<li><span class="step-text">Install Grok CLI natively (superagent-ai/grok-cli — same product as on Windows, v1.0.5 there):</span>
+<div class="step-body"><pre><code>curl -fsSL https://raw.githubusercontent.com/superagent-ai/grok-cli/main/install.sh | bash</code></pre></div></li>
+
+<li><span class="step-text">Authenticate GitHub (browser device flow) and wire git credentials:</span>
+<div class="step-body"><pre><code>gh auth login        # pick: GitHub.com → HTTPS → "Login with a web browser"
+gh auth setup-git</code></pre></div></li>
+
+<li><span class="step-text">Set git identity — copy the exact values from Windows first (<code>git config --global user.name</code> / <code>user.email</code>), then:</span>
+<div class="step-body"><pre><code>git config --global user.name "&lt;same as Windows&gt;"
+git config --global user.email "&lt;same as Windows&gt;"</code></pre></div></li>
+
+<li><span class="step-text">Clone the two private config repos straight into place:</span>
+<div class="step-body"><pre><code>gh repo clone gasyoun/claude-config ~/.claude   # 86 skills + rules
+gh repo clone gasyoun/codex-config ~/.codex</code></pre></div></li>
+
+<li><span class="step-text">Clone the working repos (Uprava hub first) and enable its commit guard:</span>
+<div class="step-body"><pre><code>gh repo clone gasyoun/Uprava ~/Documents/GitHub/Uprava
+cd ~/Documents/GitHub/Uprava &amp;&amp; git config core.hooksPath .githooks</code></pre>
+<p class="hint">Clone further repos as needed into <code>~/Documents/GitHub/</code>; set <code>core.hooksPath .githooks</code> wherever the guard applies.</p></div></li>
+</ol>
+
+<h2>Phase 3 — Verify <span class="tag mac">[MAC]</span></h2>
+<ol class="steps">
+<li><span class="step-text">Toolchain versions all print cleanly:</span>
+<div class="step-body"><pre><code>opencode --version &amp;&amp; grok --version &amp;&amp; pwsh -v</code></pre></div></li>
+
+<li><span class="step-text">Skill counts match this machine:</span>
+<div class="step-body"><pre><code>ls ~/.claude/skills | wc -l    # expect ~86
+ls ~/.agents/skills | wc -l    # expect ~34</code></pre></div></li>
+
+<li><span class="step-text">GitHub auth resolves to gasyoun over HTTPS:</span>
+<div class="step-body"><pre><code>gh auth status</code></pre></div></li>
+
+<li><span class="step-text">Smoke test in the real workspace — skill list should mirror Windows (~120 across the four dirs), then run one command:</span>
+<div class="step-body"><pre><code>cd ~/Documents/GitHub/Uprava &amp;&amp; opencode    # check skills load, run next-task</code></pre></div></li>
+</ol>
+
+<div class="warnbox">
+<strong>Security rules (non-negotiable)</strong>
+<ul>
+<li><code>.secrets</code>, SSH keys, and every <code>auth.json</code> travel by LAN scp <em>only</em> — never through any git repo, cloud drive, messenger, or backup sync.</li>
+<li>Never sync or publish <code>~/.worktree-attic</code> (holds real payloads incl. .env files).</li>
+<li>SSH keys must be chmod 600 on macOS or ssh refuses them silently-looking.</li>
+<li>All Uprava safety rules carry over automatically — they are repo/git-level, not OS-level: worktree-first off origin/main, never commit in the shared main tree, <code>git fetch</code> before handoffs, attic never synced.</li>
+<li>Optional cleanup after migration: turn “Remote Login” back off in System Settings.</li>
+</ul>
+</div>
+
+<h2>Log</h2>
+<div class="card">
+<table>
+<tr><th>Date</th><th>Entry</th></tr>
+<tr><td>22-08-2026</td><td>Runbook published (Windows side inventoried: claude-config/codex-config are git-backed, .agents ×34 not, grok-cli = superagent-ai/grok-cli v1.0.5, Windows has OpenSSH client 9.5p1).</td></tr>
+</table>
+</div>
+
+<footer>Durable doc · https://gasyoun.github.io/todo/ · ticks persist per-browser via localStorage · source: gasyoun/gasyoun.github.io <code>todo/index.html</code> (branch master)</footer>
+
+<script>
+(function () {
+  var KEY = 'todo-mac-runbook-v1';
+  var st = {};
+  try { st = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { st = {}; }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} }
+
+  // one invisible real checkbox per step li, overlaid on the CSS-drawn box
+  var cbs = [];
+  Array.prototype.forEach.call(document.querySelectorAll('ol.steps > li'), function (li) {
+    var id = 's' + cbs.length;
+    var cb = document.createElement('input');
+    cb.type = 'checkbox';
+    cb.className = 'ckbox';
+    cb.setAttribute('data-id', id);
+    cb.checked = !!st['c:' + id];
+    li.insertBefore(cb, li.firstChild);
+    cbs.push(cb);
+    cb.addEventListener('change', function () {
+      st['c:' + id] = cb.checked;
+      save(); refresh();
+    });
+  });
+
+  ['user', 'host'].forEach(function (k) {
+    var el = document.getElementById('p-' + k);
+    if (!el) return;
+    el.value = st['p:' + k] || '';
+    el.addEventListener('input', function () { st['p:' + k] = el.value; save(); applyPh(); });
+  });
+
+  function applyPh() {
+    var uEl = document.getElementById('p-user'), hEl = document.getElementById('p-host');
+    var u = (uEl && uEl.value.trim()) || '';
+    var h = (hEl && hEl.value.trim()) || '';
+    Array.prototype.forEach.call(document.querySelectorAll('[data-ph]'), function (s) {
+      var k = s.getAttribute('data-ph');
+      if (k === 'user') s.textContent = u || '<macuser>';
+      if (k === 'host') s.textContent = h ? h + '.local' : '<machost>.local';
+    });
+  }
+
+  function refresh() {
+    var n = cbs.filter(function (c) { return c.checked; }).length;
+    var dc = document.getElementById('done-count');
+    var tc = document.getElementById('total-count');
+    var bar = document.getElementById('bar');
+    if (dc) dc.textContent = n;
+    if (tc) tc.textContent = cbs.length;
+    if (bar) bar.style.width = (cbs.length ? Math.round(100 * n / cbs.length) : 0) + '%';
+    cbs.forEach(function (cb) {
+      var li = cb.closest('li');
+      if (li) li.classList.toggle('done', cb.checked);
+    });
+  }
+
+  // clicking the step text also toggles
+  Array.prototype.forEach.call(document.querySelectorAll('.step-text'), function (t) {
+    t.addEventListener('click', function () {
+      var li = t.closest('li');
+      var cb = li && li.querySelector('input.ckbox');
+      if (cb) { cb.checked = !cb.checked; st['c:' + cb.getAttribute('data-id')] = cb.checked; save(); refresh(); }
+    });
+  });
+
+  applyPh(); refresh();
+})();
+</script>
+
+</body>
+</html>
