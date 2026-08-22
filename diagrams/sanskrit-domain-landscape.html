@@ -35,28 +35,28 @@
     .card h3 { font-size: 0.875rem; font-weight: 600; }
     .card p, .card ul { color: var(--color-muted); font-size: 0.8125rem; line-height: 1.55; list-style: none; }
     .card li { margin-bottom: 0.3rem; padding-left: 0.875rem; position: relative; }
-    .card li::before { content: 'тАФ'; position: absolute; left: 0; color: rgba(45,49,66,0.25); font-size: 0.75rem; }
+    .card li::before { content: '—'; position: absolute; left: 0; color: rgba(45,49,66,0.25); font-size: 0.75rem; }
     .footer { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(45,49,66,0.10); font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.06em; color: var(--color-soft); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
-      <div class="lang-toggle" role="group" aria-label="Language / ╨п╨╖╤Л╨║">
+      <div class="lang-toggle" role="group" aria-label="Language / Язык">
         <button id="btn-en" class="active" type="button">EN</button>
-        <button id="btn-ru" type="button">╨а╨г</button>
+        <button id="btn-ru" type="button">РУ</button>
       </div>
       <p class="header-eyebrow">
-        <span class="l-en">Domain Landscape ┬╖ Diagram Design ┬╖ Round 1 of 7</span>
-        <span class="l-ru">╨Ы╨░╨╜╨┤╤И╨░╤Д╤В ╨┤╨╛╨╝╨╡╨╜╨╛╨▓ ┬╖ Diagram Design ┬╖ ╨а╨░╤Г╨╜╨┤ 1 ╨╕╨╖ 7</span>
+        <span class="l-en">Domain Landscape · Diagram Design · Round 1 of 7</span>
+        <span class="l-ru">Ландшафт доменов · Diagram Design · Раунд 1 из 7</span>
       </p>
       <h1>
         <span class="l-en">The Sanskrit Work Landscape</span>
-        <span class="l-ru">╨Ы╨░╨╜╨┤╤И╨░╤Д╤В ╤Б╨░╨╜╤Б╨║╤А╨╕╤В╤Б╨║╨╕╤Е ╤А╨░╨▒╨╛╤В</span>
+        <span class="l-ru">Ландшафт санскритских работ</span>
       </h1>
       <p class="subtitle">
-        <span class="l-en">Eight domains of the Sanskrit programme as it stands on 22-08-2026 тАФ dictionaries, derived data, corpora, grammar and pedagogy, translation, publications, products, tooling. One canonical source feeds everything else.</span>
-        <span class="l-ru">╨Т╨╛╤Б╨╡╨╝╤М ╨┤╨╛╨╝╨╡╨╜╨╛╨▓ ╤Б╨░╨╜╤Б╨║╤А╨╕╤В╤Б╨║╨╛╨╣ ╨┐╤А╨╛╨│╤А╨░╨╝╨╝╤Л ╨╜╨░ 22-08-2026 тАФ ╤Б╨╗╨╛╨▓╨░╤А╨╕, ╨┐╤А╨╛╨╕╨╖╨▓╨╛╨┤╨╜╤Л╨╡ ╨┤╨░╨╜╨╜╤Л╨╡, ╨║╨╛╤А╨┐╤Г╤Б╨░, ╨│╤А╨░╨╝╨╝╨░╤В╨╕╨║╨░ ╨╕ ╨┐╨╡╨┤╨░╨│╨╛╨│╨╕╨║╨░, ╨┐╨╡╤А╨╡╨▓╨╛╨┤, ╨┐╤Г╨▒╨╗╨╕╨║╨░╤Ж╨╕╨╕, ╨┐╤А╨╛╨┤╤Г╨║╤В╤Л, ╨╕╨╜╤Б╤В╤А╤Г╨╝╨╡╨╜╤В╨░╤А╨╕╨╣. ╨Ю╨┤╨╕╨╜ ╨║╨░╨╜╨╛╨╜╨╕╤З╨╡╤Б╨║╨╕╨╣ ╨╕╤Б╤В╨╛╤З╨╜╨╕╨║ ╨┐╨╕╤В╨░╨╡╤В ╨▓╤Б╤С ╨╛╤Б╤В╨░╨╗╤М╨╜╨╛╨╡.</span>
+        <span class="l-en">Eight domains of the Sanskrit programme as it stands on 22-08-2026 — dictionaries, derived data, corpora, grammar and pedagogy, translation, publications, products, tooling. One canonical source feeds everything else.</span>
+        <span class="l-ru">Восемь доменов санскритской программы на 22-08-2026 — словари, производные данные, корпуса, грамматика и педагогика, перевод, публикации, продукты, инструментарий. Один канонический источник питает всё остальное.</span>
       </p>
     </div>
 
@@ -76,70 +76,70 @@
         <!-- Outer programme ring -->
         <rect x="30" y="70" width="1340" height="680" rx="8" fill="rgba(45,49,66,0.015)" stroke="rgba(45,49,66,0.30)" stroke-width="1"/>
         <rect x="46" y="62" width="320" height="16" fill="#ececec"/>
-        <text x="54" y="74" class="l-en" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">THE SANSKRIT PROGRAMME ┬╖ ~85 REPOS</text>
-        <text x="54" y="74" class="l-ru" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">╨б╨Р╨Э╨б╨Ъ╨а╨Ш╨в╨б╨Ъ╨Р╨п ╨Я╨а╨Ю╨У╨а╨Р╨Ь╨Ь╨Р ┬╖ ~85 ╨а╨Х╨Я╨Ю╨Ч╨Ш╨в╨Ю╨а╨Ш╨Х╨Т</text>
+        <text x="54" y="74" class="l-en" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">THE SANSKRIT PROGRAMME · ~85 REPOS</text>
+        <text x="54" y="74" class="l-ru" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">САНСКРИТСКАЯ ПРОГРАММА · ~85 РЕПОЗИТОРИЕВ</text>
 
         <!-- Annotation -->
         <text x="1370" y="44" class="l-en" fill="#2d3142" font-size="15" font-style="italic" font-family="'Instrument Serif', serif" text-anchor="end">one canonical source feeds every orbit</text>
-        <text x="1370" y="44" class="l-ru" fill="#2d3142" font-size="15" font-style="italic" font-family="'Instrument Serif', serif" text-anchor="end">╨╛╨┤╨╕╨╜ ╨║╨░╨╜╨╛╨╜╨╕╤З╨╡╤Б╨║╨╕╨╣ ╨╕╤Б╤В╨╛╤З╨╜╨╕╨║ ╨┐╨╕╤В╨░╨╡╤В ╨▓╤Б╨╡ ╨╛╤А╨▒╨╕╤В╤Л</text>
+        <text x="1370" y="44" class="l-ru" fill="#2d3142" font-size="15" font-style="italic" font-family="'Instrument Serif', serif" text-anchor="end">один канонический источник питает все орбиты</text>
         <path d="M 1250 52 Q 760 68 372 126" fill="none" stroke="rgba(45,49,66,0.40)" stroke-width="1" stroke-dasharray="4,3"/>
         <circle cx="372" cy="126" r="2" fill="#2d3142"/>
 
         <!-- Row 1 -->
 
-        <!-- 1 ┬╖ CDSL dictionary spine тАФ focal -->
+        <!-- 1 · CDSL dictionary spine — focal -->
         <rect x="64" y="120" width="300" height="280" rx="8" fill="rgba(235,108,54,0.06)" stroke="#eb6c36" stroke-width="1"/>
         <rect x="78" y="112" width="205" height="16" fill="#ececec"/>
         <text x="84" y="123" class="l-en" fill="#eb6c36" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em" font-weight="600">CDSL DICTIONARY SPINE</text>
-        <text x="84" y="123" class="l-ru" fill="#eb6c36" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em" font-weight="600">CDSL ┬╖ ╨б╨Ы╨Ю╨Т╨Р╨а╨Э╨л╨Щ ╨е╨а╨Х╨С╨Х╨в</text>
+        <text x="84" y="123" class="l-ru" fill="#eb6c36" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em" font-weight="600">CDSL · СЛОВАРНЫЙ ХРЕБЕТ</text>
         <text x="80" y="156" class="l-en" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', sans-serif">Dictionary spine</text>
-        <text x="80" y="156" class="l-ru" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', sans-serif">╨б╨╗╨╛╨▓╨░╤А╨╜╤Л╨╣ ╤Е╤А╨╡╨▒╨╡╤В</text>
+        <text x="80" y="156" class="l-ru" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', sans-serif">Словарный хребет</text>
         <line x1="80" y1="170" x2="348" y2="170" stroke="rgba(45,49,66,0.08)"/>
         <rect x="82" y="189.5" width="5" height="5" fill="#2d3142"/>
-        <text x="96" y="196" fill="#2d3142" font-size="9" font-weight="600" font-family="'Geist Mono', monospace">csl-orig <tspan fill="#7a8399" font-weight="400" class="l-en">тАФ canonical source</tspan><tspan fill="#7a8399" font-weight="400" class="l-ru">тАФ ╨║╨░╨╜╨╛╨╜╨╕╤З╨╡╤Б╨║╨╕╨╣ ╨╕╤Б╤В╨╛╤З╨╜╨╕╨║</tspan></text>
+        <text x="96" y="196" fill="#2d3142" font-size="9" font-weight="600" font-family="'Geist Mono', monospace">csl-orig <tspan fill="#7a8399" font-weight="400" class="l-en">— canonical source</tspan><tspan fill="#7a8399" font-weight="400" class="l-ru">— канонический источник</tspan></text>
         <rect x="82" y="215.5" width="5" height="5" fill="#7a8399"/>
-        <text x="96" y="222" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">csl-pywork <tspan fill="#7a8399" class="l-en">тАФ correction pipeline</tspan><tspan fill="#7a8399" class="l-ru">тАФ ╨║╨╛╨╜╨▓╨╡╨╣╨╡╤А ╨┐╤А╨░╨▓╨╛╨║</tspan></text>
+        <text x="96" y="222" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">csl-pywork <tspan fill="#7a8399" class="l-en">— correction pipeline</tspan><tspan fill="#7a8399" class="l-ru">— конвейер правок</tspan></text>
         <rect x="82" y="241.5" width="5" height="5" fill="#7a8399"/>
-        <text x="96" y="248" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">csl-corrections <tspan fill="#7a8399" class="l-en">тАФ audit trail</tspan><tspan fill="#7a8399" class="l-ru">тАФ ╨░╤Г╨┤╨╕╤В ╨┐╤А╨░╨▓╨╛╨║</tspan></text>
+        <text x="96" y="248" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">csl-corrections <tspan fill="#7a8399" class="l-en">— audit trail</tspan><tspan fill="#7a8399" class="l-ru">— аудит правок</tspan></text>
         <rect x="82" y="267.5" width="5" height="5" fill="#7a8399"/>
-        <text x="96" y="274" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">CORRECTIONS <tspan fill="#7a8399" class="l-en">тАФ change files</tspan><tspan fill="#7a8399" class="l-ru">тАФ ╤Д╨░╨╣╨╗╤Л ╨┐╤А╨░╨▓╨╛╨║</tspan></text>
+        <text x="96" y="274" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">CORRECTIONS <tspan fill="#7a8399" class="l-en">— change files</tspan><tspan fill="#7a8399" class="l-ru">— файлы правок</tspan></text>
         <rect x="82" y="293.5" width="5" height="5" fill="#7a8399"/>
-        <text x="96" y="300" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">csl-websanlexicon <tspan fill="#7a8399" class="l-en">тАФ web UI</tspan><tspan fill="#7a8399" class="l-ru">тАФ ╨▓╨╡╨▒-╨╕╨╜╤В╨╡╤А╤Д╨╡╨╣╤Б</tspan></text>
+        <text x="96" y="300" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">csl-websanlexicon <tspan fill="#7a8399" class="l-en">— web UI</tspan><tspan fill="#7a8399" class="l-ru">— веб-интерфейс</tspan></text>
         <rect x="82" y="319.5" width="5" height="5" fill="#7a8399"/>
-        <text x="96" y="326" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">csl-apidev <tspan fill="#7a8399" class="l-en">тАФ search API</tspan><tspan fill="#7a8399" class="l-ru">тАФ ╨┐╨╛╨╕╤Б╨║╨╛╨▓╤Л╨╣ API</tspan></text>
+        <text x="96" y="326" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">csl-apidev <tspan fill="#7a8399" class="l-en">— search API</tspan><tspan fill="#7a8399" class="l-ru">— поисковый API</tspan></text>
         <rect x="236" y="368" width="116" height="20" rx="10" fill="rgba(235,108,54,0.08)" stroke="rgba(235,108,54,0.40)"/>
         <text x="294" y="381" class="l-en" fill="#eb6c36" font-size="7.5" font-family="'Geist Mono', monospace" letter-spacing="0.08em" text-anchor="middle">+43 DIGITIZED DICTS</text>
-        <text x="294" y="381" class="l-ru" fill="#eb6c36" font-size="7.5" font-family="'Geist Mono', monospace" letter-spacing="0.08em" text-anchor="middle">+43 ╨Ю╨ж╨Ш╨д╨а. ╨б╨Ы╨Ю╨Т╨Р╨а╨п</text>
+        <text x="294" y="381" class="l-ru" fill="#eb6c36" font-size="7.5" font-family="'Geist Mono', monospace" letter-spacing="0.08em" text-anchor="middle">+43 ОЦИФР. СЛОВАРЯ</text>
 
-        <!-- 2 ┬╖ Derived lexicographic data -->
+        <!-- 2 · Derived lexicographic data -->
         <rect x="388" y="120" width="300" height="280" rx="8" fill="rgba(45,49,66,0.02)" stroke="rgba(45,49,66,0.35)" stroke-width="1"/>
         <rect x="402" y="112" width="175" height="16" fill="#ececec"/>
         <text x="408" y="123" class="l-en" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">DERIVED LEX DATA</text>
-        <text x="408" y="123" class="l-ru" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">╨Я╨а╨Ю╨Ш╨Ч╨Т╨Ю╨Ф╨Э╨л╨Х ╨Ф╨Р╨Э╨Э╨л╨Х</text>
+        <text x="408" y="123" class="l-ru" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">ПРОИЗВОДНЫЕ ДАННЫЕ</text>
         <text x="404" y="156" class="l-en" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', sans-serif">Derived lexicographic data</text>
-        <text x="404" y="156" class="l-ru" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', sans-serif">╨Я╤А╨╛╨╕╨╖╨▓╨╛╨┤╨╜╤Л╨╡ ╨╗╨╡╨║╤Б╨┤╨░╨╜╨╜╤Л╨╡</text>
+        <text x="404" y="156" class="l-ru" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', sans-serif">Производные лексданные</text>
         <line x1="404" y1="170" x2="672" y2="170" stroke="rgba(45,49,66,0.08)"/>
         <rect x="406" y="189.5" width="5" height="5" fill="#7a8399"/>
-        <text x="420" y="196" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">csl-atlas <tspan fill="#7a8399" class="l-en">тАФ crosswalks &amp; loci</tspan><tspan fill="#7a8399" class="l-ru">тАФ ╨║╤А╨╛╤Б╤Б╨▓╨╛╨║╨╕ ╨╕ ╨╗╨╛╨║╤Г╤Б╤Л</tspan></text>
+        <text x="420" y="196" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">csl-atlas <tspan fill="#7a8399" class="l-en">— crosswalks &amp; loci</tspan><tspan fill="#7a8399" class="l-ru">— кроссвоки и локусы</tspan></text>
         <rect x="406" y="215.5" width="5" height="5" fill="#7a8399"/>
-        <text x="420" y="222" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">kosha <tspan fill="#7a8399" class="l-en">тАФ dataset manifest</tspan><tspan fill="#7a8399" class="l-ru">тАФ ╨╝╨░╨╜╨╕╤Д╨╡╤Б╤В ╨┤╨░╤В╨░╤Б╨╡╤В╨╛╨▓</tspan></text>
+        <text x="420" y="222" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">kosha <tspan fill="#7a8399" class="l-en">— dataset manifest</tspan><tspan fill="#7a8399" class="l-ru">— манифест датасетов</tspan></text>
         <rect x="406" y="241.5" width="5" height="5" fill="#7a8399"/>
-        <text x="420" y="248" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">alternateheadwords <tspan fill="#7a8399" class="l-en">тАФ MW variants</tspan><tspan fill="#7a8399" class="l-ru">тАФ ╨▓╨░╤А╨╕╨░╨╜╤В╤Л MW</tspan></text>
+        <text x="420" y="248" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">alternateheadwords <tspan fill="#7a8399" class="l-en">— MW variants</tspan><tspan fill="#7a8399" class="l-ru">— варианты MW</tspan></text>
         <rect x="406" y="267.5" width="5" height="5" fill="#7a8399"/>
-        <text x="420" y="274" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">csl-observatory <tspan fill="#7a8399" class="l-en">тАФ metrics</tspan><tspan fill="#7a8399" class="l-ru">тАФ ╨╝╨╡╤В╤А╨╕╨║╨╕</tspan></text>
+        <text x="420" y="274" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">csl-observatory <tspan fill="#7a8399" class="l-en">— metrics</tspan><tspan fill="#7a8399" class="l-ru">— метрики</tspan></text>
         <rect x="406" y="293.5" width="5" height="5" fill="#7a8399"/>
-        <text x="420" y="300" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">SanskritLexicography <tspan fill="#7a8399" class="l-en">тАФ hub</tspan><tspan fill="#7a8399" class="l-ru">тАФ ╤Е╨░╨▒</tspan></text>
+        <text x="420" y="300" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">SanskritLexicography <tspan fill="#7a8399" class="l-en">— hub</tspan><tspan fill="#7a8399" class="l-ru">— хаб</tspan></text>
 
-        <!-- 3 ┬╖ Corpora & e-texts -->
+        <!-- 3 · Corpora & e-texts -->
         <rect x="712" y="120" width="300" height="280" rx="8" fill="rgba(45,49,66,0.02)" stroke="rgba(45,49,66,0.35)" stroke-width="1"/>
         <rect x="726" y="112" width="175" height="16" fill="#ececec"/>
         <text x="732" y="123" class="l-en" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">CORPORA &amp; E-TEXTS</text>
-        <text x="732" y="123" class="l-ru" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">╨Ъ╨Ю╨а╨Я╨г╨б╨Р ╨Ш ╨н-╨в╨Х╨Ъ╨б╨в╨л</text>
+        <text x="732" y="123" class="l-ru" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">КОРПУСА И Э-ТЕКСТЫ</text>
         <text x="728" y="156" class="l-en" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', sans-serif">Corpora &amp; e-texts</text>
-        <text x="728" y="156" class="l-ru" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', sans-serif">╨Ъ╨╛╤А╨┐╤Г╤Б╨░ ╨╕ ╤Н-╤В╨╡╨║╤Б╤В╤Л</text>
+        <text x="728" y="156" class="l-ru" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', sans-serif">Корпуса и э-тексты</text>
         <line x1="728" y1="170" x2="996" y2="170" stroke="rgba(45,49,66,0.08)"/>
         <rect x="730" y="189.5" width="5" height="5" fill="#7a8399"/>
-        <text x="744" y="196" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">DCS <tspan fill="#7a8399" class="l-en">тАФ Digital Corpus</tspan><tspan fill="#7a8399" class="l-ru">тАФ ╤Ж╨╕╤Д╤А╨╛╨▓╨╛╨╣ ╨║╨╛╤А╨┐╤Г╤Б</tspan></text>
+        <text x="744" y="196" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">DCS <tspan fill="#7a8399" class="l-en">— Digital Corpus</tspan><tspan fill="#7a8399" class="l-ru">— цифровой корпус</tspan></text>
         <rect x="730" y="215.5" width="5" height="5" fill="#7a8399"/>
         <text x="744" y="222" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">SamudraManthanam <tspan fill="#7a8399">+ rvlinks RV</tspan></text>
         <rect x="730" y="241.5" width="5" height="5" fill="#7a8399"/>
@@ -147,142 +147,142 @@
         <rect x="730" y="267.5" width="5" height="5" fill="#7a8399"/>
         <text x="744" y="274" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">spoken-sanskrit-corpus</text>
         <rect x="730" y="293.5" width="5" height="5" fill="#7a8399"/>
-        <text x="744" y="300" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">dcs-conllu <tspan fill="#7a8399" class="l-en">тАФ treebank</tspan><tspan fill="#7a8399" class="l-ru">тАФ ╤Б╨╕╨╜╤В. ╤А╨░╨╖╨▒╨╛╤А</tspan></text>
+        <text x="744" y="300" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">dcs-conllu <tspan fill="#7a8399" class="l-en">— treebank</tspan><tspan fill="#7a8399" class="l-ru">— синт. разбор</tspan></text>
         <rect x="730" y="319.5" width="5" height="5" fill="#7a8399"/>
         <text x="744" y="326" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">vidyut-data</text>
 
-        <!-- 4 ┬╖ Grammar & pedagogy -->
+        <!-- 4 · Grammar & pedagogy -->
         <rect x="1036" y="120" width="300" height="280" rx="8" fill="rgba(45,49,66,0.02)" stroke="rgba(45,49,66,0.35)" stroke-width="1"/>
         <rect x="1050" y="112" width="215" height="16" fill="#ececec"/>
         <text x="1056" y="123" class="l-en" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">GRAMMAR &amp; PEDAGOGY</text>
-        <text x="1056" y="123" class="l-ru" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">╨У╨а╨Р╨Ь╨Ь╨Р╨в╨Ш╨Ъ╨Р ╨Ш ╨Я╨Х╨Ф╨Р╨У╨Ю╨У╨Ш╨Ъ╨Р</text>
+        <text x="1056" y="123" class="l-ru" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">ГРАММАТИКА И ПЕДАГОГИКА</text>
         <text x="1052" y="156" class="l-en" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', sans-serif">Grammar &amp; pedagogy</text>
-        <text x="1052" y="156" class="l-ru" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', sans-serif">╨У╤А╨░╨╝╨╝╨░╤В╨╕╨║╨░ ╨╕ ╨┐╨╡╨┤╨░╨│╨╛╨│╨╕╨║╨░</text>
+        <text x="1052" y="156" class="l-ru" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', sans-serif">Грамматика и педагогика</text>
         <line x1="1052" y1="170" x2="1320" y2="170" stroke="rgba(45,49,66,0.08)"/>
         <rect x="1054" y="189.5" width="5" height="5" fill="#7a8399"/>
-        <text x="1068" y="196" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">SanskritGrammar <tspan fill="#7a8399" class="l-en">тАФ claims + overlays</tspan><tspan fill="#7a8399" class="l-ru">тАФ ╤В╨╡╨╖╨╕╤Б╤Л + ╨╛╨▓╨╡╤А╨╗╨╡╨╕</tspan></text>
+        <text x="1068" y="196" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">SanskritGrammar <tspan fill="#7a8399" class="l-en">— claims + overlays</tspan><tspan fill="#7a8399" class="l-ru">— тезисы + оверлеи</tspan></text>
         <rect x="1054" y="215.5" width="5" height="5" fill="#7a8399"/>
-        <text x="1068" y="222" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">CommentaryStrategies <tspan fill="#7a8399">тАФ Sundara</tspan></text>
+        <text x="1068" y="222" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">CommentaryStrategies <tspan fill="#7a8399">— Sundara</tspan></text>
         <rect x="1054" y="241.5" width="5" height="5" fill="#7a8399"/>
-        <text x="1068" y="248" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">sangram <tspan fill="#7a8399" class="l-en">тАФ W2 core modules</tspan><tspan fill="#7a8399" class="l-ru">тАФ ╨╝╨╛╨┤╤Г╨╗╨╕ ╤П╨┤╤А╨░ W2</tspan></text>
+        <text x="1068" y="248" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">sangram <tspan fill="#7a8399" class="l-en">— W2 core modules</tspan><tspan fill="#7a8399" class="l-ru">— модули ядра W2</tspan></text>
         <rect x="1054" y="267.5" width="5" height="5" fill="#7a8399"/>
-        <text x="1068" y="274" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">WhitneyRoots <tspan fill="#7a8399" class="l-en">тАФ accents</tspan><tspan fill="#7a8399" class="l-ru">тАФ ╤Г╨┤╨░╤А╨╡╨╜╨╕╤П</tspan></text>
+        <text x="1068" y="274" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">WhitneyRoots <tspan fill="#7a8399" class="l-en">— accents</tspan><tspan fill="#7a8399" class="l-ru">— ударения</tspan></text>
         <rect x="1054" y="293.5" width="5" height="5" fill="#7a8399"/>
-        <text x="1068" y="300" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">ScharfSandhi <tspan fill="#7a8399" class="l-en">тАФ sandhi rules</tspan><tspan fill="#7a8399" class="l-ru">тАФ ╨┐╤А╨░╨▓╨╕╨╗╨░ ╤Б╨░╨╜╨┤╤Е╨╕</tspan></text>
+        <text x="1068" y="300" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">ScharfSandhi <tspan fill="#7a8399" class="l-en">— sandhi rules</tspan><tspan fill="#7a8399" class="l-ru">— правила сандхи</tspan></text>
 
         <!-- Row 2 -->
 
-        <!-- 5 ┬╖ Translation programme -->
+        <!-- 5 · Translation programme -->
         <rect x="64" y="430" width="300" height="280" rx="8" fill="rgba(45,49,66,0.02)" stroke="rgba(45,49,66,0.35)" stroke-width="1"/>
         <rect x="78" y="422" width="195" height="16" fill="#ececec"/>
         <text x="84" y="433" class="l-en" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">TRANSLATION PROGRAMME</text>
-        <text x="84" y="433" class="l-ru" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">╨Я╨а╨Ю╨У╨а╨Р╨Ь╨Ь╨Р ╨Я╨Х╨а╨Х╨Т╨Ю╨Ф╨Р</text>
+        <text x="84" y="433" class="l-ru" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">ПРОГРАММА ПЕРЕВОДА</text>
         <text x="80" y="466" class="l-en" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', sans-serif">PWG&#8594;RU translation</text>
-        <text x="80" y="466" class="l-ru" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', sans-serif">╨Я╨╡╤А╨╡╨▓╨╛╨┤ PWG&#8594;╤А╤Г╤Б╤Б╨║╨╕╨╣</text>
+        <text x="80" y="466" class="l-ru" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', sans-serif">Перевод PWG&#8594;русский</text>
         <line x1="80" y1="480" x2="348" y2="480" stroke="rgba(45,49,66,0.08)"/>
         <rect x="82" y="499.5" width="5" height="5" fill="#7a8399"/>
-        <text x="96" y="506" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">pwg-ru-data <tspan fill="#7a8399" class="l-en">тАФ card store</tspan><tspan fill="#7a8399" class="l-ru">тАФ ╤Е╤А╨░╨╜╨╕╨╗╨╕╤Й╨╡ ╨║╨░╤А╤В╨╛╤З╨╡╨║</tspan></text>
+        <text x="96" y="506" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">pwg-ru-data <tspan fill="#7a8399" class="l-en">— card store</tspan><tspan fill="#7a8399" class="l-ru">— хранилище карточек</tspan></text>
         <rect x="82" y="525.5" width="5" height="5" fill="#7a8399"/>
-        <text x="96" y="532" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">pwg_ru_prompts <tspan fill="#7a8399" class="l-en">тАФ DE 5-layer</tspan><tspan fill="#7a8399" class="l-ru">тАФ DE 5 ╤Б╨╗╨╛╤С╨▓</tspan></text>
+        <text x="96" y="532" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">pwg_ru_prompts <tspan fill="#7a8399" class="l-en">— DE 5-layer</tspan><tspan fill="#7a8399" class="l-ru">— DE 5 слоёв</tspan></text>
         <rect x="82" y="551.5" width="5" height="5" fill="#7a8399"/>
-        <text x="96" y="558" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">SanskritRussian <tspan fill="#7a8399" class="l-en">тАФ parallel corpus</tspan><tspan fill="#7a8399" class="l-ru">тАФ ╨┐╨░╤А╨░╨╗╨╗╨╡╨╗╤М╨╜╤Л╨╣ ╨║╨╛╤А╨┐╤Г╤Б</tspan></text>
+        <text x="96" y="558" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">SanskritRussian <tspan fill="#7a8399" class="l-en">— parallel corpus</tspan><tspan fill="#7a8399" class="l-ru">— параллельный корпус</tspan></text>
         <rect x="82" y="577.5" width="5" height="5" fill="#7a8399"/>
-        <text x="96" y="584" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">SanskritSpellCheck <tspan fill="#7a8399" class="l-en">тАФ QA detector</tspan><tspan fill="#7a8399" class="l-ru">тАФ QA-╨┤╨╡╤В╨╡╨║╤В╨╛╤А</tspan></text>
+        <text x="96" y="584" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">SanskritSpellCheck <tspan fill="#7a8399" class="l-en">— QA detector</tspan><tspan fill="#7a8399" class="l-ru">— QA-детектор</tspan></text>
         <rect x="82" y="603.5" width="5" height="5" fill="#7a8399"/>
-        <text x="96" y="610" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">KeySwap <tspan fill="#7a8399" class="l-en">тАФ writer tools cycle</tspan><tspan fill="#7a8399" class="l-ru">тАФ ╤Ж╨╕╨║╨╗ ╨╕╨╜╤Б╤В╤А╤Г╨╝╨╡╨╜╤В╨╛╨▓</tspan></text>
+        <text x="96" y="610" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">KeySwap <tspan fill="#7a8399" class="l-en">— writer tools cycle</tspan><tspan fill="#7a8399" class="l-ru">— цикл инструментов</tspan></text>
 
-        <!-- 6 ┬╖ Research & publications -->
+        <!-- 6 · Research & publications -->
         <rect x="388" y="430" width="300" height="280" rx="8" fill="rgba(45,49,66,0.02)" stroke="rgba(45,49,66,0.35)" stroke-width="1"/>
         <rect x="402" y="422" width="210" height="16" fill="#ececec"/>
         <text x="408" y="433" class="l-en" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">RESEARCH &amp; PUBLICATIONS</text>
-        <text x="408" y="433" class="l-ru" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">╨Ш╨б╨б╨Ы╨Х╨Ф╨Ю╨Т╨Р╨Э╨Ш╨п ╨Ш ╨б╨в╨Р╨в╨м╨Ш</text>
+        <text x="408" y="433" class="l-ru" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">ИССЛЕДОВАНИЯ И СТАТЬИ</text>
         <text x="404" y="466" class="l-en" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', sans-serif">Papers &amp; research</text>
-        <text x="404" y="466" class="l-ru" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', sans-serif">╨б╤В╨░╤В╤М╨╕ ╨╕ ╨╕╤Б╤Б╨╗╨╡╨┤╨╛╨▓╨░╨╜╨╕╤П</text>
+        <text x="404" y="466" class="l-ru" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', sans-serif">Статьи и исследования</text>
         <line x1="404" y1="480" x2="672" y2="480" stroke="rgba(45,49,66,0.08)"/>
         <rect x="406" y="499.5" width="5" height="5" fill="#7a8399"/>
-        <text x="420" y="506" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">ARTICLES registry <tspan fill="#7a8399" class="l-en">тАФ A01&#8211;A69</tspan><tspan fill="#7a8399" class="l-ru">тАФ A01&#8211;A69</tspan></text>
+        <text x="420" y="506" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">ARTICLES registry <tspan fill="#7a8399" class="l-en">— A01&#8211;A69</tspan><tspan fill="#7a8399" class="l-ru">— A01&#8211;A69</tspan></text>
         <rect x="406" y="525.5" width="5" height="5" fill="#7a8399"/>
-        <text x="420" y="532" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">monograph spine <tspan fill="#7a8399" class="l-en">тАФ M01&#8211;M03</tspan><tspan fill="#7a8399" class="l-ru">тАФ M01&#8211;M03</tspan></text>
+        <text x="420" y="532" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">monograph spine <tspan fill="#7a8399" class="l-en">— M01&#8211;M03</tspan><tspan fill="#7a8399" class="l-ru">— M01&#8211;M03</tspan></text>
         <rect x="406" y="551.5" width="5" height="5" fill="#7a8399"/>
-        <text x="420" y="558" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">RuWritingStyles <tspan fill="#7a8399" class="l-en">тАФ style passports</tspan><tspan fill="#7a8399" class="l-ru">тАФ ╤Б╤В╨╕╨╗╨╡╨▓╤Л╨╡ ╨┐╨░╤Б╨┐╨╛╤А╤В╨░</tspan></text>
+        <text x="420" y="558" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">RuWritingStyles <tspan fill="#7a8399" class="l-en">— style passports</tspan><tspan fill="#7a8399" class="l-ru">— стилевые паспорта</tspan></text>
         <rect x="406" y="577.5" width="5" height="5" fill="#7a8399"/>
-        <text x="420" y="584" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">Zenodo DOIs <tspan fill="#7a8399" class="l-en">тАФ datasets</tspan><tspan fill="#7a8399" class="l-ru">тАФ ╨┤╨░╤В╨░╤Б╨╡╤В╤Л</tspan></text>
+        <text x="420" y="584" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">Zenodo DOIs <tspan fill="#7a8399" class="l-en">— datasets</tspan><tspan fill="#7a8399" class="l-ru">— датасеты</tspan></text>
         <rect x="544" y="668" width="132" height="20" rx="10" fill="rgba(45,49,66,0.04)" stroke="rgba(45,49,66,0.25)"/>
-        <text x="610" y="681" class="l-en" fill="#4f5d75" font-size="7.5" font-family="'Geist Mono', monospace" letter-spacing="0.08em" text-anchor="middle">72 PAPERS ┬╖ 10 REPOS</text>
-        <text x="610" y="681" class="l-ru" fill="#4f5d75" font-size="7.5" font-family="'Geist Mono', monospace" letter-spacing="0.08em" text-anchor="middle">72 ╨б╨в╨Р╨в╨м╨Ш ┬╖ 10 ╨а╨Х╨Я╨Ю</text>
+        <text x="610" y="681" class="l-en" fill="#4f5d75" font-size="7.5" font-family="'Geist Mono', monospace" letter-spacing="0.08em" text-anchor="middle">72 PAPERS · 10 REPOS</text>
+        <text x="610" y="681" class="l-ru" fill="#4f5d75" font-size="7.5" font-family="'Geist Mono', monospace" letter-spacing="0.08em" text-anchor="middle">72 СТАТЬИ · 10 РЕПО</text>
 
-        <!-- 7 ┬╖ Products & surfaces -->
+        <!-- 7 · Products & surfaces -->
         <rect x="712" y="430" width="300" height="280" rx="8" fill="rgba(45,49,66,0.02)" stroke="rgba(45,49,66,0.35)" stroke-width="1"/>
         <rect x="726" y="422" width="195" height="16" fill="#ececec"/>
         <text x="732" y="433" class="l-en" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">PRODUCTS &amp; SURFACES</text>
-        <text x="732" y="433" class="l-ru" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">╨Я╨а╨Ю╨Ф╨г╨Ъ╨в╨л ╨Ш ╨Я╨Ю╨Т╨Х╨а╨е╨Э╨Ю╨б╨в╨Ш</text>
+        <text x="732" y="433" class="l-ru" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">ПРОДУКТЫ И ПОВЕРХНОСТИ</text>
         <text x="728" y="466" class="l-en" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', sans-serif">Products &amp; surfaces</text>
-        <text x="728" y="466" class="l-ru" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', sans-serif">╨Я╤А╨╛╨┤╤Г╨║╤В╤Л ╨╕ ╨┐╨╛╨▓╨╡╤А╤Е╨╜╨╛╤Б╤В╨╕</text>
+        <text x="728" y="466" class="l-ru" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', sans-serif">Продукты и поверхности</text>
         <line x1="728" y1="480" x2="996" y2="480" stroke="rgba(45,49,66,0.08)"/>
         <rect x="730" y="499.5" width="5" height="5" fill="#7a8399"/>
-        <text x="744" y="506" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">Systema-Sanscriticum <tspan fill="#7a8399" class="l-en">тАФ LMS</tspan><tspan fill="#7a8399" class="l-ru">тАФ LMS</tspan></text>
+        <text x="744" y="506" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">Systema-Sanscriticum <tspan fill="#7a8399" class="l-en">— LMS</tspan><tspan fill="#7a8399" class="l-ru">— LMS</tspan></text>
         <rect x="730" y="525.5" width="5" height="5" fill="#7a8399"/>
-        <text x="744" y="532" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">ORS-FAQ <tspan fill="#7a8399" class="l-en">тАФ samskrtam.ru</tspan><tspan fill="#7a8399" class="l-ru">тАФ samskrtam.ru</tspan></text>
+        <text x="744" y="532" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">ORS-FAQ <tspan fill="#7a8399" class="l-en">— samskrtam.ru</tspan><tspan fill="#7a8399" class="l-ru">— samskrtam.ru</tspan></text>
         <rect x="730" y="551.5" width="5" height="5" fill="#7a8399"/>
-        <text x="744" y="558" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">csl-guides <tspan fill="#7a8399" class="l-en">тАФ learner site</tspan><tspan fill="#7a8399" class="l-ru">тАФ ╤Б╨░╨╣╤В ╨┤╨╗╤П ╤Г╤З╨░╤Й╨╕╤Е╤Б╤П</tspan></text>
+        <text x="744" y="558" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">csl-guides <tspan fill="#7a8399" class="l-en">— learner site</tspan><tspan fill="#7a8399" class="l-ru">— сайт для учащихся</tspan></text>
         <rect x="730" y="577.5" width="5" height="5" fill="#7a8399"/>
-        <text x="744" y="584" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">csl-newsletter <tspan fill="#7a8399" class="l-en">тАФ monthly</tspan><tspan fill="#7a8399" class="l-ru">тАФ ╨╡╨╢╨╡╨╝╨╡╤Б╤П╤З╨╜╨╛</tspan></text>
+        <text x="744" y="584" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">csl-newsletter <tspan fill="#7a8399" class="l-en">— monthly</tspan><tspan fill="#7a8399" class="l-ru">— ежемесячно</tspan></text>
         <rect x="730" y="603.5" width="5" height="5" fill="#7a8399"/>
-        <text x="744" y="610" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">VisualDCS <tspan fill="#7a8399" class="l-en">тАФ corpus viz</tspan><tspan fill="#7a8399" class="l-ru">тАФ ╨║╨╛╤А╨┐╤Г╤Б-╨▓╨╕╨╖</tspan></text>
+        <text x="744" y="610" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">VisualDCS <tspan fill="#7a8399" class="l-en">— corpus viz</tspan><tspan fill="#7a8399" class="l-ru">— корпус-виз</tspan></text>
 
-        <!-- 8 ┬╖ Tooling & ops -->
+        <!-- 8 · Tooling & ops -->
         <rect x="1036" y="430" width="300" height="280" rx="8" fill="rgba(45,49,66,0.02)" stroke="rgba(45,49,66,0.35)" stroke-width="1"/>
         <rect x="1050" y="422" width="170" height="16" fill="#ececec"/>
         <text x="1056" y="433" class="l-en" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">TOOLING &amp; OPS</text>
-        <text x="1056" y="433" class="l-ru" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">╨Ш╨Э╨б╨в╨а╨г╨Ь╨Х╨Э╨в╨л ╨Ш OPS</text>
+        <text x="1056" y="433" class="l-ru" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">ИНСТРУМЕНТЫ И OPS</text>
         <text x="1052" y="466" class="l-en" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', sans-serif">Tooling &amp; ops</text>
-        <text x="1052" y="466" class="l-ru" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', sans-serif">╨Ш╨╜╤Б╤В╤А╤Г╨╝╨╡╨╜╤В╤Л ╨╕ ops</text>
+        <text x="1052" y="466" class="l-ru" fill="#2d3142" font-size="14" font-weight="600" font-family="'Geist', sans-serif">Инструменты и ops</text>
         <line x1="1052" y1="480" x2="1320" y2="480" stroke="rgba(45,49,66,0.08)"/>
         <rect x="1054" y="499.5" width="5" height="5" fill="#7a8399"/>
-        <text x="1068" y="506" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">Uprava <tspan fill="#7a8399" class="l-en">тАФ hubs + tools</tspan><tspan fill="#7a8399" class="l-ru">тАФ ╤Е╨░╨▒╤Л ╨╕ ╤В╤Г╨╗╨╖╤Л</tspan></text>
+        <text x="1068" y="506" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">Uprava <tspan fill="#7a8399" class="l-en">— hubs + tools</tspan><tspan fill="#7a8399" class="l-ru">— хабы и тулзы</tspan></text>
         <rect x="1054" y="525.5" width="5" height="5" fill="#7a8399"/>
-        <text x="1068" y="532" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">sanskrit-util <tspan fill="#7a8399" class="l-en">тАФ Py+JS parity</tspan><tspan fill="#7a8399" class="l-ru">тАФ ╨┐╨░╤А╨╕╤В╨╡╤В Py+JS</tspan></text>
+        <text x="1068" y="532" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">sanskrit-util <tspan fill="#7a8399" class="l-en">— Py+JS parity</tspan><tspan fill="#7a8399" class="l-ru">— паритет Py+JS</tspan></text>
         <rect x="1054" y="551.5" width="5" height="5" fill="#7a8399"/>
-        <text x="1068" y="558" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">ci_templates <tspan fill="#7a8399" class="l-en">тАФ org CI</tspan><tspan fill="#7a8399" class="l-ru">тАФ CI ╨╛╤А╨│╨░╨╜╨╕╨╖╨░╤Ж╨╕╨╕</tspan></text>
+        <text x="1068" y="558" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">ci_templates <tspan fill="#7a8399" class="l-en">— org CI</tspan><tspan fill="#7a8399" class="l-ru">— CI организации</tspan></text>
         <rect x="1054" y="577.5" width="5" height="5" fill="#7a8399"/>
-        <text x="1068" y="584" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">changelog_guard <tspan fill="#7a8399" class="l-en">тАФ releases</tspan><tspan fill="#7a8399" class="l-ru">тАФ ╤А╨╡╨╗╨╕╨╖╤Л</tspan></text>
+        <text x="1068" y="584" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace">changelog_guard <tspan fill="#7a8399" class="l-en">— releases</tspan><tspan fill="#7a8399" class="l-ru">— релизы</tspan></text>
       </svg>
     </div>
 
     <div class="cards">
       <div class="card">
-        <p class="eyebrow"><span class="l-en">THE HEADLINE</span><span class="l-ru">╨У╨Ы╨Р╨Т╨Э╨Ю╨Х</span></p>
+        <p class="eyebrow"><span class="l-en">THE HEADLINE</span><span class="l-ru">ГЛАВНОЕ</span></p>
         <div class="card-header"><span class="card-dot coral"></span>
-          <h3><span class="l-en">One spine, seven orbits</span><span class="l-ru">╨Ю╨┤╨╕╨╜ ╤Е╤А╨╡╨▒╨╡╤В, ╤Б╨╡╨╝╤М ╨╛╤А╨▒╨╕╤В</span></h3>
+          <h3><span class="l-en">One spine, seven orbits</span><span class="l-ru">Один хребет, семь орбит</span></h3>
         </div>
-        <p class="l-en">Every dictionary byte descends from <strong>csl-orig</strong> through the csl-pywork pipeline and its correction audit trail. The other seven domains refine it, read from it, teach it тАФ or ship it to learners.</p>
-        <p class="l-ru">╨Ъ╨░╨╢╨┤╤Л╨╣ ╨▒╨░╨╣╤В ╤Б╨╗╨╛╨▓╨░╤А╨╡╨╣ ╨┐╤А╨╛╨╕╤Б╤Е╨╛╨┤╨╕╤В ╨╕╨╖ <strong>csl-orig</strong> ╤З╨╡╤А╨╡╨╖ ╨║╨╛╨╜╨▓╨╡╨╣╨╡╤А csl-pywork ╨╕ ╨░╤Г╨┤╨╕╤В ╨┐╤А╨░╨▓╨╛╨║. ╨Ю╤Б╤В╨░╨╗╤М╨╜╤Л╨╡ ╤Б╨╡╨╝╤М ╨┤╨╛╨╝╨╡╨╜╨╛╨▓ ╤Г╤В╨╛╤З╨╜╤П╤О╤В ╨╡╨│╨╛, ╤З╨╕╤В╨░╤О╤В ╨╡╨│╨╛, ╨┐╤А╨╡╨┐╨╛╨┤╨░╤О╤В ╨╡╨│╨╛ тАФ ╨╕╨╗╨╕ ╨┤╨╛╤Б╤В╨░╨▓╨╗╤П╤О╤В ╤Г╤З╨░╤Й╨╕╨╝╤Б╤П.</p>
+        <p class="l-en">Every dictionary byte descends from <strong>csl-orig</strong> through the csl-pywork pipeline and its correction audit trail. The other seven domains refine it, read from it, teach it — or ship it to learners.</p>
+        <p class="l-ru">Каждый байт словарей происходит из <strong>csl-orig</strong> через конвейер csl-pywork и аудит правок. Остальные семь доменов уточняют его, читают его, преподают его — или доставляют учащимся.</p>
       </div>
       <div class="card">
-        <p class="eyebrow"><span class="l-en">HOW TO READ</span><span class="l-ru">╨Ъ╨Р╨Ъ ╨з╨Ш╨в╨Р╨в╨м</span></p>
+        <p class="eyebrow"><span class="l-en">HOW TO READ</span><span class="l-ru">КАК ЧИТАТЬ</span></p>
         <div class="card-header"><span class="card-dot ink"></span>
-          <h3><span class="l-en">Ownership, not flow</span><span class="l-ru">╨Т╨╗╨░╨┤╨╡╨╜╨╕╨╡, ╨░ ╨╜╨╡ ╨┐╨╛╤В╨╛╨║╨╕</span></h3>
+          <h3><span class="l-en">Ownership, not flow</span><span class="l-ru">Владение, а не потоки</span></h3>
         </div>
         <ul>
-          <li><span class="l-en">Coral marks the canonical source</span><span class="l-ru">╨Ъ╨╛╤А╨░╨╗╨╗╨╛╨▓╤Л╨╣ тАФ ╨║╨░╨╜╨╛╨╜╨╕╤З╨╡╤Б╨║╨╕╨╣ ╨╕╤Б╤В╨╛╤З╨╜╨╕╨║</span></li>
-          <li><span class="l-en">Boxes hold key repos; big families compressed to count chips</span><span class="l-ru">╨Т ╨▒╨╛╨║╤Б╨░╤Е ╨║╨╗╤О╤З╨╡╨▓╤Л╨╡ ╤А╨╡╨┐╨╛╨╖╨╕╤В╨╛╤А╨╕╨╕; ╤Б╨╡╨╝╨╡╨╣╤Б╤В╨▓╨░ ╤Б╨╢╨░╤В╤Л ╨▓ ╤З╨╕╨┐╤Л</span></li>
-          <li><span class="l-en">Edge truth lives in interlinks_edges.tsv (149 rows)</span><span class="l-ru">╨а╤С╨▒╤А╨░ ╨╢╨╕╨▓╤Г╤В ╨▓ interlinks_edges.tsv (149 ╤Б╤В╤А╨╛╨║)</span></li>
-          <li><span class="l-en">Data flows are Round 2's diagram</span><span class="l-ru">╨Я╨╛╤В╨╛╨║╨╕ ╨┤╨░╨╜╨╜╤Л╤Е тАФ ╨┤╨╕╨░╨│╤А╨░╨╝╨╝╨░ ╤А╨░╤Г╨╜╨┤╨░ 2</span></li>
+          <li><span class="l-en">Coral marks the canonical source</span><span class="l-ru">Коралловый — канонический источник</span></li>
+          <li><span class="l-en">Boxes hold key repos; big families compressed to count chips</span><span class="l-ru">В боксах ключевые репозитории; семейства сжаты в чипы</span></li>
+          <li><span class="l-en">Edge truth lives in interlinks_edges.tsv (149 rows)</span><span class="l-ru">Рёбра живут в interlinks_edges.tsv (149 строк)</span></li>
+          <li><span class="l-en">Data flows are Round 2's diagram</span><span class="l-ru">Потоки данных — диаграмма раунда 2</span></li>
         </ul>
       </div>
       <div class="card">
-        <p class="eyebrow"><span class="l-en">ROUND 1 OF 7</span><span class="l-ru">╨а╨Р╨г╨Э╨Ф 1 ╨Ш╨Ч 7</span></p>
+        <p class="eyebrow"><span class="l-en">ROUND 1 OF 7</span><span class="l-ru">РАУНД 1 ИЗ 7</span></p>
         <div class="card-header"><span class="card-dot muted"></span>
-          <h3><span class="l-en">Six siblings follow</span><span class="l-ru">╨Т╨┐╨╡╤А╨╡╨┤╨╕ ╨╡╤Й╤С ╤И╨╡╤Б╤В╤М</span></h3>
+          <h3><span class="l-en">Six siblings follow</span><span class="l-ru">Впереди ещё шесть</span></h3>
         </div>
-        <p class="l-en">A data-flow graph from interlinks_edges.tsv, a volume treemap, a publications board, a programme timeline, a dictionary-spine deep-dive, and a learner-surfaces map тАФ same style, each bilingual.</p>
-        <p class="l-ru">╨У╤А╨░╤Д ╨┐╨╛╤В╨╛╨║╨╛╨▓ ╨╕╨╖ interlinks_edges.tsv, ╤В╤А╨╕╨╝╤Н╨┐ ╨┐╨╛ ╨╛╨▒╤К╤С╨╝╤Г, ╨┤╨╛╤Б╨║╨░ ╨┐╤Г╨▒╨╗╨╕╨║╨░╤Ж╨╕╨╣, ╤В╨░╨╣╨╝╨╗╨░╨╣╨╜ ╨┐╤А╨╛╨│╤А╨░╨╝╨╝╤Л, ╤А╨░╨╖╨▒╨╛╤А ╤Б╨╗╨╛╨▓╨░╤А╨╜╨╛╨│╨╛ ╤Е╤А╨╡╨▒╤В╨░ ╨╕ ╨║╨░╤А╤В╨░ ╨┐╤А╨╛╨┤╤Г╨║╤В╨╛╨▓ ╨┤╨╗╤П ╤Г╤З╨░╤Й╨╕╤Е╤Б╤П тАФ ╤В╨╛╤В ╨╢╨╡ ╤Б╤В╨╕╨╗╤М, ╨║╨░╨╢╨┤╨░╤П ╨┤╨▓╤Г╤П╨╖╤Л╤З╨╜╨░.</p>
+        <p class="l-en">A data-flow graph from interlinks_edges.tsv, a volume treemap, a publications board, a programme timeline, a dictionary-spine deep-dive, and a learner-surfaces map — same style, each bilingual.</p>
+        <p class="l-ru">Граф потоков из interlinks_edges.tsv, тримэп по объёму, доска публикаций, таймлайн программы, разбор словарного хребта и карта продуктов для учащихся — тот же стиль, каждая двуязычна.</p>
       </div>
     </div>
 
     <div class="footer">
-      <span><span class="l-en">sanskrit work landscape ┬╖ domain map ┬╖ round 1/7</span><span class="l-ru">╨╗╨░╨╜╨┤╤И╨░╤Д╤В ╤А╨░╨▒╨╛╤В ┬╖ ╨║╨░╤А╤В╨░ ╨┤╨╛╨╝╨╡╨╜╨╛╨▓ ┬╖ ╤А╨░╤Г╨╜╨┤ 1/7</span></span>
-      <span><span class="l-en">~85 repos ┬╖ 22-08-2026 ┬╖ Dr. M─Бrcis Gas┼лns</span><span class="l-ru">~85 ╤А╨╡╨┐╨╛╨╖╨╕╤В╨╛╤А╨╕╨╡╨▓ ┬╖ 22-08-2026 ┬╖ Dr. M─Бrcis Gas┼лns</span></span>
+      <span><span class="l-en">sanskrit work landscape · domain map · round 1/7</span><span class="l-ru">ландшафт работ · карта доменов · раунд 1/7</span></span>
+      <span><span class="l-en">~85 repos · 22-08-2026 · Dr. Mārcis Gasūns</span><span class="l-ru">~85 репозиториев · 22-08-2026 · Dr. Mārcis Gasūns</span></span>
     </div>
   </div>
 
