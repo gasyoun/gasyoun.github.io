@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Мегакнига за 5 минут — картинками</title>
+<style>
+  :root{
+    --bg:#0f1117; --panel:#171a23; --ink:#e8e6e3; --dim:#9a96a0;
+    --gold:#d9a441; --teal:#4fb3a9; --rose:#c96f6f; --blue:#6f9fd9; --green:#79b56f;
+    --line:#2a2e3b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:"Segoe UI",system-ui,sans-serif;line-height:1.5}
+  .wrap{max-width:880px;margin:0 auto;padding:48px 20px 80px}
+  h1{font-size:34px;font-weight:800;letter-spacing:.5px;text-align:center}
+  .sub{text-align:center;color:var(--dim);margin-top:10px;font-size:15px}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;
+         padding:26px 26px 22px;margin-top:26px}
+  .panel h2{font-size:19px;color:var(--gold);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+  .panel p{font-size:16px;max-width:64ch}
+  .cap{color:var(--dim);font-size:14px;margin-top:10px}
+  svg{display:block;margin:6px auto 0;max-width:100%;height:auto}
+  .row{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:8px}
+  .card{background:var(--bg);border:1px solid var(--line);border-radius:12px;
+        padding:14px;width:200px;text-align:center;font-size:14.5px}
+  .card b{display:block;font-size:15.5px;margin-bottom:4px}
+  .foot{text-align:center;color:var(--dim);font-size:13px;margin-top:36px}
+  a{color:var(--teal)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>Мегакнига за 5 минут</h1>
+<p class="sub">О чём эта книга — большими картинками и малыми словами.
+Полная версия: <a href="https://github.com/gasyoun/Uprava/blob/main/MEGABOOK.md">MEGABOOK.md</a>
+(приватный хаб Uprava) · публичная страница-зеркало объясняющего артефакта.</p>
+
+<div class="panel">
+  <h2>Что это за мастерская?</h2>
+  <svg viewBox="0 0 720 150" width="720" role="img" aria-label="Пять областей работы">
+    <g font-size="13" text-anchor="middle" fill="#e8e6e3">
+      <rect x="10"  y="30" width="128" height="70" rx="12" fill="#20304a"/><text x="74"  y="60">Словарь</text><text x="74" y="82" fill="#9a96a0">слова и смыслы</text>
+      <rect x="152" y="30" width="128" height="70" rx="12" fill="#1d4038"/><text x="216" y="60">Грамматика</text><text x="216" y="82" fill="#9a96a0">правила языка</text>
+      <rect x="294" y="30" width="128" height="70" rx="12" fill="#46303a"/><text x="358" y="60">Корпус</text><text x="358" y="82" fill="#9a96a0">живые тексты</text>
+      <rect x="436" y="30" width="128" height="70" rx="12" fill="#4a3a20"/><text x="500" y="60">Школа</text><text x="500" y="82" fill="#9a96a0">уроки и доход</text>
+      <rect x="578" y="30" width="132" height="70" rx="12" fill="#33334d"/><text x="644" y="60">Агенты</text><text x="644" y="82" fill="#9a96a0">наши помощники</text>
+      <path d="M138 65 L152 65 M280 65 L294 65 M422 65 L436 65 M564 65 L578 65" stroke="#9a96a0" stroke-width="2"/>
+    </g>
+  </svg>
+  <p class="cap">21 тезис книги = по одному на каждое «что создаётся, зачем и что уже есть».</p>
+</div>
+
+<div class="panel">
+  <h2>Главный конвейер: источник → проверка → продукт</h2>
+  <svg viewBox="0 0 720 130" width="720" role="img" aria-label="Цепочка ценности">
+    <defs><marker id="ar" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="#d9a441"/></marker></defs>
+    <g font-size="13" text-anchor="middle">
+      <rect x="14"  y="38" width="180" height="54" rx="12" fill="#20304a"/><tspan x="104" y="70" fill="#e8e6e3">Скан словарей 1850-х</tspan>
+      <rect x="270" y="38" width="180" height="54" rx="12" fill="#1d4038"/><tspan x="360" y="63" fill="#e8e6e3">Проверенные данные</tspan><tspan x="360" y="81" fill="#9a96a0"> provenance + права</tspan>
+      <rect x="526" y="38" width="180" height="54" rx="12" fill="#4a3a20"/><tspan x="616" y="63" fill="#e8e6e3">Продукты для людей</tspan><tspan x="616" y="81" fill="#9a96a0"> сайт · книга · датасет</tspan>
+      <line x1="196" y1="65" x2="264" y2="65" stroke="#d9a441" stroke-width="2.5" marker-end="url(#ar)"/>
+      <line x1="452" y1="65" x2="520" y2="65" stroke="#d9a441" stroke-width="2.5" marker-end="url(#ar)"/>
+      <path d="M616 92 C 616 122, 104 122, 104 94" stroke="#6f9fd9" stroke-width="2" fill="none" stroke-dasharray="5 4"/>
+      <text x="360" y="120" fill="#6f9fd9" font-size="12">обратная связь от учеников и читателей</text>
+    </g>
+  </svg>
+  <p class="cap">Ничего не попадает в продукт напрямую со сканера — только через проверку.</p>
+</div>
+
+<div class="panel">
+  <h2>Три проверенных сквозных пути</h2>
+  <div class="row">
+    <div class="card"><b>CDSL → kosha → Systema</b>словарь питает уроки школы</div>
+    <div class="card"><b>DCS → Sangram → урок</b>корпус превращается в грамматику-карточки</div>
+    <div class="card"><b>корпус → статья</b>тексты становятся публикациями</div>
+  </div>
+  <p class="cap">Каждый шаг пути имеет доказательство — это не план, а свершившийся факт (§14.2).</p>
+</div>
+
+<div class="panel">
+  <h2>Где что лежит (хаб Uprava)</h2>
+  <div class="row">
+    <div class="card"><b>GTD_NEXT_ACTIONS</b>что делать дальше</div>
+    <div class="card"><b>handoffs/ H####</b>задания для агентов-сессий</div>
+    <div class="card"><b>ARTICLES</b>все статьи и их готовность</div>
+    <div class="card"><b>FINDINGS</b>«как не обжечься» — по номерам</div>
+    <div class="card"><b>MEGABOOK §16</b>живые числа статуса</div>
+  </div>
+  <p class="cap">MEGABOOK — карта смыслов, не очередь задач. Живой статус всегда в источниках.</p>
+</div>
+
+<div class="panel">
+  <h2>Три железных правила</h2>
+  <svg viewBox="0 0 720 170" width="720" role="img" aria-label="Правила">
+    <g font-size="14">
+      <circle cx="60" cy="42" r="22" fill="#46303a"/><text x="60" y="48" text-anchor="middle" fill="#c96f6f" font-weight="bold">1</text>
+      <text x="98" y="47" fill="#e8e6e3">Уже построенное — не строй заново: найди владельца и используй.</text>
+      <circle cx="60" cy="100" r="22" fill="#1d4038"/><text x="60" y="106" text-anchor="middle" fill="#4fb3a9" font-weight="bold">2</text>
+      <text x="98" y="105" fill="#e8e6e3">Числа выводи из источника, а не храни копию — копия устареет молча.</text>
+      <circle cx="60" cy="158" r="22" fill="#33334d"/><text x="60" y="164" text-anchor="middle" fill="#6f9fd9" font-weight="bold">3</text>
+      <text x="98" y="163" fill="#e8e6e3">stenogrammy/ — личные данные людей: никогда наружу.</text>
+    </g>
+  </svg>
+</div>
+
+<p class="foot">Публичное зеркало локального артефакта хаба (dashboard/, приватно) · 22-08-2026 ·
+_Dr. Mārcis Gasūns_</p>
+</div>
+</body>
+</html>
