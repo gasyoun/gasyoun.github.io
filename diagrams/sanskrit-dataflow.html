@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How the Sanskrit Work Flows</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --color-paper:#f5f5f5; --color-paper-2:#ececec; --color-ink:#2d3142; --color-muted:#4f5d75; --color-soft:#7a8399; --color-rule:rgba(45,49,66,0.12); --color-accent:#eb6c36; --color-link:#2e5aa8; --font-sans:'Geist',system-ui,sans-serif; --font-serif:'Instrument Serif',serif; --font-mono:'Geist Mono',ui-monospace,monospace; }
+    body { font-family: var(--font-sans); background: var(--color-paper); min-height: 100vh; padding: 3rem 2rem; color: var(--color-ink); }
+    .container { max-width: 1400px; margin: 0 auto; }
+    .header { position: relative; margin-bottom: 2.5rem; padding-right: 130px; }
+    .header-eyebrow { font-family: var(--font-mono); font-size: 0.66rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-muted); margin-bottom: 0.75rem; }
+    h1 { font-family: var(--font-serif); font-size: clamp(1.75rem, 3vw + 1rem, 2.5rem); font-weight: 400; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 0.5rem; }
+    .subtitle { font-size: 1rem; line-height: 1.55; color: var(--color-muted); max-width: 62ch; }
+    .lang-toggle { position: absolute; top: 0.25rem; right: 0; display: flex; border: 1px solid var(--color-rule); border-radius: 6px; overflow: hidden; background: #fff; }
+    .lang-toggle button { font-family: var(--font-mono); font-size: 0.66rem; font-weight: 500; letter-spacing: 0.08em; padding: 0.4rem 0.8rem; border: none; background: transparent; color: var(--color-soft); cursor: pointer; }
+    .lang-toggle button.active { background: var(--color-ink); color: #fff; }
+    .l-ru { display: none; }
+    body.ru .l-en { display: none; }
+    body.ru .l-ru { display: inline; }
+    .diagram-container { background: var(--color-paper-2); border-radius: 8px; border: 1px solid var(--color-rule); padding: 1.5rem; overflow-x: auto; }
+    svg { width: 100%; min-width: 1000px; display: block; }
+    text.l-ru, tspan.l-ru { display: none; }
+    body.ru text.l-en, body.ru tspan.l-en { display: none; }
+    body.ru text.l-ru, body.ru tspan.l-ru { display: inline; }
+    .cards { display: grid; grid-template-columns: 1.1fr 1fr 0.9fr; gap: 1rem; margin-top: 1.5rem; }
+    @media (max-width: 820px) { .cards { grid-template-columns: 1fr; } }
+    .card { background: #fff; border-radius: 6px; border: 1px solid var(--color-rule); padding: 1.25rem; }
+    .card .eyebrow { font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-muted); margin-bottom: 0.5rem; }
+    .card-header { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.875rem; padding-bottom: 0.875rem; border-bottom: 1px solid rgba(45,49,66,0.08); }
+    .card-dot { width: 7px; height: 7px; border-radius: 50%; }
+    .card-dot.ink { background: var(--color-ink); } .card-dot.muted { background: var(--color-muted); } .card-dot.coral { background: var(--color-accent); }
+    .card h3 { font-size: 0.875rem; font-weight: 600; }
+    .card p, .card ul { color: var(--color-muted); font-size: 0.8125rem; line-height: 1.55; list-style: none; }
+    .card li { margin-bottom: 0.3rem; padding-left: 0.875rem; position: relative; }
+    .card li::before { content: '—'; position: absolute; left: 0; color: rgba(45,49,66,0.25); font-size: 0.75rem; }
+    .footer { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(45,49,66,0.10); font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.06em; color: var(--color-soft); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="lang-toggle" role="group" aria-label="Language / Язык">
+        <button id="btn-en" class="active" type="button">EN</button>
+        <button id="btn-ru" type="button">РУ</button>
+      </div>
+      <p class="header-eyebrow">
+        <span class="l-en">Data Flow · Diagram Design · Round 2 of 7</span>
+        <span class="l-ru">Потоки данных · Diagram Design · Раунд 2 из 7</span>
+      </p>
+      <h1>
+        <span class="l-en">How the Work Flows</span>
+        <span class="l-ru">Как течёт работа</span>
+      </h1>
+      <p class="subtitle">
+        <span class="l-en">The dependency graph of the programme, aggregated from the canonical edge store — interlinks_edges.tsv, 135 live rows verified 22-08-2026. Two hubs absorb almost everything: the dictionary spine and the corpus engine.</span>
+        <span class="l-ru">Граф зависимостей программы по каноническому хранилищу рёбер interlinks_edges.tsv — 135 живых строк на 22-08-2026. Два хаба стягивают почти всё: словарный хребет и корпусный движок.</span>
+      </p>
+    </div>
+
+    <div class="diagram-container">
+      <svg viewBox="0 0 1440 800" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="swd-title swd-desc">
+        <title id="swd-title">How the Sanskrit Work Flows</title>
+        <desc id="swd-desc">Dependency graph of the Sanskrit programme aggregated from interlinks_edges.tsv: dictionary repos and correction pipeline feed the csl-orig hub; external corpora feed the VisualDCS hub; both distribute to atlas, kosha, lexicography hub, spellcheck, grammar surfaces, web apps, MW derivatives, and an org-wide bus of about 85 repos.</desc>
+        <defs>
+          <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse">
+            <circle cx="1" cy="1" r="0.9" fill="rgba(45,49,66,0.10)"/>
+          </pattern>
+          <marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L8,4 L0,8 z" fill="rgba(45,49,66,0.55)"/>
+          </marker>
+        </defs>
+
+        <rect width="100%" height="100%" fill="#f5f5f5"/>
+        <rect width="100%" height="100%" fill="url(#dots)" opacity="0.55"/>
+
+        <!-- Outer frame -->
+        <rect x="20" y="60" width="1400" height="700" rx="8" fill="rgba(45,49,66,0.015)" stroke="rgba(45,49,66,0.30)" stroke-width="1"/>
+        <rect x="36" y="52" width="330" height="16" fill="#ececec"/>
+        <text x="44" y="64" class="l-en" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">REGISTERED EDGES · interlinks_edges.tsv · LIVE</text>
+        <text x="44" y="64" class="l-ru" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">ЗАРЕГИСТРИРОВАННЫЕ РЁБРА · interlinks_edges.tsv · ЖИВЫЕ</text>
+
+        <!-- Annotation -->
+        <text x="1400" y="40" class="l-en" fill="#2d3142" font-size="15" font-style="italic" font-family="'Instrument Serif', serif" text-anchor="end">two hubs carry it all</text>
+        <text x="1400" y="40" class="l-ru" fill="#2d3142" font-size="15" font-style="italic" font-family="'Instrument Serif', serif" text-anchor="end">два хаба несут всё</text>
+
+        <!-- ============ EDGES (drawn first — pass under boxes) ============ -->
+        <g stroke="rgba(45,49,66,0.45)" fill="none">
+          <path d="M250,205 C400,120 520,180 628,300" stroke-width="5" marker-end="url(#arrow)"/>
+          <path d="M550,235 C585,262 600,290 628,315" stroke-width="2" marker-end="url(#arrow)"/>
+          <path d="M250,520 C380,562 480,566 628,552" stroke-width="2" marker-end="url(#arrow)"/>
+          <path d="M840,310 C1000,200 1080,160 1208,175" stroke-width="2" marker-end="url(#arrow)"/>
+          <path d="M840,330 C870,300 880,240 918,168" stroke-width="2" marker-end="url(#arrow)"/>
+          <path d="M840,380 C880,420 880,462 918,482" stroke-width="1" marker-end="url(#arrow)"/>
+          <path d="M840,398 C1000,432 1090,402 1208,388" stroke-width="2" marker-end="url(#arrow)"/>
+          <path d="M840,545 C892,500 896,228 918,170" stroke-width="1" marker-end="url(#arrow)"/>
+          <path d="M840,560 C876,566 886,402 918,384" stroke-width="1" marker-end="url(#arrow)"/>
+          <path d="M840,578 C875,602 885,604 918,606" stroke-width="2" marker-end="url(#arrow)"/>
+          <path d="M1025,338 C1040,326 1035,315 1026,303" stroke-width="1" marker-end="url(#arrow)"/>
+          <path d="M1130,262 C1190,300 1180,480 1208,520" stroke-width="2" marker-end="url(#arrow)"/>
+        </g>
+
+        <!-- Edge count labels -->
+        <g font-family="'Geist Mono', monospace" font-size="7.5" fill="#4f5d75" letter-spacing="0.08em">
+          <rect x="398" y="136" width="34" height="14" rx="7" fill="#f5f5f5" stroke="rgba(45,49,66,0.25)"/>
+          <text x="415" y="146" text-anchor="middle">&#215;36</text>
+          <rect x="558" y="250" width="26" height="14" rx="7" fill="#f5f5f5" stroke="rgba(45,49,66,0.25)"/>
+          <text x="571" y="260" text-anchor="middle">&#215;3</text>
+          <rect x="416" y="542" width="26" height="14" rx="7" fill="#f5f5f5" stroke="rgba(45,49,66,0.25)"/>
+          <text x="429" y="552" text-anchor="middle">&#215;3</text>
+          <rect x="996" y="188" width="26" height="14" rx="7" fill="#f5f5f5" stroke="rgba(45,49,66,0.25)"/>
+          <text x="1009" y="198" text-anchor="middle">&#215;3</text>
+          <rect x="859" y="238" width="26" height="14" rx="7" fill="#f5f5f5" stroke="rgba(45,49,66,0.25)"/>
+          <text x="872" y="248" text-anchor="middle">&#215;2</text>
+          <rect x="999" y="402" width="26" height="14" rx="7" fill="#f5f5f5" stroke="rgba(45,49,66,0.25)"/>
+          <text x="1012" y="412" text-anchor="middle">&#215;4</text>
+          <rect x="856" y="600" width="26" height="14" rx="7" fill="#f5f5f5" stroke="rgba(45,49,66,0.25)"/>
+          <text x="869" y="610" text-anchor="middle">&#215;5</text>
+        </g>
+
+        <!-- ============ BOXES ============ -->
+
+        <!-- A1 · dictionaries bundle -->
+        <rect x="40" y="150" width="210" height="110" rx="8" fill="rgba(45,49,66,0.02)" stroke="rgba(45,49,66,0.35)" stroke-width="1"/>
+        <rect x="54" y="142" width="180" height="16" fill="#ececec"/>
+        <text x="60" y="153" class="l-en" fill="#4f5d75" font-size="7.5" font-family="'Geist Mono', monospace" letter-spacing="0.12em">THE SPINE'S OWNERS</text>
+        <text x="60" y="153" class="l-ru" fill="#4f5d75" font-size="7.5" font-family="'Geist Mono', monospace" letter-spacing="0.12em">ВЛАДЕЛЬЦЫ ХРЕБЕТА</text>
+        <text x="54" y="184" class="l-en" fill="#2d3142" font-size="13" font-weight="600" font-family="'Geist', sans-serif">43 digitized dictionaries</text>
+        <text x="54" y="184" class="l-ru" fill="#2d3142" font-size="13" font-weight="600" font-family="'Geist', sans-serif">43 оцифрованных словаря</text>
+        <text x="54" y="208" fill="#4f5d75" font-size="8.5" font-family="'Geist Mono', monospace">AP90 &#183; MW72 &#183; PWG &#183; MWS &#183; SKD &#8230;</text>
+        <text x="54" y="228" fill="#7a8399" font-size="8" font-family="'Geist Mono', monospace"><tspan class="l-en">+28 more &#183; all consume csl-orig</tspan><tspan class="l-ru">+28 ещё &#183; все читают csl-orig</tspan></text>
+
+        <!-- A2 · external & corpus feeds -->
+        <rect x="40" y="430" width="210" height="200" rx="8" fill="rgba(45,49,66,0.02)" stroke="rgba(45,49,66,0.35)" stroke-width="1"/>
+        <rect x="54" y="422" width="190" height="16" fill="#ececec"/>
+        <text x="60" y="433" class="l-en" fill="#4f5d75" font-size="7.5" font-family="'Geist Mono', monospace" letter-spacing="0.12em">EXTERNAL &amp; CORPUS FEEDS</text>
+        <text x="60" y="433" class="l-ru" fill="#4f5d75" font-size="7.5" font-family="'Geist Mono', monospace" letter-spacing="0.12em">ВНЕШНИЕ ПОДПИТКИ</text>
+        <text x="54" y="464" class="l-en" fill="#2d3142" font-size="13" font-weight="600" font-family="'Geist', sans-serif">Feeds from outside</text>
+        <text x="54" y="464" class="l-ru" fill="#2d3142" font-size="13" font-weight="600" font-family="'Geist', sans-serif">Подпитка извне</text>
+        <line x1="54" y1="476" x2="236" y2="476" stroke="rgba(45,49,66,0.08)"/>
+        <text x="54" y="498" fill="#4f5d75" font-size="8.5" font-family="'Geist Mono', monospace">DCS <tspan fill="#7a8399" class="l-en">— corpus</tspan><tspan fill="#7a8399" class="l-ru">— корпус</tspan></text>
+        <text x="54" y="522" fill="#4f5d75" font-size="8.5" font-family="'Geist Mono', monospace">ext:Samsaadhanii <tspan fill="#7a8399" class="l-en">— aligner</tspan><tspan fill="#7a8399" class="l-ru">— выравниватель</tspan></text>
+        <text x="54" y="546" fill="#4f5d75" font-size="8.5" font-family="'Geist Mono', monospace">ext:VedaWeb <tspan fill="#7a8399" class="l-en">— RV accent</tspan><tspan fill="#7a8399" class="l-ru">— акценты РВ</tspan></text>
+        <text x="54" y="570" fill="#4f5d75" font-size="8.5" font-family="'Geist Mono', monospace">ext:Heritage <tspan fill="#7a8399" class="l-en">— MW mirror</tspan><tspan fill="#7a8399" class="l-ru">— зеркало MW</tspan></text>
+        <text x="54" y="594" fill="#4f5d75" font-size="8.5" font-family="'Geist Mono', monospace"><tspan class="l-en">scans mirror</tspan><tspan class="l-ru">зеркало сканов</tspan></text>
+        <text x="54" y="618" fill="#4f5d75" font-size="8.5" font-family="'Geist Mono', monospace"><tspan class="l-en">telegram corpus</tspan><tspan class="l-ru">телеграм-корпус</tspan></text>
+
+        <!-- B1 · correction pipeline -->
+        <rect x="330" y="150" width="220" height="170" rx="8" fill="rgba(45,49,66,0.02)" stroke="rgba(45,49,66,0.35)" stroke-width="1"/>
+        <rect x="344" y="142" width="185" height="16" fill="#ececec"/>
+        <text x="350" y="153" class="l-en" fill="#4f5d75" font-size="7.5" font-family="'Geist Mono', monospace" letter-spacing="0.12em">CORRECTION PIPELINE</text>
+        <text x="350" y="153" class="l-ru" fill="#4f5d75" font-size="7.5" font-family="'Geist Mono', monospace" letter-spacing="0.12em">КОНВЕЙЕР ПРАВОК</text>
+        <text x="344" y="202" fill="#2d3142" font-size="9" font-weight="600" font-family="'Geist Mono', monospace">CORRECTIONS <tspan fill="#7a8399" font-weight="400" class="l-en">— change files</tspan><tspan fill="#7a8399" font-weight="400" class="l-ru">— файлы правок</tspan></text>
+        <text x="344" y="244" fill="#2d3142" font-size="9" font-weight="600" font-family="'Geist Mono', monospace">csl-corrections <tspan fill="#7a8399" font-weight="400" class="l-en">— audit trail</tspan><tspan fill="#7a8399" font-weight="400" class="l-ru">— аудит правок</tspan></text>
+        <text x="344" y="286" fill="#2d3142" font-size="9" font-weight="600" font-family="'Geist Mono', monospace">csl-pywork <tspan fill="#7a8399" font-weight="400" class="l-en">— build + validate</tspan><tspan fill="#7a8399" font-weight="400" class="l-ru">— сборка + проверка</tspan></text>
+
+        <!-- C1 · HUB csl-orig -->
+        <rect x="630" y="280" width="210" height="140" rx="8" fill="rgba(235,108,54,0.06)" stroke="#eb6c36" stroke-width="1"/>
+        <rect x="644" y="272" width="90" height="16" fill="#ececec"/>
+        <text x="650" y="283" fill="#eb6c36" font-size="7.5" font-weight="600" font-family="'Geist Mono', monospace" letter-spacing="0.12em">HUB &#183; TEXT</text>
+        <text x="650" y="283" class="l-ru" fill="#eb6c36" font-size="7.5" font-weight="600" font-family="'Geist Mono', monospace" letter-spacing="0.12em">ХАБ &#183; ТЕКСТ</text>
+        <text x="650" y="320" fill="#2d3142" font-size="17" font-weight="600" font-family="'Geist', sans-serif">csl-orig</text>
+        <text x="650" y="344" class="l-en" fill="#4f5d75" font-size="11" font-style="italic" font-family="'Instrument Serif', serif">canonical source of record</text>
+        <text x="650" y="344" class="l-ru" fill="#4f5d75" font-size="11" font-style="italic" font-family="'Instrument Serif', serif">канонический источник</text>
+        <rect x="650" y="368" width="62" height="20" rx="10" fill="rgba(235,108,54,0.08)" stroke="rgba(235,108,54,0.40)"/>
+        <text x="681" y="381" fill="#eb6c36" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle">IN 36</text>
+        <rect x="722" y="368" width="66" height="20" rx="10" fill="rgba(235,108,54,0.08)" stroke="rgba(235,108,54,0.40)"/>
+        <text x="755" y="381" fill="#eb6c36" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle">OUT 11</text>
+
+        <!-- C2 · HUB VisualDCS -->
+        <rect x="630" y="500" width="210" height="110" rx="8" fill="rgba(235,108,54,0.06)" stroke="#eb6c36" stroke-width="1"/>
+        <rect x="644" y="492" width="96" height="16" fill="#ececec"/>
+        <text x="650" y="503" fill="#eb6c36" font-size="7.5" font-weight="600" font-family="'Geist Mono', monospace" letter-spacing="0.12em"><tspan class="l-en">HUB &#183; CORPUS</tspan><tspan class="l-ru">ХАБ &#183; КОРПУС</tspan></text>
+        <text x="650" y="538" fill="#2d3142" font-size="15" font-weight="600" font-family="'Geist', sans-serif">VisualDCS</text>
+        <text x="650" y="560" class="l-en" fill="#4f5d75" font-size="11" font-style="italic" font-family="'Instrument Serif', serif">corpus-derived hub</text>
+        <text x="650" y="560" class="l-ru" fill="#4f5d75" font-size="11" font-style="italic" font-family="'Instrument Serif', serif">корпусный хаб</text>
+        <rect x="650" y="578" width="70" height="20" rx="10" fill="rgba(235,108,54,0.08)" stroke="rgba(235,108,54,0.40)"/>
+        <text x="685" y="591" fill="#eb6c36" font-size="8" font-family="'Geist Mono', monospace" text-anchor="middle">OUT 15</text>
+
+        <!-- D1 · csl-atlas -->
+        <rect x="920" y="120" width="210" height="70" rx="8" fill="rgba(45,49,66,0.02)" stroke="rgba(45,49,66,0.35)" stroke-width="1"/>
+        <text x="934" y="150" fill="#2d3142" font-size="13" font-weight="600" font-family="'Geist', sans-serif">csl-atlas</text>
+        <text x="934" y="172" fill="#7a8399" font-size="8" font-family="'Geist Mono', monospace"><tspan class="l-en">crosswalks &amp; loci &#183; magnet</tspan><tspan class="l-ru">кроссвоки и локусы &#183; магнит</tspan></text>
+
+        <!-- D2 · kosha -->
+        <rect x="920" y="230" width="210" height="70" rx="8" fill="rgba(45,49,66,0.02)" stroke="rgba(45,49,66,0.35)" stroke-width="1"/>
+        <text x="934" y="260" fill="#2d3142" font-size="13" font-weight="600" font-family="'Geist', sans-serif">kosha</text>
+        <text x="934" y="282" fill="#7a8399" font-size="8" font-family="'Geist Mono', monospace"><tspan class="l-en">dataset manifest + releases</tspan><tspan class="l-ru">манифест и релизы датасетов</tspan></text>
+
+        <!-- D3 · SanskritLexicography -->
+        <rect x="920" y="340" width="210" height="70" rx="8" fill="rgba(45,49,66,0.02)" stroke="rgba(45,49,66,0.35)" stroke-width="1"/>
+        <text x="934" y="370" fill="#2d3142" font-size="12.5" font-weight="600" font-family="'Geist', sans-serif">SanskritLexicography</text>
+        <text x="934" y="392" fill="#7a8399" font-size="8" font-family="'Geist Mono', monospace"><tspan class="l-en">lexicography hub</tspan><tspan class="l-ru">лексикографический хаб</tspan></text>
+
+        <!-- D4 · SanskritSpellCheck -->
+        <rect x="920" y="450" width="210" height="70" rx="8" fill="rgba(45,49,66,0.02)" stroke="rgba(45,49,66,0.35)" stroke-width="1"/>
+        <text x="934" y="480" fill="#2d3142" font-size="13" font-weight="600" font-family="'Geist', sans-serif">SanskritSpellCheck</text>
+        <text x="934" y="502" fill="#7a8399" font-size="8" font-family="'Geist Mono', monospace"><tspan class="l-en">body-grounded QA</tspan><tspan class="l-ru">QA по телу текста</tspan></text>
+
+        <!-- D5 · grammar & media group -->
+        <rect x="920" y="560" width="210" height="110" rx="8" fill="rgba(45,49,66,0.02)" stroke="rgba(45,49,66,0.35)" stroke-width="1"/>
+        <rect x="934" y="552" width="160" height="16" fill="#ececec"/>
+        <text x="940" y="563" class="l-en" fill="#4f5d75" font-size="7.5" font-family="'Geist Mono', monospace" letter-spacing="0.12em">GRAMMAR &amp; MEDIA</text>
+        <text x="940" y="563" class="l-ru" fill="#4f5d75" font-size="7.5" font-family="'Geist Mono', monospace" letter-spacing="0.12em">ГРАММАТИКА И МЕДИА</text>
+        <text x="934" y="592" fill="#4f5d75" font-size="8.5" font-family="'Geist Mono', monospace">SanskritGrammar</text>
+        <text x="934" y="612" fill="#4f5d75" font-size="8.5" font-family="'Geist Mono', monospace">CommentaryStrategies</text>
+        <text x="934" y="632" fill="#4f5d75" font-size="8.5" font-family="'Geist Mono', monospace">Karaoke &#183; SanskritRussian</text>
+        <text x="934" y="652" fill="#7a8399" font-size="8" font-family="'Geist Mono', monospace"><tspan class="l-en">figures &amp; verse feeds</tspan><tspan class="l-ru">фигуры и стихи фидами</tspan></text>
+
+        <!-- E1 · CDSL web & apps container -->
+        <rect x="1210" y="120" width="190" height="180" rx="8" fill="rgba(45,49,66,0.02)" stroke="rgba(45,49,66,0.35)" stroke-width="1"/>
+        <rect x="1224" y="112" width="150" height="16" fill="#ececec"/>
+        <text x="1230" y="123" class="l-en" fill="#4f5d75" font-size="7.5" font-family="'Geist Mono', monospace" letter-spacing="0.12em">CDSL WEB &amp; APPS</text>
+        <text x="1230" y="123" class="l-ru" fill="#4f5d75" font-size="7.5" font-family="'Geist Mono', monospace" letter-spacing="0.12em">CDSL ВЕБ И ПРИЛОЖЕНИЯ</text>
+        <text x="1224" y="156" fill="#4f5d75" font-size="8.5" font-family="'Geist Mono', monospace">websanlexicon <tspan fill="#7a8399" class="l-en">— UI</tspan><tspan fill="#7a8399" class="l-ru">— интерфейс</tspan></text>
+        <text x="1224" y="180" fill="#4f5d75" font-size="8.5" font-family="'Geist Mono', monospace">apidev <tspan fill="#7a8399" class="l-en">— search API</tspan><tspan fill="#7a8399" class="l-ru">— поиск API</tspan></text>
+        <text x="1224" y="204" fill="#4f5d75" font-size="8.5" font-family="'Geist Mono', monospace">app <tspan fill="#7a8399" class="l-en">— offline Flutter</tspan><tspan fill="#7a8399" class="l-ru">— офлайн Flutter</tspan></text>
+        <text x="1224" y="228" fill="#4f5d75" font-size="8.5" font-family="'Geist Mono', monospace">devanagari <tspan fill="#7a8399">&#8646;</tspan></text>
+        <text x="1224" y="252" fill="#4f5d75" font-size="8.5" font-family="'Geist Mono', monospace">inflect <tspan fill="#7a8399" class="l-en">— paradigms</tspan><tspan fill="#7a8399" class="l-ru">— парадигмы</tspan></text>
+
+        <!-- E2 · MW derived cluster -->
+        <rect x="1210" y="350" width="190" height="80" rx="8" fill="rgba(45,49,66,0.02)" stroke="rgba(45,49,66,0.35)" stroke-width="1"/>
+        <rect x="1224" y="342" width="110" height="16" fill="#ececec"/>
+        <text x="1230" y="353" class="l-en" fill="#4f5d75" font-size="7.5" font-family="'Geist Mono', monospace" letter-spacing="0.12em">MW DERIVED</text>
+        <text x="1230" y="353" class="l-ru" fill="#4f5d75" font-size="7.5" font-family="'Geist Mono', monospace" letter-spacing="0.12em">ПРОИЗВОДНЫЕ MW</text>
+        <text x="1224" y="386" fill="#4f5d75" font-size="8.5" font-family="'Geist Mono', monospace">MWinflect <tspan fill="#7a8399" class="l-en">— tables</tspan><tspan fill="#7a8399" class="l-ru">— таблицы</tspan></text>
+        <text x="1224" y="410" fill="#4f5d75" font-size="8.5" font-family="'Geist Mono', monospace">WhitneyRoots <tspan fill="#7a8399" class="l-en">— roots</tspan><tspan fill="#7a8399" class="l-ru">— корни</tspan></text>
+
+        <!-- E3 · org-wide bus (dashed) -->
+        <rect x="1210" y="490" width="190" height="160" rx="8" fill="rgba(45,49,66,0.015)" stroke="rgba(45,49,66,0.45)" stroke-width="1" stroke-dasharray="5,4"/>
+        <rect x="1224" y="482" width="120" height="16" fill="#ececec"/>
+        <text x="1230" y="493" class="l-en" fill="#4f5d75" font-size="7.5" font-family="'Geist Mono', monospace" letter-spacing="0.12em">* ORG-WIDE TARGET</text>
+        <text x="1230" y="493" class="l-ru" fill="#4f5d75" font-size="7.5" font-family="'Geist Mono', monospace" letter-spacing="0.12em">* ОБЩИЙ АДРЕСАТ</text>
+        <text x="1224" y="530" class="l-en" fill="#2d3142" font-size="13" font-weight="600" font-family="'Geist', sans-serif">~85 repos</text>
+        <text x="1224" y="530" class="l-ru" fill="#2d3142" font-size="13" font-weight="600" font-family="'Geist', sans-serif">~85 репозиториев</text>
+        <text x="1224" y="552" fill="#7a8399" font-size="8" font-family="'Geist Mono', monospace"><tspan class="l-en">19 edges land here</tspan><tspan class="l-ru">19 рёбер приходят сюда</tspan></text>
+        <line x1="1224" y1="566" x2="1386" y2="566" stroke="rgba(45,49,66,0.08)"/>
+        <text x="1224" y="588" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace">kosha &#183; VisualDCS</text>
+        <text x="1224" y="608" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace">sanskrit-util &#183; Uprava</text>
+        <text x="1224" y="628" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace">observatory &#183; spine &#8230;</text>
+      </svg>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <p class="eyebrow"><span class="l-en">THE HEADLINE</span><span class="l-ru">ГЛАВНОЕ</span></p>
+        <div class="card-header"><span class="card-dot coral"></span>
+          <h3><span class="l-en">Two hubs, one bus</span><span class="l-ru">Два хаба, одна шина</span></h3>
+        </div>
+        <p class="l-en">csl-orig pulls 36 inbound edges and re-distributes canonical text to web, API and atlas. VisualDCS is its corpus-side twin: external sources in, a dozen derived feeds out.</p>
+        <p class="l-ru">csl-orig втягивает 36 входящих рёбер и раздаёт канонический текст вебу, API и атласу. VisualDCS — его корпусный близнец: внешние источники на вход, дюжина производных фидов на выход.</p>
+      </div>
+      <div class="card">
+        <p class="eyebrow"><span class="l-en">HOW TO READ</span><span class="l-ru">КАК ЧИТАТЬ</span></p>
+        <div class="card-header"><span class="card-dot ink"></span>
+          <h3><span class="l-en">Thickness = traffic</span><span class="l-ru">Толщина = трафик</span></h3>
+        </div>
+        <ul>
+          <li><span class="l-en">Band width follows bundled edge count (&#215;N labels)</span><span class="l-ru">Ширина ленты — число рёбер в пучке (метки &#215;N)</span></li>
+          <li><span class="l-en">Only bundles &#8805;2 or load-bearing singles drawn; raw truth = 135 TSV rows</span><span class="l-ru">Нарисованы пучки &#8805;2 и несущие одиночки; сырая правда — 135 строк TSV</span></li>
+          <li><span class="l-en">Dashed box = the org-wide '*' target</span><span class="l-ru">Пунктир — общий адресат '*'</span></li>
+          <li><span class="l-en">Directions copied verbatim from the kind column</span><span class="l-ru">Направления взяты как есть из колонки kind</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <p class="eyebrow"><span class="l-en">ROUND 2 OF 7</span><span class="l-ru">РАУНД 2 ИЗ 7</span></p>
+        <div class="card-header"><span class="card-dot muted"></span>
+          <h3><span class="l-en">Next: the volume treemap</span><span class="l-ru">Дальше: тримэп объёма</span></h3>
+        </div>
+        <p class="l-en">Round 3 sizes every data layer by bytes on disk from the harvest census — where the 32.3 GB actually lives.</p>
+        <p class="l-ru">Раунд 3 измеряет каждый слой данных в байтах по переписи — где реально живут 32,3 ГБ.</p>
+      </div>
+    </div>
+
+    <div class="footer">
+      <span><span class="l-en">sanskrit work dataflow · dependency map · round 2/7</span><span class="l-ru">потоки работ · карта зависимостей · раунд 2/7</span></span>
+      <span><span class="l-en">135 edges · interlinks_edges.tsv · 22-08-2026 · Dr. Mārcis Gasūns</span><span class="l-ru">135 рёбер · interlinks_edges.tsv · 22-08-2026 · Dr. Mārcis Gasūns</span></span>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var bE = document.getElementById('btn-en');
+      var bR = document.getElementById('btn-ru');
+      function set(lang) {
+        var ru = lang === 'ru';
+        document.body.classList.toggle('ru', ru);
+        document.documentElement.lang = ru ? 'ru' : 'en';
+        bE.classList.toggle('active', !ru);
+        bR.classList.toggle('active', ru);
+        try { localStorage.setItem('swl-lang', lang); } catch (e) {}
+      }
+      bE.addEventListener('click', function () { set('en'); });
+      bR.addEventListener('click', function () { set('ru'); });
+      var saved = 'en';
+      try { saved = localStorage.getItem('swl-lang') || 'en'; } catch (e) {}
+      set(saved);
+    })();
+  </script>
+</body>
+</html>
