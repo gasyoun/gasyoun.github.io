@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>When the Sanskrit Work Happened</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --color-paper:#f5f5f5; --color-paper-2:#ececec; --color-ink:#2d3142; --color-muted:#4f5d75; --color-soft:#7a8399; --color-rule:rgba(45,49,66,0.12); --color-accent:#eb6c36; --color-link:#2e5aa8; --font-sans:'Geist',system-ui,sans-serif; --font-serif:'Instrument Serif',serif; --font-mono:'Geist Mono',ui-monospace,monospace; }
+    body { font-family: var(--font-sans); background: var(--color-paper); min-height: 100vh; padding: 3rem 2rem; color: var(--color-ink); }
+    .container { max-width: 1400px; margin: 0 auto; }
+    .header { position: relative; margin-bottom: 2.5rem; padding-right: 130px; }
+    .header-eyebrow { font-family: var(--font-mono); font-size: 0.66rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-muted); margin-bottom: 0.75rem; }
+    h1 { font-family: var(--font-serif); font-size: clamp(1.75rem, 3vw + 1rem, 2.5rem); font-weight: 400; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 0.5rem; }
+    .subtitle { font-size: 1rem; line-height: 1.55; color: var(--color-muted); max-width: 62ch; }
+    .lang-toggle { position: absolute; top: 0.25rem; right: 0; display: flex; border: 1px solid var(--color-rule); border-radius: 6px; overflow: hidden; background: #fff; }
+    .lang-toggle button { font-family: var(--font-mono); font-size: 0.66rem; font-weight: 500; letter-spacing: 0.08em; padding: 0.4rem 0.8rem; border: none; background: transparent; color: var(--color-soft); cursor: pointer; }
+    .lang-toggle button.active { background: var(--color-ink); color: #fff; }
+    .l-ru { display: none; }
+    body.ru .l-en { display: none; }
+    body.ru .l-ru { display: inline; }
+    .diagram-container { background: var(--color-paper-2); border-radius: 8px; border: 1px solid var(--color-rule); padding: 1.5rem; overflow-x: auto; }
+    svg { width: 100%; min-width: 1000px; display: block; }
+    text.l-ru, tspan.l-ru { display: none; }
+    body.ru text.l-en, body.ru tspan.l-en { display: none; }
+    body.ru text.l-ru, body.ru tspan.l-ru { display: inline; }
+    svg a { cursor: pointer; }
+    svg a:hover rect.bar { fill: #eb6c36; }
+    a.repo-link { color: var(--color-link); }
+    .cards { display: grid; grid-template-columns: 1.1fr 1fr 0.9fr; gap: 1rem; margin-top: 1.5rem; }
+    @media (max-width: 820px) { .cards { grid-template-columns: 1fr; } }
+    .card { background: #fff; border-radius: 6px; border: 1px solid var(--color-rule); padding: 1.25rem; }
+    .card .eyebrow { font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-muted); margin-bottom: 0.5rem; }
+    .card-header { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.875rem; padding-bottom: 0.875rem; border-bottom: 1px solid rgba(45,49,66,0.08); }
+    .card-dot { width: 7px; height: 7px; border-radius: 50%; }
+    .card-dot.ink { background: var(--color-ink); } .card-dot.muted { background: var(--color-muted); } .card-dot.coral { background: var(--color-accent); }
+    .card h3 { font-size: 0.875rem; font-weight: 600; }
+    .card p, .card ul { color: var(--color-muted); font-size: 0.8125rem; line-height: 1.55; list-style: none; }
+    .card li { margin-bottom: 0.3rem; padding-left: 0.875rem; position: relative; }
+    .card li::before { content: '—'; position: absolute; left: 0; color: rgba(45,49,66,0.25); font-size: 0.75rem; }
+    .footer { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(45,49,66,0.10); font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.06em; color: var(--color-soft); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="lang-toggle" role="group" aria-label="Language / Язык">
+        <button id="btn-en" class="active" type="button">EN</button>
+        <button id="btn-ru" type="button">РУ</button>
+      </div>
+      <p class="header-eyebrow">
+        <span class="l-en">Programme Timeline · Diagram Design · Round 5 of 7</span>
+        <span class="l-ru">Таймлайн программы · Diagram Design · Раунд 5 из 7</span>
+      </p>
+      <h1>
+        <span class="l-en">When It Happened</span>
+        <span class="l-ru">Когда это было</span>
+      </h1>
+      <p class="subtitle">
+        <span class="l-en">Every dated registry event for the 59 dated papers, on one Gantt — first activity to last registry event, July&#8211;August 2026. A44 and M03 carry later targets; their bars clamp at today.</span>
+        <span class="l-ru">Все датированные события реестра по 59 статьям на одном Gantt — от первой активности до последнего события реестра, июль&#8211;август 2026. У A44 и M03 цели позже — полосы обрезаны по сегодня.</span>
+      </p>
+    </div>
+
+    <div class="diagram-container">
+      <svg viewBox="0 0 1440 920" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="swt5-title swt5-desc">
+        <title id="swt5-title">When the Sanskrit Work Happened</title>
+        <desc id="swt5-desc">Gantt timeline of registry events per paper across repos, July to August 2026: bars run from first to last dated event, coral diamonds mark signed or submission-ready papers, and 34 of 59 bars end on 29 July, the portfolio disposition day.</desc>
+        <defs>
+          <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse">
+            <circle cx="1" cy="1" r="0.9" fill="rgba(45,49,66,0.10)"/>
+          </pattern>
+        </defs>
+
+        <rect width="100%" height="100%" fill="#f5f5f5"/>
+        <rect width="100%" height="100%" fill="url(#dots)" opacity="0.55"/>
+
+        <!-- Outer frame -->
+        <rect x="20" y="60" width="1400" height="840" rx="8" fill="rgba(45,49,66,0.015)" stroke="rgba(45,49,66,0.30)" stroke-width="1"/>
+        <rect x="36" y="52" width="360" height="16" fill="#ececec"/>
+        <text x="44" y="64" class="l-en" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">TIMELINE · ARTICLES.md REGISTRY EVENTS · JULY–AUGUST 2026</text>
+        <text x="44" y="64" class="l-ru" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">ТАЙМЛАЙН · СОБЫТИЯ РЕЕСТРА ARTICLES.md · ИЮЛЬ–АВГУСТ 2026</text>
+
+        <!-- Annotation -->
+        <text x="1400" y="40" class="l-en" fill="#2d3142" font-size="15" font-style="italic" font-family="'Instrument Serif', serif" text-anchor="end">34 of 59 bars close on one ruling day</text>
+        <text x="1400" y="40" class="l-ru" fill="#2d3142" font-size="15" font-style="italic" font-family="'Instrument Serif', serif" text-anchor="end">34 из 59 полос замыкает один день вердикта</text>
+
+        <!-- Month axis -->
+        <line x1="172" y1="168" x2="172" y2="856" stroke="rgba(45,49,66,0.18)" stroke-dasharray="3,3"/>
+        <line x1="904" y1="168" x2="904" y2="856" stroke="rgba(45,49,66,0.18)" stroke-dasharray="3,3"/>
+        <line x1="1400" y1="168" x2="1400" y2="856" stroke="rgba(45,49,66,0.18)" stroke-dasharray="3,3"/>
+        <text x="538" y="152" class="l-en" fill="#4f5d75" font-size="11" font-family="'Geist Mono', monospace" text-anchor="middle">JULY</text>
+        <text x="538" y="152" class="l-ru" fill="#4f5d75" font-size="11" font-family="'Geist Mono', monospace" text-anchor="middle">ИЮЛЬ</text>
+        <text x="1152" y="152" class="l-en" fill="#4f5d75" font-size="11" font-family="'Geist Mono', monospace" text-anchor="middle">AUGUST</text>
+        <text x="1152" y="152" class="l-ru" fill="#4f5d75" font-size="11" font-family="'Geist Mono', monospace" text-anchor="middle">АВГУСТ</text>
+        <g fill="#7a8399" font-size="6" font-family="'Geist Mono', monospace">
+          <text x="172" y="180">1</text><text x="314" y="180">7</text><text x="479" y="180">14</text><text x="645" y="180">21</text><text x="810" y="180">28</text>
+          <text x="908" y="180">1</text><text x="1049" y="180">7</text><text x="1215" y="180">14</text><text x="1381" y="180">21</text>
+        </g>
+
+
+        <rect x="30" y="201" width="1390" height="76" fill="rgba(45,49,66,0.03)"/>
+        <text x="40" y="212" fill="#7a8399" font-size="6.5" font-family="Geist Mono, monospace" letter-spacing="0.08em">COMMENTARYSTRATEGIES</text>
+        <a href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>M02 &#183; Сундараканда — том «Литературные памятники» (пер. Леонова/Костиной, двухъярусный аппарат) &#8212; 07.07&#8211;29.07.2026 &#8599;</title><rect class="bar" x="313.7" y="205" width="519.5" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="1358.7" y="211" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">M02</text></a>
+        <a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/EVAL_RESULTS.md" target="_blank" rel="noopener"><title>A19 &#183; Art. 1 Концептуальная непереводимость &#8212; 19.07&#8211;10.08.2026 &#8599;</title><rect class="bar" x="597.1" y="215" width="519.5" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="1642.1" y="221" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A19</text></a>
+        <a href="https://github.com/gasyoun/Uprava/blob/main/docs/PORTFOLIO_STATISTICAL_REDTEAM_2026H2.md" target="_blank" rel="noopener"><title>A23 &#183; Art. 5 Диахронические «ложные друзья» (Елизаренкова) &#8212; 19.07&#8211;29.07.2026 &#8599;</title><rect class="bar" x="597.1" y="225" width="236.1" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="1075.3" y="231" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A23</text></a>
+        <a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/articles/SUBMISSION_READINESS_A21.md" target="_blank" rel="noopener"><title>A21 &#183; Nīlakaṇṭha commentary traditions (RU) &#8212; 26.07&#8211;29.07.2026 &#8599;</title><rect class="bar" x="762.4" y="235" width="70.8000000000001" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="910" y="241" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A21</text></a>
+        <a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/articles/SUBMISSION_READINESS_A22.md" target="_blank" rel="noopener"><title>A22 &#183; Art. 3 Nīlakaṇṭha (EN translation) &#8212; 26.07&#8211;29.07.2026 &#8599;</title><rect class="bar" x="762.4" y="245" width="70.8000000000001" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="910" y="251" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A22</text></a>
+        <a href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>A20 &#183; Art. 2 Бхагавадгита в 6 переводах &#8212; 29.07&#8211;29.07.2026 &#8599;</title><rect class="bar" x="833.2" y="255" width="4" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="843.2" y="261" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A20</text></a>
+        <a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/tronsky-XXX/A24_kostina_fold_fable5.md" target="_blank" rel="noopener"><title>A24 &#183; Tronsky-readings: RU epic translators &#8212; 29.07&#8211;29.07.2026 &#8599;</title><rect class="bar" x="833.2" y="265" width="4" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="843.2" y="271" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A24</text></a>
+        <rect x="30" y="277" width="1390" height="66" fill="rgba(45,49,66,0)"/>
+        <text x="40" y="288" fill="#7a8399" font-size="6.5" font-family="Geist Mono, monospace" letter-spacing="0.08em">CSL-ATLAS</text>
+        <a href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>A10 &#183; Apparatus, not errors (Art. 21) &#8212; 10.07&#8211;10.07.2026 &#8599;</title><rect class="bar" x="384.5" y="281" width="4" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="394.5" y="287" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A10</text></a>
+        <rect x="391.5" y="281.5" width="6" height="6" transform="rotate(45 394.5 284.5)" fill="#eb6c36"/>
+        <a href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>A50 &#183; What the tradition cites: `<ls>` citation-frequency graph (11 dicts) &#8212; 11.07&#8211;11.07.2026 &#8599;</title><rect class="bar" x="408.2" y="291" width="4" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="418.2" y="297" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A50</text></a>
+        <a href="https://github.com/sanskrit-lexicon/csl-atlas/blob/main/papers/A68_DCS_REPRESENTATIVENESS_PD_CANON.md" target="_blank" rel="noopener"><title>A68 &#183; How representative is DCS of the Sanskrit lexicographic canon? Measuring DCS coverage of the Poona Dictionary's cited source canon &#8212; 20.07&#8211;05.08.2026 &#8599;</title><rect class="bar" x="620.7" y="301" width="377.8" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="1382.3" y="307" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A68</text></a>
+        <a href="https://github.com/sanskrit-lexicon/csl-atlas/blob/main/docs/articles/A03_review_fable5.md" target="_blank" rel="noopener"><title>A03 &#183; P3 Three axes of descent &#8212; 29.07&#8211;29.07.2026 &#8599;</title><rect class="bar" x="833.2" y="311" width="4" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="843.2" y="317" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A03</text></a>
+        <a href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>A07 &#183; OBS-R Redundancy & descent &#8212; 29.07&#8211;29.07.2026 &#8599;</title><rect class="bar" x="833.2" y="321" width="4" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="843.2" y="327" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A07</text></a>
+        <a href="https://github.com/sanskrit-lexicon/csl-atlas/blob/main/docs/PAPER_SENSE_ALIGNMENT.md" target="_blank" rel="noopener"><title>A09 &#183; Sense-alignment (15 dicts) &#8212; 29.07&#8211;29.07.2026 &#8599;</title><rect class="bar" x="833.2" y="331" width="4" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="843.2" y="337" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A09</text></a>
+        <rect x="30" y="343" width="1390" height="66" fill="rgba(45,49,66,0.03)"/>
+        <text x="40" y="354" fill="#7a8399" font-size="6.5" font-family="Geist Mono, monospace" letter-spacing="0.08em">CSL-OBSERVATORY</text>
+        <a href="https://github.com/sanskrit-lexicon/csl-observatory/blob/main/paper-obs-t-error-typology.md" target="_blank" rel="noopener"><title>A12 &#183; OBS-T Error typology &#8212; 04.07&#8211;10.08.2026 &#8599;</title><rect class="bar" x="242.8" y="347" width="873.8" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="1996.4" y="353" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A12</text></a>
+        <a href="https://github.com/sanskrit-lexicon/csl-observatory/blob/main/article/A48_error_recapture.md" target="_blank" rel="noopener"><title>A48 &#183; Capture–recapture: correction work remaining in CDSL &#8212; 27.07&#8211;27.07.2026 &#8599;</title><rect class="bar" x="786" y="357" width="4" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="796" y="363" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A48</text></a>
+        <a href="https://github.com/sanskrit-lexicon/csl-observatory/blob/main/article/A13_review_fable5.md" target="_blank" rel="noopener"><title>A13 &#183; CDSL report (narrative) &#8212; 29.07&#8211;29.07.2026 &#8599;</title><rect class="bar" x="833.2" y="367" width="4" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="843.2" y="373" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A13</text></a>
+        <a href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>A14 &#183; CDSL methodological infrastructure (empirical companion) &#8212; 29.07&#8211;29.07.2026 &#8599;</title><rect class="bar" x="833.2" y="377" width="4" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="843.2" y="383" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A14</text></a>
+        <a href="https://github.com/sanskrit-lexicon/csl-observatory/blob/main/article/A15_github_ecosystem.md" target="_blank" rel="noopener"><title>A15 &#183; CDSL as GitHub maintenance ecosystem &#8212; 29.07&#8211;29.07.2026 &#8599;</title><rect class="bar" x="833.2" y="387" width="4" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="843.2" y="393" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A15</text></a>
+        <a href="https://github.com/sanskrit-lexicon/csl-observatory/blob/main/article/A69_pwg_scan_index_campaign.md" target="_blank" rel="noopener"><title>A69 &#183; The PWG scan-index campaign 2025–2026: 29k crowd-indexed pages, coverage by citation mass, resolver wiring audit &#8212; 05.08&#8211;05.08.2026 &#8599;</title><rect class="bar" x="998.5" y="397" width="4" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="1008.5" y="403" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A69</text></a>
+        <rect x="30" y="409" width="1390" height="26" fill="rgba(45,49,66,0)"/>
+        <text x="40" y="420" fill="#7a8399" font-size="6.5" font-family="Geist Mono, monospace" letter-spacing="0.08em">INDOLOGYSCHOLARS</text>
+        <a href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>A25 &#183; 20 лет рос. индологии (Зографские/Рериховские чтения) &#8212; 21.07&#8211;29.07.2026 &#8599;</title><rect class="bar" x="644.3" y="413" width="188.9" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="1028.1" y="419" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A25</text></a>
+        <a href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>A26 &#183; Data paper: Russian Indological Research Archive &#8212; 29.07&#8211;29.07.2026 &#8599;</title><rect class="bar" x="833.2" y="423" width="4" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="843.2" y="429" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A26</text></a>
+        <rect x="30" y="435" width="1390" height="36" fill="rgba(45,49,66,0.03)"/>
+        <text x="40" y="446" fill="#7a8399" font-size="6.5" font-family="Geist Mono, monospace" letter-spacing="0.08em">KOSHA</text>
+        <a href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>A59 &#183; Definition generation + gloss-grounded WSD for Sanskrit lexicography (first CDSL-side definition-modeling eval) &#8212; 11.07&#8211;11.07.2026 &#8599;</title><rect class="bar" x="408.2" y="439" width="4" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="418.2" y="445" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A59</text></a>
+        <a href="https://github.com/gasyoun/kosha/blob/main/papers/A55_UNION_HEADWORDS_DATA_PAPER_JOHD.md" target="_blank" rel="noopener"><title>A55 &#183; Union headword index of 15 digitized Sanskrit dictionaries (data paper) &#8212; 29.07&#8211;02.08.2026 &#8599;</title><rect class="bar" x="833.2" y="449" width="94.5" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="1028.2" y="455" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A55</text></a>
+        <a href="https://github.com/gasyoun/kosha/blob/main/papers/A56_ZALIZNYAK_GRAMMAR_INDEX_DATA_PAPER_JOHD.md" target="_blank" rel="noopener"><title>A56 &#183; Zaliznyak-style grammar-token index for 98,639 PWG headwords (data paper) &#8212; 29.07&#8211;02.08.2026 &#8599;</title><rect class="bar" x="833.2" y="459" width="94.5" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="1028.2" y="465" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A56</text></a>
+        <rect x="30" y="471" width="1390" height="56" fill="rgba(45,49,66,0)"/>
+        <text x="40" y="482" fill="#7a8399" font-size="6.5" font-family="Geist Mono, monospace" letter-spacing="0.08em">MWS</text>
+        <a href="https://github.com/sanskrit-lexicon/MWS/blob/master/papers/A46_mw_preface_method.md" target="_blank" rel="noopener"><title>A46 &#183; A lexicographer's own method — MW 1899 preface (bilingual EN/RU edition) &#8212; 09.07&#8211;29.07.2026 &#8599;</title><rect class="bar" x="360.9" y="475" width="472.3" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="1311.5" y="481" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A46</text></a>
+        <a href="https://github.com/sanskrit-lexicon/MWS/blob/master/papers/SIGNOFF_A45_author_pass.md" target="_blank" rel="noopener"><title>A45 &#183; Naming the plants — MW botanical → Linnaean crosswalk vs corpus &#8212; 10.07&#8211;29.07.2026 &#8599;</title><rect class="bar" x="384.5" y="485" width="448.7" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="1287.9" y="491" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A45</text></a>
+        <rect x="840.2" y="485.5" width="6" height="6" transform="rotate(45 843.2 488.5)" fill="#eb6c36"/>
+        <a href="https://github.com/sanskrit-lexicon/MWS/blob/master/papers/p3_citation_registers/A18_citation_registers_paper.md" target="_blank" rel="noopener"><title>A18 &#183; P3 Two citation registers (MW evidence block) &#8212; 16.07&#8211;29.07.2026 &#8599;</title><rect class="bar" x="526.2" y="495" width="307" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="1146.2" y="501" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A18</text></a>
+        <a href="https://github.com/sanskrit-lexicon/MWS/blob/docs-pass/papers/microanalysis/SIGNOFF_A16_citation_dossier.md" target="_blank" rel="noopener"><title>A16 &#183; MW microstructure (EN) &#8212; 17.07&#8211;21.07.2026 &#8599;</title><rect class="bar" x="549.8" y="505" width="94.5" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="744.8" y="511" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A16</text></a>
+        <rect x="651.3" y="505.5" width="6" height="6" transform="rotate(45 654.3 508.5)" fill="#eb6c36"/>
+        <a href="https://github.com/sanskrit-lexicon/MWS/blob/docs-pass/papers/microanalysis/DOUBTS.md" target="_blank" rel="noopener"><title>A17 &#183; MW microstructure / «лексикографический хедж» (RU) &#8212; 21.07&#8211;29.07.2026 &#8599;</title><rect class="bar" x="644.3" y="515" width="188.9" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="1028.1" y="521" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A17</text></a>
+        <rect x="840.2" y="515.5" width="6" height="6" transform="rotate(45 843.2 518.5)" fill="#eb6c36"/>
+        <rect x="30" y="527" width="1390" height="46" fill="rgba(45,49,66,0.03)"/>
+        <text x="40" y="538" fill="#7a8399" font-size="6.5" font-family="Geist Mono, monospace" letter-spacing="0.08em">OTHER REPOS</text>
+        <a href="https://github.com/sanskrit-lexicon/csl-standards/blob/main/docs/A27_review_fable5.md" target="_blank" rel="noopener"><title>A27 &#183; Serialization standard (MW/PWG/PWK × TEI/OntoLex/MDF) &#8212; 29.07&#8211;29.07.2026 &#8599;</title><rect class="bar" x="833.2" y="531" width="4" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="843.2" y="537" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A27</text></a>
+        <a href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>A28 &#183; Data paper for the «Хожение» digital atlas &#8212; 29.07&#8211;29.07.2026 &#8599;</title><rect class="bar" x="833.2" y="541" width="4" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="843.2" y="547" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A28</text></a>
+        <a href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>A29 &#183; «Совет филологов» (agentic review, P6) &#8212; 29.07&#8211;29.07.2026 &#8599;</title><rect class="bar" x="833.2" y="551" width="4" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="843.2" y="557" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A29</text></a>
+        <a href="https://github.com/gasyoun/SamudraManthanam/blob/main/papers/data/A41_DATA_STATEMENT_SAMUDRA_SA_RU_CORPUS.meta.md" target="_blank" rel="noopener"><title>A41 &#183; Samudra Manthanam — markup-aligned Sa–Ru parallel corpus (148 sources) &#8212; 29.07&#8211;10.08.2026 &#8599;</title><rect class="bar" x="833.2" y="561" width="283.4" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="1406" y="567" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A41</text></a>
+        <rect x="30" y="573" width="1390" height="96" fill="rgba(45,49,66,0)"/>
+        <text x="40" y="584" fill="#7a8399" font-size="6.5" font-family="Geist Mono, monospace" letter-spacing="0.08em">SANSKRITGRAMMAR</text>
+        <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/IIL_ZALIZNIAK_ALTERNATIONS_ARTICLE_2027.md" target="_blank" rel="noopener"><title>A54 &#183; Санскритские чередования полвека спустя: ответ Куликову (IIL 2027) &#8212; 11.07&#8211;29.07.2026 &#8599;</title><rect class="bar" x="408.2" y="577" width="425" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="1264.2" y="583" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A54</text></a>
+        <rect x="840.2" y="577.5" width="6" height="6" transform="rotate(45 843.2 580.5)" fill="#eb6c36"/>
+        <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/TolchelnikovTalmud_2026/papers/GrammarClaimsCorpusDenies_A60/DRAFT_grammar-claims-corpus-denies_A60.md" target="_blank" rel="noopener"><title>A60 &#183; Grammar claims the corpus does not confirm (Sanskrit reference/textbook grammars vs DCS) &#8212; 12.07&#8211;16.07.2026 &#8599;</title><rect class="bar" x="431.8" y="587" width="94.4" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="626.6" y="593" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A60</text></a>
+        <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H1284-Fable_SanskritGrammar_a61-signoff-ruling-roadmap-compare_19.07.26.md" target="_blank" rel="noopener"><title>A61 &#183; How the Cologne Digital Sanskrit Lexicon Endured (1994–2026): From Institutional Project to Shared Infrastructure — deep remake of the WSC-2025-rejected report (retitled 18-07-2026 by the evidence gate) &#8212; 12.07&#8211;29.07.2026 &#8599;</title><rect class="bar" x="431.8" y="597" width="401.4" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="1240.6" y="603" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A61</text></a>
+        <rect x="840.2" y="597.5" width="6" height="6" transform="rotate(45 843.2 600.5)" fill="#eb6c36"/>
+        <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/TolchelnikovTalmud_2026/papers/DifficultyOrdering_A63/OUTLINE_difficulty-ordering_A63.md" target="_blank" rel="noopener"><title>A63 &#183; Pedagogical difficulty & optimal learning-order for Sanskrit &#8212; 14.07&#8211;17.07.2026 &#8599;</title><rect class="bar" x="479" y="607" width="70.8" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="626.6" y="613" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A63</text></a>
+        <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/REPORT_GRAMMAR_CLAIM_VERIFICATION_SYNTHESIS_2026.md" target="_blank" rel="noopener"><title>A65 &#183; Что корпус сказал грамматикам: синтез программы верификации утверждений пяти грамматик (RU) &#8212; 16.07&#8211;29.07.2026 &#8599;</title><rect class="bar" x="526.2" y="617" width="307" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="1146.2" y="623" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A65</text></a>
+        <rect x="840.2" y="617.5" width="6" height="6" transform="rotate(45 843.2 620.5)" fill="#eb6c36"/>
+        <a href="https://github.com/gasyoun/Uprava/blob/main/REVIEW_SHEETS_INDEX.md" target="_blank" rel="noopener"><title>A66 &#183; Sangram: corpus-attested cluster overviews (W2 core) — four foundational cluster frames (declension · conjugation · compounds · word-structure) &#8212; 16.07&#8211;16.07.2026 &#8599;</title><rect class="bar" x="526.2" y="627" width="4" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="536.2" y="633" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A66</text></a>
+        <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/TolchelnikovTalmud_2026/papers/DigitalPedagogyAgenda_A62/OUTLINE_digital-sanskrit-pedagogy-agenda_A62.md" target="_blank" rel="noopener"><title>A62 &#183; Digital Sanskrit pedagogy: a research agenda &#8212; 17.07&#8211;04.08.2026 &#8599;</title><rect class="bar" x="549.8" y="637" width="425.1" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="1406" y="643" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A62</text></a>
+        <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/GasunsDhatu_2014/revision-2026/M03_FREEZE_HARNESS_SPOTCHECK.md" target="_blank" rel="noopener"><title>M03 &#183; «Состав и строй древнеиндийских корней», 2-е изд., перераб. и доп. (полная монография, Ч. I = переписанное ядро 2014, Ч. II = 4 новые главы) &#8212; 18.07&#8211;22.08.2026 (target later) &#8599;</title><rect class="bar" x="573.5" y="647" width="826.5" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="2232.5" y="653" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">M03</text></a>
+        <circle cx="1407" cy="650.5" r="3" fill="none" stroke="#eb6c36"/>
+        <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/TolchelnikovTalmud_2026/papers/CompoundTypeKappa_A64/DRAFT_compound-type-kappa_A64.md" target="_blank" rel="noopener"><title>A64 &#183; Can Pāṇinian compound type be recovered from an unannotated corpus? A two-tier inter-pass κ study (Sangram P4, tatpuruṣa) &#8212; 29.07&#8211;29.07.2026 &#8599;</title><rect class="bar" x="833.2" y="657" width="4" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="843.2" y="663" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A64</text></a>
+        <rect x="30" y="669" width="1390" height="126" fill="rgba(45,49,66,0.03)"/>
+        <text x="40" y="680" fill="#7a8399" font-size="6.5" font-family="Geist Mono, monospace" letter-spacing="0.08em">SANSKRITLEXICOGRAPHY</text>
+        <a href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>A49 &#183; The Petersburg tradition as a self-layering lexicon — an operation typology of addenda and abridgement (PWG→PW→SCH→NWS ⇄ MW/AP) &#8212; 06.07&#8211;06.07.2026 &#8599;</title><rect class="bar" x="290.1" y="673" width="4" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="300.1" y="679" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A49</text></a>
+        <a href="https://github.com/gasyoun/SanskritLexicography/blob/master/RussianTranslation/pwg_ru/A51_METHODS_DRAFT_DE_LAYERS_RU_PIPELINE.md" target="_blank" rel="noopener"><title>A51 &#183; LLM-assisted translation of a complete historical dictionary — the PWG→RU pipeline + four-rubric evaluation bake-off &#8212; 07.07&#8211;26.07.2026 &#8599;</title><rect class="bar" x="313.7" y="683" width="448.7" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="1217.1" y="689" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A51</text></a>
+        <a href="https://github.com/gasyoun/SanskritLexicography/blob/master/papers/A43_ru_dict_family.md" target="_blank" rel="noopener"><title>A43 &#183; Russian Sanskrit lexicography as a digitized comparable family &#8212; 08.07&#8211;08.07.2026 &#8599;</title><rect class="bar" x="337.3" y="693" width="4" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="347.3" y="699" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A43</text></a>
+        <a href="https://github.com/gasyoun/SanskritLexicography/blob/master/RussianTranslation/LAUNCH_STATS.md" target="_blank" rel="noopener"><title>A52 &#183; A failure taxonomy of LLM-orchestrated dictionary translation at scale — 450 real pwg_ru launches, 3 failure axes, 25% hard-fail dominated by giant polysemous roots + orchestration classes (not model quality) &#8212; 08.07&#8211;08.07.2026 &#8599;</title><rect class="bar" x="337.3" y="703" width="4" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="347.3" y="709" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A52</text></a>
+        <a href="https://github.com/gasyoun/SanskritLexicography/blob/master/Digital_Sanskrit_Lexicography-BOOK/SIGNOFF_M01_glue_framing_calls.md" target="_blank" rel="noopener"><title>M01 &#183; *Digital Sanskrit Lexicography: The Dictionary as a Layered Evidence Graph* (monograph) &#8212; 12.07&#8211;19.07.2026 &#8599;</title><rect class="bar" x="431.8" y="713" width="165.3" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="768.4" y="719" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">M01</text></a>
+        <rect x="604.1" y="713.5" width="6" height="6" transform="rotate(45 607.1 716.5)" fill="#eb6c36"/>
+        <a href="https://github.com/gasyoun/SanskritLexicography/blob/master/papers/A30_review_fable5.md" target="_blank" rel="noopener"><title>A30 &#183; P4 ŚKD/VCP indigenous microstructure &#8212; 17.07&#8211;29.07.2026 &#8599;</title><rect class="bar" x="549.8" y="723" width="283.4" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="1122.6" y="729" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A30</text></a>
+        <a href="https://github.com/gasyoun/Uprava/blob/main/docs/PROTOCOL_BLIND_LLM_SECOND_ANNOTATOR_RELIABILITY_2026.md" target="_blank" rel="noopener"><title>A31 &#183; P5 50k corrections error typology &#8212; 17.07&#8211;29.07.2026 &#8599;</title><rect class="bar" x="549.8" y="733" width="283.4" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="1122.6" y="739" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A31</text></a>
+        <a href="https://github.com/gasyoun/SanskritLexicography/blob/master/papers/A67_negative_results_adjudication_table.md" target="_blank" rel="noopener"><title>A67 &#183; What doesn’t work in computational Sanskrit lexicography: negative results from a multi-repo research programme &#8212; 19.07&#8211;19.07.2026 &#8599;</title><rect class="bar" x="597.1" y="743" width="4" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="607.1" y="749" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A67</text></a>
+        <a href="https://github.com/gasyoun/SanskritLexicography/blob/master/papers/A42_corpus_lexicon_resource.md" target="_blank" rel="noopener"><title>A42 &#183; Корпус санскр.-рус. соответствий — 1.09M-pair word-aligned Sa→Ru lexicon &#8212; 22.07&#8211;29.07.2026 &#8599;</title><rect class="bar" x="667.9" y="753" width="165.3" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="1004.5" y="759" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A42</text></a>
+        <a href="https://github.com/gasyoun/SanskritLexicography/blob/master/papers/A36_cover_letter.md" target="_blank" rel="noopener"><title>A36 &#183; The Latin discretion-screen in 19th-c. Sanskrit lexicography — history + metalanguage-relative method; *obscaena Latine* across 11+43 Cologne dicts (1832–1959) &#8212; 29.07&#8211;29.07.2026 &#8599;</title><rect class="bar" x="833.2" y="763" width="4" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="843.2" y="769" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A36</text></a>
+        <a href="https://github.com/gasyoun/SanskritLexicography/blob/master/papers/A40_headword_inventory_note.md" target="_blank" rel="noopener"><title>A40 &#183; CDSL headword inventory — 12-yr growth + corpus-grounding &#8212; 29.07&#8211;29.07.2026 &#8599;</title><rect class="bar" x="833.2" y="773" width="4" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="843.2" y="779" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A40</text></a>
+        <a href="https://github.com/gasyoun/SanskritLexicography/blob/master/papers/A58_semdom_amarakosha_crosswalk_paper.md" target="_blank" rel="noopener"><title>A58 &#183; First crosswalk of SIL's 1,792 semantic domains to a classical thesaurus — Amarakosha varga structure (semdom ↔ kosha) &#8212; 29.07&#8211;29.07.2026 &#8599;</title><rect class="bar" x="833.2" y="783" width="4" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="843.2" y="789" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A58</text></a>
+        <rect x="30" y="795" width="1390" height="36" fill="rgba(45,49,66,0)"/>
+        <text x="40" y="806" fill="#7a8399" font-size="6.5" font-family="Geist Mono, monospace" letter-spacing="0.08em">SANSKRITSPELLCHECK</text>
+        <a href="https://github.com/drdhaval2785/SanskritSpellCheck/blob/master/papers/SIGNOFF_A44_author_pass.md" target="_blank" rel="noopener"><title>A44 &#183; The dictionary body as ground truth — body-grounded LLM triage method &#8212; 10.07&#8211;22.08.2026 (target later) &#8599;</title><rect class="bar" x="384.5" y="799" width="1015.5" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="2421.5" y="805" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A44</text></a>
+        <rect x="1407" y="799.5" width="6" height="6" transform="rotate(45 1410 802.5)" fill="#eb6c36"/>
+        <a href="https://github.com/gasyoun/Uprava/blob/main/ARTICLES.md" target="_blank" rel="noopener"><title>A47 &#183; Sound and metre at scale — computational anuprāsa + chandas across Sanskrit verse corpora &#8212; 10.07&#8211;29.07.2026 &#8599;</title><rect class="bar" x="384.5" y="809" width="448.7" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="1287.9" y="815" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A47</text></a>
+        <a href="https://github.com/drdhaval2785/SanskritSpellCheck/blob/master/papers/A37_lchange_companion.md" target="_blank" rel="noopener"><title>A37 &#183; Reading the Reform off the Gloss — orthographic drift as a dater (5 langs) &#8212; 29.07&#8211;10.08.2026 &#8599;</title><rect class="bar" x="833.2" y="819" width="283.4" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="1406" y="825" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A37</text></a>
+        <rect x="1123.6" y="819.5" width="6" height="6" transform="rotate(45 1126.6 822.5)" fill="#eb6c36"/>
+        <rect x="30" y="831" width="1390" height="26" fill="rgba(45,49,66,0.03)"/>
+        <text x="40" y="842" fill="#7a8399" font-size="6.5" font-family="Geist Mono, monospace" letter-spacing="0.08em">VISUALDCS</text>
+        <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H973-OxAlpha_VisualDCS_sanskrit-lsc-pilot_15.07.26.md" target="_blank" rel="noopener"><title>A57 &#183; Lexical semantic change detection for Sanskrit (first LSC work; DCS 5-slot chronology) &#8212; 11.07&#8211;29.07.2026 &#8599;</title><rect class="bar" x="408.2" y="835" width="425" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="1264.2" y="841" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A57</text></a>
+        <a href="https://github.com/gasyoun/SanskritLexicography/blob/master/FINDINGS.md" target="_blank" rel="noopener"><title>A38 &#183; Digital Corpus of Sanskrit 2026 — open treebank + morphological SQLite release &#8212; 29.07&#8211;29.07.2026 &#8599;</title><rect class="bar" x="833.2" y="845" width="4" height="7" rx="3" fill="rgba(45,49,66,0.38)"/><text x="843.2" y="851" fill="#7a8399" font-size="5.8" font-family="Geist Mono, monospace">A38</text></a>
+
+        <!-- Legend -->
+        <g font-family="'Geist Mono', monospace" font-size="8" fill="#4f5d75">
+          <rect x="40" y="866" width="26" height="9" rx="3" fill="rgba(45,49,66,0.38)"/>
+          <text x="74" y="874"><tspan class="l-en">first → last registry event</tspan><tspan class="l-ru">первое → последнее событие реестра</tspan></text>
+          <rect x="320" y="867" width="7" height="7" transform="rotate(45 323 870)" fill="#eb6c36"/>
+          <text x="340" y="874"><tspan class="l-en">signed · reached 5/5</tspan><tspan class="l-ru">подписано · достигло 5/5</tspan></text>
+          <circle cx="520" cy="870" r="3.5" fill="none" stroke="#eb6c36"/>
+          <text x="534" y="874"><tspan class="l-en">bar clamped at today — target later</tspan><tspan class="l-ru">полоса обрезана по сегодня — цель позже</tspan></text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <p class="eyebrow"><span class="l-en">THE HEADLINE</span><span class="l-ru">ГЛАВНОЕ</span></p>
+        <div class="card-header"><span class="card-dot coral"></span>
+          <h3><span class="l-en">One ruling day: 29 July</span><span class="l-ru">Один день вердикта: 29 июля</span></h3>
+        </div>
+        <p><span class="l-en"><strong>34 of 59</strong> dated papers close on the same day — the 29-07 portfolio disposition sweep put an end-date on half the programme at once. Actual drafting ran 4 July → 10 August.</span><span class="l-ru"><strong>34 из 59</strong> датированных статей закрываются в один день — вердикт по портфелю 29-07 разом поставил точку половине программы. Само написание шло 4 июля → 10 августа.</span></p>
+      </div>
+      <div class="card">
+        <p class="eyebrow"><span class="l-en">HOW TO READ</span><span class="l-ru">КАК ЧИТАТЬ</span></p>
+        <div class="card-header"><span class="card-dot ink"></span>
+          <h3><span class="l-en">A row per paper</span><span class="l-ru">Строка — статья</span></h3>
+        </div>
+        <ul>
+          <li><span class="l-en">Rows are papers grouped by repo, sorted by start date</span><span class="l-ru">Строки — статьи по репозиториям, по дате старта</span></li>
+          <li><span class="l-en">Bar = first → last dated registry event</span><span class="l-ru">Полоса = первое → последнее событие реестра</span></li>
+          <li><span class="l-en">Coral diamond = signed / reached 5/5; hollow circle = clamped bar</span><span class="l-ru">Коралловый ромб = подписано/5⁄5; пустой круг = обрез по сегодня</span></li>
+          <li><span class="l-en">Click a row to open its manuscript (draft-index links)</span><span class="l-ru">Клик по строке открывает рукопись (ссылки индекса черновиков)</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <p class="eyebrow"><span class="l-en">ROUND 5 OF 7</span><span class="l-ru">РАУНД 5 ИЗ 7</span></p>
+        <div class="card-header"><span class="card-dot muted"></span>
+          <h3><span class="l-en">Next: the dictionary-spine deep-dive</span><span class="l-ru">Дальше: разбор словарного хребта</span></h3>
+        </div>
+        <p><span class="l-en">Round 6 zooms into the csl-orig → pipeline → web flow for all 43 digitized dictionaries.</span><span class="l-ru">Раунд 6 приближает поток csl-orig → конвейер → веб для всех 43 оцифрованных словарей.</span></p>
+      </div>
+    </div>
+
+    <div class="footer">
+      <span><span class="l-en">sanskrit work timeline · programme gantt · round 5/7</span><span class="l-ru">таймлайн работ · гантт программы · раунд 5/7</span></span>
+      <span><span class="l-en">59 dated papers · ARTICLES.md · 22-08-2026 · Dr. Mārcis Gasūns</span><span class="l-ru">59 датированных статей · ARTICLES.md · 22-08-2026 · Dr. Mārcis Gasūns</span></span>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var bE = document.getElementById('btn-en');
+      var bR = document.getElementById('btn-ru');
+      function set(lang) {
+        var ru = lang === 'ru';
+        document.body.classList.toggle('ru', ru);
+        document.documentElement.lang = ru ? 'ru' : 'en';
+        bE.classList.toggle('active', !ru);
+        bR.classList.toggle('active', ru);
+        try { localStorage.setItem('swl-lang', lang); } catch (e) {}
+      }
+      bE.addEventListener('click', function () { set('en'); });
+      bR.addEventListener('click', function () { set('ru'); });
+      var saved = 'en';
+      try { saved = localStorage.getItem('swl-lang') || 'en'; } catch (e) {}
+      set(saved);
+    })();
+  </script>
+</body>
+</html>
