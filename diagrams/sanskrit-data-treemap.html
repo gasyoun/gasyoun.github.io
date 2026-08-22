@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Where the Sanskrit Data Lives</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --color-paper:#f5f5f5; --color-paper-2:#ececec; --color-ink:#2d3142; --color-muted:#4f5d75; --color-soft:#7a8399; --color-rule:rgba(45,49,66,0.12); --color-accent:#eb6c36; --color-link:#2e5aa8; --font-sans:'Geist',system-ui,sans-serif; --font-serif:'Instrument Serif',serif; --font-mono:'Geist Mono',ui-monospace,monospace; }
+    body { font-family: var(--font-sans); background: var(--color-paper); min-height: 100vh; padding: 3rem 2rem; color: var(--color-ink); }
+    .container { max-width: 1400px; margin: 0 auto; }
+    .header { position: relative; margin-bottom: 2.5rem; padding-right: 130px; }
+    .header-eyebrow { font-family: var(--font-mono); font-size: 0.66rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-muted); margin-bottom: 0.75rem; }
+    h1 { font-family: var(--font-serif); font-size: clamp(1.75rem, 3vw + 1rem, 2.5rem); font-weight: 400; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 0.5rem; }
+    .subtitle { font-size: 1rem; line-height: 1.55; color: var(--color-muted); max-width: 62ch; }
+    .lang-toggle { position: absolute; top: 0.25rem; right: 0; display: flex; border: 1px solid var(--color-rule); border-radius: 6px; overflow: hidden; background: #fff; }
+    .lang-toggle button { font-family: var(--font-mono); font-size: 0.66rem; font-weight: 500; letter-spacing: 0.08em; padding: 0.4rem 0.8rem; border: none; background: transparent; color: var(--color-soft); cursor: pointer; }
+    .lang-toggle button.active { background: var(--color-ink); color: #fff; }
+    .l-ru { display: none; }
+    body.ru .l-en { display: none; }
+    body.ru .l-ru { display: inline; }
+    .diagram-container { background: var(--color-paper-2); border-radius: 8px; border: 1px solid var(--color-rule); padding: 1.5rem; overflow-x: auto; }
+    svg { width: 100%; min-width: 1000px; display: block; }
+    text.l-ru, tspan.l-ru { display: none; }
+    body.ru text.l-en, body.ru tspan.l-en { display: none; }
+    body.ru text.l-ru, body.ru tspan.l-ru { display: inline; }
+    svg a { cursor: pointer; }
+    svg a:hover rect.cell { stroke: #eb6c36; stroke-width: 1.5; }
+    a.repo-link { color: var(--color-link); }
+    .cards { display: grid; grid-template-columns: 1.1fr 1fr 0.9fr; gap: 1rem; margin-top: 1.5rem; }
+    @media (max-width: 820px) { .cards { grid-template-columns: 1fr; } }
+    .card { background: #fff; border-radius: 6px; border: 1px solid var(--color-rule); padding: 1.25rem; }
+    .card .eyebrow { font-family: var(--font-mono); font-size: 0.5rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-muted); margin-bottom: 0.5rem; }
+    .card-header { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.875rem; padding-bottom: 0.875rem; border-bottom: 1px solid rgba(45,49,66,0.08); }
+    .card-dot { width: 7px; height: 7px; border-radius: 50%; }
+    .card-dot.ink { background: var(--color-ink); } .card-dot.muted { background: var(--color-muted); } .card-dot.coral { background: var(--color-accent); }
+    .card h3 { font-size: 0.875rem; font-weight: 600; }
+    .card p, .card ul { color: var(--color-muted); font-size: 0.8125rem; line-height: 1.55; list-style: none; }
+    .card li { margin-bottom: 0.3rem; padding-left: 0.875rem; position: relative; }
+    .card li::before { content: '—'; position: absolute; left: 0; color: rgba(45,49,66,0.25); font-size: 0.75rem; }
+    .footer { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(45,49,66,0.10); font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.06em; color: var(--color-soft); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="lang-toggle" role="group" aria-label="Language / Язык">
+        <button id="btn-en" class="active" type="button">EN</button>
+        <button id="btn-ru" type="button">РУ</button>
+      </div>
+      <p class="header-eyebrow">
+        <span class="l-en">Data Volume · Diagram Design · Round 3 of 7</span>
+        <span class="l-ru">Объём данных · Diagram Design · Раунд 3 из 7</span>
+      </p>
+      <h1>
+        <span class="l-en">Where the 32.3 GB Lives</span>
+        <span class="l-ru">Где живут 32,3 ГБ</span>
+      </h1>
+      <p class="subtitle">
+        <span class="l-en">The data-layer census as one treemap — every block sized by bytes on disk from the harvest of files ≥1 MB (data_layers_harvest.json, 1,646 files). The coral underlay marks local-only bytes: 21.7 of 32.3 GB exist on this machine alone.</span>
+        <span class="l-ru">Перепись слоёв данных одним тримэпом — каждый блок по байтам на диске из выгрузки файлов ≥1 МБ (data_layers_harvest.json, 1&#160;646 файлов). Коралловая подложка — локальные-онли байты: 21,7 из 32,3 ГБ существуют только на этой машине.</span>
+      </p>
+    </div>
+
+    <div class="diagram-container">
+      <svg viewBox="0 0 1440 800" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="swt-title swt-desc">
+        <title id="swt-title">Where the Sanskrit Data Lives</title>
+        <desc id="swt-desc">Treemap of the data-layer census sized by bytes on disk: VisualDCS dominates with 14.7 GB (12.2 local-only), followed by SanskritSpellCheck, SamudraManthanam, kosha and SanskritLexicography; coral bands mark the local-only share of each block.</desc>
+        <defs>
+          <pattern id="dots" width="22" height="22" patternUnits="userSpaceOnUse">
+            <circle cx="1" cy="1" r="0.9" fill="rgba(45,49,66,0.10)"/>
+          </pattern>
+        </defs>
+
+        <rect width="100%" height="100%" fill="#f5f5f5"/>
+        <rect width="100%" height="100%" fill="url(#dots)" opacity="0.55"/>
+
+        <!-- Outer frame -->
+        <rect x="20" y="60" width="1400" height="700" rx="8" fill="rgba(45,49,66,0.015)" stroke="rgba(45,49,66,0.30)" stroke-width="1"/>
+        <rect x="36" y="52" width="400" height="16" fill="#ececec"/>
+        <text x="44" y="64" class="l-en" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">CENSUS · data_layers_harvest.json · 1,646 FILES ≥1 MB</text>
+        <text x="44" y="64" class="l-ru" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace" letter-spacing="0.14em">ПЕРЕПИСЬ · data_layers_harvest.json · 1&#160;646 ФАЙЛОВ ≥1 МБ</text>
+
+        <!-- Annotation -->
+        <text x="1400" y="40" class="l-en" fill="#2d3142" font-size="15" font-style="italic" font-family="'Instrument Serif', serif" text-anchor="end">half the census is one repo</text>
+        <text x="1400" y="40" class="l-ru" fill="#2d3142" font-size="15" font-style="italic" font-family="'Instrument Serif', serif" text-anchor="end">половина переписи — один репозиторий</text>
+
+        <!-- ============ TREEMAP ============ -->
+
+        <!-- VisualDCS — the giant -->
+        <a href="https://github.com/gasyoun/VisualDCS" target="_blank" rel="noopener"><title>VisualDCS — 14.7 GB, 12.2 local-only ↗</title>
+          <rect class="cell" x="40" y="150" width="620" height="540" rx="8" fill="rgba(45,49,66,0.05)" stroke="#eb6c36" stroke-width="1.5"/>
+          <rect x="41" y="245" width="618" height="444" fill="rgba(235,108,54,0.16)"/>
+          <line x1="41" y1="245" x2="659" y2="245" stroke="rgba(235,108,54,0.55)" stroke-dasharray="5,4"/>
+          <text x="62" y="200" fill="#2d3142" font-size="17" font-weight="600" font-family="'Geist', sans-serif">VisualDCS</text>
+          <text x="62" y="228" fill="#4f5d75" font-size="11" font-family="'Geist Mono', monospace"><tspan class="l-en">14.7 GB</tspan><tspan class="l-ru">14,7 ГБ</tspan></text>
+          <text x="62" y="278" class="l-en" fill="#c25426" font-size="13" font-style="italic" font-family="'Instrument Serif', serif">12.2 GB local-only — exists only on this disk</text>
+          <text x="62" y="278" class="l-ru" fill="#c25426" font-size="13" font-style="italic" font-family="'Instrument Serif', serif">12,2 ГБ только локально — нет копии на GitHub</text>
+        </a>
+
+        <!-- Row R1 -->
+        <a href="https://github.com/gasyoun/SanskritSpellCheck" target="_blank" rel="noopener"><title>SanskritSpellCheck — 2.8 GB, 2.6 local-only ↗</title>
+          <rect class="cell" x="668" y="150" width="214" height="200" rx="8" fill="rgba(45,49,66,0.06)" stroke="rgba(45,49,66,0.35)" stroke-width="1"/>
+          <rect x="669" y="163" width="212" height="186" fill="rgba(235,108,54,0.16)"/>
+          <line x1="669" y1="163" x2="881" y2="163" stroke="rgba(235,108,54,0.55)" stroke-dasharray="5,4"/>
+          <text x="680" y="184" fill="#2d3142" font-size="9.5" font-weight="600" font-family="'Geist Mono', monospace">SanskritSpellCheck</text>
+          <text x="680" y="204" fill="#4f5d75" font-size="8.5" font-family="'Geist Mono', monospace"><tspan class="l-en">2.8 GB</tspan><tspan class="l-ru">2,8 ГБ</tspan></text>
+        </a>
+        <a href="https://github.com/gasyoun/SamudraManthanam" target="_blank" rel="noopener"><title>SamudraManthanam — 2.5 GB, 1.8 local-only ↗</title>
+          <rect class="cell" x="890" y="150" width="191" height="200" rx="8" fill="rgba(45,49,66,0.06)" stroke="rgba(45,49,66,0.35)" stroke-width="1"/>
+          <rect x="891" y="207" width="189" height="142" fill="rgba(235,108,54,0.16)"/>
+          <line x1="891" y1="207" x2="1080" y2="207" stroke="rgba(235,108,54,0.55)" stroke-dasharray="5,4"/>
+          <text x="902" y="184" fill="#2d3142" font-size="10" font-weight="600" font-family="'Geist Mono', monospace">SamudraManthanam</text>
+          <text x="902" y="204" fill="#4f5d75" font-size="8.5" font-family="'Geist Mono', monospace"><tspan class="l-en">2.5 GB</tspan><tspan class="l-ru">2,5 ГБ</tspan></text>
+        </a>
+        <a href="https://github.com/gasyoun/kosha" target="_blank" rel="noopener"><title>kosha — 2.1 GB, 1.8 local-only ↗</title>
+          <rect class="cell" x="1089" y="150" width="164" height="200" rx="8" fill="rgba(45,49,66,0.06)" stroke="rgba(45,49,66,0.35)" stroke-width="1"/>
+          <rect x="1090" y="183" width="162" height="166" fill="rgba(235,108,54,0.16)"/>
+          <line x1="1090" y1="183" x2="1252" y2="183" stroke="rgba(235,108,54,0.55)" stroke-dasharray="5,4"/>
+          <text x="1101" y="184" fill="#2d3142" font-size="11" font-weight="600" font-family="'Geist', sans-serif">kosha</text>
+          <text x="1101" y="206" fill="#4f5d75" font-size="8.5" font-family="'Geist Mono', monospace"><tspan class="l-en">2.1 GB</tspan><tspan class="l-ru">2,1 ГБ</tspan></text>
+        </a>
+        <a href="https://github.com/gasyoun/SanskritLexicography" target="_blank" rel="noopener"><title>SanskritLexicography — 1.8 GB, 1.5 local-only ↗</title>
+          <rect class="cell" x="1261" y="150" width="139" height="200" rx="8" fill="rgba(45,49,66,0.06)" stroke="rgba(45,49,66,0.35)" stroke-width="1"/>
+          <rect x="1262" y="191" width="137" height="158" fill="rgba(235,108,54,0.16)"/>
+          <line x1="1262" y1="191" x2="1399" y2="191" stroke="rgba(235,108,54,0.55)" stroke-dasharray="5,4"/>
+          <text x="1273" y="180" fill="#2d3142" font-size="6.8" font-weight="600" font-family="'Geist Mono', monospace">SanskritLexicography</text>
+          <text x="1273" y="198" fill="#4f5d75" font-size="8" font-family="'Geist Mono', monospace"><tspan class="l-en">1.8 GB</tspan><tspan class="l-ru">1,8 ГБ</tspan></text>
+        </a>
+
+        <!-- Row R2 -->
+        <a href="https://github.com/sanskrit-lexicon/VCP" target="_blank" rel="noopener"><title>VCP — 0.74 GB tracked ↗</title>
+          <rect class="cell" x="668" y="358" width="91" height="170" rx="8" fill="rgba(45,49,66,0.06)" stroke="rgba(45,49,66,0.35)" stroke-width="1"/>
+          <text x="676" y="384" fill="#2d3142" font-size="7.5" font-weight="600" font-family="'Geist Mono', monospace">VCP</text>
+          <text x="676" y="402" fill="#4f5d75" font-size="7" font-family="'Geist Mono', monospace">0.74</text>
+        </a>
+        <a href="https://github.com/gasyoun/spoken-sanskrit-corpus" target="_blank" rel="noopener"><title>spoken-sanskrit-corpus — 0.70 GB all local-only ↗</title>
+          <rect class="cell" x="767" y="358" width="86" height="170" rx="8" fill="rgba(45,49,66,0.04)" stroke="rgba(45,49,66,0.35)" stroke-width="1"/>
+          <rect x="768" y="359" width="84" height="168" fill="rgba(235,108,54,0.16)"/>
+          <text x="775" y="384" fill="#2d3142" font-size="6.8" font-weight="600" font-family="'Geist Mono', monospace">spoken-corpus</text>
+          <text x="775" y="402" fill="#c25426" font-size="7" font-family="'Geist Mono', monospace">0.70</text>
+        </a>
+        <a href="https://github.com/sanskrit-lexicon/MWS" target="_blank" rel="noopener"><title>MWS — 0.58 GB tracked ↗</title>
+          <rect class="cell" x="861" y="358" width="72" height="170" rx="8" fill="rgba(45,49,66,0.06)" stroke="rgba(45,49,66,0.35)" stroke-width="1"/>
+          <text x="869" y="384" fill="#2d3142" font-size="7.5" font-weight="600" font-family="'Geist Mono', monospace">MWS</text>
+          <text x="869" y="402" fill="#4f5d75" font-size="7" font-family="'Geist Mono', monospace">0.58</text>
+        </a>
+        <a href="https://github.com/sanskrit-lexicon/csl-json" target="_blank" rel="noopener"><title>csl-json — 0.49 GB tracked ↗</title>
+          <rect class="cell" x="941" y="358" width="61" height="170" rx="8" fill="rgba(45,49,66,0.06)" stroke="rgba(45,49,66,0.35)" stroke-width="1"/>
+          <text x="948" y="380" fill="#2d3142" font-size="6.5" font-weight="600" font-family="'Geist Mono', monospace">csl-json</text>
+          <text x="948" y="396" fill="#4f5d75" font-size="6.5" font-family="'Geist Mono', monospace">0.49</text>
+        </a>
+        <a href="https://github.com/sanskrit-lexicon/csl-devanagari" target="_blank" rel="noopener"><title>csl-devanagari — 0.48 GB tracked ↗</title>
+          <rect class="cell" x="1010" y="358" width="59" height="170" rx="8" fill="rgba(45,49,66,0.06)" stroke="rgba(45,49,66,0.35)" stroke-width="1"/>
+          <text x="1017" y="380" fill="#2d3142" font-size="6" font-weight="600" font-family="'Geist Mono', monospace">devanagari</text>
+          <text x="1017" y="396" fill="#4f5d75" font-size="6.5" font-family="'Geist Mono', monospace">0.48</text>
+        </a>
+        <a href="https://github.com/sanskrit-lexicon/mw-dev" target="_blank" rel="noopener"><title>mw-dev — 0.46 GB tracked ↗</title>
+          <rect class="cell" x="1077" y="358" width="57" height="170" rx="8" fill="rgba(45,49,66,0.06)" stroke="rgba(45,49,66,0.35)" stroke-width="1"/>
+          <text x="1084" y="380" fill="#2d3142" font-size="6.5" font-weight="600" font-family="'Geist Mono', monospace">mw-dev</text>
+          <text x="1084" y="396" fill="#4f5d75" font-size="6.5" font-family="'Geist Mono', monospace">0.46</text>
+        </a>
+        <a href="https://github.com/sanskrit-lexicon/csl-orig" target="_blank" rel="noopener"><title>csl-orig — 0.42 GB tracked ↗</title>
+          <rect class="cell" x="1142" y="358" width="52" height="170" rx="8" fill="rgba(45,49,66,0.06)" stroke="rgba(45,49,66,0.35)" stroke-width="1"/>
+          <text x="1149" y="380" fill="#2d3142" font-size="6.3" font-weight="600" font-family="'Geist Mono', monospace">csl-orig</text>
+          <text x="1149" y="396" fill="#4f5d75" font-size="6.5" font-family="'Geist Mono', monospace">0.42</text>
+        </a>
+        <a href="https://github.com/sanskrit-lexicon/PWG" target="_blank" rel="noopener"><title>PWG — 0.39 GB tracked ↗</title>
+          <rect class="cell" x="1202" y="358" width="48" height="170" rx="8" fill="rgba(45,49,66,0.06)" stroke="rgba(45,49,66,0.35)" stroke-width="1"/>
+          <text x="1209" y="380" fill="#2d3142" font-size="6.5" font-weight="600" font-family="'Geist Mono', monospace">PWG</text>
+          <text x="1209" y="396" fill="#4f5d75" font-size="6.5" font-family="'Geist Mono', monospace">0.39</text>
+        </a>
+        <a href="https://github.com/gasyoun/IndologyScholars" target="_blank" rel="noopener"><title>IndologyScholars — 0.38 GB, 0.32 local-only ↗</title>
+          <rect class="cell" x="1258" y="358" width="47" height="170" rx="8" fill="rgba(45,49,66,0.06)" stroke="rgba(45,49,66,0.35)" stroke-width="1"/>
+          <rect x="1259" y="386" width="45" height="141" fill="rgba(235,108,54,0.16)"/>
+          <line x1="1259" y1="386" x2="1304" y2="386" stroke="rgba(235,108,54,0.55)" stroke-dasharray="5,4"/>
+          <text transform="rotate(-90 1281 443)" x="1281" y="443" fill="#2d3142" font-size="6.3" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle">IndologyScholars 0.38</text>
+        </a>
+        <a href="https://github.com/gasyoun/ORS-FAQ" target="_blank" rel="noopener"><title>ORS-FAQ — 0.36 GB all local-only ↗</title>
+          <rect class="cell" x="1313" y="358" width="44" height="170" rx="8" fill="rgba(45,49,66,0.04)" stroke="rgba(45,49,66,0.35)" stroke-width="1"/>
+          <rect x="1314" y="359" width="42" height="168" fill="rgba(235,108,54,0.16)"/>
+          <text transform="rotate(-90 1335 443)" x="1335" y="443" fill="#c25426" font-size="6.3" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle">ORS-FAQ 0.36</text>
+        </a>
+        <a href="https://github.com/sanskrit-lexicon/AP" target="_blank" rel="noopener"><title>AP — 0.28 GB tracked ↗</title>
+          <rect class="cell" x="1365" y="358" width="27" height="170" rx="8" fill="rgba(45,49,66,0.06)" stroke="rgba(45,49,66,0.35)" stroke-width="1"/>
+          <text transform="rotate(-90 1378 443)" x="1378" y="443" fill="#2d3142" font-size="6.3" font-weight="600" font-family="'Geist Mono', monospace" text-anchor="middle">AP 0.28</text>
+        </a>
+
+        <!-- Long tail -->
+        <a href="https://github.com/gasyoun/Uprava/blob/main/DATA_LAYERS_CENSUS.md" target="_blank" rel="noopener"><title>Long tail — ~150 more directories, ~2 GB ↗</title>
+          <rect class="cell" x="668" y="536" width="732" height="154" rx="8" fill="rgba(45,49,66,0.02)" stroke="rgba(45,49,66,0.35)" stroke-width="1" stroke-dasharray="5,4"/>
+          <text x="684" y="572" fill="#2d3142" font-size="12" font-weight="600" font-family="'Geist', sans-serif"><tspan class="l-en">The long tail — ~150 more directories</tspan><tspan class="l-ru">Длинный хвост — ещё ~150 папок</tspan></text>
+          <text x="684" y="596" fill="#4f5d75" font-size="9" font-family="'Geist Mono', monospace"><tspan class="l-en">~2 GB across mw-dev-sized repos: AP90 · MW72 · GRA · KRM · INM · csl-inflect · hwnorm · prefaces_* &#8230;</tspan><tspan class="l-ru">~2 ГБ по репо размером с mw-dev: AP90 · MW72 · GRA · KRM · INM · csl-inflect · hwnorm · prefaces_* &#8230;</tspan></text>
+          <text x="684" y="620" fill="#7a8399" font-size="8" font-family="'Geist Mono', monospace"><tspan class="l-en">full census in DATA_LAYERS_CENSUS.md — click to open</tspan><tspan class="l-ru">полная перепись в DATA_LAYERS_CENSUS.md — клик откроет</tspan></text>
+        </a>
+
+        <!-- Legend -->
+        <g font-family="'Geist Mono', monospace" font-size="8" fill="#4f5d75">
+          <rect x="40" y="710" width="18" height="12" fill="rgba(45,49,66,0.06)" stroke="rgba(45,49,66,0.35)"/>
+          <text x="66" y="720"><tspan class="l-en">tracked bytes · 10.6 GB</tspan><tspan class="l-ru">трекнутые байты · 10,6 ГБ</tspan></text>
+          <rect x="290" y="710" width="18" height="12" fill="rgba(235,108,54,0.16)" stroke="rgba(235,108,54,0.55)" stroke-dasharray="3,2"/>
+          <text x="316" y="720"><tspan class="l-en">local-only share · 21.7 GB — no copy on GitHub, back these up</tspan><tspan class="l-ru">локальные-онли · 21,7 ГБ — копии на GitHub нет, сделайте бэкап</tspan></text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <p class="eyebrow"><span class="l-en">THE HEADLINE</span><span class="l-ru">ГЛАВНОЕ</span></p>
+        <div class="card-header"><span class="card-dot coral"></span>
+          <h3><span class="l-en">One repo, half the bytes</span><span class="l-ru">Один репо — половина байтов</span></h3>
+        </div>
+        <p><a class="repo-link" href="https://github.com/gasyoun/VisualDCS" target="_blank" rel="noopener">VisualDCS</a>
+        <span class="l-en">holds 14.7 of 32.3 GB — and 12.2 GB of that has no GitHub copy. The four next-biggest layers are majority local-only too.</span>
+        <span class="l-ru">держит 14,7 из 32,3 ГБ — и 12,2 ГБ из них без копии на GitHub. Четыре следующих слоя тоже в основном локальные-онли.</span></p>
+      </div>
+      <div class="card">
+        <p class="eyebrow"><span class="l-en">HOW TO READ</span><span class="l-ru">КАК ЧИТАТЬ</span></p>
+        <div class="card-header"><span class="card-dot ink"></span>
+          <h3><span class="l-en">Area = bytes on disk</span><span class="l-ru">Площадь = байты на диске</span></h3>
+        </div>
+        <ul>
+          <li><span class="l-en">Block area ∝ gigabytes from the census</span><span class="l-ru">Площадь блока ∝ гигабайтам из переписи</span></li>
+          <li><span class="l-en">Coral band = local-only share (no remote copy)</span><span class="l-ru">Коралловая полоса = доля локальных-онли (без копии)</span></li>
+          <li><span class="l-en">Click any block to open its repo</span><span class="l-ru">Клик по блоку открывает репозиторий</span></li>
+          <li><span class="l-en">Numbers: data_layers_harvest.json (H1989 re-run)</span><span class="l-ru">Числа: data_layers_harvest.json (пересчёт H1989)</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <p class="eyebrow"><span class="l-en">ROUND 3 OF 7</span><span class="l-ru">РАУНД 3 ИЗ 7</span></p>
+        <div class="card-header"><span class="card-dot muted"></span>
+          <h3><span class="l-en">Next: the publications board</span><span class="l-ru">Дальше: доска публикаций</span></h3>
+        </div>
+        <p><span class="l-en">Round 4 turns the ARTICLES registry into a portfolio board — 72 papers by readiness and repo.</span><span class="l-ru">Раунд 4 превращает реестр ARTICLES в доску портфолио — 72 статьи по готовности и репо.</span></p>
+      </div>
+    </div>
+
+    <div class="footer">
+      <span><span class="l-en">sanskrit work treemap · data volume · round 3/7</span><span class="l-ru">тримэп работ · объём данных · раунд 3/7</span></span>
+      <span><span class="l-en">32.3 GB · 22-08-2026 · Dr. Mārcis Gasūns</span><span class="l-ru">32,3 ГБ · 22-08-2026 · Dr. Mārcis Gasūns</span></span>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var bE = document.getElementById('btn-en');
+      var bR = document.getElementById('btn-ru');
+      function set(lang) {
+        var ru = lang === 'ru';
+        document.body.classList.toggle('ru', ru);
+        document.documentElement.lang = ru ? 'ru' : 'en';
+        bE.classList.toggle('active', !ru);
+        bR.classList.toggle('active', ru);
+        try { localStorage.setItem('swl-lang', lang); } catch (e) {}
+      }
+      bE.addEventListener('click', function () { set('en'); });
+      bR.addEventListener('click', function () { set('ru'); });
+      var saved = 'en';
+      try { saved = localStorage.getItem('swl-lang') || 'en'; } catch (e) {}
+      set(saved);
+    })();
+  </script>
+</body>
+</html>
