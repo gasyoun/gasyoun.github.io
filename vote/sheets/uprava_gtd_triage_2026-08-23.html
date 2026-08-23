@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="color-scheme" content="dark">
+<meta name="generator" content="csl-pyutil/0.22.0">
+<title>GTD-сортировка: что архивировать (−17 КБ к лимиту) — 36 items</title>
+<style>
+  :root { color-scheme: dark; --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --text:#e6e6e6; --muted:#9aa0aa;
+          --accent:#5b8cff; --ok:#3fb950; --bad:#f85149; --defer:#d29922; --border:#2a2f3a; }
+  * { box-sizing: border-box; }
+  body { background:var(--bg); color:var(--text); font-family:-apple-system,Segoe UI,Roboto,sans-serif;
+         margin:0; padding:0 0 120px 0; }
+  header.top { position:sticky; top:0; z-index:10; background:var(--panel); border-bottom:1px solid var(--border);
+               padding:14px 20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+  header.top h1 { font-size:16px; margin:0; }
+  header.top .sub { color:var(--muted); font-size:12px; max-width:760px; }
+  .tally { display:flex; gap:14px; font-size:13px; }
+  .tally span.count { font-weight:700; }
+  .tally .approve { color:var(--ok); } .tally .reject { color:var(--bad); }
+  .tally .defer { color:var(--defer); } .tally .unvoted { color:var(--muted); }
+  .toolbar { padding:10px 20px; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  button.dl { background:var(--accent); color:#fff; border:none; padding:8px 14px; border-radius:6px;
+              cursor:pointer; font-size:13px; }
+  button.dl:hover { opacity:.9; }
+  .filterbar { display:flex; gap:6px; flex-wrap:wrap; }
+  .filterbar button { background:var(--panel2); border:1px solid var(--border); color:var(--text);
+                       padding:6px 10px; border-radius:14px; font-size:12px; cursor:pointer; }
+  .filterbar button.active { border-color:var(--accent); color:var(--accent); }
+  main { max-width:980px; margin:0 auto; padding:10px 20px; }
+  .card { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:16px;
+          margin-bottom:16px; }
+  .card.voted-approve { border-left:4px solid var(--ok); }
+  .card.voted-reject { border-left:4px solid var(--bad); }
+  .card.voted-defer { border-left:4px solid var(--defer); }
+  .card header { display:flex; justify-content:space-between; align-items:baseline; }
+  .card .hw { font-size:18px; font-weight:700; }
+  .badge { font-size:11px; background:var(--panel2); padding:2px 8px; border-radius:10px;
+           margin-left:8px; color:var(--muted); }
+  .question { margin:8px 0 12px; font-size:14px; }
+  .panel { background:var(--panel2); border-radius:8px; padding:10px 12px; font-size:13px; margin-bottom:10px; }
+  .panel h4 { margin:0 0 6px; font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+  .panel pre { white-space:pre-wrap; word-break:break-word; margin:0; font-size:12px; line-height:1.45; }
+  .chip { display:inline-block; background:#263042; border-radius:5px; padding:2px 7px; margin:2px 3px 2px 0; font-size:12px; }
+  .muted { color:var(--muted); font-style:italic; }
+  .controls { display:flex; align-items:center; gap:8px; margin-top:4px; }
+  button.vote { border:1px solid var(--border); background:var(--panel2); color:var(--text);
+                padding:7px 12px; border-radius:6px; cursor:pointer; font-size:13px; }
+  button.vote.approve.active { background:var(--ok); border-color:var(--ok); color:#04240b; }
+  button.vote.reject.active { background:var(--bad); border-color:var(--bad); color:#2a0a08; }
+  button.vote.defer.active { background:var(--defer); border-color:var(--defer); color:#2a1d02; }
+  .vote-state { margin-left:6px; font-size:12px; color:var(--muted); }
+  textarea.note { width:100%; margin-top:10px; min-height:44px; background:#11141a !important; color:#e6e6e6 !important;
+                  -webkit-text-fill-color:#e6e6e6; border:1px solid var(--border); border-radius:6px; padding:8px; font-size:13px;
+                  font-family:inherit; resize:vertical; }
+  textarea.note::placeholder { color:var(--muted); opacity:1; }
+  footer.hint { max-width:980px; margin:20px auto; padding:0 20px; color:var(--muted); font-size:12px; }
+  kbd { background:#263042; border-radius:4px; padding:1px 5px; font-size:11px; }
+
+  .screening-banner { margin: 0 20px 12px; padding: 10px 14px; border-radius: 8px;
+    border: 1px solid var(--accent); background: #152033; font-size: 12px; line-height: 1.45;
+    color: var(--text); max-width: 980px; }
+  .screening-banner code { font-size: 11px; color: var(--accent); }
+  .screening-banner .sc-d { color: var(--defer); font-weight: 700; }
+
+  :root { --fs:1.5; }
+  header.top h1 { font-size:calc(16px * var(--fs)) !important; }
+  header.top .sub { font-size:calc(12px * var(--fs)) !important; }
+  .tally, button.dl, button.vote, button.rate, textarea.note, .reject-label-select,
+  #strictReviewerWrap, #strictReviewerWrap input { font-size:calc(13px * var(--fs)) !important; }
+  .filterbar button, .fsctl button, .fsctl .fsval, .chip, .vote-state, .rate-state,
+  .ratinglabel, .rejectlabellabel, footer.hint, div.legend,
+  #strictReviewError { font-size:calc(12px * var(--fs)) !important; }
+  .card .hw { font-size:calc(18px * var(--fs)) !important; }
+  .badge, .panel h4, kbd, .idchip { font-size:calc(11px * var(--fs)) !important; }
+  .question { font-size:calc(14px * var(--fs)) !important; }
+  .panel { font-size:calc(13px * var(--fs)) !important; }
+  .panel pre { font-size:calc(13.5px * var(--fs)) !important; line-height:1.55; }
+  .panel .anatomy { font-size:calc(12.5px * var(--fs)) !important; }
+  .savebanner { font-size:calc(12.5px * var(--fs)) !important; }
+  .fsctl { display:flex; align-items:center; gap:4px; }
+  .fsctl button { background:var(--panel2); border:1px solid var(--border); color:var(--text);
+                  padding:6px 10px; border-radius:14px; cursor:pointer; line-height:1; }
+  .fsctl .fsval { color:var(--muted); min-width:3.4em; text-align:center; }
+  @media (max-width: 640px) {
+    header.top { padding: 10px 14px; flex-direction: column; align-items: stretch; }
+    header.top h1 { font-size: 15px; }
+    .tally { gap: 8px; font-size: 11px; }
+    .toolbar { padding: 8px 14px; }
+    main { padding: 8px 12px; }
+    .card { padding: 12px; }
+    .filterbar { flex-wrap: wrap; }
+    button.dl, button.vote, button.rate, .fsctl button, #saveBtn, #handinBtn, #pauseBtn {
+      min-height: 44px; min-width: 44px; padding: 10px 14px;
+    }
+    .controls { flex-wrap: wrap; }
+    .panel { padding: 8px 10px; }
+    textarea.note { min-height: 60px; }
+  }
+  .tally .time { color:var(--muted); }
+  .dl.handin { background:#243447; }
+  .tally .pausebtn { background:none; border:1px solid var(--border); color:var(--muted);
+                     border-radius:6px; padding:0 6px; margin-left:4px; cursor:pointer;
+                     font-size:inherit; font-family:inherit; line-height:1.6; }
+  .tally .pausebtn.on { color:#ffd479; border-color:#ffd479; }
+  .tally .time.paused { opacity:.45; }
+  .handin-said { color:var(--muted); font-size:12px; margin-left:10px; }
+  .card.kbd-active { outline:2px solid var(--accent); outline-offset:3px; }
+  .tally .tstate { color:var(--muted); font-size:.85em; margin-left:4px; }
+  .tally .tstate.idle { color:var(--defer); }
+  .flowprog { display:inline-flex; align-items:center; gap:8px; color:var(--muted); font-size:12px; }
+  .flowprog .bar { display:inline-block; width:120px; height:6px; border-radius:3px;
+                   background:var(--panel2); border:1px solid var(--border); overflow:hidden; }
+  .flowprog .bar i { display:block; height:6px; background:var(--accent); width:0; }
+  .dl.flowundo { background:#243447; }
+  .flowtoast { position:fixed; left:50%; bottom:24px; transform:translateX(-50%);
+               background:var(--panel2); border:1px solid var(--border); color:var(--text);
+               padding:8px 14px; border-radius:8px; font-size:13px; z-index:50;
+               opacity:0; pointer-events:none; transition:opacity .18s; }
+  .flowtoast.on { opacity:1; }
+  .voteprog { flex:1 0 100%; order:99; background:var(--panel);
+              border-top:1px solid var(--border); margin:6px -20px -14px; padding:8px 20px;
+              display:flex; align-items:center; gap:12px; font-size:12px; color:var(--muted); }
+  .voteprog .bar { flex:1 1 auto; height:8px; border-radius:4px; background:var(--panel2);
+                   border:1px solid var(--border); overflow:hidden; }
+  .voteprog .bar i { display:block; height:100%; width:0; background:var(--ok); transition:width .2s; }
+  .voteprog b { color:var(--text); font-weight:700; }
+  .voteprog .eta { white-space:nowrap; }
+  .votebar { position:sticky; bottom:0; z-index:9; background:var(--panel);
+             border-top:1px solid var(--border); padding:10px 20px; margin-top:24px;
+             display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  .votebar .spacer { flex:1 1 auto; }
+  .card { scroll-margin-top:96px; }
+  @media (max-width: 640px) { .voteprog { padding:6px 12px; } .votebar { padding:8px 12px; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>GTD-сортировка: что архивировать (−17 КБ к лимиту) — 36 items</h1>
+    <div class="sub">Generated 23-08-2026 &middot; sheet_id <code>uprava_gtd_triage_2026-08-23</code> &middot; Кандидаты — самые большие живые строки и @WAITING ≥45 дней. ✅ Архивировать = строка переедет в GTD_ARCHIVE.md дословно; ❌ Оставить = без изменений.</div>
+  </div>
+  <div class="tally" id="tally">
+    <span class="approve">&#9989; <span class="count" id="c-approve">0</span></span>
+    <span class="reject">&#10060; <span class="count" id="c-reject">0</span></span>
+    <span class="defer">&#9208; <span class="count" id="c-defer">0</span></span>
+    <span class="time" title="active time on this sheet (while the tab is visible)">&#9201; <span class="count" id="t-total">0:00</span><span class="tstate" id="t-state"></span></span>
+    <button type="button" class="pausebtn" id="pauseBtn" title="pause the clock — a break is not review time">&#9208;</button>
+    <span class="unvoted">&#9711; <span class="count" id="c-unvoted">36</span></span>
+  </div>
+<div class="voteprog" id="voteProg"><span id="voteProgText"></span><span class="bar"><i id="voteProgBar"></i></span><span class="eta" id="voteProgEta"></span></div>
+</header>
+<aside class="screening-banner" role="status" data-screening="1"><strong>Screening (H1649)</strong> — only human-required cards are below. Off the plate: <span class="sc-a">deterministic 0</span> · <span class="sc-b">dataset lookup 0</span> · <span class="sc-c">agent adjudication 378</span> (total screened 378). Human cards: <span class="sc-d">36</span>. Evidence: <code>https://github.com/gasyoun/Uprava/blob/main/GTD_NEXT_ACTIONS.md</code>. Rules: completed/@DONE excluded, no-tag excluded, fresh &lt;380c @DO excluded, top-36 by size/staleness.</aside>
+<div class="toolbar">
+  <button data-submit="1" class="dl" id="downloadBtn">Download decisions.json</button><button data-submit="1" class="dl handin" id="handinBtn" title="stop the clock and export the votes made so far; the rest stay saved in this browser">Hand in what I got</button><span class="handin-said" id="handinSaid"></span><button data-submit="1" class="dl" id="saveBtn" style="display:none;margin-left:8px">Save to folder…</button>
+  <div class="fsctl" title="text size — persists in this browser"><button type="button" id="fsDown" aria-label="smaller text">A&minus;</button><span class="fsval" id="fsVal"></span><button type="button" id="fsUp" aria-label="larger text">A+</button></div>
+  <button data-submit="1" type="button" class="dl flowundo" id="flowUndoBtn" title="undo the last decision (z)">&#8630; Undo</button>
+  <span class="flowprog" id="flowProg"><span class="bar"><i id="flowBar"></i></span><span id="flowProgText"></span><span id="flowEta"></span></span>
+  <div class="filterbar" id="filterbar"><button data-filter="all" class="active">all</button><button data-filter="DO">@DO</button><button data-filter="WAITING">@WAITING</button><button data-filter="DECIDE">@DECIDE</button><button data-filter="unvoted">unvoted only</button></div>
+</div>
+<main id="cards">
+
+  <section class="card" data-id="GTD-88381" data-filt="DO">
+    <header><div class="hw">2083 симв · @DO · 1д · монетизация 2026H2 сведена в единый план [MONETIZATION_PLAN_2026 <span class="badge">1д</span><span class="badge">2083c</span></div></header>
+    <div class="question"><b>Архивировать в GTD_ARCHIVE?</b><br>монетизация 2026H2 сведена в единый план [MONETIZATION_PLAN_2026H2.md](https://github.com/gasyoun/Systema-Sanscriticum/blob/main/docs/MONETI<br><small>Идентификация: H3329 — Uprava handoff; H3330 — Uprava handoff; H3331 — Uprava handoff; H3332 — Uprava handoff; H3333 — Uprava handoff; H3334 — Uprava handoff</small></div>
+    <div class="panel"><h4>Полный текст</h4><pre style='white-space:pre-wrap'>{'kind': 'bullet', 'section': '## Do Today', 'section_parent': '', 'text': '- MG `@DO` — **монетизация 2026H2 сведена в единый план [MONETIZATION_PLAN_2026H2.md](https://github.com/gasyoun/Systema-Sanscriticum/blob/main/docs/MONETIZATION_PLAN_2026H2.md) (supersedes GROWTH_STRATEGY_2026_2027); шаги человека** (22-08-2026, ox-alpha): (1) живой чекаут клубного тарифа — единственная непроверенная точка контура «оплата → членство → группа», pre-flight [H3331](https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3331-OxAlpha_Systema-Sanscriticum_club-checkout-preflight-event-chain_22.08.26.md); (2) free-гранты: активным (просмотр урока за 21 день) продлить до 15-10, остальные истекают 15-09 без офферов [H3329](https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3329-OxAlpha_Systema-Sanscriticum_free-tier-actives-extension-cohort_22.08.26.md); (3) A/B апселла марафона волнами — волна 1 купон ₽1 000, волна 2 членский оффер [H3330](https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3330-OxAlpha_Systema-Sanscriticum_marathon-warmtail-wave-ab-membership-offer_22.08.26.md); (4) VK-тест ₽20–40 тыс. параллельно марафону, инструментация [H3333](https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3333-OxAlpha_Systema-Sanscriticum_vk-paid-test-instrumentation-pack_22.08.26.md); (5) автосписание — data-triggered после первых продлений, жёсткий предел — до декабрьского пика; (6) кэпы скидок/рассрочки — только после юнит-слоя `lead_id`→доход [H3332](https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3332-OxAlpha_Systema-Sanscriticum_unit-economics-layer-lead-revenue_22.08.26.md); подарочные сертификаты к декабрю [H3334](https://github.com/gasyoun/Uprava/blob/main/handoffs/H3334-OxAlpha_Systema-Sanscriticum_gift-certificates-gift-tariff-activation-code_22.08.26.md); top-тир ₽5 000 снят с гейта 01-10. Приоритет Sep–Dec: новые плательщики → платные члены → маржа.', 'start': 117, 'end': 118, 'class': 'live', 'chars': 1847, 'sha256': '1cf1569a9c2690f7ec94ebb910800bb0652dd935a984e8ef595a72301e93fd6d', 'live_tags': ['@DO']}</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Архивировать</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="GTD-88381" data-filt="DO">
+    <header><div class="hw">1724 симв · @DO · 82д · платёжный контур без бухгалтера: ЗАПИСЬ встала 02-06-2026, реаль <span class="badge">82д</span><span class="badge">1724c</span></div></header>
+    <div class="question"><b>Архивировать в GTD_ARCHIVE?</b><br>платёжный контур без бухгалтера: ЗАПИСЬ встала 02-06-2026, реальность — в ручном реестре Марии</div>
+    <div class="panel"><h4>Полный текст</h4><pre style='white-space:pre-wrap'>{'kind': 'bullet', 'section': '## Do Today', 'section_parent': '', 'text': '- MG `@DECIDE`+`@DO` — **платёжный контур без бухгалтера: ЗАПИСЬ встала 02-06-2026, реальность — в ручном реестре Марии** (две Google-книги скрапятся ежемесячно: [`tools/scrape_money_sheets.py`](https://github.com/gasyoun/Uprava/blob/main/tools/scrape_money_sheets.py), задача планировщика 1-го числа, снимки в [`data/money_sheets/`](https://github.com/gasyoun/Uprava/blob/main/data/money_sheets)). Таблица правды + сверка «платили vs начислено» фев–июль по 16 преподавателям: [PAYROLL_TRUTH_TABLE_NO_ACCOUNTANT_22-08-2026.md](https://github.com/gasyoun/Uprava/blob/main/docs/PAYROLL_TRUTH_TABLE_NO_ACCOUNTANT_22-08-2026.md). Решить: (1) **двойной учёт** — Литвиненко 28.06 (регистр 6 624 = лист 6 624) и Трефилова 28.06 (регистр 21 528 vs лист 29 808): **спросить Марию**, готовые простые вопросы в таблице правды; (2) крупные остатки «начислено > платили» — **каждый «+» подтверждать человеком перед тем, как считать долгом** (нал невидим учёту; сняты MG 22-08: Демченко — налом давно, Уша — нал через Горностаеву, Костина и Лейтан — прошлые месяцы закрыты, всегда PayPal); (3) **к выплате сейчас по правилу «прошлые месяцы закрыты»** (деньги после 24.07 × процент): Костина **31 200 ₽ ≈ €350** · Лейтан **120 960 ₽ ≈ €1 360 Xoom** — записать через калькулятор; (4) Каркина возврат −6 000 (28.07, курс 432, блок 1) занести через кабинет. Запись выплат — только через кабинет; строки `teacher_payouts`/`payments` агент не пишет. (22-08-2026, x-preview-f-free; правки MG 22-08)', 'start': 118, 'end': 119, 'class': 'live', 'chars': 1477, 'sha256': '55547726fe9e299c2c980f88a331d60772f5ce7a9975b549e26dbbbb514a1cef', 'live_tags': ['@DECIDE', '@DO']}</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Архивировать</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="GTD-88381" data-filt="DO">
+    <header><div class="hw">917 симв · @DO · 1д · [PR #1966](https://github.com/gasyoun/Systema-Sanscriticum/pull/ <span class="badge">1д</span><span class="badge">917c</span></div></header>
+    <div class="question"><b>Архивировать в GTD_ARCHIVE?</b><br>[PR #1966](https://github.com/gasyoun/Systema-Sanscriticum/pull/1966) слит и выкачен</div>
+    <div class="panel"><h4>Полный текст</h4><pre style='white-space:pre-wrap'>{'kind': 'bullet', 'section': '## Do Today', 'section_parent': '', 'text': '- DONE 22-08-2026 — **[PR #1966](https://github.com/gasyoun/Systema-Sanscriticum/pull/1966) слит и выкачен** (f0ec6e84, deploy.sh, smoke PASS: гость 302, флаг ON, `money_tables_moved=false`, отпечатки 6/9 242, Лейтан в EUR-дорожке). **RULING MG 22-08-2026: «merge сам и не переспрашивай, даже для money-contour, сними везде no-auto-merge — отныне везде merge»** — забор на СТРОКИ денег (`teacher_payouts`/`payments`) остаётся; близнецы money-truth-pass обновлены (claude-config 7bcab9c4 · codex 6063d1a · grok файлом). Инфра-предохранители .92 ругаются не на деплой: tmpfs-cap (задача Артёма) и backup-fresh Яндекс.Диска (9 суток, обрезок 11 МиБ) — отдельный @DO. (x-preview-f-free)', 'start': 120, 'end': 121, 'class': 'live', 'chars': 682, 'sha256': '927413c2c847f4f01c905989f52babb3d25e445b689f171a190d3efab802fa49', 'live_tags': ['@DO']}</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Архивировать</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="GTD-16528" data-filt="DECIDE">
+    <header><div class="hw">909 симв · @DECIDE · ?д · Agent-docs SLA: make the 3 non-mintable waivers permanent? <span class="badge">возр?</span><span class="badge">909c</span></div></header>
+    <div class="question"><b>Архивировать в GTD_ARCHIVE?</b><br>Agent-docs SLA: make the 3 non-mintable waivers permanent?<br><small>Идентификация: H3303 — Uprava handoff; H3307 — Uprava handoff</small></div>
+    <div class="panel"><h4>Полный текст</h4><pre style='white-space:pre-wrap'>{'kind': 'table', 'section': '## Waiting on Me', 'section_parent': '', 'text': '| MG `@DECIDE` | trivial | 0d | **Agent-docs SLA: make the 3 non-mintable waivers permanent?** Batch [H3303–H3307](https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3307-OxAlpha_Uprava_agents-twins-orgwide-compress_22.08.26.md) fixes every mintable=yes fail; these stay red by design (`NO_MINT`): SanskritSpellCheck (STALE_46d, external owner drdhaval2785 — PR = cross-org interaction), codex-config (harness clone), SanskritCorpora (fill rides a later tick). Waive forever or schedule each — [checker](https://github.com/gasyoun/Uprava/blob/main/tools/agent_docs_freshness.py). | weekly-review keeps skipping them; `--check` stays 3/30 red until ruled |', 'start': 579, 'end': 580, 'class': 'live', 'chars': 666, 'sha256': 'a9ac7b42c15024f1508a0f126693989d4bb249a73bf3784620adb8a00cd78d1f', 'live_tags': ['@DECIDE']}</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Архивировать</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="GTD-20758" data-filt="DECIDE">
+    <header><div class="hw">849 симв · @DECIDE · 34д · 372 tokens across 250 rows <span class="badge">34д</span><span class="badge">849c</span></div></header>
+    <div class="question"><b>Архивировать в GTD_ARCHIVE?</b><br>372 tokens across 250 rows<br><small>Идентификация: H1341 — Uprava handoff</small></div>
+    <div class="panel"><h4>Полный текст</h4><pre style='white-space:pre-wrap'>{'kind': 'context', 'section': '## ⚖️ Top-10 live @DECIDE — age-ranked (added 20-07-2026, H1341)', 'section_parent': '', 'text': "_The `@DECIDE` backlog is **372 tokens across 250 rows**, but ~163 are already visibly ruled (✅ / ~~struck~~ / RULED). Of the ~87 that read as open: **12 gate a still-open handoff** (the real blockers), **22 are standalone** open questions, and **53 reference only ✅-executed handoffs and are almost certainly dead** — flagged for retirement below, **not resolved here** (H1341 ranks the backlog; it never rules a decision). These are the 10 highest-leverage live decisions; the full set stays in the sections below. **Every row here is a human's to rule.**_", 'start': 64, 'end': 65, 'class': 'live', 'chars': 558, 'sha256': '2eb42addff1b20914bec329c566d3715b7c2d701b137c8b5ff192a6306c4656b', 'live_tags': ['@DECIDE']}</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Архивировать</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="GTD-16528" data-filt="DO">
+    <header><div class="hw">837 симв · @DO · 4д ·  `@DECIDE` | MG | medium | ~0d |  <span class="badge">4д</span><span class="badge">837c</span></div></header>
+    <div class="question"><b>Архивировать в GTD_ARCHIVE?</b><br> `@DECIDE` | MG | medium | ~0d | <br><small>Идентификация: H3164 — Uprava handoff</small></div>
+    <div class="panel"><h4>Полный текст</h4><pre style='white-space:pre-wrap'>{'kind': 'table', 'section': '## Waiting on Me', 'section_parent': '', 'text': '| **P0** `@DECIDE` | MG | medium | ~0d | **⚠️ samskrtam.ru WAVE 2–2.7 not closed.** `index.php` + `xit-3x.gif` self-heal; core 6.9→7.1 rolled back. **Decide:** (1) panel core bump — do not retry this FTP account; (2) Artem `@t3t3r1n` `@DO` **01-10-2026** kill rewriter ([Waiting on Others](#waiting-on-others)); (3) DB forensic? [incident](https://github.com/gasyoun/Uprava/blob/main/docs/INCIDENT_SAMSKRTAM_RU_DEFACEMENT_19-08-2026.md) · [H3164](https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3164-Sonnet_Uprava_samskrtam-ru-defacement-incident-triage_19.08.26.md). | — |', 'start': 664, 'end': 665, 'class': 'live', 'chars': 587, 'sha256': '419798761b62eb4f44e846bc5c9e67015b47a1f29f072f1f435ce564222638c4', 'live_tags': ['@DECIDE', '@DO']}</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Архивировать</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="GTD-16528" data-filt="DO">
+    <header><div class="hw">835 симв · @DO · ?д · File the H3174 restic repo password (reported once, out of band, <span class="badge">возр?</span><span class="badge">835c</span></div></header>
+    <div class="question"><b>Архивировать в GTD_ARCHIVE?</b><br>File the H3174 restic repo password (reported once, out of band, per the handoff's own instruction) in the password manager, and write the o<br><small>Идентификация: H3174 — Uprava handoff</small></div>
+    <div class="panel"><h4>Полный текст</h4><pre style='white-space:pre-wrap'>{'kind': 'table', 'section': '## Waiting on Me', 'section_parent': '', 'text': "| MG `@DO` | trivial | 0d | **File the H3174 restic repo password (reported once, out of band, per the handoff's own instruction) in the password manager, and write the offline copy.** Wave 0's new hourly backup on `.91` is unreadable without it — losing it means the whole SFTP repo is dead weight. This is criterion 0.2 in [docs/VERIFICATION_BACKUP_RESTORE_IMMUTABLE_ESTATE.md](https://github.com/gasyoun/Uprava/blob/main/docs/VERIFICATION_BACKUP_RESTORE_IMMUTABLE_ESTATE.md) — explicitly confirmed by a human, not by the agent. | H3174 wave 0 stays open on this one criterion until confirmed |", 'start': 581, 'end': 582, 'class': 'live', 'chars': 596, 'sha256': '8d063d4f68a3ca7a882293331f79f2b46f3b90df5fabafa6d96647f5ce79b4b5', 'live_tags': ['@DO']}</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Архивировать</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="GTD-16528" data-filt="DO">
+    <header><div class="hw">832 симв · @DO · ?д · Проголосовать лист склейки, 47 карточек <span class="badge">возр?</span><span class="badge">832c</span></div></header>
+    <div class="question"><b>Архивировать в GTD_ARCHIVE?</b><br>Проголосовать лист склейки, 47 карточек<br><small>Идентификация: H2879 — Uprava handoff; H2880 — Uprava handoff</small></div>
+    <div class="panel"><h4>Полный текст</h4><pre style='white-space:pre-wrap'>{'kind': 'table', 'section': '## Waiting on Me', 'section_parent': '', 'text': "| MG `@DO` | minor | 0d | **Проголосовать лист склейки, 47 карточек** — [`h180_reglue_evidence_sheet.html`](https://github.com/gasyoun/SanskritLexicography/blob/master/RussianTranslation/review/h180_reglue_evidence_sheet.html) (H2879). Карточки из **257** проверяемых пар. Волны 2–4 [#1736](https://github.com/gasyoun/SanskritLexicography/issues/1736) от голоса не зависят. **H2880: сначала пере-cut lock'а** — его `content_hash` не воспроизводится ни из одного состояния кода ([FINDINGS §551](https://github.com/gasyoun/SanskritLexicography/blob/master/FINDINGS.md)). | SanskritLexicography |", 'start': 587, 'end': 588, 'class': 'live', 'chars': 593, 'sha256': '5d2a9e5c3afafc6c1046984d1e4e079036367eb4daffb16e1f5b4c03898b99c4', 'live_tags': ['@DO']}</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Архивировать</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="GTD-63244" data-filt="WAITING">
+    <header><div class="hw">827 симв · @WAITING · 9д · updated 20-08-2026 <span class="badge">9д</span><span class="badge">827c</span></div></header>
+    <div class="question"><b>Архивировать в GTD_ARCHIVE?</b><br>updated 20-08-2026<br><small>Идентификация: H2444 — Uprava handoff; H2445 — Uprava handoff; H2446 — Uprava handoff; H2758 — Uprava handoff</small></div>
+    <div class="panel"><h4>Полный текст</h4><pre style='white-space:pre-wrap'>{'kind': 'table', 'section': '## Waiting on Others', 'section_parent': '', 'text': '| Костина `@WAITING` | since 14-08-2026 · ack 14-08 · overdue 16-08 · **updated 20-08-2026** | **Черновик упражнений из YouTube в кабинете (H2758).** Открыть [Мой хинди](https://samskrte.ru/dvaram/programme/hindi), блок «Черновик упражнений из старых записей», пройти 4–5 «Упражнения». Написать Гасунсу в личку: можно показывать студентам / нельзя / что поправить. Студентам эти карточки скрыты (`HINDI_YOUTUBE_NOVA3_DRILLS=false`). Старый бриф 14-08 (список потоков, Zoom-упражнения, практика из чата) тоже ещё без ответа. | H2758 student YouTube-drill flag; H2444/H2445/H2446 |', 'start': 767, 'end': 768, 'class': 'live', 'chars': 579, 'sha256': '1fc2eafb290bd9d1b9759700397965d775aa103ae3d8ce9dacd77d5b4f53181e', 'live_tags': ['@WAITING']}</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Архивировать</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="GTD-62503" data-filt="DECIDE">
+    <header><div class="hw">821 симв · @DECIDE · 32д · {&#x27;kind&#x27;: &#x27;table&#x27;, &#x27;section&#x27;: &#x27;## Do Today&#x27;, &#x27;section_parent&#x27;: &#x27;&#x27; <span class="badge">32д</span><span class="badge">821c</span></div></header>
+    <div class="question"><b>Архивировать в GTD_ARCHIVE?</b><br>{'kind': 'table', 'section': '## Do Today', 'section_parent': '', 'text': '| Tier 1 `@DECIDE` (M01/Brill, bundle) | MG | — | ✅ RULED | ✅ RES<br><small>Идентификация: H1381 — Uprava handoff; H2697 — Uprava handoff</small></div>
+    <div class="panel"><h4>Полный текст</h4><pre style='white-space:pre-wrap'>{'kind': 'table', 'section': '## Do Today', 'section_parent': '', 'text': '| Tier 1 `@DECIDE` (M01/Brill, bundle) | MG | — | ✅ RULED | ✅ RESOLVED — all 3 gates ruled 29-07-2026 (weekly @DECIDE sheet 22-07-2026): title stays "Fifty Thousand Corrections" (a); 44-vs-43 dict count deferred to a later C7 pass (b); full human re-read before Brill submission (a). [H1381](https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H1381-Fable_SanskritLexicography_m01-headline-figure-reconciliation-book-plan_20.07.26.md), [SL PR #661](https://github.com/gasyoun/SanskritLexicography/pull/661) | Reconstructed from GTD_ARCHIVE.md 17-08-2026 (H2697 corruption) |', 'start': 285, 'end': 286, 'class': 'live', 'chars': 583, 'sha256': '576fcb55bb8f21d07b7f8e3992550f31e2facd0f7204ff05b73d0b77e672c6b6', 'live_tags': ['@DECIDE']}</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Архивировать</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="GTD-16528" data-filt="DECIDE">
+    <header><div class="hw">815 симв · @DECIDE · 7д · [@DECIDE] `scripts/taxonomy.py` cherry-pick <span class="badge">7д</span><span class="badge">815c</span></div></header>
+    <div class="question"><b>Архивировать в GTD_ARCHIVE?</b><br>[@DECIDE] `scripts/taxonomy.py` cherry-pick<br><small>Идентификация: H2872 — Uprava handoff</small></div>
+    <div class="panel"><h4>Полный текст</h4><pre style='white-space:pre-wrap'>{'kind': 'table', 'section': '## Waiting on Me', 'section_parent': '', 'text': '| MG | minor | ~0d | **[@DECIDE] `scripts/taxonomy.py` cherry-pick** from `pipeline-guards` or drop the ARCHITECTURE.md row. (The bundled "17,863+ vs 17,622" figure question is RESOLVED by H2872, 16-08-2026, Fable 5 `claude-fable-5`: 17,863 stays the published composition; the −241 residual has an evidence-bounded census — candidate strata 139 + 82, exact split UNRESOLVED pending the uncommitted Mar-2026 crawl output; [сверка](https://github.com/gasyoun/CommentaryStrategies/blob/main/docs/CORPUS_TRUTH_RECONCILIATION_17863.md).) | CommentaryStrategies doc accuracy. |', 'start': 726, 'end': 727, 'class': 'live', 'chars': 572, 'sha256': 'cf032d6849819bdb669855d263bea3af25896c76c117d79c4b7859b4444fad73', 'live_tags': ['@DECIDE']}</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Архивировать</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="GTD-88381" data-filt="WAITING">
+    <header><div class="hw">811 симв · @WAITING · 8д · различения <span class="badge">8д</span><span class="badge">811c</span></div></header>
+    <div class="question"><b>Архивировать в GTD_ARCHIVE?</b><br>различения<br><small>Идентификация: H2805 — Uprava handoff</small></div>
+    <div class="panel"><h4>Полный текст</h4><pre style='white-space:pre-wrap'>{'kind': 'bullet', 'section': '## Do Today', 'section_parent': '', 'text': '- MG `@WAITING` — H2805: спросить Сергея Крылова, как менялась позиция Апресяна по квазисинонимам за разные годы. Голос по `h1306_style` принял A1 (один эквивалент + семантизатор), но A2/A3 отложены именно на этом: Апресян требует **различения** квазисинонимов, а не их удаления. Пока §5.3 [свода](https://github.com/gasyoun/SanskritLexicography/blob/master/RussianTranslation/pwg_ru/PWG_RU_STYLE_GUIDE_OF_RECORD_2026-07.md) открыт, A1 не читается как санкция вычёркивать различённые пары. Публичную часть диахронии агент выяснит сам (15-08-2026, Opus 5 `claude-opus-5`).', 'start': 175, 'end': 176, 'class': 'live', 'chars': 571, 'sha256': '58f58acf228bab10ccd6df04b5a7128eb1b83681315989e5c4caceaafc24cd5d', 'live_tags': ['@WAITING']}</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Архивировать</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="GTD-88381" data-filt="DO">
+    <header><div class="hw">809 симв · @DO · 23д ·  -- stand up ESP + form for samskrtam lead magnet: no email-capt <span class="badge">23д</span><span class="badge">809c</span></div></header>
+    <div class="question"><b>Архивировать в GTD_ARCHIVE?</b><br> -- stand up ESP + form for samskrtam lead magnet: no email-capture infra exists on samskrtam.ru -- confirmed 31-07-2026 (H1985, Sonnet 5 `c<br><small>Идентификация: H1985 — Uprava handoff</small></div>
+    <div class="panel"><h4>Полный текст</h4><pre style='white-space:pre-wrap'>{'kind': 'bullet', 'section': '## Do Today', 'section_parent': '', 'text': '- **MG `@DO`** -- stand up ESP + form for samskrtam lead magnet: no email-capture infra exists on samskrtam.ru -- confirmed 31-07-2026 (H1985, Sonnet 5 `claude-sonnet-5`), all ~21 benefit-article forms still ship `action="#"` placeholders. Draft copy ready: [email_course_sanskrit_s_nulya.md](https://github.com/gasyoun/ORS-FAQ/blob/main/docs/email_course_sanskrit_s_nulya.md) -- needs an owner ESP pick, then one wiring pass. [H1985](https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H1985-Sonnet_ORS-FAQ_samskrtam-seo-p2-email-capture-testimonials_30.07.26.md).', 'start': 419, 'end': 420, 'class': 'live', 'chars': 574, 'sha256': '0b31125601710fa8c6c1308c527582b1c5c5b5083b67b3d465f864ed9ccd0dff', 'live_tags': ['@DO']}</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Архивировать</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="GTD-11550" data-filt="DECIDE">
+    <header><div class="hw">809 симв · @DECIDE · ?д · H2541 (Opus… [full](GTD_ARCHIVE.md#archived-14082026-h2697) |  <span class="badge">возр?</span><span class="badge">809c</span></div></header>
+    <div class="question"><b>Архивировать в GTD_ARCHIVE?</b><br>H2541 (Opus… [full](GTD_ARCHIVE.md#archived-14082026-h2697) | <br><small>Идентификация: H2541 — Uprava handoff</small></div>
+    <div class="panel"><h4>Полный текст</h4><pre style='white-space:pre-wrap'>{'kind': 'table', 'section': '## Agent-Ready', 'section_parent': '', 'text': '| — (blocked, no agent lane) | hard | — | **H2541 (Opus… [full](GTD_ARCHIVE.md#archived-14082026-h2697) | **BLOCKED — do not hand this to an agent lane yet.** Both remaining items wait on the dark-surfaces `@DECIDE` in [Do Today](#do-today): 589 of the ~800 remaining in-scope classes are those surfaces, and Phase 1 deliberately declined to declare `--color-ink` / `--color-surface` over colours whose status is undecided — extracting a primitive first would freeze an arbitrary variant. The second `@DECIDE` (restore… [full](GTD_ARCHIVE.md#archived-14082026-h2697) |', 'start': 808, 'end': 809, 'class': 'live', 'chars': 568, 'sha256': 'b5a163370eec4ce7016de4a7d17fded4edfa41ee4d32424d5243c0d05a999542', 'live_tags': ['@DECIDE']}</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Архивировать</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="GTD-62503" data-filt="DO">
+    <header><div class="hw">807 симв · @DO · ?д · Sign off the A18 draft <span class="badge">возр?</span><span class="badge">807c</span></div></header>
+    <div class="question"><b>Архивировать в GTD_ARCHIVE?</b><br>Sign off the A18 draft<br><small>Идентификация: H1076 — Uprava handoff</small></div>
+    <div class="panel"><h4>Полный текст</h4><pre style='white-space:pre-wrap'>{'kind': 'table', 'section': '## Do Today', 'section_parent': '', 'text': '| P1 `@DO` | MG | 🟡 medium | ~0d | **Sign off the A18 draft** «One Slot, Many Warrants» (readiness 3/5, [H1076](https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H1076-Fable_MWS_a18-citation-registers-draft_16.07.26.md)): read [A18_citation_registers_paper.md](https://github.com/sanskrit-lexicon/MWS/blob/master/papers/p3_citation_registers/A18_citation_registers_paper.md) and rule its 4 open gates (byline/venue, dataset DOI, csl-atlas footnote, §5.3 sense-level gate). | A18 is the paper the whole P3 evidence block was built for; 3/5→4/5 needs the author. |', 'start': 392, 'end': 393, 'class': 'live', 'chars': 573, 'sha256': '677cc18a4d6222ff8767a15a1aba43678279b9432fb9dc7c8baca66aeebb9084', 'live_tags': ['@DO']}</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Архивировать</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="GTD-88381" data-filt="DECIDE">
+    <header><div class="hw">806 симв · @DECIDE · 43д · standing gate: every public Sangram article needs MG sign-off be <span class="badge">43д</span><span class="badge">806c</span></div></header>
+    <div class="question"><b>Архивировать в GTD_ARCHIVE?</b><br>standing gate: every public Sangram article needs MG sign-off before it ships.<br><small>Идентификация: H2888 — Uprava handoff</small></div>
+    <div class="panel"><h4>Полный текст</h4><pre style='white-space:pre-wrap'>{'kind': 'bullet', 'section': '## Do Today', 'section_parent': '', 'text': '- MG `@DECIDE` — **standing gate: every public Sangram article needs MG sign-off before it ships.** Ruled 11-07-2026 in [MEGABOOK_SANGRAM_IMPLEMENTATION_PLAN_2026_2031.md](https://github.com/gasyoun/Uprava/blob/main/MEGABOOK_SANGRAM_IMPLEMENTATION_PLAN_2026_2031.md) and surfaced here 16-08-2026 (H2888) so it is visible per article rather than only inside the plan. Recurring, not a one-off: it fires on each of the 10–20 evidence-ready morphology articles targeted for the Q4-2026 rough alpha. No article is waiting on it today (16-08-2026, Opus 5 `claude-opus-5`).', 'start': 142, 'end': 143, 'class': 'live', 'chars': 567, 'sha256': '6b475fbe54f203e94e0ddf07780c328ee21f39010b6255b40c9860542d666b18', 'live_tags': ['@DECIDE']}</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Архивировать</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="GTD-16528" data-filt="DO">
+    <header><div class="hw">804 симв · @DO · 6д · Проголосовать 19 карточек переводов бандха-страниц <span class="badge">6д</span><span class="badge">804c</span></div></header>
+    <div class="question"><b>Архивировать в GTD_ARCHIVE?</b><br>Проголосовать 19 карточек переводов бандха-страниц<br><small>Идентификация: H3025 — Uprava handoff</small></div>
+    <div class="panel"><h4>Полный текст</h4><pre style='white-space:pre-wrap'>{'kind': 'table', 'section': '## Waiting on Me', 'section_parent': '', 'text': '| MG `@DO` | minor | ~0d | **Проголосовать 19 карточек переводов бандха-страниц** — [лист](https://gasyoun.github.io/vote/sheets/bandha_translations_19.html) → `uprava-bandha-translations_all-schemes-17-08-26_decisions.json` в `Uprava\\review\\`. Переслать: Уше Рани Санке [#1783](https://github.com/gasyoun/SanskritLexicography/issues/1783), Эдгару Лейтану [#1784](https://github.com/gasyoun/SanskritLexicography/issues/1784) (у обоих нет GitHub). H3025, 17-08-2026. | правка отгруженных переводов бандха-страниц; замена учебной падмабандхи классическим образцом |', 'start': 583, 'end': 584, 'class': 'live', 'chars': 563, 'sha256': '1f7c2f0ff4e6cbce1abe34d9477e7571988b2cfd1ad015285114ba6489640bd4', 'live_tags': ['@DO']}</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Архивировать</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="GTD-88381" data-filt="DO">
+    <header><div class="hw">801 симв · @DO · 6д · session concurrency: ceiling 4, box at 5. <span class="badge">6д</span><span class="badge">801c</span></div></header>
+    <div class="question"><b>Архивировать в GTD_ARCHIVE?</b><br>session concurrency: ceiling 4, box at 5.<br><small>Идентификация: H3029 — Uprava handoff</small></div>
+    <div class="panel"><h4>Полный текст</h4><pre style='white-space:pre-wrap'>{'kind': 'bullet', 'section': '## Do Today', 'section_parent': '', 'text': '- MG `@DO` — **session concurrency: ceiling 4, box at 5.** Close by **window title**, never by session id (a process hosts many sessions): `Get-Process | Where-Object -Property MainWindowHandle -NE 0`. Verify with `Get-Process -Name claude` + parent liveness. Not cosmetic — 9–10 sessions at 97 % commit charge killed a **paid** probe. [Policy](https://github.com/gasyoun/Uprava/blob/main/docs/STANDING_POLICY_SESSION_CONCURRENCY_CEILING_2026.md) · [FINDINGS §453](https://github.com/gasyoun/Uprava/blob/main/FINDINGS.md). (17-08-2026, Opus 5 `claude-opus-5`, H3029)', 'start': 133, 'end': 134, 'class': 'live', 'chars': 566, 'sha256': '3ba60a764e419335d5fc0da06ac0f8a684cbd5670f291797bb667ba64cc5d2a7', 'live_tags': ['@DO']}</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Архивировать</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="GTD-88381" data-filt="DO">
+    <header><div class="hw">800 симв · @DO · 6д · an agent cannot generate <span class="badge">6д</span><span class="badge">800c</span></div></header>
+    <div class="question"><b>Архивировать в GTD_ARCHIVE?</b><br>an agent cannot generate<br><small>Идентификация: H2648 — Uprava handoff</small></div>
+    <div class="panel"><h4>Полный текст</h4><pre style='white-space:pre-wrap'>{'kind': 'bullet', 'section': '## Do Today', 'section_parent': '', 'text': '- MG `@DO` — [H2648](https://github.com/gasyoun/Uprava/blob/main/handoffs/H2648-OxAlpha_Systema-Sanscriticum_yandex-disk-resumable-upload-stall_13.08.26.md): raw WebDAV PUT to Yandex.Disk still dies at ~27 MB (17-08-2026). Fix needs the chunked REST API, whose OAuth token **an agent cannot generate** — interactive 2FA at [oauth.yandex.ru](https://oauth.yandex.ru), scope `cloud_api:disk.write`. Drop it as `YANDEX_DISK_OAUTH_TOKEN` in prod `.env`. [#1141](https://github.com/gasyoun/Systema-Sanscriticum/issues/1141) [full](GTD_ARCHIVE.md#archived-17082026-h2697)', 'start': 445, 'end': 446, 'class': 'live', 'chars': 565, 'sha256': '7fa147edfcfadbf467dd58000d91e56831db7dd07f3d52714e5cbf3ef2c589ce', 'live_tags': ['@DO']}</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Архивировать</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="GTD-88381" data-filt="DO">
+    <header><div class="hw">799 симв · @DO · 5д · ПЕРЕДАНО ОТ МАРИИ MG 22-08-2026 <span class="badge">5д</span><span class="badge">799c</span></div></header>
+    <div class="question"><b>Архивировать в GTD_ARCHIVE?</b><br>ПЕРЕДАНО ОТ МАРИИ MG 22-08-2026</div>
+    <div class="panel"><h4>Полный текст</h4><pre style='white-space:pre-wrap'>{'kind': 'bullet', 'section': '## Do Today', 'section_parent': '', 'text': '- ~~Мария Ильюшина~~ MG `@DO` — **ПЕРЕДАНО ОТ МАРИИ MG 22-08-2026** (ей интерфейс непонятен; она сама получатель ЗП user 5949): **подтвердить в админке атрибуцию семи «Расходов»** на курсах `332`/`375` (−47 100, −20 220, −28 620, −26 820, −35 630, −25 000, −50 000 ₽): какие из них действительно ЗП Ворошилова, а какие — прочий opex. Пока не подтверждено, остаток на экране печатается со словом «предварительно». Очередь: [https://samskrte.ru/admin/payout-attribution-guide](https://samskrte.ru/admin/payout-attribution-guide). (18-08-2026, Opus 5 `claude-opus-5`)', 'start': 137, 'end': 138, 'class': 'completed', 'chars': 564, 'sha256': 'b328d6bd8b9c2ca6bbbe673c3c6a5b534fbeab96dc0a27f53708392d02550547', 'live_tags': []}</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Архивировать</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="GTD-88381" data-filt="DECIDE">
+    <header><div class="hw">799 симв · @DECIDE · ?д · глоссарий санскритской терминологии живых занятий <span class="badge">возр?</span><span class="badge">799c</span></div></header>
+    <div class="question"><b>Архивировать в GTD_ARCHIVE?</b><br>глоссарий санскритской терминологии живых занятий<br><small>Идентификация: H2839 — Uprava handoff</small></div>
+    <div class="panel"><h4>Полный текст</h4><pre style='white-space:pre-wrap'>{'kind': 'bullet', 'section': '## Do Today', 'section_parent': '', 'text': '- MG `@DECIDE` — H2839: строить ли **глоссарий санскритской терминологии живых занятий** (1 513 статей при пороге частоты ≥ 20) и кто вычитывает список: ассистент ₽600/ч → **₽10 520**, или MG лично → **₽41 600**. Это лексикографическое решение, не решение контролёра по 152-ФЗ, поэтому делегирование здесь законно — в отличие от отменённой редактуры корпуса. Окупаемость: 3–10 членств по ₽5 000 против 1 598 у отменённой программы. [Скоупинг §6–§7](https://github.com/gasyoun/Uprava/blob/main/docs/SCOPING_USTNY_KORPUS_DERIVED_NON_TRANSCRIPT_ASSETS_2026-08.md)', 'start': 154, 'end': 155, 'class': 'live', 'chars': 560, 'sha256': 'ae77c66e3e87c7b2159c7083bfaa68575f33f6506b942802e6953e25ff6320fd', 'live_tags': ['@DECIDE']}</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Архивировать</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="GTD-62503" data-filt="DO">
+    <header><div class="hw">796 симв · @DO · 43д · Complete the Google Drive OAuth desktop client <span class="badge">43д</span><span class="badge">796c</span></div></header>
+    <div class="question"><b>Архивировать в GTD_ARCHIVE?</b><br>Complete the Google Drive OAuth desktop client<br><small>Идентификация: H3176 — Uprava handoff</small></div>
+    <div class="panel"><h4>Полный текст</h4><pre style='white-space:pre-wrap'>{'kind': 'table', 'section': '## Do Today', 'section_parent': '', 'text': "| P1 `@DO` | MG | ~10 мин | ~40d | **Complete the Google Drive OAuth desktop client** (steps 1–4 in [`tools/backup_google_drive.py`](https://github.com/gasyoun/Uprava/blob/main/tools/backup_google_drive.py)'s header) — unblocks [H3176 (Sonnet 5) — Wave 1: .91 fan-out hub, restic copy onward to Google Drive](https://github.com/gasyoun/Uprava/blob/main/handoffs/H3176-OxAlpha_Uprava_backup-w1-hub-fanout-gdrive-third-copy_19.08.26.md) and the 19.2 GB data-layer wave. | Open since 11-07-2026. The third copy is the one in a different provider's failure domain. |", 'start': 327, 'end': 328, 'class': 'live', 'chars': 562, 'sha256': 'c07d3b1fa4a9808f9c876cf535fc057c100ac026629a9803954e508b3a0f239d', 'live_tags': ['@DO']}</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Архивировать</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="GTD-88381" data-filt="DO">
+    <header><div class="hw">790 симв · @DO · 0д · Институт исследования санскрита: план монетизации v1 принят; шаг <span class="badge">0д</span><span class="badge">790c</span></div></header>
+    <div class="question"><b>Архивировать в GTD_ARCHIVE?</b><br>Институт исследования санскрита: план монетизации v1 принят; шаги человека</div>
+    <div class="panel"><h4>Полный текст</h4><pre style='white-space:pre-wrap'>{'kind': 'bullet', 'section': '## Do Today', 'section_parent': '', 'text': '- MG `@DO` — **Институт исследования санскрита: план монетизации v1 принят; шаги человека** (23-08-2026, ox-alpha): (1) ратифицировать полный прайс A1 ПК-72 после пилота (кандидаты 36–40 т.₽; пилот 30 000 ₽ зафиксирован); (2) юр-рамка «Меценатов Института» — пожертвование ст.582 vs оферта услуг, формулировку сверить до запуска (ценник-предложение 500₽/мес · 5000₽/год); (3) вторая отклонённая заявка ПФКИ/ФПГИ — ссылка или PDF для постмортема; [план](https://github.com/gasyoun/Systema-Sanscriticum/blob/main/docs/INSTITUTE_MONETIZATION_PLAN_2026H2.md).', 'start': 116, 'end': 117, 'class': 'live', 'chars': 555, 'sha256': '8917e51c6153e5335ef336ad8e54be1f35b361ca6ceac7e0b518900c12b2d9c1', 'live_tags': ['@DO']}</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Архивировать</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="GTD-88381" data-filt="DECIDE">
+    <header><div class="hw">784 симв · @DECIDE · 9д · ₽1 490/мес отдельным add-on <span class="badge">9д</span><span class="badge">784c</span></div></header>
+    <div class="question"><b>Архивировать в GTD_ARCHIVE?</b><br>₽1 490/мес отдельным add-on<br><small>Идентификация: H2640 — Uprava handoff</small></div>
+    <div class="panel"><h4>Полный текст</h4><pre style='white-space:pre-wrap'>{'kind': 'bullet', 'section': '## Do Today', 'section_parent': '', 'text': '- MG `@DECIDE` — H2640: цена scholar-тира Пахтанья. Агент рекомендует **₽1 490/мес отдельным add-on**, а не рунгу ₽5 000 в лестнице членства: сегмент, который тянет ₽5 000 (26 из 88 покупателей записей), и аудитория научного инструментария — разные люди, а поверх клуба ₽1 500 это ₽6 500/мес при медианном совокупном чеке ₽1 762/мес. Осень не меняется (₽0 за Sep–Oct). [спека](https://github.com/gasyoun/SamudraManthanam/blob/main/docs/SPEC_SAMUDRA_SCHOLAR_TIER_PAID_CAPABILITY_2026.md) §4 (14-08-2026, Opus 5 `claude-opus-5`, ~10 мин decision).', 'start': 167, 'end': 168, 'class': 'live', 'chars': 545, 'sha256': 'df62a09fdce181efd7403ffbaf3719fe08e5a1525beae92b8905b680d1f3b38e', 'live_tags': ['@DECIDE']}</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Архивировать</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="GTD-62503" data-filt="DO">
+    <header><div class="hw">784 симв · @DO · ?д · File the restic repo password <span class="badge">возр?</span><span class="badge">784c</span></div></header>
+    <div class="question"><b>Архивировать в GTD_ARCHIVE?</b><br>File the restic repo password<br><small>Идентификация: H3174 — Uprava handoff</small></div>
+    <div class="panel"><h4>Полный текст</h4><pre style='white-space:pre-wrap'>{'kind': 'table', 'section': '## Do Today', 'section_parent': '', 'text': '| Tier-0 `@DO` | MG | ~5 мин | ~0d | **File the restic repo password** in the password manager **and** write one offline copy, when [H3174 (Sonnet 5) — Wave 0: hourly DB dumps + restic repo on .91 over SFTP](https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3174-Sonnet_Systema-Sanscriticum_backup-w0-restic-sftp-hourly-dumps_19.08.26.md) reports it. Acceptance criterion 0.2 — the one criterion an agent cannot close. | Immutability makes key loss unrecoverable: a WORM bucket will faithfully preserve 400 days of data nobody can read. |', 'start': 326, 'end': 327, 'class': 'live', 'chars': 550, 'sha256': 'c47bf2d615d8d873bbc97e677f5f870f9e90ec5c0680612e496509f777b4ee6f', 'live_tags': ['@DO']}</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Архивировать</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="GTD-88381" data-filt="DECIDE">
+    <header><div class="hw">783 симв · @DECIDE · 6д · 2 M proposals need a call <span class="badge">6д</span><span class="badge">783c</span></div></header>
+    <div class="question"><b>Архивировать в GTD_ARCHIVE?</b><br>2 M proposals need a call</div>
+    <div class="panel"><h4>Полный текст</h4><pre style='white-space:pre-wrap'>{'kind': 'bullet', 'section': '## Do Today', 'section_parent': '', 'text': '- MG `@DECIDE` — RussianTranslation Track B (akṣara card): agent gloss review shipped, 55/55 senses checked, flagship слог↔Непреходящее split verified correct. **2 M proposals need a call**: sense 7 ⟨кӯ⟩ glyph, and the 2Eiii Mahat category-term (+ 4 optional refinements). [aksara.gloss-review.md](https://github.com/gasyoun/SanskritLexicography/blob/f2a1ce41/article-comparison/aksara.gloss-review.md) → apply accepted edits to `aksara.pd-min.ru.md` col. 3. Surfaced 17-08-2026 during `/weekly-review` GTD harvest (Sonnet 5 `claude-sonnet-5`).', 'start': 156, 'end': 157, 'class': 'live', 'chars': 544, 'sha256': 'b973934df3e6143c6ddfe1bf79716bd8ec1b3a21174687836e8e0d518915be60', 'live_tags': ['@DECIDE']}</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Архивировать</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="GTD-62503" data-filt="DO">
+    <header><div class="hw">783 симв · @DO · ?д · Yandex Object Storage bucket with Object Lock (400 d) + PutObjec <span class="badge">возр?</span><span class="badge">783c</span></div></header>
+    <div class="question"><b>Архивировать в GTD_ARCHIVE?</b><br>Yandex Object Storage bucket with Object Lock (400 d) + PutObject-only key<br><small>Идентификация: H3175 — Uprava handoff</small></div>
+    <div class="panel"><h4>Полный текст</h4><pre style='white-space:pre-wrap'>{'kind': 'table', 'section': '## Do Today', 'section_parent': '', 'text': '| Tier-0 `@DO` | MG | ~20 мин | ~0d | **Yandex Object Storage bucket with Object Lock (400 d) + PutObject-only key** at [console.cloud.yandex.ru](https://console.cloud.yandex.ru/) — unblocks [H3175](https://github.com/gasyoun/Uprava/blob/main/handoffs/H3175-OxAlpha_Systema-Sanscriticum_backup-w1-yandex-object-lock-immutable_19.08.26.md). Plan: [PLAN_BACKUP_RESTORE_IMMUTABLE_ESTATE_2026H2.md](https://github.com/gasyoun/Uprava/blob/main/docs/PLAN_BACKUP_RESTORE_IMMUTABLE_ESTATE_2026H2.md). | Immutable offsite. ~₽20–40/mo. Wave 0 does not wait. |', 'start': 325, 'end': 326, 'class': 'live', 'chars': 549, 'sha256': '9fe5cac89c26641dcaf4be41198449b6ac375e4248f42d77f652ce67136cd055', 'live_tags': ['@DO']}</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Архивировать</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="GTD-16528" data-filt="DO">
+    <header><div class="hw">781 симв · @DO · 7д · Sa→Ru TM publish — translator-estate clearance (Гринцер, Сыркин, <span class="badge">7д</span><span class="badge">781c</span></div></header>
+    <div class="question"><b>Архивировать в GTD_ARCHIVE?</b><br>Sa→Ru TM publish — translator-estate clearance (Гринцер, Сыркин, Потапова).<br><small>Идентификация: H1457 — Uprava handoff; H3008 — Uprava handoff</small></div>
+    <div class="panel"><h4>Полный текст</h4><pre style='white-space:pre-wrap'>{'kind': 'table', 'section': '## Waiting on Me', 'section_parent': '', 'text': '| MG `@DO` | minor | ~0d | **Sa→Ru TM publish — translator-estate clearance (Гринцер, Сыркин, Потапова).** H215 + H1457 tracks all ✅ done; only the estate outreach is human-only (no agent mailbox). Checklist [`PUBLISH_PACKET.md`](https://github.com/gasyoun/SanskritLexicography/blob/master/RussianTranslation/release/PUBLISH_PACKET.md); the publish act itself is agent-run via `/publish-safety-check` (MG 16-08-2026 lifts the H215 §C5 fence). Row minted 17-08-2026 (H3008) from a bullet stranded in Agent-Ready. | RussianTranslation release |', 'start': 584, 'end': 585, 'class': 'live', 'chars': 542, 'sha256': 'e564920f3528d53837a8b22c3b6db8e77701633a8e5eb968280c95714f03db60', 'live_tags': ['@DO']}</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Архивировать</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="GTD-16528" data-filt="DECIDE">
+    <header><div class="hw">781 симв · @DECIDE · ?д · Бренд-оранжевый на кнопках не проходит WCAG AA (3.51:1 против 4. <span class="badge">возр?</span><span class="badge">781c</span></div></header>
+    <div class="question"><b>Архивировать в GTD_ARCHIVE?</b><br>Бренд-оранжевый на кнопках не проходит WCAG AA (3.51:1 против 4.5:1)<br><small>Идентификация: H2869 — Uprava handoff</small></div>
+    <div class="panel"><h4>Полный текст</h4><pre style='white-space:pre-wrap'>{'kind': 'table', 'section': '## Waiting on Me', 'section_parent': '', 'text': '| MG `@DECIDE` | trivial | 0d | **Бренд-оранжевый на кнопках не проходит WCAG AA (3.51:1 против 4.5:1)** — замер Dusk-аудита H2869 на VisualDCS-поверхностях; это стиль кнопок ВСЕГО сайта (`bg-brand` #e85c24 + белый текст). Варианты: затемнить brand-hover, увеличить кегль кнопок, или принять как осознанный бренд-риск. Факты: [контактный лист](https://github.com/gasyoun/Systema-Sanscriticum/blob/main/docs/VISUALDCS_LEARNER_CONTACT_SHEET_2026.md) § Known residue. | ничего не блокирует — поверхности живы; аудит-тест репортит, не валит |', 'start': 582, 'end': 583, 'class': 'live', 'chars': 538, 'sha256': 'b0c8be17c003cad210b2a3011a60f910a0b270584c7d5974140d076e4c2b3eb5', 'live_tags': ['@DECIDE']}</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Архивировать</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="GTD-16528" data-filt="DO">
+    <header><div class="hw">778 симв · @DO · ?д · Собрать справки о несудимости со ВСЕГО преподавательского состав <span class="badge">возр?</span><span class="badge">778c</span></div></header>
+    <div class="question"><b>Архивировать в GTD_ARCHIVE?</b><br>Собрать справки о несудимости со ВСЕГО преподавательского состава</div>
+    <div class="panel"><h4>Полный текст</h4><pre style='white-space:pre-wrap'>{'kind': 'table', 'section': '## Waiting on Me', 'section_parent': '', 'text': '| MG `@DO` (исполнитель — М. М. Ильюшина) | 🔴 medium | — | **Собрать справки о несудимости со ВСЕГО преподавательского состава** — штат, ГПХ-самозанятые и сам ИП (ч. 5 ст. 32 273-ФЗ; ст. 331/351.1 ТК РФ). Реестр и порядок: [D4_spravki_nesudimost_reestr.md](https://github.com/gasyoun/Uprava/blob/main/dpo/ip-gasuns/D_kadry/D4_spravki_nesudimost_reestr.md). Для C7 (подростки 14–17) справка обязательна до начала занятий. | Блокирует подачу пакета `dpo/ip-gasuns` и фазу 2 H461 (C7). Данные диплома и стажа М. М. Ильюшиной нужны для D2/D6 |', 'start': 673, 'end': 674, 'class': 'live', 'chars': 539, 'sha256': 'c4f4d99f670185798fdd8064354970429745233577650007a7adafd1243b4bb0', 'live_tags': ['@DO']}</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Архивировать</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="GTD-16528" data-filt="DO">
+    <header><div class="hw">773 симв · @DO · 8д · {&#x27;kind&#x27;: &#x27;table&#x27;, &#x27;section&#x27;: &#x27;## Waiting on Me&#x27;, &#x27;section_parent <span class="badge">8д</span><span class="badge">773c</span></div></header>
+    <div class="question"><b>Архивировать в GTD_ARCHIVE?</b><br>{'kind': 'table', 'section': '## Waiting on Me', 'section_parent': '', 'text': '| MG `@DO` | — | — | ✅ RESOLVED — voted 4/4 approve + applie</div>
+    <div class="panel"><h4>Полный текст</h4><pre style='white-space:pre-wrap'>{'kind': 'table', 'section': '## Waiting on Me', 'section_parent': '', 'text': '| MG `@DO` | — | — | ✅ RESOLVED — voted 4/4 approve + applied 15-08-2026 ([H798](https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H798-Sonnet_SanskritLexicography_h779-apply-okas-guda-sphic-decisions_12.07.26.md), v1.144.60); store also resolved: [KOCHERGINA_CORRECTIONS.md](https://github.com/gasyoun/SanskritLexicography/blob/master/KOCHERGINA_CORRECTIONS.md) ([FINDINGS §539](https://github.com/gasyoun/SanskritLexicography/blob/master/FINDINGS.md)) | Stale-flagged 17-08-2026 `/weekly-review`; stub only, no residual |', 'start': 656, 'end': 657, 'class': 'live', 'chars': 534, 'sha256': '6006555f4aa1cf2b6c24b12f0f5e09c83fe389ac57b75d422f85b5317fa5ed3a', 'live_tags': ['@DO']}</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Архивировать</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="GTD-88381" data-filt="DO">
+    <header><div class="hw">771 симв · @DO · 2д · {&#x27;kind&#x27;: &#x27;bullet&#x27;, &#x27;section&#x27;: &#x27;## Do Today&#x27;, &#x27;section_parent&#x27;: &#x27; <span class="badge">2д</span><span class="badge">771c</span></div></header>
+    <div class="question"><b>Архивировать в GTD_ARCHIVE?</b><br>{'kind': 'bullet', 'section': '## Do Today', 'section_parent': '', 'text': '- MG `@DO` — after [H3247 (Grok 4.6) — Wave 1 cluster 1: Deal.ki<br><small>Идентификация: H3247 — Uprava handoff</small></div>
+    <div class="panel"><h4>Полный текст</h4><pre style='white-space:pre-wrap'>{'kind': 'bullet', 'section': '## Do Today', 'section_parent': '', 'text': '- MG `@DO` — after [H3247 (Grok 4.6) — Wave 1 cluster 1: Deal.kind=trial](https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3247-Grok_Systema-Sanscriticum_trial-deal-kind-booking_21.08.26.md) is on prod: smoke a staff trial Deal, then set `CRM_TRIAL_BOOKING=true` only (`config:cache`). Leave `CRM_TRIAL_WIDGET_PUBLIC` false. Plan: [PLAN_SYSTEMA_MOYKLASS_TRIAL_BOOKING_2026H2.md](https://github.com/gasyoun/Systema-Sanscriticum/blob/main/docs/PLAN_SYSTEMA_MOYKLASS_TRIAL_BOOKING_2026H2.md). (21-08-2026, Grok 4.6 `grok-4.6`)', 'start': 123, 'end': 124, 'class': 'live', 'chars': 536, 'sha256': 'a4fe738e557531a22eaf5209b2b60d20606d8dfa4ed6c7a1c7a200be23f931e3', 'live_tags': ['@DO']}</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Архивировать</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="GTD-11550" data-filt="DO">
+    <header><div class="hw">770 симв · @DO · 44д · {&#x27;kind&#x27;: &#x27;table&#x27;, &#x27;section&#x27;: &#x27;## Agent-Ready&#x27;, &#x27;section_parent&#x27;: <span class="badge">44д</span><span class="badge">770c</span></div></header>
+    <div class="question"><b>Архивировать в GTD_ARCHIVE?</b><br>{'kind': 'table', 'section': '## Agent-Ready', 'section_parent': '', 'text': '| ~~agent (Sonnet 5 `claude-sonnet-5`)~~ ✅ done-by-audit 10-07</div>
+    <div class="panel"><h4>Полный текст</h4><pre style='white-space:pre-wrap'>{'kind': 'table', 'section': '## Agent-Ready', 'section_parent': '', 'text': '| ~~agent (Sonnet 5 `claude-sonnet-5`)~~ ✅ done-by-audit 10-07-2026 | small-medium | — | ✅ RESOLVED H371 → RussianRamayana revival audit merged [PR #20](https://github.com/gasyoun/RussianRamayana/pull/20); no new handoff; recension/fundraising/Zenodo decisions live on separate rows. — full record: [archive](GTD_ARCHIVE.md#archived-21-07-2026-h1341-resolved-row-compression-resume-4) | RussianRamayana front is not scan/plan-bound — see the existing `@DECIDE`/`@DO` rows below (recension, fundraising data, Zenodo DOI). |', 'start': 863, 'end': 864, 'class': 'live', 'chars': 522, 'sha256': 'eee95e1906c9fb1181ea36a02dcfb1d58be259ec8a4b1be06a352333105ca938', 'live_tags': ['@DECIDE', '@DO']}</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Архивировать</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="GTD-88381" data-filt="DECIDE">
+    <header><div class="hw">765 симв · @DECIDE · ?д · {&#x27;kind&#x27;: &#x27;bullet&#x27;, &#x27;section&#x27;: &#x27;## Do Today&#x27;, &#x27;section_parent&#x27;: &#x27; <span class="badge">возр?</span><span class="badge">765c</span></div></header>
+    <div class="question"><b>Архивировать в GTD_ARCHIVE?</b><br>{'kind': 'bullet', 'section': '## Do Today', 'section_parent': '', 'text': '- MG `@DECIDE` — H2890: сузить ли факт про `corpus_verify` в [DA<br><small>Идентификация: H2890 — Uprava handoff</small></div>
+    <div class="panel"><h4>Полный текст</h4><pre style='white-space:pre-wrap'>{'kind': 'bullet', 'section': '## Do Today', 'section_parent': '', 'text': '- MG `@DECIDE` — H2890: сузить ли факт про `corpus_verify` в [DANGER_FACTS](https://github.com/gasyoun/Uprava/blob/main/DANGER_FACTS.md)? Перепись Q7: `corpus_verify_classes.py` читает `app_data.json` и ни разу за историю не писал в него, но факт числит его «overlay-wiper» наравне с `apply_*`. Снять · сузить до `apply_*` · оставить страховкой. Агент предохранитель не трогает; тем же решается handoff C шаг 1. Улики: [спот-чек Q7](https://github.com/gasyoun/Uprava/blob/main/docs/Q7_REVIEWED_PREDICATE_SPOTCHECK_2026-08.md).', 'start': 139, 'end': 140, 'class': 'live', 'chars': 526, 'sha256': 'f9e97b19bab307136f877b6a8fa45d56f9c67910bd2b976e9fb6eee2119f1de6', 'live_tags': ['@DECIDE']}</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Архивировать</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="GTD-62503" data-filt="DO">
+    <header><div class="hw">764 симв · @DO · 4д · SUPERSEDED 19-08-2026 <span class="badge">4д</span><span class="badge">764c</span></div></header>
+    <div class="question"><b>Архивировать в GTD_ARCHIVE?</b><br>SUPERSEDED 19-08-2026<br><small>Идентификация: H2648 — Uprava handoff</small></div>
+    <div class="panel"><h4>Полный текст</h4><pre style='white-space:pre-wrap'>{'kind': 'table', 'section': '## Do Today', 'section_parent': '', 'text': '| Tier-0 `@DO` | MG | ~10 мин | ~0d | ⚠️ **SUPERSEDED 19-08-2026** — ~~Yandex.**Disk** WebDAV app-password for Systema off-site backups~~. Credentials were supplied; the transport itself is the defect ([H2648](https://github.com/gasyoun/Uprava/blob/main/handoffs/H2648-OxAlpha_Systema-Sanscriticum_yandex-disk-resumable-upload-stall_13.08.26.md): `413` past ~35 MB, leaving two 11.21 MB stubs of a 1.4 GB archive). Replaced by the Yandex **Object Storage** row below. | WebDAV cannot offer Object Lock at any credential quality. |', 'start': 324, 'end': 325, 'class': 'live', 'chars': 530, 'sha256': '8c708789f6fdad653cb6fad3f5162ef0ee13863e3d4d7ec09083e2dd840afe78', 'live_tags': ['@DO']}</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Архивировать</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="GTD-88381" data-filt="DO">
+    <header><div class="hw">760 симв · @DO · 7д · 46 карточек <span class="badge">7д</span><span class="badge">760c</span></div></header>
+    <div class="question"><b>Архивировать в GTD_ARCHIVE?</b><br>46 карточек<br><small>Идентификация: H2860 — Uprava handoff</small></div>
+    <div class="panel"><h4>Полный текст</h4><pre style='white-space:pre-wrap'>{'kind': 'bullet', 'section': '## Do Today', 'section_parent': '', 'text': '- MG `@DO` — H2860: проголосовать лист по регистру отступлений Нилакантхи, **46 карточек** (16 ручных решений + выборка 30 авто-строк, seed 2860). [Лист](https://gasyoun.github.io/vote/sheets/nilakantha_licence_46.html) → `decisions.json` → `nilakantha_hand_rulings.json` → `build_licence_register_nilakantha.py`. Ничто не заблокировано: [151 строка](https://github.com/gasyoun/CommentaryStrategies/blob/main/data/licence_register/commentary_licence_register_nilakantha.tsv) уже в `main` (16-08-2026, Opus 5 `claude-opus-5`).', 'start': 149, 'end': 150, 'class': 'live', 'chars': 525, 'sha256': '03e1444383fd10e5985b75df542ccb0f2d9c6ba0d674f09f057227da7aa9540d', 'live_tags': ['@DO']}</pre></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Архивировать</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+</main>
+<div class="votebar" id="voteBar"><span class="spacer"></span></div>
+<footer class="hint">Ox Alpha (x-preview-f-free) · агент применит решения после выгрузки decisions.json Keyboard: <kbd>a</kbd> Архивировать &middot; <kbd>r</kbd> Оставить
+  &middot; <kbd>d</kbd> defer &middot; <kbd>&darr;</kbd>/<kbd>&uarr;</kbd> next/prev. Votes autosave to
+  this browser's localStorage; click "Download decisions.json" when done (unvoted items export with
+  decision:null).</footer>
+<div class="legend" style="max-width:980px;margin:0 auto 20px;padding:0 20px;color:var(--muted);font-size:12px">
+  <b>Approve</b> = accept the proposed change/answer shown on the card (no separate "approve as-is" —
+  approving means agreeing as written). <b>Reject</b> = keep the current entry/answer unchanged.
+  <b>Defer</b> = not sure yet, decide later. The note field is for requesting a partial tweak instead
+  of an outright reject.
+</div>
+<script>
+(function () {
+  var SHEET_ID = "uprava_gtd_triage_2026-08-23";
+  var STORE_KEY = 'review-sheet:' + SHEET_ID;
+  var GENERATED = "23-08-2026";
+  var ids = ["GTD-88381", "GTD-88381", "GTD-88381", "GTD-16528", "GTD-20758", "GTD-16528", "GTD-16528", "GTD-16528", "GTD-63244", "GTD-62503", "GTD-16528", "GTD-88381", "GTD-88381", "GTD-11550", "GTD-62503", "GTD-88381", "GTD-16528", "GTD-88381", "GTD-88381", "GTD-88381", "GTD-88381", "GTD-62503", "GTD-88381", "GTD-88381", "GTD-62503", "GTD-88381", "GTD-62503", "GTD-16528", "GTD-16528", "GTD-16528", "GTD-16528", "GTD-88381", "GTD-11550", "GTD-88381", "GTD-62503", "GTD-88381"];
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(STORE_KEY) || '{}') || {}; } catch (e) { state = {}; }
+  function tally() {
+    var c = { approve:0, reject:0, defer:0 };
+    ids.forEach(function (id) { var v = state[id] && state[id].decision; if (v && c.hasOwnProperty(v)) c[v]++; });
+    document.getElementById('c-approve').textContent = c.approve;
+    document.getElementById('c-reject').textContent = c.reject;
+    document.getElementById('c-defer').textContent = c.defer;
+    document.getElementById('c-unvoted').textContent = ids.length - c.approve - c.reject - c.defer;
+  }
+  function applyCardUI(card) {
+    var id = card.getAttribute('data-id'); var rec = state[id] || {};
+    card.classList.remove('voted-approve','voted-reject','voted-defer');
+    card.querySelectorAll('button.vote').forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-vote') === rec.decision); });
+    card.querySelector('.vote-state').textContent = rec.decision ? rec.decision : 'unvoted';
+    if (rec.decision) card.classList.add('voted-' + rec.decision);
+    var ta = card.querySelector('textarea.note'); if (rec.note && !ta.value) ta.value = rec.note;
+  }
+  function save() { localStorage.setItem(STORE_KEY, JSON.stringify(state)); tally(); }
+  // H1523 residual / csl-pyutil#1 Part 1: always re-read the live textarea on vote
+  // and before export so a second vote click (or a missed `input` event) cannot
+  // drop a note that is still visible in the card.
+  function syncNoteFromDom(id) {
+    state[id] = state[id] || {};
+    var card = document.querySelector('.card[data-id="' + id + '"]');
+    if (!card) return;
+    var ta = card.querySelector('textarea.note');
+    if (ta) state[id].note = ta.value;
+  }
+  function vote(id, d) { syncNoteFromDom(id); state[id].decision = d; save(); }
+  function noteChange(id, t) { state[id] = state[id] || {}; state[id].note = t; save(); }
+  document.querySelectorAll('.card').forEach(function (card) {
+    var id = card.getAttribute('data-id'); applyCardUI(card);
+    card.querySelectorAll('button.vote').forEach(function (btn) {
+      btn.addEventListener('click', function () { vote(id, btn.getAttribute('data-vote')); applyCardUI(card); });
+    });
+    var ta = card.querySelector('textarea.note'); ta.addEventListener('input', function () { noteChange(id, ta.value); });
+  });
+  tally();
+  document.getElementById('downloadBtn').addEventListener('click', function () {
+    ids.forEach(function (id) { syncNoteFromDom(id); });
+    var decided = ids.filter(function (id) { return state[id] && state[id].decision; }).length;
+    var payload = { sheet_id: SHEET_ID, generated: "23-08-2026", decided: decided, time_total_seconds: __timeTotal(),
+      items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '', time_seconds: __timeFor(id) }; }) };
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
+    var url = URL.createObjectURL(blob); var a = document.createElement('a');
+    a.href = url; a.download = SHEET_ID + '_decisions.json'; document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+  });
+  var filterbar = document.getElementById('filterbar');
+  filterbar.addEventListener('click', function (e) {
+    var btn = e.target.closest('button[data-filter]'); if (!btn) return;
+    filterbar.querySelectorAll('button').forEach(function (b) { b.classList.remove('active'); });
+    btn.classList.add('active'); var f = btn.getAttribute('data-filter');
+    document.querySelectorAll('.card').forEach(function (card) {
+      var show = true;
+      if (f === 'unvoted') { var id = card.getAttribute('data-id'); show = !(state[id] && state[id].decision); }
+      else if (f !== 'all') { show = card.getAttribute('data-filt') === f; }
+      card.style.display = show ? '' : 'none';
+    });
+  });
+  var cardsEl = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  var activeIdx = 0;
+  function visibleCards() { return cardsEl.filter(function (c) { return c.style.display !== 'none'; }); }
+  document.addEventListener('keydown', function (e) {
+    if (e.target.tagName === 'TEXTAREA') return;
+    var vis = visibleCards(); if (!vis.length) return;
+    if (activeIdx >= vis.length) activeIdx = vis.length - 1;
+    var card = vis[activeIdx]; var id = card.getAttribute('data-id');
+    if (e.key === 'a') { vote(id, 'approve'); applyCardUI(card); }
+    else if (e.key === 'r') { vote(id, 'reject'); applyCardUI(card); }
+    else if (e.key === 'd') { vote(id, 'defer'); applyCardUI(card); }
+    else if (e.key === 'ArrowDown') { activeIdx = Math.min(activeIdx + 1, vis.length - 1); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'start'}); }
+    else if (e.key === 'ArrowUp') { activeIdx = Math.max(activeIdx - 1, 0); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'start'}); }
+    else return;
+    e.preventDefault();
+  });
+
+  var saveHandle = null, saveTimer = null;
+  function exportPayload() {
+    if (typeof syncNoteFromDom === 'function') {
+      ids.forEach(function (id) { syncNoteFromDom(id); });
+    }
+    var decided = ids.filter(function (id) { return state[id] && state[id].decision; }).length;
+    return JSON.stringify({ sheet_id: SHEET_ID, generated: new Date().toISOString(), decided: decided, time_total_seconds: __timeTotal(),
+      items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '', time_seconds: __timeFor(id) }; }) }, null, 2);
+  }
+  function scheduleAutosave() {
+    if (!saveHandle) return;
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(function () {
+      saveHandle.createWritable().then(function (w) {
+        w.write(exportPayload()).then(function () { w.close(); });
+      }).catch(function () {});
+    }, 1000);
+  }
+  var _origSave = save;
+  save = function () { _origSave(); scheduleAutosave(); };
+  if (window.showSaveFilePicker) {
+    var saveBtn = document.getElementById('saveBtn');
+    saveBtn.style.display = '';
+    saveBtn.addEventListener('click', function () {
+      window.showSaveFilePicker({suggestedName: SHEET_ID + '_decisions.json'}).then(function (h) {
+        saveHandle = h; scheduleAutosave();
+      }).catch(function () {});
+    });
+  }
+
+  var FS_KEY = STORE_KEY + ':fs', FS_DEFAULT = 1.5;
+  function fsGet() {
+    var v = parseFloat(localStorage.getItem(FS_KEY));
+    return (isFinite(v) && v >= 0.7 && v <= 3) ? v : FS_DEFAULT;
+  }
+  function fsApply(v) {
+    document.documentElement.style.setProperty('--fs', String(v));
+    document.getElementById('fsVal').textContent = Math.round(v * 100) + '%';
+  }
+  function fsSet(v) {
+    v = Math.min(3, Math.max(0.7, Math.round(v * 10) / 10));
+    localStorage.setItem(FS_KEY, String(v)); fsApply(v);
+  }
+  fsApply(fsGet());
+  document.getElementById('fsDown').addEventListener('click', function () { fsSet(fsGet() - 0.1); });
+  document.getElementById('fsUp').addEventListener('click', function () { fsSet(fsGet() + 0.1); });
+
+  var TIME_KEY = STORE_KEY + ':timing';
+  var __timing = { total: 0, per: {} };
+  try {
+    var __t0 = JSON.parse(localStorage.getItem(TIME_KEY) || 'null');
+    if (__t0 && typeof __t0.total === 'number') __timing = __t0;
+  } catch (e) {}
+  if (!__timing.per) __timing.per = {};
+  function __timeFor(id) { return Math.round(__timing.per[id] || 0); }
+  function __timeTotal() { return Math.round(__timing.total || 0); }
+  function __timeFmt(s) {
+    s = Math.round(s); var m = Math.floor(s / 60);
+    return (m >= 60 ? Math.floor(m / 60) + ':' + ('0' + (m - Math.floor(m / 60) * 60)).slice(-2) : m)
+      + ':' + ('0' + (s - m * 60)).slice(-2);
+  }
+  function __timeShow() {
+    var el = document.getElementById('t-total');
+    if (el) el.textContent = __timeFmt(__timing.total);
+  }
+  var __timeLast = Date.now(), __timeDirty = 0;
+  var __timeCards = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  function __timeActiveId() {
+    var mid = window.innerHeight / 2, best = null, bestd = Infinity;
+    for (var i = 0; i < __timeCards.length; i++) {
+      var c = __timeCards[i];
+      if (c.style.display === 'none') continue;
+      var r = c.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > window.innerHeight) continue;
+      var center = (Math.max(r.top, 0) + Math.min(r.bottom, window.innerHeight)) / 2;
+      var d = Math.abs(center - mid);
+      if (d < bestd) { bestd = d; best = c; }
+    }
+    return best ? best.getAttribute('data-id') : null;
+  }
+  function __timeFlush() {
+    try { localStorage.setItem(TIME_KEY, JSON.stringify(__timing)); } catch (e) {}
+  }
+  // V12 (H2858): the clock is stoppable. `paused` rides in the same persisted
+  // record as the totals, so a reviewer who pauses and closes the tab does not
+  // come back to a clock that ran all night.
+  var __timePaused = !!__timing.paused;
+  // V15 (H2887): a legacy record carries `paused` and no reason — read it as
+  // manual, so an auto-rearm can never lift a pause the curator set by hand.
+  var __timePauseReason = __timePaused ? (__timing.pause_reason || 'manual') : null;
+  function __timePauseSet(v, reason) {
+    __timePaused = !!v;
+    __timing.paused = __timePaused;
+    __timePauseReason = __timePaused ? (reason || 'manual') : null;
+    __timing.pause_reason = __timePauseReason;
+    __timeLast = Date.now(); __timeFlush();
+  }
+  setInterval(function () {
+    var now = Date.now(), dt = (now - __timeLast) / 1000;
+    __timeLast = now;
+    if (document.hidden || __timePaused || dt <= 0 || dt > 4) return;
+    __timing.total += dt;
+    var id = __timeActiveId();
+    if (id) __timing.per[id] = (__timing.per[id] || 0) + dt;
+    __timeDirty += dt;
+    if (__timeDirty >= 5) { __timeDirty = 0; __timeFlush(); }
+    __timeShow();
+  }, 1000);
+  document.addEventListener('visibilitychange', function () { __timeLast = Date.now(); });
+  window.addEventListener('beforeunload', __timeFlush);
+  __timeShow();
+
+  var HANDIN_SAID = 'handed in {n} of {total} — clock stopped, the rest stay saved in this browser';
+  var __handinBtn = document.getElementById('handinBtn');
+  var __handinSaid = document.getElementById('handinSaid');
+
+  var __pauseBtn = document.getElementById('pauseBtn');
+  function __pauseShow() {
+    __pauseBtn.classList.toggle('on', __timePaused);
+    __pauseBtn.innerHTML = __timePaused ? '&#9654;' : '&#9208;';
+    var chip = document.querySelector('.tally .time');
+    if (chip) chip.classList.toggle('paused', __timePaused);
+  }
+  __pauseBtn.addEventListener('click', function () { __timePauseSet(!__timePaused); __pauseShow(); });
+  __pauseShow();
+  __handinBtn.addEventListener('click', function () {
+    ids.forEach(function (id) { syncNoteFromDom(id); });
+    __timePauseSet(true, 'export'); __pauseShow();
+    var items = ids.map(function (id) {
+      var rec = state[id] || {};
+      var item = { id: id, decision: rec.decision || null };
+      item.note = rec.note || '';
+      item.time_seconds = __timeFor(id);
+      return item;
+    });
+    var decided = items.filter(function (it) { return !!it.decision; }).length;
+    var payload = { sheet_id: SHEET_ID, generated: GENERATED, decided: decided,
+      partial: true, complete: false, undecided: items.length - decided, items: items };
+    payload.time_total_seconds = __timeTotal();
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
+    var url = URL.createObjectURL(blob); var a = document.createElement('a');
+    a.href = url; a.download = SHEET_ID + '_decisions_partial.json';
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+    __handinSaid.textContent = HANDIN_SAID.replace('{n}', decided).replace('{total}', items.length);
+  });
+
+  // --- V15 session flow (H2887) ---------------------------------------------
+  var FLOW_IDLE_SECONDS = 90;
+  var FLOW_ETA = 'about {minutes} min left';
+  var FLOW_ETA_ROUGH = 'about {minutes} min left (rough)';
+  var FLOW_CLOCK_RUNNING = 'running';
+  var FLOW_CLOCK_PAUSED = 'paused';
+  var FLOW_CLOCK_IDLE = 'idle';
+  var FLOW_PROGRESS = 'decided {n} of {total}';
+  var FLOW_UNDO_SAID = 'undo: {id} back to {decision}';
+  var FLOW_UNDO_EMPTY = 'nothing to undo';
+  var FLOW_UNDO_NONE = 'no decision';
+  var FLOW_RESUMED = 'resumed at card {n} of {total}';
+  var __flowToast = document.getElementById('flowToast');
+  var __flowToastTimer = null;
+  function __flowSay(text) {
+    if (!__flowToast) return;
+    __flowToast.textContent = text;
+    __flowToast.classList.add('on');
+    clearTimeout(__flowToastTimer);
+    __flowToastTimer = setTimeout(function () { __flowToast.classList.remove('on'); }, 2600);
+  }
+  var __flowCenterId = __timeActiveId;
+  function __flowIdxOf(id) {
+    var vis = visibleCards();
+    for (var i = 0; i < vis.length; i++) {
+      if (vis[i].getAttribute('data-id') === id) return i;
+    }
+    return -1;
+  }
+  function __flowCardById(id) {
+    var found = null;
+    cardsEl.forEach(function (c) { if (c.getAttribute('data-id') === id) found = c; });
+    return found;
+  }
+  // The visible ring IS the target of a/r/d — that identity is the whole point
+  // of this layer, so nothing may move `activeIdx` without repainting.
+  function __flowPaint() {
+    cardsEl.forEach(function (c) { c.classList.remove('kbd-active'); });
+    var vis = visibleCards();
+    if (!vis.length) return;
+    if (activeIdx >= vis.length) activeIdx = vis.length - 1;
+    if (activeIdx < 0) activeIdx = 0;
+    vis[activeIdx].classList.add('kbd-active');
+  }
+  function __flowSync() {
+    var id = __flowCenterId();
+    if (id) { var at = __flowIdxOf(id); if (at !== -1) activeIdx = at; }
+    __flowPaint();
+  }
+  var __flowScrollTimer = null;
+  window.addEventListener('scroll', function () {
+    if (__flowScrollTimer) return;
+    __flowScrollTimer = setTimeout(function () { __flowScrollTimer = null; __flowSync(); }, 120);
+  });
+  // Both bars reset `activeIdx` to 0 as they re-filter; re-derive it from the
+  // viewport on the next tick, or defect 2 returns wearing a filter.
+  ['filterbar'].forEach(function (barId) {
+    var bar = document.getElementById(barId);
+    if (bar) bar.addEventListener('click', function () { setTimeout(__flowSync, 0); });
+  });
+  function __flowClockShow() {
+    var el = document.getElementById('t-state');
+    if (!el) return;
+    var label = FLOW_CLOCK_RUNNING;
+    if (__timePaused) label = (__timePauseReason === 'idle') ? FLOW_CLOCK_IDLE : FLOW_CLOCK_PAUSED;
+    el.textContent = label;
+    el.classList.toggle('idle', !!__timePaused && __timePauseReason === 'idle');
+  }
+  // The V12 ⏸ button drives the clock straight through __timePauseSet, so the
+  // three-state label has to ride along with V12's own repaint or it goes stale
+  // the moment the curator pauses by hand.
+  var __flowOrigPauseShow = __pauseShow;
+  __pauseShow = function () { __flowOrigPauseShow(); __flowClockShow(); };
+  var __flowIdleTimer = null;
+  function __flowIdleArm() {
+    clearTimeout(__flowIdleTimer);
+    __flowIdleTimer = setTimeout(function () {
+      if (__timePaused) return;
+      __timePauseSet(true, 'idle');
+    __pauseShow();
+      __flowClockShow();
+    }, FLOW_IDLE_SECONDS * 1000);
+  }
+  function __flowRearm() {
+    if (__timePaused && __timePauseReason !== 'manual') {
+      __timePauseSet(false);
+    __pauseShow();
+    }
+    __flowClockShow();
+    __flowIdleArm();
+  }
+  // The export GESTURES, caught in the capture phase on `document` so this runs
+  // before any handler bound to the buttons themselves — including the strict
+  // layer's, which calls stopImmediatePropagation() on its own element.
+  document.addEventListener('click', function (e) {
+    var t = e.target;
+    if (!t || !t.closest || !t.closest('#downloadBtn, #saveBtn, #handinBtn')) return;
+    __timePauseSet(true, 'export');
+    __pauseShow();
+    __flowClockShow();
+  }, true);
+  ['keydown', 'pointerdown', 'scroll'].forEach(function (evt) {
+    document.addEventListener(evt, function () { __flowRearm(); }, true);
+  });
+  var __flowUndoStack = [];
+  function __flowUndo() {
+    var last = __flowUndoStack.pop();
+    if (!last) { __flowSay(FLOW_UNDO_EMPTY); return; }
+    state[last.id] = state[last.id] || {};
+    if (last.prev) state[last.id].decision = last.prev;
+    else delete state[last.id].decision;
+    save();
+    var card = __flowCardById(last.id);
+    if (card) {
+      applyCardUI(card);
+      card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      var at = __flowIdxOf(last.id);
+      if (at !== -1) activeIdx = at;
+      __flowPaint();
+    }
+    __flowSay(FLOW_UNDO_SAID.replace('{id}', last.id)
+      .replace('{decision}', last.prev || FLOW_UNDO_NONE));
+  }
+  var __flowUndoBtn = document.getElementById('flowUndoBtn');
+  if (__flowUndoBtn) __flowUndoBtn.addEventListener('click', __flowUndo);
+  function __flowFirstUndecided() {
+    var vis = visibleCards();
+    for (var i = 0; i < vis.length; i++) {
+      var id = vis[i].getAttribute('data-id');
+      if (!(state[id] && state[id].decision)) return i;
+    }
+    return -1;
+  }
+  function __flowAdvance() {
+    var at = __flowFirstUndecided();
+    if (at === -1) { __flowPaint(); return; }
+    activeIdx = at;
+    visibleCards()[at].scrollIntoView({ behavior: 'smooth', block: 'start' });
+    __flowPaint();
+  }
+  function __flowDecided() {
+    var n = 0;
+    ids.forEach(function (id) { if (state[id] && state[id].decision) n++; });
+    return n;
+  }
+  function __flowEtaText(decided, total) {
+    var secs = [];
+    ids.forEach(function (id) {
+      if (!(state[id] && state[id].decision)) return;
+      var s = __timing.per[id] || 0;
+      if (s > 0) secs.push(s);
+    });
+    if (!secs.length) return '';
+    secs.sort(function (a, b) { return a - b; });
+    var mid = Math.floor(secs.length / 2);
+    var med = (secs.length % 2) ? secs[mid] : (secs[mid - 1] + secs[mid]) / 2;
+    var left = Math.max(0, total - decided);
+    if (!left) return '';
+    var minutes = Math.max(1, Math.round(med * left / 60));
+    return (secs.length >= 5 ? FLOW_ETA : FLOW_ETA_ROUGH).replace('{minutes}', minutes);
+  }
+  function __flowProgress() {
+    var n = __flowDecided(), total = ids.length;
+    var txt = document.getElementById('flowProgText');
+    if (txt) txt.textContent = FLOW_PROGRESS.replace('{n}', n).replace('{total}', total);
+    var bar = document.getElementById('flowBar');
+    if (bar) bar.style.width = (total ? Math.round(100 * n / total) : 0) + '%';
+    var etaEl = document.getElementById('flowEta');
+    if (etaEl) etaEl.textContent = __flowEtaText(n, total);
+  }
+  var __flowOrigTally = tally;
+  tally = function () { __flowOrigTally(); __flowProgress(); };
+  var __flowOrigVote = vote;
+  vote = function (id, d) {
+    var rec = state[id] || {};
+    __flowUndoStack.push({ id: id, prev: rec.decision || null });
+    if (__flowUndoStack.length > 100) __flowUndoStack.shift();
+    __flowOrigVote(id, d);
+    __flowRearm();
+    __flowAdvance();
+  };
+  var __flowOrigNote = noteChange;
+  noteChange = function (id, t) { __flowOrigNote(id, t); __flowRearm(); };
+  document.addEventListener('keydown', function (e) {
+    if (e.target.tagName === 'TEXTAREA') return;
+    if (e.key === 'z' || e.key === 'Z') { __flowUndo(); e.preventDefault(); return; }
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') __flowPaint();
+  });
+  __flowProgress();
+  __flowSync();
+  __flowClockShow();
+  __flowIdleArm();
+  (function () {
+    if (!__flowDecided()) return;
+    var at = __flowFirstUndecided();
+    if (at === -1) return;
+    var vis = visibleCards();
+    activeIdx = at;
+    vis[at].scrollIntoView({ block: 'start' });
+    __flowPaint();
+    __flowSay(FLOW_RESUMED.replace('{n}', at + 1).replace('{total}', vis.length));
+  })();
+
+  var VOTE_TOTAL = 0;
+  var VOTE_PROGRESS = '{n} of {total} across the whole sheet';
+  var VOTE_ETA = 'about {minutes} min left for all {total}';
+  var VOTE_ETA_ROUGH = 'about {minutes} min left for all {total} (rough)';
+  var VOTE_DONE = 'all {total} decided';
+  (function () {
+    var bar = document.getElementById('voteBar');
+    if (!bar) return;
+    // The build tagged exactly the submit controls this document actually has.
+    // Navigation (filters, facets, the type-scale control) is untagged and stays
+    // on top, where it is used BEFORE deciding.
+    var moved = document.querySelectorAll('[data-submit]');
+    for (var i = 0; i < moved.length; i++) bar.appendChild(moved[i]);
+  })();
+  // One record backs every pack of a packset — STORE_KEY and TIME_KEY are keyed
+  // on sheet_id, not on the pack — so this page can count and time the WHOLE
+  // instrument without loading a single other pack.
+  function __voteDecidedAll() {
+    var n = 0;
+    for (var k in state) {
+      if (Object.prototype.hasOwnProperty.call(state, k) && state[k] && state[k].decision) n++;
+    }
+    return n;
+  }
+  function __voteSecs() {
+    var per = (typeof __timing !== 'undefined' && __timing && __timing.per) ? __timing.per : null;
+    var out = [];
+    if (!per) return out;
+    for (var k in per) {
+      if (!Object.prototype.hasOwnProperty.call(per, k)) continue;
+      if (!(state[k] && state[k].decision)) continue;
+      if (per[k] > 0) out.push(per[k]);
+    }
+    return out;
+  }
+  function __voteEta(decided, total) {
+    var left = Math.max(0, total - decided);
+    if (!left) return VOTE_DONE.replace('{total}', total);
+    var secs = __voteSecs();
+    if (!secs.length) return '';
+    secs.sort(function (a, b) { return a - b; });
+    var mid = Math.floor(secs.length / 2);
+    var med = (secs.length % 2) ? secs[mid] : (secs[mid - 1] + secs[mid]) / 2;
+    var minutes = Math.max(1, Math.round(med * left / 60));
+    return (secs.length >= 5 ? VOTE_ETA : VOTE_ETA_ROUGH)
+      .replace('{minutes}', minutes).replace('{total}', total);
+  }
+  function __voteProgress() {
+    var total = VOTE_TOTAL || ids.length;
+    var n = VOTE_TOTAL ? __voteDecidedAll() : ids.filter(function (id) {
+      return state[id] && state[id].decision; }).length;
+    if (n > total) n = total;
+    var t = document.getElementById('voteProgText');
+    if (t) t.innerHTML = VOTE_PROGRESS.replace('{n}', '<b>' + n + '</b>')
+                                      .replace('{total}', '<b>' + total + '</b>');
+    var b = document.getElementById('voteProgBar');
+    if (b) b.style.width = (total ? Math.round(100 * n / total) : 0) + '%';
+    var e = document.getElementById('voteProgEta');
+    if (e) e.textContent = __voteEta(n, total);
+  }
+  var __voteOrigTally = tally;
+  tally = function () { __voteOrigTally(); __voteProgress(); };
+  __voteProgress();
+})();
+</script>
+<div class="flowtoast" id="flowToast" role="status"></div>
+</body>
+</html>
