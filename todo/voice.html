@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Voice-clone bake · M4 checklist</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #faf9f7; --fg: #22211f; --muted: #6d6862;
+    --card: #ffffff; --line: #e4e1dc; --accent: #0b66c3;
+    --code-bg: #f2f0ec; --ok: #1a7f37; --warn-bg: #fff7e0; --warn-line: #e0c96a;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #17181a; --fg: #e8e6e3; --muted: #9a958e;
+      --card: #1f2124; --line: #33363a; --accent: #5aa7ec;
+      --code-bg: #26282c; --ok: #4cc272; --warn-bg: #2e2916; --warn-line: #8a7a35;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0 auto; padding: 24px 16px 64px; max-width: 880px;
+    background: var(--bg); color: var(--fg);
+    font: 16px/1.55 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  h1 { font-size: 1.7rem; margin: 0 0 2px; letter-spacing: -0.01em; }
+  h2 { font-size: 1.18rem; margin: 34px 0 10px; padding-bottom: 6px; border-bottom: 1px solid var(--line); }
+  .sub { color: var(--muted); margin: 0 0 6px; font-size: 1.02rem; }
+  .meta { color: var(--muted); font-size: 0.85rem; margin: 0; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; margin: 14px 0; }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.85em; background: var(--code-bg); padding: 1px 5px; border-radius: 4px; }
+  pre { background: var(--code-bg); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; overflow-x: auto; font-size: 0.84rem; line-height: 1.45; }
+  pre code { background: none; padding: 0; }
+  ol.steps { list-style: none; margin: 10px 0; padding: 0; }
+  ol.steps > li { margin: 0 0 12px; padding-left: 30px; position: relative; }
+  ol.steps > li::before { content: ""; position: absolute; left: 0; top: 3px; width: 17px; height: 17px;
+    border: 2px solid var(--muted); border-radius: 4px; cursor: pointer; }
+  ol.steps > li.done::before { background: var(--ok); border-color: var(--ok);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='white' stroke-width='2.5' d='M3 8.5l3.5 3.5L13 4.5'/%3E%3C/svg%3E"); background-size: 15px 15px; background-repeat: no-repeat; background-position: center; }
+  ol.steps > li.done > .step-text { color: var(--muted); text-decoration: line-through; text-decoration-color: color-mix(in srgb, var(--muted) 55%, transparent); }
+  ol.steps > li > input.ckbox { position: absolute; left: -3px; top: 0; width: 25px; height: 25px; opacity: 0; margin: 0; cursor: pointer; }
+  .step-text { cursor: pointer; }
+  .step-body { margin-top: 6px; }
+  .progress { font-weight: 600; }
+  .progressbar { height: 7px; background: var(--code-bg); border-radius: 99px; overflow: hidden; margin-top: 8px; }
+  .progressbar i { display: block; height: 100%; width: 0; background: var(--ok); transition: width .25s ease; }
+  .hint { color: var(--muted); font-size: 0.83rem; margin: 8px 0 0; }
+  .warnbox { background: var(--warn-bg); border: 1px solid var(--warn-line); border-radius: 10px; padding: 12px 16px; margin: 16px 0; }
+  .warnbox ul { margin: 8px 0 0; padding-left: 20px; }
+  a { color: var(--accent); }
+  footer { margin-top: 44px; color: var(--muted); font-size: 0.82rem; border-top: 1px solid var(--line); padding-top: 12px; }
+</style>
+</head>
+<body>
+
+<h1>Voice-clone bake — что делать на M4</h1>
+<p class="sub">Phase A: Chatterbox Multilingual (базлайн) → потом shootout с S1-mini / GPT-SoVITS</p>
+<p class="meta">Created 24-08-2026 · Dr. Mārcis Gasūns · галочки хранятся в этом браузере (localStorage)</p>
+
+<div class="warnbox">
+<strong>Машинный гейт</strong>
+<ul>
+<li>Всё ниже — <strong>только на M4 Mac</strong>.</li>
+<li>Windows-бокс (GTX&nbsp;1050 4&nbsp;GB) слаб — там работает только агент (обучение SoVITS), руками ничего не запускать.</li>
+<li>Клонировать реального человека — только с его письменным разрешением (<code>permission.txt</code>). Свой голос / вымышленный персонаж — свободно.</li>
+</ul>
+</div>
+
+<h2>Шаг 0 — если OpenCode на маке ещё не поднят</h2>
+<div class="card">
+Сначала пройди runbook миграции: <a href="./index.html">Todo — Mac migration runbook</a>.
+Для этого бейка из него обязательны: Homebrew + базовые инструменты, <code>gh auth login</code>, клон Uprava.
+</div>
+
+<h2>Чек-лист бейка</h2>
+<ol class="steps">
+<li><span class="step-text">Склонировать приватный Uprava и включить его commit-guard:</span>
+<div class="step-body"><pre><code>gh repo clone gasyoun/Uprava ~/Documents/GitHub/Uprava
+cd ~/Documents/GitHub/Uprava &amp;&amp; git config core.hooksPath .githooks</code></pre></div></li>
+
+<li><span class="step-text">Приготовить ассеты в <code>~/voice-bake/</code>:</span>
+<div class="step-body"><p class="hint"><strong>ref.wav</strong> — 10–60 сек целевого голоса: чистая речь, без музыки/фона/эха, моно, ≥22 кГц, WAV/FLAC ·
+<strong>permission.txt</strong> — одна строка согласия с именем и датой (если голос чужой) ·
+<strong>test_text.txt</strong> — 2–3 абзаца настоящего русского текста курса.</p></div></li>
+
+<li><span class="step-text">Открыть OpenCode в папке репо и вставить стартовую строку:</span>
+<div class="step-body"><pre><code>Read docs/VOICE_CLONE_M4_BAKE_BRIEF_24.08.26.md and execute it.</code></pre>
+<p class="hint">Агент сам поставит окружение (~5 мин), сам остановится и спросит, если ассетов не хватает. Бриф: <a href="https://github.com/gasyoun/Uprava/blob/main/docs/VOICE_CLONE_M4_BAKE_BRIEF_24.08.26.md">docs/VOICE_CLONE_M4_BAKE_BRIEF_24.08.26.md</a> (приватный — откроется под твоим логином).</p></div></li>
+
+<li><span class="step-text">Прослушать три файла <code>out_*.wav</code> (обычный / экспрессивный / медленный) и заполнить вердикт-таблицу агента по 5 критериям (тимбр, русская фонетика, артефакты, просодия, стабильность).</span></li>
+
+<li><span class="step-text">Вердикт: средний ≥4/5 и нет оценок ниже 3 → Phase A принята; иначе — план Б (GPT-SoVITS, обучение на Windows-боксе у агента). Полная матрица: <a href="https://github.com/gasyoun/Uprava/blob/main/docs/DECISION_VOICE_CLONE_TOOL_24.08.26.md">docs/DECISION_VOICE_CLONE_TOOL_24.08.26.md</a>.</span></li>
+</ol>
+
+<h2>Параллельно на Windows-боксе (агент, не ты)</h2>
+<div class="card">
+Phase B уже готовится агентом: <code>C:\Users\user\voice-bake\</code> — GPT-SoVITS склонирован,
+ждётся HF-токен (<code>hf_token.env</code>) и твои ассеты. Статус: <code>PHASE_B_STATUS.md</code>.
+</div>
+
+<h2>Log</h2>
+<div class="card">
+<table>
+<tr><th>Date</th><th>Entry</th></tr>
+<tr><td>24-08-2026</td><td>Дашборд создан. Решение зафиксировано в DECISION_VOICE_CLONE_TOOL_24.08.26.md (качество &gt; скорость; русский обязателен; не для платных курсов → NC-лицензии разрешены). Инцидент golosa закрыт как «состав неизвестен».</td></tr>
+</table>
+</div>
+
+<footer>Durable doc · https://gasyoun.github.io/todo/voice.html · ticks persist per-browser via localStorage · source: gasyoun/gasyoun.github.io <code>todo/voice.html</code> (branch master)</footer>
+
+<script>
+(function () {
+  var KEY = 'todo-voice-bake-v1';
+  var st = {};
+  try { st = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { st = {}; }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} }
+
+  var cbs = [];
+  Array.prototype.forEach.call(document.querySelectorAll('ol.steps > li'), function (li) {
+    var id = 's' + cbs.length;
+    var cb = document.createElement('input');
+    cb.type = 'checkbox';
+    cb.className = 'ckbox';
+    cb.setAttribute('data-id', id);
+    cb.checked = !!st['c:' + id];
+    li.insertBefore(cb, li.firstChild);
+    cbs.push(cb);
+    cb.addEventListener('change', function () {
+      st['c:' + id] = cb.checked;
+      save(); refresh();
+    });
+  });
+
+  function refresh() {
+    cbs.forEach(function (cb) {
+      var li = cb.closest('li');
+      if (li) li.classList.toggle('done', cb.checked);
+    });
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll('.step-text'), function (t) {
+    t.addEventListener('click', function () {
+      var li = t.closest('li');
+      var cb = li && li.querySelector('input.ckbox');
+      if (cb) { cb.checked = !cb.checked; st['c:' + cb.getAttribute('data-id')] = cb.checked; save(); refresh(); }
+    });
+  });
+
+  refresh();
+})();
+</script>
+
+</body>
+</html>
