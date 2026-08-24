@@ -92,6 +92,17 @@
   <div class="progressbar"><i id="bar"></i></div>
 </div>
 
+<h2>Порядок работ на маке — общий dashboard задач</h2>
+<div class="card">
+<table>
+<tr><th>#</th><th>Задача</th><th>Где</th><th>Когда можно начинать</th></tr>
+<tr><td><strong>1</strong></td><td><strong>OpenCode + среда</strong> (эта страница): фазы 0–3 — brew, инструменты, scp, авторизация, клон Uprava, smoke-тест</td><td>this page ↓</td><td>сразу</td></tr>
+<tr><td><strong>2</strong></td><td><strong>Voice-clone bake, Phase A</strong> — Chatterbox базлайн: ассеты (<code>ref.wav</code>, <code>test_text.txt</code>), стартовая строка агенту, прослушивание трёх wav</td><td><a href="./voice.html">todo/voice.html</a></td><td>после задачи 1, минимум после «клон Uprava» + <code>gh auth login</code></td></tr>
+<tr><td>3+</td><td>Следующие задачи — добавлять сюда по мере появления (voice Phase B shootout идёт на Windows-боксе у агента и на маке не зависит)</td><td>—</td><td>—</td></tr>
+</table>
+<p class="hint">Машинный гейт для голоса: интерактивные прогоны — только на M4; Windows-бокс слабый и отдан агенту. Подробности внутри voice.html.</p>
+</div>
+
 <h2>Inventory — what moves where</h2>
 <div class="card">
 <table>
@@ -228,6 +239,7 @@ ls ~/.agents/skills | wc -l    # expect ~34</code></pre></div></li>
 <table>
 <tr><th>Date</th><th>Entry</th></tr>
 <tr><td>22-08-2026</td><td>Runbook published (Windows side inventoried: claude-config/codex-config are git-backed, .agents ×34 not, grok-cli = superagent-ai/grok-cli v1.0.5, Windows has OpenSSH client 9.5p1).</td></tr>
+<tr><td>24-08-2026</td><td>Added «Порядок работ на маке» — unified task order: ① OpenCode migration (this page) → ② voice-clone bake Phase A (<a href="./voice.html">voice.html</a>). Voice is explicitly NOT the first task.</td></tr>
 </table>
 </div>
 
