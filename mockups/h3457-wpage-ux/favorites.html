@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>My favorites — Sanskrit dictionary | kosha</title><meta name="robots" content="noindex"><style>:root{--fg:#1a1a1a;--muted:#6b7280;--border:#d7d7db;--accent:#7b2d26;--card-bg:#fafafa;
+--hit-bg:#fdf3e7;--page-bg:#fff}
+@media(prefers-color-scheme:dark){:root{--fg:#e8e8ea;--muted:#9aa0a6;--border:#3a3a40;
+--accent:#e0a44a;--card-bg:#202024;--hit-bg:#3a3020;--page-bg:#161618}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page-bg);color:var(--fg);
+font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.5}
+main{max-width:52rem;margin:0 auto;padding:1.2rem 1rem 4rem}
+h1{font-size:1.5rem;margin:.2rem 0 .3rem}
+.lead{color:var(--muted);margin:0 0 1rem;font-size:.9rem}
+.tools{display:flex;gap:.5rem;flex-wrap:wrap;margin:0 0 1rem}
+.tools button{border:1px solid var(--border);background:var(--card-bg);color:var(--fg);
+padding:.35rem .8rem;border-radius:6px;cursor:pointer;font-size:.85rem}
+.tools button:hover{border-color:var(--accent);color:var(--accent)}
+.fav-list{list-style:none;margin:0;padding:0}
+.fav-list li{display:flex;gap:.8rem;align-items:baseline;padding:.5rem 0;
+border-top:1px solid var(--border)}
+.fav-list li:first-child{border-top:none}
+.fav-list .dv{font-size:1.4rem}
+.fav-list .ia{color:var(--muted)}
+.fav-list a{color:var(--fg);text-decoration:none}
+.fav-list a:hover{color:var(--accent)}
+.fav-list .rm{margin-left:auto;border:none;background:none;color:var(--muted);cursor:pointer}
+.fav-list .rm:hover{color:var(--accent)}
+.empty{padding:1.5rem;border:1px dashed var(--border);border-radius:8px;color:var(--muted)}
+.study-badge{display:inline-flex;gap:.3rem;font-size:.62rem;font-weight:700;letter-spacing:.03em;
+text-transform:uppercase;padding:.1rem .4rem;border-radius:4px;border:1px solid var(--accent);
+color:var(--accent)}
+.study-badge.core-500{background:var(--accent);color:#fff}
+.study-badge.core-2000{background:var(--hit-bg)}
+footer{margin-top:2.5rem;padding-top:1rem;border-top:1px solid var(--border);font-size:.78rem;
+color:var(--muted)}footer a{color:var(--accent)}</style></head><body><main><p class="crumb"><a href="browse/">← browse</a></p><h1>My favorites <span id="fav-n">0</span></h1><p class="lead">Saved on this device only (browser storage) — nothing is sent anywhere. Export to keep them.</p><div class="tools"><button type="button" id="x-tsv">Export TSV</button><button type="button" id="x-anki">Export for Anki</button><button type="button" id="x-clear">Clear all</button></div><p class="empty" id="fav-empty">No favorites yet — open a word page and press ♡.</p><ul class="fav-list" id="fav-list"></ul><footer>Gasuns Sanskrit Dictionary · <a href="browse/">browse</a> · <a href="inflect/">inflection lookup</a></footer></main><script>window.KOSHA_CORE={"gam":7};</script><script>(function(){
+ var K='kosha_favorites',RUNG=window.KOSHA_CORE||{};
+ function load(){try{var s=localStorage.getItem(K);return s?JSON.parse(s):{}}catch(e){return {}}}
+ function save(f){try{localStorage.setItem(K,JSON.stringify(f))}catch(e){}}
+ var list=document.getElementById('fav-list'),empty=document.getElementById('fav-empty'),
+     cnt=document.getElementById('fav-n');
+ function rows(){var f=load();return Object.keys(f).map(function(k){var v=f[k];v.k=k;return v})
+  .sort(function(a,b){return (b.ts||0)-(a.ts||0)})}
+ function badge(k){var r=RUNG[k];if(!r)return '';var c=r<=500?'core-500':r<=2000?'core-2000':'core-vocab';
+  return '<span class="study-badge '+c+'">#'+r+'</span>'}
+ function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+ function render(){var r=rows();cnt.textContent=r.length;
+  empty.hidden=r.length>0;list.innerHTML=r.map(function(v){
+   return '<li data-k="'+esc(v.k)+'"><a href="w/'+esc(v.t)+'.html"><span class="dv" lang="sa">'+esc(v.dv)+
+   '</span> <span class="ia">'+esc(v.ia)+'</span></a> '+badge(v.k)+
+   '<button type="button" class="rm" title="Remove">✕</button></li>'}).join('')}
+ list.addEventListener('click',function(e){var b=e.target.closest('.rm');if(!b)return;
+  var li=b.closest('li'),f=load();delete f[li.getAttribute('data-k')];save(f);render()});
+ function dl(name,text){var a=document.createElement('a');
+  a.href='data:text/plain;charset=utf-8,'+encodeURIComponent(text);a.download=name;
+  document.body.appendChild(a);a.click();a.remove()}
+ document.getElementById('x-tsv').addEventListener('click',function(){
+  dl('kosha_favorites.tsv','slp1\tiast\tdevanagari\tcore_rank\n'+rows().map(function(v){
+   return [v.k,v.ia,v.dv,RUNG[v.k]||''].join('\t')}).join('\n')+'\n')});
+ document.getElementById('x-anki').addEventListener('click',function(){
+  dl('kosha_favorites_anki.txt',rows().map(function(v){
+   return v.dv+' ('+v.ia+')\t'+location.href.replace(/favorites\.html.*$/,'')+'w/'+v.t+'.html'}).join('\n')+'\n')});
+ document.getElementById('x-clear').addEventListener('click',function(){
+  if(confirm('Remove all favorites on this device?')){save({});render()}});
+ render();
+})();</script></body></html>
