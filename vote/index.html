@@ -49,7 +49,7 @@
   <div class="wrap">
     <h1>Vote — review sheets</h1>
     <p class="sub">Голосование по карточкам PWG → RU. Открывается в браузере, работает офлайн,
-      экспорт решений одним файлом. Снимок 24-08-2026.
+      экспорт решений одним файлом. Снимок 26-08-2026.
       Каждый новый лист попадает сюда по умолчанию, отдельной просьбы не требуется.</p>
   </div>
 </header>
@@ -82,13 +82,6 @@
   <th>Лист</th><th class="n">Карточек</th><th>Труд</th><th>Что решаете</th><th>Что разблокирует</th><th></th>
 </tr></thead>
 <tbody>
-<tr>
-  <td>h3473_wave4_sensefill</td><td class="n">9</td><td class="light">🟢</td>
-  <td>Wave-4 carried-fill corrections (H3473): 9 wrong/minor wave-1 TM fills — 2 convicted by both gates (habend⇒от, ein best. Opfer⇒совершать) + 128-row untranslated-'best.' residue.</td>
-  <td>Unblocks H3473 steps 4–5: apply_decisions → $0 re-drain → fresh seeded gate n=400 → wave4_receipt verdict.</td>
-  <td><a class="go" href="sheets/h3473_wave4_sensefill_sheet.html">Открыть</a></td>
-</tr>
-
 <tr>
   <td>sanskritlexicography-article-comparison_aksara</td><td class="n">6</td><td class="light">🟢</td>
   <td>Gloss-review akṣara (55 glosses): 6 edits — 2 M (kūṭa glyph U+04EF + Śrīvidyā hint; Mahat as Sāṃkhya term) + 4 add-glosses; ported from the retired md sheet (H739).</td>
@@ -180,10 +173,28 @@
 </tr></thead>
 <tbody>
 <tr>
+  <td>uprava-skill-mine_h3536-h3555_26-08-26</td><td class="n">6</td><td class="light">🟢</td>
+  <td>Skill-mine delta H3536–H3555</td>
+  <td>по standing policy малых листов (H3554) голос берётся в чате по одной карточке и переносится в датированный decisions_applied-док; хаб-копия архивная</td>
+  <td><a class="go" href="sheets/skill_mine_h3536_h3555.html">Открыть</a></td>
+</tr>
+<tr>
+  <td>uprava-skill-mine_h3396-h3535_25-08-26</td><td class="n">6</td><td class="light">🟢</td>
+  <td>Skill-mine delta H3396–H3535</td>
+  <td>MG voted in chat card-by-card, 6 approve · 0 reject · 0 defer. C39/U50/U51 build handoffs minted + spec-filled same pass; D70–D72 ratified «not a skill»…</td>
+  <td><a class="go" href="sheets/skill_mine_h3396_h3535.html">Открыть</a></td>
+</tr>
+<tr>
   <td>uprava-bandha-translations_all-schemes-17-08-26</td><td class="n">19</td><td class="light">🧊</td>
   <td>Все переводы всех бандха-схем samskrtam.ru — на утверждение.</td>
   <td>/decisions-apply edits  + pages, redeploy FTP</td>
   <td><a class="go" href="sheets/bandha_translations_19.html">Открыть</a></td>
+</tr>
+<tr>
+  <td>h3537-delta-redteam_26-08-26</td><td class="n">26</td><td class="light">🟢</td>
+  <td>Дельта-red-team август 2026 — 26 правок на решение автора</td>
+  <td>/decisions-apply правит статьи по approve-строкам</td>
+  <td><a class="go" href="sheets/h3537_delta_redteam.html">Открыть</a></td>
 </tr>
 <tr>
   <td>uprava_gtd_triage_2026-08-23</td><td class="n">36</td><td class="light">🟢</td>
@@ -222,6 +233,12 @@
   <td><a class="go" href="sheets/h2916_glossary_sense.html">Открыть</a></td>
 </tr>
 <tr>
+  <td>commentarystrategies-sundarakanda-typed-link-q41</td><td class="n">258</td><td class="light">🔴</td>
+  <td>Q4.1 Type-D пилот: root ↔ commentary-citation сквозь библиотеку linkid (H3346, OxAlpha).</td>
+  <td>python scripts/build_typed_link_sundara_concordance.py --apply-decisions &lt;файл&gt; (all-or-nothing; пишет только confirmed-tier TSV/JSONL, аппаратные сторы не…</td>
+  <td><a class="go" href="sheets/commentarystrategies_typed_link_q41.html">Открыть</a></td>
+</tr>
+<tr>
   <td>commentarystrategies-edition-footnotes_v1_review.html ~~foot</td><td class="n">1013</td><td class="light">⚖️</td>
   <td>⚖️ ЗАМЕЩЁН АДЪЮДИКАЦИЕЙ 27-07-2026 (H1685, ruling В2, Opus 5 1M claude-opus-5[1m])</td>
   <td>same H159 apply step, footnotes arg</td>
@@ -236,7 +253,6 @@
 <table>
 <thead><tr><th>Лист</th><th class="n">n</th><th>Почему</th></tr></thead>
 <tbody>
-<tr><td><a href="sheets/instruction_estate_v2_15.html">claude-config-instruction-estate-v2_15-proposals_25-08-26</a></td><td class="n">15</td><td>✅ VOTED+APPLIED 26-08-2026 (MG, 1 мин 44 с) — 15/15 approve; rules/ 11→4, always-loaded 15 251 → 11 100 tok; P8 снят как артефакт измерения (audit AUDIT_INSTRUCTION_ESTATE_2026H2_V2_DECISIONS_APPLIED_26-08-2026.md)</td></tr>
 <tr><td>review-vedic-r02-adjudication.html</td><td class="n">1</td><td>substantive_detection (вариант Б из verdict-variants) — зачесть содержательную детекцию, репортить оба слоя раздельно; add_alias отклонён.</td></tr>
 <tr><td>uprava-fable-unique-lens-c13-u9</td><td class="n">2</td><td>C13 + U9 approve</td></tr>
 <tr><td>uprava-nagari2013-okas-guda-sphic_4lemmas</td><td class="n">4</td><td>4/4 approve (guda note: keep anus secondary, trust PWG/Borissov/KEWA-EWA over the Vasmer cognate)</td></tr>
@@ -276,6 +292,7 @@
 <tr><td>uprava-weekly-decide_27-07-2026</td><td class="n">12</td><td>10 approve · 2 reject · 0 defer</td></tr>
 <tr><td>sanskritgrammar-metodichka-kochergina-v1_16.07.26</td><td class="n">13</td><td>12 approve · 1 reject · 0 defer</td></tr>
 <tr><td>sanskritgrammar-m03-phase0-visa-pack_13.07.26</td><td class="n">14</td><td>14/14 approve (заметки: P10 индо-арабское понятие корня по устн</td></tr>
+<tr><td><a href="sheets/instruction_estate_v2_15.html">claude-config-instruction-estate-v2_15-proposals_25-08-26</a></td><td class="n">15</td><td>✅ VOTED+APPLIED 26-08-2026 (MG, 101 с) — 15 approve · 0 reject · 0 defer</td></tr>
 <tr><td>uprava-frozen2026h2_wip-cap-census</td><td class="n">15</td><td>0 freeze · 2 defer (R-RVC, R-SOCKS5) · 13 keep</td></tr>
 <tr><td>commentarystrategies-sundarakanda-commentaries_35-37_review.</td><td class="n">16</td><td>applied (9 accept / 7 edit / 0 reject)</td></tr>
 <tr><td>sanskritgrammar-pwg-ghostword-residue_h1323</td><td class="n">16</td><td>11 confirmed ghost-words / 5 rejected (rejects: BAgApahArajAti decomposable, bfhatsUryasidDAnt technical term, ISvare/KamBAyatabindara/babakARa untranslated German residue)</td></tr>

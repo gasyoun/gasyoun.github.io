@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="color-scheme" content="dark">
+<meta name="generator" content="csl-pyutil/0.13.0">
+<title>H3537 — дельта-red-team август 2026: правки на решение автора — 26 items</title>
+<style>
+  :root { color-scheme: dark; --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --text:#e6e6e6; --muted:#9aa0aa;
+          --accent:#5b8cff; --ok:#3fb950; --bad:#f85149; --defer:#d29922; --border:#2a2f3a; }
+  * { box-sizing: border-box; }
+  body { background:var(--bg); color:var(--text); font-family:-apple-system,Segoe UI,Roboto,sans-serif;
+         margin:0; padding:0 0 120px 0; }
+  header.top { position:sticky; top:0; z-index:10; background:var(--panel); border-bottom:1px solid var(--border);
+               padding:14px 20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+  header.top h1 { font-size:16px; margin:0; }
+  header.top .sub { color:var(--muted); font-size:12px; max-width:760px; }
+  .tally { display:flex; gap:14px; font-size:13px; }
+  .tally span.count { font-weight:700; }
+  .tally .approve { color:var(--ok); } .tally .reject { color:var(--bad); }
+  .tally .defer { color:var(--defer); } .tally .unvoted { color:var(--muted); }
+  .toolbar { padding:10px 20px; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  button.dl { background:var(--accent); color:#fff; border:none; padding:8px 14px; border-radius:6px;
+              cursor:pointer; font-size:13px; }
+  button.dl:hover { opacity:.9; }
+  .filterbar { display:flex; gap:6px; flex-wrap:wrap; }
+  .filterbar button { background:var(--panel2); border:1px solid var(--border); color:var(--text);
+                       padding:6px 10px; border-radius:14px; font-size:12px; cursor:pointer; }
+  .filterbar button.active { border-color:var(--accent); color:var(--accent); }
+  main { max-width:980px; margin:0 auto; padding:10px 20px; }
+  .card { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:16px;
+          margin-bottom:16px; }
+  .card.voted-approve { border-left:4px solid var(--ok); }
+  .card.voted-reject { border-left:4px solid var(--bad); }
+  .card.voted-defer { border-left:4px solid var(--defer); }
+  .card header { display:flex; justify-content:space-between; align-items:baseline; }
+  .card .hw { font-size:18px; font-weight:700; }
+  .badge { font-size:11px; background:var(--panel2); padding:2px 8px; border-radius:10px;
+           margin-left:8px; color:var(--muted); }
+  .badge.top { color:#ffd75e; border:1px solid #453407; }
+  .badge.fenced { color:var(--bad); border:1px solid #4a1512; }
+  .question { margin:8px 0 12px; font-size:14px; }
+  .panel { background:var(--panel2); border-radius:8px; padding:10px 12px; font-size:13px; margin-bottom:10px; }
+  .panel h4 { margin:0 0 6px; font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+  .panel pre { white-space:pre-wrap; word-break:break-word; margin:0; font-size:12px; line-height:1.45; }
+  .chip { display:inline-block; background:#263042; border-radius:5px; padding:2px 7px; margin:2px 3px 2px 0; font-size:12px; }
+  .muted { color:var(--muted); font-style:italic; }
+  .controls { display:flex; align-items:center; gap:8px; margin-top:4px; }
+  button.vote { border:1px solid var(--border); background:var(--panel2); color:var(--text);
+                padding:7px 12px; border-radius:6px; cursor:pointer; font-size:13px; }
+  button.vote.approve.active { background:var(--ok); border-color:var(--ok); color:#04240b; }
+  button.vote.reject.active { background:var(--bad); border-color:var(--bad); color:#2a0a08; }
+  button.vote.defer.active { background:var(--defer); border-color:var(--defer); color:#2a1d02; }
+  .vote-state { margin-left:6px; font-size:12px; color:var(--muted); }
+  textarea.note { width:100%; margin-top:10px; min-height:88px; background:#11141a !important; color:#e6e6e6 !important;
+                  -webkit-text-fill-color:#e6e6e6; border:1px solid var(--border); border-radius:6px; padding:8px; font-size:13px;
+                  font-family:inherit; resize:vertical; }
+  textarea.note::placeholder { color:var(--muted); opacity:1; }
+  footer.hint { max-width:980px; margin:20px auto; padding:0 20px; color:var(--muted); font-size:12px; }
+  kbd { background:#263042; border-radius:4px; padding:1px 5px; font-size:11px; }
+
+  .freeze-banner { margin: 0 20px 12px; padding: 10px 14px; border-radius: 8px;
+    border: 1px solid var(--defer); background: #2a1d02; font-size: 12px; line-height: 1.45;
+    color: var(--text); max-width: 980px; }
+  .freeze-banner a { color: var(--accent); }
+
+  .idchip { font-family:ui-monospace,Consolas,monospace; font-size:11px; color:var(--muted);
+            background:var(--panel2); border:1px solid var(--border); padding:2px 7px;
+            border-radius:6px; user-select:all; }
+  .card header { gap:10px; }
+  .hw a.hwlink { color:inherit; text-decoration:underline dotted; text-underline-offset:3px; }
+  .hw a.hwlink:hover { color:var(--accent); }
+  .question a { color:var(--accent); }
+  mark.hl { background:#453407; color:#ffd75e; padding:0 2px; border-radius:3px; }
+  .savebanner { max-width:980px; margin:10px auto 0; padding:8px 20px; font-size:12.5px; }
+  .savebanner code { background:var(--panel2); border:1px solid var(--border); padding:1px 6px; border-radius:5px; }
+  :root { --fs:1.5; }
+  header.top h1 { font-size:calc(16px * var(--fs)) !important; }
+  header.top .sub { font-size:calc(12px * var(--fs)) !important; }
+  .tally, button.dl, button.vote, textarea.note { font-size:calc(13px * var(--fs)) !important; }
+  .filterbar button, .fsctl button, .fsctl .fsval, .chip, .vote-state,
+  footer.hint, div.legend { font-size:calc(12px * var(--fs)) !important; }
+  .card .hw { font-size:calc(18px * var(--fs)) !important; }
+  .badge, .panel h4, kbd, .idchip { font-size:calc(11px * var(--fs)) !important; }
+  .question { font-size:calc(14px * var(--fs)) !important; }
+  .panel { font-size:calc(13px * var(--fs)) !important; }
+  .panel pre { font-size:calc(13.5px * var(--fs)) !important; line-height:1.55; }
+  .savebanner { font-size:calc(12.5px * var(--fs)) !important; }
+  .freeze-banner { font-size:calc(12px * var(--fs)) !important; }
+  .fsctl { display:flex; align-items:center; gap:4px; }
+  .fsctl button { background:var(--panel2); border:1px solid var(--border); color:var(--text);
+                  padding:6px 10px; border-radius:14px; cursor:pointer; line-height:1; }
+  .fsctl .fsval { color:var(--muted); min-width:3.4em; text-align:center; }
+  @media (max-width: 640px) {
+    header.top { padding: 10px 14px; flex-direction: column; align-items: stretch; }
+    header.top h1 { font-size: 15px; }
+    .tally { gap: 8px; font-size: 11px; }
+    .toolbar { padding: 8px 14px; }
+    main { padding: 8px 12px; }
+    .card { padding: 12px; }
+    .filterbar { flex-wrap: wrap; }
+    button.dl, button.vote, .fsctl button, #saveBtn, #handinBtn, #pauseBtn {
+      min-height: 44px; min-width: 44px; padding: 10px 14px;
+    }
+    .controls { flex-wrap: wrap; }
+    .panel { padding: 8px 10px; }
+    textarea.note { min-height: 60px; }
+  }
+  .tally .time { color:var(--muted); }
+  .dl.handin { background:#243447; }
+  .tally .pausebtn { background:none; border:1px solid var(--border); color:var(--muted);
+                     border-radius:6px; padding:0 6px; margin-left:4px; cursor:pointer;
+                     font-size:inherit; font-family:inherit; line-height:1.6; }
+  .tally .pausebtn.on { color:#ffd479; border-color:#ffd479; }
+  .tally .time.paused { opacity:.45; }
+  .handin-said { color:var(--muted); font-size:12px; margin-left:10px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>H3537 — дельта-red-team август 2026: 26 правок на решение автора</h1>
+    <div class="sub">Generated 26-08-2026 &middot; sheet_id <code>h3537-delta-redteam_26-08-26</code> &middot; Источник: <a href="https://github.com/gasyoun/Uprava/blob/main/docs/REVIEW_SHEET_DELTA_REDTEAM_AUG2026_H3537.md" target="_blank" rel="noopener" style="color:var(--accent)">review-sheet H3537</a>, доказательная база — §8 в <a href="https://github.com/gasyoun/Uprava/blob/main/docs/PORTFOLIO_STATISTICAL_REDTEAM_2026H2.md" target="_blank" rel="noopener" style="color:var(--accent)">PORTFOLIO_STATISTICAL_REDTEAM_2026H2.md</a> (цепочки верификации в §8.2, SUSPECT-кандидаты в §8.3). Аудит: Claude Code Fable 5 (claude-fable-5). Ни одна строка не выполняется агентом автоматически — каждая ждёт решения автора здесь.</div>
+  </div>
+  <div class="tally" id="tally">
+    <span class="approve">&#9989; <span class="count" id="c-approve">0</span></span>
+    <span class="reject">&#10060; <span class="count" id="c-reject">0</span></span>
+    <span class="defer">&#9208; <span class="count" id="c-defer">0</span></span>
+    <span class="time" title="активное время на листе (пока вкладка видима)">&#9201; <span class="count" id="t-total">0:00</span></span>
+    <button type="button" class="pausebtn" id="pauseBtn" title="пауза — перерыв не считается временем ревью">&#9208;</button>
+    <span class="unvoted">&#9711; <span class="count" id="c-unvoted">26</span></span>
+  </div>
+</header>
+<aside class="freeze-banner" role="status"><strong>Мороз подачи до 01-11-2026</strong> (<a href="https://github.com/gasyoun/Uprava/issues/1672" target="_blank" rel="noopener">Uprava #1672</a>) — никаких submit-CTA: все карточки ниже описывают правки текста и данных, не подачу статей. Строки A35 (R3–R4) — репозиторий <strong>csl-orig fenced</strong>: только решение на листе, никаких прямых коммитов/PR от агента. Строки A44 (R22–R26) идут из SUSPECT-кандидатов §8.3 — адверсариальный верификатор для A44 не запускался (детерминированная арифметика статьи при этом воспроизведена до цифры).</aside>
+<div class="savebanner">&#128229; Экспорт скачивается как <code>h3537-delta-redteam_26-08-26_decisions.json</code> &rarr; сохраните в <code>Uprava/review/h3537-delta-redteam_26-08-26_decisions.json</code> (поле <code>sheet_id</code> внутри файла — <code>h3537-delta-redteam_26-08-26</code> — по нему следующая сессия узнаёт, к какому листу относятся решения).</div>
+<div class="toolbar">
+  <button class="dl" id="downloadBtn">Download decisions.json</button><button class="dl handin" id="handinBtn" title="остановить часы и выгрузить голоса, сделанные до сих пор; остальные остаются в этом браузере">Hand in what I got</button><span class="handin-said" id="handinSaid"></span><button class="dl" id="saveBtn" style="display:none;margin-left:8px">Save to folder…</button>
+  <div class="fsctl" title="размер текста — сохраняется в этом браузере"><button type="button" id="fsDown" aria-label="меньше">A&minus;</button><span class="fsval" id="fsVal"></span><button type="button" id="fsUp" aria-label="больше">A+</button></div>
+  <div class="filterbar" id="filterbar"><button data-filter="all" class="active">все</button><button data-filter="top">наивысший (1)</button><button data-filter="high">высокий (19)</button><button data-filter="mid">средний (6)</button><button data-filter="unvoted">без голоса</button></div>
+</div>
+<main id="cards">
+
+  <section class="card" data-id="R1" data-filt="high">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/SanskritGrammar/blob/main/TolchelnikovTalmud_2026/papers/DigitalPedagogyAgenda_A62/OUTLINE_digital-sanskrit-pedagogy-agenda_A62.md" target="_blank" rel="noopener">A62 — τ = 0.887 измеряет не «эксперт vs корпус», а два канала одного архива</a> <span class="badge">A62 pedagogy</span><span class="badge">SanskritGrammar</span><span class="badge">§8.2.1</span><span class="badge">высокий</span></div><span class="idchip" title="id карточки — ссылайтесь на него в обсуждении">R1</span></header>
+    <div class="question"><p><b>Файл : место:</b> OUTLINE_A62.md:36–38, 119 (абстракт + вердикт RQ1)</p><p><b>Дефект:</b> τ = 0.887 измеряет согласие двух частотных каналов одного архива (<code>core_rank</code> — argsort <code>coverage_pct</code>, 0 инверсий), а не «эксперт против корпуса». Экспертный сигнал — <b>членство</b> в списке (46 % сырого топ-50 — служебные слова, исключённые куратором), не внутренний порядок.</p><p><b>Правка:</b> переформулировать абстракт и вердикт RQ1 от членства, не от ранговой корреляции.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять правку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить — оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="уточнение формулировки, если нужно"></textarea>
+  </section>
+
+  <section class="card" data-id="R2" data-filt="high">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/SanskritGrammar/blob/main/DIFFICULTY_ORDERING_RESULT.md" target="_blank" rel="noopener">A62 — «frequency-agnostic (τ ≈ 0.05)» скрывает статистически значимые связи</a> <span class="badge">A62 pedagogy</span><span class="badge">SanskritGrammar</span><span class="badge">§8.2.2</span><span class="badge">высокий</span></div><span class="idchip">R2</span></header>
+    <div class="question"><p><b>Файл : место:</b> OUTLINE_A62.md:40, 119 + DIFFICULTY_ORDERING_RESULT.md</p><p><b>Дефект:</b> «frequency-agnostic (τ ≈ 0.05)» — на деле связь слабая (|τ| ≈ 0.05–0.10), но местами статистически значимая: Kochergina surface p = 0.0158; Bühler lemmatised τ = +0.1006, p = 0.0011 — всегда много ниже меж-учебникового согласия 0.45–0.84.</p><p><b>Правка:</b> заменить формулировку на «слабая, местами значимая»; в result-doc заменить «all |τ| ≤ 0.10» точными пер-учебниковыми значениями.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять правку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить — оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="уточнение формулировки, если нужно"></textarea>
+  </section>
+
+  <section class="card" data-id="R3" data-filt="high">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/sanskrit-lexicon/csl-orig/blob/master/v02/etymology_stats/PAPER_DRAFT.md" target="_blank" rel="noopener">A35 — «exact-match variant moves no headline figure»: вычисления не существует, утверждение ложно</a> <span class="badge">A35 etymology</span><span class="badge fenced">csl-orig · fenced</span><span class="badge">§8.2.3</span><span class="badge">высокий</span></div><span class="idchip">R3</span></header>
+    <div class="question"><p><b>Файл : место:</b> PAPER_DRAFT.md:225–228</p><p><b>Дефект:</b> под set-equality пять из девяти пар Table 1 падают ниже «over 90 %» (VCP↔AP90 96.8→76.3 и т.д.); вычисление никогда не коммитилось. Заодно «all others less» ложно — у KRM multi-affix 19.5 %.</p><p><b>Правка (два варианта):</b> (а) закоммитить расчёт и печатать обе колонки — any-overlap и set-equality, с называнием multi-affix-механизма; (б) удалить фразу и ограничить заголовок «any-overlap agreement». <span class="muted">Fenced: правка выполняется только автором в csl-orig, не агентом.</span></p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять правку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить — оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="вариант (а) или (б), либо своя формулировка"></textarea>
+  </section>
+
+  <section class="card" data-id="R4" data-filt="high">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/sanskrit-lexicon/csl-orig/blob/master/v02/etymology_stats/PAPER_DRAFT.md" target="_blank" rel="noopener">A35 — strict-подмножество это не «≈100 % precision»: честно ≈96.0 % (VCP) / ≈97.4 % (корпус)</a> <span class="badge">A35 etymology</span><span class="badge fenced">csl-orig · fenced</span><span class="badge">§8.2.4</span><span class="badge">высокий</span></div><span class="idchip">R4</span></header>
+    <div class="question"><p><b>Файл : место:</b> PAPER_DRAFT.md:275–276, 417–422 + DATASHEET.md:65 + stats_etymology.py:525</p><p><b>Дефект:</b> strict-подмножество сохраняет oracle-join (82.9 % точности по собственному аудиту; 23.3 % строк VCP-strict) — «≈100 % precision» и «единственный sub-100 % tier» ложны.</p><p><b>Правка (два варианта):</b> (а) переопределить strict — убрать оба inferred-тира и пересчитать покрытие; (б) честно печатать ≈96.0 % (VCP) / ≈97.4 % (корпус) с Wilson-интервалом. <span class="muted">Fenced: правка выполняется только автором в csl-orig, не агентом.</span></p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять правку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить — оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="вариант (а) или (б), либо своя формулировка"></textarea>
+  </section>
+
+  <section class="card" data-id="R5" data-filt="top">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/CommentaryStrategies/blob/main/articles/article1_vya.md" target="_blank" rel="noopener">A19 — «gold» за κ = 0,648/0,521 — Gemini-Flash-генерация: нужна настоящая человеческая разметка 300 заметок</a> <span class="badge">A19 commentary</span><span class="badge">CommentaryStrategies</span><span class="badge">§8.2.5</span><span class="badge top">наивысший</span></div><span class="idchip">R5</span></header>
+    <div class="question"><p><b>Файл : место:</b> article1_vya.md §2.1/§2.3 + data/iaa/PRE_REGISTRATION_H1469.md + iaa_kappa_stats.json</p><p><b>Дефект:</b> «gold»-набор — Gemini-Flash-генерация в одном коммите, тексты заметок частично синтетические (0/5 совпадений с корпусом на переводчика). κ = 0,648/0,521 — не inter-annotator agreement.</p><p><b>Правка:</b> настоящая человеческая разметка 300 <b>дословных</b> корпусных заметок (пересэмплировать закоммиченным скриптом) и пересчёт κ; до неё все три поверхности «ручная разметка / hand-coded / human gold» переписать как model-generated, а таблицы §5 пометить как опирающиеся на синтетическое золото.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять правку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить — оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="кто и когда делает разметку 300 заметок"></textarea>
+  </section>
+
+  <section class="card" data-id="R6" data-filt="high">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/CommentaryStrategies/blob/main/articles/article1_vya.md" target="_blank" rel="noopener">A19 — состав корпуса 17 622 невоспроизводим: пересчёт даёт 15 847 (Δ = −1 775)</a> <span class="badge">A19 commentary</span><span class="badge">CommentaryStrategies</span><span class="badge">§8.2.6</span><span class="badge">высокий</span></div><span class="idchip">R6</span></header>
+    <div class="question"><p><b>Файл : место:</b> article1_vya.md §2.1 (:43, 51, 73, 81, 394, 414)</p><p><b>Дефект:</b> 17 622 невоспроизводимо по закоммиченному корпусу (15 847). Также: диапазон книг В–Н («кн. III, VIII, X–XVIII») молча включает ~1 685 заметок Мокшадхармы; «20 упанишад» — по переписи 26.</p><p><b>Правка (два варианта):</b> (а) закоммитить мартовский категоризационный прогон + снапшот входа; (б) переписать §2.1 от закоммиченных 15 847 со ссылкой на CORPUS_TRUTH_RECONCILIATION_17863.md. В том же проходе исправить диапазон книг и счёт упанишад.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять правку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить — оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="вариант (а) или (б)"></textarea>
+  </section>
+
+  <section class="card" data-id="R7" data-filt="high">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/CommentaryStrategies/blob/main/articles/article1_vya.md" target="_blank" rel="noopener">A19 — лейблы профилей противоречат собственной Table 2: Кальянов и Леонов P-доминантны, не «K-доминирование»</a> <span class="badge">A19 commentary</span><span class="badge">CommentaryStrategies</span><span class="badge">§8.2.7</span><span class="badge">высокий</span></div><span class="idchip">R7</span></header>
+    <div class="question"><p><b>Файл : место:</b> article1_vya.md §5.1:279, §7:394</p><p><b>Дефект:</b> Кальянов и Леонов — P-доминантны (~4.5×), не «K-доминирование»; у Эрмана P=28 &gt; D=16.</p><p><b>Правка (два варианта):</b> (а) пересчитать максимумы строк и перелейблить; (б) явно определить относительное прочтение — «наибольшая <i>доля</i> K/D относительно коллег».</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять правку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить — оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="вариант (а) или (б)"></textarea>
+  </section>
+
+  <section class="card" data-id="R8" data-filt="high">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/csl-observatory/blob/main/paper-obs-t-error-typology.md" target="_blank" rel="noopener">A12 — пол диапазона плотности «down to ~56 (PUI)» завышен на порядок: минимум 4.48/1k</a> <span class="badge">A12 OBS-T</span><span class="badge">csl-observatory</span><span class="badge">§8.2.8</span><span class="badge">высокий</span></div><span class="idchip">R8</span></header>
+    <div class="question"><p><b>Файл : место:</b> paper-obs-t-error-typology.md:416–418</p><p><b>Дефект:</b> по полной таблице obs_t_dict.csv двадцать два словаря с ≥30 событиями лежат ниже «~56», минимум <b>4.48</b>/1k (mwe).</p><p><b>Правка (два варианта):</b> (а) переписать от полной 43-строчной таблицы (диапазон ≈4.5–160.8); (б) явно ограничить фразу top-density-лидербордом.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять правку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить — оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="вариант (а) или (б)"></textarea>
+  </section>
+
+  <section class="card" data-id="R9" data-filt="high">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/csl-observatory/blob/main/paper-obs-t-error-typology.md" target="_blank" rel="noopener">A12 — «6,969 form events» → 5,634 (цитируемый артефакт на pin); вывод «0.1 %» выживает</a> <span class="badge">A12 OBS-T</span><span class="badge">csl-observatory</span><span class="badge">§8.2.9</span><span class="badge">высокий</span></div><span class="idchip">R9</span></header>
+    <div class="question"><p><b>Файл : место:</b> paper-obs-t-error-typology.md:240</p><p><b>Дефект:</b> цитируемый артефакт на pin даёт <code>"testable_overlap": 5634</code>; 6,969 — из устаревшей генерации 11-06-2026. agree = 5 → 0.089 %, так что вывод «0.1 %» выживает — неверен только знаменатель.</p><p><b>Правка (два варианта):</b> (а) заменить 6,969 → 5,634; (б) перегенерировать silver на снапшоте 52,498 событий и цитировать регенерированный артефакт.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять правку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить — оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="вариант (а) или (б)"></textarea>
+  </section>
+
+  <section class="card" data-id="R10" data-filt="mid">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/kosha/blob/main/papers/A55_UNION_HEADWORDS_DATA_PAPER_JOHD.md" target="_blank" rel="noopener">A55 — QC-клауза о «feminine folds and homograph collapse» ложна: ~92 % дельты — дигитизационный дрейф csl-orig</a> <span class="badge">A55 union headwords</span><span class="badge">kosha</span><span class="badge">§8.2.10</span><span class="badge">средний</span></div><span class="idchip">R10</span></header>
+    <div class="question"><p><b>Файл : место:</b> A55_UNION_HEADWORDS_DATA_PAPER_JOHD.md:106–109</p><p><b>Дефект:</b> за нетто −31 стоит двусторонний чёрн 329 ключей, из них лишь 28 — feminine folds и 0 — гомографы; ~92 % — дигитизационный дрейф csl-orig 2014→2026.</p><p><b>Правка (два варианта):</b> (а) замена: «small deltas are the union's feminine folds plus a decade of csl-orig digitization corrections (±≈150 keys each way for PWG); homograph collapse contributes none»; (б) реконсилировать против текущего пер-словарного экспорта вместо фриза 2014.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять правку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить — оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="вариант (а) или (б)"></textarea>
+  </section>
+
+  <section class="card" data-id="R11" data-filt="mid">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/kosha/blob/main/papers/A56_ZALIZNYAK_GRAMMAR_INDEX_DATA_PAPER_JOHD.md" target="_blank" rel="noopener">A56 — «every headword of the large Petersburg Dictionary» покрывает 89 %, не 100 %</a> <span class="badge">A56 Zaliznyak index</span><span class="badge">kosha</span><span class="badge">§8.2.11</span><span class="badge">средний</span></div><span class="idchip">R11</span></header>
+    <div class="question"><p><b>Файл : место:</b> A56_ZALIZNYAK_GRAMMAR_INDEX_DATA_PAPER_JOHD.md, абстракт</p><p><b>Дефект:</b> 94,074 distinct k1 из 106,082 ключей PWG; 12,120 заглавных без строки индекса (среди них ~30 % — настоящие глоссированные номиналы, ~22 % — глагольные корни, которые статья явно называет индексированными).</p><p><b>Правка:</b> «≈94,000 of PWG's ≈106,000 headwords (≈89 %) are assigned one of 335 compact paradigm tokens; cross-reference entries and a residue of verbal and rare nominal lemmas are not yet tokenized».</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять правку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить — оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="уточнение формулировки, если нужно"></textarea>
+  </section>
+
+  <section class="card" data-id="R12" data-filt="mid">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/kosha/blob/main/papers/A56_ZALIZNYAK_GRAMMAR_INDEX_DATA_PAPER_JOHD.md" target="_blank" rel="noopener">A56 — «48 singletons / 121 ≤ 5» — классификатор-зависимые цифры, живой инвентарь уже 53/129</a> <span class="badge">A56 Zaliznyak index</span><span class="badge">kosha</span><span class="badge">§8.3</span><span class="badge">средний</span></div><span class="idchip">R12</span></header>
+    <div class="question"><p><b>Файл : место:</b> тот же файл, хвостовые цифры инвентаря</p><p><b>Дефект:</b> error rate программного классификатора не измерен; живой инвентарь уже сдвинул цифры к 53/129.</p><p><b>Правка (два варианта):</b> (а) квалифицировать цифры как классификатор-зависимые; (б) провести ручную проверку 48 синглетонов против печати PWG до публикации цифры как находки.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять правку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить — оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="вариант (а) или (б)"></textarea>
+  </section>
+
+  <section class="card" data-id="R13" data-filt="high">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/csl-observatory/blob/main/article/A69_pwg_scan_index_campaign.md" target="_blank" rel="noopener">A69 — «top three volunteers 79 %» смешивает базы: done-only даёт 76.2 % и меняет рейтинг</a> <span class="badge">A69 scan-index</span><span class="badge">csl-observatory</span><span class="badge">§8.2.12</span><span class="badge">высокий</span></div><span class="idchip">R13</span></header>
+    <div class="question"><p><b>Файл : место:</b> A69_pwg_scan_index_campaign.md:158–159</p><p><b>Дефект:</b> числитель без фильтра статуса, знаменатель done-only. По done-only/done-only: <b>76.2 %</b>, первым становится второй волонтёр (58,955 против 58,820), счётчики работ 15/11/7.</p><p><b>Правка (два варианта):</b> (а) «76.2 % of indexed citation mass» с новым рейтингом; (б) оставить 79 %, переименовав базу — «79 % of the citation mass volunteers have taken on».</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять правку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить — оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="вариант (а) или (б)"></textarea>
+  </section>
+
+  <section class="card" data-id="R14" data-filt="high">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/csl-observatory/blob/main/article/A69_pwg_scan_index_campaign.md" target="_blank" rel="noopener">A69 — «42 works» → 40 по done-only; освежить §5.1/§5.3 от данных H2874</a> <span class="badge">A69 scan-index</span><span class="badge">csl-observatory</span><span class="badge">§8.3</span><span class="badge">высокий</span></div><span class="idchip">R14</span></header>
+    <div class="question"><p><b>Файл : место:</b> тот же файл, счётчик работ и §5.1/§5.3</p><p><b>Дефект:</b> «42 works» — 40 по done-only; §5.1/§5.3 устарели (черновик заморожен a984542 05-08-2026, данные уехали; итог 344,229 без guard-клаузы).</p><p><b>Правка:</b> «42» → «40» (либо пометить как «posted base»); освежить §5.1/§5.3 от данных, перегенерированных H2874 16-08-2026 (15ab5ca): актуальные доли 36.3 %/26.8 %; guard-клауза на итог 344,229.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять правку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить — оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="уточнение, если нужно"></textarea>
+  </section>
+
+  <section class="card" data-id="R15" data-filt="high">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/drdhaval2785/SanskritSpellCheck/blob/master/papers/A37_lchange_companion.md" target="_blank" rel="noopener">A37 — механизм «zero-censoring» опровергнут: реальный драйвер — рычаг одиночной точки WIL 1832</a> <span class="badge">A37 ortho drift</span><span class="badge">SanskritSpellCheck</span><span class="badge">§8.2.13</span><span class="badge">высокий</span></div><span class="idchip">R15</span></header>
+    <div class="question"><p><b>Файл : место:</b> A37_lchange_companion.md абстракт + §4; A37_ortho_drift_paper.md §4.8, O7a</p><p><b>Дефект:</b> рефит только на 7 ненулевых точках побитно идентичен (b=+0.2861, Δt80=9.69) — нули каузально бездействуют; реальный драйвер — рычаг одиночной точки WIL 1832 при max-нормализации прокси (без неё ширина ~120–230 лет, R² ≈0.05–0.09).</p><p><b>Правка:</b> переписать механизм-абзац и пункт 1 чек-листа: «check saturation» → «check single-point leverage / proxy normalization».</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять правку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить — оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="уточнение, если нужно"></textarea>
+  </section>
+
+  <section class="card" data-id="R16" data-filt="high">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/drdhaval2785/SanskritSpellCheck/blob/master/papers/A37_lchange_companion.md" target="_blank" rel="noopener">A37 — механизм «sparse-sampling» опровергнут симуляцией: драйвер — дореформенные значения прокси</a> <span class="badge">A37 ortho drift</span><span class="badge">SanskritSpellCheck</span><span class="badge">§8.2.14</span><span class="badge">высокий</span></div><span class="idchip">R16</span></header>
+    <div class="question"><p><b>Файл : место:</b> те же файлы, §4</p><p><b>Дефект:</b> истинная ступенька 1901, семплированная в те же пять изданий, фитится сколь угодно круто (Δt80 до 0.55 года) — разреженность дала бы правильную метку. Реальный драйвер — дореформенные значения прокси (PW 0.000 vs PWG 0.1365 в одном 1865-м; CCS 0.540 за 14 лет до реформы).</p><p><b>Правка:</b> переписать абзац о немецкой ширине 50.2 года и пункт 2 чек-листа.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять правку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить — оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="уточнение, если нужно"></textarea>
+  </section>
+
+  <section class="card" data-id="R17" data-filt="high">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/drdhaval2785/SanskritSpellCheck/blob/master/detectors/drift_dating.py" target="_blank" rel="noopener">A37 — 'PW': 1865 это диапазон PWG; PW издан 1879–1889, midpoint ≈1884 — монотонность рушится</a> <span class="badge">A37 ortho drift</span><span class="badge">SanskritSpellCheck</span><span class="badge">§8.2.15</span><span class="badge">высокий</span></div><span class="idchip">R17</span></header>
+    <div class="question"><p><b>Файл : место:</b> detectors/drift_dating.py:44 + четыре лейбла «PW (1855–75)» в документах</p><p><b>Дефект:</b> PW (kürzere Fassung) издан 1879–1889; midpoint-правило самого скрипта даёт ≈<b>1884</b>. С PW=1884 рушатся «declines monotonically with publication date» и ρ=−0.975 (n=5); защитимой остаётся no-PW-строка (Δt80=54.6).</p><p><b>Правка:</b> перепроверить и переписать немецкую серию от PW=1884.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять правку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить — оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="уточнение, если нужно"></textarea>
+  </section>
+
+  <section class="card" data-id="R18" data-filt="mid">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/drdhaval2785/SanskritSpellCheck/blob/master/papers/A37_ortho_drift_paper.md" target="_blank" rel="noopener">A37 — «33 dictionaries» → «24 из 33-словарного корпуса Кёльна + один внешний русский»</a> <span class="badge">A37 ortho drift</span><span class="badge">SanskritSpellCheck</span><span class="badge">§8.3</span><span class="badge">средний</span></div><span class="idchip">R18</span></header>
+    <div class="question"><p><b>Файл : место:</b> обе статьи A37, где «33 dictionaries»</p><p><b>Дефект:</b> фактический вход фитов — 24 словаря Кёльна + один внешний русский, не 33.</p><p><b>Правка:</b> исправить счёт; опционально раскрыть map-зависимость (Δt80 11.75 vs 50.2 по выбору маппинга).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять правку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить — оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="раскрывать ли map-зависимость"></textarea>
+  </section>
+
+  <section class="card" data-id="R19" data-filt="high">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/SamudraManthanam/blob/main/papers/A41_parallel_corpus_descriptor.md" target="_blank" rel="noopener">A41 — «led by Kochergina 29,180» опровергнуто собственным файлом: класс ведут MW 222,390 и Apte 31,647</a> <span class="badge">A41 corpus descriptor</span><span class="badge">SamudraManthanam</span><span class="badge">§8.2.16</span><span class="badge">высокий</span></div><span class="idchip">R19</span></header>
+    <div class="question"><p><b>Файл : место:</b> A41_parallel_corpus_descriptor.md:391–392, :709</p><p><b>Дефект:</b> цитируемый файл даёт dic_mw 222,390 (69.1 %) и dic_apte 31,647 во главе класса.</p><p><b>Правка:</b> «led by Monier-Williams 222,390 and Apte 31,647; the largest Sanskrit–Russian sources are Kochergina 29,180 and Kossovich 13,488».</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять правку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить — оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="уточнение, если нужно"></textarea>
+  </section>
+
+  <section class="card" data-id="R20" data-filt="high">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/SamudraManthanam/blob/main/papers/A41_parallel_corpus_descriptor.md" target="_blank" rel="noopener">A41 — класс охарактеризован как «Sanskrit–Russian», хотя ~82 % записей — санскрит-английские</a> <span class="badge">A41 corpus descriptor</span><span class="badge">SamudraManthanam</span><span class="badge">§8.2.16</span><span class="badge">высокий</span></div><span class="idchip">R20</span></header>
+    <div class="question"><p><b>Файл : место:</b> тот же файл, §3.1</p><p><b>Дефект:</b> «Sanskrit–Russian and Russian-indological reference works» ложно для класса, где ~82 % записей (263,624/321,672) — санскрит-английские (MW, Apte) и немецкий KEWA; MW и Apte в прозе не упомянуты ни разу.</p><p><b>Правка:</b> перехарактеризовать словарный класс с упоминанием MW и Apte.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять правку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить — оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="уточнение, если нужно"></textarea>
+  </section>
+
+  <section class="card" data-id="R21" data-filt="mid">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/gasyoun/SamudraManthanam/blob/main/papers/A41_parallel_corpus_descriptor.md" target="_blank" rel="noopener">A41 — освежить перепись extras (274/126/219,463); рядом с 81.1 % дать group-level 57.5 %</a> <span class="badge">A41 corpus descriptor</span><span class="badge">SamudraManthanam</span><span class="badge">§8.3</span><span class="badge">средний</span></div><span class="idchip">R21</span></header>
+    <div class="question"><p><b>Файл : место:</b> тот же файл, перепись extras + §5.2</p><p><b>Дефект:</b> перепись extras устарела (актуально 274/126/219,463; коэффициент 19.85×); 81.1 % — доля записей, group-level даёт 57.5 % (доля групп).</p><p><b>Правка:</b> освежить перепись или явно датировать as-of; добавить рядом с 81.1 % предложение о group-level 57.5 %.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять правку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить — оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="освежить или датировать as-of"></textarea>
+  </section>
+
+  <section class="card" data-id="R22" data-filt="high">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/drdhaval2785/SanskritSpellCheck/issues/104" target="_blank" rel="noopener">A44 — знаменатели YAT 247 / ACC 174 / MCI 41 невоспроизводимы: закоммичено 219/144/24</a> <span class="badge">A44 typo triage</span><span class="badge">SanskritSpellCheck</span><span class="badge">§8.3 · SUSPECT</span><span class="badge">высокий</span></div><span class="idchip">R22</span></header>
+    <div class="question"><p><b>Файл : место:</b> статья A44 + gitignored <code>combined_candidates.txt</code> (issue #104)</p><p><b>Дефект:</b> закоммиченные файлы на pin дают 219/144/24 — ставки выходят на 12.3/15.3/41.7 % выше заявленных; расхождение анти-консервативно в пользу статьи, но свидетелей нет. <span class="muted">SUSPECT §8.3 — верификатор для A44 не запускался.</span></p><p><b>Правка (два варианта):</b> (а) регенерировать <code>combined_candidates.txt</code> и восстановить свидетелей; (б) пересчитать от закоммиченных 219/144/24.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять правку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить — оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="вариант (а) или (б)"></textarea>
+  </section>
+
+  <section class="card" data-id="R23" data-filt="high">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/drdhaval2785/SanskritSpellCheck/issues/104" target="_blank" rel="noopener">A44 — «union recall 99.1 %» почти циркулярно; «108 POSITIVE rows» — фактически 109/108</a> <span class="badge">A44 typo triage</span><span class="badge">SanskritSpellCheck</span><span class="badge">§8.3 · SUSPECT</span><span class="badge">высокий</span></div><span class="idchip">R23</span></header>
+    <div class="question"><p><b>Файл : место:</b> статья A44, recall-клауза</p><p><b>Дефект:</b> золотая рамка = выжившие union-детекторов, поэтому recall почти циркулярен; «108 POSITIVE rows» — фактически 109 строк / 108 уникальных (дубль <code>jAmbabat</code>). <span class="muted">SUSPECT §8.3.</span></p><p><b>Правка:</b> ограничить формулировку — «recall of the triage frame» (precision/FPR/harm не затронуты); исправить счёт строк.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять правку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить — оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="уточнение, если нужно"></textarea>
+  </section>
+
+  <section class="card" data-id="R24" data-filt="high">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/drdhaval2785/SanskritSpellCheck/issues/104" target="_blank" rel="noopener">A44 — бинарная κ 0.663 — одноклеточная статистика: печатать сырое согласие 121/122</a> <span class="badge">A44 typo triage</span><span class="badge">SanskritSpellCheck</span><span class="badge">§8.3 · SUSPECT</span><span class="badge">высокий</span></div><span class="idchip">R24</span></header>
+    <div class="question"><p><b>Файл : место:</b> статья A44, надёжность</p><p><b>Дефект:</b> бинарная κ 0.663 опирается на маргиналы NOACT 2×1 (одна клетка); пятиклассная κ 0.336 подана без интервала. <span class="muted">SUSPECT §8.3.</span></p><p><b>Правка:</b> печатать сырое согласие <b>121/122</b> вместо бинарной κ; для пятиклассной κ дать CI (≈0.34±0.14).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять правку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить — оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="уточнение, если нужно"></textarea>
+  </section>
+
+  <section class="card" data-id="R25" data-filt="mid">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/drdhaval2785/SanskritSpellCheck/issues/104" target="_blank" rel="noopener">A44 — «pre-registered» не подтверждён датированным артефактом</a> <span class="badge">A44 typo triage</span><span class="badge">SanskritSpellCheck</span><span class="badge">§8.3 · SUSPECT</span><span class="badge">средний</span></div><span class="idchip">R25</span></header>
+    <div class="question"><p><b>Файл : место:</b> статья A44</p><p><b>Дефект:</b> слово «pre-registered» без датированного артефакта. <span class="muted">SUSPECT §8.3.</span></p><p><b>Правка (два варианта):</b> (а) удалить слово; (б) указать артефакт с датой.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять правку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить — оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="вариант (а) или (б)"></textarea>
+  </section>
+
+  <section class="card" data-id="R26" data-filt="high">
+    <header><div class="hw"><a class="hwlink" href="https://github.com/drdhaval2785/SanskritSpellCheck/blob/master/VERIFICATION_2026_07.md" target="_blank" rel="noopener">A44 — скриптовый дрейф: memo печатает 97/12 против аудированных 92/17; sf-recipe → 178, не 122</a> <span class="badge">A44 typo triage</span><span class="badge">SanskritSpellCheck</span><span class="badge">§8.3 · SUSPECT</span><span class="badge">высокий</span></div><span class="idchip">R26</span></header>
+    <div class="question"><p><b>Файл : место:</b> VERIFICATION_2026_07.md + скрипты на HEAD</p><p><b>Дефект:</b> memo печатает 97/12 против аудированных 92/17; <code>build_gold_set.py</code> → 184/16 vs 109/13; sf-recipe → 178, не 122; диапазон «77–100 %» молча исключает вырожденный <code>dict_vs_corpus</code> 0/13. <span class="muted">SUSPECT §8.3.</span></p><p><b>Правка:</b> обновить memo и привести скрипты в соответствие с опубликованными цифрами.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять правку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить — оставить как есть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="уточнение, если нужно"></textarea>
+  </section>
+</main>
+<footer class="hint">Approve = принять правку как сформулировано на карточке (она попадает в план правок автора). Reject = оставить текст статьи как есть. Defer = решить позже. Заметка уточняет или переопределяет правку в любую сторону — там же можно выбрать вариант (а)/(б). Клавиатура: <kbd>a</kbd> принять &middot; <kbd>r</kbd> отклонить
+  &middot; <kbd>d</kbd> отложить &middot; <kbd>&darr;</kbd>/<kbd>&uarr;</kbd> след./пред. Голоса автосохраняются в
+  localStorage этого браузера; по завершении нажмите "Download decisions.json" (строки без голоса экспортируются с
+  decision:null).</footer>
+<div class="legend" style="max-width:980px;margin:0 auto 20px;padding:0 20px;color:var(--muted);font-size:12px">
+  <b>Approve</b> = согласие с правкой как она написана (отдельного «approve as-is» нет —
+  approve значит «согласен с формулировкой»). <b>Reject</b> = текущий текст статьи остаётся без изменений.
+  <b>Defer</b> = пока не уверен, решу позже. Поле заметки — для частичной правки вместо полного отклонения.
+</div>
+<script>
+(function () {
+  var SHEET_ID = "h3537-delta-redteam_26-08-26";
+  var STORE_KEY = 'review-sheet:' + SHEET_ID;
+  var GENERATED = "26-08-2026";
+  var ids = ["R1","R2","R3","R4","R5","R6","R7","R8","R9","R10","R11","R12","R13","R14","R15","R16","R17","R18","R19","R20","R21","R22","R23","R24","R25","R26"];
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(STORE_KEY) || '{}') || {}; } catch (e) { state = {}; }
+  function tally() {
+    var c = { approve:0, reject:0, defer:0 };
+    ids.forEach(function (id) { var v = state[id] && state[id].decision; if (v && c.hasOwnProperty(v)) c[v]++; });
+    document.getElementById('c-approve').textContent = c.approve;
+    document.getElementById('c-reject').textContent = c.reject;
+    document.getElementById('c-defer').textContent = c.defer;
+    document.getElementById('c-unvoted').textContent = ids.length - c.approve - c.reject - c.defer;
+  }
+  function applyCardUI(card) {
+    var id = card.getAttribute('data-id'); var rec = state[id] || {};
+    card.classList.remove('voted-approve','voted-reject','voted-defer');
+    card.querySelectorAll('button.vote').forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-vote') === rec.decision); });
+    card.querySelector('.vote-state').textContent = rec.decision ? rec.decision : 'unvoted';
+    if (rec.decision) card.classList.add('voted-' + rec.decision);
+    var ta = card.querySelector('textarea.note'); if (rec.note && !ta.value) ta.value = rec.note;
+  }
+  function save() { localStorage.setItem(STORE_KEY, JSON.stringify(state)); tally(); }
+  // H1523 residual / csl-pyutil#1 Part 1: always re-read the live textarea on vote
+  // and before export so a second vote click (or a missed `input` event) cannot
+  // drop a note that is still visible in the card.
+  function syncNoteFromDom(id) {
+    state[id] = state[id] || {};
+    var card = document.querySelector('.card[data-id="' + id + '"]');
+    if (!card) return;
+    var ta = card.querySelector('textarea.note');
+    if (ta) state[id].note = ta.value;
+  }
+  function vote(id, d) { syncNoteFromDom(id); state[id].decision = d; save(); }
+  function noteChange(id, t) { state[id] = state[id] || {}; state[id].note = t; save(); }
+  document.querySelectorAll('.card').forEach(function (card) {
+    var id = card.getAttribute('data-id'); applyCardUI(card);
+    card.querySelectorAll('button.vote').forEach(function (btn) {
+      btn.addEventListener('click', function () { vote(id, btn.getAttribute('data-vote')); applyCardUI(card); });
+    });
+    var ta = card.querySelector('textarea.note'); ta.addEventListener('input', function () { noteChange(id, ta.value); });
+  });
+  tally();
+  document.getElementById('downloadBtn').addEventListener('click', function () {
+    ids.forEach(function (id) { syncNoteFromDom(id); });
+    var decided = ids.filter(function (id) { return state[id] && state[id].decision; }).length;
+    var payload = { sheet_id: SHEET_ID, generated: "26-08-2026", decided: decided, time_total_seconds: __timeTotal(),
+      items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '', time_seconds: __timeFor(id) }; }) };
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
+    var url = URL.createObjectURL(blob); var a = document.createElement('a');
+    a.href = url; a.download = SHEET_ID + '_decisions.json'; document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+  });
+  var filterbar = document.getElementById('filterbar');
+  filterbar.addEventListener('click', function (e) {
+    var btn = e.target.closest('button[data-filter]'); if (!btn) return;
+    filterbar.querySelectorAll('button').forEach(function (b) { b.classList.remove('active'); });
+    btn.classList.add('active'); var f = btn.getAttribute('data-filter');
+    document.querySelectorAll('.card').forEach(function (card) {
+      var show = true;
+      if (f === 'unvoted') { var id = card.getAttribute('data-id'); show = !(state[id] && state[id].decision); }
+      else if (f !== 'all') { show = card.getAttribute('data-filt') === f; }
+      card.style.display = show ? '' : 'none';
+    });
+  });
+  var cardsEl = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  var activeIdx = 0;
+  function visibleCards() { return cardsEl.filter(function (c) { return c.style.display !== 'none'; }); }
+  document.addEventListener('keydown', function (e) {
+    if (e.target.tagName === 'TEXTAREA') return;
+    var vis = visibleCards(); if (!vis.length) return;
+    if (activeIdx >= vis.length) activeIdx = vis.length - 1;
+    var card = vis[activeIdx]; var id = card.getAttribute('data-id');
+    if (e.key === 'a') { vote(id, 'approve'); applyCardUI(card); }
+    else if (e.key === 'r') { vote(id, 'reject'); applyCardUI(card); }
+    else if (e.key === 'd') { vote(id, 'defer'); applyCardUI(card); }
+    else if (e.key === 'ArrowDown') { activeIdx = Math.min(activeIdx + 1, vis.length - 1); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'center'}); }
+    else if (e.key === 'ArrowUp') { activeIdx = Math.max(activeIdx - 1, 0); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'center'}); }
+    else return;
+    e.preventDefault();
+  });
+
+  var saveHandle = null, saveTimer = null;
+  function exportPayload() {
+    if (typeof syncNoteFromDom === 'function') {
+      ids.forEach(function (id) { syncNoteFromDom(id); });
+    }
+    var decided = ids.filter(function (id) { return state[id] && state[id].decision; }).length;
+    return JSON.stringify({ sheet_id: SHEET_ID, generated: new Date().toISOString(), decided: decided, time_total_seconds: __timeTotal(),
+      items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '', time_seconds: __timeFor(id) }; }) }, null, 2);
+  }
+  function scheduleAutosave() {
+    if (!saveHandle) return;
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(function () {
+      saveHandle.createWritable().then(function (w) {
+        w.write(exportPayload()).then(function () { w.close(); });
+      }).catch(function () {});
+    }, 1000);
+  }
+  var _origSave = save;
+  save = function () { _origSave(); scheduleAutosave(); };
+  if (window.showSaveFilePicker) {
+    var saveBtn = document.getElementById('saveBtn');
+    saveBtn.style.display = '';
+    saveBtn.addEventListener('click', function () {
+      window.showSaveFilePicker({suggestedName: SHEET_ID + '_decisions.json'}).then(function (h) {
+        saveHandle = h; scheduleAutosave();
+      }).catch(function () {});
+    });
+  }
+
+  var FS_KEY = STORE_KEY + ':fs', FS_DEFAULT = 1.5;
+  function fsGet() {
+    var v = parseFloat(localStorage.getItem(FS_KEY));
+    return (isFinite(v) && v >= 0.7 && v <= 3) ? v : FS_DEFAULT;
+  }
+  function fsApply(v) {
+    document.documentElement.style.setProperty('--fs', String(v));
+    document.getElementById('fsVal').textContent = Math.round(v * 100) + '%';
+  }
+  function fsSet(v) {
+    v = Math.min(3, Math.max(0.7, Math.round(v * 10) / 10));
+    localStorage.setItem(FS_KEY, String(v)); fsApply(v);
+  }
+  fsApply(fsGet());
+  document.getElementById('fsDown').addEventListener('click', function () { fsSet(fsGet() - 0.1); });
+  document.getElementById('fsUp').addEventListener('click', function () { fsSet(fsGet() + 0.1); });
+
+  var TIME_KEY = STORE_KEY + ':timing';
+  var __timing = { total: 0, per: {} };
+  try {
+    var __t0 = JSON.parse(localStorage.getItem(TIME_KEY) || 'null');
+    if (__t0 && typeof __t0.total === 'number') __timing = __t0;
+  } catch (e) {}
+  if (!__timing.per) __timing.per = {};
+  function __timeFor(id) { return Math.round(__timing.per[id] || 0); }
+  function __timeTotal() { return Math.round(__timing.total || 0); }
+  function __timeFmt(s) {
+    s = Math.round(s); var m = Math.floor(s / 60);
+    return (m >= 60 ? Math.floor(m / 60) + ':' + ('0' + (m - Math.floor(m / 60) * 60)).slice(-2) : m)
+      + ':' + ('0' + (s - m * 60)).slice(-2);
+  }
+  function __timeShow() {
+    var el = document.getElementById('t-total');
+    if (el) el.textContent = __timeFmt(__timing.total);
+  }
+  var __timeLast = Date.now(), __timeDirty = 0;
+  var __timeCards = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  function __timeActiveId() {
+    var mid = window.innerHeight / 2, best = null, bestd = Infinity;
+    for (var i = 0; i < __timeCards.length; i++) {
+      var c = __timeCards[i];
+      if (c.style.display === 'none') continue;
+      var r = c.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > window.innerHeight) continue;
+      var center = (Math.max(r.top, 0) + Math.min(r.bottom, window.innerHeight)) / 2;
+      var d = Math.abs(center - mid);
+      if (d < bestd) { bestd = d; best = c; }
+    }
+    return best ? best.getAttribute('data-id') : null;
+  }
+  function __timeFlush() {
+    try { localStorage.setItem(TIME_KEY, JSON.stringify(__timing)); } catch (e) {}
+  }
+  // V12 (H2858): the clock is stoppable. `paused` rides in the same persisted
+  // record as the totals, so a reviewer who pauses and closes the tab does not
+  // come back to a clock that ran all night.
+  var __timePaused = !!__timing.paused;
+  function __timePauseSet(v) {
+    __timePaused = !!v; __timing.paused = __timePaused; __timeLast = Date.now(); __timeFlush();
+  }
+  setInterval(function () {
+    var now = Date.now(), dt = (now - __timeLast) / 1000;
+    __timeLast = now;
+    if (document.hidden || __timePaused || dt <= 0 || dt > 4) return;
+    __timing.total += dt;
+    var id = __timeActiveId();
+    if (id) __timing.per[id] = (__timing.per[id] || 0) + dt;
+    __timeDirty += dt;
+    if (__timeDirty >= 5) { __timeDirty = 0; __timeFlush(); }
+    __timeShow();
+  }, 1000);
+  document.addEventListener('visibilitychange', function () { __timeLast = Date.now(); });
+  window.addEventListener('beforeunload', __timeFlush);
+  __timeShow();
+
+  var HANDIN_SAID = 'handed in {n} of {total} — clock stopped, the rest stay saved in this browser';
+  var __handinBtn = document.getElementById('handinBtn');
+  var __handinSaid = document.getElementById('handinSaid');
+
+  var __pauseBtn = document.getElementById('pauseBtn');
+  function __pauseShow() {
+    __pauseBtn.classList.toggle('on', __timePaused);
+    __pauseBtn.innerHTML = __timePaused ? '&#9654;' : '&#9208;';
+    var chip = document.querySelector('.tally .time');
+    if (chip) chip.classList.toggle('paused', __timePaused);
+  }
+  __pauseBtn.addEventListener('click', function () { __timePauseSet(!__timePaused); __pauseShow(); });
+  __pauseShow();
+  __handinBtn.addEventListener('click', function () {
+    ids.forEach(function (id) { syncNoteFromDom(id); });
+    __timePauseSet(true); __pauseShow();
+    var items = ids.map(function (id) {
+      var rec = state[id] || {};
+      var item = { id: id, decision: rec.decision || null };
+      item.note = rec.note || '';
+      item.time_seconds = __timeFor(id);
+      return item;
+    });
+    var decided = items.filter(function (it) { return !!it.decision; }).length;
+    var payload = { sheet_id: SHEET_ID, generated: GENERATED, decided: decided,
+      partial: true, complete: false, undecided: items.length - decided, items: items };
+    payload.time_total_seconds = __timeTotal();
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
+    var url = URL.createObjectURL(blob); var a = document.createElement('a');
+    a.href = url; a.download = SHEET_ID + '_decisions_partial.json';
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+    __handinSaid.textContent = HANDIN_SAID.replace('{n}', decided).replace('{total}', items.length);
+  });
+})();
+</script>
+</body>
+</html>
