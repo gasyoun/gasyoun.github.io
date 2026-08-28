@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="color-scheme" content="dark">
+<title>Голосование 28-08 — все живые решения за один присест — 21 items</title>
+<style>
+  :root { color-scheme: dark; --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --text:#e6e6e6; --muted:#9aa0aa;
+          --accent:#5b8cff; --ok:#3fb950; --bad:#f85149; --defer:#d29922; --border:#2a2f3a; }
+  * { box-sizing: border-box; }
+  body { background:var(--bg); color:var(--text); font-family:-apple-system,Segoe UI,Roboto,sans-serif;
+         margin:0; padding:0 0 120px 0; }
+  header.top { position:sticky; top:0; z-index:10; background:var(--panel); border-bottom:1px solid var(--border);
+               padding:14px 20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+  header.top h1 { font-size:16px; margin:0; }
+  header.top .sub { color:var(--muted); font-size:12px; max-width:760px; }
+  .tally { display:flex; gap:14px; font-size:13px; }
+  .tally span.count { font-weight:700; }
+  .tally .approve { color:var(--ok); } .tally .reject { color:var(--bad); }
+  .tally .defer { color:var(--defer); } .tally .unvoted { color:var(--muted); }
+  .toolbar { padding:10px 20px; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  button.dl { background:var(--accent); color:#fff; border:none; padding:8px 14px; border-radius:6px;
+              cursor:pointer; font-size:13px; }
+  button.dl:hover { opacity:.9; }
+  .filterbar { display:flex; gap:6px; flex-wrap:wrap; }
+  .filterbar button { background:var(--panel2); border:1px solid var(--border); color:var(--text);
+                       padding:6px 10px; border-radius:14px; font-size:12px; cursor:pointer; }
+  .filterbar button.active { border-color:var(--accent); color:var(--accent); }
+  main { max-width:980px; margin:0 auto; padding:10px 20px; }
+  .card { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:16px;
+          margin-bottom:16px; }
+  .card.voted-approve { border-left:4px solid var(--ok); }
+  .card.voted-reject { border-left:4px solid var(--bad); }
+  .card.voted-defer { border-left:4px solid var(--defer); }
+  .card header { display:flex; justify-content:space-between; align-items:baseline; }
+  .card .hw { font-size:18px; font-weight:700; }
+  .badge { font-size:11px; background:var(--panel2); padding:2px 8px; border-radius:10px;
+           margin-left:8px; color:var(--muted); }
+  .question { margin:8px 0 12px; font-size:14px; }
+  .panel { background:var(--panel2); border-radius:8px; padding:10px 12px; font-size:13px; margin-bottom:10px; }
+  .panel h4 { margin:0 0 6px; font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+  .panel pre { white-space:pre-wrap; word-break:break-word; margin:0; font-size:12px; line-height:1.45; }
+  .chip { display:inline-block; background:#263042; border-radius:5px; padding:2px 7px; margin:2px 3px 2px 0; font-size:12px; }
+  .muted { color:var(--muted); font-style:italic; }
+  .controls { display:flex; align-items:center; gap:8px; margin-top:4px; }
+  button.vote { border:1px solid var(--border); background:var(--panel2); color:var(--text);
+                padding:7px 12px; border-radius:6px; cursor:pointer; font-size:13px; }
+  button.vote.approve.active { background:var(--ok); border-color:var(--ok); color:#04240b; }
+  button.vote.reject.active { background:var(--bad); border-color:var(--bad); color:#2a0a08; }
+  button.vote.defer.active { background:var(--defer); border-color:var(--defer); color:#2a1d02; }
+  .vote-state { margin-left:6px; font-size:12px; color:var(--muted); }
+  textarea.note { width:100%; margin-top:10px; min-height:88px; background:#11141a !important; color:#e6e6e6 !important;
+                  -webkit-text-fill-color:#e6e6e6; border:1px solid var(--border); border-radius:6px; padding:8px; font-size:13px;
+                  font-family:inherit; resize:vertical; }
+  textarea.note::placeholder { color:var(--muted); opacity:1; }
+  footer.hint { max-width:980px; margin:20px auto; padding:0 20px; color:var(--muted); font-size:12px; }
+  kbd { background:#263042; border-radius:4px; padding:1px 5px; font-size:11px; }
+
+  .screening-banner { margin: 0 20px 12px; padding: 10px 14px; border-radius: 8px;
+    border: 1px solid var(--accent); background: #152033; font-size: 12px; line-height: 1.45;
+    color: var(--text); max-width: 980px; }
+  .screening-banner code { font-size: 11px; color: var(--accent); }
+  .screening-banner .sc-d { color: var(--defer); font-weight: 700; }
+
+  .idchip { font-family:ui-monospace,Consolas,monospace; font-size:11px; color:var(--muted);
+            background:var(--panel2); border:1px solid var(--border); padding:2px 7px;
+            border-radius:6px; user-select:all; }
+  .card header { gap:10px; }
+  .hw a.hwlink { color:inherit; text-decoration:underline dotted; text-underline-offset:3px; }
+  .hw a.hwlink:hover { color:var(--accent); }
+  mark.hl { background:#453407; color:#ffd75e; padding:0 2px; border-radius:3px; }
+  .savebanner { max-width:980px; margin:10px auto 0; padding:8px 20px; font-size:12.5px; }
+  .savebanner code { background:var(--panel2); border:1px solid var(--border); padding:1px 6px; border-radius:5px; }
+  .ratingrow { display:flex; align-items:center; gap:6px; margin-top:10px; flex-wrap:wrap; }
+  .ratinglabel { font-size:12px; color:var(--muted); margin-right:4px; }
+  button.rate { border:1px solid var(--border); background:var(--panel2); color:var(--text);
+                width:34px; padding:6px 0; border-radius:6px; cursor:pointer; font-size:13px; }
+  button.rate.active { background:var(--accent); border-color:var(--accent); color:#fff; }
+  button.rate.active.below { background:var(--defer); border-color:var(--defer); color:#2a1d02; }
+  .rate-state { font-size:12px; color:var(--muted); margin-left:4px; }
+  :root { --fs:1.5; }
+  header.top h1 { font-size:calc(16px * var(--fs)) !important; }
+  header.top .sub { font-size:calc(12px * var(--fs)) !important; }
+  .tally, button.dl, button.vote, button.rate, textarea.note, .reject-label-select,
+  #strictReviewerWrap, #strictReviewerWrap input { font-size:calc(13px * var(--fs)) !important; }
+  .filterbar button, .fsctl button, .fsctl .fsval, .chip, .vote-state, .rate-state,
+  .ratinglabel, .rejectlabellabel, footer.hint, div.legend,
+  #strictReviewError { font-size:calc(12px * var(--fs)) !important; }
+  .card .hw { font-size:calc(18px * var(--fs)) !important; }
+  .badge, .panel h4, kbd, .idchip { font-size:calc(11px * var(--fs)) !important; }
+  .question { font-size:calc(14px * var(--fs)) !important; }
+  .panel { font-size:calc(13px * var(--fs)) !important; }
+  .panel pre { font-size:calc(13.5px * var(--fs)) !important; line-height:1.55; }
+  .panel .anatomy { font-size:calc(12.5px * var(--fs)) !important; }
+  .savebanner { font-size:calc(12.5px * var(--fs)) !important; }
+  .fsctl { display:flex; align-items:center; gap:4px; }
+  .fsctl button { background:var(--panel2); border:1px solid var(--border); color:var(--text);
+                  padding:6px 10px; border-radius:14px; cursor:pointer; line-height:1; }
+  .fsctl .fsval { color:var(--muted); min-width:3.4em; text-align:center; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>Голосование 28-08 — все живые решения за один присест — 21 items</h1>
+    <div class="sub">Generated 28-08-2026 &middot; sheet_id <code>uprava-vote_session_28-08-26</code> &middot; 21 <mark class="hl">карточка</mark>: <mark class="hl">пачка</mark> 1 — <mark class="hl">однословные</mark> <mark class="hl">рулинги</mark> <mark class="hl">с</mark> <mark class="hl">готовой</mark> <mark class="hl">рекомендацией</mark> (~1 <mark class="hl">мин</mark>/<mark class="hl">карточка</mark>), <mark class="hl">пачка</mark> 2 — <mark class="hl">решения</mark> <mark class="hl">по</mark> <mark class="hl">брифам</mark>, <mark class="hl">пачка</mark> 3 — Top-10 live @DECIDE (<mark class="hl">кнопка</mark> «<mark class="hl">Одобрить</mark>» = <mark class="hl">принять</mark> <mark class="hl">рекомендацию</mark> <mark class="hl">брифа</mark>).<br>«<mark class="hl">Иначе</mark>» — <mark class="hl">только</mark> <mark class="hl">с</mark> <mark class="hl">формулировкой</mark> <mark class="hl">в</mark> <mark class="hl">заметке</mark>: <mark class="hl">заметка</mark> <mark class="hl">становится</mark> <mark class="hl">самим</mark> <mark class="hl">рулингом</mark>.<br><mark class="hl">После</mark> <mark class="hl">голосования</mark> <mark class="hl">скачайте</mark> decisions.json <mark class="hl">и</mark> <mark class="hl">положите</mark> <mark class="hl">в</mark> Uprava/review/ — <mark class="hl">применяющий</mark> <mark class="hl">проход</mark> <mark class="hl">подхватит</mark> <mark class="hl">сам</mark>.</div>
+  </div>
+  <div class="tally" id="tally">
+    <span class="approve">&#9989; <span class="count" id="c-approve">0</span></span>
+    <span class="reject">&#10060; <span class="count" id="c-reject">0</span></span>
+    <span class="defer">&#9208; <span class="count" id="c-defer">0</span></span>
+    <span class="unvoted">&#9711; <span class="count" id="c-unvoted">21</span></span>
+  </div>
+</header>
+<aside class="screening-banner" role="status" data-screening="1"><strong>Screening (H1649)</strong> — only human-required cards are below. Off the plate: <span class="sc-a">deterministic 0</span> · <span class="sc-b">dataset lookup 0</span> · <span class="sc-c">agent adjudication 0</span> (total screened 0). Human cards: <span class="sc-d">21</span>. Evidence: <code>https://github.com/gasyoun/Uprava/blob/main/docs/VOTE_AND_ACCESS_SESSION_28-08-2026.md</code>. Rules: policy-rulings-human-only (все карточки — класс (d): вкус/политика, датасетом не решаются).</aside>
+<div class="savebanner">&#128229; Your export downloads as <code>uprava-vote_session_28-08-26_decisions.json</code> &rarr; save it to <code>Uprava/review/uprava-vote_session_28-08-26_decisions.json</code> (the <code>sheet_id</code> inside the file is <code>uprava-vote_session_28-08-26</code> — that is how a later session knows which sheet these decisions belong to).</div>
+<div class="toolbar">
+  <button class="dl" id="downloadBtn">Download decisions.json</button><button class="dl" id="saveBtn" style="display:none;margin-left:8px">Save to folder…</button>
+  <div class="fsctl" title="text size — persists in this browser"><button type="button" id="fsDown" aria-label="smaller text">A&minus;</button><span class="fsval" id="fsVal"></span><button type="button" id="fsUp" aria-label="larger text">A+</button></div>
+  <div class="filterbar" id="filterbar"><button data-filter="all" class="active">all</button><button data-filter="batch1">&lt;mark class=&quot;hl&quot;&gt;Пачка&lt;/mark&gt; 1 · &lt;mark class=&quot;hl&quot;&gt;однословные&lt;/mark&gt;</button><button data-filter="batch2">&lt;mark class=&quot;hl&quot;&gt;Пачка&lt;/mark&gt; 2 · &lt;mark class=&quot;hl&quot;&gt;брифы&lt;/mark&gt;</button><button data-filter="batch3">&lt;mark class=&quot;hl&quot;&gt;Пачка&lt;/mark&gt; 3 · Top-10</button><button data-filter="unvoted">unvoted only</button></div>
+</div>
+<main id="cards">
+
+  <section class="card" data-id="interlinks-schema-v3" data-filt="batch1">
+    <header><div class="hw">interlinks_edges.tsv: схема v3 (колонка registered) <span class="badge">28-08</span><span class="badge">1 слово</span></div><span class="idchip" title="card id — cite this id back when discussing this card">interlinks-schema-v3</span></header>
+    <div class="question"><mark class="hl">Вариант</mark> «<mark class="hl">да</mark>»: <mark class="hl">добавить</mark> 9-<mark class="hl">ю</mark> <mark class="hl">колонку</mark> registered — <mark class="hl">проверяющий</mark> <mark class="hl">перестанет</mark> <mark class="hl">врать</mark> <mark class="hl">про</mark> <mark class="hl">свежесть</mark>, <mark class="hl">бампы</mark> <mark class="hl">дат</mark> <mark class="hl">верификации</mark> <mark class="hl">станут</mark> <mark class="hl">приземляемыми</mark>; <mark class="hl">цена</mark> — <mark class="hl">касание</mark> <mark class="hl">чекера</mark>, <mark class="hl">бэкфилла</mark> <mark class="hl">и</mark> <mark class="hl">фикстур</mark> (medium-<mark class="hl">работа</mark> <mark class="hl">агента</mark>). <mark class="hl">Вариант</mark> «<mark class="hl">нет</mark>»: <mark class="hl">ноль</mark> <mark class="hl">постройки</mark>, <mark class="hl">но</mark> 103 <mark class="hl">строки</mark> <mark class="hl">до-контракта</mark> <mark class="hl">навсегда</mark> <mark class="hl">показывают</mark> <mark class="hl">ложную</mark> <mark class="hl">свежесть</mark>, <mark class="hl">предупреждения</mark> 35→138 <mark class="hl">остаются</mark>. <mark class="hl">Рекомендация</mark>: <mark class="hl">да</mark>.<br>«<mark class="hl">Иначе</mark>» = <mark class="hl">любое</mark> <mark class="hl">другое</mark> <mark class="hl">решение</mark> — <mark class="hl">обязательно</mark> <mark class="hl">с</mark> <mark class="hl">формулировкой</mark> <mark class="hl">в</mark> <mark class="hl">заметке</mark>.</div>
+    <div class="panel"><h4>Источники</h4><a href="https://github.com/gasyoun/Uprava/blob/main/reports/INTERLINKS_FRESHNESS_SWEEP_28-08-2026.md">INTERLINKS_FRESHNESS_SWEEP_28-08-2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; &lt;mark class=&quot;hl&quot;&gt;Одобрить&lt;/mark&gt;</button>
+      <button class="vote reject" data-vote="reject">&#10060; &lt;mark class=&quot;hl&quot;&gt;Иначе&lt;/mark&gt;</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Иное решение — напишите здесь формулировку"></textarea>
+  </section>
+
+  <section class="card" data-id="github-pro-branch-protection" data-filt="batch1">
+    <header><div class="hw">GitHub Pro для серверного запрета force-push <span class="badge">28-08</span><span class="badge">1 слово</span><span class="badge">$4/мес</span></div><span class="idchip" title="card id — cite this id back when discussing this card">github-pro-branch-protection</span></header>
+    <div class="question">«<mark class="hl">Подключай</mark> Pro» (~$4/<mark class="hl">мес</mark>, PayPal) — <mark class="hl">сразу</mark> <mark class="hl">после</mark> <mark class="hl">слова</mark> branch protection <mark class="hl">на</mark> <mark class="hl">приватном</mark> Uprava <mark class="hl">включается</mark> <mark class="hl">одной</mark> API-<mark class="hl">командой</mark> (allow_force_pushes=false; <mark class="hl">аварийная</mark> <mark class="hl">реставрация</mark> <mark class="hl">снимается</mark> <mark class="hl">владельцем</mark> <mark class="hl">за</mark> 30 <mark class="hl">с</mark>). <mark class="hl">Альтернатива</mark> «watchdog»: <mark class="hl">ветка-свидетель</mark> <mark class="hl">на</mark> <mark class="hl">этом</mark> <mark class="hl">ПК</mark> — <mark class="hl">бесплатно</mark>, <mark class="hl">но</mark> <mark class="hl">реактивно</mark>, <mark class="hl">окно</mark> <mark class="hl">потерь</mark> <mark class="hl">минуты-часы</mark>. «<mark class="hl">Оба</mark>» — <mark class="hl">напишите</mark> <mark class="hl">в</mark> <mark class="hl">заметке</mark>. <mark class="hl">Инцидент</mark> 27-08 (<mark class="hl">перезапись</mark> main) <mark class="hl">стал</mark> <mark class="hl">возможен</mark> <mark class="hl">именно</mark> <mark class="hl">из-за</mark> Free-<mark class="hl">плана</mark>. <mark class="hl">Рекомендация</mark>: Pro.<br>«<mark class="hl">Иначе</mark>» = <mark class="hl">любое</mark> <mark class="hl">другое</mark> <mark class="hl">решение</mark> — <mark class="hl">обязательно</mark> <mark class="hl">с</mark> <mark class="hl">формулировкой</mark> <mark class="hl">в</mark> <mark class="hl">заметке</mark>.</div>
+    <div class="panel"><h4>Источники</h4><a href="https://github.com/gasyoun/Uprava/blob/main/GTD_NEXT_ACTIONS.md">строка GTD Do Today 28-08</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; &lt;mark class=&quot;hl&quot;&gt;Одобрить&lt;/mark&gt;</button>
+      <button class="vote reject" data-vote="reject">&#10060; &lt;mark class=&quot;hl&quot;&gt;Иначе&lt;/mark&gt;</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Иное решение — напишите здесь формулировку"></textarea>
+  </section>
+
+  <section class="card" data-id="oxalpha-status-gate" data-filt="batch1">
+    <header><div class="hw">OxAlpha status-гейт в Systema CI <span class="badge">26-08</span><span class="badge">1 слово</span></div><span class="idchip" title="card id — cite this id back when discussing this card">oxalpha-status-gate</span></header>
+    <div class="question"><mark class="hl">Вариант</mark> <mark class="hl">Б</mark>: PR <mark class="hl">добавляет</mark> job oxalpha-review-gate <mark class="hl">с</mark> required:false, <mark class="hl">две</mark> <mark class="hl">недели</mark> <mark class="hl">обкатки</mark> <mark class="hl">с</mark> <mark class="hl">еженедельным</mark> <mark class="hl">аудитом</mark> <mark class="hl">вердиктов</mark>, <mark class="hl">затем</mark> <mark class="hl">вы</mark> <mark class="hl">сами</mark> <mark class="hl">ставите</mark> <mark class="hl">галку</mark> required (<mark class="hl">откат</mark> — <mark class="hl">снять</mark> <mark class="hl">галку</mark>). <mark class="hl">Вариант</mark> <mark class="hl">А</mark>: <mark class="hl">ничего</mark> <mark class="hl">не</mark> <mark class="hl">менять</mark>, <mark class="hl">ревью</mark> <mark class="hl">остаются</mark> ad-hoc. <mark class="hl">Контракт</mark> <mark class="hl">уже</mark> <mark class="hl">доказал</mark> <mark class="hl">себя</mark> <mark class="hl">на</mark> H3546. <mark class="hl">Рекомендация</mark>: <mark class="hl">Б</mark>.<br>«<mark class="hl">Иначе</mark>» = <mark class="hl">любое</mark> <mark class="hl">другое</mark> <mark class="hl">решение</mark> — <mark class="hl">обязательно</mark> <mark class="hl">с</mark> <mark class="hl">формулировкой</mark> <mark class="hl">в</mark> <mark class="hl">заметке</mark>.</div>
+    <div class="panel"><h4>Источники</h4><a href="https://github.com/gasyoun/Systema-Sanscriticum/blob/main/docs/OXALPHA_STATUS_GATE_DESIGN_2026.md">OXALPHA_STATUS_GATE_DESIGN_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; &lt;mark class=&quot;hl&quot;&gt;Одобрить&lt;/mark&gt;</button>
+      <button class="vote reject" data-vote="reject">&#10060; &lt;mark class=&quot;hl&quot;&gt;Иначе&lt;/mark&gt;</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Иное решение — напишите здесь формулировку"></textarea>
+  </section>
+
+  <section class="card" data-id="karaoke-oauth-scope" data-filt="batch1">
+    <header><div class="hw">SanskritKaraoke: скоуп drive vs Picker API <span class="badge">26-08</span><span class="badge">1 слово</span></div><span class="idchip" title="card id — cite this id back when discussing this card">karaoke-oauth-scope</span></header>
+    <div class="question">«<mark class="hl">Оставляем</mark>»: <mark class="hl">широкий</mark> OAuth-<mark class="hl">скоуп</mark> drive <mark class="hl">остаётся</mark> — <mark class="hl">механическое</mark> <mark class="hl">сужение</mark> <mark class="hl">до</mark> drive.file <mark class="hl">ломает</mark> <mark class="hl">загрузку</mark> <mark class="hl">аудио</mark> <mark class="hl">из</mark> <mark class="hl">общей</mark> <mark class="hl">папки</mark>; <mark class="hl">переезд</mark> <mark class="hl">выбора</mark> <mark class="hl">файлов</mark> <mark class="hl">на</mark> Picker API <mark class="hl">планируется</mark> <mark class="hl">отдельным</mark> <mark class="hl">юнитом</mark> <mark class="hl">после</mark> <mark class="hl">первого</mark> chapter drop (<mark class="hl">нужно</mark> <mark class="hl">ваше</mark> <mark class="hl">разовое</mark> <mark class="hl">включение</mark> Picker API + <mark class="hl">живой</mark> <mark class="hl">тест</mark> <mark class="hl">на</mark> <mark class="hl">экране</mark> 2FA). «<mark class="hl">Мигрируем</mark>»: <mark class="hl">переезд</mark> <mark class="hl">на</mark> Picker API <mark class="hl">сейчас</mark>. <mark class="hl">Рекомендация</mark>: <mark class="hl">оставляем</mark>.<br>«<mark class="hl">Иначе</mark>» = <mark class="hl">любое</mark> <mark class="hl">другое</mark> <mark class="hl">решение</mark> — <mark class="hl">обязательно</mark> <mark class="hl">с</mark> <mark class="hl">формулировкой</mark> <mark class="hl">в</mark> <mark class="hl">заметке</mark>.</div>
+    <div class="panel"><h4>Источники</h4><a href="https://github.com/gasyoun/SanskritKaraoke/blob/main/docs/ROADMAP_SANSKRITKARAOKE_AUDIO_GATE_RESIDUAL_2026H2.md">re-verdict Lane A</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; &lt;mark class=&quot;hl&quot;&gt;Одобрить&lt;/mark&gt;</button>
+      <button class="vote reject" data-vote="reject">&#10060; &lt;mark class=&quot;hl&quot;&gt;Иначе&lt;/mark&gt;</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Иное решение — напишите здесь формулировку"></textarea>
+  </section>
+
+  <section class="card" data-id="h3263-dual-run" data-filt="batch1">
+    <header><div class="hw">H3263 dual-run: минтить сверку или закрыть бесплатно <span class="badge">27-08</span><span class="badge">1 слово</span></div><span class="idchip" title="card id — cite this id back when discussing this card">h3263-dual-run</span></header>
+    <div class="question">«<mark class="hl">Не</mark> <mark class="hl">минтить</mark>»: residual H3263 <mark class="hl">закрывается</mark> <mark class="hl">бесплатно</mark> <mark class="hl">как</mark> override-stands — <mark class="hl">изменение</mark> <mark class="hl">чисто</mark> <mark class="hl">документное</mark>, <mark class="hl">его</mark> acceptance <mark class="hl">уже</mark> <mark class="hl">проверен</mark> (<mark class="hl">заголовок</mark>/<mark class="hl">подпись</mark>/provenance <mark class="hl">на</mark> <mark class="hl">живом</mark> blob). «<mark class="hl">Минтить</mark>»: <mark class="hl">независимый</mark> <mark class="hl">перезапуск</mark> Grok 4.6 <mark class="hl">по</mark> acceptance + <mark class="hl">письменная</mark> <mark class="hl">таблица</mark> <mark class="hl">сверки</mark>, ~15–30 <mark class="hl">мин</mark> <mark class="hl">платного</mark> Grok <mark class="hl">при</mark> <mark class="hl">близкой</mark> <mark class="hl">к</mark> <mark class="hl">нулю</mark> <mark class="hl">информационной</mark> <mark class="hl">ценности</mark>. <mark class="hl">Рекомендация</mark>: <mark class="hl">не</mark> <mark class="hl">минтить</mark>.<br>«<mark class="hl">Иначе</mark>» = <mark class="hl">любое</mark> <mark class="hl">другое</mark> <mark class="hl">решение</mark> — <mark class="hl">обязательно</mark> <mark class="hl">с</mark> <mark class="hl">формулировкой</mark> <mark class="hl">в</mark> <mark class="hl">заметке</mark>.</div>
+    <div class="panel"><h4>Источники</h4><a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3263-Grok_SanskritKaraoke_harness-gap-analysis-doc_21.08.26.md">H3263 (архив)</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; &lt;mark class=&quot;hl&quot;&gt;Одобрить&lt;/mark&gt;</button>
+      <button class="vote reject" data-vote="reject">&#10060; &lt;mark class=&quot;hl&quot;&gt;Иначе&lt;/mark&gt;</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Иное решение — напишите здесь формулировку"></textarea>
+  </section>
+
+  <section class="card" data-id="scenario2-email-link" data-filt="batch1">
+    <header><div class="hw">Кабинет: сценарий 2 (email-привязка) — включать ли <span class="badge">28-08</span><span class="badge">1 слово</span></div><span class="idchip" title="card id — cite this id back when discussing this card">scenario2-email-link</span></header>
+    <div class="question">«<mark class="hl">Пока</mark> <mark class="hl">не</mark> <mark class="hl">включать</mark>»: TELEGRAM_CABINET_EMAIL_LINK <mark class="hl">остаётся</mark> OFF — <mark class="hl">размен</mark> «<mark class="hl">знает</mark> email = <mark class="hl">получит</mark> <mark class="hl">доступ</mark>» <mark class="hl">сильнее</mark> <mark class="hl">разрешённой</mark> <mark class="hl">самопроверки</mark> <mark class="hl">входа</mark>; <mark class="hl">решение</mark> <mark class="hl">вернётся</mark> <mark class="hl">по</mark> <mark class="hl">данным</mark> <mark class="hl">волны</mark> H3499. «<mark class="hl">Включать</mark>»: email-<mark class="hl">привязка</mark> <mark class="hl">кабинета</mark> <mark class="hl">включается</mark> <mark class="hl">сейчас</mark> (<mark class="hl">сценарий</mark> 1 — <mark class="hl">вход</mark> <mark class="hl">по</mark> Telegram — <mark class="hl">уже</mark> <mark class="hl">жив</mark> <mark class="hl">с</mark> 28-08). <mark class="hl">Рекомендация</mark>: <mark class="hl">пока</mark> <mark class="hl">не</mark> <mark class="hl">включать</mark>.<br>«<mark class="hl">Иначе</mark>» = <mark class="hl">любое</mark> <mark class="hl">другое</mark> <mark class="hl">решение</mark> — <mark class="hl">обязательно</mark> <mark class="hl">с</mark> <mark class="hl">формулировкой</mark> <mark class="hl">в</mark> <mark class="hl">заметке</mark>.</div>
+    <div class="panel"><h4>Источники</h4><a href="https://github.com/gasyoun/Systema-Sanscriticum/blob/main/docs/RUNBOOK_TELEGRAM_CABINET_LOGIN_2026-08-28.md">RUNBOOK_TELEGRAM_CABINET_LOGIN_2026-08-28.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; &lt;mark class=&quot;hl&quot;&gt;Одобрить&lt;/mark&gt;</button>
+      <button class="vote reject" data-vote="reject">&#10060; &lt;mark class=&quot;hl&quot;&gt;Иначе&lt;/mark&gt;</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Иное решение — напишите здесь формулировку"></textarea>
+  </section>
+
+  <section class="card" data-id="dup-suffix-gate" data-filt="batch1">
+    <header><div class="hw">Corpus-гейт dup-suffix: advisory или чинить <span class="badge">28-08</span><span class="badge">1 слово</span></div><span class="idchip" title="card id — cite this id back when discussing this card">dup-suffix-gate</span></header>
+    <div class="question">«Advisory»: <mark class="hl">снимаем</mark> strict-<mark class="hl">режим</mark> dup_suffix_report.py <mark class="hl">в</mark> <mark class="hl">гейте</mark> — <mark class="hl">гейт</mark> <mark class="hl">становится</mark> <mark class="hl">зелёным</mark>, 47 <mark class="hl">нарушений</mark> (<mark class="hl">сплиттер</mark> <mark class="hl">ходил</mark> <mark class="hl">по</mark> <mark class="hl">одному</mark> <mark class="hl">пассажу</mark> <mark class="hl">многократно</mark>) <mark class="hl">остаются</mark> <mark class="hl">в</mark> <mark class="hl">отчёте</mark> <mark class="hl">как</mark> <mark class="hl">известные</mark>. «<mark class="hl">Чинить</mark>»: <mark class="hl">заводим</mark> <mark class="hl">хендофф</mark> <mark class="hl">на</mark> data-splitter <mark class="hl">фикс</mark> (medium-hard, <mark class="hl">исправит</mark> <mark class="hl">сами</mark> <mark class="hl">раны</mark>). <mark class="hl">Гейт</mark> <mark class="hl">фактически</mark> advisory <mark class="hl">уже</mark> <mark class="hl">две</mark> <mark class="hl">недели</mark> — <mark class="hl">каждый</mark> <mark class="hl">релиз</mark> <mark class="hl">садился</mark> <mark class="hl">с</mark> <mark class="hl">ним</mark> <mark class="hl">красным</mark>. <mark class="hl">Рекомендация</mark>: advisory.<br>«<mark class="hl">Иначе</mark>» = <mark class="hl">любое</mark> <mark class="hl">другое</mark> <mark class="hl">решение</mark> — <mark class="hl">обязательно</mark> <mark class="hl">с</mark> <mark class="hl">формулировкой</mark> <mark class="hl">в</mark> <mark class="hl">заметке</mark>.</div>
+    <div class="panel"><h4>Источники</h4><a href="https://github.com/gasyoun/SamudraManthanam/blob/main/docs/reviews/OXALPHA_RETROSPECTIVE_CODE_REVIEW_26-08-2026.md">evidence report «Known-inherited red»</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; &lt;mark class=&quot;hl&quot;&gt;Одобрить&lt;/mark&gt;</button>
+      <button class="vote reject" data-vote="reject">&#10060; &lt;mark class=&quot;hl&quot;&gt;Иначе&lt;/mark&gt;</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Иное решение — напишите здесь формулировку"></textarea>
+  </section>
+
+  <section class="card" data-id="h3613-stage-b" data-filt="batch1">
+    <header><div class="hw">H3613 stage B: разбирать 896 Grok-сессий? <span class="badge">28-08</span><span class="badge">стоимость</span></div><span class="idchip" title="card id — cite this id back when discussing this card">h3613-stage-b</span></header>
+    <div class="question">«<mark class="hl">Запускать</mark>»: <mark class="hl">платный</mark> <mark class="hl">проход</mark> OxAlpha <mark class="hl">по</mark> stage B — 896 Grok-<mark class="hl">сессий</mark> (~7.7 GB) <mark class="hl">батчами</mark> <mark class="hl">по</mark> ~15, <mark class="hl">подлинные</mark> <mark class="hl">находки</mark> — <mark class="hl">строками</mark> <mark class="hl">в</mark> FINDINGS/GTD. «<mark class="hl">Не</mark> <mark class="hl">запускать</mark>»: <mark class="hl">остановиться</mark> <mark class="hl">на</mark> 104 <mark class="hl">разобранных</mark> Codex-<mark class="hl">кандидатах</mark>; suspected-<mark class="hl">ценные</mark> <mark class="hl">темы</mark> (homework-submission, MW diachronic layers, GTD waiting-times) <mark class="hl">остаются</mark> <mark class="hl">непроверенными</mark>. OxAlpha <mark class="hl">теперь</mark> <mark class="hl">платный</mark> — <mark class="hl">стоимость</mark> <mark class="hl">на</mark> <mark class="hl">вас</mark>. <mark class="hl">Рекомендация</mark>: <mark class="hl">не</mark> <mark class="hl">запускать</mark> <mark class="hl">сейчас</mark>.<br>«<mark class="hl">Иначе</mark>» = <mark class="hl">любое</mark> <mark class="hl">другое</mark> <mark class="hl">решение</mark> — <mark class="hl">обязательно</mark> <mark class="hl">с</mark> <mark class="hl">формулировкой</mark> <mark class="hl">в</mark> <mark class="hl">заметке</mark>.</div>
+    <div class="panel"><h4>Источники</h4><a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3613-OxAlpha_Uprava_h3598-candidates-adjudication_28.08.26.md">H3613 (архив)</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; &lt;mark class=&quot;hl&quot;&gt;Одобрить&lt;/mark&gt;</button>
+      <button class="vote reject" data-vote="reject">&#10060; &lt;mark class=&quot;hl&quot;&gt;Иначе&lt;/mark&gt;</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Иное решение — напишите здесь формулировку"></textarea>
+  </section>
+
+  <section class="card" data-id="tg-channel-rename" data-filt="batch1">
+    <header><div class="hw">Переименование TG-канала <span class="badge">24-08</span><span class="badge">1 слово</span></div><span class="idchip" title="card id — cite this id back when discussing this card">tg-channel-rename</span></header>
+    <div class="question">«<mark class="hl">Да</mark>»: <mark class="hl">канал</mark> <mark class="hl">в</mark> [t.me/samskrte](https://t.me/s/samskrte) <mark class="hl">переименовать</mark> <mark class="hl">в</mark> «<mark class="hl">Санскритяне</mark> / <mark class="hl">курсы</mark> <mark class="hl">санскрита</mark> <mark class="hl">и</mark> <mark class="hl">хинди</mark>» (<mark class="hl">формула</mark> <mark class="hl">бренд</mark> / <mark class="hl">что</mark> <mark class="hl">даём</mark> <mark class="hl">из</mark> OKARUTO teardown <mark class="hl">ч</mark>.3). «<mark class="hl">Нет</mark>»: <mark class="hl">остаётся</mark> «<mark class="hl">ОПОВЕЩЕНИЯ</mark> <mark class="hl">САНСКРИТЯН</mark>». <mark class="hl">Своя</mark> <mark class="hl">формула</mark> — <mark class="hl">напишите</mark> <mark class="hl">в</mark> <mark class="hl">заметке</mark>. <mark class="hl">Рекомендация</mark>: <mark class="hl">да</mark>.<br>«<mark class="hl">Иначе</mark>» = <mark class="hl">любое</mark> <mark class="hl">другое</mark> <mark class="hl">решение</mark> — <mark class="hl">обязательно</mark> <mark class="hl">с</mark> <mark class="hl">формулировкой</mark> <mark class="hl">в</mark> <mark class="hl">заметке</mark>.</div>
+    <div class="panel"><h4>Источники</h4><a href="https://github.com/gasyoun/Uprava/blob/main/custdev/COMPETITOR_TEARDOWN_OKARUTO_FUNNEL_2026.md">OKARUTO teardown ч.3</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; &lt;mark class=&quot;hl&quot;&gt;Одобрить&lt;/mark&gt;</button>
+      <button class="vote reject" data-vote="reject">&#10060; &lt;mark class=&quot;hl&quot;&gt;Иначе&lt;/mark&gt;</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Иное решение — напишите здесь формулировку"></textarea>
+  </section>
+
+  <section class="card" data-id="ssb-brand" data-filt="batch2">
+    <header><div class="hw">SSB: имя бенчмарка <span class="badge">25-08</span><span class="badge">бриф</span></div><span class="idchip" title="card id — cite this id back when discussing this card">ssb-brand</span></header>
+    <div class="question"><mark class="hl">Ратифицировать</mark> <mark class="hl">имя</mark> SanskritScienceBench <mark class="hl">сейчас</mark>, <mark class="hl">до</mark> <mark class="hl">старта</mark> <mark class="hl">пилота</mark> W1: <mark class="hl">переименование</mark> <mark class="hl">после</mark> W1 — breaking-<mark class="hl">миграция</mark> <mark class="hl">вместо</mark> <mark class="hl">свипа</mark> <mark class="hl">меньше</mark> <mark class="hl">часа</mark> <mark class="hl">сейчас</mark>. <mark class="hl">Отклонение</mark> = <mark class="hl">выбрать</mark> IndologyBench/SaṃskṛtaBench <mark class="hl">или</mark> <mark class="hl">свою</mark> <mark class="hl">форму</mark> (<mark class="hl">заметка</mark>). <mark class="hl">Рекомендация</mark> <mark class="hl">брифа</mark>: <mark class="hl">ратифицировать</mark> <mark class="hl">дефолт</mark> <mark class="hl">сейчас</mark> (medium-high).<br>«<mark class="hl">Иначе</mark>» = <mark class="hl">любое</mark> <mark class="hl">другое</mark> <mark class="hl">решение</mark> — <mark class="hl">обязательно</mark> <mark class="hl">с</mark> <mark class="hl">формулировкой</mark> <mark class="hl">в</mark> <mark class="hl">заметке</mark>.</div>
+    <div class="panel"><h4>Источники</h4><a href="https://github.com/gasyoun/Uprava/blob/main/decide_briefs/DECIDE_BRIEF_ssb-brand-name-ruling_25-08-2026.md">DECIDE_BRIEF_ssb-brand-name-ruling_25-08-2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; &lt;mark class=&quot;hl&quot;&gt;Одобрить&lt;/mark&gt;</button>
+      <button class="vote reject" data-vote="reject">&#10060; &lt;mark class=&quot;hl&quot;&gt;Иначе&lt;/mark&gt;</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Иное решение — напишите здесь формулировку"></textarea>
+  </section>
+
+  <section class="card" data-id="goal-loop-adoption" data-filt="batch2">
+    <header><div class="hw">Goal-loop: реестр vs три петли <span class="badge">21-08</span><span class="badge">бриф</span></div><span class="idchip" title="card id — cite this id back when discussing this card">goal-loop-adoption</span></header>
+    <div class="question"><mark class="hl">Вариант</mark> A-registry: <mark class="hl">цель</mark> <mark class="hl">входит</mark> <mark class="hl">в</mark> <mark class="hl">реестр</mark> <mark class="hl">целей</mark> (GOALS registry) — <mark class="hl">рекомендация</mark> <mark class="hl">брифа</mark> (medium-high). <mark class="hl">Вариант</mark> B-three-loops: <mark class="hl">три</mark> <mark class="hl">реальных</mark> <mark class="hl">петли</mark> <mark class="hl">вместо</mark> <mark class="hl">реестра</mark>. <mark class="hl">Агент</mark> <mark class="hl">сам</mark> <mark class="hl">выбирать</mark> <mark class="hl">не</mark> <mark class="hl">может</mark>.<br>«<mark class="hl">Иначе</mark>» = <mark class="hl">любое</mark> <mark class="hl">другое</mark> <mark class="hl">решение</mark> — <mark class="hl">обязательно</mark> <mark class="hl">с</mark> <mark class="hl">формулировкой</mark> <mark class="hl">в</mark> <mark class="hl">заметке</mark>.</div>
+    <div class="panel"><h4>Источники</h4><a href="https://github.com/gasyoun/Uprava/blob/main/decide_briefs/DECIDE_BRIEF_goal-loop-adoption-registry-vs-three-loops_21-08-2026.md">DECIDE_BRIEF_goal-loop-adoption-registry-vs-three-loops_21-08-2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; &lt;mark class=&quot;hl&quot;&gt;Одобрить&lt;/mark&gt;</button>
+      <button class="vote reject" data-vote="reject">&#10060; &lt;mark class=&quot;hl&quot;&gt;Иначе&lt;/mark&gt;</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Иное решение — напишите здесь формулировку"></textarea>
+  </section>
+
+  <section class="card" data-id="retire-dead-decides" data-filt="batch2">
+    <header><div class="hw">Ретайр 53 мёртвых @DECIDE <span class="badge">26-08</span><span class="badge">1 слово</span></div><span class="idchip" title="card id — cite this id back when discussing this card">retire-dead-decides</span></header>
+    <div class="question"><mark class="hl">Одобрить</mark> <mark class="hl">ретайр</mark> 53 <mark class="hl">мёртвых</mark> @DECIDE-<mark class="hl">строк</mark> (<mark class="hl">все</mark> <mark class="hl">ссылаются</mark> <mark class="hl">только</mark> <mark class="hl">на</mark> <mark class="hl">уже</mark> <mark class="hl">исполненные</mark> <mark class="hl">хендоффы</mark>, <mark class="hl">классификация</mark> H1341): <mark class="hl">одобрение</mark> = <mark class="hl">строки</mark> <mark class="hl">архивируются</mark>, GTD <mark class="hl">худеет</mark>; <mark class="hl">отказ</mark> = <mark class="hl">хаб</mark> <mark class="hl">продолжает</mark> <mark class="hl">нести</mark> <mark class="hl">мёртвый</mark> <mark class="hl">вес</mark> <mark class="hl">и</mark> <mark class="hl">большинство</mark> <mark class="hl">в</mark> <mark class="hl">нём</mark> <mark class="hl">читается</mark> <mark class="hl">как</mark> <mark class="hl">живое</mark>. <mark class="hl">Рекомендация</mark>: <mark class="hl">одобрить</mark>.<br>«<mark class="hl">Иначе</mark>» = <mark class="hl">любое</mark> <mark class="hl">другое</mark> <mark class="hl">решение</mark> — <mark class="hl">обязательно</mark> <mark class="hl">с</mark> <mark class="hl">формулировкой</mark> <mark class="hl">в</mark> <mark class="hl">заметке</mark>.</div>
+    <div class="panel"><h4>Источники</h4><a href="https://github.com/gasyoun/Uprava/blob/main/GTD_NEXT_ACTIONS.md">GTD (H3403 resume)</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; &lt;mark class=&quot;hl&quot;&gt;Одобрить&lt;/mark&gt;</button>
+      <button class="vote reject" data-vote="reject">&#10060; &lt;mark class=&quot;hl&quot;&gt;Иначе&lt;/mark&gt;</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Иное решение — напишите здесь формулировку"></textarea>
+  </section>
+
+  <section class="card" data-id="top10-membership-ladder" data-filt="batch3">
+    <header><div class="hw">Top-10 #10 — ланч-лестница членства <span class="badge">бриф</span></div><span class="idchip" title="card id — cite this id back when discussing this card">top10-membership-ladder</span></header>
+    <div class="question"><mark class="hl">Подтвердить</mark> <mark class="hl">ланч-лестницу</mark> <mark class="hl">членства</mark> — <mark class="hl">публичный</mark> <mark class="hl">запуск</mark> 28-08 (<mark class="hl">сегодня</mark>) <mark class="hl">без</mark> <mark class="hl">неё</mark> <mark class="hl">не</mark> <mark class="hl">открывается</mark>. <mark class="hl">Одобрить</mark> = <mark class="hl">принять</mark> <mark class="hl">рекомендацию</mark> <mark class="hl">брифа</mark>; <mark class="hl">иначе</mark> — <mark class="hl">сформулируйте</mark> <mark class="hl">в</mark> <mark class="hl">заметке</mark>.<br><a href="https://github.com/gasyoun/Uprava/blob/main/decide_briefs/README.md">Бриф (~5–10 мин чтения)</a></div>
+    <div class="panel"><h4>Источники</h4><a href="https://github.com/gasyoun/Uprava/blob/main/decide_briefs/README.md">бриф в decide_briefs/</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; &lt;mark class=&quot;hl&quot;&gt;Одобрить&lt;/mark&gt;</button>
+      <button class="vote reject" data-vote="reject">&#10060; &lt;mark class=&quot;hl&quot;&gt;Иначе&lt;/mark&gt;</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Иное решение — напишите здесь формулировку"></textarea>
+  </section>
+
+  <section class="card" data-id="top10-calendar-host" data-filt="batch3">
+    <header><div class="hw">Top-10 #9 — хост осеннего календаря <span class="badge">бриф</span></div><span class="idchip" title="card id — cite this id back when discussing this card">top10-calendar-host</span></header>
+    <div class="question"><mark class="hl">Выбрать</mark> <mark class="hl">хост</mark> <mark class="hl">страницы</mark> <mark class="hl">осеннего</mark> <mark class="hl">календаря</mark> — <mark class="hl">без</mark> <mark class="hl">одной</mark> <mark class="hl">каноничной</mark> <mark class="hl">страницы</mark> <mark class="hl">анонс</mark> <mark class="hl">запуска</mark> <mark class="hl">ведёт</mark> <mark class="hl">в</mark> <mark class="hl">пустоту</mark>. <mark class="hl">Одобрить</mark> = <mark class="hl">принять</mark> <mark class="hl">рекомендацию</mark> <mark class="hl">брифа</mark>; <mark class="hl">иначе</mark> — <mark class="hl">сформулируйте</mark> <mark class="hl">в</mark> <mark class="hl">заметке</mark>.<br><a href="https://github.com/gasyoun/Uprava/blob/main/decide_briefs/README.md">Бриф (~5–10 мин чтения)</a></div>
+    <div class="panel"><h4>Источники</h4><a href="https://github.com/gasyoun/Uprava/blob/main/decide_briefs/README.md">бриф в decide_briefs/</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; &lt;mark class=&quot;hl&quot;&gt;Одобрить&lt;/mark&gt;</button>
+      <button class="vote reject" data-vote="reject">&#10060; &lt;mark class=&quot;hl&quot;&gt;Иначе&lt;/mark&gt;</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Иное решение — напишите здесь формулировку"></textarea>
+  </section>
+
+  <section class="card" data-id="top10-scholar-price" data-filt="batch3">
+    <header><div class="hw">Top-10 #4 — цена scholar-тира <span class="badge">бриф</span></div><span class="idchip" title="card id — cite this id back when discussing this card">top10-scholar-price</span></header>
+    <div class="question"><mark class="hl">Назначить</mark> <mark class="hl">цену</mark> scholar-<mark class="hl">тира</mark> — <mark class="hl">отделит</mark> research-<mark class="hl">инструмент</mark> <mark class="hl">от</mark> <mark class="hl">клубного</mark> <mark class="hl">оффера</mark> ₽1 500. <mark class="hl">Одобрить</mark> = <mark class="hl">принять</mark> <mark class="hl">рекомендацию</mark> <mark class="hl">брифа</mark>; <mark class="hl">иначе</mark> — <mark class="hl">сформулируйте</mark> <mark class="hl">в</mark> <mark class="hl">заметке</mark>.<br><a href="https://github.com/gasyoun/Uprava/blob/main/decide_briefs/README.md">Бриф (~5–10 мин чтения)</a></div>
+    <div class="panel"><h4>Источники</h4><a href="https://github.com/gasyoun/Uprava/blob/main/decide_briefs/README.md">бриф в decide_briefs/</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; &lt;mark class=&quot;hl&quot;&gt;Одобрить&lt;/mark&gt;</button>
+      <button class="vote reject" data-vote="reject">&#10060; &lt;mark class=&quot;hl&quot;&gt;Иначе&lt;/mark&gt;</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Иное решение — напишите здесь формулировку"></textarea>
+  </section>
+
+  <section class="card" data-id="top10-ins-instr" data-filt="batch3">
+    <header><div class="hw">Top-10 #1 — Ins. или Instr. <span class="badge">бриф</span></div><span class="idchip" title="card id — cite this id back when discussing this card">top10-ins-instr</span></header>
+    <div class="question"><mark class="hl">Выбрать</mark> <mark class="hl">каноничный</mark> <mark class="hl">латинский</mark> <mark class="hl">ярлык</mark> <mark class="hl">творительного</mark> <mark class="hl">падежа</mark> — <mark class="hl">влияет</mark> <mark class="hl">на</mark> 1 071 <mark class="hl">замену</mark> <mark class="hl">в</mark> 72 <mark class="hl">записях</mark>. <mark class="hl">Одобрить</mark> = <mark class="hl">принять</mark> <mark class="hl">рекомендацию</mark> <mark class="hl">брифа</mark>; <mark class="hl">иначе</mark> — <mark class="hl">сформулируйте</mark> <mark class="hl">в</mark> <mark class="hl">заметке</mark>.<br><a href="https://github.com/gasyoun/Uprava/blob/main/decide_briefs/DECIDE_BRIEF_nkrya-rubric-declension-reimplement_21-07-2026.md">Бриф (~5–10 мин чтения)</a></div>
+    <div class="panel"><h4>Источники</h4><a href="https://github.com/gasyoun/Uprava/blob/main/decide_briefs/DECIDE_BRIEF_nkrya-rubric-declension-reimplement_21-07-2026.md">бриф в decide_briefs/</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; &lt;mark class=&quot;hl&quot;&gt;Одобрить&lt;/mark&gt;</button>
+      <button class="vote reject" data-vote="reject">&#10060; &lt;mark class=&quot;hl&quot;&gt;Иначе&lt;/mark&gt;</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Иное решение — напишите здесь формулировку"></textarea>
+  </section>
+
+  <section class="card" data-id="top10-kochergina-store" data-filt="batch3">
+    <header><div class="hw">Top-10 #6 — стор правок Кочергиной <span class="badge">бриф</span></div><span class="idchip" title="card id — cite this id back when discussing this card">top10-kochergina-store</span></header>
+    <div class="question"><mark class="hl">Определить</mark>, <mark class="hl">где</mark> <mark class="hl">живёт</mark> <mark class="hl">стор</mark> <mark class="hl">одобренных</mark> <mark class="hl">правок</mark> <mark class="hl">Кочергиной</mark> — <mark class="hl">без</mark> <mark class="hl">владельца</mark> <mark class="hl">правки</mark> <mark class="hl">нельзя</mark> <mark class="hl">применить</mark> <mark class="hl">безопасно</mark>. <mark class="hl">Одобрить</mark> = <mark class="hl">принять</mark> <mark class="hl">рекомендацию</mark> <mark class="hl">брифа</mark>; <mark class="hl">иначе</mark> — <mark class="hl">сформулируйте</mark> <mark class="hl">в</mark> <mark class="hl">заметке</mark>.<br><a href="https://github.com/gasyoun/Uprava/blob/main/decide_briefs/README.md">Бриф (~5–10 мин чтения)</a></div>
+    <div class="panel"><h4>Источники</h4><a href="https://github.com/gasyoun/Uprava/blob/main/decide_briefs/README.md">бриф в decide_briefs/</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; &lt;mark class=&quot;hl&quot;&gt;Одобрить&lt;/mark&gt;</button>
+      <button class="vote reject" data-vote="reject">&#10060; &lt;mark class=&quot;hl&quot;&gt;Иначе&lt;/mark&gt;</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Иное решение — напишите здесь формулировку"></textarea>
+  </section>
+
+  <section class="card" data-id="top10-glossary-reviewer" data-filt="batch3">
+    <header><div class="hw">Top-10 #5 — кто ревьюит глоссарий <span class="badge">бриф</span></div><span class="idchip" title="card id — cite this id back when discussing this card">top10-glossary-reviewer</span></header>
+    <div class="question"><mark class="hl">Выбрать</mark>, <mark class="hl">кто</mark> <mark class="hl">вычитывает</mark> <mark class="hl">глоссарий</mark> <mark class="hl">живых</mark> <mark class="hl">занятий</mark>: <mark class="hl">ассистент</mark> ₽600/<mark class="hl">ч</mark> → ₽10 520 <mark class="hl">или</mark> <mark class="hl">лично</mark> → ₽41 600. <mark class="hl">Одобрить</mark> = <mark class="hl">принять</mark> <mark class="hl">рекомендацию</mark> <mark class="hl">брифа</mark>; <mark class="hl">иначе</mark> — <mark class="hl">сформулируйте</mark> <mark class="hl">в</mark> <mark class="hl">заметке</mark>.<br><a href="https://github.com/gasyoun/Uprava/blob/main/decide_briefs/README.md">Бриф (~5–10 мин чтения)</a></div>
+    <div class="panel"><h4>Источники</h4><a href="https://github.com/gasyoun/Uprava/blob/main/decide_briefs/README.md">бриф в decide_briefs/</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; &lt;mark class=&quot;hl&quot;&gt;Одобрить&lt;/mark&gt;</button>
+      <button class="vote reject" data-vote="reject">&#10060; &lt;mark class=&quot;hl&quot;&gt;Иначе&lt;/mark&gt;</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Иное решение — напишите здесь формулировку"></textarea>
+  </section>
+
+  <section class="card" data-id="top10-ab-rerun" data-filt="batch3">
+    <header><div class="hw">Top-10 #2 — платный повтор A/B (40 карт) <span class="badge">бриф</span></div><span class="idchip" title="card id — cite this id back when discussing this card">top10-ab-rerun</span></header>
+    <div class="question"><mark class="hl">Авторизовать</mark> <mark class="hl">или</mark> <mark class="hl">закрыть</mark> <mark class="hl">платный</mark> 40-<mark class="hl">карточный</mark> A/B <mark class="hl">повтор</mark> — <mark class="hl">прежний</mark> <mark class="hl">слепой</mark> <mark class="hl">срез</mark> <mark class="hl">невоспроизводим</mark> (<mark class="hl">входы</mark> <mark class="hl">удалены</mark>). <mark class="hl">Одобрить</mark> = <mark class="hl">принять</mark> <mark class="hl">рекомендацию</mark> <mark class="hl">брифа</mark>; <mark class="hl">иначе</mark> — <mark class="hl">сформулируйте</mark> <mark class="hl">в</mark> <mark class="hl">заметке</mark>.<br><a href="https://github.com/gasyoun/Uprava/blob/main/decide_briefs/README.md">Бриф (~5–10 мин чтения)</a></div>
+    <div class="panel"><h4>Источники</h4><a href="https://github.com/gasyoun/Uprava/blob/main/decide_briefs/README.md">бриф в decide_briefs/</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; &lt;mark class=&quot;hl&quot;&gt;Одобрить&lt;/mark&gt;</button>
+      <button class="vote reject" data-vote="reject">&#10060; &lt;mark class=&quot;hl&quot;&gt;Иначе&lt;/mark&gt;</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Иное решение — напишите здесь формулировку"></textarea>
+  </section>
+
+  <section class="card" data-id="top10-backfill-channel" data-filt="batch3">
+    <header><div class="hw">Top-10 #3 — канал backfill терминов 2025 <span class="badge">бриф</span></div><span class="idchip" title="card id — cite this id back when discussing this card">top10-backfill-channel</span></header>
+    <div class="question"><mark class="hl">Выбрать</mark> <mark class="hl">канал</mark> <mark class="hl">возврата</mark> 15–20 <mark class="hl">терминов</mark> 2025, <mark class="hl">добавленных</mark> <mark class="hl">прямо</mark> <mark class="hl">в</mark> <mark class="hl">вёрстку</mark> — <mark class="hl">блокирует</mark> <mark class="hl">печатные</mark> <mark class="hl">стадии</mark> 3–4 RussianRamayana. <mark class="hl">Одобрить</mark> = <mark class="hl">принять</mark> <mark class="hl">рекомендацию</mark> <mark class="hl">брифа</mark>; <mark class="hl">иначе</mark> — <mark class="hl">сформулируйте</mark> <mark class="hl">в</mark> <mark class="hl">заметке</mark>.<br><a href="https://github.com/gasyoun/Uprava/blob/main/decide_briefs/README.md">Бриф (~5–10 мин чтения)</a></div>
+    <div class="panel"><h4>Источники</h4><a href="https://github.com/gasyoun/Uprava/blob/main/decide_briefs/README.md">бриф в decide_briefs/</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; &lt;mark class=&quot;hl&quot;&gt;Одобрить&lt;/mark&gt;</button>
+      <button class="vote reject" data-vote="reject">&#10060; &lt;mark class=&quot;hl&quot;&gt;Иначе&lt;/mark&gt;</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Иное решение — напишите здесь формулировку"></textarea>
+  </section>
+
+  <section class="card" data-id="top10-teacher-nav" data-filt="batch3">
+    <header><div class="hw">Top-10 #7 — пункты навигации преподавателя <span class="badge">бриф</span></div><span class="idchip" title="card id — cite this id back when discussing this card">top10-teacher-nav</span></header>
+    <div class="question"><mark class="hl">Отметить</mark>, <mark class="hl">какие</mark> <mark class="hl">пункты</mark> <mark class="hl">убрать</mark> <mark class="hl">из</mark> <mark class="hl">группы</mark> «<mark class="hl">Обучение</mark>» <mark class="hl">у</mark> <mark class="hl">преподавателя</mark> — <mark class="hl">блокирует</mark> <mark class="hl">измеренную</mark> <mark class="hl">чистку</mark>. <mark class="hl">Одобрить</mark> = <mark class="hl">принять</mark> <mark class="hl">рекомендацию</mark> <mark class="hl">брифа</mark>; <mark class="hl">иначе</mark> — <mark class="hl">сформулируйте</mark> <mark class="hl">в</mark> <mark class="hl">заметке</mark>.<br><a href="https://github.com/gasyoun/Systema-Sanscriticum/issues/1568">Бриф (~5–10 мин чтения)</a></div>
+    <div class="panel"><h4>Источники</h4><a href="https://github.com/gasyoun/Systema-Sanscriticum/issues/1568">бриф в decide_briefs/</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; &lt;mark class=&quot;hl&quot;&gt;Одобрить&lt;/mark&gt;</button>
+      <button class="vote reject" data-vote="reject">&#10060; &lt;mark class=&quot;hl&quot;&gt;Иначе&lt;/mark&gt;</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="Иное решение — напишите здесь формулировку"></textarea>
+  </section>
+</main>
+<footer class="hint"><mark class="hl">Одобрить</mark> = <mark class="hl">принять</mark> <mark class="hl">рекомендацию</mark> <mark class="hl">карточки</mark> · <mark class="hl">Иначе</mark> = <mark class="hl">другое</mark> <mark class="hl">решение</mark> (<mark class="hl">обязательно</mark> <mark class="hl">с</mark> <mark class="hl">формулировкой</mark> <mark class="hl">в</mark> <mark class="hl">заметке</mark>) · <mark class="hl">Отложить</mark> = <mark class="hl">вернуться</mark> <mark class="hl">позже</mark>. <mark class="hl">Заметка</mark> <mark class="hl">без</mark> <mark class="hl">отклонения</mark> = <mark class="hl">уточнение</mark> <mark class="hl">к</mark> <mark class="hl">одобрению</mark>. Keyboard: <kbd>a</kbd> <mark class="hl">Одобрить</mark> &middot; <kbd>r</kbd> <mark class="hl">Иначе</mark>
+  &middot; <kbd>d</kbd> defer &middot; <kbd>&darr;</kbd>/<kbd>&uarr;</kbd> next/prev. Votes autosave to
+  this browser's localStorage; click "Download decisions.json" when done (unvoted items export with
+  decision:null).</footer>
+<div class="legend" style="max-width:980px;margin:0 auto 20px;padding:0 20px;color:var(--muted);font-size:12px">
+  <b>Approve</b> = accept the proposed change/answer shown on the card (no separate "approve as-is" —
+  approving means agreeing as written). <b>Reject</b> = keep the current entry/answer unchanged.
+  <b>Defer</b> = not sure yet, decide later. The note field is for requesting a partial tweak instead
+  of an outright reject.
+</div>
+<script>
+(function () {
+  var SHEET_ID = "uprava-vote_session_28-08-26";
+  var STORE_KEY = 'review-sheet:' + SHEET_ID;
+  var ids = ["interlinks-schema-v3", "github-pro-branch-protection", "oxalpha-status-gate", "karaoke-oauth-scope", "h3263-dual-run", "scenario2-email-link", "dup-suffix-gate", "h3613-stage-b", "tg-channel-rename", "ssb-brand", "goal-loop-adoption", "retire-dead-decides", "top10-membership-ladder", "top10-calendar-host", "top10-scholar-price", "top10-ins-instr", "top10-kochergina-store", "top10-glossary-reviewer", "top10-ab-rerun", "top10-backfill-channel", "top10-teacher-nav"];
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(STORE_KEY) || '{}') || {}; } catch (e) { state = {}; }
+  function tally() {
+    var c = { approve:0, reject:0, defer:0 };
+    ids.forEach(function (id) { var v = state[id] && state[id].decision; if (v && c.hasOwnProperty(v)) c[v]++; });
+    document.getElementById('c-approve').textContent = c.approve;
+    document.getElementById('c-reject').textContent = c.reject;
+    document.getElementById('c-defer').textContent = c.defer;
+    document.getElementById('c-unvoted').textContent = ids.length - c.approve - c.reject - c.defer;
+  }
+  function applyCardUI(card) {
+    var id = card.getAttribute('data-id'); var rec = state[id] || {};
+    card.classList.remove('voted-approve','voted-reject','voted-defer');
+    card.querySelectorAll('button.vote').forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-vote') === rec.decision); });
+    card.querySelector('.vote-state').textContent = rec.decision ? rec.decision : 'unvoted';
+    if (rec.decision) card.classList.add('voted-' + rec.decision);
+    var ta = card.querySelector('textarea.note'); if (rec.note && !ta.value) ta.value = rec.note;
+  }
+  function save() { localStorage.setItem(STORE_KEY, JSON.stringify(state)); tally(); }
+  // H1523 residual / csl-pyutil#1 Part 1: always re-read the live textarea on vote
+  // and before export so a second vote click (or a missed `input` event) cannot
+  // drop a note that is still visible in the card.
+  function syncNoteFromDom(id) {
+    state[id] = state[id] || {};
+    var card = document.querySelector('.card[data-id="' + id + '"]');
+    if (!card) return;
+    var ta = card.querySelector('textarea.note');
+    if (ta) state[id].note = ta.value;
+  }
+  function vote(id, d) { syncNoteFromDom(id); state[id].decision = d; save(); }
+  function noteChange(id, t) { state[id] = state[id] || {}; state[id].note = t; save(); }
+  document.querySelectorAll('.card').forEach(function (card) {
+    var id = card.getAttribute('data-id'); applyCardUI(card);
+    card.querySelectorAll('button.vote').forEach(function (btn) {
+      btn.addEventListener('click', function () { vote(id, btn.getAttribute('data-vote')); applyCardUI(card); });
+    });
+    var ta = card.querySelector('textarea.note'); ta.addEventListener('input', function () { noteChange(id, ta.value); });
+  });
+  tally();
+  document.getElementById('downloadBtn').addEventListener('click', function () {
+    ids.forEach(function (id) { syncNoteFromDom(id); });
+    var decided = ids.filter(function (id) { return state[id] && state[id].decision; }).length;
+    var payload = { sheet_id: SHEET_ID, generated: "28-08-2026", decided: decided,
+      items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '' }; }) };
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
+    var url = URL.createObjectURL(blob); var a = document.createElement('a');
+    a.href = url; a.download = SHEET_ID + '_decisions.json'; document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+  });
+  var filterbar = document.getElementById('filterbar');
+  filterbar.addEventListener('click', function (e) {
+    var btn = e.target.closest('button[data-filter]'); if (!btn) return;
+    filterbar.querySelectorAll('button').forEach(function (b) { b.classList.remove('active'); });
+    btn.classList.add('active'); var f = btn.getAttribute('data-filter');
+    document.querySelectorAll('.card').forEach(function (card) {
+      var show = true;
+      if (f === 'unvoted') { var id = card.getAttribute('data-id'); show = !(state[id] && state[id].decision); }
+      else if (f !== 'all') { show = card.getAttribute('data-filt') === f; }
+      card.style.display = show ? '' : 'none';
+    });
+  });
+  var cardsEl = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  var activeIdx = 0;
+  function visibleCards() { return cardsEl.filter(function (c) { return c.style.display !== 'none'; }); }
+  document.addEventListener('keydown', function (e) {
+    if (e.target.tagName === 'TEXTAREA') return;
+    var vis = visibleCards(); if (!vis.length) return;
+    if (activeIdx >= vis.length) activeIdx = vis.length - 1;
+    var card = vis[activeIdx]; var id = card.getAttribute('data-id');
+    if (e.key === 'a') { vote(id, 'approve'); applyCardUI(card); }
+    else if (e.key === 'r') { vote(id, 'reject'); applyCardUI(card); }
+    else if (e.key === 'd') { vote(id, 'defer'); applyCardUI(card); }
+    else if (e.key === 'ArrowDown') { activeIdx = Math.min(activeIdx + 1, vis.length - 1); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'center'}); }
+    else if (e.key === 'ArrowUp') { activeIdx = Math.max(activeIdx - 1, 0); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'center'}); }
+    else return;
+    e.preventDefault();
+  });
+
+  var saveHandle = null, saveTimer = null;
+  function exportPayload() {
+    if (typeof syncNoteFromDom === 'function') {
+      ids.forEach(function (id) { syncNoteFromDom(id); });
+    }
+    var decided = ids.filter(function (id) { return state[id] && state[id].decision; }).length;
+    return JSON.stringify({ sheet_id: SHEET_ID, generated: new Date().toISOString(), decided: decided,
+      items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '' }; }) }, null, 2);
+  }
+  function scheduleAutosave() {
+    if (!saveHandle) return;
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(function () {
+      saveHandle.createWritable().then(function (w) {
+        w.write(exportPayload()).then(function () { w.close(); });
+      }).catch(function () {});
+    }, 1000);
+  }
+  var _origSave = save;
+  save = function () { _origSave(); scheduleAutosave(); };
+  if (window.showSaveFilePicker) {
+    var saveBtn = document.getElementById('saveBtn');
+    saveBtn.style.display = '';
+    saveBtn.addEventListener('click', function () {
+      window.showSaveFilePicker({suggestedName: SHEET_ID + '_decisions.json'}).then(function (h) {
+        saveHandle = h; scheduleAutosave();
+      }).catch(function () {});
+    });
+  }
+
+  var FS_KEY = STORE_KEY + ':fs', FS_DEFAULT = 1.5;
+  function fsGet() {
+    var v = parseFloat(localStorage.getItem(FS_KEY));
+    return (isFinite(v) && v >= 0.7 && v <= 3) ? v : FS_DEFAULT;
+  }
+  function fsApply(v) {
+    document.documentElement.style.setProperty('--fs', String(v));
+    document.getElementById('fsVal').textContent = Math.round(v * 100) + '%';
+  }
+  function fsSet(v) {
+    v = Math.min(3, Math.max(0.7, Math.round(v * 10) / 10));
+    localStorage.setItem(FS_KEY, String(v)); fsApply(v);
+  }
+  fsApply(fsGet());
+  document.getElementById('fsDown').addEventListener('click', function () { fsSet(fsGet() - 0.1); });
+  document.getElementById('fsUp').addEventListener('click', function () { fsSet(fsGet() + 0.1); });
+})();
+</script>
+</body>
+</html>
