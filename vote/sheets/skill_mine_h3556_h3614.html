@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="color-scheme" content="dark">
+<meta name="generator" content="csl-pyutil/0.22.0">
+<title>Skill-mine: кандидаты H3556–H3614 (28-08-2026) — 9 items</title>
+<style>
+  :root { color-scheme: dark; --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --text:#e6e6e6; --muted:#9aa0aa;
+          --accent:#5b8cff; --ok:#3fb950; --bad:#f85149; --defer:#d29922; --border:#2a2f3a; }
+  * { box-sizing: border-box; }
+  body { background:var(--bg); color:var(--text); font-family:-apple-system,Segoe UI,Roboto,sans-serif;
+         margin:0; padding:0 0 120px 0; }
+  header.top { position:sticky; top:0; z-index:10; background:var(--panel); border-bottom:1px solid var(--border);
+               padding:14px 20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+  header.top h1 { font-size:16px; margin:0; }
+  header.top .sub { color:var(--muted); font-size:12px; max-width:760px; }
+  .tally { display:flex; gap:14px; font-size:13px; }
+  .tally span.count { font-weight:700; }
+  .tally .approve { color:var(--ok); } .tally .reject { color:var(--bad); }
+  .tally .defer { color:var(--defer); } .tally .unvoted { color:var(--muted); }
+  .toolbar { padding:10px 20px; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  button.dl { background:var(--accent); color:#fff; border:none; padding:8px 14px; border-radius:6px;
+              cursor:pointer; font-size:13px; }
+  button.dl:hover { opacity:.9; }
+  .filterbar { display:flex; gap:6px; flex-wrap:wrap; }
+  .filterbar button { background:var(--panel2); border:1px solid var(--border); color:var(--text);
+                       padding:6px 10px; border-radius:14px; font-size:12px; cursor:pointer; }
+  .filterbar button.active { border-color:var(--accent); color:var(--accent); }
+  main { max-width:980px; margin:0 auto; padding:10px 20px; }
+  .card { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:16px;
+          margin-bottom:16px; }
+  .card.voted-approve { border-left:4px solid var(--ok); }
+  .card.voted-reject { border-left:4px solid var(--bad); }
+  .card.voted-defer { border-left:4px solid var(--defer); }
+  .card header { display:flex; justify-content:space-between; align-items:baseline; }
+  .card .hw { font-size:18px; font-weight:700; }
+  .badge { font-size:11px; background:var(--panel2); padding:2px 8px; border-radius:10px;
+           margin-left:8px; color:var(--muted); }
+  .question { margin:8px 0 12px; font-size:14px; }
+  .panel { background:var(--panel2); border-radius:8px; padding:10px 12px; font-size:13px; margin-bottom:10px; }
+  .panel h4 { margin:0 0 6px; font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+  .panel pre { white-space:pre-wrap; word-break:break-word; margin:0; font-size:12px; line-height:1.45; }
+  .chip { display:inline-block; background:#263042; border-radius:5px; padding:2px 7px; margin:2px 3px 2px 0; font-size:12px; }
+  .muted { color:var(--muted); font-style:italic; }
+  .controls { display:flex; align-items:center; gap:8px; margin-top:4px; }
+  button.vote { border:1px solid var(--border); background:var(--panel2); color:var(--text);
+                padding:7px 12px; border-radius:6px; cursor:pointer; font-size:13px; }
+  button.vote.approve.active { background:var(--ok); border-color:var(--ok); color:#04240b; }
+  button.vote.reject.active { background:var(--bad); border-color:var(--bad); color:#2a0a08; }
+  button.vote.defer.active { background:var(--defer); border-color:var(--defer); color:#2a1d02; }
+  .vote-state { margin-left:6px; font-size:12px; color:var(--muted); }
+  textarea.note { width:100%; margin-top:10px; min-height:88px; background:#11141a !important; color:#e6e6e6 !important;
+                  -webkit-text-fill-color:#e6e6e6; border:1px solid var(--border); border-radius:6px; padding:8px; font-size:13px;
+                  font-family:inherit; resize:vertical; }
+  textarea.note::placeholder { color:var(--muted); opacity:1; }
+  footer.hint { max-width:980px; margin:20px auto; padding:0 20px; color:var(--muted); font-size:12px; }
+  kbd { background:#263042; border-radius:4px; padding:1px 5px; font-size:11px; }
+
+  .screening-banner { margin: 0 20px 12px; padding: 10px 14px; border-radius: 8px;
+    border: 1px solid var(--accent); background: #152033; font-size: 12px; line-height: 1.45;
+    color: var(--text); max-width: 980px; }
+  .screening-banner code { font-size: 11px; color: var(--accent); }
+  .screening-banner .sc-d { color: var(--defer); font-weight: 700; }
+
+  .idchip { font-family:ui-monospace,Consolas,monospace; font-size:11px; color:var(--muted);
+            background:var(--panel2); border:1px solid var(--border); padding:2px 7px;
+            border-radius:6px; user-select:all; }
+  .card header { gap:10px; }
+  .hw a.hwlink { color:inherit; text-decoration:underline dotted; text-underline-offset:3px; }
+  .hw a.hwlink:hover { color:var(--accent); }
+  mark.hl { background:#453407; color:#ffd75e; padding:0 2px; border-radius:3px; }
+  .savebanner { max-width:980px; margin:10px auto 0; padding:8px 20px; font-size:12.5px; }
+  .savebanner code { background:var(--panel2); border:1px solid var(--border); padding:1px 6px; border-radius:5px; }
+  .ratingrow { display:flex; align-items:center; gap:6px; margin-top:10px; flex-wrap:wrap; }
+  .ratinglabel { font-size:12px; color:var(--muted); margin-right:4px; }
+  button.rate { border:1px solid var(--border); background:var(--panel2); color:var(--text);
+                width:34px; padding:6px 0; border-radius:6px; cursor:pointer; font-size:13px; }
+  button.rate.active { background:var(--accent); border-color:var(--accent); color:#fff; }
+  button.rate.active.below { background:var(--defer); border-color:var(--defer); color:#2a1d02; }
+  .rate-state { font-size:12px; color:var(--muted); margin-left:4px; }
+  .badge-typology { border:1px solid var(--accent); color:var(--text); font-weight:600; }
+  :root { --fs:1.5; }
+  header.top h1 { font-size:calc(16px * var(--fs)) !important; }
+  header.top .sub { font-size:calc(12px * var(--fs)) !important; }
+  .tally, button.dl, button.vote, button.rate, textarea.note, .reject-label-select,
+  #strictReviewerWrap, #strictReviewerWrap input { font-size:calc(13px * var(--fs)) !important; }
+  .filterbar button, .fsctl button, .fsctl .fsval, .chip, .vote-state, .rate-state,
+  .ratinglabel, .rejectlabellabel, footer.hint, div.legend,
+  #strictReviewError { font-size:calc(12px * var(--fs)) !important; }
+  .card .hw { font-size:calc(18px * var(--fs)) !important; }
+  .badge, .panel h4, kbd, .idchip { font-size:calc(11px * var(--fs)) !important; }
+  .question { font-size:calc(14px * var(--fs)) !important; }
+  .panel { font-size:calc(13px * var(--fs)) !important; }
+  .panel pre { font-size:calc(13.5px * var(--fs)) !important; line-height:1.55; }
+  .panel .anatomy { font-size:calc(12.5px * var(--fs)) !important; }
+  .savebanner { font-size:calc(12.5px * var(--fs)) !important; }
+  .fsctl { display:flex; align-items:center; gap:4px; }
+  .fsctl button { background:var(--panel2); border:1px solid var(--border); color:var(--text);
+                  padding:6px 10px; border-radius:14px; cursor:pointer; line-height:1; }
+  .fsctl .fsval { color:var(--muted); min-width:3.4em; text-align:center; }
+  @media (max-width: 640px) {
+    header.top { padding: 10px 14px; flex-direction: column; align-items: stretch; }
+    header.top h1 { font-size: 15px; }
+    .tally { gap: 8px; font-size: 11px; }
+    .toolbar { padding: 8px 14px; }
+    main { padding: 8px 12px; }
+    .card { padding: 12px; }
+    .filterbar { flex-wrap: wrap; }
+    button.dl, button.vote, button.rate, .fsctl button, #saveBtn, #handinBtn, #pauseBtn {
+      min-height: 44px; min-width: 44px; padding: 10px 14px;
+    }
+    .controls { flex-wrap: wrap; }
+    .panel { padding: 8px 10px; }
+    textarea.note { min-height: 60px; }
+  }
+  .tally .time { color:var(--muted); }
+  .dl.handin { background:#243447; }
+  .tally .pausebtn { background:none; border:1px solid var(--border); color:var(--muted);
+                     border-radius:6px; padding:0 6px; margin-left:4px; cursor:pointer;
+                     font-size:inherit; font-family:inherit; line-height:1.6; }
+  .tally .pausebtn.on { color:#ffd479; border-color:#ffd479; }
+  .tally .time.paused { opacity:.45; }
+  .handin-said { color:var(--muted); font-size:12px; margin-left:10px; }
+  .card.kbd-active { outline:2px solid var(--accent); outline-offset:3px; }
+  .tally .tstate { color:var(--muted); font-size:.85em; margin-left:4px; }
+  .tally .tstate.idle { color:var(--defer); }
+  .flowprog { display:inline-flex; align-items:center; gap:8px; color:var(--muted); font-size:12px; }
+  .flowprog .bar { display:inline-block; width:120px; height:6px; border-radius:3px;
+                   background:var(--panel2); border:1px solid var(--border); overflow:hidden; }
+  .flowprog .bar i { display:block; height:6px; background:var(--accent); width:0; }
+  .dl.flowundo { background:#243447; }
+  .flowtoast { position:fixed; left:50%; bottom:24px; transform:translateX(-50%);
+               background:var(--panel2); border:1px solid var(--border); color:var(--text);
+               padding:8px 14px; border-radius:8px; font-size:13px; z-index:50;
+               opacity:0; pointer-events:none; transition:opacity .18s; }
+  .flowtoast.on { opacity:1; }
+  .voteprog { flex:1 0 100%; order:99; background:var(--panel);
+              border-top:1px solid var(--border); margin:6px -20px -14px; padding:8px 20px;
+              display:flex; align-items:center; gap:12px; font-size:12px; color:var(--muted); }
+  .voteprog .bar { flex:1 1 auto; height:8px; border-radius:4px; background:var(--panel2);
+                   border:1px solid var(--border); overflow:hidden; }
+  .voteprog .bar i { display:block; height:100%; width:0; background:var(--ok); transition:width .2s; }
+  .voteprog b { color:var(--text); font-weight:700; }
+  .voteprog .eta { white-space:nowrap; }
+  .votebar { position:sticky; bottom:0; z-index:9; background:var(--panel);
+             border-top:1px solid var(--border); padding:10px 20px; margin-top:24px;
+             display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  .votebar .spacer { flex:1 1 auto; }
+  .card { scroll-margin-top:96px; }
+  @media (max-width: 640px) { .voteprog { padding:6px 12px; } .votebar { padding:8px 12px; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>Skill-mine: кандидаты H3556–H3614 (28-08-2026) — 9 items</h1>
+    <div class="sub">Generated 28-08-2026 &middot; sheet_id <code>uprava-skill-mine_h3556-h3614_28-08-26</code> &middot; Голосование approve / reject / defer по переписи следов за 26–28 августа 2026: 62 handoff-файла, 4 кандидата, 2 обновления и 3 подтверждения. По standing policy малых листов (H3554) голос берётся в чате по одной карточке; эта хаб-страница — архивная копия. Навыки в проходе переписи не строятся — только после голосования.</div>
+  </div>
+  <div class="tally" id="tally">
+    <span class="approve">&#9989; <span class="count" id="c-approve">0</span></span>
+    <span class="reject">&#10060; <span class="count" id="c-reject">0</span></span>
+    <span class="defer">&#9208; <span class="count" id="c-defer">0</span></span>
+    <span class="time" title="active time on this sheet (while the tab is visible)">&#9201; <span class="count" id="t-total">0:00</span><span class="tstate" id="t-state"></span></span>
+    <button type="button" class="pausebtn" id="pauseBtn" title="pause the clock — a break is not review time">&#9208;</button>
+    <span class="unvoted">&#9711; <span class="count" id="c-unvoted">9</span></span>
+  </div>
+<div class="voteprog" id="voteProg"><span id="voteProgText"></span><span class="bar"><i id="voteProgBar"></i></span><span class="eta" id="voteProgEta"></span></div>
+</header>
+<aside class="screening-banner" role="status" data-screening="1"><strong>Screening (H1649)</strong> — only human-required cards are below. Off the plate: <span class="sc-a">deterministic 18</span> · <span class="sc-b">dataset lookup 5</span> · <span class="sc-c">agent adjudication 0</span> (total screened 23). Human cards: <span class="sc-d">9</span>. Evidence: <code>SKILL_CANDIDATES_CENSUS_H3556_H3614_28_08_2026.md</code>. Rules: bar-&gt;=2-distinct-sessions (singletons dropped, listed once in the census), catalogue-dedupe-vs-247+-commands-on-origin-main (covered shapes never rendered), one-programme-one-repo test (staged fanouts -&gt; DEFER, not candidate), minted-intent-is-not-footprint (queued slices -&gt; no shape until executed), encoded-in-committed-tools test (a skill must not duplicate a tool&#x27;s own docs).</aside>
+<div class="savebanner">&#128229; Your export downloads as <code>uprava-skill-mine_h3556-h3614_28-08-26_decisions.json</code> &rarr; save it to <code>Uprava\review\uprava-skill-mine_h3556-h3614_28-08-26_decisions.json</code> (the <code>sheet_id</code> inside the file is <code>uprava-skill-mine_h3556-h3614_28-08-26</code> — that is how a later session knows which sheet these decisions belong to).</div>
+<div class="toolbar">
+  <button data-submit="1" class="dl" id="downloadBtn">Download decisions.json</button><button data-submit="1" class="dl handin" id="handinBtn" title="stop the clock and export the votes made so far; the rest stay saved in this browser">Hand in what I got</button><span class="handin-said" id="handinSaid"></span><button data-submit="1" class="dl" id="saveBtn" style="display:none;margin-left:8px">Save to folder…</button>
+  <label data-submit="1" id="strictReviewerWrap" style="display:flex;align-items:center;gap:6px;font-size:13px">
+    Reviewer <input id="strictReviewer" type="text" autocomplete="name" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:7px 9px" />
+  </label>
+  <span data-submit="1" id="strictReviewError" role="alert" style="color:var(--bad);font-size:12px"></span>
+  <div class="fsctl" title="text size — persists in this browser"><button type="button" id="fsDown" aria-label="smaller text">A&minus;</button><span class="fsval" id="fsVal"></span><button type="button" id="fsUp" aria-label="larger text">A+</button></div>
+  <button data-submit="1" type="button" class="dl flowundo" id="flowUndoBtn" title="undo the last decision (z)">&#8630; Undo</button>
+  <span class="flowprog" id="flowProg"><span class="bar"><i id="flowBar"></i></span><span id="flowProgText"></span><span id="flowEta"></span></span>
+  <div class="filterbar" id="filterbar"><button data-filter="all" class="active">all</button><button data-filter="new">NEW</button><button data-filter="update">UPDATE</button><button data-filter="defer">Подтверждение отсрочки</button><button data-filter="unvoted">unvoted only</button></div>
+</div>
+<main id="cards">
+
+  <section class="card" data-id="C41" data-filt="new">
+    <header><div class="hw">C41 — NEW /tip-rescue: спасение брошенного типа и ре-ленд полезной нагрузки <span class="badge">freq:7 за 3 дня</span><span class="badge">ранг 1</span><span class="badge">класс реальных потерь</span><span class="badge">владельца нет</span><span class="badge badge-typology" title="U7: count + population share">NEW (n=4, 44%)</span></div><span class="idchip" title="card id — cite this id back when discussing this card">C41</span></header>
+    <div class="question"><p><b>Что кодирует.</b> Дисциплину извлечения и повторной посадки недоставленных результатов:
+осиротевший worktree с никогда не закоммиченным staged-пейлоадом · локальный тип, сброшенный force-push/restore ·
+untracked-файлы, исчезающие из shared main. Процедура: удостоверить существование пейлоада (reflog / worktree- обход /
+staged diff) → извлечь в свежий worktree от origin/main → ре-ленд с тестами и реестровыми строками → отдельный
+остаток «close owed», никогда не тихая потеря.</p>
+<p><b>Свидетельство — 7 сессий за 26–28-08:</b>
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3559-Sonnet_Uprava_vote-telemetry-sheet-typology_26.08.26.md">H3559</a> rescue 1/2+2/2 (классификатор
+типологии из worktree с осиротевшей базой) ·
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H3584-OxAlpha_Uprava_hygiene-trackd-secret-sweeper_26.08.26.md">H3584</a> rescue (инструмент secret-sweep) ·
+rescue H3225 (docusaurus_scaffold.py) · ре-ленд H3598 (пейлоад, сброшенный force-push-restore 27-08) ·
+ре-ленд OxAlpha TPS (идемпотентный re-apply) ·
+<a href="https://github.com/gasyoun/Uprava/blob/main/FINDINGS.md">FINDINGS §569</a> (keep-best salvage, buhler PR #18 vs #19)
+· §570 (чистый ре-ленд после livelock).</p>
+<p><b>Дедупликация.</b> Владельца в каталоге нет: <code>/dual-run-salvage</code> — коллизии двух ЖИВЫХ сессий,
+не мёртвые пейлоады; <code>/worktree-claim</code> — клеймы, не salvage; <code>/evidence-archive</code> — архивирует
+телеметрию перед GC, не ре-лендит deliverables; <code>/branch-contention-recover</code> — реконсиляция ветки.</p>
+<ul>
+<li><b>approve</b> — следующий инцидент гасится одним вызовом по договору навыка; пейлоады перестают зависеть от
+памяти сессии, которая их уронила.</li>
+<li><b>reject</b> — каждая спасательная операция заново импровизирует процедуру; цена класса — реальные потери
+недоставленной работы (H2929-класс).</li>
+<li><b>defer</b> — подождать следующего инцидента какconfirmation.</li>
+</ul></div>
+    
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Approve</button>
+      <button class="vote reject" data-vote="reject">&#10060; Reject</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="NEW / reject / назвать владельца…"></textarea>
+  </section>
+
+  <section class="card" data-id="C42" data-filt="new">
+    <header><div class="hw">C42 — NEW /interconnect-slice: пер-репо срез межсоединения + контракт рёберного реестра <span class="badge">freq:17</span><span class="badge">ранг 2</span><span class="badge">крупнейшая группа окна</span><span class="badge badge-typology" title="U7: count + population share">NEW (n=4, 44%)</span></div><span class="idchip" title="card id — cite this id back when discussing this card">C42</span></header>
+    <div class="question"><p><b>Что кодирует.</b> Исполнение одного среза межрепо-программы связывания:
+prior-art проверка → регистрация SHARED_CODE family-строки / ребра-фида с проверкой потребителя → строка в
+рёберном реестре (interlinks_edges) + верdict-флип → CLAUDE.md поинтер / scope-строка / code-home → локальный
+FINDINGS (тест двух реальных находок) + README-секция проводки → changelog. Плюс петля обслуживания реестра:
+re-verify устаревших last_verified строк, triage-листы по мнимым рёбрам, диспозиции.</p>
+<p><b>Свидетельство — 17 сессий:</b> H3560–H3575 (16 срезов программы H3534; исполнено 11 —
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3561-Opus_github-spine_interconnect-spine-aistate-sharedcode-families_26.08.26.md">H3561</a>,
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3567-Opus_IndologyScholars_interconnect-indology-crosswalk-feed-edge_26.08.26.md">H3567</a>,
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3570-Opus_SanskritKaraoke_interconnect-karaoke-timing-caption-family_26.08.26.md">H3570</a>,
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3574-Sonnet_Uprava_interconnect-ledger-bookindex-scratch-correction_26.08.26.md">H3574</a>,
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3575-Sonnet_Uprava_interconnect-ledger-cslpyutil-reviewsheet-edge_26.08.26.md">H3575</a> и др.) +
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3599-OxAlpha_Uprava_interlinks-edges-freshness-sweep_27.08.26.md">H3599</a> (свежестный свип 103/103) +
+R5 implied-edges triage (462 карточки, 22 ребра зарегистрированы).</p>
+<p><b>Дедупликация.</b> <code>/document</code> — свип ОДНОГО артефакта по поверхностям, не рёберные строки;
+<code>/findings-append</code> — маршрутизация находки; <code>/hub-staleness-audit</code> — устарелость хабов;
+<code>/link-audit-fix</code> — битые ссылки. Контракт ребра (строка + верdict + свежесть + проверка потребителя)
+никем не покрыт.</p>
+<ul>
+<li><b>approve</b> — следующий срез (в очереди ещё 5 stub-ов H3562/H3563/H3568/H3569/H3571) идёт по договору
+навыка одним вызовом.</li>
+<li><b>reject</b> — каждый срез заново выводит те же 7 шагов; рёберный реестр продолжает обслуживаться
+импровизацией (уже 5 проходов за окно).</li>
+<li><b>defer</b> — до исполнения пяти queued срезов.</li>
+</ul></div>
+    
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Approve</button>
+      <button class="vote reject" data-vote="reject">&#10060; Reject</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="NEW / reject / назвать владельца…"></textarea>
+  </section>
+
+  <section class="card" data-id="C43" data-filt="new">
+    <header><div class="hw">C43 — NEW /hygiene-track: орг-трек ценза с самотестом → отчёт → остатки → apply-волна <span class="badge">freq:9</span><span class="badge">ранг 3</span><span class="badge">4 трека + apply-волны</span><span class="badge badge-typology" title="U7: count + population share">NEW (n=4, 44%)</span></div><span class="idchip" title="card id — cite this id back when discussing this card">C43</span></header>
+    <div class="question"><p><b>Что кодирует.</b> Обёртку гигиенического трека: построить сканер с selftest
+(позитивные/негативные контроли, зелёный selftest ДО орг-прогона) → прогон по активному набору → датированный
+отчёт-ценз → GTD-остатки → маркер-гейтед apply-волна (discard-or-land, never force) → spot-check. Сканеры
+разные (git / docs / lint / secrets), обёртка одна и та же — и каждый раз переимпровизируется.</p>
+<p><b>Свидетельство — 9 сессий:</b>
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3581-OxAlpha_Uprava_hygiene-tracka-git-census_26.08.26.md">H3581</a> Track A (исполнен) ·
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H3582-OxAlpha_Uprava_hygiene-trackb-docs-census_26.08.26.md">H3582</a> Track B (sibling-proven) ·
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3583-OxAlpha_Uprava_hygiene-trackc-lint-scanner_26.08.26.md">H3583</a> Track C (исполнен) ·
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H3584-OxAlpha_Uprava_hygiene-trackd-secret-sweeper_26.08.26.md">H3584</a> Track D (sibling-proven) ·
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3605-OxAlpha_Uprava_hygiene-fix-cologne-index-html_28.08.26.md">H3605</a> +
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3606-OxAlpha_Uprava_hygiene-fix-uprava-family-dirt_28.08.26.md">H3606</a> apply-волны (исполнены) ·
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H3607-OxAlpha_Uprava_hygiene-worktree-reclaim-apply_28.08.26.md">H3607</a>–
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H3609-OxAlpha_Uprava_sanskritkaraoke-firebase-key-consistency_28.08.26.md">H3609</a> (stub-ы).</p>
+<p><b>Дедупликация.</b> <code>/org-axis-sweep</code> — read-only одна ось; <code>/tidy</code> — acting-джанитор
+поверх существующих навыков, сканеры не строит; <code>/dirty-tree-sweep</code> — только грязные деревья;
+<code>/md-hygiene</code> — один репо; <code>/secret-purge</code> — только purge. Дельта — самотестируемый сканер
++ лента ценз→остатки→apply как одна дисциплина.</p>
+<ul>
+<li><b>approve</b> — следующий трек (очередь: H3607–H3609) и любые новые оси идут по договору навыка.</li>
+<li><b>reject</b> — пятый трек снова строит selftest-обёртку с нуля, а apply-волны остаются импровизацией
+с риском задеть чужие деревья.</li>
+<li><b>defer</b> — до закрытия трёх открытых apply- stub-ов.</li>
+</ul></div>
+    
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Approve</button>
+      <button class="vote reject" data-vote="reject">&#10060; Reject</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="NEW / reject / назвать владельца…"></textarea>
+  </section>
+
+  <section class="card" data-id="U54" data-filt="update">
+    <header><div class="hw">U54 — UPDATE /dual-run-salvage: рецепт patch-id keep-best + маршрутизация на /tip-rescue <span class="badge">freq:6+</span><span class="badge">ранг 4</span><span class="badge">один раздел</span><span class="badge badge-typology" title="U7: count + population share">UPDATE (n=2, 22%)</span></div><span class="idchip" title="card id — cite this id back when discussing this card">U54</span></header>
+    <div class="question"><p><b>Что кодирует.</b> Три абзаца в существующий навык: (1) рецепт сравнения через patch-id
+(<code>git cherry</code> — merge-base слеп к squash-merge, урок H3578); (2) формат compare-записи, применённый в
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3603-OxAlpha_buhler-sanskrit-book_tsc-theme-heading-props-fix_27.08.26.md">H3603</a>
+(два параллельных PR #18/#19, keep-best, явный supersede); (3) таблица маршрутизации: живое/живое → salvage,
+мёртвый пейлоад → /tip-rescue (если C41 — NEW /tip-rescue — одобрена).</p>
+<p><b>Свидетельство — 6+ проходов за окно:</b>
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H3577-Sonnet_Uprava_h3574-h3575-ledger-dual-run-compare_26.08.26.md">H3577</a> ·
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H3585-Grok_claude-config_h3232-oxalpha-dual-run-compare_26.08.26.md">H3585</a> · H3603 · salvage-заметки
+батчей 33–36 в docs/skill_drain/RUN_26-08-2026.md · dual-run merge 25-08 в .ai_state.md.</p>
+<p><b>Дедупликация.</b> <code>/dual-run-salvage</code> УЖЕ владеет дисциплиной — повторение это тяжёлое
+ИСПОЛЬЗОВАНИЕ плюс ручной вывод механики (patch-id, keep-best, запись) при каждом вызове. Обновление разделов,
+не новый навык.</p>
+<ul>
+<li><b>approve</b> — следующий compare идёт по записанному рецепту, маршрутизация на спасение перестает быть
+устной традицией.</li>
+<li><b>reject</b> — механика продолжает выводиться из FINDINGS каждый раз.</li>
+<li><b>defer</b> — до голоса по C41 (рецепт ссылается на маршрутизацию).</li>
+</ul></div>
+    
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Approve</button>
+      <button class="vote reject" data-vote="reject">&#10060; Reject</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="UPDATE dual-run-salvage / defer / reject…"></textarea>
+  </section>
+
+  <section class="card" data-id="C44" data-filt="new">
+    <header><div class="hw">C44 — NEW /chat-knowledge-audit: ценз знания чат-сторов → хабы <span class="badge">freq:2, петля живая</span><span class="badge">ранг 5</span><span class="badge">136 кандидатов ждут</span><span class="badge badge-typology" title="U7: count + population share">NEW (n=4, 44%)</span></div><span class="idchip" title="card id — cite this id back when discussing this card">C44</span></header>
+    <div class="question"><p><b>Что кодирует.</b> Дисциплину: извлечь знание из сессионных чат-сторов → детерминированный
+кросс-матч с хабами (GTD/FINDINGS/PROJECT_INTERLINKS) → остаток без хаба адъюдицировать ограниченными батчами
+(GENUINE vs CHATTER) → строки в хабы + security-находки отдельно.</p>
+<p><b>Свидетельство — 2 сессии, петля не закрыта:</b>
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3598-OxAlpha_Uprava_chat-only-knowledge-audit_27.08.26.md">H3598</a> (исполнен: 1 522 сессии,
+80,9 % заякорены в хабах; audit sk-ключа → FINDINGS §573) +
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H3613-OxAlpha_Uprava_h3598-candidates-adjudication_28.08.26.md">H3613</a> (адъюдикация 136
+кандидатов — живой stub).</p>
+<p><b>Дедупликация.</b> Владельца нет: <code>/inbox-triage</code> — личный Inbox.md; <code>/semantic-memory</code> —
+recall, не ценз-на-полноту; <code>/skill-mine</code> — только следы навыков. Сессионный стор как ИСТОЧНИК знания
+никем не обходится.</p>
+<ul>
+<li><b>approve</b> — H3613 и следующие волны адъюдикации идут по договору навыка, включая повторный ценз.</li>
+<li><b>reject</b> — каждая волна заново изобретает извлечение и кросс-матч; знание чатов так и остаётся
+невыверенным на полноту.</li>
+<li><b>defer</b> — до закрытия H3613.</li>
+</ul></div>
+    
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Approve</button>
+      <button class="vote reject" data-vote="reject">&#10060; Reject</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="NEW / reject / назвать владельца…"></textarea>
+  </section>
+
+  <section class="card" data-id="U55" data-filt="update">
+    <header><div class="hw">U55 — UPDATE /roadmap-item-exec: режим мульти-репо Lane-A среза <span class="badge">freq:2</span><span class="badge">ранг 6</span><span class="badge">один абзац</span><span class="badge badge-typology" title="U7: count + population share">UPDATE (n=2, 22%)</span></div><span class="idchip" title="card id — cite this id back when discussing this card">U55</span></header>
+    <div class="question"><p><b>Что кодирует.</b> Один абзац: исполнение СРЕЗАННОЙ партии agent-doable остатков
+устаревших роадмапов по нескольким репо за один проход — per-repo PR + truth-pass тик, Lane-C забор для
+human-юнитов, вердикт-флипы в реестр свипа.</p>
+<p><b>Свидетельство — 2 сессии:</b>
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3604-Opus_multi_stale-roadmap-s4-lane-a-residuals_27.08.26.md">H3604</a> (исполнен, slice-4:
+version-surface унификация csl-atlas + Wave 3 nav, PR #422–#424/#26) +
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H3558-Opus_multi_stale-roadmap-s5-lane-a-residuals_26.08.26.md">H3558</a> (slice-5, claimed stub).</p>
+<p><b>Дедупликация.</b> <code>/roadmap-item-exec</code> — ОДИН юнит ОДНОГО репо; <code>/readme-truth-pass</code> —
+дрейн предкаталогизированного дрифта; <code>/roadmap-drain</code> — read-only. Мульти-репо срез с Lane-забором —
+дельта одного абзаца.</p>
+<ul>
+<li><b>approve</b> — slice-5 и следующие срезы идут тем же вызовом с флагом среза.</li>
+<li><b>reject</b> — срезы продолжают минтиться пачкой индивидуальных вызовов.</li>
+<li><b>defer</b> — до исполнения slice-5.</li>
+</ul></div>
+    
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Approve</button>
+      <button class="vote reject" data-vote="reject">&#10060; Reject</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="UPDATE roadmap-item-exec / defer / reject…"></textarea>
+  </section>
+
+  <section class="card" data-id="D76" data-filt="defer">
+    <header><div class="hw">D76 — фиксы диспетчерских гейтов (H3578/H3594/H3595): подтвердить «не навык» <span class="badge">freq:3, 3/3 исполнены</span><span class="badge">обычная разработка</span><span class="badge badge-typology" title="U7: count + population share">DEFER-подтверждение (n=3, 33%)</span></div><span class="idchip" title="card id — cite this id back when discussing this card">D76</span></header>
+    <div class="question"><p><b>Форма.</b> Три сессии одной дисциплины: наблюдённый дефект планировщика/гейта →
+фикс с гейтом + закреплённые тесты → JSON-верdict: auto-resume finished-filter
+(<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3578-Opus_Uprava_next-pick-auto-resume-finished-filter_26.08.26.md">H3578</a>), go-gate
+registry-lead (<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3594-OxAlpha_Uprava_go-gate-registry-lead-verdict_27.08.26.md">H3594</a>), fruit
+сортировка effort-inside-tier
+(<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3595-Grok_Uprava_fruit-bucket-sort-effort-inside-tier_27.08.26.md">H3595</a>).</p>
+<p><b>Почему перепись не считает это кандидатом.</b> Это обычная разработка через тест —
+<code>/diagnosing-bugs</code> + <code>/tdd</code> владеют дисциплиной; кодировать отдельный навык значило бы
+продублировать их.</p>
+<ul>
+<li><b>approve</b> — подтверждаем; дефекты гейтов чинятся обычным путём.</li>
+<li><b>reject</b> — значит «строить»: назвать дисциплину, которой не хватает, в заметке.</li>
+<li><b>defer</b> — до четвёртого однотипного фикса вне /tdd.</li>
+</ul></div>
+    
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Approve</button>
+      <button class="vote reject" data-vote="reject">&#10060; Reject</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="подтвердить / назвать дисциплину…"></textarea>
+  </section>
+
+  <section class="card" data-id="D77" data-filt="defer">
+    <header><div class="hw">D77 — PWG→RU аудит/восстановление/рескор стора: подтвердить «покрыто существующими» <span class="badge">freq:4</span><span class="badge">владельцы названы</span><span class="badge badge-typology" title="U7: count + population share">DEFER-подтверждение (n=3, 33%)</span></div><span class="idchip" title="card id — cite this id back when discussing this card">D77</span></header>
+    <div class="question"><p><b>Форма.</b> 4 сессии: восстановление 289 строк Instr.→Ins. из зеркала
+(<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3591-Fable_pwg-ru-data_pwg-ru-store-instr-restore_27.08.26.md">H3591</a>) · детерминированный
+аудит стора (H3590, sibling-proven) · проводка san-loss гейта
+(<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3593-Sonnet_SanskritLexicography_pwg-ru-san-loss-gate-and-dA-requeue_27.08.26.md">H3593</a>) ·
+рескор W1 serious10 с LLM-судьёй, заблокирован деньгами
+(<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H3611-Opus_RussianTranslation_pwg-tm-w1-serious10-rescore_28.08.26.md">H3611</a>, частично).</p>
+<p><b>Почему перепись не считает это кандидатом.</b> Восстановление канонического стора —
+<code>/canonical-data-repair</code>; lane-работа — <code>/pwg-de-editorial</code> + <code>/pwg-window-close</code> +
+<code>/pwg-drain</code>; рескор с судьёй — <code>/eval-harness</code> + денежные врата. Новому навыку нечего
+кодировать сверх названных владельцев.</p>
+<ul>
+<li><b>approve</b> — подтверждаем; следующие волны аудита идут через названных владельцев.</li>
+<li><b>reject</b> — значит «строить»: назвать недостающую дисциплину в заметке.</li>
+<li><b>defer</b> — до разблокировки денег H3611.</li>
+</ul></div>
+    
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Approve</button>
+      <button class="vote reject" data-vote="reject">&#10060; Reject</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="подтвердить / назвать владельца…"></textarea>
+  </section>
+
+  <section class="card" data-id="D78" data-filt="defer">
+    <header><div class="hw">D78 — TPS/токен-бенчи агентных линий: подтвердить «владеет инструмент репозитория» <span class="badge">freq:4</span><span class="badge">уже код репозитория</span><span class="badge badge-typology" title="U7: count + population share">DEFER-подтверждение (n=3, 33%)</span></div><span class="idchip" title="card id — cite this id back when discussing this card">D78</span></header>
+    <div class="question"><p><b>Форма — ~4 прохода за окно:</b> tools/agent_speed_bench.py (матрица линий 26-08) ·
+tools/oxalpha_tps_probe.py (raw-проба 26-08, проводка 27-08, ре-ленд 28-08) · docs/HARNESS_BENCH_TREND.md ·
+recheck-проходы на событиях баланса/квоты (grok-balance, claude shim/OAuth).</p>
+<p><b>Почему перепись не считает это кандидатом.</b> Переносимое ядро УЖЕ закодировано инструментами репозитория
+с собственными доками и тренд-доком — навык дублировал бы их (прецедент D74 — имение launchd-петель macOS: владеет инструмент, mac_loops.py).
+<code>/model-lane-onboard</code> владеет adopt/decline-решением, <code>/cpu</code> — загрузкой машины;
+повторяющийся бенч линии — это вызовы инструментов, не агентная дисциплина.</p>
+<ul>
+<li><b>approve</b> — подтверждаем; новые линии добавляются в инструменты, а не навыком.</li>
+<li><b>reject</b> — значит «строить»: назвать дисциплину (например, контракт тренд-дока) в заметке.</li>
+<li><b>defer</b> — до появления второй линии бенчей вне инструментов.</li>
+</ul></div>
+    
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Approve</button>
+      <button class="vote reject" data-vote="reject">&#10060; Reject</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="подтвердить / назвать дисциплину…"></textarea>
+  </section>
+</main>
+<div class="votebar" id="voteBar"><span class="spacer"></span></div>
+<footer class="hint">Источник: SKILL_CANDIDATES_CENSUS_H3556_H3614_28_08_2026.md · /skill-mine · OxAlpha (opencode/glm-5.3-flash) · H3615. Approve — принять предложение карточки. Reject — оставить как есть; для карточек D-класса reject означает «строить сейчас». Defer — решить позже. Keyboard: <kbd>a</kbd> Approve &middot; <kbd>r</kbd> Reject
+  &middot; <kbd>d</kbd> defer &middot; <kbd>&darr;</kbd>/<kbd>&uarr;</kbd> next/prev. Votes autosave to
+  this browser's localStorage; click "Download decisions.json" when done (unvoted items export with
+  decision:null).</footer>
+<div class="legend" style="max-width:980px;margin:0 auto 20px;padding:0 20px;color:var(--muted);font-size:12px">
+  <b>Approve</b> = accept the proposed change/answer shown on the card (no separate "approve as-is" —
+  approving means agreeing as written). <b>Reject</b> = keep the current entry/answer unchanged.
+  <b>Defer</b> = not sure yet, decide later. The note field is for requesting a partial tweak instead
+  of an outright reject.
+</div>
+<script>
+(function () {
+  var SHEET_ID = "uprava-skill-mine_h3556-h3614_28-08-26";
+  var STORE_KEY = 'review-sheet:' + SHEET_ID;
+  var GENERATED = "28-08-2026";
+  var ids = ["C41", "C42", "C43", "U54", "C44", "U55", "D76", "D77", "D78"];
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(STORE_KEY) || '{}') || {}; } catch (e) { state = {}; }
+  function tally() {
+    var c = { approve:0, reject:0, defer:0 };
+    ids.forEach(function (id) { var v = state[id] && state[id].decision; if (v && c.hasOwnProperty(v)) c[v]++; });
+    document.getElementById('c-approve').textContent = c.approve;
+    document.getElementById('c-reject').textContent = c.reject;
+    document.getElementById('c-defer').textContent = c.defer;
+    document.getElementById('c-unvoted').textContent = ids.length - c.approve - c.reject - c.defer;
+  }
+  function applyCardUI(card) {
+    var id = card.getAttribute('data-id'); var rec = state[id] || {};
+    card.classList.remove('voted-approve','voted-reject','voted-defer');
+    card.querySelectorAll('button.vote').forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-vote') === rec.decision); });
+    card.querySelector('.vote-state').textContent = rec.decision ? rec.decision : 'unvoted';
+    if (rec.decision) card.classList.add('voted-' + rec.decision);
+    var ta = card.querySelector('textarea.note'); if (rec.note && !ta.value) ta.value = rec.note;
+  }
+  function save() { localStorage.setItem(STORE_KEY, JSON.stringify(state)); tally(); }
+  // H1523 residual / csl-pyutil#1 Part 1: always re-read the live textarea on vote
+  // and before export so a second vote click (or a missed `input` event) cannot
+  // drop a note that is still visible in the card.
+  function syncNoteFromDom(id) {
+    state[id] = state[id] || {};
+    var card = document.querySelector('.card[data-id="' + id + '"]');
+    if (!card) return;
+    var ta = card.querySelector('textarea.note');
+    if (ta) state[id].note = ta.value;
+  }
+  function vote(id, d) { syncNoteFromDom(id); state[id].decision = d; save(); }
+  function noteChange(id, t) { state[id] = state[id] || {}; state[id].note = t; save(); }
+  document.querySelectorAll('.card').forEach(function (card) {
+    var id = card.getAttribute('data-id'); applyCardUI(card);
+    card.querySelectorAll('button.vote').forEach(function (btn) {
+      btn.addEventListener('click', function () { vote(id, btn.getAttribute('data-vote')); applyCardUI(card); });
+    });
+    var ta = card.querySelector('textarea.note'); ta.addEventListener('input', function () { noteChange(id, ta.value); });
+  });
+  tally();
+  document.getElementById('downloadBtn').addEventListener('click', function () {
+    ids.forEach(function (id) { syncNoteFromDom(id); });
+    var decided = ids.filter(function (id) { return state[id] && state[id].decision; }).length;
+    var payload = { sheet_id: SHEET_ID, generated: "28-08-2026", decided: decided, time_total_seconds: __timeTotal(),
+      items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '', time_seconds: __timeFor(id) }; }) };
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
+    var url = URL.createObjectURL(blob); var a = document.createElement('a');
+    a.href = url; a.download = SHEET_ID + '_decisions.json'; document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+  });
+  var filterbar = document.getElementById('filterbar');
+  filterbar.addEventListener('click', function (e) {
+    var btn = e.target.closest('button[data-filter]'); if (!btn) return;
+    filterbar.querySelectorAll('button').forEach(function (b) { b.classList.remove('active'); });
+    btn.classList.add('active'); var f = btn.getAttribute('data-filter');
+    document.querySelectorAll('.card').forEach(function (card) {
+      var show = true;
+      if (f === 'unvoted') { var id = card.getAttribute('data-id'); show = !(state[id] && state[id].decision); }
+      else if (f !== 'all') { show = card.getAttribute('data-filt') === f; }
+      card.style.display = show ? '' : 'none';
+    });
+  });
+  var cardsEl = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  var activeIdx = 0;
+  function visibleCards() { return cardsEl.filter(function (c) { return c.style.display !== 'none'; }); }
+  document.addEventListener('keydown', function (e) {
+    if (e.target.tagName === 'TEXTAREA') return;
+    var vis = visibleCards(); if (!vis.length) return;
+    if (activeIdx >= vis.length) activeIdx = vis.length - 1;
+    var card = vis[activeIdx]; var id = card.getAttribute('data-id');
+    if (e.key === 'a') { vote(id, 'approve'); applyCardUI(card); }
+    else if (e.key === 'r') { vote(id, 'reject'); applyCardUI(card); }
+    else if (e.key === 'd') { vote(id, 'defer'); applyCardUI(card); }
+    else if (e.key === 'ArrowDown') { activeIdx = Math.min(activeIdx + 1, vis.length - 1); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'start'}); }
+    else if (e.key === 'ArrowUp') { activeIdx = Math.max(activeIdx - 1, 0); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'start'}); }
+    else return;
+    e.preventDefault();
+  });
+
+  var STRICT_REVIEW = {"reviewer": "MG", "requireAllVotes": true, "requireRejectNote": true, "generated": "28-08-2026"};
+  var strictReviewer = document.getElementById('strictReviewer');
+  var strictError = document.getElementById('strictReviewError');
+  strictReviewer.value = state.__reviewer || STRICT_REVIEW.reviewer || '';
+  function strictItems() {
+    return ids.map(function (id) {
+      var rec = state[id] || {};
+      return { id: id, decision: rec.decision || null, note: rec.note || '', time_seconds: __timeFor(id) };
+    });
+  }
+  function strictValidation() {
+    var items = strictItems();
+    var reviewer = strictReviewer.value.trim();
+    var unvoted = STRICT_REVIEW.requireAllVotes ? items.filter(function (item) { return !item.decision; }) : [];
+    var rejectedWithoutNote = STRICT_REVIEW.requireRejectNote ? items.filter(function (item) {
+      return item.decision === 'reject' && !item.note.trim();
+    }) : [];
+    var errors = [];
+    if (!reviewer) errors.push('reviewer is required');
+    if (unvoted.length) errors.push(unvoted.length + ' item(s) remain unvoted');
+    if (rejectedWithoutNote.length) errors.push(rejectedWithoutNote.length + ' rejection(s) need a note');
+    return { reviewer: reviewer, items: items, complete: errors.length === 0, errors: errors };
+  }
+  function strictPayload() {
+    var result = strictValidation();
+    var decided = result.items.filter(function (item) { return !!item.decision; }).length;
+    return { sheet_id: SHEET_ID, generated: "28-08-2026", decided: decided, time_total_seconds: __timeTotal(),
+      reviewer: result.reviewer, reviewedAt: result.complete ? new Date().toISOString() : null,
+      complete: result.complete, items: result.items };
+  }
+  strictReviewer.addEventListener('input', function () {
+    state.__reviewer = strictReviewer.value;
+    strictError.textContent = '';
+    save();
+  });
+  document.getElementById('downloadBtn').addEventListener('click', function (event) {
+    event.preventDefault(); event.stopImmediatePropagation();
+    var result = strictValidation();
+    if (!result.complete) {
+      strictError.textContent = result.errors.join('; ');
+      if (!result.reviewer) strictReviewer.focus();
+      return;
+    }
+    strictError.textContent = '';
+    var blob = new Blob([JSON.stringify(strictPayload(), null, 2)], { type:'application/json' });
+    var url = URL.createObjectURL(blob); var a = document.createElement('a');
+    a.href = url; a.download = SHEET_ID + '_decisions.json'; document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+  }, true);
+
+  var saveHandle = null, saveTimer = null;
+  function exportPayload() {
+    return JSON.stringify(strictPayload(), null, 2);
+  }
+  function scheduleAutosave() {
+    if (!saveHandle) return;
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(function () {
+      saveHandle.createWritable().then(function (w) {
+        w.write(exportPayload()).then(function () { w.close(); });
+      }).catch(function () {});
+    }, 1000);
+  }
+  var _origSave = save;
+  save = function () { _origSave(); scheduleAutosave(); };
+  if (window.showSaveFilePicker) {
+    var saveBtn = document.getElementById('saveBtn');
+    saveBtn.style.display = '';
+    saveBtn.addEventListener('click', function () {
+      window.showSaveFilePicker({suggestedName: SHEET_ID + '_decisions.json'}).then(function (h) {
+        saveHandle = h; scheduleAutosave();
+      }).catch(function () {});
+    });
+  }
+
+  var FS_KEY = STORE_KEY + ':fs', FS_DEFAULT = 1.5;
+  function fsGet() {
+    var v = parseFloat(localStorage.getItem(FS_KEY));
+    return (isFinite(v) && v >= 0.7 && v <= 3) ? v : FS_DEFAULT;
+  }
+  function fsApply(v) {
+    document.documentElement.style.setProperty('--fs', String(v));
+    document.getElementById('fsVal').textContent = Math.round(v * 100) + '%';
+  }
+  function fsSet(v) {
+    v = Math.min(3, Math.max(0.7, Math.round(v * 10) / 10));
+    localStorage.setItem(FS_KEY, String(v)); fsApply(v);
+  }
+  fsApply(fsGet());
+  document.getElementById('fsDown').addEventListener('click', function () { fsSet(fsGet() - 0.1); });
+  document.getElementById('fsUp').addEventListener('click', function () { fsSet(fsGet() + 0.1); });
+
+  var TIME_KEY = STORE_KEY + ':timing';
+  var __timing = { total: 0, per: {} };
+  try {
+    var __t0 = JSON.parse(localStorage.getItem(TIME_KEY) || 'null');
+    if (__t0 && typeof __t0.total === 'number') __timing = __t0;
+  } catch (e) {}
+  if (!__timing.per) __timing.per = {};
+  function __timeFor(id) { return Math.round(__timing.per[id] || 0); }
+  function __timeTotal() { return Math.round(__timing.total || 0); }
+  function __timeFmt(s) {
+    s = Math.round(s); var m = Math.floor(s / 60);
+    return (m >= 60 ? Math.floor(m / 60) + ':' + ('0' + (m - Math.floor(m / 60) * 60)).slice(-2) : m)
+      + ':' + ('0' + (s - m * 60)).slice(-2);
+  }
+  function __timeShow() {
+    var el = document.getElementById('t-total');
+    if (el) el.textContent = __timeFmt(__timing.total);
+  }
+  var __timeLast = Date.now(), __timeDirty = 0;
+  var __timeCards = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  function __timeActiveId() {
+    var mid = window.innerHeight / 2, best = null, bestd = Infinity;
+    for (var i = 0; i < __timeCards.length; i++) {
+      var c = __timeCards[i];
+      if (c.style.display === 'none') continue;
+      var r = c.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > window.innerHeight) continue;
+      var center = (Math.max(r.top, 0) + Math.min(r.bottom, window.innerHeight)) / 2;
+      var d = Math.abs(center - mid);
+      if (d < bestd) { bestd = d; best = c; }
+    }
+    return best ? best.getAttribute('data-id') : null;
+  }
+  function __timeFlush() {
+    try { localStorage.setItem(TIME_KEY, JSON.stringify(__timing)); } catch (e) {}
+  }
+  // V12 (H2858): the clock is stoppable. `paused` rides in the same persisted
+  // record as the totals, so a reviewer who pauses and closes the tab does not
+  // come back to a clock that ran all night.
+  var __timePaused = !!__timing.paused;
+  // V15 (H2887): a legacy record carries `paused` and no reason — read it as
+  // manual, so an auto-rearm can never lift a pause the curator set by hand.
+  var __timePauseReason = __timePaused ? (__timing.pause_reason || 'manual') : null;
+  function __timePauseSet(v, reason) {
+    __timePaused = !!v;
+    __timing.paused = __timePaused;
+    __timePauseReason = __timePaused ? (reason || 'manual') : null;
+    __timing.pause_reason = __timePauseReason;
+    __timeLast = Date.now(); __timeFlush();
+  }
+  setInterval(function () {
+    var now = Date.now(), dt = (now - __timeLast) / 1000;
+    __timeLast = now;
+    if (document.hidden || __timePaused || dt <= 0 || dt > 4) return;
+    __timing.total += dt;
+    var id = __timeActiveId();
+    if (id) __timing.per[id] = (__timing.per[id] || 0) + dt;
+    __timeDirty += dt;
+    if (__timeDirty >= 5) { __timeDirty = 0; __timeFlush(); }
+    __timeShow();
+  }, 1000);
+  document.addEventListener('visibilitychange', function () { __timeLast = Date.now(); });
+  window.addEventListener('beforeunload', __timeFlush);
+  __timeShow();
+
+  var HANDIN_SAID = 'handed in {n} of {total} — clock stopped, the rest stay saved in this browser';
+  var __handinBtn = document.getElementById('handinBtn');
+  var __handinSaid = document.getElementById('handinSaid');
+
+  var __pauseBtn = document.getElementById('pauseBtn');
+  function __pauseShow() {
+    __pauseBtn.classList.toggle('on', __timePaused);
+    __pauseBtn.innerHTML = __timePaused ? '&#9654;' : '&#9208;';
+    var chip = document.querySelector('.tally .time');
+    if (chip) chip.classList.toggle('paused', __timePaused);
+  }
+  __pauseBtn.addEventListener('click', function () { __timePauseSet(!__timePaused); __pauseShow(); });
+  __pauseShow();
+  __handinBtn.addEventListener('click', function () {
+    ids.forEach(function (id) { syncNoteFromDom(id); });
+    __timePauseSet(true, 'export'); __pauseShow();
+    var items = ids.map(function (id) {
+      var rec = state[id] || {};
+      var item = { id: id, decision: rec.decision || null };
+      item.note = rec.note || '';
+      item.time_seconds = __timeFor(id);
+      return item;
+    });
+    var decided = items.filter(function (it) { return !!it.decision; }).length;
+    var payload = { sheet_id: SHEET_ID, generated: GENERATED, decided: decided,
+      partial: true, complete: false, undecided: items.length - decided, items: items };
+    payload.time_total_seconds = __timeTotal();
+    payload.reviewer = strictReviewer.value.trim();
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
+    var url = URL.createObjectURL(blob); var a = document.createElement('a');
+    a.href = url; a.download = SHEET_ID + '_decisions_partial.json';
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+    __handinSaid.textContent = HANDIN_SAID.replace('{n}', decided).replace('{total}', items.length);
+  });
+
+  // --- V15 session flow (H2887) ---------------------------------------------
+  var FLOW_IDLE_SECONDS = 90;
+  var FLOW_ETA = 'about {minutes} min left';
+  var FLOW_ETA_ROUGH = 'about {minutes} min left (rough)';
+  var FLOW_CLOCK_RUNNING = 'running';
+  var FLOW_CLOCK_PAUSED = 'paused';
+  var FLOW_CLOCK_IDLE = 'idle';
+  var FLOW_PROGRESS = 'decided {n} of {total}';
+  var FLOW_UNDO_SAID = 'undo: {id} back to {decision}';
+  var FLOW_UNDO_EMPTY = 'nothing to undo';
+  var FLOW_UNDO_NONE = 'no decision';
+  var FLOW_RESUMED = 'resumed at card {n} of {total}';
+  var __flowToast = document.getElementById('flowToast');
+  var __flowToastTimer = null;
+  function __flowSay(text) {
+    if (!__flowToast) return;
+    __flowToast.textContent = text;
+    __flowToast.classList.add('on');
+    clearTimeout(__flowToastTimer);
+    __flowToastTimer = setTimeout(function () { __flowToast.classList.remove('on'); }, 2600);
+  }
+  var __flowCenterId = __timeActiveId;
+  function __flowIdxOf(id) {
+    var vis = visibleCards();
+    for (var i = 0; i < vis.length; i++) {
+      if (vis[i].getAttribute('data-id') === id) return i;
+    }
+    return -1;
+  }
+  function __flowCardById(id) {
+    var found = null;
+    cardsEl.forEach(function (c) { if (c.getAttribute('data-id') === id) found = c; });
+    return found;
+  }
+  // The visible ring IS the target of a/r/d — that identity is the whole point
+  // of this layer, so nothing may move `activeIdx` without repainting.
+  function __flowPaint() {
+    cardsEl.forEach(function (c) { c.classList.remove('kbd-active'); });
+    var vis = visibleCards();
+    if (!vis.length) return;
+    if (activeIdx >= vis.length) activeIdx = vis.length - 1;
+    if (activeIdx < 0) activeIdx = 0;
+    vis[activeIdx].classList.add('kbd-active');
+  }
+  function __flowSync() {
+    var id = __flowCenterId();
+    if (id) { var at = __flowIdxOf(id); if (at !== -1) activeIdx = at; }
+    __flowPaint();
+  }
+  var __flowScrollTimer = null;
+  window.addEventListener('scroll', function () {
+    if (__flowScrollTimer) return;
+    __flowScrollTimer = setTimeout(function () { __flowScrollTimer = null; __flowSync(); }, 120);
+  });
+  // Both bars reset `activeIdx` to 0 as they re-filter; re-derive it from the
+  // viewport on the next tick, or defect 2 returns wearing a filter.
+  ['filterbar'].forEach(function (barId) {
+    var bar = document.getElementById(barId);
+    if (bar) bar.addEventListener('click', function () { setTimeout(__flowSync, 0); });
+  });
+  function __flowClockShow() {
+    var el = document.getElementById('t-state');
+    if (!el) return;
+    var label = FLOW_CLOCK_RUNNING;
+    if (__timePaused) label = (__timePauseReason === 'idle') ? FLOW_CLOCK_IDLE : FLOW_CLOCK_PAUSED;
+    el.textContent = label;
+    el.classList.toggle('idle', !!__timePaused && __timePauseReason === 'idle');
+  }
+  // The V12 ⏸ button drives the clock straight through __timePauseSet, so the
+  // three-state label has to ride along with V12's own repaint or it goes stale
+  // the moment the curator pauses by hand.
+  var __flowOrigPauseShow = __pauseShow;
+  __pauseShow = function () { __flowOrigPauseShow(); __flowClockShow(); };
+  var __flowIdleTimer = null;
+  function __flowIdleArm() {
+    clearTimeout(__flowIdleTimer);
+    __flowIdleTimer = setTimeout(function () {
+      if (__timePaused) return;
+      __timePauseSet(true, 'idle');
+    __pauseShow();
+      __flowClockShow();
+    }, FLOW_IDLE_SECONDS * 1000);
+  }
+  function __flowRearm() {
+    if (__timePaused && __timePauseReason !== 'manual') {
+      __timePauseSet(false);
+    __pauseShow();
+    }
+    __flowClockShow();
+    __flowIdleArm();
+  }
+  // The export GESTURES, caught in the capture phase on `document` so this runs
+  // before any handler bound to the buttons themselves — including the strict
+  // layer's, which calls stopImmediatePropagation() on its own element.
+  document.addEventListener('click', function (e) {
+    var t = e.target;
+    if (!t || !t.closest || !t.closest('#downloadBtn, #saveBtn, #handinBtn')) return;
+    __timePauseSet(true, 'export');
+    __pauseShow();
+    __flowClockShow();
+  }, true);
+  ['keydown', 'pointerdown', 'scroll'].forEach(function (evt) {
+    document.addEventListener(evt, function () { __flowRearm(); }, true);
+  });
+  var __flowUndoStack = [];
+  function __flowUndo() {
+    var last = __flowUndoStack.pop();
+    if (!last) { __flowSay(FLOW_UNDO_EMPTY); return; }
+    state[last.id] = state[last.id] || {};
+    if (last.prev) state[last.id].decision = last.prev;
+    else delete state[last.id].decision;
+    save();
+    var card = __flowCardById(last.id);
+    if (card) {
+      applyCardUI(card);
+      card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      var at = __flowIdxOf(last.id);
+      if (at !== -1) activeIdx = at;
+      __flowPaint();
+    }
+    __flowSay(FLOW_UNDO_SAID.replace('{id}', last.id)
+      .replace('{decision}', last.prev || FLOW_UNDO_NONE));
+  }
+  var __flowUndoBtn = document.getElementById('flowUndoBtn');
+  if (__flowUndoBtn) __flowUndoBtn.addEventListener('click', __flowUndo);
+  function __flowFirstUndecided() {
+    var vis = visibleCards();
+    for (var i = 0; i < vis.length; i++) {
+      var id = vis[i].getAttribute('data-id');
+      if (!(state[id] && state[id].decision)) return i;
+    }
+    return -1;
+  }
+  function __flowAdvance() {
+    var at = __flowFirstUndecided();
+    if (at === -1) { __flowPaint(); return; }
+    activeIdx = at;
+    visibleCards()[at].scrollIntoView({ behavior: 'smooth', block: 'start' });
+    __flowPaint();
+  }
+  function __flowDecided() {
+    var n = 0;
+    ids.forEach(function (id) { if (state[id] && state[id].decision) n++; });
+    return n;
+  }
+  function __flowEtaText(decided, total) {
+    var secs = [];
+    ids.forEach(function (id) {
+      if (!(state[id] && state[id].decision)) return;
+      var s = __timing.per[id] || 0;
+      if (s > 0) secs.push(s);
+    });
+    if (!secs.length) return '';
+    secs.sort(function (a, b) { return a - b; });
+    var mid = Math.floor(secs.length / 2);
+    var med = (secs.length % 2) ? secs[mid] : (secs[mid - 1] + secs[mid]) / 2;
+    var left = Math.max(0, total - decided);
+    if (!left) return '';
+    var minutes = Math.max(1, Math.round(med * left / 60));
+    return (secs.length >= 5 ? FLOW_ETA : FLOW_ETA_ROUGH).replace('{minutes}', minutes);
+  }
+  function __flowProgress() {
+    var n = __flowDecided(), total = ids.length;
+    var txt = document.getElementById('flowProgText');
+    if (txt) txt.textContent = FLOW_PROGRESS.replace('{n}', n).replace('{total}', total);
+    var bar = document.getElementById('flowBar');
+    if (bar) bar.style.width = (total ? Math.round(100 * n / total) : 0) + '%';
+    var etaEl = document.getElementById('flowEta');
+    if (etaEl) etaEl.textContent = __flowEtaText(n, total);
+  }
+  var __flowOrigTally = tally;
+  tally = function () { __flowOrigTally(); __flowProgress(); };
+  var __flowOrigVote = vote;
+  vote = function (id, d) {
+    var rec = state[id] || {};
+    __flowUndoStack.push({ id: id, prev: rec.decision || null });
+    if (__flowUndoStack.length > 100) __flowUndoStack.shift();
+    __flowOrigVote(id, d);
+    __flowRearm();
+    __flowAdvance();
+  };
+  var __flowOrigNote = noteChange;
+  noteChange = function (id, t) { __flowOrigNote(id, t); __flowRearm(); };
+  document.addEventListener('keydown', function (e) {
+    if (e.target.tagName === 'TEXTAREA') return;
+    if (e.key === 'z' || e.key === 'Z') { __flowUndo(); e.preventDefault(); return; }
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') __flowPaint();
+  });
+  __flowProgress();
+  __flowSync();
+  __flowClockShow();
+  __flowIdleArm();
+  (function () {
+    if (!__flowDecided()) return;
+    var at = __flowFirstUndecided();
+    if (at === -1) return;
+    var vis = visibleCards();
+    activeIdx = at;
+    vis[at].scrollIntoView({ block: 'start' });
+    __flowPaint();
+    __flowSay(FLOW_RESUMED.replace('{n}', at + 1).replace('{total}', vis.length));
+  })();
+
+  var VOTE_TOTAL = 0;
+  var VOTE_PROGRESS = '{n} of {total} across the whole sheet';
+  var VOTE_ETA = 'about {minutes} min left for all {total}';
+  var VOTE_ETA_ROUGH = 'about {minutes} min left for all {total} (rough)';
+  var VOTE_DONE = 'all {total} decided';
+  (function () {
+    var bar = document.getElementById('voteBar');
+    if (!bar) return;
+    // The build tagged exactly the submit controls this document actually has.
+    // Navigation (filters, facets, the type-scale control) is untagged and stays
+    // on top, where it is used BEFORE deciding.
+    var moved = document.querySelectorAll('[data-submit]');
+    for (var i = 0; i < moved.length; i++) bar.appendChild(moved[i]);
+  })();
+  // One record backs every pack of a packset — STORE_KEY and TIME_KEY are keyed
+  // on sheet_id, not on the pack — so this page can count and time the WHOLE
+  // instrument without loading a single other pack.
+  function __voteDecidedAll() {
+    var n = 0;
+    for (var k in state) {
+      if (Object.prototype.hasOwnProperty.call(state, k) && state[k] && state[k].decision) n++;
+    }
+    return n;
+  }
+  function __voteSecs() {
+    var per = (typeof __timing !== 'undefined' && __timing && __timing.per) ? __timing.per : null;
+    var out = [];
+    if (!per) return out;
+    for (var k in per) {
+      if (!Object.prototype.hasOwnProperty.call(per, k)) continue;
+      if (!(state[k] && state[k].decision)) continue;
+      if (per[k] > 0) out.push(per[k]);
+    }
+    return out;
+  }
+  function __voteEta(decided, total) {
+    var left = Math.max(0, total - decided);
+    if (!left) return VOTE_DONE.replace('{total}', total);
+    var secs = __voteSecs();
+    if (!secs.length) return '';
+    secs.sort(function (a, b) { return a - b; });
+    var mid = Math.floor(secs.length / 2);
+    var med = (secs.length % 2) ? secs[mid] : (secs[mid - 1] + secs[mid]) / 2;
+    var minutes = Math.max(1, Math.round(med * left / 60));
+    return (secs.length >= 5 ? VOTE_ETA : VOTE_ETA_ROUGH)
+      .replace('{minutes}', minutes).replace('{total}', total);
+  }
+  function __voteProgress() {
+    var total = VOTE_TOTAL || ids.length;
+    var n = VOTE_TOTAL ? __voteDecidedAll() : ids.filter(function (id) {
+      return state[id] && state[id].decision; }).length;
+    if (n > total) n = total;
+    var t = document.getElementById('voteProgText');
+    if (t) t.innerHTML = VOTE_PROGRESS.replace('{n}', '<b>' + n + '</b>')
+                                      .replace('{total}', '<b>' + total + '</b>');
+    var b = document.getElementById('voteProgBar');
+    if (b) b.style.width = (total ? Math.round(100 * n / total) : 0) + '%';
+    var e = document.getElementById('voteProgEta');
+    if (e) e.textContent = __voteEta(n, total);
+  }
+  var __voteOrigTally = tally;
+  tally = function () { __voteOrigTally(); __voteProgress(); };
+  __voteProgress();
+})();
+</script>
+<div class="flowtoast" id="flowToast" role="status"></div>
+</body>
+</html>
