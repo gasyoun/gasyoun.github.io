@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>What our GitHub knows about Sanskrit</title>
+<!-- Composition: The Big Object — one isometric diorama (the dictionary quarter)
+     dominates; data lives on and around the slab.
+     Building heights: entries x 0.00098 px (MW 286,525 -> 280.8px). Silo fill:
+     MW share = 286525/1506452 = 19.0%. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito+Sans:ital,opsz,wght@0,6..12,400;0,6..12,600;0,6..12,800;1,6..12,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --canvas-w: 1920px; --canvas-h: 1080px;
+  --bg:#E8EDEF; --ground:#CFD8DB; --ground-2:#B8C2C6;
+  --ink:#22333B; --ink-muted:#5D6E75;
+  --chart-1:#D9503F; --chart-1-top:#E58272; --chart-1-dark:#A93A2D;
+  --chart-2:#009B7D; --chart-2-top:#4DB49D; --chart-2-dark:#007259;
+  --chart-3:#4A55C8; --chart-3-top:#7A82D8; --chart-3-dark:#363F9B;
+  --chart-4:#B57300; --chart-4-top:#CC9440; --chart-4-dark:#8A5700;
+  --de-emphasis:#AEB9BD;
+  --font-display:'Fredoka',sans-serif; --font-body:'Nunito Sans',sans-serif;
+  --space-1:8px; --space-2:16px; --space-3:24px; --space-4:40px; --space-5:64px;
+}
+html, body { background: var(--bg); }
+body { width: var(--canvas-w); font-family: var(--font-body); color: var(--ink); }
+.canvas {
+  position: relative; width: var(--canvas-w); height: var(--canvas-h); overflow: hidden;
+  background: radial-gradient(ellipse 1300px 560px at 50% 66%, #F3F6F7 0%, var(--bg) 62%);
+}
+.scene { position: absolute; inset: 0; }
+.title-block { position: absolute; left: var(--space-5); top: var(--space-4); width: 780px; }
+.kicker { font: 800 14px/1.2 var(--font-body); text-transform: uppercase; letter-spacing: .06em; color: var(--ink-muted); }
+h1 { font-family: var(--font-display); font-weight: 700; font-size: 62px; line-height: 1.06; margin-top: var(--space-2); }
+.standfirst { margin-top: var(--space-2); font: 400 21px/1.45 var(--font-body); color: var(--ink-muted); width: 700px; }
+.hero-block { position: absolute; right: var(--space-5); top: var(--space-4); width: 744px; min-height: 292px; text-align: right; }
+.hero-num { font-family: var(--font-display); font-weight: 700; font-size: 124px; line-height: 1; letter-spacing: -0.01em; }
+.hero-label { margin-top: var(--space-2); font: 600 22px/1.35 var(--font-body); color: var(--ink); }
+.hero-sub { margin-top: var(--space-1); font: 600 17px/1.3 var(--font-body); color: var(--ink-muted); }
+.hero-bar { margin-top: var(--space-2); margin-left: auto; width: 132px; height: 10px; background: var(--chart-1); }
+.footer { position: absolute; left: var(--space-5); bottom: 24px; max-width: 1080px;
+  background: #FFFFFF; border: 2px solid var(--ink); border-radius: 6px; padding: 10px 16px;
+  font: 400 13px/1.55 var(--font-body); color: var(--ink-muted); }
+.ghost { position: absolute; left: 1096px; top: 344px; font: 700 150px/1 'Devanagari Sangam MN','Noto Sans Devanagari',sans-serif; color: rgba(34,51,59,0.07); }
+svg text { font-family: var(--font-body); }
+.t-name { font-size: 13px; font-weight: 600; fill: var(--ink-muted); }
+.t-val  { font-size: 18px; font-weight: 800; fill: var(--ink); font-family: var(--font-display); }
+.t-sign { font-size: 16px; font-weight: 800; fill: var(--ink); }
+
+/* ===== motion layer (final frame = approved still) ===== */
+.bld-body { transform-box: fill-box; transform-origin: 50% 100%;
+  animation: grow .9s cubic-bezier(.34,1.56,.64,1) backwards; }
+@keyframes grow { from { transform: scaleY(0); } }
+.anim-fade { animation: fadein .4s ease-out backwards; }
+@keyframes fadein { from { opacity: 0; } }
+.anim-softfade { animation: fadein .8s ease-out backwards; animation-delay: .5s; }
+.anim-rise { animation: risef .6s cubic-bezier(.2,.8,.2,1) backwards; }
+@keyframes risef { from { opacity: 0; transform: translateY(16px); } }
+.anim-fillrise { animation: fillrise 1.1s ease-out backwards; animation-delay: 1.9s; }
+@keyframes fillrise { from { transform: translateY(175px); } }
+.drift { animation: drift 9s ease-in-out infinite alternate; }
+.drift2 { animation: drift 11s ease-in-out -4s infinite alternate-reverse; }
+@keyframes drift { to { transform: translate(10px, -6px); } }
+.bob { animation: bob 5s ease-in-out infinite alternate; }
+@keyframes bob { to { transform: translateY(7px); } }
+.title-block { animation: enter .7s cubic-bezier(.2,.8,.2,1) backwards; animation-delay: .1s; }
+.standfirst { animation: enter .7s cubic-bezier(.2,.8,.2,1) backwards; animation-delay: .3s; }
+.hero-num { animation: enter .8s cubic-bezier(.2,.8,.2,1) backwards; animation-delay: 4.3s; }
+.hero-label { animation: enter .5s cubic-bezier(.2,.8,.2,1) backwards; animation-delay: 4.55s; }
+.hero-sub { animation: enter .5s cubic-bezier(.2,.8,.2,1) backwards; animation-delay: 4.7s; }
+.hero-bar { transform-origin: right center; animation: barx .6s cubic-bezier(.2,.8,.2,1) backwards; animation-delay: 4.85s; }
+@keyframes barx { from { transform: scaleX(0); } }
+@keyframes enter { from { opacity: 0; transform: translateY(18px); } }
+.footer { animation: fadein .6s ease-out backwards; animation-delay: 5.3s; }
+.ghost { animation: fadein 1.2s ease-out backwards; animation-delay: .3s; }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <svg class="scene" viewBox="0 0 1920 1080" width="1920" height="1080">
+    <defs>
+      <pattern id="wins" width="30" height="40" patternUnits="userSpaceOnUse" patternTransform="skewY(30)">
+        <rect x="9" y="10" width="12" height="20" fill="rgba(34,51,59,0.18)"/>
+      </pattern>
+      <clipPath id="siloClip"><path d="M 1595.0,750.0 V 960.0 A 55.0 15 0 0 0 1705.0,960.0 V 750.0 Z"/></clipPath>
+    </defs>
+    <ellipse cx="1080" cy="1042" rx="760" ry="40" fill="rgba(34,51,59,0.10)"/>
+    <polygon points="1159.2,1565.0 76.7,940.0 76.7,966.0 1159.2,1591.0" fill="var(--ground-2)"/>
+    <polygon points="1921.3,1125.0 1159.2,1565.0 1159.2,1591.0 1921.3,1151.0" fill="var(--ground-2)"/>
+    <polygon points="1921.3,985.0 1921.3,1125.0 1921.3,1151.0 1921.3,1011.0" fill="var(--ground-2)"/>
+    <polygon points="960.0,430.0 1921.3,985.0 1921.3,1125.0 1159.2,1565.0 76.7,940.0" fill="var(--ground)"/>
+    <g class="cluster anim-softfade">
+    <polygon points="890.7,516.0 928.8,538.0 890.7,560.0 852.6,538.0" fill="#E2E7E9"/>
+    <polygon points="928.8,538.0 890.7,560.0 890.7,574.0 928.8,552.0" fill="var(--de-emphasis)"/>
+    <polygon points="852.6,538.0 890.7,560.0 890.7,574.0 852.6,552.0" fill="#96A2A6"/></g><g class="cluster anim-softfade">
+    <polygon points="1020.6,525.0 1060.5,548.0 1020.6,571.0 980.8,548.0" fill="#E2E7E9"/>
+    <polygon points="1060.5,548.0 1020.6,571.0 1020.6,601.0 1060.5,578.0" fill="var(--de-emphasis)"/>
+    <polygon points="980.8,548.0 1020.6,571.0 1020.6,601.0 980.8,578.0" fill="#96A2A6"/></g><g class="cluster anim-softfade">
+    <polygon points="1167.8,598.0 1198.2,615.5 1167.8,633.0 1137.5,615.5" fill="#E2E7E9"/>
+    <polygon points="1198.2,615.5 1167.8,633.0 1167.8,645.0 1198.2,627.5" fill="var(--de-emphasis)"/>
+    <polygon points="1137.5,615.5 1167.8,633.0 1167.8,645.0 1137.5,627.5" fill="#96A2A6"/></g><g class="cluster anim-softfade">
+    <polygon points="1202.5,707.0 1246.6,732.5 1202.5,758.0 1158.3,732.5" fill="#E2E7E9"/>
+    <polygon points="1246.6,732.5 1202.5,758.0 1202.5,771.0 1246.6,745.5" fill="var(--de-emphasis)"/>
+    <polygon points="1158.3,732.5 1202.5,758.0 1202.5,771.0 1158.3,745.5" fill="#96A2A6"/></g><g class="cluster anim-softfade">
+    <polygon points="1367.0,727.0 1406.0,749.5 1367.0,772.0 1328.0,749.5" fill="#E2E7E9"/>
+    <polygon points="1406.0,749.5 1367.0,772.0 1367.0,800.0 1406.0,777.5" fill="var(--de-emphasis)"/>
+    <polygon points="1328.0,749.5 1367.0,772.0 1367.0,800.0 1328.0,777.5" fill="#96A2A6"/></g><g class="cluster anim-softfade">
+    <polygon points="1514.2,784.0 1544.5,801.5 1514.2,819.0 1483.9,801.5" fill="#E2E7E9"/>
+    <polygon points="1544.5,801.5 1514.2,819.0 1514.2,845.0 1544.5,827.5" fill="var(--de-emphasis)"/>
+    <polygon points="1483.9,801.5 1514.2,819.0 1514.2,845.0 1483.9,827.5" fill="#96A2A6"/></g><g class="cluster anim-softfade">
+    <polygon points="1566.2,909.0 1600.8,929.0 1566.2,949.0 1531.6,929.0" fill="#E2E7E9"/>
+    <polygon points="1600.8,929.0 1566.2,949.0 1566.2,960.0 1600.8,940.0" fill="var(--de-emphasis)"/>
+    <polygon points="1531.6,929.0 1566.2,949.0 1566.2,960.0 1531.6,940.0" fill="#96A2A6"/></g><g class="cluster anim-softfade">
+    <polygon points="1722.1,927.0 1753.3,945.0 1722.1,963.0 1690.9,945.0" fill="#E2E7E9"/>
+    <polygon points="1753.3,945.0 1722.1,963.0 1722.1,986.0 1753.3,968.0" fill="var(--de-emphasis)"/>
+    <polygon points="1690.9,945.0 1722.1,963.0 1722.1,986.0 1690.9,968.0" fill="#96A2A6"/></g><g class="cluster anim-softfade">
+    <polygon points="1739.4,1028.0 1780.1,1051.5 1739.4,1075.0 1698.7,1051.5" fill="#E2E7E9"/>
+    <polygon points="1780.1,1051.5 1739.4,1075.0 1739.4,1087.0 1780.1,1063.5" fill="var(--de-emphasis)"/>
+    <polygon points="1698.7,1051.5 1739.4,1075.0 1739.4,1087.0 1698.7,1063.5" fill="#96A2A6"/></g><g class="cluster anim-softfade">
+    <polygon points="942.7,638.0 978.2,658.5 942.7,679.0 907.2,658.5" fill="#E2E7E9"/>
+    <polygon points="978.2,658.5 942.7,679.0 942.7,691.0 978.2,670.5" fill="var(--de-emphasis)"/>
+    <polygon points="907.2,658.5 942.7,679.0 942.7,691.0 907.2,670.5" fill="#96A2A6"/></g><g class="cluster anim-softfade">
+    <polygon points="1306.4,847.0 1350.6,872.5 1306.4,898.0 1262.2,872.5" fill="#E2E7E9"/>
+    <polygon points="1350.6,872.5 1306.4,898.0 1306.4,921.0 1350.6,895.5" fill="var(--de-emphasis)"/>
+    <polygon points="1262.2,872.5 1306.4,898.0 1306.4,921.0 1262.2,895.5" fill="#96A2A6"/></g><g class="cluster anim-softfade">
+    <polygon points="1514.2,982.0 1544.5,999.5 1514.2,1017.0 1483.9,999.5" fill="#E2E7E9"/>
+    <polygon points="1544.5,999.5 1514.2,1017.0 1514.2,1045.0 1544.5,1027.5" fill="var(--de-emphasis)"/>
+    <polygon points="1483.9,999.5 1514.2,1017.0 1514.2,1045.0 1483.9,1027.5" fill="#96A2A6"/></g><g class="cluster anim-softfade">
+    <polygon points="1072.6,728.0 1104.6,746.5 1072.6,765.0 1040.5,746.5" fill="#E2E7E9"/>
+    <polygon points="1104.6,746.5 1072.6,765.0 1072.6,782.0 1104.6,763.5" fill="var(--de-emphasis)"/>
+    <polygon points="1040.5,746.5 1072.6,765.0 1072.6,782.0 1040.5,763.5" fill="#96A2A6"/></g><g class="cluster anim-softfade">
+    <polygon points="1583.5,800.0 1630.3,827.0 1583.5,854.0 1536.8,827.0" fill="#E2E7E9"/>
+    <polygon points="1630.3,827.0 1583.5,854.0 1583.5,884.0 1630.3,857.0" fill="var(--de-emphasis)"/>
+    <polygon points="1536.8,827.0 1583.5,854.0 1583.5,884.0 1536.8,857.0" fill="#96A2A6"/></g>
+    <path class="road anim-fade" style="animation-delay:0.6s" d="M 596.3,960.0 L 1427.6,960.0" stroke="var(--ink-muted)" stroke-width="3" stroke-dasharray="14 12" fill="none"/>
+    <g transform="translate(890.7,1290.0) scale(1.1)" class="prop">
+  <line x1="0" y1="0" x2="0" y2="-26" stroke="var(--ink)" stroke-width="3"/>
+  <path d="M 0,-58 L 20,-40 L 0,-22 L -20,-40 Z" fill="var(--chart-2-top)" stroke="var(--ink)" stroke-width="1.5"/>
+  <path d="M 0,-44 L 24,-24 L 0,-4 L -24,-24 Z" fill="var(--chart-2)" stroke="var(--ink)" stroke-width="1.5"/>
+</g><g transform="translate(1427.6,1160.0) scale(0.9)" class="prop">
+  <line x1="0" y1="0" x2="0" y2="-26" stroke="var(--ink)" stroke-width="3"/>
+  <path d="M 0,-58 L 20,-40 L 0,-22 L -20,-40 Z" fill="var(--chart-2-top)" stroke="var(--ink)" stroke-width="1.5"/>
+  <path d="M 0,-44 L 24,-24 L 0,-4 L -24,-24 Z" fill="var(--chart-2)" stroke="var(--ink)" stroke-width="1.5"/>
+</g><g transform="translate(717.5,630.0) scale(0.8)" class="prop">
+  <line x1="0" y1="0" x2="0" y2="-26" stroke="var(--ink)" stroke-width="3"/>
+  <path d="M 0,-58 L 20,-40 L 0,-22 L -20,-40 Z" fill="var(--chart-2-top)" stroke="var(--ink)" stroke-width="1.5"/>
+  <path d="M 0,-44 L 24,-24 L 0,-4 L -24,-24 Z" fill="var(--chart-2)" stroke="var(--ink)" stroke-width="1.5"/>
+</g><g transform="translate(336.5,930.0)" class="prop"><rect x="-21" y="-12" width="42" height="11" rx="2" fill="#D7DDE0" stroke="var(--ink)" stroke-width="1.5" transform="rotate(0)"/><rect x="-21" y="-26" width="42" height="11" rx="2" fill="var(--chart-4-top)" stroke="var(--ink)" stroke-width="1.5" transform="rotate(-2)"/><rect x="-21" y="-40" width="42" height="11" rx="2" fill="var(--chart-3-top)" stroke="var(--ink)" stroke-width="1.5" transform="rotate(2)"/><rect x="-21" y="-54" width="42" height="11" rx="2" fill="#E2E7E9" stroke="var(--ink)" stroke-width="1.5" transform="rotate(-1)"/></g><g transform="translate(1531.6,1000.0)" class="prop"><rect x="-21" y="-12" width="42" height="11" rx="2" fill="#D7DDE0" stroke="var(--ink)" stroke-width="1.5" transform="rotate(0)"/><rect x="-21" y="-26" width="42" height="11" rx="2" fill="var(--chart-4-top)" stroke="var(--ink)" stroke-width="1.5" transform="rotate(-2)"/><rect x="-21" y="-40" width="42" height="11" rx="2" fill="var(--chart-3-top)" stroke="var(--ink)" stroke-width="1.5" transform="rotate(2)"/><rect x="-21" y="-54" width="42" height="11" rx="2" fill="#E2E7E9" stroke="var(--ink)" stroke-width="1.5" transform="rotate(-1)"/></g>
+    
+  <g class="bld">
+    <g class="bld-body" style="animation-delay:0.8s">
+    <polygon points="440.4,539.2 509.7,579.2 440.4,619.2 371.1,579.2" fill="var(--chart-1-top)"/>
+    <polygon points="509.7,579.2 440.4,619.2 440.4,900.0 509.7,860.0" fill="var(--chart-1)"/>
+    <polygon points="509.7,579.2 440.4,619.2 440.4,900.0 509.7,860.0" fill="url(#wins)"/>
+    <polygon points="371.1,579.2 440.4,619.2 440.4,900.0 371.1,860.0" fill="var(--chart-1-dark)"/>
+    </g>
+    <g class="tag anim-fade" style="animation-delay:1.55s" transform="translate(440.4,539.2)">
+      <line x1="0" y1="-46" x2="0" y2="-2" stroke="var(--ink)" stroke-width="2"/>
+      <rect x="-80" y="-96" width="160" height="50" rx="6" fill="#FFFFFF" stroke="var(--ink)" stroke-width="2"/>
+      <text x="0" y="-78" text-anchor="middle" class="t-name">Monier-Williams</text>
+      <text x="0" y="-57" text-anchor="middle" class="t-val">286,525</text>
+    </g>
+  </g>
+  <g class="bld">
+    <g class="bld-body" style="animation-delay:0.92s">
+    <polygon points="613.6,652.9 682.9,692.9 613.6,732.9 544.3,692.9" fill="var(--chart-2-top)"/>
+    <polygon points="682.9,692.9 613.6,732.9 613.6,900.0 682.9,860.0" fill="var(--chart-2)"/>
+    <polygon points="682.9,692.9 613.6,732.9 613.6,900.0 682.9,860.0" fill="url(#wins)"/>
+    <polygon points="544.3,692.9 613.6,732.9 613.6,900.0 544.3,860.0" fill="var(--chart-2-dark)"/>
+    </g>
+    <g class="tag anim-fade" style="animation-delay:1.67s" transform="translate(613.6,652.9)">
+      <line x1="0" y1="-46" x2="0" y2="-2" stroke="var(--ink)" stroke-width="2"/>
+      <rect x="-80" y="-96" width="160" height="50" rx="6" fill="#FFFFFF" stroke="var(--ink)" stroke-width="2"/>
+      <text x="0" y="-78" text-anchor="middle" class="t-name">Petersburger Wb.</text>
+      <text x="0" y="-57" text-anchor="middle" class="t-val">170,556</text>
+    </g>
+  </g>
+  <g class="bld">
+    <g class="bld-body" style="animation-delay:1.04s">
+    <polygon points="786.8,699.1 856.1,739.1 786.8,779.1 717.5,739.1" fill="var(--chart-3-top)"/>
+    <polygon points="856.1,739.1 786.8,779.1 786.8,900.0 856.1,860.0" fill="var(--chart-3)"/>
+    <polygon points="856.1,739.1 786.8,779.1 786.8,900.0 856.1,860.0" fill="url(#wins)"/>
+    <polygon points="717.5,739.1 786.8,779.1 786.8,900.0 717.5,860.0" fill="var(--chart-3-dark)"/>
+    </g>
+    <g class="tag anim-fade" style="animation-delay:1.79s" transform="translate(786.8,699.1)">
+      <line x1="0" y1="-46" x2="0" y2="-2" stroke="var(--ink)" stroke-width="2"/>
+      <rect x="-80" y="-96" width="160" height="50" rx="6" fill="#FFFFFF" stroke="var(--ink)" stroke-width="2"/>
+      <text x="0" y="-78" text-anchor="middle" class="t-name">PW, kürzere Fassung</text>
+      <text x="0" y="-57" text-anchor="middle" class="t-val">123,366</text>
+    </g>
+  </g>
+  <g class="bld">
+    <g class="bld-body" style="animation-delay:1.16s">
+    <polygon points="960.0,731.0 1029.3,771.0 960.0,811.0 890.7,771.0" fill="var(--chart-4-top)"/>
+    <polygon points="1029.3,771.0 960.0,811.0 960.0,900.0 1029.3,860.0" fill="var(--chart-4)"/>
+    <polygon points="1029.3,771.0 960.0,811.0 960.0,900.0 1029.3,860.0" fill="url(#wins)"/>
+    <polygon points="890.7,771.0 960.0,811.0 960.0,900.0 890.7,860.0" fill="var(--chart-4-dark)"/>
+    </g>
+    <g class="tag anim-fade" style="animation-delay:1.91s" transform="translate(960.0,731.0)">
+      <line x1="0" y1="-46" x2="0" y2="-2" stroke="var(--ink)" stroke-width="2"/>
+      <rect x="-80" y="-96" width="160" height="50" rx="6" fill="#FFFFFF" stroke="var(--ink)" stroke-width="2"/>
+      <text x="0" y="-78" text-anchor="middle" class="t-name">Amarakośa</text>
+      <text x="0" y="-57" text-anchor="middle" class="t-val">90,847</text>
+    </g>
+  </g>
+  <g class="bld">
+    <g class="bld-body" style="animation-delay:1.28s">
+    <polygon points="1133.2,765.8 1202.5,805.8 1133.2,845.8 1063.9,805.8" fill="#D7DDE0"/>
+    <polygon points="1202.5,805.8 1133.2,845.8 1133.2,900.0 1202.5,860.0" fill="var(--de-emphasis)"/>
+    
+    <polygon points="1063.9,805.8 1133.2,845.8 1133.2,900.0 1063.9,860.0" fill="#96A2A6"/>
+    </g>
+    <g class="tag anim-fade" style="animation-delay:2.03s" transform="translate(1133.2,765.8)">
+      <line x1="0" y1="-46" x2="0" y2="-2" stroke="var(--ink)" stroke-width="2"/>
+      <rect x="-80" y="-96" width="160" height="50" rx="6" fill="#FFFFFF" stroke="var(--ink)" stroke-width="2"/>
+      <text x="0" y="-78" text-anchor="middle" class="t-name">mw72</text>
+      <text x="0" y="-57" text-anchor="middle" class="t-val">55,340</text>
+    </g>
+  </g>
+  <g class="bld">
+    <g class="bld-body" style="animation-delay:1.4s">
+    <polygon points="1306.4,767.6 1375.7,807.6 1306.4,847.6 1237.1,807.6" fill="#D7DDE0"/>
+    <polygon points="1375.7,807.6 1306.4,847.6 1306.4,900.0 1375.7,860.0" fill="var(--de-emphasis)"/>
+    
+    <polygon points="1237.1,807.6 1306.4,847.6 1306.4,900.0 1237.1,860.0" fill="#96A2A6"/>
+    </g>
+    <g class="tag anim-fade" style="animation-delay:2.15s" transform="translate(1306.4,767.6)">
+      <line x1="0" y1="-46" x2="0" y2="-2" stroke="var(--ink)" stroke-width="2"/>
+      <rect x="-80" y="-96" width="160" height="50" rx="6" fill="#FFFFFF" stroke="var(--ink)" stroke-width="2"/>
+      <text x="0" y="-78" text-anchor="middle" class="t-name">lrv</text>
+      <text x="0" y="-57" text-anchor="middle" class="t-val">53,440</text>
+    </g>
+  </g>
+  <g class="bld">
+    <g class="bld-body" style="animation-delay:1.52s">
+    <polygon points="1479.6,770.9 1548.9,810.9 1479.6,850.9 1410.3,810.9" fill="#D7DDE0"/>
+    <polygon points="1548.9,810.9 1479.6,850.9 1479.6,900.0 1548.9,860.0" fill="var(--de-emphasis)"/>
+    
+    <polygon points="1410.3,810.9 1479.6,850.9 1479.6,900.0 1410.3,860.0" fill="#96A2A6"/>
+    </g>
+    <g class="tag anim-fade" style="animation-delay:2.27s" transform="translate(1479.6,770.9)">
+      <line x1="0" y1="-46" x2="0" y2="-2" stroke="var(--ink)" stroke-width="2"/>
+      <rect x="-80" y="-96" width="160" height="50" rx="6" fill="#FFFFFF" stroke="var(--ink)" stroke-width="2"/>
+      <text x="0" y="-78" text-anchor="middle" class="t-name">vcp</text>
+      <text x="0" y="-57" text-anchor="middle" class="t-val">50,135</text>
+    </g>
+  </g>
+    <g id="silo">
+  <g class="anim-rise" style="animation-delay:1.7s">
+  <path d="M 1595.0,750.0 V 960.0 A 55.0 15 0 0 0 1705.0,960.0 V 750.0" fill="#C6CED1" stroke="var(--ink)" stroke-width="2"/>
+  <ellipse cx="1650.0" cy="750.0" rx="55.0" ry="15" fill="#D7DDE0" stroke="var(--ink)" stroke-width="2"/>
+  </g>
+  <g clip-path="url(#siloClip)"><g class="anim-fillrise">
+  <rect x="1595.0" y="920.1" width="110" height="54.9" fill="var(--chart-1)"/>
+  <line x1="1595.0" y1="920.1" x2="1705.0" y2="920.1" stroke="var(--chart-1-dark)" stroke-width="2.5"/>
+  </g></g>
+</g>
+    <g class="tag anim-fade" style="animation-delay:3.3s" transform="translate(1560,760)">
+  <line x1="30" y1="46" x2="66" y2="14" stroke="var(--ink)" stroke-width="2"/>
+  <rect x="-85" y="0" width="170" height="50" rx="6" fill="#FFFFFF" stroke="var(--ink)" stroke-width="2"/>
+  <text x="0" y="20" text-anchor="middle" class="t-name">MW share of all entries</text>
+  <text x="0" y="41" text-anchor="middle" class="t-val">19.0%</text>
+</g>
+    <g class="sign anim-fade" style="animation-delay:2.9s" transform="translate(1107.0,1040.0)">
+  <line x1="0" y1="0" x2="0" y2="-105" stroke="var(--ink)" stroke-width="5"/>
+  <rect x="-110.0" y="-152" width="220" height="52" rx="6" fill="#FFFFFF" stroke="var(--ink)" stroke-width="2.5"/>
+  <path d="M 110.0,-152 L 126.0,-126 L 110.0,-100 Z" fill="#FFFFFF" stroke="var(--ink)" stroke-width="2.5"/>
+  <text x="6" y="-118" text-anchor="middle" class="t-sign">45 dictionaries</text>
+</g>
+    <g class="sign anim-fade" style="animation-delay:3.1s" transform="translate(1395.0,1040.0)">
+  <line x1="0" y1="0" x2="0" y2="-135" stroke="var(--ink)" stroke-width="5"/>
+  <rect x="-150.0" y="-182" width="300" height="52" rx="6" fill="#FFFFFF" stroke="var(--ink)" stroke-width="2.5"/>
+  <path d="M 150.0,-182 L 166.0,-156 L 150.0,-130 Z" fill="#FFFFFF" stroke="var(--ink)" stroke-width="2.5"/>
+  <text x="6" y="-148" text-anchor="middle" class="t-sign">431,596 unique headwords</text>
+</g>
+    <g class="figure anim-softfade" transform="translate(760.0,960.0)">
+  <circle cx="0" cy="-30" r="6" fill="var(--ink)"/>
+  <path d="M 0,-24 V -10 M 0,-14 L -7,-2 M 0,-14 L 7,-2 M 0,-10 L -6,0 M 0,-10 L 6,0" stroke="var(--ink)" stroke-width="3" fill="none" stroke-linecap="round"/>
+</g>
+    <g class="drift"><g transform="translate(920,130) scale(1.0)" fill="#FFFFFF" opacity="0.9" class="sky">
+  <ellipse cx="0" cy="0" rx="46" ry="16"/><ellipse cx="-22" cy="-8" rx="24" ry="13"/><ellipse cx="18" cy="-9" rx="27" ry="14"/>
+</g></g>
+    <g class="drift2"><g transform="translate(1560,310) scale(0.8)" fill="#FFFFFF" opacity="0.9" class="sky">
+  <ellipse cx="0" cy="0" rx="46" ry="16"/><ellipse cx="-22" cy="-8" rx="24" ry="13"/><ellipse cx="18" cy="-9" rx="27" ry="14"/>
+</g></g>
+    <g class="drift"><g transform="translate(150,560) scale(0.7)" fill="#FFFFFF" opacity="0.9" class="sky">
+  <ellipse cx="0" cy="0" rx="46" ry="16"/><ellipse cx="-22" cy="-8" rx="24" ry="13"/><ellipse cx="18" cy="-9" rx="27" ry="14"/>
+</g></g>
+    <g class="bob"><g transform="translate(1035,205)" class="sky">
+  <path d="M 0,-38 C 17,-38 24,-24 24,-12 C 24,2 10,12 4,18 L -4,18 C -10,12 -24,2 -24,-12 C -24,-24 -17,-38 0,-38 Z" fill="var(--chart-1-top)" stroke="var(--ink)" stroke-width="2"/>
+  <path d="M -12,-30 C -6,-20 -6,-4 -2,16 M 12,-30 C 6,-20 6,-4 2,16" stroke="var(--chart-1-dark)" stroke-width="2" fill="none"/>
+  <rect x="-6" y="22" width="12" height="9" rx="2" fill="#C6CED1" stroke="var(--ink)" stroke-width="2"/>
+  <line x1="-5" y1="18" x2="-5" y2="22" stroke="var(--ink)" stroke-width="1.5"/><line x1="5" y1="18" x2="5" y2="22" stroke="var(--ink)" stroke-width="1.5"/>
+</g></g>
+  </svg>
+  <div class="ghost" aria-hidden="true">संस्कृत</div>
+  <header class="title-block">
+    <div class="kicker">The Sanskrit estate on GitHub · dictionary quarter · counted 28 Aug 2026</div>
+    <h1>What our GitHub knows about Sanskrit</h1>
+    <p class="standfirst">One city block of the estate: the digitized Sanskrit
+    dictionaries, counted entry by entry from the sources. The skyline is the
+    ranking; every rooftop is a real count.</p>
+  </header>
+  <div class="hero-block" data-hero>
+    <div class="hero-num">1,506,452</div>
+    <div class="hero-label">dictionary entries across 45 digitized dictionaries</div>
+    <div class="hero-sub">from the Cologne scans to the linked data — one git organisation</div>
+    <div class="hero-bar"></div>
+  </div>
+  <footer class="footer">
+    Counted 28 Aug 2026 from the local clones — csl-orig/v02: 45 dictionaries · 1,506,452 entries<br>
+    SanskritSpellCheck sanhw1: 431,596 unique headwords · kosha: 111 datasets · SanskritGrammar: 270 chapters<br>
+    sanskrit-lexicon.org · dictionary codes as in csl-orig/v02 · CC BY-SA 4.0
+  </footer>
+</div>
+</body>
+</html>
