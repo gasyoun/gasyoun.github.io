@@ -1,0 +1,400 @@
+{
+  "counted": "29.08.2026",
+  "ashtadhyayi": {
+    "full_8book_text": false,
+    "candidates": [
+      {
+        "path": "C:\\Users\\user\\Documents\\GitHub\\ashtadhyayi-com-data",
+        "exists": false
+      },
+      {
+        "path": "C:\\Users\\user\\Documents\\GitHub\\ashtadhyayi",
+        "exists": false
+      },
+      {
+        "path": "csl-json\\ashtadhyayi.com",
+        "exists": true
+      }
+    ],
+    "sanskritgrammar_hits": [
+      "SanskritGrammar\\Concordance\\UshaSanka_Ph.D_2014\\Alphabetical Ashtadhyayi.docx",
+      "SanskritGrammar\\Concordance\\UshaSanka_Ph.D_2014\\Alphabetical Ashtadhyayi.mdx",
+      "SanskritGrammar\\Concordance\\UshaSanka_Ph.D_2014\\Ashtadhyayi- Anuvrittis - Copy.docx",
+      "SanskritGrammar\\Concordance\\UshaSanka_Ph.D_2014\\Ashtadhyayi- Anuvrittis - Copy.mdx",
+      "SanskritGrammar\\Concordance\\UshaSanka_Ph.D_2014\\Ashtadhyayi- Anuvrittis.docx",
+      "SanskritGrammar\\Concordance\\UshaSanka_Ph.D_2014\\Ashtadhyayi- Anuvrittis.mdx",
+      "SanskritGrammar\\Concordance\\UshaSanka_Ph.D_2014\\Ashtadhyayi-Complete-SutraVyakhya-ManyVrittis.docx"
+    ],
+    "decision": "REPLACE with somadeva Kathasaritsagara 18+18 (H3706)"
+  },
+  "somadeva": {
+    "path": "somadeva/chapters_san + chapters_rus",
+    "san_files": 18,
+    "rus_files": 18,
+    "san_lines": 44027,
+    "rus_lines": 3717,
+    "chapters": [
+      {
+        "file": "kathasaritsagara_san_cleant_chap_01.txt",
+        "lines": 1691
+      },
+      {
+        "file": "kathasaritsagara_san_cleant_chap_02.txt",
+        "lines": 1779
+      },
+      {
+        "file": "kathasaritsagara_san_cleant_chap_03.txt",
+        "lines": 2429
+      },
+      {
+        "file": "kathasaritsagara_san_cleant_chap_04.txt",
+        "lines": 1024
+      },
+      {
+        "file": "kathasaritsagara_san_cleant_chap_05.txt",
+        "lines": 1677
+      },
+      {
+        "file": "kathasaritsagara_san_cleant_chap_06.txt",
+        "lines": 3106
+      },
+      {
+        "file": "kathasaritsagara_san_cleant_chap_07.txt",
+        "lines": 3299
+      },
+      {
+        "file": "kathasaritsagara_san_cleant_chap_08.txt",
+        "lines": 3260
+      },
+      {
+        "file": "kathasaritsagara_san_cleant_chap_09.txt",
+        "lines": 3525
+      },
+      {
+        "file": "kathasaritsagara_san_cleant_chap_10.txt",
+        "lines": 4317
+      },
+      {
+        "file": "kathasaritsagara_san_cleant_chap_11.txt",
+        "lines": 241
+      },
+      {
+        "file": "kathasaritsagara_san_cleant_chap_12.txt",
+        "lines": 10078
+      },
+      {
+        "file": "kathasaritsagara_san_cleant_chap_13.txt",
+        "lines": 447
+      },
+      {
+        "file": "kathasaritsagara_san_cleant_chap_14.txt",
+        "lines": 1281
+      },
+      {
+        "file": "kathasaritsagara_san_cleant_chap_15.txt",
+        "lines": 631
+      },
+      {
+        "file": "kathasaritsagara_san_cleant_chap_16.txt",
+        "lines": 861
+      },
+      {
+        "file": "kathasaritsagara_san_cleant_chap_17.txt",
+        "lines": 2061
+      },
+      {
+        "file": "kathasaritsagara_san_cleant_chap_18.txt",
+        "lines": 2320
+      }
+    ],
+    "ok": true
+  },
+  "ors": {
+    "path": "ORS-FAQ/Tukan_stats.md",
+    "present": true,
+    "missing": [],
+    "ok": true,
+    "numbers": {
+      "dialogs": 3064,
+      "students": 2794,
+      "messages": 46325,
+      "pairs": 38280,
+      "pay": 2553,
+      "price": 1744,
+      "signup": 967
+    },
+    "personal_data": false,
+    "note": "public aggregates only; no names"
+  },
+  "prefaces": {
+    "rows": [
+      {
+        "repo": "prefaces_ieg",
+        "files": 184,
+        "present": true
+      },
+      {
+        "repo": "prefaces_lan",
+        "files": 64,
+        "present": true
+      },
+      {
+        "repo": "prefaces_pe",
+        "files": 59,
+        "present": true
+      },
+      {
+        "repo": "prefaces_pgn",
+        "files": 35,
+        "present": true
+      },
+      {
+        "repo": "prefaces_ae",
+        "files": 18,
+        "present": true
+      },
+      {
+        "repo": "prefaces_gst",
+        "files": 39,
+        "present": true
+      },
+      {
+        "repo": "prefaces_snp",
+        "files": 26,
+        "present": true
+      }
+    ],
+    "ok": true
+  },
+  "observatory": {
+    "present": true,
+    "md": 545,
+    "html": 377,
+    "json": 795,
+    "reportish_md": 3,
+    "sample": [
+      ".ai_state.md",
+      "AGENTS.md",
+      "CHANGELOG.md",
+      "CLAUDE.md",
+      "CODE_OF_CONDUCT.md",
+      "CONTRIBUTING.md",
+      "DATA_LICENSE.md",
+      "gasuns-cologne-30-report.md",
+      "paper-obs-t-error-typology.md",
+      "README.md",
+      "STATUS.md",
+      "CLAUDE.md"
+    ],
+    "ok": true
+  },
+  "visualdcs": {
+    "present": true,
+    "derived_dir": true,
+    "data_files": 978,
+    "by_ext": {
+      ".json": 61,
+      ".txt": 166,
+      ".tsv": 13,
+      ".csv": 736,
+      ".jsonl": 2
+    },
+    "sample": [
+      ".mcp.json",
+      "dcs_lemma_summary.json",
+      "dcs_published_figures.json",
+      "merge_log.txt",
+      "morph_pn.json",
+      "passage_library.json",
+      "prefix_clean.json",
+      "tense_case_data.json",
+      "verb_classes.json",
+      ".repowise\\knowledge-graph.json",
+      ".repowise\\mcp.json",
+      ".repowise\\state.json"
+    ],
+    "ok": true
+  },
+  "countvowels": {
+    "path": "SanskritSpellCheck/CountVowels",
+    "rows": [
+      {
+        "file": "atharvaveda-CVC-SLP1.txt",
+        "lines": 18510
+      },
+      {
+        "file": "atharvaveda.txt",
+        "lines": 18510
+      },
+      {
+        "file": "mbh-CVC-SLP1.txt",
+        "lines": 224885
+      },
+      {
+        "file": "mbh.txt",
+        "lines": 224885
+      },
+      {
+        "file": "megha-CVC-SLP1.txt",
+        "lines": 4
+      },
+      {
+        "file": "meghadhuta-CVC-SLP1.txt",
+        "lines": 611
+      },
+      {
+        "file": "meghadhuta.txt",
+        "lines": 1225
+      },
+      {
+        "file": "ramayana-CVC-SLP1.txt",
+        "lines": 38060
+      },
+      {
+        "file": "ramayana.txt",
+        "lines": 38060
+      },
+      {
+        "file": "rigveda-CVC-SLP1.txt",
+        "lines": 22082
+      }
+    ],
+    "ok": true
+  },
+  "o_vs_O": {
+    "hits": [
+      {
+        "path": "SanskritSpellCheck\\ORTHO_DRIFT_ROADMAP.md",
+        "lines": 11890
+      },
+      {
+        "path": "SanskritSpellCheck\\detectors\\ortho_drift.py",
+        "lines": 23411
+      },
+      {
+        "path": "SanskritSpellCheck\\docs\\ORTHO_DRIFT_FINDINGS.md",
+        "lines": 36837
+      },
+      {
+        "path": "SanskritSpellCheck\\o_vs_O\\o_vs_O.html",
+        "lines": 4941738
+      },
+      {
+        "path": "SanskritSpellCheck\\o_vs_O\\o_vs_O.php",
+        "lines": 3634
+      },
+      {
+        "path": "SanskritSpellCheck\\o_vs_O\\o_vs_O.txt",
+        "lines": 20185
+      },
+      {
+        "path": "SanskritSpellCheck\\o_vs_O\\o_vs_O1.txt",
+        "lines": 21990
+      },
+      {
+        "path": "SanskritSpellCheck\\o_vs_O\\o_vs_O2.txt",
+        "lines": 3884
+      },
+      {
+        "path": "SanskritSpellCheck\\o_vs_O\\o_vs_O_sanhw2.php",
+        "lines": 4067
+      },
+      {
+        "path": "SanskritSpellCheck\\papers\\A37_ortho_drift_paper.md",
+        "lines": 30692
+      },
+      {
+        "path": "SanskritSpellCheck\\zenodo_dataset_v1\\data\\o_vs_O_evaluation_pairs.txt",
+        "lines": 3884
+      },
+      {
+        "path": "SanskritSpellCheck\\o_vs_O\\backup\\o_vs_O.html",
+        "lines": 4941738
+      },
+      {
+        "path": "SanskritSpellCheck\\o_vs_O\\backup\\o_vs_O.php",
+        "lines": 2789
+      },
+      {
+        "path": "SanskritSpellCheck\\o_vs_O\\backup\\o_vs_O.txt",
+        "lines": 20185
+      },
+      {
+        "path": "SanskritSpellCheck\\o_vs_O\\output1\\o_vs_O1.txt",
+        "lines": 22028
+      },
+      {
+        "path": "SanskritSpellCheck\\o_vs_O\\output1\\o_vs_O2.txt",
+        "lines": 5858
+      },
+      {
+        "path": "SanskritSpellCheck\\o_vs_O\\output2\\o_vs_O1.txt",
+        "lines": 22059
+      },
+      {
+        "path": "SanskritSpellCheck\\o_vs_O\\output2\\o_vs_O2.txt",
+        "lines": 19207
+      }
+    ],
+    "ok": true
+  },
+  "fuzzyalpha": {
+    "hits": [
+      {
+        "path": "SanskritSpellCheck\\fuzzyalpha\\inm-fuzzyalpha.txt",
+        "bytes": 34561
+      },
+      {
+        "path": "SanskritSpellCheck\\fuzzyalpha\\pui-fuzzyalpha.html",
+        "bytes": 322508
+      },
+      {
+        "path": "SanskritSpellCheck\\fuzzyalpha\\pui-fuzzyalpha.txt",
+        "bytes": 303436
+      },
+      {
+        "path": "SanskritSpellCheck\\fuzzyalpha\\pui-fuzzybeta.txt",
+        "bytes": 288698
+      },
+      {
+        "path": "SanskritSpellCheck\\fuzzyalpha\\VEI fuzzyalpha.htm",
+        "bytes": 35625
+      },
+      {
+        "path": "SanskritSpellCheck\\fuzzyalpha\\vei-fuzzyalpha.txt",
+        "bytes": 33088
+      },
+      {
+        "path": "SanskritSpellCheck\\fuzzyalpha\\vei-fuzzybeta.txt",
+        "bytes": 33298
+      }
+    ],
+    "ok": true
+  },
+  "bookindex": {
+    "path": "BookIndex",
+    "md": 5839,
+    "html": 719,
+    "json": 584,
+    "ok": true
+  },
+  "sorting": {
+    "path": "SanskritSorting",
+    "files": 491,
+    "sample": [
+      ".gitattributes",
+      ".gitignore",
+      ".mcp.json",
+      ".pre-commit-config.yaml",
+      "296.txt",
+      "accent_old2new.php",
+      "addheader.php",
+      "ajax1.php",
+      "conf.php",
+      "dev-slp.php",
+      "dhatulistconverter.php",
+      "folderconverter21.php"
+    ],
+    "ok": true
+  }
+}

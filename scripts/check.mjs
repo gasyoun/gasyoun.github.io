@@ -6,11 +6,26 @@ import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const inf = path.join(root, "infographics");
-const built = JSON.parse(
-  fs.readFileSync(path.join(root, "scripts", "infographics50", "data", "built.json"), "utf8"),
-);
-let errors = 0;
+function loadBuilt(name) {
+  const p = path.join(root, "scripts", "infographics50", "data", name);
+  if (!fs.existsSync(p)) return [];
+  return JSON.parse(fs.readFileSync(p, "utf8"));
+}
+const built = [
+  ...loadBuilt("built.json"),
+  ...loadBuilt("h3711_built.json"),
+];
+const seen = new Set();
+const rows = [];
 for (const row of built) {
+  if (seen.has(row.slug)) continue;
+  seen.add(row.slug);
+  rows.push(row);
+}
+let errors = 0;
+for (const row of rows) {
+  // Wave-1 #3 (mw-letters) is a different generator (template + data.json), not the 1080×1920 canvas.
+  if (row.slug === "mw-letters-2026-08-29") continue;
   const file = path.join(inf, row.slug, "index.html");
   if (!fs.existsSync(file)) {
     console.error("MISSING", row.slug);
@@ -34,4 +49,4 @@ if (errors) {
   console.error(errors, "errors");
   process.exit(1);
 }
-console.log("check.mjs 0 errors on", built.length, "pages");
+console.log("check.mjs 0 errors on", rows.length, "pages");
