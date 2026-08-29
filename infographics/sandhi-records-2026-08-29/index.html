@@ -3,37 +3,132 @@
 <head>
 <meta charset="utf-8">
 <title>Рекорды сандхи</title>
-<!-- Data: kosha/data/sandhi/corpus_sandhi.tsv. 29.08.2026 -->
+<!-- Composition: Specimen sheet — 8 ranked junction-rules pinned as Fig. 1–8, apothecary divided
+     bar for the four families, hero numeral in the left column. Naturalist plate, wide 1920x1080. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;600;700&family=Nunito:wght@400;600;700;800&family=Noto+Mono&family=Noto+Serif+Devanagari:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#F5EFE3;--ink:#29261F;--sub:rgba(41,38,31,.62);--accent:#C4552F;--card:#FFFFFF;
---neon:#6FE3C1;--bar:#009B7D;--blue:#4A55C8;--red:#D9503F;
---font-display:'Comfortaa',sans-serif;--font-body:'Nunito',sans-serif;
---dev:'Noto Serif Devanagari',serif;--mono:'Noto Mono',monospace}
-html,body{background:var(--bg)}
-body{width:1080px;font-family:var(--font-body);color:var(--ink)}
-.canvas{position:relative;width:1080px;height:1920px;overflow:hidden;background:var(--bg)}
-.kicker{position:absolute;left:64px;top:88px;font:700 13px/1.3 var(--font-body);
-letter-spacing:.16em;text-transform:uppercase;color:var(--sub)}
-h1{position:absolute;left:64px;top:118px;font-family:var(--font-display);
-font-weight:700;font-size:46px;line-height:1.08;width:952px}
-.hero{position:absolute;left:64px;top:230px;width:952px;font:600 16px/1.5 var(--font-body);color:var(--sub)}
-.hero b{color:var(--accent);font-weight:800}
-.foot{position:absolute;left:64px;top:1810px;width:952px;font:400 13px/1.5 var(--font-body);color:var(--sub)}
-.fade{opacity:0;animation:fadein .45s ease-out forwards}
-@keyframes fadein{to{opacity:1}}
-.chip{display:inline-block;padding:3px 10px;border-radius:14px;font:700 12px var(--font-body);background:var(--accent);color:#fff}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:#F3ECDA; --surface:#EDE3CB; --surface-2:#E0D3B4;
+  --ink:#3A3226; --ink-muted:#7C7060;
+  --chart-1:#4E7A34; --chart-2:#3A6FB0; --chart-3:#8F2F28; --chart-4:#9A7104;
+  --font-display:'Cormorant Garamond',serif; --font-body:'EB Garamond',serif;
+}
+html, body { background: var(--bg); }
+body { width: 1920px; font-family: var(--font-body); color: var(--ink); }
+.canvas { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: var(--bg); }
+.frame { position: absolute; inset: 28px; border: 2px solid var(--ink); pointer-events: none; }
+.frame::after { content: ''; position: absolute; inset: 6px; border: 1px solid var(--ink); }
+.platehead { position: absolute; left: 100px; right: 100px; top: 66px; text-align: center; }
+.plateno { font: 600 15px var(--font-body); font-variant: small-caps; letter-spacing: .3em; color: var(--ink-muted); }
+h1 { font-family: var(--font-display); font-weight: 600; font-size: 56px; letter-spacing: .12em;
+  text-transform: uppercase; margin-top: 8px; }
+.latin { font-style: italic; font-size: 21px; color: var(--ink-muted); margin-top: 4px; }
+.lefcol { position: absolute; left: 128px; top: 280px; width: 470px; }
+.hero-num { font-family: var(--font-display); font-weight: 600; font-size: 182px; line-height: .95; }
+.hero-cap { font: 500 19px/1.5 var(--font-body); margin-top: 18px; }
+.scalebar { margin-top: 44px; }
+.scalebar .lab { font: 500 16px/1.4 var(--font-body); margin-top: 8px; }
+.divided { margin-top: 36px; }
+.divided h2 { font: 600 17px var(--font-body); font-variant: small-caps; letter-spacing: .08em; margin-bottom: 14px; }
+svg { display: block; }
+.figtag { font: 500 16px var(--font-body); font-variant: small-caps; letter-spacing: .06em; fill: var(--ink-muted); }
+.rule { font: 600 24px var(--font-body); fill: var(--ink); }
+.figval { font: 500 16px var(--font-body); fill: var(--ink-muted); }
+.segval { font: 600 16px var(--font-body); fill: var(--ink); text-anchor: middle; }
+.seglab { font: 500 14px var(--font-body); fill: var(--ink-muted); text-anchor: middle; }
+.caption-foot { position: absolute; left: 100px; right: 100px; bottom: 88px; border-top: 1px solid var(--ink-muted);
+  padding-top: 10px; font: italic 400 14.5px/1.5 var(--font-body); color: var(--ink-muted); }
+footer { position: absolute; left: 100px; right: 100px; bottom: 46px;
+  display: flex; justify-content: space-between; gap: 40px;
+  font: 400 13.5px/1.4 var(--font-body); color: var(--ink-muted); }
+footer b { font-weight: 600; color: var(--ink); }
 </style>
 </head>
 <body>
 <div class="canvas">
-  <div class="kicker">Санскритский архив Гасунса · грамматика</div>
-  <h1>Рекорды сандхи</h1>
-  <div class="hero">Топ правил из <b>kosha/data/sandhi/corpus_sandhi.tsv</b> — global_count по 41 тексту.</div><div class="fade" style="position:absolute;left:64px;top:340px;width:952px;animation-delay:0.1s"><div style="display:flex;justify-content:space-between;font:700 16px var(--font-body)"><span>a a → ā</span><span>45 296</span></div><div style="color:var(--sub);font:600 13px var(--font-body)">vowel coalescence</div><div style="height:14px;background:rgba(41,38,31,.08);border-radius:6px;margin-top:6px"><div style="width:680px;height:100%;background:var(--blue);border-radius:6px"></div></div></div><div class="fade" style="position:absolute;left:64px;top:455px;width:952px;animation-delay:0.14s"><div style="display:flex;justify-content:space-between;font:700 16px var(--font-body)"><span>m p → ṃ p</span><span>26 690</span></div><div style="color:var(--sub);font:600 13px var(--font-body)">anusvāra / nasal</div><div style="height:14px;background:rgba(41,38,31,.08);border-radius:6px;margin-top:6px"><div style="width:417px;height:100%;background:var(--blue);border-radius:6px"></div></div></div><div class="fade" style="position:absolute;left:64px;top:570px;width:952px;animation-delay:0.18s"><div style="display:flex;justify-content:space-between;font:700 16px var(--font-body)"><span>m s → ṃ s</span><span>23 476</span></div><div style="color:var(--sub);font:600 13px var(--font-body)">anusvāra / nasal</div><div style="height:14px;background:rgba(41,38,31,.08);border-radius:6px;margin-top:6px"><div style="width:372px;height:100%;background:var(--blue);border-radius:6px"></div></div></div><div class="fade" style="position:absolute;left:64px;top:685px;width:952px;animation-delay:0.22s"><div style="display:flex;justify-content:space-between;font:700 16px var(--font-body)"><span>m v → ṃ v</span><span>22 649</span></div><div style="color:var(--sub);font:600 13px var(--font-body)">anusvāra / nasal</div><div style="height:14px;background:rgba(41,38,31,.08);border-radius:6px;margin-top:6px"><div style="width:360px;height:100%;background:var(--blue);border-radius:6px"></div></div></div><div class="fade" style="position:absolute;left:64px;top:800px;width:952px;animation-delay:0.26s"><div style="display:flex;justify-content:space-between;font:700 16px var(--font-body)"><span>m t → ṃ t</span><span>22 119</span></div><div style="color:var(--sub);font:600 13px var(--font-body)">anusvāra / nasal</div><div style="height:14px;background:rgba(41,38,31,.08);border-radius:6px;margin-top:6px"><div style="width:353px;height:100%;background:var(--blue);border-radius:6px"></div></div></div><div class="fade" style="position:absolute;left:64px;top:915px;width:952px;animation-delay:0.30000000000000004s"><div style="display:flex;justify-content:space-between;font:700 16px var(--font-body)"><span>ḥ t → s t</span><span>21 292</span></div><div style="color:var(--sub);font:600 13px var(--font-body)">visarga</div><div style="height:14px;background:rgba(41,38,31,.08);border-radius:6px;margin-top:6px"><div style="width:341px;height:100%;background:var(--blue);border-radius:6px"></div></div></div><div class="fade" style="position:absolute;left:64px;top:1030px;width:952px;animation-delay:0.33999999999999997s"><div style="display:flex;justify-content:space-between;font:700 16px var(--font-body)"><span>m c → ṃ c</span><span>20 096</span></div><div style="color:var(--sub);font:600 13px var(--font-body)">anusvāra / nasal</div><div style="height:14px;background:rgba(41,38,31,.08);border-radius:6px;margin-top:6px"><div style="width:324px;height:100%;background:var(--blue);border-radius:6px"></div></div></div><div class="fade" style="position:absolute;left:64px;top:1145px;width:952px;animation-delay:0.38s"><div style="display:flex;justify-content:space-between;font:700 16px var(--font-body)"><span>ḥ c → ś c</span><span>18 883</span></div><div style="color:var(--sub);font:600 13px var(--font-body)">visarga</div><div style="height:14px;background:rgba(41,38,31,.08);border-radius:6px;margin-top:6px"><div style="width:307px;height:100%;background:var(--blue);border-radius:6px"></div></div></div><div class="fade" style="position:absolute;left:64px;top:1260px;width:952px;animation-delay:0.42000000000000004s"><div style="display:flex;justify-content:space-between;font:700 16px var(--font-body)"><span>m k → ṃ k</span><span>15 961</span></div><div style="color:var(--sub);font:600 13px var(--font-body)">anusvāra / nasal</div><div style="height:14px;background:rgba(41,38,31,.08);border-radius:6px;margin-top:6px"><div style="width:266px;height:100%;background:var(--blue);border-radius:6px"></div></div></div><div class="fade" style="position:absolute;left:64px;top:1375px;width:952px;animation-delay:0.45999999999999996s"><div style="display:flex;justify-content:space-between;font:700 16px var(--font-body)"><span>a ā → ā</span><span>15 955</span></div><div style="color:var(--sub);font:600 13px var(--font-body)">vowel coalescence</div><div style="height:14px;background:rgba(41,38,31,.08);border-radius:6px;margin-top:6px"><div style="width:265px;height:100%;background:var(--blue);border-radius:6px"></div></div></div><div class="fade" style="position:absolute;left:64px;top:1490px;width:952px;animation-delay:0.5s"><div style="display:flex;justify-content:space-between;font:700 16px var(--font-body)"><span>m m → ṃ m</span><span>14 226</span></div><div style="color:var(--sub);font:600 13px var(--font-body)">anusvāra / nasal</div><div style="height:14px;background:rgba(41,38,31,.08);border-radius:6px;margin-top:6px"><div style="width:241px;height:100%;background:var(--blue);border-radius:6px"></div></div></div><div class="fade" style="position:absolute;left:64px;top:1605px;width:952px;animation-delay:0.54s"><div style="display:flex;justify-content:space-between;font:700 16px var(--font-body)"><span>m n → ṃ n</span><span>12 870</span></div><div style="color:var(--sub);font:600 13px var(--font-body)">anusvāra / nasal</div><div style="height:14px;background:rgba(41,38,31,.08);border-radius:6px;margin-top:6px"><div style="width:222px;height:100%;background:var(--blue);border-radius:6px"></div></div></div>
-  <div class="foot">Посчитано 29.08.2026 · скрипт <span style='font-family:var(--mono)'>scripts/infographics50/probe.py → sandhi.top</span> · Dr. Mārcis Gasūns</div>
+  <div class="frame"></div>
+  <div class="platehead">
+    <div class="plateno">Планша № 20 · Бхагавадгита · посчитано 29.08.2026</div>
+    <h1>Рекорды сандхи</h1>
+    <div class="latin">Coniunctionum in Gītā: 3 412 loci, 161 regulae</div>
+  </div>
+  <div class="lefcol">
+    <div class="hero-num" data-hero>3 412</div>
+    <div class="hero-cap">стыков сандхи между словами Гиты; каждая описана одним из 161 правил перехода</div>
+    <div class="scalebar">
+      <svg width="460" height="34">
+        <line x1="2" y1="10" x2="458" y2="10" stroke="#3A3226" stroke-width="1.4"/>
+        <line x1="2" y1="4" x2="2" y2="16" stroke="#3A3226" stroke-width="1.4"/>
+        <line x1="458" y1="4" x2="458" y2="16" stroke="#3A3226" stroke-width="1.4"/>
+      </svg>
+      <div class="lab">Масштаб: самая частая стыковка «a a → ā» встречается 193 раз — от неё отградуированы все линейки.</div>
+    </div>
+    <div class="divided">
+      <h2>Четыре семейства правил</h2>
+    </div>
+  </div>
+  <svg width="1920" height="1080" viewBox="0 0 1920 1080">
+      <text class="figtag" x="700" y="286">Fig. 1.</text>
+      <text class="rule" x="790" y="286">a a → ā</text>
+      <rect x="790" y="298" width="620" height="16" fill="#4E7A3455" stroke="#3A3226" stroke-width="1"/>
+      <rect x="790" y="298" width="620" height="16" fill="#4E7A34" opacity="0.28"/>
+      <text class="figval" x="1420" y="311">193 стыков · 5.66%</text>
+      <text class="figtag" x="700" y="378">Fig. 2.</text>
+      <text class="rule" x="790" y="378">aḥ a → o '</text>
+      <rect x="790" y="390" width="447" height="16" fill="#3A6FB055" stroke="#3A3226" stroke-width="1"/>
+      <rect x="790" y="390" width="447" height="16" fill="#3A6FB0" opacity="0.28"/>
+      <text class="figval" x="1247" y="403">139 стыков · 4.07%</text>
+      <text class="figtag" x="700" y="470">Fig. 3.</text>
+      <text class="rule" x="790" y="470">ḥ t → s t</text>
+      <rect x="790" y="482" width="411" height="16" fill="#3A6FB055" stroke="#3A3226" stroke-width="1"/>
+      <rect x="790" y="482" width="411" height="16" fill="#3A6FB0" opacity="0.28"/>
+      <text class="figval" x="1211" y="495">128 стыков · 3.75%</text>
+      <text class="figtag" x="700" y="562">Fig. 4.</text>
+      <text class="rule" x="790" y="562">m p → ṃ p</text>
+      <rect x="790" y="574" width="363" height="16" fill="#8F2F2855" stroke="#3A3226" stroke-width="1"/>
+      <rect x="790" y="574" width="363" height="16" fill="#8F2F28" opacity="0.28"/>
+      <text class="figval" x="1163" y="587">113 стыков · 3.31%</text>
+      <text class="figtag" x="700" y="654">Fig. 5.</text>
+      <text class="rule" x="790" y="654">m s → ṃ s</text>
+      <rect x="790" y="666" width="350" height="16" fill="#8F2F2855" stroke="#3A3226" stroke-width="1"/>
+      <rect x="790" y="666" width="350" height="16" fill="#8F2F28" opacity="0.28"/>
+      <text class="figval" x="1150" y="679">109 стыков · 3.19%</text>
+      <text class="figtag" x="700" y="746">Fig. 6.</text>
+      <text class="rule" x="790" y="746">m t → ṃ t</text>
+      <rect x="790" y="758" width="341" height="16" fill="#8F2F2855" stroke="#3A3226" stroke-width="1"/>
+      <rect x="790" y="758" width="341" height="16" fill="#8F2F28" opacity="0.28"/>
+      <text class="figval" x="1141" y="771">106 стыков · 3.11%</text>
+      <text class="figtag" x="700" y="838">Fig. 7.</text>
+      <text class="rule" x="790" y="838">ḥ c → ś c</text>
+      <rect x="790" y="850" width="324" height="16" fill="#3A6FB055" stroke="#3A3226" stroke-width="1"/>
+      <rect x="790" y="850" width="324" height="16" fill="#3A6FB0" opacity="0.28"/>
+      <text class="figval" x="1124" y="863">101 стыков · 2.96%</text>
+      <text class="figtag" x="700" y="930">Fig. 8.</text>
+      <text class="rule" x="790" y="930">a e → ai</text>
+      <rect x="790" y="942" width="324" height="16" fill="#4E7A3455" stroke="#3A3226" stroke-width="1"/>
+      <rect x="790" y="942" width="324" height="16" fill="#4E7A34" opacity="0.28"/>
+      <text class="figval" x="1124" y="955">101 стыков · 2.96%</text>
+      <rect x="128" y="736" width="158.0" height="26" fill="#8F2F28" opacity=".45" stroke="#3A3226" stroke-width="1"/>
+      <text class="segval" x="207.0" y="754">34,3%</text>
+      <text class="seglab" x="207.0" y="806">носовые</text>
+      <rect x="286" y="736" width="156.8" height="26" fill="#3A6FB0" opacity=".45" stroke="#3A3226" stroke-width="1"/>
+      <text class="segval" x="364.4" y="754">34,1%</text>
+      <text class="seglab" x="364.4" y="780">висарга</text>
+      <rect x="443" y="736" width="109.6" height="26" fill="#4E7A34" opacity=".45" stroke="#3A3226" stroke-width="1"/>
+      <text class="segval" x="497.6" y="754">23,8%</text>
+      <text class="seglab" x="497.6" y="806">гласные</text>
+      <rect x="552" y="736" width="35.6" height="26" fill="#9A7104" opacity=".45" stroke="#3A3226" stroke-width="1"/>
+      <text class="segval" x="570.2" y="754">7,7%</text>
+      <text class="seglab" x="570.2" y="780">прочее</text>
+  </svg>
+  <div class="caption-foot">Fig. 1–8 — восемь рекордных правил сандхи Гиты; толщина заливки — число стыков. Ниже — доля каждого семейства правил во всех 3 412 стыковках.</div>
+  <footer>
+    <div>Данные: <b>kosha · data/gita/gita_sandhi.tsv</b> — 161 правил, 3 412 стыков</div>
+    <div>скрипт: <b>scripts/infographics50/sandhi_records.py</b> · Посчитано 29.08.2026 · <b>Dr. Mārcis Gasūns</b></div>
+  </footer>
 </div>
 </body>
 </html>
