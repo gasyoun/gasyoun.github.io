@@ -2,17 +2,19 @@
 
 _Created: 29-08-2026 · Last updated: 30-08-2026_
 
-Counting scripts + HTML emitter for the 40 catalog rows that were still «идея» after wave 1.
+Counting scripts + HTML emitter for the 40 catalog rows that were still «идея» after wave 1, plus the H3711 b5 unblocks and eight fresh estate ideas.
 
 ## Reproduce
 
 ```
 python scripts/infographics50/probe.py
 python scripts/infographics50/build.py
+python scripts/infographics50/h3711_probe.py
+python scripts/infographics50/h3711_build.py
 node scripts/check.mjs
 ```
 
-`probe.py` reads local GitHub/ clones (csl-orig, MWinflect, kosha, …) and writes `data/infographics50.json`. `build.py` emits `infographics/<slug>-2026-08-29/index.html` and flips the catalog chips.
+`probe.py` reads local GitHub/ clones (csl-orig, MWinflect, kosha, …) and writes `data/infographics50.json`. `build.py` emits `infographics/<slug>-2026-08-29/index.html` and flips the catalog chips. `h3711_probe.py` / `h3711_build.py` add rows #51–#58 and refresh #18/#27.
 
 ## Replacements (catalog notes the probe)
 
