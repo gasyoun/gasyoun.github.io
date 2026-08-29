@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Словари как чемоданы</title>
+<!-- Data: local csl-orig/v02 (370 MB txt, 7,914,934 lines), git packs; assumptions on page stack stated on the graphic. 29.08.2026. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;600;700&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --paper:#EFE8DA; --ink:#29261F; --ink-soft:rgba(41,38,31,.62); --accent:#C4552F;
+  --s1:#8A5A7C; --s2:#4A55C8; --s3:#3E7C59;
+  --font-display:'Comfortaa',sans-serif; --font-body:'Nunito',sans-serif; }
+html, body { background: var(--paper); }
+body { width: 1080px; font-family: var(--font-body); color: var(--ink); }
+.canvas { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: var(--paper); }
+.kicker { position: absolute; left: 64px; top: 96px; font: 700 14px/1.3 var(--font-body);
+  letter-spacing: .18em; text-transform: uppercase; color: var(--ink-soft); }
+h1 { position: absolute; left: 64px; top: 128px; font-family: var(--font-display); font-weight: 700; font-size: 60px; }
+.hero { position: absolute; left: 64px; top: 222px; width: 952px; font: 600 18.5px/1.5 var(--font-body); color: var(--ink-soft); }
+.hero b { color: var(--accent); }
+.floor { position: absolute; left: 64px; top: 1180px; width: 952px; height: 5px; background: var(--ink); border-radius: 3px; }
+.stack { position: absolute; left: 64px; top: 1268px; width: 952px; }
+.pagebar { height: 26px; background: repeating-linear-gradient(90deg, #FFFFFF 0 10px, #E7DEC9 10px 12px);
+  border: 2px solid var(--ink); border-radius: 4px; }
+.stack .lbl { margin-top: 12px; font: 600 15.5px/1.45 var(--font-body); color: var(--ink-soft); }
+.foot { position: absolute; left: 64px; top: 1660px; width: 952px; font: 400 13.5px/1.55 var(--font-body); color: var(--ink-soft); }
+svg text { font-family: var(--font-body); }
+.suit { opacity: 0; transform: translateY(30px); animation: drop .6s cubic-bezier(.2,.8,.3,1.2) forwards; }
+@keyframes drop { to { opacity: 1; transform: none; } }
+.fade { opacity: 0; animation: fadein .5s ease-out forwards; }
+@keyframes fadein { to { opacity: 1; } }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="kicker">Санскритский архив Гасунса · сравнения и рекорды</div>
+  <h1>Словари как чемоданы</h1>
+  <div class="hero"><b>1 506 452 статьи</b> — сколько это весит? Три чемодана разного калибра: весь архив, один словарный репозиторий и чистый текст квартала.</div>
+  <svg width="1080" height="1920" viewBox="0 0 1080 1920">
+    <!-- suitcase 1: 15.8 GB -->
+    <g class="suit" style="animation-delay:.4s">
+      <rect x="100" y="480" width="360" height="700" rx="26" fill="var(--s1)" stroke="var(--ink)" stroke-width="4"/>
+      <rect x="100" y="640" width="360" height="26" fill="rgba(0,0,0,.25)"/>
+      <rect x="230" y="440" width="100" height="46" rx="12" fill="none" stroke="var(--ink)" stroke-width="5"/>
+      <circle cx="280" cy="830" r="26" fill="#EFE8DA" stroke="var(--ink)" stroke-width="4"/>
+      <text x="280" y="840" text-anchor="middle" font-size="20" font-weight="800">15,8</text>
+      <text x="280" y="790" text-anchor="middle" font-size="15" font-weight="700">весь архив</text>
+      <text x="280" y="1230" text-anchor="middle" font-size="17" font-weight="800">15,8 ГБ</text>
+      <text x="280" y="1256" text-anchor="middle" font-size="13.5" fill="var(--ink-soft)">162 клона · git-паки</text>
+    </g>
+    <!-- suitcase 2: 0.9 GB -->
+    <g class="suit" style="animation-delay:.7s">
+      <rect x="520" y="760" width="230" height="420" rx="18" fill="var(--s2)" stroke="var(--ink)" stroke-width="4"/>
+      <rect x="520" y="856" width="230" height="20" fill="rgba(0,0,0,.25)"/>
+      <rect x="600" y="732" width="70" height="32" rx="9" fill="none" stroke="var(--ink)" stroke-width="5"/>
+      <text x="635" y="985" text-anchor="middle" font-size="14.5" font-weight="700">csl-orig</text>
+      <text x="635" y="1230" text-anchor="middle" font-size="17" font-weight="800">0,9 ГБ</text>
+      <text x="635" y="1256" text-anchor="middle" font-size="13.5" fill="var(--ink-soft)">git-пак 45 словарей</text>
+    </g>
+    <!-- suitcase 3: 370 MB -->
+    <g class="suit" style="animation-delay:1s">
+      <rect x="810" y="930" width="150" height="250" rx="13" fill="var(--s3)" stroke="var(--ink)" stroke-width="4"/>
+      <rect x="810" y="988" width="150" height="15" fill="rgba(0,0,0,.25)"/>
+      <rect x="858" y="912" width="46" height="22" rx="7" fill="none" stroke="var(--ink)" stroke-width="4"/>
+      <text x="885" y="1230" text-anchor="middle" font-size="17" font-weight="800">370 МБ</text>
+      <text x="885" y="1256" text-anchor="middle" font-size="13.5" fill="var(--ink-soft)">чистый текст статей</text>
+    </g>
+  </svg>
+  <div class="floor"></div>
+  <div class="stack">
+    <div class="pagebar"></div>
+    <div class="lbl">А на бумаге? <b>7 914 934 строки</b> словарного текста ≈ <b>198 000 страниц</b> (при ~40 строках на страницу) ≈ <b>198 томов по 1000 страниц</b> — целая стенка в библиотеке, умещающаяся в чемодан № 3. Для масштаба: 0,9 ГБ словарей — меньше одного фильма в HD.</div>
+  </div>
+  <div class="foot">Данные: локальные клоны, git count-objects и размер v02-текстов · допущение о 40 строках на страницу указано прямо на графике · 29.08.2026 · Dr. Mārcis Gasūns</div>
+</div>
+</body>
+</html>

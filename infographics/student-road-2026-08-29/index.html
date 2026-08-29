@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>От алфавита до Рамаяны</title>
+<!-- Qualitative road map grounded in repo facts: Nagari, ScharfSandhi, SanskritGrammar (270 chapters),
+     kosha (111 datasets), sanhw1 (431 596), SanskritKaraoke, CommentaryStrategies (1058 notes). 29.08.2026. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --paper:#EAF3EE; --ink:#22301F; --ink-soft:rgba(34,48,31,.62); --accent:#C4552F; --road:#4E6E52;
+  --font-display:'Comfortaa',sans-serif; --font-body:'Nunito',sans-serif; }
+html, body { background: var(--paper); }
+body { width: 1080px; font-family: var(--font-body); color: var(--ink); }
+.canvas { position: relative; width: 1080px; height: 1920px; overflow: hidden;
+  background: linear-gradient(180deg, #F2F8F0 0%, var(--paper) 60%, #DFEBE2 100%); }
+.kicker { position: absolute; left: 64px; top: 96px; font: 700 14px/1.3 var(--font-body);
+  letter-spacing: .18em; text-transform: uppercase; color: var(--ink-soft); }
+h1 { position: absolute; left: 64px; top: 128px; font-family: var(--font-display); font-weight: 700; font-size: 58px; }
+.hero { position: absolute; left: 64px; top: 218px; width: 952px; font: 600 18px/1.5 var(--font-body); color: var(--ink-soft); }
+.foot { position: absolute; left: 64px; top: 1810px; width: 952px; font: 400 13.5px/1.5 var(--font-body); color: var(--ink-soft); }
+.station { opacity: 0; animation: fadein .55s ease-out forwards; }
+.road { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 1.6s ease-out forwards; }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes fadein { to { opacity: 1; } }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="kicker">Санскритский архив Гасунса · педагогика</div>
+  <h1>От алфавита до Рамаяны</h1>
+  <div class="hero">Шесть станций дороги ученика — и у каждой есть опора в архиве: репозитории, главы, наборы данных. Дорожная карта qualitative, цифры — настоящие.</div>
+  <svg width="1080" height="1920" viewBox="0 0 1080 1920">
+    <path class="road" d="M 250 700 C 420 480 640 520 760 640 C 880 760 300 830 460 950 C 620 1070 840 1120 700 1250 C 560 1380 320 1400 380 1500"
+      fill="none" stroke="var(--road)" stroke-width="26" stroke-linecap="round" pathLength="1" opacity=".35"/>
+    <path class="road" style="animation-delay:.2s" d="M 250 700 C 420 480 640 520 760 640 C 880 760 300 830 460 950 C 620 1070 840 1120 700 1250 C 560 1380 320 1400 380 1500"
+      fill="none" stroke="#FFFFFF" stroke-width="4" stroke-dasharray="18 22" pathLength="1"/>
+        <g class="station" style="animation-delay:0.4s">
+      <circle cx="250" cy="700" r="46" fill="var(--accent)"/>
+      <text x="250" y="712" text-anchor="middle" font-size="30" font-weight="700" fill="#FFF8EE" style="font-family:var(--font-display)">1</text>
+      <g transform="translate(314 666)">
+        <rect width="330" height="104" rx="12" fill="#FFFDF6" stroke="var(--ink)" stroke-width="2.5"/>
+        <text x="16" y="30" font-size="20" font-weight="800" style="font-family:var(--font-body)">Деванагари</text>
+        <text x="16" y="54" font-size="14" fill="var(--ink-soft)" style="font-family:var(--font-body)">46 знаков алфавита</text>
+        <text x="16" y="82" font-size="12.5" font-weight="700" fill="var(--accent)" style="font-family:var(--font-body)">Nagari · деванагари-шрифты</text>
+      </g>
+    </g>
+    <g class="station" style="animation-delay:0.58s">
+      <circle cx="500" cy="560" r="46" fill="var(--accent)"/>
+      <text x="500" y="572" text-anchor="middle" font-size="30" font-weight="700" fill="#FFF8EE" style="font-family:var(--font-display)">2</text>
+      <g transform="translate(564 526)">
+        <rect width="330" height="104" rx="12" fill="#FFFDF6" stroke="var(--ink)" stroke-width="2.5"/>
+        <text x="16" y="30" font-size="20" font-weight="800" style="font-family:var(--font-body)">Сандхи</text>
+        <text x="16" y="54" font-size="14" fill="var(--ink-soft)" style="font-family:var(--font-body)">сшивать слова по правилам</text>
+        <text x="16" y="82" font-size="12.5" font-weight="700" fill="var(--accent)" style="font-family:var(--font-body)">ScharfSandhi · sandhi-корпуса</text>
+      </g>
+    </g>
+    <g class="station" style="animation-delay:0.76s">
+      <circle cx="760" cy="640" r="46" fill="var(--accent)"/>
+      <text x="760" y="652" text-anchor="middle" font-size="30" font-weight="700" fill="#FFF8EE" style="font-family:var(--font-display)">3</text>
+      <g transform="translate(366 606)">
+        <rect width="330" height="104" rx="12" fill="#FFFDF6" stroke="var(--ink)" stroke-width="2.5"/>
+        <text x="16" y="30" font-size="20" font-weight="800" style="font-family:var(--font-body)">Формы</text>
+        <text x="16" y="54" font-size="14" fill="var(--ink-soft)" style="font-family:var(--font-body)">падежи, спряжения, флексия</text>
+        <text x="16" y="82" font-size="12.5" font-weight="700" fill="var(--accent)" style="font-family:var(--font-body)">SanskritGrammar · 270 глав · MWinflect</text>
+      </g>
+    </g>
+    <g class="station" style="animation-delay:0.94s">
+      <circle cx="460" cy="950" r="46" fill="var(--accent)"/>
+      <text x="460" y="962" text-anchor="middle" font-size="30" font-weight="700" fill="#FFF8EE" style="font-family:var(--font-display)">4</text>
+      <g transform="translate(524 916)">
+        <rect width="330" height="104" rx="12" fill="#FFFDF6" stroke="var(--ink)" stroke-width="2.5"/>
+        <text x="16" y="30" font-size="20" font-weight="800" style="font-family:var(--font-body)">Слова</text>
+        <text x="16" y="54" font-size="14" fill="var(--ink-soft)" style="font-family:var(--font-body)">словарный запас</text>
+        <text x="16" y="82" font-size="12.5" font-weight="700" fill="var(--accent)" style="font-family:var(--font-body)">kosha · 111 наборов · 431 596 заголовков</text>
+      </g>
+    </g>
+    <g class="station" style="animation-delay:1.12s">
+      <circle cx="700" cy="1250" r="46" fill="var(--accent)"/>
+      <text x="700" y="1262" text-anchor="middle" font-size="30" font-weight="700" fill="#FFF8EE" style="font-family:var(--font-display)">5</text>
+      <g transform="translate(306 1216)">
+        <rect width="330" height="104" rx="12" fill="#FFFDF6" stroke="var(--ink)" stroke-width="2.5"/>
+        <text x="16" y="30" font-size="20" font-weight="800" style="font-family:var(--font-body)">Чтение</text>
+        <text x="16" y="54" font-size="14" fill="var(--ink-soft)" style="font-family:var(--font-body)">тексты с опорой</text>
+        <text x="16" y="82" font-size="12.5" font-weight="700" fill="var(--accent)" style="font-family:var(--font-body)">SanskritKaraoke · Гита · Рамаяна</text>
+      </g>
+    </g>
+    <g class="station" style="animation-delay:1.3s">
+      <circle cx="380" cy="1500" r="46" fill="var(--accent)"/>
+      <text x="380" y="1512" text-anchor="middle" font-size="30" font-weight="700" fill="#FFF8EE" style="font-family:var(--font-display)">6</text>
+      <g transform="translate(444 1466)">
+        <rect width="330" height="104" rx="12" fill="#FFFDF6" stroke="var(--ink)" stroke-width="2.5"/>
+        <text x="16" y="30" font-size="20" font-weight="800" style="font-family:var(--font-body)">Комментарий</text>
+        <text x="16" y="54" font-size="14" fill="var(--ink-soft)" style="font-family:var(--font-body)">слои смысла</text>
+        <text x="16" y="82" font-size="12.5" font-weight="700" fill="var(--accent)" style="font-family:var(--font-body)">CommentaryStrategies · 1058 заметок</text>
+      </g>
+    </g>
+  </svg>
+  <div class="foot">Маршрут качественный, опоры — количественные: 46 букв · 270 глав грамматики · 111 наборов kosha · 431 596 заголовков · 1058 заметок комментария. 29.08.2026 · Dr. Mārcis Gasūns</div>
+</div>
+</body>
+</html>
