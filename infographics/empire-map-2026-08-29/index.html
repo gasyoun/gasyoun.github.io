@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Карта империи</title>
+<!-- Data: local scan of GitHub/ clones (git count-objects size-pack, ls-files ext histogram),
+     162 real clones, 15.80 GB packed. 29.08.2026. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;600;700&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --paper:#F5EFE3; --ink:#29261F; --ink-soft:rgba(41,38,31,.62);
+  --font-display:'Comfortaa',sans-serif; --font-body:'Nunito',sans-serif; }
+html, body { background: var(--paper); }
+body { width: 1080px; font-family: var(--font-body); color: var(--ink); }
+.canvas { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: var(--paper); }
+.kicker { position: absolute; left: 48px; top: 92px; font: 700 13.5px/1.3 var(--font-body);
+  letter-spacing: .18em; text-transform: uppercase; color: var(--ink-soft); }
+h1 { position: absolute; left: 48px; top: 124px; font-family: var(--font-display); font-weight: 700; font-size: 58px; }
+.hero { position: absolute; left: 48px; top: 210px; width: 984px; font: 600 17.5px/1.5 var(--font-body); color: var(--ink-soft); }
+.hero b { color: var(--accent); }
+svg text { font-family: var(--font-body); }
+.cell { opacity: 0; transform: scale(.96); transform-box: fill-box; transform-origin: center;
+  animation: pin .45s ease-out forwards; }
+@keyframes pin { to { opacity: 1; transform: none; } }
+.fade { opacity: 0; animation: fadein .5s ease-out forwards; }
+@keyframes fadein { to { opacity: 1; } }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="kicker">Санскритский архив Гасунса · инфраструктура</div>
+  <h1>Карта империи</h1>
+  <div class="hero"><b>162 настоящих клонов</b> · <b>15.8 ГБ</b> упакованной истории · площадь клетки ∝ размеру git-пака · цвет — основной тип файлов · по локальным клонам, 29.08.2026</div>
+  <svg width="1080" height="1920" viewBox="0 0 1080 1920">
+        <g class="cell" style="animation-delay:0.3s"><rect x="49.5" y="401.5" width="563.4" height="523.2" rx="6" fill="#3E7C59" opacity="0.92"/><text x="58.0" y="429.0" font-size="21" font-weight="700" fill="#FFFFFF" style="font-family:var(--font-body)">VisualDCS</text><text x="58.0" y="448.0" font-size="12" font-weight="600" fill="rgba(255,255,255,.75)" style="font-family:var(--font-body)">словарные данные · 3.60 ГБ</text></g>
+    <g class="cell" style="animation-delay:0.305s"><rect x="615.9" y="401.5" width="414.6" height="523.2" rx="6" fill="#3E7C59" opacity="0.92"/><text x="624.4" y="429.0" font-size="21" font-weight="700" fill="#FFFFFF" style="font-family:var(--font-body)">cologne-stardict</text><text x="624.4" y="448.0" font-size="12" font-weight="600" fill="rgba(255,255,255,.75)" style="font-family:var(--font-body)">словарные данные · 2.65 ГБ</text></g>
+    <g class="cell" style="animation-delay:0.31s"><rect x="49.5" y="927.7" width="211.0" height="340.7" rx="6" fill="#3E7C59" opacity="0.92"/><text x="58.0" y="955.2" font-size="21" font-weight="700" fill="#FFFFFF" style="font-family:var(--font-body)">csl-orig</text><text x="58.0" y="974.2" font-size="12" font-weight="600" fill="rgba(255,255,255,.75)" style="font-family:var(--font-body)">словарные данные · 0.89 ГБ</text></g>
+    <g class="cell" style="animation-delay:0.315s"><rect x="49.5" y="1271.4" width="211.0" height="276.5" rx="6" fill="#8A5A7C" opacity="0.92"/><text x="58.0" y="1298.9" font-size="21" font-weight="700" fill="#FFFFFF" style="font-family:var(--font-body)">RussianRamayana</text><text x="58.0" y="1317.9" font-size="12" font-weight="600" fill="rgba(255,255,255,.75)" style="font-family:var(--font-body)">медиа и документы · 0.72 ГБ</text></g>
+    <g class="cell" style="animation-delay:0.32s"><rect x="49.5" y="1550.9" width="211.0" height="177.6" rx="6" fill="#8A5A7C" opacity="0.92"/><text x="58.0" y="1578.4" font-size="21" font-weight="700" fill="#FFFFFF" style="font-family:var(--font-body)">csl-kale</text><text x="58.0" y="1597.4" font-size="12" font-weight="600" fill="rgba(255,255,255,.75)" style="font-family:var(--font-body)">медиа и документы · 0.47 ГБ</text></g>
+    <g class="cell" style="animation-delay:0.325s"><rect x="263.5" y="927.7" width="198.5" height="170.9" rx="6" fill="#3E7C59" opacity="0.92"/><text x="272.0" y="955.2" font-size="21" font-weight="700" fill="#FFFFFF" style="font-family:var(--font-body)">csl-lnum</text><text x="272.0" y="974.2" font-size="12" font-weight="600" fill="rgba(255,255,255,.75)" style="font-family:var(--font-body)">словарные данные · 0.42 ГБ</text></g>
+    <g class="cell" style="animation-delay:0.33s"><rect x="464.9" y="927.7" width="194.1" height="170.9" rx="6" fill="#3E7C59" opacity="0.92"/><text x="473.4" y="955.2" font-size="21" font-weight="700" fill="#FFFFFF" style="font-family:var(--font-body)">csl-ldev</text><text x="473.4" y="974.2" font-size="12" font-weight="600" fill="rgba(255,255,255,.75)" style="font-family:var(--font-body)">словарные данные · 0.41 ГБ</text></g>
+    <g class="cell" style="animation-delay:0.335s"><rect x="662.0" y="927.7" width="183.2" height="170.9" rx="6" fill="#4A55C8" opacity="0.92"/><text x="670.5" y="954.9" font-size="21" font-weight="700" fill="#FFFFFF" style="font-family:var(--font-body)">Uprava</text><text x="670.5" y="973.9" font-size="12" font-weight="600" fill="rgba(255,255,255,.75)" style="font-family:var(--font-body)">Python · 0.39 ГБ</text></g>
+    <g class="cell" style="animation-delay:0.34s"><rect x="848.2" y="927.7" width="182.3" height="170.9" rx="6" fill="#3E7C59" opacity="0.92"/><text x="856.7" y="954.8" font-size="21" font-weight="700" fill="#FFFFFF" style="font-family:var(--font-body)">csl-devanagari</text><text x="856.7" y="973.8" font-size="12" font-weight="600" fill="rgba(255,255,255,.75)" style="font-family:var(--font-body)">словарные данные · 0.39 ГБ</text></g>
+    <g class="cell" style="animation-delay:0.345s"><rect x="263.5" y="1101.6" width="166.7" height="166.1" rx="6" fill="#3E7C59" opacity="0.92"/><text x="272.0" y="1126.9" font-size="19" font-weight="700" fill="#FFFFFF" style="font-family:var(--font-body)">csl-json</text><text x="272.0" y="1145.9" font-size="12" font-weight="600" fill="rgba(255,255,255,.75)" style="font-family:var(--font-body)">словарные данные · 0.35 ГБ</text></g>
+    <g class="cell" style="animation-delay:0.35s"><rect x="263.5" y="1270.7" width="166.7" height="164.2" rx="6" fill="#B57300" opacity="0.92"/><text x="272.0" y="1296.0" font-size="19" font-weight="700" fill="#FFFFFF" style="font-family:var(--font-body)">IndologyScholars</text><text x="272.0" y="1315.0" font-size="12" font-weight="600" fill="rgba(255,255,255,.75)" style="font-family:var(--font-body)">web-код · 0.34 ГБ</text></g>
+    <g class="cell" style="animation-delay:0.355s"><rect x="263.5" y="1437.9" width="166.7" height="158.5" rx="6" fill="#3E7C59" opacity="0.92"/><text x="272.0" y="1463.2" font-size="19" font-weight="700" fill="#FFFFFF" style="font-family:var(--font-body)">SanskritLexicography</text><text x="272.0" y="1482.2" font-size="12" font-weight="600" fill="rgba(255,255,255,.75)" style="font-family:var(--font-body)">словарные данные · 0.33 ГБ</text></g>
+    <g class="cell" style="animation-delay:0.36s"><rect x="263.5" y="1599.4" width="166.7" height="129.1" rx="6" fill="#3E7C59" opacity="0.92"/><text x="272.0" y="1624.8" font-size="19" font-weight="700" fill="#FFFFFF" style="font-family:var(--font-body)">SamudraManthanam</text><text x="272.0" y="1643.8" font-size="12" font-weight="600" fill="rgba(255,255,255,.75)" style="font-family:var(--font-body)">словарные данные · 0.27 ГБ</text></g>
+    <g class="cell" style="animation-delay:0.365s"><rect x="433.1" y="1101.6" width="168.2" height="117.7" rx="6" fill="#8A5A7C" opacity="0.92"/><text x="441.6" y="1127.1" font-size="19" font-weight="700" fill="#FFFFFF" style="font-family:var(--font-body)">MWS</text><text x="441.6" y="1146.1" font-size="12" font-weight="600" fill="rgba(255,255,255,.75)" style="font-family:var(--font-body)">медиа и документы · 0.25 ГБ</text></g>
+    <g class="cell" style="animation-delay:0.37s"><rect x="604.3" y="1101.6" width="146.2" height="117.7" rx="6" fill="#B57300" opacity="0.92"/><text x="612.8" y="1124.6" font-size="17" font-weight="700" fill="#FFFFFF" style="font-family:var(--font-body)">csl-apidev</text><text x="612.8" y="1143.6" font-size="12" font-weight="600" fill="rgba(255,255,255,.75)" style="font-family:var(--font-body)">web-код · 0.22 ГБ</text></g>
+    <g class="cell" style="animation-delay:0.375s"><rect x="753.5" y="1101.6" width="142.5" height="117.7" rx="6" fill="#8A8F94" opacity="0.92"/><text x="762.0" y="1124.2" font-size="16" font-weight="700" fill="#FFFFFF" style="font-family:var(--font-body)">csl-sqlite</text><text x="762.0" y="1143.2" font-size="12" font-weight="600" fill="rgba(255,255,255,.75)" style="font-family:var(--font-body)">прочее · 0.21 ГБ</text></g>
+    <g class="cell" style="animation-delay:0.38s"><rect x="899.0" y="1101.6" width="131.5" height="117.7" rx="6" fill="#8A8F94" opacity="0.92"/><text x="907.5" y="1123.0" font-size="15" font-weight="700" fill="#FFFFFF" style="font-family:var(--font-body)">dcs-conllu</text><text x="907.5" y="1142.0" font-size="12" font-weight="600" fill="rgba(255,255,255,.75)" style="font-family:var(--font-body)">прочее · 0.20 ГБ</text></g>
+    <g class="cell" style="animation-delay:0.385s"><rect x="433.1" y="1222.3" width="111.4" height="125.5" rx="6" fill="#8A5A7C" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.39s"><rect x="433.1" y="1350.8" width="111.4" height="124.7" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.395s"><rect x="433.1" y="1478.5" width="111.4" height="123.9" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.4s"><rect x="433.1" y="1605.5" width="111.4" height="123.0" rx="6" fill="#B57300" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.405s"><rect x="547.6" y="1222.3" width="124.2" height="108.9" rx="6" fill="#3E7C59" opacity="0.92"/><text x="556.1" y="1242.9" font-size="14" font-weight="700" fill="#FFFFFF" style="font-family:var(--font-body)">kosha</text><text x="556.1" y="1261.9" font-size="12" font-weight="600" fill="rgba(255,255,255,.75)" style="font-family:var(--font-body)">словарные данные · 0.17 ГБ</text></g>
+    <g class="cell" style="animation-delay:0.41s"><rect x="674.7" y="1222.3" width="124.2" height="108.9" rx="6" fill="#3E7C59" opacity="0.92"/><text x="683.2" y="1242.9" font-size="14" font-weight="700" fill="#FFFFFF" style="font-family:var(--font-body)">kosha-h3479-doc-287</text><text x="683.2" y="1261.9" font-size="12" font-weight="600" fill="rgba(255,255,255,.75)" style="font-family:var(--font-body)">словарные данные · 0.17 ГБ</text></g>
+    <g class="cell" style="animation-delay:0.415s"><rect x="801.9" y="1222.3" width="124.2" height="108.9" rx="6" fill="#3E7C59" opacity="0.92"/><text x="810.4" y="1242.9" font-size="14" font-weight="700" fill="#FFFFFF" style="font-family:var(--font-body)">kosha-les1990</text><text x="810.4" y="1261.9" font-size="12" font-weight="600" fill="rgba(255,255,255,.75)" style="font-family:var(--font-body)">словарные данные · 0.17 ГБ</text></g>
+    <g class="cell" style="animation-delay:0.42s"><rect x="929.1" y="1222.3" width="101.4" height="108.9" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.425s"><rect x="547.6" y="1334.1" width="90.0" height="102.7" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.43s"><rect x="547.6" y="1439.9" width="90.0" height="98.2" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.435s"><rect x="547.6" y="1541.1" width="90.0" height="98.1" rx="6" fill="#B57300" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.44s"><rect x="547.6" y="1642.2" width="90.0" height="86.3" rx="6" fill="#B57300" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.445s"><rect x="640.6" y="1334.1" width="80.5" height="90.0" rx="6" fill="#8A5A7C" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.45s"><rect x="724.1" y="1334.1" width="78.5" height="90.0" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.455s"><rect x="805.6" y="1334.1" width="76.9" height="90.0" rx="6" fill="#4A55C8" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.46s"><rect x="885.5" y="1334.1" width="71.2" height="90.0" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.465s"><rect x="959.7" y="1334.1" width="70.8" height="90.0" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.47s"><rect x="640.6" y="1427.1" width="72.2" height="86.7" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.475s"><rect x="640.6" y="1516.8" width="72.2" height="70.6" rx="6" fill="#B57300" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.48s"><rect x="640.6" y="1590.4" width="72.2" height="69.3" rx="6" fill="#8A8F94" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.485s"><rect x="640.6" y="1662.7" width="72.2" height="65.8" rx="6" fill="#4A55C8" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.49s"><rect x="715.8" y="1427.1" width="62.9" height="73.1" rx="6" fill="#4A55C8" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.495s"><rect x="715.8" y="1503.2" width="62.9" height="62.6" rx="6" fill="#8A5A7C" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.5s"><rect x="715.8" y="1568.9" width="62.9" height="60.7" rx="6" fill="#8A8F94" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.505s"><rect x="715.8" y="1632.6" width="62.9" height="47.3" rx="6" fill="#4A55C8" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.51s"><rect x="715.8" y="1682.8" width="62.9" height="45.7" rx="6" fill="#4A55C8" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.515s"><rect x="781.7" y="1427.1" width="51.3" height="52.0" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.52s"><rect x="836.0" y="1427.1" width="48.2" height="52.0" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.525s"><rect x="887.1" y="1427.1" width="48.2" height="52.0" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.53s"><rect x="938.3" y="1427.1" width="44.6" height="52.0" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.535s"><rect x="985.9" y="1427.1" width="44.6" height="52.0" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.54s"><rect x="781.7" y="1482.1" width="47.0" height="44.5" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.545s"><rect x="781.7" y="1529.6" width="47.0" height="40.3" rx="6" fill="#4A55C8" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.55s"><rect x="781.7" y="1572.9" width="47.0" height="37.5" rx="6" fill="#8A5A7C" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.555s"><rect x="781.7" y="1613.4" width="47.0" height="36.4" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.56s"><rect x="781.7" y="1652.8" width="47.0" height="36.4" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.565s"><rect x="781.7" y="1692.2" width="47.0" height="36.3" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.57s"><rect x="831.7" y="1482.1" width="40.3" height="41.2" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.575s"><rect x="874.9" y="1482.1" width="39.0" height="41.2" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.58s"><rect x="916.9" y="1482.1" width="37.7" height="41.2" rx="6" fill="#4A55C8" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.585s"><rect x="957.6" y="1482.1" width="36.6" height="41.2" rx="6" fill="#8A8F94" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.59s"><rect x="997.3" y="1482.1" width="33.2" height="41.2" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.595s"><rect x="831.7" y="1526.3" width="40.5" height="33.6" rx="6" fill="#B57300" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.6s"><rect x="875.2" y="1526.3" width="40.5" height="33.6" rx="6" fill="#B57300" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.605s"><rect x="918.8" y="1526.3" width="37.5" height="33.6" rx="6" fill="#B57300" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.61s"><rect x="959.3" y="1526.3" width="34.5" height="33.6" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.615s"><rect x="996.7" y="1526.3" width="33.8" height="33.6" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.62s"><rect x="831.7" y="1563.0" width="31.2" height="36.2" rx="6" fill="#8A8F94" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.625s"><rect x="831.7" y="1602.2" width="31.2" height="30.2" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.63s"><rect x="831.7" y="1635.4" width="31.2" height="29.7" rx="6" fill="#4A55C8" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.635s"><rect x="831.7" y="1668.1" width="31.2" height="28.8" rx="6" fill="#B57300" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.64s"><rect x="831.7" y="1699.9" width="31.2" height="28.6" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.645s"><rect x="865.9" y="1563.0" width="34.0" height="25.9" rx="6" fill="#8A5A7C" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.65s"><rect x="902.9" y="1563.0" width="32.3" height="25.9" rx="6" fill="#4A55C8" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.655s"><rect x="938.2" y="1563.0" width="29.1" height="25.9" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.66s"><rect x="970.3" y="1563.0" width="28.7" height="25.9" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.665s"><rect x="1002.0" y="1563.0" width="28.5" height="25.9" rx="6" fill="#4A55C8" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.67s"><rect x="865.9" y="1591.9" width="27.2" height="26.7" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.675s"><rect x="865.9" y="1621.6" width="27.2" height="25.6" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.68s"><rect x="865.9" y="1650.2" width="27.2" height="24.8" rx="6" fill="#B57300" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.685s"><rect x="865.9" y="1678.0" width="27.2" height="23.7" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.69s"><rect x="865.9" y="1704.8" width="27.2" height="23.7" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.695s"><rect x="896.1" y="1591.9" width="26.2" height="24.6" rx="6" fill="#8A5A7C" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.7s"><rect x="925.3" y="1591.9" width="26.2" height="24.6" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.705s"><rect x="954.5" y="1591.9" width="23.8" height="24.6" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.71s"><rect x="981.3" y="1591.9" width="23.1" height="24.6" rx="6" fill="#B57300" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.715s"><rect x="1007.4" y="1591.9" width="23.1" height="24.6" rx="6" fill="#B57300" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.72s"><rect x="896.1" y="1619.5" width="19.6" height="27.1" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.725s"><rect x="896.1" y="1649.5" width="19.6" height="25.9" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.73s"><rect x="896.1" y="1678.4" width="19.6" height="23.5" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.735s"><rect x="896.1" y="1705.0" width="19.6" height="23.5" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.74s"><rect x="918.7" y="1619.5" width="20.6" height="20.6" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.745s"><rect x="918.7" y="1643.0" width="20.6" height="20.3" rx="6" fill="#4A55C8" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.75s"><rect x="918.7" y="1666.3" width="20.6" height="19.4" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.755s"><rect x="918.7" y="1688.7" width="20.6" height="18.8" rx="6" fill="#8A8F94" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.76s"><rect x="918.7" y="1710.5" width="20.6" height="18.0" rx="6" fill="#B57300" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.765s"><rect x="942.4" y="1619.5" width="22.0" height="16.7" rx="6" fill="#4A55C8" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.77s"><rect x="967.4" y="1619.5" width="19.2" height="16.7" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.775s"><rect x="989.5" y="1619.5" width="19.0" height="16.7" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.78s"><rect x="1011.6" y="1619.5" width="18.9" height="16.7" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.785s"><rect x="942.4" y="1639.2" width="16.5" height="18.5" rx="6" fill="#8A8F94" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.79s"><rect x="961.8" y="1639.2" width="15.8" height="18.5" rx="6" fill="#8A5A7C" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.795s"><rect x="980.7" y="1639.2" width="14.8" height="18.5" rx="6" fill="#B57300" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.8s"><rect x="998.5" y="1639.2" width="14.5" height="18.5" rx="6" fill="#4A55C8" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.805s"><rect x="1016.0" y="1639.2" width="14.5" height="18.5" rx="6" fill="#4A55C8" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.81s"><rect x="942.4" y="1660.7" width="18.2" height="14.7" rx="6" fill="#4A55C8" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.815s"><rect x="942.4" y="1678.4" width="18.2" height="14.7" rx="6" fill="#4A55C8" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.82s"><rect x="942.4" y="1696.1" width="18.2" height="14.7" rx="6" fill="#4A55C8" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.825s"><rect x="942.4" y="1713.8" width="18.2" height="14.7" rx="6" fill="#4A55C8" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.83s"><rect x="963.6" y="1660.7" width="15.4" height="17.5" rx="6" fill="#4A55C8" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.835s"><rect x="982.0" y="1660.7" width="15.4" height="17.5" rx="6" fill="#4A55C8" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.84s"><rect x="1000.3" y="1660.7" width="13.8" height="17.5" rx="6" fill="#8A8F94" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.845s"><rect x="1017.1" y="1660.7" width="13.4" height="17.5" rx="6" fill="#8A5A7C" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.85s"><rect x="963.6" y="1681.2" width="15.5" height="14.7" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.855s"><rect x="963.6" y="1698.9" width="15.5" height="14.2" rx="6" fill="#4A55C8" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.86s"><rect x="963.6" y="1716.1" width="15.5" height="12.4" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.865s"><rect x="982.1" y="1681.2" width="10.4" height="15.4" rx="6" fill="#4A55C8" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.87s"><rect x="982.1" y="1699.6" width="10.4" height="13.1" rx="6" fill="#4A55C8" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.875s"><rect x="982.1" y="1715.7" width="10.4" height="12.8" rx="6" fill="#B57300" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.88s"><rect x="995.5" y="1681.2" width="10.8" height="10.0" rx="6" fill="#B57300" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.885s"><rect x="1009.3" y="1681.2" width="10.2" height="10.0" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.89s"><rect x="1022.5" y="1681.2" width="8.0" height="10.0" rx="6" fill="#B57300" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.895s"><rect x="995.5" y="1694.2" width="7.5" height="10.0" rx="6" fill="#8A8F94" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.9s"><rect x="995.5" y="1707.1" width="7.5" height="9.9" rx="6" fill="#4A55C8" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.905s"><rect x="995.5" y="1720.0" width="7.5" height="8.5" rx="6" fill="#4A55C8" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.91s"><rect x="1006.0" y="1694.2" width="8.9" height="6.9" rx="6" fill="#4A55C8" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.915s"><rect x="1017.9" y="1694.2" width="5.3" height="6.9" rx="6" fill="#8A5A7C" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.92s"><rect x="1026.2" y="1694.2" width="4.3" height="6.9" rx="6" fill="#B57300" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.925s"><rect x="1006.0" y="1704.1" width="5.8" height="4.3" rx="6" fill="#8A5A7C" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.93s"><rect x="1006.0" y="1711.4" width="5.8" height="3.7" rx="6" fill="#4A55C8" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.935s"><rect x="1006.0" y="1718.1" width="5.8" height="3.7" rx="6" fill="#4A55C8" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.94s"><rect x="1006.0" y="1724.8" width="5.8" height="3.7" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.945s"><rect x="1014.8" y="1704.1" width="3.6" height="4.7" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.95s"><rect x="1021.4" y="1704.1" width="3.2" height="4.7" rx="6" fill="#8A8F94" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.955s"><rect x="1027.6" y="1704.1" width="2.9" height="4.7" rx="6" fill="#8A5A7C" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.96s"><rect x="1014.8" y="1711.8" width="3.4" height="3.1" rx="6" fill="#B57300" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.965s"><rect x="1021.3" y="1711.8" width="3.2" height="3.1" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.97s"><rect x="1027.4" y="1711.8" width="3.1" height="3.1" rx="6" fill="#4A55C8" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.975s"><rect x="1014.8" y="1717.9" width="1.8" height="4.6" rx="6" fill="#4A55C8" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.98s"><rect x="1014.8" y="1725.4" width="1.8" height="3.1" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.985s"><rect x="1019.6" y="1717.9" width="2.4" height="2.0" rx="6" fill="#4A55C8" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.99s"><rect x="1019.6" y="1722.9" width="2.4" height="1.7" rx="6" fill="#4A55C8" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:0.995s"><rect x="1019.6" y="1727.5" width="2.4" height="1.0" rx="6" fill="#8A5A7C" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:1.0s"><rect x="1025.1" y="1717.9" width="1.7" height="1.2" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:1.005s"><rect x="1029.8" y="1717.9" width="0.7" height="1.2" rx="6" fill="#8A5A7C" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:1.01s"><rect x="1025.1" y="1722.0" width="0.4" height="0.8" rx="6" fill="#8A8F94" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:1.015s"><rect x="1028.5" y="1722.0" width="0.0" height="0.8" rx="6" fill="#4A55C8" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:1.02s"><rect x="1031.1" y="1722.0" width="0.0" height="0.8" rx="6" fill="#4A55C8" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:1.025s"><rect x="1025.1" y="1725.8" width="0.0" height="0.2" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:1.03s"><rect x="1025.1" y="1729.0" width="0.0" height="0.0" rx="6" fill="#4A55C8" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:1.035s"><rect x="1027.5" y="1725.8" width="0.0" height="0.0" rx="6" fill="#3E7C59" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:1.04s"><rect x="1027.5" y="1728.7" width="0.0" height="0.0" rx="6" fill="#8A8F94" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:1.045s"><rect x="1029.4" y="1725.8" width="0.0" height="0.0" rx="6" fill="#4A55C8" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:1.05s"><rect x="1031.7" y="1725.8" width="0.0" height="0.0" rx="6" fill="#B57300" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:1.055s"><rect x="1029.4" y="1727.6" width="0.0" height="0.0" rx="6" fill="#4A55C8" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:1.06s"><rect x="1029.4" y="1729.8" width="0.0" height="0.0" rx="6" fill="#B57300" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:1.065s"><rect x="1030.8" y="1727.6" width="0.0" height="0.0" rx="6" fill="#8A8F94" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:1.07s"><rect x="1032.2" y="1727.6" width="0.0" height="0.0" rx="6" fill="#4A55C8" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:1.075s"><rect x="1030.8" y="1729.0" width="0.0" height="0.0" rx="6" fill="#4A55C8" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:1.08s"><rect x="1030.8" y="1730.3" width="0.0" height="0.0" rx="6" fill="#8A8F94" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:1.085s"><rect x="1031.9" y="1729.0" width="0.0" height="0.0" rx="6" fill="#8A8F94" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:1.09s"><rect x="1031.9" y="1729.8" width="0.0" height="0.0" rx="6" fill="#8A8F94" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:1.095s"><rect x="1032.8" y="1729.8" width="0.0" height="0.0" rx="6" fill="#8A8F94" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:1.1s"><rect x="1031.9" y="1730.8" width="0.0" height="0.0" rx="6" fill="#8A8F94" opacity="0.92"/></g>
+    <g class="cell" style="animation-delay:1.105s"><rect x="1032.9" y="1730.8" width="0.0" height="0.0" rx="6" fill="#8A8F94" opacity="0.92"/></g>
+    <g><rect x="48" y="1856" width="16" height="16" rx="4" fill="#3E7C59"/><text x="72" y="1869" font-size="14.5" font-weight="600" fill="var(--ink-soft)" style="font-family:var(--font-body)">словарные данные · 64</text></g>
+    <g><rect x="244" y="1856" width="16" height="16" rx="4" fill="#4A55C8"/><text x="268" y="1869" font-size="14.5" font-weight="600" fill="var(--ink-soft)" style="font-family:var(--font-body)">Python · 40</text></g>
+    <g><rect x="440" y="1856" width="16" height="16" rx="4" fill="#B57300"/><text x="464" y="1869" font-size="14.5" font-weight="600" fill="var(--ink-soft)" style="font-family:var(--font-body)">web-код · 22</text></g>
+    <g><rect x="636" y="1856" width="16" height="16" rx="4" fill="#8A5A7C"/><text x="660" y="1869" font-size="14.5" font-weight="600" fill="var(--ink-soft)" style="font-family:var(--font-body)">медиа и документы · 16</text></g>
+    <g><rect x="832" y="1856" width="16" height="16" rx="4" fill="#8A8F94"/><text x="856" y="1869" font-size="14.5" font-weight="600" fill="var(--ink-soft)" style="font-family:var(--font-body)">прочее · 20</text></g>
+  </svg>
+</div>
+</body>
+</html>
