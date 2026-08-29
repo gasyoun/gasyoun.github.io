@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>50 инфографик санскритского архива — каталог</title>
+<!-- Catalog of 50 infographic ideas built on the GitHub Sanskrit estate data.
+     Living document: statuses flip idea -> first wave -> done (with links). -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --paper:#F5EFE3; --ink:#29261F; --ink-soft:rgba(41,38,31,.62); --accent:#C4552F;
+  --card:#FFFFFF; --hair:rgba(41,38,31,.16); --ok:#2E7D4F; --wave:#8A4B2C;
+  --font-display:'Comfortaa',sans-serif; --font-body:'Nunito',sans-serif;
+}
+html, body { background: var(--paper); }
+body { width: 100%; font-family: var(--font-body); color: var(--ink); }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 56px 40px 80px; }
+.kicker { font: 700 13px/1.4 var(--font-body); letter-spacing: .2em; text-transform: uppercase; color: var(--ink-soft); }
+h1 { font-family: var(--font-display); font-weight: 700; font-size: 52px; line-height: 1.1; margin-top: 14px; }
+.standfirst { margin-top: 16px; max-width: 860px; font: 400 19px/1.55 var(--font-body); color: var(--ink-soft); }
+.legend { margin-top: 26px; display: flex; gap: 22px; flex-wrap: wrap; font: 600 14px var(--font-body); }
+.chip { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12.5px; font-weight: 700; letter-spacing: .04em; }
+.chip.wave { background: var(--wave); color: var(--paper); }
+.chip.idea { background: var(--hair); color: var(--ink-soft); }
+.chip.done { background: var(--ok); color: #fff; }
+.group { margin-top: 52px; }
+.group h2 { font-family: var(--font-display); font-weight: 700; font-size: 27px; padding-bottom: 10px; border-bottom: 3px solid var(--ink); }
+.group .note { margin-top: 8px; font: 400 15.5px/1.5 var(--font-body); color: var(--ink-soft); }
+ol { list-style: none; margin-top: 14px; display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 12px; }
+li { background: var(--card); border: 1.5px solid var(--hair); border-radius: 12px; padding: 14px 16px; }
+li.wave { border-color: var(--wave); border-width: 2px; }
+li .num { font: 800 12.5px var(--font-body); color: var(--accent); letter-spacing: .08em; }
+li .t { display: block; margin-top: 4px; font: 700 17.5px/1.3 var(--font-body); }
+li .src { display: block; margin-top: 6px; font: 400 13.5px/1.45 var(--font-body); color: var(--ink-soft); }
+li .meta { margin-top: 8px; }
+a { color: var(--accent); text-decoration: none; font-weight: 700; }
+a:hover { text-decoration: underline; }
+footer { margin-top: 70px; padding-top: 18px; border-top: 3px solid var(--ink);
+  font: 400 14px/1.6 var(--font-body); color: var(--ink-soft); }
+footer a { font-weight: 600; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kicker">Санскритский архив Гасунса · каталог инфографик · 29.08.2026</div>
+  <h1>50 инфографик из наших данных</h1>
+  <p class="standfirst">Все идеи построены на реальных данных GitHub-имения: 45 словарей (1 506 452 статьи), 431 596 заголовков, 111 наборов kosha, 270 глав SanskritGrammar, корпуса, приложения и инфраструктура. Каталог живой: статусы обновляются после каждого выпуска.</p>
+  <div class="legend">
+    <span><span class="chip wave">первая волна</span> — делаем сейчас</span>
+    <span><span class="chip idea">идея</span> — ждёт очереди</span>
+    <span><span class="chip done">готово</span> — выпущено, есть ссылка</span>
+  </div>
+
+  <div class="group"><h2>Словари и лексикографы</h2>
+    <ol>
+      <li class="wave"><span class="num">№ 1</span><span class="t">45 словарей целиком</span><span class="src">Лог-шкала: все 45 словарей csl-orig вертикальными полосами, не только топ-5.</span><div class="meta"><span class="chip wave">первая волна</span></div></li>
+      <li><span class="num">№ 2</span><span class="t">Анатомия одной статьи</span><span class="src">Разбор статьи MW по слоям: лемма, грамматика, значения, цитаты.</span><div class="meta"><span class="chip idea">идея</span></div></li>
+      <li><span class="num">№ 3</span><span class="t">Словари по буквам деванагари</span><span class="src">Сколько статей MW на каждую букву алфавита.</span><div class="meta"><span class="chip idea">идея</span></div></li>
+      <li><span class="num">№ 4</span><span class="t">Хронология изданий</span><span class="src">Timeline: год печати каждого словаря — PW 1855–75, MW 1899, Apte…</span><div class="meta"><span class="chip idea">идея</span></div></li>
+      <li><span class="num">№ 5</span><span class="t">Пятеро лексикографов</span><span class="src">Böhtlingk, Roth, Monier-Williams, Apte, Cappeller: тома и числа статей.</span><div class="meta"><span class="chip idea">идея</span></div></li>
+      <li><span class="num">№ 6</span><span class="t">Генеалогия словарей</span><span class="src">Flow-дерево наследования: PWG → PW → MW → Apte → rev.</span><div class="meta"><span class="chip idea">идея</span></div></li>
+    </ol>
+  </div>
+
+  <div class="group"><h2>Слова и формы</h2>
+    <ol>
+      <li class="wave"><span class="num">№ 7</span><span class="t">Топ-20 самых длинных слов</span><span class="src">Лесенка из sanhw1 с деванагари, IAST и числом словарей.</span><div class="meta"><span class="chip wave">первая волна</span></div></li>
+      <li><span class="num">№ 8</span><span class="t">Рекорды омонимии</span><span class="src">Слова с максимумом словарных статей (rūpa и др.), sunburst.</span><div class="meta"><span class="chip idea">идея</span></div></li>
+      <li><span class="num">№ 9</span><span class="t">Одно слово — пять кодировок</span><span class="src">Devanagari / IAST / SLP1 / HK / WX: типографический постер.</span><div class="meta"><span class="chip idea">идея</span></div></li>
+      <li><span class="num">№ 10</span><span class="t">Календарь «слово дня»</span><span class="src">30 красивых слов на месяц, постер для печати.</span><div class="meta"><span class="chip idea">идея</span></div></li>
+      <li><span class="num">№ 11</span><span class="t">Морфологическая снежинка</span><span class="src">Все формы одного глагола (MWinflect) радиальным лучом.</span><div class="meta"><span class="chip idea">идея</span></div></li>
+      <li><span class="num">№ 12</span><span class="t">Сетка падежей</span><span class="src">8 падежей × 3 числа одного слова, минимализм.</span><div class="meta"><span class="chip idea">идея</span></div></li>
+    </ol>
+  </div>
+
+  <div class="group"><h2>Корпуса и тексты</h2>
+    <ol>
+      <li class="wave"><span class="num">№ 13</span><span class="t">Рамаяна в цифрах</span><span class="src">Канты, сарги, шлоки: RussianRamayana и оригинал — scroll-история.</span><div class="meta"><span class="chip wave">первая волна</span></div></li>
+      <li><span class="num">№ 14</span><span class="t">Гита: тепловая карта</span><span class="src">700 шлок × 18 глав + покрытие слоями (karaoke, словари).</span><div class="meta"><span class="chip idea">идея</span></div></li>
+      <li><span class="num">№ 15</span><span class="t">Стратиграфия комментария</span><span class="src">1058 заметок Leonov/Kostina к Sundara-kāṇḍe, послойно.</span><div class="meta"><span class="chip idea">идея</span></div></li>
+      <li><span class="num">№ 16</span><span class="t">Корпуса рядом</span><span class="src">DCS vs Parallel-Corpora vs telegram-corpus: объёмы, жанры, лицензии.</span><div class="meta"><span class="chip idea">идея</span></div></li>
+      <li><span class="num">№ 17</span><span class="t">Самые цитируемые источники</span><span class="src">Кто чаще всего стоит в скобках у цитат MW.</span><div class="meta"><span class="chip idea">идея</span></div></li>
+    </ol>
+  </div>
+
+  <div class="group"><h2>Грамматика и Панини</h2>
+    <ol>
+      <li class="wave"><span class="num">№ 18</span><span class="t">Аштадхьяи как город</span><span class="src">8 книг × сутры: восемь кварталов одного города правил.</span><div class="meta"><span class="chip wave">первая волна</span></div></li>
+      <li><span class="num">№ 19</span><span class="t">Колесо самас</span><span class="src">Типы компаундов (SamasaChakram) колесом-мандалой.</span><div class="meta"><span class="chip idea">идея</span></div></li>
+      <li><span class="num">№ 20</span><span class="t">Рекорды сандхи</span><span class="src">Какие junction-правила встречаются в корпусах чаще.</span><div class="meta"><span class="chip idea">идея</span></div></li>
+      <li><span class="num">№ 21</span><span class="t">Падежные дорожки</span><span class="src">Как падеж подаётся в 5 учебных грамматиках — сравнение.</span><div class="meta"><span class="chip idea">идея</span></div></li>
+    </ol>
+  </div>
+
+  <div class="group"><h2>Инфраструктура GitHub-имения</h2>
+    <ol>
+      <li class="wave"><span class="num">№ 22</span><span class="t">Карта империи</span><span class="src">Treemap ~85 репозиториев по языкам и организациям.</span><div class="meta"><span class="chip wave">первая волна</span></div></li>
+      <li><span class="num">№ 23</span><span class="t">Пульс коммитов</span><span class="src">Тепловая карта: когда работали, какие репо горячие.</span><div class="meta"><span class="chip idea">идея</span></div></li>
+      <li><span class="num">№ 24</span><span class="t">Кто пишет санскрит</span><span class="src">MG + агенты по tier из реестра handoffs: вклад исполнителей.</span><div class="meta"><span class="chip idea">идея</span></div></li>
+      <li><span class="num">№ 25</span><span class="t">CI-паспорт организации</span><span class="src">Зелёные/красные воркфлоу, покрытие проверками.</span><div class="meta"><span class="chip idea">идея</span></div></li>
+      <li><span class="num">№ 26</span><span class="t">Рост имения 2025→2026</span><span class="src">Кумулятивные кривые: репо, данные, статьи.</span><div class="meta"><span class="chip idea">идея</span></div></li>
+    </ol>
+  </div>
+
+  <div class="group"><h2>Приложения и бизнес</h2>
+    <ol>
+      <li class="wave"><span class="num">№ 27</span><span class="t">Воронка ORS</span><span class="src">Посетители → подписчики → курс, обезличенно. Ждёт данные.</span><div class="meta"><span class="chip idea">нужны данные</span></div></li>
+      <li><span class="num">№ 28</span><span class="t">Дорога ученика в Systema</span><span class="src">Колоды SRS, уровни, стрики.</span><div class="meta"><span class="chip idea">идея</span></div></li>
+      <li><span class="num">№ 29</span><span class="t">Кампус продуктов</span><span class="src">samskrtam.ru, Systema, kosha, словари — карта владений.</span><div class="meta"><span class="chip idea">идея</span></div></li>
+      <li><span class="num">№ 30</span><span class="t">Цена слова</span><span class="src">Сколько агентских часов стоил миллион статей — из реестра handoffs.</span><div class="meta"><span class="chip idea">идея</span></div></li>
+      <li><span class="num">№ 31</span><span class="t">Roadmap-снепшот</span><span class="src">Сделано / в работе / ждёт решения из GTD-реестра.</span><div class="meta"><span class="chip idea">идея</span></div></li>
+    </ol>
+  </div>
+
+  <div class="group"><h2>Люди и история</h2>
+    <ol>
+      <li class="wave"><span class="num">№ 32</span><span class="t">Хронология имения</span><span class="src">Ключевые даты: от первого репо до вспышки 2026 года.</span><div class="meta"><span class="chip wave">первая волна</span></div></li>
+      <li><span class="num">№ 33</span><span class="t">Атлас индологов</span><span class="src">Карта мира: учёные из IndologyScholars и их корпуса.</span><div class="meta"><span class="chip idea">идея</span></div></li>
+      <li><span class="num">№ 34</span><span class="t">Мост Зализняк → санскрит</span><span class="src">Русская морфологическая школа встречает санскрит, диптих.</span><div class="meta"><span class="chip idea">идея</span></div></li>
+      <li><span class="num">№ 35</span><span class="t">Светофор лицензий</span><span class="src">CC / PD / серые зоны по всем 45 словарям.</span><div class="meta"><span class="chip idea">идея</span></div></li>
+    </ol>
+  </div>
+
+  <div class="group"><h2>Педагогика</h2>
+    <ol>
+      <li class="wave"><span class="num">№ 36</span><span class="t">От алфавита до Рамаяны</span><span class="src">Карта уровней ученика: Systema, курс, тексты.</span><div class="meta"><span class="chip wave">первая волна</span></div></li>
+      <li><span class="num">№ 37</span><span class="t">Топ-100 слов новичка</span><span class="src">Частотный постер для печати из корпуса.</span><div class="meta"><span class="chip idea">идея</span></div></li>
+      <li><span class="num">№ 38</span><span class="t">Таблица грехов</span><span class="src">Типовые опечатки учеников из SanskritSpellCheck.</span><div class="meta"><span class="chip idea">идея</span></div></li>
+      <li><span class="num">№ 39</span><span class="t">Деванагари-квартал</span><span class="src">46 букв как здания по частотности.</span><div class="meta"><span class="chip idea">идея</span></div></li>
+      <li><span class="num">№ 40</span><span class="t">Сколько слов нужно для Гиты</span><span class="src">Кривая покрытия словаря — кривая обучения.</span><div class="meta"><span class="chip idea">идея</span></div></li>
+    </ol>
+  </div>
+
+  <div class="group"><h2>Сравнения и рекорды</h2>
+    <ol>
+      <li class="wave"><span class="num">№ 41</span><span class="t">Санскрит vs латынь vs греческий</span><span class="src">Кто больше оцифрован на GitHub и в веб-корпусах.</span><div class="meta"><span class="chip wave">первая волна</span></div></li>
+      <li><span class="num">№ 42</span><span class="t">Википедия vs наши словари</span><span class="src">Статьи «о санскрите» против статей «на санскрите».</span><div class="meta"><span class="chip idea">идея</span></div></li>
+      <li><span class="num">№ 43</span><span class="t">Место в мировом рейтинге</span><span class="src">MW среди великих словарей: OED, Duden, Grimms.</span><div class="meta"><span class="chip idea">идея</span></div></li>
+      <li><span class="num">№ 44</span><span class="t">Словари как чемоданы</span><span class="src">Сколько весит 1,5 млн статей: гигабайты и тома на полке.</span><div class="meta"><span class="chip idea">идея</span></div></li>
+      <li><span class="num">№ 45</span><span class="t">Три языка науки</span><span class="src">RU / EN / DE: на каком языке написаны наши словари.</span><div class="meta"><span class="chip idea">идея</span></div></li>
+    </ol>
+  </div>
+
+  <div class="group"><h2>Экспериментальные форматы</h2>
+    <ol>
+      <li><span class="num">№ 46</span><span class="t">Муравейник агентов</span><span class="src">Сессии как муравьи, таскающие статьи в кучи словарей.</span><div class="meta"><span class="chip idea">идея</span></div></li>
+      <li class="wave"><span class="num">№ 47</span><span class="t">Год одним кадром</span><span class="src">Календарь-постер 2025–26 с вехами имения.</span><div class="meta"><span class="chip wave">первая волна</span></div></li>
+      <li><span class="num">№ 48</span><span class="t">Слайдер роста</span><span class="src">От 1 слова до 1,5 млн: scroll-анимация роста.</span><div class="meta"><span class="chip idea">идея</span></div></li>
+      <li><span class="num">№ 49</span><span class="t">Мета-дашборд «вселенная санскрита»</span><span class="src">Все ключевые метрики имения в одном кадре.</span><div class="meta"><span class="chip idea">идея</span></div></li>
+      <li><span class="num">№ 50</span><span class="t">Паспорт одного словаря</span><span class="src">Серия из 5 постеров в едином шаблоне: MW, PW, PWG, AP, VCP.</span><div class="meta"><span class="chip idea">идея</span></div></li>
+    </ol>
+  </div>
+
+  <footer>
+    Каталог ведётся вместе с серией: <a href="https://gasyoun.github.io/infographics/github-sanskrit-estate-isometric-2026-08-28/">изометрический квартал</a> · <a href="https://gasyoun.github.io/infographics/github-sanskrit-blueprint-story-2026-08-29/">синька</a> · <a href="https://gasyoun.github.io/infographics/github-sanskrit-story-styles-2026-08-29/all-styles.html">7 стилей</a>.
+    Данные: csl-orig (45 словарей, 1 506 452 статьи), SanskritSpellCheck (431 596 заголовков), kosha (111 наборов), SanskritGrammar (270 глав).
+    Посчитано 29.08.2026 · Dr. Mārcis Gasūns
+  </footer>
+</div>
+</body>
+</html>
