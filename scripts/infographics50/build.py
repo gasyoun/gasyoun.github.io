@@ -136,6 +136,18 @@ def page_anatomy():
         f'статей · <b>{fmt(DATA["mw"]["unique_k1"])}</b> уникальных k1.</div>'
         + "".join(cards[:6])
     )
+    if a.get("raw"):
+        raw_lines = "".join(
+            f'<div style="white-space:pre-wrap">{e(ln)}</div>'
+            for ln in a["raw"].split("\n")
+        )
+        inner += (
+            '<div class="fade" style="position:absolute;left:64px;top:1520px;width:952px;'
+            'background:var(--card);border-radius:14px;padding:20px 26px;animation-delay:.7s">'
+            '<div style="font:700 13px var(--font-body);color:var(--accent);letter-spacing:.08em">'
+            'сырая статья, как лежит в mw.txt</div>'
+            f'<div style="font:12.5px/1.55 var(--mono);color:var(--sub);margin-top:8px">{raw_lines}</div></div>'
+        )
     return shell(
         "Анатомия одной статьи MW",
         "Санскритский архив Гасунса · словари",
@@ -254,6 +266,26 @@ def page_genealogy():
         ("MW 1872", "предшественник MW 1899", "mw72"),
     ]
     by = {r["code"]: r for r in DATA["dicts"]["rows"]}
+    CARD_H = 202
+    xs = [120, 360]
+    arrows = []
+    tops = []
+    for i, (lab, when, code) in enumerate(chain):
+        y0 = 340 + i * 270
+        tops.append((xs[i % 2] + 300, y0, y0 + CARD_H))
+    for i in range(3):  # PWG→PW→MW→Apte; MW 1872 stays a side note
+        x1, _, yb = tops[i]
+        x2, yt, _ = tops[i + 1]
+        arrows.append(
+            f'<line x1="{x1}" y1="{yb + 4}" x2="{x2}" y2="{yt - 8}" '
+            f'stroke="#C4552F" stroke-opacity=".55" stroke-width="2.5" marker-end="url(#ahg)"/>'
+        )
+    svg = (
+        '<svg style="position:absolute;left:0;top:0;pointer-events:none" width="1080" height="1920">'
+        '<defs><marker id="ahg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" '
+        'orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#C4552F" opacity=".55"/></marker></defs>'
+        + "".join(arrows) + "</svg>"
+    )
     blocks = []
     for i, (lab, when, code) in enumerate(chain):
         n = by.get(code, {}).get("entries", 0)
@@ -269,7 +301,9 @@ def page_genealogy():
     inner = (
         '<div class="hero">Не дерево «влияния» из головы: пять узлов с <b>датой из header.xml</b> '
         "и числом статей из того же клона. Стрелка наследования — историческая подпись серии, "
-        "числа проверяемы.</div>" + "".join(blocks)
+        "числа проверяемы.</div>"
+        + svg
+        + "".join(blocks)
     )
     return shell(
         "Генеалогия словарей",
@@ -317,27 +351,45 @@ def page_encodings():
 
 def page_snowflake():
     forms = DATA["gam"]["present_para_gacC"]
-    cx, cy, R = 540, 980, 380
-    nodes = []
+    cx, cy, R = 540, 920, 400
+    slots = ["3 sg", "3 du", "3 pl", "2 sg", "2 du", "2 pl", "1 sg", "1 du", "1 pl"]
     n = max(len(forms), 1)
+    rays = [
+        f'<svg style="position:absolute;left:0;top:0;pointer-events:none" width="1080" height="1920">'
+        f'<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" '
+        f'orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#FF8A70" opacity=".55"/></marker></defs>'
+    ]
+    nodes = []
     for i, f in enumerate(forms):
         ang = -math.pi / 2 + i * 2 * math.pi / n
-        x = cx + R * math.cos(ang) - 90
-        y = cy + R * math.sin(ang) - 40
+        nx = cx + R * math.cos(ang)
+        ny = cy + R * math.sin(ang)
+        rays.append(
+            f'<line x1="{cx}" y1="{cy}" x2="{nx:.0f}" y2="{ny + 6:.0f}" '
+            f'stroke="#FF8A70" stroke-opacity=".38" stroke-width="2.5" marker-end="url(#ah)"/>'
+        )
         nodes.append(
-            f'<div class="fade" style="position:absolute;left:{x:.0f}px;top:{y:.0f}px;width:180px;text-align:center;'
-            f'animation-delay:{0.2+i*0.05}s">'
-            f'<div style="font:700 28px var(--dev)">{e(f["deva"])}</div>'
+            f'<div class="fade" style="position:absolute;left:{nx - 90:.0f}px;top:{ny - 46:.0f}px;width:180px;'
+            f'text-align:center;animation-delay:{0.2+i*0.05}s">'
+            f'<div style="font:700 12px var(--font-body);color:var(--neon);letter-spacing:.08em">{e(slots[i])}</div>'
+            f'<div style="font:700 28px var(--dev);margin-top:2px">{e(f["deva"])}</div>'
             f'<div style="font:600 13px var(--font-body);font-style:italic;color:var(--sub)">{e(f["iast"])}</div>'
             f'</div>'
         )
+    rays.append("</svg>")
     inner = (
-        f'<div class="hero">Корень <b>√gam</b>, настоящее время, parasmaipada, основа gacch- — '
+        f'<div class="hero">Корень <b>√gam</b> «идти», настоящее время, parasmaipada, основа gacch- — '
         f'<b>{len(forms)}</b> форм из MWinflect (20 строк gam в calc_tables.txt). '
-        "Центр — 3×3 лица и числа.</div>"
-        f'<div style="position:absolute;left:430px;top:900px;width:220px;text-align:center">'
-        f'<div style="font:700 36px var(--dev)">√गम्</div>'
-        f'<div style="color:var(--sub)">gacchati</div></div>'
+        "Луч — форма; 3×3 лица и числа подписаны на лучах.</div>"
+        + "".join(rays)
+        + f'<div style="position:absolute;left:430px;top:{cy - 48}px;width:220px;text-align:center">'
+        f'<div style="font:700 40px var(--dev)">√गम्</div>'
+        f'<div style="font:italic 600 14px var(--font-body);color:var(--sub)">gam — корень</div></div>'
+        + '<div class="fade" style="position:absolute;left:64px;top:1560px;width:952px;background:var(--card);'
+        'border-radius:14px;padding:18px 26px;animation-delay:.8s">'
+        '<div style="font:600 14.5px/1.55 var(--font-body);color:var(--sub)">Порядок лучей — как хранит '
+        'MWinflect: <b style="color:var(--ink)">3-е → 2-е → 1-е лицо</b>, в каждом sg · du · pl. '
+        'Каждая форма — одна строка таблицы verbs calc_tables.txt, модель 1,a,pre, основа gacC.</div></div>'
         + "".join(nodes)
     )
     return shell(
@@ -369,6 +421,14 @@ def page_cases():
         f'<b>{len(cells)}</b> клеток = 8 падежей × 3 числа. '
         f'Таблица nominals calc_tables.txt, {fmt(DATA["rama"]["table_rows"])} строк.</div>'
         + "".join(grid)
+        + '<div class="fade" style="position:absolute;left:64px;top:1500px;width:952px;background:var(--card);'
+        'border-radius:14px;padding:20px 26px;animation-delay:.6s">'
+        '<div style="font:700 13px var(--font-body);color:var(--accent);letter-spacing:.08em">как читать сетку</div>'
+        '<div style="font:600 15px/1.55 var(--font-body);color:var(--sub);margin-top:6px">'
+        'Основа <b style="color:var(--ink)">rāma-</b> (модель m_a — мужской род, a-стем). '
+        '<b style="color:var(--ink)">du</b> — двойственное число: ровно для двух предметов, '
+        'отдельные формы во всех восьми падежах. Порядок строк — N A I D Ab G L V, '
+        'как хранит calc_tables.txt (1s,1d,1p…8s,8d,8p).</div></div>'
     )
     return shell(
         "Сетка падежей",
