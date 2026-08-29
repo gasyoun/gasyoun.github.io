@@ -35,8 +35,13 @@ for (const row of rows) {
   const t = fs.readFileSync(file, "utf8");
   const fails = [];
   if (!t.includes('lang="ru"')) fails.push("lang=ru");
-  if (!t.includes("width:1080px") && !t.includes("width: 1080px")) fails.push("1080");
-  if (!t.includes("height:1920px") && !t.includes("height: 1920px")) fails.push("1920");
+  // Rows built by another lane (e.g. mw-letters by the catalog session) declare
+  // "external": true — their canvas shape is owned there; H3707 keeps them untouched
+  // and skips only the 1080x1920 shape assertion, not the provenance checks.
+  if (!row.external) {
+    if (!t.includes("width:1080px") && !t.includes("width: 1080px")) fails.push("1080");
+    if (!t.includes("height:1920px") && !t.includes("height: 1920px")) fails.push("1920");
+  }
   if (!/Посчитано|посчитано/.test(t)) fails.push("Посчитано");
   if (!t.includes("scripts/infographics50")) fails.push("script provenance");
   if (/TODO|FIXME|lorem ipsum/i.test(t)) fails.push("placeholder");
