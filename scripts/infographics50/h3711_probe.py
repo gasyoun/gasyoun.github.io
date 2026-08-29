@@ -7,13 +7,38 @@ Python 3.9+. Writes data/h3711.json. Derive-don't-store.
 from __future__ import annotations
 
 import json
+import os
 import sys
 from pathlib import Path
 
 sys.stdout.reconfigure(encoding="utf-8")
 sys.stderr.reconfigure(encoding="utf-8")
 
-GH = Path(r"C:\Users\user\Documents\GitHub")
+def _estate_root() -> Path:
+    """Locate the GitHub estate clone root, portable across boxes (H3710).
+
+    Order: $GITHUB_ESTATE env var, then known checkout locations, then the
+    first parent of this repo whose directory name is 'GitHub'."""
+    env = os.environ.get("GITHUB_ESTATE")
+    if env and Path(env).is_dir():
+        return Path(env)
+    here = Path(__file__).resolve()
+    for parent in here.parents:
+        if parent.name == "GitHub" and (parent / "csl-orig").is_dir():
+            return parent
+    for cand in (
+        Path.home() / "Documents" / "GitHub",
+        Path("C:/Users/user/Documents/GitHub"),
+        Path.home() / "GitHub",
+    ):
+        if (cand / "csl-orig").is_dir():
+            return cand
+    raise SystemExit(
+        "h3711_probe.py: cannot locate the GitHub estate root; set GITHUB_ESTATE"
+    )
+
+
+GH = _estate_root()
 HERE = Path(__file__).resolve().parent
 OUT = HERE / "data" / "h3711.json"
 
@@ -106,9 +131,16 @@ def probe_prefaces() -> dict:
     names = ["prefaces_ieg", "prefaces_lan", "prefaces_pe", "prefaces_pgn", "prefaces_ae", "prefaces_gst", "prefaces_snp"]
     rows = []
     for name in names:
-        p = GH / name
-        n = count_files(p) if p.exists() else 0
-        rows.append({"repo": name, "files": n, "present": p.exists()})
+        plain = GH / name
+        promote = GH / (name + "-promote")
+        if plain.exists():
+            p, via = plain, name
+        elif promote.exists():
+            p, via = promote, name + "-promote"
+        else:
+            rows.append({"repo": name, "files": 0, "present": False, "via": None})
+            continue
+        rows.append({"repo": name, "files": count_files(p), "present": True, "via": via})
     return {"rows": rows, "ok": all(r["present"] and r["files"] > 0 for r in rows)}
 
 

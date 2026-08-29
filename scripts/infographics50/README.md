@@ -38,3 +38,13 @@ Batch b1 (#2,3,4,5,6,9,11,12,17,50) arrived already emitted by the parallel H370
 - Re-derive on any box: `GITHUB_ESTATE=… python scripts/infographics50/probe.py` → regenerating the verbs/nominals `calc_tables.txt` first via MWinflect `redo.sh` chains (see H3707 close note).
 
 _Dr. Mārcis Gasūns_
+
+## H3710 b4 completion (30-08-2026)
+
+Batch b4 (#33,41,42,43,44,46,48,49 + spares prefaces/bookindex) arrived already emitted by the parallel H3705 sweep; this pass completed the production contract without touching any page's counted numbers:
+
+- `infographic.png` rendered for all 9 b4 pages (Playwright, `.canvas` @1080×1920) + `infographic.mp4`/`.gif` for `growth-slider` (rAF counter is not WAAPI-scrubbable, so frames are fresh-load wall-clock captures at 0…2400 ms — real page states, ffmpeg assembly).
+- `h3711_probe.py` portability fix (H3710): estate root via `$GITHUB_ESTATE`/auto-detect (was hard-coded `C:\Users\user\Documents\GitHub` from the Windows session); `probe_prefaces` now falls back to `prefaces_X-promote` clones and records which form was counted in `via`.
+- Re-derivation spot-check on 30-08-2026: all probes run green on this Mac (`ok=True`); counts differ from the frozen 29.08 JSONs only by estate drift since the count (csl-orig 1 496 157→1 506 391 entries, IndologyScholars CI rebuild 6 841→3 407 md, prefaces 425→500 files across promote renames, BookIndex/SanskritSorting ±). Pages stay frozen at «Посчитано 29.08.2026» — the committed JSONs are the counted evidence.
+
+_Dr. Mārcis Gasūns_
