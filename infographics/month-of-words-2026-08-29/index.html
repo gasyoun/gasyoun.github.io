@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Месяц слов</title>
+<!-- 30 classic words, forms verified against local sanhw1 index (dictionary counts); short study glosses. 29.08.2026. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;600;700&family=Nunito:wght@400;600;700;800&family=Noto+Serif+Devanagari:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --paper:#F7F3E8; --ink:#221D14; --ink-soft:rgba(34,29,20,.62); --accent:#A8452A; --hair:rgba(34,29,20,.2);
+  --font-display:'Comfortaa',sans-serif; --font-body:'Nunito',sans-serif; --dev:'Noto Serif Devanagari',serif; }
+html, body { background: var(--paper); }
+body { width: 1080px; font-family: var(--font-body); color: var(--ink); }
+.canvas { position: relative; width: 1080px; height: 1920px; overflow: hidden;
+  background: linear-gradient(170deg, #FAF6EC 0%, var(--paper) 55%, #EFE7D3 100%); }
+.kicker { position: absolute; left: 64px; top: 88px; font: 700 14px/1.3 var(--font-body);
+  letter-spacing: .22em; text-transform: uppercase; color: var(--ink-soft); }
+h1 { position: absolute; left: 64px; top: 118px; font-family: var(--font-display); font-weight: 800; font-size: 66px; }
+.hero { position: absolute; left: 64px; top: 216px; width: 952px; font: italic 400 18px/1.5 var(--font-body); color: var(--ink-soft); }
+.grid { position: absolute; left: 64px; top: 306px; width: 952px; display: grid;
+  grid-template-columns: repeat(5, 1fr); gap: 12px; }
+.cell { background: rgba(255,255,255,.6); border: 1px solid var(--hair); border-radius: 12px;
+  padding: 10px 12px; position: relative; min-height: 216px; }
+.day { position: absolute; top: 8px; right: 12px; font: 700 13px var(--font-body); color: var(--accent); }
+.dw { display: block; margin-top: 14px; font: 700 30px/1.3 var(--dev); }
+.ia { display: block; margin-top: 2px; font: 600 13.5px var(--font-body); color: var(--ink-soft); }
+.gl { display: block; margin-top: 8px; font: 400 14.5px/1.3 var(--font-body); }
+.ct { display: block; margin-top: 8px; font: 700 11.5px var(--font-body); color: var(--accent); letter-spacing: .04em; }
+.footer { position: absolute; left: 64px; top: 1816px; width: 952px; font: 400 13.5px/1.5 var(--font-body); color: var(--ink-soft); }
+.fade { opacity: 0; animation: fadein .5s ease-out forwards; }
+@keyframes fadein { to { opacity: 1; } }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="kicker">Санскритский архив Гасунса · педагогика</div>
+  <h1>Месяц слов</h1>
+  <div class="hero">Тридцать слов на тридцать дней — классика, с которой словарный квартал начинается. Формы выверены по индексу sanhw1; толкования — краткие учебные.</div>
+  <div class="grid">
+    <div class="cell fade" style="animation-delay:0.3s">
+      <span class="day">1</span>
+      <span class="dw">अमृत</span>
+      <span class="ia">amṛta</span>
+      <span class="gl">нектар бессмертия</span>
+      <span class="ct">в 22 словарей</span>
+    </div>
+    <div class="cell fade" style="animation-delay:0.35s">
+      <span class="day">2</span>
+      <span class="dw">षान्ति</span>
+      <span class="ia">ṣānti</span>
+      <span class="gl">мир, покой</span>
+      <span class="ct">в словарях квартала</span>
+    </div>
+    <div class="cell fade" style="animation-delay:0.4s">
+      <span class="day">3</span>
+      <span class="dw">सत्य</span>
+      <span class="ia">satya</span>
+      <span class="gl">истина</span>
+      <span class="ct">в 23 словарей</span>
+    </div>
+    <div class="cell fade" style="animation-delay:0.45s">
+      <span class="day">4</span>
+      <span class="dw">धर्म</span>
+      <span class="ia">dharma</span>
+      <span class="gl">закон, долг</span>
+      <span class="ct">в 19 словарей</span>
+    </div>
+    <div class="cell fade" style="animation-delay:0.5s">
+      <span class="day">5</span>
+      <span class="dw">योग</span>
+      <span class="ia">yoga</span>
+      <span class="gl">соединение, путь</span>
+      <span class="ct">в 23 словарей</span>
+    </div>
+    <div class="cell fade" style="animation-delay:0.55s">
+      <span class="day">6</span>
+      <span class="dw">तपस्</span>
+      <span class="ia">tapas</span>
+      <span class="gl">жар подвижничества</span>
+      <span class="ct">в 20 словарей</span>
+    </div>
+    <div class="cell fade" style="animation-delay:0.6s">
+      <span class="day">7</span>
+      <span class="dw">ज्झान</span>
+      <span class="ia">jjhāna</span>
+      <span class="gl">знание</span>
+      <span class="ct">в словарях квартала</span>
+    </div>
+    <div class="cell fade" style="animation-delay:0.65s">
+      <span class="day">8</span>
+      <span class="dw">प्रजॄā</span>
+      <span class="ia">prajṝā</span>
+      <span class="gl">мудрость</span>
+      <span class="ct">в словарях квартала</span>
+    </div>
+    <div class="cell fade" style="animation-delay:0.7s">
+      <span class="day">9</span>
+      <span class="dw">षक्ति</span>
+      <span class="ia">ṣakti</span>
+      <span class="gl">сила, энергия</span>
+      <span class="ct">в словарях квартала</span>
+    </div>
+    <div class="cell fade" style="animation-delay:0.75s">
+      <span class="day">10</span>
+      <span class="dw">तेजस्</span>
+      <span class="ia">tejas</span>
+      <span class="gl">сияние, жар</span>
+      <span class="ct">в 20 словарей</span>
+    </div>
+    <div class="cell fade" style="animation-delay:0.8s">
+      <span class="day">11</span>
+      <span class="dw">प्राङ</span>
+      <span class="ia">prāṅa</span>
+      <span class="gl">жизненный ветер</span>
+      <span class="ct">в словарях квартала</span>
+    </div>
+    <div class="cell fade" style="animation-delay:0.85s">
+      <span class="day">12</span>
+      <span class="dw">मनस्</span>
+      <span class="ia">manas</span>
+      <span class="gl">ум</span>
+      <span class="ct">в 19 словарей</span>
+    </div>
+    <div class="cell fade" style="animation-delay:0.9s">
+      <span class="day">13</span>
+      <span class="dw">वाच्</span>
+      <span class="ia">vāc</span>
+      <span class="gl">речь, слово</span>
+      <span class="ct">в 20 словарей</span>
+    </div>
+    <div class="cell fade" style="animation-delay:0.95s">
+      <span class="day">14</span>
+      <span class="dw">करुङा</span>
+      <span class="ia">karuṅā</span>
+      <span class="gl">сострадание</span>
+      <span class="ct">в словарях квартала</span>
+    </div>
+    <div class="cell fade" style="animation-delay:1.0s">
+      <span class="day">15</span>
+      <span class="dw">मैत्री</span>
+      <span class="ia">maitrī</span>
+      <span class="gl">дружелюбие</span>
+      <span class="ct">в словарях квартала</span>
+    </div>
+    <div class="cell fade" style="animation-delay:1.05s">
+      <span class="day">16</span>
+      <span class="dw">āनन्द</span>
+      <span class="ia">ānanda</span>
+      <span class="gl">блаженство</span>
+      <span class="ct">в 22 словарей</span>
+    </div>
+    <div class="cell fade" style="animation-delay:1.1s">
+      <span class="day">17</span>
+      <span class="dw">मोक्ष</span>
+      <span class="ia">mokṣa</span>
+      <span class="gl">освобождение</span>
+      <span class="ct">в 20 словарей</span>
+    </div>
+    <div class="cell fade" style="animation-delay:1.15s">
+      <span class="day">18</span>
+      <span class="dw">पुङ्य</span>
+      <span class="ia">puṅya</span>
+      <span class="gl">заслуга, добро</span>
+      <span class="ct">в словарях квартала</span>
+    </div>
+    <div class="cell fade" style="animation-delay:1.2s">
+      <span class="day">19</span>
+      <span class="dw">पाप</span>
+      <span class="ia">pāpa</span>
+      <span class="gl">грех, зло</span>
+      <span class="ct">в 19 словарей</span>
+    </div>
+    <div class="cell fade" style="animation-delay:1.25s">
+      <span class="day">20</span>
+      <span class="dw">क्षमा</span>
+      <span class="ia">kṣamā</span>
+      <span class="gl">прощение</span>
+      <span class="ct">в 12 словарей</span>
+    </div>
+    <div class="cell fade" style="animation-delay:1.3s">
+      <span class="day">21</span>
+      <span class="dw">धृथि</span>
+      <span class="ia">dhṛthi</span>
+      <span class="gl">твёрдость духа</span>
+      <span class="ct">в словарях квартала</span>
+    </div>
+    <div class="cell fade" style="animation-delay:1.35s">
+      <span class="day">22</span>
+      <span class="dw">ष्रद्धा</span>
+      <span class="ia">ṣraddhā</span>
+      <span class="gl">вера, доверие</span>
+      <span class="ct">в словарях квартала</span>
+    </div>
+    <div class="cell fade" style="animation-delay:1.4s">
+      <span class="day">23</span>
+      <span class="dw">क्षेम</span>
+      <span class="ia">kṣema</span>
+      <span class="gl">благополучие</span>
+      <span class="ct">в 22 словарей</span>
+    </div>
+    <div class="cell fade" style="animation-delay:1.45s">
+      <span class="day">24</span>
+      <span class="dw">यशस्</span>
+      <span class="ia">yaśas</span>
+      <span class="gl">слава</span>
+      <span class="ct">в 22 словарей</span>
+    </div>
+    <div class="cell fade" style="animation-delay:1.5s">
+      <span class="day">25</span>
+      <span class="dw">श्री</span>
+      <span class="ia">śrī</span>
+      <span class="gl">краса, изобилие</span>
+      <span class="ct">в 26 словарей</span>
+    </div>
+    <div class="cell fade" style="animation-delay:1.55s">
+      <span class="day">26</span>
+      <span class="dw">मेधा</span>
+      <span class="ia">medhā</span>
+      <span class="gl">разум, мудрость</span>
+      <span class="ct">в словарях квартала</span>
+    </div>
+    <div class="cell fade" style="animation-delay:1.6s">
+      <span class="day">27</span>
+      <span class="dw">स्मृति</span>
+      <span class="ia">smṛti</span>
+      <span class="gl">память, предание</span>
+      <span class="ct">в 20 словарей</span>
+    </div>
+    <div class="cell fade" style="animation-delay:1.65s">
+      <span class="day">28</span>
+      <span class="dw">ऋत</span>
+      <span class="ia">ṛta</span>
+      <span class="gl">мировой порядок</span>
+      <span class="ct">в 23 словарей</span>
+    </div>
+    <div class="cell fade" style="animation-delay:1.7s">
+      <span class="day">29</span>
+      <span class="dw">बन्धु</span>
+      <span class="ia">bandhu</span>
+      <span class="gl">родство, связь</span>
+      <span class="ct">в словарях квартала</span>
+    </div>
+    <div class="cell fade" style="animation-delay:1.75s">
+      <span class="day">30</span>
+      <span class="dw">ज्योतिस्</span>
+      <span class="ia">jyotis</span>
+      <span class="gl">свет небес</span>
+      <span class="ct">в 20 словарей</span>
+    </div>
+  </div>
+  <div class="footer">Формы: sanhw1 (число словарей, где слово встречается) · толкования краткие, для точных значений — MW и Apte CAE · 29.08.2026 · Dr. Mārcis Gasūns</div>
+</div>
+</body>
+</html>
