@@ -19,7 +19,31 @@ from pathlib import Path
 sys.stdout.reconfigure(encoding="utf-8")
 sys.stderr.reconfigure(encoding="utf-8")
 
-GH = Path(r"C:\Users\user\Documents\GitHub")
+def _estate_root() -> Path:
+    """Locate the GitHub estate clone root, portable across boxes (H3707).
+
+    Order: $GITHUB_ESTATE env var, then known checkout locations, then the
+    first parent of this repo whose directory name is 'GitHub'."""
+    env = os.environ.get("GITHUB_ESTATE")
+    if env and Path(env).is_dir():
+        return Path(env)
+    here = Path(__file__).resolve()
+    for parent in here.parents:
+        if parent.name == "GitHub" and (parent / "csl-orig").is_dir():
+            return parent
+    for cand in (
+        Path.home() / "Documents" / "GitHub",
+        Path("C:/Users/user/Documents/GitHub"),
+        Path.home() / "GitHub",
+    ):
+        if (cand / "csl-orig").is_dir():
+            return cand
+    raise SystemExit(
+        "probe.py: cannot locate the GitHub estate root; set GITHUB_ESTATE"
+    )
+
+
+GH = _estate_root()
 HERE = Path(__file__).resolve().parent
 OUT = HERE / "data" / "infographics50.json"
 SU = GH / "sanskrit-util" / "py"
@@ -28,7 +52,7 @@ if SU.exists():
 from sanskrit_util import from_slp1, slp1_to_devanagari  # noqa: E402
 
 TODAY = date.today().isoformat()
-COUNTED = "29.08.2026"
+COUNTED = TODAY[8:10] + "." + TODAY[5:7] + "." + TODAY[0:4]  # derive-don't-store (H3707)
 
 SLP1_HK = {
     "A": "A", "I": "I", "U": "U", "f": "R", "F": "RR", "x": "lR", "X": "lRR",
@@ -85,15 +109,38 @@ def parse_header_date(header: Path) -> str:
     return m.group(1).strip() if m else ""
 
 
+_FOREIGN_RE = re.compile(r"<foreign[^>]*>(.*?)</foreign>", re.S)
+_BRACE_RE = re.compile(r"\{([a-zA-Z])\}")
+
+
+def _slp1_segment_to_iast(seg: str) -> str:
+    """Cologne SLP1 display markup -> IAST: {x} font switches keep the letter
+    (it is part of the word), then from_slp1 transcodes."""
+    return from_slp1(_BRACE_RE.sub(r"\1", seg))
+
+
 def parse_header_title(header: Path) -> str:
+    """Main title from the TEI header, cleaned for display (H3707).
+
+    - nested tags (e.g. <foreign>) are unwrapped, their text kept;
+    - SLP1 segments inside <foreign xml:lang="sa-Latn-x-SLP1"> are transcoded
+      to IAST via sanskrit-util.from_slp1 (not hand-typed);
+    - stray upstream artifacts (leading '>' in gst) are stripped."""
     if not header.exists():
         return ""
     t = header.read_text(encoding="utf-8", errors="replace")
-    m = re.search(r'<title type="main">([^<]+)</title>', t)
-    return m.group(1).strip() if m else ""
+    m = re.search(r'<title type="main">(.*?)</title>', t, re.S)
+    if not m:
+        return ""
+    raw = m.group(1)
+    out = _FOREIGN_RE.sub(lambda fm: _slp1_segment_to_iast(fm.group(1)), raw)
+    out = re.sub(r"<[^>]+>", "", out)
+    out = _BRACE_RE.sub(r"\1", out)
+    out = re.sub(r"^[>\s]+", "", out)
+    return re.sub(r"\s+", " ", out).strip()
 
 
-def dict_lang(title: str) -> str:
+def dict_lang(title: str, header: Path | None = None) -> str:
     tl = title.lower()
     if "russian" in tl or "русск" in tl:
         return "RU"
@@ -103,7 +150,19 @@ def dict_lang(title: str) -> str:
         return "FR"
     if "english" in tl:
         return "EN"
-    if "sanskrit" in tl and "english" not in tl and "german" not in tl:
+    # A title whose every word came from <foreign xml:lang="sa-…"> is a
+    # Sanskrit-metalanguage dictionary (e.g. Vācaspatya, Śabdakalpadruma).
+    if header is not None and header.exists():
+        t = header.read_text(encoding="utf-8", errors="replace")
+        m = re.search(r'<title type="main">(.*?)</title>', t, re.S)
+        if m:
+            outside = _FOREIGN_RE.sub(" ", m.group(1))
+            outside = re.sub(r"<[^>]+>", " ", outside)
+            outside = outside.replace("’s", " ").replace("'s", " ")
+            outside = re.sub(r"[\s'’.,\-]+", "", outside)
+            if not outside:
+                return "SA"
+    if "sanskrit" in tl:
         return "SA"
     return "other"
 
@@ -125,7 +184,7 @@ def probe_dicts() -> dict:
             "bytes": bytes_,
             "print_date": parse_header_date(header),
             "title": title,
-            "lang": dict_lang(title),
+            "lang": dict_lang(title, header),
             "script": str(txt.relative_to(GH)).replace("\\", "/"),
         })
     rows.sort(key=lambda r: -r["entries"])
@@ -200,6 +259,7 @@ def probe_mw() -> dict:
             "n_senses": sample.count("¦"),
             "chars": len(sample),
             "lines": sample.count("\n") + 1,
+            "raw": sample,
         }
     return {
         "path": "csl-orig/v02/mw/mw.txt",

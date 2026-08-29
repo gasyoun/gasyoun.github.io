@@ -65,8 +65,8 @@
         "entries": 50135,
         "bytes": 25107867,
         "print_date": "1873",
-        "title": "",
-        "lang": "other",
+        "title": "tarkavācaspati's vācaspatya",
+        "lang": "SA",
         "script": "csl-orig/v02/vcp/vcp.txt"
       },
       {
@@ -83,8 +83,8 @@
         "entries": 47326,
         "bytes": 9244937,
         "print_date": "1900",
-        "title": "",
-        "lang": "other",
+        "title": "jīvānanda vidyāsāgara bhaṭṭācāryya's śabda-sāgara",
+        "lang": "SA",
         "script": "csl-orig/v02/shs/shs.txt"
       },
       {
@@ -110,8 +110,8 @@
         "entries": 42531,
         "bytes": 22867341,
         "print_date": "1886",
-        "title": "",
-        "lang": "other",
+        "title": "rādhākāntadeva's śabdakalpadruma",
+        "lang": "SA",
         "script": "csl-orig/v02/skd/skd.txt"
       },
       {
@@ -218,7 +218,7 @@
         "entries": 17512,
         "bytes": 3916210,
         "print_date": "1951-1955",
-        "title": "",
+        "title": "Dikshitar's purāṇa Index",
         "lang": "other",
         "script": "csl-orig/v02/pui/pui.txt"
       },
@@ -245,7 +245,7 @@
         "entries": 12647,
         "bytes": 7023737,
         "print_date": "1904-1925",
-        "title": "",
+        "title": "Sörensen's Index to the Names in the mahābhārata",
         "lang": "other",
         "script": "csl-orig/v02/inm/inm.txt"
       },
@@ -272,7 +272,7 @@
         "entries": 8799,
         "bytes": 6521202,
         "print_date": "1975",
-        "title": "",
+        "title": "Vettam Mani's purāṇic Encyclopedia",
         "lang": "other",
         "script": "csl-orig/v02/pe/pe.txt"
       },
@@ -308,7 +308,7 @@
         "entries": 6780,
         "bytes": 2653069,
         "print_date": "1856",
-        "title": ">Goldstücker's Dictionary, Sanskrit and English",
+        "title": "Goldstücker's Dictionary, Sanskrit and English",
         "lang": "EN",
         "script": "csl-orig/v02/gst/gst.txt"
       },
@@ -344,7 +344,7 @@
         "entries": 2061,
         "bytes": 3355133,
         "print_date": "1965-1971",
-        "title": "",
+        "title": "Ramasubba Sastri's kṛdantarūpamālā",
         "lang": "other",
         "script": "csl-orig/v02/krm/krm.txt"
       },
@@ -786,7 +786,8 @@
       "n_ls_tags": 2,
       "n_senses": 1,
       "chars": 261,
-      "lines": 3
+      "lines": 3,
+      "raw": "<L>55142<pc>306,2<k1>kfzRa<k2>kfzRa/<h>1<e>1\n<hom>1.</hom> <s>kfzRa/</s> ¦ <lex>mf(<s>A/</s>)n.</lex> black, dark, dark-blue (opposed to <s>Sveta/</s>, <s>Sukla/</s>, <s>ro/hita</s>, and <s>aruRa/</s>), <ls>RV.</ls>; <ls>AV.</ls> &c.<info lex=\"m:f#A:n\"/>\n<LEND>"
     },
     "word_encodings": {
       "slp1": "kfzRa",

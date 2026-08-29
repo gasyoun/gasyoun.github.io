@@ -1,212 +1,213 @@
 [
-  {
-    "n": 2,
-    "slug": "anatomy-mw-2026-08-29",
-    "replaced": false
-  },
-  {
-    "n": 3,
-    "slug": "mw-letters-2026-08-29",
-    "replaced": false
-  },
-  {
-    "n": 4,
-    "slug": "editions-timeline-2026-08-29",
-    "replaced": false
-  },
-  {
-    "n": 5,
-    "slug": "five-lexicographers-2026-08-29",
-    "replaced": false
-  },
-  {
-    "n": 6,
-    "slug": "dict-genealogy-2026-08-29",
-    "replaced": false
-  },
-  {
-    "n": 9,
-    "slug": "five-encodings-2026-08-29",
-    "replaced": false
-  },
-  {
-    "n": 11,
-    "slug": "morph-snowflake-2026-08-29",
-    "replaced": false
-  },
-  {
-    "n": 12,
-    "slug": "case-grid-2026-08-29",
-    "replaced": false
-  },
-  {
-    "n": 17,
-    "slug": "mw-citations-2026-08-29",
-    "replaced": false
-  },
-  {
-    "n": 50,
-    "slug": "dict-passport-2026-08-29",
-    "replaced": false
-  },
-  {
-    "n": 14,
-    "slug": "gita-heatmap-2026-08-29",
-    "replaced": false
-  },
-  {
-    "n": 15,
-    "slug": "commentary-strata-2026-08-29",
-    "replaced": false
-  },
-  {
-    "n": 16,
-    "slug": "corpora-beside-2026-08-29",
-    "replaced": false
-  },
-  {
-    "n": 19,
-    "slug": "samasa-wheel-2026-08-29",
-    "replaced": false
-  },
-  {
-    "n": 20,
-    "slug": "sandhi-records-2026-08-29",
-    "replaced": false
-  },
-  {
-    "n": 21,
-    "slug": "case-tracks-2026-08-29",
-    "replaced": false
-  },
-  {
-    "n": 35,
-    "slug": "license-lights-2026-08-29",
-    "replaced": false
-  },
-  {
-    "n": 39,
-    "slug": "devanagari-quarter-2026-08-29",
-    "replaced": false
-  },
-  {
-    "n": 40,
-    "slug": "gita-coverage-2026-08-29",
-    "replaced": false
-  },
-  {
-    "n": 45,
-    "slug": "science-langs-2026-08-29",
-    "replaced": false
-  },
-  {
-    "n": 23,
-    "slug": "commit-pulse-2026-08-29",
-    "replaced": false
-  },
-  {
-    "n": 24,
-    "slug": "who-writes-2026-08-29",
-    "replaced": false
-  },
-  {
-    "n": 25,
-    "slug": "ci-passport-2026-08-29",
-    "replaced": false
-  },
-  {
-    "n": 26,
-    "slug": "estate-growth-2026-08-29",
-    "replaced": false
-  },
-  {
-    "n": 28,
-    "slug": "systema-srs-2026-08-29",
-    "replaced": false
-  },
-  {
-    "n": 29,
-    "slug": "product-campus-2026-08-29",
-    "replaced": false
-  },
-  {
-    "n": 30,
-    "slug": "price-of-word-2026-08-29",
-    "replaced": false
-  },
-  {
-    "n": 31,
-    "slug": "gtd-snapshot-2026-08-29",
-    "replaced": false
-  },
-  {
-    "n": 34,
-    "slug": "zaliznyak-bridge-2026-08-29",
-    "replaced": false
-  },
-  {
-    "n": 38,
-    "slug": "typo-gold-2026-08-29",
-    "replaced": false
-  },
-  {
-    "n": 33,
-    "slug": "indology-atlas-2026-08-29",
-    "replaced": false
-  },
-  {
-    "n": 41,
-    "slug": "sanskrit-vs-classical-2026-08-29",
-    "replaced": false
-  },
-  {
-    "n": 42,
-    "slug": "bookindex-scans-2026-08-29",
-    "replaced": true
-  },
-  {
-    "n": 43,
-    "slug": "mw-among-greats-2026-08-29",
-    "replaced": false
-  },
-  {
-    "n": 44,
-    "slug": "dict-suitcases-2026-08-29",
-    "replaced": false
-  },
-  {
-    "n": 46,
-    "slug": "agent-anthill-2026-08-29",
-    "replaced": false
-  },
-  {
-    "n": 48,
-    "slug": "growth-slider-2026-08-29",
-    "replaced": false
-  },
-  {
-    "n": 49,
-    "slug": "meta-dashboard-2026-08-29",
-    "replaced": false
-  },
-  {
-    "n": 18,
-    "slug": "somadeva-ocean-2026-08-29",
-    "replaced": true
-  },
-  {
-    "n": 27,
-    "slug": "ors-funnel-2026-08-29",
-    "replaced": false
-  },
-  {
-    "n": 0,
-    "slug": "countvowels-cvc-2026-08-29",
-    "replaced": false
-  },
-  {
-    "n": 0,
-    "slug": "prefaces-seven-2026-08-29",
-    "replaced": false
-  }
+ {
+  "n": 2,
+  "slug": "anatomy-mw-2026-08-29",
+  "replaced": false
+ },
+ {
+  "n": 3,
+  "slug": "mw-letters-2026-08-29",
+  "replaced": false,
+  "external": true
+ },
+ {
+  "n": 4,
+  "slug": "editions-timeline-2026-08-29",
+  "replaced": false
+ },
+ {
+  "n": 5,
+  "slug": "five-lexicographers-2026-08-29",
+  "replaced": false
+ },
+ {
+  "n": 6,
+  "slug": "dict-genealogy-2026-08-29",
+  "replaced": false
+ },
+ {
+  "n": 9,
+  "slug": "five-encodings-2026-08-29",
+  "replaced": false
+ },
+ {
+  "n": 11,
+  "slug": "morph-snowflake-2026-08-29",
+  "replaced": false
+ },
+ {
+  "n": 12,
+  "slug": "case-grid-2026-08-29",
+  "replaced": false
+ },
+ {
+  "n": 17,
+  "slug": "mw-citations-2026-08-29",
+  "replaced": false
+ },
+ {
+  "n": 50,
+  "slug": "dict-passport-2026-08-29",
+  "replaced": false
+ },
+ {
+  "n": 14,
+  "slug": "gita-heatmap-2026-08-29",
+  "replaced": false
+ },
+ {
+  "n": 15,
+  "slug": "commentary-strata-2026-08-29",
+  "replaced": false
+ },
+ {
+  "n": 16,
+  "slug": "corpora-beside-2026-08-29",
+  "replaced": false
+ },
+ {
+  "n": 19,
+  "slug": "samasa-wheel-2026-08-29",
+  "replaced": false
+ },
+ {
+  "n": 20,
+  "slug": "sandhi-records-2026-08-29",
+  "replaced": false
+ },
+ {
+  "n": 21,
+  "slug": "case-tracks-2026-08-29",
+  "replaced": false
+ },
+ {
+  "n": 35,
+  "slug": "license-lights-2026-08-29",
+  "replaced": false
+ },
+ {
+  "n": 39,
+  "slug": "devanagari-quarter-2026-08-29",
+  "replaced": false
+ },
+ {
+  "n": 40,
+  "slug": "gita-coverage-2026-08-29",
+  "replaced": false
+ },
+ {
+  "n": 45,
+  "slug": "science-langs-2026-08-29",
+  "replaced": false
+ },
+ {
+  "n": 23,
+  "slug": "commit-pulse-2026-08-29",
+  "replaced": false
+ },
+ {
+  "n": 24,
+  "slug": "who-writes-2026-08-29",
+  "replaced": false
+ },
+ {
+  "n": 25,
+  "slug": "ci-passport-2026-08-29",
+  "replaced": false
+ },
+ {
+  "n": 26,
+  "slug": "estate-growth-2026-08-29",
+  "replaced": false
+ },
+ {
+  "n": 28,
+  "slug": "systema-srs-2026-08-29",
+  "replaced": false
+ },
+ {
+  "n": 29,
+  "slug": "product-campus-2026-08-29",
+  "replaced": false
+ },
+ {
+  "n": 30,
+  "slug": "price-of-word-2026-08-29",
+  "replaced": false
+ },
+ {
+  "n": 31,
+  "slug": "gtd-snapshot-2026-08-29",
+  "replaced": false
+ },
+ {
+  "n": 34,
+  "slug": "zaliznyak-bridge-2026-08-29",
+  "replaced": false
+ },
+ {
+  "n": 38,
+  "slug": "typo-gold-2026-08-29",
+  "replaced": false
+ },
+ {
+  "n": 33,
+  "slug": "indology-atlas-2026-08-29",
+  "replaced": false
+ },
+ {
+  "n": 41,
+  "slug": "sanskrit-vs-classical-2026-08-29",
+  "replaced": false
+ },
+ {
+  "n": 42,
+  "slug": "bookindex-scans-2026-08-29",
+  "replaced": true
+ },
+ {
+  "n": 43,
+  "slug": "mw-among-greats-2026-08-29",
+  "replaced": false
+ },
+ {
+  "n": 44,
+  "slug": "dict-suitcases-2026-08-29",
+  "replaced": false
+ },
+ {
+  "n": 46,
+  "slug": "agent-anthill-2026-08-29",
+  "replaced": false
+ },
+ {
+  "n": 48,
+  "slug": "growth-slider-2026-08-29",
+  "replaced": false
+ },
+ {
+  "n": 49,
+  "slug": "meta-dashboard-2026-08-29",
+  "replaced": false
+ },
+ {
+  "n": 18,
+  "slug": "somadeva-ocean-2026-08-29",
+  "replaced": true
+ },
+ {
+  "n": 27,
+  "slug": "ors-funnel-2026-08-29",
+  "replaced": false
+ },
+ {
+  "n": 0,
+  "slug": "countvowels-cvc-2026-08-29",
+  "replaced": false
+ },
+ {
+  "n": 0,
+  "slug": "prefaces-seven-2026-08-29",
+  "replaced": false
+ }
 ]
