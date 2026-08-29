@@ -1,0 +1,68 @@
+{
+ "junctions": 3412,
+ "rules": 161,
+ "by_category": {
+  "vowel coalescence": 813,
+  "visarga": 1163,
+  "anusvāra / nasal": 1172,
+  "consonant / other": 264
+ },
+ "top": [
+  {
+   "rule": "a a → ā",
+   "category": "vowel coalescence",
+   "count": 193,
+   "pct": "5.66",
+   "examples": "1.11 eva · 1.13 eva · 1.17 ca · 1.26 tatra"
+  },
+  {
+   "rule": "aḥ a → o '",
+   "category": "visarga",
+   "count": 139,
+   "pct": "4.07",
+   "examples": "1.13 tumulaḥ · 1.31 śreyaḥ · 1.35 ghnataḥ · 1.40 adharmaḥ"
+  },
+  {
+   "rule": "ḥ t → s t",
+   "category": "visarga",
+   "count": 128,
+   "pct": "3.75",
+   "examples": "1.02 duryodhanaḥ · 1.08 saumadattiḥ · 1.13 śabdaḥ · 1.34 putrāḥ"
+  },
+  {
+   "rule": "m p → ṃ p",
+   "category": "anusvāra / nasal",
+   "count": 113,
+   "pct": "3.31",
+   "examples": "1.39 doṣam · 2.07 tvām · 2.11 tvam · 2.15 puruṣam"
+  },
+  {
+   "rule": "m s → ṃ s",
+   "category": "anusvāra / nasal",
+   "count": 109,
+   "pct": "3.19",
+   "examples": "1.21 ratham · 1.30 gāṇḍīvam · 1.32 rājyam · 1.45 hantum"
+  },
+  {
+   "rule": "m t → ṃ t",
+   "category": "anusvāra / nasal",
+   "count": 106,
+   "pct": "3.11",
+   "examples": "1.07 asmākam · 1.10 aparyāptam · 1.10 paryāptam · 1.21 hṛṣīkeśam"
+  },
+  {
+   "rule": "ḥ c → ś c",
+   "category": "visarga",
+   "count": 101,
+   "pct": "2.96",
+   "examples": "1.01 pāṇḍavāḥ · 1.04 virāṭaḥ · 1.04 drupadaḥ · 1.05 dhṛṣṭa-ketuḥ"
+  },
+  {
+   "rule": "a e → ai",
+   "category": "vowel coalescence",
+   "count": 101,
+   "pct": "2.96",
+   "examples": "1.01 ca · 1.03 paśya · 1.14 ca · 1.19 ca"
+  }
+ ]
+}

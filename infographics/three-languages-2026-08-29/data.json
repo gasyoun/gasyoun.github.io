@@ -1,0 +1,236 @@
+{
+ "rows": [
+  {
+   "dict": "abch",
+   "lang": "SA",
+   "sampled": 11
+  },
+  {
+   "dict": "acc",
+   "lang": "EN",
+   "sampled": 5879
+  },
+  {
+   "dict": "acph",
+   "lang": "SA",
+   "sampled": 5
+  },
+  {
+   "dict": "acsj",
+   "lang": "SA",
+   "sampled": 5
+  },
+  {
+   "dict": "ae",
+   "lang": "SA",
+   "sampled": 3101
+  },
+  {
+   "dict": "ap",
+   "lang": "EN",
+   "sampled": 23222
+  },
+  {
+   "dict": "ap90",
+   "lang": "EN",
+   "sampled": 13605
+  },
+  {
+   "dict": "armh",
+   "lang": "SA",
+   "sampled": 2250
+  },
+  {
+   "dict": "ben",
+   "lang": "EN",
+   "sampled": 2488
+  },
+  {
+   "dict": "bhs",
+   "lang": "SA",
+   "sampled": 8
+  },
+  {
+   "dict": "bop",
+   "lang": "SA",
+   "sampled": 2562
+  },
+  {
+   "dict": "bor",
+   "lang": "SA",
+   "sampled": 6109
+  },
+  {
+   "dict": "bur",
+   "lang": "FR",
+   "sampled": 3020
+  },
+  {
+   "dict": "cae",
+   "lang": "EN",
+   "sampled": 3963
+  },
+  {
+   "dict": "ccs",
+   "lang": "SA",
+   "sampled": 5655
+  },
+  {
+   "dict": "fri",
+   "lang": "SA",
+   "sampled": 608
+  },
+  {
+   "dict": "gra",
+   "lang": "DE",
+   "sampled": 887
+  },
+  {
+   "dict": "gst",
+   "lang": "EN",
+   "sampled": 3002
+  },
+  {
+   "dict": "ieg",
+   "lang": "EN",
+   "sampled": 1288
+  },
+  {
+   "dict": "inm",
+   "lang": "EN",
+   "sampled": 7908
+  },
+  {
+   "dict": "krm",
+   "lang": "SA",
+   "sampled": 555
+  },
+  {
+   "dict": "lan",
+   "lang": "EN",
+   "sampled": 1069
+  },
+  {
+   "dict": "lrv",
+   "lang": "EN",
+   "sampled": 3818
+  },
+  {
+   "dict": "mci",
+   "lang": "EN",
+   "sampled": 5513
+  },
+  {
+   "dict": "md",
+   "lang": "EN",
+   "sampled": 3238
+  },
+  {
+   "dict": "mw",
+   "lang": "EN",
+   "sampled": 5071
+  },
+  {
+   "dict": "mw72",
+   "lang": "EN",
+   "sampled": 23661
+  },
+  {
+   "dict": "mwe",
+   "lang": "SA",
+   "sampled": 8671
+  },
+  {
+   "dict": "nmmb",
+   "lang": "SA",
+   "sampled": 68
+  },
+  {
+   "dict": "nybj",
+   "lang": "SA",
+   "sampled": 470
+  },
+  {
+   "dict": "pe",
+   "lang": "EN",
+   "sampled": 8241
+  },
+  {
+   "dict": "pgn",
+   "lang": "EN",
+   "sampled": 800
+  },
+  {
+   "dict": "pui",
+   "lang": "EN",
+   "sampled": 4299
+  },
+  {
+   "dict": "pw",
+   "lang": "DE",
+   "sampled": 11672
+  },
+  {
+   "dict": "pwg",
+   "lang": "DE",
+   "sampled": 17064
+  },
+  {
+   "dict": "pwkvn",
+   "lang": "DE",
+   "sampled": 1726
+  },
+  {
+   "dict": "sch",
+   "lang": "DE",
+   "sampled": 2177
+  },
+  {
+   "dict": "shs",
+   "lang": "EN",
+   "sampled": 7216
+  },
+  {
+   "dict": "skd",
+   "lang": "SA",
+   "sampled": 35279
+  },
+  {
+   "dict": "snp",
+   "lang": "SA",
+   "sampled": 226
+  },
+  {
+   "dict": "stc",
+   "lang": "FR",
+   "sampled": 6526
+  },
+  {
+   "dict": "vcp",
+   "lang": "SA",
+   "sampled": 29737
+  },
+  {
+   "dict": "vei",
+   "lang": "EN",
+   "sampled": 3254
+  },
+  {
+   "dict": "wil",
+   "lang": "EN",
+   "sampled": 12152
+  },
+  {
+   "dict": "yat",
+   "lang": "EN",
+   "sampled": 5138
+  }
+ ],
+ "counts": {
+  "EN": 21,
+  "DE": 5,
+  "FR": 2,
+  "RU": 0,
+  "SA": 17
+ }
+}

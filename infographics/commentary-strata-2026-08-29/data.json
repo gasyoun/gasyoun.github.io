@@ -1,0 +1,24 @@
+{
+ "total_notes": 2527,
+ "by_layer": {
+  "tier1": 1058,
+  "lexical": 814,
+  "edition": 174,
+  "phase2": 281,
+  "crosstext": 200
+ },
+ "by_status": {
+  "в печатном аппарате перевода": 1058,
+  "принято": 131,
+  "review_required": 899,
+  "ожидает гейта М.Г.": 423,
+  "принято гейтом М.Г. (2026-07-03)": 16
+ },
+ "verses": 1676,
+ "commentator_verses": {
+  "tilaka": 888,
+  "bhusana": 1443,
+  "siromani": 1099,
+  "tattvadipika": 82
+ }
+}

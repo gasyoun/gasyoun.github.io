@@ -1,0 +1,18 @@
+{
+ "dcs": {
+  "texts": 270,
+  "files": 15900,
+  "sentences": 754726,
+  "tokens": 5688416
+ },
+ "spoken": {
+  "transcripts": 2861
+ },
+ "telegram": {
+  "messages": 979,
+  "words": 27898,
+  "chars": 198024,
+  "chats": 27
+ },
+ "dcs_vs_telegram_words_x": 204
+}

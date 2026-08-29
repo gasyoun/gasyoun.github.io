@@ -2,38 +2,824 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
-<title>Гита: тепловая карта</title>
-<!-- Data: kosha/data/gita/gita_gold_master.tsv tokens per chapter. 29.08.2026 -->
+<title>Гита: тепловая карта 700 шлок</title>
+<!-- Composition: Big Object — the brick wall of 700 verses (18 chapter courses) fills the left
+     two-thirds; title + hero layers block on the right. Retro-print, wide 1920x1080.
+     Brick color = quartile of the Sanskrit commentary field scsri length (data.json).
+     Layer groups re-derived from field-name prefixes of CommentaryStrategies/data/gita verse JSON. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;600;700&family=Nunito:wght@400;600;700;800&family=Noto+Mono&family=Noto+Serif+Devanagari:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Karla:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#F5EFE3;--ink:#29261F;--sub:rgba(41,38,31,.62);--accent:#C4552F;--card:#FFFFFF;
---neon:#6FE3C1;--bar:#009B7D;--blue:#4A55C8;--red:#D9503F;
---font-display:'Comfortaa',sans-serif;--font-body:'Nunito',sans-serif;
---dev:'Noto Serif Devanagari',serif;--mono:'Noto Mono',monospace}
-html,body{background:var(--bg)}
-body{width:1080px;font-family:var(--font-body);color:var(--ink)}
-.canvas{position:relative;width:1080px;height:1920px;overflow:hidden;background:var(--bg)}
-.kicker{position:absolute;left:64px;top:88px;font:700 13px/1.3 var(--font-body);
-letter-spacing:.16em;text-transform:uppercase;color:var(--sub)}
-h1{position:absolute;left:64px;top:118px;font-family:var(--font-display);
-font-weight:700;font-size:46px;line-height:1.08;width:952px}
-.hero{position:absolute;left:64px;top:230px;width:952px;font:600 16px/1.5 var(--font-body);color:var(--sub)}
-.hero b{color:var(--accent);font-weight:800}
-.foot{position:absolute;left:64px;top:1810px;width:952px;font:400 13px/1.5 var(--font-body);color:var(--sub)}
-.fade{opacity:0;animation:fadein .45s ease-out forwards}
-@keyframes fadein{to{opacity:1}}
-.chip{display:inline-block;padding:3px 10px;border-radius:14px;font:700 12px var(--font-body);background:var(--accent);color:#fff}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:#F5E9D4; --surface:#FBF3E2; --surface-2:#E7D6B6;
+  --ink:#33241A; --ink-muted:#6E5B49;
+  --chart-1:#C8501E; --chart-2:#157F63; --chart-3:#AD7A00; --chart-4:#8E4468;
+  --de-emphasis:#C9B593;
+  --font-display:'Alfa Slab One',serif; --font-body:'Karla',sans-serif;
+  --space-1:8px; --space-2:16px; --space-3:24px; --space-4:40px; --space-5:64px;
+}
+html, body { background: var(--bg); }
+body { width: 1920px; font-family: var(--font-body); color: var(--ink); }
+.canvas { position: relative; width: 1920px; height: 1080px; overflow: hidden;
+  background: radial-gradient(ellipse 1500px 700px at 30% 20%, #FBF3E2 0%, var(--bg) 70%); }
+.grain { position: absolute; inset: 0; pointer-events: none; opacity: .38; }
+.title-block { position: absolute; left: var(--space-5); top: var(--space-4); width: 700px; }
+.kicker { font: 700 15px/1.3 var(--font-body); text-transform: uppercase; letter-spacing: .06em; color: var(--ink-muted); }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: 64px; line-height: 1.04;
+  margin-top: var(--space-2); text-shadow: 4px 3px 0 rgba(200,80,30,.35); }
+.standfirst { margin-top: var(--space-2); font: 400 17px/1.5 var(--font-body); color: var(--ink-muted); width: 660px; }
+.hero-block { position: absolute; right: var(--space-5); top: var(--space-4); width: 560px; text-align: left;
+  border-top: 2px solid var(--ink); padding-top: var(--space-3); }
+.hero-num { font-family: var(--font-display); font-size: 132px; line-height: 1; color: var(--ink);
+  text-shadow: 4px 3px 0 var(--chart-1); }
+.hero-label { margin-top: var(--space-1); font: 700 22px/1.3 var(--font-body); }
+.hero-sub { margin-top: var(--space-2); font: 400 16.5px/1.55 var(--font-body); color: var(--ink-muted); }
+.legend { margin-top: var(--space-3); }
+.legend .row { display: flex; align-items: center; gap: 10px; font: 700 15.5px var(--font-body); margin-bottom: 10px; }
+.sw { width: 30px; height: 18px; border: 2px solid var(--ink); flex: none; }
+.note { margin-top: var(--space-3); font: italic 400 14px/1.5 var(--font-body); color: var(--ink-muted); width: 520px; }
+svg.wall { position: absolute; left: 0; top: 0; }
+.brick { stroke: rgba(51,36,26,.45); stroke-width: .5; }
+.brick.q0 { fill: var(--de-emphasis); }
+.brick.q1 { fill: var(--chart-3); }
+.brick.q2 { fill: var(--chart-2); }
+.brick.q3 { fill: var(--chart-1); }
+.chlab { font: 700 15px var(--font-body); fill: var(--ink); }
+.chcnt { font: 400 13.5px var(--font-body); fill: var(--ink-muted); }
+.heatline { position: absolute; left: var(--space-5); bottom: 132px; }
+footer { position: absolute; left: var(--space-5); right: var(--space-5); bottom: var(--space-3);
+  display: flex; justify-content: space-between; gap: 40px;
+  border-top: 1.5px solid var(--ink); padding-top: 12px; font: 400 14px/1.5 var(--font-body); color: var(--ink-muted); }
+footer b { font-weight: 700; color: var(--ink); }
 </style>
 </head>
 <body>
 <div class="canvas">
-  <div class="kicker">Санскритский архив Гасунса · корпуса</div>
-  <h1>Гита: 18 глав</h1>
-  <div class="hero">Гита по главам в <b>kosha/data/gita/gita_gold_master.tsv</b>: 9 092 токенов, 18 глав, 3 874 лемм. Это морфологическое золото, не сырой padapāṭha.</div><div class="fade" style="position:absolute;left:64px;top:360px;width:146px;height:390px;background:rgba(201,85,47,0.655);border-radius:16px;padding:18px 14px;animation-delay:0.1s"><div style="font:700 13px var(--font-body);color:var(--sub)">глава 1</div><div style="font:800 36px var(--font-display);margin-top:12px">570</div><div style="color:var(--sub);margin-top:8px">токенов золота</div></div><div class="fade" style="position:absolute;left:222px;top:360px;width:146px;height:390px;background:rgba(201,85,47,0.978);border-radius:16px;padding:18px 14px;animation-delay:0.14s"><div style="font:700 13px var(--font-body);color:var(--sub)">глава 2</div><div style="font:800 36px var(--font-display);margin-top:12px">957</div><div style="color:var(--sub);margin-top:8px">токенов золота</div></div><div class="fade" style="position:absolute;left:380px;top:360px;width:146px;height:390px;background:rgba(201,85,47,0.636);border-radius:16px;padding:18px 14px;animation-delay:0.18s"><div style="font:700 13px var(--font-body);color:var(--sub)">глава 3</div><div style="font:800 36px var(--font-display);margin-top:12px">547</div><div style="color:var(--sub);margin-top:8px">токенов золота</div></div><div class="fade" style="position:absolute;left:538px;top:360px;width:146px;height:390px;background:rgba(201,85,47,0.608);border-radius:16px;padding:18px 14px;animation-delay:0.22s"><div style="font:700 13px var(--font-body);color:var(--sub)">глава 4</div><div style="font:800 36px var(--font-display);margin-top:12px">514</div><div style="color:var(--sub);margin-top:8px">токенов золота</div></div><div class="fade" style="position:absolute;left:696px;top:360px;width:146px;height:390px;background:rgba(201,85,47,0.477);border-radius:16px;padding:18px 14px;animation-delay:0.26s"><div style="font:700 13px var(--font-body);color:var(--sub)">глава 5</div><div style="font:800 36px var(--font-display);margin-top:12px">356</div><div style="color:var(--sub);margin-top:8px">токенов золота</div></div><div class="fade" style="position:absolute;left:854px;top:360px;width:146px;height:390px;background:rgba(201,85,47,0.660);border-radius:16px;padding:18px 14px;animation-delay:0.30000000000000004s"><div style="font:700 13px var(--font-body);color:var(--sub)">глава 6</div><div style="font:800 36px var(--font-display);margin-top:12px">576</div><div style="color:var(--sub);margin-top:8px">токенов золота</div></div><div class="fade" style="position:absolute;left:64px;top:790px;width:146px;height:390px;background:rgba(201,85,47,0.516);border-radius:16px;padding:18px 14px;animation-delay:0.33999999999999997s"><div style="font:700 13px var(--font-body);color:var(--sub)">глава 7</div><div style="font:800 36px var(--font-display);margin-top:12px">403</div><div style="color:var(--sub);margin-top:8px">токенов золота</div></div><div class="fade" style="position:absolute;left:222px;top:790px;width:146px;height:390px;background:rgba(201,85,47,0.496);border-radius:16px;padding:18px 14px;animation-delay:0.38s"><div style="font:700 13px var(--font-body);color:var(--sub)">глава 8</div><div style="font:800 36px var(--font-display);margin-top:12px">379</div><div style="color:var(--sub);margin-top:8px">токенов золота</div></div><div class="fade" style="position:absolute;left:380px;top:790px;width:146px;height:390px;background:rgba(201,85,47,0.550);border-radius:16px;padding:18px 14px;animation-delay:0.42000000000000004s"><div style="font:700 13px var(--font-body);color:var(--sub)">глава 9</div><div style="font:800 36px var(--font-display);margin-top:12px">444</div><div style="color:var(--sub);margin-top:8px">токенов золота</div></div><div class="fade" style="position:absolute;left:538px;top:790px;width:146px;height:390px;background:rgba(201,85,47,0.647);border-radius:16px;padding:18px 14px;animation-delay:0.45999999999999996s"><div style="font:700 13px var(--font-body);color:var(--sub)">глава 10</div><div style="font:800 36px var(--font-display);margin-top:12px">560</div><div style="color:var(--sub);margin-top:8px">токенов золота</div></div><div class="fade" style="position:absolute;left:696px;top:790px;width:146px;height:390px;background:rgba(201,85,47,0.909);border-radius:16px;padding:18px 14px;animation-delay:0.5s"><div style="font:700 13px var(--font-body);color:var(--sub)">глава 11</div><div style="font:800 36px var(--font-display);margin-top:12px">875</div><div style="color:var(--sub);margin-top:8px">токенов золота</div></div><div class="fade" style="position:absolute;left:854px;top:790px;width:146px;height:390px;background:rgba(201,85,47,0.387);border-radius:16px;padding:18px 14px;animation-delay:0.54s"><div style="font:700 13px var(--font-body);color:var(--sub)">глава 12</div><div style="font:800 36px var(--font-display);margin-top:12px">248</div><div style="color:var(--sub);margin-top:8px">токенов золота</div></div><div class="fade" style="position:absolute;left:64px;top:1220px;width:146px;height:390px;background:rgba(201,85,47,0.540);border-radius:16px;padding:18px 14px;animation-delay:0.58s"><div style="font:700 13px var(--font-body);color:var(--sub)">глава 13</div><div style="font:800 36px var(--font-display);margin-top:12px">432</div><div style="color:var(--sub);margin-top:8px">токенов золота</div></div><div class="fade" style="position:absolute;left:222px;top:1220px;width:146px;height:390px;background:rgba(201,85,47,0.454);border-radius:16px;padding:18px 14px;animation-delay:0.62s"><div style="font:700 13px var(--font-body);color:var(--sub)">глава 14</div><div style="font:800 36px var(--font-display);margin-top:12px">329</div><div style="color:var(--sub);margin-top:8px">токенов золота</div></div><div class="fade" style="position:absolute;left:380px;top:1220px;width:146px;height:390px;background:rgba(201,85,47,0.422);border-radius:16px;padding:18px 14px;animation-delay:0.66s"><div style="font:700 13px var(--font-body);color:var(--sub)">глава 15</div><div style="font:800 36px var(--font-display);margin-top:12px">290</div><div style="color:var(--sub);margin-top:8px">токенов золота</div></div><div class="fade" style="position:absolute;left:538px;top:1220px;width:146px;height:390px;background:rgba(201,85,47,0.421);border-radius:16px;padding:18px 14px;animation-delay:0.7s"><div style="font:700 13px var(--font-body);color:var(--sub)">глава 16</div><div style="font:800 36px var(--font-display);margin-top:12px">289</div><div style="color:var(--sub);margin-top:8px">токенов золота</div></div><div class="fade" style="position:absolute;left:696px;top:1220px;width:146px;height:390px;background:rgba(201,85,47,0.462);border-radius:16px;padding:18px 14px;animation-delay:0.74s"><div style="font:700 13px var(--font-body);color:var(--sub)">глава 17</div><div style="font:800 36px var(--font-display);margin-top:12px">339</div><div style="color:var(--sub);margin-top:8px">токенов золота</div></div><div class="fade" style="position:absolute;left:854px;top:1220px;width:146px;height:390px;background:rgba(201,85,47,1.000);border-radius:16px;padding:18px 14px;animation-delay:0.78s"><div style="font:700 13px var(--font-body);color:var(--sub)">глава 18</div><div style="font:800 36px var(--font-display);margin-top:12px">984</div><div style="color:var(--sub);margin-top:8px">токенов золота</div></div>
-  <div class="foot">Посчитано 29.08.2026 · скрипт <span style='font-family:var(--mono)'>scripts/infographics50/probe.py → gita.chapters</span> · Dr. Mārcis Gasūns</div>
+  <svg class="grain" width="1920" height="1080"><filter id="g"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2"/><feColorMatrix values="0 0 0 0 0.2 0 0 0 0 0.14 0 0 0 0 0.1 0 0 0 0.5 0"/></filter><rect width="1920" height="1080" filter="url(#g)"/></svg>
+  <div class="title-block">
+    <div class="kicker">САНСКРИТСКИЙ АРХИВ ГАСУНСА · БХАГАВАДГИТА · ПОСЧИТАНО 29.08.2026</div>
+    <h1>Гита: тепловая карта 700 шлок</h1>
+    <p class="standfirst">Каждый кирпич — одна шлока Бхагавадгиты; 18 рядов — 18 глав. Цвет показывает, насколько пространный санскритский комментарий (поле scsri) сопровождает шлоку: от краткого до развёрнутого толкования. Стена читается слева направо, глава за главой.</p>
+  </div>
+  <div class="hero-block" data-hero>
+    <div class="hero-num">27</div>
+    <div class="hero-label">слоя текста на каждую из 700 шлок</div>
+    <div class="hero-sub">13 санскритских · 7 английских переводов · 5 хинди · 2 пословные глоссы. У 670 шлок есть и 27-й слой (scvv) — тридцати шлокам его не достаётся.</div>
+    <div class="legend">
+      <div class="row"><span class="sw" style="background:var(--de-emphasis)"></span> комментарий до 218 знаков</div>
+      <div class="row"><span class="sw" style="background:var(--chart-3)"></span> 218–282 знаков</div>
+      <div class="row"><span class="sw" style="background:var(--chart-2)"></span> 282–385 знаков</div>
+      <div class="row"><span class="sw" style="background:var(--chart-1)"></span> свыше 385 знаков</div>
+    </div>
+    <div class="note">Самый длинный комментарий — шлока 18.2, 2 186 знаков. Средняя глубина по всей Гите — 329 знаков на шлоку. Самая просторная глава — 18-я: 78 шлок; самые сжатые — 20 шлок.</div>
+  </div>
+  <svg class="wall" width="1920" height="1080" viewBox="0 0 1920 1080">
+      <text class="chlab" x="94" y="390.0">1</text>
+      <text class="chcnt" x="790.0" y="390.0">47</text>
+      <rect class="brick q3" x="118" y="372" width="13" height="26"/>
+      <rect class="brick q0" x="132" y="372" width="13" height="26"/>
+      <rect class="brick q0" x="146" y="372" width="13" height="26"/>
+      <rect class="brick q1" x="160" y="372" width="13" height="26"/>
+      <rect class="brick q0" x="174" y="372" width="13" height="26"/>
+      <rect class="brick q2" x="188" y="372" width="13" height="26"/>
+      <rect class="brick q0" x="202" y="372" width="13" height="26"/>
+      <rect class="brick q0" x="216" y="372" width="13" height="26"/>
+      <rect class="brick q0" x="230" y="372" width="13" height="26"/>
+      <rect class="brick q2" x="244" y="372" width="13" height="26"/>
+      <rect class="brick q1" x="258" y="372" width="13" height="26"/>
+      <rect class="brick q0" x="272" y="372" width="13" height="26"/>
+      <rect class="brick q0" x="286" y="372" width="13" height="26"/>
+      <rect class="brick q0" x="300" y="372" width="13" height="26"/>
+      <rect class="brick q0" x="314" y="372" width="13" height="26"/>
+      <rect class="brick q0" x="328" y="372" width="13" height="26"/>
+      <rect class="brick q0" x="342" y="372" width="13" height="26"/>
+      <rect class="brick q0" x="356" y="372" width="13" height="26"/>
+      <rect class="brick q0" x="370" y="372" width="13" height="26"/>
+      <rect class="brick q0" x="384" y="372" width="13" height="26"/>
+      <rect class="brick q0" x="398" y="372" width="13" height="26"/>
+      <rect class="brick q0" x="412" y="372" width="13" height="26"/>
+      <rect class="brick q0" x="426" y="372" width="13" height="26"/>
+      <rect class="brick q0" x="440" y="372" width="13" height="26"/>
+      <rect class="brick q0" x="454" y="372" width="13" height="26"/>
+      <rect class="brick q0" x="468" y="372" width="13" height="26"/>
+      <rect class="brick q0" x="482" y="372" width="13" height="26"/>
+      <rect class="brick q1" x="496" y="372" width="13" height="26"/>
+      <rect class="brick q0" x="510" y="372" width="13" height="26"/>
+      <rect class="brick q0" x="524" y="372" width="13" height="26"/>
+      <rect class="brick q0" x="538" y="372" width="13" height="26"/>
+      <rect class="brick q1" x="552" y="372" width="13" height="26"/>
+      <rect class="brick q1" x="566" y="372" width="13" height="26"/>
+      <rect class="brick q1" x="580" y="372" width="13" height="26"/>
+      <rect class="brick q1" x="594" y="372" width="13" height="26"/>
+      <rect class="brick q3" x="608" y="372" width="13" height="26"/>
+      <rect class="brick q2" x="622" y="372" width="13" height="26"/>
+      <rect class="brick q0" x="636" y="372" width="13" height="26"/>
+      <rect class="brick q0" x="650" y="372" width="13" height="26"/>
+      <rect class="brick q0" x="664" y="372" width="13" height="26"/>
+      <rect class="brick q0" x="678" y="372" width="13" height="26"/>
+      <rect class="brick q0" x="692" y="372" width="13" height="26"/>
+      <rect class="brick q0" x="706" y="372" width="13" height="26"/>
+      <rect class="brick q0" x="720" y="372" width="13" height="26"/>
+      <rect class="brick q0" x="734" y="372" width="13" height="26"/>
+      <rect class="brick q0" x="748" y="372" width="13" height="26"/>
+      <rect class="brick q3" x="762" y="372" width="13" height="26"/>
+      <text class="chlab" x="94" y="422.0">2</text>
+      <text class="chcnt" x="1140.0" y="422.0">72</text>
+      <rect class="brick q0" x="118" y="404" width="13" height="26"/>
+      <rect class="brick q0" x="132" y="404" width="13" height="26"/>
+      <rect class="brick q0" x="146" y="404" width="13" height="26"/>
+      <rect class="brick q1" x="160" y="404" width="13" height="26"/>
+      <rect class="brick q3" x="174" y="404" width="13" height="26"/>
+      <rect class="brick q2" x="188" y="404" width="13" height="26"/>
+      <rect class="brick q3" x="202" y="404" width="13" height="26"/>
+      <rect class="brick q2" x="216" y="404" width="13" height="26"/>
+      <rect class="brick q0" x="230" y="404" width="13" height="26"/>
+      <rect class="brick q0" x="244" y="404" width="13" height="26"/>
+      <rect class="brick q3" x="258" y="404" width="13" height="26"/>
+      <rect class="brick q2" x="272" y="404" width="13" height="26"/>
+      <rect class="brick q3" x="286" y="404" width="13" height="26"/>
+      <rect class="brick q3" x="300" y="404" width="13" height="26"/>
+      <rect class="brick q1" x="314" y="404" width="13" height="26"/>
+      <rect class="brick q2" x="328" y="404" width="13" height="26"/>
+      <rect class="brick q0" x="342" y="404" width="13" height="26"/>
+      <rect class="brick q2" x="356" y="404" width="13" height="26"/>
+      <rect class="brick q1" x="370" y="404" width="13" height="26"/>
+      <rect class="brick q3" x="384" y="404" width="13" height="26"/>
+      <rect class="brick q2" x="398" y="404" width="13" height="26"/>
+      <rect class="brick q0" x="412" y="404" width="13" height="26"/>
+      <rect class="brick q0" x="426" y="404" width="13" height="26"/>
+      <rect class="brick q1" x="440" y="404" width="13" height="26"/>
+      <rect class="brick q0" x="454" y="404" width="13" height="26"/>
+      <rect class="brick q2" x="468" y="404" width="13" height="26"/>
+      <rect class="brick q1" x="482" y="404" width="13" height="26"/>
+      <rect class="brick q3" x="496" y="404" width="13" height="26"/>
+      <rect class="brick q3" x="510" y="404" width="13" height="26"/>
+      <rect class="brick q0" x="524" y="404" width="13" height="26"/>
+      <rect class="brick q2" x="538" y="404" width="13" height="26"/>
+      <rect class="brick q2" x="552" y="404" width="13" height="26"/>
+      <rect class="brick q0" x="566" y="404" width="13" height="26"/>
+      <rect class="brick q0" x="580" y="404" width="13" height="26"/>
+      <rect class="brick q0" x="594" y="404" width="13" height="26"/>
+      <rect class="brick q0" x="608" y="404" width="13" height="26"/>
+      <rect class="brick q0" x="622" y="404" width="13" height="26"/>
+      <rect class="brick q2" x="636" y="404" width="13" height="26"/>
+      <rect class="brick q3" x="650" y="404" width="13" height="26"/>
+      <rect class="brick q3" x="664" y="404" width="13" height="26"/>
+      <rect class="brick q3" x="678" y="404" width="13" height="26"/>
+      <rect class="brick q3" x="692" y="404" width="13" height="26"/>
+      <rect class="brick q1" x="706" y="404" width="13" height="26"/>
+      <rect class="brick q1" x="720" y="404" width="13" height="26"/>
+      <rect class="brick q3" x="734" y="404" width="13" height="26"/>
+      <rect class="brick q3" x="748" y="404" width="13" height="26"/>
+      <rect class="brick q3" x="762" y="404" width="13" height="26"/>
+      <rect class="brick q1" x="776" y="404" width="13" height="26"/>
+      <rect class="brick q3" x="790" y="404" width="13" height="26"/>
+      <rect class="brick q2" x="804" y="404" width="13" height="26"/>
+      <rect class="brick q1" x="818" y="404" width="13" height="26"/>
+      <rect class="brick q2" x="832" y="404" width="13" height="26"/>
+      <rect class="brick q2" x="846" y="404" width="13" height="26"/>
+      <rect class="brick q2" x="860" y="404" width="13" height="26"/>
+      <rect class="brick q3" x="874" y="404" width="13" height="26"/>
+      <rect class="brick q0" x="888" y="404" width="13" height="26"/>
+      <rect class="brick q1" x="902" y="404" width="13" height="26"/>
+      <rect class="brick q0" x="916" y="404" width="13" height="26"/>
+      <rect class="brick q3" x="930" y="404" width="13" height="26"/>
+      <rect class="brick q1" x="944" y="404" width="13" height="26"/>
+      <rect class="brick q0" x="958" y="404" width="13" height="26"/>
+      <rect class="brick q0" x="972" y="404" width="13" height="26"/>
+      <rect class="brick q0" x="986" y="404" width="13" height="26"/>
+      <rect class="brick q3" x="1000" y="404" width="13" height="26"/>
+      <rect class="brick q0" x="1014" y="404" width="13" height="26"/>
+      <rect class="brick q3" x="1028" y="404" width="13" height="26"/>
+      <rect class="brick q2" x="1042" y="404" width="13" height="26"/>
+      <rect class="brick q1" x="1056" y="404" width="13" height="26"/>
+      <rect class="brick q3" x="1070" y="404" width="13" height="26"/>
+      <rect class="brick q2" x="1084" y="404" width="13" height="26"/>
+      <rect class="brick q1" x="1098" y="404" width="13" height="26"/>
+      <rect class="brick q2" x="1112" y="404" width="13" height="26"/>
+      <text class="chlab" x="94" y="454.0">3</text>
+      <text class="chcnt" x="734.0" y="454.0">43</text>
+      <rect class="brick q3" x="118" y="436" width="13" height="26"/>
+      <rect class="brick q3" x="132" y="436" width="13" height="26"/>
+      <rect class="brick q3" x="146" y="436" width="13" height="26"/>
+      <rect class="brick q3" x="160" y="436" width="13" height="26"/>
+      <rect class="brick q2" x="174" y="436" width="13" height="26"/>
+      <rect class="brick q1" x="188" y="436" width="13" height="26"/>
+      <rect class="brick q1" x="202" y="436" width="13" height="26"/>
+      <rect class="brick q0" x="216" y="436" width="13" height="26"/>
+      <rect class="brick q2" x="230" y="436" width="13" height="26"/>
+      <rect class="brick q3" x="244" y="436" width="13" height="26"/>
+      <rect class="brick q1" x="258" y="436" width="13" height="26"/>
+      <rect class="brick q1" x="272" y="436" width="13" height="26"/>
+      <rect class="brick q2" x="286" y="436" width="13" height="26"/>
+      <rect class="brick q2" x="300" y="436" width="13" height="26"/>
+      <rect class="brick q3" x="314" y="436" width="13" height="26"/>
+      <rect class="brick q3" x="328" y="436" width="13" height="26"/>
+      <rect class="brick q1" x="342" y="436" width="13" height="26"/>
+      <rect class="brick q3" x="356" y="436" width="13" height="26"/>
+      <rect class="brick q1" x="370" y="436" width="13" height="26"/>
+      <rect class="brick q1" x="384" y="436" width="13" height="26"/>
+      <rect class="brick q0" x="398" y="436" width="13" height="26"/>
+      <rect class="brick q0" x="412" y="436" width="13" height="26"/>
+      <rect class="brick q0" x="426" y="436" width="13" height="26"/>
+      <rect class="brick q0" x="440" y="436" width="13" height="26"/>
+      <rect class="brick q0" x="454" y="436" width="13" height="26"/>
+      <rect class="brick q2" x="468" y="436" width="13" height="26"/>
+      <rect class="brick q2" x="482" y="436" width="13" height="26"/>
+      <rect class="brick q1" x="496" y="436" width="13" height="26"/>
+      <rect class="brick q0" x="510" y="436" width="13" height="26"/>
+      <rect class="brick q2" x="524" y="436" width="13" height="26"/>
+      <rect class="brick q1" x="538" y="436" width="13" height="26"/>
+      <rect class="brick q0" x="552" y="436" width="13" height="26"/>
+      <rect class="brick q3" x="566" y="436" width="13" height="26"/>
+      <rect class="brick q3" x="580" y="436" width="13" height="26"/>
+      <rect class="brick q3" x="594" y="436" width="13" height="26"/>
+      <rect class="brick q2" x="608" y="436" width="13" height="26"/>
+      <rect class="brick q3" x="622" y="436" width="13" height="26"/>
+      <rect class="brick q0" x="636" y="436" width="13" height="26"/>
+      <rect class="brick q2" x="650" y="436" width="13" height="26"/>
+      <rect class="brick q1" x="664" y="436" width="13" height="26"/>
+      <rect class="brick q2" x="678" y="436" width="13" height="26"/>
+      <rect class="brick q3" x="692" y="436" width="13" height="26"/>
+      <rect class="brick q1" x="706" y="436" width="13" height="26"/>
+      <text class="chlab" x="94" y="486.0">4</text>
+      <text class="chcnt" x="720.0" y="486.0">42</text>
+      <rect class="brick q3" x="118" y="468" width="13" height="26"/>
+      <rect class="brick q0" x="132" y="468" width="13" height="26"/>
+      <rect class="brick q0" x="146" y="468" width="13" height="26"/>
+      <rect class="brick q1" x="160" y="468" width="13" height="26"/>
+      <rect class="brick q0" x="174" y="468" width="13" height="26"/>
+      <rect class="brick q3" x="188" y="468" width="13" height="26"/>
+      <rect class="brick q0" x="202" y="468" width="13" height="26"/>
+      <rect class="brick q2" x="216" y="468" width="13" height="26"/>
+      <rect class="brick q1" x="230" y="468" width="13" height="26"/>
+      <rect class="brick q3" x="244" y="468" width="13" height="26"/>
+      <rect class="brick q3" x="258" y="468" width="13" height="26"/>
+      <rect class="brick q1" x="272" y="468" width="13" height="26"/>
+      <rect class="brick q3" x="286" y="468" width="13" height="26"/>
+      <rect class="brick q2" x="300" y="468" width="13" height="26"/>
+      <rect class="brick q2" x="314" y="468" width="13" height="26"/>
+      <rect class="brick q2" x="328" y="468" width="13" height="26"/>
+      <rect class="brick q3" x="342" y="468" width="13" height="26"/>
+      <rect class="brick q3" x="356" y="468" width="13" height="26"/>
+      <rect class="brick q3" x="370" y="468" width="13" height="26"/>
+      <rect class="brick q1" x="384" y="468" width="13" height="26"/>
+      <rect class="brick q2" x="398" y="468" width="13" height="26"/>
+      <rect class="brick q2" x="412" y="468" width="13" height="26"/>
+      <rect class="brick q1" x="426" y="468" width="13" height="26"/>
+      <rect class="brick q3" x="440" y="468" width="13" height="26"/>
+      <rect class="brick q3" x="454" y="468" width="13" height="26"/>
+      <rect class="brick q2" x="468" y="468" width="13" height="26"/>
+      <rect class="brick q3" x="482" y="468" width="13" height="26"/>
+      <rect class="brick q2" x="496" y="468" width="13" height="26"/>
+      <rect class="brick q1" x="510" y="468" width="13" height="26"/>
+      <rect class="brick q3" x="524" y="468" width="13" height="26"/>
+      <rect class="brick q1" x="538" y="468" width="13" height="26"/>
+      <rect class="brick q1" x="552" y="468" width="13" height="26"/>
+      <rect class="brick q3" x="566" y="468" width="13" height="26"/>
+      <rect class="brick q2" x="580" y="468" width="13" height="26"/>
+      <rect class="brick q1" x="594" y="468" width="13" height="26"/>
+      <rect class="brick q0" x="608" y="468" width="13" height="26"/>
+      <rect class="brick q1" x="622" y="468" width="13" height="26"/>
+      <rect class="brick q1" x="636" y="468" width="13" height="26"/>
+      <rect class="brick q2" x="650" y="468" width="13" height="26"/>
+      <rect class="brick q2" x="664" y="468" width="13" height="26"/>
+      <rect class="brick q2" x="678" y="468" width="13" height="26"/>
+      <rect class="brick q1" x="692" y="468" width="13" height="26"/>
+      <text class="chlab" x="94" y="518.0">5</text>
+      <text class="chcnt" x="538.0" y="518.0">29</text>
+      <rect class="brick q3" x="118" y="500" width="13" height="26"/>
+      <rect class="brick q3" x="132" y="500" width="13" height="26"/>
+      <rect class="brick q2" x="146" y="500" width="13" height="26"/>
+      <rect class="brick q3" x="160" y="500" width="13" height="26"/>
+      <rect class="brick q2" x="174" y="500" width="13" height="26"/>
+      <rect class="brick q3" x="188" y="500" width="13" height="26"/>
+      <rect class="brick q2" x="202" y="500" width="13" height="26"/>
+      <rect class="brick q3" x="216" y="500" width="13" height="26"/>
+      <rect class="brick q3" x="230" y="500" width="13" height="26"/>
+      <rect class="brick q2" x="244" y="500" width="13" height="26"/>
+      <rect class="brick q1" x="258" y="500" width="13" height="26"/>
+      <rect class="brick q1" x="272" y="500" width="13" height="26"/>
+      <rect class="brick q3" x="286" y="500" width="13" height="26"/>
+      <rect class="brick q3" x="300" y="500" width="13" height="26"/>
+      <rect class="brick q3" x="314" y="500" width="13" height="26"/>
+      <rect class="brick q1" x="328" y="500" width="13" height="26"/>
+      <rect class="brick q1" x="342" y="500" width="13" height="26"/>
+      <rect class="brick q2" x="356" y="500" width="13" height="26"/>
+      <rect class="brick q3" x="370" y="500" width="13" height="26"/>
+      <rect class="brick q1" x="384" y="500" width="13" height="26"/>
+      <rect class="brick q2" x="398" y="500" width="13" height="26"/>
+      <rect class="brick q1" x="412" y="500" width="13" height="26"/>
+      <rect class="brick q3" x="426" y="500" width="13" height="26"/>
+      <rect class="brick q1" x="440" y="500" width="13" height="26"/>
+      <rect class="brick q0" x="454" y="500" width="13" height="26"/>
+      <rect class="brick q0" x="468" y="500" width="13" height="26"/>
+      <rect class="brick q3" x="482" y="500" width="13" height="26"/>
+      <rect class="brick q0" x="496" y="500" width="13" height="26"/>
+      <rect class="brick q2" x="510" y="500" width="13" height="26"/>
+      <text class="chlab" x="94" y="550.0">6</text>
+      <text class="chcnt" x="790.0" y="550.0">47</text>
+      <rect class="brick q3" x="118" y="532" width="13" height="26"/>
+      <rect class="brick q3" x="132" y="532" width="13" height="26"/>
+      <rect class="brick q1" x="146" y="532" width="13" height="26"/>
+      <rect class="brick q1" x="160" y="532" width="13" height="26"/>
+      <rect class="brick q1" x="174" y="532" width="13" height="26"/>
+      <rect class="brick q1" x="188" y="532" width="13" height="26"/>
+      <rect class="brick q1" x="202" y="532" width="13" height="26"/>
+      <rect class="brick q2" x="216" y="532" width="13" height="26"/>
+      <rect class="brick q2" x="230" y="532" width="13" height="26"/>
+      <rect class="brick q2" x="244" y="532" width="13" height="26"/>
+      <rect class="brick q1" x="258" y="532" width="13" height="26"/>
+      <rect class="brick q0" x="272" y="532" width="13" height="26"/>
+      <rect class="brick q2" x="286" y="532" width="13" height="26"/>
+      <rect class="brick q0" x="300" y="532" width="13" height="26"/>
+      <rect class="brick q1" x="314" y="532" width="13" height="26"/>
+      <rect class="brick q0" x="328" y="532" width="13" height="26"/>
+      <rect class="brick q0" x="342" y="532" width="13" height="26"/>
+      <rect class="brick q0" x="356" y="532" width="13" height="26"/>
+      <rect class="brick q1" x="370" y="532" width="13" height="26"/>
+      <rect class="brick q3" x="384" y="532" width="13" height="26"/>
+      <rect class="brick q2" x="398" y="532" width="13" height="26"/>
+      <rect class="brick q1" x="412" y="532" width="13" height="26"/>
+      <rect class="brick q3" x="426" y="532" width="13" height="26"/>
+      <rect class="brick q0" x="440" y="532" width="13" height="26"/>
+      <rect class="brick q2" x="454" y="532" width="13" height="26"/>
+      <rect class="brick q0" x="468" y="532" width="13" height="26"/>
+      <rect class="brick q1" x="482" y="532" width="13" height="26"/>
+      <rect class="brick q1" x="496" y="532" width="13" height="26"/>
+      <rect class="brick q1" x="510" y="532" width="13" height="26"/>
+      <rect class="brick q1" x="524" y="532" width="13" height="26"/>
+      <rect class="brick q0" x="538" y="532" width="13" height="26"/>
+      <rect class="brick q1" x="552" y="532" width="13" height="26"/>
+      <rect class="brick q0" x="566" y="532" width="13" height="26"/>
+      <rect class="brick q2" x="580" y="532" width="13" height="26"/>
+      <rect class="brick q3" x="594" y="532" width="13" height="26"/>
+      <rect class="brick q2" x="608" y="532" width="13" height="26"/>
+      <rect class="brick q2" x="622" y="532" width="13" height="26"/>
+      <rect class="brick q3" x="636" y="532" width="13" height="26"/>
+      <rect class="brick q0" x="650" y="532" width="13" height="26"/>
+      <rect class="brick q1" x="664" y="532" width="13" height="26"/>
+      <rect class="brick q1" x="678" y="532" width="13" height="26"/>
+      <rect class="brick q1" x="692" y="532" width="13" height="26"/>
+      <rect class="brick q0" x="706" y="532" width="13" height="26"/>
+      <rect class="brick q3" x="720" y="532" width="13" height="26"/>
+      <rect class="brick q1" x="734" y="532" width="13" height="26"/>
+      <rect class="brick q0" x="748" y="532" width="13" height="26"/>
+      <rect class="brick q0" x="762" y="532" width="13" height="26"/>
+      <text class="chlab" x="94" y="582.0">7</text>
+      <text class="chcnt" x="552.0" y="582.0">30</text>
+      <rect class="brick q3" x="118" y="564" width="13" height="26"/>
+      <rect class="brick q1" x="132" y="564" width="13" height="26"/>
+      <rect class="brick q3" x="146" y="564" width="13" height="26"/>
+      <rect class="brick q3" x="160" y="564" width="13" height="26"/>
+      <rect class="brick q1" x="174" y="564" width="13" height="26"/>
+      <rect class="brick q3" x="188" y="564" width="13" height="26"/>
+      <rect class="brick q0" x="202" y="564" width="13" height="26"/>
+      <rect class="brick q3" x="216" y="564" width="13" height="26"/>
+      <rect class="brick q2" x="230" y="564" width="13" height="26"/>
+      <rect class="brick q1" x="244" y="564" width="13" height="26"/>
+      <rect class="brick q2" x="258" y="564" width="13" height="26"/>
+      <rect class="brick q2" x="272" y="564" width="13" height="26"/>
+      <rect class="brick q1" x="286" y="564" width="13" height="26"/>
+      <rect class="brick q2" x="300" y="564" width="13" height="26"/>
+      <rect class="brick q2" x="314" y="564" width="13" height="26"/>
+      <rect class="brick q2" x="328" y="564" width="13" height="26"/>
+      <rect class="brick q2" x="342" y="564" width="13" height="26"/>
+      <rect class="brick q2" x="356" y="564" width="13" height="26"/>
+      <rect class="brick q1" x="370" y="564" width="13" height="26"/>
+      <rect class="brick q3" x="384" y="564" width="13" height="26"/>
+      <rect class="brick q0" x="398" y="564" width="13" height="26"/>
+      <rect class="brick q1" x="412" y="564" width="13" height="26"/>
+      <rect class="brick q2" x="426" y="564" width="13" height="26"/>
+      <rect class="brick q3" x="440" y="564" width="13" height="26"/>
+      <rect class="brick q1" x="454" y="564" width="13" height="26"/>
+      <rect class="brick q3" x="468" y="564" width="13" height="26"/>
+      <rect class="brick q3" x="482" y="564" width="13" height="26"/>
+      <rect class="brick q0" x="496" y="564" width="13" height="26"/>
+      <rect class="brick q2" x="510" y="564" width="13" height="26"/>
+      <rect class="brick q2" x="524" y="564" width="13" height="26"/>
+      <text class="chlab" x="94" y="614.0">8</text>
+      <text class="chcnt" x="524.0" y="614.0">28</text>
+      <rect class="brick q1" x="118" y="596" width="13" height="26"/>
+      <rect class="brick q2" x="132" y="596" width="13" height="26"/>
+      <rect class="brick q3" x="146" y="596" width="13" height="26"/>
+      <rect class="brick q3" x="160" y="596" width="13" height="26"/>
+      <rect class="brick q2" x="174" y="596" width="13" height="26"/>
+      <rect class="brick q1" x="188" y="596" width="13" height="26"/>
+      <rect class="brick q2" x="202" y="596" width="13" height="26"/>
+      <rect class="brick q1" x="216" y="596" width="13" height="26"/>
+      <rect class="brick q3" x="230" y="596" width="13" height="26"/>
+      <rect class="brick q1" x="244" y="596" width="13" height="26"/>
+      <rect class="brick q3" x="258" y="596" width="13" height="26"/>
+      <rect class="brick q1" x="272" y="596" width="13" height="26"/>
+      <rect class="brick q1" x="286" y="596" width="13" height="26"/>
+      <rect class="brick q1" x="300" y="596" width="13" height="26"/>
+      <rect class="brick q1" x="314" y="596" width="13" height="26"/>
+      <rect class="brick q3" x="328" y="596" width="13" height="26"/>
+      <rect class="brick q3" x="342" y="596" width="13" height="26"/>
+      <rect class="brick q3" x="356" y="596" width="13" height="26"/>
+      <rect class="brick q1" x="370" y="596" width="13" height="26"/>
+      <rect class="brick q1" x="384" y="596" width="13" height="26"/>
+      <rect class="brick q3" x="398" y="596" width="13" height="26"/>
+      <rect class="brick q1" x="412" y="596" width="13" height="26"/>
+      <rect class="brick q3" x="426" y="596" width="13" height="26"/>
+      <rect class="brick q3" x="440" y="596" width="13" height="26"/>
+      <rect class="brick q3" x="454" y="596" width="13" height="26"/>
+      <rect class="brick q1" x="468" y="596" width="13" height="26"/>
+      <rect class="brick q0" x="482" y="596" width="13" height="26"/>
+      <rect class="brick q3" x="496" y="596" width="13" height="26"/>
+      <text class="chlab" x="94" y="646.0">9</text>
+      <text class="chcnt" x="608.0" y="646.0">34</text>
+      <rect class="brick q3" x="118" y="628" width="13" height="26"/>
+      <rect class="brick q3" x="132" y="628" width="13" height="26"/>
+      <rect class="brick q2" x="146" y="628" width="13" height="26"/>
+      <rect class="brick q3" x="160" y="628" width="13" height="26"/>
+      <rect class="brick q3" x="174" y="628" width="13" height="26"/>
+      <rect class="brick q1" x="188" y="628" width="13" height="26"/>
+      <rect class="brick q1" x="202" y="628" width="13" height="26"/>
+      <rect class="brick q2" x="216" y="628" width="13" height="26"/>
+      <rect class="brick q2" x="230" y="628" width="13" height="26"/>
+      <rect class="brick q1" x="244" y="628" width="13" height="26"/>
+      <rect class="brick q1" x="258" y="628" width="13" height="26"/>
+      <rect class="brick q3" x="272" y="628" width="13" height="26"/>
+      <rect class="brick q1" x="286" y="628" width="13" height="26"/>
+      <rect class="brick q2" x="300" y="628" width="13" height="26"/>
+      <rect class="brick q2" x="314" y="628" width="13" height="26"/>
+      <rect class="brick q1" x="328" y="628" width="13" height="26"/>
+      <rect class="brick q0" x="342" y="628" width="13" height="26"/>
+      <rect class="brick q2" x="356" y="628" width="13" height="26"/>
+      <rect class="brick q2" x="370" y="628" width="13" height="26"/>
+      <rect class="brick q3" x="384" y="628" width="13" height="26"/>
+      <rect class="brick q1" x="398" y="628" width="13" height="26"/>
+      <rect class="brick q2" x="412" y="628" width="13" height="26"/>
+      <rect class="brick q2" x="426" y="628" width="13" height="26"/>
+      <rect class="brick q1" x="440" y="628" width="13" height="26"/>
+      <rect class="brick q2" x="454" y="628" width="13" height="26"/>
+      <rect class="brick q3" x="468" y="628" width="13" height="26"/>
+      <rect class="brick q1" x="482" y="628" width="13" height="26"/>
+      <rect class="brick q2" x="496" y="628" width="13" height="26"/>
+      <rect class="brick q3" x="510" y="628" width="13" height="26"/>
+      <rect class="brick q2" x="524" y="628" width="13" height="26"/>
+      <rect class="brick q3" x="538" y="628" width="13" height="26"/>
+      <rect class="brick q2" x="552" y="628" width="13" height="26"/>
+      <rect class="brick q3" x="566" y="628" width="13" height="26"/>
+      <rect class="brick q1" x="580" y="628" width="13" height="26"/>
+      <text class="chlab" x="94" y="678.0">10</text>
+      <text class="chcnt" x="720.0" y="678.0">42</text>
+      <rect class="brick q3" x="118" y="660" width="13" height="26"/>
+      <rect class="brick q2" x="132" y="660" width="13" height="26"/>
+      <rect class="brick q0" x="146" y="660" width="13" height="26"/>
+      <rect class="brick q2" x="160" y="660" width="13" height="26"/>
+      <rect class="brick q2" x="174" y="660" width="13" height="26"/>
+      <rect class="brick q3" x="188" y="660" width="13" height="26"/>
+      <rect class="brick q0" x="202" y="660" width="13" height="26"/>
+      <rect class="brick q2" x="216" y="660" width="13" height="26"/>
+      <rect class="brick q2" x="230" y="660" width="13" height="26"/>
+      <rect class="brick q0" x="244" y="660" width="13" height="26"/>
+      <rect class="brick q2" x="258" y="660" width="13" height="26"/>
+      <rect class="brick q2" x="272" y="660" width="13" height="26"/>
+      <rect class="brick q0" x="286" y="660" width="13" height="26"/>
+      <rect class="brick q2" x="300" y="660" width="13" height="26"/>
+      <rect class="brick q2" x="314" y="660" width="13" height="26"/>
+      <rect class="brick q0" x="328" y="660" width="13" height="26"/>
+      <rect class="brick q0" x="342" y="660" width="13" height="26"/>
+      <rect class="brick q1" x="356" y="660" width="13" height="26"/>
+      <rect class="brick q1" x="370" y="660" width="13" height="26"/>
+      <rect class="brick q1" x="384" y="660" width="13" height="26"/>
+      <rect class="brick q3" x="398" y="660" width="13" height="26"/>
+      <rect class="brick q0" x="412" y="660" width="13" height="26"/>
+      <rect class="brick q0" x="426" y="660" width="13" height="26"/>
+      <rect class="brick q0" x="440" y="660" width="13" height="26"/>
+      <rect class="brick q0" x="454" y="660" width="13" height="26"/>
+      <rect class="brick q0" x="468" y="660" width="13" height="26"/>
+      <rect class="brick q0" x="482" y="660" width="13" height="26"/>
+      <rect class="brick q0" x="496" y="660" width="13" height="26"/>
+      <rect class="brick q0" x="510" y="660" width="13" height="26"/>
+      <rect class="brick q0" x="524" y="660" width="13" height="26"/>
+      <rect class="brick q0" x="538" y="660" width="13" height="26"/>
+      <rect class="brick q3" x="552" y="660" width="13" height="26"/>
+      <rect class="brick q3" x="566" y="660" width="13" height="26"/>
+      <rect class="brick q1" x="580" y="660" width="13" height="26"/>
+      <rect class="brick q1" x="594" y="660" width="13" height="26"/>
+      <rect class="brick q0" x="608" y="660" width="13" height="26"/>
+      <rect class="brick q0" x="622" y="660" width="13" height="26"/>
+      <rect class="brick q1" x="636" y="660" width="13" height="26"/>
+      <rect class="brick q0" x="650" y="660" width="13" height="26"/>
+      <rect class="brick q0" x="664" y="660" width="13" height="26"/>
+      <rect class="brick q1" x="678" y="660" width="13" height="26"/>
+      <rect class="brick q1" x="692" y="660" width="13" height="26"/>
+      <text class="chlab" x="94" y="710.0">11</text>
+      <text class="chcnt" x="902.0" y="710.0">55</text>
+      <rect class="brick q3" x="118" y="692" width="13" height="26"/>
+      <rect class="brick q3" x="132" y="692" width="13" height="26"/>
+      <rect class="brick q2" x="146" y="692" width="13" height="26"/>
+      <rect class="brick q1" x="160" y="692" width="13" height="26"/>
+      <rect class="brick q2" x="174" y="692" width="13" height="26"/>
+      <rect class="brick q0" x="188" y="692" width="13" height="26"/>
+      <rect class="brick q1" x="202" y="692" width="13" height="26"/>
+      <rect class="brick q1" x="216" y="692" width="13" height="26"/>
+      <rect class="brick q1" x="230" y="692" width="13" height="26"/>
+      <rect class="brick q0" x="244" y="692" width="13" height="26"/>
+      <rect class="brick q0" x="258" y="692" width="13" height="26"/>
+      <rect class="brick q1" x="272" y="692" width="13" height="26"/>
+      <rect class="brick q0" x="286" y="692" width="13" height="26"/>
+      <rect class="brick q0" x="300" y="692" width="13" height="26"/>
+      <rect class="brick q2" x="314" y="692" width="13" height="26"/>
+      <rect class="brick q0" x="328" y="692" width="13" height="26"/>
+      <rect class="brick q1" x="342" y="692" width="13" height="26"/>
+      <rect class="brick q2" x="356" y="692" width="13" height="26"/>
+      <rect class="brick q1" x="370" y="692" width="13" height="26"/>
+      <rect class="brick q1" x="384" y="692" width="13" height="26"/>
+      <rect class="brick q0" x="398" y="692" width="13" height="26"/>
+      <rect class="brick q3" x="412" y="692" width="13" height="26"/>
+      <rect class="brick q2" x="426" y="692" width="13" height="26"/>
+      <rect class="brick q2" x="440" y="692" width="13" height="26"/>
+      <rect class="brick q0" x="454" y="692" width="13" height="26"/>
+      <rect class="brick q3" x="468" y="692" width="13" height="26"/>
+      <rect class="brick q0" x="482" y="692" width="13" height="26"/>
+      <rect class="brick q1" x="496" y="692" width="13" height="26"/>
+      <rect class="brick q1" x="510" y="692" width="13" height="26"/>
+      <rect class="brick q1" x="524" y="692" width="13" height="26"/>
+      <rect class="brick q1" x="538" y="692" width="13" height="26"/>
+      <rect class="brick q3" x="552" y="692" width="13" height="26"/>
+      <rect class="brick q3" x="566" y="692" width="13" height="26"/>
+      <rect class="brick q1" x="580" y="692" width="13" height="26"/>
+      <rect class="brick q2" x="594" y="692" width="13" height="26"/>
+      <rect class="brick q3" x="608" y="692" width="13" height="26"/>
+      <rect class="brick q2" x="622" y="692" width="13" height="26"/>
+      <rect class="brick q2" x="636" y="692" width="13" height="26"/>
+      <rect class="brick q2" x="650" y="692" width="13" height="26"/>
+      <rect class="brick q2" x="664" y="692" width="13" height="26"/>
+      <rect class="brick q2" x="678" y="692" width="13" height="26"/>
+      <rect class="brick q1" x="692" y="692" width="13" height="26"/>
+      <rect class="brick q2" x="706" y="692" width="13" height="26"/>
+      <rect class="brick q2" x="720" y="692" width="13" height="26"/>
+      <rect class="brick q1" x="734" y="692" width="13" height="26"/>
+      <rect class="brick q3" x="748" y="692" width="13" height="26"/>
+      <rect class="brick q2" x="762" y="692" width="13" height="26"/>
+      <rect class="brick q2" x="776" y="692" width="13" height="26"/>
+      <rect class="brick q1" x="790" y="692" width="13" height="26"/>
+      <rect class="brick q1" x="804" y="692" width="13" height="26"/>
+      <rect class="brick q0" x="818" y="692" width="13" height="26"/>
+      <rect class="brick q1" x="832" y="692" width="13" height="26"/>
+      <rect class="brick q0" x="846" y="692" width="13" height="26"/>
+      <rect class="brick q1" x="860" y="692" width="13" height="26"/>
+      <rect class="brick q1" x="874" y="692" width="13" height="26"/>
+      <text class="chlab" x="94" y="742.0">12</text>
+      <text class="chcnt" x="412.0" y="742.0">20</text>
+      <rect class="brick q3" x="118" y="724" width="13" height="26"/>
+      <rect class="brick q1" x="132" y="724" width="13" height="26"/>
+      <rect class="brick q3" x="146" y="724" width="13" height="26"/>
+      <rect class="brick q0" x="160" y="724" width="13" height="26"/>
+      <rect class="brick q2" x="174" y="724" width="13" height="26"/>
+      <rect class="brick q1" x="188" y="724" width="13" height="26"/>
+      <rect class="brick q0" x="202" y="724" width="13" height="26"/>
+      <rect class="brick q2" x="216" y="724" width="13" height="26"/>
+      <rect class="brick q0" x="230" y="724" width="13" height="26"/>
+      <rect class="brick q1" x="244" y="724" width="13" height="26"/>
+      <rect class="brick q3" x="258" y="724" width="13" height="26"/>
+      <rect class="brick q2" x="272" y="724" width="13" height="26"/>
+      <rect class="brick q2" x="286" y="724" width="13" height="26"/>
+      <rect class="brick q0" x="300" y="724" width="13" height="26"/>
+      <rect class="brick q2" x="314" y="724" width="13" height="26"/>
+      <rect class="brick q1" x="328" y="724" width="13" height="26"/>
+      <rect class="brick q1" x="342" y="724" width="13" height="26"/>
+      <rect class="brick q0" x="356" y="724" width="13" height="26"/>
+      <rect class="brick q0" x="370" y="724" width="13" height="26"/>
+      <rect class="brick q1" x="384" y="724" width="13" height="26"/>
+      <text class="chlab" x="94" y="774.0">13</text>
+      <text class="chcnt" x="608.0" y="774.0">34</text>
+      <rect class="brick q0" x="118" y="756" width="13" height="26"/>
+      <rect class="brick q3" x="132" y="756" width="13" height="26"/>
+      <rect class="brick q3" x="146" y="756" width="13" height="26"/>
+      <rect class="brick q3" x="160" y="756" width="13" height="26"/>
+      <rect class="brick q3" x="174" y="756" width="13" height="26"/>
+      <rect class="brick q3" x="188" y="756" width="13" height="26"/>
+      <rect class="brick q3" x="202" y="756" width="13" height="26"/>
+      <rect class="brick q3" x="216" y="756" width="13" height="26"/>
+      <rect class="brick q0" x="230" y="756" width="13" height="26"/>
+      <rect class="brick q0" x="244" y="756" width="13" height="26"/>
+      <rect class="brick q0" x="258" y="756" width="13" height="26"/>
+      <rect class="brick q3" x="272" y="756" width="13" height="26"/>
+      <rect class="brick q3" x="286" y="756" width="13" height="26"/>
+      <rect class="brick q3" x="300" y="756" width="13" height="26"/>
+      <rect class="brick q3" x="314" y="756" width="13" height="26"/>
+      <rect class="brick q3" x="328" y="756" width="13" height="26"/>
+      <rect class="brick q2" x="342" y="756" width="13" height="26"/>
+      <rect class="brick q3" x="356" y="756" width="13" height="26"/>
+      <rect class="brick q2" x="370" y="756" width="13" height="26"/>
+      <rect class="brick q3" x="384" y="756" width="13" height="26"/>
+      <rect class="brick q3" x="398" y="756" width="13" height="26"/>
+      <rect class="brick q2" x="412" y="756" width="13" height="26"/>
+      <rect class="brick q3" x="426" y="756" width="13" height="26"/>
+      <rect class="brick q1" x="440" y="756" width="13" height="26"/>
+      <rect class="brick q2" x="454" y="756" width="13" height="26"/>
+      <rect class="brick q1" x="468" y="756" width="13" height="26"/>
+      <rect class="brick q2" x="482" y="756" width="13" height="26"/>
+      <rect class="brick q1" x="496" y="756" width="13" height="26"/>
+      <rect class="brick q3" x="510" y="756" width="13" height="26"/>
+      <rect class="brick q2" x="524" y="756" width="13" height="26"/>
+      <rect class="brick q3" x="538" y="756" width="13" height="26"/>
+      <rect class="brick q2" x="552" y="756" width="13" height="26"/>
+      <rect class="brick q0" x="566" y="756" width="13" height="26"/>
+      <rect class="brick q0" x="580" y="756" width="13" height="26"/>
+      <text class="chlab" x="94" y="806.0">14</text>
+      <text class="chcnt" x="510.0" y="806.0">27</text>
+      <rect class="brick q3" x="118" y="788" width="13" height="26"/>
+      <rect class="brick q1" x="132" y="788" width="13" height="26"/>
+      <rect class="brick q3" x="146" y="788" width="13" height="26"/>
+      <rect class="brick q2" x="160" y="788" width="13" height="26"/>
+      <rect class="brick q3" x="174" y="788" width="13" height="26"/>
+      <rect class="brick q3" x="188" y="788" width="13" height="26"/>
+      <rect class="brick q2" x="202" y="788" width="13" height="26"/>
+      <rect class="brick q1" x="216" y="788" width="13" height="26"/>
+      <rect class="brick q2" x="230" y="788" width="13" height="26"/>
+      <rect class="brick q2" x="244" y="788" width="13" height="26"/>
+      <rect class="brick q2" x="258" y="788" width="13" height="26"/>
+      <rect class="brick q2" x="272" y="788" width="13" height="26"/>
+      <rect class="brick q0" x="286" y="788" width="13" height="26"/>
+      <rect class="brick q1" x="300" y="788" width="13" height="26"/>
+      <rect class="brick q0" x="314" y="788" width="13" height="26"/>
+      <rect class="brick q2" x="328" y="788" width="13" height="26"/>
+      <rect class="brick q2" x="342" y="788" width="13" height="26"/>
+      <rect class="brick q3" x="356" y="788" width="13" height="26"/>
+      <rect class="brick q2" x="370" y="788" width="13" height="26"/>
+      <rect class="brick q1" x="384" y="788" width="13" height="26"/>
+      <rect class="brick q2" x="398" y="788" width="13" height="26"/>
+      <rect class="brick q3" x="412" y="788" width="13" height="26"/>
+      <rect class="brick q2" x="426" y="788" width="13" height="26"/>
+      <rect class="brick q0" x="440" y="788" width="13" height="26"/>
+      <rect class="brick q0" x="454" y="788" width="13" height="26"/>
+      <rect class="brick q1" x="468" y="788" width="13" height="26"/>
+      <rect class="brick q3" x="482" y="788" width="13" height="26"/>
+      <text class="chlab" x="94" y="838.0">15</text>
+      <text class="chcnt" x="412.0" y="838.0">20</text>
+      <rect class="brick q3" x="118" y="820" width="13" height="26"/>
+      <rect class="brick q3" x="132" y="820" width="13" height="26"/>
+      <rect class="brick q3" x="146" y="820" width="13" height="26"/>
+      <rect class="brick q2" x="160" y="820" width="13" height="26"/>
+      <rect class="brick q2" x="174" y="820" width="13" height="26"/>
+      <rect class="brick q0" x="188" y="820" width="13" height="26"/>
+      <rect class="brick q3" x="202" y="820" width="13" height="26"/>
+      <rect class="brick q2" x="216" y="820" width="13" height="26"/>
+      <rect class="brick q0" x="230" y="820" width="13" height="26"/>
+      <rect class="brick q2" x="244" y="820" width="13" height="26"/>
+      <rect class="brick q1" x="258" y="820" width="13" height="26"/>
+      <rect class="brick q2" x="272" y="820" width="13" height="26"/>
+      <rect class="brick q0" x="286" y="820" width="13" height="26"/>
+      <rect class="brick q3" x="300" y="820" width="13" height="26"/>
+      <rect class="brick q2" x="314" y="820" width="13" height="26"/>
+      <rect class="brick q3" x="328" y="820" width="13" height="26"/>
+      <rect class="brick q2" x="342" y="820" width="13" height="26"/>
+      <rect class="brick q2" x="356" y="820" width="13" height="26"/>
+      <rect class="brick q0" x="370" y="820" width="13" height="26"/>
+      <rect class="brick q2" x="384" y="820" width="13" height="26"/>
+      <text class="chlab" x="94" y="870.0">16</text>
+      <text class="chcnt" x="468.0" y="870.0">24</text>
+      <rect class="brick q3" x="118" y="852" width="13" height="26"/>
+      <rect class="brick q2" x="132" y="852" width="13" height="26"/>
+      <rect class="brick q3" x="146" y="852" width="13" height="26"/>
+      <rect class="brick q2" x="160" y="852" width="13" height="26"/>
+      <rect class="brick q2" x="174" y="852" width="13" height="26"/>
+      <rect class="brick q2" x="188" y="852" width="13" height="26"/>
+      <rect class="brick q0" x="202" y="852" width="13" height="26"/>
+      <rect class="brick q3" x="216" y="852" width="13" height="26"/>
+      <rect class="brick q1" x="230" y="852" width="13" height="26"/>
+      <rect class="brick q2" x="244" y="852" width="13" height="26"/>
+      <rect class="brick q2" x="258" y="852" width="13" height="26"/>
+      <rect class="brick q0" x="272" y="852" width="13" height="26"/>
+      <rect class="brick q0" x="286" y="852" width="13" height="26"/>
+      <rect class="brick q0" x="300" y="852" width="13" height="26"/>
+      <rect class="brick q1" x="314" y="852" width="13" height="26"/>
+      <rect class="brick q1" x="328" y="852" width="13" height="26"/>
+      <rect class="brick q3" x="342" y="852" width="13" height="26"/>
+      <rect class="brick q2" x="356" y="852" width="13" height="26"/>
+      <rect class="brick q1" x="370" y="852" width="13" height="26"/>
+      <rect class="brick q0" x="384" y="852" width="13" height="26"/>
+      <rect class="brick q0" x="398" y="852" width="13" height="26"/>
+      <rect class="brick q0" x="412" y="852" width="13" height="26"/>
+      <rect class="brick q0" x="426" y="852" width="13" height="26"/>
+      <rect class="brick q1" x="440" y="852" width="13" height="26"/>
+      <text class="chlab" x="94" y="902.0">17</text>
+      <text class="chcnt" x="524.0" y="902.0">28</text>
+      <rect class="brick q3" x="118" y="884" width="13" height="26"/>
+      <rect class="brick q3" x="132" y="884" width="13" height="26"/>
+      <rect class="brick q3" x="146" y="884" width="13" height="26"/>
+      <rect class="brick q2" x="160" y="884" width="13" height="26"/>
+      <rect class="brick q3" x="174" y="884" width="13" height="26"/>
+      <rect class="brick q2" x="188" y="884" width="13" height="26"/>
+      <rect class="brick q2" x="202" y="884" width="13" height="26"/>
+      <rect class="brick q2" x="216" y="884" width="13" height="26"/>
+      <rect class="brick q2" x="230" y="884" width="13" height="26"/>
+      <rect class="brick q1" x="244" y="884" width="13" height="26"/>
+      <rect class="brick q2" x="258" y="884" width="13" height="26"/>
+      <rect class="brick q0" x="272" y="884" width="13" height="26"/>
+      <rect class="brick q1" x="286" y="884" width="13" height="26"/>
+      <rect class="brick q0" x="300" y="884" width="13" height="26"/>
+      <rect class="brick q0" x="314" y="884" width="13" height="26"/>
+      <rect class="brick q0" x="328" y="884" width="13" height="26"/>
+      <rect class="brick q1" x="342" y="884" width="13" height="26"/>
+      <rect class="brick q1" x="356" y="884" width="13" height="26"/>
+      <rect class="brick q0" x="370" y="884" width="13" height="26"/>
+      <rect class="brick q3" x="384" y="884" width="13" height="26"/>
+      <rect class="brick q0" x="398" y="884" width="13" height="26"/>
+      <rect class="brick q1" x="412" y="884" width="13" height="26"/>
+      <rect class="brick q3" x="426" y="884" width="13" height="26"/>
+      <rect class="brick q1" x="440" y="884" width="13" height="26"/>
+      <rect class="brick q1" x="454" y="884" width="13" height="26"/>
+      <rect class="brick q2" x="468" y="884" width="13" height="26"/>
+      <rect class="brick q3" x="482" y="884" width="13" height="26"/>
+      <rect class="brick q1" x="496" y="884" width="13" height="26"/>
+      <text class="chlab" x="94" y="934.0">18</text>
+      <text class="chcnt" x="1224.0" y="934.0">78</text>
+      <rect class="brick q3" x="118" y="916" width="13" height="26"/>
+      <rect class="brick q3" x="132" y="916" width="13" height="26"/>
+      <rect class="brick q3" x="146" y="916" width="13" height="26"/>
+      <rect class="brick q2" x="160" y="916" width="13" height="26"/>
+      <rect class="brick q0" x="174" y="916" width="13" height="26"/>
+      <rect class="brick q2" x="188" y="916" width="13" height="26"/>
+      <rect class="brick q2" x="202" y="916" width="13" height="26"/>
+      <rect class="brick q1" x="216" y="916" width="13" height="26"/>
+      <rect class="brick q0" x="230" y="916" width="13" height="26"/>
+      <rect class="brick q3" x="244" y="916" width="13" height="26"/>
+      <rect class="brick q2" x="258" y="916" width="13" height="26"/>
+      <rect class="brick q3" x="272" y="916" width="13" height="26"/>
+      <rect class="brick q3" x="286" y="916" width="13" height="26"/>
+      <rect class="brick q2" x="300" y="916" width="13" height="26"/>
+      <rect class="brick q1" x="314" y="916" width="13" height="26"/>
+      <rect class="brick q0" x="328" y="916" width="13" height="26"/>
+      <rect class="brick q3" x="342" y="916" width="13" height="26"/>
+      <rect class="brick q3" x="356" y="916" width="13" height="26"/>
+      <rect class="brick q3" x="370" y="916" width="13" height="26"/>
+      <rect class="brick q1" x="384" y="916" width="13" height="26"/>
+      <rect class="brick q1" x="398" y="916" width="13" height="26"/>
+      <rect class="brick q1" x="412" y="916" width="13" height="26"/>
+      <rect class="brick q1" x="426" y="916" width="13" height="26"/>
+      <rect class="brick q0" x="440" y="916" width="13" height="26"/>
+      <rect class="brick q0" x="454" y="916" width="13" height="26"/>
+      <rect class="brick q1" x="468" y="916" width="13" height="26"/>
+      <rect class="brick q0" x="482" y="916" width="13" height="26"/>
+      <rect class="brick q3" x="496" y="916" width="13" height="26"/>
+      <rect class="brick q0" x="510" y="916" width="13" height="26"/>
+      <rect class="brick q2" x="524" y="916" width="13" height="26"/>
+      <rect class="brick q0" x="538" y="916" width="13" height="26"/>
+      <rect class="brick q2" x="552" y="916" width="13" height="26"/>
+      <rect class="brick q0" x="566" y="916" width="13" height="26"/>
+      <rect class="brick q0" x="580" y="916" width="13" height="26"/>
+      <rect class="brick q0" x="594" y="916" width="13" height="26"/>
+      <rect class="brick q1" x="608" y="916" width="13" height="26"/>
+      <rect class="brick q1" x="622" y="916" width="13" height="26"/>
+      <rect class="brick q0" x="636" y="916" width="13" height="26"/>
+      <rect class="brick q0" x="650" y="916" width="13" height="26"/>
+      <rect class="brick q1" x="664" y="916" width="13" height="26"/>
+      <rect class="brick q3" x="678" y="916" width="13" height="26"/>
+      <rect class="brick q2" x="692" y="916" width="13" height="26"/>
+      <rect class="brick q1" x="706" y="916" width="13" height="26"/>
+      <rect class="brick q1" x="720" y="916" width="13" height="26"/>
+      <rect class="brick q1" x="734" y="916" width="13" height="26"/>
+      <rect class="brick q0" x="748" y="916" width="13" height="26"/>
+      <rect class="brick q1" x="762" y="916" width="13" height="26"/>
+      <rect class="brick q3" x="776" y="916" width="13" height="26"/>
+      <rect class="brick q3" x="790" y="916" width="13" height="26"/>
+      <rect class="brick q0" x="804" y="916" width="13" height="26"/>
+      <rect class="brick q2" x="818" y="916" width="13" height="26"/>
+      <rect class="brick q1" x="832" y="916" width="13" height="26"/>
+      <rect class="brick q2" x="846" y="916" width="13" height="26"/>
+      <rect class="brick q1" x="860" y="916" width="13" height="26"/>
+      <rect class="brick q1" x="874" y="916" width="13" height="26"/>
+      <rect class="brick q2" x="888" y="916" width="13" height="26"/>
+      <rect class="brick q1" x="902" y="916" width="13" height="26"/>
+      <rect class="brick q1" x="916" y="916" width="13" height="26"/>
+      <rect class="brick q2" x="930" y="916" width="13" height="26"/>
+      <rect class="brick q0" x="944" y="916" width="13" height="26"/>
+      <rect class="brick q3" x="958" y="916" width="13" height="26"/>
+      <rect class="brick q0" x="972" y="916" width="13" height="26"/>
+      <rect class="brick q2" x="986" y="916" width="13" height="26"/>
+      <rect class="brick q3" x="1000" y="916" width="13" height="26"/>
+      <rect class="brick q1" x="1014" y="916" width="13" height="26"/>
+      <rect class="brick q1" x="1028" y="916" width="13" height="26"/>
+      <rect class="brick q2" x="1042" y="916" width="13" height="26"/>
+      <rect class="brick q0" x="1056" y="916" width="13" height="26"/>
+      <rect class="brick q1" x="1070" y="916" width="13" height="26"/>
+      <rect class="brick q3" x="1084" y="916" width="13" height="26"/>
+      <rect class="brick q2" x="1098" y="916" width="13" height="26"/>
+      <rect class="brick q0" x="1112" y="916" width="13" height="26"/>
+      <rect class="brick q1" x="1126" y="916" width="13" height="26"/>
+      <rect class="brick q0" x="1140" y="916" width="13" height="26"/>
+      <rect class="brick q1" x="1154" y="916" width="13" height="26"/>
+      <rect class="brick q0" x="1168" y="916" width="13" height="26"/>
+      <rect class="brick q0" x="1182" y="916" width="13" height="26"/>
+      <rect class="brick q3" x="1196" y="916" width="13" height="26"/>
+      <text class="chlab" x="22" y="360.0">гл.</text>
+      <text class="chcnt" x="1186" y="360.0">шлок</text>
+  </svg>
+  <div class="heatline" style="display:none"></div>
+  <footer>
+    <div>Данные: <b>CommentaryStrategies · data/gita</b> — 700 шлок × 27 слоёв (гл. 1–18), счёт по полям verse JSON</div>
+    <div>скрипт: <b>scripts/infographics50/gita_heatmap.py</b> · Посчитано 29.08.2026 · <b>Dr. Mārcis Gasūns</b></div>
+  </footer>
 </div>
 </body>
 </html>

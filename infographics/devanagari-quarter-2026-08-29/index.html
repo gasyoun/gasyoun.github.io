@@ -2,38 +2,273 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
-<title>Деванагари-квартал</title>
-<!-- Data: SanskritSpellCheck/sanhw1.txt first character. 29.08.2026 -->
+<title>Квартал деванагари: 46 букв</title>
+<!-- Composition: Big Object — one isometric slab of 46 letter-buildings (2 streets of 23),
+     height linear 260px = max. Isometric world, wide 1920x1080. Two triads: vowels teal,
+     consonants amber; hero letter a coral. True-iso: X = X0 + (x-y)*0.866, Y = Y0 + (x+y)*0.5 - z. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;600;700&family=Nunito:wght@400;600;700;800&family=Noto+Mono&family=Noto+Serif+Devanagari:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito+Sans:ital,opsz,wght@0,6..12,400;0,6..12,600;0,6..12,800;1,6..12,400&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#F5EFE3;--ink:#29261F;--sub:rgba(41,38,31,.62);--accent:#C4552F;--card:#FFFFFF;
---neon:#6FE3C1;--bar:#009B7D;--blue:#4A55C8;--red:#D9503F;
---font-display:'Comfortaa',sans-serif;--font-body:'Nunito',sans-serif;
---dev:'Noto Serif Devanagari',serif;--mono:'Noto Mono',monospace}
-html,body{background:var(--bg)}
-body{width:1080px;font-family:var(--font-body);color:var(--ink)}
-.canvas{position:relative;width:1080px;height:1920px;overflow:hidden;background:var(--bg)}
-.kicker{position:absolute;left:64px;top:88px;font:700 13px/1.3 var(--font-body);
-letter-spacing:.16em;text-transform:uppercase;color:var(--sub)}
-h1{position:absolute;left:64px;top:118px;font-family:var(--font-display);
-font-weight:700;font-size:46px;line-height:1.08;width:952px}
-.hero{position:absolute;left:64px;top:230px;width:952px;font:600 16px/1.5 var(--font-body);color:var(--sub)}
-.hero b{color:var(--accent);font-weight:800}
-.foot{position:absolute;left:64px;top:1810px;width:952px;font:400 13px/1.5 var(--font-body);color:var(--sub)}
-.fade{opacity:0;animation:fadein .45s ease-out forwards}
-@keyframes fadein{to{opacity:1}}
-.chip{display:inline-block;padding:3px 10px;border-radius:14px;font:700 12px var(--font-body);background:var(--accent);color:#fff}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:#E8EDEF; --ground:#CFD8DB; --ground-2:#B8C2C6;
+  --ink:#22333B; --ink-muted:#5D6E75; --de-emphasis:#AEB9BD;
+  --chart-1:#D9503F; --chart-2:#009B7D; --chart-4:#B57300;
+  --font-display:'Fredoka',sans-serif; --font-body:'Nunito Sans',sans-serif;
+}
+html, body { background: var(--bg); }
+body { width: 1920px; font-family: var(--font-body); color: var(--ink); }
+.canvas { position: relative; width: 1920px; height: 1080px; overflow: hidden;
+  background: radial-gradient(ellipse 1600px 800px at 40% 80%, #F2F6F7 0%, var(--bg) 70%); }
+.title-block { position: absolute; left: var(--space-5, 64px); top: var(--space-4, 40px); width: 760px; z-index: 3; }
+.kicker { font: 800 14px/1.3 var(--font-body); text-transform: uppercase; letter-spacing: .06em; color: var(--ink-muted); }
+h1 { font-family: var(--font-display); font-weight: 700; font-size: 58px; line-height: 1.02; margin-top: 12px; }
+.standfirst { margin-top: 12px; font: 400 17px/1.5 var(--font-body); color: var(--ink-muted); width: 720px; }
+svg.city { position: absolute; left: 0; top: 0; }
+.deva { font: 400 26px 'Devanagari Sangam MN','Noto Sans Devanagari',sans-serif; fill: var(--ink); text-anchor: middle; }
+.bigval { font: 800 15px var(--font-body); fill: var(--ink); text-anchor: middle; }
+.hero-block { position: absolute; right: var(--space-5, 64px); top: 60px; width: 420px; text-align: left; z-index: 3;
+  border-top: 3px solid var(--ink); padding-top: 18px; }
+.hero-num { font-family: var(--font-display); font-weight: 700; font-size: 96px; line-height: 1; }
+.hero-label { font: 600 19px/1.4 var(--font-body); margin-top: 6px; }
+.tops { margin-top: 22px; }
+.tops .row { display: flex; align-items: baseline; gap: 12px; margin-bottom: 12px; font: 400 17px var(--font-body); }
+.tops .deva2 { font-family: 'Devanagari Sangam MN','Noto Sans Devanagari',sans-serif; font-size: 30px; width: 46px; }
+.tops .n { font-weight: 800; }
+.tops .bar { height: 10px; background: var(--chart-2); width: 170px; }
+.legend { position: absolute; left: var(--space-5, 64px); bottom: 120px; display: flex; gap: 24px; align-items: center;
+  font: 600 15px var(--font-body); z-index: 3; }
+.dot { display: inline-block; width: 15px; height: 15px; margin-right: 7px; vertical-align: -2px; border: 1.5px solid var(--ink); }
+footer { position: absolute; left: var(--space-5, 64px); right: var(--space-5, 64px); bottom: var(--space-3, 24px);
+  display: flex; justify-content: space-between; gap: 40px; z-index: 3;
+  border-top: 1.5px solid var(--ink); padding-top: 12px; font: 400 14px/1.5 var(--font-body); color: var(--ink-muted); }
+footer b { font-weight: 700; color: var(--ink); }
 </style>
 </head>
 <body>
 <div class="canvas">
-  <div class="kicker">Санскритский архив Гасунса · педагогика</div>
-  <h1>Деванагари-квартал</h1>
-  <div class="hero">Квартал букв: первая буква sanhw1 (431 596 заголовков). Дома — пропорциональны частоте.</div><div class="fade" style="position:absolute;left:48px;top:330px;width:156px;height:220px;background:var(--card);border-radius:12px;padding:10px;animation-delay:0.08s"><div style="font:700 28px var(--dev)">अ</div><div style="height:114px;margin-top:8px;background:var(--bar);border-radius:6px"></div><div style="font:700 13px var(--font-body);margin-top:6px">132 318</div></div><div class="fade" style="position:absolute;left:216px;top:330px;width:156px;height:220px;background:var(--card);border-radius:12px;padding:10px;animation-delay:0.1s"><div style="font:700 28px var(--dev)">स्</div><div style="height:51px;margin-top:8px;background:var(--bar);border-radius:6px"></div><div style="font:700 13px var(--font-body);margin-top:6px">40 013</div></div><div class="fade" style="position:absolute;left:384px;top:330px;width:156px;height:220px;background:var(--card);border-radius:12px;padding:10px;animation-delay:0.12s"><div style="font:700 28px var(--dev)">प्</div><div style="height:48px;margin-top:8px;background:var(--bar);border-radius:6px"></div><div style="font:700 13px var(--font-body);margin-top:6px">35 048</div></div><div class="fade" style="position:absolute;left:552px;top:330px;width:156px;height:220px;background:var(--card);border-radius:12px;padding:10px;animation-delay:0.14s"><div style="font:700 28px var(--dev)">व्</div><div style="height:45px;margin-top:8px;background:var(--bar);border-radius:6px"></div><div style="font:700 13px var(--font-body);margin-top:6px">30 503</div></div><div class="fade" style="position:absolute;left:720px;top:330px;width:156px;height:220px;background:var(--card);border-radius:12px;padding:10px;animation-delay:0.16s"><div style="font:700 28px var(--dev)">क्</div><div style="height:41px;margin-top:8px;background:var(--bar);border-radius:6px"></div><div style="font:700 13px var(--font-body);margin-top:6px">24 785</div></div><div class="fade" style="position:absolute;left:888px;top:330px;width:156px;height:220px;background:var(--card);border-radius:12px;padding:10px;animation-delay:0.18s"><div style="font:700 28px var(--dev)">म्</div><div style="height:36px;margin-top:8px;background:var(--bar);border-radius:6px"></div><div style="font:700 13px var(--font-body);margin-top:6px">17 781</div></div><div class="fade" style="position:absolute;left:48px;top:570px;width:156px;height:220px;background:var(--card);border-radius:12px;padding:10px;animation-delay:0.2s"><div style="font:700 28px var(--dev)">श्</div><div style="height:35px;margin-top:8px;background:var(--bar);border-radius:6px"></div><div style="font:700 13px var(--font-body);margin-top:6px">15 994</div></div><div class="fade" style="position:absolute;left:216px;top:570px;width:156px;height:220px;background:var(--card);border-radius:12px;padding:10px;animation-delay:0.22000000000000003s"><div style="font:700 28px var(--dev)">न्</div><div style="height:33px;margin-top:8px;background:var(--bar);border-radius:6px"></div><div style="font:700 13px var(--font-body);margin-top:6px">13 791</div></div><div class="fade" style="position:absolute;left:384px;top:570px;width:156px;height:220px;background:var(--card);border-radius:12px;padding:10px;animation-delay:0.24s"><div style="font:700 28px var(--dev)">द्</div><div style="height:33px;margin-top:8px;background:var(--bar);border-radius:6px"></div><div style="font:700 13px var(--font-body);margin-top:6px">13 328</div></div><div class="fade" style="position:absolute;left:552px;top:570px;width:156px;height:220px;background:var(--card);border-radius:12px;padding:10px;animation-delay:0.26s"><div style="font:700 28px var(--dev)">त्</div><div style="height:31px;margin-top:8px;background:var(--bar);border-radius:6px"></div><div style="font:700 13px var(--font-body);margin-top:6px">10 175</div></div><div class="fade" style="position:absolute;left:720px;top:570px;width:156px;height:220px;background:var(--card);border-radius:12px;padding:10px;animation-delay:0.28s"><div style="font:700 28px var(--dev)">उ</div><div style="height:31px;margin-top:8px;background:var(--bar);border-radius:6px"></div><div style="font:700 13px var(--font-body);margin-top:6px">9 999</div></div><div class="fade" style="position:absolute;left:888px;top:570px;width:156px;height:220px;background:var(--card);border-radius:12px;padding:10px;animation-delay:0.3s"><div style="font:700 28px var(--dev)">आ</div><div style="height:30px;margin-top:8px;background:var(--bar);border-radius:6px"></div><div style="font:700 13px var(--font-body);margin-top:6px">9 250</div></div><div class="fade" style="position:absolute;left:48px;top:810px;width:156px;height:220px;background:var(--card);border-radius:12px;padding:10px;animation-delay:0.32s"><div style="font:700 28px var(--dev)">ग्</div><div style="height:30px;margin-top:8px;background:var(--bar);border-radius:6px"></div><div style="font:700 13px var(--font-body);margin-top:6px">9 197</div></div><div class="fade" style="position:absolute;left:216px;top:810px;width:156px;height:220px;background:var(--card);border-radius:12px;padding:10px;animation-delay:0.34s"><div style="font:700 28px var(--dev)">र्</div><div style="height:30px;margin-top:8px;background:var(--bar);border-radius:6px"></div><div style="font:700 13px var(--font-body);margin-top:6px">8 583</div></div><div class="fade" style="position:absolute;left:384px;top:810px;width:156px;height:220px;background:var(--card);border-radius:12px;padding:10px;animation-delay:0.36000000000000004s"><div style="font:700 28px var(--dev)">भ्</div><div style="height:29px;margin-top:8px;background:var(--bar);border-radius:6px"></div><div style="font:700 13px var(--font-body);margin-top:6px">7 391</div></div><div class="fade" style="position:absolute;left:552px;top:810px;width:156px;height:220px;background:var(--card);border-radius:12px;padding:10px;animation-delay:0.38s"><div style="font:700 28px var(--dev)">च्</div><div style="height:29px;margin-top:8px;background:var(--bar);border-radius:6px"></div><div style="font:700 13px var(--font-body);margin-top:6px">6 822</div></div><div class="fade" style="position:absolute;left:720px;top:810px;width:156px;height:220px;background:var(--card);border-radius:12px;padding:10px;animation-delay:0.4s"><div style="font:700 28px var(--dev)">ब्</div><div style="height:28px;margin-top:8px;background:var(--bar);border-radius:6px"></div><div style="font:700 13px var(--font-body);margin-top:6px">6 515</div></div><div class="fade" style="position:absolute;left:888px;top:810px;width:156px;height:220px;background:var(--card);border-radius:12px;padding:10px;animation-delay:0.42000000000000004s"><div style="font:700 28px var(--dev)">ज्</div><div style="height:28px;margin-top:8px;background:var(--bar);border-radius:6px"></div><div style="font:700 13px var(--font-body);margin-top:6px">6 285</div></div><div class="fade" style="position:absolute;left:48px;top:1050px;width:156px;height:220px;background:var(--card);border-radius:12px;padding:10px;animation-delay:0.44s"><div style="font:700 28px var(--dev)">ह्</div><div style="height:28px;margin-top:8px;background:var(--bar);border-radius:6px"></div><div style="font:700 13px var(--font-body);margin-top:6px">5 748</div></div><div class="fade" style="position:absolute;left:216px;top:1050px;width:156px;height:220px;background:var(--card);border-radius:12px;padding:10px;animation-delay:0.46s"><div style="font:700 28px var(--dev)">य्</div><div style="height:27px;margin-top:8px;background:var(--bar);border-radius:6px"></div><div style="font:700 13px var(--font-body);margin-top:6px">4 718</div></div><div class="fade" style="position:absolute;left:384px;top:1050px;width:156px;height:220px;background:var(--card);border-radius:12px;padding:10px;animation-delay:0.48000000000000004s"><div style="font:700 28px var(--dev)">ल्</div><div style="height:27px;margin-top:8px;background:var(--bar);border-radius:6px"></div><div style="font:700 13px var(--font-body);margin-top:6px">4 391</div></div><div class="fade" style="position:absolute;left:552px;top:1050px;width:156px;height:220px;background:var(--card);border-radius:12px;padding:10px;animation-delay:0.5s"><div style="font:700 28px var(--dev)">ध्</div><div style="height:27px;margin-top:8px;background:var(--bar);border-radius:6px"></div><div style="font:700 13px var(--font-body);margin-top:6px">4 099</div></div><div class="fade" style="position:absolute;left:720px;top:1050px;width:156px;height:220px;background:var(--card);border-radius:12px;padding:10px;animation-delay:0.52s"><div style="font:700 28px var(--dev)">ख्</div><div style="height:25px;margin-top:8px;background:var(--bar);border-radius:6px"></div><div style="font:700 13px var(--font-body);margin-top:6px">1 943</div></div><div class="fade" style="position:absolute;left:888px;top:1050px;width:156px;height:220px;background:var(--card);border-radius:12px;padding:10px;animation-delay:0.54s"><div style="font:700 28px var(--dev)">इ</div><div style="height:25px;margin-top:8px;background:var(--bar);border-radius:6px"></div><div style="font:700 13px var(--font-body);margin-top:6px">1 862</div></div><div class="fade" style="position:absolute;left:48px;top:1290px;width:156px;height:220px;background:var(--card);border-radius:12px;padding:10px;animation-delay:0.5599999999999999s"><div style="font:700 28px var(--dev)">ए</div><div style="height:25px;margin-top:8px;background:var(--bar);border-radius:6px"></div><div style="font:700 13px var(--font-body);margin-top:6px">1 644</div></div><div class="fade" style="position:absolute;left:216px;top:1290px;width:156px;height:220px;background:var(--card);border-radius:12px;padding:10px;animation-delay:0.58s"><div style="font:700 28px var(--dev)">घ्</div><div style="height:25px;margin-top:8px;background:var(--bar);border-radius:6px"></div><div style="font:700 13px var(--font-body);margin-top:6px">1 259</div></div><div class="fade" style="position:absolute;left:384px;top:1290px;width:156px;height:220px;background:var(--card);border-radius:12px;padding:10px;animation-delay:0.6s"><div style="font:700 28px var(--dev)">ष्</div><div style="height:25px;margin-top:8px;background:var(--bar);border-radius:6px"></div><div style="font:700 13px var(--font-body);margin-top:6px">1 126</div></div><div class="fade" style="position:absolute;left:552px;top:1290px;width:156px;height:220px;background:var(--card);border-radius:12px;padding:10px;animation-delay:0.62s"><div style="font:700 28px var(--dev)">छ्</div><div style="height:25px;margin-top:8px;background:var(--bar);border-radius:6px"></div><div style="font:700 13px var(--font-body);margin-top:6px">1 033</div></div><div class="fade" style="position:absolute;left:720px;top:1290px;width:156px;height:220px;background:var(--card);border-radius:12px;padding:10px;animation-delay:0.64s"><div style="font:700 28px var(--dev)">ऋ</div><div style="height:25px;margin-top:8px;background:var(--bar);border-radius:6px"></div><div style="font:700 13px var(--font-body);margin-top:6px">927</div></div><div class="fade" style="position:absolute;left:888px;top:1290px;width:156px;height:220px;background:var(--card);border-radius:12px;padding:10px;animation-delay:0.6599999999999999s"><div style="font:700 28px var(--dev)">फ्</div><div style="height:25px;margin-top:8px;background:var(--bar);border-radius:6px"></div><div style="font:700 13px var(--font-body);margin-top:6px">917</div></div><div class="fade" style="position:absolute;left:48px;top:1530px;width:156px;height:220px;background:var(--card);border-radius:12px;padding:10px;animation-delay:0.6799999999999999s"><div style="font:700 28px var(--dev)">औ</div><div style="height:25px;margin-top:8px;background:var(--bar);border-radius:6px"></div><div style="font:700 13px var(--font-body);margin-top:6px">811</div></div><div class="fade" style="position:absolute;left:216px;top:1530px;width:156px;height:220px;background:var(--card);border-radius:12px;padding:10px;animation-delay:0.7s"><div style="font:700 28px var(--dev)">ऊ</div><div style="height:25px;margin-top:8px;background:var(--bar);border-radius:6px"></div><div style="font:700 13px var(--font-body);margin-top:6px">762</div></div><div class="fade" style="position:absolute;left:384px;top:1530px;width:156px;height:220px;background:var(--card);border-radius:12px;padding:10px;animation-delay:0.72s"><div style="font:700 28px var(--dev)">ई</div><div style="height:24px;margin-top:8px;background:var(--bar);border-radius:6px"></div><div style="font:700 13px var(--font-body);margin-top:6px">514</div></div>
-  <div class="foot">Посчитано 29.08.2026 · скрипт <span style='font-family:var(--mono)'>scripts/infographics50/probe.py → sanhw1.letters</span> · Dr. Mārcis Gasūns</div>
+  <div class="title-block">
+    <div class="kicker">САНСКРИТСКИЙ АРХИВ ГАСУНСА · CSL-ORIG · ПОСЧИТАНО 29.08.2026</div>
+    <h1>Квартал деванагари</h1>
+    <p class="standfirst">46 букв словарного алфавита как здания квартала: высота каждого дома — сколько статей всех 45 словарей Кёльна начинаются на эту букву. Передний ряд — согласные варги, задний продолжает алфавитный порядок.</p>
+  </div>
+  <div class="hero-block" data-hero>
+    <div class="hero-num">1 503 517</div>
+    <div class="hero-label">статей в 45 словарях — 46 домов квартала</div>
+    <div class="tops">
+      <div class="row"><span class="deva2">अ</span><span class="bar" style="width:170px;background:var(--chart-1)"></span><span class="n">180 749</span></div>
+      <div class="row"><span class="deva2">स</span><span class="bar" style="width:149px"></span><span class="n">158 446</span></div>
+      <div class="row"><span class="deva2">प</span><span class="bar" style="width:146px"></span><span class="n">154 967</span></div>
+      <div class="row"><span class="deva2">व</span><span class="bar" style="width:113px"></span><span class="n">125 595</span></div>
+    </div>
+  </div>
+  <svg class="city" width="1920" height="1080" viewBox="0 0 1920 1080">
+      <polygon points="330.0,422.0 1237.6,946.0 1104.2,1023.0 196.6,499.0" fill="#CFD8DB"/>
+      <polygon points="330.0,444.0 1237.6,968.0 1104.2,1045.0 196.6,521.0" fill="#B8C2C6"/>
+      <polygon points="366.4,293.0 330.0,314.0 330.0,574.0 366.4,553.0" fill="#D9503F" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="293.6,293.0 330.0,314.0 330.0,574.0 293.6,553.0" fill="#A93A2D" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="330.0,272.0 366.4,293.0 330.0,314.0 293.6,293.0" fill="#E58272" stroke="#22333B" stroke-width="1.2"/>
+      <text class="deva" x="291.0" y="583.5">अ</text>
+      <text class="bigval" x="330.0" y="279.0">180 749</text>
+      <polygon points="404.5,514.9 368.1,535.9 368.1,596.0 404.5,575.0" fill="#009B7D" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="331.7,514.9 368.1,535.9 368.1,596.0 331.7,575.0" fill="#007259" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="368.1,493.9 404.5,514.9 368.1,535.9 331.7,514.9" fill="#4DB49D" stroke="#22333B" stroke-width="1.2"/>
+      <text class="deva" x="329.1" y="605.5">आ</text>
+      <polygon points="442.6,579.0 406.2,600.0 406.2,618.0 442.6,597.0" fill="#009B7D" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="369.8,579.0 406.2,600.0 406.2,618.0 369.8,597.0" fill="#007259" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="406.2,558.0 442.6,579.0 406.2,600.0 369.8,579.0" fill="#4DB49D" stroke="#22333B" stroke-width="1.2"/>
+      <text class="deva" x="367.2" y="627.5">इ</text>
+      <polygon points="480.7,615.4 444.3,636.4 444.3,640.0 480.7,619.0" fill="#009B7D" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="407.9,615.4 444.3,636.4 444.3,640.0 407.9,619.0" fill="#007259" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="444.3,594.4 480.7,615.4 444.3,636.4 407.9,615.4" fill="#4DB49D" stroke="#22333B" stroke-width="1.2"/>
+      <text class="deva" x="405.3" y="649.5">ई</text>
+      <polygon points="518.8,575.6 482.4,596.6 482.4,662.0 518.8,641.0" fill="#009B7D" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="446.0,575.6 482.4,596.6 482.4,662.0 446.0,641.0" fill="#007259" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="482.4,554.6 518.8,575.6 482.4,596.6 446.0,575.6" fill="#4DB49D" stroke="#22333B" stroke-width="1.2"/>
+      <text class="deva" x="443.4" y="671.5">उ</text>
+      <polygon points="556.9,658.3 520.5,679.3 520.5,684.0 556.9,663.0" fill="#009B7D" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="484.1,658.3 520.5,679.3 520.5,684.0 484.1,663.0" fill="#007259" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="520.5,637.3 556.9,658.3 520.5,679.3 484.1,658.3" fill="#4DB49D" stroke="#22333B" stroke-width="1.2"/>
+      <text class="deva" x="481.6" y="693.5">ऊ</text>
+      <polygon points="595.0,673.4 558.6,694.4 558.6,706.0 595.0,685.0" fill="#009B7D" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="522.3,673.4 558.6,694.4 558.6,706.0 522.3,685.0" fill="#007259" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="558.6,652.4 595.0,673.4 558.6,694.4 522.3,673.4" fill="#4DB49D" stroke="#22333B" stroke-width="1.2"/>
+      <text class="deva" x="519.7" y="715.5">ऋ</text>
+      <polygon points="633.1,705.0 596.7,726.0 596.7,728.0 633.1,707.0" fill="#009B7D" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="560.4,705.0 596.7,726.0 596.7,728.0 560.4,707.0" fill="#007259" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="596.7,684.0 633.1,705.0 596.7,726.0 560.4,705.0" fill="#4DB49D" stroke="#22333B" stroke-width="1.2"/>
+      <text class="deva" x="557.8" y="737.5">ॠ</text>
+      <polygon points="671.2,727.0 634.8,748.0 634.8,750.0 671.2,729.0" fill="#009B7D" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="598.5,727.0 634.8,748.0 634.8,750.0 598.5,729.0" fill="#007259" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="634.8,706.0 671.2,727.0 634.8,748.0 598.5,727.0" fill="#4DB49D" stroke="#22333B" stroke-width="1.2"/>
+      <text class="deva" x="595.9" y="759.5">ऌ</text>
+      <polygon points="709.3,736.0 672.9,757.0 672.9,772.0 709.3,751.0" fill="#009B7D" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="636.6,736.0 672.9,757.0 672.9,772.0 636.6,751.0" fill="#007259" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="672.9,715.0 709.3,736.0 672.9,757.0 636.6,736.0" fill="#4DB49D" stroke="#22333B" stroke-width="1.2"/>
+      <text class="deva" x="634.0" y="781.5">ए</text>
+      <polygon points="747.4,770.0 711.0,791.0 711.0,794.0 747.4,773.0" fill="#009B7D" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="674.7,770.0 711.0,791.0 711.0,794.0 674.7,773.0" fill="#007259" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="711.0,749.0 747.4,770.0 711.0,791.0 674.7,770.0" fill="#4DB49D" stroke="#22333B" stroke-width="1.2"/>
+      <text class="deva" x="672.1" y="803.5">ऐ</text>
+      <polygon points="785.5,790.2 749.1,811.2 749.1,816.0 785.5,795.0" fill="#009B7D" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="712.8,790.2 749.1,811.2 749.1,816.0 712.8,795.0" fill="#007259" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="749.1,769.2 785.5,790.2 749.1,811.2 712.8,790.2" fill="#4DB49D" stroke="#22333B" stroke-width="1.2"/>
+      <text class="deva" x="710.2" y="825.5">ओ</text>
+      <polygon points="823.6,811.7 787.2,832.7 787.2,838.0 823.6,817.0" fill="#009B7D" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="750.9,811.7 787.2,832.7 787.2,838.0 750.9,817.0" fill="#007259" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="787.2,790.7 823.6,811.7 787.2,832.7 750.9,811.7" fill="#4DB49D" stroke="#22333B" stroke-width="1.2"/>
+      <text class="deva" x="748.3" y="847.5">औ</text>
+      <polygon points="861.7,680.2 825.4,701.2 825.4,860.0 861.7,839.0" fill="#B57300" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="789.0,680.2 825.4,701.2 825.4,860.0 789.0,839.0" fill="#8A5700" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="825.4,659.2 861.7,680.2 825.4,701.2 789.0,680.2" fill="#CC9440" stroke="#22333B" stroke-width="1.2"/>
+      <text class="deva" x="786.4" y="869.5">क</text>
+      <text class="bigval" x="825.4" y="666.2">110 393</text>
+      <polygon points="899.8,848.5 863.5,869.5 863.5,882.0 899.8,861.0" fill="#B57300" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="827.1,848.5 863.5,869.5 863.5,882.0 827.1,861.0" fill="#8A5700" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="863.5,827.5 899.8,848.5 863.5,869.5 827.1,848.5" fill="#CC9440" stroke="#22333B" stroke-width="1.2"/>
+      <text class="deva" x="824.5" y="891.5">ख</text>
+      <polygon points="937.9,822.3 901.6,843.3 901.6,904.0 937.9,883.0" fill="#B57300" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="865.2,822.3 901.6,843.3 901.6,904.0 865.2,883.0" fill="#8A5700" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="901.6,801.3 937.9,822.3 901.6,843.3 865.2,822.3" fill="#CC9440" stroke="#22333B" stroke-width="1.2"/>
+      <text class="deva" x="862.6" y="913.5">ग</text>
+      <polygon points="976.0,896.5 939.7,917.5 939.7,926.0 976.0,905.0" fill="#B57300" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="903.3,896.5 939.7,917.5 939.7,926.0 903.3,905.0" fill="#8A5700" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="939.7,875.5 976.0,896.5 939.7,917.5 903.3,896.5" fill="#CC9440" stroke="#22333B" stroke-width="1.2"/>
+      <text class="deva" x="900.7" y="935.5">घ</text>
+      <polygon points="1014.1,925.0 977.8,946.0 977.8,948.0 1014.1,927.0" fill="#B57300" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="941.4,925.0 977.8,946.0 977.8,948.0 941.4,927.0" fill="#8A5700" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="977.8,904.0 1014.1,925.0 977.8,946.0 941.4,925.0" fill="#CC9440" stroke="#22333B" stroke-width="1.2"/>
+      <text class="deva" x="938.8" y="957.5">ङ</text>
+      <polygon points="1052.2,897.0 1015.9,918.0 1015.9,970.0 1052.2,949.0" fill="#B57300" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="979.5,897.0 1015.9,918.0 1015.9,970.0 979.5,949.0" fill="#8A5700" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="1015.9,876.0 1052.2,897.0 1015.9,918.0 979.5,897.0" fill="#CC9440" stroke="#22333B" stroke-width="1.2"/>
+      <text class="deva" x="976.9" y="979.5">च</text>
+      <polygon points="1090.3,964.6 1054.0,985.6 1054.0,992.0 1090.3,971.0" fill="#B57300" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="1017.6,964.6 1054.0,985.6 1054.0,992.0 1017.6,971.0" fill="#8A5700" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="1054.0,943.6 1090.3,964.6 1054.0,985.6 1017.6,964.6" fill="#CC9440" stroke="#22333B" stroke-width="1.2"/>
+      <text class="deva" x="1015.0" y="1001.5">छ</text>
+      <polygon points="1128.5,952.6 1092.1,973.6 1092.1,1014.0 1128.5,993.0" fill="#B57300" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="1055.7,952.6 1092.1,973.6 1092.1,1014.0 1055.7,993.0" fill="#8A5700" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="1092.1,931.6 1128.5,952.6 1092.1,973.6 1055.7,952.6" fill="#CC9440" stroke="#22333B" stroke-width="1.2"/>
+      <text class="deva" x="1053.1" y="1023.5">ज</text>
+      <polygon points="1166.6,1012.9 1130.2,1033.9 1130.2,1036.0 1166.6,1015.0" fill="#B57300" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="1093.8,1012.9 1130.2,1033.9 1130.2,1036.0 1093.8,1015.0" fill="#8A5700" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="1130.2,991.9 1166.6,1012.9 1130.2,1033.9 1093.8,1012.9" fill="#CC9440" stroke="#22333B" stroke-width="1.2"/>
+      <text class="deva" x="1091.2" y="1045.5">झ</text>
+      <polygon points="1204.7,1035.0 1168.3,1056.0 1168.3,1058.0 1204.7,1037.0" fill="#B57300" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="1131.9,1035.0 1168.3,1056.0 1168.3,1058.0 1131.9,1037.0" fill="#8A5700" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="1168.3,1014.0 1204.7,1035.0 1168.3,1056.0 1131.9,1035.0" fill="#CC9440" stroke="#22333B" stroke-width="1.2"/>
+      <text class="deva" x="1129.3" y="1067.5">ञ</text>
+      <polygon points="366.4,469.6 330.0,490.6 330.0,494.0 366.4,473.0" fill="#B57300" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="293.6,469.6 330.0,490.6 330.0,494.0 293.6,473.0" fill="#8A5700" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="330.0,448.6 366.4,469.6 330.0,490.6 293.6,469.6" fill="#CC9440" stroke="#22333B" stroke-width="1.2"/>
+      <text class="deva" x="291.0" y="503.5">ट</text>
+      <polygon points="404.5,493.0 368.1,514.0 368.1,516.0 404.5,495.0" fill="#B57300" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="331.7,493.0 368.1,514.0 368.1,516.0 331.7,495.0" fill="#8A5700" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="368.1,472.0 404.5,493.0 368.1,514.0 331.7,493.0" fill="#CC9440" stroke="#22333B" stroke-width="1.2"/>
+      <text class="deva" x="329.1" y="525.5">ठ</text>
+      <polygon points="442.6,514.8 406.2,535.8 406.2,538.0 442.6,517.0" fill="#B57300" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="369.8,514.8 406.2,535.8 406.2,538.0 369.8,517.0" fill="#8A5700" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="406.2,493.8 442.6,514.8 406.2,535.8 369.8,514.8" fill="#CC9440" stroke="#22333B" stroke-width="1.2"/>
+      <text class="deva" x="367.2" y="547.5">ड</text>
+      <polygon points="480.7,537.0 444.3,558.0 444.3,560.0 480.7,539.0" fill="#B57300" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="407.9,537.0 444.3,558.0 444.3,560.0 407.9,539.0" fill="#8A5700" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="444.3,516.0 480.7,537.0 444.3,558.0 407.9,537.0" fill="#CC9440" stroke="#22333B" stroke-width="1.2"/>
+      <text class="deva" x="405.3" y="569.5">ढ</text>
+      <polygon points="518.8,559.0 482.4,580.0 482.4,582.0 518.8,561.0" fill="#B57300" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="446.0,559.0 482.4,580.0 482.4,582.0 446.0,561.0" fill="#8A5700" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="482.4,538.0 518.8,559.0 482.4,580.0 446.0,559.0" fill="#CC9440" stroke="#22333B" stroke-width="1.2"/>
+      <text class="deva" x="443.4" y="591.5">ण</text>
+      <polygon points="556.9,515.1 520.5,536.1 520.5,604.0 556.9,583.0" fill="#B57300" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="484.1,515.1 520.5,536.1 520.5,604.0 484.1,583.0" fill="#8A5700" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="520.5,494.1 556.9,515.1 520.5,536.1 484.1,515.1" fill="#CC9440" stroke="#22333B" stroke-width="1.2"/>
+      <text class="deva" x="481.6" y="613.5">त</text>
+      <polygon points="595.0,603.0 558.6,624.0 558.6,626.0 595.0,605.0" fill="#B57300" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="522.3,603.0 558.6,624.0 558.6,626.0 522.3,605.0" fill="#8A5700" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="558.6,582.0 595.0,603.0 558.6,624.0 522.3,603.0" fill="#CC9440" stroke="#22333B" stroke-width="1.2"/>
+      <text class="deva" x="519.7" y="635.5">थ</text>
+      <polygon points="633.1,535.2 596.7,556.2 596.7,648.0 633.1,627.0" fill="#B57300" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="560.4,535.2 596.7,556.2 596.7,648.0 560.4,627.0" fill="#8A5700" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="596.7,514.2 633.1,535.2 596.7,556.2 560.4,535.2" fill="#CC9440" stroke="#22333B" stroke-width="1.2"/>
+      <text class="deva" x="557.8" y="657.5">द</text>
+      <text class="bigval" x="596.7" y="521.2">63 812</text>
+      <polygon points="671.2,622.5 634.8,643.5 634.8,670.0 671.2,649.0" fill="#B57300" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="598.5,622.5 634.8,643.5 634.8,670.0 598.5,649.0" fill="#8A5700" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="634.8,601.5 671.2,622.5 634.8,643.5 598.5,622.5" fill="#CC9440" stroke="#22333B" stroke-width="1.2"/>
+      <text class="deva" x="595.9" y="679.5">ध</text>
+      <polygon points="709.3,583.5 672.9,604.5 672.9,692.0 709.3,671.0" fill="#B57300" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="636.6,583.5 672.9,604.5 672.9,692.0 636.6,671.0" fill="#8A5700" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="672.9,562.5 709.3,583.5 672.9,604.5 636.6,583.5" fill="#CC9440" stroke="#22333B" stroke-width="1.2"/>
+      <text class="deva" x="634.0" y="701.5">न</text>
+      <text class="bigval" x="672.9" y="569.5">60 805</text>
+      <polygon points="747.4,470.1 711.0,491.1 711.0,714.0 747.4,693.0" fill="#B57300" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="674.7,470.1 711.0,491.1 711.0,714.0 674.7,693.0" fill="#8A5700" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="711.0,449.1 747.4,470.1 711.0,491.1 674.7,470.1" fill="#CC9440" stroke="#22333B" stroke-width="1.2"/>
+      <text class="deva" x="672.1" y="723.5">प</text>
+      <text class="bigval" x="711.0" y="456.1">154 967</text>
+      <polygon points="785.5,709.5 749.1,730.5 749.1,736.0 785.5,715.0" fill="#B57300" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="712.8,709.5 749.1,730.5 749.1,736.0 712.8,715.0" fill="#8A5700" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="749.1,688.5 785.5,709.5 749.1,730.5 712.8,709.5" fill="#CC9440" stroke="#22333B" stroke-width="1.2"/>
+      <text class="deva" x="710.2" y="745.5">फ</text>
+      <polygon points="823.6,694.9 787.2,715.9 787.2,758.0 823.6,737.0" fill="#B57300" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="750.9,694.9 787.2,715.9 787.2,758.0 750.9,737.0" fill="#8A5700" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="787.2,673.9 823.6,694.9 787.2,715.9 750.9,694.9" fill="#CC9440" stroke="#22333B" stroke-width="1.2"/>
+      <text class="deva" x="748.3" y="767.5">ब</text>
+      <polygon points="861.7,712.6 825.4,733.6 825.4,780.0 861.7,759.0" fill="#B57300" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="789.0,712.6 825.4,733.6 825.4,780.0 789.0,759.0" fill="#8A5700" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="825.4,691.6 861.7,712.6 825.4,733.6 789.0,712.6" fill="#CC9440" stroke="#22333B" stroke-width="1.2"/>
+      <text class="deva" x="786.4" y="789.5">भ</text>
+      <polygon points="899.8,667.5 863.5,688.5 863.5,802.0 899.8,781.0" fill="#B57300" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="827.1,667.5 863.5,688.5 863.5,802.0 827.1,781.0" fill="#8A5700" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="863.5,646.5 899.8,667.5 863.5,688.5 827.1,667.5" fill="#CC9440" stroke="#22333B" stroke-width="1.2"/>
+      <text class="deva" x="824.5" y="811.5">म</text>
+      <text class="bigval" x="863.5" y="653.5">78 895</text>
+      <polygon points="937.9,774.2 901.6,795.2 901.6,824.0 937.9,803.0" fill="#B57300" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="865.2,774.2 901.6,795.2 901.6,824.0 865.2,803.0" fill="#8A5700" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="901.6,753.2 937.9,774.2 901.6,795.2 865.2,774.2" fill="#CC9440" stroke="#22333B" stroke-width="1.2"/>
+      <text class="deva" x="862.6" y="833.5">य</text>
+      <polygon points="976.0,770.4 939.7,791.4 939.7,846.0 976.0,825.0" fill="#B57300" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="903.3,770.4 939.7,791.4 939.7,846.0 903.3,825.0" fill="#8A5700" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="939.7,749.4 976.0,770.4 939.7,791.4 903.3,770.4" fill="#CC9440" stroke="#22333B" stroke-width="1.2"/>
+      <text class="deva" x="900.7" y="855.5">र</text>
+      <polygon points="1014.1,816.4 977.8,837.4 977.8,868.0 1014.1,847.0" fill="#B57300" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="941.4,816.4 977.8,837.4 977.8,868.0 941.4,847.0" fill="#8A5700" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="977.8,795.4 1014.1,816.4 977.8,837.4 941.4,816.4" fill="#CC9440" stroke="#22333B" stroke-width="1.2"/>
+      <text class="deva" x="938.8" y="877.5">ल</text>
+      <polygon points="1052.2,688.3 1015.9,709.3 1015.9,890.0 1052.2,869.0" fill="#B57300" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="979.5,688.3 1015.9,709.3 1015.9,890.0 979.5,869.0" fill="#8A5700" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="1015.9,667.3 1052.2,688.3 1015.9,709.3 979.5,688.3" fill="#CC9440" stroke="#22333B" stroke-width="1.2"/>
+      <text class="deva" x="976.9" y="899.5">व</text>
+      <text class="bigval" x="1015.9" y="674.3">125 595</text>
+      <polygon points="1090.3,798.4 1054.0,819.4 1054.0,912.0 1090.3,891.0" fill="#B57300" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="1017.6,798.4 1054.0,819.4 1054.0,912.0 1017.6,891.0" fill="#8A5700" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="1054.0,777.4 1090.3,798.4 1054.0,819.4 1017.6,798.4" fill="#CC9440" stroke="#22333B" stroke-width="1.2"/>
+      <text class="deva" x="1015.0" y="921.5">श</text>
+      <text class="bigval" x="1054.0" y="784.4">64 394</text>
+      <polygon points="1128.5,907.4 1092.1,928.4 1092.1,934.0 1128.5,913.0" fill="#B57300" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="1055.7,907.4 1092.1,928.4 1092.1,934.0 1055.7,913.0" fill="#8A5700" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="1092.1,886.4 1128.5,907.4 1092.1,928.4 1055.7,907.4" fill="#CC9440" stroke="#22333B" stroke-width="1.2"/>
+      <text class="deva" x="1053.1" y="943.5">ष</text>
+      <polygon points="1166.6,707.1 1130.2,728.1 1130.2,956.0 1166.6,935.0" fill="#B57300" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="1093.8,707.1 1130.2,728.1 1130.2,956.0 1093.8,935.0" fill="#8A5700" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="1130.2,686.1 1166.6,707.1 1130.2,728.1 1093.8,707.1" fill="#CC9440" stroke="#22333B" stroke-width="1.2"/>
+      <text class="deva" x="1091.2" y="965.5">स</text>
+      <text class="bigval" x="1130.2" y="693.1">158 446</text>
+      <polygon points="1204.7,919.1 1168.3,940.1 1168.3,978.0 1204.7,957.0" fill="#B57300" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="1131.9,919.1 1168.3,940.1 1168.3,978.0 1131.9,957.0" fill="#8A5700" stroke="#22333B" stroke-width="1.2"/>
+      <polygon points="1168.3,898.1 1204.7,919.1 1168.3,940.1 1131.9,919.1" fill="#CC9440" stroke="#22333B" stroke-width="1.2"/>
+      <text class="deva" x="1129.3" y="987.5">ह</text>
+  </svg>
+  <div class="legend">
+    <span><span class="dot" style="background:#4DB49D"></span>гласные</span>
+    <span><span class="dot" style="background:#CC9440"></span>согласные</span>
+    <span><span class="dot" style="background:#E58272"></span>рекордсмен a</span>
+  </div>
+  <footer>
+    <div>Данные: <b>csl-orig/v02</b> — первые буквы ключей &lt;k1&gt; всех 45 словарей, 1 503 517 статей; высота 260px = 180 749 статей</div>
+    <div>скрипт: <b>scripts/infographics50/deva_quarter.py</b> · Посчитано 29.08.2026 · <b>Dr. Mārcis Gasūns</b></div>
+  </footer>
 </div>
 </body>
 </html>

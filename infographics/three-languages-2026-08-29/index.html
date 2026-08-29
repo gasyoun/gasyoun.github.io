@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Три языка науки — и ноль по-русски</title>
+<!-- Composition: Big Object — a shelf of 45 book spines, one per Cologne dictionary, colored by
+     gloss language; hero «0 русских» at right. Retro-print, wide 1920x1080. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Karla:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:#F5E9D4; --surface:#FBF3E2; --surface-2:#E7D6B6;
+  --ink:#33241A; --ink-muted:#6E5B49;
+  --chart-1:#C8501E; --chart-2:#157F63; --chart-3:#AD7A00; --chart-4:#8E4468;
+  --de-emphasis:#C9B593;
+  --font-display:'Alfa Slab One',serif; --font-body:'Karla',sans-serif;
+}
+html, body { background: var(--bg); }
+body { width: 1920px; font-family: var(--font-body); color: var(--ink); }
+.canvas { position: relative; width: 1920px; height: 1080px; overflow: hidden;
+  background: radial-gradient(ellipse 1400px 700px at 30% 25%, #FBF3E2 0%, var(--bg) 72%); }
+.grain { position: absolute; inset: 0; pointer-events: none; opacity: .36; }
+.title-block { position: absolute; left: 64px; top: 40px; width: 900px; z-index: 3; }
+.kicker { font: 700 15px/1.3 var(--font-body); text-transform: uppercase; letter-spacing: .06em; color: var(--ink-muted); }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: 58px; line-height: 1.05; margin-top: 12px;
+  text-shadow: 4px 3px 0 rgba(200,80,30,.35); }
+.standfirst { margin-top: 12px; font: 400 17px/1.5 var(--font-body); color: var(--ink-muted); width: 820px; }
+svg.shelf { position: absolute; left: 0; top: 0; }
+.spine { font: 700 12.5px var(--font-body); fill: var(--ink); text-anchor: middle; }
+.hero-block { position: absolute; right: 64px; top: 90px; width: 480px; text-align: left; z-index: 3;
+  border-top: 2px solid var(--ink); padding-top: 20px; }
+.hero-num { font-family: var(--font-display); font-size: 150px; line-height: 1; color: var(--ink);
+  text-shadow: 4px 3px 0 var(--chart-1); }
+.hero-label { font: 700 21px/1.35 var(--font-body); margin-top: 4px; }
+.hero-sub { margin-top: 10px; font: italic 400 14.5px/1.5 var(--font-body); color: var(--ink-muted); }
+.legend { position: absolute; right: 64px; top: 560px; width: 560px; z-index: 3; }
+.lg { border-top: 2px solid var(--ink); padding: 13px 0; font: 400 16px/1.45 var(--font-body); display: flex; align-items: center; gap: 12px; }
+.lg:last-child { border-bottom: 2px solid var(--ink); }
+.sw { width: 24px; height: 15px; border: 2px solid var(--ink); flex: none; }
+.lgn { font-weight: 700; }
+footer { position: absolute; left: 64px; right: 64px; bottom: 24px; z-index: 3;
+  display: flex; justify-content: space-between; gap: 40px;
+  border-top: 1.5px solid var(--ink); padding-top: 12px; font: 400 14px/1.5 var(--font-body); color: var(--ink-muted); }
+footer b { font-weight: 700; color: var(--ink); }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <svg class="grain" width="1920" height="1080"><filter id="g"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2"/><feColorMatrix values="0 0 0 0 0.2 0 0 0 0 0.14 0 0 0 0 0.1 0 0 0 0.5 0"/></filter><rect width="1920" height="1080" filter="url(#g)"/></svg>
+  <div class="title-block">
+    <div class="kicker">САНСКРИТСКИЙ АРХИВ ГАСУНСА · CSL-ORIG · ПОСЧИТАНО 29.08.2026</div>
+    <h1>Три языка науки: на чём говорят словари</h1>
+    <p class="standfirst">45 словарей Кёльна — на одной полке, каждый корешок окрашен по языку глосс: выборка глосс каждого словаря проверена на кириллицу, французские акценты, немецкие и английские служебные слова.</p>
+  </div>
+  <svg class="shelf" width="1920" height="1080" viewBox="0 0 1920 1080">
+      <rect x="118" y="560" width="32" height="104" fill="#C9B593" stroke="#33241A" stroke-width="1.6"/>
+      <text class="spine" x="140.0" y="652" transform="rotate(-90 140.0 652)">abch</text>
+      <rect x="164" y="560" width="32" height="104" fill="#AD7A00" stroke="#33241A" stroke-width="1.6"/>
+      <text class="spine" x="186.0" y="652" transform="rotate(-90 186.0 652)">acc</text>
+      <rect x="210" y="560" width="32" height="104" fill="#C9B593" stroke="#33241A" stroke-width="1.6"/>
+      <text class="spine" x="232.0" y="652" transform="rotate(-90 232.0 652)">acph</text>
+      <rect x="256" y="560" width="32" height="104" fill="#C9B593" stroke="#33241A" stroke-width="1.6"/>
+      <text class="spine" x="278.0" y="652" transform="rotate(-90 278.0 652)">acsj</text>
+      <rect x="302" y="560" width="32" height="104" fill="#C9B593" stroke="#33241A" stroke-width="1.6"/>
+      <text class="spine" x="324.0" y="652" transform="rotate(-90 324.0 652)">ae</text>
+      <rect x="348" y="560" width="32" height="104" fill="#AD7A00" stroke="#33241A" stroke-width="1.6"/>
+      <text class="spine" x="370.0" y="652" transform="rotate(-90 370.0 652)">ap</text>
+      <rect x="394" y="560" width="32" height="104" fill="#AD7A00" stroke="#33241A" stroke-width="1.6"/>
+      <text class="spine" x="416.0" y="652" transform="rotate(-90 416.0 652)">ap90</text>
+      <rect x="440" y="560" width="32" height="104" fill="#C9B593" stroke="#33241A" stroke-width="1.6"/>
+      <text class="spine" x="462.0" y="652" transform="rotate(-90 462.0 652)">armh</text>
+      <rect x="486" y="560" width="32" height="104" fill="#AD7A00" stroke="#33241A" stroke-width="1.6"/>
+      <text class="spine" x="508.0" y="652" transform="rotate(-90 508.0 652)">ben</text>
+      <rect x="532" y="560" width="32" height="104" fill="#C9B593" stroke="#33241A" stroke-width="1.6"/>
+      <text class="spine" x="554.0" y="652" transform="rotate(-90 554.0 652)">bhs</text>
+      <rect x="578" y="560" width="32" height="104" fill="#C9B593" stroke="#33241A" stroke-width="1.6"/>
+      <text class="spine" x="600.0" y="652" transform="rotate(-90 600.0 652)">bop</text>
+      <rect x="624" y="560" width="32" height="104" fill="#C9B593" stroke="#33241A" stroke-width="1.6"/>
+      <text class="spine" x="646.0" y="652" transform="rotate(-90 646.0 652)">bor</text>
+      <rect x="670" y="560" width="32" height="104" fill="#8E4468" stroke="#33241A" stroke-width="1.6"/>
+      <text class="spine" x="692.0" y="652" transform="rotate(-90 692.0 652)">bur</text>
+      <rect x="716" y="560" width="32" height="104" fill="#AD7A00" stroke="#33241A" stroke-width="1.6"/>
+      <text class="spine" x="738.0" y="652" transform="rotate(-90 738.0 652)">cae</text>
+      <rect x="762" y="560" width="32" height="104" fill="#C9B593" stroke="#33241A" stroke-width="1.6"/>
+      <text class="spine" x="784.0" y="652" transform="rotate(-90 784.0 652)">ccs</text>
+      <rect x="118" y="432" width="32" height="104" fill="#C9B593" stroke="#33241A" stroke-width="1.6"/>
+      <text class="spine" x="140.0" y="524" transform="rotate(-90 140.0 524)">fri</text>
+      <rect x="164" y="432" width="32" height="104" fill="#157F63" stroke="#33241A" stroke-width="1.6"/>
+      <text class="spine" x="186.0" y="524" transform="rotate(-90 186.0 524)">gra</text>
+      <rect x="210" y="432" width="32" height="104" fill="#AD7A00" stroke="#33241A" stroke-width="1.6"/>
+      <text class="spine" x="232.0" y="524" transform="rotate(-90 232.0 524)">gst</text>
+      <rect x="256" y="432" width="32" height="104" fill="#AD7A00" stroke="#33241A" stroke-width="1.6"/>
+      <text class="spine" x="278.0" y="524" transform="rotate(-90 278.0 524)">ieg</text>
+      <rect x="302" y="432" width="32" height="104" fill="#AD7A00" stroke="#33241A" stroke-width="1.6"/>
+      <text class="spine" x="324.0" y="524" transform="rotate(-90 324.0 524)">inm</text>
+      <rect x="348" y="432" width="32" height="104" fill="#C9B593" stroke="#33241A" stroke-width="1.6"/>
+      <text class="spine" x="370.0" y="524" transform="rotate(-90 370.0 524)">krm</text>
+      <rect x="394" y="432" width="32" height="104" fill="#AD7A00" stroke="#33241A" stroke-width="1.6"/>
+      <text class="spine" x="416.0" y="524" transform="rotate(-90 416.0 524)">lan</text>
+      <rect x="440" y="432" width="32" height="104" fill="#AD7A00" stroke="#33241A" stroke-width="1.6"/>
+      <text class="spine" x="462.0" y="524" transform="rotate(-90 462.0 524)">lrv</text>
+      <rect x="486" y="432" width="32" height="104" fill="#AD7A00" stroke="#33241A" stroke-width="1.6"/>
+      <text class="spine" x="508.0" y="524" transform="rotate(-90 508.0 524)">mci</text>
+      <rect x="532" y="432" width="32" height="104" fill="#AD7A00" stroke="#33241A" stroke-width="1.6"/>
+      <text class="spine" x="554.0" y="524" transform="rotate(-90 554.0 524)">md</text>
+      <rect x="578" y="432" width="32" height="104" fill="#AD7A00" stroke="#33241A" stroke-width="1.6"/>
+      <text class="spine" x="600.0" y="524" transform="rotate(-90 600.0 524)">mw</text>
+      <rect x="624" y="432" width="32" height="104" fill="#AD7A00" stroke="#33241A" stroke-width="1.6"/>
+      <text class="spine" x="646.0" y="524" transform="rotate(-90 646.0 524)">mw72</text>
+      <rect x="670" y="432" width="32" height="104" fill="#C9B593" stroke="#33241A" stroke-width="1.6"/>
+      <text class="spine" x="692.0" y="524" transform="rotate(-90 692.0 524)">mwe</text>
+      <rect x="716" y="432" width="32" height="104" fill="#C9B593" stroke="#33241A" stroke-width="1.6"/>
+      <text class="spine" x="738.0" y="524" transform="rotate(-90 738.0 524)">nmmb</text>
+      <rect x="762" y="432" width="32" height="104" fill="#C9B593" stroke="#33241A" stroke-width="1.6"/>
+      <text class="spine" x="784.0" y="524" transform="rotate(-90 784.0 524)">nybj</text>
+      <rect x="118" y="304" width="32" height="104" fill="#AD7A00" stroke="#33241A" stroke-width="1.6"/>
+      <text class="spine" x="140.0" y="396" transform="rotate(-90 140.0 396)">pe</text>
+      <rect x="164" y="304" width="32" height="104" fill="#AD7A00" stroke="#33241A" stroke-width="1.6"/>
+      <text class="spine" x="186.0" y="396" transform="rotate(-90 186.0 396)">pgn</text>
+      <rect x="210" y="304" width="32" height="104" fill="#AD7A00" stroke="#33241A" stroke-width="1.6"/>
+      <text class="spine" x="232.0" y="396" transform="rotate(-90 232.0 396)">pui</text>
+      <rect x="256" y="304" width="32" height="104" fill="#157F63" stroke="#33241A" stroke-width="1.6"/>
+      <text class="spine" x="278.0" y="396" transform="rotate(-90 278.0 396)">pw</text>
+      <rect x="302" y="304" width="32" height="104" fill="#157F63" stroke="#33241A" stroke-width="1.6"/>
+      <text class="spine" x="324.0" y="396" transform="rotate(-90 324.0 396)">pwg</text>
+      <rect x="348" y="304" width="32" height="104" fill="#157F63" stroke="#33241A" stroke-width="1.6"/>
+      <text class="spine" x="370.0" y="396" transform="rotate(-90 370.0 396)">pwkvn</text>
+      <rect x="394" y="304" width="32" height="104" fill="#157F63" stroke="#33241A" stroke-width="1.6"/>
+      <text class="spine" x="416.0" y="396" transform="rotate(-90 416.0 396)">sch</text>
+      <rect x="440" y="304" width="32" height="104" fill="#AD7A00" stroke="#33241A" stroke-width="1.6"/>
+      <text class="spine" x="462.0" y="396" transform="rotate(-90 462.0 396)">shs</text>
+      <rect x="486" y="304" width="32" height="104" fill="#C9B593" stroke="#33241A" stroke-width="1.6"/>
+      <text class="spine" x="508.0" y="396" transform="rotate(-90 508.0 396)">skd</text>
+      <rect x="532" y="304" width="32" height="104" fill="#C9B593" stroke="#33241A" stroke-width="1.6"/>
+      <text class="spine" x="554.0" y="396" transform="rotate(-90 554.0 396)">snp</text>
+      <rect x="578" y="304" width="32" height="104" fill="#8E4468" stroke="#33241A" stroke-width="1.6"/>
+      <text class="spine" x="600.0" y="396" transform="rotate(-90 600.0 396)">stc</text>
+      <rect x="624" y="304" width="32" height="104" fill="#C9B593" stroke="#33241A" stroke-width="1.6"/>
+      <text class="spine" x="646.0" y="396" transform="rotate(-90 646.0 396)">vcp</text>
+      <rect x="670" y="304" width="32" height="104" fill="#AD7A00" stroke="#33241A" stroke-width="1.6"/>
+      <text class="spine" x="692.0" y="396" transform="rotate(-90 692.0 396)">vei</text>
+      <rect x="716" y="304" width="32" height="104" fill="#AD7A00" stroke="#33241A" stroke-width="1.6"/>
+      <text class="spine" x="738.0" y="396" transform="rotate(-90 738.0 396)">wil</text>
+      <rect x="762" y="304" width="32" height="104" fill="#AD7A00" stroke="#33241A" stroke-width="1.6"/>
+      <text class="spine" x="784.0" y="396" transform="rotate(-90 784.0 396)">yat</text>
+      <rect x="96" y="666" width="700" height="8" fill="#33241A"/>
+      <rect x="96" y="538" width="700" height="8" fill="#33241A"/>
+      <rect x="96" y="410" width="700" height="8" fill="#33241A"/>
+  </svg>
+  <div class="hero-block" data-hero>
+    <div class="hero-num">0</div>
+    <div class="hero-label">русских словарей в каноне Кёльна</div>
+    <div class="hero-sub">Даже «Кочергина» из нашей коллекции хранится в csl-orig транслитом, без кириллицы. Русская ниша санскритской лексикографии свободна — её занимает наш проект.</div>
+  </div>
+  <div class="legend">
+    <div class="lg"><span class="sw" style="background:#AD7A00"></span><span class="lgn">английский</span> — 21 словарь — от MW до Apte</div>
+    <div class="lg"><span class="sw" style="background:#157F63"></span><span class="lgn">немецкий</span> — 5 словарей — PW, PWG, Грассман</div>
+    <div class="lg"><span class="sw" style="background:#8E4468"></span><span class="lgn">французский</span> — 2 словаря — Рену и Бурнуф</div>
+    <div class="lg"><span class="sw" style="background:#C9B593"></span><span class="lgn">санскрит и прочее</span> — 17 словарей без европейских глосс</div>
+    <div class="lg"><span class="sw" style="background:#C8501E"></span><span class="lgn">русский</span> — 0 — ниши нет и в каноне Кёльна</div>
+  </div>
+  <footer>
+    <div>Данные: <b>csl-orig/v02</b> — выборка глоссовых строк каждого словаря; Bucket SA — глоссы санскритом или транслитом без европейских маркеров</div>
+    <div>скрипт: <b>scripts/infographics50/three_languages.py</b> · Посчитано 29.08.2026 · <b>Dr. Mārcis Gasūns</b></div>
+  </footer>
+</div>
+</body>
+</html>

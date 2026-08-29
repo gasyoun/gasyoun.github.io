@@ -2,38 +2,142 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
-<title>Стратиграфия комментария</title>
-<!-- Data: CommentaryStrategies/data/leonov_own_notes.json _meta only. 29.08.2026 -->
+<title>Стратиграфия комментария: 2527 примечаний</title>
+<!-- Composition: Big Object — the Sundara-kanda volume sliced open, five annotation strata inside;
+     museum placard left, commentator detail column right. Cutaway, wide 1920x1080.
+     Stratum heights proportional to note counts (data.json); hatched bands mark the cut. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;600;700&family=Nunito:wght@400;600;700;800&family=Noto+Mono&family=Noto+Serif+Devanagari:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@500;600;700;800&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#F5EFE3;--ink:#29261F;--sub:rgba(41,38,31,.62);--accent:#C4552F;--card:#FFFFFF;
---neon:#6FE3C1;--bar:#009B7D;--blue:#4A55C8;--red:#D9503F;
---font-display:'Comfortaa',sans-serif;--font-body:'Nunito',sans-serif;
---dev:'Noto Serif Devanagari',serif;--mono:'Noto Mono',monospace}
-html,body{background:var(--bg)}
-body{width:1080px;font-family:var(--font-body);color:var(--ink)}
-.canvas{position:relative;width:1080px;height:1920px;overflow:hidden;background:var(--bg)}
-.kicker{position:absolute;left:64px;top:88px;font:700 13px/1.3 var(--font-body);
-letter-spacing:.16em;text-transform:uppercase;color:var(--sub)}
-h1{position:absolute;left:64px;top:118px;font-family:var(--font-display);
-font-weight:700;font-size:46px;line-height:1.08;width:952px}
-.hero{position:absolute;left:64px;top:230px;width:952px;font:600 16px/1.5 var(--font-body);color:var(--sub)}
-.hero b{color:var(--accent);font-weight:800}
-.foot{position:absolute;left:64px;top:1810px;width:952px;font:400 13px/1.5 var(--font-body);color:var(--sub)}
-.fade{opacity:0;animation:fadein .45s ease-out forwards}
-@keyframes fadein{to{opacity:1}}
-.chip{display:inline-block;padding:3px 10px;border-radius:14px;font:700 12px var(--font-body);background:var(--accent);color:#fff}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:#FAF6EC; --surface:#F1EADA; --surface-2:#E4DBC4;
+  --ink:#2B2A26; --ink-muted:#6E695D;
+  --chart-1:#B5432F; --chart-2:#3E6DA6; --chart-3:#B57F1B;
+  --chart-4:#0E8E76; --chart-5:#7B5397;
+}
+html, body { background: var(--bg); }
+body { width: 1920px; font-family: 'Source Sans 3',sans-serif; color: var(--ink); }
+.canvas { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: var(--bg); }
+.placard { position: absolute; left: var(--sp4, 40px); left: 64px; top: 56px; width: 380px;
+  background: var(--surface); border: 2px solid var(--ink); padding: 24px; }
+.kicker { font: 700 13.5px/1.4 'Source Sans 3'; text-transform: uppercase; letter-spacing: .07em; color: var(--ink-muted); }
+h1 { font-family: 'Bitter',serif; font-weight: 800; font-size: 46px; line-height: 1.06; margin-top: 12px; }
+.standfirst { margin-top: 12px; font: 400 15.5px/1.5 'Source Sans 3'; color: var(--ink-muted); }
+.hero-num { font-family: 'Bitter',serif; font-weight: 800; font-size: 150px; line-height: 1; margin-top: 16px; letter-spacing: -0.01em; }
+.hero-label { font: 600 16px/1.35 'Source Sans 3'; margin-top: 6px; }
+.status { margin-top: 16px; border-top: 1px solid var(--ink); padding-top: 12px; font: 400 14px/1.7 'Source Sans 3'; }
+.status b { font-weight: 700; }
+svg.plate { position: absolute; left: 0; top: 0; }
+.strat-cnt { font: 700 26px 'Bitter',serif; fill: #FAF6EC; }
+.strat-pct { font: 600 15px 'Source Sans 3'; fill: #FAF6EC; text-anchor: end; }
+.callout-txt { font: 700 14px 'Source Sans 3'; fill: #FAF6EC; text-anchor: middle; }
+.comlab { font: 700 15px 'Source Sans 3'; fill: var(--ink); }
+.comval { font: 600 14px 'Source Sans 3'; fill: var(--ink-muted); }
+.captions { position: absolute; right: 64px; top: 150px; width: 300px; }
+.cap { margin-bottom: 26px; }
+.cap .n { display: inline-flex; width: 24px; height: 24px; border-radius: 50%; align-items: center;
+  justify-content: center; font: 700 14px 'Source Sans 3'; color: #FAF6EC; margin-right: 8px; }
+.cap .t { font: 400 14.5px/1.45 'Source Sans 3'; color: var(--ink); }
+.cap .t b { font-weight: 700; }
+.lens { position: absolute; right: 64px; top: 646px; width: 430px; border-top: 2px solid var(--ink); padding-top: 10px; }
+.lens h2 { font: 700 17px 'Source Sans 3'; margin-bottom: 2px; }
+.lens .sub { font: 400 13px/1.4 'Source Sans 3'; color: var(--ink-muted); margin-bottom: 8px; }
+footer { position: absolute; left: 64px; right: 64px; bottom: 24px;
+  display: flex; justify-content: space-between; gap: 40px;
+  border-top: 1.5px solid var(--ink); padding-top: 12px; font: 400 14px/1.5 'Source Sans 3'; color: var(--ink-muted); }
+footer b { font-weight: 700; color: var(--ink); }
 </style>
 </head>
 <body>
 <div class="canvas">
-  <div class="kicker">Санскритский архив Гасунса · корпуса</div>
-  <h1>1058 примечаний, без текстов</h1>
-  <div class="hero">Стратиграфия аппарата Sundarakāṇḍa: <b>только поля _meta</b> файла leonov_own_notes.json. Тела примечаний на страницу не выгружались.</div><div class="fade" style="position:absolute;left:64px;top:340px;width:952px;background:var(--card);border-radius:16px;padding:26px 32px;animation-delay:0.12s"><div style="font:700 15px var(--font-body);color:var(--accent)">примечаний</div><div style="font:800 52px var(--font-display)">1 058</div><div style="color:var(--sub)">total_notes в _meta JSON</div></div><div class="fade" style="position:absolute;left:64px;top:610px;width:952px;background:var(--card);border-radius:16px;padding:26px 32px;animation-delay:0.2s"><div style="font:700 15px var(--font-body);color:var(--accent)">сарг</div><div style="font:800 52px var(--font-display)">68</div><div style="color:var(--sub)">покрытие кн. V</div></div><div class="fade" style="position:absolute;left:64px;top:880px;width:952px;background:var(--card);border-radius:16px;padding:26px 32px;animation-delay:0.28s"><div style="font:700 15px var(--font-body);color:var(--accent)">шлок с примечанием</div><div style="font:800 52px var(--font-display)">1 022</div><div style="color:var(--sub)">verses_with_note</div></div><div class="fade" style="position:absolute;left:64px;top:1150px;width:952px;background:var(--card);border-radius:16px;padding:26px 32px;animation-delay:0.36s"><div style="font:700 15px var(--font-body);color:var(--accent)">помечено Kostina</div><div style="font:800 52px var(--font-display)">442</div><div style="color:var(--sub)">поле editor=kostina</div></div><div class="fade" style="position:absolute;left:64px;top:1420px;width:952px;background:var(--card);border-radius:16px;padding:26px 32px;animation-delay:0.44s"><div style="font:700 15px var(--font-body);color:var(--accent)">без editor в JSON</div><div style="font:800 52px var(--font-display)">616</div><div style="color:var(--sub)">агрегат, без тел примечаний</div></div>
-  <div class="foot">Посчитано 29.08.2026 · скрипт <span style='font-family:var(--mono)'>scripts/infographics50/probe.py → sundara</span> · Dr. Mārcis Gasūns</div>
+  <div class="placard">
+    <div class="kicker">САНСКРИТСКИЙ АРХИВ ГАСУНСА · СУНДАРАКАНДА · ПОСЧИТАНО 29.08.2026</div>
+    <h1>Стратиграфия комментария</h1>
+    <p class="standfirst">Пятая книга Рамаяны в переводе Леонова готовится к печати с двухъярусным аппаратом. В разрезе тома — пять слоёв примечаний: от неприкосновенного яруса перевода до черновых глосс и диалога средневековых комментаторов.</p>
+    <div class="hero-num" data-hero>2 527</div>
+    <div class="hero-label">примечания в аппарате — 68 песней, 1 676 шлок</div>
+    <div class="status">
+      <b>1 058</b> — в печатном аппарате перевода (ярус 1)<br>
+      <b>147</b> — принято гейтами · <b>899</b> — на проверке<br>
+      <b>423</b> — ожидают гейта М.Г. · ни одно не печатается автоматически
+    </div>
+  </div>
+  <svg class="plate" width="1920" height="1080" viewBox="0 0 1920 1080">
+    <defs>
+      <pattern id="hatch" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)">
+        <rect width="6" height="6" fill="#FAF6EC"/><line x1="0" y1="0" x2="0" y2="6" stroke="#2B2A26" stroke-width="1" opacity=".55"/>
+      </pattern>
+    </defs>
+      <rect x="480" y="200.0" width="660" height="268.0" fill="#B5432F59" stroke="#2B2A26" stroke-width="1.2"/>
+      <rect x="480" y="462.0" width="660" height="6" fill="url(#hatch)"/>
+      <text class="strat-cnt" x="504.0" y="341.0">1 058</text>
+      <text class="strat-pct" x="1120.0" y="341.0">42%</text>
+      <rect x="480" y="468.0" width="660" height="206.2" fill="#B57F1B59" stroke="#2B2A26" stroke-width="1.2"/>
+      <rect x="480" y="668.1" width="660" height="6" fill="url(#hatch)"/>
+      <text class="strat-cnt" x="504.0" y="578.0">814</text>
+      <text class="strat-pct" x="1120.0" y="578.0">32%</text>
+      <rect x="480" y="674.1" width="660" height="71.2" fill="#7B539759" stroke="#2B2A26" stroke-width="1.2"/>
+      <rect x="480" y="739.3" width="660" height="6" fill="url(#hatch)"/>
+      <text class="strat-cnt" x="504.0" y="716.7">281</text>
+      <text class="strat-pct" x="1120.0" y="716.7">11%</text>
+      <rect x="480" y="745.3" width="660" height="50.7" fill="#3E6DA659" stroke="#2B2A26" stroke-width="1.2"/>
+      <rect x="480" y="789.9" width="660" height="6" fill="url(#hatch)"/>
+      <text class="strat-cnt" x="504.0" y="777.6">200</text>
+      <text class="strat-pct" x="1120.0" y="777.6">8%</text>
+      <rect x="480" y="795.9" width="660" height="44.1" fill="#0E8E7659" stroke="#2B2A26" stroke-width="1.2"/>
+      <rect x="480" y="834.0" width="660" height="6" fill="url(#hatch)"/>
+      <text class="strat-cnt" x="504.0" y="825.0">174</text>
+      <text class="strat-pct" x="1120.0" y="825.0">7%</text>
+      <rect x="480" y="200" width="660" height="640" fill="none" stroke="#2B2A26" stroke-width="3"/>
+      <rect x="466" y="190" width="14" height="660" fill="#E4DBC4" stroke="#2B2A26" stroke-width="1.2"/>
+      <rect x="466" y="190" width="674" height="12" fill="#E4DBC4" stroke="#2B2A26" stroke-width="1.2"/>
+      <circle cx="1174.0" cy="334.0" r="13" fill="#B5432F"/>
+      <text class="callout-txt" x="1174.0" y="339.0">1</text>
+      <line x1="1144.0" y1="334.0" x2="1161.0" y2="334.0" stroke="#2B2A26" stroke-width="1"/>
+      <circle cx="1174.0" cy="571.0" r="13" fill="#B57F1B"/>
+      <text class="callout-txt" x="1174.0" y="576.0">2</text>
+      <line x1="1144.0" y1="571.0" x2="1161.0" y2="571.0" stroke="#2B2A26" stroke-width="1"/>
+      <circle cx="1174.0" cy="709.7" r="13" fill="#7B5397"/>
+      <text class="callout-txt" x="1174.0" y="714.7">3</text>
+      <line x1="1144.0" y1="709.7" x2="1161.0" y2="709.7" stroke="#2B2A26" stroke-width="1"/>
+      <circle cx="1174.0" cy="770.6" r="13" fill="#3E6DA6"/>
+      <text class="callout-txt" x="1174.0" y="775.6">4</text>
+      <line x1="1144.0" y1="770.6" x2="1161.0" y2="770.6" stroke="#2B2A26" stroke-width="1"/>
+      <circle cx="1174.0" cy="818.0" r="13" fill="#0E8E76"/>
+      <text class="callout-txt" x="1174.0" y="823.0">5</text>
+      <line x1="1144.0" y1="818.0" x2="1161.0" y2="818.0" stroke="#2B2A26" stroke-width="1"/><g transform="translate(430,868)" stroke="#2B2A26" stroke-width="2" fill="none"><circle cx="0" cy="-34" r="7" fill="#FAF6EC"/><line x1="0" y1="-27" x2="0" y2="-6"/><line x1="0" y1="-6" x2="-9" y2="10"/><line x1="0" y1="-6" x2="9" y2="10"/><line x1="0" y1="-20" x2="-11" y2="-10"/><line x1="0" y1="-20" x2="11" y2="-12"/></g>
+  </svg>
+  <div class="captions">
+    <div class="cap"><span class="n" style="background:var(--chart-1)">1</span><span class="t"><b>Ярус 1 — примечания Леонова и Костиной · 1 058.</b> Единственный слой, который идёт в печать как есть.</span></div>
+    <div class="cap"><span class="n" style="background:var(--chart-3)">2</span><span class="t"><b>Лексические и этимологические глоссы · 814.</b> Черновой слой, каждая строка требует проверки.</span></div>
+    <div class="cap"><span class="n" style="background:var(--chart-5)">3</span><span class="t"><b>Диалог комментаторов · 281.</b> «Тилака понимает это слово так-то, а Широмани иначе».</span></div>
+    <div class="cap"><span class="n" style="background:var(--chart-2)">4</span><span class="t"><b>Переклички с другими текстами · 200.</b> Законы Ману, Махабхарата, Гита, Калидаса.</span></div>
+    <div class="cap"><span class="n" style="background:var(--chart-4)">5</span><span class="t"><b>Расхождения изданий · 174.</b> Места, где южная вульгата полнее критического издания.</span></div>
+  </div>
+  <div class="lens">
+    <h2>Голоса комментаторов — число шлок с их толкованием</h2>
+    <div class="sub">Из 1 676 шлок Сундараканды (санскрит с Gita Supersite, CC BY 4.0)</div>
+    <svg width="430" height="170">
+      <text class="comlab" x="0" y="30">Бхушана</text>
+      <rect x="110" y="19" width="160" height="13" fill="#3E6DA699" stroke="#2B2A26" stroke-width="1"/>
+      <text class="comval" x="276" y="30">1 443</text>
+      <text class="comlab" x="0" y="68">Широмани</text>
+      <rect x="110" y="57" width="122" height="13" fill="#3E6DA699" stroke="#2B2A26" stroke-width="1"/>
+      <text class="comval" x="238" y="68">1 099</text>
+      <text class="comlab" x="0" y="106">Тилак</text>
+      <rect x="110" y="95" width="98" height="13" fill="#3E6DA699" stroke="#2B2A26" stroke-width="1"/>
+      <text class="comval" x="214" y="106">888</text>
+      <text class="comlab" x="0" y="144">Таттвадипика</text>
+      <rect x="110" y="133" width="9" height="13" fill="#3E6DA699" stroke="#2B2A26" stroke-width="1"/>
+      <text class="comval" x="125" y="144">82</text>
+    </svg>
+  </div>
+  <footer>
+    <div>Данные: <b>CommentaryStrategies · data/apparatus</b> — примечания 68 костинских сводок sarga_*_kostina.json + покрытие комментаторов в sarga_*.json</div>
+    <div>скрипт: <b>scripts/infographics50/sundara_strata.py</b> · Посчитано 29.08.2026 · <b>Dr. Mārcis Gasūns</b></div>
+  </footer>
 </div>
 </body>
 </html>

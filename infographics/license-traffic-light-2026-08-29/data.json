@@ -1,0 +1,234 @@
+{
+ "rows": [
+  {
+   "dict": "abch",
+   "verdict": "yellow",
+   "evidence": ";licence{GNU GPL v3.0} в шапке текста"
+  },
+  {
+   "dict": "acc",
+   "verdict": "green",
+   "evidence": "LICENSE репозитория ACC"
+  },
+  {
+   "dict": "acph",
+   "verdict": "yellow",
+   "evidence": ";licence{GNU GPL v3.0} в шапке текста"
+  },
+  {
+   "dict": "acsj",
+   "verdict": "yellow",
+   "evidence": ";licence{GNU GPL v3.0} в шапке текста"
+  },
+  {
+   "dict": "ae",
+   "verdict": "grey",
+   "evidence": "не заявлено в клоне"
+  },
+  {
+   "dict": "ap",
+   "verdict": "green",
+   "evidence": "LICENSE репозитория AP"
+  },
+  {
+   "dict": "ap90",
+   "verdict": "yellow",
+   "evidence": "LICENSE репозитория AP90"
+  },
+  {
+   "dict": "armh",
+   "verdict": "grey",
+   "evidence": "не заявлено в клоне"
+  },
+  {
+   "dict": "ben",
+   "verdict": "green",
+   "evidence": "LICENSE репозитория BEN"
+  },
+  {
+   "dict": "bhs",
+   "verdict": "green",
+   "evidence": "LICENSE репозитория BHS"
+  },
+  {
+   "dict": "bop",
+   "verdict": "green",
+   "evidence": "LICENSE репозитория BOP"
+  },
+  {
+   "dict": "bor",
+   "verdict": "green",
+   "evidence": "LICENSE репозитория BOR"
+  },
+  {
+   "dict": "bur",
+   "verdict": "green",
+   "evidence": "LICENSE репозитория BUR"
+  },
+  {
+   "dict": "cae",
+   "verdict": "green",
+   "evidence": "LICENSE репозитория CAE"
+  },
+  {
+   "dict": "ccs",
+   "verdict": "green",
+   "evidence": "LICENSE репозитория CCS"
+  },
+  {
+   "dict": "fri",
+   "verdict": "green",
+   "evidence": "LICENSE репозитория FRI"
+  },
+  {
+   "dict": "gra",
+   "verdict": "green",
+   "evidence": "LICENSE репозитория GRA"
+  },
+  {
+   "dict": "gst",
+   "verdict": "grey",
+   "evidence": "не заявлено в клоне"
+  },
+  {
+   "dict": "ieg",
+   "verdict": "grey",
+   "evidence": "не заявлено в клоне"
+  },
+  {
+   "dict": "inm",
+   "verdict": "green",
+   "evidence": "LICENSE репозитория INM"
+  },
+  {
+   "dict": "krm",
+   "verdict": "green",
+   "evidence": "LICENSE репозитория KRM"
+  },
+  {
+   "dict": "lan",
+   "verdict": "grey",
+   "evidence": "не заявлено в клоне"
+  },
+  {
+   "dict": "lrv",
+   "verdict": "green",
+   "evidence": "LICENSE репозитория LRV"
+  },
+  {
+   "dict": "mci",
+   "verdict": "green",
+   "evidence": "LICENSE репозитория MCI"
+  },
+  {
+   "dict": "md",
+   "verdict": "green",
+   "evidence": "LICENSE репозитория MD"
+  },
+  {
+   "dict": "mw",
+   "verdict": "green",
+   "evidence": "LICENSE репозитория MWS"
+  },
+  {
+   "dict": "mw72",
+   "verdict": "green",
+   "evidence": "LICENSE репозитория MW72"
+  },
+  {
+   "dict": "mwe",
+   "verdict": "grey",
+   "evidence": "не заявлено в клоне"
+  },
+  {
+   "dict": "nmmb",
+   "verdict": "yellow",
+   "evidence": ";licence{GNU GPL v3.0} в шапке текста"
+  },
+  {
+   "dict": "nybj",
+   "verdict": "grey",
+   "evidence": "не заявлено в клоне"
+  },
+  {
+   "dict": "pe",
+   "verdict": "grey",
+   "evidence": "не заявлено в клоне"
+  },
+  {
+   "dict": "pgn",
+   "verdict": "grey",
+   "evidence": "не заявлено в клоне"
+  },
+  {
+   "dict": "pui",
+   "verdict": "green",
+   "evidence": "LICENSE репозитория PUI"
+  },
+  {
+   "dict": "pw",
+   "verdict": "grey",
+   "evidence": "не заявлено в клоне"
+  },
+  {
+   "dict": "pwg",
+   "verdict": "green",
+   "evidence": "LICENSE репозитория PWG"
+  },
+  {
+   "dict": "pwkvn",
+   "verdict": "green",
+   "evidence": "LICENSE репозитория PWK"
+  },
+  {
+   "dict": "sch",
+   "verdict": "green",
+   "evidence": "LICENSE репозитория SCH"
+  },
+  {
+   "dict": "shs",
+   "verdict": "green",
+   "evidence": "LICENSE репозитория SHS"
+  },
+  {
+   "dict": "skd",
+   "verdict": "green",
+   "evidence": "LICENSE репозитория SKD"
+  },
+  {
+   "dict": "snp",
+   "verdict": "grey",
+   "evidence": "не заявлено в клоне"
+  },
+  {
+   "dict": "stc",
+   "verdict": "green",
+   "evidence": "LICENSE репозитория STC"
+  },
+  {
+   "dict": "vcp",
+   "verdict": "green",
+   "evidence": "LICENSE репозитория VCP"
+  },
+  {
+   "dict": "vei",
+   "verdict": "green",
+   "evidence": "LICENSE репозитория VEI"
+  },
+  {
+   "dict": "wil",
+   "verdict": "green",
+   "evidence": "LICENSE репозитория WIL"
+  },
+  {
+   "dict": "yat",
+   "verdict": "green",
+   "evidence": "LICENSE репозитория Wil-YAT"
+  }
+ ],
+ "counts": {
+  "green": 29,
+  "yellow": 5,
+  "grey": 11
+ }
+}

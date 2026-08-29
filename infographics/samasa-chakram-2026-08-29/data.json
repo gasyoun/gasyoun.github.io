@@ -1,0 +1,50 @@
+{
+ "classes": [
+  {
+   "id": "tatpurusa",
+   "name": "татпуруша",
+   "families": 4,
+   "leaves": 25,
+   "pradhana": "uttarapadārtha-pradhāna — главная правая часть",
+   "ex_term": "dvitīyā",
+   "ex": "grāmagataḥ",
+   "vigraha": "grāmaṃ gataḥ",
+   "ru": "пошедший в деревню"
+  },
+  {
+   "id": "bahuvrihi",
+   "name": "бахуврихи",
+   "families": 3,
+   "leaves": 20,
+   "pradhana": "anyapadārtha-pradhāna — главное слово вне композита",
+   "ex_term": "dvitīyārtha",
+   "ex": "prāptodakaḥ",
+   "vigraha": "prāptam udakaṃ yam [grāmaḥ]",
+   "ru": "деревня, до которой дошла вода"
+  },
+  {
+   "id": "dvandva",
+   "name": "двандва",
+   "families": 1,
+   "leaves": 2,
+   "pradhana": "ubhayapadārtha-pradhāna — главны обе части",
+   "ex_term": "itaretara",
+   "ex": "rāmakṛṣṇau",
+   "vigraha": "rāmaś ca kṛṣṇaś ca",
+   "ru": "Рама и Кришна"
+  },
+  {
+   "id": "avyayibhava",
+   "name": "авьяйибхава",
+   "families": 1,
+   "leaves": 11,
+   "pradhana": "pūrvapadārtha-pradhāna — главная левая часть",
+   "ex_term": "vibhakti",
+   "ex": "adhihari",
+   "vigraha": "harau iti",
+   "ru": "касательно Хари"
+  }
+ ],
+ "families": 9,
+ "leaves": 58
+}
