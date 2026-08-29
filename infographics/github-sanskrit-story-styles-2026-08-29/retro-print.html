@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Сколько слов в санскрите? — ретро-принт</title>
+<!-- Style: letterpress / constructivist print poster. Telegram story 1080x1920. RU-only. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Oswald:wght@500;600;700&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --paper:#EDE4CC; --ink:#1E3A5F; --red:#C6402E;
+  --font-big:'Russo One',sans-serif; --font-head:'Oswald',sans-serif; --font-body:'Nunito',sans-serif;
+}
+html, body { background: var(--paper); }
+body { width: 1080px; font-family: var(--font-body); color: var(--ink); }
+.canvas { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: var(--paper); }
+.scene { position: absolute; inset: 0; }
+.overline { position: absolute; left: 64px; top: 108px; font: 600 16px/1.4 var(--font-body);
+  text-transform: uppercase; letter-spacing: .2em; color: var(--ink); }
+h1 { position: absolute; left: 60px; top: 156px; width: 960px; font-family: var(--font-big);
+  font-size: 88px; line-height: 1.06; color: var(--ink); text-shadow: 4px 4px 0 rgba(198,64,46,.55); }
+.subrule { position: absolute; left: 64px; top: 462px; width: 952px; height: 10px; background: var(--red); }
+.hero { position: absolute; left: 64px; top: 502px; }
+.hero-num { font-family: var(--font-big); font-size: 84px; line-height: 1; }
+.hero-label { margin-top: 8px; font: 600 22px/1.3 var(--font-body); color: var(--ink); }
+.hero-sub { margin-top: 2px; font: 400 16px/1.35 var(--font-body); color: rgba(30,58,95,.75); }
+svg text { font-family: var(--font-body); }
+.r-name { font: 600 17px var(--font-head); letter-spacing: .06em; text-transform: uppercase; fill: var(--ink); }
+.r-val { font: 400 30px var(--font-big); fill: var(--ink); }
+.r-cap { font: 600 13px var(--font-body); letter-spacing: .14em; text-transform: uppercase; fill: var(--ink); }
+.stampin { opacity: 0; transform: scaleY(0); transform-box: fill-box; transform-origin: 50% 100%;
+  animation: stampin .5s cubic-bezier(.2,.9,.3,1.2) forwards; }
+@keyframes stampin { to { opacity: 1; transform: none; } }
+.fadeup { opacity: 0; animation: fadeup .5s ease-out forwards; }
+@keyframes fadeup { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+.fade { opacity: 0; animation: fadein .5s ease-out forwards; }
+@keyframes fadein { to { opacity: 1; } }
+.overline { animation: fadeup .5s ease-out backwards .1s; }
+h1 { animation: fadeup .6s ease-out backwards .2s; }
+.subrule { transform-origin: left center; animation: growx .5s ease-out backwards .4s; transform: scaleX(0); }
+@keyframes growx { to { transform: scaleX(1); } }
+.hero-num { animation: fadeup .6s ease-out backwards .5s; }
+.hero-label { animation: fadeup .5s ease-out backwards .65s; }
+.hero-sub { animation: fadeup .5s ease-out backwards .75s; }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <svg class="scene" viewBox="0 0 1080 1920" width="1080" height="1920">
+    <defs>
+      <pattern id="dots" width="16" height="16" patternUnits="userSpaceOnUse">
+        <circle cx="4" cy="4" r="3" fill="rgba(198,64,46,.5)"/>
+      </pattern>
+    </defs>
+
+    <!-- halftone sun behind MW bar -->
+    <g class="fade" style="animation-delay:.5s">
+      <circle cx="190" cy="940" r="205" fill="url(#dots)"/>
+      <circle cx="190" cy="940" r="205" fill="none" stroke="var(--red)" stroke-width="3" stroke-dasharray="1 0"/>
+    </g>
+
+    <!-- ===== five ink bars, ground 1300 ===== -->
+    <!-- MW 315 top 985, cx 170 -->
+    <g class="stampin" style="animation-delay:.9s">
+      <rect x="110" y="985" width="120" height="315" fill="var(--ink)"/>
+      <rect x="110" y="985" width="120" height="20" fill="var(--red)"/>
+    </g>
+    <!-- PW 188 top 1112, cx 350 -->
+    <g class="stampin" style="animation-delay:1.02s">
+      <rect x="290" y="1112" width="120" height="188" fill="var(--ink)"/>
+      <rect x="290" y="1112" width="120" height="20" fill="var(--red)"/>
+    </g>
+    <!-- PWG 136 top 1164, cx 530 -->
+    <g class="stampin" style="animation-delay:1.14s">
+      <rect x="470" y="1164" width="120" height="136" fill="var(--ink)"/>
+      <rect x="470" y="1164" width="120" height="20" fill="var(--red)"/>
+    </g>
+    <!-- AP 100 top 1200, cx 710 -->
+    <g class="stampin" style="animation-delay:1.26s">
+      <rect x="650" y="1200" width="120" height="100" fill="var(--ink)"/>
+      <rect x="650" y="1200" width="120" height="20" fill="var(--red)"/>
+    </g>
+    <!-- VCP 55 top 1245, cx 890 -->
+    <g class="stampin" style="animation-delay:1.38s">
+      <rect x="830" y="1245" width="120" height="55" fill="var(--ink)"/>
+      <rect x="830" y="1245" width="120" height="20" fill="var(--red)"/>
+    </g>
+
+    <!-- counts above bars -->
+    <g class="fadeup" style="animation-delay:1.5s">
+      <text x="170" y="946" text-anchor="middle" class="r-val" style="font-size:38px">286 525</text>
+      <text x="170" y="972" text-anchor="middle" class="r-cap" style="font-size:12px">Monier-Williams</text>
+    </g>
+    <g class="fadeup" style="animation-delay:1.6s">
+      <text x="350" y="1076" text-anchor="middle" class="r-val" style="font-size:30px">170 556</text>
+      <text x="350" y="1100" text-anchor="middle" class="r-cap" style="font-size:11.5px">Малый Петербургский</text>
+    </g>
+    <g class="fadeup" style="animation-delay:1.7s">
+      <text x="530" y="1128" text-anchor="middle" class="r-val" style="font-size:30px">123 366</text>
+      <text x="530" y="1152" text-anchor="middle" class="r-cap" style="font-size:11.5px">Большой Петербургский</text>
+    </g>
+    <g class="fadeup" style="animation-delay:1.8s">
+      <text x="710" y="1164" text-anchor="middle" class="r-val" style="font-size:28px">90 847</text>
+      <text x="710" y="1188" text-anchor="middle" class="r-cap" style="font-size:11.5px">Apte Practical (rev.)</text>
+    </g>
+    <g class="fadeup" style="animation-delay:1.9s">
+      <text x="890" y="1209" text-anchor="middle" class="r-val" style="font-size:28px">50 135</text>
+      <text x="890" y="1233" text-anchor="middle" class="r-cap" style="font-size:11.5px">vcp</text>
+    </g>
+
+    <!-- ground double rule -->
+    <g class="fade" style="animation-delay:.6s">
+      <rect x="60" y="1300" width="960" height="8" fill="var(--ink)"/>
+      <rect x="60" y="1316" width="960" height="3" fill="var(--ink)"/>
+    </g>
+
+    <!-- rosette + share (right, clear of the hero block) -->
+    <g class="fadeup" style="animation-delay:2s">
+      <path d="M 930 560 l 14 30 l 32 -8 l -14 30 l 26 20 l -32 8 l 4 32 l -30 -16 l -22 24 l -4 -32 l -32 4 l 18 -27 l -26 -19 l 32 -7 z" fill="var(--red)"/>
+      <text x="930" y="742" text-anchor="middle" font-family="Russo One" font-size="30" fill="var(--ink)">19,0 %</text>
+      <text x="930" y="770" text-anchor="middle" class="r-cap" style="font-size:12px">всех статей — MW</text>
+    </g>
+
+    <!-- ===== ticket strip ===== -->
+    <g class="fadeup" style="animation-delay:2.2s">
+      <rect x="60" y="1400" width="960" height="270" fill="none" stroke="var(--ink)" stroke-width="5"/>
+      <rect x="74" y="1414" width="932" height="242" fill="none" stroke="var(--ink)" stroke-width="1.6"/>
+      <g fill="var(--paper)">
+        <circle cx="60" cy="1535" r="14"/><circle cx="1020" cy="1535" r="14"/>
+      </g>
+      <g stroke="var(--ink)" stroke-width="2">
+        <circle cx="60" cy="1535" r="14" fill="none"/><circle cx="1020" cy="1535" r="14" fill="none"/>
+      </g>
+      <text x="540" y="1520" text-anchor="middle" font-family="Russo One" font-size="76" fill="var(--ink)">1 506 452</text>
+      <text x="540" y="1566" text-anchor="middle" class="r-cap" style="font-size:17px">словарных статей · 45 оцифрованных словарей</text>
+      <line x1="140" y1="1592" x2="940" y2="1592" stroke="var(--ink)" stroke-width="1.6"/>
+      <a href="https://github.com/sanskrit-lexicon/csl-orig" target="_blank" rel="noopener">
+        <text x="330" y="1632" text-anchor="middle" class="r-cap" style="font-size:13px" fill="var(--red)">45 словарей → csl-orig</text>
+      </a>
+      <a href="https://github.com/drdhaval2785/SanskritSpellCheck" target="_blank" rel="noopener">
+        <text x="750" y="1632" text-anchor="middle" class="r-cap" style="font-size:13px" fill="var(--red)">431 596 заголовков → SanskritSpellCheck</text>
+      </a>
+    </g>
+
+    <!-- colophon -->
+    <g class="fadeup" style="animation-delay:2.4s">
+      <text x="540" y="1758" text-anchor="middle" class="r-cap" style="font-size:14px">типографія «гитъ и сanthъ» · отпечатано в клоне № 1</text>
+      <text x="540" y="1794" text-anchor="middle" class="r-cap" style="font-size:14px">цена: одинъ клокъ · 28.08.2026</text>
+    </g>
+  </svg>
+  <div class="overline">Санскритский архив Гасунса · словарный квартал · 28.08.2026</div>
+  <h1>СКОЛЬКО СЛОВ<br>В САНСКРИТЕ?</h1>
+  <div class="subrule"></div>
+  <div class="hero">
+    <div class="hero-num">1 506 452</div>
+    <div class="hero-label">словарных статей в 45 оцифрованных словарях</div>
+    <div class="hero-sub">от кёльнских сканов до связанных данных</div>
+  </div>
+</div>
+</body>
+</html>

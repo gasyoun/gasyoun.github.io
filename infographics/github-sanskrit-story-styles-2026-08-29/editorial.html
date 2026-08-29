@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Сколько слов в санскрите? — редакция</title>
+<!-- Style: magazine editorial spread. Telegram story 1080x1920. RU-only. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500&family=PT+Serif:ital,wght@0,400;0,700;1,400&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ivory:#F7F4EC; --ink:#16150F; --ink-soft:rgba(22,21,15,.6); --hair:rgba(22,21,15,.22); --red:#C0392B;
+  --font-display:'Playfair Display',serif; --font-serif:'PT Serif',serif; --font-sans:'PT Sans',sans-serif;
+}
+html, body { background: var(--ivory); }
+body { width: 1080px; font-family: var(--font-serif); color: var(--ink); }
+.canvas { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: var(--ivory); }
+.scene { position: absolute; inset: 0; }
+.issue { position: absolute; left: 64px; right: 64px; top: 92px; display: flex; justify-content: space-between;
+  font: 700 14px/1 var(--font-sans); letter-spacing: .22em; text-transform: uppercase; color: var(--ink-soft);
+  border-top: 3px solid var(--ink); border-bottom: 1px solid var(--hair); padding: 14px 2px 12px; }
+h1 { position: absolute; left: 64px; top: 168px; width: 950px; font-family: var(--font-display);
+  font-weight: 800; font-size: 108px; line-height: 1.04; letter-spacing: -.01em; }
+.standfirst { position: absolute; left: 64px; top: 520px; width: 880px;
+  font: italic 400 26px/1.5 var(--font-serif); color: var(--ink); }
+.standfirst::first-letter { font-family: var(--font-display); font-weight: 700; font-size: 74px;
+  float: left; line-height: .82; padding: 8px 14px 0 0; color: var(--red); }
+svg text { font-family: var(--font-serif); }
+.e-cap { font: 700 14px var(--font-sans); letter-spacing: .16em; text-transform: uppercase; fill: var(--ink-soft); }
+.e-val { font: 600 40px var(--font-display); fill: var(--ink); }
+.e-name { font: 700 15px var(--font-sans); letter-spacing: .1em; text-transform: uppercase; fill: var(--ink); }
+.e-note { font: italic 400 19px var(--font-serif); fill: var(--ink-soft); }
+.fadeup { opacity: 0; animation: fadeup .55s ease-out forwards; }
+@keyframes fadeup { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.growx { transform: scaleX(0); transform-origin: left center; animation: growx .7s cubic-bezier(.2,.8,.2,1) forwards; }
+@keyframes growx { to { transform: scaleX(1); } }
+.fade { opacity: 0; animation: fadein .6s ease-out forwards; }
+@keyframes fadein { to { opacity: 1; } }
+.issue { animation: fadein .6s ease-out backwards .05s; }
+h1 { animation: fadeup .7s ease-out backwards .15s; }
+.standfirst { animation: fadeup .6s ease-out backwards .35s; }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <svg class="scene" viewBox="0 0 1080 1920" width="1080" height="1920">
+    <!-- ===== chart: bars on hairline ground 1290 ===== -->
+    <g class="fade" style="animation-delay:.6s">
+      <line x1="64" y1="1290" x2="1016" y2="1290" stroke="var(--ink)" stroke-width="2"/>
+      <line x1="64" y1="660" x2="64" y2="1290" stroke="var(--hair)" stroke-width="1"/>
+    </g>
+    <!-- bars w 70: MW h 420 top 870 cx 150 | PW 250 top 1040 cx 340 | PWG 181 top 1109 cx 530 | AP 133 top 1157 cx 720 | VCP 74 top 1216 cx 910 -->
+    <g class="growx" style="animation-delay:.8s; transform-origin:150px 1290px">
+      <rect x="115" y="870" width="70" height="420" fill="var(--ink)"/>
+    </g>
+    <g class="growx" style="animation-delay:.95s; transform-origin:340px 1290px">
+      <rect x="305" y="1040" width="70" height="250" fill="rgba(22,21,15,.82)"/>
+    </g>
+    <g class="growx" style="animation-delay:1.1s; transform-origin:530px 1290px">
+      <rect x="495" y="1109" width="70" height="181" fill="rgba(22,21,15,.64)"/>
+    </g>
+    <g class="growx" style="animation-delay:1.25s; transform-origin:720px 1290px">
+      <rect x="685" y="1157" width="70" height="133" fill="rgba(22,21,15,.46)"/>
+    </g>
+    <g class="growx" style="animation-delay:1.4s; transform-origin:910px 1290px">
+      <rect x="875" y="1216" width="70" height="74" fill="rgba(22,21,15,.3)"/>
+    </g>
+    <!-- counts + names -->
+    <g class="fadeup" style="animation-delay:1.5s">
+      <text x="150" y="830" text-anchor="middle" class="e-val">286 525</text>
+      <text x="150" y="862" text-anchor="middle" class="e-name">Monier-Williams</text>
+      <text x="150" y="1330" text-anchor="middle" class="e-note">¹</text>
+    </g>
+    <g class="fadeup" style="animation-delay:1.6s">
+      <text x="340" y="1000" text-anchor="middle" class="e-val" style="font-size:32px">170 556</text>
+      <text x="340" y="1330" text-anchor="middle" class="e-name" style="font-size:12.5px">Малый Петербургский</text>
+      <text x="340" y="1354" text-anchor="middle" class="e-name" style="font-size:12.5px">словарь</text>
+    </g>
+    <g class="fadeup" style="animation-delay:1.7s">
+      <text x="530" y="1069" text-anchor="middle" class="e-val" style="font-size:32px">123 366</text>
+      <text x="530" y="1330" text-anchor="middle" class="e-name" style="font-size:12.5px">Большой Петербургский</text>
+      <text x="530" y="1354" text-anchor="middle" class="e-name" style="font-size:12.5px">словарь</text>
+    </g>
+    <g class="fadeup" style="animation-delay:1.8s">
+      <text x="720" y="1117" text-anchor="middle" class="e-val" style="font-size:30px">90 847</text>
+      <text x="720" y="1330" text-anchor="middle" class="e-name" style="font-size:12.5px">Apte Practical (rev.)</text>
+    </g>
+    <g class="fadeup" style="animation-delay:1.9s">
+      <text x="910" y="1176" text-anchor="middle" class="e-val" style="font-size:30px">50 135</text>
+      <text x="910" y="1330" text-anchor="middle" class="e-name" style="font-size:12.5px">vcp</text>
+    </g>
+
+    <!-- footnotes -->
+    <g class="fadeup" style="animation-delay:2s">
+      <line x1="64" y1="1396" x2="1016" y2="1396" stroke="var(--hair)" stroke-width="1"/>
+      <text x="64" y="1436" class="e-note" style="font-size:18px">¹ Доля Monier-Williams от всех статей квартала — 19,0 %. Полное собрание — 45 словарей.</text>
+    </g>
+
+    <!-- ===== pull-quote hero ===== -->
+    <g class="fadeup" style="animation-delay:2.15s">
+      <rect x="64" y="1490" width="6" height="230" fill="var(--red)"/>
+      <text x="100" y="1600" class="e-val" style="font-size:96px">1 506 452</text>
+      <text x="100" y="1660" class="e-cap">словарных статей в 45 оцифрованных словарях — от кёльнских сканов до связанных данных</text>
+    </g>
+
+    <!-- ===== 3-column footer ===== -->
+    <g class="fadeup" style="animation-delay:2.3s">
+      <line x1="64" y1="1724" x2="1016" y2="1724" stroke="var(--ink)" stroke-width="2"/>
+      <a href="https://github.com/sanskrit-lexicon/csl-orig" target="_blank" rel="noopener">
+        <text x="64" y="1776" class="e-name" style="fill:var(--red)">45 словарей</text>
+        <text x="64" y="1806" class="e-note" style="font-size:17px">корпус csl-orig</text>
+      </a>
+      <a href="https://github.com/drdhaval2785/SanskritSpellCheck" target="_blank" rel="noopener">
+        <text x="440" y="1776" class="e-name" style="fill:var(--red)">431 596 заголовков</text>
+        <text x="440" y="1806" class="e-note" style="font-size:17px">индекс SanskritSpellCheck</text>
+      </a>
+      <text x="1016" y="1776" text-anchor="end" class="e-name">санскритский архив гасунса</text>
+      <text x="1016" y="1806" text-anchor="end" class="e-note" style="font-size:17px">посчитано 28.08.2026 · стр. 1</text>
+    </g>
+  </svg>
+  <div class="issue"><span>Санскритский архив Гасунса</span><span>Выпуск I · 28.08.2026</span></div>
+  <h1>Сколько слов в&nbsp;санскрите?</h1>
+  <p class="standfirst">Пять главных словарей квартала, измеренные числом статей: от двухсот восьмидесяти шести с половиной тысяч у Monier-Williams до пятидесяти тысяч у vcp. Высота столбцов — настоящий счёт.</p>
+</div>
+</body>
+</html>

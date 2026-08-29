@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Сколько слов в санскрите? — парк</title>
+<!-- Style: travel park poster. Telegram story 1080x1920. RU-only. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --green-deep:#274D33; --green:#8FB569; --green-dark:#2E5D3A;
+  --cream:#F3EAD3; --trunk:#6B4A2E; --accent:#E07A3F; --ink:#22301F;
+  --font-head:'Oswald',sans-serif; --font-body:'Nunito',sans-serif;
+}
+html, body { background: var(--green-deep); }
+body { width: 1080px; font-family: var(--font-body); color: var(--cream); }
+.canvas { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: var(--green-deep); }
+.scene { position: absolute; inset: 0; }
+.kicker { position: absolute; left: 64px; top: 120px; font: 600 15px/1.3 var(--font-body);
+  text-transform: uppercase; letter-spacing: .18em; color: rgba(243,234,211,.75); }
+h1 { position: absolute; left: 64px; top: 156px; width: 760px; font-family: var(--font-head);
+  font-weight: 700; font-size: 88px; line-height: 1.04; text-transform: uppercase; color: var(--cream); }
+.ribbon { position: absolute; left: 64px; top: 420px; transform: rotate(-2deg);
+  background: var(--cream); color: var(--ink); border-radius: 10px; padding: 20px 30px 18px; }
+.ribbon-num { font-family: var(--font-head); font-weight: 700; font-size: 66px; line-height: 1; }
+.ribbon-label { margin-top: 6px; font: 600 21px/1.3 var(--font-body); }
+svg text { font-family: var(--font-body); }
+.p-name { font: 700 17px var(--font-head); letter-spacing: .04em; text-transform: uppercase; fill: var(--ink); }
+.p-val { font: 600 24px var(--font-head); fill: var(--ink); }
+.p-cap { font: 600 13px var(--font-body); letter-spacing: .12em; text-transform: uppercase; fill: rgba(243,234,211,.8); }
+.pop { opacity: 0; transform: scale(.5); transform-box: fill-box; transform-origin: 50% 100%;
+  animation: pop .55s cubic-bezier(.34,1.56,.64,1) forwards; }
+@keyframes pop { to { opacity: 1; transform: scale(1); } }
+.fadeup { opacity: 0; animation: fadeup .5s ease-out forwards; }
+@keyframes fadeup { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.fade { opacity: 0; animation: fadein .6s ease-out forwards; }
+@keyframes fadein { to { opacity: 1; } }
+.growx { transform: scaleX(0); transform-origin: left center; animation: growx .6s ease-out forwards; }
+@keyframes growx { to { transform: scaleX(1); } }
+.kicker { animation: fadeup .5s ease-out backwards .1s; }
+h1 { animation: fadeup .6s ease-out backwards .2s; }
+.ribbon { animation: fadeup .6s ease-out backwards .4s; }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <svg class="scene" viewBox="0 0 1080 1920" width="1080" height="1920">
+    <!-- sun -->
+    <g class="fade" style="animation-delay:.3s">
+      <circle cx="880" cy="220" r="95" fill="var(--accent)"/>
+      <g stroke="var(--accent)" stroke-width="6">
+        <line x1="880" y1="80" x2="880" y2="115"/><line x1="880" y1="325" x2="880" y2="360"/>
+        <line x1="740" y1="220" x2="775" y2="220"/><line x1="985" y1="220" x2="1020" y2="220"/>
+        <line x1="781" y1="121" x2="806" y2="146"/><line x1="954" y1="294" x2="979" y2="319"/>
+        <line x1="781" y1="319" x2="806" y2="294"/><line x1="954" y1="146" x2="979" y2="121"/>
+      </g>
+    </g>
+    <!-- birds -->
+    <g class="fade" style="animation-delay:.7s" stroke="var(--cream)" stroke-width="4" fill="none" stroke-linecap="round">
+      <path d="M 856 428 q 14 -16 28 0 q 14 -16 28 0"/>
+      <path d="M 944 474 q 11 -13 22 0 q 11 -13 22 0"/>
+      <path d="M 796 470 q 9 -10 18 0 q 9 -10 18 0"/>
+    </g>
+
+    <!-- lawn -->
+    <path class="fade" style="animation-delay:.4s" d="M 0 1000 Q 270 940 540 990 T 1080 980 V 1920 H 0 Z" fill="var(--green)"/>
+    <!-- winding path -->
+    <path class="fade" style="animation-delay:.6s" d="M 480 1920 C 420 1700 700 1620 640 1470 C 590 1340 380 1330 400 1180 C 415 1075 560 1050 560 1000"
+      fill="none" stroke="var(--cream)" stroke-width="46" stroke-linecap="round" opacity=".95"/>
+    <path class="fade" style="animation-delay:.8s" d="M 480 1920 C 420 1700 700 1620 640 1470 C 590 1340 380 1330 400 1180 C 415 1075 560 1050 560 1000"
+      fill="none" stroke="var(--green-deep)" stroke-width="4" stroke-dasharray="2 26" opacity=".5"/>
+
+    <!-- ===== five trees, crown area ∝ entries ===== -->
+    <!-- MW r160 -->
+    <g class="pop" style="animation-delay:.9s">
+      <rect x="160" y="1268" width="26" height="120" rx="8" fill="var(--trunk)"/>
+      <circle cx="173" cy="1150" r="160" fill="var(--green-dark)" stroke="var(--cream)" stroke-width="5"/>
+      <circle cx="120" cy="1090" r="46" fill="var(--green-deep)" opacity=".55"/>
+    </g>
+    <g class="fadeup" style="animation-delay:1.15s">
+      <rect x="83" y="1396" width="180" height="74" rx="8" fill="var(--cream)"/>
+      <text x="173" y="1426" text-anchor="middle" class="p-name">Monier-Williams</text>
+      <text x="173" y="1458" text-anchor="middle" class="p-val">286 525</text>
+      <rect x="103" y="1478" width="140" height="12" fill="none" stroke="var(--ink)" stroke-width="2"/>
+      <rect x="105" y="1480" width="26.6" height="8" fill="var(--accent)"/>
+      <text x="173" y="1512" text-anchor="middle" class="p-cap" fill="var(--ink)" opacity=".8" style="font-size:11.5px">19,0 % всех статей</text>
+    </g>
+    <!-- PW r118 -->
+    <g class="pop" style="animation-delay:1.05s">
+      <rect x="466" y="1330" width="22" height="100" rx="7" fill="var(--trunk)"/>
+      <circle cx="477" cy="1245" r="118" fill="var(--green-dark)" stroke="var(--cream)" stroke-width="4"/>
+      <circle cx="440" cy="1200" r="34" fill="var(--green-deep)" opacity=".55"/>
+    </g>
+    <g class="fadeup" style="animation-delay:1.25s">
+      <rect x="392" y="1438" width="170" height="64" rx="8" fill="var(--cream)"/>
+      <text x="477" y="1464" text-anchor="middle" class="p-name" style="font-size:14px">Малый Петербургский</text>
+      <text x="477" y="1492" text-anchor="middle" class="p-val" style="font-size:20px">170 556</text>
+    </g>
+    <!-- PWG r100 -->
+    <g class="pop" style="animation-delay:1.15s">
+      <rect x="739" y="1380" width="20" height="90" rx="7" fill="var(--trunk)"/>
+      <circle cx="749" cy="1310" r="100" fill="var(--green-dark)" stroke="var(--cream)" stroke-width="4"/>
+      <circle cx="716" cy="1272" r="29" fill="var(--green-deep)" opacity=".55"/>
+    </g>
+    <g class="fadeup" style="animation-delay:1.35s">
+      <rect x="669" y="1478" width="160" height="64" rx="8" fill="var(--cream)"/>
+      <text x="749" y="1504" text-anchor="middle" class="p-name" style="font-size:14px">Большой Петербургский</text>
+      <text x="749" y="1532" text-anchor="middle" class="p-val" style="font-size:20px">123 366</text>
+    </g>
+    <!-- AP r82 -->
+    <g class="pop" style="animation-delay:1.25s">
+      <rect x="921" y="1500" width="18" height="72" rx="6" fill="var(--trunk)"/>
+      <circle cx="930" cy="1425" r="82" fill="var(--green-dark)" stroke="var(--cream)" stroke-width="4"/>
+      <circle cx="902" cy="1396" r="24" fill="var(--green-deep)" opacity=".55"/>
+    </g>
+    <g class="fadeup" style="animation-delay:1.45s">
+      <rect x="850" y="1548" width="160" height="62" rx="8" fill="var(--cream)"/>
+      <text x="930" y="1572" text-anchor="middle" class="p-name" style="font-size:13px">Apte Practical (rev.)</text>
+      <text x="930" y="1600" text-anchor="middle" class="p-val" style="font-size:19px">90 847</text>
+    </g>
+    <!-- VCP r60 -->
+    <g class="pop" style="animation-delay:1.35s">
+      <rect x="207" y="1646" width="15" height="64" rx="6" fill="var(--trunk)"/>
+      <circle cx="215" cy="1592" r="60" fill="var(--green-dark)" stroke="var(--cream)" stroke-width="4"/>
+    </g>
+    <g class="fadeup" style="animation-delay:1.55s">
+      <rect x="135" y="1670" width="140" height="58" rx="8" fill="var(--cream)"/>
+      <text x="205" y="1692" text-anchor="middle" class="p-name" style="font-size:13px">vcp</text>
+      <text x="205" y="1718" text-anchor="middle" class="p-val" style="font-size:19px">50 135</text>
+    </g>
+    <!-- bushes right -->
+    <g class="pop" style="animation-delay:1.6s">
+      <circle cx="920" cy="1660" r="52" fill="var(--green-dark)" stroke="var(--cream)" stroke-width="4"/>
+      <circle cx="990" cy="1690" r="38" fill="var(--green-dark)" stroke="var(--cream)" stroke-width="4"/>
+    </g>
+
+    <!-- ===== park sign board with links ===== -->
+    <g class="fadeup" style="animation-delay:1.8s">
+      <rect x="382" y="1800" width="18" height="56" fill="var(--trunk)"/>
+      <rect x="630" y="1800" width="18" height="56" fill="var(--trunk)"/>
+    </g>
+    <g class="fadeup" style="animation-delay:1.9s">
+      <rect x="300" y="1650" width="420" height="150" rx="10" fill="var(--cream)" stroke="var(--trunk)" stroke-width="6"/>
+      <a href="https://github.com/sanskrit-lexicon/csl-orig" target="_blank" rel="noopener">
+        <text x="510" y="1702" text-anchor="middle" class="p-name" style="font-size:20px">45 словарей</text>
+        <text x="510" y="1730" text-anchor="middle" class="p-cap" fill="var(--ink)" opacity=".7" style="font-size:11.5px">источник: csl-orig</text>
+      </a>
+      <line x1="340" y1="1748" x2="680" y2="1748" stroke="var(--trunk)" stroke-width="2"/>
+      <a href="https://github.com/drdhaval2785/SanskritSpellCheck" target="_blank" rel="noopener">
+        <text x="510" y="1776" text-anchor="middle" class="p-name" style="font-size:15px">431 596 уникальных заголовков</text>
+        <text x="510" y="1794" text-anchor="middle" class="p-cap" fill="var(--ink)" opacity=".7" style="font-size:11px">источник: SanskritSpellCheck</text>
+      </a>
+    </g>
+    <text class="fade" style="animation-delay:2.1s" x="64" y="1888" font-family="Oswald" font-size="17" letter-spacing="3" fill="rgba(243,234,211,.65)">ПАРК СЛОВАРЕЙ · ЛИСТ 1/1 · ПОСЧИТАНО 28.08.2026</text>
+  </svg>
+  <div class="kicker">Санскритский архив Гасунса · словарный квартал</div>
+  <h1>Сколько слов<br>в санскрите?</h1>
+  <div class="ribbon">
+    <div class="ribbon-num">1 506 452</div>
+    <div class="ribbon-label">словарных статей в 45 оцифрованных словарях</div>
+  </div>
+</div>
+</body>
+</html>
+
