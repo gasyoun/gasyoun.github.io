@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Хронология имения</title>
+<!-- Data: GitHub API users/gasyoun/repos created_at, 54 repositories, fetched 29.08.2026. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --bg:#101216; --card:#1A1F26; --line:rgba(255,255,255,.14); --text:#F2F5F9;
+  --text-sub:#9AA6B5; --accent:#FF8A70; --neon:#6FE3C1; --gold:#E9C46A;
+  --font-display:'Comfortaa',sans-serif; --font-body:'Nunito',sans-serif; }
+html, body { background: var(--bg); }
+body { width: 1080px; font-family: var(--font-body); color: var(--text); }
+.canvas { position: relative; width: 1080px; height: 1920px; overflow: hidden;
+  background: radial-gradient(ellipse 1000px 700px at 50% 0%, #1A2230 0%, var(--bg) 60%); }
+.kicker { position: absolute; left: 64px; top: 88px; font: 800 13px/1.3 var(--font-body);
+  text-transform: uppercase; letter-spacing: .16em; color: var(--text-sub); }
+h1 { position: absolute; left: 64px; top: 118px; font-family: var(--font-display); font-weight: 700; font-size: 54px; }
+.hero { position: absolute; left: 64px; top: 194px; font: 600 16.5px/1.5 var(--font-body); color: var(--text-sub); }
+.hero b { color: var(--accent); }
+.tl { position: absolute; left: 64px; top: 300px; width: 952px; }
+.tl::before { content: ""; position: absolute; left: 8px; top: 6px; bottom: 6px; width: 3px;
+  background: linear-gradient(var(--neon), var(--accent)); border-radius: 2px; }
+.era { display: flex; gap: 22px; align-items: center; margin: 20px 0 6px 0; }
+.etag { font: 700 22px var(--font-display); color: var(--gold); width: 168px; flex: none; text-align: right; }
+.ename { font: 800 15px var(--font-body); letter-spacing: .1em; text-transform: uppercase; color: var(--neon); }
+.ms { position: relative; display: flex; gap: 22px; align-items: baseline; margin: 10px 0 10px 0; padding-left: 168px; }
+.dot { position: absolute; left: 0px; top: 5px; width: 19px; height: 19px; border-radius: 50%;
+  background: var(--card); border: 3.5px solid var(--accent); }
+.when { font: 700 14.5px var(--font-body); color: var(--gold); width: 130px; flex: none; }
+.what { font: 400 16px/1.4 var(--font-body); color: var(--text-sub); }
+.what b { color: var(--text); font-weight: 700; }
+.fade { opacity: 0; animation: fadein .5s ease-out forwards; }
+@keyframes fadein { to { opacity: 1; } }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="kicker">Санскритский архив Гасунса · люди и история</div>
+  <h1>Хронология имения</h1>
+  <div class="hero"><b>54 репозитория</b> санскритского дела · от первого «Нагари» до словарного квартала · <b>43 из них — за 5 месяцев 2026</b> · по датам создания, GitHub API, 29.08.2026</div>
+  <div class="tl">
+    <div class="era fade" style="animation-delay:0.3s">
+      <div class="etag">2013–2014</div><div class="ename">Первый пункт</div>
+    </div>
+    <div class="ms fade" style="animation-delay:0.45s">
+      <div class="dot"></div>
+      <div class="when">2013-12-22</div>
+      <div class="what"><b>Nagari</b><span> — первый репозиторий — деванагари</span></div>
+    </div>
+    <div class="ms fade" style="animation-delay:0.52s">
+      <div class="dot"></div>
+      <div class="when">2014-10-05</div>
+      <div class="what"><b>SanskritMacros · SanskritLexicography</b><span> — макросы и лексикография</span></div>
+    </div>
+    <div class="ms fade" style="animation-delay:0.59s">
+      <div class="dot"></div>
+      <div class="when">2014-10-08</div>
+      <div class="what"><b>gasyoun.github.io</b><span> — собственная страница</span></div>
+    </div>
+    <div class="era fade" style="animation-delay:0.45s">
+      <div class="etag">2019–2021</div><div class="ename">Сандхи и корпуса</div>
+    </div>
+    <div class="ms fade" style="animation-delay:0.6s">
+      <div class="dot"></div>
+      <div class="when">2019-07-03</div>
+      <div class="what"><b>ScharfSandhi</b><span> — сандхи по Шарфу</span></div>
+    </div>
+    <div class="ms fade" style="animation-delay:0.67s">
+      <div class="dot"></div>
+      <div class="when">2019-11-28</div>
+      <div class="what"><b>Parallel-Sanskrit-Corpora</b><span> — параллельные корпуса</span></div>
+    </div>
+    <div class="ms fade" style="animation-delay:0.74s">
+      <div class="dot"></div>
+      <div class="when">2021-03-07</div>
+      <div class="what"><b>MWderivations</b><span> — деривации MW</span></div>
+    </div>
+    <div class="era fade" style="animation-delay:0.6s">
+      <div class="etag">2026-04</div><div class="ename">Большой взрыв</div>
+    </div>
+    <div class="ms fade" style="animation-delay:0.75s">
+      <div class="dot"></div>
+      <div class="when">2026-04-11</div>
+      <div class="what"><b>Systema-Sanscriticum · BookIndex</b><span> — приложение и индекс книг</span></div>
+    </div>
+    <div class="ms fade" style="animation-delay:0.82s">
+      <div class="dot"></div>
+      <div class="when">2026-04-17</div>
+      <div class="what"><b>SanskritKaraoke</b><span> — караоке-шлоки</span></div>
+    </div>
+    <div class="ms fade" style="animation-delay:0.89s">
+      <div class="dot"></div>
+      <div class="when">2026-04-18</div>
+      <div class="what"><b>CommentaryStrategies · VisualDCS · WhitneyRoots · SamasaChakram · SamudraManthanam · AfanasiyNikitin</b><span> — шесть репозиториев за день</span></div>
+    </div>
+    <div class="era fade" style="animation-delay:0.75s">
+      <div class="etag">2026-05–06</div><div class="ename">Тексты и стили</div>
+    </div>
+    <div class="ms fade" style="animation-delay:0.9s">
+      <div class="dot"></div>
+      <div class="when">2026-05-03</div>
+      <div class="what"><b>RuWritingStyles</b><span> — стилевые паспорта</span></div>
+    </div>
+    <div class="ms fade" style="animation-delay:0.97s">
+      <div class="dot"></div>
+      <div class="when">2026-05-12</div>
+      <div class="what"><b>RussianRamayana</b><span> — Рамаяна по-русски</span></div>
+    </div>
+    <div class="ms fade" style="animation-delay:1.04s">
+      <div class="dot"></div>
+      <div class="when">2026-06-06</div>
+      <div class="what"><b>dcs-conllu</b><span> — DCS в CoNLL-U</span></div>
+    </div>
+    <div class="era fade" style="animation-delay:0.9s">
+      <div class="etag">2026-07</div><div class="ename">Словарный квартал</div>
+    </div>
+    <div class="ms fade" style="animation-delay:1.05s">
+      <div class="dot"></div>
+      <div class="when">2026-07-02</div>
+      <div class="what"><b>kosha</b><span> — 111 наборов данных</span></div>
+    </div>
+    <div class="ms fade" style="animation-delay:1.12s">
+      <div class="dot"></div>
+      <div class="when">2026-07-03</div>
+      <div class="what"><b>SanskritGrammar · csl-inflect · buhler-sanskrit-book</b><span> — грамматика и флексия</span></div>
+    </div>
+    <div class="ms fade" style="animation-delay:1.19s">
+      <div class="dot"></div>
+      <div class="when">2026-07-14</div>
+      <div class="what"><b>SanskritSpellCheck</b><span> — 431 596 уникальных заголовков</span></div>
+    </div>
+    <div class="ms fade" style="animation-delay:1.26s">
+      <div class="dot"></div>
+      <div class="when">2026-07-19</div>
+      <div class="what"><b>pwg-ru-lod · IndologyArchiveAtlas</b><span> — связанные данные PWG</span></div>
+    </div>
+    <div class="era fade" style="animation-delay:1.05s">
+      <div class="etag">2026-08</div><div class="ename">Слово становится образом</div>
+    </div>
+    <div class="ms fade" style="animation-delay:1.2s">
+      <div class="dot"></div>
+      <div class="when">2026-07-23</div>
+      <div class="what"><b>prefaces × 6</b><span> — предисловия кёльнских словарей</span></div>
+    </div>
+    <div class="ms fade" style="animation-delay:1.27s">
+      <div class="dot"></div>
+      <div class="when">2026-08-18</div>
+      <div class="what"><b>vote-inbox</b><span> — голосования</span></div>
+    </div>
+    <div class="ms fade" style="animation-delay:1.34s">
+      <div class="dot"></div>
+      <div class="when">2026-08-28</div>
+      <div class="what"><b>«Словарный квартал»</b><span> — первая инфографика серии</span></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
