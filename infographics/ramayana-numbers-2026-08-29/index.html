@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Рамаяна в цифрах</title>
+<!-- Data: local RussianRamayana/data/kandas.json + translations.json, 29.08.2026.
+     7 kandas, 645 sargas (valmikiramayan.net / IIT-Kanpur tradition), ~24000 shlokas canon. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,500&family=PT+Serif:ital,wght@0,400;0,700;1,400&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --paper:#F7F3E8; --ink:#221D14; --ink-soft:rgba(34,29,20,.62); --accent:#A8452A; --gold:#B98A2F;
+  --hair:rgba(34,29,20,.2); --bar:#7A4A22;
+  --font-display:'Playfair Display',serif; --font-serif:'PT Serif',serif; --font-sans:'PT Sans',sans-serif;
+}
+html, body { background: var(--paper); }
+body { width: 1080px; font-family: var(--font-serif); color: var(--ink); }
+.canvas { position: relative; width: 1080px; height: 1920px; overflow: hidden;
+  background: linear-gradient(170deg, #FAF6EC 0%, var(--paper) 55%, #EFE7D3 100%); }
+.kicker { position: absolute; left: 64px; top: 92px; font: 700 14px/1.3 var(--font-sans);
+  letter-spacing: .22em; text-transform: uppercase; color: var(--ink-soft); }
+h1 { position: absolute; left: 64px; top: 124px; font-family: var(--font-display);
+  font-weight: 800; font-size: 72px; line-height: 1.05; }
+.hero { position: absolute; left: 64px; top: 226px; width: 952px; display: flex; gap: 34px; }
+.hv { border-left: 4px solid var(--accent); padding-left: 14px; }
+.hv .n { font-family: var(--font-display); font-weight: 800; font-size: 46px; line-height: 1; }
+.hv .l { font: 400 16px/1.3 var(--font-sans); color: var(--ink-soft); margin-top: 4px; }
+.kandas { position: absolute; left: 64px; top: 366px; width: 952px; display: flex; flex-direction: column; gap: 14px; }
+.kanda { background: rgba(255,255,255,.55); border: 1px solid var(--hair); border-radius: 12px; padding: 14px 18px; display: flex; gap: 18px; }
+.num { font-family: var(--font-display); font-weight: 800; font-size: 40px; color: var(--gold); width: 52px; flex: none; text-align: center; }
+.body { flex: 1; }
+.head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.dev { font-size: 25px; }
+.name { font: 700 19px var(--font-sans); }
+.name i { font-weight: 400; color: var(--ink-soft); }
+.late { font: 700 11px var(--font-sans); letter-spacing: .08em; text-transform: uppercase;
+  color: var(--accent); border: 1.5px solid var(--accent); border-radius: 12px; padding: 2px 9px; }
+.barline { display: flex; align-items: center; gap: 12px; margin-top: 8px; }
+.bar { width: 420px; height: 12px; background: rgba(34,29,20,.1); border-radius: 6px; overflow: hidden; }
+.bar > div { height: 100%; background: var(--bar); }
+.sg { font: 700 15px var(--font-sans); white-space: nowrap; }
+.sum { margin-top: 6px; font: italic 400 15.5px/1.42 var(--font-serif); color: var(--ink-soft); }
+.note { position: absolute; left: 64px; top: 1688px; width: 952px; font: 400 13.5px/1.5 var(--font-sans); color: var(--ink-soft); }
+.trans { position: absolute; left: 64px; top: 1770px; width: 952px; font: 400 14.5px/1.5 var(--font-sans); }
+.trans b { color: var(--accent); }
+.fade { opacity: 0; animation: fadein .55s ease-out forwards; }
+@keyframes fadein { to { opacity: 1; } }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="kicker">Санскритский архив Гасунса · тексты</div>
+  <h1>Рамаяна в цифрах</h1>
+  <div class="hero">
+    <div class="hv"><div class="n">7</div><div class="l">канд</div></div>
+    <div class="hv"><div class="n">645</div><div class="l">сарг (северная традиция)</div></div>
+    <div class="hv"><div class="n">24 000</div><div class="l">шлок в каноническом счёте</div></div>
+    <div class="hv"><div class="n">2</div><div class="l">книги академического перевода вышли</div></div>
+  </div>
+  <div class="kandas">
+    <div class="kanda fade" style="animation-delay:0.5s">
+      <div class="num">I</div>
+      <div class="body">
+        <div class="head"><span class="dev">बालकाण्ड</span><span class="name">Балаканда · <i>Книга о детстве</i></span><span class="late">позднее добавление</span></div>
+        <div class="barline"><div class="bar"><div style="width:252.7px"></div></div><span class="sg">77 сарг</span></div>
+        <div class="sum">Обрамляющий рассказ о том, как Вальмики слагает поэму; рождение Рамы у царя Дашаратхи в Айодхье, детство и учение.</div>
+      </div>
+    </div>
+    <div class="kanda fade" style="animation-delay:0.62s">
+      <div class="num">II</div>
+      <div class="body">
+        <div class="head"><span class="dev">अयोध्याकाण्ड</span><span class="name">Айодхьяканда · <i>Книга об Айодхье</i></span></div>
+        <div class="barline"><div class="bar"><div style="width:390.5px"></div></div><span class="sg">119 сарг</span></div>
+        <div class="sum">Дашаратха готовит венчание Рамы на царство, но царица Кайкейи, напомнив о старых обещаниях, требует изгнать Раму на 14 лет и возвести на трон Бхарату.</div>
+      </div>
+    </div>
+    <div class="kanda fade" style="animation-delay:0.74s">
+      <div class="num">III</div>
+      <div class="body">
+        <div class="head"><span class="dev">अरण्यकाण्ड</span><span class="name">Араньяканда · <i>Книга о лесе</i></span></div>
+        <div class="barline"><div class="bar"><div style="width:246.1px"></div></div><span class="sg">75 сарг</span></div>
+        <div class="sum">Жизнь в лесу Дандака; ракшаси Шурпанакха изувечена, её брат Кхара убит.</div>
+      </div>
+    </div>
+    <div class="kanda fade" style="animation-delay:0.86s">
+      <div class="num">IV</div>
+      <div class="body">
+        <div class="head"><span class="dev">किष्किन्धाकाण्ड</span><span class="name">Кишкиндхаканда · <i>Книга о Кишкиндхе</i></span></div>
+        <div class="barline"><div class="bar"><div style="width:219.8px"></div></div><span class="sg">67 сарг</span></div>
+        <div class="sum">Рама заключает союз с изгнанным царевичем обезьян Сугривой, убивает его брата Валина и возвращает Сугриве трон Кишкиндхи.</div>
+      </div>
+    </div>
+    <div class="kanda fade" style="animation-delay:0.98s">
+      <div class="num">V</div>
+      <div class="body">
+        <div class="head"><span class="dev">सुन्दरकाण्ड</span><span class="name">Сундараканда · <i>Прекрасная книга</i></span></div>
+        <div class="barline"><div class="bar"><div style="width:223.1px"></div></div><span class="sg">68 сарг</span></div>
+        <div class="sum">Хануман перепрыгивает океан на Ланку, находит пленённую Ситу в роще Ашока и передаёт ей перстень Рамы.</div>
+      </div>
+    </div>
+    <div class="kanda fade" style="animation-delay:1.1s">
+      <div class="num">VI</div>
+      <div class="body">
+        <div class="head"><span class="dev">युद्धकाण्ड</span><span class="name">Юддхаканда · <i>Книга о битве</i></span></div>
+        <div class="barline"><div class="bar"><div style="width:420.0px"></div></div><span class="sg">128 сарг</span></div>
+        <div class="sum">Войско Рамы наводит мост через океан на Ланку; великая битва завершается гибелью Раваны.</div>
+      </div>
+    </div>
+    <div class="kanda fade" style="animation-delay:1.22s">
+      <div class="num">VII</div>
+      <div class="body">
+        <div class="head"><span class="dev">उत्तरकाण्ड</span><span class="name">Уттараканда · <i>Заключительная книга</i></span><span class="late">позднее добавление</span></div>
+        <div class="barline"><div class="bar"><div style="width:364.2px"></div></div><span class="sg">111 сарг</span></div>
+        <div class="sum">Долгое царствование Рамы; предыстория Раваны.</div>
+      </div>
+    </div>
+  </div>
+  <div class="note">Число сарг зависит от рецензии: Юддхаканда — 128 (valmikiramayan.net), в ИИТ-Канпур — 131, в критическом издании — 116; Уттараканда — ~111 по северной традиции, 100 в критическом издании. Бала- и Уттараканды считаются поздними добавлениями.</div>
+  <div class="trans">Переводы на русский: <b>П. А. Гринцер</b> — кн. I–II (2006) и кн. III (2014), серия «Литературные памятники»; кн. IV готовит <b>С. Д. Серебряный</b>. Данные: RussianRamayana/data · 29.08.2026</div>
+</div>
+</body>
+</html>
