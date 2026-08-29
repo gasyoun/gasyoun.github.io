@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>MW среди великих</title>
+<!-- Internal: csl-orig &lt;L&gt;. External: Wikipedia OED/DWB; Welt 2017 Duden. 29.08.2026 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;600;700&family=Nunito:wght@400;600;700;800&family=Noto+Mono&family=Noto+Serif+Devanagari:wght@500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#F5EFE3;--ink:#29261F;--sub:rgba(41,38,31,.62);--accent:#C4552F;--card:#FFFFFF;
+--neon:#6FE3C1;--bar:#009B7D;--blue:#4A55C8;--red:#D9503F;
+--font-display:'Comfortaa',sans-serif;--font-body:'Nunito',sans-serif;
+--dev:'Noto Serif Devanagari',serif;--mono:'Noto Mono',monospace}
+html,body{background:var(--bg)}
+body{width:1080px;font-family:var(--font-body);color:var(--ink)}
+.canvas{position:relative;width:1080px;height:1920px;overflow:hidden;background:var(--bg)}
+.kicker{position:absolute;left:64px;top:88px;font:700 13px/1.3 var(--font-body);
+letter-spacing:.16em;text-transform:uppercase;color:var(--sub)}
+h1{position:absolute;left:64px;top:118px;font-family:var(--font-display);
+font-weight:700;font-size:46px;line-height:1.08;width:952px}
+.hero{position:absolute;left:64px;top:230px;width:952px;font:600 16px/1.5 var(--font-body);color:var(--sub)}
+.hero b{color:var(--accent);font-weight:800}
+.foot{position:absolute;left:64px;top:1810px;width:952px;font:400 13px/1.5 var(--font-body);color:var(--sub)}
+.fade{opacity:0;animation:fadein .45s ease-out forwards}
+@keyframes fadein{to{opacity:1}}
+.chip{display:inline-block;padding:3px 10px;border-radius:14px;font:700 12px var(--font-body);background:var(--accent);color:#fff}
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="kicker">Санскритский архив Гасунса · сравнения</div>
+  <h1>Место среди великих</h1>
+  <div class="hero">Санскрит vs великие словари Европы. Внешние цифры <b>с цитатой на странице</b>; наша — из csl-orig. Разные единицы (статья / headword / Stichwort) не смешиваются в один ранг без оговорки.</div><div class="fade" style="position:absolute;left:64px;top:360px;width:952px;animation-delay:0.1s"><div style="font:700 20px var(--font-display)">csl-orig (этот клон)</div><div style="font:800 40px var(--font-display);color:var(--accent)">1 496 157</div><div style="height:18px;background:rgba(41,38,31,.08);border-radius:6px;margin:8px 0"><div style="width:780px;height:100%;background:var(--bar);border-radius:6px"></div></div><div style="font:400 13px var(--font-body);color:var(--sub)">probe.py dicts.total_entries</div></div><div class="fade" style="position:absolute;left:64px;top:700px;width:952px;animation-delay:0.18s"><div style="font:700 20px var(--font-display)">OED</div><div style="font:800 40px var(--font-display);color:var(--accent)">520 779</div><div style="height:18px;background:rgba(41,38,31,.08);border-radius:6px;margin:8px 0"><div style="width:324px;height:100%;background:var(--bar);border-radius:6px"></div></div><div style="font:400 13px var(--font-body);color:var(--sub)">https://en.wikipedia.org/wiki/Oxford_English_Dictionary (as of January 2026)</div></div><div class="fade" style="position:absolute;left:64px;top:1040px;width:952px;animation-delay:0.26s"><div style="font:700 20px var(--font-display)">DWB Grimm</div><div style="font:800 40px var(--font-display);color:var(--accent)">330 000</div><div style="height:18px;background:rgba(41,38,31,.08);border-radius:6px;margin:8px 0"><div style="width:234px;height:100%;background:var(--bar);border-radius:6px"></div></div><div style="font:400 13px var(--font-body);color:var(--sub)">https://en.wikipedia.org/wiki/Deutsches_W%C3%B6rterbuch (first completed DWB)</div></div><div class="fade" style="position:absolute;left:64px;top:1380px;width:952px;animation-delay:0.33999999999999997s"><div style="font:700 20px var(--font-display)">Duden 27</div><div style="font:800 40px var(--font-display);color:var(--accent)">145 000</div><div style="height:18px;background:rgba(41,38,31,.08);border-radius:6px;margin:8px 0"><div style="width:148px;height:100%;background:var(--bar);border-radius:6px"></div></div><div style="font:400 13px var(--font-body);color:var(--sub)">Welt, 19.08.2017, Duden 27. Auflage</div></div>
+  <div class="foot">Посчитано 29.08.2026 · скрипт <span style='font-family:var(--mono)'>scripts/infographics50/probe.py dicts + external_cited</span> · Dr. Mārcis Gasūns</div>
+</div>
+</body>
+</html>
