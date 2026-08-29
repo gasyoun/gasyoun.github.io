@@ -1,0 +1,2294 @@
+{
+  "counted": "29.08.2026",
+  "iso": "2026-08-29",
+  "dicts": {
+    "n_dicts": 44,
+    "total_entries": 1496157,
+    "total_bytes": 384281124,
+    "rows": [
+      {
+        "code": "mw",
+        "entries": 286525,
+        "bytes": 50163282,
+        "print_date": "1899",
+        "title": "Monier-Williams' Sanskrit-English dictionary",
+        "lang": "EN",
+        "script": "csl-orig/v02/mw/mw.txt"
+      },
+      {
+        "code": "pw",
+        "entries": 170556,
+        "bytes": 31495384,
+        "print_date": "1879-1889",
+        "title": "Böhtlingk's Sanskrit-Wörterbuch in Kürzerer Fassung",
+        "lang": "DE",
+        "script": "csl-orig/v02/pw/pw.txt"
+      },
+      {
+        "code": "pwg",
+        "entries": 123366,
+        "bytes": 54634244,
+        "print_date": "1855-1875",
+        "title": "Böhtlingk and Roth's Sanskrit Wörterbuch",
+        "lang": "DE",
+        "script": "csl-orig/v02/pwg/pwg.txt"
+      },
+      {
+        "code": "ap",
+        "entries": 90843,
+        "bytes": 18525907,
+        "print_date": "1957-1959",
+        "title": "Revised and enlarged edition of Prin. V. S. Apte's The practical Sanskrit-English dictionary",
+        "lang": "EN",
+        "script": "csl-orig/v02/ap/ap.txt"
+      },
+      {
+        "code": "mw72",
+        "entries": 55390,
+        "bytes": 17172254,
+        "print_date": "1872",
+        "title": "Monier-Williams's Sanskrit-English Dictionary",
+        "lang": "EN",
+        "script": "csl-orig/v02/mw72/mw72.txt"
+      },
+      {
+        "code": "lrv",
+        "entries": 53441,
+        "bytes": 7125995,
+        "print_date": "1889",
+        "title": "Vaidya Standard Sanskrit-English Dictionary",
+        "lang": "EN",
+        "script": "csl-orig/v02/lrv/lrv.txt"
+      },
+      {
+        "code": "vcp",
+        "entries": 50135,
+        "bytes": 25107867,
+        "print_date": "1873",
+        "title": "",
+        "lang": "other",
+        "script": "csl-orig/v02/vcp/vcp.txt"
+      },
+      {
+        "code": "acc",
+        "entries": 49833,
+        "bytes": 8168907,
+        "print_date": "1891",
+        "title": "Aufrecht's Catalogus Catalogorum",
+        "lang": "other",
+        "script": "csl-orig/v02/acc/acc.txt"
+      },
+      {
+        "code": "shs",
+        "entries": 47326,
+        "bytes": 9244937,
+        "print_date": "1900",
+        "title": "",
+        "lang": "other",
+        "script": "csl-orig/v02/shs/shs.txt"
+      },
+      {
+        "code": "yat",
+        "entries": 45206,
+        "bytes": 5257490,
+        "print_date": "1846",
+        "title": "Yates's Dictionary in Sanscrit and English",
+        "lang": "EN",
+        "script": "csl-orig/v02/yat/yat.txt"
+      },
+      {
+        "code": "wil",
+        "entries": 44577,
+        "bytes": 9960919,
+        "print_date": "1832",
+        "title": "Wilson's dictionary in Sanscrit and English",
+        "lang": "EN",
+        "script": "csl-orig/v02/wil/wil.txt"
+      },
+      {
+        "code": "skd",
+        "entries": 42531,
+        "bytes": 22867341,
+        "print_date": "1886",
+        "title": "",
+        "lang": "other",
+        "script": "csl-orig/v02/skd/skd.txt"
+      },
+      {
+        "code": "cae",
+        "entries": 40069,
+        "bytes": 5311677,
+        "print_date": "1891",
+        "title": "Cappeller's Sanskrit-English Dictionary",
+        "lang": "EN",
+        "script": "csl-orig/v02/cae/cae.txt"
+      },
+      {
+        "code": "ap90",
+        "entries": 34882,
+        "bytes": 11766345,
+        "print_date": "1890",
+        "title": "Apte's Practical Sanskrit-English Dictionary",
+        "lang": "EN",
+        "script": "csl-orig/v02/ap90/ap90.txt"
+      },
+      {
+        "code": "mwe",
+        "entries": 32378,
+        "bytes": 8409021,
+        "print_date": "1851",
+        "title": "Monier-Williams's English-Sanskrit Dictionary",
+        "lang": "EN",
+        "script": "csl-orig/v02/mwe/mwe.txt"
+      },
+      {
+        "code": "ccs",
+        "entries": 30010,
+        "bytes": 3581965,
+        "print_date": "1887",
+        "title": "Cappeller's Sanskrit-Wörterbuch",
+        "lang": "DE",
+        "script": "csl-orig/v02/ccs/ccs.txt"
+      },
+      {
+        "code": "sch",
+        "entries": 29125,
+        "bytes": 4770385,
+        "print_date": "1928",
+        "title": "Schmidt's Nachträge zum Sanskrit-Wörterbuch",
+        "lang": "DE",
+        "script": "csl-orig/v02/sch/sch.txt"
+      },
+      {
+        "code": "pwkvn",
+        "entries": 24976,
+        "bytes": 3066388,
+        "print_date": "1879-1889",
+        "title": "Böhtlingk Sanskrit-Wörterbuch in kürzerer Fassung, Nachträge und Verbesserungen",
+        "lang": "DE",
+        "script": "csl-orig/v02/pwkvn/pwkvn.txt"
+      },
+      {
+        "code": "bor",
+        "entries": 24609,
+        "bytes": 5633427,
+        "print_date": "1877-1881",
+        "title": "Borooah's English-Sanskrit Dictionary",
+        "lang": "EN",
+        "script": "csl-orig/v02/bor/bor.txt"
+      },
+      {
+        "code": "stc",
+        "entries": 24574,
+        "bytes": 5736300,
+        "print_date": "1932",
+        "title": "Stchoupak's Dictionnaire Sanskrit-Français",
+        "lang": "FR",
+        "script": "csl-orig/v02/stc/stc.txt"
+      },
+      {
+        "code": "md",
+        "entries": 20749,
+        "bytes": 6181239,
+        "print_date": "1893",
+        "title": "Macdonell's Sanskrit-English dictionary",
+        "lang": "EN",
+        "script": "csl-orig/v02/md/md.txt"
+      },
+      {
+        "code": "bur",
+        "entries": 19776,
+        "bytes": 4832037,
+        "print_date": "1866",
+        "title": "Burnouf's dictionnaire classique Sanscrit-Francais",
+        "lang": "FR",
+        "script": "csl-orig/v02/bur/bur.txt"
+      },
+      {
+        "code": "bhs",
+        "entries": 17839,
+        "bytes": 7601178,
+        "print_date": "1953",
+        "title": "Edgerton's Buddhist hybrid Sanskrit dictionary",
+        "lang": "SA",
+        "script": "csl-orig/v02/bhs/bhs.txt"
+      },
+      {
+        "code": "pui",
+        "entries": 17512,
+        "bytes": 3916210,
+        "print_date": "1951-1955",
+        "title": "",
+        "lang": "other",
+        "script": "csl-orig/v02/pui/pui.txt"
+      },
+      {
+        "code": "ben",
+        "entries": 17310,
+        "bytes": 5809744,
+        "print_date": "1866",
+        "title": "Benfey's Sanskrit-English Dictionary",
+        "lang": "EN",
+        "script": "csl-orig/v02/ben/ben.txt"
+      },
+      {
+        "code": "gra",
+        "entries": 12785,
+        "bytes": 6419587,
+        "print_date": "1873",
+        "title": "Grassmann's Wörterbuch zum Rig-Veda",
+        "lang": "DE",
+        "script": "csl-orig/v02/gra/gra.txt"
+      },
+      {
+        "code": "inm",
+        "entries": 12647,
+        "bytes": 7023737,
+        "print_date": "1904-1925",
+        "title": "",
+        "lang": "other",
+        "script": "csl-orig/v02/inm/inm.txt"
+      },
+      {
+        "code": "ae",
+        "entries": 11359,
+        "bytes": 4264446,
+        "print_date": "1964",
+        "title": "Apte's Student's English Sanskrit dictionary",
+        "lang": "EN",
+        "script": "csl-orig/v02/ae/ae.txt"
+      },
+      {
+        "code": "bop",
+        "entries": 8961,
+        "bytes": 2116876,
+        "print_date": "1847",
+        "title": "Bopp's Glossarium Sanscritum",
+        "lang": "other",
+        "script": "csl-orig/v02/bop/bop.txt"
+      },
+      {
+        "code": "pe",
+        "entries": 8799,
+        "bytes": 6521202,
+        "print_date": "1975",
+        "title": "",
+        "lang": "other",
+        "script": "csl-orig/v02/pe/pe.txt"
+      },
+      {
+        "code": "fri",
+        "entries": 8155,
+        "bytes": 2305686,
+        "print_date": "",
+        "title": "",
+        "lang": "other",
+        "script": "csl-orig/v02/fri/fri.txt"
+      },
+      {
+        "code": "ieg",
+        "entries": 7932,
+        "bytes": 1811732,
+        "print_date": "1966",
+        "title": "Sircar's Indian Epigraphical Glossary",
+        "lang": "other",
+        "script": "csl-orig/v02/ieg/ieg.txt"
+      },
+      {
+        "code": "armh",
+        "entries": 7907,
+        "bytes": 1346702,
+        "print_date": "1958",
+        "title": "Halāyudhkośaḥ (Abhidhānaratnamālā)",
+        "lang": "other",
+        "script": "csl-orig/v02/armh/armh.txt"
+      },
+      {
+        "code": "gst",
+        "entries": 6780,
+        "bytes": 2653069,
+        "print_date": "1856",
+        "title": ">Goldstücker's Dictionary, Sanskrit and English",
+        "lang": "EN",
+        "script": "csl-orig/v02/gst/gst.txt"
+      },
+      {
+        "code": "lan",
+        "entries": 4944,
+        "bytes": 1403261,
+        "print_date": "1906",
+        "title": "Lanman's Sanskrit Reader",
+        "lang": "SA",
+        "script": "csl-orig/v02/lan/lan.txt"
+      },
+      {
+        "code": "vei",
+        "entries": 3834,
+        "bytes": 3134915,
+        "print_date": "1912",
+        "title": "Macdonell and Keith's Vedic Index of Names and Subjects",
+        "lang": "other",
+        "script": "csl-orig/v02/vei/vei.txt"
+      },
+      {
+        "code": "mci",
+        "entries": 2643,
+        "bytes": 3674321,
+        "print_date": "1993",
+        "title": "Mehendale's Mahabharata Cultural Index",
+        "lang": "other",
+        "script": "csl-orig/v02/mci/mci.txt"
+      },
+      {
+        "code": "krm",
+        "entries": 2061,
+        "bytes": 3355133,
+        "print_date": "1965-1971",
+        "title": "",
+        "lang": "other",
+        "script": "csl-orig/v02/krm/krm.txt"
+      },
+      {
+        "code": "abch",
+        "entries": 1965,
+        "bytes": 581805,
+        "print_date": "1896",
+        "title": "Abhidhānacintāmaṇi",
+        "lang": "other",
+        "script": "csl-orig/v02/abch/abch.txt"
+      },
+      {
+        "code": "nmmb",
+        "entries": 506,
+        "bytes": 87366,
+        "print_date": "1955",
+        "title": "Nāmamālikā",
+        "lang": "other",
+        "script": "csl-orig/v02/nmmb/nmmb.txt"
+      },
+      {
+        "code": "pgn",
+        "entries": 485,
+        "bytes": 832820,
+        "print_date": "1978",
+        "title": "Sharma's personal and geographical names in the Gupta inscriptions",
+        "lang": "other",
+        "script": "csl-orig/v02/pgn/pgn.txt"
+      },
+      {
+        "code": "snp",
+        "entries": 453,
+        "bytes": 294270,
+        "print_date": "1974, 1988",
+        "title": "Meulenbeld's Sanskrit names of plants and their botanical equivalents",
+        "lang": "SA",
+        "script": "csl-orig/v02/snp/snp.txt"
+      },
+      {
+        "code": "acsj",
+        "entries": 240,
+        "bytes": 50122,
+        "print_date": "1896",
+        "title": "Abhidhānacintāmaṇiśiloñcha",
+        "lang": "other",
+        "script": "csl-orig/v02/acsj/acsj.txt"
+      },
+      {
+        "code": "acph",
+        "entries": 163,
+        "bytes": 63631,
+        "print_date": "1896",
+        "title": "Abhidhānacintāmaṇipariśiṣṭa",
+        "lang": "other",
+        "script": "csl-orig/v02/acph/acph.txt"
+      }
+    ]
+  },
+  "mw": {
+    "path": "csl-orig/v02/mw/mw.txt",
+    "entries": 286525,
+    "unique_k1": 194084,
+    "n_s_tags": 350609,
+    "n_lex_tags": 201941,
+    "n_ls_tags": 320599,
+    "letters": [
+      {
+        "slp1": "s",
+        "iast": "s",
+        "deva": "स्",
+        "n": 36866
+      },
+      {
+        "slp1": "p",
+        "iast": "p",
+        "deva": "प्",
+        "n": 31035
+      },
+      {
+        "slp1": "v",
+        "iast": "v",
+        "deva": "व्",
+        "n": 28396
+      },
+      {
+        "slp1": "a",
+        "iast": "a",
+        "deva": "अ",
+        "n": 25599
+      },
+      {
+        "slp1": "k",
+        "iast": "k",
+        "deva": "क्",
+        "n": 20502
+      },
+      {
+        "slp1": "m",
+        "iast": "m",
+        "deva": "म्",
+        "n": 16215
+      },
+      {
+        "slp1": "S",
+        "iast": "ś",
+        "deva": "श्",
+        "n": 14658
+      },
+      {
+        "slp1": "n",
+        "iast": "n",
+        "deva": "न्",
+        "n": 11746
+      },
+      {
+        "slp1": "d",
+        "iast": "d",
+        "deva": "द्",
+        "n": 10874
+      },
+      {
+        "slp1": "u",
+        "iast": "u",
+        "deva": "उ",
+        "n": 8615
+      },
+      {
+        "slp1": "t",
+        "iast": "t",
+        "deva": "त्",
+        "n": 8185
+      },
+      {
+        "slp1": "r",
+        "iast": "r",
+        "deva": "र्",
+        "n": 7742
+      },
+      {
+        "slp1": "g",
+        "iast": "g",
+        "deva": "ग्",
+        "n": 7547
+      },
+      {
+        "slp1": "A",
+        "iast": "ā",
+        "deva": "आ",
+        "n": 7160
+      },
+      {
+        "slp1": "B",
+        "iast": "bh",
+        "deva": "भ्",
+        "n": 6736
+      },
+      {
+        "slp1": "b",
+        "iast": "b",
+        "deva": "ब्",
+        "n": 5591
+      },
+      {
+        "slp1": "c",
+        "iast": "c",
+        "deva": "च्",
+        "n": 5439
+      },
+      {
+        "slp1": "h",
+        "iast": "h",
+        "deva": "ह्",
+        "n": 5198
+      },
+      {
+        "slp1": "j",
+        "iast": "j",
+        "deva": "ज्",
+        "n": 5077
+      },
+      {
+        "slp1": "y",
+        "iast": "y",
+        "deva": "य्",
+        "n": 4456
+      },
+      {
+        "slp1": "l",
+        "iast": "l",
+        "deva": "ल्",
+        "n": 3981
+      },
+      {
+        "slp1": "D",
+        "iast": "dh",
+        "deva": "ध्",
+        "n": 3587
+      },
+      {
+        "slp1": "K",
+        "iast": "kh",
+        "deva": "ख्",
+        "n": 1563
+      },
+      {
+        "slp1": "i",
+        "iast": "i",
+        "deva": "इ",
+        "n": 1359
+      },
+      {
+        "slp1": "e",
+        "iast": "e",
+        "deva": "ए",
+        "n": 1312
+      },
+      {
+        "slp1": "G",
+        "iast": "gh",
+        "deva": "घ्",
+        "n": 1101
+      },
+      {
+        "slp1": "C",
+        "iast": "ch",
+        "deva": "छ्",
+        "n": 830
+      },
+      {
+        "slp1": "z",
+        "iast": "ṣ",
+        "deva": "ष्",
+        "n": 823
+      },
+      {
+        "slp1": "f",
+        "iast": "ṛ",
+        "deva": "ऋ",
+        "n": 779
+      },
+      {
+        "slp1": "P",
+        "iast": "ph",
+        "deva": "फ्",
+        "n": 761
+      },
+      {
+        "slp1": "O",
+        "iast": "au",
+        "deva": "औ",
+        "n": 590
+      },
+      {
+        "slp1": "U",
+        "iast": "ū",
+        "deva": "ऊ",
+        "n": 572
+      },
+      {
+        "slp1": "I",
+        "iast": "ī",
+        "deva": "ई",
+        "n": 339
+      },
+      {
+        "slp1": "E",
+        "iast": "ai",
+        "deva": "ऐ",
+        "n": 314
+      },
+      {
+        "slp1": "o",
+        "iast": "o",
+        "deva": "ओ",
+        "n": 247
+      },
+      {
+        "slp1": "J",
+        "iast": "jh",
+        "deva": "झ्",
+        "n": 214
+      },
+      {
+        "slp1": "q",
+        "iast": "ḍ",
+        "deva": "ड्",
+        "n": 187
+      },
+      {
+        "slp1": "w",
+        "iast": "ṭ",
+        "deva": "ट्",
+        "n": 168
+      },
+      {
+        "slp1": "Q",
+        "iast": "ḍh",
+        "deva": "ढ्",
+        "n": 52
+      },
+      {
+        "slp1": "T",
+        "iast": "th",
+        "deva": "थ्",
+        "n": 31
+      },
+      {
+        "slp1": "W",
+        "iast": "ṭh",
+        "deva": "ठ्",
+        "n": 24
+      },
+      {
+        "slp1": "F",
+        "iast": "ṝ",
+        "deva": "ॠ",
+        "n": 14
+      },
+      {
+        "slp1": "R",
+        "iast": "ṇ",
+        "deva": "ण्",
+        "n": 12
+      },
+      {
+        "slp1": "X",
+        "iast": "ḹ",
+        "deva": "ॡ",
+        "n": 8
+      },
+      {
+        "slp1": "N",
+        "iast": "ṅ",
+        "deva": "ङ्",
+        "n": 7
+      },
+      {
+        "slp1": "Y",
+        "iast": "ñ",
+        "deva": "ञ्",
+        "n": 7
+      },
+      {
+        "slp1": "x",
+        "iast": "ḷ",
+        "deva": "ऌ",
+        "n": 6
+      }
+    ],
+    "top_ls": [
+      {
+        "ls": "L.",
+        "n": 40212
+      },
+      {
+        "ls": "MBh.",
+        "n": 22990
+      },
+      {
+        "ls": "ib.",
+        "n": 10094
+      },
+      {
+        "ls": "RV.",
+        "n": 9707
+      },
+      {
+        "ls": "R.",
+        "n": 9049
+      },
+      {
+        "ls": "W.",
+        "n": 8285
+      },
+      {
+        "ls": "BhP.",
+        "n": 6979
+      },
+      {
+        "ls": "Kathās.",
+        "n": 5926
+      },
+      {
+        "ls": "MW.",
+        "n": 5710
+      },
+      {
+        "ls": "Suśr.",
+        "n": 5690
+      },
+      {
+        "ls": "ŚBr.",
+        "n": 5493
+      },
+      {
+        "ls": "Cat.",
+        "n": 5302
+      },
+      {
+        "ls": "Hariv.",
+        "n": 5229
+      },
+      {
+        "ls": "AV.",
+        "n": 4971
+      },
+      {
+        "ls": "Kāv.",
+        "n": 4662
+      },
+      {
+        "ls": "Mn.",
+        "n": 3519
+      },
+      {
+        "ls": "VarBṛS.",
+        "n": 2958
+      },
+      {
+        "ls": "Rājat.",
+        "n": 2837
+      },
+      {
+        "ls": "TS.",
+        "n": 2663
+      },
+      {
+        "ls": "Pañcat.",
+        "n": 2423
+      }
+    ],
+    "anatomy_kfzRa": {
+      "k1": "kfzRa",
+      "iast": "kṛṣṇa",
+      "deva": "कृष्ण",
+      "n_s_tags": 6,
+      "n_lex_tags": 1,
+      "n_ls_tags": 2,
+      "n_senses": 1,
+      "chars": 261,
+      "lines": 3
+    },
+    "word_encodings": {
+      "slp1": "kfzRa",
+      "iast": "kṛṣṇa",
+      "deva": "कृष्ण",
+      "hk": "kRSNa",
+      "wx": "kqRNa"
+    }
+  },
+  "gam": {
+    "path": "MWinflect/verbs/pysanskritv2/tables/calc_tables.txt",
+    "gam_rows": 20,
+    "present_para_gacC": [
+      {
+        "slp1": "gacCati",
+        "iast": "gacchati",
+        "deva": "गच्छति"
+      },
+      {
+        "slp1": "gacCataH",
+        "iast": "gacchataḥ",
+        "deva": "गच्छतः"
+      },
+      {
+        "slp1": "gacCanti",
+        "iast": "gacchanti",
+        "deva": "गच्छन्ति"
+      },
+      {
+        "slp1": "gacCasi",
+        "iast": "gacchasi",
+        "deva": "गच्छसि"
+      },
+      {
+        "slp1": "gacCaTaH",
+        "iast": "gacchathaḥ",
+        "deva": "गच्छथः"
+      },
+      {
+        "slp1": "gacCaTa",
+        "iast": "gacchatha",
+        "deva": "गच्छथ"
+      },
+      {
+        "slp1": "gacCAmi",
+        "iast": "gacchāmi",
+        "deva": "गच्छामि"
+      },
+      {
+        "slp1": "gacCAvaH",
+        "iast": "gacchāvaḥ",
+        "deva": "गच्छावः"
+      },
+      {
+        "slp1": "gacCAmaH",
+        "iast": "gacchāmaḥ",
+        "deva": "गच्छामः"
+      }
+    ]
+  },
+  "rama": {
+    "path": "MWinflect/nominals/pysanskritv2/tables/calc_tables.txt",
+    "table_rows": 64215,
+    "raw_hit": true,
+    "cells": [
+      {
+        "slot": "N sg",
+        "slp1": "rAmaH",
+        "iast": "rāmaḥ",
+        "deva": "रामः"
+      },
+      {
+        "slot": "N du",
+        "slp1": "rAmO",
+        "iast": "rāmau",
+        "deva": "रामौ"
+      },
+      {
+        "slot": "N pl",
+        "slp1": "rAmAH",
+        "iast": "rāmāḥ",
+        "deva": "रामाः"
+      },
+      {
+        "slot": "A sg",
+        "slp1": "rAmam",
+        "iast": "rāmam",
+        "deva": "रामम्"
+      },
+      {
+        "slot": "A du",
+        "slp1": "rAmO",
+        "iast": "rāmau",
+        "deva": "रामौ"
+      },
+      {
+        "slot": "A pl",
+        "slp1": "rAmAn",
+        "iast": "rāmān",
+        "deva": "रामान्"
+      },
+      {
+        "slot": "I sg",
+        "slp1": "rAmeRa",
+        "iast": "rāmeṇa",
+        "deva": "रामेण"
+      },
+      {
+        "slot": "I du",
+        "slp1": "rAmAByAm",
+        "iast": "rāmābhyām",
+        "deva": "रामाभ्याम्"
+      },
+      {
+        "slot": "I pl",
+        "slp1": "rAmEH",
+        "iast": "rāmaiḥ",
+        "deva": "रामैः"
+      },
+      {
+        "slot": "D sg",
+        "slp1": "rAmAya",
+        "iast": "rāmāya",
+        "deva": "रामाय"
+      },
+      {
+        "slot": "D du",
+        "slp1": "rAmAByAm",
+        "iast": "rāmābhyām",
+        "deva": "रामाभ्याम्"
+      },
+      {
+        "slot": "D pl",
+        "slp1": "rAmeByaH",
+        "iast": "rāmebhyaḥ",
+        "deva": "रामेभ्यः"
+      },
+      {
+        "slot": "Ab sg",
+        "slp1": "rAmAt",
+        "iast": "rāmāt",
+        "deva": "रामात्"
+      },
+      {
+        "slot": "Ab du",
+        "slp1": "rAmAByAm",
+        "iast": "rāmābhyām",
+        "deva": "रामाभ्याम्"
+      },
+      {
+        "slot": "Ab pl",
+        "slp1": "rAmeByaH",
+        "iast": "rāmebhyaḥ",
+        "deva": "रामेभ्यः"
+      },
+      {
+        "slot": "G sg",
+        "slp1": "rAmasya",
+        "iast": "rāmasya",
+        "deva": "रामस्य"
+      },
+      {
+        "slot": "G du",
+        "slp1": "rAmayoH",
+        "iast": "rāmayoḥ",
+        "deva": "रामयोः"
+      },
+      {
+        "slot": "G pl",
+        "slp1": "rAmARAm",
+        "iast": "rāmāṇām",
+        "deva": "रामाणाम्"
+      },
+      {
+        "slot": "L sg",
+        "slp1": "rAme",
+        "iast": "rāme",
+        "deva": "रामे"
+      },
+      {
+        "slot": "L du",
+        "slp1": "rAmayoH",
+        "iast": "rāmayoḥ",
+        "deva": "रामयोः"
+      },
+      {
+        "slot": "L pl",
+        "slp1": "rAmezu",
+        "iast": "rāmeṣu",
+        "deva": "रामेषु"
+      },
+      {
+        "slot": "V sg",
+        "slp1": "rAma",
+        "iast": "rāma",
+        "deva": "राम"
+      },
+      {
+        "slot": "V du",
+        "slp1": "rAmO",
+        "iast": "rāmau",
+        "deva": "रामौ"
+      },
+      {
+        "slot": "V pl",
+        "slp1": "rAmAH",
+        "iast": "rāmāḥ",
+        "deva": "रामाः"
+      }
+    ]
+  },
+  "samasa": {
+    "path": "SamasaChakram/samasacakra/samasacakra-taxonomy.json",
+    "n_classes": 4,
+    "n_leaves": 58,
+    "classes": [
+      {
+        "id": "tatpurusa",
+        "name": "tatpuruṣa",
+        "leaves": 25,
+        "pradhana": "uttarapadārtha-pradhāna — главная правая часть"
+      },
+      {
+        "id": "bahuvrihi",
+        "name": "bahuvrīhi",
+        "leaves": 20,
+        "pradhana": "anyapadārtha-pradhāna — главное слово вне композита"
+      },
+      {
+        "id": "dvandva",
+        "name": "dvandva",
+        "leaves": 2,
+        "pradhana": "ubhayapadārtha-pradhāna — главны обе части"
+      },
+      {
+        "id": "avyayibhava",
+        "name": "avyayībhāva",
+        "leaves": 11,
+        "pradhana": "pūrvapadārtha-pradhāna — главная левая часть"
+      }
+    ]
+  },
+  "sandhi": {
+    "path": "kosha/data/sandhi/corpus_sandhi.tsv",
+    "top": [
+      {
+        "rule": "a a → ā",
+        "category": "vowel coalescence",
+        "n": 45296
+      },
+      {
+        "rule": "m p → ṃ p",
+        "category": "anusvāra / nasal",
+        "n": 26690
+      },
+      {
+        "rule": "m s → ṃ s",
+        "category": "anusvāra / nasal",
+        "n": 23476
+      },
+      {
+        "rule": "m v → ṃ v",
+        "category": "anusvāra / nasal",
+        "n": 22649
+      },
+      {
+        "rule": "m t → ṃ t",
+        "category": "anusvāra / nasal",
+        "n": 22119
+      },
+      {
+        "rule": "ḥ t → s t",
+        "category": "visarga",
+        "n": 21292
+      },
+      {
+        "rule": "m c → ṃ c",
+        "category": "anusvāra / nasal",
+        "n": 20096
+      },
+      {
+        "rule": "ḥ c → ś c",
+        "category": "visarga",
+        "n": 18883
+      },
+      {
+        "rule": "m k → ṃ k",
+        "category": "anusvāra / nasal",
+        "n": 15961
+      },
+      {
+        "rule": "a ā → ā",
+        "category": "vowel coalescence",
+        "n": 15955
+      },
+      {
+        "rule": "m m → ṃ m",
+        "category": "anusvāra / nasal",
+        "n": 14226
+      },
+      {
+        "rule": "m n → ṃ n",
+        "category": "anusvāra / nasal",
+        "n": 12870
+      },
+      {
+        "rule": "m d → ṃ d",
+        "category": "anusvāra / nasal",
+        "n": 11375
+      },
+      {
+        "rule": "a u → o",
+        "category": "vowel coalescence",
+        "n": 10672
+      },
+      {
+        "rule": "a e → ai",
+        "category": "vowel coalescence",
+        "n": 10430
+      }
+    ]
+  },
+  "gita": {
+    "path": "kosha/data/gita/gita_gold_master.tsv",
+    "n_tokens": 9092,
+    "n_lemmas": 3874,
+    "n_chapters": 18,
+    "chapters": [
+      {
+        "ch": 1,
+        "n": 570
+      },
+      {
+        "ch": 2,
+        "n": 957
+      },
+      {
+        "ch": 3,
+        "n": 547
+      },
+      {
+        "ch": 4,
+        "n": 514
+      },
+      {
+        "ch": 5,
+        "n": 356
+      },
+      {
+        "ch": 6,
+        "n": 576
+      },
+      {
+        "ch": 7,
+        "n": 403
+      },
+      {
+        "ch": 8,
+        "n": 379
+      },
+      {
+        "ch": 9,
+        "n": 444
+      },
+      {
+        "ch": 10,
+        "n": 560
+      },
+      {
+        "ch": 11,
+        "n": 875
+      },
+      {
+        "ch": 12,
+        "n": 248
+      },
+      {
+        "ch": 13,
+        "n": 432
+      },
+      {
+        "ch": 14,
+        "n": 329
+      },
+      {
+        "ch": 15,
+        "n": 290
+      },
+      {
+        "ch": 16,
+        "n": 289
+      },
+      {
+        "ch": 17,
+        "n": 339
+      },
+      {
+        "ch": 18,
+        "n": 984
+      }
+    ],
+    "coverage_curve": [
+      {
+        "k": 1,
+        "coverage": 4.31
+      },
+      {
+        "k": 10,
+        "coverage": 15.27
+      },
+      {
+        "k": 25,
+        "coverage": 23.03
+      },
+      {
+        "k": 50,
+        "coverage": 29.06
+      },
+      {
+        "k": 100,
+        "coverage": 36.23
+      },
+      {
+        "k": 200,
+        "coverage": 44.4
+      },
+      {
+        "k": 500,
+        "coverage": 56.74
+      },
+      {
+        "k": 1000,
+        "coverage": 68.2
+      },
+      {
+        "k": 3874,
+        "coverage": 100.0
+      }
+    ],
+    "top100_coverage": 36.23
+  },
+  "sundara": {
+    "path": "CommentaryStrategies/data/leonov_own_notes.json",
+    "meta_only": true,
+    "total_notes": 1058,
+    "sargas_covered": 68,
+    "verses_with_note": 1022,
+    "kostina": 442,
+    "unattributed_in_json": 616
+  },
+  "corpora": {
+    "dcs_conllu_files": 15900,
+    "dcs_path": "dcs-conllu",
+    "parallel_text_files": 8,
+    "parallel_path": "Parallel-Sanskrit-Corpora",
+    "telegram_files": 370,
+    "telegram_path": "telegram-sanskrit-corpus"
+  },
+  "registry": {
+    "handoff_rows": 3549,
+    "by_family": {
+      "Opus": 1041,
+      "Sonnet": 955,
+      "Fable": 646,
+      "Grok": 537,
+      "OxAlpha": 302,
+      "Codex": 38,
+      "Haiku": 20,
+      "Kimi": 1
+    },
+    "gtd": {
+      "@DO": 1276,
+      "@DECIDE": 866,
+      "@WAITING": 124
+    },
+    "paths": [
+      "Uprava/handoffs/README.md",
+      "Uprava/handoffs/REGISTRY_ARCHIVE.md",
+      "Uprava/GTD_NEXT_ACTIONS.md"
+    ]
+  },
+  "git": {
+    "repos": [
+      {
+        "repo": "Uprava",
+        "commits_since_2025": 18827,
+        "workflows": 5
+      },
+      {
+        "repo": "kosha",
+        "commits_since_2025": 269,
+        "workflows": 4
+      },
+      {
+        "repo": "SanskritGrammar",
+        "commits_since_2025": 818,
+        "workflows": 3
+      },
+      {
+        "repo": "SanskritLexicography",
+        "commits_since_2025": 455,
+        "workflows": 9
+      },
+      {
+        "repo": "CommentaryStrategies",
+        "commits_since_2025": 455,
+        "workflows": 4
+      },
+      {
+        "repo": "SanskritKaraoke",
+        "commits_since_2025": 236,
+        "workflows": 7
+      },
+      {
+        "repo": "SanskritSpellCheck",
+        "commits_since_2025": 193,
+        "workflows": 3
+      },
+      {
+        "repo": "Systema-Sanscriticum",
+        "commits_since_2025": 2517,
+        "workflows": 10
+      },
+      {
+        "repo": "IndologyScholars",
+        "commits_since_2025": 773,
+        "workflows": 4
+      },
+      {
+        "repo": "gasyoun.github.io",
+        "commits_since_2025": 127,
+        "workflows": 2
+      },
+      {
+        "repo": "ORS-FAQ",
+        "commits_since_2025": 702,
+        "workflows": 6
+      },
+      {
+        "repo": "SamudraManthanam",
+        "commits_since_2025": 466,
+        "workflows": 10
+      }
+    ],
+    "n_workflows": 67,
+    "n_repos_with_workflows": 12,
+    "commits_since_2025": 25838,
+    "first_dates": [
+      {
+        "repo": "Uprava",
+        "first": "2026-08-29"
+      },
+      {
+        "repo": "kosha",
+        "first": "2026-08-28"
+      },
+      {
+        "repo": "SanskritGrammar",
+        "first": "2026-08-29"
+      },
+      {
+        "repo": "SanskritLexicography",
+        "first": "2026-08-29"
+      },
+      {
+        "repo": "CommentaryStrategies",
+        "first": "2026-08-29"
+      },
+      {
+        "repo": "SanskritKaraoke",
+        "first": "2026-08-28"
+      },
+      {
+        "repo": "SanskritSpellCheck",
+        "first": "2026-08-10"
+      },
+      {
+        "repo": "Systema-Sanscriticum",
+        "first": "2026-08-29"
+      },
+      {
+        "repo": "IndologyScholars",
+        "first": "2026-08-29"
+      },
+      {
+        "repo": "gasyoun.github.io",
+        "first": "2026-08-29"
+      },
+      {
+        "repo": "ORS-FAQ",
+        "first": "2026-08-28"
+      },
+      {
+        "repo": "SamudraManthanam",
+        "first": "2026-08-28"
+      }
+    ],
+    "heat_weekday_week": [
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        0,
+        0,
+        1,
+        1,
+        52,
+        28,
+        57,
+        16,
+        35,
+        47,
+        98,
+        314,
+        286,
+        375,
+        531,
+        341,
+        325,
+        558,
+        581,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        2,
+        0,
+        2,
+        31,
+        5,
+        15,
+        63,
+        10,
+        19,
+        61,
+        65,
+        253,
+        304,
+        285,
+        520,
+        369,
+        81,
+        492,
+        603,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        2,
+        0,
+        0,
+        1,
+        16,
+        34,
+        92,
+        23,
+        35,
+        37,
+        96,
+        338,
+        321,
+        248,
+        378,
+        191,
+        278,
+        443,
+        613,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        2,
+        7,
+        13,
+        15,
+        57,
+        28,
+        53,
+        33,
+        22,
+        68,
+        159,
+        286,
+        392,
+        146,
+        505,
+        402,
+        484,
+        112,
+        213,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        2,
+        7,
+        13,
+        7,
+        69,
+        25,
+        72,
+        50,
+        52,
+        20,
+        189,
+        388,
+        519,
+        573,
+        330,
+        443,
+        423,
+        866,
+        306,
+        636,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        3,
+        1,
+        5,
+        1,
+        27,
+        26,
+        45,
+        24,
+        153,
+        21,
+        69,
+        139,
+        625,
+        380,
+        187,
+        576,
+        338,
+        461,
+        273,
+        631,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        6,
+        1,
+        0,
+        8,
+        3,
+        14,
+        32,
+        7,
+        60,
+        13,
+        52,
+        146,
+        521,
+        511,
+        436,
+        585,
+        317,
+        646,
+        529,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "note": "commit census is the 12 named public/local clones, not the full ~85 estate"
+  },
+  "systema": {
+    "path": "Systema-Sanscriticum/database/seeders/data",
+    "manifests": 6,
+    "csv_files": 133
+  },
+  "indology": {
+    "path": "IndologyScholars",
+    "md_files": 6841
+  },
+  "countvowels": {
+    "path": "SanskritSpellCheck/CountVowels",
+    "rows": [
+      {
+        "file": "atharvaveda-CVC-SLP1.txt",
+        "lines": 18510
+      },
+      {
+        "file": "mbh-CVC-SLP1.txt",
+        "lines": 224885
+      },
+      {
+        "file": "megha-CVC-SLP1.txt",
+        "lines": 4
+      },
+      {
+        "file": "meghadhuta-CVC-SLP1.txt",
+        "lines": 611
+      },
+      {
+        "file": "ramayana-CVC-SLP1.txt",
+        "lines": 38060
+      },
+      {
+        "file": "rigveda-CVC-SLP1.txt",
+        "lines": 22082
+      }
+    ]
+  },
+  "prefaces": {
+    "rows": [
+      {
+        "repo": "prefaces_ieg",
+        "files": 88,
+        "present": true
+      },
+      {
+        "repo": "prefaces_lan",
+        "files": 64,
+        "present": true
+      },
+      {
+        "repo": "prefaces_pe",
+        "files": 59,
+        "present": true
+      },
+      {
+        "repo": "prefaces_pgn",
+        "files": 35,
+        "present": true
+      },
+      {
+        "repo": "prefaces_ae",
+        "files": 18,
+        "present": true
+      },
+      {
+        "repo": "prefaces_gst",
+        "files": 39,
+        "present": true
+      },
+      {
+        "repo": "prefaces_snp",
+        "files": 26,
+        "present": true
+      }
+    ]
+  },
+  "bookindex": {
+    "path": "BookIndex",
+    "md_files": 5839
+  },
+  "typos": {
+    "path": "SanskritSpellCheck/detectors/gold_corrections.tsv",
+    "n": 127,
+    "top_kinds": [
+      {
+        "kind": "# Generated by detectors/build_gold_set.py from corrections_draft/file_first_verified.tsv.",
+        "n": 1
+      },
+      {
+        "kind": "# class=POSITIVE (PASS/SCAN-FIRST): a genuine fileable typo -- detectors should flag `wrong`.",
+        "n": 1
+      },
+      {
+        "kind": "# class=HARM (EDITORIAL/DNF/DROP): NOT a plain typo -- flagging/\"correcting\" `wrong` here is",
+        "n": 1
+      },
+      {
+        "kind": "#   the harm case (duplicate/apparatus collision, do-not-file spelling, or already-stale).",
+        "n": 1
+      },
+      {
+        "kind": "row_id",
+        "n": 1
+      },
+      {
+        "kind": "001",
+        "n": 1
+      },
+      {
+        "kind": "002",
+        "n": 1
+      },
+      {
+        "kind": "003",
+        "n": 1
+      },
+      {
+        "kind": "004",
+        "n": 1
+      },
+      {
+        "kind": "005",
+        "n": 1
+      },
+      {
+        "kind": "006",
+        "n": 1
+      },
+      {
+        "kind": "007",
+        "n": 1
+      }
+    ]
+  },
+  "sanhw1": {
+    "path": "SanskritSpellCheck/sanhw1.txt",
+    "n_headwords": 431596,
+    "letters": [
+      {
+        "slp1": "a",
+        "iast": "a",
+        "deva": "अ",
+        "n": 132318
+      },
+      {
+        "slp1": "s",
+        "iast": "s",
+        "deva": "स्",
+        "n": 40013
+      },
+      {
+        "slp1": "p",
+        "iast": "p",
+        "deva": "प्",
+        "n": 35048
+      },
+      {
+        "slp1": "v",
+        "iast": "v",
+        "deva": "व्",
+        "n": 30503
+      },
+      {
+        "slp1": "k",
+        "iast": "k",
+        "deva": "क्",
+        "n": 24785
+      },
+      {
+        "slp1": "m",
+        "iast": "m",
+        "deva": "म्",
+        "n": 17781
+      },
+      {
+        "slp1": "S",
+        "iast": "ś",
+        "deva": "श्",
+        "n": 15994
+      },
+      {
+        "slp1": "n",
+        "iast": "n",
+        "deva": "न्",
+        "n": 13791
+      },
+      {
+        "slp1": "d",
+        "iast": "d",
+        "deva": "द्",
+        "n": 13328
+      },
+      {
+        "slp1": "t",
+        "iast": "t",
+        "deva": "त्",
+        "n": 10175
+      },
+      {
+        "slp1": "u",
+        "iast": "u",
+        "deva": "उ",
+        "n": 9999
+      },
+      {
+        "slp1": "A",
+        "iast": "ā",
+        "deva": "आ",
+        "n": 9250
+      },
+      {
+        "slp1": "g",
+        "iast": "g",
+        "deva": "ग्",
+        "n": 9197
+      },
+      {
+        "slp1": "r",
+        "iast": "r",
+        "deva": "र्",
+        "n": 8583
+      },
+      {
+        "slp1": "B",
+        "iast": "bh",
+        "deva": "भ्",
+        "n": 7391
+      },
+      {
+        "slp1": "c",
+        "iast": "c",
+        "deva": "च्",
+        "n": 6822
+      },
+      {
+        "slp1": "b",
+        "iast": "b",
+        "deva": "ब्",
+        "n": 6515
+      },
+      {
+        "slp1": "j",
+        "iast": "j",
+        "deva": "ज्",
+        "n": 6285
+      },
+      {
+        "slp1": "h",
+        "iast": "h",
+        "deva": "ह्",
+        "n": 5748
+      },
+      {
+        "slp1": "y",
+        "iast": "y",
+        "deva": "य्",
+        "n": 4718
+      },
+      {
+        "slp1": "l",
+        "iast": "l",
+        "deva": "ल्",
+        "n": 4391
+      },
+      {
+        "slp1": "D",
+        "iast": "dh",
+        "deva": "ध्",
+        "n": 4099
+      },
+      {
+        "slp1": "K",
+        "iast": "kh",
+        "deva": "ख्",
+        "n": 1943
+      },
+      {
+        "slp1": "i",
+        "iast": "i",
+        "deva": "इ",
+        "n": 1862
+      },
+      {
+        "slp1": "e",
+        "iast": "e",
+        "deva": "ए",
+        "n": 1644
+      },
+      {
+        "slp1": "G",
+        "iast": "gh",
+        "deva": "घ्",
+        "n": 1259
+      },
+      {
+        "slp1": "z",
+        "iast": "ṣ",
+        "deva": "ष्",
+        "n": 1126
+      },
+      {
+        "slp1": "C",
+        "iast": "ch",
+        "deva": "छ्",
+        "n": 1033
+      },
+      {
+        "slp1": "f",
+        "iast": "ṛ",
+        "deva": "ऋ",
+        "n": 927
+      },
+      {
+        "slp1": "P",
+        "iast": "ph",
+        "deva": "फ्",
+        "n": 917
+      },
+      {
+        "slp1": "O",
+        "iast": "au",
+        "deva": "औ",
+        "n": 811
+      },
+      {
+        "slp1": "U",
+        "iast": "ū",
+        "deva": "ऊ",
+        "n": 762
+      },
+      {
+        "slp1": "I",
+        "iast": "ī",
+        "deva": "ई",
+        "n": 514
+      },
+      {
+        "slp1": "E",
+        "iast": "ai",
+        "deva": "ऐ",
+        "n": 476
+      },
+      {
+        "slp1": "o",
+        "iast": "o",
+        "deva": "ओ",
+        "n": 419
+      },
+      {
+        "slp1": "J",
+        "iast": "jh",
+        "deva": "झ्",
+        "n": 334
+      },
+      {
+        "slp1": "q",
+        "iast": "ḍ",
+        "deva": "ड्",
+        "n": 275
+      },
+      {
+        "slp1": "w",
+        "iast": "ṭ",
+        "deva": "ट्",
+        "n": 258
+      },
+      {
+        "slp1": "R",
+        "iast": "ṇ",
+        "deva": "ण्",
+        "n": 87
+      },
+      {
+        "slp1": "Q",
+        "iast": "ḍh",
+        "deva": "ढ्",
+        "n": 84
+      },
+      {
+        "slp1": "T",
+        "iast": "th",
+        "deva": "थ्",
+        "n": 66
+      },
+      {
+        "slp1": "W",
+        "iast": "ṭh",
+        "deva": "ठ्",
+        "n": 40
+      },
+      {
+        "slp1": "x",
+        "iast": "ḷ",
+        "deva": "ऌ",
+        "n": 7
+      },
+      {
+        "slp1": "N",
+        "iast": "ṅ",
+        "deva": "ङ्",
+        "n": 6
+      },
+      {
+        "slp1": "Y",
+        "iast": "ñ",
+        "deva": "ञ्",
+        "n": 5
+      },
+      {
+        "slp1": "F",
+        "iast": "ṝ",
+        "deva": "ॠ",
+        "n": 3
+      },
+      {
+        "slp1": "X",
+        "iast": "ḹ",
+        "deva": "ॡ",
+        "n": 2
+      },
+      {
+        "slp1": "L",
+        "iast": "ḻ",
+        "deva": "ळ्",
+        "n": 2
+      }
+    ]
+  },
+  "grammar": {
+    "path": "SanskritGrammar",
+    "md_files": 2299
+  },
+  "astadhyayi_sandhi": {
+    "path": "kosha/data/sandhi/astadhyayi_sandhi.tsv",
+    "top": [
+      {
+        "rule": "ḥ c → ś c",
+        "category": "visarga",
+        "n": 291
+      },
+      {
+        "rule": "a a → ā",
+        "category": "vowel coalescence",
+        "n": 170
+      },
+      {
+        "rule": "a ā → ā",
+        "category": "vowel coalescence",
+        "n": 146
+      },
+      {
+        "rule": "aḥ a → o a",
+        "category": "visarga",
+        "n": 145
+      },
+      {
+        "rule": "t a → d a",
+        "category": "consonant / other",
+        "n": 99
+      },
+      {
+        "rule": "i a → y a",
+        "category": "vowel coalescence",
+        "n": 98
+      },
+      {
+        "rule": "ḥ a → r a",
+        "category": "visarga",
+        "n": 98
+      },
+      {
+        "rule": "t c → c c",
+        "category": "consonant / other",
+        "n": 82
+      },
+      {
+        "rule": "m c → ṃ c",
+        "category": "anusvāra / nasal",
+        "n": 72
+      },
+      {
+        "rule": "ḥ t → s t",
+        "category": "visarga",
+        "n": 65
+      },
+      {
+        "rule": "a u → o",
+        "category": "vowel coalescence",
+        "n": 65
+      },
+      {
+        "rule": "aḥ a → o '",
+        "category": "visarga",
+        "n": 60
+      }
+    ],
+    "sum_top_file_counts": 3724,
+    "full_8book_text": false
+  },
+  "external_cited": {
+    "oed_entries": 520779,
+    "oed_source": "https://en.wikipedia.org/wiki/Oxford_English_Dictionary (as of January 2026)",
+    "dwb_headwords": 330000,
+    "dwb_source": "https://en.wikipedia.org/wiki/Deutsches_W%C3%B6rterbuch (first completed DWB)",
+    "duden_27_words": 145000,
+    "duden_source": "Welt, 19.08.2017, Duden 27. Auflage"
+  },
+  "replacements": {
+    "18": {
+      "reason": "no verified full 8-book sūtra text on this box",
+      "instead": "countvowels epic CVC census + astadhyayi_sandhi.tsv top rules (not a city of 8 books)"
+    },
+    "27": {
+      "reason": "no anonymized public ORS funnel aggregates in-repo without personal-data risk",
+      "instead": "prefaces_* 7-repo file census"
+    }
+  }
+}
