@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>One-line audit probes — click to copy</title>
+<style>
+  :root {
+    --bg: #fafaf8; --fg: #1c1c1e; --muted: #6e6e73; --card: #ffffff;
+    --line: #e5e5e0; --accent: #0a66c2; --done: #2e7d32; --donebg: #eef7ee;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #141416; --fg: #f2f2f2; --muted: #98989d; --card: #1f1f22;
+      --line: #333336; --accent: #6cb2ff; --done: #7dd487; --donebg: #1d2b1e;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0 auto; padding: 1.25rem 1rem 4rem; max-width: 46rem;
+    background: var(--bg); color: var(--fg);
+    font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  h1 { font-size: 1.25rem; margin: 0 0 .25rem; }
+  .sub { color: var(--muted); margin: 0 0 1rem; font-size: .9rem; }
+  .bar {
+    display: flex; align-items: center; gap: .75rem; flex-wrap: wrap;
+    padding: .6rem .9rem; background: var(--card); border: 1px solid var(--line);
+    border-radius: 10px; margin-bottom: 1.5rem; position: sticky; top: .5rem; z-index: 5;
+  }
+  #progress { font-size: .85rem; color: var(--muted); }
+  #progress b { color: var(--fg); }
+  .bar button {
+    font-size: .8rem; padding: .25rem .6rem; border-radius: 7px;
+    border: 1px solid var(--line); background: var(--bg); color: var(--fg); cursor: pointer;
+  }
+  .bar button:hover { border-color: var(--accent); color: var(--accent); }
+  h2 { font-size: 1rem; margin: 1.75rem 0 .5rem; padding-bottom: .3rem; border-bottom: 1px solid var(--line); }
+  .q {
+    display: flex; align-items: flex-start; gap: .65rem; width: 100%;
+    text-align: left; padding: .55rem .75rem; margin: 0 0 .45rem;
+    background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+    color: var(--fg); font: inherit; font-size: .95rem; cursor: pointer;
+  }
+  .q:hover { border-color: var(--accent); }
+  .q .idx { color: var(--muted); font-size: .78rem; min-width: 1.6rem; padding-top: .1rem; }
+  .q .txt { flex: 1; }
+  .q .tag { color: var(--muted); font-size: .72rem; padding-top: .15rem; white-space: nowrap; }
+  .q.copied { border-color: var(--done); background: var(--donebg); }
+  .q.copied .tag { color: var(--done); font-weight: 600; }
+  #toast {
+    position: fixed; left: 50%; bottom: 1.25rem; transform: translateX(-50%);
+    background: var(--fg); color: var(--bg); font-size: .8rem;
+    padding: .4rem .9rem; border-radius: 999px; opacity: 0; pointer-events: none;
+    transition: opacity .18s ease;
+  }
+  #toast.show { opacity: 1; }
+</style>
+</head>
+<body>
+<h1>One-line audit probes</h1>
+<p class="sub">39 questions · click a line → it copies to clipboard · click again to re-copy · progress is remembered locally in this browser.</p>
+
+<div class="bar">
+  <span id="progress"><b>0</b> / 39 copied</span>
+  <button id="reset" type="button">Reset progress</button>
+</div>
+
+<div id="list"></div>
+<div id="toast">Copied</div>
+
+<script>
+const SECTIONS = [
+["Graph & knowledge", [
+ "Which hub-doc claims are load-bearing but unverified?",
+ "Where do two repos silently own the same asset?",
+ "What edges does the graph imply but not yet register?",
+ "Which datasets have had zero consumers for 60+ days?",
+ "Is the Type-D ID grammar actually used wherever IDs cross repos?",
+ "What knowledge exists only in chat transcripts, no hub?"
+]],
+["Automation & ops", [
+ "What breaks silently at 02:00 besides interlinks?",
+ "Which of the ~250 skills never fire — and which fire always?",
+ "Where is identical logic re-implemented across Claude/Codex/Grok twins?",
+ "What automation dies if this one machine or path disappears?",
+ "Which guards have never once been tripped in anger?"
+]],
+["Data integrity & rights", [
+ "Who can corrupt human-reviewed stores today? (Q7 refresh)",
+ "Which derived datasets fail end-to-end regeneration right now?",
+ "Where do rights gates live in memory instead of a ledger?",
+ "What is unrecoverable if GitHub/ vanishes tonight?"
+]],
+["Security & prod", [
+ "Is samskrtam.ru clean per the full H3164 contract — proven, not declared?",
+ "What secrets surface outside already-audited scopes?",
+ "What's our real MTTR across past incidents?"
+]],
+["Research & publication", [
+ "Which papers cite numbers that moved upstream after drafting?",
+ "What single blocker keeps every readiness-4 paper unsent?",
+ "Which paper-backing datasets lack citable DOIs?",
+ "Which shortlisted venues have died or drifted scope?"
+]],
+["Product & revenue", [
+ "What funnel facts do pending decisions need that we don't instrument?",
+ "Which Tier-0 autumn assumptions still have no metric attached?",
+ "Where does money arithmetic depend on manual ledgers?",
+ "What's missing to produce a trial\u2192paid cohort report?"
+]],
+["Process & meta", [
+ "What does main-tree contention cost us per week, measured?",
+ "Which @DECIDE/@WAITING rows age past policy unnoticed?",
+ "Are the AGENTS.md generated blocks worth their token budget?",
+ "If you vanished for a month, what rots first?"
+]],
+["Voting & human gates", [
+ "How many review sheets are sitting unvoted, and how old is the oldest?",
+ "Which votes landed as decisions.json but were never applied downstream?",
+ "Do all human gates route through the standard sheet emitter, or do banned markdown-checkbox sheets still circulate?",
+ "What's the measured round-trip from sheet issuance \u2192 vote \u2192 applied change?",
+ "When multi-reviewer ballots disagree, is the disagreement preserved as data or discarded?",
+ "Do quorum rules exist where they matter — and are they enforced by the pipeline, not by memory?",
+ "What's the voter-fatigue curve: how many sheets per week land on one person, and does decision quality decay?",
+ "Does every visa-type decision carry an immutable audit trail from ballot \u2192 import \u2192 applied change?",
+ "When a fix lands in one sheet's builder or the shared emitter, are all not-yet-voted sheets rebuilt to the new standard automatically — while voted ones are provably untouched?"
+]]
+];
+
+const KEY = "probes-2026-08-29-copied";
+let done = new Set(JSON.parse(localStorage.getItem(KEY) || "[]"));
+let n = 0;
+const list = document.getElementById("list");
+const toast = document.getElementById("toast");
+
+function save() { localStorage.setItem(KEY, JSON.stringify([...done])); updateBar(); }
+function updateBar() {
+  document.getElementById("progress").innerHTML = "<b>" + done.size + "</b> / " + n + " copied";
+}
+function showToast(msg) {
+  toast.textContent = msg;
+  toast.classList.add("show");
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(() => toast.classList.remove("show"), 1200);
+}
+function copyText(text, btn) {
+  const ok = () => { btn.classList.add("copied"); btn.querySelector(".tag").textContent = "copied \u2713"; showToast("Copied"); save(); };
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text).then(ok).catch(() => fallback(text, ok));
+  } else { fallback(text, ok); }
+}
+function fallback(text, ok) {
+  const ta = document.createElement("textarea");
+  ta.value = text;
+  ta.style.cssText = "position:fixed;opacity:0";
+  document.body.appendChild(ta);
+  ta.select();
+  try { document.execCommand("copy"); ok(); }
+  catch (e) { showToast("Copy failed — select the line manually"); }
+  document.body.removeChild(ta);
+}
+
+SECTIONS.forEach(([title, questions]) => {
+  const h = document.createElement("h2");
+  h.textContent = title + "  ·  " + questions.length;
+  list.appendChild(h);
+  questions.forEach(q => {
+    n++;
+    const i = n;
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "q";
+    btn.innerHTML = '<span class="idx">' + i + '</span><span class="txt"></span><span class="tag">click to copy</span>';
+    btn.querySelector(".txt").textContent = q;
+    if (done.has(i)) btn.classList.add("copied"), btn.querySelector(".tag").textContent = "copied \u2713";
+    btn.addEventListener("click", () => {
+      btn.querySelector(".tag").textContent = "click to copy";
+      btn.classList.remove("copied");
+      copyText(q, btn);
+    });
+    list.appendChild(btn);
+  });
+});
+
+document.getElementById("reset").addEventListener("click", () => {
+  done.clear();
+  document.querySelectorAll(".q").forEach(b => { b.classList.remove("copied"); b.querySelector(".tag").textContent = "click to copy"; });
+  save();
+  showToast("Progress reset");
+});
+updateBar();
+</script>
+</body>
+</html>
