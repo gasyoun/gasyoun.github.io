@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="color-scheme" content="dark">
+<title>Aging-audit рулинги — 5 новых решений (29-08-2026) — 5 items</title>
+<style>
+  :root { color-scheme: dark; --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --text:#e6e6e6; --muted:#9aa0aa;
+          --accent:#5b8cff; --ok:#3fb950; --bad:#f85149; --defer:#d29922; --border:#2a2f3a; }
+  * { box-sizing: border-box; }
+  body { background:var(--bg); color:var(--text); font-family:-apple-system,Segoe UI,Roboto,sans-serif;
+         margin:0; padding:0 0 120px 0; }
+  header.top { position:sticky; top:0; z-index:10; background:var(--panel); border-bottom:1px solid var(--border);
+               padding:14px 20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+  header.top h1 { font-size:16px; margin:0; }
+  header.top .sub { color:var(--muted); font-size:12px; max-width:760px; }
+  .tally { display:flex; gap:14px; font-size:13px; }
+  .tally span.count { font-weight:700; }
+  .tally .approve { color:var(--ok); } .tally .reject { color:var(--bad); }
+  .tally .defer { color:var(--defer); } .tally .unvoted { color:var(--muted); }
+  .toolbar { padding:10px 20px; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  button.dl { background:var(--accent); color:#fff; border:none; padding:8px 14px; border-radius:6px;
+              cursor:pointer; font-size:13px; }
+  button.dl:hover { opacity:.9; }
+  .filterbar { display:flex; gap:6px; flex-wrap:wrap; }
+  .filterbar button { background:var(--panel2); border:1px solid var(--border); color:var(--text);
+                       padding:6px 10px; border-radius:14px; font-size:12px; cursor:pointer; }
+  .filterbar button.active { border-color:var(--accent); color:var(--accent); }
+  main { max-width:980px; margin:0 auto; padding:10px 20px; }
+  .card { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:16px;
+          margin-bottom:16px; }
+  .card.voted-approve { border-left:4px solid var(--ok); }
+  .card.voted-reject { border-left:4px solid var(--bad); }
+  .card.voted-defer { border-left:4px solid var(--defer); }
+  .card header { display:flex; justify-content:space-between; align-items:baseline; }
+  .card .hw { font-size:18px; font-weight:700; }
+  .badge { font-size:11px; background:var(--panel2); padding:2px 8px; border-radius:10px;
+           margin-left:8px; color:var(--muted); }
+  .question { margin:8px 0 12px; font-size:14px; }
+  .panel { background:var(--panel2); border-radius:8px; padding:10px 12px; font-size:13px; margin-bottom:10px; }
+  .panel h4 { margin:0 0 6px; font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+  .panel pre { white-space:pre-wrap; word-break:break-word; margin:0; font-size:12px; line-height:1.45; }
+  .chip { display:inline-block; background:#263042; border-radius:5px; padding:2px 7px; margin:2px 3px 2px 0; font-size:12px; }
+  .muted { color:var(--muted); font-style:italic; }
+  .controls { display:flex; align-items:center; gap:8px; margin-top:4px; }
+  button.vote { border:1px solid var(--border); background:var(--panel2); color:var(--text);
+                padding:7px 12px; border-radius:6px; cursor:pointer; font-size:13px; }
+  button.vote.approve.active { background:var(--ok); border-color:var(--ok); color:#04240b; }
+  button.vote.reject.active { background:var(--bad); border-color:var(--bad); color:#2a0a08; }
+  button.vote.defer.active { background:var(--defer); border-color:var(--defer); color:#2a1d02; }
+  .vote-state { margin-left:6px; font-size:12px; color:var(--muted); }
+  textarea.note { width:100%; margin-top:10px; min-height:110px; background:#11141a !important; color:#e6e6e6 !important;
+                  -webkit-text-fill-color:#e6e6e6; border:1px solid var(--border); border-radius:6px; padding:8px; font-size:13px;
+                  font-family:inherit; resize:vertical; }
+  textarea.note::placeholder { color:var(--muted); opacity:1; }
+  footer.hint { max-width:980px; margin:20px auto; padding:0 20px; color:var(--muted); font-size:12px; }
+  kbd { background:#263042; border-radius:4px; padding:1px 5px; font-size:11px; }
+
+  .screening-banner { margin: 0 20px 12px; padding: 10px 14px; border-radius: 8px;
+    border: 1px solid var(--accent); background: #152033; font-size: 12px; line-height: 1.45;
+    color: var(--text); max-width: 980px; }
+  .screening-banner code { font-size: 11px; color: var(--accent); }
+  .screening-banner .sc-d { color: var(--defer); font-weight: 700; }
+
+  .idchip { font-family:ui-monospace,Consolas,monospace; font-size:11px; color:var(--muted);
+            background:var(--panel2); border:1px solid var(--border); padding:2px 7px;
+            border-radius:6px; user-select:all; }
+  .card header { gap:10px; }
+  .hw a.hwlink { color:inherit; text-decoration:underline dotted; text-underline-offset:3px; }
+  .hw a.hwlink:hover { color:var(--accent); }
+  mark.hl { background:#453407; color:#ffd75e; padding:0 2px; border-radius:3px; }
+  .savebanner { max-width:980px; margin:10px auto 0; padding:8px 20px; font-size:12.5px; }
+  .savebanner code { background:var(--panel2); border:1px solid var(--border); padding:1px 6px; border-radius:5px; }
+  .ratingrow { display:flex; align-items:center; gap:6px; margin-top:10px; flex-wrap:wrap; }
+  .ratinglabel { font-size:12px; color:var(--muted); margin-right:4px; }
+  button.rate { border:1px solid var(--border); background:var(--panel2); color:var(--text);
+                width:34px; padding:6px 0; border-radius:6px; cursor:pointer; font-size:13px; }
+  button.rate.active { background:var(--accent); border-color:var(--accent); color:#fff; }
+  button.rate.active.below { background:var(--defer); border-color:var(--defer); color:#2a1d02; }
+  .rate-state { font-size:12px; color:var(--muted); margin-left:4px; }
+  :root { --fs:1.5; }
+  header.top h1 { font-size:calc(16px * var(--fs)) !important; }
+  header.top .sub { font-size:calc(12px * var(--fs)) !important; }
+  .tally, button.dl, button.vote, button.rate, textarea.note, .reject-label-select,
+  #strictReviewerWrap, #strictReviewerWrap input { font-size:calc(13px * var(--fs)) !important; }
+  .filterbar button, .fsctl button, .fsctl .fsval, .chip, .vote-state, .rate-state,
+  .ratinglabel, .rejectlabellabel, footer.hint, div.legend,
+  #strictReviewError { font-size:calc(12px * var(--fs)) !important; }
+  .card .hw { font-size:calc(18px * var(--fs)) !important; }
+  .badge, .panel h4, kbd, .idchip { font-size:calc(11px * var(--fs)) !important; }
+  .question { font-size:calc(14px * var(--fs)) !important; }
+  .panel { font-size:calc(13px * var(--fs)) !important; }
+  .panel pre { font-size:calc(13.5px * var(--fs)) !important; line-height:1.55; }
+  .panel .anatomy { font-size:calc(12.5px * var(--fs)) !important; }
+  .savebanner { font-size:calc(12.5px * var(--fs)) !important; }
+  .fsctl { display:flex; align-items:center; gap:4px; }
+  .fsctl button { background:var(--panel2); border:1px solid var(--border); color:var(--text);
+                  padding:6px 10px; border-radius:14px; cursor:pointer; line-height:1; }
+  .fsctl .fsval { color:var(--muted); min-width:3.4em; text-align:center; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>Aging-audit рулинги — 5 новых решений (29-08-2026) — 5 items</h1>
+    <div class="sub">Generated 29-08-2026 &middot; sheet_id <code>uprava-aging-audit_29-08-26</code> &middot; Generated 29-08-2026 · sheet_id <code>uprava-aging-audit_29-08-26</code> · 5 карточек из <a href='https://github.com/gasyoun/Uprava/blob/main/docs/REPORT_GTD_AGING_AUDIT_29-08-2026.md'>аудита старения GTD</a>: строки, состарившиеся мимо всякой политики. Ничего не дублирует <a href='https://gasyoun.github.io/vote/sheets/uprava_vote_session_28-08-26.html'>лист 28-08</a> (Top-10 live @DECIDE и ретайр 53 мёртвых остаются там). На каждой карточке варианты одним предложением + рекомендация; Одобрить = принять рекомендацию; после голоса скачайте decisions.json — применяющий проход подхватит.</div>
+  </div>
+  <div class="tally" id="tally">
+    <span class="approve">&#9989; <span class="count" id="c-approve">0</span></span>
+    <span class="reject">&#10060; <span class="count" id="c-reject">0</span></span>
+    <span class="defer">&#9208; <span class="count" id="c-defer">0</span></span>
+    <span class="unvoted">&#9711; <span class="count" id="c-unvoted">5</span></span>
+  </div>
+</header>
+<aside class="screening-banner" role="status" data-screening="1"><strong>Screening (H1649)</strong> — only human-required cards are below. Off the plate: <span class="sc-a">deterministic 0</span> · <span class="sc-b">dataset lookup 0</span> · <span class="sc-c">agent adjudication 0</span> (total screened 0). Human cards: <span class="sc-d">5</span>. Evidence: <code>docs/REPORT_GTD_AGING_AUDIT_29-08-2026.md</code>. Rules: open @DECIDE rows aged &gt;=32 days (or the aging-policy adoption itself), hand-carded from GTD_NEXT_ACTIONS.md + GTD_ARCHIVE.md; nothing already carded on the 28-08 session sheet.</aside>
+<div class="savebanner">&#128229; Your export downloads as <code>uprava-aging-audit_29-08-26_decisions.json</code> &rarr; save it to <code>review/uprava-aging-audit_29-08-26_decisions.json</code> (the <code>sheet_id</code> inside the file is <code>uprava-aging-audit_29-08-26</code> — that is how a later session knows which sheet these decisions belong to).</div>
+<div class="toolbar">
+  <button class="dl" id="downloadBtn">Download decisions.json</button><button class="dl" id="saveBtn" style="display:none;margin-left:8px">Save to folder…</button>
+  <div class="fsctl" title="text size — persists in this browser"><button type="button" id="fsDown" aria-label="smaller text">A&minus;</button><span class="fsval" id="fsVal"></span><button type="button" id="fsUp" aria-label="larger text">A+</button></div>
+  <div class="filterbar" id="filterbar"><button data-filter="all" class="active">all</button><button data-filter="all">все</button><button data-filter="policy">политика</button><button data-filter="money">деньги</button><button data-filter="docs">доки</button><button data-filter="rights">права</button><button data-filter="infra">инфра</button><button data-filter="unvoted">unvoted only</button></div>
+</div>
+<main id="cards">
+
+  <section class="card" data-id="aging_policy" data-filt="policy">
+    <header><div class="hw">Политика старения GTD-строк (@DECIDE&gt;14d / @WAITING&gt;30d) </div><span class="idchip" title="card id — cite this id back when discussing this card">aging_policy</span></header>
+    <div class="question"><p><b><mark class="hl">Принять</mark> <mark class="hl">политику</mark> <mark class="hl">старения</mark>:</b> <code>@DECIDE</code> <mark class="hl">открытая</mark> &gt;14 <mark class="hl">дней</mark> — <mark class="hl">сегмент</mark> ⏰ <mark class="hl">в</mark> <a href='https://github.com/gasyoun/Uprava/blob/main/BLOCKERS.md'>BLOCKERS.md</a> + re-surface <mark class="hl">на</mark> <mark class="hl">голосование</mark>; <code>@WAITING</code> &gt;30 <mark class="hl">дней</mark> — ⏳; <mark class="hl">строки</mark> <mark class="hl">без</mark> <mark class="hl">даты</mark> — ⚠️; <mark class="hl">рост</mark> aged-@DECIDE <mark class="hl">сверх</mark> max(2, 20%) <mark class="hl">валит</mark> <code>build_blockers --check/--land</code> (escape <code>BLOCKERS_AGED_GROWTH_OVERRIDE=1</code>, <mark class="hl">один</mark> <mark class="hl">прогон</mark>).</p><p><mark class="hl">Уже</mark> <mark class="hl">исполнено</mark> <mark class="hl">как</mark> <mark class="hl">код</mark> (aging alarm 29-08, <mark class="hl">тесты</mark> 15/15) — <mark class="hl">голос</mark> <mark class="hl">ратифицирует</mark> <mark class="hl">пороги</mark> <mark class="hl">как</mark> <mark class="hl">ПОЛИТИКУ</mark>, <mark class="hl">а</mark> <mark class="hl">не</mark> <mark class="hl">моё</mark> <mark class="hl">одноразовое</mark> <mark class="hl">усмотрение</mark>. <mark class="hl">Отклонить</mark> = <mark class="hl">снять</mark> <mark class="hl">гейт</mark>, <mark class="hl">оставить</mark> <mark class="hl">только</mark> <mark class="hl">отчётные</mark> <mark class="hl">секции</mark>.</p></div>
+    <div class="panel"><h4>Контекст</h4><p>Сегодняшний честный ценз: aged @DECIDE 34 · aged @WAITING 4 · undated 142 из 312 живых строк. ДоToday механизма старения не существовало (0 DEFAULT-клауз). Полный разбор — <a href='https://github.com/gasyoun/Uprava/blob/main/docs/REPORT_GTD_AGING_AUDIT_29-08-2026.md'>отчёт аудита</a>.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Одобрить (рекомендация)</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="money_accountant" data-filt="money">
+    <header><div class="hw">Платёжный контур без бухгалтера — 88 дней ( oldest открытая строка) </div><span class="idchip" title="card id — cite this id back when discussing this card">money_accountant</span></header>
+    <div class="question"><p><mark class="hl">Строка</mark> <mark class="hl">стоит</mark> <mark class="hl">с</mark> 02-06-2026. <b><mark class="hl">Одобрить</mark> =</b> <mark class="hl">ратифицировать</mark> <mark class="hl">правило</mark> «<mark class="hl">прошлые</mark> <mark class="hl">месяцы</mark> <mark class="hl">закрыты</mark>» <mark class="hl">и</mark> <mark class="hl">отправить</mark> <mark class="hl">Марии</mark> <mark class="hl">готовые</mark> <mark class="hl">вопросы</mark> <mark class="hl">двойного</mark> <mark class="hl">учёта</mark> (<mark class="hl">Литвиненко</mark> 28.06: <mark class="hl">регистр</mark> 6 624 = <mark class="hl">лист</mark> 6 624; <mark class="hl">Трефилова</mark> 28.06: 21 528 vs 29 808) <mark class="hl">из</mark> <a href='https://github.com/gasyoun/Uprava/blob/main/docs/PAYROLL_TRUTH_TABLE_NO_ACCOUNTANT_22-08-2026.md'><mark class="hl">таблицы</mark> <mark class="hl">правды</mark></a>; <mark class="hl">выплаты</mark> <mark class="hl">Костина</mark> 31 200 ₽ <mark class="hl">и</mark> <mark class="hl">Лейтан</mark> 120 960 ₽ — <mark class="hl">через</mark> <mark class="hl">кабинет</mark> <mark class="hl">по</mark> <mark class="hl">правилу</mark>.</p><ul><li><b>(<mark class="hl">а</mark>)</b> <mark class="hl">ратифицировать</mark> <mark class="hl">правило</mark> + <mark class="hl">вопросы</mark> <mark class="hl">Марии</mark> <mark class="hl">уходят</mark> — <i><mark class="hl">рекомендация</mark></i></li><li><b>(<mark class="hl">б</mark>)</b> <mark class="hl">только</mark> <mark class="hl">вопросы</mark> <mark class="hl">Марии</mark>, <mark class="hl">выплаты</mark> <mark class="hl">заморозить</mark> <mark class="hl">до</mark> <mark class="hl">её</mark> <mark class="hl">ответа</mark></li><li><b>(<mark class="hl">в</mark>)</b> <mark class="hl">искать</mark> <mark class="hl">бухгалтера</mark> / <mark class="hl">передавать</mark> <mark class="hl">контур</mark> <mark class="hl">наружу</mark></li><li><mark class="hl">своя</mark> <mark class="hl">формулировка</mark> — <mark class="hl">словом</mark> <mark class="hl">в</mark> <mark class="hl">чат</mark> <mark class="hl">или</mark> <mark class="hl">в</mark> <mark class="hl">примечании</mark> <mark class="hl">карточки</mark></li></ul></div>
+    <div class="panel"><h4>Статус</h4><p>Запись выплат — только через кабинет; строки <code>teacher_payouts</code>/<code>payments</code> агент не пишет. Правки MG 22-08 уже в тексте строки.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Одобрить (рекомендация)</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="public_cites_private" data-filt="docs">
+    <header><div class="hw">Публичный репо цитирует приватный документ (H1738) — одна конвенция </div><span class="idchip" title="card id — cite this id back when discussing this card">public_cites_private</span></header>
+    <div class="question"><p><code>csl-guides</code> (<mark class="hl">публичный</mark>) — <mark class="hl">единственный</mark> <mark class="hl">репо</mark> <mark class="hl">с</mark> lychee <code>Link check</code>; <mark class="hl">он</mark> 28 <mark class="hl">дней</mark> <mark class="hl">был</mark> <mark class="hl">красным</mark> <mark class="hl">на</mark> 404-<mark class="hl">х</mark> <mark class="hl">по</mark> blob-URL <mark class="hl">приватного</mark> Uprava — <mark class="hl">это</mark> <mark class="hl">не</mark> <mark class="hl">мёртвые</mark> <mark class="hl">ссылки</mark>, <mark class="hl">а</mark> <mark class="hl">наша</mark> <mark class="hl">конвенция</mark> «<mark class="hl">полные</mark> blob-URL» <mark class="hl">в</mark> <mark class="hl">публичном</mark> <mark class="hl">репо</mark>. <mark class="hl">Механика</mark> <mark class="hl">уже</mark> <mark class="hl">починена</mark> (exclude); <mark class="hl">осталась</mark> <mark class="hl">конвенция</mark> <b><mark class="hl">на</mark> <mark class="hl">будущее</mark></b>:</p><ul><li><b>(<mark class="hl">а</mark>)</b> <mark class="hl">голый</mark> ID <mark class="hl">без</mark> <mark class="hl">ссылки</mark> (<code>H1580</code>), <mark class="hl">приватный</mark> <mark class="hl">оригинал</mark> <mark class="hl">остаётся</mark> <mark class="hl">связанным</mark> <mark class="hl">в</mark> <mark class="hl">приватных</mark> <mark class="hl">доках</mark> — <i><mark class="hl">рекомендация</mark> <mark class="hl">генератора</mark> H1738</i></li><li><b>(<mark class="hl">б</mark>)</b> <mark class="hl">публичное</mark> <mark class="hl">зеркало</mark>/<mark class="hl">резюме</mark> <mark class="hl">на</mark> <mark class="hl">каждый</mark> <mark class="hl">цитируемый</mark> <mark class="hl">хендофф</mark></li><li><b>(<mark class="hl">в</mark>)</b> <mark class="hl">без</mark> <mark class="hl">цитирования</mark>, <mark class="hl">только</mark> <mark class="hl">пересказ</mark></li><li><b>(<mark class="hl">г</mark>)</b> <mark class="hl">статус-кво</mark>: blob-URL + <mark class="hl">постоянный</mark> lychee-exclude</li></ul></div>
+    <div class="panel"><h4>Масштаб</h4><p>~60 файлов в csl-guides со ссылками на gasyoun/Uprava (в основном scripts/out/*.md артефакты) — спа после рулинга.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Одобрить (рекомендация)</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="volunteer_names" data-filt="rights">
+    <header><div class="hw">Имена волонтёров PWG: публиковать или оставить хэндлы (H1706) </div><span class="idchip" title="card id — cite this id back when discussing this card">volunteer_names</span></header>
+    <div class="question"><p>Tab <code>Team</code> <mark class="hl">в</mark> csl-observatory <mark class="hl">связывает</mark> <mark class="hl">реальные</mark> <mark class="hl">имена</mark> <mark class="hl">волонтёров</mark> <mark class="hl">с</mark> <mark class="hl">публичными</mark> GitHub-<mark class="hl">хэндлами</mark>; <mark class="hl">колонка</mark> <mark class="hl">имён</mark> <b><mark class="hl">заредакчена</mark></b> <mark class="hl">в</mark> committed-<mark class="hl">снапшоте</mark>, <mark class="hl">генератор</mark> <mark class="hl">не</mark> <mark class="hl">может</mark> <mark class="hl">вернуть</mark> <mark class="hl">её</mark> <mark class="hl">сам</mark>.</p><ul><li><b>(<mark class="hl">а</mark>)</b> <mark class="hl">оставить</mark> <mark class="hl">редакцию</mark> — <i><mark class="hl">рекомендация</mark>: <mark class="hl">явного</mark> <mark class="hl">согласия</mark> <mark class="hl">нет</mark></i></li><li><b>(<mark class="hl">б</mark>)</b> <mark class="hl">раскрыть</mark> <mark class="hl">имена</mark> (<mark class="hl">только</mark> <mark class="hl">если</mark> <mark class="hl">волонтёры</mark> <mark class="hl">согласились</mark> — <mark class="hl">кредит</mark> <mark class="hl">в</mark> <mark class="hl">метод-пейпере</mark> <mark class="hl">захотят</mark> <mark class="hl">не</mark> <mark class="hl">все</mark>)</li></ul></div>
+    <div class="panel"><h4>Что не страдает</h4><p>Кредиты, счётчики и по-волонтёрные цифры не затронуты в обоих вариантах; хэндлы и так публичны на координирующих issue.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Одобрить (рекомендация)</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="instruction_estate" data-filt="infra">
+    <header><div class="hw">Реформы instruction estate P1/P3/P5 (H1271, 42 дня) </div><span class="idchip" title="card id — cite this id back when discussing this card">instruction_estate</span></header>
+    <div class="question"><p><a href='https://github.com/gasyoun/claude-config/blob/main/AUDIT_INSTRUCTION_ESTATE_2026H2.md'><mark class="hl">Аудит</mark></a> <mark class="hl">намерил</mark> ~14.7k always-loaded <mark class="hl">токенов</mark>/<mark class="hl">сессию</mark> <mark class="hl">и</mark> 5 <mark class="hl">верифицированных</mark> <mark class="hl">дефектов</mark>. P2/P4/P6 <mark class="hl">отгружены</mark> 06-08 <mark class="hl">механически</mark>; <mark class="hl">остались</mark> <mark class="hl">три</mark>, <mark class="hl">каждая</mark> — <mark class="hl">рулинг</mark>:</p><ul><li><b>(<mark class="hl">а</mark>)</b> <mark class="hl">все</mark> <mark class="hl">три</mark>: P1 <mark class="hl">убрать</mark> <mark class="hl">хардкод-счётчики</mark> (120/205/202) · P3 promote-or-retire memory-only <mark class="hl">правил</mark> (<mark class="hl">первый</mark> <mark class="hl">кейс</mark> GTD-footer) · P5 <mark class="hl">править</mark> stale «(not hook-checked)» — <i><mark class="hl">рекомендация</mark></i></li><li><b>(<mark class="hl">б</mark>)</b> P1+P5 <mark class="hl">механически</mark> <mark class="hl">сейчас</mark>, P3 <mark class="hl">отдельно</mark> <mark class="hl">после</mark> <mark class="hl">ревизии</mark> <mark class="hl">правил</mark></li><li><b>(<mark class="hl">в</mark>)</b> <mark class="hl">отклонить</mark> <mark class="hl">всё</mark></li></ul></div>
+    <div class="panel"><h4>Исполнение</h4><p>После голоса apply-проход исполняет одобренное тем же механизмом, что P2/P4/P6 (claude-config PR + реген twins).</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Одобрить (рекомендация)</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+</main>
+<footer class="hint">Built by <code>tools/_gen_aging_audit_sheet.py</code> · apply with <code>/decisions-apply</code>. Keyboard: <kbd>a</kbd> Одобрить (рекомендация) &middot; <kbd>r</kbd> Отклонить
+  &middot; <kbd>d</kbd> defer &middot; <kbd>&darr;</kbd>/<kbd>&uarr;</kbd> next/prev. Votes autosave to
+  this browser's localStorage; click "Download decisions.json" when done (unvoted items export with
+  decision:null).</footer>
+<div class="legend" style="max-width:980px;margin:0 auto 20px;padding:0 20px;color:var(--muted);font-size:12px">
+  <b>Approve</b> = accept the proposed change/answer shown on the card (no separate "approve as-is" —
+  approving means agreeing as written). <b>Reject</b> = keep the current entry/answer unchanged.
+  <b>Defer</b> = not sure yet, decide later. The note field is for requesting a partial tweak instead
+  of an outright reject.
+</div>
+<script>
+(function () {
+  var SHEET_ID = "uprava-aging-audit_29-08-26";
+  var STORE_KEY = 'review-sheet:' + SHEET_ID;
+  var ids = ["aging_policy", "money_accountant", "public_cites_private", "volunteer_names", "instruction_estate"];
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(STORE_KEY) || '{}') || {}; } catch (e) { state = {}; }
+  function tally() {
+    var c = { approve:0, reject:0, defer:0 };
+    ids.forEach(function (id) { var v = state[id] && state[id].decision; if (v && c.hasOwnProperty(v)) c[v]++; });
+    document.getElementById('c-approve').textContent = c.approve;
+    document.getElementById('c-reject').textContent = c.reject;
+    document.getElementById('c-defer').textContent = c.defer;
+    document.getElementById('c-unvoted').textContent = ids.length - c.approve - c.reject - c.defer;
+  }
+  function applyCardUI(card) {
+    var id = card.getAttribute('data-id'); var rec = state[id] || {};
+    card.classList.remove('voted-approve','voted-reject','voted-defer');
+    card.querySelectorAll('button.vote').forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-vote') === rec.decision); });
+    card.querySelector('.vote-state').textContent = rec.decision ? rec.decision : 'unvoted';
+    if (rec.decision) card.classList.add('voted-' + rec.decision);
+    var ta = card.querySelector('textarea.note'); if (rec.note && !ta.value) ta.value = rec.note;
+  }
+  function save() { localStorage.setItem(STORE_KEY, JSON.stringify(state)); tally(); }
+  // H1523 residual / csl-pyutil#1 Part 1: always re-read the live textarea on vote
+  // and before export so a second vote click (or a missed `input` event) cannot
+  // drop a note that is still visible in the card.
+  function syncNoteFromDom(id) {
+    state[id] = state[id] || {};
+    var card = document.querySelector('.card[data-id="' + id + '"]');
+    if (!card) return;
+    var ta = card.querySelector('textarea.note');
+    if (ta) state[id].note = ta.value;
+  }
+  function vote(id, d) { syncNoteFromDom(id); state[id].decision = d; save(); }
+  function noteChange(id, t) { state[id] = state[id] || {}; state[id].note = t; save(); }
+  document.querySelectorAll('.card').forEach(function (card) {
+    var id = card.getAttribute('data-id'); applyCardUI(card);
+    card.querySelectorAll('button.vote').forEach(function (btn) {
+      btn.addEventListener('click', function () { vote(id, btn.getAttribute('data-vote')); applyCardUI(card); });
+    });
+    var ta = card.querySelector('textarea.note'); ta.addEventListener('input', function () { noteChange(id, ta.value); });
+  });
+  tally();
+  document.getElementById('downloadBtn').addEventListener('click', function () {
+    ids.forEach(function (id) { syncNoteFromDom(id); });
+    var decided = ids.filter(function (id) { return state[id] && state[id].decision; }).length;
+    var payload = { sheet_id: SHEET_ID, generated: "29-08-2026", decided: decided,
+      items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '' }; }) };
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
+    var url = URL.createObjectURL(blob); var a = document.createElement('a');
+    a.href = url; a.download = SHEET_ID + '_decisions.json'; document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+  });
+  var filterbar = document.getElementById('filterbar');
+  filterbar.addEventListener('click', function (e) {
+    var btn = e.target.closest('button[data-filter]'); if (!btn) return;
+    filterbar.querySelectorAll('button').forEach(function (b) { b.classList.remove('active'); });
+    btn.classList.add('active'); var f = btn.getAttribute('data-filter');
+    document.querySelectorAll('.card').forEach(function (card) {
+      var show = true;
+      if (f === 'unvoted') { var id = card.getAttribute('data-id'); show = !(state[id] && state[id].decision); }
+      else if (f !== 'all') { show = card.getAttribute('data-filt') === f; }
+      card.style.display = show ? '' : 'none';
+    });
+  });
+  var cardsEl = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  var activeIdx = 0;
+  function visibleCards() { return cardsEl.filter(function (c) { return c.style.display !== 'none'; }); }
+  document.addEventListener('keydown', function (e) {
+    if (e.target.tagName === 'TEXTAREA') return;
+    var vis = visibleCards(); if (!vis.length) return;
+    if (activeIdx >= vis.length) activeIdx = vis.length - 1;
+    var card = vis[activeIdx]; var id = card.getAttribute('data-id');
+    if (e.key === 'a') { vote(id, 'approve'); applyCardUI(card); }
+    else if (e.key === 'r') { vote(id, 'reject'); applyCardUI(card); }
+    else if (e.key === 'd') { vote(id, 'defer'); applyCardUI(card); }
+    else if (e.key === 'ArrowDown') { activeIdx = Math.min(activeIdx + 1, vis.length - 1); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'center'}); }
+    else if (e.key === 'ArrowUp') { activeIdx = Math.max(activeIdx - 1, 0); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'center'}); }
+    else return;
+    e.preventDefault();
+  });
+
+  var saveHandle = null, saveTimer = null;
+  function exportPayload() {
+    if (typeof syncNoteFromDom === 'function') {
+      ids.forEach(function (id) { syncNoteFromDom(id); });
+    }
+    var decided = ids.filter(function (id) { return state[id] && state[id].decision; }).length;
+    return JSON.stringify({ sheet_id: SHEET_ID, generated: new Date().toISOString(), decided: decided,
+      items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '' }; }) }, null, 2);
+  }
+  function scheduleAutosave() {
+    if (!saveHandle) return;
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(function () {
+      saveHandle.createWritable().then(function (w) {
+        w.write(exportPayload()).then(function () { w.close(); });
+      }).catch(function () {});
+    }, 1000);
+  }
+  var _origSave = save;
+  save = function () { _origSave(); scheduleAutosave(); };
+  if (window.showSaveFilePicker) {
+    var saveBtn = document.getElementById('saveBtn');
+    saveBtn.style.display = '';
+    saveBtn.addEventListener('click', function () {
+      window.showSaveFilePicker({suggestedName: SHEET_ID + '_decisions.json'}).then(function (h) {
+        saveHandle = h; scheduleAutosave();
+      }).catch(function () {});
+    });
+  }
+
+  var FS_KEY = STORE_KEY + ':fs', FS_DEFAULT = 1.5;
+  function fsGet() {
+    var v = parseFloat(localStorage.getItem(FS_KEY));
+    return (isFinite(v) && v >= 0.7 && v <= 3) ? v : FS_DEFAULT;
+  }
+  function fsApply(v) {
+    document.documentElement.style.setProperty('--fs', String(v));
+    document.getElementById('fsVal').textContent = Math.round(v * 100) + '%';
+  }
+  function fsSet(v) {
+    v = Math.min(3, Math.max(0.7, Math.round(v * 10) / 10));
+    localStorage.setItem(FS_KEY, String(v)); fsApply(v);
+  }
+  fsApply(fsGet());
+  document.getElementById('fsDown').addEventListener('click', function () { fsSet(fsGet() - 0.1); });
+  document.getElementById('fsUp').addEventListener('click', function () { fsSet(fsGet() + 0.1); });
+})();
+</script>
+</body>
+</html>
