@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>С чего начинается словарь</title>
+<!-- Composition: Big Object — the 47-bar alphabet forest spans the full canvas;
+     the letter sequence follows Devanagari dictionary order (vowels, then consonant vargas).
+     Bar heights: entries / 36866 * 600px, minimum 2px (data.tsv, scripts/infographics50/mw_letters.py).
+     Zone boundaries (bar index): vowels 0-13, velars 14-18, palatals 19-23, retroflex 24-28,
+     dental 29-33, labials 34-38, sonorants/sibilants 39-46.
+     s+p+v share = (36866+31035+28396)/286525 = 33.6%. Hero share = 36866/286525 = 12.9%. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;600;700&family=Nunito:ital,wght@0,400;0,600;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --canvas-w: 1920px; --canvas-h: 1080px;
+  --bg:#E8EDEF; --ink:#22333B; --ink-muted:#5D6E75;
+  --chart-1:#D9503F; --chart-2:#009B7D; --bar:#7E939B;
+  --hair:rgba(34,51,59,.18);
+  --font-display:'Comfortaa',sans-serif; --font-body:'Nunito',sans-serif;
+  --font-deva:'Devanagari Sangam MN','Noto Sans Devanagari',sans-serif;
+  --space-1:8px; --space-2:16px; --space-3:24px; --space-4:40px; --space-5:64px;
+}
+html, body { background: var(--bg); }
+body { width: var(--canvas-w); font-family: var(--font-body); color: var(--ink); }
+.canvas { position: relative; width: var(--canvas-w); height: var(--canvas-h); overflow: hidden;
+  background: radial-gradient(ellipse 1400px 600px at 50% 70%, #F3F6F7 0%, var(--bg) 62%); }
+.title-block { position: absolute; left: var(--space-5); top: var(--space-4); width: 860px; }
+.kicker { font: 800 14px/1.2 var(--font-body); text-transform: uppercase; letter-spacing: .06em; color: var(--ink-muted); }
+h1 { font-family: var(--font-display); font-weight: 700; font-size: 60px; line-height: 1.06; margin-top: var(--space-2); }
+.standfirst { margin-top: var(--space-2); font: 400 20px/1.45 var(--font-body); color: var(--ink-muted); width: 800px; }
+.hero-block { position: absolute; right: var(--space-5); top: var(--space-4); width: 640px; text-align: right; }
+.hero-deva { font-family: var(--font-deva); font-weight: 400; font-size: 64px; line-height: 1; color: var(--chart-1); }
+.hero-num { font-family: var(--font-display); font-weight: 700; font-size: 110px; line-height: 1; letter-spacing: -0.01em; }
+.hero-label { margin-top: var(--space-2); font: 600 21px/1.35 var(--font-body); color: var(--ink); }
+.hero-sub { margin-top: var(--space-1); font: 400 17px/1.4 var(--font-body); color: var(--ink-muted); }
+.hero-bar { margin-top: var(--space-2); margin-left: auto; width: 132px; height: 10px; background: var(--chart-1); }
+.ghost { position: absolute; right: 30px; top: 300px; font: 700 320px/1 var(--font-deva); color: rgba(34,51,59,.05); }
+svg.chart { position: absolute; left: 0; top: 0; }
+svg text { font-family: var(--font-body); }
+.gridline { stroke: var(--hair); stroke-width: 1; }
+.gridlab { font-size: 13px; font-weight: 600; fill: var(--ink-muted); }
+.bar { fill: var(--bar); }
+.bar.vowel { fill: var(--chart-2); }
+.bar.hero { fill: var(--chart-1); }
+.glyph { font-family: var(--font-deva); font-size: 26px; fill: var(--ink); }
+.iast { font-size: 12px; font-style: italic; fill: var(--ink-muted); }
+.val { font-size: 15px; font-weight: 800; fill: var(--ink); }
+.val-hero { font-size: 16px; font-weight: 800; fill: var(--chart-1); }
+.zoneline { stroke: var(--ink); stroke-width: 1.5; }
+.zonelab { font-size: 13.5px; font-weight: 700; letter-spacing: .04em; fill: var(--ink-muted); text-transform: lowercase; }
+footer { position: absolute; left: var(--space-5); right: var(--space-5); bottom: var(--space-3);
+  display: flex; justify-content: space-between; gap: 40px;
+  border-top: 1.5px solid var(--hair); padding-top: 12px; font: 400 14px/1.5 var(--font-body); color: var(--ink-muted); }
+footer b { font-weight: 700; color: var(--ink); }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="title-block">
+    <div class="kicker">САНСКРИТСКИЙ АРХИВ ГАСУНСА · MONIER-WILLIAMS · ПОСЧИТАНО 29.08.2026</div>
+    <h1>С чего начинается словарь</h1>
+    <p class="standfirst">286 525 статей Monier-Williams распределены по 47 начальным буквам деванагари — слева направо в словарном порядке: сначала гласные, затем варги согласных. Высота каждой колонки — настоящий счёт статей; на три буквы s-, p-, v- приходится 33,6 % всего словаря.</p>
+  </div>
+  <div class="hero-block" data-hero>
+    <div class="hero-deva">स</div>
+    <div class="hero-num">36 866</div>
+    <div class="hero-label">статья начинается с sa-</div>
+    <div class="hero-sub">каждая восьмая статья словаря</div>
+    <div class="hero-bar"></div>
+  </div>
+  <svg class="chart" width="1920" height="1080" viewBox="0 0 1920 1080">
+    <line class="gridline" x1="90" y1="748" x2="1860" y2="748"/>
+    <text class="gridlab" x="80" y="752" text-anchor="end">10 000</text>
+    <line class="gridline" x1="90" y1="584" x2="1860" y2="584"/>
+    <text class="gridlab" x="80" y="588" text-anchor="end">20 000</text>
+    <line class="gridline" x1="90" y1="421" x2="1860" y2="421"/>
+    <text class="gridlab" x="80" y="425" text-anchor="end">30 000</text>
+    <!--BARS-->
+    <line x1="90" y1="910" x2="1860" y2="910" stroke="#22333B" stroke-width="2"/>
+    <!-- zone separators: after idx 13,18,23,28,33,38 -->
+    <line class="zoneline" x1="599" y1="330" x2="599" y2="910" stroke-dasharray="2 5" opacity=".35"/>
+    <line class="zoneline" x1="786" y1="330" x2="786" y2="910" stroke-dasharray="2 5" opacity=".35"/>
+    <line class="zoneline" x1="973" y1="330" x2="973" y2="910" stroke-dasharray="2 5" opacity=".35"/>
+    <line class="zoneline" x1="1160" y1="330" x2="1160" y2="910" stroke-dasharray="2 5" opacity=".35"/>
+    <line class="zoneline" x1="1347" y1="330" x2="1347" y2="910" stroke-dasharray="2 5" opacity=".35"/>
+    <line class="zoneline" x1="1534" y1="330" x2="1534" y2="910" stroke-dasharray="2 5" opacity=".35"/>
+    <text class="zonelab" x="356" y="985" text-anchor="middle">гласные</text>
+    <text class="zonelab" x="710" y="985" text-anchor="middle">велярные</text>
+    <text class="zonelab" x="895" y="985" text-anchor="middle">палатальные</text>
+    <text class="zonelab" x="1080" y="985" text-anchor="middle">ретрофлексные</text>
+    <text class="zonelab" x="1265" y="985" text-anchor="middle">зубные</text>
+    <text class="zonelab" x="1450" y="985" text-anchor="middle">губные</text>
+    <text class="zonelab" x="1693" y="985" text-anchor="middle">сонанты и шипящие</text>
+  </svg>
+  <footer>
+    <div>Данные: <b>csl-orig · Monier-Williams (1899)</b> — 286 525 статей, счёт по первой букве ключа &lt;k1&gt; (SLP1 → деванагари)</div>
+    <div>скрипт: <b>scripts/infographics50/mw_letters.py</b> · Посчитано 29.08.2026 · <b>Dr. Mārcis Gasūns</b></div>
+  </footer>
+</div>
+</body>
+</html>

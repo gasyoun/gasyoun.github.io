@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>С чего начинается словарь</title>
+<!-- Composition: Big Object — the 47-bar alphabet forest spans the full canvas;
+     the letter sequence follows Devanagari dictionary order (vowels, then consonant vargas).
+     Bar heights: entries / 36866 * 600px, minimum 2px (data.tsv, scripts/infographics50/mw_letters.py).
+     Zone boundaries (bar index): vowels 0-13, velars 14-18, palatals 19-23, retroflex 24-28,
+     dental 29-33, labials 34-38, sonorants/sibilants 39-46.
+     s+p+v share = (36866+31035+28396)/286525 = 33.6%. Hero share = 36866/286525 = 12.9%. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;600;700&family=Nunito:ital,wght@0,400;0,600;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --canvas-w: 1920px; --canvas-h: 1080px;
+  --bg:#E8EDEF; --ink:#22333B; --ink-muted:#5D6E75;
+  --chart-1:#D9503F; --chart-2:#009B7D; --bar:#7E939B;
+  --hair:rgba(34,51,59,.18);
+  --font-display:'Comfortaa',sans-serif; --font-body:'Nunito',sans-serif;
+  --font-deva:'Devanagari Sangam MN','Noto Sans Devanagari',sans-serif;
+  --space-1:8px; --space-2:16px; --space-3:24px; --space-4:40px; --space-5:64px;
+}
+html, body { background: var(--bg); }
+body { width: var(--canvas-w); font-family: var(--font-body); color: var(--ink); }
+.canvas { position: relative; width: var(--canvas-w); height: var(--canvas-h); overflow: hidden;
+  background: radial-gradient(ellipse 1400px 600px at 50% 70%, #F3F6F7 0%, var(--bg) 62%); }
+.title-block { position: absolute; left: var(--space-5); top: var(--space-4); width: 860px; }
+.kicker { font: 800 14px/1.2 var(--font-body); text-transform: uppercase; letter-spacing: .06em; color: var(--ink-muted); }
+h1 { font-family: var(--font-display); font-weight: 700; font-size: 60px; line-height: 1.06; margin-top: var(--space-2); }
+.standfirst { margin-top: var(--space-2); font: 400 20px/1.45 var(--font-body); color: var(--ink-muted); width: 800px; }
+.hero-block { position: absolute; right: var(--space-5); top: var(--space-4); width: 640px; text-align: right; }
+.hero-deva { font-family: var(--font-deva); font-weight: 400; font-size: 64px; line-height: 1; color: var(--chart-1); }
+.hero-num { font-family: var(--font-display); font-weight: 700; font-size: 110px; line-height: 1; letter-spacing: -0.01em; }
+.hero-label { margin-top: var(--space-2); font: 600 21px/1.35 var(--font-body); color: var(--ink); }
+.hero-sub { margin-top: var(--space-1); font: 400 17px/1.4 var(--font-body); color: var(--ink-muted); }
+.hero-bar { margin-top: var(--space-2); margin-left: auto; width: 132px; height: 10px; background: var(--chart-1); }
+.ghost { position: absolute; right: 30px; top: 300px; font: 700 320px/1 var(--font-deva); color: rgba(34,51,59,.05); }
+svg.chart { position: absolute; left: 0; top: 0; }
+svg text { font-family: var(--font-body); }
+.gridline { stroke: var(--hair); stroke-width: 1; }
+.gridlab { font-size: 13px; font-weight: 600; fill: var(--ink-muted); }
+.bar { fill: var(--bar); }
+.bar.vowel { fill: var(--chart-2); }
+.bar.hero { fill: var(--chart-1); }
+.glyph { font-family: var(--font-deva); font-size: 26px; fill: var(--ink); }
+.iast { font-size: 12px; font-style: italic; fill: var(--ink-muted); }
+.val { font-size: 15px; font-weight: 800; fill: var(--ink); }
+.val-hero { font-size: 16px; font-weight: 800; fill: var(--chart-1); }
+.zoneline { stroke: var(--ink); stroke-width: 1.5; }
+.zonelab { font-size: 13.5px; font-weight: 700; letter-spacing: .04em; fill: var(--ink-muted); text-transform: lowercase; }
+footer { position: absolute; left: var(--space-5); right: var(--space-5); bottom: var(--space-3);
+  display: flex; justify-content: space-between; gap: 40px;
+  border-top: 1.5px solid var(--hair); padding-top: 12px; font: 400 14px/1.5 var(--font-body); color: var(--ink-muted); }
+footer b { font-weight: 700; color: var(--ink); }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="title-block">
+    <div class="kicker">САНСКРИТСКИЙ АРХИВ ГАСУНСА · MONIER-WILLIAMS · ПОСЧИТАНО 29.08.2026</div>
+    <h1>С чего начинается словарь</h1>
+    <p class="standfirst">286 525 статей Monier-Williams распределены по 47 начальным буквам деванагари — слева направо в словарном порядке: сначала гласные, затем варги согласных. Высота каждой колонки — настоящий счёт статей; на три буквы s-, p-, v- приходится 33,6 % всего словаря.</p>
+  </div>
+  <div class="hero-block" data-hero>
+    <div class="hero-deva">स</div>
+    <div class="hero-num">36 866</div>
+    <div class="hero-label">статья начинается с sa-</div>
+    <div class="hero-sub">каждая восьмая статья словаря</div>
+    <div class="hero-bar"></div>
+  </div>
+  <svg class="chart" width="1920" height="1080" viewBox="0 0 1920 1080">
+    <line class="gridline" x1="90" y1="748" x2="1860" y2="748"/>
+    <text class="gridlab" x="80" y="752" text-anchor="end">10 000</text>
+    <line class="gridline" x1="90" y1="584" x2="1860" y2="584"/>
+    <text class="gridlab" x="80" y="588" text-anchor="end">20 000</text>
+    <line class="gridline" x1="90" y1="421" x2="1860" y2="421"/>
+    <text class="gridlab" x="80" y="425" text-anchor="end">30 000</text>
+    <rect class="bar vowel" x="94.0" y="493" width="29" height="417"/>
+    <text class="glyph" x="108.5" y="944" text-anchor="middle">अ</text>
+    <text class="val" x="108.5" y="483" text-anchor="middle">25 599</text>
+    <text class="iast" x="108.5" y="962" text-anchor="middle">a</text>
+    <rect class="bar vowel" x="131.4" y="793" width="29" height="117"/>
+    <text class="glyph" x="145.9" y="944" text-anchor="middle">आ</text>
+    <text class="iast" x="145.9" y="962" text-anchor="middle">ā</text>
+    <rect class="bar vowel" x="168.8" y="888" width="29" height="22"/>
+    <text class="glyph" x="183.3" y="944" text-anchor="middle">इ</text>
+    <text class="iast" x="183.3" y="962" text-anchor="middle">i</text>
+    <rect class="bar vowel" x="206.2" y="904" width="29" height="6"/>
+    <text class="glyph" x="220.7" y="944" text-anchor="middle">ई</text>
+    <text class="iast" x="220.7" y="962" text-anchor="middle">ī</text>
+    <rect class="bar vowel" x="243.6" y="770" width="29" height="140"/>
+    <text class="glyph" x="258.1" y="944" text-anchor="middle">उ</text>
+    <text class="iast" x="258.1" y="962" text-anchor="middle">u</text>
+    <rect class="bar vowel" x="281.0" y="901" width="29" height="9"/>
+    <text class="glyph" x="295.5" y="944" text-anchor="middle">ऊ</text>
+    <text class="iast" x="295.5" y="962" text-anchor="middle">ū</text>
+    <rect class="bar vowel" x="318.4" y="897" width="29" height="13"/>
+    <text class="glyph" x="332.9" y="944" text-anchor="middle">ऋ</text>
+    <text class="iast" x="332.9" y="962" text-anchor="middle">ṛ</text>
+    <rect class="bar vowel" x="355.8" y="908" width="29" height="2"/>
+    <text class="glyph" x="370.3" y="944" text-anchor="middle">ॠ</text>
+    <text class="iast" x="370.3" y="962" text-anchor="middle">ṝ</text>
+    <rect class="bar vowel" x="393.2" y="908" width="29" height="2"/>
+    <text class="glyph" x="407.7" y="944" text-anchor="middle">ऌ</text>
+    <text class="iast" x="407.7" y="962" text-anchor="middle">ḷ</text>
+    <rect class="bar cons" x="430.6" y="908" width="29" height="2"/>
+    <text class="glyph" x="445.1" y="944" text-anchor="middle">ॡ</text>
+    <text class="iast" x="445.1" y="962" text-anchor="middle">ḹ</text>
+    <rect class="bar vowel" x="468.0" y="889" width="29" height="21"/>
+    <text class="glyph" x="482.5" y="944" text-anchor="middle">ए</text>
+    <text class="iast" x="482.5" y="962" text-anchor="middle">e</text>
+    <rect class="bar vowel" x="505.4" y="905" width="29" height="5"/>
+    <text class="glyph" x="519.9" y="944" text-anchor="middle">ऐ</text>
+    <text class="iast" x="519.9" y="962" text-anchor="middle">ai</text>
+    <rect class="bar vowel" x="542.8" y="906" width="29" height="4"/>
+    <text class="glyph" x="557.3" y="944" text-anchor="middle">ओ</text>
+    <text class="iast" x="557.3" y="962" text-anchor="middle">o</text>
+    <rect class="bar vowel" x="580.2" y="900" width="29" height="10"/>
+    <text class="glyph" x="594.7" y="944" text-anchor="middle">औ</text>
+    <text class="iast" x="594.7" y="962" text-anchor="middle">au</text>
+    <rect class="bar cons" x="617.6" y="576" width="29" height="334"/>
+    <text class="glyph" x="632.1" y="944" text-anchor="middle">क</text>
+    <text class="val" x="632.1" y="566" text-anchor="middle">20 502</text>
+    <text class="iast" x="632.1" y="962" text-anchor="middle">ka</text>
+    <rect class="bar cons" x="655.0" y="885" width="29" height="25"/>
+    <text class="glyph" x="669.5" y="944" text-anchor="middle">ख</text>
+    <text class="iast" x="669.5" y="962" text-anchor="middle">kha</text>
+    <rect class="bar cons" x="692.4" y="787" width="29" height="123"/>
+    <text class="glyph" x="706.9" y="944" text-anchor="middle">ग</text>
+    <text class="iast" x="706.9" y="962" text-anchor="middle">ga</text>
+    <rect class="bar cons" x="729.8" y="892" width="29" height="18"/>
+    <text class="glyph" x="744.3" y="944" text-anchor="middle">घ</text>
+    <text class="iast" x="744.3" y="962" text-anchor="middle">gha</text>
+    <rect class="bar cons" x="767.2" y="908" width="29" height="2"/>
+    <text class="glyph" x="781.7" y="944" text-anchor="middle">ङ</text>
+    <text class="iast" x="781.7" y="962" text-anchor="middle">ṅa</text>
+    <rect class="bar cons" x="804.6" y="821" width="29" height="89"/>
+    <text class="glyph" x="819.1" y="944" text-anchor="middle">च</text>
+    <text class="iast" x="819.1" y="962" text-anchor="middle">ca</text>
+    <rect class="bar cons" x="842.0" y="896" width="29" height="14"/>
+    <text class="glyph" x="856.5" y="944" text-anchor="middle">छ</text>
+    <text class="iast" x="856.5" y="962" text-anchor="middle">cha</text>
+    <rect class="bar cons" x="879.4" y="827" width="29" height="83"/>
+    <text class="glyph" x="893.9" y="944" text-anchor="middle">ज</text>
+    <text class="iast" x="893.9" y="962" text-anchor="middle">ja</text>
+    <rect class="bar cons" x="916.8" y="907" width="29" height="3"/>
+    <text class="glyph" x="931.3" y="944" text-anchor="middle">झ</text>
+    <text class="iast" x="931.3" y="962" text-anchor="middle">jha</text>
+    <rect class="bar cons" x="954.2" y="908" width="29" height="2"/>
+    <text class="glyph" x="968.7" y="944" text-anchor="middle">ञ</text>
+    <text class="iast" x="968.7" y="962" text-anchor="middle">ña</text>
+    <rect class="bar cons" x="991.6" y="907" width="29" height="3"/>
+    <text class="glyph" x="1006.1" y="944" text-anchor="middle">ट</text>
+    <text class="iast" x="1006.1" y="962" text-anchor="middle">ṭa</text>
+    <rect class="bar cons" x="1029.0" y="908" width="29" height="2"/>
+    <text class="glyph" x="1043.5" y="944" text-anchor="middle">ठ</text>
+    <text class="iast" x="1043.5" y="962" text-anchor="middle">ṭha</text>
+    <rect class="bar cons" x="1066.4" y="907" width="29" height="3"/>
+    <text class="glyph" x="1080.9" y="944" text-anchor="middle">ड</text>
+    <text class="iast" x="1080.9" y="962" text-anchor="middle">ḍa</text>
+    <rect class="bar cons" x="1103.8" y="908" width="29" height="2"/>
+    <text class="glyph" x="1118.3" y="944" text-anchor="middle">ढ</text>
+    <text class="iast" x="1118.3" y="962" text-anchor="middle">ḍha</text>
+    <rect class="bar cons" x="1141.2" y="908" width="29" height="2"/>
+    <text class="glyph" x="1155.7" y="944" text-anchor="middle">ण</text>
+    <text class="iast" x="1155.7" y="962" text-anchor="middle">ṇa</text>
+    <rect class="bar cons" x="1178.6" y="777" width="29" height="133"/>
+    <text class="glyph" x="1193.1" y="944" text-anchor="middle">त</text>
+    <text class="iast" x="1193.1" y="962" text-anchor="middle">ta</text>
+    <rect class="bar cons" x="1216.0" y="908" width="29" height="2"/>
+    <text class="glyph" x="1230.5" y="944" text-anchor="middle">थ</text>
+    <text class="iast" x="1230.5" y="962" text-anchor="middle">tha</text>
+    <rect class="bar cons" x="1253.4" y="733" width="29" height="177"/>
+    <text class="glyph" x="1267.9" y="944" text-anchor="middle">द</text>
+    <text class="iast" x="1267.9" y="962" text-anchor="middle">da</text>
+    <rect class="bar cons" x="1290.8" y="852" width="29" height="58"/>
+    <text class="glyph" x="1305.3" y="944" text-anchor="middle">ध</text>
+    <text class="iast" x="1305.3" y="962" text-anchor="middle">dha</text>
+    <rect class="bar cons" x="1328.2" y="719" width="29" height="191"/>
+    <text class="glyph" x="1342.7" y="944" text-anchor="middle">न</text>
+    <text class="iast" x="1342.7" y="962" text-anchor="middle">na</text>
+    <rect class="bar cons" x="1365.6" y="405" width="29" height="505"/>
+    <text class="glyph" x="1380.1" y="944" text-anchor="middle">प</text>
+    <text class="val" x="1380.1" y="395" text-anchor="middle">31 035</text>
+    <text class="iast" x="1380.1" y="962" text-anchor="middle">pa</text>
+    <rect class="bar cons" x="1403.0" y="898" width="29" height="12"/>
+    <text class="glyph" x="1417.5" y="944" text-anchor="middle">फ</text>
+    <text class="iast" x="1417.5" y="962" text-anchor="middle">pha</text>
+    <rect class="bar cons" x="1440.4" y="819" width="29" height="91"/>
+    <text class="glyph" x="1454.9" y="944" text-anchor="middle">ब</text>
+    <text class="iast" x="1454.9" y="962" text-anchor="middle">ba</text>
+    <rect class="bar cons" x="1477.8" y="800" width="29" height="110"/>
+    <text class="glyph" x="1492.3" y="944" text-anchor="middle">भ</text>
+    <text class="iast" x="1492.3" y="962" text-anchor="middle">bha</text>
+    <rect class="bar cons" x="1515.2" y="646" width="29" height="264"/>
+    <text class="glyph" x="1529.7" y="944" text-anchor="middle">म</text>
+    <text class="val" x="1529.7" y="636" text-anchor="middle">16 215</text>
+    <text class="iast" x="1529.7" y="962" text-anchor="middle">ma</text>
+    <rect class="bar cons" x="1552.6" y="837" width="29" height="73"/>
+    <text class="glyph" x="1567.1" y="944" text-anchor="middle">य</text>
+    <text class="iast" x="1567.1" y="962" text-anchor="middle">ya</text>
+    <rect class="bar cons" x="1590.0" y="784" width="29" height="126"/>
+    <text class="glyph" x="1604.5" y="944" text-anchor="middle">र</text>
+    <text class="iast" x="1604.5" y="962" text-anchor="middle">ra</text>
+    <rect class="bar cons" x="1627.4" y="845" width="29" height="65"/>
+    <text class="glyph" x="1641.9" y="944" text-anchor="middle">ल</text>
+    <text class="iast" x="1641.9" y="962" text-anchor="middle">la</text>
+    <rect class="bar cons" x="1664.8" y="448" width="29" height="462"/>
+    <text class="glyph" x="1679.3" y="944" text-anchor="middle">व</text>
+    <text class="val" x="1679.3" y="438" text-anchor="middle">28 396</text>
+    <text class="iast" x="1679.3" y="962" text-anchor="middle">va</text>
+    <rect class="bar cons" x="1702.2" y="671" width="29" height="239"/>
+    <text class="glyph" x="1716.7" y="944" text-anchor="middle">श</text>
+    <text class="iast" x="1716.7" y="962" text-anchor="middle">śa</text>
+    <rect class="bar cons" x="1739.6" y="897" width="29" height="13"/>
+    <text class="glyph" x="1754.1" y="944" text-anchor="middle">ष</text>
+    <text class="iast" x="1754.1" y="962" text-anchor="middle">ṣa</text>
+    <rect class="bar hero" x="1777.0" y="310" width="29" height="600"/>
+    <text class="glyph" x="1791.5" y="944" text-anchor="middle">स</text>
+    <text class="val-hero" x="1791.5" y="300" text-anchor="middle">36 866</text>
+    <text class="iast" x="1791.5" y="962" text-anchor="middle">sa</text>
+    <rect class="bar cons" x="1814.4" y="825" width="29" height="85"/>
+    <text class="glyph" x="1828.9" y="944" text-anchor="middle">ह</text>
+    <text class="iast" x="1828.9" y="962" text-anchor="middle">ha</text>
+    <line x1="90" y1="910" x2="1860" y2="910" stroke="#22333B" stroke-width="2"/>
+    <!-- zone separators: after idx 13,18,23,28,33,38 -->
+    <line class="zoneline" x1="599" y1="330" x2="599" y2="910" stroke-dasharray="2 5" opacity=".35"/>
+    <line class="zoneline" x1="786" y1="330" x2="786" y2="910" stroke-dasharray="2 5" opacity=".35"/>
+    <line class="zoneline" x1="973" y1="330" x2="973" y2="910" stroke-dasharray="2 5" opacity=".35"/>
+    <line class="zoneline" x1="1160" y1="330" x2="1160" y2="910" stroke-dasharray="2 5" opacity=".35"/>
+    <line class="zoneline" x1="1347" y1="330" x2="1347" y2="910" stroke-dasharray="2 5" opacity=".35"/>
+    <line class="zoneline" x1="1534" y1="330" x2="1534" y2="910" stroke-dasharray="2 5" opacity=".35"/>
+    <text class="zonelab" x="356" y="985" text-anchor="middle">гласные</text>
+    <text class="zonelab" x="710" y="985" text-anchor="middle">велярные</text>
+    <text class="zonelab" x="895" y="985" text-anchor="middle">палатальные</text>
+    <text class="zonelab" x="1080" y="985" text-anchor="middle">ретрофлексные</text>
+    <text class="zonelab" x="1265" y="985" text-anchor="middle">зубные</text>
+    <text class="zonelab" x="1450" y="985" text-anchor="middle">губные</text>
+    <text class="zonelab" x="1693" y="985" text-anchor="middle">сонанты и шипящие</text>
+  </svg>
+  <footer>
+    <div>Данные: <b>csl-orig · Monier-Williams (1899)</b> — 286 525 статей, счёт по первой букве ключа &lt;k1&gt; (SLP1 → деванагари)</div>
+    <div>скрипт: <b>scripts/infographics50/mw_letters.py</b> · Посчитано 29.08.2026 · <b>Dr. Mārcis Gasūns</b></div>
+  </footer>
+</div>
+</body>
+</html>

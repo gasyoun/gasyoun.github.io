@@ -1,0 +1,241 @@
+{
+ "total": 286525,
+ "source": "csl-orig/v02/mw/mw.txt",
+ "rows": [
+  {
+   "deva": "अ",
+   "slp1": "a",
+   "entries": 25599
+  },
+  {
+   "deva": "आ",
+   "slp1": "A",
+   "entries": 7160
+  },
+  {
+   "deva": "इ",
+   "slp1": "i",
+   "entries": 1359
+  },
+  {
+   "deva": "ई",
+   "slp1": "I",
+   "entries": 339
+  },
+  {
+   "deva": "उ",
+   "slp1": "u",
+   "entries": 8615
+  },
+  {
+   "deva": "ऊ",
+   "slp1": "U",
+   "entries": 572
+  },
+  {
+   "deva": "ऋ",
+   "slp1": "f",
+   "entries": 779
+  },
+  {
+   "deva": "ॠ",
+   "slp1": "F",
+   "entries": 14
+  },
+  {
+   "deva": "ऌ",
+   "slp1": "x",
+   "entries": 6
+  },
+  {
+   "deva": "ॡ",
+   "slp1": "X",
+   "entries": 8
+  },
+  {
+   "deva": "ए",
+   "slp1": "e",
+   "entries": 1312
+  },
+  {
+   "deva": "ऐ",
+   "slp1": "E",
+   "entries": 314
+  },
+  {
+   "deva": "ओ",
+   "slp1": "o",
+   "entries": 247
+  },
+  {
+   "deva": "औ",
+   "slp1": "O",
+   "entries": 590
+  },
+  {
+   "deva": "क",
+   "slp1": "k",
+   "entries": 20502
+  },
+  {
+   "deva": "ख",
+   "slp1": "K",
+   "entries": 1563
+  },
+  {
+   "deva": "ग",
+   "slp1": "g",
+   "entries": 7547
+  },
+  {
+   "deva": "घ",
+   "slp1": "G",
+   "entries": 1101
+  },
+  {
+   "deva": "ङ",
+   "slp1": "N",
+   "entries": 7
+  },
+  {
+   "deva": "च",
+   "slp1": "c",
+   "entries": 5439
+  },
+  {
+   "deva": "छ",
+   "slp1": "C",
+   "entries": 830
+  },
+  {
+   "deva": "ज",
+   "slp1": "j",
+   "entries": 5077
+  },
+  {
+   "deva": "झ",
+   "slp1": "J",
+   "entries": 214
+  },
+  {
+   "deva": "ञ",
+   "slp1": "Y",
+   "entries": 7
+  },
+  {
+   "deva": "ट",
+   "slp1": "w",
+   "entries": 168
+  },
+  {
+   "deva": "ठ",
+   "slp1": "W",
+   "entries": 24
+  },
+  {
+   "deva": "ड",
+   "slp1": "q",
+   "entries": 187
+  },
+  {
+   "deva": "ढ",
+   "slp1": "Q",
+   "entries": 52
+  },
+  {
+   "deva": "ण",
+   "slp1": "R",
+   "entries": 12
+  },
+  {
+   "deva": "त",
+   "slp1": "t",
+   "entries": 8185
+  },
+  {
+   "deva": "थ",
+   "slp1": "T",
+   "entries": 31
+  },
+  {
+   "deva": "द",
+   "slp1": "d",
+   "entries": 10874
+  },
+  {
+   "deva": "ध",
+   "slp1": "D",
+   "entries": 3587
+  },
+  {
+   "deva": "न",
+   "slp1": "n",
+   "entries": 11746
+  },
+  {
+   "deva": "प",
+   "slp1": "p",
+   "entries": 31035
+  },
+  {
+   "deva": "फ",
+   "slp1": "P",
+   "entries": 761
+  },
+  {
+   "deva": "ब",
+   "slp1": "b",
+   "entries": 5591
+  },
+  {
+   "deva": "भ",
+   "slp1": "B",
+   "entries": 6736
+  },
+  {
+   "deva": "म",
+   "slp1": "m",
+   "entries": 16215
+  },
+  {
+   "deva": "य",
+   "slp1": "y",
+   "entries": 4456
+  },
+  {
+   "deva": "र",
+   "slp1": "r",
+   "entries": 7742
+  },
+  {
+   "deva": "ल",
+   "slp1": "l",
+   "entries": 3981
+  },
+  {
+   "deva": "व",
+   "slp1": "v",
+   "entries": 28396
+  },
+  {
+   "deva": "श",
+   "slp1": "S",
+   "entries": 14658
+  },
+  {
+   "deva": "ष",
+   "slp1": "z",
+   "entries": 823
+  },
+  {
+   "deva": "स",
+   "slp1": "s",
+   "entries": 36866
+  },
+  {
+   "deva": "ह",
+   "slp1": "h",
+   "entries": 5198
+  }
+ ]
+}
