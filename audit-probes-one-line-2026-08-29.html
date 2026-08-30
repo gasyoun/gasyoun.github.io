@@ -55,14 +55,26 @@
     transition: opacity .18s ease;
   }
   #toast.show { opacity: 1; }
+  #savedinfo { font-size: .8rem; color: var(--muted); }
+  .warn {
+    padding: .5rem .75rem; border: 1px solid #b8860b; border-radius: 10px;
+    background: #fff6dd; color: #6b5200; font-size: .85rem; margin: 0 0 1rem;
+  }
+  @media (prefers-color-scheme: dark) {
+    .warn { background: #33290c; border-color: #8a6d1f; color: #e8c96a; }
+  }
 </style>
 </head>
 <body>
 <h1>One-line audit probes</h1>
-<p class="sub">39 questions · click a line → it copies to clipboard · click again to re-copy · progress is remembered locally in this browser.</p>
+<p class="sub">39 questions · click a line → it copies to clipboard · progress is saved in this browser — if it resets after a reboot (browser cleared site data), “Copy progress link” gives you a bookmark that keeps your place.</p>
+
+<div id="storewarn" class="warn" hidden>Progress is NOT being saved in this window (private browsing or blocked storage). Use “Copy progress link” to keep your place.</div>
 
 <div class="bar">
   <span id="progress"><b>0</b> / 39 copied</span>
+  <span id="savedinfo"></span>
+  <button id="linkbtn" type="button">Copy progress link</button>
   <button id="reset" type="button">Reset progress</button>
 </div>
 
@@ -129,14 +141,29 @@ const SECTIONS = [
 ];
 
 const KEY = "probes-2026-08-29-copied";
-let done = new Set(JSON.parse(localStorage.getItem(KEY) || "[]"));
+let storageOK = true;
+function storeGet() { try { return localStorage.getItem(KEY); } catch (e) { storageOK = false; return null; } }
+function storeSet(v) { try { localStorage.setItem(KEY, v); storageOK = true; } catch (e) { storageOK = false; } }
+try { const t = KEY + "-probe"; localStorage.setItem(t, "1"); localStorage.removeItem(t); } catch (e) { storageOK = false; }
+let done = new Set();
+try { done = new Set(JSON.parse(storeGet() || "[]")); } catch (e) {}
+const hashMatch = location.hash.match(/p=([\d,]+)/);
+if (hashMatch) hashMatch[1].split(",").filter(Boolean).forEach(x => done.add(Number(x)));
 let n = 0;
+let savedAt = null;
 const list = document.getElementById("list");
 const toast = document.getElementById("toast");
 
-function save() { localStorage.setItem(KEY, JSON.stringify([...done])); updateBar(); }
+function save() {
+  storeSet(JSON.stringify([...done]));
+  try { history.replaceState(null, "", done.size ? "#p=" + [...done].join(",") : location.pathname); } catch (e) {}
+  savedAt = new Date();
+  updateBar();
+}
 function updateBar() {
   document.getElementById("progress").innerHTML = "<b>" + done.size + "</b> / " + n + " copied";
+  document.getElementById("savedinfo").textContent = storageOK ? (savedAt ? "saved " + savedAt.toLocaleTimeString() : "") : "not saved";
+  document.getElementById("storewarn").hidden = storageOK;
 }
 function showToast(msg) {
   toast.textContent = msg;
@@ -183,6 +210,12 @@ SECTIONS.forEach(([title, questions]) => {
   });
 });
 
+document.getElementById("linkbtn").addEventListener("click", () => {
+  const url = location.origin + location.pathname + (done.size ? "#p=" + [...done].join(",") : "");
+  const ok = () => showToast("Progress link copied");
+  if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(url).then(ok).catch(() => fallback(url, ok));
+  else fallback(url, ok);
+});
 document.getElementById("reset").addEventListener("click", () => {
   done.clear();
   document.querySelectorAll(".q").forEach(b => { b.classList.remove("copied"); b.querySelector(".tag").textContent = "click to copy"; });
