@@ -1,0 +1,396 @@
+{
+ "dirs": [
+  "agent-anthill-2026-08-29",
+  "anatomy-mw-2026-08-29",
+  "bookindex-scans-2026-08-29",
+  "case-grid-2026-08-29",
+  "case-roads-2026-08-29",
+  "case-tracks-2026-08-29",
+  "ci-passport-2026-08-29",
+  "commentary-strata-2026-08-29",
+  "commit-pulse-2026-08-29",
+  "corpora-beside-2026-08-29",
+  "corpora-side-by-side-2026-08-29",
+  "countvowels-cvc-2026-08-29",
+  "devanagari-quarter-2026-08-29",
+  "dict-genealogy-2026-08-29",
+  "dict-passport-2026-08-29",
+  "dict-suitcases-2026-08-29",
+  "dictionaries-45-2026-08-29",
+  "editions-timeline-2026-08-29",
+  "empire-map-2026-08-29",
+  "estate-growth-2026-08-29",
+  "estate-timeline-2026-08-29",
+  "five-encodings-2026-08-29",
+  "five-lexicographers-2026-08-29",
+  "fuzzyalpha-dupes-2026-08-29",
+  "gita-100-2026-08-29",
+  "gita-coverage-2026-08-29",
+  "gita-heatmap-2026-08-29",
+  "github-sanskrit-blueprint-story-2026-08-29",
+  "github-sanskrit-estate-isometric-2026-08-28",
+  "github-sanskrit-story-styles-2026-08-29",
+  "growth-slider-2026-08-29",
+  "gtd-snapshot-2026-08-29",
+  "homonyms-2026-08-29",
+  "indology-atlas-2026-08-29",
+  "license-lights-2026-08-29",
+  "license-traffic-light-2026-08-29",
+  "longest-words-2026-08-29",
+  "meta-dashboard-2026-08-29",
+  "month-of-words-2026-08-29",
+  "morph-snowflake-2026-08-29",
+  "mw-among-greats-2026-08-29",
+  "mw-citations-2026-08-29",
+  "mw-letters-2026-08-29",
+  "o-vs-o-pairs-2026-08-29",
+  "observatory-reports-2026-08-29",
+  "ors-funnel-2026-08-29",
+  "prefaces-seven-2026-08-29",
+  "price-of-word-2026-08-29",
+  "product-campus-2026-08-29",
+  "ramayana-numbers-2026-08-29",
+  "samasa-chakram-2026-08-29",
+  "samasa-wheel-2026-08-29",
+  "sandhi-records-2026-08-29",
+  "sanskrit-infographics-catalog",
+  "sanskrit-sorting-2026-08-29",
+  "sanskrit-vs-classical-2026-08-29",
+  "science-langs-2026-08-29",
+  "somadeva-ocean-2026-08-29",
+  "student-road-2026-08-29",
+  "suitcases-2026-08-29",
+  "systema-srs-2026-08-29",
+  "three-languages-2026-08-29",
+  "typo-gold-2026-08-29",
+  "visualdcs-derived-2026-08-29",
+  "who-writes-2026-08-29",
+  "year-one-frame-2026-08-29",
+  "zaliznyak-bridge-2026-08-29"
+ ],
+ "catalog_slugs": [
+  "agent-anthill-2026-08-29",
+  "anatomy-mw-2026-08-29",
+  "bookindex-scans-2026-08-29",
+  "case-grid-2026-08-29",
+  "case-roads-2026-08-29",
+  "ci-passport-2026-08-29",
+  "commentary-strata-2026-08-29",
+  "commit-pulse-2026-08-29",
+  "corpora-side-by-side-2026-08-29",
+  "countvowels-cvc-2026-08-29",
+  "devanagari-quarter-2026-08-29",
+  "dict-genealogy-2026-08-29",
+  "dict-passport-2026-08-29",
+  "dict-suitcases-2026-08-29",
+  "dictionaries-45-2026-08-29",
+  "editions-timeline-2026-08-29",
+  "empire-map-2026-08-29",
+  "estate-growth-2026-08-29",
+  "estate-timeline-2026-08-29",
+  "five-encodings-2026-08-29",
+  "five-lexicographers-2026-08-29",
+  "fuzzyalpha-dupes-2026-08-29",
+  "gita-100-2026-08-29",
+  "gita-coverage-2026-08-29",
+  "gita-heatmap-2026-08-29",
+  "github-sanskrit-blueprint-story-2026-08-29",
+  "github-sanskrit-estate-isometric-2026-08-28",
+  "github-sanskrit-story-styles-2026-08-29",
+  "growth-slider-2026-08-29",
+  "gtd-snapshot-2026-08-29",
+  "homonyms-2026-08-29",
+  "indology-atlas-2026-08-29",
+  "license-traffic-light-2026-08-29",
+  "longest-words-2026-08-29",
+  "meta-dashboard-2026-08-29",
+  "month-of-words-2026-08-29",
+  "morph-snowflake-2026-08-29",
+  "mw-among-greats-2026-08-29",
+  "mw-citations-2026-08-29",
+  "mw-letters-2026-08-29",
+  "o-vs-o-pairs-2026-08-29",
+  "observatory-reports-2026-08-29",
+  "ors-funnel-2026-08-29",
+  "prefaces-seven-2026-08-29",
+  "price-of-word-2026-08-29",
+  "product-campus-2026-08-29",
+  "ramayana-numbers-2026-08-29",
+  "samasa-chakram-2026-08-29",
+  "sandhi-records-2026-08-29",
+  "sanskrit-sorting-2026-08-29",
+  "sanskrit-vs-classical-2026-08-29",
+  "somadeva-ocean-2026-08-29",
+  "student-road-2026-08-29",
+  "systema-srs-2026-08-29",
+  "three-languages-2026-08-29",
+  "typo-gold-2026-08-29",
+  "visualdcs-derived-2026-08-29",
+  "who-writes-2026-08-29",
+  "year-one-frame-2026-08-29",
+  "zaliznyak-bridge-2026-08-29"
+ ],
+ "singles": [
+  [
+   "agent-anthill-2026-08-29",
+   "Муравейник агентов"
+  ],
+  [
+   "anatomy-mw-2026-08-29",
+   "Анатомия одной статьи MW"
+  ],
+  [
+   "bookindex-scans-2026-08-29",
+   "BookIndex и SanskritSorting"
+  ],
+  [
+   "case-grid-2026-08-29",
+   "Сетка падежей"
+  ],
+  [
+   "case-roads-2026-08-29",
+   "Падежные дорожки: пять грамматик"
+  ],
+  [
+   "ci-passport-2026-08-29",
+   "CI-паспорт"
+  ],
+  [
+   "commentary-strata-2026-08-29",
+   "Стратиграфия комментария: 2527 примечаний"
+  ],
+  [
+   "commit-pulse-2026-08-29",
+   "Пульс коммитов"
+  ],
+  [
+   "corpora-side-by-side-2026-08-29",
+   "Три корпуса санскрита рядом"
+  ],
+  [
+   "countvowels-cvc-2026-08-29",
+   "Гласные эпоса (CVC)"
+  ],
+  [
+   "devanagari-quarter-2026-08-29",
+   "Квартал деванагари: 46 букв"
+  ],
+  [
+   "dict-genealogy-2026-08-29",
+   "Генеалогия словарей"
+  ],
+  [
+   "dict-passport-2026-08-29",
+   "Паспорт словаря"
+  ],
+  [
+   "dict-suitcases-2026-08-29",
+   "Словари как чемоданы"
+  ],
+  [
+   "dictionaries-45-2026-08-29",
+   "45 словарей целиком"
+  ],
+  [
+   "editions-timeline-2026-08-29",
+   "Хронология изданий"
+  ],
+  [
+   "empire-map-2026-08-29",
+   "Карта империи"
+  ],
+  [
+   "estate-growth-2026-08-29",
+   "Рост имения"
+  ],
+  [
+   "estate-timeline-2026-08-29",
+   "Хронология имения"
+  ],
+  [
+   "five-encodings-2026-08-29",
+   "Пять кодировок"
+  ],
+  [
+   "five-lexicographers-2026-08-29",
+   "Пятеро лексикографов"
+  ],
+  [
+   "fuzzyalpha-dupes-2026-08-29",
+   "fuzzyalpha: почти-дубли"
+  ],
+  [
+   "gita-100-2026-08-29",
+   "Сто слов Гиты"
+  ],
+  [
+   "gita-coverage-2026-08-29",
+   "Сколько слов нужно для Гиты"
+  ],
+  [
+   "gita-heatmap-2026-08-29",
+   "Гита: тепловая карта 700 шлок"
+  ],
+  [
+   "growth-slider-2026-08-29",
+   "Слайдер роста"
+  ],
+  [
+   "gtd-snapshot-2026-08-29",
+   "Roadmap-снепшот"
+  ],
+  [
+   "homonyms-2026-08-29",
+   "Рекорды омонимии"
+  ],
+  [
+   "indology-atlas-2026-08-29",
+   "Атлас индологов"
+  ],
+  [
+   "license-traffic-light-2026-08-29",
+   "Светофор лицензий 45 словарей"
+  ],
+  [
+   "longest-words-2026-08-29",
+   "Топ-20 самых длинных слов"
+  ],
+  [
+   "meta-dashboard-2026-08-29",
+   "Вселенная санскрита"
+  ],
+  [
+   "month-of-words-2026-08-29",
+   "Месяц слов"
+  ],
+  [
+   "morph-snowflake-2026-08-29",
+   "Морфологическая снежинка"
+  ],
+  [
+   "mw-among-greats-2026-08-29",
+   "MW среди великих"
+  ],
+  [
+   "mw-citations-2026-08-29",
+   "Цитаты MW"
+  ],
+  [
+   "mw-letters-2026-08-29",
+   "С чего начинается словарь"
+  ],
+  [
+   "o-vs-o-pairs-2026-08-29",
+   "o_vs_O: орфо-дрейф"
+  ],
+  [
+   "observatory-reports-2026-08-29",
+   "Обсерватория Cologne"
+  ],
+  [
+   "ors-funnel-2026-08-29",
+   "Воронка ORS"
+  ],
+  [
+   "prefaces-seven-2026-08-29",
+   "Предисловия семи словарей"
+  ],
+  [
+   "price-of-word-2026-08-29",
+   "Цена слова"
+  ],
+  [
+   "product-campus-2026-08-29",
+   "Кампус продуктов"
+  ],
+  [
+   "ramayana-numbers-2026-08-29",
+   "Рамаяна в цифрах"
+  ],
+  [
+   "samasa-chakram-2026-08-29",
+   "Колесо самас: 58 подтипов"
+  ],
+  [
+   "sandhi-records-2026-08-29",
+   "Рекорды сандхи"
+  ],
+  [
+   "sanskrit-sorting-2026-08-29",
+   "SanskritSorting"
+  ],
+  [
+   "sanskrit-vs-classical-2026-08-29",
+   "Санскрит vs латынь vs греческий"
+  ],
+  [
+   "somadeva-ocean-2026-08-29",
+   "Сомадева: океан историй"
+  ],
+  [
+   "student-road-2026-08-29",
+   "От алфавита до Рамаяны"
+  ],
+  [
+   "systema-srs-2026-08-29",
+   "Дорога ученика"
+  ],
+  [
+   "three-languages-2026-08-29",
+   "Три языка науки — и ноль по-русски"
+  ],
+  [
+   "typo-gold-2026-08-29",
+   "Таблица грехов"
+  ],
+  [
+   "visualdcs-derived-2026-08-29",
+   "VisualDCS: derived-data"
+  ],
+  [
+   "who-writes-2026-08-29",
+   "Кто пишет санскрит"
+  ],
+  [
+   "year-one-frame-2026-08-29",
+   "Год одним кадром"
+  ],
+  [
+   "zaliznyak-bridge-2026-08-29",
+   "Мост Зализняк"
+  ]
+ ],
+ "drafts": [
+  [
+   "case-tracks-2026-08-29",
+   "Падежные дорожки",
+   "case-roads-2026-08-29"
+  ],
+  [
+   "corpora-beside-2026-08-29",
+   "Корпуса рядом",
+   "corpora-side-by-side-2026-08-29"
+  ],
+  [
+   "license-lights-2026-08-29",
+   "Светофор лицензий",
+   "license-traffic-light-2026-08-29"
+  ],
+  [
+   "samasa-wheel-2026-08-29",
+   "Колесо самас",
+   "samasa-chakram-2026-08-29"
+  ],
+  [
+   "science-langs-2026-08-29",
+   "Три языка науки",
+   "three-languages-2026-08-29"
+  ],
+  [
+   "suitcases-2026-08-29",
+   "Словари как чемоданы",
+   "dict-suitcases-2026-08-29"
+  ]
+ ],
+ "other": []
+}
