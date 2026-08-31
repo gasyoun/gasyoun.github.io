@@ -38,11 +38,15 @@ for (const row of rows) {
   // Rows built by another lane (e.g. mw-letters by the catalog session) declare
   // "external": true — their canvas shape is owned there; H3707 keeps them untouched
   // and skips only the 1080x1920 shape assertion, not the provenance checks.
+  // Canvas may be portrait 1080×1920 (build.py lane) or wide 1920×1080
+  // (epic-infographics b2 lane, H3708). Accept either size in either order.
   if (!row.external) {
-    if (!t.includes("width:1080px") && !t.includes("width: 1080px")) fails.push("1080");
-    if (!t.includes("height:1920px") && !t.includes("height: 1920px")) fails.push("1920");
+    const has = (w, h) =>
+      (t.includes(`width:${w}px`) || t.includes(`width: ${w}px`)) &&
+      (t.includes(`height:${h}px`) || t.includes(`height: ${h}px`));
+    if (!has(1080, 1920) && !has(1920, 1080)) fails.push("1080", "1920");
   }
-  if (!/Посчитано|посчитано/.test(t)) fails.push("Посчитано");
+  if (!/Посчитано|посчитано|ПОСЧИТАНО/.test(t)) fails.push("Посчитано");
   if (!t.includes("scripts/infographics50")) fails.push("script provenance");
   if (/TODO|FIXME|lorem ipsum/i.test(t)) fails.push("placeholder");
   if (fails.length) {
