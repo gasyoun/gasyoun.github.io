@@ -30,12 +30,12 @@ h1 { position: absolute; left: 48px; top: 90px; font-family: var(--font-display)
   display: grid; grid-template-columns: 482px 482px; gap: 18px; }
 .card { background: var(--card); border: 1.5px solid var(--line); border-radius: 16px; overflow: hidden;
   text-decoration: none; color: var(--text); display: block; }
-.card img { width: 482px; height: 300px; object-fit: cover; object-position: 50% 22%; display: block; }
+.card img { width: 482px; height: 240px; object-fit: cover; object-position: 50% 22%; display: block; }
 .card .cap { display: flex; justify-content: space-between; align-items: center; padding: 0 18px; height: 44px; }
 .card .name { font: 700 19px var(--font-body); }
 .card .file { font: 600 12.5px var(--font-body); color: var(--text-sub); letter-spacing: .04em; }
 .card.hub { display: flex; flex-direction: column; justify-content: center; gap: 10px; padding: 24px;
-  background: linear-gradient(150deg, #18222E 0%, var(--card) 70%); border-color: rgba(111,227,193,.45); height: 344px; }
+  background: linear-gradient(150deg, #18222E 0%, var(--card) 70%); border-color: rgba(111,227,193,.45); height: 284px; }
 .card.hub .big { font: 700 30px var(--font-display); color: var(--neon); line-height: 1.2; }
 .card.hub .small { font: 600 16px/1.45 var(--font-body); color: var(--text-sub); }
 .footer { position: absolute; left: 48px; right: 48px; top: 1830px; display: flex; justify-content: space-between;
@@ -54,7 +54,7 @@ h1 { opacity: 0; animation: pop .55s ease-out forwards .15s; }
   <h1>Сколько слов в санскрите?</h1>
   <div class="hero">
     <div class="hero-num">1 506 452</div>
-    <div class="hero-label">словарных статей · 45 словарей · 7 стилей одной истории</div>
+    <div class="hero-label">словарных статей · 45 словарей · 8 стилевых обложек</div>
   </div>
 
   <div class="grid">
@@ -86,7 +86,11 @@ h1 { opacity: 0; animation: pop .55s ease-out forwards .15s; }
       <img src="editorial.png" alt="Журнал">
       <div class="cap"><span class="name">Журнал</span><span class="file">editorial</span></div>
     </a>
-    <div class="card hub pop" style="animation-delay:1.15s">
+    <a class="card pop" style="animation-delay:1.15s" href="../github-sanskrit-blueprint-story-2026-08-29/index.html">
+      <img src="../github-sanskrit-blueprint-story-2026-08-29/blueprint-story.png" alt="Синька">
+      <div class="cap"><span class="name">Синька</span><span class="file">blueprint-story</span></div>
+    </a>
+    <div class="card hub pop" style="animation-delay:1.25s">
       <div class="big">Один сюжет —<br>семь обложек</div>
       <div class="small">У каждого стиля свои файлы в этой папке:<br>имя.html · имя.mp4 · имя.gif · имя.png</div>
       <div class="small">Доля Monier-Williams — 19,0 % всех статей.<br>Уникальных заголовков — 431 596.</div>

@@ -50,6 +50,52 @@ for (const row of rows) {
     errors += 1;
   }
 }
+
+// --index: H3768 gate — every infographics/* dir must be listed in the generated
+// index, every href in the index must resolve on disk, and the emitted page must
+// not have drifted from what gen_infographics_index.py derives from disk.
+if (process.argv.includes("--index")) {
+  const gen = path.join(root, "scripts", "infographics50", "gen_infographics_index.py");
+  const { execFileSync } = await import("node:child_process");
+  try {
+    execFileSync("python3", [gen, "--check"], { stdio: "pipe" });
+    console.log("index parity OK (gen_infographics_index --check)");
+  } catch (e) {
+    console.error("FAIL index parity:", String(e.stderr || e.message).trim());
+    errors += 1;
+  }
+  const idxPath = path.join(inf, "index.html");
+  if (!fs.existsSync(idxPath)) {
+    console.error("FAIL index: infographics/index.html missing");
+    errors += 1;
+  } else {
+    const idx = fs.readFileSync(idxPath, "utf8");
+    const hrefs = [...idx.matchAll(/href="([^"#]+)"/g)].map(m => m[1]);
+    const listed = new Set(
+      [...idx.matchAll(/href="([a-z0-9-]+)\/[^"]*"/g)].map(m => m[1])
+    );
+    const dirs = fs.readdirSync(inf, { withFileTypes: true })
+      .filter(d => d.isDirectory() && d.name !== "sanskrit-infographics-catalog")
+      .map(d => d.name);
+    for (const d of dirs) {
+      if (!listed.has(d)) {
+        console.error("FAIL index: directory not listed in index.html:", d);
+        errors += 1;
+      }
+    }
+    for (const h of hrefs) {
+      if (/^(https?:|#|mailto:)/.test(h)) continue;
+      const target = path.resolve(inf, h);
+      if (!fs.existsSync(target)) {
+        console.error("FAIL index: broken href ", h);
+        errors += 1;
+      }
+    }
+    if (!errors) console.error("index coverage:", dirs.length, "dirs listed,",
+      hrefs.filter(h => !/^(https?:|#)/.test(h)).length, "local hrefs valid");
+  }
+}
+
 if (errors) {
   console.error(errors, "errors");
   process.exit(1);
