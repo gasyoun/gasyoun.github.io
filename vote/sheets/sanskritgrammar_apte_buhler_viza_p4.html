@@ -1,0 +1,2175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="color-scheme" content="dark">
+<meta name="generator" content="csl-pyutil/0.22.0">
+<title>Виза P4 — методички Апте и Бюлера (корпусный слой + упражнения) — 114 items</title>
+<style>
+  :root { color-scheme: dark; --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --text:#e6e6e6; --muted:#9aa0aa;
+          --accent:#5b8cff; --ok:#3fb950; --bad:#f85149; --defer:#d29922; --border:#2a2f3a; }
+  * { box-sizing: border-box; }
+  body { background:var(--bg); color:var(--text); font-family:-apple-system,Segoe UI,Roboto,sans-serif;
+         margin:0; padding:0 0 120px 0; }
+  header.top { position:sticky; top:0; z-index:10; background:var(--panel); border-bottom:1px solid var(--border);
+               padding:14px 20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+  header.top h1 { font-size:16px; margin:0; }
+  header.top .sub { color:var(--muted); font-size:12px; max-width:760px; }
+  .tally { display:flex; gap:14px; font-size:13px; }
+  .tally span.count { font-weight:700; }
+  .tally .approve { color:var(--ok); } .tally .reject { color:var(--bad); }
+  .tally .defer { color:var(--defer); } .tally .unvoted { color:var(--muted); }
+  .toolbar { padding:10px 20px; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  button.dl { background:var(--accent); color:#fff; border:none; padding:8px 14px; border-radius:6px;
+              cursor:pointer; font-size:13px; }
+  button.dl:hover { opacity:.9; }
+  .filterbar { display:flex; gap:6px; flex-wrap:wrap; }
+  .filterbar button { background:var(--panel2); border:1px solid var(--border); color:var(--text);
+                       padding:6px 10px; border-radius:14px; font-size:12px; cursor:pointer; }
+  .filterbar button.active { border-color:var(--accent); color:var(--accent); }
+  main { max-width:980px; margin:0 auto; padding:10px 20px; }
+  .card { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:16px;
+          margin-bottom:16px; }
+  .card.voted-approve { border-left:4px solid var(--ok); }
+  .card.voted-reject { border-left:4px solid var(--bad); }
+  .card.voted-defer { border-left:4px solid var(--defer); }
+  .card header { display:flex; justify-content:space-between; align-items:baseline; }
+  .card .hw { font-size:18px; font-weight:700; }
+  .badge { font-size:11px; background:var(--panel2); padding:2px 8px; border-radius:10px;
+           margin-left:8px; color:var(--muted); }
+  .question { margin:8px 0 12px; font-size:14px; }
+  .panel { background:var(--panel2); border-radius:8px; padding:10px 12px; font-size:13px; margin-bottom:10px; }
+  .panel h4 { margin:0 0 6px; font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+  .panel pre { white-space:pre-wrap; word-break:break-word; margin:0; font-size:12px; line-height:1.45; }
+  .chip { display:inline-block; background:#263042; border-radius:5px; padding:2px 7px; margin:2px 3px 2px 0; font-size:12px; }
+  .muted { color:var(--muted); font-style:italic; }
+  .controls { display:flex; align-items:center; gap:8px; margin-top:4px; }
+  button.vote { border:1px solid var(--border); background:var(--panel2); color:var(--text);
+                padding:7px 12px; border-radius:6px; cursor:pointer; font-size:13px; }
+  button.vote.approve.active { background:var(--ok); border-color:var(--ok); color:#04240b; }
+  button.vote.reject.active { background:var(--bad); border-color:var(--bad); color:#2a0a08; }
+  button.vote.defer.active { background:var(--defer); border-color:var(--defer); color:#2a1d02; }
+  .vote-state { margin-left:6px; font-size:12px; color:var(--muted); }
+  textarea.note { width:100%; margin-top:10px; min-height:88px; background:#11141a !important; color:#e6e6e6 !important;
+                  -webkit-text-fill-color:#e6e6e6; border:1px solid var(--border); border-radius:6px; padding:8px; font-size:13px;
+                  font-family:inherit; resize:vertical; }
+  textarea.note::placeholder { color:var(--muted); opacity:1; }
+  footer.hint { max-width:980px; margin:20px auto; padding:0 20px; color:var(--muted); font-size:12px; }
+  kbd { background:#263042; border-radius:4px; padding:1px 5px; font-size:11px; }
+
+  .screening-banner { margin: 0 20px 12px; padding: 10px 14px; border-radius: 8px;
+    border: 1px solid var(--accent); background: #152033; font-size: 12px; line-height: 1.45;
+    color: var(--text); max-width: 980px; }
+  .screening-banner code { font-size: 11px; color: var(--accent); }
+  .screening-banner .sc-d { color: var(--defer); font-weight: 700; }
+
+  .idchip { font-family:ui-monospace,Consolas,monospace; font-size:11px; color:var(--muted);
+            background:var(--panel2); border:1px solid var(--border); padding:2px 7px;
+            border-radius:6px; user-select:all; }
+  .card header { gap:10px; }
+  .hw a.hwlink { color:inherit; text-decoration:underline dotted; text-underline-offset:3px; }
+  .hw a.hwlink:hover { color:var(--accent); }
+  mark.hl { background:#453407; color:#ffd75e; padding:0 2px; border-radius:3px; }
+  .savebanner { max-width:980px; margin:10px auto 0; padding:8px 20px; font-size:12.5px; }
+  .savebanner code { background:var(--panel2); border:1px solid var(--border); padding:1px 6px; border-radius:5px; }
+  .ratingrow { display:flex; align-items:center; gap:6px; margin-top:10px; flex-wrap:wrap; }
+  .ratinglabel { font-size:12px; color:var(--muted); margin-right:4px; }
+  button.rate { border:1px solid var(--border); background:var(--panel2); color:var(--text);
+                width:34px; padding:6px 0; border-radius:6px; cursor:pointer; font-size:13px; }
+  button.rate.active { background:var(--accent); border-color:var(--accent); color:#fff; }
+  button.rate.active.below { background:var(--defer); border-color:var(--defer); color:#2a1d02; }
+  .rate-state { font-size:12px; color:var(--muted); margin-left:4px; }
+  .badge-typology { border:1px solid var(--accent); color:var(--text); font-weight:600; }
+  :root { --fs:1.5; }
+  header.top h1 { font-size:calc(16px * var(--fs)) !important; }
+  header.top .sub { font-size:calc(12px * var(--fs)) !important; }
+  .tally, button.dl, button.vote, button.rate, textarea.note, .reject-label-select,
+  #strictReviewerWrap, #strictReviewerWrap input { font-size:calc(13px * var(--fs)) !important; }
+  .filterbar button, .fsctl button, .fsctl .fsval, .chip, .vote-state, .rate-state,
+  .ratinglabel, .rejectlabellabel, footer.hint, div.legend,
+  #strictReviewError { font-size:calc(12px * var(--fs)) !important; }
+  .card .hw { font-size:calc(18px * var(--fs)) !important; }
+  .badge, .panel h4, kbd, .idchip { font-size:calc(11px * var(--fs)) !important; }
+  .question { font-size:calc(14px * var(--fs)) !important; }
+  .panel { font-size:calc(13px * var(--fs)) !important; }
+  .panel pre { font-size:calc(13.5px * var(--fs)) !important; line-height:1.55; }
+  .panel .anatomy { font-size:calc(12.5px * var(--fs)) !important; }
+  .savebanner { font-size:calc(12.5px * var(--fs)) !important; }
+  .fsctl { display:flex; align-items:center; gap:4px; }
+  .fsctl button { background:var(--panel2); border:1px solid var(--border); color:var(--text);
+                  padding:6px 10px; border-radius:14px; cursor:pointer; line-height:1; }
+  .fsctl .fsval { color:var(--muted); min-width:3.4em; text-align:center; }
+  @media (max-width: 640px) {
+    header.top { padding: 10px 14px; flex-direction: column; align-items: stretch; }
+    header.top h1 { font-size: 15px; }
+    .tally { gap: 8px; font-size: 11px; }
+    .toolbar { padding: 8px 14px; }
+    main { padding: 8px 12px; }
+    .card { padding: 12px; }
+    .filterbar { flex-wrap: wrap; }
+    button.dl, button.vote, button.rate, .fsctl button, #saveBtn, #handinBtn, #pauseBtn {
+      min-height: 44px; min-width: 44px; padding: 10px 14px;
+    }
+    .controls { flex-wrap: wrap; }
+    .panel { padding: 8px 10px; }
+    textarea.note { min-height: 60px; }
+  }
+  .tally .time { color:var(--muted); }
+  .dl.handin { background:#243447; }
+  .tally .pausebtn { background:none; border:1px solid var(--border); color:var(--muted);
+                     border-radius:6px; padding:0 6px; margin-left:4px; cursor:pointer;
+                     font-size:inherit; font-family:inherit; line-height:1.6; }
+  .tally .pausebtn.on { color:#ffd479; border-color:#ffd479; }
+  .tally .time.paused { opacity:.45; }
+  .handin-said { color:var(--muted); font-size:12px; margin-left:10px; }
+  .card.kbd-active { outline:2px solid var(--accent); outline-offset:3px; }
+  .tally .tstate { color:var(--muted); font-size:.85em; margin-left:4px; }
+  .tally .tstate.idle { color:var(--defer); }
+  .flowprog { display:inline-flex; align-items:center; gap:8px; color:var(--muted); font-size:12px; }
+  .flowprog .bar { display:inline-block; width:120px; height:6px; border-radius:3px;
+                   background:var(--panel2); border:1px solid var(--border); overflow:hidden; }
+  .flowprog .bar i { display:block; height:6px; background:var(--accent); width:0; }
+  .dl.flowundo { background:#243447; }
+  .flowtoast { position:fixed; left:50%; bottom:24px; transform:translateX(-50%);
+               background:var(--panel2); border:1px solid var(--border); color:var(--text);
+               padding:8px 14px; border-radius:8px; font-size:13px; z-index:50;
+               opacity:0; pointer-events:none; transition:opacity .18s; }
+  .flowtoast.on { opacity:1; }
+  .voteprog { flex:1 0 100%; order:99; background:var(--panel);
+              border-top:1px solid var(--border); margin:6px -20px -14px; padding:8px 20px;
+              display:flex; align-items:center; gap:12px; font-size:12px; color:var(--muted); }
+  .voteprog .bar { flex:1 1 auto; height:8px; border-radius:4px; background:var(--panel2);
+                   border:1px solid var(--border); overflow:hidden; }
+  .voteprog .bar i { display:block; height:100%; width:0; background:var(--ok); transition:width .2s; }
+  .voteprog b { color:var(--text); font-weight:700; }
+  .voteprog .eta { white-space:nowrap; }
+  .votebar { position:sticky; bottom:0; z-index:9; background:var(--panel);
+             border-top:1px solid var(--border); padding:10px 20px; margin-top:24px;
+             display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  .votebar .spacer { flex:1 1 auto; }
+  .card { scroll-margin-top:96px; }
+  @media (max-width: 640px) { .voteprog { padding:6px 12px; } .votebar { padding:8px 12px; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>Виза P4 — методички Апте и Бюлера (корпусный слой + упражнения) — 114 items</h1>
+    <div class="sub">Generated 31-08-2026 &middot; sheet_id <code>sanskritgrammar-apte-buhler-viza_p4</code> &middot; Черновые русские переводы примеров DCS (раздел II) и черновые ключи/переводы чтений раздела IV — методички Апте (H3739) и Бюлера (H3804). Каждая карточка — один черновик ⟦MG-viza⟧/⟦MG-виза⟧ до подписи автора.</div>
+  </div>
+  <div class="tally" id="tally">
+    <span class="approve">&#9989; <span class="count" id="c-approve">0</span></span>
+    <span class="reject">&#10060; <span class="count" id="c-reject">0</span></span>
+    <span class="defer">&#9208; <span class="count" id="c-defer">0</span></span>
+    <span class="time" title="active time on this sheet (while the tab is visible)">&#9201; <span class="count" id="t-total">0:00</span><span class="tstate" id="t-state"></span></span>
+    <button type="button" class="pausebtn" id="pauseBtn" title="pause the clock — a break is not review time">&#9208;</button>
+    <span class="unvoted">&#9711; <span class="count" id="c-unvoted">114</span></span>
+  </div>
+<div class="voteprog" id="voteProg"><span id="voteProgText"></span><span class="bar"><i id="voteProgBar"></i></span><span class="eta" id="voteProgEta"></span></div>
+</header>
+<aside class="screening-banner" role="status" data-screening="1"><strong>Screening (H1649)</strong> — only human-required cards are below. Off the plate: <span class="sc-a">deterministic 0</span> · <span class="sc-b">dataset lookup 0</span> · <span class="sc-c">agent adjudication 0</span> (total screened 0). Human cards: <span class="sc-d">114</span>. Evidence: <code>review/screening_evidence_sanskritgrammar-apte-buhler-viza_p4.md</code>. Rules: none.</aside>
+<div class="savebanner">&#128229; Your export downloads as <code>sanskritgrammar-apte-buhler-viza_p4_decisions.json</code> &rarr; save it to <code>SanskritGrammar/review/sanskritgrammar-apte-buhler-viza_p4_decisions.json</code> (the <code>sheet_id</code> inside the file is <code>sanskritgrammar-apte-buhler-viza_p4</code> — that is how a later session knows which sheet these decisions belong to).</div>
+<div class="toolbar">
+  <button data-submit="1" class="dl" id="downloadBtn">Download decisions.json</button><button data-submit="1" class="dl handin" id="handinBtn" title="stop the clock and export the votes made so far; the rest stay saved in this browser">Hand in what I got</button><span class="handin-said" id="handinSaid"></span><button data-submit="1" class="dl" id="saveBtn" style="display:none;margin-left:8px">Save to folder…</button>
+  <div class="fsctl" title="text size — persists in this browser"><button type="button" id="fsDown" aria-label="smaller text">A&minus;</button><span class="fsval" id="fsVal"></span><button type="button" id="fsUp" aria-label="larger text">A+</button></div>
+  <button data-submit="1" type="button" class="dl flowundo" id="flowUndoBtn" title="undo the last decision (z)">&#8630; Undo</button>
+  <span class="flowprog" id="flowProg"><span class="bar"><i id="flowBar"></i></span><span id="flowProgText"></span><span id="flowEta"></span></span>
+  <div class="filterbar" id="filterbar"><button data-filter="all" class="active">all</button><button data-filter="apte-corpus">Апте: корпусный слой (34)</button><button data-filter="apte-uprazhneniia-keys">Апте: ключи упражнений (13)</button><button data-filter="apte-uprazhneniia-translations">Апте: переводы чтений (15)</button><button data-filter="buhler-corpus">Бюлер: корпусный слой (31)</button><button data-filter="buhler-uprazhneniia-keys">Бюлер: ключи упражнений (11)</button><button data-filter="buhler-uprazhneniia-translations">Бюлер: переводы чтений (10)</button><button data-filter="unvoted">unvoted only</button></div>
+</div>
+<main id="cards">
+
+  <section class="card" data-id="apte-corpus-gam-25" data-filt="apte-corpus">
+    <header><div class="hw">gam — Занятие 3 — глаголы движения и падеж цели <span class="badge">топ-100</span><span class="badge">ранг 25</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-corpus-gam-25</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> tenāsau pañcatvam agamat</p><p><b>Локус:</b> Hitopadeśa: Hitop, 2, 35.3</p><p><b>Черновой перевод (Fable 5, до визы):</b> «оттого он и отошел к пяти началам [умер]»</p></div>
+    <div class="panel"><h4>Раздел</h4>Занятие 3 — глаголы движения и падеж цели — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-corpus-yā-81" data-filt="apte-corpus">
+    <header><div class="hw">yā — Занятие 3 — глаголы движения и падеж цели <span class="badge">топ-100</span><span class="badge">ранг 81</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-corpus-yā-81</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> sa eva nidhanaṃ yāti kīlotpāṭīva vānaraḥ</p><p><b>Локус:</b> Hitopadeśa: Hitop, 2, 30.5</p><p><b>Черновой перевод (Fable 5, до визы):</b> «тот и идет к гибели — как обезьяна, выдернувшая клин»</p></div>
+    <div class="panel"><h4>Раздел</h4>Занятие 3 — глаголы движения и падеж цели — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-corpus-i-307" data-filt="apte-corpus">
+    <header><div class="hw">i — Занятие 3 — глаголы движения и падеж цели <span class="badge">топ-1000</span><span class="badge">ранг 307</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-corpus-i-307</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> āsannataratām eti mṛtyur jantor dine dine</p><p><b>Локус:</b> Hitopadeśa: Hitop, 4, 74</p><p><b>Черновой перевод (Fable 5, до визы):</b> «день за днем смерть подходит к живому все ближе»</p></div>
+    <div class="panel"><h4>Раздел</h4>Занятие 3 — глаголы движения и падеж цели — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-corpus-car-176" data-filt="apte-corpus">
+    <header><div class="hw">car — Занятие 3 — глаголы движения и падеж цели <span class="badge">топ-1000</span><span class="badge">ранг 176</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-corpus-car-176</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> ajā siṃhaprasādena vane carati nirbhayam</p><p><b>Локус:</b> Hitopadeśa: Hitop, 3, 13.2</p><p><b>Черновой перевод (Fable 5, до визы):</b> «милостью льва коза бесстрашно бродит по лесу»</p></div>
+    <div class="panel"><h4>Раздел</h4>Занятие 3 — глаголы движения и падеж цели — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-corpus-vraj-642" data-filt="apte-corpus">
+    <header><div class="hw">vraj — Занятие 3 — глаголы движения и падеж цели <span class="badge">топ-1000</span><span class="badge">ранг 642</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-corpus-vraj-642</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> sa vināśaṃ vrajaty āśu sūcakāśucir eva ca</p><p><b>Локус:</b> Manusmṛti: ManuS, 4, 71.2</p><p><b>Черновой перевод (Fable 5, до визы):</b> «тот быстро идет к погибели, как и нечистый доносчик»</p></div>
+    <div class="panel"><h4>Раздел</h4>Занятие 3 — глаголы движения и падеж цели — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-corpus-sṛ-3640" data-filt="apte-corpus">
+    <header><div class="hw">sṛ — Занятие 3 — глаголы движения и падеж цели <span class="badge">редкое</span><span class="badge">ранг 3640</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-corpus-sṛ-3640</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> tvaramāṇo janasthānaṃ sasārābhimukhas tadā</p><p><b>Локус:</b> Rāmāyaṇa: Rām, Ār, 42, 21.2</p><p><b>Черновой перевод (Fable 5, до визы):</b> «тогда, спеша, он устремился прямо к Джанастхане»</p></div>
+    <div class="panel"><h4>Раздел</h4>Занятие 3 — глаголы движения и падеж цели — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-corpus-dhāv-1551" data-filt="apte-corpus">
+    <header><div class="hw">dhāv — Занятие 3 — глаголы движения и падеж цели <span class="badge">редкое</span><span class="badge">ранг 1551</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-corpus-dhāv-1551</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> rājā stenena gantavyo muktakeśena dhāvatā</p><p><b>Локус:</b> Manusmṛti: ManuS, 8, 314</p><p><b>Черновой перевод (Fable 5, до визы):</b> «вор должен бежать к царю с распущенными волосами»</p></div>
+    <div class="panel"><h4>Раздел</h4>Занятие 3 — глаголы движения и падеж цели — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-corpus-ruc-1463" data-filt="apte-corpus">
+    <header><div class="hw">ruc — Занятие 7 — глаголы чувства <span class="badge">редкое</span><span class="badge">ранг 1463</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-corpus-ruc-1463</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> yad eva rocate yasmai bhavet tat tasya sundaram</p><p><b>Локус:</b> Hitopadeśa: Hitop, 2, 53.3</p><p><b>Черновой перевод (Fable 5, до визы):</b> «что кому нравится, то для того и прекрасно»</p></div>
+    <div class="panel"><h4>Раздел</h4>Занятие 7 — глаголы чувства — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-corpus-krudh-416" data-filt="apte-corpus">
+    <header><div class="hw">krudh — Занятие 7 — глаголы чувства <span class="badge">топ-1000</span><span class="badge">ранг 416</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-corpus-krudh-416</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> na jāne kruddhaḥ svāmī kiṃ vidhāsyati</p><p><b>Локус:</b> Hitopadeśa: Hitop, 2, 85.14</p><p><b>Черновой перевод (Fable 5, до визы):</b> «не знаю, что сделает разгневанный господин»</p></div>
+    <div class="panel"><h4>Раздел</h4>Занятие 7 — глаголы чувства — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-corpus-druh-4237" data-filt="apte-corpus">
+    <header><div class="hw">druh — Занятие 7 — глаголы чувства <span class="badge">редкое</span><span class="badge">ранг 4237</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-corpus-druh-4237</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> sa mātā sa pitā jñeyas taṃ na druhyet kadācana</p><p><b>Локус:</b> Manusmṛti: ManuS, 2, 144.2</p><p><b>Черновой перевод (Fable 5, до визы):</b> «его следует чтить как мать и отца — ему пусть не вредит никогда»</p></div>
+    <div class="panel"><h4>Раздел</h4>Занятие 7 — глаголы чувства — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-corpus-īrṣy-35949" data-filt="apte-corpus">
+    <header><div class="hw">īrṣy — Занятие 7 — глаголы чувства <span class="badge">редкое</span><span class="badge">ранг 35949</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-corpus-īrṣy-35949</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> idānīm evāhaṃ janaka strīṇām īrṣyāmi no purā</p><p><b>Локус:</b> Āpastambadharmasūtra: ĀpDhS, 2, 13, 6.2</p><p><b>Черновой перевод (Fable 5, до визы):</b> «лишь теперь, о Джанака, я ревную женщин — прежде нет»</p></div>
+    <div class="panel"><h4>Раздел</h4>Занятие 7 — глаголы чувства — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-corpus-asūy-8823" data-filt="apte-corpus">
+    <header><div class="hw">asūy — Занятие 7 — глаголы чувства <span class="badge">редкое</span><span class="badge">ранг 8823</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-corpus-asūy-8823</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> asūyanti hi rājāno janān anṛtavādinaḥ</p><p><b>Локус:</b> Mahābhārata: MBh, 4, 4, 13</p><p><b>Черновой перевод (Fable 5, до визы):</b> «ведь цари негодуют на людей лживых»</p></div>
+    <div class="panel"><h4>Раздел</h4>Занятие 7 — глаголы чувства — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-corpus-kṣip-264" data-filt="apte-corpus">
+    <header><div class="hw">kṣip — Занятие 9 — «бросать» и «любить» <span class="badge">топ-1000</span><span class="badge">ранг 264</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-corpus-kṣip-264</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> gāṃ vipram ajam agniṃ vā prāśayed apsu vā kṣipet</p><p><b>Локус:</b> Manusmṛti: ManuS, 3, 260.2</p><p><b>Черновой перевод (Fable 5, до визы):</b> «пусть скормит корове, брахману, козе, огню — или бросит в воду»</p></div>
+    <div class="panel"><h4>Раздел</h4>Занятие 9 — «бросать» и «любить» — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-corpus-muc-162" data-filt="apte-corpus">
+    <header><div class="hw">muc — Занятие 9 — «бросать» и «любить» <span class="badge">топ-1000</span><span class="badge">ранг 162</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-corpus-muc-162</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> paśya mūṣikamitreṇa kapotā muktabandhanāḥ</p><p><b>Локус:</b> Hitopadeśa: Hitop, 1, 53.4</p><p><b>Черновой перевод (Fable 5, до визы):</b> «смотри: другом-мышью голуби освобождены от пут»</p></div>
+    <div class="panel"><h4>Раздел</h4>Занятие 9 — «бросать» и «любить» — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-corpus-snih-4166" data-filt="apte-corpus">
+    <header><div class="hw">snih — Занятие 9 — «бросать» и «любить» <span class="badge">редкое</span><span class="badge">ранг 4166</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-corpus-snih-4166</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> tataś cāsyāṃ svayaṃ tasya cakṣuḥ snihyed asaṃśayam</p><p><b>Локус:</b> Kathāsaritsāgara: KSS, 2, 3, 11.2</p><p><b>Черновой перевод (Fable 5, до визы):</b> «и тогда его взгляд, без сомнения, сам потянется к ней с любовью»</p></div>
+    <div class="panel"><h4>Раздел</h4>Занятие 9 — «бросать» и «любить» — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-corpus-abhilaṣ-4413" data-filt="apte-corpus">
+    <header><div class="hw">abhilaṣ — Занятие 9 — «бросать» и «любить» <span class="badge">редкое</span><span class="badge">ранг 4413</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-corpus-abhilaṣ-4413</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> etad bhavatām abhilaṣitam api sampannam</p><p><b>Локус:</b> Hitopadeśa: Hitop, 1, 201.6</p><p><b>Черновой перевод (Fable 5, до визы):</b> «вот и желание ваше исполнилось»</p></div>
+    <div class="panel"><h4>Раздел</h4>Занятие 9 — «бросать» и «любить» — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-corpus-anurañj-3181" data-filt="apte-corpus">
+    <header><div class="hw">anurañj — Занятие 9 — «бросать» и «любить» <span class="badge">редкое</span><span class="badge">ранг 3181</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-corpus-anurañj-3181</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> anuraktaḥ śucir dakṣaḥ smṛtimān deśakālavit</p><p><b>Локус:</b> Manusmṛti: ManuS, 7, 64</p><p><b>Черновой перевод (Fable 5, до визы):</b> «преданный, честный, ловкий, памятливый, знающий место и время»</p></div>
+    <div class="panel"><h4>Раздел</h4>Занятие 9 — «бросать» и «любить» — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-corpus-īś-2491" data-filt="apte-corpus">
+    <header><div class="hw">īś — Занятие 10 — «власть» и «память» <span class="badge">редкое</span><span class="badge">ранг 2491</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-corpus-īś-2491</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> na kaścid īśate brahman svayaṃgrāhasya sattama</p><p><b>Локус:</b> Mahābhārata: MBh, 3, 200, 22</p><p><b>Черновой перевод (Fable 5, до визы):</b> «никто, о брахман, не властен над самовольным захватом»</p></div>
+    <div class="panel"><h4>Раздел</h4>Занятие 10 — «власть» и «память» — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-corpus-prabhū-2142" data-filt="apte-corpus">
+    <header><div class="hw">prabhū — Занятие 10 — «власть» и «память» <span class="badge">редкое</span><span class="badge">ранг 2142</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-corpus-prabhū-2142</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> kathaṃ mṛtyuḥ prabhavati vedaśāstravidāṃ prabho</p><p><b>Локус:</b> Manusmṛti: ManuS, 5, 2.2</p><p><b>Черновой перевод (Fable 5, до визы):</b> «как смерть имеет власть над знатоками Вед, о владыка?»</p></div>
+    <div class="panel"><h4>Раздел</h4>Занятие 10 — «власть» и «память» — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-corpus-day-9223" data-filt="apte-corpus">
+    <header><div class="hw">day — Занятие 10 — «власть» и «память» <span class="badge">редкое</span><span class="badge">ранг 9223</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-corpus-day-9223</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> dāmyata datta dayadhvam iti</p><p><b>Локус:</b> Bṛhadāraṇyakopaniṣad: BĀU, 5, 2, 3.8</p><p><b>Черновой перевод (Fable 5, до визы):</b> ««смиряйте себя, давайте, сострадайте»»</p></div>
+    <div class="panel"><h4>Раздел</h4>Занятие 10 — «власть» и «память» — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-corpus-smṛ-114" data-filt="apte-corpus">
+    <header><div class="hw">smṛ — Занятие 10 — «власть» и «память» <span class="badge">топ-1000</span><span class="badge">ранг 114</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-corpus-smṛ-114</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> smarantī taṃ ca bhartāraṃ muktakaṇṭhaṃ ruroda sā</p><p><b>Локус:</b> Kathāsaritsāgara: KSS, 2, 1, 61.2</p><p><b>Черновой перевод (Fable 5, до визы):</b> «вспоминая того мужа [вин.], она рыдала в голос»</p></div>
+    <div class="panel"><h4>Раздел</h4>Занятие 10 — «власть» и «память» — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-corpus-adhī-1275" data-filt="apte-corpus">
+    <header><div class="hw">adhī — Занятие 10 — «власть» и «память» <span class="badge">редкое</span><span class="badge">ранг 1275</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-corpus-adhī-1275</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> mayā ca dharmaśāstrāṇi adhītāni</p><p><b>Локус:</b> Hitopadeśa: Hitop, 1, 11</p><p><b>Черновой перевод (Fable 5, до визы):</b> «и дхармашастры мною изучены»</p></div>
+    <div class="panel"><h4>Раздел</h4>Занятие 10 — «власть» и «память» — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-corpus-uta-363" data-filt="apte-corpus">
+    <header><div class="hw">uta — Занятие 22 — частица uta <span class="badge">топ-1000</span><span class="badge">ранг 363</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-corpus-uta-363</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> śṛṇu deva kim asmābhir baladarpād durgaṃ bhagnam uta tava pratāpādhiṣṭhitenopāyena</p><p><b>Локус:</b> Hitopadeśa: Hitop, 4, 23</p><p><b>Черновой перевод (Fable 5, до визы):</b> «слушай, государь: нами ли, в гордыне силы, взята крепость — или уловкой, опирающейся на твое величие?»</p></div>
+    <div class="panel"><h4>Раздел</h4>Занятие 22 — частица uta — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-corpus-kim-583" data-filt="apte-corpus">
+    <header><div class="hw">kim — Занятие 22 — частица uta <span class="badge">топ-1000</span><span class="badge">ранг 583</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-corpus-kim-583</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> śvā yadi kriyate rājā tat kiṃ nāśnāty upānaham</p><p><b>Локус:</b> Hitopadeśa: Hitop, 3, 60.23</p><p><b>Черновой перевод (Fable 5, до визы):</b> «если пса сделают царем — разве не станет он грызть сандалию?»</p></div>
+    <div class="panel"><h4>Раздел</h4>Занятие 22 — частица uta — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-corpus-krīḍ-1576" data-filt="apte-corpus">
+    <header><div class="hw">krīḍ — Занятия 29–30 — назначение залога <span class="badge">редкое</span><span class="badge">ранг 1576</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-corpus-krīḍ-1576</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> tatra balavān vānarayūthaḥ krīḍann āgataḥ</p><p><b>Локус:</b> Hitopadeśa: Hitop, 2, 31.5</p><p><b>Черновой перевод (Fable 5, до визы):</b> «туда, резвясь, пришла сильная обезьянья стая»</p></div>
+    <div class="panel"><h4>Раздел</h4>Занятия 29–30 — назначение залога — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-corpus-ram-495" data-filt="apte-corpus">
+    <header><div class="hw">ram — Занятия 29–30 — назначение залога <span class="badge">топ-1000</span><span class="badge">ранг 495</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-corpus-ram-495</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> vaktā śrotā ca yatrāsti ramante tatra sampadaḥ</p><p><b>Локус:</b> Hitopadeśa: Hitop, 2, 135.3</p><p><b>Черновой перевод (Fable 5, до визы):</b> «где есть говорящий и слушающий, там обитают богатства»</p></div>
+    <div class="panel"><h4>Раздел</h4>Занятия 29–30 — назначение залога — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-corpus-han-55" data-filt="apte-corpus">
+    <header><div class="hw">han — Занятия 29–30 — назначение залога <span class="badge">топ-100</span><span class="badge">ранг 55</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-corpus-han-55</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> ekaś candramās tamo hanti na ca tārāgaṇair api</p><p><b>Локус:</b> Hitopadeśa: Hitop, 0, 18.3</p><p><b>Черновой перевод (Fable 5, до визы):</b> «одна луна разгоняет тьму — не [сделать этого] и сонмам звезд»</p></div>
+    <div class="panel"><h4>Раздел</h4>Занятия 29–30 — назначение залога — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-corpus-punar-39" data-filt="apte-corpus">
+    <header><div class="hw">punar — Приложение — словарь частиц <span class="badge">топ-100</span><span class="badge">ранг 39</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-corpus-punar-39</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> punar na tatra gamiṣyāmi</p><p><b>Локус:</b> Hitopadeśa: Hitop, 3, 17.6</p><p><b>Черновой перевод (Fable 5, до визы):</b> «снова туда не пойду»</p></div>
+    <div class="panel"><h4>Раздел</h4>Приложение — словарь частиц — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-corpus-prāyas-2205" data-filt="apte-corpus">
+    <header><div class="hw">prāyas — Приложение — словарь частиц <span class="badge">редкое</span><span class="badge">ранг 2205</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-corpus-prāyas-2205</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> prāyaḥ samāpannavipattikāle dhiyo 'pi puṃsāṃ malinā bhavanti</p><p><b>Локус:</b> Hitopadeśa: Hitop, 1, 28.3</p><p><b>Черновой перевод (Fable 5, до визы):</b> «обычно в час нагрянувшей беды даже разум людей мутнеет»</p></div>
+    <div class="panel"><h4>Раздел</h4>Приложение — словарь частиц — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-corpus-muhur-652" data-filt="apte-corpus">
+    <header><div class="hw">muhur — Приложение — словарь частиц <span class="badge">топ-1000</span><span class="badge">ранг 652</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-corpus-muhur-652</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> suṣeṇaṃ tāḍayāmāsa nanāda ca muhur muhuḥ</p><p><b>Локус:</b> Rāmāyaṇa: Rām, Yu, 33, 35.2</p><p><b>Черновой перевод (Fable 5, до визы):</b> «он ударил Сушену и взревел снова и снова»</p></div>
+    <div class="panel"><h4>Раздел</h4>Приложение — словарь частиц — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-corpus-yatas-366" data-filt="apte-corpus">
+    <header><div class="hw">yatas — Приложение — словарь частиц <span class="badge">топ-1000</span><span class="badge">ранг 366</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-corpus-yatas-366</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> yato rājadharmaś caiṣaḥ</p><p><b>Локус:</b> Hitopadeśa: Hitop, 3, 64</p><p><b>Черновой перевод (Fable 5, до визы):</b> «ибо таков и долг царя»</p></div>
+    <div class="panel"><h4>Раздел</h4>Приложение — словарь частиц — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-corpus-yāvat-172" data-filt="apte-corpus">
+    <header><div class="hw">yāvat — Приложение — словарь частиц <span class="badge">топ-1000</span><span class="badge">ранг 172</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-corpus-yāvat-172</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> tāvad bhayasya bhetavyaṃ yāvad bhayam anāgatam</p><p><b>Локус:</b> Hitopadeśa: Hitop, 1, 57.9</p><p><b>Черновой перевод (Fable 5, до визы):</b> «бояться беды следует [лишь] до тех пор, пока беда не пришла»</p></div>
+    <div class="panel"><h4>Раздел</h4>Приложение — словарь частиц — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-corpus-hā-190" data-filt="apte-corpus">
+    <header><div class="hw">hā — Приложение — словарь частиц <span class="badge">топ-1000</span><span class="badge">ранг 190</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-corpus-hā-190</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> hā hā putraka nādhītaṃ gatāsv etāsu rātriṣu</p><p><b>Локус:</b> Hitopadeśa: Hitop, 0, 24</p><p><b>Черновой перевод (Fable 5, до визы):</b> «увы, увы, сынок: ничего не выучено за эти ушедшие ночи»</p></div>
+    <div class="panel"><h4>Раздел</h4>Приложение — словарь частиц — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-corpus-vara-82" data-filt="apte-corpus">
+    <header><div class="hw">vara — Приложение — словарь частиц <span class="badge">топ-100</span><span class="badge">ранг 82</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-corpus-vara-82</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> varam eko guṇī putro na ca mūrkhaśatair api</p><p><b>Локус:</b> Hitopadeśa: Hitop, 0, 18.2</p><p><b>Черновой перевод (Fable 5, до визы):</b> «лучше один достойный сын — и ни к чему даже сотни глупцов»</p></div>
+    <div class="panel"><h4>Раздел</h4>Приложение — словарь частиц — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-corpus-kāray-433" data-filt="buhler-corpus">
+    <header><div class="hw">kāray — Урок XVIII — каузатив: вриддхи конечного гласного и один беглец <span class="badge">топ-1000</span><span class="badge">ранг 433</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-corpus-kāray-433</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> māṃ rajadarśanaṃ kāraya</p><p><b>Локус:</b> Hitopadeśa: Hitop, 3, 102.5</p><p><b>Черновой перевод (Fable 5, до визы):</b> «дай мне увидеть царя [устрой мне лицезрение царя]»</p></div>
+    <div class="panel"><h4>Раздел</h4>Урок XVIII — каузатив: вриддхи конечного гласного и один беглец — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-corpus-darśay-594" data-filt="buhler-corpus">
+    <header><div class="hw">darśay — Урок XVIII — каузатив: вриддхи конечного гласного и один беглец <span class="badge">топ-1000</span><span class="badge">ранг 594</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-corpus-darśay-594</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> tad ahaṃ tvāṃ tatra nītvā darśayāmi</p><p><b>Локус:</b> Hitopadeśa: Hitop, 1, 73.4</p><p><b>Черновой перевод (Fable 5, до визы):</b> «вот я отведу тебя туда и покажу»</p></div>
+    <div class="panel"><h4>Раздел</h4>Урок XVIII — каузатив: вриддхи конечного гласного и один беглец — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-corpus-sthāpay-632" data-filt="buhler-corpus">
+    <header><div class="hw">sthāpay — Урок XVIII — каузатив: вриддхи конечного гласного и один беглец <span class="badge">топ-1000</span><span class="badge">ранг 632</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-corpus-sthāpay-632</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> jitendriyo hi śaknoti vaśe sthāpayituṃ prajāḥ</p><p><b>Локус:</b> Manusmṛti: ManuS, 7, 44.2</p><p><b>Черновой перевод (Fable 5, до визы):</b> «ведь [лишь] владеющий чувствами способен держать подданных в повиновении»</p></div>
+    <div class="panel"><h4>Раздел</h4>Урок XVIII — каузатив: вриддхи конечного гласного и один беглец — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-corpus-śrāvay-2361" data-filt="buhler-corpus">
+    <header><div class="hw">śrāvay — Урок XVIII — каузатив: вриддхи конечного гласного и один беглец <span class="badge">редкое</span><span class="badge">ранг 2361</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-corpus-śrāvay-2361</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> svādhyāyaṃ śrāvayet pitrye dharmaśāstrāṇi caiva hi</p><p><b>Локус:</b> Manusmṛti: ManuS, 3, 232</p><p><b>Черновой перевод (Fable 5, до визы):</b> «на обряде предкам пусть даст услышать [чтение] Веды и дхармашастр»</p></div>
+    <div class="panel"><h4>Раздел</h4>Урок XVIII — каузатив: вриддхи конечного гласного и один беглец — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-corpus-pūray-1123" data-filt="buhler-corpus">
+    <header><div class="hw">pūray — Урок XVIII — каузатив: вриддхи конечного гласного и один беглец <span class="badge">редкое</span><span class="badge">ранг 1123</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-corpus-pūray-1123</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> jalabindunipātena kramaśaḥ pūryate ghaṭaḥ</p><p><b>Локус:</b> Hitopadeśa: Hitop, 2, 10.2</p><p><b>Черновой перевод (Fable 5, до визы):</b> «падением водяных капель постепенно наполняется кувшин»</p></div>
+    <div class="panel"><h4>Раздел</h4>Урок XVIII — каузатив: вриддхи конечного гласного и один беглец — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-corpus-kup-1398" data-filt="buhler-corpus">
+    <header><div class="hw">kup — Урок XXVIII — seṭ и aniṭ причастия: обе половины склеенных пар <span class="badge">редкое</span><span class="badge">ранг 1398</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-corpus-kup-1398</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> tam uvāca tatas tatra kupitā janakātmajā</p><p><b>Локус:</b> Rāmāyaṇa: Rām, Ār, 43, 5</p><p><b>Черновой перевод (Fable 5, до визы):</b> «тогда разгневанная дочь Джанаки сказала ему там»</p></div>
+    <div class="panel"><h4>Раздел</h4>Урок XXVIII — seṭ и aniṭ причастия: обе половины склеенных пар — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-corpus-krudh-416" data-filt="buhler-corpus">
+    <header><div class="hw">krudh — Урок XXVIII — seṭ и aniṭ причастия: обе половины склеенных пар <span class="badge">топ-1000</span><span class="badge">ранг 416</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-corpus-krudh-416</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> ata evāyaṃ daṇḍanāyakaḥ kruddha eva gacchati</p><p><b>Локус:</b> Hitopadeśa: Hitop, 2, 119.10</p><p><b>Черновой перевод (Fable 5, до визы):</b> «потому-то этот начальник стражи и уходит разгневанным»</p></div>
+    <div class="panel"><h4>Раздел</h4>Урок XXVIII — seṭ и aniṭ причастия: обе половины склеенных пар — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-corpus-jan-62" data-filt="buhler-corpus">
+    <header><div class="hw">jan — Урок XXVIII — seṭ и aniṭ причастия: обе половины склеенных пар <span class="badge">топ-100</span><span class="badge">ранг 62</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-corpus-jan-62</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> jātasya hi dhruvo mṛtyur dhruvaṃ janma mṛtasya ca</p><p><b>Локус:</b> Hitopadeśa: Hitop, 4, 71.2</p><p><b>Черновой перевод (Fable 5, до визы):</b> «ибо рожденному непреложна смерть, непреложно рождение мертвому»</p></div>
+    <div class="panel"><h4>Раздел</h4>Урок XXVIII — seṭ и aniṭ причастия: обе половины склеенных пар — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-corpus-khan-3640" data-filt="buhler-corpus">
+    <header><div class="hw">khan — Урок XXVIII — seṭ и aniṭ причастия: обе половины склеенных пар <span class="badge">редкое</span><span class="badge">ранг 3640</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-corpus-khan-3640</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> sa khātaṃ pitṛbhir mārgam antarbhaumaṃ mahātmabhiḥ</p><p><b>Локус:</b> Rāmāyaṇa: Rām, Bā, 40, 6</p><p><b>Черновой перевод (Fable 5, до визы):</b> «он [пошел] подземным путем, прорытым великими предками»</p></div>
+    <div class="panel"><h4>Раздел</h4>Урок XXVIII — seṭ и aniṭ причастия: обе половины склеенных пар — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-corpus-san-3542" data-filt="buhler-corpus">
+    <header><div class="hw">san — Урок XXVIII — seṭ и aniṭ причастия: обе половины склеенных пар <span class="badge">редкое</span><span class="badge">ранг 3542</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-corpus-san-3542</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> pūṣā vājaṃ sanotu naḥ</p><p><b>Локус:</b> Ṛgveda: ṚV, 6, 54, 5.2</p><p><b>Черновой перевод (Fable 5, до визы):</b> «пусть Пушан добудет нам награду»</p></div>
+    <div class="panel"><h4>Раздел</h4>Урок XXVIII — seṭ и aniṭ причастия: обе половины склеенных пар — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-corpus-pat-211" data-filt="buhler-corpus">
+    <header><div class="hw">pat — Урок XXVIII — seṭ и aniṭ причастия: обе половины склеенных пар <span class="badge">топ-1000</span><span class="badge">ранг 211</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-corpus-pat-211</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> atra marusthale patitā yūyaṃ kiṃ kurutha</p><p><b>Локус:</b> Hitopadeśa: Hitop, 3, 4.17</p><p><b>Черновой перевод (Fable 5, до визы):</b> «что вы делаете, попав в эту пустыню?»</p></div>
+    <div class="panel"><h4>Раздел</h4>Урок XXVIII — seṭ и aniṭ причастия: обе половины склеенных пар — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-corpus-rājan-23" data-filt="buhler-corpus">
+    <header><div class="hw">rājan — Урок XXXIV — samāsānta: rājan → °rāja, sakhi → °sakha, pathin → °patha <span class="badge">топ-100</span><span class="badge">ранг 23</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-corpus-rājan-23</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> rājovāca katham etat</p><p><b>Локус:</b> Hitopadeśa: Hitop, 3, 6</p><p><b>Черновой перевод (Fable 5, до визы):</b> «царь сказал: как это [было]?»</p></div>
+    <div class="panel"><h4>Раздел</h4>Урок XXXIV — samāsānta: rājan → °rāja, sakhi → °sakha, pathin → °patha — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-corpus-yuvarāja-7964" data-filt="buhler-corpus">
+    <header><div class="hw">yuvarāja — Урок XXXIV — samāsānta: rājan → °rāja, sakhi → °sakha, pathin → °patha <span class="badge">редкое</span><span class="badge">ранг 7964</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-corpus-yuvarāja-7964</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> saṃdhāya yuvarājena yadi vā mukhyamantriṇā</p><p><b>Локус:</b> Hitopadeśa: Hitop, 3, 95</p><p><b>Черновой перевод (Fable 5, до визы):</b> «заключив союз с наследником престола или с первым министром»</p></div>
+    <div class="panel"><h4>Раздел</h4>Урок XXXIV — samāsānta: rājan → °rāja, sakhi → °sakha, pathin → °patha — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-corpus-sakhi-875" data-filt="buhler-corpus">
+    <header><div class="hw">sakhi — Урок XXXIV — samāsānta: rājan → °rāja, sakhi → °sakha, pathin → °patha <span class="badge">топ-1000</span><span class="badge">ранг 875</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-corpus-sakhi-875</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> saṃjīvakenoktaṃ sakhe brūhi kim etat</p><p><b>Локус:</b> Hitopadeśa: Hitop, 2, 154</p><p><b>Черновой перевод (Fable 5, до визы):</b> «Санджнивака сказал: друг, скажи, что это?»</p></div>
+    <div class="panel"><h4>Раздел</h4>Урок XXXIV — samāsānta: rājan → °rāja, sakhi → °sakha, pathin → °patha — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-corpus-pathin-698" data-filt="buhler-corpus">
+    <header><div class="hw">pathin — Урок XXXIV — samāsānta: rājan → °rāja, sakhi → °sakha, pathin → °patha <span class="badge">топ-1000</span><span class="badge">ранг 698</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-corpus-pathin-698</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> śivās te santu panthānaḥ</p><p><b>Локус:</b> Hitopadeśa: Hitop, 2, 124.20</p><p><b>Черновой перевод (Fable 5, до визы):</b> «да будут пути твои благосклонны [счастливого пути]»</p></div>
+    <div class="panel"><h4>Раздел</h4>Урок XXXIV — samāsānta: rājan → °rāja, sakhi → °sakha, pathin → °patha — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-corpus-apatha-15149" data-filt="buhler-corpus">
+    <header><div class="hw">apatha — Урок XXXIV — samāsānta: rājan → °rāja, sakhi → °sakha, pathin → °patha <span class="badge">редкое</span><span class="badge">ранг 15149</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-corpus-apatha-15149</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> āpad ety ubhayalokadūṣaṇī vartamānam apathe hi durmatim</p><p><b>Локус:</b> Kirātārjunīya: Kir, 13, 64.2</p><p><b>Черновой перевод (Fable 5, до визы):</b> «ведь к злоумному, стоящему на дурном пути, приходит беда, губящая оба мира»</p></div>
+    <div class="panel"><h4>Раздел</h4>Урок XXXIV — samāsānta: rājan → °rāja, sakhi → °sakha, pathin → °patha — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-corpus-stu-432" data-filt="buhler-corpus">
+    <header><div class="hw">stu — Урок XXXVIII — корни на u: au перед согласным окончанием <span class="badge">топ-1000</span><span class="badge">ранг 432</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-corpus-stu-432</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> udgātā cāpi māṃ stauti gītaghoṣair mahādhvare</p><p><b>Локус:</b> Mahābhārata: MBh, 14, 53, 10</p><p><b>Черновой перевод (Fable 5, до визы):</b> «и удгатар славит меня звуками песнопений на великом жертвоприношении»</p></div>
+    <div class="panel"><h4>Раздел</h4>Урок XXXVIII — корни на u: au перед согласным окончанием — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-corpus-ru-5464" data-filt="buhler-corpus">
+    <header><div class="hw">ru — Урок XXXVIII — корни на u: au перед согласным окончанием <span class="badge">редкое</span><span class="badge">ранг 5464</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-corpus-ru-5464</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> prāk pādayoḥ patati khādati pṛṣṭhamāṃsaṃ karṇe phalaṃ kim api rauti śanair vicitram</p><p><b>Локус:</b> Hitopadeśa: Hitop, 1, 82.2</p><p><b>Черновой перевод (Fable 5, до визы):</b> «сперва падает в ноги, [потом] грызет мясо со спины и тихо, чудно воет что-то на ухо»</p></div>
+    <div class="panel"><h4>Раздел</h4>Урок XXXVIII — корни на u: au перед согласным окончанием — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-corpus-vac-15" data-filt="buhler-corpus">
+    <header><div class="hw">vac — Урок XLIII — перфект: не «реже», а нарратив по умолчанию <span class="badge">топ-100</span><span class="badge">ранг 15</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-corpus-vac-15</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> rājovāca katham etat</p><p><b>Локус:</b> Hitopadeśa: Hitop, 3, 6</p><p><b>Черновой перевод (Fable 5, до визы):</b> «царь сказал: как это [было]?»</p></div>
+    <div class="panel"><h4>Раздел</h4>Урок XLIII — перфект: не «реже», а нарратив по умолчанию — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-corpus-bhū-13" data-filt="buhler-corpus">
+    <header><div class="hw">bhū — Урок XLIII — перфект: не «реже», а нарратив по умолчанию <span class="badge">топ-100</span><span class="badge">ранг 13</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-corpus-bhū-13</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> dhārāsārair mahatī vṛṣṭir babhūva</p><p><b>Локус:</b> Hitopadeśa: Hitop, 3, 6.6</p><p><b>Черновой перевод (Fable 5, до визы):</b> «потоками ливня пролился великий дождь»</p></div>
+    <div class="panel"><h4>Раздел</h4>Урок XLIII — перфект: не «реже», а нарратив по умолчанию — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-corpus-gam-25" data-filt="buhler-corpus">
+    <header><div class="hw">gam — Урок XLIII — перфект: не «реже», а нарратив по умолчанию <span class="badge">топ-100</span><span class="badge">ранг 25</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-corpus-gam-25</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> avaruhya jagāmāśu velāvanam anuttamam</p><p><b>Локус:</b> Rāmāyaṇa: Rām, Yu, 4, 66</p><p><b>Черновой перевод (Fable 5, до визы):</b> «спустившись, он быстро пошел в несравненный прибрежный лес»</p></div>
+    <div class="panel"><h4>Раздел</h4>Урок XLIII — перфект: не «реже», а нарратив по умолчанию — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-corpus-yā-81" data-filt="buhler-corpus">
+    <header><div class="hw">yā — Урок XLIV — будущее: сначала частое <span class="badge">топ-100</span><span class="badge">ранг 81</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-corpus-yā-81</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> yāsyāmi bhava suprītā vanaṃ cīrajaṭādharaḥ</p><p><b>Локус:</b> Rāmāyaṇa: Rām, Ay, 16, 30.2</p><p><b>Черновой перевод (Fable 5, до визы):</b> «я уйду в лес, нося платье из лыка и косу отшельника, — будь же довольна»</p></div>
+    <div class="panel"><h4>Раздел</h4>Урок XLIV — будущее: сначала частое — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-corpus-dṛś-27" data-filt="buhler-corpus">
+    <header><div class="hw">dṛś — Урок XLIV — будущее: сначала частое <span class="badge">топ-100</span><span class="badge">ранг 27</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-corpus-dṛś-27</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> ito drakṣyāmi vaidehīṃ rāmadarśanalālasām</p><p><b>Локус:</b> Rāmāyaṇa: Rām, Su, 12, 41</p><p><b>Черновой перевод (Fable 5, до визы):</b> «отсюда я увижу Вайдехи, жаждущую увидеть Раму»</p></div>
+    <div class="panel"><h4>Раздел</h4>Урок XLIV — будущее: сначала частое — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-corpus-sic-1563" data-filt="buhler-corpus">
+    <header><div class="hw">sic — Урок XLV — аорист: тематическая парадигма и корневой запрет <span class="badge">редкое</span><span class="badge">ранг 1563</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-corpus-sic-1563</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> toyair jalastham asicann ārabdhajalakelayaḥ</p><p><b>Локус:</b> Kathāsaritsāgara: KSS, 5, 3, 57.2</p><p><b>Черновой перевод (Fable 5, до визы):</b> «затеяв игры в воде, они обливали водой сидевшего в ней»</p></div>
+    <div class="panel"><h4>Раздел</h4>Урок XLV — аорист: тематическая парадигма и корневой запрет — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-corpus-muc-162" data-filt="buhler-corpus">
+    <header><div class="hw">muc — Урок XLV — аорист: тематическая парадигма и корневой запрет <span class="badge">топ-1000</span><span class="badge">ранг 162</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-corpus-muc-162</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> praśaste tithinakṣatre bohittham amucad vaṇik</p><p><b>Локус:</b> Bṛhatkathāślokasaṃgraha: BKŚS, 18, 251.2</p><p><b>Черновой перевод (Fable 5, до визы):</b> «в благоприятный день, под счастливым созвездием купец отпустил корабль [отчалил]»</p></div>
+    <div class="panel"><h4>Раздел</h4>Урок XLV — аорист: тематическая парадигма и корневой запрет — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-corpus-dā-43" data-filt="buhler-corpus">
+    <header><div class="hw">dā — Урок XLV — аорист: тематическая парадигма и корневой запрет <span class="badge">топ-100</span><span class="badge">ранг 43</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-corpus-dā-43</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> asūyakāya māṃ mādās tathā syāṃ vīryavattamā</p><p><b>Локус:</b> Manusmṛti: ManuS, 2, 114.2</p><p><b>Черновой перевод (Fable 5, до визы):</b> «не выдавай меня хулителю — тогда стану я наимощнейшей [говорит Веда о себе]»</p></div>
+    <div class="panel"><h4>Раздел</h4>Урок XLV — аорист: тематическая парадигма и корневой запрет — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-corpus-hu-395" data-filt="buhler-corpus">
+    <header><div class="hw">hu — Управление глаголов — подтвержденные рамки Шерцля вживую <span class="badge">топ-1000</span><span class="badge">ранг 395</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-corpus-hu-395</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> vātendraguruvahnīnāṃ juhuyāt sarpiṣāhutīḥ</p><p><b>Локус:</b> Manusmṛti: ManuS, 11, 120.2</p><p><b>Черновой перевод (Fable 5, до визы):</b> «Ветру, Индре, Наставнику и Огню пусть принесет возлияния топленого масла»</p></div>
+    <div class="panel"><h4>Раздел</h4>Управление глаголов — подтвержденные рамки Шерцля вживую — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-corpus-ah-69" data-filt="buhler-corpus">
+    <header><div class="hw">ah — Управление глаголов — подтвержденные рамки Шерцля вживую <span class="badge">топ-100</span><span class="badge">ранг 69</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-corpus-ah-69</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> tāv āhatuḥ katham etat</p><p><b>Локус:</b> Hitopadeśa: Hitop, 1, 158</p><p><b>Черновой перевод (Fable 5, до визы):</b> «те двое сказали: как это [было]?»</p></div>
+    <div class="panel"><h4>Раздел</h4>Управление глаголов — подтвержденные рамки Шерцля вживую — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-corpus-grah-100" data-filt="buhler-corpus">
+    <header><div class="hw">grah — Управление глаголов — подтвержденные рамки Шерцля вживую <span class="badge">топ-100</span><span class="badge">ранг 100</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-corpus-grah-100</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> bālād api gṛhītavyaṃ yuktam uktaṃ manīṣibhiḥ</p><p><b>Локус:</b> Hitopadeśa: Hitop, 2, 79.2</p><p><b>Черновой перевод (Fable 5, до визы):</b> «дельное слово следует принять даже от ребенка — так сказали мудрые»</p></div>
+    <div class="panel"><h4>Раздел</h4>Управление глаголов — подтвержденные рамки Шерцля вживую — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-corpus-pā-101" data-filt="buhler-corpus">
+    <header><div class="hw">pā — Управление глаголов — подтвержденные рамки Шерцля вживую <span class="badge">топ-1000</span><span class="badge">ранг 101</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-corpus-pā-101</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> sa caikadā pipāsākulitaḥ pānīyaṃ pātuṃ yamunākaccham agacchat</p><p><b>Локус:</b> Hitopadeśa: Hitop, 2, 20</p><p><b>Черновой перевод (Fable 5, до визы):</b> «и однажды, томимый жаждой, он пошел к берегу Ямуны попить воды»</p></div>
+    <div class="panel"><h4>Раздел</h4>Управление глаголов — подтвержденные рамки Шерцля вживую — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-corpus-dhā-283" data-filt="buhler-corpus">
+    <header><div class="hw">dhā — Управление глаголов — подтвержденные рамки Шерцля вживую <span class="badge">топ-1000</span><span class="badge">ранг 283</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-corpus-dhā-283</span></header>
+    <div class="question"><p><b>Пример (DCS):</b> cukrodha ca mahākrodho vadhe cāsya mano dadhe</p><p><b>Локус:</b> Rāmāyaṇa: Rām, Yu, 84, 17.2</p><p><b>Черновой перевод (Fable 5, до визы):</b> «вспыхнул он великим гневом и устремил мысль на его убийство»</p></div>
+    <div class="panel"><h4>Раздел</h4>Управление глаголов — подтвержденные рамки Шерцля вживую — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_CORPUS_LAYER_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-key-3-1" data-filt="apte-uprazhneniia-keys">
+    <header><div class="hw">Ключ 3-1 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-key-3-1</span></header>
+    <div class="question"><p><b>Черновой ключ (до визы):</b> 1 — § 33 (धिग् с винительным); 2 — § 35 (अन्तरेण «без, в отношении» + вин.); 3 — § 32 (वस् с приставкой अधि — винительный места обитания); 4 — § 37 (अनु «вслед за» + вин., karmapravacanīya).</p></div>
+    <div class="panel"><h4>Раздел</h4>Апте, раздел IV — Ключи ⟦MG-viza⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка формулировки или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-key-3-2" data-filt="apte-uprazhneniia-keys">
+    <header><div class="hw">Ключ 3-2 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-key-3-2</span></header>
+    <div class="question"><p><b>Черновой ключ (до визы):</b> Дательный цели (grāmāya gacchati) — реальная, но меньшинная альтернатива винительному цели: не ошибка, а та самая «одна из семи» (14,1 %); Апте сам допускает ее в § 71 для физического движения.</p></div>
+    <div class="panel"><h4>Раздел</h4>Апте, раздел IV — Ключи ⟦MG-viza⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка формулировки или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-key-7-1" data-filt="apte-uprazhneniia-keys">
+    <header><div class="hw">Ключ 7-1 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-key-7-1</span></header>
+    <div class="question"><p><b>Черновой ключ (до визы):</b> सचिवोपदेशाय (дательный при असूय्) и हितवादिने (дательный при कुप्) — § 63: глаголы гнева/злобы управляют дательным лица.</p></div>
+    <div class="panel"><h4>Раздел</h4>Апте, раздел IV — Ключи ⟦MG-viza⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка формулировки или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-key-7-2" data-filt="apte-uprazhneniia-keys">
+    <header><div class="hw">Ключ 7-2 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-key-7-2</span></header>
+    <div class="question"><p><b>Черновой ключ (до визы):</b> Винительный: он лидирует у krudh/druh и без приставок (подъем дательного 0,91 — ниже фона), а с приставками его требует сам Апте. «Дательный гнева» — книжное правило, винительный — корпусное большинство.</p></div>
+    <div class="panel"><h4>Раздел</h4>Апте, раздел IV — Ключи ⟦MG-viza⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка формулировки или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-key-9-1" data-filt="apte-uprazhneniia-keys">
+    <header><div class="hw">Ключ 9-1 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-key-9-1</span></header>
+    <div class="question"><p><b>Черновой ключ (до визы):</b> 1 — местный (त्वयि, § 94); 2 — родительный (आवयोः при स्निह्, युष्मत्संनिकर्षस्य при उत्कण्ठ्) — живой конкурент местного, которого § 94 не называет; 3 — винительный при अनुरक्ता (примечание Апте к § 94: производные от अनुरञ्ज् с винительным, अनु как karmapravacanīya § 37).</p></div>
+    <div class="panel"><h4>Раздел</h4>Апте, раздел IV — Ключи ⟦MG-viza⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка формулировки или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-key-9-2" data-filt="apte-uprazhneniia-keys">
+    <header><div class="hw">Ключ 9-2 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-key-9-2</span></header>
+    <div class="question"><p><b>Черновой ключ (до визы):</b> Винительным объекта — потому что muc чаще значит «освобождать» (मुक्तबन्धनाः «освобожденные от пут»), а не «бросать в»; местный цели при muc в чистом виде редок.</p></div>
+    <div class="panel"><h4>Раздел</h4>Апте, раздел IV — Ключи ⟦MG-viza⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка формулировки или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-key-10-1" data-filt="apte-uprazhneniia-keys">
+    <header><div class="hw">Ключ 10-1 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-key-10-1</span></header>
+    <div class="question"><p><b>Черновой ключ (до визы):</b> ईश् «владеть, мочь» + родительный गात्राणां — § 113: «не властен над своими членами (не владею телом)».</p></div>
+    <div class="panel"><h4>Раздел</h4>Апте, раздел IV — Ключи ⟦MG-viza⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка формулировки или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-key-10-2" data-filt="apte-uprazhneniia-keys">
+    <header><div class="hw">Ключ 10-2 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-key-10-2</span></header>
+    <div class="question"><p><b>Черновой ключ (до визы):</b> «Объект smṛ/adhī стоит в родительном ИЛИ винительном, причем винительный чаще (41 % против 30 %)» — родительный правилен, но не единствен; smarasi godāvarīṃ — не исключение, а большинство.</p></div>
+    <div class="panel"><h4>Раздел</h4>Апте, раздел IV — Ключи ⟦MG-viza⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка формулировки или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-key-19-1" data-filt="apte-uprazhneniia-keys">
+    <header><div class="hw">Ключ 19-1 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-key-19-1</span></header>
+    <div class="question"><p><b>Черновой ключ (до визы):</b> Пример § 210 показывает лишь то, что аорист *может* стоять при обстоятельстве длительности (यावज्जीवं), но не то, что имперфект там невозможен: по § 207 самого Апте классические авторы употребляют три прошедших «случайным образом», а по Уитни §§ 927–929 аорист несет завершительное значение — прямую противоположность длительности. Запрет «*не* अददात्» — предписание панинийской доктрины, не факт языка (APT-31, FALSE).</p></div>
+    <div class="panel"><h4>Раздел</h4>Апте, раздел IV — Ключи ⟦MG-viza⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка формулировки или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-key-22-1" data-filt="apte-uprazhneniia-keys">
+    <header><div class="hw">Ключ 22-1 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-key-22-1</span></header>
+    <div class="question"><p><b>Черновой ключ (до визы):</b> В первом — повторенное uta «или — или» (§ 258 (а)); во втором — одиночное uta сомнения/догадки «столб это или человек?» (§ 259 (1)).</p></div>
+    <div class="panel"><h4>Раздел</h4>Апте, раздел IV — Ключи ⟦MG-viza⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка формулировки или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-key-22-2" data-filt="apte-uprazhneniia-keys">
+    <header><div class="hw">Ключ 22-2 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-key-22-2</span></header>
+    <div class="question"><p><b>Черновой ключ (до визы):</b> Потому что uta регулярно (23,66 %) открывает предложение — она возглавляет вторую половину разделительного вопроса (kim… uta…), тогда как настоящие постпозитивы (ca/tu/hi — < 1 %) в начале предложения не встречаются; «пользоваться по смыслу, но не как постпозитивной» (виза, зан-22).</p></div>
+    <div class="panel"><h4>Раздел</h4>Апте, раздел IV — Ключи ⟦MG-viza⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка формулировки или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-key-29-1" data-filt="apte-uprazhneniia-keys">
+    <header><div class="hw">Ключ 29-1 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-key-29-1</span></header>
+    <div class="question"><p><b>Черновой ключ (до визы):</b> 1 — § 337 (yuj с приставкой anu → Ātmanepada: अन्वयुङ्क्त); 2 — § 340 (vi+kṛ «издавать звуки» → Ātmanepada: विकुर्वाणः स्वरान्); 3 — § 317 (b) (upa+yam «брать в жены» → Ātmanepada: उपयेमे); 4 — примечание к § 316: विनी «приручать, дрессировать» → Parasmaipada (विनेष्यन्).</p></div>
+    <div class="panel"><h4>Раздел</h4>Апте, раздел IV — Ключи ⟦MG-viza⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка формулировки или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-key-29-2" data-filt="apte-uprazhneniia-keys">
+    <header><div class="hw">Ключ 29-2 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-key-29-2</span></header>
+    <div class="question"><p><b>Черновой ключ (до визы):</b> Подтверждены корпусом и потому заучиваются как факт: § 337 (pra/upa+yuj — но с оговоркой: корпус дает подлинно смешанное 41/59, т. е. Ātmanepada лишь как слабое большинство), § 317 (b) — не входит в проверенные 15; строго подтверждены из разбора — никакие: у № 2 и № 4 (vi+kṛ, vi+nī) корпус либо не дал n ≥ 40, либо показал обратное (nī-группа — 92,6 % Parasmaipada). Как жесткий факт залога из уроков 29–30 учите vi/parā+ji, upa+sthā, bhuj и каузативы § 344; правила kram, nī, pra/upa+yuj и krī-группы — как предписание, которое живой текст соблюдает не всегда (реестр APT-40).</p></div>
+    <div class="panel"><h4>Раздел</h4>Апте, раздел IV — Ключи ⟦MG-viza⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка формулировки или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-translation-3-1" data-filt="apte-uprazhneniia-translations">
+    <header><div class="hw">Перевод чтения 3-1 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-translation-3-1</span></header>
+    <div class="question"><p><b>Черновой перевод (до визы):</b> «Он пришел в крайнее отчаяние.»</p></div>
+    <div class="panel"><h4>Раздел</h4>Апте, раздел IV — Переводы чтений ⟦MG-viza⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-translation-3-2" data-filt="apte-uprazhneniia-translations">
+    <header><div class="hw">Перевод чтения 3-2 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-translation-3-2</span></header>
+    <div class="question"><p><b>Черновой перевод (до визы):</b> «Странствуй по желанным краям, о облако, обогащенное дождями.»</p></div>
+    <div class="panel"><h4>Раздел</h4>Апте, раздел IV — Переводы чтений ⟦MG-viza⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-translation-7-1" data-filt="apte-uprazhneniia-translations">
+    <header><div class="hw">Перевод чтения 7-1 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-translation-7-1</span></header>
+    <div class="question"><p><b>Черновой перевод (до визы):</b> «…что нравится вашей светлости.»</p></div>
+    <div class="panel"><h4>Раздел</h4>Апте, раздел IV — Переводы чтений ⟦MG-viza⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-translation-7-2" data-filt="apte-uprazhneniia-translations">
+    <header><div class="hw">Перевод чтения 7-2 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-translation-7-2</span></header>
+    <div class="question"><p><b>Черновой перевод (до визы):</b> «Так что же ты, словно не понимая, гневаешься на зятя?»</p></div>
+    <div class="panel"><h4>Раздел</h4>Апте, раздел IV — Переводы чтений ⟦MG-viza⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-translation-9-1" data-filt="apte-uprazhneniia-translations">
+    <header><div class="hw">Перевод чтения 9-1 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-translation-9-1</span></header>
+    <div class="question"><p><b>Черновой перевод (до визы):</b> «Почему же мое сердце так любит этого ребенка?»</p></div>
+    <div class="panel"><h4>Раздел</h4>Апте, раздел IV — Переводы чтений ⟦MG-viza⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-translation-9-2" data-filt="apte-uprazhneniia-translations">
+    <header><div class="hw">Перевод чтения 9-2 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-translation-9-2</span></header>
+    <div class="question"><p><b>Черновой перевод (до визы):</b> «…для желающего пускать стрелы в ланей»; «Стрела не должна поразить тело этой лани.»</p></div>
+    <div class="panel"><h4>Раздел</h4>Апте, раздел IV — Переводы чтений ⟦MG-viza⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-translation-10-1" data-filt="apte-uprazhneniia-translations">
+    <header><div class="hw">Перевод чтения 10-1 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-translation-10-1</span></header>
+    <div class="question"><p><b>Черновой перевод (до визы):</b> «Ты властен над богатствами — а мы, насколько нужно, властны над словами.»</p></div>
+    <div class="panel"><h4>Раздел</h4>Апте, раздел IV — Переводы чтений ⟦MG-viza⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-translation-10-2" data-filt="apte-uprazhneniia-translations">
+    <header><div class="hw">Перевод чтения 10-2 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-translation-10-2</span></header>
+    <div class="question"><p><b>Черновой перевод (до визы):</b> «О царица, помнишь ли ты то место…»; «Помнишь ли те дни, помнишь ли Годавари?»</p></div>
+    <div class="panel"><h4>Раздел</h4>Апте, раздел IV — Переводы чтений ⟦MG-viza⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-translation-19-1" data-filt="apte-uprazhneniia-translations">
+    <header><div class="hw">Перевод чтения 19-1 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-translation-19-1</span></header>
+    <div class="question"><p><b>Черновой перевод (до визы):</b> «Да не будет помехи обитателям рощи подвижников.»</p></div>
+    <div class="panel"><h4>Раздел</h4>Апте, раздел IV — Переводы чтений ⟦MG-viza⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-translation-19-2" data-filt="apte-uprazhneniia-translations">
+    <header><div class="hw">Перевод чтения 19-2 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-translation-19-2</span></header>
+    <div class="question"><p><b>Черновой перевод (до визы):</b> «Не поддавайся малодушию, о Партха.»</p></div>
+    <div class="panel"><h4>Раздел</h4>Апте, раздел IV — Переводы чтений ⟦MG-viza⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-translation-19-3" data-filt="apte-uprazhneniia-translations">
+    <header><div class="hw">Перевод чтения 19-3 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-translation-19-3</span></header>
+    <div class="question"><p><b>Черновой перевод (до визы):</b> «Что я тогда делал, куда ходил, что говорил — ничего этого я не помню (не узнал).»</p></div>
+    <div class="panel"><h4>Раздел</h4>Апте, раздел IV — Переводы чтений ⟦MG-viza⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-translation-22-1" data-filt="apte-uprazhneniia-translations">
+    <header><div class="hw">Перевод чтения 22-1 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-translation-22-1</span></header>
+    <div class="question"><p><b>Черновой перевод (до визы):</b> «Не знаю: пристало ли это одеждам из коры, подходит ли к спутанным волосам, согласуется ли с аскезой — или это часть праведных наставлений.»</p></div>
+    <div class="panel"><h4>Раздел</h4>Апте, раздел IV — Переводы чтений ⟦MG-viza⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-translation-22-2" data-filt="apte-uprazhneniia-translations">
+    <header><div class="hw">Перевод чтения 22-2 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-translation-22-2</span></header>
+    <div class="question"><p><b>Черновой перевод (до визы):</b> «Наставлено ли это учителями, вычитано ли в дхармащастрах, способ ли это достичь освобождения — или некий иной род обета?»</p></div>
+    <div class="panel"><h4>Раздел</h4>Апте, раздел IV — Переводы чтений ⟦MG-viza⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-translation-29-1" data-filt="apte-uprazhneniia-translations">
+    <header><div class="hw">Перевод чтения 29-1 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-translation-29-1</span></header>
+    <div class="question"><p><b>Черновой перевод (до визы):</b> «Силы же — совет, мощь и рвение, — поддерживая друг друга, развиваются в делах.»</p></div>
+    <div class="panel"><h4>Раздел</h4>Апте, раздел IV — Переводы чтений ⟦MG-viza⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="apte-translation-29-2" data-filt="apte-uprazhneniia-translations">
+    <header><div class="hw">Перевод чтения 29-2 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">apte-translation-29-2</span></header>
+    <div class="question"><p><b>Черновой перевод (до визы):</b> «Совершив изгнание Ситы, тот владыка земли владел одной лишь землею, опоясанной океаном.»</p></div>
+    <div class="panel"><h4>Раздел</h4>Апте, раздел IV — Переводы чтений ⟦MG-viza⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/ApteSyntax_1885/METODICHKA_APTE_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-key-18-1" data-filt="buhler-uprazhneniia-keys">
+    <header><div class="hw">Ключ 18-1 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-key-18-1</span></header>
+    <div class="question"><p><b>Черновой ключ (до визы):</b> 1 — sthāpaya: п. 3г не применим (корень на ā берет paya по п. 2а; sthā → sthāpaya-), простой винительный ratham; 2 — śrāvayeḥ: п. 3г (śru → vṛddhi au → āv), двойной винительный kāvyaṃ… mām «дай мне услышать поэму»; 3 — paridhāpayeyuḥ: п. 2а (dhā → dhāpaya-), двойной винительный bālān… vastrāṇi «пусть оденут мальчиков в новые одежды»; 4 — apātyanta: пассив каузатива по п. 4 (pātaya- → pātya-te) «деревья были повалены силой ветра».</p></div>
+    <div class="panel"><h4>Раздел</h4>Бюлер, раздел IV — Ключи ⟦MG-виза⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка формулировки или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-key-18-2" data-filt="buhler-uprazhneniia-keys">
+    <header><div class="hw">Ключ 18-2 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-key-18-2</span></header>
+    <div class="question"><p><b>Черновой ключ (до визы):</b> От pṝ «наполнять»: конечный ṝ после губного дает ūr (pūrayati), а не вриддхи (реестр HB-142; то же правило ūr — заметка OCH-14 линии Зализняка). Каузатив на -ūrayati — всегда сигнал губного корня на ṝ.</p></div>
+    <div class="panel"><h4>Раздел</h4>Бюлер, раздел IV — Ключи ⟦MG-виза⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка формулировки или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-key-28-1" data-filt="buhler-uprazhneniia-keys">
+    <header><div class="hw">Ключ 28-1 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-key-28-1</span></header>
+    <div class="question"><p><b>Черновой ключ (до визы):</b> Прямо (п. 2–3): labdhāni (labh → labdha, п. 3г — bh → b, t → dh), pṛṣṭaḥ (prach → pṛṣṭa, п. 3в). Через i (п. 3а, список урока): uṣitaiḥ (vas, uṣita — в самом списке), patitaḥ (pat), likhitāt (likh, п. 4 — корень на kh). Через ī (п. 5): gṛhītaḥ (grah).</p></div>
+    <div class="panel"><h4>Раздел</h4>Бюлер, раздел IV — Ключи ⟦MG-виза⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка формулировки или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-key-28-2" data-filt="buhler-uprazhneniia-keys">
+    <header><div class="hw">Ключ 28-2 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-key-28-2</span></header>
+    <div class="question"><p><b>Черновой ключ (до визы):</b> Вместо krudh — kup «гневаться» (kupita): krudh кончается на dh, а не на t/p/s, и образует kruddha без i; вместо «sam, sata» — san (ṣaṇ) «давать», причастие sāta с удлинением, как в jāta и khāta строкой выше (Pāṇini 6.4.42); sam вдобавок не корень на n/ṇ. Контраст для памяти: kupita «разгневанный» (с i) — kruddha (без i, с озвончением); реестр HB-211/HB-219.</p></div>
+    <div class="panel"><h4>Раздел</h4>Бюлер, раздел IV — Ключи ⟦MG-виза⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка формулировки или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-key-34-1" data-filt="buhler-uprazhneniia-keys">
+    <header><div class="hw">Ключ 34-1 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-key-34-1</span></header>
+    <div class="question"><p><b>Черновой ключ (до визы):</b> kopāviṣṭena — тип п. 4а через причастие: kopa āviṣṭo yaṃ saḥ «в кого вошел гнев»; pāṭitodaraḥ — pāṭitam udaraṃ yasya saḥ «у кого распорот живот»; gataprāṇaḥ — gatāḥ prāṇā yasya saḥ «чья жизнь ушла»; bālendudyutinā — п. 4б: bālendor iva dyutir yasya «чей блеск — как у молодого месяца» (согласовано с daṃṣṭrāgreṇa).</p></div>
+    <div class="panel"><h4>Раздел</h4>Бюлер, раздел IV — Ключи ⟦MG-виза⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка формулировки или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-key-34-2" data-filt="buhler-uprazhneniia-keys">
+    <header><div class="hw">Ключ 34-2 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-key-34-2</span></header>
+    <div class="question"><p><b>Черновой ключ (до визы):</b> °rāja — обязательная замена rājan в конце всякого tatpuruṣa (п. 3, Pāṇini 5.4.91): aṅgarājaḥ, склоняется как deva. Оговорка о блокировке после a(не) — тенденция, не закон: классическое apatha n. «бездорожье» (тип patha) сосуществует с apathin (реестр HB-269); встретив apatha, фиксируйте вариант, а не ошибку.</p></div>
+    <div class="panel"><h4>Раздел</h4>Бюлер, раздел IV — Ключи ⟦MG-виза⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка формулировки или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-key-38-1" data-filt="buhler-uprazhneniia-keys">
+    <header><div class="hw">Ключ 38-1 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-key-38-1</span></header>
+    <div class="question"><p><b>Черновой ключ (до визы):</b> П. 4 урока: все корни на u в сильных формах перед согласными окончаниями имеют vṛddhi au — stauti, astaut. Для tu/ru/stu тот же пункт допускает guṇa со вставным ī: stavīti (и stavīmi в парадигме). ūrṇoti — единственный маргинальный контрпример «всех» (производный корень ūrṇu, Pāṇini 7.3.90 vibhāṣā), элементарному курсу не нужный: доверяйте au (реестр HB-296).</p></div>
+    <div class="panel"><h4>Раздел</h4>Бюлер, раздел IV — Ключи ⟦MG-виза⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка формулировки или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-key-43-1" data-filt="buhler-uprazhneniia-keys">
+    <header><div class="hw">Ключ 43-1 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-key-43-1</span></header>
+    <div class="question"><p><b>Черновой ключ (до визы):</b> dhā: 3 ед. dadhau, 3 мн. dadhuḥ (сильная основа dadhau по п. 12 — корни на ā в 1/3 ед. на au; слабая dadh-); stu: tuṣṭāva / tuṣṭuvuḥ (сильная tuṣṭāv-, слабая tuṣṭuv-, п. 7); han: jaghāna / jaghnuḥ (сильная jaghān-, слабая jaghn-, п. 11).</p></div>
+    <div class="panel"><h4>Раздел</h4>Бюлер, раздел IV — Ключи ⟦MG-виза⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка формулировки или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-key-43-2" data-filt="buhler-uprazhneniia-keys">
+    <header><div class="hw">Ключ 43-2 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-key-43-2</span></header>
+    <div class="question"><p><b>Черновой ключ (до визы):</b> Агрегат DCS тяжел эпосом и пуранами, где перфект — форма повествования; в узком срезе кавьи или шастры направление Бюлера может удерживаться. Поэтому строка — сверхобобщение с неверным для корпуса в целом направлением (OVERSTATED со стратификационной оговоркой), а не фактическая ложь класса опечаток (реестр HB-57). Практический вывод чтения эпоса: uvāca, babhūva, jagāma — норма, имперфект — сосед по строке с тем же значением.</p></div>
+    <div class="panel"><h4>Раздел</h4>Бюлер, раздел IV — Ключи ⟦MG-виза⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка формулировки или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-key-45-1" data-filt="buhler-uprazhneniia-keys">
+    <header><div class="hw">Ключ 45-1 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-key-45-1</span></header>
+    <div class="question"><p><b>Черновой ключ (до визы):</b> Верно: «как impf. VI кл.» — asicat строится ровно как atudat (тематическое -a-, без носового инфикса); имперфект VII класса (aruṇadham) не похож ни на одну напечатанную форму. Строку опровергает ее же соседняя парадигма — потому это опечатка, а не ошибка Бюлера-грамматиста (реестр HB-60; Whitney §§ 846–847).</p></div>
+    <div class="panel"><h4>Раздел</h4>Бюлер, раздел IV — Ключи ⟦MG-виза⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка формулировки или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-key-45-2" data-filt="buhler-uprazhneniia-keys">
+    <header><div class="hw">Ключ 45-2 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-key-45-2</span></header>
+    <div class="question"><p><b>Черновой ключ (до визы):</b> Удваивается конечный согласный (ā-śi-śat, ā-rji-jat, ai-ci-kṣat — эхо согласного с i-вставкой); «эхо» и есть примета каузативного аориста гласного корня (реестр HB-372; Whitney § 865; Очерк § 142 — аорист 3 «обычно аорист каузатива»).</p></div>
+    <div class="panel"><h4>Раздел</h4>Бюлер, раздел IV — Ключи ⟦MG-виза⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка формулировки или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-translation-18-1" data-filt="buhler-uprazhneniia-translations">
+    <header><div class="hw">Перевод чтения 18-1 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-translation-18-1</span></header>
+    <div class="question"><p><b>Черновой перевод (до визы):</b> «Врагов он отправил на небо, своим возвестил смысл Веды, богов накормил нектаром, Брахму обучил Веде.»</p></div>
+    <div class="panel"><h4>Раздел</h4>Бюлер, раздел IV — Переводы чтений ⟦MG-виза⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-translation-18-2" data-filt="buhler-uprazhneniia-translations">
+    <header><div class="hw">Перевод чтения 18-2 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-translation-18-2</span></header>
+    <div class="question"><p><b>Черновой перевод (до визы):</b> «Пусть царь заставит вайшьев платить подати.»</p></div>
+    <div class="panel"><h4>Раздел</h4>Бюлер, раздел IV — Переводы чтений ⟦MG-виза⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-translation-28-1" data-filt="buhler-uprazhneniia-translations">
+    <header><div class="hw">Перевод чтения 28-1 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-translation-28-1</span></header>
+    <div class="question"><p><b>Черновой перевод (до визы):</b> «Глупый осел, обманутый ласковыми речами шакала, пришел в пещеру льва и был им убит.»</p></div>
+    <div class="panel"><h4>Раздел</h4>Бюлер, раздел IV — Переводы чтений ⟦MG-виза⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-translation-28-2" data-filt="buhler-uprazhneniia-translations">
+    <header><div class="hw">Перевод чтения 28-2 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-translation-28-2</span></header>
+    <div class="question"><p><b>Черновой перевод (до визы):</b> «На полях зерно проросло от вод, пролитых облаками.»</p></div>
+    <div class="panel"><h4>Раздел</h4>Бюлер, раздел IV — Переводы чтений ⟦MG-виза⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-translation-34-1" data-filt="buhler-uprazhneniia-translations">
+    <header><div class="hw">Перевод чтения 34-1 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-translation-34-1</span></header>
+    <div class="question"><p><b>Черновой перевод (до визы):</b> «Чрезмерной жажды [обладания] иметь не следует — но и жажды вовсе не оставляй: у одержимого чрезмерной жаждой [вырастает] хохол на темени.»</p></div>
+    <div class="panel"><h4>Раздел</h4>Бюлер, раздел IV — Переводы чтений ⟦MG-виза⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-translation-34-2" data-filt="buhler-uprazhneniia-translations">
+    <header><div class="hw">Перевод чтения 34-2 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-translation-34-2</span></header>
+    <div class="question"><p><b>Черновой перевод (до визы):</b> «А тот вепрь, охваченный яростью, острием клыка, блистающего как молодой месяц, распорол пулинде живот — и тот, бездыханный, упал на землю.»</p></div>
+    <div class="panel"><h4>Раздел</h4>Бюлер, раздел IV — Переводы чтений ⟦MG-виза⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-translation-38-1" data-filt="buhler-uprazhneniia-translations">
+    <header><div class="hw">Перевод чтения 38-1 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-translation-38-1</span></header>
+    <div class="question"><p><b>Черновой перевод (до визы):</b> «Ты — дочь славящего, просящего, принимающего [дары]; я же — [сын] славимого, дающего, не принимающего.»</p></div>
+    <div class="panel"><h4>Раздел</h4>Бюлер, раздел IV — Переводы чтений ⟦MG-виза⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-translation-38-2" data-filt="buhler-uprazhneniia-translations">
+    <header><div class="hw">Перевод чтения 38-2 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-translation-38-2</span></header>
+    <div class="question"><p><b>Черновой перевод (до визы):</b> «Восемью гимнами риши восславил Агни-и-Сому, тремя — Индру-и-Варуну.»</p></div>
+    <div class="panel"><h4>Раздел</h4>Бюлер, раздел IV — Переводы чтений ⟦MG-виза⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-translation-38-3" data-filt="buhler-uprazhneniia-translations">
+    <header><div class="hw">Перевод чтения 38-3 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-translation-38-3</span></header>
+    <div class="question"><p><b>Черновой перевод (до визы):</b> «Лишь тот язык — язык, что славит Будду; лишь то сердце — сердце, что предано Будде.»</p></div>
+    <div class="panel"><h4>Раздел</h4>Бюлер, раздел IV — Переводы чтений ⟦MG-виза⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+
+  <section class="card" data-id="buhler-translation-45-1" data-filt="buhler-uprazhneniia-translations">
+    <header><div class="hw">Перевод чтения 45-1 <span class="badge">⟦MG-viza⟧</span></div><span class="idchip" title="card id — cite this id back when discussing this card">buhler-translation-45-1</span></header>
+    <div class="question"><p><b>Черновой перевод (до визы):</b> ««не давай»; «не бойся».»</p></div>
+    <div class="panel"><h4>Раздел</h4>Бюлер, раздел IV — Переводы чтений ⟦MG-виза⟧ — <a href="https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_V1_UPRAZHNENIIA_2026.md">https://github.com/gasyoun/SanskritGrammar/blob/main/BuhlerLeitfaden_1923/METODICHKA_BUHLER_V1_UPRAZHNENIIA_2026.md</a></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Принять перевод/ключ</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="правка перевода или причина отклонения"></textarea>
+  </section>
+</main>
+<div class="votebar" id="voteBar"><span class="spacer"></span></div>
+<footer class="hint">Approve = принять черновик как есть (правку впишите в поле заметки, если требуется точечная замена слова). Reject = черновик не годится, нужен новый вариант — опишите проблему в заметке. Defer = отложить на потом. Keyboard: <kbd>a</kbd> Принять перевод/ключ &middot; <kbd>r</kbd> Отклонить
+  &middot; <kbd>d</kbd> defer &middot; <kbd>&darr;</kbd>/<kbd>&uarr;</kbd> next/prev. Votes autosave to
+  this browser's localStorage; click "Download decisions.json" when done (unvoted items export with
+  decision:null).</footer>
+<div class="legend" style="max-width:980px;margin:0 auto 20px;padding:0 20px;color:var(--muted);font-size:12px">
+  <b>Approve</b> = accept the proposed change/answer shown on the card (no separate "approve as-is" —
+  approving means agreeing as written). <b>Reject</b> = keep the current entry/answer unchanged.
+  <b>Defer</b> = not sure yet, decide later. The note field is for requesting a partial tweak instead
+  of an outright reject.
+</div>
+<script>
+(function () {
+  var SHEET_ID = "sanskritgrammar-apte-buhler-viza_p4";
+  var STORE_KEY = 'review-sheet:' + SHEET_ID;
+  var GENERATED = "31-08-2026";
+  var ids = ["apte-corpus-gam-25", "apte-corpus-y\u0101-81", "apte-corpus-i-307", "apte-corpus-car-176", "apte-corpus-vraj-642", "apte-corpus-s\u1e5b-3640", "apte-corpus-dh\u0101v-1551", "apte-corpus-ruc-1463", "apte-corpus-krudh-416", "apte-corpus-druh-4237", "apte-corpus-\u012br\u1e63y-35949", "apte-corpus-as\u016by-8823", "apte-corpus-k\u1e63ip-264", "apte-corpus-muc-162", "apte-corpus-snih-4166", "apte-corpus-abhila\u1e63-4413", "apte-corpus-anura\u00f1j-3181", "apte-corpus-\u012b\u015b-2491", "apte-corpus-prabh\u016b-2142", "apte-corpus-day-9223", "apte-corpus-sm\u1e5b-114", "apte-corpus-adh\u012b-1275", "apte-corpus-uta-363", "apte-corpus-kim-583", "apte-corpus-kr\u012b\u1e0d-1576", "apte-corpus-ram-495", "apte-corpus-han-55", "apte-corpus-punar-39", "apte-corpus-pr\u0101yas-2205", "apte-corpus-muhur-652", "apte-corpus-yatas-366", "apte-corpus-y\u0101vat-172", "apte-corpus-h\u0101-190", "apte-corpus-vara-82", "buhler-corpus-k\u0101ray-433", "buhler-corpus-dar\u015bay-594", "buhler-corpus-sth\u0101pay-632", "buhler-corpus-\u015br\u0101vay-2361", "buhler-corpus-p\u016bray-1123", "buhler-corpus-kup-1398", "buhler-corpus-krudh-416", "buhler-corpus-jan-62", "buhler-corpus-khan-3640", "buhler-corpus-san-3542", "buhler-corpus-pat-211", "buhler-corpus-r\u0101jan-23", "buhler-corpus-yuvar\u0101ja-7964", "buhler-corpus-sakhi-875", "buhler-corpus-pathin-698", "buhler-corpus-apatha-15149", "buhler-corpus-stu-432", "buhler-corpus-ru-5464", "buhler-corpus-vac-15", "buhler-corpus-bh\u016b-13", "buhler-corpus-gam-25", "buhler-corpus-y\u0101-81", "buhler-corpus-d\u1e5b\u015b-27", "buhler-corpus-sic-1563", "buhler-corpus-muc-162", "buhler-corpus-d\u0101-43", "buhler-corpus-hu-395", "buhler-corpus-ah-69", "buhler-corpus-grah-100", "buhler-corpus-p\u0101-101", "buhler-corpus-dh\u0101-283", "apte-key-3-1", "apte-key-3-2", "apte-key-7-1", "apte-key-7-2", "apte-key-9-1", "apte-key-9-2", "apte-key-10-1", "apte-key-10-2", "apte-key-19-1", "apte-key-22-1", "apte-key-22-2", "apte-key-29-1", "apte-key-29-2", "apte-translation-3-1", "apte-translation-3-2", "apte-translation-7-1", "apte-translation-7-2", "apte-translation-9-1", "apte-translation-9-2", "apte-translation-10-1", "apte-translation-10-2", "apte-translation-19-1", "apte-translation-19-2", "apte-translation-19-3", "apte-translation-22-1", "apte-translation-22-2", "apte-translation-29-1", "apte-translation-29-2", "buhler-key-18-1", "buhler-key-18-2", "buhler-key-28-1", "buhler-key-28-2", "buhler-key-34-1", "buhler-key-34-2", "buhler-key-38-1", "buhler-key-43-1", "buhler-key-43-2", "buhler-key-45-1", "buhler-key-45-2", "buhler-translation-18-1", "buhler-translation-18-2", "buhler-translation-28-1", "buhler-translation-28-2", "buhler-translation-34-1", "buhler-translation-34-2", "buhler-translation-38-1", "buhler-translation-38-2", "buhler-translation-38-3", "buhler-translation-45-1"];
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(STORE_KEY) || '{}') || {}; } catch (e) { state = {}; }
+  function tally() {
+    var c = { approve:0, reject:0, defer:0 };
+    ids.forEach(function (id) { var v = state[id] && state[id].decision; if (v && c.hasOwnProperty(v)) c[v]++; });
+    document.getElementById('c-approve').textContent = c.approve;
+    document.getElementById('c-reject').textContent = c.reject;
+    document.getElementById('c-defer').textContent = c.defer;
+    document.getElementById('c-unvoted').textContent = ids.length - c.approve - c.reject - c.defer;
+  }
+  function applyCardUI(card) {
+    var id = card.getAttribute('data-id'); var rec = state[id] || {};
+    card.classList.remove('voted-approve','voted-reject','voted-defer');
+    card.querySelectorAll('button.vote').forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-vote') === rec.decision); });
+    card.querySelector('.vote-state').textContent = rec.decision ? rec.decision : 'unvoted';
+    if (rec.decision) card.classList.add('voted-' + rec.decision);
+    var ta = card.querySelector('textarea.note'); if (rec.note && !ta.value) ta.value = rec.note;
+  }
+  function save() { localStorage.setItem(STORE_KEY, JSON.stringify(state)); tally(); }
+  // H1523 residual / csl-pyutil#1 Part 1: always re-read the live textarea on vote
+  // and before export so a second vote click (or a missed `input` event) cannot
+  // drop a note that is still visible in the card.
+  function syncNoteFromDom(id) {
+    state[id] = state[id] || {};
+    var card = document.querySelector('.card[data-id="' + id + '"]');
+    if (!card) return;
+    var ta = card.querySelector('textarea.note');
+    if (ta) state[id].note = ta.value;
+  }
+  function vote(id, d) { syncNoteFromDom(id); state[id].decision = d; save(); }
+  function noteChange(id, t) { state[id] = state[id] || {}; state[id].note = t; save(); }
+  document.querySelectorAll('.card').forEach(function (card) {
+    var id = card.getAttribute('data-id'); applyCardUI(card);
+    card.querySelectorAll('button.vote').forEach(function (btn) {
+      btn.addEventListener('click', function () { vote(id, btn.getAttribute('data-vote')); applyCardUI(card); });
+    });
+    var ta = card.querySelector('textarea.note'); ta.addEventListener('input', function () { noteChange(id, ta.value); });
+  });
+  tally();
+  document.getElementById('downloadBtn').addEventListener('click', function () {
+    ids.forEach(function (id) { syncNoteFromDom(id); });
+    var decided = ids.filter(function (id) { return state[id] && state[id].decision; }).length;
+    var payload = { sheet_id: SHEET_ID, generated: "31-08-2026", decided: decided, time_total_seconds: __timeTotal(),
+      items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '', time_seconds: __timeFor(id) }; }) };
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
+    var url = URL.createObjectURL(blob); var a = document.createElement('a');
+    a.href = url; a.download = SHEET_ID + '_decisions.json'; document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+  });
+  var filterbar = document.getElementById('filterbar');
+  filterbar.addEventListener('click', function (e) {
+    var btn = e.target.closest('button[data-filter]'); if (!btn) return;
+    filterbar.querySelectorAll('button').forEach(function (b) { b.classList.remove('active'); });
+    btn.classList.add('active'); var f = btn.getAttribute('data-filter');
+    document.querySelectorAll('.card').forEach(function (card) {
+      var show = true;
+      if (f === 'unvoted') { var id = card.getAttribute('data-id'); show = !(state[id] && state[id].decision); }
+      else if (f !== 'all') { show = card.getAttribute('data-filt') === f; }
+      card.style.display = show ? '' : 'none';
+    });
+  });
+  var cardsEl = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  var activeIdx = 0;
+  function visibleCards() { return cardsEl.filter(function (c) { return c.style.display !== 'none'; }); }
+  document.addEventListener('keydown', function (e) {
+    if (e.target.tagName === 'TEXTAREA') return;
+    var vis = visibleCards(); if (!vis.length) return;
+    if (activeIdx >= vis.length) activeIdx = vis.length - 1;
+    var card = vis[activeIdx]; var id = card.getAttribute('data-id');
+    if (e.key === 'a') { vote(id, 'approve'); applyCardUI(card); }
+    else if (e.key === 'r') { vote(id, 'reject'); applyCardUI(card); }
+    else if (e.key === 'd') { vote(id, 'defer'); applyCardUI(card); }
+    else if (e.key === 'ArrowDown') { activeIdx = Math.min(activeIdx + 1, vis.length - 1); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'start'}); }
+    else if (e.key === 'ArrowUp') { activeIdx = Math.max(activeIdx - 1, 0); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'start'}); }
+    else return;
+    e.preventDefault();
+  });
+
+  var saveHandle = null, saveTimer = null;
+  function exportPayload() {
+    if (typeof syncNoteFromDom === 'function') {
+      ids.forEach(function (id) { syncNoteFromDom(id); });
+    }
+    var decided = ids.filter(function (id) { return state[id] && state[id].decision; }).length;
+    return JSON.stringify({ sheet_id: SHEET_ID, generated: new Date().toISOString(), decided: decided, time_total_seconds: __timeTotal(),
+      items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '', time_seconds: __timeFor(id) }; }) }, null, 2);
+  }
+  function scheduleAutosave() {
+    if (!saveHandle) return;
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(function () {
+      saveHandle.createWritable().then(function (w) {
+        w.write(exportPayload()).then(function () { w.close(); });
+      }).catch(function () {});
+    }, 1000);
+  }
+  var _origSave = save;
+  save = function () { _origSave(); scheduleAutosave(); };
+  if (window.showSaveFilePicker) {
+    var saveBtn = document.getElementById('saveBtn');
+    saveBtn.style.display = '';
+    saveBtn.addEventListener('click', function () {
+      window.showSaveFilePicker({suggestedName: SHEET_ID + '_decisions.json'}).then(function (h) {
+        saveHandle = h; scheduleAutosave();
+      }).catch(function () {});
+    });
+  }
+
+  var FS_KEY = STORE_KEY + ':fs', FS_DEFAULT = 1.5;
+  function fsGet() {
+    var v = parseFloat(localStorage.getItem(FS_KEY));
+    return (isFinite(v) && v >= 0.7 && v <= 3) ? v : FS_DEFAULT;
+  }
+  function fsApply(v) {
+    document.documentElement.style.setProperty('--fs', String(v));
+    document.getElementById('fsVal').textContent = Math.round(v * 100) + '%';
+  }
+  function fsSet(v) {
+    v = Math.min(3, Math.max(0.7, Math.round(v * 10) / 10));
+    localStorage.setItem(FS_KEY, String(v)); fsApply(v);
+  }
+  fsApply(fsGet());
+  document.getElementById('fsDown').addEventListener('click', function () { fsSet(fsGet() - 0.1); });
+  document.getElementById('fsUp').addEventListener('click', function () { fsSet(fsGet() + 0.1); });
+
+  var TIME_KEY = STORE_KEY + ':timing';
+  var __timing = { total: 0, per: {} };
+  try {
+    var __t0 = JSON.parse(localStorage.getItem(TIME_KEY) || 'null');
+    if (__t0 && typeof __t0.total === 'number') __timing = __t0;
+  } catch (e) {}
+  if (!__timing.per) __timing.per = {};
+  function __timeFor(id) { return Math.round(__timing.per[id] || 0); }
+  function __timeTotal() { return Math.round(__timing.total || 0); }
+  function __timeFmt(s) {
+    s = Math.round(s); var m = Math.floor(s / 60);
+    return (m >= 60 ? Math.floor(m / 60) + ':' + ('0' + (m - Math.floor(m / 60) * 60)).slice(-2) : m)
+      + ':' + ('0' + (s - m * 60)).slice(-2);
+  }
+  function __timeShow() {
+    var el = document.getElementById('t-total');
+    if (el) el.textContent = __timeFmt(__timing.total);
+  }
+  var __timeLast = Date.now(), __timeDirty = 0;
+  var __timeCards = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  function __timeActiveId() {
+    var mid = window.innerHeight / 2, best = null, bestd = Infinity;
+    for (var i = 0; i < __timeCards.length; i++) {
+      var c = __timeCards[i];
+      if (c.style.display === 'none') continue;
+      var r = c.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > window.innerHeight) continue;
+      var center = (Math.max(r.top, 0) + Math.min(r.bottom, window.innerHeight)) / 2;
+      var d = Math.abs(center - mid);
+      if (d < bestd) { bestd = d; best = c; }
+    }
+    return best ? best.getAttribute('data-id') : null;
+  }
+  function __timeFlush() {
+    try { localStorage.setItem(TIME_KEY, JSON.stringify(__timing)); } catch (e) {}
+  }
+  // V12 (H2858): the clock is stoppable. `paused` rides in the same persisted
+  // record as the totals, so a reviewer who pauses and closes the tab does not
+  // come back to a clock that ran all night.
+  var __timePaused = !!__timing.paused;
+  // V15 (H2887): a legacy record carries `paused` and no reason — read it as
+  // manual, so an auto-rearm can never lift a pause the curator set by hand.
+  var __timePauseReason = __timePaused ? (__timing.pause_reason || 'manual') : null;
+  function __timePauseSet(v, reason) {
+    __timePaused = !!v;
+    __timing.paused = __timePaused;
+    __timePauseReason = __timePaused ? (reason || 'manual') : null;
+    __timing.pause_reason = __timePauseReason;
+    __timeLast = Date.now(); __timeFlush();
+  }
+  setInterval(function () {
+    var now = Date.now(), dt = (now - __timeLast) / 1000;
+    __timeLast = now;
+    if (document.hidden || __timePaused || dt <= 0 || dt > 4) return;
+    __timing.total += dt;
+    var id = __timeActiveId();
+    if (id) __timing.per[id] = (__timing.per[id] || 0) + dt;
+    __timeDirty += dt;
+    if (__timeDirty >= 5) { __timeDirty = 0; __timeFlush(); }
+    __timeShow();
+  }, 1000);
+  document.addEventListener('visibilitychange', function () { __timeLast = Date.now(); });
+  window.addEventListener('beforeunload', __timeFlush);
+  __timeShow();
+
+  var HANDIN_SAID = 'handed in {n} of {total} — clock stopped, the rest stay saved in this browser';
+  var __handinBtn = document.getElementById('handinBtn');
+  var __handinSaid = document.getElementById('handinSaid');
+
+  var __pauseBtn = document.getElementById('pauseBtn');
+  function __pauseShow() {
+    __pauseBtn.classList.toggle('on', __timePaused);
+    __pauseBtn.innerHTML = __timePaused ? '&#9654;' : '&#9208;';
+    var chip = document.querySelector('.tally .time');
+    if (chip) chip.classList.toggle('paused', __timePaused);
+  }
+  __pauseBtn.addEventListener('click', function () { __timePauseSet(!__timePaused); __pauseShow(); });
+  __pauseShow();
+  __handinBtn.addEventListener('click', function () {
+    ids.forEach(function (id) { syncNoteFromDom(id); });
+    __timePauseSet(true, 'export'); __pauseShow();
+    var items = ids.map(function (id) {
+      var rec = state[id] || {};
+      var item = { id: id, decision: rec.decision || null };
+      item.note = rec.note || '';
+      item.time_seconds = __timeFor(id);
+      return item;
+    });
+    var decided = items.filter(function (it) { return !!it.decision; }).length;
+    var payload = { sheet_id: SHEET_ID, generated: GENERATED, decided: decided,
+      partial: true, complete: false, undecided: items.length - decided, items: items };
+    payload.time_total_seconds = __timeTotal();
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
+    var url = URL.createObjectURL(blob); var a = document.createElement('a');
+    a.href = url; a.download = SHEET_ID + '_decisions_partial.json';
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+    __handinSaid.textContent = HANDIN_SAID.replace('{n}', decided).replace('{total}', items.length);
+  });
+
+  // --- V15 session flow (H2887) ---------------------------------------------
+  var FLOW_IDLE_SECONDS = 90;
+  var FLOW_ETA = 'about {minutes} min left';
+  var FLOW_ETA_ROUGH = 'about {minutes} min left (rough)';
+  var FLOW_CLOCK_RUNNING = 'running';
+  var FLOW_CLOCK_PAUSED = 'paused';
+  var FLOW_CLOCK_IDLE = 'idle';
+  var FLOW_PROGRESS = 'decided {n} of {total}';
+  var FLOW_UNDO_SAID = 'undo: {id} back to {decision}';
+  var FLOW_UNDO_EMPTY = 'nothing to undo';
+  var FLOW_UNDO_NONE = 'no decision';
+  var FLOW_RESUMED = 'resumed at card {n} of {total}';
+  var __flowToast = document.getElementById('flowToast');
+  var __flowToastTimer = null;
+  function __flowSay(text) {
+    if (!__flowToast) return;
+    __flowToast.textContent = text;
+    __flowToast.classList.add('on');
+    clearTimeout(__flowToastTimer);
+    __flowToastTimer = setTimeout(function () { __flowToast.classList.remove('on'); }, 2600);
+  }
+  var __flowCenterId = __timeActiveId;
+  function __flowIdxOf(id) {
+    var vis = visibleCards();
+    for (var i = 0; i < vis.length; i++) {
+      if (vis[i].getAttribute('data-id') === id) return i;
+    }
+    return -1;
+  }
+  function __flowCardById(id) {
+    var found = null;
+    cardsEl.forEach(function (c) { if (c.getAttribute('data-id') === id) found = c; });
+    return found;
+  }
+  // The visible ring IS the target of a/r/d — that identity is the whole point
+  // of this layer, so nothing may move `activeIdx` without repainting.
+  function __flowPaint() {
+    cardsEl.forEach(function (c) { c.classList.remove('kbd-active'); });
+    var vis = visibleCards();
+    if (!vis.length) return;
+    if (activeIdx >= vis.length) activeIdx = vis.length - 1;
+    if (activeIdx < 0) activeIdx = 0;
+    vis[activeIdx].classList.add('kbd-active');
+  }
+  function __flowSync() {
+    var id = __flowCenterId();
+    if (id) { var at = __flowIdxOf(id); if (at !== -1) activeIdx = at; }
+    __flowPaint();
+  }
+  var __flowScrollTimer = null;
+  window.addEventListener('scroll', function () {
+    if (__flowScrollTimer) return;
+    __flowScrollTimer = setTimeout(function () { __flowScrollTimer = null; __flowSync(); }, 120);
+  });
+  // Both bars reset `activeIdx` to 0 as they re-filter; re-derive it from the
+  // viewport on the next tick, or defect 2 returns wearing a filter.
+  ['filterbar'].forEach(function (barId) {
+    var bar = document.getElementById(barId);
+    if (bar) bar.addEventListener('click', function () { setTimeout(__flowSync, 0); });
+  });
+  function __flowClockShow() {
+    var el = document.getElementById('t-state');
+    if (!el) return;
+    var label = FLOW_CLOCK_RUNNING;
+    if (__timePaused) label = (__timePauseReason === 'idle') ? FLOW_CLOCK_IDLE : FLOW_CLOCK_PAUSED;
+    el.textContent = label;
+    el.classList.toggle('idle', !!__timePaused && __timePauseReason === 'idle');
+  }
+  // The V12 ⏸ button drives the clock straight through __timePauseSet, so the
+  // three-state label has to ride along with V12's own repaint or it goes stale
+  // the moment the curator pauses by hand.
+  var __flowOrigPauseShow = __pauseShow;
+  __pauseShow = function () { __flowOrigPauseShow(); __flowClockShow(); };
+  var __flowIdleTimer = null;
+  function __flowIdleArm() {
+    clearTimeout(__flowIdleTimer);
+    __flowIdleTimer = setTimeout(function () {
+      if (__timePaused) return;
+      __timePauseSet(true, 'idle');
+    __pauseShow();
+      __flowClockShow();
+    }, FLOW_IDLE_SECONDS * 1000);
+  }
+  function __flowRearm() {
+    if (__timePaused && __timePauseReason !== 'manual') {
+      __timePauseSet(false);
+    __pauseShow();
+    }
+    __flowClockShow();
+    __flowIdleArm();
+  }
+  // The export GESTURES, caught in the capture phase on `document` so this runs
+  // before any handler bound to the buttons themselves — including the strict
+  // layer's, which calls stopImmediatePropagation() on its own element.
+  document.addEventListener('click', function (e) {
+    var t = e.target;
+    if (!t || !t.closest || !t.closest('#downloadBtn, #saveBtn, #handinBtn')) return;
+    __timePauseSet(true, 'export');
+    __pauseShow();
+    __flowClockShow();
+  }, true);
+  ['keydown', 'pointerdown', 'scroll'].forEach(function (evt) {
+    document.addEventListener(evt, function () { __flowRearm(); }, true);
+  });
+  var __flowUndoStack = [];
+  function __flowUndo() {
+    var last = __flowUndoStack.pop();
+    if (!last) { __flowSay(FLOW_UNDO_EMPTY); return; }
+    state[last.id] = state[last.id] || {};
+    if (last.prev) state[last.id].decision = last.prev;
+    else delete state[last.id].decision;
+    save();
+    var card = __flowCardById(last.id);
+    if (card) {
+      applyCardUI(card);
+      card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      var at = __flowIdxOf(last.id);
+      if (at !== -1) activeIdx = at;
+      __flowPaint();
+    }
+    __flowSay(FLOW_UNDO_SAID.replace('{id}', last.id)
+      .replace('{decision}', last.prev || FLOW_UNDO_NONE));
+  }
+  var __flowUndoBtn = document.getElementById('flowUndoBtn');
+  if (__flowUndoBtn) __flowUndoBtn.addEventListener('click', __flowUndo);
+  function __flowFirstUndecided() {
+    var vis = visibleCards();
+    for (var i = 0; i < vis.length; i++) {
+      var id = vis[i].getAttribute('data-id');
+      if (!(state[id] && state[id].decision)) return i;
+    }
+    return -1;
+  }
+  function __flowAdvance() {
+    var at = __flowFirstUndecided();
+    if (at === -1) { __flowPaint(); return; }
+    activeIdx = at;
+    visibleCards()[at].scrollIntoView({ behavior: 'smooth', block: 'start' });
+    __flowPaint();
+  }
+  function __flowDecided() {
+    var n = 0;
+    ids.forEach(function (id) { if (state[id] && state[id].decision) n++; });
+    return n;
+  }
+  function __flowEtaText(decided, total) {
+    var secs = [];
+    ids.forEach(function (id) {
+      if (!(state[id] && state[id].decision)) return;
+      var s = __timing.per[id] || 0;
+      if (s > 0) secs.push(s);
+    });
+    if (!secs.length) return '';
+    secs.sort(function (a, b) { return a - b; });
+    var mid = Math.floor(secs.length / 2);
+    var med = (secs.length % 2) ? secs[mid] : (secs[mid - 1] + secs[mid]) / 2;
+    var left = Math.max(0, total - decided);
+    if (!left) return '';
+    var minutes = Math.max(1, Math.round(med * left / 60));
+    return (secs.length >= 5 ? FLOW_ETA : FLOW_ETA_ROUGH).replace('{minutes}', minutes);
+  }
+  function __flowProgress() {
+    var n = __flowDecided(), total = ids.length;
+    var txt = document.getElementById('flowProgText');
+    if (txt) txt.textContent = FLOW_PROGRESS.replace('{n}', n).replace('{total}', total);
+    var bar = document.getElementById('flowBar');
+    if (bar) bar.style.width = (total ? Math.round(100 * n / total) : 0) + '%';
+    var etaEl = document.getElementById('flowEta');
+    if (etaEl) etaEl.textContent = __flowEtaText(n, total);
+  }
+  var __flowOrigTally = tally;
+  tally = function () { __flowOrigTally(); __flowProgress(); };
+  var __flowOrigVote = vote;
+  vote = function (id, d) {
+    var rec = state[id] || {};
+    __flowUndoStack.push({ id: id, prev: rec.decision || null });
+    if (__flowUndoStack.length > 100) __flowUndoStack.shift();
+    __flowOrigVote(id, d);
+    __flowRearm();
+    __flowAdvance();
+  };
+  var __flowOrigNote = noteChange;
+  noteChange = function (id, t) { __flowOrigNote(id, t); __flowRearm(); };
+  document.addEventListener('keydown', function (e) {
+    if (e.target.tagName === 'TEXTAREA') return;
+    if (e.key === 'z' || e.key === 'Z') { __flowUndo(); e.preventDefault(); return; }
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') __flowPaint();
+  });
+  __flowProgress();
+  __flowSync();
+  __flowClockShow();
+  __flowIdleArm();
+  (function () {
+    if (!__flowDecided()) return;
+    var at = __flowFirstUndecided();
+    if (at === -1) return;
+    var vis = visibleCards();
+    activeIdx = at;
+    vis[at].scrollIntoView({ block: 'start' });
+    __flowPaint();
+    __flowSay(FLOW_RESUMED.replace('{n}', at + 1).replace('{total}', vis.length));
+  })();
+
+  var VOTE_TOTAL = 0;
+  var VOTE_PROGRESS = '{n} of {total} across the whole sheet';
+  var VOTE_ETA = 'about {minutes} min left for all {total}';
+  var VOTE_ETA_ROUGH = 'about {minutes} min left for all {total} (rough)';
+  var VOTE_DONE = 'all {total} decided';
+  (function () {
+    var bar = document.getElementById('voteBar');
+    if (!bar) return;
+    // The build tagged exactly the submit controls this document actually has.
+    // Navigation (filters, facets, the type-scale control) is untagged and stays
+    // on top, where it is used BEFORE deciding.
+    var moved = document.querySelectorAll('[data-submit]');
+    for (var i = 0; i < moved.length; i++) bar.appendChild(moved[i]);
+  })();
+  // One record backs every pack of a packset — STORE_KEY and TIME_KEY are keyed
+  // on sheet_id, not on the pack — so this page can count and time the WHOLE
+  // instrument without loading a single other pack.
+  function __voteDecidedAll() {
+    var n = 0;
+    for (var k in state) {
+      if (Object.prototype.hasOwnProperty.call(state, k) && state[k] && state[k].decision) n++;
+    }
+    return n;
+  }
+  function __voteSecs() {
+    var per = (typeof __timing !== 'undefined' && __timing && __timing.per) ? __timing.per : null;
+    var out = [];
+    if (!per) return out;
+    for (var k in per) {
+      if (!Object.prototype.hasOwnProperty.call(per, k)) continue;
+      if (!(state[k] && state[k].decision)) continue;
+      if (per[k] > 0) out.push(per[k]);
+    }
+    return out;
+  }
+  function __voteEta(decided, total) {
+    var left = Math.max(0, total - decided);
+    if (!left) return VOTE_DONE.replace('{total}', total);
+    var secs = __voteSecs();
+    if (!secs.length) return '';
+    secs.sort(function (a, b) { return a - b; });
+    var mid = Math.floor(secs.length / 2);
+    var med = (secs.length % 2) ? secs[mid] : (secs[mid - 1] + secs[mid]) / 2;
+    var minutes = Math.max(1, Math.round(med * left / 60));
+    return (secs.length >= 5 ? VOTE_ETA : VOTE_ETA_ROUGH)
+      .replace('{minutes}', minutes).replace('{total}', total);
+  }
+  function __voteProgress() {
+    var total = VOTE_TOTAL || ids.length;
+    var n = VOTE_TOTAL ? __voteDecidedAll() : ids.filter(function (id) {
+      return state[id] && state[id].decision; }).length;
+    if (n > total) n = total;
+    var t = document.getElementById('voteProgText');
+    if (t) t.innerHTML = VOTE_PROGRESS.replace('{n}', '<b>' + n + '</b>')
+                                      .replace('{total}', '<b>' + total + '</b>');
+    var b = document.getElementById('voteProgBar');
+    if (b) b.style.width = (total ? Math.round(100 * n / total) : 0) + '%';
+    var e = document.getElementById('voteProgEta');
+    if (e) e.textContent = __voteEta(n, total);
+  }
+  var __voteOrigTally = tally;
+  tally = function () { __voteOrigTally(); __voteProgress(); };
+  __voteProgress();
+})();
+</script>
+<div class="flowtoast" id="flowToast" role="status"></div>
+</body>
+</html>
