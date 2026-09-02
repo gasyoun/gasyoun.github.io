@@ -13,10 +13,24 @@ Usage:
     python scripts/check_sheet_staleness.py
 
 Exit codes:
-    0 - every live (non-excluded) sheet carries a generator meta tag whose
-        version matches the latest csl-pyutil release
-    1 - at least one live sheet is stale or missing the meta tag entirely
-    2 - could not determine the latest csl-pyutil release (network/API error)
+    0 - the scan completed. Stale/untagged sheets are printed for visibility
+        but do NOT fail the job (see "Why staleness is non-blocking" below).
+    2 - the scan itself could not run: sheets dir missing, no sheet files
+        found, or the latest csl-pyutil release could not be determined
+        (network/API error)
+
+Why staleness is non-blocking (amended 02-09-2026, H3848):
+    csl-pyutil ships new releases faster than the ~65 published vote sheets
+    get bulk-regenerated, and many sheets are closed decision records that
+    are never touched again after a vote lands. Under the original "any
+    stale sheet -> exit 1" rule this check failed on literally every one of
+    its first 65 runs (16-08-2026 through 02-09-2026, spanning both the
+    weekly schedule and every push to vote/sheets/**) -- zero passes, so a
+    red status carried no incremental information about any given push.
+    The staleness list itself is still useful as a periodic regen queue,
+    so the scan and its report stay; only the pass/fail semantics changed.
+    Branch is unprotected (no required status checks), so this was always
+    a pure signal problem, never a merge gate.
 
 No GitHub token is required: sanskrit-lexicon/csl-pyutil is a public repo and
 the unauthenticated GitHub API rate limit (60 req/hour per IP) is more than
@@ -149,13 +163,13 @@ def main() -> int:
             print(f"  - {sheet_id} ({marker}): {reason}")
 
     if stale:
-        print("\nSTALE sheets (regenerate against latest csl-pyutil):")
+        print("\nSTALE sheets (regen queue -- not a build failure, see docstring):")
         for sheet_id, version in sorted(stale):
             detected = version if version else "no meta tag"
             print(f"  - {sheet_id}: {detected} (latest: {latest_version})")
-        return 1
+    else:
+        print("\nAll live sheets are current.")
 
-    print("\nAll live sheets are current.")
     return 0
 
 
