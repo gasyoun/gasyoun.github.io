@@ -16,7 +16,9 @@
           max-width: 640px; margin: 0 auto 4rem; padding: 0 1.25rem; line-height: 1.5;
           background: var(--bg); color: var(--fg); }
   h1 { font-size: 1.1rem; font-weight: 600; margin: 1.5rem 0 0.25rem; }
+  h2 { font-size: 0.95rem; font-weight: 600; margin: 1.6rem 0 0.1rem; }
   .meta { color: var(--muted); font-size: 0.8rem; margin-bottom: 1rem; }
+  .tierhead { margin: 1rem 0 0.35rem; font-size: 0.8rem; }
   .bar { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; gap: 0.6rem;
           background: var(--bg); padding: 0.6rem 0; border-bottom: 1px solid var(--line);
           margin-bottom: 1rem; font-size: 0.85rem; }
@@ -54,7 +56,7 @@
 </head>
 <body>
 <h1>Fruit &mdash; top picks right now</h1>
-<p class="meta">generated 2026-09-02T11:29:25.711854+00:00 UTC &middot; page rendered 2026-09-02T11:37:42Z UTC &middot; auto-refreshes every 5 min</p>
+<p class="meta">generated 2026-09-02T12:46:58.456261+00:00 UTC &middot; page rendered 2026-09-02T12:47:03Z UTC &middot; auto-refreshes every 5 min</p>
 <div class="bar">
   <span id="progress">0 / 0 done</span>
   <span class="spacer"></span>
@@ -63,9 +65,37 @@
 </div>
 <p id="storewarn" hidden>&#9888;&#65039; local storage is blocked here (private window?) -- done state won't persist; use "copy progress link" instead.</p>
 <p class="warn">&#9888;&#65039; close-loop sweep degraded (H3125; generated 2026-09-02T10:04:01Z); 40 search failure(s); 0 rows verified this pass -- carry-forward only</p>
-<details class="card" data-id="H3823" open>
+<h2>Top 10 picks</h2>
+<p class="meta">sorted by effort tier</p>
+<details class="card" data-id="H3517" open>
   <summary>
     <span class="rank">#1</span>
+    <span class="pick">H3517</span>
+    <span class="dim">&middot; OxAlpha &middot; Uprava &middot; 🟢1</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🟢 trivial · 8.0d old</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3517-OxAlpha_Uprava_effort-vocab-unify-shared_25.08.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane oxalpha --max 1</code></pre>
+</details>
+<details class="card" data-id="H3934">
+  <summary>
+    <span class="rank">#2</span>
+    <span class="pick">H3934</span>
+    <span class="dim">&middot; Sonnet &middot; Uprava &middot; 🟢1</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🟢 trivial</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3934-Sonnet_Uprava_fruit-status-tier-sort_02.09.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane sonnet --max 1</code></pre>
+</details>
+<details class="card" data-id="H3823">
+  <summary>
+    <span class="rank">#3</span>
     <span class="pick">H3823</span>
     <span class="dim">&middot; Opus &middot; Systema-Sanscriticum &middot; 🟡2</span>
     <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
@@ -76,9 +106,611 @@
   <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3823-Opus_Systema-Sanscriticum_bind-yoga-sutra-recordings-course-327_01.09.26.md and execute it.</code></pre>
   <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane opus --max 1</code></pre>
 </details>
+<details class="card" data-id="H3930">
+  <summary>
+    <span class="rank">#4</span>
+    <span class="pick">H3930</span>
+    <span class="dim">&middot; OxAlpha &middot; Systema-Sanscriticum &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 0 · 🟡 medium</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3930-OxAlpha_Systema-Sanscriticum_telegram-stories-posts-automation_02.09.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane oxalpha --max 1</code></pre>
+</details>
+<details class="card" data-id="H3451">
+  <summary>
+    <span class="rank">#5</span>
+    <span class="pick">H3451</span>
+    <span class="dim">&middot; OxAlpha &middot; Uprava &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">unblocks 2 · repo tier 2 · 🟡 medium · 9.0d old</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3451-OxAlpha_Uprava_session-runner-seam_24.08.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane oxalpha --max 1</code></pre>
+</details>
+<details class="card" data-id="H3647">
+  <summary>
+    <span class="rank">#6</span>
+    <span class="pick">H3647</span>
+    <span class="dim">&middot; OxAlpha &middot; Uprava &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">unblocks 1 · repo tier 2 · 🟡 medium · 5.0d old</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3647-OxAlpha_Uprava_roadmap-guard-foreign-wip-emit_28.08.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane oxalpha --max 1</code></pre>
+</details>
+<details class="card" data-id="H3285">
+  <summary>
+    <span class="rank">#7</span>
+    <span class="pick">H3285</span>
+    <span class="dim">&middot; Codex &middot; Uprava &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🟡 medium · 11.0d old</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3285-Codex_Uprava_parallelize-repo-fanout-tools_22.08.26.md and execute it.</code></pre>
+  
+</details>
+<details class="card" data-id="H3286">
+  <summary>
+    <span class="rank">#8</span>
+    <span class="pick">H3286</span>
+    <span class="dim">&middot; Codex &middot; Uprava &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🟡 medium · 11.0d old</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3286-Codex_Uprava_regen-derived-skip-unchanged_22.08.26.md and execute it.</code></pre>
+  
+</details>
+<details class="card" data-id="H3287">
+  <summary>
+    <span class="rank">#9</span>
+    <span class="pick">H3287</span>
+    <span class="dim">&middot; Codex &middot; Uprava &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🟡 medium · 11.0d old</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3287-Codex_Uprava_open-encoding-utf8-sweep_22.08.26.md and execute it.</code></pre>
+  
+</details>
+<details class="card" data-id="H3288">
+  <summary>
+    <span class="rank">#10</span>
+    <span class="pick">H3288</span>
+    <span class="dim">&middot; Codex &middot; Uprava &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🟡 medium · 11.0d old</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3288-Codex_Uprava_repo-gc-and-archive-monolith-audit_22.08.26.md and execute it.</code></pre>
+  
+</details>
+<h2>All other launchable &middot; 50</h2>
+<p class="meta">sorted by effort tier</p>
+<p class="label tierhead">&#128993; Medium</p>
+<details class="card" data-id="H3290">
+  <summary>
+    <span class="rank">#11</span>
+    <span class="pick">H3290</span>
+    <span class="dim">&middot; Codex &middot; Uprava &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🟡 medium · 11.0d old</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3290-Codex_Uprava_batch-drain-opencode-executor_22.08.26.md and execute it.</code></pre>
+  
+</details>
+<details class="card" data-id="H3319">
+  <summary>
+    <span class="rank">#12</span>
+    <span class="pick">H3319</span>
+    <span class="dim">&middot; OxAlpha &middot; Uprava &middot; 🟡2≈</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🟡 medium · 11.0d old</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3319-OxAlpha_Uprava_gaps-unshallow-probe-fanout-retry_22.08.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane oxalpha --max 1</code></pre>
+</details>
+<details class="card" data-id="H3405">
+  <summary>
+    <span class="rank">#13</span>
+    <span class="pick">H3405</span>
+    <span class="dim">&middot; OxAlpha &middot; claude-config &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🟡 medium · 9.0d old</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3405-OxAlpha_claude-config_g45-residual-ru-tracked-legs_24.08.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane oxalpha --max 1</code></pre>
+</details>
+<details class="card" data-id="H3449">
+  <summary>
+    <span class="rank">#14</span>
+    <span class="pick">H3449</span>
+    <span class="dim">&middot; OxAlpha &middot; Uprava &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🟡 medium · 9.0d old</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3449-OxAlpha_Uprava_worker-verification-contract_24.08.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane oxalpha --max 1</code></pre>
+</details>
+<details class="card" data-id="H3450">
+  <summary>
+    <span class="rank">#15</span>
+    <span class="pick">H3450</span>
+    <span class="dim">&middot; OxAlpha &middot; Uprava &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🟡 medium · 9.0d old</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3450-OxAlpha_Uprava_closeout-hedge-tell-lint_24.08.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane oxalpha --max 1</code></pre>
+</details>
+<details class="card" data-id="H3460">
+  <summary>
+    <span class="rank">#16</span>
+    <span class="pick">H3460</span>
+    <span class="dim">&middot; OxAlpha &middot; Uprava &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🟡 medium · 9.0d old</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3460-OxAlpha_Uprava_drain-teardown-custody_24.08.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane oxalpha --max 1</code></pre>
+</details>
+<details class="card" data-id="H3470">
+  <summary>
+    <span class="rank">#17</span>
+    <span class="pick">H3470</span>
+    <span class="dim">&middot; OxAlpha &middot; Uprava &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🟡 medium · 9.0d old</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3470-OxAlpha_Uprava_lane-spawn-permission-map_24.08.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane oxalpha --max 1</code></pre>
+</details>
+<details class="card" data-id="H3471">
+  <summary>
+    <span class="rank">#18</span>
+    <span class="pick">H3471</span>
+    <span class="dim">&middot; OxAlpha &middot; Uprava &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🟡 medium · 8.0d old</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3471-OxAlpha_Uprava_drain-pass-state-record_25.08.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane oxalpha --max 1</code></pre>
+</details>
+<details class="card" data-id="H3475">
+  <summary>
+    <span class="rank">#19</span>
+    <span class="pick">H3475</span>
+    <span class="dim">&middot; OxAlpha &middot; Uprava &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🟡 medium · 8.0d old</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3475-OxAlpha_Uprava_claim-liveness-noise-classifier_25.08.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane oxalpha --max 1</code></pre>
+</details>
+<details class="card" data-id="H3476">
+  <summary>
+    <span class="rank">#20</span>
+    <span class="pick">H3476</span>
+    <span class="dim">&middot; OxAlpha &middot; Uprava &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🟡 medium · 8.0d old</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3476-OxAlpha_Uprava_drill-idempotency-hardening_25.08.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane oxalpha --max 1</code></pre>
+</details>
+<details class="card" data-id="H3485">
+  <summary>
+    <span class="rank">#21</span>
+    <span class="pick">H3485</span>
+    <span class="dim">&middot; OxAlpha &middot; csl-websanlexicon &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🟡 medium · 8.0d old</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3485-OxAlpha_csl-websanlexicon_websanlexicon-d4-ftsearch-pr_25.08.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane oxalpha --max 1</code></pre>
+</details>
+<details class="card" data-id="H3486">
+  <summary>
+    <span class="rank">#22</span>
+    <span class="pick">H3486</span>
+    <span class="dim">&middot; OxAlpha &middot; csl-corrections &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🟡 medium · 8.0d old</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3486-OxAlpha_csl-corrections_allvspwg-correction-queue-pass_25.08.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane oxalpha --max 1</code></pre>
+</details>
+<details class="card" data-id="H3488">
+  <summary>
+    <span class="rank">#23</span>
+    <span class="pick">H3488</span>
+    <span class="dim">&middot; OxAlpha &middot; multi &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🟡 medium · 8.0d old</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3488-OxAlpha_multi_cologne-hygiene-consolidation-sweep_25.08.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane oxalpha --max 1</code></pre>
+</details>
+<details class="card" data-id="H3503">
+  <summary>
+    <span class="rank">#24</span>
+    <span class="pick">H3503</span>
+    <span class="dim">&middot; OxAlpha &middot; claude-config &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🟡 medium · 8.0d old</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3503-OxAlpha_claude-config_grep-first-read-economy-policy_25.08.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane oxalpha --max 1</code></pre>
+</details>
+<details class="card" data-id="H3506">
+  <summary>
+    <span class="rank">#25</span>
+    <span class="pick">H3506</span>
+    <span class="dim">&middot; OxAlpha &middot; Uprava &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🟡 medium · 8.0d old</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3506-OxAlpha_Uprava_drain-lesson-verdict-mirror_25.08.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane oxalpha --max 1</code></pre>
+</details>
+<details class="card" data-id="H3507">
+  <summary>
+    <span class="rank">#26</span>
+    <span class="pick">H3507</span>
+    <span class="dim">&middot; OxAlpha &middot; Uprava &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🟡 medium · 8.0d old</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3507-OxAlpha_Uprava_landable-registry-single-source_25.08.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane oxalpha --max 1</code></pre>
+</details>
+<details class="card" data-id="H3514">
+  <summary>
+    <span class="rank">#27</span>
+    <span class="pick">H3514</span>
+    <span class="dim">&middot; OxAlpha &middot; Uprava &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🟡 medium · 8.0d old</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3514-OxAlpha_Uprava_deps-dag-full-regen-check_25.08.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane oxalpha --max 1</code></pre>
+</details>
+<details class="card" data-id="H3515">
+  <summary>
+    <span class="rank">#28</span>
+    <span class="pick">H3515</span>
+    <span class="dim">&middot; OxAlpha &middot; Uprava &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🟡 medium · 8.0d old</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3515-OxAlpha_Uprava_money-ledger-unified-export_25.08.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane oxalpha --max 1</code></pre>
+</details>
+<details class="card" data-id="H3516">
+  <summary>
+    <span class="rank">#29</span>
+    <span class="pick">H3516</span>
+    <span class="dim">&middot; OxAlpha &middot; Uprava &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🟡 medium · 8.0d old</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3516-OxAlpha_Uprava_articles-stage-history-parse_25.08.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane oxalpha --max 1</code></pre>
+</details>
+<details class="card" data-id="H3725">
+  <summary>
+    <span class="rank">#30</span>
+    <span class="pick">H3725</span>
+    <span class="dim">&middot; Grok &middot; csl-atlas &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🟡 medium · 3.0d old</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3725-Grok_csl-atlas_l8-nmmb-pui-vei-acc-skd-scan_30.08.26.md and execute it.</code></pre>
+  
+</details>
+<details class="card" data-id="H3727">
+  <summary>
+    <span class="rank">#31</span>
+    <span class="pick">H3727</span>
+    <span class="dim">&middot; Grok &middot; SanskritKaraoke &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🟡 medium · 3.0d old</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3727-Grok_SanskritKaraoke_build-chapter-session-audio-run_30.08.26.md and execute it.</code></pre>
+  
+</details>
+<details class="card" data-id="H3728">
+  <summary>
+    <span class="rank">#32</span>
+    <span class="pick">H3728</span>
+    <span class="dim">&middot; Grok &middot; Uprava &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🟡 medium · 3.0d old</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3728-Grok_Uprava_science-bench-w15-baseline_30.08.26.md and execute it.</code></pre>
+  
+</details>
+<details class="card" data-id="H3730">
+  <summary>
+    <span class="rank">#33</span>
+    <span class="pick">H3730</span>
+    <span class="dim">&middot; OxAlpha &middot; Uprava &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🟡 medium · 3.0d old</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3730-OxAlpha_Uprava_restandardize-review-sheets-v0-22-0_30.08.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane oxalpha --max 1</code></pre>
+</details>
+<details class="card" data-id="H3845">
+  <summary>
+    <span class="rank">#34</span>
+    <span class="pick">H3845</span>
+    <span class="dim">&middot; Sonnet &middot; IndologyScholars &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🟡 medium · 1.0d old</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3845-Sonnet_IndologyScholars_red-branch-repair-validate-publication-build_01.09.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane sonnet --max 1</code></pre>
+</details>
+<details class="card" data-id="H3846">
+  <summary>
+    <span class="rank">#35</span>
+    <span class="pick">H3846</span>
+    <span class="dim">&middot; Sonnet &middot; RussianRamayana &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🟡 medium · 1.0d old</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3846-Sonnet_RussianRamayana_red-branch-repair-ci_01.09.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane sonnet --max 1</code></pre>
+</details>
+<details class="card" data-id="H3847">
+  <summary>
+    <span class="rank">#36</span>
+    <span class="pick">H3847</span>
+    <span class="dim">&middot; Sonnet &middot; spoken-sanskrit-corpus &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🟡 medium · 1.0d old</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3847-Sonnet_spoken-sanskrit-corpus_red-branch-repair-ci_01.09.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane sonnet --max 1</code></pre>
+</details>
+<details class="card" data-id="H3849">
+  <summary>
+    <span class="rank">#37</span>
+    <span class="pick">H3849</span>
+    <span class="dim">&middot; Sonnet &middot; CommentaryStrategies &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🟡 medium · 1.0d old</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3849-Sonnet_CommentaryStrategies_red-branch-repair-ci_01.09.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane sonnet --max 1</code></pre>
+</details>
+<details class="card" data-id="H3851">
+  <summary>
+    <span class="rank">#38</span>
+    <span class="pick">H3851</span>
+    <span class="dim">&middot; Sonnet &middot; csl-orig &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🟡 medium · 1.0d old</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3851-Sonnet_csl-orig_red-branch-repair-generate-and-sync-stardict-files_01.09.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane sonnet --max 1</code></pre>
+</details>
+<details class="card" data-id="H3872">
+  <summary>
+    <span class="rank">#39</span>
+    <span class="pick">H3872</span>
+    <span class="dim">&middot; OxAlpha &middot; claude-config &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🟡 medium</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3872-OxAlpha_claude-config_windows-hook-rows-platform-gate_02.09.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane oxalpha --max 1</code></pre>
+</details>
+<details class="card" data-id="H3873">
+  <summary>
+    <span class="rank">#40</span>
+    <span class="pick">H3873</span>
+    <span class="dim">&middot; OxAlpha &middot; Uprava &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🟡 medium</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3873-OxAlpha_Uprava_drain-go-lanes-effort-medium-session-scope_02.09.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane oxalpha --max 1</code></pre>
+</details>
+<details class="card" data-id="H3919">
+  <summary>
+    <span class="rank">#41</span>
+    <span class="pick">H3919</span>
+    <span class="dim">&middot; OxAlpha &middot; Uprava &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🟡 medium</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3919-OxAlpha_Uprava_portfolio-stats-collector-history-trends_02.09.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane oxalpha --max 1</code></pre>
+</details>
+<details class="card" data-id="H3920">
+  <summary>
+    <span class="rank">#42</span>
+    <span class="pick">H3920</span>
+    <span class="dim">&middot; OxAlpha &middot; Uprava &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🟡 medium</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3920-OxAlpha_Uprava_portfolio-stats-bookindex-github-adapters_02.09.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane oxalpha --max 1</code></pre>
+</details>
+<details class="card" data-id="H3921">
+  <summary>
+    <span class="rank">#43</span>
+    <span class="pick">H3921</span>
+    <span class="dim">&middot; OxAlpha &middot; Uprava &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🟡 medium</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3921-OxAlpha_Uprava_portfolio-stats-acceptance-weekly-scheduler_02.09.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane oxalpha --max 1</code></pre>
+</details>
+<details class="card" data-id="H3875">
+  <summary>
+    <span class="rank">#44</span>
+    <span class="pick">H3875</span>
+    <span class="dim">&middot; Sonnet &middot; AfanasiyNikitin &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🟡 medium</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3875-Sonnet_AfanasiyNikitin_en-browser-title-suffix-localization_02.09.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane sonnet --max 1</code></pre>
+</details>
+<details class="card" data-id="H3877">
+  <summary>
+    <span class="rank">#45</span>
+    <span class="pick">H3877</span>
+    <span class="dim">&middot; Sonnet &middot; SanskritRussian &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🟡 medium</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3877-Sonnet_SanskritRussian_provenance-homograph-ui_02.09.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane sonnet --max 1</code></pre>
+</details>
+<details class="card" data-id="H3879">
+  <summary>
+    <span class="rank">#46</span>
+    <span class="pick">H3879</span>
+    <span class="dim">&middot; Sonnet &middot; SKD &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🟡 medium</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3879-Sonnet_SKD_issue-1-history-retriage_02.09.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane sonnet --max 1</code></pre>
+</details>
+<details class="card" data-id="H3880">
+  <summary>
+    <span class="rank">#47</span>
+    <span class="pick">H3880</span>
+    <span class="dim">&middot; Sonnet &middot; SanskritGrammar &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🟡 medium</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3880-Sonnet_SanskritGrammar_monthly-errata-reconcile_02.09.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane sonnet --max 1</code></pre>
+</details>
+<details class="card" data-id="H3881">
+  <summary>
+    <span class="rank">#48</span>
+    <span class="pick">H3881</span>
+    <span class="dim">&middot; Sonnet &middot; sanskrit-util &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🟡 medium</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3881-Sonnet_sanskrit-util_whitneyroots-browser-iife-build_02.09.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane sonnet --max 1</code></pre>
+</details>
+<details class="card" data-id="H3883">
+  <summary>
+    <span class="rank">#49</span>
+    <span class="pick">H3883</span>
+    <span class="dim">&middot; Sonnet &middot; csl-observatory &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🟡 medium</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3883-Sonnet_csl-observatory_cologne-286-network-retry-triage_02.09.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane sonnet --max 1</code></pre>
+</details>
+<p class="label tierhead">&#128308; Hard</p>
 <details class="card" data-id="H3234">
   <summary>
-    <span class="rank">#2</span>
+    <span class="rank">#50</span>
     <span class="pick">H3234</span>
     <span class="dim">&middot; Grok &middot; Systema-Sanscriticum &middot; 🔴3</span>
     <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
@@ -91,7 +723,7 @@
 </details>
 <details class="card" data-id="H3380">
   <summary>
-    <span class="rank">#3</span>
+    <span class="rank">#51</span>
     <span class="pick">H3380</span>
     <span class="dim">&middot; OxAlpha &middot; Systema-Sanscriticum &middot; 🔴3</span>
     <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
@@ -102,96 +734,122 @@
   <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3380-OxAlpha_Systema-Sanscriticum_rusamskrtam-second-session-autoreply-trial_23.08.26.md and execute it.</code></pre>
   <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane oxalpha --max 1</code></pre>
 </details>
-<details class="card" data-id="H3451">
+<details class="card" data-id="H3284">
   <summary>
-    <span class="rank">#4</span>
-    <span class="pick">H3451</span>
-    <span class="dim">&middot; OxAlpha &middot; Uprava &middot; 🟡2</span>
+    <span class="rank">#52</span>
+    <span class="pick">H3284</span>
+    <span class="dim">&middot; Codex &middot; Uprava &middot; 🔴3</span>
     <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
   </summary>
-  <p class="sub">unblocks 2 · repo tier 2 · 🟡 medium · 9.0d old</p>
+  <p class="sub">repo tier 2 · 🔴 hard · 11.0d old</p>
   
   <p class="label">Starter &middot; click to copy</p>
-  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3451-OxAlpha_Uprava_session-runner-seam_24.08.26.md and execute it.</code></pre>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3284-Codex_Uprava_hook-dispatcher-pre-posttooluse_22.08.26.md and execute it.</code></pre>
+  
+</details>
+<details class="card" data-id="H3551">
+  <summary>
+    <span class="rank">#53</span>
+    <span class="pick">H3551</span>
+    <span class="dim">&middot; OxAlpha &middot; CommentaryStrategies &middot; 🔴3</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🔴 hard · 7.0d old</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3551-OxAlpha_CommentaryStrategies_oxalpha-30d-risk-review-gate_26.08.26.md and execute it.</code></pre>
   <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane oxalpha --max 1</code></pre>
 </details>
-<details class="card" data-id="H3784">
+<details class="card" data-id="H3553">
   <summary>
-    <span class="rank">#5</span>
-    <span class="pick">H3784</span>
-    <span class="dim">&middot; Sonnet &middot; kosha &middot; 🟡2</span>
+    <span class="rank">#54</span>
+    <span class="pick">H3553</span>
+    <span class="dim">&middot; OxAlpha &middot; claude-config &middot; 🔴3</span>
     <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
   </summary>
-  <p class="sub">repo tier 1 · 🟡 medium · 2.0d old</p>
+  <p class="sub">repo tier 2 · 🔴 hard · 7.0d old</p>
   
   <p class="label">Starter &middot; click to copy</p>
-  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3784-Sonnet_kosha_datahub-pd5-queryable-db-layers_31.08.26.md and execute it.</code></pre>
-  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane sonnet --max 1</code></pre>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3553-OxAlpha_claude-config_oxalpha-30d-risk-review-gate_26.08.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane oxalpha --max 1</code></pre>
 </details>
-<details class="card" data-id="H3925">
+<details class="card" data-id="H3857">
   <summary>
-    <span class="rank">#6</span>
-    <span class="pick">H3925</span>
-    <span class="dim">&middot; Opus &middot; kosha &middot; 🟡2</span>
+    <span class="rank">#55</span>
+    <span class="pick">H3857</span>
+    <span class="dim">&middot; Fable &middot; Uprava &middot; 🔴3</span>
     <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
   </summary>
-  <p class="sub">repo tier 1 · 🟡 medium</p>
+  <p class="sub">repo tier 2 · 🔴 hard · 1.0d old</p>
   
   <p class="label">Starter &middot; click to copy</p>
-  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3925-Opus_kosha_a3-key-rebuild-formkey-011_02.09.26.md and execute it.</code></pre>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3857-Fable_Uprava_all-articles-author-voice-pass-workflow_01.09.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane fable --max 1</code></pre>
+</details>
+<details class="card" data-id="H3871">
+  <summary>
+    <span class="rank">#56</span>
+    <span class="pick">H3871</span>
+    <span class="dim">&middot; Opus &middot; claude-config &middot; 🔴3</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🔴 hard</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3871-Opus_claude-config_mac-fixed-prefix-diet_02.09.26.md and execute it.</code></pre>
   <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane opus --max 1</code></pre>
 </details>
-<details class="card" data-id="H3647">
+<details class="card" data-id="H3874">
   <summary>
-    <span class="rank">#7</span>
-    <span class="pick">H3647</span>
-    <span class="dim">&middot; OxAlpha &middot; Uprava &middot; 🟡2</span>
+    <span class="rank">#57</span>
+    <span class="pick">H3874</span>
+    <span class="dim">&middot; Opus &middot; BookIndex &middot; 🔴3</span>
     <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
   </summary>
-  <p class="sub">unblocks 1 · repo tier 2 · 🟡 medium · 5.0d old</p>
+  <p class="sub">repo tier 2 · 🔴 hard</p>
   
   <p class="label">Starter &middot; click to copy</p>
-  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3647-OxAlpha_Uprava_roadmap-guard-foreign-wip-emit_28.08.26.md and execute it.</code></pre>
-  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane oxalpha --max 1</code></pre>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3874-Opus_BookIndex_v3-runtime-source-parity-reconcile_02.09.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane opus --max 1</code></pre>
 </details>
-<details class="card" data-id="H3517">
+<details class="card" data-id="H3876">
   <summary>
-    <span class="rank">#8</span>
-    <span class="pick">H3517</span>
-    <span class="dim">&middot; OxAlpha &middot; Uprava &middot; 🟢1</span>
+    <span class="rank">#58</span>
+    <span class="pick">H3876</span>
+    <span class="dim">&middot; Opus &middot; SanskritRussian &middot; 🔴3</span>
     <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
   </summary>
-  <p class="sub">repo tier 2 · 🟢 trivial · 8.0d old</p>
+  <p class="sub">repo tier 2 · 🔴 hard</p>
   
   <p class="label">Starter &middot; click to copy</p>
-  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3517-OxAlpha_Uprava_effort-vocab-unify-shared_25.08.26.md and execute it.</code></pre>
-  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane oxalpha --max 1</code></pre>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3876-Opus_SanskritRussian_marker-residual-morphology-recovery_02.09.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane opus --max 1</code></pre>
 </details>
-<details class="card" data-id="H3844">
+<details class="card" data-id="H3878">
   <summary>
-    <span class="rank">#9</span>
-    <span class="pick">H3844</span>
-    <span class="dim">&middot; Sonnet &middot; Uprava &middot; 🟢1</span>
+    <span class="rank">#59</span>
+    <span class="pick">H3878</span>
+    <span class="dim">&middot; Opus &middot; VisualDCS &middot; 🔴3</span>
     <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
   </summary>
-  <p class="sub">repo tier 2 · 🟢 trivial · 1.0d old</p>
+  <p class="sub">repo tier 2 · 🔴 hard</p>
   
   <p class="label">Starter &middot; click to copy</p>
-  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3844-Sonnet_Uprava_payroll-uncovered-paypal-period-flag_01.09.26.md and execute it.</code></pre>
-  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane sonnet --max 1</code></pre>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3878-Opus_VisualDCS_past-nonindicative-formation-audit_02.09.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane opus --max 1</code></pre>
 </details>
-<details class="card" data-id="H3285">
+<details class="card" data-id="H3882">
   <summary>
-    <span class="rank">#10</span>
-    <span class="pick">H3285</span>
-    <span class="dim">&middot; Codex &middot; Uprava &middot; 🟡2</span>
+    <span class="rank">#60</span>
+    <span class="pick">H3882</span>
+    <span class="dim">&middot; Opus &middot; WhitneyRoots &middot; 🔴3</span>
     <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
   </summary>
-  <p class="sub">repo tier 2 · 🟡 medium · 11.0d old</p>
+  <p class="sub">repo tier 2 · 🔴 hard</p>
   
   <p class="label">Starter &middot; click to copy</p>
-  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3285-Codex_Uprava_parallelize-repo-fanout-tools_22.08.26.md and execute it.</code></pre>
-  
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3882-Opus_WhitneyRoots_d3-genitive-plural-accent-split_02.09.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane opus --max 1</code></pre>
 </details>
 <div id="toast"></div>
 <script>
