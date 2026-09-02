@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tape Over the Sanskrit</title>
+<meta name="description" content="How the Petersburg Dictionary (Boehtlingk & Roth, 1855-1875) is translated into Russian: masking, deterministic gates, translation memory. Explained simply, in English and Russian.">
+<meta property="og:title" content="Tape Over the Sanskrit">
+<meta property="og:description" content="How the Petersburg Dictionary (Boehtlingk & Roth, 1855-1875) is translated into Russian: masking, deterministic gates, translation memory. Explained simply, in English and Russian.">
+<meta property="og:type" content="article">
+<style>
+  /* Reset the Artifact host normally supplies; the page depends on it. */
+  :root{color-scheme:light dark}
+  body{margin:0}
+  img{max-width:100%}
+  [hidden]{display:none!important}
+</style>
+</head>
+<body>
+<script>
+  (function(){
+    var l='en';
+    try{var s=localStorage.getItem('pwg-eli5-lang'); if(s==='ru'||s==='en') l=s;}catch(e){}
+    document.documentElement.setAttribute('data-lang',l);
+    document.documentElement.lang=l;
+  })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600;800&family=PT+Sans:wght@400;700&family=IBM+Plex+Mono:wght@400;600&display=swap">
+
+<style>
+  :root{
+    --ground:#EDEBE4;
+    --surface:#F8F7F2;
+    --surface-2:#FFFFFF;
+    --ink:#15201C;
+    --muted:#5E6864;
+    --line:#D2D1C6;
+    --line-soft:#E2E1D8;
+    --malachite:#1E5C4B;
+    --malachite-ink:#164437;
+    --malachite-soft:#DBE7E1;
+    --gold:#8F6320;
+    --gold-tape:#EFD69B;
+    --gold-edge:#D9B45F;
+    --on-accent:#F8F7F2;
+    --shadow:rgba(21,32,28,.10);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#0E1412;
+      --surface:#171F1C;
+      --surface-2:#1D2723;
+      --ink:#E7E9E3;
+      --muted:#94A09A;
+      --line:#2A3733;
+      --line-soft:#222D29;
+      --malachite:#5FBC9C;
+      --malachite-ink:#8FD3BB;
+      --malachite-soft:#1B322B;
+      --gold:#E4B96A;
+      --gold-tape:#4A3A18;
+      --gold-edge:#7A6027;
+      --on-accent:#0E1412;
+      --shadow:rgba(0,0,0,.42);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#0E1412;
+    --surface:#171F1C;
+    --surface-2:#1D2723;
+    --ink:#E7E9E3;
+    --muted:#94A09A;
+    --line:#2A3733;
+    --line-soft:#222D29;
+    --malachite:#5FBC9C;
+    --malachite-ink:#8FD3BB;
+    --malachite-soft:#1B322B;
+    --gold:#E4B96A;
+    --gold-tape:#4A3A18;
+    --gold-edge:#7A6027;
+    --on-accent:#0E1412;
+    --shadow:rgba(0,0,0,.42);
+  }
+
+  /* Language switch: only ever HIDES, so every shown element keeps its own display. */
+  :root[data-lang="ru"] [data-l="en"]{display:none}
+  :root[data-lang="en"] [data-l="ru"]{display:none}
+
+  *{box-sizing:border-box}
+  body{
+    background:var(--ground);
+    color:var(--ink);
+    font-family:"PT Sans","Segoe UI",system-ui,sans-serif;
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:960px;margin:0 auto;padding:0 24px}
+  section{padding:64px 0;border-top:1px solid var(--line-soft)}
+
+  h1,h2,h3{font-family:Spectral,Georgia,serif;text-wrap:balance;margin:0}
+  h1{font-weight:800;font-size:clamp(36px,6.6vw,64px);line-height:1.03;letter-spacing:-.02em}
+  h2{font-weight:800;font-size:clamp(25px,3.5vw,35px);line-height:1.13;letter-spacing:-.01em}
+  h3{font-weight:600;font-size:19px;line-height:1.25}
+  p{margin:0}
+
+  .eyebrow{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:11.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--malachite);
+  }
+  .lede{font-family:Spectral,Georgia,serif;font-size:clamp(19px,2.3vw,24px);line-height:1.45;max-width:31em}
+  .say{max-width:34em;color:var(--muted)}
+  .stack{display:flex;flex-direction:column;gap:20px}
+  .stack-s{display:flex;flex-direction:column;gap:10px}
+
+  /* ---------- language switch ---------- */
+  .topbar{display:flex;justify-content:flex-end;padding:20px 0 0}
+  .langs{display:flex;gap:5px}
+  .lang{
+    font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;letter-spacing:.08em;
+    padding:6px 12px;border-radius:3px;cursor:pointer;
+    background:transparent;color:var(--muted);border:1px solid var(--line);
+  }
+  .lang:hover{color:var(--ink);border-color:var(--malachite)}
+  .lang[aria-pressed="true"]{background:var(--malachite);border-color:var(--malachite);color:var(--on-accent)}
+  .lang:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+  /* ---------- hero ---------- */
+  header{padding:44px 0 56px}
+  .hero-grid{display:flex;flex-direction:column;gap:28px}
+  .hero-sub{font-size:19px;max-width:33em}
+  .rule{height:3px;background:var(--malachite);width:64px;border-radius:2px}
+
+  /* ---------- 106k dot field ---------- */
+  .field{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(13px,1fr));
+    gap:4px;padding:18px;background:var(--surface);
+    border:1px solid var(--line);border-radius:3px;
+  }
+  .field i{display:block;aspect-ratio:1;background:var(--malachite);opacity:.30;border-radius:1px}
+  .field i.on{opacity:1}
+  .field i.pub{background:var(--gold);opacity:1}
+  .legend{display:flex;flex-wrap:wrap;gap:18px;font-size:14px;color:var(--muted)}
+  .legend span{display:flex;align-items:center;gap:8px}
+  :root[data-lang="ru"] .legend span[data-l="en"],
+  :root[data-lang="en"] .legend span[data-l="ru"]{display:none}
+  .swatch{width:12px;height:12px;border-radius:2px;flex:none}
+  .sw-dim{background:var(--malachite);opacity:.30}
+  .sw-on{background:var(--malachite)}
+  .sw-pub{background:var(--gold)}
+
+  /* ---------- entry bench ---------- */
+  .bench{background:var(--surface);border:1px solid var(--line);border-radius:4px;box-shadow:0 1px 0 var(--shadow)}
+  .bench-head{
+    display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;
+    padding:14px 18px;border-bottom:1px solid var(--line);
+  }
+  .bench-title{font-family:"IBM Plex Mono",monospace;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  .tabs{display:flex;gap:6px}
+  .tab{
+    font-family:"IBM Plex Mono",monospace;font-size:12.5px;font-weight:600;letter-spacing:.04em;
+    padding:7px 13px;border-radius:3px;cursor:pointer;
+    background:transparent;color:var(--muted);border:1px solid var(--line);
+  }
+  .tab:hover{color:var(--ink);border-color:var(--malachite)}
+  .tab[aria-selected="true"]{background:var(--malachite);border-color:var(--malachite);color:var(--on-accent)}
+  .tab:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+  .entry{
+    margin:0;padding:22px 20px;overflow-x:auto;
+    font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:14px;line-height:2.0;white-space:pre-wrap;word-break:break-word;
+  }
+  .de,.ru{
+    background:var(--gold-tape);color:var(--gold);
+    box-shadow:0 0 0 1px var(--gold-edge) inset;
+    padding:2px 5px;border-radius:2px;font-weight:600;
+  }
+  .san{color:var(--malachite);font-weight:600}
+  .keep{color:var(--malachite);opacity:.85}
+  .cit{color:var(--muted)}
+  .tok{
+    background:var(--gold-tape);color:var(--gold);
+    box-shadow:0 0 0 1px var(--gold-edge) inset;
+    padding:2px 6px;border-radius:2px;font-weight:600;letter-spacing:.03em;
+  }
+  .bench-foot{padding:13px 18px;border-top:1px solid var(--line);font-size:14.5px;color:var(--muted)}
+
+  /* ---------- stations ---------- */
+  .line{display:flex;flex-direction:column;margin-top:8px}
+  .station{
+    display:grid;grid-template-columns:56px 1fr;gap:20px;
+    padding:22px 0;border-top:1px solid var(--line-soft);
+  }
+  .station:first-child{border-top:none}
+  .no{
+    font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:600;
+    color:var(--on-accent);background:var(--malachite);
+    width:34px;height:34px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .station-body{display:flex;flex-direction:column;gap:7px}
+  .station p{color:var(--muted);max-width:35em}
+  .fact{
+    font-family:"IBM Plex Mono",monospace;font-size:13px;
+    color:var(--malachite);font-variant-numeric:tabular-nums;
+  }
+
+  /* ---------- gate diagram ---------- */
+  .gate-wrap{background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:22px 18px;overflow-x:auto}
+  .gate-wrap svg{display:block;width:100%;min-width:520px;height:auto;color:var(--muted)}
+  .gate-wrap .box{fill:var(--malachite-soft);stroke:var(--malachite);stroke-width:1.4}
+  .gate-wrap .box-check{fill:var(--surface-2);stroke:var(--gold-edge);stroke-width:1.6}
+  .gate-wrap .box-park{fill:var(--surface-2);stroke:var(--line);stroke-width:1.4;stroke-dasharray:5 4}
+  .gate-wrap .lbl{fill:var(--malachite-ink)}
+  .gate-wrap .lbl-gold{fill:var(--gold)}
+  .gate-wrap .lbl-mut{fill:var(--muted)}
+  .gate-wrap .wire{fill:none;stroke:currentColor;stroke-width:1.6}
+  .gate-wrap .wire-dash{stroke-dasharray:5 4}
+  .gate-wrap .t-mono{font-family:"IBM Plex Mono",monospace;font-size:12.5px;font-weight:600}
+  .gate-wrap .t-body{font-family:"PT Sans",sans-serif;font-size:12px;font-weight:400}
+
+  /* ---------- scoreboard ---------- */
+  .score{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:4px;overflow:hidden}
+  .cell{background:var(--surface);padding:20px 18px;display:flex;flex-direction:column;gap:5px}
+  .num{
+    font-family:Spectral,Georgia,serif;font-weight:800;font-size:clamp(27px,3.8vw,37px);
+    line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums;
+  }
+  .num.g{color:var(--malachite)}
+  .num.o{color:var(--gold)}
+  .cap{font-size:14px;color:var(--muted);line-height:1.4}
+
+  /* ---------- lessons ---------- */
+  .lessons{display:grid;grid-template-columns:repeat(auto-fit,minmax(262px,1fr));gap:18px}
+  .lesson{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:3px;padding:18px}
+  .lesson h3{margin-bottom:6px}
+  .lesson p{font-size:15px;color:var(--muted)}
+
+  footer{padding:52px 0 72px;border-top:1px solid var(--line-soft);color:var(--muted);font-size:14.5px;display:flex;flex-direction:column;gap:14px}
+  a{color:var(--malachite)}
+  a:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+  @media (max-width:560px){
+    .station{grid-template-columns:40px 1fr;gap:14px}
+    .no{width:30px;height:30px;font-size:12px}
+  }
+</style>
+
+<div class="wrap topbar">
+  <div class="langs" role="group" aria-label="Language / Язык">
+    <button class="lang" id="lang-en" aria-pressed="true">EN</button>
+    <button class="lang" id="lang-ru" aria-pressed="false">RU</button>
+  </div>
+</div>
+
+<header class="wrap">
+  <div class="hero-grid">
+    <div class="stack-s">
+      <p class="eyebrow" data-l="en">Böhtlingk &amp; Roth · 1855–1875 · into Russian</p>
+      <p class="eyebrow" data-l="ru">Бетлингк и Рот · 1855–1875 · на русский</p>
+      <h1 data-l="en">We tape over the Sanskrit, then translate what&#39;s left.</h1>
+      <h1 data-l="ru">Мы заклеиваем санскрит и переводим то, что осталось.</h1>
+    </div>
+    <div class="rule"></div>
+    <p class="lede hero-sub" data-l="en">There is a very big German book that explains Sanskrit words. We are turning it into a Russian book. Almost all of the work is making sure the machine <em>doesn&#39;t</em> touch the parts that must stay exactly as they are.</p>
+    <p class="lede hero-sub" data-l="ru">Есть очень большая немецкая книга, которая объясняет санскритские слова. Мы делаем из нее русскую. И почти вся работа — следить, чтобы машина <em>не тронула</em> то, что обязано остаться в точности таким же.</p>
+  </div>
+</header>
+
+<section class="wrap">
+  <div class="stack">
+    <p class="eyebrow" data-l="en">1 · How big the book is</p>
+    <p class="eyebrow" data-l="ru">1 · Насколько велика книга</p>
+    <h2 data-l="en">Every square is a thousand words.</h2>
+    <h2 data-l="ru">Каждый квадрат — тысяча слов.</h2>
+    <p class="say" data-l="en">The Petersburg Dictionary has about <b>106,000</b> headwords. It is still the largest Sanskrit dictionary anyone has ever made. Nobody is going to translate that by hand — so a machine does it, and we spend all our effort checking the machine.</p>
+    <p class="say" data-l="ru">В Петербургском словаре около <b>106 000</b> заглавных слов. Он до сих пор остается самым большим санскритским словарем из когда-либо составленных. Вручную столько никто не переведет — переводит машина, а все наши силы уходят на проверку машины.</p>
+    <div class="field" id="field" aria-hidden="true"></div>
+    <div class="legend">
+      <span data-l="en"><i class="swatch sw-dim"></i> still German, waiting</span>
+      <span data-l="en"><i class="swatch sw-on"></i> translated &amp; locked in (~11,500 sense rows)</span>
+      <span data-l="en"><i class="swatch sw-pub"></i> published with a permanent name (2,392)</span>
+      <span data-l="ru"><i class="swatch sw-dim"></i> еще по-немецки, в очереди</span>
+      <span data-l="ru"><i class="swatch sw-on"></i> переведено и записано (~11 500 строк-значений)</span>
+      <span data-l="ru"><i class="swatch sw-pub"></i> опубликовано под постоянным именем (2 392)</span>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="stack">
+    <p class="eyebrow" data-l="en">2 · The whole trick, on one real entry</p>
+    <p class="eyebrow" data-l="ru">2 · Весь фокус на одной настоящей статье</p>
+    <h2 data-l="en">Gold is what the machine may change. Green must come back untouched.</h2>
+    <h2 data-l="ru">Золотое машина имеет право менять. Зеленое обязано вернуться нетронутым.</h2>
+    <p class="say" data-l="en">This is a real row from the store — sense 6 of the word <em>āpta</em>. Press the buttons and watch what moves.</p>
+    <p class="say" data-l="ru">Это настоящая строка из хранилища — значение 6 слова <em>āpta</em>. Нажимайте кнопки и смотрите, что меняется.</p>
+
+    <div class="bench">
+      <div class="bench-head">
+        <span class="bench-title" data-l="en">āpta · sense 6 · column 1-0649</span>
+        <span class="bench-title" data-l="ru">āpta · значение 6 · столбец 1-0649</span>
+        <div class="tabs" role="tablist" aria-label="Stages">
+          <button class="tab" role="tab" id="t-de" aria-controls="p-de" aria-selected="true"><span data-l="en">1 · German</span><span data-l="ru">1 · Немецкий</span></button>
+          <button class="tab" role="tab" id="t-mask" aria-controls="p-mask" aria-selected="false"><span data-l="en">2 · Taped</span><span data-l="ru">2 · Заклеено</span></button>
+          <button class="tab" role="tab" id="t-ru" aria-controls="p-ru" aria-selected="false"><span data-l="en">3 · Russian</span><span data-l="ru">3 · Русский</span></button>
+        </div>
+      </div>
+
+<pre class="entry" id="p-de" role="tabpanel" aria-labelledby="t-de">— 6) <span class="de">nahe stehend, verwandt, befreundet, vertraut</span>; <span class="keep">&lt;lex&gt;m.&lt;/lex&gt;</span> <span class="de">Verwandter, Freund, Vertrauter</span> (<span class="keep">&lt;ab&gt;vgl.&lt;/ab&gt;</span> <span class="san">{#Api#}</span>)
+<span class="cit">&lt;ls&gt;MED. t. 3&lt;/ls&gt;</span> (<span class="san">{#sva#}</span>).
+<span class="cit">&lt;ls&gt;M. 2,109.&lt;/ls&gt;</span> <span class="cit">&lt;ls n="M."&gt;8,64.&lt;/ls&gt;</span>
+<span class="cit">&lt;ls&gt;YĀJÑ. 1,28.&lt;/ls&gt;</span> <span class="cit">&lt;ls n="YĀJÑ."&gt;2,71.&lt;/ls&gt;</span>
+<span class="cit">&lt;ls&gt;RAGH. 12,52.&lt;/ls&gt;</span> <span class="san">{#mAturAptAMSca bAnDavAn#}</span>
+<span class="cit">&lt;ls&gt;M. 5,101.&lt;/ls&gt;</span> <span class="san">{#AptabanDuBiH#}</span>
+<span class="cit">&lt;ls&gt;DEV. 1,19.&lt;/ls&gt;</span></pre>
+
+<pre class="entry" id="p-mask" role="tabpanel" aria-labelledby="t-mask" hidden>— 6) <span class="de">nahe stehend, verwandt, befreundet, vertraut</span>; <span class="tok">{T1}</span> <span class="de">Verwandter, Freund, Vertrauter</span> (<span class="tok">{T2}</span> <span class="tok">{T3}</span>)
+<span class="tok">{T4}</span> (<span class="tok">{T5}</span>).
+<span class="tok">{T6}</span> <span class="tok">{T7}</span>
+<span class="tok">{T8}</span> <span class="tok">{T9}</span>
+<span class="tok">{T10}</span> <span class="tok">{T11}</span>
+<span class="tok">{T12}</span> <span class="tok">{T13}</span>
+<span class="tok">{T14}</span></pre>
+
+<pre class="entry" id="p-ru" role="tabpanel" aria-labelledby="t-ru" hidden>— 6) <span class="ru">близкий, родственный, дружественный, доверенный</span>; <span class="keep">&lt;lex&gt;m.&lt;/lex&gt;</span> <span class="ru">родственник, друг, доверенное лицо</span> (<span class="keep">&lt;ab&gt;vgl.&lt;/ab&gt;</span> <span class="san">{#Api#}</span>)
+<span class="cit">&lt;ls&gt;MED. t. 3&lt;/ls&gt;</span> (<span class="san">{#sva#}</span>).
+<span class="cit">&lt;ls&gt;M. 2,109.&lt;/ls&gt;</span> <span class="cit">&lt;ls n="M."&gt;8,64.&lt;/ls&gt;</span>
+<span class="cit">&lt;ls&gt;YĀJÑ. 1,28.&lt;/ls&gt;</span> <span class="cit">&lt;ls n="YĀJÑ."&gt;2,71.&lt;/ls&gt;</span>
+<span class="cit">&lt;ls&gt;RAGH. 12,52.&lt;/ls&gt;</span> <span class="san">{#mAturAptAMSca bAnDavAn#}</span>
+<span class="cit">&lt;ls&gt;M. 5,101.&lt;/ls&gt;</span> <span class="san">{#AptabanDuBiH#}</span>
+<span class="cit">&lt;ls&gt;DEV. 1,19.&lt;/ls&gt;</span></pre>
+
+      <p class="bench-foot" id="benchfoot">The German words are the only thing the machine is allowed to see.</p>
+    </div>
+
+    <p class="say" data-l="en">Why bother taping? Because now &ldquo;did it break anything?&rdquo; is a question a <b>computer</b> can answer. Count the tape pieces going in, count them coming out. Fourteen in, fourteen out, same order — pass. Anything else — fail. No human has to read the entry to know something went wrong.</p>
+    <p class="say" data-l="ru">Зачем вообще заклеивать? Затем, что теперь на вопрос «сломалось ли что-нибудь?» умеет отвечать <b>компьютер</b>. Посчитать наклейки на входе, посчитать на выходе. Четырнадцать вошло, четырнадцать вышло, порядок тот же — годится. Любое расхождение — брак. Человеку не нужно читать статью, чтобы узнать, что что-то пошло не так.</p>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="stack">
+    <p class="eyebrow" data-l="en">3 · The line, station by station</p>
+    <p class="eyebrow" data-l="ru">3 · Линия, станция за станцией</p>
+    <h2 data-l="en">Eight stops from German page to Russian book.</h2>
+    <h2 data-l="ru">Восемь остановок от немецкой страницы до русской книги.</h2>
+
+    <div class="line">
+      <div class="station">
+        <div><div class="no">1</div></div>
+        <div class="station-body">
+          <h3 data-l="en">Stack up all five books</h3>
+          <h3 data-l="ru">Сложить вместе все пять книг</h3>
+          <p data-l="en">The dictionary was published over twenty years and then patched four more times. We glue the main volume together with its four supplement layers, so one word arrives as one complete story.</p>
+          <p data-l="ru">Словарь выходил двадцать лет, а потом его еще четыре раза дополняли. Мы склеиваем основной корпус с четырьмя слоями дополнений, чтобы слово приходило одной цельной историей.</p>
+          <p class="fact" data-l="en">PWG · PW · SCH · PWK-Nachträge · NWS &nbsp;→&nbsp; about a third of the words have no entry in the main volume at all</p>
+          <p class="fact" data-l="ru">PWG · PW · SCH · PWK-Nachträge · NWS &nbsp;→&nbsp; примерно у трети слов в основном корпусе статьи нет вовсе</p>
+        </div>
+      </div>
+
+      <div class="station">
+        <div><div class="no">2</div></div>
+        <div class="station-body">
+          <h3 data-l="en">Cut it into cards</h3>
+          <h3 data-l="ru">Разрезать на карточки</h3>
+          <p data-l="en">One card per word, split again by sense — small enough that a mistake ruins one card and not a chapter.</p>
+          <p data-l="ru">Одна карточка на слово, дальше — деление по значениям. Настолько мелко, чтобы ошибка портила карточку, а не главу.</p>
+          <p class="fact" data-l="en">120,172 cards · plain Python · the German original is never edited</p>
+          <p class="fact" data-l="ru">120 172 карточки · обычный Python · немецкий оригинал не правится никогда</p>
+        </div>
+      </div>
+
+      <div class="station">
+        <div><div class="no">3</div></div>
+        <div class="station-body">
+          <h3 data-l="en">Put tape on everything that isn&#39;t German</h3>
+          <h3 data-l="ru">Заклеить все, что не по-немецки</h3>
+          <p data-l="en">Sanskrit, grammar labels, and hundreds of thousands of book-and-verse citations get covered with numbered stickers. The machine sees stickers, not content.</p>
+          <p data-l="ru">Санскрит, грамматические пометы и сотни тысяч ссылок на книгу и стих закрываются нумерованными наклейками. Машина видит наклейки, а не содержимое.</p>
+          <p class="fact" data-l="en">masking + packing several cards per call cut the bill by 72–90%</p>
+          <p class="fact" data-l="ru">заклейка плюс упаковка нескольких карточек в один вызов срезали счет на 72–90%</p>
+        </div>
+      </div>
+
+      <div class="station">
+        <div><div class="no">4</div></div>
+        <div class="station-body">
+          <h3 data-l="en">Look in the memory box first</h3>
+          <h3 data-l="ru">Сначала заглянуть в коробку с памятью</h3>
+          <p data-l="en">Dictionaries repeat themselves constantly. Anything already translated once — a whole card or just a phrase — is refilled for free before we pay for a single new word.</p>
+          <p data-l="ru">Словари повторяются постоянно. Все, что уже переведено однажды, — целая карточка или один оборот — подставляется бесплатно, прежде чем мы заплатим хоть за одно новое слово.</p>
+          <p class="fact" data-l="en">whole-card and fragment memory · one wave needed zero new drafting: 158k fills came from memory</p>
+          <p class="fact" data-l="ru">память на целые карточки и на фрагменты · одной волне не потребовалось ни одного нового черновика: 158 тысяч подстановок пришли из памяти</p>
+        </div>
+      </div>
+
+      <div class="station">
+        <div><div class="no">5</div></div>
+        <div class="station-body">
+          <h3 data-l="en">Test the machine before spending money</h3>
+          <h3 data-l="ru">Проверить машину до того, как платить</h3>
+          <p data-l="en">Before any paid run we send one small card we already know the right answer to. If it comes back wrong, or slowly, nothing else is allowed to start. And every run has to say up front how many calls it may make.</p>
+          <p data-l="ru">Перед любым платным запуском мы отправляем одну маленькую карточку, правильный ответ на которую уже знаем. Вернется неверно или медленно — дальше не начинается ничего. И каждый запуск обязан заранее объявить, сколько вызовов ему позволено.</p>
+          <p class="fact" data-l="en">health probe → canary card → a &ldquo;GO&rdquo; receipt that expires after 6 hours</p>
+          <p class="fact" data-l="ru">проба связи → карточка-канарейка → расписка «GO», которая сгорает через шесть часов</p>
+        </div>
+      </div>
+
+      <div class="station">
+        <div><div class="no">6</div></div>
+        <div class="station-body">
+          <h3 data-l="en">Translate, then peel the tape off</h3>
+          <h3 data-l="ru">Перевести и отклеить наклейки</h3>
+          <p data-l="en">The German prose goes to the model. The stickers come back and are swapped for the original Sanskrit and citations, mechanically. A card that takes too long is killed rather than waited on.</p>
+          <p data-l="ru">Немецкая проза уходит модели. Наклейки возвращаются и механически меняются обратно на исходный санскрит и цитаты. Карточку, которая тянется слишком долго, снимают, а не ждут.</p>
+          <p class="fact" data-l="en">one profile at a time · never more than 3 at once · a wall-clock kill gate on every call</p>
+          <p class="fact" data-l="ru">по одному профилю за раз · не больше трех одновременно · ограничение по часам на каждом вызове</p>
+        </div>
+      </div>
+
+      <div class="station">
+        <div><div class="no">7</div></div>
+        <div class="station-body">
+          <h3 data-l="en">Let the robot inspector check it</h3>
+          <h3 data-l="ru">Пустить робота-контролера</h3>
+          <p data-l="en">A stack of dumb, fast checks with no opinions: are all the stickers back, did a sense go missing, did two senses come back identical, is there German left in the Russian? A card that fails goes back in the queue. Nothing is ever quietly dropped.</p>
+          <p data-l="ru">Стопка тупых и быстрых проверок безо всякого мнения: все ли наклейки на месте, не пропало ли значение, не вернулись ли два значения одинаковыми, не остался ли немецкий внутри русского. Не прошедшая карточка возвращается в очередь. Втихую не выбрасывается ничего.</p>
+          <p class="fact" data-l="en">zero-AI gates · a check that examined nothing is counted as a failure, not a pass</p>
+          <p class="fact" data-l="ru">проверки безо всякого ИИ · проверка, которая ничего не осмотрела, считается провалом, а не успехом</p>
+        </div>
+      </div>
+
+      <div class="station">
+        <div><div class="no">8</div></div>
+        <div class="station-body">
+          <h3 data-l="en">Lock it in the book, then give it away</h3>
+          <h3 data-l="ru">Запереть в книге и отдать людям</h3>
+          <p data-l="en">Only one program is allowed to write to the store, one card at a time, keeping a receipt for every change. Rows a human has already approved survive everything. The clean part gets published under a permanent name anyone can cite.</p>
+          <p data-l="ru">Писать в хранилище имеет право только одна программа, по одной карточке за раз, с распиской на каждое изменение. Строки, которые человек уже утвердил, переживают что угодно. Чистая часть выходит под постоянным именем, на которое можно сослаться.</p>
+          <p class="fact" data-l="en">4 standard formats · CC BY 4.0 · DOI 10.5281/zenodo.21932901</p>
+          <p class="fact" data-l="ru">4 стандартных формата · CC BY 4.0 · DOI 10.5281/zenodo.21932901</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="stack">
+    <p class="eyebrow" data-l="en">4 · What happens when a card fails</p>
+    <p class="eyebrow" data-l="ru">4 · Что происходит с непрошедшей карточкой</p>
+    <h2 data-l="en">Nothing gets thrown away. It goes round again.</h2>
+    <h2 data-l="ru">Ничего не выбрасывается. Все идет на второй круг.</h2>
+
+    <div class="gate-wrap">
+      <svg viewBox="0 0 720 240" role="img" aria-label="A card goes to the inspector; clean cards are locked in the store and feed the memory box, failed cards return to the queue, and unfixable ones are parked on a labelled shelf.">
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0 0 L10 5 L0 10 z" fill="currentColor"/>
+          </marker>
+        </defs>
+        <g>
+          <path class="wire" d="M120 60 H190" marker-end="url(#ar)"/>
+          <path class="wire" d="M320 60 H390" marker-end="url(#ar)"/>
+          <path class="wire" d="M258 92 V140 H120 V88" marker-end="url(#ar)"/>
+          <path class="wire wire-dash" d="M258 92 V186 H600 V88" marker-end="url(#ar)"/>
+          <path class="wire" d="M520 60 H586" marker-end="url(#ar)"/>
+        </g>
+
+        <g>
+          <rect class="box" x="20" y="38" width="100" height="44" rx="3"/>
+          <rect class="box-check" x="196" y="34" width="124" height="52" rx="3"/>
+          <rect class="box" x="396" y="38" width="124" height="44" rx="3"/>
+          <rect class="box" x="592" y="38" width="108" height="44" rx="3"/>
+          <rect class="box-park" x="496" y="164" width="204" height="42" rx="3"/>
+        </g>
+
+        <g data-l="en">
+          <g class="t-mono">
+            <text class="lbl" x="70" y="65" text-anchor="middle">queue</text>
+            <text class="lbl-gold" x="258" y="56" text-anchor="middle">inspector</text>
+            <text class="lbl-mut t-body" x="258" y="74" text-anchor="middle">no AI, no opinions</text>
+            <text class="lbl" x="458" y="65" text-anchor="middle">the store</text>
+            <text class="lbl" x="646" y="65" text-anchor="middle">memory box</text>
+            <text class="lbl-mut" x="598" y="190" text-anchor="middle">parked shelf, labelled</text>
+          </g>
+          <g class="t-body lbl-mut">
+            <text x="346" y="32">clean</text>
+            <text x="144" y="157">failed a check — try again</text>
+            <text x="286" y="203">can&#39;t be fixed yet — never deleted</text>
+          </g>
+        </g>
+
+        <g data-l="ru">
+          <g class="t-mono">
+            <text class="lbl" x="70" y="65" text-anchor="middle">очередь</text>
+            <text class="lbl-gold" x="258" y="56" text-anchor="middle">контролер</text>
+            <text class="lbl-mut t-body" x="258" y="74" text-anchor="middle">без ИИ, без мнений</text>
+            <text class="lbl" x="458" y="65" text-anchor="middle">хранилище</text>
+            <text class="lbl" x="646" y="65" text-anchor="middle">память</text>
+            <text class="lbl-mut" x="598" y="190" text-anchor="middle">полка ожидания, с ярлыком</text>
+          </g>
+          <g class="t-body lbl-mut">
+            <text x="340" y="32">чисто</text>
+            <text x="140" y="157">не прошла проверку — заново</text>
+            <text x="276" y="203">пока не чинится — но не удаляется</text>
+          </g>
+        </g>
+      </svg>
+    </div>
+
+    <p class="say" data-l="en">And there is a second, stricter inspector that we cannot argue with: a random sample of finished cards is sent to a different model that had nothing to do with making them. In the first big wave it found serious errors in 2.5% of cards. The rule was 1%. So that whole wave was <b>held back from publication</b> and rebuilt.</p>
+    <p class="say" data-l="ru">Есть и второй контролер, строже, и с ним не поспоришь: случайная выборка готовых карточек уходит другой модели, которая к их изготовлению отношения не имела. В первой большой волне она нашла серьезные ошибки в 2,5% карточек. Порог был 1%. Всю волну <b>сняли с публикации</b> и переделали.</p>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="stack">
+    <p class="eyebrow" data-l="en">5 · Where it stands today</p>
+    <p class="eyebrow" data-l="ru">5 · Как обстоят дела сегодня</p>
+    <h2 data-l="en">The counts, as measured.</h2>
+    <h2 data-l="ru">Цифры, как они измерены.</h2>
+    <div class="score">
+      <div class="cell">
+        <span class="num" data-l="en">120,172</span><span class="num" data-l="ru">120 172</span>
+        <span class="cap" data-l="en">cards cut from the five layers</span>
+        <span class="cap" data-l="ru">карточек нарезано из пяти слоев</span>
+      </div>
+      <div class="cell">
+        <span class="num g" data-l="en">~11,500</span><span class="num g" data-l="ru">~11 500</span>
+        <span class="cap" data-l="en">sense rows translated and locked in the store</span>
+        <span class="cap" data-l="ru">строк-значений переведено и записано в хранилище</span>
+      </div>
+      <div class="cell">
+        <span class="num o" data-l="en">2,392</span><span class="num o" data-l="ru">2 392</span>
+        <span class="cap" data-l="en">records clean enough to publish and cite</span>
+        <span class="cap" data-l="ru">записей достаточно чисты, чтобы публиковать и цитировать</span>
+      </div>
+      <div class="cell">
+        <span class="num" data-l="en">96–98.5%</span><span class="num" data-l="ru">96–98,5%</span>
+        <span class="cap" data-l="en">faithful, on independently judged gold samples</span>
+        <span class="cap" data-l="ru">точности на золотых выборках при независимой оценке</span>
+      </div>
+      <div class="cell">
+        <span class="num">0</span>
+        <span class="cap" data-l="en">fields lost across the four export formats</span>
+        <span class="cap" data-l="ru">полей потеряно при выгрузке в четыре формата</span>
+      </div>
+      <div class="cell">
+        <span class="num" data-l="en">1.09M</span><span class="num" data-l="ru">1,09 млн</span>
+        <span class="cap" data-l="en">Sanskrit–Russian pairs in the memory box</span>
+        <span class="cap" data-l="ru">санскритско-русских пар в памяти переводов</span>
+      </div>
+    </div>
+    <p class="say" data-l="en">Two counts to keep honest about: 106,000 is the size of the book, and ~11,500 is what is finished. This is a working line, not a finished translation.</p>
+    <p class="say" data-l="ru">Две цифры, о которых надо говорить честно: 106 000 — это размер книги, а ~11 500 — то, что готово. Перед вами работающая линия, а не законченный перевод.</p>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="stack">
+    <p class="eyebrow" data-l="en">6 · What the failures taught us</p>
+    <p class="eyebrow" data-l="ru">6 · Чему научили провалы</p>
+    <h2 data-l="en">Every rule here is a scar.</h2>
+    <h2 data-l="ru">Каждое правило здесь — это шрам.</h2>
+    <div class="lessons">
+      <div class="lesson">
+        <h3 data-l="en">Don&#39;t run wide</h3>
+        <h3 data-l="ru">Не разгоняться вширь</h3>
+        <p data-l="en">Eighteen workers at once produced 117 empty answers. The standing rule is now three at most.</p>
+        <p data-l="ru">Восемнадцать работников разом дали 117 пустых ответов. Теперь действует правило: не больше трех.</p>
+      </div>
+      <div class="lesson">
+        <h3 data-l="en">The cost was the greeting, not the words</h3>
+        <h3 data-l="ru">Платили за приветствие, а не за слова</h3>
+        <p data-l="en">Most of the bill was the instructions repeated on every single call. Packing several cards into one call removed it.</p>
+        <p data-l="ru">Большую часть счета составляли инструкции, повторявшиеся в каждом вызове. Упаковка нескольких карточек в один вызов их убрала.</p>
+      </div>
+      <div class="lesson">
+        <h3 data-l="en">Suspect the checker, not the card</h3>
+        <h3 data-l="ru">Подозревай проверку, а не карточку</h3>
+        <p data-l="en">One word&#39;s 127 &ldquo;defects&rdquo; turned out to be three bugs in the checking code. The cards had been fine all along.</p>
+        <p data-l="ru">127 «дефектов» у одного слова оказались тремя ошибками в самом проверяющем коде. С карточками все было в порядке с самого начала.</p>
+      </div>
+      <div class="lesson">
+        <h3 data-l="en">A check that saw nothing is a failure</h3>
+        <h3 data-l="ru">Проверка, которая ничего не увидела, — это провал</h3>
+        <p data-l="en">A gate that inspects an empty list will happily report success. That now counts as a hard failure.</p>
+        <p data-l="ru">Проверка, осматривающая пустой список, радостно отчитается об успехе. Теперь это засчитывается как жесткий провал.</p>
+      </div>
+      <div class="lesson">
+        <h3 data-l="en">Teaching grammar in the prompt made it worse</h3>
+        <h3 data-l="ru">Грамматика внутри запроса делала только хуже</h3>
+        <p data-l="en">We tested it properly and it lost. The grammar layer is kept as data beside the translation instead.</p>
+        <p data-l="ru">Мы проверили это как следует, и вариант проиграл. Грамматический слой лежит данными рядом с переводом, а не внутри запроса.</p>
+      </div>
+      <div class="lesson">
+        <h3 data-l="en">Humans go at gates, not afterwards</h3>
+        <h3 data-l="ru">Человек включается на воротах, а не потом</h3>
+        <p data-l="en">People review through a vote sheet at defined points. Nobody silently edits the store behind the machine&#39;s back.</p>
+        <p data-l="ru">Люди голосуют по листу в заранее назначенных точках. Никто не правит хранилище втихую за спиной у машины.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap">
+  <p data-l="en">The one sentence, if you keep nothing else: <b>the hard part is not translating German — it is proving, mechanically and cheaply, that a hundred thousand entries came out the other side with their Sanskrit intact.</b></p>
+  <p data-l="ru">Одна фраза, если больше ничего не запоминать: <b>трудность не в том, чтобы перевести немецкий, а в том, чтобы механически и дешево доказать, что сто тысяч статей вышли с другой стороны с целым санскритом.</b></p>
+  <p data-l="en">Source of record: the audited pipeline diagram and README in <a href="https://github.com/gasyoun/SanskritLexicography/blob/master/RussianTranslation/DIAGRAM_PWG_RU_PIPELINE.md">SanskritLexicography / RussianTranslation</a>. Counts measured 02-09-2026; the store keeps moving, so re-measure before citing.</p>
+  <p data-l="ru">Источник истины: проверенная схема конвейера и README в <a href="https://github.com/gasyoun/SanskritLexicography/blob/master/RussianTranslation/DIAGRAM_PWG_RU_PIPELINE.md">SanskritLexicography / RussianTranslation</a>. Цифры измерены 02-09-2026; хранилище продолжает расти, так что перед цитированием измеряйте заново.</p>
+  <p data-l="en">German source text: Böhtlingk &amp; Roth, <em>Sanskrit-Wörterbuch</em> (St. Petersburg, 1855–1875), Public Domain Mark 1.0. Russian renderings: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. The <em>āpta</em> entry is shown as a single specimen.</p>
+  <p data-l="ru">Немецкий источник: Böhtlingk &amp; Roth, <em>Sanskrit-Wörterbuch</em> (СПб., 1855–1875), Public Domain Mark 1.0. Русские переводы: <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Статья <em>āpta</em> приведена как единичный образец.</p>
+  <p><em>Dr. Mārcis Gasūns</em></p>
+</footer>
+
+<script>
+  // 106 squares = 106,000 headwords. ~11.5k done, ~2.4k published.
+  (function(){
+    var f = document.getElementById('field');
+    if(!f) return;
+    var frag = document.createDocumentFragment();
+    for(var k=0;k<106;k++){
+      var i = document.createElement('i');
+      if(k < 3) i.className = 'pub';
+      else if(k < 12) i.className = 'on';
+      frag.appendChild(i);
+    }
+    f.appendChild(frag);
+  })();
+
+  // Language switch
+  (function(){
+    var btns = {en:document.getElementById('lang-en'), ru:document.getElementById('lang-ru')};
+    function setLang(l){
+      document.documentElement.setAttribute('data-lang', l);
+      document.documentElement.lang = l;
+      btns.en.setAttribute('aria-pressed', l==='en' ? 'true':'false');
+      btns.ru.setAttribute('aria-pressed', l==='ru' ? 'true':'false');
+      try{ localStorage.setItem('pwg-eli5-lang', l); }catch(e){}
+      if(window.__refreshBenchNote) window.__refreshBenchNote();
+    }
+    btns.en.addEventListener('click', function(){ setLang('en'); });
+    btns.ru.addEventListener('click', function(){ setLang('ru'); });
+    setLang(document.documentElement.getAttribute('data-lang') || 'en');
+  })();
+
+  // Masking demo
+  (function(){
+    var notes = {
+      'p-de':  {en:'The German words are the only thing the machine is allowed to see.',
+                ru:'Немецкие слова — единственное, что машине вообще разрешено видеть.'},
+      'p-mask':{en:'Fourteen stickers went in. Fourteen must come back, in order — that is the whole quality check.',
+                ru:'Внутрь ушло четырнадцать наклеек. Четырнадцать обязаны вернуться, и в том же порядке, — вот и вся проверка качества.'},
+      'p-ru':  {en:'Only the gold changed. Every citation and every Sanskrit word is byte-for-byte identical.',
+                ru:'Изменилось только золотое. Каждая цитата и каждое санскритское слово совпадают побайтово.'}
+    };
+    var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+    var foot = document.getElementById('benchfoot');
+    var current = 'p-de';
+
+    function paintNote(){
+      var l = document.documentElement.getAttribute('data-lang') === 'ru' ? 'ru' : 'en';
+      if(foot && notes[current]) foot.textContent = notes[current][l];
+    }
+    window.__refreshBenchNote = paintNote;
+
+    function show(tab){
+      tabs.forEach(function(t){
+        var sel = (t === tab);
+        t.setAttribute('aria-selected', sel ? 'true':'false');
+        var panel = document.getElementById(t.getAttribute('aria-controls'));
+        if(panel) panel.hidden = !sel;
+      });
+      current = tab.getAttribute('aria-controls');
+      paintNote();
+    }
+
+    tabs.forEach(function(t, idx){
+      t.addEventListener('click', function(){ show(t); });
+      t.addEventListener('keydown', function(e){
+        var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if(!d) return;
+        e.preventDefault();
+        var next = tabs[(idx + d + tabs.length) % tabs.length];
+        next.focus(); show(next);
+      });
+    });
+    paintNote();
+  })();
+</script>
+</body>
+</html>
