@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="refresh" content="300">
+<title>Fruit top picks</title>
+<style>
+  :root { color-scheme: light dark; --bg: #fff; --fg: #1a1a1a; --muted: #888; --card: #8881;
+           --line: #ccc4; --accent: #2563eb; --done: #15803d; --donebg: #15803d1a; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #0f0f0f; --fg: #eee; --muted: #999; --card: #ffffff10; --line: #ffffff26; }
+  }
+  * { box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+          max-width: 640px; margin: 0 auto 4rem; padding: 0 1.25rem; line-height: 1.5;
+          background: var(--bg); color: var(--fg); }
+  h1 { font-size: 1.1rem; font-weight: 600; margin: 1.5rem 0 0.25rem; }
+  .meta { color: var(--muted); font-size: 0.8rem; margin-bottom: 1rem; }
+  .bar { position: sticky; top: 0; z-index: 5; display: flex; align-items: center; gap: 0.6rem;
+          background: var(--bg); padding: 0.6rem 0; border-bottom: 1px solid var(--line);
+          margin-bottom: 1rem; font-size: 0.85rem; }
+  #progress { font-weight: 600; }
+  .bar button { font: inherit; font-size: 0.8rem; padding: 0.3rem 0.6rem; border-radius: 6px;
+                 border: 1px solid var(--line); background: transparent; color: var(--fg); cursor: pointer; }
+  .bar button:hover { border-color: var(--accent); color: var(--accent); }
+  .bar .spacer { flex: 1; }
+  #storewarn { color: #b45309; font-size: 0.8rem; margin: -0.5rem 0 1rem; }
+  .card { border: 1px solid var(--line); border-radius: 10px; padding: 0.6rem 1rem; margin-bottom: 0.6rem; }
+  .card.done { background: var(--donebg); border-color: var(--done); }
+  .card summary { cursor: pointer; list-style: revert; display: flex; align-items: center; flex-wrap: wrap; gap: 0.3rem; }
+  .rank { color: var(--muted); font-variant-numeric: tabular-nums; margin-right: 0.2rem; }
+  .pick { font-size: 1.05rem; font-weight: 700; }
+  .dim { color: var(--muted); font-size: 0.85rem; }
+  .sub { color: var(--muted); margin: 0.6rem 0 0.5rem; }
+  .label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em;
+            color: var(--muted); margin: 0.8rem 0 0.25rem; }
+  pre { background: var(--card); border-radius: 6px; padding: 0.6rem 0.8rem; overflow-x: auto;
+         font-size: 0.85rem; white-space: pre-wrap; word-break: break-word; }
+  pre.copyable { cursor: pointer; }
+  pre.copyable:hover { outline: 1px solid var(--accent); }
+  .warn { color: #b45309; font-size: 0.85rem; }
+  a { color: inherit; }
+  .donebtn { margin-left: auto; font: inherit; font-size: 0.75rem; padding: 0.2rem 0.55rem;
+              border-radius: 999px; border: 1px solid var(--line); background: transparent;
+              color: var(--muted); cursor: pointer; }
+  .card.done .donebtn { border-color: var(--done); color: var(--done); }
+  .donebtn:hover { border-color: var(--accent); color: var(--accent); }
+  #toast { position: fixed; bottom: 1.25rem; left: 50%; transform: translateX(-50%) translateY(120%);
+            background: var(--fg); color: var(--bg); padding: 0.5rem 0.9rem; border-radius: 8px;
+            font-size: 0.8rem; opacity: 0; transition: transform 0.15s, opacity 0.15s; pointer-events: none; }
+  #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+<h1>Fruit &mdash; top picks right now</h1>
+<p class="meta">generated 2026-09-02T11:29:25.711854+00:00 UTC &middot; page rendered 2026-09-02T11:37:42Z UTC &middot; auto-refreshes every 5 min</p>
+<div class="bar">
+  <span id="progress">0 / 0 done</span>
+  <span class="spacer"></span>
+  <button type="button" id="copylink">copy progress link</button>
+  <button type="button" id="reset">reset</button>
+</div>
+<p id="storewarn" hidden>&#9888;&#65039; local storage is blocked here (private window?) -- done state won't persist; use "copy progress link" instead.</p>
+<p class="warn">&#9888;&#65039; close-loop sweep degraded (H3125; generated 2026-09-02T10:04:01Z); 40 search failure(s); 0 rows verified this pass -- carry-forward only</p>
+<details class="card" data-id="H3823" open>
+  <summary>
+    <span class="rank">#1</span>
+    <span class="pick">H3823</span>
+    <span class="dim">&middot; Opus &middot; Systema-Sanscriticum &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 0 · 🟡 medium · 1.0d old</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3823-Opus_Systema-Sanscriticum_bind-yoga-sutra-recordings-course-327_01.09.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane opus --max 1</code></pre>
+</details>
+<details class="card" data-id="H3234">
+  <summary>
+    <span class="rank">#2</span>
+    <span class="pick">H3234</span>
+    <span class="dim">&middot; Grok &middot; Systema-Sanscriticum &middot; 🔴3</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 0 · 🔴 hard · 12.0d old</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3234-Grok_Systema-Sanscriticum_ollama-gpu-experiment-oct1_21.08.26.md and execute it.</code></pre>
+  
+</details>
+<details class="card" data-id="H3380">
+  <summary>
+    <span class="rank">#3</span>
+    <span class="pick">H3380</span>
+    <span class="dim">&middot; OxAlpha &middot; Systema-Sanscriticum &middot; 🔴3</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 0 · 🔴 hard · 10.0d old</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3380-OxAlpha_Systema-Sanscriticum_rusamskrtam-second-session-autoreply-trial_23.08.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane oxalpha --max 1</code></pre>
+</details>
+<details class="card" data-id="H3451">
+  <summary>
+    <span class="rank">#4</span>
+    <span class="pick">H3451</span>
+    <span class="dim">&middot; OxAlpha &middot; Uprava &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">unblocks 2 · repo tier 2 · 🟡 medium · 9.0d old</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3451-OxAlpha_Uprava_session-runner-seam_24.08.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane oxalpha --max 1</code></pre>
+</details>
+<details class="card" data-id="H3784">
+  <summary>
+    <span class="rank">#5</span>
+    <span class="pick">H3784</span>
+    <span class="dim">&middot; Sonnet &middot; kosha &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 1 · 🟡 medium · 2.0d old</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3784-Sonnet_kosha_datahub-pd5-queryable-db-layers_31.08.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane sonnet --max 1</code></pre>
+</details>
+<details class="card" data-id="H3925">
+  <summary>
+    <span class="rank">#6</span>
+    <span class="pick">H3925</span>
+    <span class="dim">&middot; Opus &middot; kosha &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 1 · 🟡 medium</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3925-Opus_kosha_a3-key-rebuild-formkey-011_02.09.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane opus --max 1</code></pre>
+</details>
+<details class="card" data-id="H3647">
+  <summary>
+    <span class="rank">#7</span>
+    <span class="pick">H3647</span>
+    <span class="dim">&middot; OxAlpha &middot; Uprava &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">unblocks 1 · repo tier 2 · 🟡 medium · 5.0d old</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3647-OxAlpha_Uprava_roadmap-guard-foreign-wip-emit_28.08.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane oxalpha --max 1</code></pre>
+</details>
+<details class="card" data-id="H3517">
+  <summary>
+    <span class="rank">#8</span>
+    <span class="pick">H3517</span>
+    <span class="dim">&middot; OxAlpha &middot; Uprava &middot; 🟢1</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🟢 trivial · 8.0d old</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3517-OxAlpha_Uprava_effort-vocab-unify-shared_25.08.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane oxalpha --max 1</code></pre>
+</details>
+<details class="card" data-id="H3844">
+  <summary>
+    <span class="rank">#9</span>
+    <span class="pick">H3844</span>
+    <span class="dim">&middot; Sonnet &middot; Uprava &middot; 🟢1</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🟢 trivial · 1.0d old</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3844-Sonnet_Uprava_payroll-uncovered-paypal-period-flag_01.09.26.md and execute it.</code></pre>
+  <p class="label">Drain</p><pre class="copyable"><code>python tools/handoff.py drain --lane sonnet --max 1</code></pre>
+</details>
+<details class="card" data-id="H3285">
+  <summary>
+    <span class="rank">#10</span>
+    <span class="pick">H3285</span>
+    <span class="dim">&middot; Codex &middot; Uprava &middot; 🟡2</span>
+    <button type="button" class="donebtn" title="mark this pick done or not done">mark done</button>
+  </summary>
+  <p class="sub">repo tier 2 · 🟡 medium · 11.0d old</p>
+  
+  <p class="label">Starter &middot; click to copy</p>
+  <pre class="copyable"><code>Read /Users/mac/Documents/GitHub/Uprava/handoffs/H3285-Codex_Uprava_parallelize-repo-fanout-tools_22.08.26.md and execute it.</code></pre>
+  
+</details>
+<div id="toast"></div>
+<script>
+(function () {
+  var STORE_KEY = "fruit-status-done";
+  var storageOK = true;
+  try {
+    localStorage.setItem("__fruit_probe__", "1");
+    localStorage.removeItem("__fruit_probe__");
+  } catch (e) { storageOK = false; }
+
+  var done = new Set();
+  try {
+    if (storageOK) {
+      var raw = localStorage.getItem(STORE_KEY);
+      if (raw) JSON.parse(raw).forEach(function (id) { done.add(id); });
+    }
+  } catch (e) {}
+  var hash = location.hash.replace(/^#/, "");
+  if (hash.indexOf("d=") === 0) {
+    hash.slice(2).split(",").filter(Boolean).forEach(function (id) { done.add(id); });
+  }
+
+  var cards = Array.prototype.slice.call(document.querySelectorAll(".card"));
+  var total = cards.length;
+
+  function save() {
+    try {
+      if (storageOK) localStorage.setItem(STORE_KEY, JSON.stringify(Array.from(done)));
+    } catch (e) {}
+    var hashVal = Array.from(done).join(",");
+    try {
+      history.replaceState(null, "", location.pathname + (hashVal ? "#d=" + hashVal : ""));
+    } catch (e) {}
+    updateBar();
+  }
+
+  function updateBar() {
+    var n = 0;
+    cards.forEach(function (c) {
+      var id = c.getAttribute("data-id");
+      var isDone = done.has(id);
+      c.classList.toggle("done", isDone);
+      var btn = c.querySelector(".donebtn");
+      if (btn) btn.textContent = isDone ? "\u2713 done" : "mark done";
+      if (isDone) n++;
+    });
+    var p = document.getElementById("progress");
+    if (p) p.textContent = n + " / " + total + " done";
+    var warn = document.getElementById("storewarn");
+    if (warn) warn.hidden = storageOK;
+  }
+
+  cards.forEach(function (c) {
+    var id = c.getAttribute("data-id");
+    var btn = c.querySelector(".donebtn");
+    if (btn) {
+      btn.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (done.has(id)) done.delete(id); else done.add(id);
+        save();
+      });
+    }
+  });
+
+  var resetBtn = document.getElementById("reset");
+  if (resetBtn) {
+    resetBtn.addEventListener("click", function () {
+      done.clear();
+      save();
+      showToast("reset");
+    });
+  }
+
+  var copyLinkBtn = document.getElementById("copylink");
+  if (copyLinkBtn) {
+    copyLinkBtn.addEventListener("click", function () {
+      var hashVal = Array.from(done).join(",");
+      var url = location.origin + location.pathname + (hashVal ? "#d=" + hashVal : "");
+      copyText(url, "link copied");
+    });
+  }
+
+  document.querySelectorAll("pre.copyable").forEach(function (pre) {
+    pre.addEventListener("click", function () {
+      copyText(pre.textContent, "copied");
+    });
+  });
+
+  function copyText(text, msg) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () { showToast(msg); }, function () { fallback(text, msg); });
+    } else {
+      fallback(text, msg);
+    }
+  }
+
+  function fallback(text, msg) {
+    var ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    try { document.execCommand("copy"); showToast(msg); } catch (e) {}
+    document.body.removeChild(ta);
+  }
+
+  var toastTimer;
+  function showToast(msg) {
+    var t = document.getElementById("toast");
+    if (!t) return;
+    t.textContent = msg;
+    t.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { t.classList.remove("show"); }, 1200);
+  }
+
+  updateBar();
+})();
+</script>
+</body>
+</html>
