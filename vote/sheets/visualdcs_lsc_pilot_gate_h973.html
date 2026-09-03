@@ -63,6 +63,23 @@
   .screening-banner code { font-size: 11px; color: var(--accent); }
   .screening-banner .sc-d { color: var(--defer); font-weight: 700; }
 
+  .idchip { font-family:ui-monospace,Consolas,monospace; font-size:11px; color:var(--muted);
+            background:var(--panel2); border:1px solid var(--border); padding:2px 7px;
+            border-radius:6px; user-select:all; }
+  .card header { gap:10px; }
+  .hw a.hwlink { color:inherit; text-decoration:underline dotted; text-underline-offset:3px; }
+  .hw a.hwlink:hover { color:var(--accent); }
+  mark.hl { background:#453407; color:#ffd75e; padding:0 2px; border-radius:3px; }
+  .savebanner { max-width:980px; margin:10px auto 0; padding:8px 20px; font-size:12.5px; }
+  .savebanner code { background:var(--panel2); border:1px solid var(--border); padding:1px 6px; border-radius:5px; }
+  .ratingrow { display:flex; align-items:center; gap:6px; margin-top:10px; flex-wrap:wrap; }
+  .ratinglabel { font-size:12px; color:var(--muted); margin-right:4px; }
+  button.rate { border:1px solid var(--border); background:var(--panel2); color:var(--text);
+                width:34px; padding:6px 0; border-radius:6px; cursor:pointer; font-size:13px; }
+  button.rate.active { background:var(--accent); border-color:var(--accent); color:#fff; }
+  button.rate.active.below { background:var(--defer); border-color:var(--defer); color:#2a1d02; }
+  .rate-state { font-size:12px; color:var(--muted); margin-left:4px; }
+  .badge-typology { border:1px solid var(--accent); color:var(--text); font-weight:600; }
   :root { --fs:1.5; }
   header.top h1 { font-size:calc(16px * var(--fs)) !important; }
   header.top .sub { font-size:calc(12px * var(--fs)) !important; }
@@ -151,6 +168,7 @@
 <div class="voteprog" id="voteProg"><span id="voteProgText"></span><span class="bar"><i id="voteProgBar"></i></span><span class="eta" id="voteProgEta"></span></div>
 </header>
 <aside class="screening-banner" role="status" data-screening="1"><strong>Screening (H1649)</strong> — only human-required cards are below. Off the plate: <span class="sc-a">deterministic 0</span> · <span class="sc-b">dataset lookup 0</span> · <span class="sc-c">agent adjudication 0</span> (total screened 0). Human cards: <span class="sc-d">3</span>. Evidence: <code>https://github.com/gasyoun/VisualDCS/blob/main/derived-lsc/README.md</code>. Rules: новый метод — заканчивается на человеческих воротах: вердикт по пилоту, формулировка клейма и решение о разметке — только MG, машинный скрининг неприменим по построению (H973 guardrails).</aside>
+<div class="savebanner">&#128229; Your export downloads as <code>visualdcs-lsc-pilot-gate-h973_decisions.json</code> &rarr; save it to <code>review/visualdcs-lsc-pilot-gate-h973_decisions.json</code> (the <code>sheet_id</code> inside the file is <code>visualdcs-lsc-pilot-gate-h973</code> — that is how a later session knows which sheet these decisions belong to).</div>
 <div class="toolbar">
   <button data-submit="1" class="dl" id="downloadBtn">Download decisions.json</button><button data-submit="1" class="dl handin" id="handinBtn" title="stop the clock and export the votes made so far; the rest stay saved in this browser">Hand in what I got</button><span class="handin-said" id="handinSaid"></span><button data-submit="1" class="dl" id="saveBtn" style="display:none;margin-left:8px">Save to folder…</button>
   <div class="fsctl" title="text size — persists in this browser"><button type="button" id="fsDown" aria-label="smaller text">A&minus;</button><span class="fsval" id="fsVal"></span><button type="button" id="fsUp" aria-label="larger text">A+</button></div>
