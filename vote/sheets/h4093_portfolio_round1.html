@@ -37,7 +37,7 @@
   <div>
     <h1>H4093 — обновление портфельных дорожных карт: раунд 1</h1>
     <div class="sub">Generated 04-09-2026 &middot; sheet_id <code>uprava-portfolio-roadmap-renewal_round1-goals-40</code>
-      &middot; 40 items in 4 packs &middot; 40 решений о целях и приоритетах · 13 репозиториев · доход, санскритские исследования и педагогика</div>
+      &middot; 40 items in 4 packs &middot; 40 решений · 12 активных репозиториев + фиксированная низкоприоритетная граница BookIndex · доход, исследования и педагогика</div>
   </div>
 </header>
 <main>
@@ -59,7 +59,7 @@
 (function () {
   var SHEET_ID = "uprava-portfolio-roadmap-renewal_round1-goals-40";
   var STORE_KEY = 'review-sheet:' + SHEET_ID;
-  var PACKS = [{"name": "01", "ids": ["P00", "SYS-01", "SYS-02", "SYS-03", "ORS-01", "ORS-02", "ORS-03", "SAM-01", "SAM-02", "SAM-03"]}, {"name": "02", "ids": ["BKI-01", "BKI-02", "BKI-03", "SL-01", "SL-02", "SL-03", "COM-01", "COM-02", "COM-03", "OBS-01"]}, {"name": "03", "ids": ["OBS-02", "OBS-03", "KOS-01", "KOS-02", "KOS-03", "SG-01", "SG-02", "SG-03", "MAN-01", "MAN-02"]}, {"name": "04", "ids": ["MAN-03", "KAR-01", "KAR-02", "KAR-03", "VDCS-01", "VDCS-02", "VDCS-03", "RR-01", "RR-02", "RR-03"]}];
+  var PACKS = [{"name": "01", "ids": ["P00", "SYS-01", "SYS-02", "SYS-03", "ORS-01", "ORS-02", "ORS-03", "SAM-01", "SAM-02", "SAM-03"]}, {"name": "02", "ids": ["SYS-04", "KAR-04", "RES-01", "SL-01", "SL-02", "SL-03", "COM-01", "COM-02", "COM-03", "OBS-01"]}, {"name": "03", "ids": ["OBS-02", "OBS-03", "KOS-01", "KOS-02", "KOS-03", "SG-01", "SG-02", "SG-03", "MAN-01", "MAN-02"]}, {"name": "04", "ids": ["MAN-03", "KAR-01", "KAR-02", "KAR-03", "VDCS-01", "VDCS-02", "VDCS-03", "RR-01", "RR-02", "RR-03"]}];
   var state = {};
   try { state = JSON.parse(localStorage.getItem(STORE_KEY) || '{}') || {}; } catch (e) { state = {}; }
   var total = 0, done = 0;
