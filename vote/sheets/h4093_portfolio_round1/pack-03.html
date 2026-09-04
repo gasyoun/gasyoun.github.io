@@ -168,7 +168,7 @@
 <div class="voteprog" id="voteProg"><span id="voteProgText"></span><span class="bar"><i id="voteProgBar"></i></span><span class="eta" id="voteProgEta"></span></div>
 </header>
 <aside class="screening-banner" role="status" data-screening="1"><strong>Screening (H1649)</strong> — only human-required cards are below. Off the plate: <span class="sc-a">deterministic 6</span> · <span class="sc-b">dataset lookup 0</span> · <span class="sc-c">agent adjudication 0</span> (total screened 6). Human cards: <span class="sc-d">40</span>. Evidence: <code>docs/SCREENING_H4093_PORTFOLIO_ROUND1_04-09-2026.md</code>. Rules: locked-ruling-dedup, shipped-surface-dedup, cross-repo-owner-reuse.</aside>
-<div class="savebanner">&#128229; Your export downloads as <code>uprava-portfolio-roadmap-renewal_round1-goals-40_decisions.json</code> &rarr; save it to <code>Uprava/review/uprava-portfolio-roadmap-renewal_round1-goals-40_decisions.json</code> (the <code>sheet_id</code> inside the file is <code>uprava-portfolio-roadmap-renewal_round1-goals-40</code> — that is how a later session knows which sheet these decisions belong to).</div>
+<div class="savebanner">&#128229; Your export downloads as <code>uprava-portfolio-roadmap-renewal_round1-goals-40_pack-03_decisions.json</code> &rarr; save it to <code>Uprava/review/uprava-portfolio-roadmap-renewal_round1-goals-40_pack-03_decisions.json</code> (the <code>sheet_id</code> inside the file is <code>uprava-portfolio-roadmap-renewal_round1-goals-40</code> — that is how a later session knows which sheet these decisions belong to).</div>
 <div class="toolbar">
   <button data-submit="1" class="dl" id="downloadBtn">Download decisions.json</button><button data-submit="1" class="dl handin" id="handinBtn" title="stop the clock and export the votes made so far; the rest stay saved in this browser">Hand in what I got</button><span class="handin-said" id="handinSaid"></span><button data-submit="1" class="dl" id="saveBtn" style="display:none;margin-left:8px">Save to folder…</button>
   <div class="fsctl" title="text size — persists in this browser"><button type="button" id="fsDown" aria-label="smaller text">A&minus;</button><span class="fsval" id="fsVal"></span><button type="button" id="fsUp" aria-label="larger text">A+</button></div>
@@ -461,7 +461,7 @@
       items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '', time_seconds: __timeFor(id) }; }) };
     var blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
     var url = URL.createObjectURL(blob); var a = document.createElement('a');
-    a.href = url; a.download = SHEET_ID + '_decisions.json'; document.body.appendChild(a); a.click();
+    a.href = url; a.download = SHEET_ID + '_pack-03_decisions.json'; document.body.appendChild(a); a.click();
     document.body.removeChild(a); URL.revokeObjectURL(url);
   });
   var filterbar = document.getElementById('filterbar');
@@ -517,7 +517,7 @@
     var saveBtn = document.getElementById('saveBtn');
     saveBtn.style.display = '';
     saveBtn.addEventListener('click', function () {
-      window.showSaveFilePicker({suggestedName: SHEET_ID + '_decisions.json'}).then(function (h) {
+      window.showSaveFilePicker({suggestedName: SHEET_ID + '_pack-03_decisions.json'}).then(function (h) {
         saveHandle = h; scheduleAutosave();
       }).catch(function () {});
     });
@@ -634,7 +634,7 @@
     payload.time_total_seconds = __timeTotal();
     var blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
     var url = URL.createObjectURL(blob); var a = document.createElement('a');
-    a.href = url; a.download = SHEET_ID + '_decisions_partial.json';
+    a.href = url; a.download = SHEET_ID + '_pack-03_decisions_partial.json';
     document.body.appendChild(a); a.click();
     document.body.removeChild(a); URL.revokeObjectURL(url);
     __handinSaid.textContent = HANDIN_SAID.replace('{n}', decided).replace('{total}', items.length);
