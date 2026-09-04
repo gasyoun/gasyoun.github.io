@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="color-scheme" content="dark">
 <meta name="generator" content="csl-pyutil/0.23.0">
-<title>Мега-ревизия дрена: все молчаливые решения 50 закрытий (04-09-2026) — 28 items</title>
+<title>Мега-ревизия дрена: все молчаливые решения 50 закрытий (04-09-2026) — 34 items</title>
 <style>
   :root { color-scheme: dark; --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --text:#e6e6e6; --muted:#9aa0aa;
           --accent:#5b8cff; --ok:#3fb950; --bad:#f85149; --defer:#d29922; --border:#2a2f3a; }
@@ -114,6 +114,8 @@
     .panel { padding: 8px 10px; }
     textarea.note { min-height: 60px; }
   }
+  /* caller css */
+header.top{pointer-events:none}header.top a,header.top button,header.top input,header.top select,header.top label{pointer-events:auto}.card{scroll-margin-top:150px}
   .tally .time { color:var(--muted); }
   .dl.handin { background:#243447; }
   .tally .pausebtn { background:none; border:1px solid var(--border); color:var(--muted);
@@ -154,8 +156,8 @@
 <body>
 <header class="top">
   <div>
-    <h1>Мега-ревизия дрена: все молчаливые решения 50 закрытий (04-09-2026) — 28 items</h1>
-    <div class="sub">Generated 04-09-2026 &middot; sheet_id <code>uprava-drain-assumptions_04-09-26</code> &middot; Generated 04-09-2026 · sheet_id <code>uprava-drain-assumptions_04-09-26</code> · 28 карточек из <b>48 разобранных закрытий</b> headless-дрена (полный корпус: 50 done из леджера OxAlpha; H4028/H4030 закрылись сегодня и приедут в первый дневной лист). По рулингу MG 04-09-2026: каждый форк, который воркер решил без вопроса, — на голос. На карточке: что сделано · почему · что будет, если молчать · варианты одним предложением. <b>Одобрить = рекомендация принята</b>; после голоса скачайте decisions.json — применяющий проход подхватит.</div>
+    <h1>Мега-ревизия дрена: все молчаливые решения 50 закрытий (04-09-2026) — 34 items</h1>
+    <div class="sub">Generated 04-09-2026 &middot; sheet_id <code>uprava-drain-assumptions_04-09-26</code> &middot; Generated 04-09-2026 · sheet_id <code>uprava-drain-assumptions_04-09-26</code> · 34 карточек из <b>48 разобранных закрытий</b> headless-дрена (полный корпус: 50 done из леджера OxAlpha; H4028/H4030 закрылись сегодня и приедут в первый дневной лист). По рулингу MG 04-09-2026: каждый форк, который воркер решил без вопроса, — на голос. На карточке: что сделано · почему · что будет, если молчать · варианты одним предложением. <b>Одобрить = рекомендация принята</b>; после голоса скачайте decisions.json — применяющий проход подхватит. <b>Обновление 04-09 (вечер):</b> + секция «системное» (6 карт) из статистического слоя MG-вопроса «что упускаем статистически» — таксономия маркеров на 48 клоузах против базы 3576 строк реестра (R1/R2 + Wilson CI), ops-таблица леджера, effort-покрытие: <a href='https://github.com/gasyoun/Uprava/blob/main/reports/H4060_DRAIN_ASSUMPTION_STATS_04-09-2026.md'>отчёт</a>.</div>
   </div>
   <div class="tally" id="tally">
     <span class="approve">&#9989; <span class="count" id="c-approve">0</span></span>
@@ -163,18 +165,18 @@
     <span class="defer">&#9208; <span class="count" id="c-defer">0</span></span>
     <span class="time" title="active time on this sheet (while the tab is visible)">&#9201; <span class="count" id="t-total">0:00</span><span class="tstate" id="t-state"></span></span>
     <button type="button" class="pausebtn" id="pauseBtn" title="pause the clock — a break is not review time">&#9208;</button>
-    <span class="unvoted">&#9711; <span class="count" id="c-unvoted">28</span></span>
+    <span class="unvoted">&#9711; <span class="count" id="c-unvoted">34</span></span>
   </div>
 <div class="voteprog" id="voteProg"><span id="voteProgText"></span><span class="bar"><i id="voteProgBar"></i></span><span class="eta" id="voteProgEta"></span></div>
 </header>
-<aside class="screening-banner" role="status" data-screening="1"><strong>Screening (H1649)</strong> — only human-required cards are below. Off the plate: <span class="sc-a">deterministic 0</span> · <span class="sc-b">dataset lookup 0</span> · <span class="sc-c">agent adjudication 0</span> (total screened 0). Human cards: <span class="sc-d">28</span>. Evidence: <code>~/.claude/handoff-drain/oxalpha/h4060-corpus.jsonl (REGISTRY_ARCHIVE close rows + CHANGELOG clauses, 50 done H-IDs)</code>. Rules: every close row of the drain-lane done set (ledgers H3234..H4045) hand-read; a card exists where the close resolved a fork, picked a default, or left a pilot/permanent state MG never ruled; pure mechanical closes (census-only, no state change) are not carded.</aside>
+<aside class="screening-banner" role="status" data-screening="1"><strong>Screening (H1649)</strong> — only human-required cards are below. Off the plate: <span class="sc-a">deterministic 0</span> · <span class="sc-b">dataset lookup 0</span> · <span class="sc-c">agent adjudication 0</span> (total screened 0). Human cards: <span class="sc-d">34</span>. Evidence: <code>~/.claude/handoff-drain/oxalpha/h4060-corpus.jsonl (REGISTRY_ARCHIVE close rows + CHANGELOG clauses, 50 done H-IDs)</code>. Rules: every close row of the drain-lane done set (ledgers H3234..H4045) hand-read; a card exists where the close resolved a fork, picked a default, or left a pilot/permanent state MG never ruled; pure mechanical closes (census-only, no state change) are not carded; the 6 system cards are policy forks backed by reports/H4060_DRAIN_ASSUMPTION_STATS_04-09-2026.md (R1 n=48 vs R2 n=3576, Wilson 95% CI, ledger ops).</aside>
 <div class="savebanner">&#128229; Your export downloads as <code>uprava-drain-assumptions_04-09-26_decisions.json</code> &rarr; save it to <code>review/uprava-drain-assumptions_04-09-26_decisions.json</code> (the <code>sheet_id</code> inside the file is <code>uprava-drain-assumptions_04-09-26</code> — that is how a later session knows which sheet these decisions belong to).</div>
 <div class="toolbar">
   <button data-submit="1" class="dl" id="downloadBtn">Download decisions.json</button><button data-submit="1" class="dl handin" id="handinBtn" title="stop the clock and export the votes made so far; the rest stay saved in this browser">Hand in what I got</button><span class="handin-said" id="handinSaid"></span><button data-submit="1" class="dl" id="saveBtn" style="display:none;margin-left:8px">Save to folder…</button>
   <div class="fsctl" title="text size — persists in this browser"><button type="button" id="fsDown" aria-label="smaller text">A&minus;</button><span class="fsval" id="fsVal"></span><button type="button" id="fsUp" aria-label="larger text">A+</button></div>
   <button data-submit="1" type="button" class="dl flowundo" id="flowUndoBtn" title="undo the last decision (z)">&#8630; Undo</button>
   <span class="flowprog" id="flowProg"><span class="bar"><i id="flowBar"></i></span><span id="flowProgText"></span><span id="flowEta"></span></span>
-  <div class="filterbar" id="filterbar"><button data-filter="all" class="active">all</button><button data-filter="all">все</button><button data-filter="danger">опасное</button><button data-filter="pilots">пилоты/флаги</button><button data-filter="product">продукт</button><button data-filter="security">безопасность</button><button data-filter="infra">стандарты</button><button data-filter="research">исследования</button><button data-filter="unvoted">unvoted only</button></div>
+  <div class="filterbar" id="filterbar"><button data-filter="all" class="active">all</button><button data-filter="all">все</button><button data-filter="danger">опасное</button><button data-filter="system">системное</button><button data-filter="pilots">пилоты/флаги</button><button data-filter="product">продукт</button><button data-filter="security">безопасность</button><button data-filter="infra">стандарты</button><button data-filter="research">исследования</button><button data-filter="unvoted">unvoted only</button></div>
 </div>
 <main id="cards">
 
@@ -541,6 +543,84 @@
     </div>
     <textarea class="note" placeholder="free-text note (optional)"></textarea>
   </section>
+
+  <section class="card" data-id="m2_close_rate" data-filt="system">
+    <header><div class="hw">СИСТЕМА: скорость закрытия 0.195× скорости минта — дрен никогда не сойдётся с потоком </div><span class="idchip" title="card id — cite this id back when discussing this card">m2_close_rate</span></header>
+    <div class="question"><p><b><mark class="hl">Числа</mark>:</b> <mark class="hl">за</mark> 7 <mark class="hl">дней</mark> <mark class="hl">наминчено</mark> 420, <mark class="hl">терминальных</mark> 82 (M2=0.195×; <mark class="hl">цель</mark> ≥1.0). <mark class="hl">Дрен</mark> <mark class="hl">даёт</mark> ~5 <mark class="hl">клоузов</mark>/<mark class="hl">календ-день</mark> <mark class="hl">против</mark> ~60 <mark class="hl">минтов</mark>/<mark class="hl">день</mark>. <b><mark class="hl">Если</mark> <mark class="hl">молчать</mark>:</b> <mark class="hl">очередь</mark> <mark class="hl">растёт</mark> <mark class="hl">монотонно</mark> (<mark class="hl">уже</mark> 114 queued, 26 <mark class="hl">строк</mark> <mark class="hl">старше</mark> 31 <mark class="hl">дня</mark>); <mark class="hl">любые</mark> <mark class="hl">ревью</mark> <mark class="hl">типа</mark> <mark class="hl">этого</mark> — <mark class="hl">вечный</mark> <mark class="hl">хвост</mark>.</p><ul><b>(<mark class="hl">а</mark>)</b> <mark class="hl">троттлинг</mark> <mark class="hl">минта</mark>: soft-cap <mark class="hl">новых</mark> H###/<mark class="hl">день</mark> <mark class="hl">в</mark> mint_handoff (<mark class="hl">напр</mark>. 25) — <i><mark class="hl">рекомендация</mark></i><br><b>(<mark class="hl">б</mark>)</b> <mark class="hl">больше</mark> <mark class="hl">воркеров</mark>/<mark class="hl">окон</mark> <mark class="hl">дрена</mark><br><b>(<mark class="hl">в</mark>)</b> <mark class="hl">оставить</mark> <mark class="hl">как</mark> <mark class="hl">есть</mark>, <mark class="hl">очередь</mark> = <mark class="hl">буфер</mark> <mark class="hl">идей</mark></ul></div>
+    
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Одобрить (рекомендация)</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="defer_rate" data-filt="system">
+    <header><div class="hw">СИСТЕМА: дрен деферит вам в 3.5× чаще базы — 31% клоузов с ruling/@decide против 8.9% по эстейту </div><span class="idchip" title="card id — cite this id back when discussing this card">defer_rate</span></header>
+    <div class="question"><p><b><mark class="hl">Числа</mark> (R1−R2, <mark class="hl">значимо</mark>):</b> ruling/@decide +22 <mark class="hl">п</mark>.<mark class="hl">п</mark>., GTD-<mark class="hl">строка</mark> +20 <mark class="hl">п</mark>.<mark class="hl">п</mark>., default +17 <mark class="hl">п</mark>.<mark class="hl">п</mark>. <mark class="hl">Дрен</mark> — <mark class="hl">не</mark> «<mark class="hl">закрыватель</mark>», <mark class="hl">а</mark> <b><mark class="hl">собиратель</mark> <mark class="hl">форков</mark></b>: <mark class="hl">треть</mark> <mark class="hl">клоузов</mark> <mark class="hl">специально</mark> <mark class="hl">оставлена</mark> <mark class="hl">на</mark> <mark class="hl">ваш</mark> <mark class="hl">голос</mark>. <b><mark class="hl">Если</mark> <mark class="hl">молчать</mark>:</b> <mark class="hl">этот</mark> <mark class="hl">режим</mark> (<mark class="hl">мега-ревью</mark> + <mark class="hl">дневные</mark> <mark class="hl">листы</mark>) — <mark class="hl">де-факто</mark> <mark class="hl">конвейер</mark>: ~12 <mark class="hl">человеческих</mark> <mark class="hl">форков</mark>/<mark class="hl">неделю</mark>.</p><ul><b>(<mark class="hl">а</mark>)</b> <mark class="hl">ратифицировать</mark> <mark class="hl">режим</mark>: <mark class="hl">дрен</mark> <mark class="hl">собирает</mark> <mark class="hl">форки</mark>, <mark class="hl">вы</mark> <mark class="hl">решаете</mark> <mark class="hl">пачками</mark> (<mark class="hl">листы</mark>) — <i><mark class="hl">рекомендация</mark></i><br><b>(<mark class="hl">б</mark>)</b> <mark class="hl">дрению</mark> <mark class="hl">запрещено</mark> <mark class="hl">деферить</mark> <mark class="hl">кроме</mark> danger/product<br><b>(<mark class="hl">в</mark>)</b> <mark class="hl">лимит</mark>: ≤N <mark class="hl">форков</mark> <mark class="hl">в</mark> <mark class="hl">день-лист</mark>, <mark class="hl">остальное</mark> <mark class="hl">в</mark> <mark class="hl">недельный</mark></ul></div>
+    
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Одобрить (рекомендация)</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="gtd_undated" data-filt="system">
+    <header><div class="hw">СИСТЕМА: половина GTD-пула без дат — aging-статистика слепа (@DO 47%, @DECIDE 56% undated) </div><span class="idchip" title="card id — cite this id back when discussing this card">gtd_undated</span></header>
+    <div class="question"><p><b><mark class="hl">Числа</mark>:</b> @DO 643 <mark class="hl">строк</mark> (304 <mark class="hl">без</mark> <mark class="hl">даты</mark>), @DECIDE 304 (170 <mark class="hl">без</mark> <mark class="hl">даты</mark>). Aging-<mark class="hl">политики</mark> (14/30 <mark class="hl">дней</mark>) <mark class="hl">физически</mark> <mark class="hl">не</mark> <mark class="hl">применяются</mark> <mark class="hl">к</mark> <mark class="hl">половине</mark> <mark class="hl">пула</mark>. <b><mark class="hl">Если</mark> <mark class="hl">молчать</mark>:</b> «<mark class="hl">старые</mark>» <mark class="hl">строки</mark> <mark class="hl">не</mark> <mark class="hl">стареют</mark>, <mark class="hl">голосовые</mark> <mark class="hl">срезы</mark> <mark class="hl">неполны</mark>.</p><ul><b>(<mark class="hl">а</mark>)</b> <mark class="hl">дата</mark> <mark class="hl">обязательна</mark> <mark class="hl">при</mark> <mark class="hl">заведении</mark> <mark class="hl">строки</mark> (<mark class="hl">линт</mark> <mark class="hl">в</mark> <mark class="hl">минте</mark>/GTD-<mark class="hl">харвесте</mark>) + <mark class="hl">разовый</mark> <mark class="hl">бэкфильт</mark> <mark class="hl">дат</mark> <mark class="hl">по</mark> git-<mark class="hl">логу</mark> — <i><mark class="hl">рекомендация</mark></i><br><b>(<mark class="hl">б</mark>)</b> <mark class="hl">только</mark> <mark class="hl">линт</mark>, <mark class="hl">без</mark> <mark class="hl">бэкфильта</mark><br><b>(<mark class="hl">в</mark>)</b> <mark class="hl">оставить</mark>, undated = <mark class="hl">вне</mark> aging</ul></div>
+    
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Одобрить (рекомендация)</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="effort_untagged" data-filt="system">
+    <header><div class="hw">СИСТЕМА: 29% клоузов дрена без {effort:}-тега — план-факт калибровка невозможна </div><span class="idchip" title="card id — cite this id back when discussing this card">effort_untagged</span></header>
+    <div class="question"><p><b><mark class="hl">Числа</mark>:</b> medium 20, hard 12, trivial 2, <b><mark class="hl">без</mark> <mark class="hl">тега</mark> 14/48</b>. <mark class="hl">Планирование</mark> <mark class="hl">пула</mark> (trivial-first, /fruit <mark class="hl">ранжирование</mark>) <mark class="hl">строит</mark> <mark class="hl">оценки</mark> <mark class="hl">на</mark> 71% <mark class="hl">корпуса</mark>. <b><mark class="hl">Если</mark> <mark class="hl">молчать</mark>:</b> <mark class="hl">трафарет</mark> <mark class="hl">усилий</mark> <mark class="hl">не</mark> <mark class="hl">калибруется</mark> <mark class="hl">никогда</mark>.</p><ul><b>(<mark class="hl">а</mark>)</b> <mark class="hl">линт</mark>: <mark class="hl">закрытие</mark> <mark class="hl">дрена</mark> <mark class="hl">без</mark> {effort:} = <mark class="hl">невалидно</mark> ( <mark class="hl">воркер</mark> <mark class="hl">обязан</mark> <mark class="hl">разметить</mark>) — <i><mark class="hl">рекомендация</mark></i><br><b>(<mark class="hl">б</mark>)</b> <mark class="hl">разметить</mark> <mark class="hl">задним</mark> <mark class="hl">числом</mark> (<mark class="hl">я</mark>, <mark class="hl">один</mark> <mark class="hl">проход</mark>)<br><b>(<mark class="hl">в</mark>)</b> <mark class="hl">не</mark> <mark class="hl">надо</mark>, <mark class="hl">тег</mark> <mark class="hl">необязательный</mark></ul></div>
+    
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Одобрить (рекомендация)</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="fruit_loop_stale" data-filt="system">
+    <header><div class="hw">СИСТЕМА: fruit-верификация деградировала — 40 search-fail, 0 строк верифицировано за проход </div><span class="idchip" title="card id — cite this id back when discussing this card">fruit_loop_stale</span></header>
+    <div class="question"><p><b><mark class="hl">Числа</mark> (03-09):</b> «close-loop sweep degraded; 40 search failure(s); 0 rows verified this pass — carry-forward only». Best-pick <mark class="hl">и</mark> Bucket A/B <mark class="hl">едут</mark> <mark class="hl">на</mark> <mark class="hl">невалидированных</mark> carry-forward <mark class="hl">данных</mark>. <b><mark class="hl">Если</mark> <mark class="hl">молчать</mark>:</b> /fruit <mark class="hl">и</mark> drain-pick <mark class="hl">ведут</mark> <mark class="hl">дрена</mark> <mark class="hl">по</mark> <mark class="hl">устаревшей</mark> <mark class="hl">карте</mark>.</p><ul><b>(<mark class="hl">а</mark>)</b> <mark class="hl">починить</mark> <mark class="hl">источник</mark> search-fail + <mark class="hl">алерт</mark> <mark class="hl">при</mark> 0 verified — <i><mark class="hl">рекомендация</mark></i><br><b>(<mark class="hl">б</mark>)</b> <mark class="hl">честный</mark> <mark class="hl">флаг</mark> <mark class="hl">в</mark> <mark class="hl">отчёте</mark> (<mark class="hl">уже</mark> <mark class="hl">есть</mark> ⚠️) <mark class="hl">и</mark> <mark class="hl">подождать</mark><br><b>(<mark class="hl">в</mark>)</b> <mark class="hl">убрать</mark> fruit <mark class="hl">из</mark> drain-pick <mark class="hl">цепочки</mark></ul></div>
+    
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Одобрить (рекомендация)</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="heartbeat_daily" data-filt="system">
+    <header><div class="hw">СИСТЕМА: 4 из 10 дней lane молчал — дневной лист должен различать «пусто» и «не запускался» </div><span class="idchip" title="card id — cite this id back when discussing this card">heartbeat_daily</span></header>
+    <div class="question"><p><b><mark class="hl">Числа</mark>:</b> <mark class="hl">пустые</mark> <mark class="hl">дни</mark> 27–28.08, 31.08–02.09 (<mark class="hl">квоты</mark>/<mark class="hl">сеть</mark>; git_fetch_fail ×12 <mark class="hl">в</mark> <mark class="hl">один</mark> <mark class="hl">день</mark>). <b><mark class="hl">Если</mark> <mark class="hl">молчать</mark>:</b> <mark class="hl">тихий</mark> <mark class="hl">день</mark> <mark class="hl">неотличим</mark> <mark class="hl">от</mark> «<mark class="hl">голосовать</mark> <mark class="hl">нечего</mark>» — <mark class="hl">ритуал</mark> T2 <mark class="hl">размывается</mark>.</p><ul><b>(<mark class="hl">а</mark>)</b> heartbeat: <mark class="hl">даже</mark> <mark class="hl">в</mark> <mark class="hl">пустой</mark> <mark class="hl">день</mark> <mark class="hl">дневной</mark> <mark class="hl">лист</mark> <mark class="hl">выходит</mark> <mark class="hl">строкой</mark> «lane <mark class="hl">не</mark> <mark class="hl">запускался</mark>: <mark class="hl">причина</mark>» — <i><mark class="hl">рекомендация</mark></i><br><b>(<mark class="hl">б</mark>)</b> heartbeat <mark class="hl">только</mark> <mark class="hl">при</mark> git_fetch_fail/quota<br><b>(<mark class="hl">в</mark>)</b> <mark class="hl">оставить</mark>: <mark class="hl">пусто</mark> = <mark class="hl">тихо</mark></ul></div>
+    
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Одобрить (рекомендация)</button>
+      <button class="vote reject" data-vote="reject">&#10060; Отклонить</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
 </main>
 <div class="votebar" id="voteBar"><span class="spacer"></span></div>
 <footer class="hint">Built by <code>tools/_gen_h4060_drain_assumptions_sheet.py</code> · apply with <code>/decisions-apply</code>. Keyboard: <kbd>a</kbd> Одобрить (рекомендация) &middot; <kbd>r</kbd> Отклонить
@@ -558,7 +638,7 @@
   var SHEET_ID = "uprava-drain-assumptions_04-09-26";
   var STORE_KEY = 'review-sheet:' + SHEET_ID;
   var GENERATED = "04-09-2026";
-  var ids = ["h4045_opencodedb_retire", "h3353_public_keys", "h3367_fence_ruling", "h3915_exit_survey_flag", "h3234_ollama_shadow", "h3548_h3550_inactive_gates", "h3379_agents_ctx", "h3588_minilm", "h3592_fusion_arm", "h3418_h3419_hire", "h3913_orphan_payments", "h3914_certs_report", "h4042_osankina_mirror", "h3345_resync_std", "h3357_dep_clock", "h3365_h3684_failsweep", "h3485_webtc2_default", "h3507_single_source", "h3683_hardfail_join", "h3454_allowlist", "h3450_hedge_lint", "h3582_docs_fixwaves", "h4022_recall_writer", "drain_writable_repos", "h3346_typed_store", "h3356_venues", "h3673_sense_dating", "h3376_integrity_fixes"];
+  var ids = ["h4045_opencodedb_retire", "h3353_public_keys", "h3367_fence_ruling", "h3915_exit_survey_flag", "h3234_ollama_shadow", "h3548_h3550_inactive_gates", "h3379_agents_ctx", "h3588_minilm", "h3592_fusion_arm", "h3418_h3419_hire", "h3913_orphan_payments", "h3914_certs_report", "h4042_osankina_mirror", "h3345_resync_std", "h3357_dep_clock", "h3365_h3684_failsweep", "h3485_webtc2_default", "h3507_single_source", "h3683_hardfail_join", "h3454_allowlist", "h3450_hedge_lint", "h3582_docs_fixwaves", "h4022_recall_writer", "drain_writable_repos", "h3346_typed_store", "h3356_venues", "h3673_sense_dating", "h3376_integrity_fixes", "m2_close_rate", "defer_rate", "gtd_undated", "effort_untagged", "fruit_loop_stale", "heartbeat_daily"];
   var state = {};
   try { state = JSON.parse(localStorage.getItem(STORE_KEY) || '{}') || {}; } catch (e) { state = {}; }
   function tally() {
