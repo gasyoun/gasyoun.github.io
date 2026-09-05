@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="color-scheme" content="dark">
-<meta name="generator" content="csl-pyutil/0.24.0">
+<meta name="generator" content="csl-pyutil/0.24.1">
 <title>H4093 — обновление портфельных дорожных карт: раунд 2 — 10 карточек</title>
 <style>
   :root { color-scheme: dark; --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --text:#e6e6e6; --muted:#9aa0aa;
@@ -884,6 +884,7 @@
   var INBOX_HYDRATED = 'подтянуто {n} голос(ов) с GitHub';
   var INBOX_SAVED = 'пакет {pack} сохранён в GitHub';
   var INBOX_COMPLETE = 'Все пакеты ({packs}) получены. От человека больше ничего не требуется.';
+  var INBOX_TOKEN_KEY = 'csl-review-github-token:' + INBOX.client_id + ':' + INBOX.repo;
   var INBOX_DISABLED = 'нет OAuth client_id / релея device-flow — используйте «Скачать decisions.json»';
   var INBOX_CODE = 'откройте {url} и введите код {code}';
   var INBOX_FAILED = 'сохранить в GitHub не удалось: {why}';
@@ -1011,7 +1012,11 @@
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (cur) { return send(cur && cur.sha); })
       .then(function (r) {
-        if (!r.ok) throw new Error('HTTP ' + r.status);
+        if (!r.ok) {
+          var err = new Error('HTTP ' + r.status);
+          err.inboxAuth = r.status === 401;
+          throw err;
+        }
         __inboxSay(INBOX_SAVED.replace('{pack}', INBOX.pack_name));
         return __inboxCompletion();
       });
@@ -1048,6 +1053,29 @@
         });
       });
   }
+  function __inboxCachedToken() {
+    try { return sessionStorage.getItem(INBOX_TOKEN_KEY) || ''; }
+    catch (e) { return ''; }
+  }
+  function __inboxCacheToken(token) {
+    try { sessionStorage.setItem(INBOX_TOKEN_KEY, token); } catch (e) {}
+    return token;
+  }
+  function __inboxClearToken() {
+    try { sessionStorage.removeItem(INBOX_TOKEN_KEY); } catch (e) {}
+  }
+  function __inboxToken() {
+    var cached = __inboxCachedToken();
+    return cached ? Promise.resolve(cached) : __inboxDeviceToken().then(__inboxCacheToken);
+  }
+  function __inboxSave() {
+    return __inboxToken().then(__inboxPut).catch(function (e) {
+      // A revoked cached token gets exactly one fresh device flow.
+      if (!e || !e.inboxAuth) throw e;
+      __inboxClearToken();
+      return __inboxDeviceToken().then(__inboxCacheToken).then(__inboxPut);
+    });
+  }
   if (__inboxBtn) {
     if (!INBOX.enabled) {
       __inboxBtn.disabled = true;
@@ -1055,8 +1083,7 @@
     } else {
       __inboxBtn.addEventListener('click', function () {
         __inboxBtn.disabled = true;
-        __inboxDeviceToken()
-          .then(__inboxPut)
+        __inboxSave()
           .catch(function (e) { __inboxSay(INBOX_FAILED.replace('{why}', e && e.message ? e.message : e)); })
           .then(function () { __inboxBtn.disabled = false; });
       });
