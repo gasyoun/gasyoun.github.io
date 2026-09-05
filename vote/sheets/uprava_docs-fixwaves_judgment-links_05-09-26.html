@@ -170,7 +170,7 @@
 <aside class="screening-banner" role="status" data-screening="1"><strong>Screening (H1649)</strong> — only human-required cards are below. Off the plate: <span class="sc-a">deterministic 0</span> · <span class="sc-b">dataset lookup 0</span> · <span class="sc-c">agent adjudication 0</span> (total screened 0). Human cards: <span class="sc-d">7</span>. Evidence: <code>docs/REPORT_H4092_WAVE3_FULL_POOL_05-09-2026.md</code>. Rules: no-safe-mechanical-fix-classes-need-human-disposition.</aside>
 <div class="savebanner">&#128229; Your export downloads as <code>uprava-docs-fixwaves_judgment-links_05-09-26_decisions.json</code> &rarr; save it to <code>Uprava/review/uprava-docs-fixwaves_judgment-links_05-09-26_decisions.json</code> (the <code>sheet_id</code> inside the file is <code>uprava-docs-fixwaves_judgment-links_05-09-26</code> — that is how a later session knows which sheet these decisions belong to).</div>
 <div class="toolbar">
-  <button data-submit="1" class="dl" id="downloadBtn">Download decisions.json</button><button data-submit="1" class="dl handin" id="handinBtn" title="stop the clock and export the votes made so far; the rest stay saved in this browser">Hand in what I got</button><span class="handin-said" id="handinSaid"></span><button data-submit="1" class="dl" id="saveBtn" style="display:none;margin-left:8px">Save to folder…</button>
+  <button data-submit="1" class="dl" id="downloadBtn">Download decisions.json</button> <button class="dl" id="ghBtn">Сохранить в GitHub</button><button data-submit="1" class="dl handin" id="handinBtn" title="stop the clock and export the votes made so far; the rest stay saved in this browser">Hand in what I got</button><span class="handin-said" id="handinSaid"></span><button data-submit="1" class="dl" id="saveBtn" style="display:none;margin-left:8px">Save to folder…</button>
   <div class="fsctl" title="text size — persists in this browser"><button type="button" id="fsDown" aria-label="smaller text">A&minus;</button><span class="fsval" id="fsVal"></span><button type="button" id="fsUp" aria-label="larger text">A+</button></div>
   <button data-submit="1" type="button" class="dl flowundo" id="flowUndoBtn" title="undo the last decision (z)">&#8630; Undo</button>
   <span class="flowprog" id="flowProg"><span class="bar"><i id="flowBar"></i></span><span id="flowProgText"></span><span id="flowEta"></span></span>
@@ -270,7 +270,7 @@
   </section>
 </main>
 <div class="votebar" id="voteBar"><span class="spacer"></span></div>
-<footer class="hint">Approve = <mark class="hl">применить</mark> <mark class="hl">рекомендацию</mark> <mark class="hl">массово</mark> (<mark class="hl">я</mark> <mark class="hl">исполняю</mark> <mark class="hl">прогоном</mark> <mark class="hl">с</mark> <mark class="hl">отчётом</mark>) · Reject = <mark class="hl">оставить</mark> <mark class="hl">класс</mark> <mark class="hl">как</mark> <mark class="hl">есть</mark> · Defer = <mark class="hl">решить</mark> <mark class="hl">позже</mark>. <mark class="hl">Голосуете</mark> <mark class="hl">один</mark> <mark class="hl">раз</mark> <mark class="hl">за</mark> <mark class="hl">всю</mark> <mark class="hl">семью</mark> <mark class="hl">ссылок</mark> — <mark class="hl">не</mark> <mark class="hl">по</mark> <mark class="hl">одной</mark>. Keyboard: <kbd>a</kbd> Применить &middot; <kbd>r</kbd> Оставить как есть
+<footer class="hint">Approve = <mark class="hl">применить</mark> <mark class="hl">рекомендацию</mark> <mark class="hl">массово</mark> (<mark class="hl">я</mark> <mark class="hl">исполняю</mark> <mark class="hl">прогоном</mark> <mark class="hl">с</mark> <mark class="hl">отчётом</mark>) · Reject = <mark class="hl">оставить</mark> <mark class="hl">класс</mark> <mark class="hl">как</mark> <mark class="hl">есть</mark> · Defer = <mark class="hl">решить</mark> <mark class="hl">позже</mark>. <mark class="hl">Голосуете</mark> <mark class="hl">один</mark> <mark class="hl">раз</mark> <mark class="hl">за</mark> <mark class="hl">всю</mark> <mark class="hl">семью</mark> <mark class="hl">ссылок</mark> — <mark class="hl">не</mark> <mark class="hl">по</mark> <mark class="hl">одной</mark>. <b><mark class="hl">Сохранение</mark>:</b> <mark class="hl">после</mark> <mark class="hl">голосования</mark> <mark class="hl">нажмите</mark> «<mark class="hl">Сохранить</mark> <mark class="hl">в</mark> GitHub» — <mark class="hl">откроется</mark> <mark class="hl">готовый</mark> <mark class="hl">черновик</mark> issue <mark class="hl">в</mark> <mark class="hl">приватный</mark> Uprava; <mark class="hl">нажмите</mark> <mark class="hl">зелёную</mark> «Submit new issue» — <mark class="hl">готово</mark>, <mark class="hl">скачивать</mark> <mark class="hl">файл</mark> <mark class="hl">не</mark> <mark class="hl">нужно</mark>. Keyboard: <kbd>a</kbd> Применить &middot; <kbd>r</kbd> Оставить как есть
   &middot; <kbd>d</kbd> defer &middot; <kbd>&darr;</kbd>/<kbd>&uarr;</kbd> next/prev. Votes autosave to
   this browser's localStorage; click "Download decisions.json" when done (unvoted items export with
   decision:null).</footer>
@@ -335,6 +335,22 @@
     a.href = url; a.download = SHEET_ID + '_decisions.json'; document.body.appendChild(a); a.click();
     document.body.removeChild(a); URL.revokeObjectURL(url);
   });
+  var ghBtn = document.getElementById('ghBtn');
+  ghBtn.addEventListener('click', function () {
+    ids.forEach(function (id) { syncNoteFromDom(id); });
+    var decided = ids.filter(function (id) { return state[id] && state[id].decision; }).length;
+    var payload = { sheet_id: SHEET_ID, generated: '05-09-2026', decided: decided,
+      items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '' }; }) };
+    if (decided === 0) { ghBtn.textContent = 'Сначала проголосуйте'; return; }
+    var body = JSON.stringify(payload, null, 2);
+    var url = 'https://github.com/gasyoun/Uprava/issues/new'
+      + '?title=' + encodeURIComponent('decisions: ' + SHEET_ID)
+      + '&body=' + encodeURIComponent(body);
+    ghBtn.textContent = 'Открываю GitHub…';
+    window.open(url, '_blank');
+    ghBtn.textContent = 'Сохранить в GitHub';
+  });
+
   var filterbar = document.getElementById('filterbar');
   filterbar.addEventListener('click', function (e) {
     var btn = e.target.closest('button[data-filter]'); if (!btn) return;
