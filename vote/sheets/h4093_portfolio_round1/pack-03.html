@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="color-scheme" content="dark">
-<meta name="generator" content="csl-pyutil/0.23.1">
+<meta name="generator" content="csl-pyutil/0.24.0">
 <title>H4093 — обновление портфельных дорожных карт: раунд 1 — 10 items</title>
 <style>
   :root { color-scheme: dark; --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --text:#e6e6e6; --muted:#9aa0aa;
@@ -890,6 +890,7 @@
   var INBOX_PULLING = 'pulling votes from GitHub…';
   var INBOX_HYDRATED = 'pulled {n} vote(s) from GitHub';
   var INBOX_SAVED = 'saved pack {pack} to GitHub';
+  var INBOX_COMPLETE = 'All {packs} packs received. Nothing more is expected from the human.';
   var INBOX_DISABLED = 'no OAuth client_id / device relay configured — use Download decisions.json';
   var INBOX_CODE = 'open {url} and enter code {code}';
   var INBOX_FAILED = 'GitHub save failed: {why}';
@@ -920,6 +921,33 @@
                if (__inboxNoteOk(it.id, it.note)) out.note = it.note;
                return out;
              }) };
+  }
+  function __inboxCompletion() {
+    return fetch(__inboxDir() + '?t=' + Date.now()).then(function (r) {
+      return r.ok ? r.json() : [];
+    }).then(function (list) {
+      if (!Array.isArray(list)) return false;
+      var byName = {};
+      list.forEach(function (f) { byName[f.name] = f; });
+      var reads = [];
+      for (var n = 1; n <= INBOX.packs; n++) {
+        var name = 'pack-' + ('0' + n).slice(-2) + '.json';
+        var file = byName[name];
+        reads.push(file ? fetch(file.download_url + '?t=' + Date.now()).then(function (r) {
+          return r.ok ? r.json() : null;
+        }).catch(function () { return null; }) : Promise.resolve(null));
+      }
+      return Promise.all(reads).then(function (docs) {
+        var complete = docs.filter(function (doc, index) {
+          return doc && doc.sheet_id === SHEET_ID && doc.pack === index + 1
+            && Array.isArray(doc.items) && doc.items.length > 0
+            && doc.decided === doc.items.length
+            && doc.items.every(function (it) { return !!it.decision; });
+        }).length;
+        if (complete === INBOX.packs) __inboxSay(INBOX_COMPLETE.replace('{packs}', INBOX.packs));
+        return complete === INBOX.packs;
+      });
+    }).catch(function () { return false; });
   }
   // The pull is two network hops, and the second one -- raw.githubusercontent.com,
   // once per decisions file -- is routinely slow to settle, sometimes past 10 s,
@@ -961,7 +989,7 @@
               save();
               document.querySelectorAll('.card').forEach(function (c) { applyCardUI(c); });
             }
-            done(merged);
+            __inboxCompletion().then(function (complete) { if (!complete) done(merged); });
           });
       });
     }).catch(function () { done(0); });
@@ -992,6 +1020,7 @@
       .then(function (r) {
         if (!r.ok) throw new Error('HTTP ' + r.status);
         __inboxSay(INBOX_SAVED.replace('{pack}', INBOX.pack_name));
+        return __inboxCompletion();
       });
   }
   // GitHub does not send Access-Control-Allow-Origin on login/device/* (measured
