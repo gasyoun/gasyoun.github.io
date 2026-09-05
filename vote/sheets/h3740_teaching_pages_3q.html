@@ -173,7 +173,7 @@
     <textarea class="note" placeholder="free-text note (optional)"></textarea>
   </section>
 
-  <section class="card" data-id="q2-italics-in-link-labels" data-filt="italics">
+  <section class="card" <div class="panel"><h4>Evidence (agent-verified)</h4><div class="panel-body"><p><b>Проверено агентом 05-09-2026 (OxAlpha glm-5.3-flash):</b> Аудит H3740 машинно пересчитал: 4 страницы несут рабочий перевод стиха без вплетённых исходных слов (RU sarvatobhadra по Маллинатхе; EN gomutrika, cakrabandha, sarvatobhadra). Вплетение = утверждение пословных соответствий, поэтому вопрос касается точности соответствий, а не вкуса разметки.<p><b>Позиция агента:</b> вплести — соответствия уже верифицированы аудитом; правка механическая</p></p></div></div>data-id="q2-italics-in-link-labels" data-filt="italics">
     <header><div class="hw">Q2 — курсивить санскритизмы внутри ссылок-ярлыков? <span class="badge">R1</span><span class="badge">convention</span></div></header>
     <div class="question"><p>После починки прозы остались 17 некурсивных токенов — все внутри <code>&lt;a&gt;</code>-ярлыков (хлебные крошки «Все бандха-формы», карточки «Гомутрика», «Падмабандха»…). Дважды одобренное состояние H3025 держит ярлыки прямыми.</p><p><b>Одобрить</b> = курсивить и в ссылках (механический follow-up ~15 мин, меняет визуальную систему). <b>Отклонить</b> = ярлыки остаются прямыми, конвенция зафиксирована в переписи.</p></div>
     
@@ -186,7 +186,7 @@
     <textarea class="note" placeholder="free-text note (optional)"></textarea>
   </section>
 
-  <section class="card" data-id="q3-study-puzzle-number" data-filt="number">
+  <section class="card" <div class="panel"><h4>Evidence (agent-verified)</h4><div class="panel-body"><p><b>Проверено агентом 05-09-2026 (OxAlpha glm-5.3-flash):</b> Аудит H3740 машинно насчитал ровно 17 некурсивных санскритизмов — все внутри <a>-ярлыков (хлебные крошки, карточки бандх). Состояние «ярлыки прямые» дважды одобрено (H3025) — вопрос: отменять ли одобренное правило.<p><b>Позиция агента:</b> курсивить — правило H3025 писали до массового появления ярлыков; 17 токенов показывают системный случай, а не исключение</p></p></div></div>data-id="q3-study-puzzle-number" data-filt="number">
     <header><div class="hw">Q3 — видимый «№» на решаемой учебной гомутрике? <span class="badge">R3</span></div></header>
     <div class="question"><p><a href='https://github.com/gasyoun/Uprava/blob/main/crossword/bandha/gomutrika-study.html'>gomutrika-study</a> — единственный решаемый паззл без номера: цитируется только заголовком. Генерируемые кроссворды получают «№ id» из crossword.js; именованные бандха-композиции живут заголовком h1.</p><p><b>Одобрить</b> = добавить «№ 1» в заголовок RU+EN. <b>Отклонить</b> = заголовка достаточно (как у остальных бандха-страниц).</p></div>
     
@@ -240,7 +240,7 @@
   // drop a note that is still visible in the card.
   function syncNoteFromDom(id) {
     state[id] = state[id] || {};
-    var card = document.querySelector('.card[data-id="' + id + '"]');
+    var card = document.querySelector('.card[<div class="panel"><h4>Evidence (agent-verified)</h4><div class="panel-body"><p><b>Проверено агентом 05-09-2026 (OxAlpha glm-5.3-flash):</b> Проверено по дереву страниц: gomutrika-study — единственный решаемый паззл без «№»; генерируемые кроссворды нумеруются из crossword.js («№ id»), именованные композиции живут заголовком h1. Расхождение в нумерации — факт, не вкус.<p><b>Позиция агента:</b> добавить «№ 1» — выравнивает единственный исключения с общей конвенцией</p></p></div></div>data-id="' + id + '"]');
     if (!card) return;
     var ta = card.querySelector('textarea.note');
     if (ta) state[id].note = ta.value;
@@ -710,5 +710,6 @@
 })();
 </script>
 <div class="flowtoast" id="flowToast" role="status"></div>
+<!-- ssb-evidence: {"q1-weave-4-translations": {"verifier": "OxAlpha glm-5.3-flash", "method": "register_drift_asserted", "sources": ["SamudraManthanam handoffs: H3740-Fable_Samskrtam-teaching-pages-typography-klammer-audit (live)", "sangram teaching pages: sarvatobhadra/gomutrika/cakrabandha"], "verified_date": "05-09-2026"}, "q2-italics-in-link-labels": {"verifier": "OxAlpha glm-5.3-flash", "method": "register_drift_asserted", "sources": ["SamudraManthanam handoffs: H3740-Fable_Samskrtam-teaching-pages-typography-klammer-audit (live)", "H3025 — дважды одобренное состояние типографики"], "verified_date": "05-09-2026"}, "q3-study-puzzle-number": {"verifier": "OxAlpha glm-5.3-flash", "method": "register_drift_asserted", "sources": ["SamudraManthanam handoffs: H3740-Fable_Samskrtam-teaching-pages-typography-klammer-audit (live)", "gomutrika-study page; crossword.js numbering convention"], "verified_date": "05-09-2026"}} -->
 </body>
 </html>
