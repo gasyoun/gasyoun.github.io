@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="color-scheme" content="dark">
-<meta name="generator" content="csl-pyutil/0.22.0">
+<meta name="generator" content="csl-pyutil/0.23.1">
 <title>H4093 — обновление портфельных дорожных карт: раунд 1 — 10 items</title>
 <style>
   :root { color-scheme: dark; --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --text:#e6e6e6; --muted:#9aa0aa;
@@ -135,6 +135,11 @@
                padding:8px 14px; border-radius:8px; font-size:13px; z-index:50;
                opacity:0; pointer-events:none; transition:opacity .18s; }
   .flowtoast.on { opacity:1; }
+  .dl.inbox { background:#2d6a4f; }
+  .dl.inbox[disabled] { background:var(--panel2); color:var(--muted); cursor:not-allowed; border:1px solid var(--border); }
+  .inboxnote { color:var(--muted); font-size:12px; }
+  .inboxcode { font-family:ui-monospace,Consolas,monospace; font-size:16px; letter-spacing:.12em;
+               background:#11141a; border:1px solid var(--border); border-radius:6px; padding:4px 10px; }
   .voteprog { flex:1 0 100%; order:99; background:var(--panel);
               border-top:1px solid var(--border); margin:6px -20px -14px; padding:8px 20px;
               display:flex; align-items:center; gap:12px; font-size:12px; color:var(--muted); }
@@ -171,7 +176,7 @@
 <nav aria-label="Навигация по пакетам" style="max-width:980px;margin:10px auto;padding:10px 20px;display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:center;background:var(--panel);border:1px solid var(--border);border-radius:8px"><a href="pack-02.html">← Пакет 2</a><a href="../h4093_portfolio_round1.html">Все пакеты · 3/4</a><span style="text-align:right"><a href="pack-04.html">Пакет 4 →</a></span></nav>
 <div class="savebanner">&#128229; Your export downloads as <code>uprava-portfolio-roadmap-renewal_round1-goals-40_pack-03_decisions.json</code> &rarr; save it to <code>Uprava/review/uprava-portfolio-roadmap-renewal_round1-goals-40_pack-03_decisions.json</code> (the <code>sheet_id</code> inside the file is <code>uprava-portfolio-roadmap-renewal_round1-goals-40</code> — that is how a later session knows which sheet these decisions belong to).</div>
 <div class="toolbar">
-  <button data-submit="1" class="dl" id="downloadBtn">Download decisions.json</button><button data-submit="1" class="dl handin" id="handinBtn" title="stop the clock and export the votes made so far; the rest stay saved in this browser">Hand in what I got</button><span class="handin-said" id="handinSaid"></span><button data-submit="1" class="dl" id="saveBtn" style="display:none;margin-left:8px">Save to folder…</button>
+  <button data-submit="1" class="dl" id="downloadBtn">Download decisions.json</button><button data-submit="1" type="button" class="dl inbox" id="inboxBtn" title="push this pack's ids and verdicts to the public vote inbox">Save to GitHub</button><span data-submit="1" class="inboxnote" id="inboxNote" role="status"></span><button data-submit="1" class="dl handin" id="handinBtn" title="stop the clock and export the votes made so far; the rest stay saved in this browser">Hand in what I got</button><span class="handin-said" id="handinSaid"></span><button data-submit="1" class="dl" id="saveBtn" style="display:none;margin-left:8px">Save to folder…</button>
   <div class="fsctl" title="text size — persists in this browser"><button type="button" id="fsDown" aria-label="smaller text">A&minus;</button><span class="fsval" id="fsVal"></span><button type="button" id="fsUp" aria-label="larger text">A+</button></div>
   <button data-submit="1" type="button" class="dl flowundo" id="flowUndoBtn" title="undo the last decision (z)">&#8630; Undo</button>
   <span class="flowprog" id="flowProg"><span class="bar"><i id="flowBar"></i></span><span id="flowProgText"></span><span id="flowEta"></span></span>
@@ -495,22 +500,48 @@
     e.preventDefault();
   });
 
-  var saveHandle = null, saveTimer = null;
+  var saveHandle = null, saveTimer = null, saveWritePending = 0;
+  var saveWriteChain = Promise.resolve();
+  var SAVE_SAVING = 'Saving…';
+  var SAVE_SAVED = 'Saved';
+  var SAVE_FAILED = 'Save failed — retry';
   function exportPayload() {
     if (typeof syncNoteFromDom === 'function') {
       ids.forEach(function (id) { syncNoteFromDom(id); });
     }
     var decided = ids.filter(function (id) { return state[id] && state[id].decision; }).length;
-    return JSON.stringify({ sheet_id: SHEET_ID, generated: new Date().toISOString(), decided: decided, time_total_seconds: __timeTotal(),
+    var nowIso = new Date().toISOString();
+    return JSON.stringify({ sheet_id: SHEET_ID, generated: nowIso, reviewedAt: nowIso, decided: decided, time_total_seconds: __timeTotal(),
       items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '', time_seconds: __timeFor(id) }; }) }, null, 2);
+  }
+  function flushAutosave() {
+    if (!saveHandle) return Promise.resolve(false);
+    clearTimeout(saveTimer);
+    var payload = exportPayload();
+    saveWritePending++;
+    var writeJob = saveWriteChain.then(function () {
+      return saveHandle.createWritable().then(function (writable) {
+        return writable.write(payload).then(function () { return writable.close(); });
+      });
+    });
+    var tracked = writeJob.then(function () {
+      saveWritePending--; return true;
+    }, function (error) {
+      saveWritePending--; throw error;
+    });
+    saveWriteChain = tracked.catch(function () {});
+    return tracked;
+  }
+  function saveStatus(message) {
+    var saveBtn = document.getElementById('saveBtn');
+    if (saveBtn) saveBtn.textContent = message;
   }
   function scheduleAutosave() {
     if (!saveHandle) return;
     clearTimeout(saveTimer);
     saveTimer = setTimeout(function () {
-      saveHandle.createWritable().then(function (w) {
-        w.write(exportPayload()).then(function () { w.close(); });
-      }).catch(function () {});
+      flushAutosave().then(function () { saveStatus(SAVE_SAVED); })
+        .catch(function () { saveStatus(SAVE_FAILED); });
     }, 1000);
   }
   var _origSave = save;
@@ -520,10 +551,19 @@
     saveBtn.style.display = '';
     saveBtn.addEventListener('click', function () {
       window.showSaveFilePicker({suggestedName: SHEET_ID + '_pack-03_decisions.json'}).then(function (h) {
-        saveHandle = h; scheduleAutosave();
-      }).catch(function () {});
+        saveHandle = h; saveStatus(SAVE_SAVING); return flushAutosave();
+      }).then(function (saved) {
+        if (saved) saveStatus(SAVE_SAVED);
+      }).catch(function (error) {
+        if (!error || error.name !== 'AbortError') saveStatus(SAVE_FAILED);
+      });
     });
   }
+  window.addEventListener('beforeunload', function (event) {
+    if (!saveWritePending) return;
+    event.preventDefault();
+    event.returnValue = '';
+  });
 
   var FS_KEY = STORE_KEY + ':fs', FS_DEFAULT = 1.5;
   function fsGet() {
@@ -844,6 +884,163 @@
     __flowPaint();
     __flowSay(FLOW_RESUMED.replace('{n}', at + 1).replace('{total}', vis.length));
   })();
+
+  var INBOX = {"repo": "gasyoun/vote-inbox", "branch": "", "client_id": "Ov23lifQmcuDYuTw0ZWv", "device_url": "https://kosha.193.232.229.92.sslip.io/gh-device", "pack": 3, "pack_name": "03", "packs": 4, "enabled": true};
+  var CARD_Q = {"OBS-02": "Что уже известно. A12 — OBS-T error-typology paper, а также A16 и A44 используют родственные задачи проверки и сейчас упираются в человеческий gold/IAA. Рекомендация. Набрать одного аннотатора по общей инструкции и использовать перекрывающиеся калибровочные наборы там, где методически допустимо. Принять рекомендацию — обучение человека оплачивается один раз, а несколько статей получают независимую проверку. Выбрать альтернативу: искать отдельного специалиста для каждой статьи — специализация выше, но набор и калибровка повторяются и тормозят все треки. Отложить — решение не войдёт в первую волну; зависимые планы останутся без приоритета. Если нужен третий вариант или поправка, запишите его в примечании: текст примечания важнее кнопки.", "OBS-03": "Что уже известно. Сильная сторона observatory — версии данных, скрипты и публичные отчёты; DOI и несоответствие источников уже становились воротами. Рекомендация. Каждая приоритетная статья получает замороженный dataset snapshot, команду пересчёта и проверяемый DOI/идентификатор до подачи. Принять рекомендацию — публикационная скорость немного ниже, но результаты устойчивы к смене живых данных. Выбрать альтернативу: замораживать пакет только после принятия статьи — черновик подаётся быстрее, но числа и источники могут дрейфовать во время рецензирования. Отложить — решение не войдёт в первую волну; зависимые планы останутся без приоритета. Если нужен третий вариант или поправка, запишите его в примечании: текст примечания важнее кнопки.", "KOS-01": "Что уже известно. kosha уже регистрирует десятки публичных и ограниченных наборов и кормит Systema reading packs; отдельный полный LMS дублировал бы Systema. Рекомендация. Считать kosha владельцем данных, API и тонких демонстрационных поверхностей, а обучение и платежи оставлять Systema. Принять рекомендацию — границы компонентов ясны, и новые учебные продукты переиспользуют один data contract. Выбрать альтернативу: развивать kosha как самостоятельное учебное приложение — эксперименты независимее, но появятся дубли аккаунтов, прогресса, платежей и педагогической логики. Отложить — решение не войдёт в первую волну; зависимые планы останутся без приоритета. Если нужен третий вариант или поправка, запишите его в примечании: текст примечания важнее кнопки.", "KOS-02": "Что уже известно. Reading packs уже потребляются Systema, а конкорданс получил аттестованные частотные и временные слои; это короче пути к ученику, чем новый тренажёр. Рекомендация. Сначала расширять версионированные reading packs и конкорданс для конкретных курсов Systema. Принять рекомендацию — учебная ценность доходит до живой аудитории через существующий кабинет. Выбрать альтернативу: строить новый самостоятельный набор упражнений — можно экспериментировать свободнее, но потребуется ещё один интерфейс и интеграция позже. Отложить — решение не войдёт в первую волну; зависимые планы останутся без приоритета. Если нужен третий вариант или поправка, запишите его в примечании: текст примечания важнее кнопки.", "KOS-03": "Что уже известно. A55 — kosha data paper A55 и A56 — kosha data paper A56 уже достигли готовности 4/5; числа и ограничения недавно перепроверены, остаются DOI и подача. Рекомендация. Считать DOI и подачу A55/A56 приоритетом выше нового аналитического направления. Принять рекомендацию — уже оплаченная исследовательская работа становится внешним результатом. Выбрать альтернативу: начать следующий набор метрик и статью — научная широта растёт, но две почти готовые работы остаются внутри репозитория. Отложить — решение не войдёт в первую волну; зависимые планы останутся без приоритета. Если нужен третий вариант или поправка, запишите его в примечании: текст примечания важнее кнопки.", "SG-01": "Что уже известно. Grammar Lab G1, lessonpack для занятия 1 и natural-method drafts уже построены; несколько следующих шагов — импорт, редакционная виза и ограниченный пилот. Рекомендация. Сначала довести существующие педагогические активы до ограниченных живых пилотов в Systema. Принять рекомендацию — работа начинает служить ученикам и учителям, а не только пополнять исследовательский репозиторий. Выбрать альтернативу: сначала открыть новые исследовательские темы — портфель знаний растёт, но уже готовые учебные активы продолжают ждать интеграции. Отложить — решение не войдёт в первую волну; зависимые планы останутся без приоритета. Если нужен третий вариант или поправка, запишите его в примечании: текст примечания важнее кнопки.", "SG-02": "Что уже известно. 32 темы Grammar Lab и экспорт уже существуют; следующий именованный шаг — Systema import/search UI. Natural-method story ещё ждёт редакционной визы. Рекомендация. Первым довести Grammar Lab G2 до ограниченного интерфейса Systema, затем запускать natural-method story. Принять рекомендацию — первый пилот использует более зрелый и структурированный актив с меньшим редакционным риском. Выбрать альтернативу: первым запустить natural-method story — опыт обучения будет цельнее, но понадобится ранняя авторская правка художественно-педагогического текста. Отложить — решение не войдёт в первую волну; зависимые планы останутся без приоритета. Если нужен третий вариант или поправка, запишите его в примечании: текст примечания важнее кнопки.", "SG-03": "Что уже известно. Перенесённое августовское решение уже ставит classroom-ready материалы раньше teacher training; формат результата всё ещё можно закрепить. Рекомендация. Каждая педагогическая тема завершается пакетом урока: цель, объяснение, упражнения, ответы, типичные ошибки и источник данных. Принять рекомендацию — учитель может применить исследование без дополнительной редакторской сборки. Выбрать альтернативу: выпускать прежде всего исследовательские страницы и интерактивные прототипы — они гибче для исследования, но учителю придётся самому превращать их в занятие. Отложить — решение не войдёт в первую волну; зависимые планы останутся без приоритета. Если нужен третий вариант или поправка, запишите его в примечании: текст примечания важнее кнопки.", "MAN-01": "Что уже известно. Содержательная работа явно отложена до 2027; готов только дом репозитория, рендер и приложение «Санскрит в цифрах». Рекомендация. Когда работа возобновится в 2027, первым собрать последовательное ядро грамматики и чтения, а не новые приложения-портреты. Принять рекомендацию — учебник раньше становится пригодным для реального курса и задаёт место всем приложениям. Выбрать альтернативу: сначала расширять приложения и портреты — видимые автономные материалы появляются быстрее, но основной учебный путь остаётся неопределённым. Отложить — решение не войдёт в первую волну; зависимые планы останутся без приоритета. Если нужен третий вариант или поправка, запишите его в примечании: текст примечания важнее кнопки.", "MAN-02": "Что уже известно. Systema, Kochergina lesson packs и собственные материалы уже содержат объяснения, задания и реальные точки затруднения учеников. Рекомендация. Собирать черновик из проверенных уроков, ответов и упражнений, затем переписывать единым авторским голосом. Принять рекомендацию — учебник наследует опыт преподавания и не начинает содержание с пустого листа. Выбрать альтернативу: писать новую рукопись с нуля — структура свободнее, но уже доказанные объяснения и ошибки учеников могут потеряться. Отложить — решение не войдёт в первую волну; зависимые планы останутся без приоритета. Если нужен третий вариант или поправка, запишите его в примечании: текст примечания важнее кнопки."};
+  var INBOX_PULLING = 'pulling votes from GitHub…';
+  var INBOX_HYDRATED = 'pulled {n} vote(s) from GitHub';
+  var INBOX_SAVED = 'saved pack {pack} to GitHub';
+  var INBOX_DISABLED = 'no OAuth client_id / device relay configured — use Download decisions.json';
+  var INBOX_CODE = 'open {url} and enter code {code}';
+  var INBOX_FAILED = 'GitHub save failed: {why}';
+  var __inboxBtn = document.getElementById('inboxBtn');
+  var __inboxNote = document.getElementById('inboxNote');
+  function __inboxSay(msg) { if (__inboxNote) __inboxNote.textContent = msg; }
+  function __inboxDir() {
+    return 'https://api.github.com/repos/' + INBOX.repo + '/contents/decisions/'
+      + encodeURIComponent(SHEET_ID);
+  }
+  // A public repo must not become a back door onto the card text. A note ships
+  // only when it is short, carries no markup, and is not the card's own question
+  // pasted back — otherwise the decision travels alone.
+  function __inboxNoteOk(id, note) {
+    if (!note) return false;
+    if (note.length > 280) return false;
+    if (note.indexOf('<') >= 0) return false;
+    var q = CARD_Q[id];
+    if (q && q.length > 12 && note.indexOf(q) >= 0) return false;
+    return true;
+  }
+  function __inboxPayload() {
+    var base = JSON.parse(exportPayload());
+    return { sheet_id: base.sheet_id, pack: INBOX.pack, generated: base.generated,
+             reviewedAt: base.reviewedAt, decided: base.decided,
+             items: base.items.map(function (it) {
+               var out = { id: it.id, decision: it.decision };
+               if (__inboxNoteOk(it.id, it.note)) out.note = it.note;
+               return out;
+             }) };
+  }
+  // The pull is two network hops, and the second one -- raw.githubusercontent.com,
+  // once per decisions file -- is routinely slow to settle, sometimes past 10 s,
+  // while the api.github.com listing answers in about one. Measured 18-08-2026: the
+  // first hydrate smoke FAILED on a 20 s ceiling against completely correct code.
+  // Without a hint the reviewer sees an unvoted sheet that silently fills in later,
+  // which reads as a bug and invites them to start voting over the top of votes that
+  // are about to arrive. So say so while it is happening, and clear the line if the
+  // pull turns out to bring nothing.
+  function __inboxHydrate() {
+    var said = false;
+    function announce() { if (!said) { said = true; __inboxSay(INBOX_PULLING); } }
+    function done(merged) {
+      if (merged) { __inboxSay(INBOX_HYDRATED.replace('{n}', merged)); return; }
+      if (said) __inboxSay('');
+    }
+    announce();
+    fetch(__inboxDir()).then(function (r) { return r.ok ? r.json() : []; }).then(function (list) {
+      if (!Array.isArray(list) || !list.length) { done(0); return; }
+      var files = list.filter(function (f) { return /\.json$/.test(f.name || ''); });
+      var pending = files.length, merged = 0;
+      if (!pending) { done(0); return; }
+      files.forEach(function (f) {
+        fetch(f.download_url).then(function (r) { return r.ok ? r.json() : null; })
+          .then(function (doc) {
+            if (!doc || !doc.items) return;
+            doc.items.forEach(function (it) {
+              if (!it.decision || ids.indexOf(it.id) < 0) return;
+              // Two machines, one sheet: the inbox is the shared record, so it wins.
+              state[it.id] = state[it.id] || {};
+              if (state[it.id].decision !== it.decision) merged++;
+              state[it.id].decision = it.decision;
+            });
+          })
+          .catch(function () {})
+          .then(function () {
+            if (--pending > 0) return;
+            if (merged) {
+              save();
+              document.querySelectorAll('.card').forEach(function (c) { applyCardUI(c); });
+            }
+            done(merged);
+          });
+      });
+    }).catch(function () { done(0); });
+  }
+  function __inboxPut(token) {
+    var path = 'decisions/' + encodeURIComponent(SHEET_ID) + '/pack-' + INBOX.pack_name + '.json';
+    var url = 'https://api.github.com/repos/' + INBOX.repo + '/contents/' + path;
+    var body = JSON.stringify(__inboxPayload(), null, 2);
+    var enc = btoa(unescape(encodeURIComponent(body)));
+    function send(sha) {
+      var msg = { message: 'vote: ' + SHEET_ID + ' pack-' + INBOX.pack_name,
+                  content: enc };
+      // No branch unless the caller named one: the contents API then writes to the
+      // repo's OWN default branch. Defaulting to 'main' here shipped a bug in
+      // 0.17.0 — gasyoun/vote-inbox defaults to `master`, so the first real save
+      // would have 404'd on a branch that does not exist.
+      if (INBOX.branch) msg.branch = INBOX.branch;
+      if (sha) msg.sha = sha;
+      return fetch(url, { method:'PUT',
+        headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json',
+                   'Accept': 'application/vnd.github+json' },
+        body: JSON.stringify(msg) });
+    }
+    return fetch(url + (INBOX.branch ? '?ref=' + encodeURIComponent(INBOX.branch) : ''),
+                 { headers: { 'Authorization': 'Bearer ' + token } })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (cur) { return send(cur && cur.sha); })
+      .then(function (r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        __inboxSay(INBOX_SAVED.replace('{pack}', INBOX.pack_name));
+      });
+  }
+  // GitHub does not send Access-Control-Allow-Origin on login/device/* (measured
+  // 18-08-2026), so this exchange cannot go straight to github.com from a page.
+  // INBOX.device_url must name a relay that forwards and echoes CORS headers.
+  function __inboxDeviceToken() {
+    var base = INBOX.device_url.replace(/\/$/, '');
+    return fetch(base + '/code', { method:'POST',
+        headers: { 'Content-Type':'application/json', 'Accept':'application/json' },
+        body: JSON.stringify({ client_id: INBOX.client_id, scope: 'public_repo' }) })
+      .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+      .then(function (d) {
+        __inboxSay(INBOX_CODE.replace('{url}', d.verification_uri).replace('{code}', d.user_code));
+        var iv = Math.max(5, d.interval || 5) * 1000, deadline = Date.now() + (d.expires_in || 900) * 1000;
+        return new Promise(function (resolve, reject) {
+          (function poll() {
+            if (Date.now() > deadline) { reject(new Error('expired')); return; }
+            setTimeout(function () {
+              fetch(base + '/token', { method:'POST',
+                  headers: { 'Content-Type':'application/json', 'Accept':'application/json' },
+                  body: JSON.stringify({ client_id: INBOX.client_id, device_code: d.device_code,
+                    grant_type: 'urn:ietf:params:oauth:grant-type:device_code' }) })
+                .then(function (r) { return r.json(); })
+                .then(function (t) {
+                  if (t.access_token) { resolve(t.access_token); return; }
+                  if (t.error === 'authorization_pending' || t.error === 'slow_down') { poll(); return; }
+                  reject(new Error(t.error || 'device flow refused'));
+                })
+                .catch(reject);
+            }, iv);
+          })();
+        });
+      });
+  }
+  if (__inboxBtn) {
+    if (!INBOX.enabled) {
+      __inboxBtn.disabled = true;
+      __inboxSay(INBOX_DISABLED);
+    } else {
+      __inboxBtn.addEventListener('click', function () {
+        __inboxBtn.disabled = true;
+        __inboxDeviceToken()
+          .then(__inboxPut)
+          .catch(function (e) { __inboxSay(INBOX_FAILED.replace('{why}', e && e.message ? e.message : e)); })
+          .then(function () { __inboxBtn.disabled = false; });
+      });
+    }
+  }
+  __inboxHydrate();
 
   var VOTE_TOTAL = 40;
   var VOTE_PROGRESS = '{n} of {total} across the whole sheet';
