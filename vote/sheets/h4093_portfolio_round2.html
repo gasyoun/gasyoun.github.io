@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="color-scheme" content="dark">
+<meta name="generator" content="csl-pyutil/0.24.0">
+<title>H4093 — обновление портфельных дорожных карт: раунд 2 — 4 packs</title>
+<style>
+  :root { color-scheme: dark; --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --text:#e6e6e6; --muted:#9aa0aa;
+          --accent:#5b8cff; --ok:#3fb950; --border:#2a2f3a; }
+  * { box-sizing: border-box; }
+  body { background:var(--bg); color:var(--text); font-family:-apple-system,Segoe UI,Roboto,sans-serif;
+         margin:0; padding:0 0 80px 0; font-size:15px; }
+  header.top { background:var(--panel); border-bottom:1px solid var(--border); padding:14px 20px; }
+  header.top h1 { font-size:17px; margin:0 0 4px; }
+  header.top .sub { color:var(--muted); font-size:12px; }
+  main { max-width:760px; margin:0 auto; padding:18px 20px; }
+  .overall { background:var(--panel); border:1px solid var(--border); border-radius:10px;
+             padding:14px 16px; margin-bottom:18px; }
+  .bar { height:8px; background:var(--panel2); border-radius:5px; overflow:hidden; margin-top:8px; }
+  .bar > i { display:block; height:100%; background:var(--ok); width:0; transition:width .2s; }
+  ol.packs { list-style:none; margin:0; padding:0; }
+  ol.packs li { margin-bottom:10px; }
+  a.pack { display:flex; align-items:center; justify-content:space-between; gap:12px;
+           background:var(--panel); border:1px solid var(--border); border-radius:10px;
+           padding:13px 16px; color:var(--text); text-decoration:none; }
+  a.pack:hover { border-color:var(--accent); }
+  a.pack .n { font-weight:700; }
+  a.pack .prog { color:var(--muted); font-size:13px; }
+  a.pack.done { border-left:4px solid var(--ok); }
+  a.pack.done .prog { color:var(--ok); }
+  footer.hint { max-width:760px; margin:20px auto; padding:0 20px; color:var(--muted); font-size:12px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>H4093 — обновление портфельных дорожных карт: раунд 2</h1>
+    <div class="sub">Generated 05-09-2026 &middot; sheet_id <code>uprava-portfolio-roadmap-renewal_round2-architecture-40</code>
+      &middot; 40 items in 4 packs &middot; 40 архитектурных границ · владение · контракты данных · интеграция · права · воспроизводимость</div>
+  </div>
+</header>
+<main>
+  <div class="overall">
+    <div><b id="ovText">0 of 40 decided</b></div>
+    <div class="bar"><i id="ovBar"></i></div>
+  </div>
+  <ol class="packs" id="packs">
+    <li><a class="pack" id="pack-01" href="h4093_portfolio_round2/pack-01.html"><span class="n">Pack 1 of 4</span><span class="prog">0 / 10</span></a></li>
+    <li><a class="pack" id="pack-02" href="h4093_portfolio_round2/pack-02.html"><span class="n">Pack 2 of 4</span><span class="prog">0 / 10</span></a></li>
+    <li><a class="pack" id="pack-03" href="h4093_portfolio_round2/pack-03.html"><span class="n">Pack 3 of 4</span><span class="prog">0 / 10</span></a></li>
+    <li><a class="pack" id="pack-04" href="h4093_portfolio_round2/pack-04.html"><span class="n">Pack 4 of 4</span><span class="prog">0 / 10</span></a></li>
+  </ol>
+</main>
+<footer class="hint">Dr. Mārcis Gasūns · H4093 · Codex (gpt-5.6-sol) Each pack is its own page; all packs share this
+  sheet_id, so one browser keeps one record of the whole sheet and a pack you
+  finished stays finished when you come back.</footer>
+<script>
+(function () {
+  var SHEET_ID = "uprava-portfolio-roadmap-renewal_round2-architecture-40";
+  var STORE_KEY = 'review-sheet:' + SHEET_ID;
+  var PACKS = [{"name": "01", "ids": ["P-A00", "SYS-A01", "SYS-A02", "SYS-A03", "SYS-A04", "ORS-A01", "ORS-A02", "ORS-A03", "SAM-A01", "SAM-A02"]}, {"name": "02", "ids": ["SAM-A03", "RES-A01", "SL-A01", "SL-A02", "SL-A03", "COM-A01", "COM-A02", "COM-A03", "OBS-A01", "OBS-A02"]}, {"name": "03", "ids": ["OBS-A03", "KOS-A01", "KOS-A02", "KOS-A03", "SG-A01", "SG-A02", "SG-A03", "MAN-A01", "MAN-A02", "MAN-A03"]}, {"name": "04", "ids": ["KAR-A01", "KAR-A02", "KAR-A03", "KAR-A04", "VDCS-A01", "VDCS-A02", "VDCS-A03", "RR-A01", "RR-A02", "RR-A03"]}];
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(STORE_KEY) || '{}') || {}; } catch (e) { state = {}; }
+  var total = 0, done = 0;
+  PACKS.forEach(function (p) {
+    var d = p.ids.filter(function (id) { return state[id] && state[id].decision; }).length;
+    total += p.ids.length; done += d;
+    var el = document.getElementById('pack-' + p.name);
+    if (!el) return;
+    el.querySelector('.prog').textContent = d + ' / ' + p.ids.length;
+    if (d === p.ids.length) el.classList.add('done');
+  });
+  document.getElementById('ovText').textContent = done + ' of ' + total + ' decided';
+  document.getElementById('ovBar').style.width = (total ? (100 * done / total) : 0) + '%';
+})();
+</script>
+<!-- ssb-evidence: {"P-A00": {"verifier": "Codex gpt-5.6-sol", "method": "register_drift_asserted", "sources": ["review/weekly/archive/decisions_applied_05-09-2026_h4093_portfolio_round1.md", "review/weekly/archive/decisions_applied_05-09-2026_h4093_portfolio_round1.md"], "verified_date": "05-09-2026"}, "SYS-A01": {"verifier": "Codex gpt-5.6-sol", "method": "register_drift_asserted", "sources": ["Systema-Sanscriticum/docs/ACTIVATION_COMPLETION_METRICS_METHODOLOGY_2026.md", "review/weekly/archive/decisions_applied_05-09-2026_h4093_portfolio_round1.md"], "verified_date": "05-09-2026"}, "SYS-A02": {"verifier": "Codex gpt-5.6-sol", "method": "register_drift_asserted", "sources": ["SanskritKaraoke/docs/KARAOKE_PRODUCT_ROADMAP.md", "review/weekly/archive/decisions_applied_05-09-2026_h4093_portfolio_round1.md"], "verified_date": "05-09-2026"}, "SYS-A03": {"verifier": "Codex gpt-5.6-sol", "method": "register_drift_asserted", "sources": ["Systema-Sanscriticum/docs/ACTIVATION_COMPLETION_METRICS_METHODOLOGY_2026.md", "review/weekly/archive/decisions_applied_05-09-2026_h4093_portfolio_round1.md"], "verified_date": "05-09-2026"}, "SYS-A04": {"verifier": "Codex gpt-5.6-sol", "method": "register_drift_asserted", "sources": ["Systema-Sanscriticum/docs/ROADMAP_GETCOURSE_PARITY_2026.md", "review/weekly/archive/decisions_applied_05-09-2026_h4093_portfolio_round1.md"], "verified_date": "05-09-2026"}, "ORS-A01": {"verifier": "Codex gpt-5.6-sol", "method": "register_drift_asserted", "sources": ["ORS-FAQ/docs/ROADMAP_ORS-FAQ_PUBLICATION_UNBLOCK_2026H2.md", "review/weekly/archive/decisions_applied_05-09-2026_h4093_portfolio_round1.md"], "verified_date": "05-09-2026"}, "ORS-A02": {"verifier": "Codex gpt-5.6-sol", "method": "register_drift_asserted", "sources": ["ORS-FAQ/docs/PLAN_ORS-FAQ_STUDENT_FEARS_MAP_2026H2.md", "review/weekly/archive/decisions_applied_05-09-2026_h4093_portfolio_round1.md"], "verified_date": "05-09-2026"}, "ORS-A03": {"verifier": "Codex gpt-5.6-sol", "method": "register_drift_asserted", "sources": ["ORS-FAQ/docs/ROADMAP_ORS-FAQ_STUDENT_FEARS_MAP_2026H2.md", "review/weekly/archive/decisions_applied_05-09-2026_h4093_portfolio_round1.md"], "verified_date": "05-09-2026"}, "SAM-A01": {"verifier": "Codex gpt-5.6-sol", "method": "register_drift_asserted", "sources": ["SamudraManthanam/docs/ARCHITECTURE_SAMUDRAMANTHANAM_CANONICAL_PLATFORM.md", "review/weekly/archive/decisions_applied_05-09-2026_h4093_portfolio_round1.md"], "verified_date": "05-09-2026"}, "SAM-A02": {"verifier": "Codex gpt-5.6-sol", "method": "register_drift_asserted", "sources": ["SamudraManthanam/docs/PLAN_SAMUDRAMANTHANAM_ARCHITECTURE_2026_2027.md", "review/weekly/archive/decisions_applied_05-09-2026_h4093_portfolio_round1.md"], "verified_date": "05-09-2026"}, "SAM-A03": {"verifier": "Codex gpt-5.6-sol", "method": "register_drift_asserted", "sources": ["SamudraManthanam/docs/ROADMAP_SAMUDRAMANTHANAM_2026_2027.md", "review/weekly/archive/decisions_applied_05-09-2026_h4093_portfolio_round1.md"], "verified_date": "05-09-2026"}, "RES-A01": {"verifier": "Codex gpt-5.6-sol", "method": "register_drift_asserted", "sources": ["ARTICLES.md", "review/weekly/archive/decisions_applied_05-09-2026_h4093_portfolio_round1.md"], "verified_date": "05-09-2026"}, "SL-A01": {"verifier": "Codex gpt-5.6-sol", "method": "register_drift_asserted", "sources": ["SanskritLexicography/README.md", "review/weekly/archive/decisions_applied_05-09-2026_h4093_portfolio_round1.md"], "verified_date": "05-09-2026"}, "SL-A02": {"verifier": "Codex gpt-5.6-sol", "method": "register_drift_asserted", "sources": ["SanskritLexicography/README.md", "review/weekly/archive/decisions_applied_05-09-2026_h4093_portfolio_round1.md"], "verified_date": "05-09-2026"}, "SL-A03": {"verifier": "Codex gpt-5.6-sol", "method": "register_drift_asserted", "sources": ["SanskritLexicography/README.md", "review/weekly/archive/decisions_applied_05-09-2026_h4093_portfolio_round1.md"], "verified_date": "05-09-2026"}, "COM-A01": {"verifier": "Codex gpt-5.6-sol", "method": "register_drift_asserted", "sources": ["CommentaryStrategies/docs/ROADMAP_CommentaryStrategies_2026Q3.md", "review/weekly/archive/decisions_applied_05-09-2026_h4093_portfolio_round1.md"], "verified_date": "05-09-2026"}, "COM-A02": {"verifier": "Codex gpt-5.6-sol", "method": "register_drift_asserted", "sources": ["CommentaryStrategies/docs/ROADMAP_CommentaryStrategies_2026Q3.md", "review/weekly/archive/decisions_applied_05-09-2026_h4093_portfolio_round1.md"], "verified_date": "05-09-2026"}, "COM-A03": {"verifier": "Codex gpt-5.6-sol", "method": "register_drift_asserted", "sources": ["CommentaryStrategies/README.md", "review/weekly/archive/decisions_applied_05-09-2026_h4093_portfolio_round1.md"], "verified_date": "05-09-2026"}, "OBS-A01": {"verifier": "Codex gpt-5.6-sol", "method": "register_drift_asserted", "sources": ["csl-observatory/docs/ROADMAP.md", "review/weekly/archive/decisions_applied_05-09-2026_h4093_portfolio_round1.md"], "verified_date": "05-09-2026"}, "OBS-A02": {"verifier": "Codex gpt-5.6-sol", "method": "register_drift_asserted", "sources": ["csl-observatory/docs/ROADMAP.md", "review/weekly/archive/decisions_applied_05-09-2026_h4093_portfolio_round1.md"], "verified_date": "05-09-2026"}, "OBS-A03": {"verifier": "Codex gpt-5.6-sol", "method": "register_drift_asserted", "sources": ["csl-observatory/docs/ROADMAP.md", "review/weekly/archive/decisions_applied_05-09-2026_h4093_portfolio_round1.md"], "verified_date": "05-09-2026"}, "KOS-A01": {"verifier": "Codex gpt-5.6-sol", "method": "register_drift_asserted", "sources": ["kosha/README.md", "review/weekly/archive/decisions_applied_05-09-2026_h4093_portfolio_round1.md"], "verified_date": "05-09-2026"}, "KOS-A02": {"verifier": "Codex gpt-5.6-sol", "method": "register_drift_asserted", "sources": ["kosha/README.md", "review/weekly/archive/decisions_applied_05-09-2026_h4093_portfolio_round1.md"], "verified_date": "05-09-2026"}, "KOS-A03": {"verifier": "Codex gpt-5.6-sol", "method": "register_drift_asserted", "sources": ["kosha/README.md", "review/weekly/archive/decisions_applied_05-09-2026_h4093_portfolio_round1.md"], "verified_date": "05-09-2026"}, "SG-A01": {"verifier": "Codex gpt-5.6-sol", "method": "register_drift_asserted", "sources": ["SanskritGrammar/docs/ROADMAP_SANSKRITGRAMMAR_PEDAGOGY_LAST_MILE_2026H2.md", "review/weekly/archive/decisions_applied_05-09-2026_h4093_portfolio_round1.md"], "verified_date": "05-09-2026"}, "SG-A02": {"verifier": "Codex gpt-5.6-sol", "method": "register_drift_asserted", "sources": ["SanskritGrammar/docs/ROADMAP_SANSKRITGRAMMAR_GRAMMAR_LAB_2026_2027.md", "review/weekly/archive/decisions_applied_05-09-2026_h4093_portfolio_round1.md"], "verified_date": "05-09-2026"}, "SG-A03": {"verifier": "Codex gpt-5.6-sol", "method": "register_drift_asserted", "sources": ["SanskritGrammar/README.md", "review/weekly/archive/decisions_applied_05-09-2026_h4093_portfolio_round1.md"], "verified_date": "05-09-2026"}, "MAN-A01": {"verifier": "Codex gpt-5.6-sol", "method": "register_drift_asserted", "sources": ["gasuns-sanskrit-manual/.ai_state.md", "review/weekly/archive/decisions_applied_05-09-2026_h4093_portfolio_round1.md"], "verified_date": "05-09-2026"}, "MAN-A02": {"verifier": "Codex gpt-5.6-sol", "method": "register_drift_asserted", "sources": ["gasuns-sanskrit-manual/.ai_state.md", "review/weekly/archive/decisions_applied_05-09-2026_h4093_portfolio_round1.md"], "verified_date": "05-09-2026"}, "MAN-A03": {"verifier": "Codex gpt-5.6-sol", "method": "register_drift_asserted", "sources": ["gasuns-sanskrit-manual/.ai_state.md", "review/weekly/archive/decisions_applied_05-09-2026_h4093_portfolio_round1.md"], "verified_date": "05-09-2026"}, "KAR-A01": {"verifier": "Codex gpt-5.6-sol", "method": "register_drift_asserted", "sources": ["SanskritKaraoke/docs/KARAOKE_PRODUCT_ROADMAP.md", "review/weekly/archive/decisions_applied_05-09-2026_h4093_portfolio_round1.md"], "verified_date": "05-09-2026"}, "KAR-A02": {"verifier": "Codex gpt-5.6-sol", "method": "register_drift_asserted", "sources": ["SanskritKaraoke/ROADMAP.md", "review/weekly/archive/decisions_applied_05-09-2026_h4093_portfolio_round1.md"], "verified_date": "05-09-2026"}, "KAR-A03": {"verifier": "Codex gpt-5.6-sol", "method": "register_drift_asserted", "sources": ["SanskritKaraoke/docs/PLAN_SANSKRITKARAOKE_AUDIO_GATE_RESIDUAL_2026H2.md", "review/weekly/archive/decisions_applied_05-09-2026_h4093_portfolio_round1.md"], "verified_date": "05-09-2026"}, "KAR-A04": {"verifier": "Codex gpt-5.6-sol", "method": "register_drift_asserted", "sources": ["SanskritKaraoke/docs/KARAOKE_PRODUCT_ROADMAP.md", "review/weekly/archive/decisions_applied_05-09-2026_h4093_portfolio_round1.md"], "verified_date": "05-09-2026"}, "VDCS-A01": {"verifier": "Codex gpt-5.6-sol", "method": "register_drift_asserted", "sources": ["VisualDCS/docs/ROADMAP_VISUALDCS_PRODUCT_INTEGRATION_2026H2.md", "review/weekly/archive/decisions_applied_05-09-2026_h4093_portfolio_round1.md"], "verified_date": "05-09-2026"}, "VDCS-A02": {"verifier": "Codex gpt-5.6-sol", "method": "register_drift_asserted", "sources": ["VisualDCS/src/DCS-data-2026/import_dcs_conllu.py", "review/weekly/archive/decisions_applied_05-09-2026_h4093_portfolio_round1.md"], "verified_date": "05-09-2026"}, "VDCS-A03": {"verifier": "Codex gpt-5.6-sol", "method": "register_drift_asserted", "sources": ["VisualDCS/docs/PLAN_VISUALDCS_SYSTEMA_LEARNER_CONTRACTS_2026H2.md", "review/weekly/archive/decisions_applied_05-09-2026_h4093_portfolio_round1.md"], "verified_date": "05-09-2026"}, "RR-A01": {"verifier": "Codex gpt-5.6-sol", "method": "register_drift_asserted", "sources": ["RussianRamayana/Litpam-Indexator/docs/ROADMAP_LITPAM_INDEXATOR_PRINT_READINESS_2026.md", "review/weekly/archive/decisions_applied_05-09-2026_h4093_portfolio_round1.md"], "verified_date": "05-09-2026"}, "RR-A02": {"verifier": "Codex gpt-5.6-sol", "method": "register_drift_asserted", "sources": ["RussianRamayana/data/fundraising/README.md", "review/weekly/archive/decisions_applied_05-09-2026_h4093_portfolio_round1.md"], "verified_date": "05-09-2026"}, "RR-A03": {"verifier": "Codex gpt-5.6-sol", "method": "register_drift_asserted", "sources": ["RussianRamayana/docs/DH_ROADMAP.md", "review/weekly/archive/decisions_applied_05-09-2026_h4093_portfolio_round1.md"], "verified_date": "05-09-2026"}} -->
+</body>
+</html>
