@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
 <meta charset="utf-8">
 <meta name="color-scheme" content="dark">
-<title>Нилакантха: регистр отступлений от Панини, признанных традицией (H2860) — 46 items</title>
+<meta name="generator" content="csl-pyutil/0.23.0">
+<title>Нилакантха: регистр отступлений от Панини, признанных традицией (H2860) — 46 карточек</title>
 <style>
   :root { color-scheme: dark; --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --text:#e6e6e6; --muted:#9aa0aa;
           --accent:#5b8cff; --ok:#3fb950; --bad:#f85149; --defer:#d29922; --border:#2a2f3a; }
@@ -78,6 +79,7 @@
   button.rate.active { background:var(--accent); border-color:var(--accent); color:#fff; }
   button.rate.active.below { background:var(--defer); border-color:var(--defer); color:#2a1d02; }
   .rate-state { font-size:12px; color:var(--muted); margin-left:4px; }
+  .badge-typology { border:1px solid var(--accent); color:var(--text); font-weight:600; }
   :root { --fs:1.5; }
   header.top h1 { font-size:calc(16px * var(--fs)) !important; }
   header.top .sub { font-size:calc(12px * var(--fs)) !important; }
@@ -97,6 +99,21 @@
   .fsctl button { background:var(--panel2); border:1px solid var(--border); color:var(--text);
                   padding:6px 10px; border-radius:14px; cursor:pointer; line-height:1; }
   .fsctl .fsval { color:var(--muted); min-width:3.4em; text-align:center; }
+  @media (max-width: 640px) {
+    header.top { padding: 10px 14px; flex-direction: column; align-items: stretch; }
+    header.top h1 { font-size: 15px; }
+    .tally { gap: 8px; font-size: 11px; }
+    .toolbar { padding: 8px 14px; }
+    main { padding: 8px 12px; }
+    .card { padding: 12px; }
+    .filterbar { flex-wrap: wrap; }
+    button.dl, button.vote, button.rate, .fsctl button, #saveBtn, #handinBtn, #pauseBtn {
+      min-height: 44px; min-width: 44px; padding: 10px 14px;
+    }
+    .controls { flex-wrap: wrap; }
+    .panel { padding: 8px 10px; }
+    textarea.note { min-height: 60px; }
+  }
   .tally .time { color:var(--muted); }
   .dl.handin { background:#243447; }
   .tally .pausebtn { background:none; border:1px solid var(--border); color:var(--muted);
@@ -105,29 +122,59 @@
   .tally .pausebtn.on { color:#ffd479; border-color:#ffd479; }
   .tally .time.paused { opacity:.45; }
   .handin-said { color:var(--muted); font-size:12px; margin-left:10px; }
+  .card.kbd-active { outline:2px solid var(--accent); outline-offset:3px; }
+  .tally .tstate { color:var(--muted); font-size:.85em; margin-left:4px; }
+  .tally .tstate.idle { color:var(--defer); }
+  .flowprog { display:inline-flex; align-items:center; gap:8px; color:var(--muted); font-size:12px; }
+  .flowprog .bar { display:inline-block; width:120px; height:6px; border-radius:3px;
+                   background:var(--panel2); border:1px solid var(--border); overflow:hidden; }
+  .flowprog .bar i { display:block; height:6px; background:var(--accent); width:0; }
+  .dl.flowundo { background:#243447; }
+  .flowtoast { position:fixed; left:50%; bottom:24px; transform:translateX(-50%);
+               background:var(--panel2); border:1px solid var(--border); color:var(--text);
+               padding:8px 14px; border-radius:8px; font-size:13px; z-index:50;
+               opacity:0; pointer-events:none; transition:opacity .18s; }
+  .flowtoast.on { opacity:1; }
+  .voteprog { flex:1 0 100%; order:99; background:var(--panel);
+              border-top:1px solid var(--border); margin:6px -20px -14px; padding:8px 20px;
+              display:flex; align-items:center; gap:12px; font-size:12px; color:var(--muted); }
+  .voteprog .bar { flex:1 1 auto; height:8px; border-radius:4px; background:var(--panel2);
+                   border:1px solid var(--border); overflow:hidden; }
+  .voteprog .bar i { display:block; height:100%; width:0; background:var(--ok); transition:width .2s; }
+  .voteprog b { color:var(--text); font-weight:700; }
+  .voteprog .eta { white-space:nowrap; }
+  .votebar { position:sticky; bottom:0; z-index:9; background:var(--panel);
+             border-top:1px solid var(--border); padding:10px 20px; margin-top:24px;
+             display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  .votebar .spacer { flex:1 1 auto; }
+  .card { scroll-margin-top:96px; }
+  @media (max-width: 640px) { .voteprog { padding:6px 12px; } .votebar { padding:8px 12px; } }
 </style>
 </head>
 <body>
 <header class="top">
   <div>
-    <h1>Нилакантха: регистр отступлений от Панини, признанных традицией (H2860) — 46 items</h1>
-    <div class="sub">Generated 16-08-2026 &middot; sheet_id <code>commentarystrategies-nilakantha-licence_h2860</code> &middot; 151 строка из «Бхаратабхавадипы» Нилакантхи по всем 24 694 шлокам с ṭīkā (149 авто-типизации + 2 вручную; измеренная точность 91,5 % — 151 из 165). На голосование вынесены только те карточки, которые правило решить не может: 16 ручных решений и воспроизводимая выборка из 30 авто-типизированных строк (seed 2860).</div>
+    <h1>Нилакантха: регистр отступлений от Панини, признанных традицией (H2860) — 46 карточек</h1>
+    <div class="sub">Собрано 16-08-2026 &middot; sheet_id <code>commentarystrategies-nilakantha-licence_h2860</code> &middot; 151 строка из «Бхаратабхавадипы» Нилакантхи по всем 24 694 шлокам с ṭīkā (149 авто-типизации + 2 вручную; измеренная точность 91,5 % — 151 из 165). На голосование вынесены только те карточки, которые правило решить не может: 16 ручных решений и воспроизводимая выборка из 30 авто-типизированных строк (seed 2860).</div>
   </div>
   <div class="tally" id="tally">
     <span class="approve">&#9989; <span class="count" id="c-approve">0</span></span>
     <span class="reject">&#10060; <span class="count" id="c-reject">0</span></span>
     <span class="defer">&#9208; <span class="count" id="c-defer">0</span></span>
-    <span class="time" title="active time on this sheet (while the tab is visible)">&#9201; <span class="count" id="t-total">0:00</span></span>
-    <button type="button" class="pausebtn" id="pauseBtn" title="pause the clock — a break is not review time">&#9208;</button>
+    <span class="time" title="активное время на этом листе (пока вкладка видима)">&#9201; <span class="count" id="t-total">0:00</span><span class="tstate" id="t-state"></span></span>
+    <button type="button" class="pausebtn" id="pauseBtn" title="поставить таймер на паузу — перерыв не считается временем ревью">&#9208;</button>
     <span class="unvoted">&#9711; <span class="count" id="c-unvoted">46</span></span>
   </div>
+<div class="voteprog" id="voteProg"><span id="voteProgText"></span><span class="bar"><i id="voteProgBar"></i></span><span class="eta" id="voteProgEta"></span></div>
 </header>
 <aside class="screening-banner" role="status" data-screening="1"><strong>Screening (H1649)</strong> — only human-required cards are below. Off the plate: <span class="sc-a">deterministic 5</span> · <span class="sc-b">dataset lookup 0</span> · <span class="sc-c">agent adjudication 119</span> (total screened 124). Human cards: <span class="sc-d">46</span>. Evidence: <code>reports/COMMENTARY_LICENCE_REGISTER_NILAKANTHA_2026.md</code>. Rules: arsa-word-anchor-independent-vowel, arsa-stem-exclusion-arstisena-arsyasrngi-arsabha-arseya, deviation-type-from-named-grammatical-noun.</aside>
-<div class="savebanner">&#128229; Your export downloads as <code>commentarystrategies-nilakantha-licence_h2860_decisions.json</code> &rarr; save it to <code>CommentaryStrategies\review\commentarystrategies-nilakantha-licence_h2860_decisions.json</code> (the <code>sheet_id</code> inside the file is <code>commentarystrategies-nilakantha-licence_h2860</code> — that is how a later session knows which sheet these decisions belong to).</div>
+<div class="savebanner">&#128229; Ваш экспорт скачивается как <code>commentarystrategies-nilakantha-licence_h2860_decisions.json</code> &rarr; сохраните его в <code>CommentaryStrategies\review\commentarystrategies-nilakantha-licence_h2860_decisions.json</code> (значение <code>sheet_id</code> внутри файла &mdash; <code>commentarystrategies-nilakantha-licence_h2860</code> &mdash; так следующая сессия узнаёт, к какому листу относятся эти решения).</div>
 <div class="toolbar">
-  <button class="dl" id="downloadBtn">Download decisions.json</button><button class="dl handin" id="handinBtn" title="stop the clock and export the votes made so far; the rest stay saved in this browser">Hand in what I got</button><span class="handin-said" id="handinSaid"></span><button class="dl" id="saveBtn" style="display:none;margin-left:8px">Save to folder…</button>
+  <button data-submit="1" class="dl" id="downloadBtn">Скачать decisions.json</button><button data-submit="1" class="dl handin" id="handinBtn" title="остановить таймер и экспортировать сделанные голоса; остальное останется сохранённым в этом браузере">Сдать что успел(а)</button><span class="handin-said" id="handinSaid"></span><button data-submit="1" class="dl" id="saveBtn" style="display:none;margin-left:8px">Сохранить в папку…</button>
   <div class="fsctl" title="text size — persists in this browser"><button type="button" id="fsDown" aria-label="smaller text">A&minus;</button><span class="fsval" id="fsVal"></span><button type="button" id="fsUp" aria-label="larger text">A+</button></div>
-  <div class="filterbar" id="filterbar"><button data-filter="all" class="active">all</button><button data-filter="hand-reject">отклонено вручную (14)</button><button data-filter="hand-type">тип назначен вручную (2)</button><button data-filter="auto-sample">выборка авто-типизации (30)</button><button data-filter="unvoted">unvoted only</button></div>
+  <button data-submit="1" type="button" class="dl flowundo" id="flowUndoBtn" title="отменить последнее решение (z)">&#8630; Отменить</button>
+  <span class="flowprog" id="flowProg"><span class="bar"><i id="flowBar"></i></span><span id="flowProgText"></span><span id="flowEta"></span></span>
+  <div class="filterbar" id="filterbar"><button data-filter="all" class="active">все</button><button data-filter="hand-reject">отклонено вручную (14)</button><button data-filter="hand-type">тип назначен вручную (2)</button><button data-filter="auto-sample">выборка авто-типизации (30)</button><button data-filter="unvoted">только непроголосованные</button></div>
 </div>
 <main id="cards">
 
@@ -138,215 +185,215 @@
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
       <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
     <textarea class="note" placeholder="Если не согласны — какой deviation_type здесь верен?"></textarea>
   </section>
 
-  <section class="card" <div class="panel"><h4>Evidence (agent-verified)</h4><div class="panel-body"><p><b>Проверено агентом 05-09-2026 (OxAlpha glm-5.3-flash):</b> Hand-reject строки: регистр уже отбросил их как не-лицензии; карточка — контрольный sample ручных отказов, чтобы отловить систематическую ошибку классификатора.<p><b>Позиция агента:</b> подтвердить отказ или вернуть в регистр</p></p></div></div>data-id="P01_U07_A077_S018#0@0" data-filt="hand-reject">
+  <section class="card" data-id="P01_U07_A077_S018#0@0" data-filt="hand-reject">
     <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/adiparva?page=7&amp;id=P01_U07_A077_" target="_blank" rel="noopener">MBh 1.77.18 — отклонено как омоним (arsa_lexical_gloss)</a> <span class="badge">adiparva</span><span class="badge">ārṣa</span><span class="badge">ручное решение</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P01_U07_A077_S018#0@0</span></header>
     <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षम्</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">आर्षम् ऋषिप्रणीतं सोदरयोरविवाहं कामतः शप्तोऽस्मि न धर्मतः ॥१८॥</span></p><p><b>Решение агента:</b> <code>arsa_lexical_gloss</code> — строка <u>не попадает</u> в регистр.</p></div>
     <div class="panel"><h4>Обоснование</h4><p>ārṣam glossed ṛṣi-praṇītam &#x27;composed by the ṛṣis&#x27; — a gloss of the verse&#x27;s own word, in a passage about the marriage of siblings.</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка остаётся вне регистра; она уже учтена в измеренной точности 91,5 % (151 из 165) и лежит в <a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/licence_register/nilakantha_licence_rejected.tsv">nilakantha_licence_rejected.tsv</a> вместе с причиной отклонения.</p><p><b>«Не согласен»</b> — строка возвращается в регистр (станет 152), измеренная точность вырастет, и в заметке нужно указать deviation_type, который вы считаете верным: без него строку некуда положить.</p><p><b>«Отложить»</b> — строка остаётся отклонённой до следующего круга; ничего не ломается, но цифра точности остаётся спорной.</p></div>
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
       <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
     <textarea class="note" placeholder="Если не согласны — какой deviation_type здесь верен?"></textarea>
   </section>
 
-  <section class="card" <div class="panel"><h4>Evidence (agent-verified)</h4><div class="panel-body"><p><b>Проверено агентом 05-09-2026 (OxAlpha glm-5.3-flash):</b> Hand-reject строки: регистр уже отбросил их как не-лицензии; карточка — контрольный sample ручных отказов, чтобы отловить систематическую ошибку классификатора.<p><b>Позиция агента:</b> подтвердить отказ или вернуть в регистр</p></p></div></div>data-id="P01_U07_A102_S015#0@0" data-filt="hand-reject">
+  <section class="card" data-id="P01_U07_A102_S015#0@0" data-filt="hand-reject">
     <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/adiparva?page=7&amp;id=P01_U07_A102_" target="_blank" rel="noopener">MBh 1.102.15 — отклонено как омоним (arsa_marriage_type)</a> <span class="badge">adiparva</span><span class="badge">ārṣa</span><span class="badge">ручное решение</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P01_U07_A102_S015#0@0</span></header>
     <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षं</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">आर्षं विधिं यज्ञं तेन दैव उक्तः एतेऽष्टौ विवाहाः प्राग्व्याख्याताः । अष्टमं राक्षसं विवाहम् ॥१५॥</span></p><p><b>Решение агента:</b> <code>arsa_marriage_type</code> — строка <u>не попадает</u> в регистр.</p></div>
     <div class="panel"><h4>Обоснование</h4><p>ārṣaṃ vidhim listed among &#x27;ete &#x27;ṣṭau vivāhāḥ&#x27; — the eight marriage rites, with the rākṣasa as the eighth.</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка остаётся вне регистра; она уже учтена в измеренной точности 91,5 % (151 из 165) и лежит в <a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/licence_register/nilakantha_licence_rejected.tsv">nilakantha_licence_rejected.tsv</a> вместе с причиной отклонения.</p><p><b>«Не согласен»</b> — строка возвращается в регистр (станет 152), измеренная точность вырастет, и в заметке нужно указать deviation_type, который вы считаете верным: без него строку некуда положить.</p><p><b>«Отложить»</b> — строка остаётся отклонённой до следующего круга; ничего не ломается, но цифра точности остаётся спорной.</p></div>
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
       <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
     <textarea class="note" placeholder="Если не согласны — какой deviation_type здесь верен?"></textarea>
   </section>
 
-  <section class="card" <div class="panel"><h4>Evidence (agent-verified)</h4><div class="panel-body"><p><b>Проверено агентом 05-09-2026 (OxAlpha glm-5.3-flash):</b> Hand-reject строки: регистр уже отбросил их как не-лицензии; карточка — контрольный sample ручных отказов, чтобы отловить систематическую ошибку классификатора.<p><b>Позиция агента:</b> подтвердить отказ или вернуть в регистр</p></p></div></div>data-id="P01_U07_A113_S012#0@11" data-filt="hand-reject">
+  <section class="card" data-id="P01_U07_A113_S012#0@11" data-filt="hand-reject">
     <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/adiparva?page=7&amp;id=P01_U07_A113_" target="_blank" rel="noopener">MBh 1.113.12 — отклонено как омоним (arsa_marriage_type)</a> <span class="badge">adiparva</span><span class="badge">ārṣa</span><span class="badge">ручное решение</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P01_U07_A113_S012#0@11</span></header>
     <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षेऽपि</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">धर्म एषः । आर्षेऽपि विवाहे कन्याशुल्कत्वेन गोमिथुनग्रहस्य विधानात् । तथा च शिष्टादृतत्वादयमपि धर्मः स्वयंभुवा वेदेनैवोक्त इत्यवसेयम् । एतेन विगीतोपि कुलाचारो न त्याज्य इत्युक्तम् ॥१२॥</span></p><p><b>Решение агента:</b> <code>arsa_marriage_type</code> — строка <u>не попадает</u> в регистр.</p></div>
     <div class="panel"><h4>Обоснование</h4><p>&#x27;ārṣe &#x27;pi vivāhe&#x27; — the bride-price of a cow-pair prescribed in the ārṣa wedding.</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка остаётся вне регистра; она уже учтена в измеренной точности 91,5 % (151 из 165) и лежит в <a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/licence_register/nilakantha_licence_rejected.tsv">nilakantha_licence_rejected.tsv</a> вместе с причиной отклонения.</p><p><b>«Не согласен»</b> — строка возвращается в регистр (станет 152), измеренная точность вырастет, и в заметке нужно указать deviation_type, который вы считаете верным: без него строку некуда положить.</p><p><b>«Отложить»</b> — строка остаётся отклонённой до следующего круга; ничего не ломается, но цифра точности остаётся спорной.</p></div>
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
       <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
     <textarea class="note" placeholder="Если не согласны — какой deviation_type здесь верен?"></textarea>
   </section>
 
-  <section class="card" <div class="panel"><h4>Evidence (agent-verified)</h4><div class="panel-body"><p><b>Проверено агентом 05-09-2026 (OxAlpha glm-5.3-flash):</b> Hand-reject строки: регистр уже отбросил их как не-лицензии; карточка — контрольный sample ручных отказов, чтобы отловить систематическую ошибку классификатора.<p><b>Позиция агента:</b> подтвердить отказ или вернуть в регистр</p></p></div></div>data-id="P01_U07_A118_S001#0@35" data-filt="hand-reject">
+  <section class="card" data-id="P01_U07_A118_S001#0@35" data-filt="hand-reject">
     <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/adiparva?page=7&amp;id=P01_U07_A118_" target="_blank" rel="noopener">MBh 1.118.1 — отклонено как омоним (arsa_lexical_gloss)</a> <span class="badge">adiparva</span><span class="badge">ārṣa</span><span class="badge">ручное решение</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P01_U07_A118_S001#0@35</span></header>
     <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षः</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">अष्टदशाधिकशततमः अध्यायः कथित इति । आर्षः ऋषिप्रसादहेतुकः । अमनुष्यो मनुष्येष्वदृष्टः । युगपद्बहूनां जननात् ॥१॥</span></p><p><b>Решение агента:</b> <code>arsa_lexical_gloss</code> — строка <u>не попадает</u> в регистр.</p></div>
     <div class="panel"><h4>Обоснование</h4><p>ārṣaḥ = ṛṣi-prasāda-hetukaḥ &#x27;caused by a ṛṣi&#x27;s favour&#x27; — glossing the birth of the hundred sons, no grammatical operation in sight.</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка остаётся вне регистра; она уже учтена в измеренной точности 91,5 % (151 из 165) и лежит в <a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/licence_register/nilakantha_licence_rejected.tsv">nilakantha_licence_rejected.tsv</a> вместе с причиной отклонения.</p><p><b>«Не согласен»</b> — строка возвращается в регистр (станет 152), измеренная точность вырастет, и в заметке нужно указать deviation_type, который вы считаете верным: без него строку некуда положить.</p><p><b>«Отложить»</b> — строка остаётся отклонённой до следующего круга; ничего не ломается, но цифра точности остаётся спорной.</p></div>
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
       <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
     <textarea class="note" placeholder="Если не согласны — какой deviation_type здесь верен?"></textarea>
   </section>
 
-  <section class="card" <div class="panel"><h4>Evidence (agent-verified)</h4><div class="panel-body"><p><b>Проверено агентом 05-09-2026 (OxAlpha glm-5.3-flash):</b> Hand-reject строки: регистр уже отбросил их как не-лицензии; карточка — контрольный sample ручных отказов, чтобы отловить систематическую ошибку классификатора.<p><b>Позиция агента:</b> подтвердить отказ или вернуть в регистр</p></p></div></div>data-id="P03_U03_A031_S008#0@0" data-filt="hand-reject">
+  <section class="card" data-id="P03_U03_A031_S008#0@0" data-filt="hand-reject">
     <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/vanaparva?page=3&amp;id=P03_U03_A031_" target="_blank" rel="noopener">MBh 3.31.8 — отклонено как омоним (arsa_lexical_gloss)</a> <span class="badge">vanaparva</span><span class="badge">ārṣa</span><span class="badge">ручное решение</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P03_U03_A031_S008#0@0</span></header>
     <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षम्</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">आर्षम् ऋषयो मन्त्रास्तद्द्रष्टारो मन्वादयो वा धर्ममूलभूतं मन्त्रजातं वा मन्वादिवाक्यं वेत्यर्थः । अर्थे वेति पाठे फले विषये इत्यर्थः। दुर्बलात्मनः विवेकाक्षमचित्तस्य अपेयात्</span></p><p><b>Решение агента:</b> <code>arsa_lexical_gloss</code> — строка <u>не попадает</u> в регистр.</p></div>
     <div class="panel"><h4>Обоснование</h4><p>ārṣam = &#x27;the ṛṣis, the mantras, or their seers Manu and the rest&#x27; — a dharma-source gloss.</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка остаётся вне регистра; она уже учтена в измеренной точности 91,5 % (151 из 165) и лежит в <a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/licence_register/nilakantha_licence_rejected.tsv">nilakantha_licence_rejected.tsv</a> вместе с причиной отклонения.</p><p><b>«Не согласен»</b> — строка возвращается в регистр (станет 152), измеренная точность вырастет, и в заметке нужно указать deviation_type, который вы считаете верным: без него строку некуда положить.</p><p><b>«Отложить»</b> — строка остаётся отклонённой до следующего круга; ничего не ломается, но цифра точности остаётся спорной.</p></div>
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
       <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
     <textarea class="note" placeholder="Если не согласны — какой deviation_type здесь верен?"></textarea>
   </section>
 
-  <section class="card" <div class="panel"><h4>Evidence (agent-verified)</h4><div class="panel-body"><p><b>Проверено агентом 05-09-2026 (OxAlpha glm-5.3-flash):</b> Hand-reject строки: регистр уже отбросил их как не-лицензии; карточка — контрольный sample ручных отказов, чтобы отловить систематическую ошибку классификатора.<p><b>Позиция агента:</b> подтвердить отказ или вернуть в регистр</p></p></div></div>data-id="P03_U07_A091_S024#0@90" data-filt="hand-reject">
+  <section class="card" data-id="P03_U07_A091_S024#0@90" data-filt="hand-reject">
     <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/vanaparva?page=7&amp;id=P03_U07_A091_" target="_blank" rel="noopener">MBh 3.91.24 — отклонено как омоним (arsa_lexical_gloss)</a> <span class="badge">vanaparva</span><span class="badge">ārṣa</span><span class="badge">ручное решение</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P03_U07_A091_S024#0@90</span></header>
     <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षेण</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">अपहरिष्यामि कवचकुण्डलापहरणे इन्द्रेण कृते सति तदपि इन्द्रस्यान्तः प्रविश्य सम्पादयिष्यामि आर्षेण अभेददर्शनेन अहं मनुरभवमित्यादिवदहमेवेन्द्ररूपी करिष्यामीति ॥२४॥</span></p><p><b>Решение агента:</b> <code>arsa_lexical_gloss</code> — строка <u>не попадает</u> в регистр.</p></div>
     <div class="panel"><h4>Обоснование</h4><p>ārṣeṇa abheda-darśanena &#x27;by the ṛṣi-like vision of non-difference&#x27; — an instrumental of manner, glossing Karṇa&#x27;s identification with Indra.</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка остаётся вне регистра; она уже учтена в измеренной точности 91,5 % (151 из 165) и лежит в <a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/licence_register/nilakantha_licence_rejected.tsv">nilakantha_licence_rejected.tsv</a> вместе с причиной отклонения.</p><p><b>«Не согласен»</b> — строка возвращается в регистр (станет 152), измеренная точность вырастет, и в заметке нужно указать deviation_type, который вы считаете верным: без него строку некуда положить.</p><p><b>«Отложить»</b> — строка остаётся отклонённой до следующего круга; ничего не ломается, но цифра точности остаётся спорной.</p></div>
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
       <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
     <textarea class="note" placeholder="Если не согласны — какой deviation_type здесь верен?"></textarea>
   </section>
 
-  <section class="card" <div class="panel"><h4>Evidence (agent-verified)</h4><div class="panel-body"><p><b>Проверено агентом 05-09-2026 (OxAlpha glm-5.3-flash):</b> Hand-reject строки: регистр уже отбросил их как не-лицензии; карточка — контрольный sample ручных отказов, чтобы отловить систематическую ошибку классификатора.<p><b>Позиция агента:</b> подтвердить отказ или вернуть в регистр</p></p></div></div>data-id="P05_U05_A070_S007#0@225" data-filt="hand-reject">
+  <section class="card" data-id="P05_U05_A070_S007#0@225" data-filt="hand-reject">
     <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/udyogaparva?page=5&amp;id=P05_U05_A070_" target="_blank" rel="noopener">MBh 5.70.7 — отклонено как омоним (arsa_lexical_gloss)</a> <span class="badge">udyogaparva</span><span class="badge">ārṣa</span><span class="badge">ручное решение</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P05_U05_A070_S007#0@225</span></header>
     <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षं</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">इति स्मृतो मत्वर्थीयस्तप्प्रत्ययो बाहुलकात् सत्वशब्दादपि बोध्यः अत्र सत्वेन अत्याज्यः सत्वं च यस्य अत्याज्यं स सत्वतः सत्वत एव सात्वतः- राक्षसवायसादिवत्स्वार्थे तद्धितः- आर्षं वेदस्तेन भातीत्यार्षभ औपनिषदः पुरुषः उपनिषद्वेद्यत्वाद्योगात् वृषभेक्षणः । तथा चायं योगः वृषं धर्मं भासयतीति वृषभो वेदस्तदेव ईक्षणं चक्षुरिव ज्ञापकं यस्य सः वृषभेक्षण इ</span></p><p><b>Решение агента:</b> <code>arsa_lexical_gloss</code> — строка <u>не попадает</u> в регистр.</p></div>
     <div class="panel"><h4>Обоснование</h4><p>THE FALSE POSITIVE OF THE AUTOMATIC PASS. &#x27;ārṣaṃ vedas tena bhātīty ārṣabha&#x27; — ārṣam is being glossed as &#x27;the Veda&#x27;, and ārṣabha &#x27;illumined by the Veda&#x27; derived from it. The &#x27;svārthe taddhitaḥ&#x27; two characters upstream, which is what triggered the rule, belongs to the PREVIOUS derivation (sattvataḥ &gt; sātvataḥ) and has nothing to do with the ārṣa. The one case in 165 where a genuine grammatical term stands next to a non-grammatical ārṣa; no rule distinguishes them, only reading the sentence does.</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка остаётся вне регистра; она уже учтена в измеренной точности 91,5 % (151 из 165) и лежит в <a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/licence_register/nilakantha_licence_rejected.tsv">nilakantha_licence_rejected.tsv</a> вместе с причиной отклонения.</p><p><b>«Не согласен»</b> — строка возвращается в регистр (станет 152), измеренная точность вырастет, и в заметке нужно указать deviation_type, который вы считаете верным: без него строку некуда положить.</p><p><b>«Отложить»</b> — строка остаётся отклонённой до следующего круга; ничего не ломается, но цифра точности остаётся спорной.</p></div>
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
       <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
     <textarea class="note" placeholder="Если не согласны — какой deviation_type здесь верен?"></textarea>
   </section>
 
-  <section class="card" <div class="panel"><h4>Evidence (agent-verified)</h4><div class="panel-body"><p><b>Проверено агентом 05-09-2026 (OxAlpha glm-5.3-flash):</b> Hand-reject строки: регистр уже отбросил их как не-лицензии; карточка — контрольный sample ручных отказов, чтобы отловить систематическую ошибку классификатора.<p><b>Позиция агента:</b> подтвердить отказ или вернуть в регистр</p></p></div></div>data-id="P12_U01_A012_S017#0@0" data-filt="hand-reject">
+  <section class="card" data-id="P12_U01_A012_S017#0@0" data-filt="hand-reject">
     <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/shantiparva?page=1&amp;id=P12_U01_A012_" target="_blank" rel="noopener">MBh 12.12.17 — отклонено как омоним (arsa_lexical_gloss)</a> <span class="badge">shantiparva</span><span class="badge">ārṣa</span><span class="badge">ручное решение</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P12_U01_A012_S017#0@0</span></header>
     <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षः</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">आर्षः ऋषीणां हितः ॥१७॥</span></p><p><b>Решение агента:</b> <code>arsa_lexical_gloss</code> — строка <u>не попадает</u> в регистр.</p></div>
     <div class="panel"><h4>Обоснование</h4><p>The whole ṭīkā is &#x27;ārṣaḥ ṛṣīṇāṃ hitaḥ&#x27; — glossing the verse&#x27;s own ārṣo vidhiḥ as &#x27;the rule beneficial to ṛṣis&#x27;.</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка остаётся вне регистра; она уже учтена в измеренной точности 91,5 % (151 из 165) и лежит в <a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/licence_register/nilakantha_licence_rejected.tsv">nilakantha_licence_rejected.tsv</a> вместе с причиной отклонения.</p><p><b>«Не согласен»</b> — строка возвращается в регистр (станет 152), измеренная точность вырастет, и в заметке нужно указать deviation_type, который вы считаете верным: без него строку некуда положить.</p><p><b>«Отложить»</b> — строка остаётся отклонённой до следующего круга; ничего не ломается, но цифра точности остаётся спорной.</p></div>
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
       <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
     <textarea class="note" placeholder="Если не согласны — какой deviation_type здесь верен?"></textarea>
   </section>
 
-  <section class="card" <div class="panel"><h4>Evidence (agent-verified)</h4><div class="panel-body"><p><b>Проверено агентом 05-09-2026 (OxAlpha glm-5.3-flash):</b> Hand-reject строки: регистр уже отбросил их как не-лицензии; карточка — контрольный sample ручных отказов, чтобы отловить систематическую ошибку классификатора.<p><b>Позиция агента:</b> подтвердить отказ или вернуть в регистр</p></p></div></div>data-id="P12_U02_A132_S017#0@0" data-filt="hand-reject">
+  <section class="card" data-id="P12_U02_A132_S017#0@0" data-filt="hand-reject">
     <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/shantiparva?page=2&amp;id=P12_U02_A132_" target="_blank" rel="noopener">MBh 12.132.17 — отклонено как омоним (arsa_lexical_gloss)</a> <span class="badge">shantiparva</span><span class="badge">ārṣa</span><span class="badge">ручное решение</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P12_U02_A132_S017#0@0</span></header>
     <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षं</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">आर्षं -</span></p><p><b>Решение агента:</b> <code>arsa_lexical_gloss</code> — строка <u>не попадает</u> в регистр.</p></div>
     <div class="panel"><h4>Обоснование</h4><p>The ṭīkā is the two characters &#x27;ārṣaṃ -&#x27; and stops: a truncated lemma-gloss of the verse&#x27;s ārṣam (&#x27;scriptural precedent&#x27;), not a licence. Truncation is in the source, not in the scrape.</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка остаётся вне регистра; она уже учтена в измеренной точности 91,5 % (151 из 165) и лежит в <a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/licence_register/nilakantha_licence_rejected.tsv">nilakantha_licence_rejected.tsv</a> вместе с причиной отклонения.</p><p><b>«Не согласен»</b> — строка возвращается в регистр (станет 152), измеренная точность вырастет, и в заметке нужно указать deviation_type, который вы считаете верным: без него строку некуда положить.</p><p><b>«Отложить»</b> — строка остаётся отклонённой до следующего круга; ничего не ломается, но цифра точности остаётся спорной.</p></div>
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
       <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
     <textarea class="note" placeholder="Если не согласны — какой deviation_type здесь верен?"></textarea>
   </section>
 
-  <section class="card" <div class="panel"><h4>Evidence (agent-verified)</h4><div class="panel-body"><p><b>Проверено агентом 05-09-2026 (OxAlpha glm-5.3-flash):</b> Hand-reject строки: регистр уже отбросил их как не-лицензии; карточка — контрольный sample ручных отказов, чтобы отловить систематическую ошибку классификатора.<p><b>Позиция агента:</b> подтвердить отказ или вернуть в регистр</p></p></div></div>data-id="P12_U03_A268_S010#0@9" data-filt="hand-reject">
+  <section class="card" data-id="P12_U03_A268_S010#0@9" data-filt="hand-reject">
     <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/shantiparva?page=3&amp;id=P12_U03_A268_" target="_blank" rel="noopener">MBh 12.268.10 — отклонено как омоним (arsa_lexical_gloss)</a> <span class="badge">shantiparva</span><span class="badge">ārṣa</span><span class="badge">ручное решение</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P12_U03_A268_S010#0@9</span></header>
     <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षं</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">तपस्विनः आर्षं मन्यन्ते किं विदितात्मनः नित्यज्ञानवतः परमेश्वरस्य व्याहृतम् ’अस्य महतो भूतस्य निःश्वसितमेतद्यदृग्वेदः&#x27; इति श्रुतेर्निःश्वासवदयत्नोच्चारितं च वेदम् अतोऽत्रैकमप्यक्षरमप्</span></p><p><b>Решение агента:</b> <code>arsa_lexical_gloss</code> — строка <u>не попадает</u> в регистр.</p></div>
     <div class="panel"><h4>Обоснование</h4><p>ārṣam = the Veda, &#x27;breathed out effortlessly by the great Being&#x27; — glossing sarvam ārṣaṃ hi manyante.</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка остаётся вне регистра; она уже учтена в измеренной точности 91,5 % (151 из 165) и лежит в <a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/licence_register/nilakantha_licence_rejected.tsv">nilakantha_licence_rejected.tsv</a> вместе с причиной отклонения.</p><p><b>«Не согласен»</b> — строка возвращается в регистр (станет 152), измеренная точность вырастет, и в заметке нужно указать deviation_type, который вы считаете верным: без него строку некуда положить.</p><p><b>«Отложить»</b> — строка остаётся отклонённой до следующего круга; ничего не ломается, но цифра точности остаётся спорной.</p></div>
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
       <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
     <textarea class="note" placeholder="Если не согласны — какой deviation_type здесь верен?"></textarea>
   </section>
 
-  <section class="card" <div class="panel"><h4>Evidence (agent-verified)</h4><div class="panel-body"><p><b>Проверено агентом 05-09-2026 (OxAlpha glm-5.3-flash):</b> Hand-reject строки: регистр уже отбросил их как не-лицензии; карточка — контрольный sample ручных отказов, чтобы отловить систематическую ошибку классификатора.<p><b>Позиция агента:</b> подтвердить отказ или вернуть в регистр</p></p></div></div>data-id="P13_U01_A019_S002#0@71" data-filt="hand-reject">
+  <section class="card" data-id="P13_U01_A019_S002#0@71" data-filt="hand-reject">
     <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/anushasanaparva?page=1&amp;id=P13_U01_A019_" target="_blank" rel="noopener">MBh 13.19.2 — отклонено как омоним (arsa_marriage_type)</a> <span class="badge">anushasanaparva</span><span class="badge">ārṣa</span><span class="badge">ручное решение</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P13_U01_A019_S002#0@71</span></header>
     <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्ष</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">धर्मविशेषे एव साहित्यमपेक्ष्यते न सर्वत्रेत्याशङ्क्य धर्मं विकल्पयति - आर्ष इति । ऋषिभिर्मन्त्रैः प्रकाशितः श्रौतस्मार्तक्रियारूप आर्षः केवलं वेदविहितत्वाद्वा । प्राजपत्यः प्रजापतिना सन्तानकर्मणा प्रथितः &#x27;नापुत्रस्य लोकोऽस्ति&#x27; इति श्रुतत्वादकरणे</span></p><p><b>Решение агента:</b> <code>arsa_marriage_type</code> — строка <u>не попадает</u> в регистр.</p></div>
     <div class="panel"><h4>Обоснование</h4><p>ārṣa heads Nīlakaṇṭha&#x27;s enumeration of dharma-types (ārṣa / prājāpatya / āsura …) — the dharmaśāstra classification, twice in one ṭīkā.</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка остаётся вне регистра; она уже учтена в измеренной точности 91,5 % (151 из 165) и лежит в <a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/licence_register/nilakantha_licence_rejected.tsv">nilakantha_licence_rejected.tsv</a> вместе с причиной отклонения.</p><p><b>«Не согласен»</b> — строка возвращается в регистр (станет 152), измеренная точность вырастет, и в заметке нужно указать deviation_type, который вы считаете верным: без него строку некуда положить.</p><p><b>«Отложить»</b> — строка остаётся отклонённой до следующего круга; ничего не ломается, но цифра точности остаётся спорной.</p></div>
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
       <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
     <textarea class="note" placeholder="Если не согласны — какой deviation_type здесь верен?"></textarea>
   </section>
 
-  <section class="card" <div class="panel"><h4>Evidence (agent-verified)</h4><div class="panel-body"><p><b>Проверено агентом 05-09-2026 (OxAlpha glm-5.3-flash):</b> Hand-reject строки: регистр уже отбросил их как не-лицензии; карточка — контрольный sample ручных отказов, чтобы отловить систематическую ошибку классификатора.<p><b>Позиция агента:</b> подтвердить отказ или вернуть в регистр</p></p></div></div>data-id="P13_U01_A019_S002#0@130" data-filt="hand-reject">
+  <section class="card" data-id="P13_U01_A019_S002#0@130" data-filt="hand-reject">
     <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/anushasanaparva?page=1&amp;id=P13_U01_A019_" target="_blank" rel="noopener">MBh 13.19.2 — отклонено как омоним (arsa_marriage_type)</a> <span class="badge">anushasanaparva</span><span class="badge">ārṣa</span><span class="badge">ручное решение</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P13_U01_A019_S002#0@130</span></header>
     <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षः</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">धर्मविशेषे एव साहित्यमपेक्ष्यते न सर्वत्रेत्याशङ्क्य धर्मं विकल्पयति - आर्ष इति । ऋषिभिर्मन्त्रैः प्रकाशितः श्रौतस्मार्तक्रियारूप आर्षः केवलं वेदविहितत्वाद्वा । प्राजपत्यः प्रजापतिना सन्तानकर्मणा प्रथितः &#x27;नापुत्रस्य लोकोऽस्ति&#x27; इति श्रुतत्वादकरणेऽनिष्टदर्शनाद्वा आसुरः असुषु रमन्ते तेऽसुरास्तेषामयमासुरः क</span></p><p><b>Решение агента:</b> <code>arsa_marriage_type</code> — строка <u>не попадает</u> в регистр.</p></div>
     <div class="panel"><h4>Обоснование</h4><p>Second occurrence in the same ṭīkā: &#x27;śrauta-smārta-kriyā-rūpa ārṣaḥ&#x27;.</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка остаётся вне регистра; она уже учтена в измеренной точности 91,5 % (151 из 165) и лежит в <a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/licence_register/nilakantha_licence_rejected.tsv">nilakantha_licence_rejected.tsv</a> вместе с причиной отклонения.</p><p><b>«Не согласен»</b> — строка возвращается в регистр (станет 152), измеренная точность вырастет, и в заметке нужно указать deviation_type, который вы считаете верным: без него строку некуда положить.</p><p><b>«Отложить»</b> — строка остаётся отклонённой до следующего круга; ничего не ломается, но цифра точности остаётся спорной.</p></div>
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
       <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
     <textarea class="note" placeholder="Если не согласны — какой deviation_type здесь верен?"></textarea>
   </section>
 
-  <section class="card" <div class="panel"><h4>Evidence (agent-verified)</h4><div class="panel-body"><p><b>Проверено агентом 05-09-2026 (OxAlpha glm-5.3-flash):</b> Hand-reject строки: регистр уже отбросил их как не-лицензии; карточка — контрольный sample ручных отказов, чтобы отловить систематическую ошибку классификатора.<p><b>Позиция агента:</b> подтвердить отказ или вернуть в регистр</p></p></div></div>data-id="P13_U01_A044_S004#0@206" data-filt="hand-reject">
+  <section class="card" data-id="P13_U01_A044_S004#0@206" data-filt="hand-reject">
     <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/anushasanaparva?page=1&amp;id=P13_U01_A044_" target="_blank" rel="noopener">MBh 13.44.4 — отклонено как омоним (arsa_marriage_type)</a> <span class="badge">anushasanaparva</span><span class="badge">ārṣa</span><span class="badge">ручное решение</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P13_U01_A044_S004#0@206</span></header>
     <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षः</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">हणं ब्राह्मणयोग्या एते विवाहाः। यदाहाश्वलायनः - ‘अलंकृत्य कन्यामुदकपूर्वां दद्यादेष ब्राह्मो विवाहः । ऋत्विजे वितते कर्मणि दद्यादलंकृत्य स दैवः । गोमिथुनं दत्वोपयच्छेत स आर्षः’ इति । एवम् उक्तगुणवन्तम् आवाह्यं विवाहयोग्यम् आवहेत् आकारयेत् । ततश्च अनुकूलतो धनदानादिना अभिमुखीकृताय दद्यात् । अयं चतुर्थः प्राजापत्यो ब्राह्मणानां क्षत्रियाणां च प्</span></p><p><b>Решение агента:</b> <code>arsa_marriage_type</code> — строка <u>не попадает</u> в регистр.</p></div>
     <div class="panel"><h4>Обоснование</h4><p>Again Āśvalāyana&#x27;s marriage list, verbatim: &#x27;gomithunaṃ datvopayacchheta sa ārṣaḥ&#x27;.</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка остаётся вне регистра; она уже учтена в измеренной точности 91,5 % (151 из 165) и лежит в <a href="https://github.com/gasyoun/CommentaryStrategies/blob/main/data/licence_register/nilakantha_licence_rejected.tsv">nilakantha_licence_rejected.tsv</a> вместе с причиной отклонения.</p><p><b>«Не согласен»</b> — строка возвращается в регистр (станет 152), измеренная точность вырастет, и в заметке нужно указать deviation_type, который вы считаете верным: без него строку некуда положить.</p><p><b>«Отложить»</b> — строка остаётся отклонённой до следующего круга; ничего не ломается, но цифра точности остаётся спорной.</p></div>
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
       <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
     <textarea class="note" placeholder="Если не согласны — какой deviation_type здесь верен?"></textarea>
   </section>
 
-  <section class="card" <div class="panel"><h4>Evidence (agent-verified)</h4><div class="panel-body"><p><b>Проверено агентом 05-09-2026 (OxAlpha glm-5.3-flash):</b> Hand-reject строки: регистр уже отбросил их как не-лицензии; карточка — контрольный sample ручных отказов, чтобы отловить систематическую ошибку классификатора.<p><b>Позиция агента:</b> подтвердить отказ или вернуть в регистр</p></p></div></div>data-id="P01_U05_A032_S024#0@128" data-filt="hand-type">
+  <section class="card" data-id="P01_U05_A032_S024#0@128" data-filt="hand-type">
     <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/adiparva?page=5&amp;id=P01_U05_A032_" target="_blank" rel="noopener">MBh 1.32.24 — принято, тип назначен вручную</a> <span class="badge">adiparva</span><span class="badge">ārṣa</span><span class="badge">ручное решение</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P01_U05_A032_S024#0@128</span></header>
     <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षः</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">नवत्याः &#x27;नवती: शताधिकाष्टसाहस्री । नवतीरिति बहुवचनात्साप्यनेकगुणा । ततश्चानन्तर्मुखैरित्यर्थः । नवत्यो नवतीरिति पाठे ङितामाडभाव आर्षः ॥२४॥</span></p><p><b>Назначенный тип:</b> <code>absence of the āṭ augment</code> (<span lang="sa">āḍ-abhāva</span>)</p></div>
     <div class="panel"><h4>Обоснование</h4><p>&#x27;navatyo navatīr iti pāṭhe ṅitām āḍbhāva ārṣaḥ&#x27;. Written ङितामाडभाव, the fused form is indistinguishable from an aḍ-abhāva, and no rule can tell them apart; ṅitām &#x27;of the ṅit endings&#x27; settles it as āṭ (Pāṇini 7.3.112 ṅiti āṭ), so the type is assigned by hand rather than guessed.</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка остаётся в регистре с этим типом и с пометкой <code>classification=hand</code>.</p><p><b>«Не согласен»</b> — тип переписывается по вашей заметке; если это вообще не licence-claim, строка уходит в отклонённые и регистр становится 150-строчным.</p><p><b>«Отложить»</b> — строка остаётся как есть до следующего круга.</p></div>
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
       <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
     <textarea class="note" placeholder="Другой deviation_type? Или это не licence-claim?"></textarea>
   </section>
 
-  <section class="card" <div class="panel"><h4>Evidence (agent-verified)</h4><div class="panel-body"><p><b>Проверено агентом 05-09-2026 (OxAlpha glm-5.3-flash):</b> Hand-типизированные лицензии: каждая сверена с usage Нилакантхи в регистре (генератор H3103-fixed); карточка несёт цитату-свидетеля.<p><b>Позиция агента:</b> подтвердить типизацию</p></p></div></div>data-id="P12_U01_A040_S002#0@29" data-filt="hand-type">
+  <section class="card" data-id="P12_U01_A040_S002#0@29" data-filt="hand-type">
     <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/shantiparva?page=1&amp;id=P12_U01_A040_" target="_blank" rel="noopener">MBh 12.40.2 — принято, тип назначен вручную</a> <span class="badge">shantiparva</span><span class="badge">ārṣa</span><span class="badge">ручное решение</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P12_U01_A040_S002#0@29</span></header>
     <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">आर्षम्</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">निषीदतुरिति निषेदतुरित्यर्थे आर्षम् ॥२॥</span></p><p><b>Назначенный тип:</b> <code>stem vowel — ī for the expected e of the reduplicated perfect</code> (<span lang="sa">niṣīdatuḥ for niṣedatuḥ</span>)</p></div>
     <div class="panel"><h4>Обоснование</h4><p>&#x27;niṣīdatur iti niṣedatur ity arthe ārṣam&#x27; — Nīlakaṇṭha names no operation, only the two forms: the reduplicated perfect of sad- should show guṇa (niṣedatuḥ), and the epic&#x27;s niṣīdatuḥ keeps the present-stem vowel. The one hit in the whole corpus where the deviation is stated by contrasting forms rather than by naming a rule, which is exactly why it fell out of the automatic pass.</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка остаётся в регистре с этим типом и с пометкой <code>classification=hand</code>.</p><p><b>«Не согласен»</b> — тип переписывается по вашей заметке; если это вообще не licence-claim, строка уходит в отклонённые и регистр становится 150-строчным.</p><p><b>«Отложить»</b> — строка остаётся как есть до следующего круга.</p></div>
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
       <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
     <textarea class="note" placeholder="Другой deviation_type? Или это не licence-claim?"></textarea>
   </section>
 
-  <section class="card" <div class="panel"><h4>Evidence (agent-verified)</h4><div class="panel-body"><p><b>Проверено агентом 05-09-2026 (OxAlpha glm-5.3-flash):</b> Hand-типизированные лицензии: каждая сверена с usage Нилакантхи в регистре (генератор H3103-fixed); карточка несёт цитату-свидетеля.<p><b>Позиция агента:</b> подтвердить типизацию</p></p></div></div>data-id="P01_U01_A001_S050|NIL-001" data-filt="auto-sample">
+  <section class="card" data-id="P01_U01_A001_S050|NIL-001" data-filt="auto-sample">
     <header><div class="hw"><a class="hwlink" href="https://sanatana.in/mahabharata/listing/parva/adiparva?page=1&amp;id=P01_U01_A001_" target="_blank" rel="noopener">MBh 1.1.50 — absence of sandhi</a> <span class="badge">adiparva</span><span class="badge">chāndasa</span><span class="badge">авто-типизация</span></div><span class="idchip" title="card id — cite this id back when discussing this card">P01_U01_A001_S050|NIL-001</span></header>
     <div class="question"><p><b>Термин в тексте:</b> <span lang="sa">असीत्यत्रासन्धिप्रछान्दसः</span></p><p><b>Цитата (ṭīkā, деванагари):</b><br><span lang="sa">्रपाः कर्तन्या इत्यादिस्मृतिमूलभूता धन्वन्निव प्रपा असित्वमग्ने इत्यादयः । हे अग्ने ! त्वं धन्वन् निरुदके प्रदेशे प्रपेवलोकतृप्तिकरोसीति तदर्थः । प्रपा असीत्यत्रासन्धिप्रछान्दसः । इहेति । अनुक्रान्तमनुक्रमेणोक्तं इदमेव यथोक्तं ग्रन्थस्य लक्षणम् । विषयः प्रतिपाद्योऽर्थः ॥५०॥</span></p><p><b>Тип, выведенный автоматически:</b> <code>absence of sandhi</code> — из грамматического термина <span lang="sa">asandhi</span>, который Нилакантха называет рядом со словом-лицензией.</p></div>
     <div class="panel"><h4>Что проверяется</h4><p>Вопрос карточки — <u>не</u> «licence-claim ли это» (наличие названной грамматической операции рядом со словом-лицензией это уже доказывает), а «верно ли операция переведена в deviation_type».</p></div><div class="panel"><h4>Что делают кнопки</h4><p><b>«Согласен»</b> — строка засчитывается как верная в выборке из 30, подтверждая измеренные 100 % точности авто-типизации (149 из 149).</p><p><b>«Не согласен»</b> — точность авто-прохода падает. Это <u>та самая</u> цифра, по которой H2860 объявляется провалившимся, если она уйдёт ниже ~90 %: три несогласия из 30 — ещё порог, четыре — уже провал, и регистр придётся перетипизировать.</p><p><b>«Отложить»</b> — строка выпадает из знаменателя выборки; при большом числе отложенных выборка перестаёт быть 30-строчной и оценку придётся повторить.</p></div>
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
       <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
     <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
@@ -359,7 +406,7 @@
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
       <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
     <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
@@ -372,7 +419,7 @@
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
       <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
     <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
@@ -385,7 +432,7 @@
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
       <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
     <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
@@ -398,7 +445,7 @@
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
       <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
     <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
@@ -411,7 +458,7 @@
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
       <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
     <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
@@ -424,7 +471,7 @@
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
       <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
     <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
@@ -437,7 +484,7 @@
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
       <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
     <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
@@ -450,7 +497,7 @@
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
       <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
     <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
@@ -463,7 +510,7 @@
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
       <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
     <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
@@ -476,7 +523,7 @@
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
       <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
     <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
@@ -489,7 +536,7 @@
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
       <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
     <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
@@ -502,7 +549,7 @@
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
       <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
     <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
@@ -515,7 +562,7 @@
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
       <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
     <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
@@ -528,7 +575,7 @@
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
       <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
     <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
@@ -541,7 +588,7 @@
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
       <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
     <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
@@ -554,7 +601,7 @@
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
       <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
     <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
@@ -567,7 +614,7 @@
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
       <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
     <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
@@ -580,7 +627,7 @@
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
       <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
     <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
@@ -593,7 +640,7 @@
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
       <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
     <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
@@ -606,7 +653,7 @@
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
       <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
     <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
@@ -619,7 +666,7 @@
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
       <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
     <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
@@ -632,7 +679,7 @@
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
       <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
     <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
@@ -645,7 +692,7 @@
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
       <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
     <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
@@ -658,7 +705,7 @@
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
       <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
     <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
@@ -671,7 +718,7 @@
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
       <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
     <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
@@ -684,7 +731,7 @@
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
       <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
     <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
@@ -697,7 +744,7 @@
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
       <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
     <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
@@ -710,7 +757,7 @@
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
       <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
     <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
@@ -723,21 +770,15 @@
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Согласен с решением</button>
       <button class="vote reject" data-vote="reject">&#10060; Не согласен (см. заметку)</button>
-      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <button class="vote defer" data-vote="defer">&#9208; Отложить</button>
       <span class="vote-state">unvoted</span>
     </div>
     <textarea class="note" placeholder="Если тип неверен — какой верен?"></textarea>
   </section>
 </main>
-<footer class="hint">Регистр: commentary_licence_register_nilakantha.tsv/.jsonl · отклонённые: nilakantha_licence_rejected.tsv · плотность по парванам: nilakantha_parvan_density.tsv · отчёт: reports/COMMENTARY_LICENCE_REGISTER_NILAKANTHA_2026.md Keyboard: <kbd>a</kbd> Согласен с решением &middot; <kbd>r</kbd> Не согласен (см. заметку)
-  &middot; <kbd>d</kbd> defer &middot; <kbd>&darr;</kbd>/<kbd>&uarr;</kbd> next/prev. Votes autosave to
-  this browser's localStorage; click "Download decisions.json" when done (unvoted items export with
-  decision:null).</footer>
-<div class="legend" style="max-width:980px;margin:0 auto 20px;padding:0 20px;color:var(--muted);font-size:12px">
-  <b>Approve</b> = accept the proposed change/answer shown on the card (no separate "approve as-is" —
-  approving means agreeing as written). <b>Reject</b> = keep the current entry/answer unchanged.
-  <b>Defer</b> = not sure yet, decide later. The note field is for requesting a partial tweak instead
-  of an outright reject.
+<div class="votebar" id="voteBar"><span class="spacer"></span></div>
+<footer class="hint">Регистр: commentary_licence_register_nilakantha.tsv/.jsonl · отклонённые: nilakantha_licence_rejected.tsv · плотность по парванам: nilakantha_parvan_density.tsv · отчёт: reports/COMMENTARY_LICENCE_REGISTER_NILAKANTHA_2026.md Клавиши: <kbd>a</kbd> одобрить &middot; <kbd>r</kbd> отклонить &middot; <kbd>d</kbd> отложить &middot; <kbd>&darr;</kbd>/<kbd>&uarr;</kbd> дальше/назад. Голоса сохраняются автоматически в localStorage браузера; нажмите «Скачать decisions.json», когда закончите (непроголосованные пункты экспортируются с decision:null).</footer>
+<div class="legend" style="max-width:980px;margin:0 auto 20px;padding:0 20px;color:var(--muted);font-size:12px"><b>Одобрить</b> — принять предложенное изменение/ответ на карточке как есть (нет отдельного «одобрить как есть» — одобрение значит согласие с написанным). <b>Отклонить</b> — оставить текущую запись/ответ без изменений. <b>Отложить</b> — пока не уверен(а), решить позже. Поле заметки — для запроса частичной правки вместо полного отклонения.
 </div>
 <script>
 (function () {
@@ -817,8 +858,8 @@
     if (e.key === 'a') { vote(id, 'approve'); applyCardUI(card); }
     else if (e.key === 'r') { vote(id, 'reject'); applyCardUI(card); }
     else if (e.key === 'd') { vote(id, 'defer'); applyCardUI(card); }
-    else if (e.key === 'ArrowDown') { activeIdx = Math.min(activeIdx + 1, vis.length - 1); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'center'}); }
-    else if (e.key === 'ArrowUp') { activeIdx = Math.max(activeIdx - 1, 0); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'center'}); }
+    else if (e.key === 'ArrowDown') { activeIdx = Math.min(activeIdx + 1, vis.length - 1); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'start'}); }
+    else if (e.key === 'ArrowUp') { activeIdx = Math.max(activeIdx - 1, 0); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'start'}); }
     else return;
     e.preventDefault();
   });
@@ -829,7 +870,8 @@
       ids.forEach(function (id) { syncNoteFromDom(id); });
     }
     var decided = ids.filter(function (id) { return state[id] && state[id].decision; }).length;
-    return JSON.stringify({ sheet_id: SHEET_ID, generated: new Date().toISOString(), decided: decided, time_total_seconds: __timeTotal(),
+    var nowIso = new Date().toISOString();
+    return JSON.stringify({ sheet_id: SHEET_ID, generated: nowIso, reviewedAt: nowIso, decided: decided, time_total_seconds: __timeTotal(),
       items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '', time_seconds: __timeFor(id) }; }) }, null, 2);
   }
   function scheduleAutosave() {
@@ -910,8 +952,15 @@
   // record as the totals, so a reviewer who pauses and closes the tab does not
   // come back to a clock that ran all night.
   var __timePaused = !!__timing.paused;
-  function __timePauseSet(v) {
-    __timePaused = !!v; __timing.paused = __timePaused; __timeLast = Date.now(); __timeFlush();
+  // V15 (H2887): a legacy record carries `paused` and no reason — read it as
+  // manual, so an auto-rearm can never lift a pause the curator set by hand.
+  var __timePauseReason = __timePaused ? (__timing.pause_reason || 'manual') : null;
+  function __timePauseSet(v, reason) {
+    __timePaused = !!v;
+    __timing.paused = __timePaused;
+    __timePauseReason = __timePaused ? (reason || 'manual') : null;
+    __timing.pause_reason = __timePauseReason;
+    __timeLast = Date.now(); __timeFlush();
   }
   setInterval(function () {
     var now = Date.now(), dt = (now - __timeLast) / 1000;
@@ -928,7 +977,7 @@
   window.addEventListener('beforeunload', __timeFlush);
   __timeShow();
 
-  var HANDIN_SAID = 'handed in {n} of {total} — clock stopped, the rest stay saved in this browser';
+  var HANDIN_SAID = 'сдано {n} из {total} — таймер остановлен, остальное сохранено в этом браузере';
   var __handinBtn = document.getElementById('handinBtn');
   var __handinSaid = document.getElementById('handinSaid');
 
@@ -943,7 +992,7 @@
   __pauseShow();
   __handinBtn.addEventListener('click', function () {
     ids.forEach(function (id) { syncNoteFromDom(id); });
-    __timePauseSet(true); __pauseShow();
+    __timePauseSet(true, 'export'); __pauseShow();
     var items = ids.map(function (id) {
       var rec = state[id] || {};
       var item = { id: id, decision: rec.decision || null };
@@ -962,8 +1011,276 @@
     document.body.removeChild(a); URL.revokeObjectURL(url);
     __handinSaid.textContent = HANDIN_SAID.replace('{n}', decided).replace('{total}', items.length);
   });
+
+  // --- V15 session flow (H2887) ---------------------------------------------
+  var FLOW_IDLE_SECONDS = 90;
+  var FLOW_ETA = 'осталось ≈{minutes} мин';
+  var FLOW_ETA_ROUGH = 'осталось ≈{minutes} мин (оценка грубая)';
+  var FLOW_CLOCK_RUNNING = 'идут';
+  var FLOW_CLOCK_PAUSED = 'пауза';
+  var FLOW_CLOCK_IDLE = 'простой';
+  var FLOW_PROGRESS = 'решено {n} из {total}';
+  var FLOW_UNDO_SAID = 'отменено: {id} → {decision}';
+  var FLOW_UNDO_EMPTY = 'отменять нечего';
+  var FLOW_UNDO_NONE = 'решения не было';
+  var FLOW_RESUMED = 'продолжили с карточки {n} из {total}';
+  var __flowToast = document.getElementById('flowToast');
+  var __flowToastTimer = null;
+  function __flowSay(text) {
+    if (!__flowToast) return;
+    __flowToast.textContent = text;
+    __flowToast.classList.add('on');
+    clearTimeout(__flowToastTimer);
+    __flowToastTimer = setTimeout(function () { __flowToast.classList.remove('on'); }, 2600);
+  }
+  var __flowCenterId = __timeActiveId;
+  function __flowIdxOf(id) {
+    var vis = visibleCards();
+    for (var i = 0; i < vis.length; i++) {
+      if (vis[i].getAttribute('data-id') === id) return i;
+    }
+    return -1;
+  }
+  function __flowCardById(id) {
+    var found = null;
+    cardsEl.forEach(function (c) { if (c.getAttribute('data-id') === id) found = c; });
+    return found;
+  }
+  // The visible ring IS the target of a/r/d — that identity is the whole point
+  // of this layer, so nothing may move `activeIdx` without repainting.
+  function __flowPaint() {
+    cardsEl.forEach(function (c) { c.classList.remove('kbd-active'); });
+    var vis = visibleCards();
+    if (!vis.length) return;
+    if (activeIdx >= vis.length) activeIdx = vis.length - 1;
+    if (activeIdx < 0) activeIdx = 0;
+    vis[activeIdx].classList.add('kbd-active');
+  }
+  function __flowSync() {
+    var id = __flowCenterId();
+    if (id) { var at = __flowIdxOf(id); if (at !== -1) activeIdx = at; }
+    __flowPaint();
+  }
+  var __flowScrollTimer = null;
+  window.addEventListener('scroll', function () {
+    if (__flowScrollTimer) return;
+    __flowScrollTimer = setTimeout(function () { __flowScrollTimer = null; __flowSync(); }, 120);
+  });
+  // Both bars reset `activeIdx` to 0 as they re-filter; re-derive it from the
+  // viewport on the next tick, or defect 2 returns wearing a filter.
+  ['filterbar'].forEach(function (barId) {
+    var bar = document.getElementById(barId);
+    if (bar) bar.addEventListener('click', function () { setTimeout(__flowSync, 0); });
+  });
+  function __flowClockShow() {
+    var el = document.getElementById('t-state');
+    if (!el) return;
+    var label = FLOW_CLOCK_RUNNING;
+    if (__timePaused) label = (__timePauseReason === 'idle') ? FLOW_CLOCK_IDLE : FLOW_CLOCK_PAUSED;
+    el.textContent = label;
+    el.classList.toggle('idle', !!__timePaused && __timePauseReason === 'idle');
+  }
+  // The V12 ⏸ button drives the clock straight through __timePauseSet, so the
+  // three-state label has to ride along with V12's own repaint or it goes stale
+  // the moment the curator pauses by hand.
+  var __flowOrigPauseShow = __pauseShow;
+  __pauseShow = function () { __flowOrigPauseShow(); __flowClockShow(); };
+  var __flowIdleTimer = null;
+  function __flowIdleArm() {
+    clearTimeout(__flowIdleTimer);
+    __flowIdleTimer = setTimeout(function () {
+      if (__timePaused) return;
+      __timePauseSet(true, 'idle');
+    __pauseShow();
+      __flowClockShow();
+    }, FLOW_IDLE_SECONDS * 1000);
+  }
+  function __flowRearm() {
+    if (__timePaused && __timePauseReason !== 'manual') {
+      __timePauseSet(false);
+    __pauseShow();
+    }
+    __flowClockShow();
+    __flowIdleArm();
+  }
+  // The export GESTURES, caught in the capture phase on `document` so this runs
+  // before any handler bound to the buttons themselves — including the strict
+  // layer's, which calls stopImmediatePropagation() on its own element.
+  document.addEventListener('click', function (e) {
+    var t = e.target;
+    if (!t || !t.closest || !t.closest('#downloadBtn, #saveBtn, #handinBtn')) return;
+    __timePauseSet(true, 'export');
+    __pauseShow();
+    __flowClockShow();
+  }, true);
+  ['keydown', 'pointerdown', 'scroll'].forEach(function (evt) {
+    document.addEventListener(evt, function () { __flowRearm(); }, true);
+  });
+  var __flowUndoStack = [];
+  function __flowUndo() {
+    var last = __flowUndoStack.pop();
+    if (!last) { __flowSay(FLOW_UNDO_EMPTY); return; }
+    state[last.id] = state[last.id] || {};
+    if (last.prev) state[last.id].decision = last.prev;
+    else delete state[last.id].decision;
+    save();
+    var card = __flowCardById(last.id);
+    if (card) {
+      applyCardUI(card);
+      card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      var at = __flowIdxOf(last.id);
+      if (at !== -1) activeIdx = at;
+      __flowPaint();
+    }
+    __flowSay(FLOW_UNDO_SAID.replace('{id}', last.id)
+      .replace('{decision}', last.prev || FLOW_UNDO_NONE));
+  }
+  var __flowUndoBtn = document.getElementById('flowUndoBtn');
+  if (__flowUndoBtn) __flowUndoBtn.addEventListener('click', __flowUndo);
+  function __flowFirstUndecided() {
+    var vis = visibleCards();
+    for (var i = 0; i < vis.length; i++) {
+      var id = vis[i].getAttribute('data-id');
+      if (!(state[id] && state[id].decision)) return i;
+    }
+    return -1;
+  }
+  function __flowAdvance() {
+    var at = __flowFirstUndecided();
+    if (at === -1) { __flowPaint(); return; }
+    activeIdx = at;
+    visibleCards()[at].scrollIntoView({ behavior: 'smooth', block: 'start' });
+    __flowPaint();
+  }
+  function __flowDecided() {
+    var n = 0;
+    ids.forEach(function (id) { if (state[id] && state[id].decision) n++; });
+    return n;
+  }
+  function __flowEtaText(decided, total) {
+    var secs = [];
+    ids.forEach(function (id) {
+      if (!(state[id] && state[id].decision)) return;
+      var s = __timing.per[id] || 0;
+      if (s > 0) secs.push(s);
+    });
+    if (!secs.length) return '';
+    secs.sort(function (a, b) { return a - b; });
+    var mid = Math.floor(secs.length / 2);
+    var med = (secs.length % 2) ? secs[mid] : (secs[mid - 1] + secs[mid]) / 2;
+    var left = Math.max(0, total - decided);
+    if (!left) return '';
+    var minutes = Math.max(1, Math.round(med * left / 60));
+    return (secs.length >= 5 ? FLOW_ETA : FLOW_ETA_ROUGH).replace('{minutes}', minutes);
+  }
+  function __flowProgress() {
+    var n = __flowDecided(), total = ids.length;
+    var txt = document.getElementById('flowProgText');
+    if (txt) txt.textContent = FLOW_PROGRESS.replace('{n}', n).replace('{total}', total);
+    var bar = document.getElementById('flowBar');
+    if (bar) bar.style.width = (total ? Math.round(100 * n / total) : 0) + '%';
+    var etaEl = document.getElementById('flowEta');
+    if (etaEl) etaEl.textContent = __flowEtaText(n, total);
+  }
+  var __flowOrigTally = tally;
+  tally = function () { __flowOrigTally(); __flowProgress(); };
+  var __flowOrigVote = vote;
+  vote = function (id, d) {
+    var rec = state[id] || {};
+    __flowUndoStack.push({ id: id, prev: rec.decision || null });
+    if (__flowUndoStack.length > 100) __flowUndoStack.shift();
+    __flowOrigVote(id, d);
+    __flowRearm();
+    __flowAdvance();
+  };
+  var __flowOrigNote = noteChange;
+  noteChange = function (id, t) { __flowOrigNote(id, t); __flowRearm(); };
+  document.addEventListener('keydown', function (e) {
+    if (e.target.tagName === 'TEXTAREA') return;
+    if (e.key === 'z' || e.key === 'Z') { __flowUndo(); e.preventDefault(); return; }
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') __flowPaint();
+  });
+  __flowProgress();
+  __flowSync();
+  __flowClockShow();
+  __flowIdleArm();
+  (function () {
+    if (!__flowDecided()) return;
+    var at = __flowFirstUndecided();
+    if (at === -1) return;
+    var vis = visibleCards();
+    activeIdx = at;
+    vis[at].scrollIntoView({ block: 'start' });
+    __flowPaint();
+    __flowSay(FLOW_RESUMED.replace('{n}', at + 1).replace('{total}', vis.length));
+  })();
+
+  var VOTE_TOTAL = 0;
+  var VOTE_PROGRESS = '{n} из {total} по всему листу';
+  var VOTE_ETA = '≈{minutes} мин на все {total}';
+  var VOTE_ETA_ROUGH = '≈{minutes} мин на все {total} (оценка грубая)';
+  var VOTE_DONE = 'все {total} решены';
+  (function () {
+    var bar = document.getElementById('voteBar');
+    if (!bar) return;
+    // The build tagged exactly the submit controls this document actually has.
+    // Navigation (filters, facets, the type-scale control) is untagged and stays
+    // on top, where it is used BEFORE deciding.
+    var moved = document.querySelectorAll('[data-submit]');
+    for (var i = 0; i < moved.length; i++) bar.appendChild(moved[i]);
+  })();
+  // One record backs every pack of a packset — STORE_KEY and TIME_KEY are keyed
+  // on sheet_id, not on the pack — so this page can count and time the WHOLE
+  // instrument without loading a single other pack.
+  function __voteDecidedAll() {
+    var n = 0;
+    for (var k in state) {
+      if (Object.prototype.hasOwnProperty.call(state, k) && state[k] && state[k].decision) n++;
+    }
+    return n;
+  }
+  function __voteSecs() {
+    var per = (typeof __timing !== 'undefined' && __timing && __timing.per) ? __timing.per : null;
+    var out = [];
+    if (!per) return out;
+    for (var k in per) {
+      if (!Object.prototype.hasOwnProperty.call(per, k)) continue;
+      if (!(state[k] && state[k].decision)) continue;
+      if (per[k] > 0) out.push(per[k]);
+    }
+    return out;
+  }
+  function __voteEta(decided, total) {
+    var left = Math.max(0, total - decided);
+    if (!left) return VOTE_DONE.replace('{total}', total);
+    var secs = __voteSecs();
+    if (!secs.length) return '';
+    secs.sort(function (a, b) { return a - b; });
+    var mid = Math.floor(secs.length / 2);
+    var med = (secs.length % 2) ? secs[mid] : (secs[mid - 1] + secs[mid]) / 2;
+    var minutes = Math.max(1, Math.round(med * left / 60));
+    return (secs.length >= 5 ? VOTE_ETA : VOTE_ETA_ROUGH)
+      .replace('{minutes}', minutes).replace('{total}', total);
+  }
+  function __voteProgress() {
+    var total = VOTE_TOTAL || ids.length;
+    var n = VOTE_TOTAL ? __voteDecidedAll() : ids.filter(function (id) {
+      return state[id] && state[id].decision; }).length;
+    if (n > total) n = total;
+    var t = document.getElementById('voteProgText');
+    if (t) t.innerHTML = VOTE_PROGRESS.replace('{n}', '<b>' + n + '</b>')
+                                      .replace('{total}', '<b>' + total + '</b>');
+    var b = document.getElementById('voteProgBar');
+    if (b) b.style.width = (total ? Math.round(100 * n / total) : 0) + '%';
+    var e = document.getElementById('voteProgEta');
+    if (e) e.textContent = __voteEta(n, total);
+  }
+  var __voteOrigTally = tally;
+  tally = function () { __voteOrigTally(); __voteProgress(); };
+  __voteProgress();
 })();
 </script>
-<!-- ssb-evidence: {"P01_U05_A013_S029#0@229": {"verifier": "OxAlpha glm-5.3-flash", "method": "primary_source_quote", "sources": ["CommentaryStrategies: scripts/build_licence_register_review_sheet.py (committed generator, H3103-fixed) + H2860 licence-register pass (asandhi/augment claims vs Nilakantha usage)"], "verified_date": "05-09-2026"}, "P01_U07_A077_S018#0@0": {"verifier": "OxAlpha glm-5.3-flash", "method": "primary_source_quote", "sources": ["CommentaryStrategies: scripts/build_licence_register_review_sheet.py (committed generator, H3103-fixed) + H2860 licence-register pass (asandhi/augment claims vs Nilakantha usage)"], "verified_date": "05-09-2026"}, "P01_U07_A102_S015#0@0": {"verifier": "OxAlpha glm-5.3-flash", "method": "primary_source_quote", "sources": ["CommentaryStrategies: scripts/build_licence_register_review_sheet.py (committed generator, H3103-fixed) + H2860 licence-register pass (asandhi/augment claims vs Nilakantha usage)"], "verified_date": "05-09-2026"}, "P01_U07_A113_S012#0@11": {"verifier": "OxAlpha glm-5.3-flash", "method": "primary_source_quote", "sources": ["CommentaryStrategies: scripts/build_licence_register_review_sheet.py (committed generator, H3103-fixed) + H2860 licence-register pass (asandhi/augment claims vs Nilakantha usage)"], "verified_date": "05-09-2026"}, "P01_U07_A118_S001#0@35": {"verifier": "OxAlpha glm-5.3-flash", "method": "primary_source_quote", "sources": ["CommentaryStrategies: scripts/build_licence_register_review_sheet.py (committed generator, H3103-fixed) + H2860 licence-register pass (asandhi/augment claims vs Nilakantha usage)"], "verified_date": "05-09-2026"}, "P03_U03_A031_S008#0@0": {"verifier": "OxAlpha glm-5.3-flash", "method": "primary_source_quote", "sources": ["CommentaryStrategies: scripts/build_licence_register_review_sheet.py (committed generator, H3103-fixed) + H2860 licence-register pass (asandhi/augment claims vs Nilakantha usage)"], "verified_date": "05-09-2026"}, "P03_U07_A091_S024#0@90": {"verifier": "OxAlpha glm-5.3-flash", "method": "primary_source_quote", "sources": ["CommentaryStrategies: scripts/build_licence_register_review_sheet.py (committed generator, H3103-fixed) + H2860 licence-register pass (asandhi/augment claims vs Nilakantha usage)"], "verified_date": "05-09-2026"}, "P05_U05_A070_S007#0@225": {"verifier": "OxAlpha glm-5.3-flash", "method": "primary_source_quote", "sources": ["CommentaryStrategies: scripts/build_licence_register_review_sheet.py (committed generator, H3103-fixed) + H2860 licence-register pass (asandhi/augment claims vs Nilakantha usage)"], "verified_date": "05-09-2026"}, "P12_U01_A012_S017#0@0": {"verifier": "OxAlpha glm-5.3-flash", "method": "primary_source_quote", "sources": ["CommentaryStrategies: scripts/build_licence_register_review_sheet.py (committed generator, H3103-fixed) + H2860 licence-register pass (asandhi/augment claims vs Nilakantha usage)"], "verified_date": "05-09-2026"}, "P12_U02_A132_S017#0@0": {"verifier": "OxAlpha glm-5.3-flash", "method": "primary_source_quote", "sources": ["CommentaryStrategies: scripts/build_licence_register_review_sheet.py (committed generator, H3103-fixed) + H2860 licence-register pass (asandhi/augment claims vs Nilakantha usage)"], "verified_date": "05-09-2026"}, "P12_U03_A268_S010#0@9": {"verifier": "OxAlpha glm-5.3-flash", "method": "primary_source_quote", "sources": ["CommentaryStrategies: scripts/build_licence_register_review_sheet.py (committed generator, H3103-fixed) + H2860 licence-register pass (asandhi/augment claims vs Nilakantha usage)"], "verified_date": "05-09-2026"}, "P13_U01_A019_S002#0@71": {"verifier": "OxAlpha glm-5.3-flash", "method": "primary_source_quote", "sources": ["CommentaryStrategies: scripts/build_licence_register_review_sheet.py (committed generator, H3103-fixed) + H2860 licence-register pass (asandhi/augment claims vs Nilakantha usage)"], "verified_date": "05-09-2026"}, "P13_U01_A019_S002#0@130": {"verifier": "OxAlpha glm-5.3-flash", "method": "primary_source_quote", "sources": ["CommentaryStrategies: scripts/build_licence_register_review_sheet.py (committed generator, H3103-fixed) + H2860 licence-register pass (asandhi/augment claims vs Nilakantha usage)"], "verified_date": "05-09-2026"}, "P13_U01_A044_S004#0@206": {"verifier": "OxAlpha glm-5.3-flash", "method": "primary_source_quote", "sources": ["CommentaryStrategies: scripts/build_licence_register_review_sheet.py (committed generator, H3103-fixed) + H2860 licence-register pass (asandhi/augment claims vs Nilakantha usage)"], "verified_date": "05-09-2026"}, "P01_U05_A032_S024#0@128": {"verifier": "OxAlpha glm-5.3-flash", "method": "primary_source_quote", "sources": ["CommentaryStrategies: scripts/build_licence_register_review_sheet.py (committed generator, H3103-fixed) + H2860 licence-register pass (asandhi/augment claims vs Nilakantha usage)"], "verified_date": "05-09-2026"}, "P12_U01_A040_S002#0@29": {"verifier": "OxAlpha glm-5.3-flash", "method": "primary_source_quote", "sources": ["CommentaryStrategies: scripts/build_licence_register_review_sheet.py (committed generator, H3103-fixed) + H2860 licence-register pass (asandhi/augment claims vs Nilakantha usage)"], "verified_date": "05-09-2026"}} -->
+<div class="flowtoast" id="flowToast" role="status"></div>
+<!-- ssb-evidence: {"P01_U05_A013_S029#0@229": {"verifier": "CommentaryStrategies register pipeline (H2883-derived, agent-ruled hand queue)", "method": "primary_source_quote", "sources": ["data/licence_register/commentary_licence_register_nilakantha.tsv", "data/licence_register/nilakantha_licence_rejected.tsv", "data/licence_register/nilakantha_hand_rulings.json"], "verified_date": "05-09-2026"}, "P01_U07_A077_S018#0@0": {"verifier": "CommentaryStrategies register pipeline (H2883-derived, agent-ruled hand queue)", "method": "primary_source_quote", "sources": ["data/licence_register/commentary_licence_register_nilakantha.tsv", "data/licence_register/nilakantha_licence_rejected.tsv", "data/licence_register/nilakantha_hand_rulings.json"], "verified_date": "05-09-2026"}, "P01_U07_A102_S015#0@0": {"verifier": "CommentaryStrategies register pipeline (H2883-derived, agent-ruled hand queue)", "method": "primary_source_quote", "sources": ["data/licence_register/commentary_licence_register_nilakantha.tsv", "data/licence_register/nilakantha_licence_rejected.tsv", "data/licence_register/nilakantha_hand_rulings.json"], "verified_date": "05-09-2026"}, "P01_U07_A113_S012#0@11": {"verifier": "CommentaryStrategies register pipeline (H2883-derived, agent-ruled hand queue)", "method": "primary_source_quote", "sources": ["data/licence_register/commentary_licence_register_nilakantha.tsv", "data/licence_register/nilakantha_licence_rejected.tsv", "data/licence_register/nilakantha_hand_rulings.json"], "verified_date": "05-09-2026"}, "P01_U07_A118_S001#0@35": {"verifier": "CommentaryStrategies register pipeline (H2883-derived, agent-ruled hand queue)", "method": "primary_source_quote", "sources": ["data/licence_register/commentary_licence_register_nilakantha.tsv", "data/licence_register/nilakantha_licence_rejected.tsv", "data/licence_register/nilakantha_hand_rulings.json"], "verified_date": "05-09-2026"}, "P03_U03_A031_S008#0@0": {"verifier": "CommentaryStrategies register pipeline (H2883-derived, agent-ruled hand queue)", "method": "primary_source_quote", "sources": ["data/licence_register/commentary_licence_register_nilakantha.tsv", "data/licence_register/nilakantha_licence_rejected.tsv", "data/licence_register/nilakantha_hand_rulings.json"], "verified_date": "05-09-2026"}, "P03_U07_A091_S024#0@90": {"verifier": "CommentaryStrategies register pipeline (H2883-derived, agent-ruled hand queue)", "method": "primary_source_quote", "sources": ["data/licence_register/commentary_licence_register_nilakantha.tsv", "data/licence_register/nilakantha_licence_rejected.tsv", "data/licence_register/nilakantha_hand_rulings.json"], "verified_date": "05-09-2026"}, "P05_U05_A070_S007#0@225": {"verifier": "CommentaryStrategies register pipeline (H2883-derived, agent-ruled hand queue)", "method": "primary_source_quote", "sources": ["data/licence_register/commentary_licence_register_nilakantha.tsv", "data/licence_register/nilakantha_licence_rejected.tsv", "data/licence_register/nilakantha_hand_rulings.json"], "verified_date": "05-09-2026"}, "P12_U01_A012_S017#0@0": {"verifier": "CommentaryStrategies register pipeline (H2883-derived, agent-ruled hand queue)", "method": "primary_source_quote", "sources": ["data/licence_register/commentary_licence_register_nilakantha.tsv", "data/licence_register/nilakantha_licence_rejected.tsv", "data/licence_register/nilakantha_hand_rulings.json"], "verified_date": "05-09-2026"}, "P12_U02_A132_S017#0@0": {"verifier": "CommentaryStrategies register pipeline (H2883-derived, agent-ruled hand queue)", "method": "primary_source_quote", "sources": ["data/licence_register/commentary_licence_register_nilakantha.tsv", "data/licence_register/nilakantha_licence_rejected.tsv", "data/licence_register/nilakantha_hand_rulings.json"], "verified_date": "05-09-2026"}, "P12_U03_A268_S010#0@9": {"verifier": "CommentaryStrategies register pipeline (H2883-derived, agent-ruled hand queue)", "method": "primary_source_quote", "sources": ["data/licence_register/commentary_licence_register_nilakantha.tsv", "data/licence_register/nilakantha_licence_rejected.tsv", "data/licence_register/nilakantha_hand_rulings.json"], "verified_date": "05-09-2026"}, "P13_U01_A019_S002#0@71": {"verifier": "CommentaryStrategies register pipeline (H2883-derived, agent-ruled hand queue)", "method": "primary_source_quote", "sources": ["data/licence_register/commentary_licence_register_nilakantha.tsv", "data/licence_register/nilakantha_licence_rejected.tsv", "data/licence_register/nilakantha_hand_rulings.json"], "verified_date": "05-09-2026"}, "P13_U01_A019_S002#0@130": {"verifier": "CommentaryStrategies register pipeline (H2883-derived, agent-ruled hand queue)", "method": "primary_source_quote", "sources": ["data/licence_register/commentary_licence_register_nilakantha.tsv", "data/licence_register/nilakantha_licence_rejected.tsv", "data/licence_register/nilakantha_hand_rulings.json"], "verified_date": "05-09-2026"}, "P13_U01_A044_S004#0@206": {"verifier": "CommentaryStrategies register pipeline (H2883-derived, agent-ruled hand queue)", "method": "primary_source_quote", "sources": ["data/licence_register/commentary_licence_register_nilakantha.tsv", "data/licence_register/nilakantha_licence_rejected.tsv", "data/licence_register/nilakantha_hand_rulings.json"], "verified_date": "05-09-2026"}, "P01_U05_A032_S024#0@128": {"verifier": "CommentaryStrategies register pipeline (H2883-derived, agent-ruled hand queue)", "method": "primary_source_quote", "sources": ["data/licence_register/commentary_licence_register_nilakantha.tsv", "data/licence_register/nilakantha_licence_rejected.tsv", "data/licence_register/nilakantha_hand_rulings.json"], "verified_date": "05-09-2026"}, "P12_U01_A040_S002#0@29": {"verifier": "CommentaryStrategies register pipeline (H2883-derived, agent-ruled hand queue)", "method": "primary_source_quote", "sources": ["data/licence_register/commentary_licence_register_nilakantha.tsv", "data/licence_register/nilakantha_licence_rejected.tsv", "data/licence_register/nilakantha_hand_rulings.json"], "verified_date": "05-09-2026"}, "P01_U01_A001_S050|NIL-001": {"verifier": "CommentaryStrategies register pipeline (H2883-derived, agent-ruled hand queue)", "method": "primary_source_quote", "sources": ["data/licence_register/commentary_licence_register_nilakantha.tsv", "data/licence_register/nilakantha_licence_rejected.tsv", "data/licence_register/nilakantha_hand_rulings.json"], "verified_date": "05-09-2026"}, "P01_U02_A002_S010|NIL-002": {"verifier": "CommentaryStrategies register pipeline (H2883-derived, agent-ruled hand queue)", "method": "primary_source_quote", "sources": ["data/licence_register/commentary_licence_register_nilakantha.tsv", "data/licence_register/nilakantha_licence_rejected.tsv", "data/licence_register/nilakantha_hand_rulings.json"], "verified_date": "05-09-2026"}, "P01_U03_A003_S067|NIL-005": {"verifier": "CommentaryStrategies register pipeline (H2883-derived, agent-ruled hand queue)", "method": "primary_source_quote", "sources": ["data/licence_register/commentary_licence_register_nilakantha.tsv", "data/licence_register/nilakantha_licence_rejected.tsv", "data/licence_register/nilakantha_hand_rulings.json"], "verified_date": "05-09-2026"}, "P01_U03_A003_S142|NIL-006": {"verifier": "CommentaryStrategies register pipeline (H2883-derived, agent-ruled hand queue)", "method": "primary_source_quote", "sources": ["data/licence_register/commentary_licence_register_nilakantha.tsv", "data/licence_register/nilakantha_licence_rejected.tsv", "data/licence_register/nilakantha_hand_rulings.json"], "verified_date": "05-09-2026"}, "P01_U05_A024_S011|NIL-007": {"verifier": "CommentaryStrategies register pipeline (H2883-derived, agent-ruled hand queue)", "method": "primary_source_quote", "sources": ["data/licence_register/commentary_licence_register_nilakantha.tsv", "data/licence_register/nilakantha_licence_rejected.tsv", "data/licence_register/nilakantha_hand_rulings.json"], "verified_date": "05-09-2026"}, "P01_U07_A093_S023|NIL-013": {"verifier": "CommentaryStrategies register pipeline (H2883-derived, agent-ruled hand queue)", "method": "primary_source_quote", "sources": ["data/licence_register/commentary_licence_register_nilakantha.tsv", "data/licence_register/nilakantha_licence_rejected.tsv", "data/licence_register/nilakantha_hand_rulings.json"], "verified_date": "05-09-2026"}, "P01_U07_A131_S051|NIL-017": {"verifier": "CommentaryStrategies register pipeline (H2883-derived, agent-ruled hand queue)", "method": "primary_source_quote", "sources": ["data/licence_register/commentary_licence_register_nilakantha.tsv", "data/licence_register/nilakantha_licence_rejected.tsv", "data/licence_register/nilakantha_hand_rulings.json"], "verified_date": "05-09-2026"}, "P03_U06_A064_S114|NIL-028": {"verifier": "CommentaryStrategies register pipeline (H2883-derived, agent-ruled hand queue)", "method": "primary_source_quote", "sources": ["data/licence_register/commentary_licence_register_nilakantha.tsv", "data/licence_register/nilakantha_licence_rejected.tsv", "data/licence_register/nilakantha_hand_rulings.json"], "verified_date": "05-09-2026"}, "P03_U06_A068_S014|NIL-029": {"verifier": "CommentaryStrategies register pipeline (H2883-derived, agent-ruled hand queue)", "method": "primary_source_quote", "sources": ["data/licence_register/commentary_licence_register_nilakantha.tsv", "data/licence_register/nilakantha_licence_rejected.tsv", "data/licence_register/nilakantha_hand_rulings.json"], "verified_date": "05-09-2026"}, "P03_U09_A160_S068|NIL-037": {"verifier": "CommentaryStrategies register pipeline (H2883-derived, agent-ruled hand queue)", "method": "primary_source_quote", "sources": ["data/licence_register/commentary_licence_register_nilakantha.tsv", "data/licence_register/nilakantha_licence_rejected.tsv", "data/licence_register/nilakantha_hand_rulings.json"], "verified_date": "05-09-2026"}, "P03_U12_A217_S007|NIL-042": {"verifier": "CommentaryStrategies register pipeline (H2883-derived, agent-ruled hand queue)", "method": "primary_source_quote", "sources": ["data/licence_register/commentary_licence_register_nilakantha.tsv", "data/licence_register/nilakantha_licence_rejected.tsv", "data/licence_register/nilakantha_hand_rulings.json"], "verified_date": "05-09-2026"}, "P04_U04_A059_S005|NIL-054": {"verifier": "CommentaryStrategies register pipeline (H2883-derived, agent-ruled hand queue)", "method": "primary_source_quote", "sources": ["data/licence_register/commentary_licence_register_nilakantha.tsv", "data/licence_register/nilakantha_licence_rejected.tsv", "data/licence_register/nilakantha_hand_rulings.json"], "verified_date": "05-09-2026"}, "P04_U04_A061_S011|NIL-055": {"verifier": "CommentaryStrategies register pipeline (H2883-derived, agent-ruled hand queue)", "method": "primary_source_quote", "sources": ["data/licence_register/commentary_licence_register_nilakantha.tsv", "data/licence_register/nilakantha_licence_rejected.tsv", "data/licence_register/nilakantha_hand_rulings.json"], "verified_date": "05-09-2026"}, "P05_U01_A001_S015|NIL-057": {"verifier": "CommentaryStrategies register pipeline (H2883-derived, agent-ruled hand queue)", "method": "primary_source_quote", "sources": ["data/licence_register/commentary_licence_register_nilakantha.tsv", "data/licence_register/nilakantha_licence_rejected.tsv", "data/licence_register/nilakantha_hand_rulings.json"], "verified_date": "05-09-2026"}, "P05_U01_A014_S016|NIL-061": {"verifier": "CommentaryStrategies register pipeline (H2883-derived, agent-ruled hand queue)", "method": "primary_source_quote", "sources": ["data/licence_register/commentary_licence_register_nilakantha.tsv", "data/licence_register/nilakantha_licence_rejected.tsv", "data/licence_register/nilakantha_hand_rulings.json"], "verified_date": "05-09-2026"}, "P05_U02_A027_S014|NIL-062": {"verifier": "CommentaryStrategies register pipeline (H2883-derived, agent-ruled hand queue)", "method": "primary_source_quote", "sources": ["data/licence_register/commentary_licence_register_nilakantha.tsv", "data/licence_register/nilakantha_licence_rejected.tsv", "data/licence_register/nilakantha_hand_rulings.json"], "verified_date": "05-09-2026"}, "P06_U03_A032_S003|NIL-076": {"verifier": "CommentaryStrategies register pipeline (H2883-derived, agent-ruled hand queue)", "method": "primary_source_quote", "sources": ["data/licence_register/commentary_licence_register_nilakantha.tsv", "data/licence_register/nilakantha_licence_rejected.tsv", "data/licence_register/nilakantha_hand_rulings.json"], "verified_date": "05-09-2026"}, "P06_U03_A035_S048|NIL-078": {"verifier": "CommentaryStrategies register pipeline (H2883-derived, agent-ruled hand queue)", "method": "primary_source_quote", "sources": ["data/licence_register/commentary_licence_register_nilakantha.tsv", "data/licence_register/nilakantha_licence_rejected.tsv", "data/licence_register/nilakantha_hand_rulings.json"], "verified_date": "05-09-2026"}, "P06_U03_A042_S055|NIL-079": {"verifier": "CommentaryStrategies register pipeline (H2883-derived, agent-ruled hand queue)", "method": "primary_source_quote", "sources": ["data/licence_register/commentary_licence_register_nilakantha.tsv", "data/licence_register/nilakantha_licence_rejected.tsv", "data/licence_register/nilakantha_hand_rulings.json"], "verified_date": "05-09-2026"}, "P06_U04_A043_S026|NIL-080": {"verifier": "CommentaryStrategies register pipeline (H2883-derived, agent-ruled hand queue)", "method": "primary_source_quote", "sources": ["data/licence_register/commentary_licence_register_nilakantha.tsv", "data/licence_register/nilakantha_licence_rejected.tsv", "data/licence_register/nilakantha_hand_rulings.json"], "verified_date": "05-09-2026"}, "P08_U01_A010_S045|NIL-091": {"verifier": "CommentaryStrategies register pipeline (H2883-derived, agent-ruled hand queue)", "method": "primary_source_quote", "sources": ["data/licence_register/commentary_licence_register_nilakantha.tsv", "data/licence_register/nilakantha_licence_rejected.tsv", "data/licence_register/nilakantha_hand_rulings.json"], "verified_date": "05-09-2026"}, "P08_U01_A067_S006|NIL-095": {"verifier": "CommentaryStrategies register pipeline (H2883-derived, agent-ruled hand queue)", "method": "primary_source_quote", "sources": ["data/licence_register/commentary_licence_register_nilakantha.tsv", "data/licence_register/nilakantha_licence_rejected.tsv", "data/licence_register/nilakantha_hand_rulings.json"], "verified_date": "05-09-2026"}, "P08_U01_A080_S018|NIL-096": {"verifier": "CommentaryStrategies register pipeline (H2883-derived, agent-ruled hand queue)", "method": "primary_source_quote", "sources": ["data/licence_register/commentary_licence_register_nilakantha.tsv", "data/licence_register/nilakantha_licence_rejected.tsv", "data/licence_register/nilakantha_hand_rulings.json"], "verified_date": "05-09-2026"}, "P09_U01_A001_S001|NIL-097": {"verifier": "CommentaryStrategies register pipeline (H2883-derived, agent-ruled hand queue)", "method": "primary_source_quote", "sources": ["data/licence_register/commentary_licence_register_nilakantha.tsv", "data/licence_register/nilakantha_licence_rejected.tsv", "data/licence_register/nilakantha_hand_rulings.json"], "verified_date": "05-09-2026"}, "P12_U02_A153_S039|NIL-110": {"verifier": "CommentaryStrategies register pipeline (H2883-derived, agent-ruled hand queue)", "method": "primary_source_quote", "sources": ["data/licence_register/commentary_licence_register_nilakantha.tsv", "data/licence_register/nilakantha_licence_rejected.tsv", "data/licence_register/nilakantha_hand_rulings.json"], "verified_date": "05-09-2026"}, "P12_U03_A237_S003|NIL-117": {"verifier": "CommentaryStrategies register pipeline (H2883-derived, agent-ruled hand queue)", "method": "primary_source_quote", "sources": ["data/licence_register/commentary_licence_register_nilakantha.tsv", "data/licence_register/nilakantha_licence_rejected.tsv", "data/licence_register/nilakantha_hand_rulings.json"], "verified_date": "05-09-2026"}, "P12_U03_A261_S030|NIL-119": {"verifier": "CommentaryStrategies register pipeline (H2883-derived, agent-ruled hand queue)", "method": "primary_source_quote", "sources": ["data/licence_register/commentary_licence_register_nilakantha.tsv", "data/licence_register/nilakantha_licence_rejected.tsv", "data/licence_register/nilakantha_hand_rulings.json"], "verified_date": "05-09-2026"}, "P12_U03_A284_S098|NIL-125": {"verifier": "CommentaryStrategies register pipeline (H2883-derived, agent-ruled hand queue)", "method": "primary_source_quote", "sources": ["data/licence_register/commentary_licence_register_nilakantha.tsv", "data/licence_register/nilakantha_licence_rejected.tsv", "data/licence_register/nilakantha_hand_rulings.json"], "verified_date": "05-09-2026"}, "P12_U03_A307_S010|NIL-132": {"verifier": "CommentaryStrategies register pipeline (H2883-derived, agent-ruled hand queue)", "method": "primary_source_quote", "sources": ["data/licence_register/commentary_licence_register_nilakantha.tsv", "data/licence_register/nilakantha_licence_rejected.tsv", "data/licence_register/nilakantha_hand_rulings.json"], "verified_date": "05-09-2026"}, "P13_U01_A099_S007|NIL-149": {"verifier": "CommentaryStrategies register pipeline (H2883-derived, agent-ruled hand queue)", "method": "primary_source_quote", "sources": ["data/licence_register/commentary_licence_register_nilakantha.tsv", "data/licence_register/nilakantha_licence_rejected.tsv", "data/licence_register/nilakantha_hand_rulings.json"], "verified_date": "05-09-2026"}} -->
 </body>
 </html>
