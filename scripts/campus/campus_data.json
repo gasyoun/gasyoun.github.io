@@ -1,0 +1,359 @@
+{
+ "wings": {
+  "grammar": {
+   "title": "Грамматика",
+   "items": [
+    {
+     "no": 2,
+     "title": "Анатомия одной статьи",
+     "url": "https://gasyoun.github.io/infographics/anatomy-mw-2026-08-29/index.html"
+    },
+    {
+     "no": 3,
+     "title": "Словари по буквам деванагари",
+     "url": "https://gasyoun.github.io/infographics/mw-letters-2026-08-29/index.html"
+    },
+    {
+     "no": 5,
+     "title": "Пятеро лексикографов",
+     "url": "https://gasyoun.github.io/infographics/five-lexicographers-2026-08-29/index.html"
+    },
+    {
+     "no": 6,
+     "title": "Генеалогия словарей",
+     "url": "https://gasyoun.github.io/infographics/dict-genealogy-2026-08-29/index.html"
+    },
+    {
+     "no": 7,
+     "title": "Топ-20 самых длинных слов",
+     "url": "https://gasyoun.github.io/infographics/longest-words-2026-08-29/index.html"
+    },
+    {
+     "no": 8,
+     "title": "Рекорды омонимии",
+     "url": "https://gasyoun.github.io/infographics/homonyms-2026-08-29/index.html"
+    },
+    {
+     "no": 9,
+     "title": "Одно слово — пять кодировок",
+     "url": "https://gasyoun.github.io/infographics/five-encodings-2026-08-29/index.html"
+    },
+    {
+     "no": 11,
+     "title": "Морфологическая снежинка",
+     "url": "https://gasyoun.github.io/infographics/morph-snowflake-2026-08-29/index.html"
+    },
+    {
+     "no": 12,
+     "title": "Сетка падежей",
+     "url": "https://gasyoun.github.io/infographics/case-grid-2026-08-29/index.html"
+    },
+    {
+     "no": 19,
+     "title": "Колесо самас",
+     "url": "https://gasyoun.github.io/infographics/samasa-chakram-2026-08-29/index.html"
+    },
+    {
+     "no": 20,
+     "title": "Рекорды сандхи",
+     "url": "https://gasyoun.github.io/infographics/sandhi-records-2026-08-29/index.html"
+    },
+    {
+     "no": 21,
+     "title": "Падежные дорожки",
+     "url": "https://gasyoun.github.io/infographics/case-roads-2026-08-29/index.html"
+    },
+    {
+     "no": 39,
+     "title": "Деванагари-квартал",
+     "url": "https://gasyoun.github.io/infographics/devanagari-quarter-2026-08-29/index.html"
+    },
+    {
+     "no": null,
+     "title": "Klammerdiagramm — разобранные примеры",
+     "url": "https://github.com/gasyoun/SamasaChakram/blob/main/klammerdiagramm-worked-examples.md"
+    }
+   ]
+  },
+  "study": {
+   "title": "Учёба",
+   "items": [
+    {
+     "no": 10,
+     "title": "Месяц слов",
+     "url": "https://gasyoun.github.io/infographics/month-of-words-2026-08-29/index.html"
+    },
+    {
+     "no": 13,
+     "title": "Рамаяна в цифрах",
+     "url": "https://gasyoun.github.io/infographics/ramayana-numbers-2026-08-29/index.html"
+    },
+    {
+     "no": 14,
+     "title": "Гита: тепловая карта",
+     "url": "https://gasyoun.github.io/infographics/gita-heatmap-2026-08-29/index.html"
+    },
+    {
+     "no": 18,
+     "title": "Сомадева: океан историй",
+     "url": "https://gasyoun.github.io/infographics/somadeva-ocean-2026-08-29/index.html"
+    },
+    {
+     "no": 28,
+     "title": "Дорога ученика в Systema",
+     "url": "https://gasyoun.github.io/infographics/systema-srs-2026-08-29/index.html"
+    },
+    {
+     "no": 36,
+     "title": "От алфавита до Рамаяны",
+     "url": "https://gasyoun.github.io/infographics/student-road-2026-08-29/index.html"
+    },
+    {
+     "no": 37,
+     "title": "Сто слов Гиты",
+     "url": "https://gasyoun.github.io/infographics/gita-100-2026-08-29/index.html"
+    },
+    {
+     "no": 38,
+     "title": "Таблица грехов",
+     "url": "https://gasyoun.github.io/infographics/typo-gold-2026-08-29/index.html"
+    },
+    {
+     "no": 40,
+     "title": "Сколько слов нужно для Гиты",
+     "url": "https://gasyoun.github.io/infographics/gita-coverage-2026-08-29/index.html"
+    },
+    {
+     "no": null,
+     "title": "kosha — наборы данных и релизы (drills, SRS)",
+     "url": "https://github.com/gasyoun/kosha/releases"
+    },
+    {
+     "no": null,
+     "title": "Systema-Sanscriticum — живая школа",
+     "url": "https://samskrte.ru/"
+    }
+   ]
+  },
+  "estate": {
+   "title": "Имение и финансы",
+   "items": [
+    {
+     "no": 22,
+     "title": "Карта империи",
+     "url": "https://gasyoun.github.io/infographics/empire-map-2026-08-29/index.html"
+    },
+    {
+     "no": 23,
+     "title": "Пульс коммитов",
+     "url": "https://gasyoun.github.io/infographics/commit-pulse-2026-08-29/index.html"
+    },
+    {
+     "no": 24,
+     "title": "Кто пишет санскрит",
+     "url": "https://gasyoun.github.io/infographics/who-writes-2026-08-29/index.html"
+    },
+    {
+     "no": 25,
+     "title": "CI-паспорт организации",
+     "url": "https://gasyoun.github.io/infographics/ci-passport-2026-08-29/index.html"
+    },
+    {
+     "no": 26,
+     "title": "Рост имения 2025→2026",
+     "url": "https://gasyoun.github.io/infographics/estate-growth-2026-08-29/index.html"
+    },
+    {
+     "no": 30,
+     "title": "Цена слова",
+     "url": "https://gasyoun.github.io/infographics/price-of-word-2026-08-29/index.html"
+    },
+    {
+     "no": 31,
+     "title": "Roadmap-снепшот",
+     "url": "https://gasyoun.github.io/infographics/gtd-snapshot-2026-08-29/index.html"
+    },
+    {
+     "no": 32,
+     "title": "Хронология имения",
+     "url": "https://gasyoun.github.io/infographics/estate-timeline-2026-08-29/index.html"
+    },
+    {
+     "no": 46,
+     "title": "Муравейник агентов",
+     "url": "https://gasyoun.github.io/infographics/agent-anthill-2026-08-29/index.html"
+    },
+    {
+     "no": 47,
+     "title": "Год одним кадром",
+     "url": "https://gasyoun.github.io/infographics/year-one-frame-2026-08-29/index.html"
+    },
+    {
+     "no": 49,
+     "title": "Мета-дашборд «вселенная санскрита»",
+     "url": "https://gasyoun.github.io/infographics/meta-dashboard-2026-08-29/index.html"
+    },
+    {
+     "no": 52,
+     "title": "Корпус отчётов обсерватории",
+     "url": "https://gasyoun.github.io/infographics/observatory-reports-2026-08-29/index.html"
+    },
+    {
+     "no": null,
+     "title": "Sangram атлас — единый вид (исходник; live-деплой не опубликован)",
+     "url": "https://github.com/gasyoun/SanskritGrammar/blob/main/sangram/atlas/unified.mdx"
+    },
+    {
+     "no": null,
+     "title": "SanskritGrammar — сайт (живой)",
+     "url": "https://gasyoun.github.io/SanskritGrammar/"
+    },
+    {
+     "no": null,
+     "title": "csl-observatory — метрики организации",
+     "url": "https://github.com/sanskrit-lexicon/csl-observatory"
+    },
+    {
+     "no": null,
+     "title": "🔒 REUSE_INDEX и MEGABOOK — приватный Uprava (без публичной ссылки)",
+     "url": null
+    }
+   ]
+  },
+  "products": {
+   "title": "Продукты и привлечение",
+   "items": [
+    {
+     "no": 1,
+     "title": "45 словарей целиком",
+     "url": "https://gasyoun.github.io/infographics/dictionaries-45-2026-08-29/index.html"
+    },
+    {
+     "no": 4,
+     "title": "Хронология изданий",
+     "url": "https://gasyoun.github.io/infographics/editions-timeline-2026-08-29/index.html"
+    },
+    {
+     "no": 15,
+     "title": "Стратиграфия комментария",
+     "url": "https://gasyoun.github.io/infographics/commentary-strata-2026-08-29/index.html"
+    },
+    {
+     "no": 16,
+     "title": "Корпуса рядом",
+     "url": "https://gasyoun.github.io/infographics/corpora-side-by-side-2026-08-29/index.html"
+    },
+    {
+     "no": 17,
+     "title": "Самые цитируемые источники",
+     "url": "https://gasyoun.github.io/infographics/mw-citations-2026-08-29/index.html"
+    },
+    {
+     "no": 27,
+     "title": "Воронка ORS",
+     "url": "https://gasyoun.github.io/infographics/ors-funnel-2026-08-29/index.html"
+    },
+    {
+     "no": 29,
+     "title": "Кампус продуктов",
+     "url": "https://gasyoun.github.io/infographics/product-campus-2026-08-29/index.html"
+    },
+    {
+     "no": 33,
+     "title": "Атлас индологов",
+     "url": "https://gasyoun.github.io/infographics/indology-atlas-2026-08-29/index.html"
+    },
+    {
+     "no": 34,
+     "title": "Мост Зализняк → санскрит",
+     "url": "https://gasyoun.github.io/infographics/zaliznyak-bridge-2026-08-29/index.html"
+    },
+    {
+     "no": 35,
+     "title": "Светофор лицензий",
+     "url": "https://gasyoun.github.io/infographics/license-traffic-light-2026-08-29/index.html"
+    },
+    {
+     "no": 41,
+     "title": "Санскрит vs латынь vs греческий",
+     "url": "https://gasyoun.github.io/infographics/sanskrit-vs-classical-2026-08-29/index.html"
+    },
+    {
+     "no": 42,
+     "title": "Индекс сканов BookIndex",
+     "url": "https://gasyoun.github.io/infographics/bookindex-scans-2026-08-29/index.html"
+    },
+    {
+     "no": 43,
+     "title": "Место в мировом рейтинге",
+     "url": "https://gasyoun.github.io/infographics/mw-among-greats-2026-08-29/index.html"
+    },
+    {
+     "no": 44,
+     "title": "Словари как чемоданы",
+     "url": "https://gasyoun.github.io/infographics/dict-suitcases-2026-08-29/index.html"
+    },
+    {
+     "no": 45,
+     "title": "Три языка науки",
+     "url": "https://gasyoun.github.io/infographics/three-languages-2026-08-29/index.html"
+    },
+    {
+     "no": 48,
+     "title": "Слайдер роста",
+     "url": "https://gasyoun.github.io/infographics/growth-slider-2026-08-29/index.html"
+    },
+    {
+     "no": 50,
+     "title": "Паспорт одного словаря",
+     "url": "https://gasyoun.github.io/infographics/dict-passport-2026-08-29/index.html"
+    },
+    {
+     "no": 51,
+     "title": "Семь предисловий",
+     "url": "https://gasyoun.github.io/infographics/prefaces-seven-2026-08-29/index.html"
+    },
+    {
+     "no": 53,
+     "title": "VisualDCS derived-data",
+     "url": "https://gasyoun.github.io/infographics/visualdcs-derived-2026-08-29/index.html"
+    },
+    {
+     "no": 54,
+     "title": "CountVowels CVC",
+     "url": "https://gasyoun.github.io/infographics/countvowels-cvc-2026-08-29/index.html"
+    },
+    {
+     "no": 55,
+     "title": "o_vs_O орфо-дрейф",
+     "url": "https://gasyoun.github.io/infographics/o-vs-o-pairs-2026-08-29/index.html"
+    },
+    {
+     "no": 56,
+     "title": "fuzzyalpha почти-дубли",
+     "url": "https://gasyoun.github.io/infographics/fuzzyalpha-dupes-2026-08-29/index.html"
+    },
+    {
+     "no": 57,
+     "title": "BookIndex сканы",
+     "url": "https://gasyoun.github.io/infographics/bookindex-scans-2026-08-29/index.html"
+    },
+    {
+     "no": 58,
+     "title": "SanskritSorting",
+     "url": "https://gasyoun.github.io/infographics/sanskrit-sorting-2026-08-29/index.html"
+    },
+    {
+     "no": null,
+     "title": "ORS-FAQ — samskrtam.ru (воронка, кабинет)",
+     "url": "https://samskrtam.ru/"
+    },
+    {
+     "no": null,
+     "title": "FEATURES_INDEX — инвентарь всех возможностей",
+     "url": "https://github.com/gasyoun/SanskritLexicography/blob/master/FEATURES_INDEX.md"
+    }
+   ]
+  }
+ }
+}
