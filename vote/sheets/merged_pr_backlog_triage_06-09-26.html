@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="color-scheme" content="dark">
+<meta name="generator" content="csl-pyutil/0.23.0">
+<title>Merged-PR close-or-sheet триаж реестра (U47) — 35 items</title>
+<style>
+  :root { color-scheme: dark; --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --text:#e6e6e6; --muted:#9aa0aa;
+          --accent:#5b8cff; --ok:#3fb950; --bad:#f85149; --defer:#d29922; --border:#2a2f3a; }
+  * { box-sizing: border-box; }
+  body { background:var(--bg); color:var(--text); font-family:-apple-system,Segoe UI,Roboto,sans-serif;
+         margin:0; padding:0 0 120px 0; }
+  header.top { position:sticky; top:0; z-index:10; background:var(--panel); border-bottom:1px solid var(--border);
+               padding:14px 20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+  header.top h1 { font-size:16px; margin:0; }
+  header.top .sub { color:var(--muted); font-size:12px; max-width:760px; }
+  .tally { display:flex; gap:14px; font-size:13px; }
+  .tally span.count { font-weight:700; }
+  .tally .approve { color:var(--ok); } .tally .reject { color:var(--bad); }
+  .tally .defer { color:var(--defer); } .tally .unvoted { color:var(--muted); }
+  .toolbar { padding:10px 20px; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  button.dl { background:var(--accent); color:#fff; border:none; padding:8px 14px; border-radius:6px;
+              cursor:pointer; font-size:13px; }
+  button.dl:hover { opacity:.9; }
+  .filterbar { display:flex; gap:6px; flex-wrap:wrap; }
+  .filterbar button { background:var(--panel2); border:1px solid var(--border); color:var(--text);
+                       padding:6px 10px; border-radius:14px; font-size:12px; cursor:pointer; }
+  .filterbar button.active { border-color:var(--accent); color:var(--accent); }
+  main { max-width:980px; margin:0 auto; padding:10px 20px; }
+  .card { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:16px;
+          margin-bottom:16px; }
+  .card.voted-approve { border-left:4px solid var(--ok); }
+  .card.voted-reject { border-left:4px solid var(--bad); }
+  .card.voted-defer { border-left:4px solid var(--defer); }
+  .card header { display:flex; justify-content:space-between; align-items:baseline; }
+  .card .hw { font-size:18px; font-weight:700; }
+  .badge { font-size:11px; background:var(--panel2); padding:2px 8px; border-radius:10px;
+           margin-left:8px; color:var(--muted); }
+  .question { margin:8px 0 12px; font-size:14px; }
+  .panel { background:var(--panel2); border-radius:8px; padding:10px 12px; font-size:13px; margin-bottom:10px; }
+  .panel h4 { margin:0 0 6px; font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+  .panel pre { white-space:pre-wrap; word-break:break-word; margin:0; font-size:12px; line-height:1.45; }
+  .chip { display:inline-block; background:#263042; border-radius:5px; padding:2px 7px; margin:2px 3px 2px 0; font-size:12px; }
+  .muted { color:var(--muted); font-style:italic; }
+  .controls { display:flex; align-items:center; gap:8px; margin-top:4px; }
+  button.vote { border:1px solid var(--border); background:var(--panel2); color:var(--text);
+                padding:7px 12px; border-radius:6px; cursor:pointer; font-size:13px; }
+  button.vote.approve.active { background:var(--ok); border-color:var(--ok); color:#04240b; }
+  button.vote.reject.active { background:var(--bad); border-color:var(--bad); color:#2a0a08; }
+  button.vote.defer.active { background:var(--defer); border-color:var(--defer); color:#2a1d02; }
+  .vote-state { margin-left:6px; font-size:12px; color:var(--muted); }
+  textarea.note { width:100%; margin-top:10px; min-height:44px; background:#11141a !important; color:#e6e6e6 !important;
+                  -webkit-text-fill-color:#e6e6e6; border:1px solid var(--border); border-radius:6px; padding:8px; font-size:13px;
+                  font-family:inherit; resize:vertical; }
+  textarea.note::placeholder { color:var(--muted); opacity:1; }
+  footer.hint { max-width:980px; margin:20px auto; padding:0 20px; color:var(--muted); font-size:12px; }
+  kbd { background:#263042; border-radius:4px; padding:1px 5px; font-size:11px; }
+
+  .screening-banner { margin: 0 20px 12px; padding: 10px 14px; border-radius: 8px;
+    border: 1px solid var(--accent); background: #152033; font-size: 12px; line-height: 1.45;
+    color: var(--text); max-width: 980px; }
+  .screening-banner code { font-size: 11px; color: var(--accent); }
+  .screening-banner .sc-d { color: var(--defer); font-weight: 700; }
+
+  :root { --fs:1.5; }
+  header.top h1 { font-size:calc(16px * var(--fs)) !important; }
+  header.top .sub { font-size:calc(12px * var(--fs)) !important; }
+  .tally, button.dl, button.vote, button.rate, textarea.note, .reject-label-select,
+  #strictReviewerWrap, #strictReviewerWrap input { font-size:calc(13px * var(--fs)) !important; }
+  .filterbar button, .fsctl button, .fsctl .fsval, .chip, .vote-state, .rate-state,
+  .ratinglabel, .rejectlabellabel, footer.hint, div.legend,
+  #strictReviewError { font-size:calc(12px * var(--fs)) !important; }
+  .card .hw { font-size:calc(18px * var(--fs)) !important; }
+  .badge, .panel h4, kbd, .idchip { font-size:calc(11px * var(--fs)) !important; }
+  .question { font-size:calc(14px * var(--fs)) !important; }
+  .panel { font-size:calc(13px * var(--fs)) !important; }
+  .panel pre { font-size:calc(13.5px * var(--fs)) !important; line-height:1.55; }
+  .panel .anatomy { font-size:calc(12.5px * var(--fs)) !important; }
+  .savebanner { font-size:calc(12.5px * var(--fs)) !important; }
+  .fsctl { display:flex; align-items:center; gap:4px; }
+  .fsctl button { background:var(--panel2); border:1px solid var(--border); color:var(--text);
+                  padding:6px 10px; border-radius:14px; cursor:pointer; line-height:1; }
+  .fsctl .fsval { color:var(--muted); min-width:3.4em; text-align:center; }
+  @media (max-width: 640px) {
+    header.top { padding: 10px 14px; flex-direction: column; align-items: stretch; }
+    header.top h1 { font-size: 15px; }
+    .tally { gap: 8px; font-size: 11px; }
+    .toolbar { padding: 8px 14px; }
+    main { padding: 8px 12px; }
+    .card { padding: 12px; }
+    .filterbar { flex-wrap: wrap; }
+    button.dl, button.vote, button.rate, .fsctl button, #saveBtn, #handinBtn, #pauseBtn {
+      min-height: 44px; min-width: 44px; padding: 10px 14px;
+    }
+    .controls { flex-wrap: wrap; }
+    .panel { padding: 8px 10px; }
+    textarea.note { min-height: 60px; }
+  }
+  .tally .time { color:var(--muted); }
+  .dl.handin { background:#243447; }
+  .tally .pausebtn { background:none; border:1px solid var(--border); color:var(--muted);
+                     border-radius:6px; padding:0 6px; margin-left:4px; cursor:pointer;
+                     font-size:inherit; font-family:inherit; line-height:1.6; }
+  .tally .pausebtn.on { color:#ffd479; border-color:#ffd479; }
+  .tally .time.paused { opacity:.45; }
+  .handin-said { color:var(--muted); font-size:12px; margin-left:10px; }
+  .card.kbd-active { outline:2px solid var(--accent); outline-offset:3px; }
+  .tally .tstate { color:var(--muted); font-size:.85em; margin-left:4px; }
+  .tally .tstate.idle { color:var(--defer); }
+  .flowprog { display:inline-flex; align-items:center; gap:8px; color:var(--muted); font-size:12px; }
+  .flowprog .bar { display:inline-block; width:120px; height:6px; border-radius:3px;
+                   background:var(--panel2); border:1px solid var(--border); overflow:hidden; }
+  .flowprog .bar i { display:block; height:6px; background:var(--accent); width:0; }
+  .dl.flowundo { background:#243447; }
+  .flowtoast { position:fixed; left:50%; bottom:24px; transform:translateX(-50%);
+               background:var(--panel2); border:1px solid var(--border); color:var(--text);
+               padding:8px 14px; border-radius:8px; font-size:13px; z-index:50;
+               opacity:0; pointer-events:none; transition:opacity .18s; }
+  .flowtoast.on { opacity:1; }
+  .voteprog { flex:1 0 100%; order:99; background:var(--panel);
+              border-top:1px solid var(--border); margin:6px -20px -14px; padding:8px 20px;
+              display:flex; align-items:center; gap:12px; font-size:12px; color:var(--muted); }
+  .voteprog .bar { flex:1 1 auto; height:8px; border-radius:4px; background:var(--panel2);
+                   border:1px solid var(--border); overflow:hidden; }
+  .voteprog .bar i { display:block; height:100%; width:0; background:var(--ok); transition:width .2s; }
+  .voteprog b { color:var(--text); font-weight:700; }
+  .voteprog .eta { white-space:nowrap; }
+  .votebar { position:sticky; bottom:0; z-index:9; background:var(--panel);
+             border-top:1px solid var(--border); padding:10px 20px; margin-top:24px;
+             display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  .votebar .spacer { flex:1 1 auto; }
+  .card { scroll-margin-top:96px; }
+  @media (max-width: 640px) { .voteprog { padding:6px 12px; } .votebar { padding:8px 12px; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>Merged-PR close-or-sheet триаж реестра (U47) — 35 items</h1>
+    <div class="sub">Generated 2026-09-06 &middot; sheet_id <code>uprava-merged-pr-backlog-triage_06-09-26</code> &middot; 06-09-2026 — 35 открытых строк, цитируемых слитыми PR. 29 из 63 backlog-строк уже закрыты другими проходами; здесь только живые. Классы: опровергнуто агентом 2 · человеческий гейт 21 · MG решает 12. ~30 мин.</div>
+  </div>
+  <div class="tally" id="tally">
+    <span class="approve">&#9989; <span class="count" id="c-approve">0</span></span>
+    <span class="reject">&#10060; <span class="count" id="c-reject">0</span></span>
+    <span class="defer">&#9208; <span class="count" id="c-defer">0</span></span>
+    <span class="time" title="active time on this sheet (while the tab is visible)">&#9201; <span class="count" id="t-total">0:00</span><span class="tstate" id="t-state"></span></span>
+    <button type="button" class="pausebtn" id="pauseBtn" title="pause the clock — a break is not review time">&#9208;</button>
+    <span class="unvoted">&#9711; <span class="count" id="c-unvoted">35</span></span>
+  </div>
+<div class="voteprog" id="voteProg"><span id="voteProgText"></span><span class="bar"><i id="voteProgBar"></i></span><span class="eta" id="voteProgEta"></span></div>
+</header>
+<aside class="screening-banner" role="status" data-screening="1"><strong>Screening (H1649)</strong> — only human-required cards are below. Off the plate: <span class="sc-a">deterministic 35</span> · <span class="sc-b">dataset lookup 0</span> · <span class="sc-c">agent adjudication 35</span> (total screened 70). Human cards: <span class="sc-d">35</span>. Evidence: <code>data/merged_pr_close_backlog.json</code>. Rules: детект: handoff_merged_pr_reconcile (merged-PR search + local_git), популяция: backlog-хиты со строкой, ещё открытой в обеих половинах реестра @ origin/main, классификация: механическая — гейт-токены статуса / ручные опровержения H3184+H3824, верdict — только MG; автозакрытия по этому листу нет.</aside>
+<div class="toolbar">
+  <button data-submit="1" class="dl" id="downloadBtn">Download decisions.json</button><button data-submit="1" class="dl handin" id="handinBtn" title="stop the clock and export the votes made so far; the rest stay saved in this browser">Hand in what I got</button><span class="handin-said" id="handinSaid"></span><button data-submit="1" class="dl" id="saveBtn" style="display:none;margin-left:8px">Save to folder…</button>
+  <div class="fsctl" title="text size — persists in this browser"><button type="button" id="fsDown" aria-label="smaller text">A&minus;</button><span class="fsval" id="fsVal"></span><button type="button" id="fsUp" aria-label="larger text">A+</button></div>
+  <button data-submit="1" type="button" class="dl flowundo" id="flowUndoBtn" title="undo the last decision (z)">&#8630; Undo</button>
+  <span class="flowprog" id="flowProg"><span class="bar"><i id="flowBar"></i></span><span id="flowProgText"></span><span id="flowEta"></span></span>
+  <div class="filterbar" id="filterbar"><button data-filter="all" class="active">all</button><button data-filter="all">Все</button><button data-filter="refuted">Опровергнуто агентом</button><button data-filter="gate">Человеческий гейт</button><button data-filter="judge">MG решает</button><button data-filter="unvoted">unvoted only</button></div>
+</div>
+<main id="cards">
+
+  <section class="card" data-id="H058" data-filt="gate">
+    <header><div class="hw">H058 — H058-OxAlpha_DO_MWS_SPEC1_w1c_scanlink_02.07.26 <span class="badge">gate</span><span class="badge">local_git</span></div></header>
+    <div class="question">Строка цитируется слитыми PR, но не переведена в ✅. Вердикт: <b>закрыть</b> (работа шипилась) или <b>оставить открытой</b>?</div>
+    <div class="panel"><h4>&lt;h4&gt;Evidence (источник)&lt;/h4&gt;&lt;p&gt;&lt;b&gt;Статус строки (verbatim):&lt;/b&gt; 🟠 RESUMABLE — BLOCKED 08-07-2026 (Sonnet 5 `claude-sonnet-5`) — step 1 fails for all three works (MW&amp;#x27;s preface names no edition at all for Suśr./Kathās./ŚBr., just a bare abbreviation-expansion key); stopped before any pages.tsv build per SPEC-1&amp;#x27;s own guardrail. Candidate editions + full analysis: [sanskrit-lexicon/MWS#234](https://github.com/sanskrit-lexicon/MWS/issues/234). Waiting on GTD `@DECIDE` (edition ruling) to resume. 🔴 EXECUTED: H058-OxAlpha_DO_MWS_SPEC1_w1c_scanlink_02.07.26.md {effort: medium} {gate: human:MG}&lt;/p&gt;&lt;p&gt;&lt;b&gt;Ссылка строки:&lt;/b&gt; &lt;a href=&quot;https://github.com/gasyoun/Uprava/blob/main/handoffs/H058-OxAlpha_DO_MWS_SPEC1_w1c_scanlink_02.07.26.md&quot;&gt;H058-OxAlpha_DO_MWS_SPEC1_w1c_scanlink_02.07.26&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Цитирующие слитые PR (5):&lt;/b&gt;&lt;/p&gt;</h4><ul><li><code>gasyoun/Uprava</code> (title) — H058: flip MWS SPEC-1 handoff to blocked-in-work (MW#234)</li><li><code>gasyoun/Uprava</code> (body) — feat(H3125): close-loop evidence order — local git first, REST second, never GraphQL</li><li><code>gasyoun/Uprava</code> (body) — fix(fruit): human-gate visibility — {gate:} backfill, fail-loud prose warn, concrete-act blocker text (H2867)</li><li><code>gasyoun/Uprava</code> (body) — docs(handoffs): A3 age-out — 15 rows past the 7-day 🔵 fuse -&gt; 🟠 RESUMABLE (H2373)</li><li><code>gasyoun/Uprava</code> (body) — handoffs: rename @DO-blocked handoffs to &lt;ID&gt;-&lt;Model&gt;_DO_&lt;repo&gt;_&lt;slug&gt; schema</li></ul><p><b>Детект:</b> local_git merge-commit <code>bfcace699ee4</code> — «H058: flip MWS SPEC-1 handoff to blocked-in-work (MW#234)»</p><h4>Позиция агента</h4><p><b>KEEP-OPEN — человеческий гейт на строке</b> — Статус строки несёт человеческий гейт/блок (⛔/human-gate/waiting on human). PR-цитаты доставку такого гейта не закрывают; строка держится открытой.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Закрыть строку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить открытой</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="H274" data-filt="gate">
+    <header><div class="hw">H274 — H274-Fable_DO_RussianTranslation_pwg_ru_bakeoff_compute_07.07.26 <span class="badge">gate</span><span class="badge">local_git</span></div></header>
+    <div class="question">Строка цитируется слитыми PR, но не переведена в ✅. Вердикт: <b>закрыть</b> (работа шипилась) или <b>оставить открытой</b>?</div>
+    <div class="panel"><h4>&lt;h4&gt;Evidence (источник)&lt;/h4&gt;&lt;p&gt;&lt;b&gt;Статус строки (verbatim):&lt;/b&gt; 🟡 Queued (07-07-2026, Fable 5 `claude-fable-5`) — H178 B-1 follow-on: post-MG-vote bake-off compute (κ/ρ/discrimination/cost table, chosen standing protocol, COMETKiwi correlations). **Blocked on humans:** MG votes the 4 `review/h178_*_sheet.html` sheets → `pwg_ru/eval/h178_&amp;lt;rubric&amp;gt;.decisions.json`; HF license/token for `Unbabel/wmt22-cometkiwi-da`. Starts: `Read C:\Users\user\Documents\GitHub\Uprava\handoffs\H274-Fable_DO_RussianTranslation_pwg_ru_bakeoff_compute_07.07.26.md and execute it.` {gate: human:MG} — **RELEASED 26-07-2026 (MG ruling A2):** only `h178_da` is voted (27a/3r); `h178_mqm&lt;/p&gt;&lt;p&gt;&lt;b&gt;Ссылка строки:&lt;/b&gt; &lt;a href=&quot;https://github.com/gasyoun/Uprava/blob/main/handoffs/H274-Fable_DO_RussianTranslation_pwg_ru_bakeoff_compute_07.07.26.md&quot;&gt;H274-Fable_DO_RussianTranslation_pwg_ru_bakeoff_compute_07.07.26&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Цитирующие слитые PR (7):&lt;/b&gt;&lt;/p&gt;</h4><ul><li><code>gasyoun/Uprava</code> (title) — docs: close H2950 — merged_pr_reconcile widened to FULL prs[] per hit ({repo,number,title,url,match:title|body}, ranked best-first), confidence from best member, search limit 5-to-40; SessionStart+UserPrompt banners name the count; H1088+H2531 replayed as selftest fixtures (56 checks green); fresh scan shows multi-PR rows (H274 - 9 merged PRs cite it); no auto-close loosening (H2733 11% precision stands); consumers landed same change-set in claude-config 3803b8e</li><li><code><a href="https://github.com/gasyoun/Uprava/pull/1643">gasyoun/Uprava#1643</a></code> (title) — docs: H1650 — A2 retire note in index + H274 gate release (#1643)</li><li><code>gasyoun/Uprava</code> (title) — docs: H178 done (PRs #206/#209) — mint H274 bake-off-compute follow-up, GTD @DO rows (vote 4 sheets, HF token), register h178 sheets</li><li><code>gasyoun/Uprava</code> (body) — fix(H3125): the close-loop&#x27;s &quot;REST&quot; fallback was GraphQL all along</li><li><code><a href="https://github.com/gasyoun/Uprava/pull/1458">gasyoun/Uprava#1458</a></code> (body) — docs(uprava): apply MG voting-queue ruling A2 / B / V2; correct H1652 scope (#1458)</li><li><code>gasyoun/Uprava</code> (body) — handoffs: mark @DO-blocked handoffs with _DO_ token in filename</li><li>… ещё 1 цитат (полный список в backlog JSON)</li></ul><p><b>Детект:</b> local_git merge-commit <code>209d142236b5</code> — «docs: close H2950 — merged_pr_reconcile widened to FULL prs[] per hit ({repo,number,title,url,match:title|body}, ranked best-first), confidence from best member, search limit 5-to-40; SessionStart+UserPrompt banners name the count; H1088+H2531 replayed as selftest fixtures (56 checks green); fresh scan shows multi-PR rows (H274 - 9 merged PRs cite it); no auto-close loosening (H2733 11% precision stands); consumers landed same change-set in claude-config 3803b8e»</p><h4>Позиция агента</h4><p><b>KEEP-OPEN — человеческий гейт на строке</b> — Статус строки несёт человеческий гейт/блок (⛔/human-gate/waiting on human). PR-цитаты доставку такого гейта не закрывают; строка держится открытой.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Закрыть строку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить открытой</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="H410" data-filt="gate">
+    <header><div class="hw">H410 — H410-OxAlpha_SanskritLexicography_pwg-xref-redirect-resolution_09.07.26 <span class="badge">gate</span><span class="badge">local_git</span></div></header>
+    <div class="question">Строка цитируется слитыми PR, но не переведена в ✅. Вердикт: <b>закрыть</b> (работа шипилась) или <b>оставить открытой</b>?</div>
+    <div class="panel"><h4>&lt;h4&gt;Evidence (источник)&lt;/h4&gt;&lt;p&gt;&lt;b&gt;Статус строки (verbatim):&lt;/b&gt; 🟠 RESUMABLE — Mixed status — H404 Part B follow-on (PWG bare `s.`/`vgl.` redirect resolution); Step 1 fork resolved and the annotation-vs-csl-orig-text-correction question parked as an explicit `@DECIDE`, Step 2 work queued via `/cologne-correction-queue`. Not fully done. _(Orphan added by `/handoff-registry-audit` 09-07-2026 — file existed, no registry row; flagged as mixed status, not auto-rebucketed.)_ {effort: hard} {gate: human:MG}&lt;/p&gt;&lt;p&gt;&lt;b&gt;Ссылка строки:&lt;/b&gt; &lt;a href=&quot;https://github.com/gasyoun/Uprava/blob/main/handoffs/H410-OxAlpha_SanskritLexicography_pwg-xref-redirect-resolution_09.07.26.md&quot;&gt;H410-OxAlpha_SanskritLexicography_pwg-xref-redirect-resolution_09.07.26&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Цитирующие слитые PR (5):&lt;/b&gt;&lt;/p&gt;</h4><ul><li><code>gasyoun/Uprava</code> (title) — Mint H409/H410: fri has_meaning stemmer gap + PWG redirect resolution</li><li><code>gasyoun/Uprava</code> (title) — mint: claim H410 stub</li><li><code>gasyoun/Uprava</code> (body) — fix(fruit): human-gate visibility — {gate:} backfill, fail-loud prose warn, concrete-act blocker text (H2867)</li><li><code>gasyoun/Uprava</code> (body) — docs(handoffs): A3 age-out — 15 rows past the 7-day 🔵 fuse -&gt; 🟠 RESUMABLE (H2373)</li><li><code>gasyoun/Uprava</code> (body) — fix(handoffs): registry audit #2 -- rebucket 18 done/queued rows, add 12 orphans, recount</li></ul><p><b>Детект:</b> local_git merge-commit <code>8c4c979b62ec</code> — «Mint H409/H410: fri has_meaning stemmer gap + PWG redirect resolution»</p><h4>Позиция агента</h4><p><b>KEEP-OPEN — человеческий гейт на строке</b> — Статус строки несёт человеческий гейт/блок (⛔/human-gate/waiting on human). PR-цитаты доставку такого гейта не закрывают; строка держится открытой.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Закрыть строку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить открытой</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="H432" data-filt="gate">
+    <header><div class="hw">H432 — H432-OxAlpha_RuWritingStyles_rws_chunk_pipeline_library_skill_09.07.26 <span class="badge">gate</span><span class="badge">local_git</span></div></header>
+    <div class="question">Строка цитируется слитыми PR, но не переведена в ✅. Вердикт: <b>закрыть</b> (работа шипилась) или <b>оставить открытой</b>?</div>
+    <div class="panel"><h4>&lt;h4&gt;Evidence (источник)&lt;/h4&gt;&lt;p&gt;&lt;b&gt;Статус строки (verbatim):&lt;/b&gt; 🟡 Minted 09-07-2026 (Fable 5 `claude-fable-5`; executor **Sonnet 5** `claude-sonnet-5`) — **RWS chunk pipeline (split_gasuns/drive_RWS/aggregate_RWS) → ruwritingstyles library + CLI + sanskrit-util core + /rws-chunk skill.** BLOCKED on @DO: scripts live only in Fable claude.ai chats — MG must paste/export them first. {gate: human:MG} {effort: hard}&lt;/p&gt;&lt;p&gt;&lt;b&gt;Ссылка строки:&lt;/b&gt; &lt;a href=&quot;https://github.com/gasyoun/Uprava/blob/main/handoffs/H432-OxAlpha_RuWritingStyles_rws_chunk_pipeline_library_skill_09.07.26.md&quot;&gt;H432-OxAlpha_RuWritingStyles_rws_chunk_pipeline_library_skill_09.07.26&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Цитирующие слитые PR (2):&lt;/b&gt;&lt;/p&gt;</h4><ul><li><code>gasyoun/Uprava</code> (title) — handoffs: mint H432 (RWS chunk pipeline lib+CLI+skill), H433 (/sanskrit-council skill), H435 (Fable-footprint skill census) + registry rows + GTD @DO (export scripts from Fable chat)</li><li><code>gasyoun/Uprava</code> (title) — mint: claim H432 stub</li></ul><p><b>Детект:</b> local_git merge-commit <code>e65cdc1dc20f</code> — «handoffs: mint H432 (RWS chunk pipeline lib+CLI+skill), H433 (/sanskrit-council skill), H435 (Fable-footprint skill census) + registry rows + GTD @DO (export scripts from Fable chat)»</p><h4>Позиция агента</h4><p><b>KEEP-OPEN — человеческий гейт на строке</b> — Статус строки несёт человеческий гейт/блок (⛔/human-gate/waiting on human). PR-цитаты доставку такого гейта не закрывают; строка держится открытой.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Закрыть строку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить открытой</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="H477" data-filt="gate">
+    <header><div class="hw">H477 — H477-OxAlpha_DO_Uprava_custdev_lesson_churn_map_10.07.26 <span class="badge">gate</span><span class="badge">local_git</span></div></header>
+    <div class="question">Строка цитируется слитыми PR, но не переведена в ✅. Вердикт: <b>закрыть</b> (работа шипилась) или <b>оставить открытой</b>?</div>
+    <div class="panel"><h4>&lt;h4&gt;Evidence (источник)&lt;/h4&gt;&lt;p&gt;&lt;b&gt;Статус строки (verbatim):&lt;/b&gt; 🟡 Minted 10-07-2026 (Opus 4.8 `claude-opus-4-8`; executor **Sonnet 5 `claude-sonnet-5`**) — 🔴 **Карта отвала по урокам (LessonView) — ЗАБЛОКИРОВАН кредами прод-БД.** Срезы 3–4 висят с 03-07-2026 — самый старый незакрытый пункт custdev; адаптер `pull_samskrte_db.py` написан 06-07 и ждёт только `~/.secrets/samskrte_db.env`. Фаза 0 хендоффа — гейт: кредов нет → остановиться, ничего не имитировать. Спека: [CUSTDEV_NEXT_FOUR_DOCS_RULINGS_2026H2.md](https://github.com/gasyoun/Uprava/blob/main/custdev/CUSTDEV_NEXT_FOUR_DOCS_RULINGS_2026H2.md). {gate: human:MG} {effort: medium}&lt;/p&gt;&lt;p&gt;&lt;b&gt;Ссылка строки:&lt;/b&gt; &lt;a href=&quot;https://github.com/gasyoun/Uprava/blob/main/handoffs/H477-OxAlpha_DO_Uprava_custdev_lesson_churn_map_10.07.26.md&quot;&gt;H477-OxAlpha_DO_Uprava_custdev_lesson_churn_map_10.07.26&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Цитирующие слитые PR (5):&lt;/b&gt;&lt;/p&gt;</h4><ul><li><code>gasyoun/Uprava</code> (title) — custdev: четыре следующих документа — решения MG, спека, H474–H477</li><li><code>gasyoun/Uprava</code> (title) — mint: claim H477 stub</li><li><code>gasyoun/Uprava</code> (body) — fix(fruit_report): suppress §82 false-positive dependency warning, add missing gate fields</li><li><code>gasyoun/Uprava</code> (body) — gtd-sync: Session 41 full re-harvest (7 batches, ~140 repos) — hub confirmed fresh, next-task denylist gap fixed</li><li><code>gasyoun/Uprava</code> (body) — handoffs: rename @DO-blocked handoffs to &lt;ID&gt;-&lt;Model&gt;_DO_&lt;repo&gt;_&lt;slug&gt; schema</li></ul><p><b>Детект:</b> local_git merge-commit <code>4f53ff13e163</code> — «custdev: четыре следующих документа — решения MG, спека, H474–H477»</p><h4>Позиция агента</h4><p><b>KEEP-OPEN — человеческий гейт на строке</b> — Статус строки несёт человеческий гейт/блок (⛔/human-gate/waiting on human). PR-цитаты доставку такого гейта не закрывают; строка держится открытой.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Закрыть строку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить открытой</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="H596" data-filt="judge">
+    <header><div class="hw">H596 — H596-OxAlpha_Systema-Sanscriticum_telegram_w32_unified_reply_live_11.07.26 <span class="badge">judge</span><span class="badge">local_git</span></div></header>
+    <div class="question">Строка цитируется слитыми PR, но не переведена в ✅. Вердикт: <b>закрыть</b> (работа шипилась) или <b>оставить открытой</b>?</div>
+    <div class="panel"><h4>&lt;h4&gt;Evidence (источник)&lt;/h4&gt;&lt;p&gt;&lt;b&gt;Статус строки (verbatim):&lt;/b&gt; 🟡 Minted 11-07-2026 (Opus 4.8 (`claude-opus-4-8`)) — WS3.2 — flip support_unified_reply live after the canary; node of the [Telegram-scaling implementation map](https://github.com/gasyoun/Systema-Sanscriticum/blob/main/docs/IMPLEMENTATION_MAP_TELEGRAM_SCALING_2026_2027.md). Sonnet 4.6 (`claude-sonnet-4-6`). Starts: `Read C:\Users\user\Documents\GitHub\Uprava\handoffs\H596-OxAlpha_Systema-Sanscriticum_telegram_w32_unified_reply_live_11.07.26.md and execute it.` {effort: trivial}&lt;/p&gt;&lt;p&gt;&lt;b&gt;Ссылка строки:&lt;/b&gt; &lt;a href=&quot;https://github.com/gasyoun/Uprava/blob/main/handoffs/H596-OxAlpha_Systema-Sanscriticum_telegram_w32_unified_reply_live_11.07.26.md&quot;&gt;H596-OxAlpha_Systema-Sanscriticum_telegram_w32_unified_reply_live_11.07.26&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Цитирующие слитые PR (1):&lt;/b&gt;&lt;/p&gt;</h4><ul><li><code>gasyoun/Uprava</code> (body) — gtd-sync: Session 41 full re-harvest (7 batches, ~140 repos) — hub confirmed fresh, next-task denylist gap fixed</li></ul><p><b>Детект:</b> local_git merge-commit <code>e16e85571a48</code> — «gtd-sync: Session 41 full re-harvest (7 batches, ~140 repos) — hub confirmed fresh, next-task denylist gap fixed»</p><h4>Позиция агента</h4><p><b>MG-JUDGE — агент не видит доставки</b> — Цитаты в слитых PR не доказывают доставку mission (совпадение по title/body), гейтов в строке не найдено. Рекомендация агента: закрыть ТОЛЬКО если работа реально шипилась — иначе строка ждёт исполнителя.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Закрыть строку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить открытой</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="H789" data-filt="gate">
+    <header><div class="hw">H789 — H789-Fable_SamudraManthanam_nkrya-w2-adjudication-verdict-a41-s64_12.07.26 <span class="badge">gate</span><span class="badge">local_git</span></div></header>
+    <div class="question">Строка цитируется слитыми PR, но не переведена в ✅. Вердикт: <b>закрыть</b> (работа шипилась) или <b>оставить открытой</b>?</div>
+    <div class="panel"><h4>&lt;h4&gt;Evidence (источник)&lt;/h4&gt;&lt;p&gt;&lt;b&gt;Статус строки (verbatim):&lt;/b&gt; 🟡 QUEUED 12-07-2026 (Fable 5 `claude-fable-5` executor, Opus 4.8 `claude-opus-4-8` fallback post-Fable-sunset) — **⛔ GATED on the MG vote, do not auto-start:** needs `samudramanthanam-nkrya-3path-lemma_adjudication51_decisions.json` (the H759 review sheet, REVIEW_SHEETS_INDEX row). Then: ingest votes → decompose B↔C disagreement (convention vs real error vs DCS error) → A41 §6.3/§6.4 verdict + ship-C ruling → report/index/GTD/ARTICLES sync. Minted 12-07-2026 at H759 close so the post-vote Fable work survives the tier sunset. {gate: human:MG} {effort: medium}&lt;/p&gt;&lt;p&gt;&lt;b&gt;Ссылка строки:&lt;/b&gt; &lt;a href=&quot;https://github.com/gasyoun/Uprava/blob/main/handoffs/H789-Fable_SamudraManthanam_nkrya-w2-adjudication-verdict-a41-s64_12.07.26.md&quot;&gt;H789-Fable_SamudraManthanam_nkrya-w2-adjudication-verdict-a41-s64_12.07.26&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Цитирующие слитые PR (77):&lt;/b&gt;&lt;/p&gt;</h4><ul><li><code><a href="https://github.com/gasyoun/SamudraManthanam/pull/328">gasyoun/SamudraManthanam#328</a></code> (title) — docs(.ai_state): H789 sheet hub-published, no longer lost (H3138) (#328)</li><li><code><a href="https://github.com/gasyoun/SamudraManthanam/pull/327">gasyoun/SamudraManthanam#327</a></code> (title) — add H789 review-sheet generator: 51-group NKRYA lemma adjudication (#327)</li><li><code>gasyoun/Uprava</code> (title) — docs(review-index): H789/H159 gate sheets now hub-published (H3138)</li><li><code>gasyoun/Uprava</code> (title) — H789: fill post-vote adjudication-verdict handoff (Fable, vote-gated) + registry row + GTD starter line</li><li><code>gasyoun/Uprava</code> (title) — mint: claim H789 stub</li><li><code>gasyoun/Uprava</code> (title) — docs(review-index): H789/H159 gate sheets now hub-published (H3138)</li><li>… ещё 71 цитат (полный список в backlog JSON)</li></ul><p><b>Детект:</b> local_git merge-commit <code>594ff96a565f</code> — «docs(.ai_state): H789 sheet hub-published, no longer lost (H3138) (#328)»</p><h4>Позиция агента</h4><p><b>KEEP-OPEN — человеческий гейт на строке</b> — Статус строки несёт человеческий гейт/блок (⛔/human-gate/waiting on human). PR-цитаты доставку такого гейта не закрывают; строка держится открытой.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Закрыть строку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить открытой</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="H808" data-filt="gate">
+    <header><div class="hw">H808 — H808-Opus_RussianRamayana_translator-env-wave2-all-sargas-log499_12.07.26 <span class="badge">gate</span><span class="badge">local_git</span></div></header>
+    <div class="question">Строка цитируется слитыми PR, но не переведена в ✅. Вердикт: <b>закрыть</b> (работа шипилась) или <b>оставить открытой</b>?</div>
+    <div class="panel"><h4>&lt;h4&gt;Evidence (источник)&lt;/h4&gt;&lt;p&gt;&lt;b&gt;Статус строки (verbatim):&lt;/b&gt; 🟡 QUEUED 12-07-2026 (Opus 4.8 `claude-opus-4-8` executor) — **🔒 GATED на ответ Леонова** (выбор формы + экспорт лога 499 запросов). Среда переводчика Wave 2 поверх ✅ [H764](https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H764-Opus_RussianRamayana_translator-env-pilot-sundara_12.07.26.md) (пилот) + ✅ [H765](https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H765-Sonnet_SamudraManthanam_ramayana-yuddha-uttara-sanskrit-ingest_12.07.26.md) (текст 6–7): подключить сигнал (в) лог-499, рекалибровать пороги на всех саргах книги 6 (judgment), сгенерировать ВЫБРАННУЮ форму на все &lt;/p&gt;&lt;p&gt;&lt;b&gt;Ссылка строки:&lt;/b&gt; &lt;a href=&quot;https://github.com/gasyoun/Uprava/blob/main/handoffs/H808-Opus_RussianRamayana_translator-env-wave2-all-sargas-log499_12.07.26.md&quot;&gt;H808-Opus_RussianRamayana_translator-env-wave2-all-sargas-log499_12.07.26&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Цитирующие слитые PR (351):&lt;/b&gt;&lt;/p&gt;</h4><ul><li><code><a href="https://github.com/gasyoun/RussianRamayana/pull/36">gasyoun/RussianRamayana#36</a></code> (title) — docs(roadmap): backlink Wave 2 heading to H808 (matches Wave 0/1 pattern) (#36)</li><li><code>gasyoun/Uprava</code> (title) — docs: close H3775 — roadmap_handoff_truth.py --check FLAG 14-&gt;0. Found+fixed a classify() bug (row-cell lead search wasn&#x27;t scoped to the row&#x27;s own status header). Bannered 14 genuinely-drained roadmaps (11 named in the mission + 4 new: kosha, RESEARCH_CAPABILITY, ACL_LESSONS, SanskritLexicography PWG_RU_CEILING_RESIDUAL). RussianRamayana correctly excluded (H808 still QUEUED/gated). Nalopakhyana already a superseded tombstone, only added machine marker. Landed as 8 PRs (all merged) plus one direct push to Uprava main.</li><li><code>gasyoun/Uprava</code> (title) — exec-claim released: H808 (RussianRamayana) — GATE still up (Leonov form + log-499 not received); claim dropped at GATE check, no generation started</li><li><code>gasyoun/Uprava</code> (title) — exec-claim: H808 (RussianRamayana) claimed by OxAlpha (opencode/z-ai/glm-5.3-flash) (marker+ledger)</li><li><code>gasyoun/Uprava</code> (title) — H808: DoD — update MANUAL.md with the среда once Leonov picks a form (MG 12-07)</li><li><code>gasyoun/Uprava</code> (title) — H808: lock Wave 2 scope to book 6 (Yuddhakanda) per roadmap §4 (MG 12-07-2026)</li><li>… ещё 345 цитат (полный список в backlog JSON)</li></ul><p><b>Детект:</b> local_git merge-commit <code>6772a9781380</code> — «docs(roadmap): backlink Wave 2 heading to H808 (matches Wave 0/1 pattern) (#36)»</p><h4>Позиция агента</h4><p><b>KEEP-OPEN — внешний/дата/права гейт</b> — Статус строки несёт внешний гейт (blocked/gated/until/rights). Слитый PR, цитирующий ID, сам гейт не снимает.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Закрыть строку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить открытой</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="H812" data-filt="gate">
+    <header><div class="hw">H812 — H812-OxAlpha_Systema-Sanscriticum_gasuns-course-portfolio-measurement_12.07.26 <span class="badge">gate</span><span class="badge">local_git</span></div></header>
+    <div class="question">Строка цитируется слитыми PR, но не переведена в ✅. Вердикт: <b>закрыть</b> (работа шипилась) или <b>оставить открытой</b>?</div>
+    <div class="panel"><h4>&lt;h4&gt;Evidence (источник)&lt;/h4&gt;&lt;p&gt;&lt;b&gt;Статус строки (verbatim):&lt;/b&gt; 🟡 QUEUED 12-07-2026 (Sonnet 5 `claude-sonnet-5` executor, filled same pass) — **⛔ GATED:** нужен доступ к прод-БД samskrte.ru + разовая оценка часов Гасунса (знаменатель ₽/час, только от человека). E1–E5: связка курс→преподаватель + маржа по курсу/преподавателю + лог часов + атрибуция воронки + календарь запусков → заполнить дашборд-оболочку + применить порог финдира. Разблокирует решение [DECISION_GASUNS_FOCUS_VS_TEACHER_PORTFOLIO_2026H2.md](https://github.com/gasyoun/Uprava/blob/main/DECISION_GASUNS_FOCUS_VS_TEACHER_PORTFOLIO_2026H2.md). {gate: human:MG} {effort: medium}&lt;/p&gt;&lt;p&gt;&lt;b&gt;Ссылка строки:&lt;/b&gt; &lt;a href=&quot;https://github.com/gasyoun/Uprava/blob/main/handoffs/H812-OxAlpha_Systema-Sanscriticum_gasuns-course-portfolio-measurement_12.07.26.md&quot;&gt;H812-OxAlpha_Systema-Sanscriticum_gasuns-course-portfolio-measurement_12.07.26&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Цитирующие слитые PR (125):&lt;/b&gt;&lt;/p&gt;</h4><ul><li><code>gasyoun/Uprava</code> (title) — chore(release): v0.10.8 — H812 schema-correction changelog entry + .ai_state.md close-out</li><li><code>gasyoun/Uprava</code> (title) — docs(H812): correct prod-schema assumptions — E1 already exists, SQL bug fixed, gate confirmed human-only</li><li><code>gasyoun/Uprava</code> (title) — docs(strategy): Tier-0 decision doc + dashboard — Gasuns-focus vs teacher portfolio (+H812)</li><li><code>gasyoun/Uprava</code> (title) — mint: claim H812 stub</li><li><code>gasyoun/Uprava</code> (title) — chore(release): v0.10.8 — H812 schema-correction changelog entry + .ai_state.md close-out</li><li><code>gasyoun/Uprava</code> (title) — docs(H812): correct prod-schema assumptions — E1 already exists, SQL bug fixed, gate confirmed human-only</li><li>… ещё 119 цитат (полный список в backlog JSON)</li></ul><p><b>Детект:</b> local_git merge-commit <code>a315a52313dc</code> — «chore(release): v0.10.8 — H812 schema-correction changelog entry + .ai_state.md close-out»</p><h4>Позиция агента</h4><p><b>KEEP-OPEN — человеческий гейт на строке</b> — Статус строки несёт человеческий гейт/блок (⛔/human-gate/waiting on human). PR-цитаты доставку такого гейта не закрывают; строка держится открытой.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Закрыть строку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить открытой</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="H974" data-filt="gate">
+    <header><div class="hw">H974 — H974-OxAlpha_SamudraManthanam_interlinear-sa-ru-mt-benchmark_15.07.26 <span class="badge">gate</span><span class="badge">local_git</span></div></header>
+    <div class="question">Строка цитируется слитыми PR, но не переведена в ✅. Вердикт: <b>закрыть</b> (работа шипилась) или <b>оставить открытой</b>?</div>
+    <div class="panel"><h4>&lt;h4&gt;Evidence (источник)&lt;/h4&gt;&lt;p&gt;&lt;b&gt;Статус строки (verbatim):&lt;/b&gt; 🟡 QUEUED — SamudraManthanam interlinear sa-ru MT benchmark (rights-gated); Sonnet 5 (`claude-sonnet-5`) _(marker corrected 🔵→🟡 18-07-2026, Sonnet 5 `claude-sonnet-5`, `/next-task` pass — mismatched marker had hidden this row from next_task_scan.py&amp;#x27;s fresh-pick bucket since minting; no work found in the target repo)_ {gate: external:rights} {effort: medium}&lt;/p&gt;&lt;p&gt;&lt;b&gt;Ссылка строки:&lt;/b&gt; &lt;a href=&quot;https://github.com/gasyoun/Uprava/blob/main/handoffs/H974-OxAlpha_SamudraManthanam_interlinear-sa-ru-mt-benchmark_15.07.26.md&quot;&gt;H974-OxAlpha_SamudraManthanam_interlinear-sa-ru-mt-benchmark_15.07.26&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Цитирующие слитые PR (150):&lt;/b&gt;&lt;/p&gt;</h4><ul><li><code>gasyoun/Uprava</code> (title) — fix(registry): correct 🔵→🟡 marker on H966/H968/H969/H973/H974/H975</li><li><code>gasyoun/Uprava</code> (title) — registry: dedupe the H728/H973 + H729/H974 slug-dup pairs (tombstone the dead twins)</li><li><code>gasyoun/Uprava</code> (title) — fix(registry): correct 🔵→🟡 marker on H966/H968/H969/H973/H974/H975</li><li><code>gasyoun/Uprava</code> (title) — registry: dedupe the H728/H973 + H729/H974 slug-dup pairs (tombstone the dead twins)</li><li><code>gasyoun/Uprava</code> (title) — fix(registry): correct 🔵→🟡 marker on H966/H968/H969/H973/H974/H975</li><li><code>gasyoun/Uprava</code> (title) — registry: dedupe the H728/H973 + H729/H974 slug-dup pairs (tombstone the dead twins)</li><li>… ещё 144 цитат (полный список в backlog JSON)</li></ul><p><b>Детект:</b> local_git merge-commit <code>73af687f5ec9</code> — «fix(registry): correct 🔵→🟡 marker on H966/H968/H969/H973/H974/H975»</p><h4>Позиция агента</h4><p><b>KEEP-OPEN — внешний/дата/права гейт</b> — Статус строки несёт внешний гейт (blocked/gated/until/rights). Слитый PR, цитирующий ID, сам гейт не снимает.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Закрыть строку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить открытой</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="H1243" data-filt="gate">
+    <header><div class="hw">H1243 — H1243-Fable_SanskritGrammar_concordance-v3-wackernagel-renou-pdf-gated_18.07.26 <span class="badge">gate</span><span class="badge">local_git</span></div></header>
+    <div class="question">Строка цитируется слитыми PR, но не переведена в ✅. Вердикт: <b>закрыть</b> (работа шипилась) или <b>оставить открытой</b>?</div>
+    <div class="panel"><h4>&lt;h4&gt;Evidence (источник)&lt;/h4&gt;&lt;p&gt;&lt;b&gt;Статус строки (verbatim):&lt;/b&gt; 🟡 QUEUED (PDF-gated) 18-07-2026 — полностью специфицирован; гейт: собственные сканы MG (Wackernagel, *Altindische Grammatik* I–III; Renou, *Grammaire sanscrite*) отложены до 2027 (руление MG 17-08-2026; исходно ожидались ~25-07-2026), archive.org исключён НАВСЕГДА (руление MG 18-07-2026) — не поднимать в /fruit/census как launchable до появления PDF. Конвейер прохода закоммичен и смоук-проверен ([concordance_witness_grid.py](https://github.com/gasyoun/SanskritGrammar/blob/main/scripts/concordance_witness_grid.py), релиз [v0.85.0](https://github.com/gasyoun/SanskritGrammar/releases/tag/v0.85.0)&lt;/p&gt;&lt;p&gt;&lt;b&gt;Ссылка строки:&lt;/b&gt; &lt;a href=&quot;https://github.com/gasyoun/Uprava/blob/main/handoffs/H1243-Fable_SanskritGrammar_concordance-v3-wackernagel-renou-pdf-gated_18.07.26.md&quot;&gt;H1243-Fable_SanskritGrammar_concordance-v3-wackernagel-renou-pdf-gated_18.07.26&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Цитирующие слитые PR (126):&lt;/b&gt;&lt;/p&gt;</h4><ul><li><code><a href="https://github.com/gasyoun/SanskritGrammar/pull/424">gasyoun/SanskritGrammar#424</a></code> (title) — feat(concordance): witness-grid pipeline as reusable tooling + agent prompt contract (H1243 prep, v0.85.0) (#424)</li><li><code>gasyoun/Uprava</code> (title) — registry+docs: H1243 PDFs deferred to 2027 (MG 17-08-2026); watcher narrowed to H2855/H2965</li><li><code>gasyoun/Uprava</code> (title) — gate(H1243): MG ruling recorded — archive.org never, own scans ~25-07-2026; pass conveyor committed (SG v0.85.0); registry row + GTD stale links fixed + release 0.68.0</li><li><code>gasyoun/Uprava</code> (title) — @ salvage(H1242,H1243): commit filled concordance-v2/v3 briefs + resume note</li><li><code>gasyoun/Uprava</code> (title) — mint: claim H1242..H1243 stubs (batch of 2)</li><li><code>gasyoun/Uprava</code> (title) — registry+docs: H1243 PDFs deferred to 2027 (MG 17-08-2026); watcher narrowed to H2855/H2965</li><li>… ещё 120 цитат (полный список в backlog JSON)</li></ul><p><b>Детект:</b> local_git merge-commit <code>b90e2eae048b</code> — «feat(concordance): witness-grid pipeline as reusable tooling + agent prompt contract (H1243 prep, v0.85.0) (#424)»</p><h4>Позиция агента</h4><p><b>KEEP-OPEN — человеческий гейт на строке</b> — Статус строки несёт человеческий гейт/блок (⛔/human-gate/waiting on human). PR-цитаты доставку такого гейта не закрывают; строка держится открытой.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Закрыть строку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить открытой</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="H1259" data-filt="gate">
+    <header><div class="hw">H1259 — H1259-Fable_SanskritGrammar_m03-final-hybrid-line-edit-freeze_18.07.26 <span class="badge">gate</span><span class="badge">local_git</span></div></header>
+    <div class="question">Строка цитируется слитыми PR, но не переведена в ✅. Вердикт: <b>закрыть</b> (работа шипилась) или <b>оставить открытой</b>?</div>
+    <div class="panel"><h4>&lt;h4&gt;Evidence (источник)&lt;/h4&gt;&lt;p&gt;&lt;b&gt;Статус строки (verbatim):&lt;/b&gt; 🟠 RESUMABLE — PARTIAL 18-07-2026 — agent phase done, waiting on human review (Fable 5 `claude-fable-5`; per the handoff&amp;#x27;s own Definition of done). Also shipped: disposition ledger over all 1,127 findings ([RWS_DISPOSITION_H1259.tsv](https://github.com/gasyoun/SanskritGrammar/blob/main/GasunsDhatu_2014/revision-2026/RWS_DISPOSITION_H1259.tsv), totals reconcile) + dated [edit report](https://github.com/gasyoun/SanskritGrammar/blob/main/GasunsDhatu_2014/revision-2026/RWS_H1259_EDIT_REPORT.md) — M03 hybrid RWS line edit: the checklist&amp;#x27;s last prose gate (⛔-human, H275 «агент прозу не переписывает»)&lt;/p&gt;&lt;p&gt;&lt;b&gt;Ссылка строки:&lt;/b&gt; &lt;a href=&quot;https://github.com/gasyoun/Uprava/blob/main/handoffs/H1259-Fable_SanskritGrammar_m03-final-hybrid-line-edit-freeze_18.07.26.md&quot;&gt;H1259-Fable_SanskritGrammar_m03-final-hybrid-line-edit-freeze_18.07.26&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Цитирующие слитые PR (511):&lt;/b&gt;&lt;/p&gt;</h4><ul><li><code>gasyoun/claude-config</code> (title) — skill-drain(handoff-close): A4 H3128/H835/H1342/H1259/H2867/H588/H1530-H1543 tier+title</li><li><code>gasyoun/claude-config</code> (title) — skill-drain(handoff-close): A4 H3128/H835/H1342/H1259/H2867/H588/H1530-H1543 tier+title</li><li><code>gasyoun/claude-config</code> (title) — skill-drain(handoff-close): A4 H3128/H835/H1342/H1259/H2867/H588/H1530-H1543 tier+title</li><li><code>gasyoun/SanskritGrammar</code> (title) — H1259: disposition ledger for all 1,127 RWS findings + dated edit report</li><li><code>gasyoun/SanskritGrammar</code> (title) — docs: cut gasuns-dhatu-v0.20.0 — H1259 hybrid RWS line edit + freeze date; .ai_state sync</li><li><code><a href="https://github.com/gasyoun/SanskritGrammar/pull/422">gasyoun/SanskritGrammar#422</a></code> (title) — Merge pull request #422 from gasyoun/h1259-m03-hybrid-line-edit</li><li>… ещё 505 цитат (полный список в backlog JSON)</li></ul><p><b>Детект:</b> local_git merge-commit <code>bcf91ecf74d4</code> — «skill-drain(handoff-close): A4 H3128/H835/H1342/H1259/H2867/H588/H1530-H1543 tier+title»</p><h4>Позиция агента</h4><p><b>KEEP-OPEN — человеческий гейт на строке</b> — Статус строки несёт человеческий гейт/блок (⛔/human-gate/waiting on human). PR-цитаты доставку такого гейта не закрывают; строка держится открытой.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Закрыть строку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить открытой</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="H1333" data-filt="gate">
+    <header><div class="hw">H1333 — H1333-Opus_RussianTranslation_pwg-ru-dhatup-palsule-wire-from-xls_19.07.26 <span class="badge">gate</span><span class="badge">local_git</span></div></header>
+    <div class="question">Строка цитируется слитыми PR, но не переведена в ✅. Вердикт: <b>закрыть</b> (работа шипилась) или <b>оставить открытой</b>?</div>
+    <div class="panel"><h4>&lt;h4&gt;Evidence (источник)&lt;/h4&gt;&lt;p&gt;&lt;b&gt;Статус строки (verbatim):&lt;/b&gt; 🟡 QUEUED — **BLOCKED on MG&amp;#x27;s Palsule XLS**. H1307 arm-3 follow-up: wire `DHĀTUP. x,y` → Palsule numbering/links once MG supplies the Palsule list as an XLS (H1307 committed the acquisition spec — no machine-readable Palsule list or Böhtlingk→Palsule concordance existed org-wide). Ingest XLS → committed Böhtlingk↔Palsule concordance → tooltip/link via the shared `_ls_tooltip` layer + coverage + selftest; the existing Westergaard gaṇa-level link stays. {effort: medium} {gate: human:MG}&lt;/p&gt;&lt;p&gt;&lt;b&gt;Ссылка строки:&lt;/b&gt; &lt;a href=&quot;https://github.com/gasyoun/Uprava/blob/main/handoffs/H1333-Opus_RussianTranslation_pwg-ru-dhatup-palsule-wire-from-xls_19.07.26.md&quot;&gt;H1333-Opus_RussianTranslation_pwg-ru-dhatup-palsule-wire-from-xls_19.07.26&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Цитирующие слитые PR (108):&lt;/b&gt;&lt;/p&gt;</h4><ul><li><code>gasyoun/SanskritLexicography</code> (title) — ai-wip: .ai_state — H1333 queued (DHATUP.-&gt;Palsule wiring, blocked on MG&#x27;s Palsule XLS)</li><li><code>gasyoun/SanskritLexicography</code> (title) — ai-wip: .ai_state — H1333 queued (DHATUP.-&gt;Palsule wiring, blocked on MG&#x27;s Palsule XLS)</li><li><code>gasyoun/SanskritLexicography</code> (title) — ai-wip: .ai_state — H1333 queued (DHATUP.-&gt;Palsule wiring, blocked on MG&#x27;s Palsule XLS)</li><li><code>gasyoun/SanskritLexicography</code> (title) — ai-wip: .ai_state — H1333 queued (DHATUP.-&gt;Palsule wiring, blocked on MG&#x27;s Palsule XLS)</li><li><code>gasyoun/SanskritLexicography</code> (title) — ai-wip: .ai_state — H1333 queued (DHATUP.-&gt;Palsule wiring, blocked on MG&#x27;s Palsule XLS)</li><li><code>gasyoun/SanskritLexicography</code> (title) — ai-wip: .ai_state — H1333 queued (DHATUP.-&gt;Palsule wiring, blocked on MG&#x27;s Palsule XLS)</li><li>… ещё 102 цитат (полный список в backlog JSON)</li></ul><p><b>Детект:</b> local_git merge-commit <code>75890bed6d3e</code> — «ai-wip: .ai_state — H1333 queued (DHATUP.-&gt;Palsule wiring, blocked on MG&#x27;s Palsule XLS)»</p><h4>Позиция агента</h4><p><b>KEEP-OPEN — человеческий гейт на строке</b> — Статус строки несёт человеческий гейт/блок (⛔/human-gate/waiting on human). PR-цитаты доставку такого гейта не закрывают; строка держится открытой.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Закрыть строку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить открытой</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="H1351" data-filt="gate">
+    <header><div class="hw">H1351 — H1351-Opus_SanskritLexicography_pwg-ru-offline-spawn-cost-phase-c_20.07.26 <span class="badge">gate</span><span class="badge">local_git</span></div></header>
+    <div class="question">Строка цитируется слитыми PR, но не переведена в ✅. Вердикт: <b>закрыть</b> (работа шипилась) или <b>оставить открытой</b>?</div>
+    <div class="panel"><h4>&lt;h4&gt;Evidence (источник)&lt;/h4&gt;&lt;p&gt;&lt;b&gt;Статус строки (verbatim):&lt;/b&gt; 🟡 DEFERRED 22-07-2026 (Opus 4.8 `claude-opus-4-8` assessment; MG ruling) — **overtaken by events, gated on H1437.** Candidates #1+#2 (per-lease prepare batching) already SHIPPED by [H1386](https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H1386-Fable_RussianTranslation_pwg-ru-post-h1339-resume-fixes-prepare-speed_20.07.26.md) (v1.54.0 — `coordinator prepare-batch`, prepare **−72.0% median**, signature-equal); H1339&amp;#x27;s ≥25% total target is now MET (fresh same-session bench 22-07 on v1.57.0: prepare 2.29s · audit 7.53s · store 3.26s · total 12.80s, sig `da1341e6ac`). Only remnant is ca&lt;/p&gt;&lt;p&gt;&lt;b&gt;Ссылка строки:&lt;/b&gt; &lt;a href=&quot;https://github.com/gasyoun/Uprava/blob/main/handoffs/H1351-Opus_SanskritLexicography_pwg-ru-offline-spawn-cost-phase-c_20.07.26.md&quot;&gt;H1351-Opus_SanskritLexicography_pwg-ru-offline-spawn-cost-phase-c_20.07.26&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Цитирующие слитые PR (206):&lt;/b&gt;&lt;/p&gt;</h4><ul><li><code>gasyoun/claude-config</code> (title) — backup: memory sync — /go stale-handoff-clone lesson (H1351 deferred to H1437)</li><li><code>gasyoun/claude-config</code> (title) — backup: config sync — H1351 deferred memory (prepare done by H1386, audit parked)</li><li><code>gasyoun/claude-config</code> (title) — backup: memory sync — /go stale-handoff-clone lesson (H1351 deferred to H1437)</li><li><code>gasyoun/claude-config</code> (title) — backup: config sync — H1351 deferred memory (prepare done by H1386, audit parked)</li><li><code>gasyoun/claude-config</code> (title) — backup: memory sync — /go stale-handoff-clone lesson (H1351 deferred to H1437)</li><li><code>gasyoun/claude-config</code> (title) — backup: config sync — H1351 deferred memory (prepare done by H1386, audit parked)</li><li>… ещё 200 цитат (полный список в backlog JSON)</li></ul><p><b>Детект:</b> local_git merge-commit <code>2731631b3710</code> — «backup: memory sync — /go stale-handoff-clone lesson (H1351 deferred to H1437)»</p><h4>Позиция агента</h4><p><b>KEEP-OPEN — внешний/дата/права гейт</b> — Статус строки несёт внешний гейт (blocked/gated/until/rights). Слитый PR, цитирующий ID, сам гейт не снимает.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Закрыть строку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить открытой</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="H1891" data-filt="gate">
+    <header><div class="hw">H1891 — H1891-Fable_Systema-Sanscriticum_arzamas-third-note-minaev_29.07.26 <span class="badge">gate</span><span class="badge">local_git</span></div></header>
+    <div class="question">Строка цитируется слитыми PR, но не переведена в ✅. Вердикт: <b>закрыть</b> (работа шипилась) или <b>оставить открытой</b>?</div>
+    <div class="panel"><h4>&lt;h4&gt;Evidence (источник)&lt;/h4&gt;&lt;p&gt;&lt;b&gt;Статус строки (verbatim):&lt;/b&gt; 🟡 Queued (29-07-2026, `/ask-batch`, Opus 5 1M `claude-opus-5[1m]`) — третья заметка Arzamas о Минаеве, ученике и преемнике Коссовича; серия закрыта на трёх (L11/L12, Systema PR #832). **Заблокирована на входных материалах от MG** (`docs/materials/minaev-arzamas/SOURCES_RAW/`) — не начинать на пустом каталоге {gate: human:MG} {effort: hard}&lt;/p&gt;&lt;p&gt;&lt;b&gt;Ссылка строки:&lt;/b&gt; &lt;a href=&quot;https://github.com/gasyoun/Uprava/blob/main/handoffs/H1891-Fable_Systema-Sanscriticum_arzamas-third-note-minaev_29.07.26.md&quot;&gt;H1891-Fable_Systema-Sanscriticum_arzamas-third-note-minaev_29.07.26&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Цитирующие слитые PR (5):&lt;/b&gt;&lt;/p&gt;</h4><ul><li><code>gasyoun/Uprava</code> (title) — docs(changelog): 0.179.0 - H1891 third Arzamas note ruled + Kossovich/Minaev roles corrected</li><li><code>gasyoun/Uprava</code> (title) — docs(handoffs): real queued row for H1891 (stub text -&gt; deliverable + input gate)</li><li><code>gasyoun/Uprava</code> (title) — docs(handoffs): H1891 third Arzamas note (Minaev) - ruled, minted, input-gated</li><li><code>gasyoun/Uprava</code> (title) — mint: claim H1891 stub</li><li><code>gasyoun/Uprava</code> (body) — fix(fruit_report): suppress §82 false-positive dependency warning, add missing gate fields</li></ul><p><b>Детект:</b> local_git merge-commit <code>97350f8dcd51</code> — «docs(changelog): 0.179.0 - H1891 third Arzamas note ruled + Kossovich/Minaev roles corrected»</p><h4>Позиция агента</h4><p><b>KEEP-OPEN — человеческий гейт на строке</b> — Статус строки несёт человеческий гейт/блок (⛔/human-gate/waiting on human). PR-цитаты доставку такого гейта не закрывают; строка держится открытой.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Закрыть строку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить открытой</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="H2073" data-filt="gate">
+    <header><div class="hw">H2073 — H2073-OxAlpha_SanskritSpellCheck_h454-grok-dual-run-compare_01.08.26 <span class="badge">gate</span><span class="badge">local_git</span></div></header>
+    <div class="question">Строка цитируется слитыми PR, но не переведена в ✅. Вердикт: <b>закрыть</b> (работа шипилась) или <b>оставить открытой</b>?</div>
+    <div class="panel"><h4>&lt;h4&gt;Evidence (источник)&lt;/h4&gt;&lt;p&gt;&lt;b&gt;Статус строки (verbatim):&lt;/b&gt; 🟡 **Dual-run residual for closed H454** — Sonnet re-runs change-file path after MG scan-verify votes + compares Grok 4.5 (`grok-4.5`) override ([PR #61](https://github.com/drdhaval2785/SanskritSpellCheck/pull/61): y=0/n=122 gate reconfirm, `:y`-only make_changefiles, census). {gate: human:MG} {effort: medium}&lt;/p&gt;&lt;p&gt;&lt;b&gt;Ссылка строки:&lt;/b&gt; &lt;a href=&quot;https://github.com/gasyoun/Uprava/blob/main/handoffs/H2073-OxAlpha_SanskritSpellCheck_h454-grok-dual-run-compare_01.08.26.md&quot;&gt;H2073-OxAlpha_SanskritSpellCheck_h454-grok-dual-run-compare_01.08.26&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Цитирующие слитые PR (4):&lt;/b&gt;&lt;/p&gt;</h4><ul><li><code>gasyoun/Uprava</code> (title) — docs: fill H2073 dual-run residual for closed H454</li><li><code>gasyoun/Uprava</code> (title) — docs: close H454 — override dual-run (Grok 4.5 grok-4.5): reconfirmed gate y=0/n=122; shipped :y-only make_changefiles + gate census; residual H2073 open for Sonnet compare + post-vote change files</li><li><code>gasyoun/Uprava</code> (title) — mint: claim H2073 stub</li><li><code><a href="https://github.com/gasyoun/Uprava/pull/1595">gasyoun/Uprava#1595</a></code> (body) — Merge pull request #1595 from gasyoun/h454-close-residual</li></ul><p><b>Детект:</b> local_git merge-commit <code>3c280f462a6b</code> — «docs: fill H2073 dual-run residual for closed H454»</p><h4>Позиция агента</h4><p><b>KEEP-OPEN — человеческий гейт на строке</b> — Статус строки несёт человеческий гейт/блок (⛔/human-gate/waiting on human). PR-цитаты доставку такого гейта не закрывают; строка держится открытой.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Закрыть строку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить открытой</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="H2380" data-filt="gate">
+    <header><div class="hw">H2380 — H2380-Grok_Systema-Sanscriticum_cabinet-adoption-kpi-experiment_07.08.26 <span class="badge">gate</span><span class="badge">local_git</span></div></header>
+    <div class="question">Строка цитируется слитыми PR, но не переведена в ✅. Вердикт: <b>закрыть</b> (работа шипилась) или <b>оставить открытой</b>?</div>
+    <div class="panel"><h4>&lt;h4&gt;Evidence (источник)&lt;/h4&gt;&lt;p&gt;&lt;b&gt;Статус строки (verbatim):&lt;/b&gt; ⛔ HUMAN-GATED — pre-baseline + HOLD packet shipped ([Systema #1192](https://github.com/gasyoun/Systema-Sanscriticum/pull/1192), [ORS #145](https://github.com/gasyoun/ORS-FAQ/pull/145)); H1582 flag still OFF; resume after DEPLOY №52 {effort: hard} {gate: human:MG}&lt;/p&gt;&lt;p&gt;&lt;b&gt;Ссылка строки:&lt;/b&gt; &lt;a href=&quot;https://github.com/gasyoun/Uprava/blob/main/handoffs/H2380-Grok_Systema-Sanscriticum_cabinet-adoption-kpi-experiment_07.08.26.md&quot;&gt;H2380-Grok_Systema-Sanscriticum_cabinet-adoption-kpi-experiment_07.08.26&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Цитирующие слитые PR (6):&lt;/b&gt;&lt;/p&gt;</h4><ul><li><code>gasyoun/Uprava</code> (title) — H4004 B3-B6: weekly business cadence (schtasks Mon 07:30 + upsell-script extension), cabinet-adoption standing KPI vs H2380 baseline, GSC weekly series live, Metrika fail-closed @WAITING; 10 tests</li><li><code>gasyoun/Uprava</code> (title) — registry: H2380 gate (registry_row.py)</li><li><code>gasyoun/Uprava</code> (title) — handoffs: H2380 human-gated — pre-baseline HOLD packet shipped</li><li><code>gasyoun/Uprava</code> (title) — exec-claim: H2380 (Systema-Sanscriticum) executing (ledger mirror)</li><li><code>gasyoun/Uprava</code> (title) — exec-claim: H2380 CLAIMED by Grok 4.5 (grok-4.5) (marker only)</li><li><code>gasyoun/Uprava</code> (body) — docs(gtd): Session 67 /gtd-sync — reconfirm H1067 residual, prune claims</li></ul><p><b>Детект:</b> local_git merge-commit <code>75633724219c</code> — «H4004 B3-B6: weekly business cadence (schtasks Mon 07:30 + upsell-script extension), cabinet-adoption standing KPI vs H2380 baseline, GSC weekly series live, Metrika fail-closed @WAITING; 10 tests»</p><h4>Позиция агента</h4><p><b>KEEP-OPEN — человеческий гейт на строке</b> — Статус строки несёт человеческий гейт/блок (⛔/human-gate/waiting on human). PR-цитаты доставку такого гейта не закрывают; строка держится открытой.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Закрыть строку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить открытой</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="H2716" data-filt="gate">
+    <header><div class="hw">H2716 — H2716-Opus_Uprava_t5-resize-after-ask-batch-answers_14.08.26 <span class="badge">gate</span><span class="badge">local_git</span></div></header>
+    <div class="question">Строка цитируется слитыми PR, но не переведена в ✅. Вердикт: <b>закрыть</b> (работа шипилась) или <b>оставить открытой</b>?</div>
+    <div class="panel"><h4>&lt;h4&gt;Evidence (источник)&lt;/h4&gt;&lt;p&gt;&lt;b&gt;Статус строки (verbatim):&lt;/b&gt; 🟡 spec filled; ⛔ BLOCKED on a human — verified 16-08-2026 (Opus 5) that all six `**MG:**` slots in [ASK_BATCH_LEAKAGE_RECOVERY_QUESTIONS_2026H2.md](https://github.com/gasyoun/Uprava/blob/main/docs/ASK_BATCH_LEAKAGE_RECOVERY_QUESTIONS_2026H2.md) are still empty. The handoff forbids re-sizing against assumed answers, so do NOT launch it until Q1/Q3 are answered; gate mirrored to GTD «Do Today» {effort: medium} {gate: human:MG}&lt;/p&gt;&lt;p&gt;&lt;b&gt;Ссылка строки:&lt;/b&gt; &lt;a href=&quot;https://github.com/gasyoun/Uprava/blob/main/handoffs/H2716-Opus_Uprava_t5-resize-after-ask-batch-answers_14.08.26.md&quot;&gt;H2716-Opus_Uprava_t5-resize-after-ask-batch-answers_14.08.26&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Цитирующие слитые PR (5):&lt;/b&gt;&lt;/p&gt;</h4><ul><li><code><a href="https://github.com/gasyoun/Uprava/pull/1857">gasyoun/Uprava#1857</a></code> (title) — docs(H2716): gate still shut - 0 of 6 MG slots filled; surface the decision in GTD (#1857)</li><li><code>gasyoun/Uprava</code> (title) — docs(.ai_state): journal H2566 — leakage sized, six MG questions open, H2716 queued [dup-push-ok]</li><li><code>gasyoun/Uprava</code> (title) — docs: close H2566 — sized: the ₽22.4M is a counterfactual (noncontinuers × avg-spend gap), not cash — re-derived ₽22 265 731; cash-shaped base is 247 dormant payers / ₽6 385 162 already-collected spend, 99.6 % reachable; recoverable ₽0.26M–₽0.68M gross / ₽0.11M–₽0.47M incremental anchored on 18 observed spontaneous returns (4.9 %, ₽17 200 mean 12-mo); withdrawn ₽2M placeholder implied 47.1 % response. Йога-сутры is a FINISHED 2025 cohort, not a leak — 41 % of the cohort has no product to be offered back. T5 updated; 6 MG questions parked in docs/ASK_BATCH_LEAKAGE_RECOVERY_QUESTIONS_2026H2.md; re-size residual H2716</li><li><code>gasyoun/Uprava</code> (title) — mint: claim H2716 stub</li><li><code>gasyoun/Uprava</code> (body) — feat(H2566): size the leakage recovery — ₽22.4M is a counterfactual, T5 is ₽0.3M</li></ul><p><b>Детект:</b> local_git merge-commit <code>6dd033819270</code> — «docs(H2716): gate still shut - 0 of 6 MG slots filled; surface the decision in GTD (#1857)»</p><h4>Позиция агента</h4><p><b>KEEP-OPEN — человеческий гейт на строке</b> — Статус строки несёт человеческий гейт/блок (⛔/human-gate/waiting on human). PR-цитаты доставку такого гейта не закрывают; строка держится открытой.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Закрыть строку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить открытой</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="H2855" data-filt="gate">
+    <header><div class="hw">H2855 — H2855-Fable_Uprava_vote-platform-w2-trud-calibration_15.08.26 <span class="badge">gate</span><span class="badge">local_git</span></div></header>
+    <div class="question">Строка цитируется слитыми PR, но не переведена в ✅. Вердикт: <b>закрыть</b> (работа шипилась) или <b>оставить открытой</b>?</div>
+    <div class="panel"><h4>&lt;h4&gt;Evidence (источник)&lt;/h4&gt;&lt;p&gt;&lt;b&gt;Статус строки (verbatim):&lt;/b&gt; 🟡 content filled as of 15-08-2026 (auto-corrected by registry_check.py --fix; STUB label was stale — verify actual completion status) {effort: medium} {gate: human:MG}&lt;/p&gt;&lt;p&gt;&lt;b&gt;Ссылка строки:&lt;/b&gt; &lt;a href=&quot;https://github.com/gasyoun/Uprava/blob/main/handoffs/H2855-Fable_Uprava_vote-platform-w2-trud-calibration_15.08.26.md&quot;&gt;H2855-Fable_Uprava_vote-platform-w2-trud-calibration_15.08.26&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Цитирующие слитые PR (20):&lt;/b&gt;&lt;/p&gt;</h4><ul><li><code>gasyoun/Uprava</code> (title) — docs: close H3378 — S6 five-metric voting baseline: 52 unvoted (oldest 51d), 164-surface scan 0 banned checkbox sheets, issued-to-applied median 2d (vote leg unknown-not-zero), quorum census (H2855 gate prose-only), fatigue peak 43 sheets/wk; TSV+summary+tool+staged cadence fanout</li><li><code>gasyoun/Uprava</code> (title) — H3378 (OxAlpha): S6 voting-layer five-metric baseline — 52 unvoted (oldest 51d), 164-surface compliance scan 0 banned checkbox sheets, issued-to-applied median 2d (vote leg unknown-not-zero), quorum census (H2855 gate prose-only), fatigue peak 43 sheets/week; census tool + TSV + summary + staged cadence fanout</li><li><code>gasyoun/Uprava</code> (title) — chore(release): 0.195.199 — H3140+H3142 decisions-apply (two voted sheets, H2855 gate 2/5)</li><li><code>gasyoun/Uprava</code> (title) — docs: close H3142 — 7-card stub-verdict vote applied: H2133 retired (dual-run debt written off), H2583 retired -&gt; MAINTAINER_DEPENDENCIES (drdhaval2785#103), 5 cards already satisfied by 18-08 drift; telemetry 53s ingested (H2855 gate vote 2)</li><li><code>gasyoun/Uprava</code> (title) — docs: close H3140 — 22-card triage vote applied: 17 MG rows -&gt; GTD_HARVEST_TRIAGE_APPLIED_19.08.26.md (+3 embedded rulings), 5 rejects denylisted, telemetry 313s ingested (H2855 gate vote 1)</li><li><code>gasyoun/Uprava</code> (title) — H3140+H3142: first two vote telemetry records (313s/22 cards, 53s/7 cards) — H2855 gate 2/5</li><li>… ещё 14 цитат (полный список в backlog JSON)</li></ul><p><b>Детект:</b> local_git merge-commit <code>7cd6d5d23407</code> — «docs: close H3378 — S6 five-metric voting baseline: 52 unvoted (oldest 51d), 164-surface scan 0 banned checkbox sheets, issued-to-applied median 2d (vote leg unknown-not-zero), quorum census (H2855 gate prose-only), fatigue peak 43 sheets/wk; TSV+summary+tool+staged cadence fanout»</p><h4>Позиция агента</h4><p><b>KEEP-OPEN — человеческий гейт на строке</b> — Статус строки несёт человеческий гейт/блок (⛔/human-gate/waiting on human). PR-цитаты доставку такого гейта не закрывают; строка держится открытой.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Закрыть строку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить открытой</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="H2965" data-filt="gate">
+    <header><div class="hw">H2965 — H2965-Fable_SanskritGrammar_m03-rws-approved-edits-gost-freeze_17.08.26 <span class="badge">gate</span><span class="badge">local_git</span></div></header>
+    <div class="question">Строка цитируется слитыми PR, но не переведена в ✅. Вердикт: <b>закрыть</b> (работа шипилась) или <b>оставить открытой</b>?</div>
+    <div class="panel"><h4>&lt;h4&gt;Evidence (источник)&lt;/h4&gt;&lt;p&gt;&lt;b&gt;Статус строки (verbatim):&lt;/b&gt; 🟡 QUEUED 17-08-2026 (Fable 5 `claude-fable-5`) — H1259 residual: after the author returns decisions on the 387 human_judgment findings in GasunsDhatu_2026_RWS_review.docx, apply the approved edits, run the GOST R 7.0.100-2018 bibliography pass + final numbers cross-check, then record the 31-10-2026 freeze in the Nestor-Istoria checklist. GATED on the author&amp;#x27;s docx review (@DO since 18-07-2026). Starts: Read C:\Users\user\Documents\GitHub\Uprava\handoffs\H2965-Fable_SanskritGrammar_m03-rws-approved-edits-gost-freeze_17.08.26.md and execute it. {effort: hard} {gate: human:MG}&lt;/p&gt;&lt;p&gt;&lt;b&gt;Ссылка строки:&lt;/b&gt; &lt;a href=&quot;https://github.com/gasyoun/Uprava/blob/main/handoffs/H2965-Fable_SanskritGrammar_m03-rws-approved-edits-gost-freeze_17.08.26.md&quot;&gt;H2965-Fable_SanskritGrammar_m03-rws-approved-edits-gost-freeze_17.08.26&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Цитирующие слитые PR (8):&lt;/b&gt;&lt;/p&gt;</h4><ul><li><code>gasyoun/Uprava</code> (title) — H3034: close — fruit gate-detection miss fixed, H2965 gated in census (v0.195.161)</li><li><code>gasyoun/Uprava</code> (title) — H3034: census regen (H2965 -&gt; Bucket B, {gate: human:MG}); registry_row.py surfaces guard blocks instead of &#x27;storming&#x27; (H2956 class)</li><li><code>gasyoun/Uprava</code> (title) — registry: H2965 gate (registry_row.py)</li><li><code>gasyoun/Uprava</code> (title) — H3034: fruit gate-detection miss — HUMAN_WAIT_RE learns &#x27;GATED on&#x27;/&#x27;@DO since&#x27;/&#x27;author returns&#x27; (H2965 recurrence of H1259)</li><li><code>gasyoun/Uprava</code> (title) — registry+docs: H1243 PDFs deferred to 2027 (MG 17-08-2026); watcher narrowed to H2855/H2965</li><li><code>gasyoun/Uprava</code> (title) — docs(fable-drain): H2965 residual minted + gate-watcher noted</li><li>… ещё 2 цитат (полный список в backlog JSON)</li></ul><p><b>Детект:</b> local_git merge-commit <code>db3ffab91fb5</code> — «H3034: close — fruit gate-detection miss fixed, H2965 gated in census (v0.195.161)»</p><h4>Позиция агента</h4><p><b>KEEP-OPEN — человеческий гейт на строке</b> — Статус строки несёт человеческий гейт/блок (⛔/human-gate/waiting on human). PR-цитаты доставку такого гейта не закрывают; строка держится открытой.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Закрыть строку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить открытой</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="H3184" data-filt="refuted">
+    <header><div class="hw">H3184 — H3184-Opus_Systema-Sanscriticum_uptime-w4-nftables-default-deny-ssh-hardening_19.08.26 <span class="badge">refuted</span><span class="badge">local_git</span></div></header>
+    <div class="question">Строка цитируется слитыми PR, но не переведена в ✅. Вердикт: <b>закрыть</b> (работа шипилась) или <b>оставить открытой</b>?</div>
+    <div class="panel"><h4>&lt;h4&gt;Evidence (источник)&lt;/h4&gt;&lt;p&gt;&lt;b&gt;Статус строки (verbatim):&lt;/b&gt; 🟡 content filled as of 19-08-2026 (auto-corrected by registry_check.py --fix; STUB label was stale — verify actual completion status) {effort: medium} {gate: handoff:H3413}&lt;/p&gt;&lt;p&gt;&lt;b&gt;Ссылка строки:&lt;/b&gt; &lt;a href=&quot;https://github.com/gasyoun/Uprava/blob/main/handoffs/H3184-Opus_Systema-Sanscriticum_uptime-w4-nftables-default-deny-ssh-hardening_19.08.26.md&quot;&gt;H3184-Opus_Systema-Sanscriticum_uptime-w4-nftables-default-deny-ssh-hardening_19.08.26&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Цитирующие слитые PR (17):&lt;/b&gt;&lt;/p&gt;</h4><ul><li><code>gasyoun/Uprava</code> (title) — registry: H3184 gate (registry_row.py)</li><li><code>gasyoun/Uprava</code> (title) — H3184: record the exit-4 REFUSE verdict — authoring half shipped, W4b apply still owed, row stays open</li><li><code>gasyoun/Uprava</code> (title) — H3184: the &#x27;7 clean days&#x27; clock for W4b has never started — measured, and the gate is a dependency not a date</li><li><code>gasyoun/Uprava</code> (title) — docs: close H3664 — MG ruling: ignoreip = 127.0.0.1/8 ::1 192.168.200.0/24 100.64.0.0/10 added to fail2ban on BOTH boxes, so a ban can never cut the private-net and Tailscale recovery paths the H3184 default-deny allowlist deliberately keeps open on two console-less LXC guests (Artem away to ~19-09-2026). Internet-side brute force still banned - proven on .91 by a live ban surviving the change. Also surfaced and fixed: fail2ban on .92 was entirely unmanaged (defaults-debian.conf only, no ignoreip, no fail2ban templates in the app profile at all); it now has a managed jail.d file and a manifest row, setting ignoreip ONLY - no enabled/banaction/backend - because .92 is Tier-0 and its ban behaviour must not ride along with this ruling. Verified fail2ban-client get sshd ignoreip on both boxes, new SSH session on both, samskrte.ru and context-ai.ru 200. Released v1.90.30 (PR #2178).</li><li><code>gasyoun/Uprava</code> (title) — changelog + ai_state: H3661 window close (FINDINGS 600/601, GTD P4, H3184 stays open for W4b) [dup-push-ok]</li><li><code>gasyoun/Uprava</code> (title) — H3184: record W4a/W4c applied 29-08-2026 (H3661, PR #2174); row stays open for W4b on .92, gated to 05-09-2026</li><li>… ещё 11 цитат (полный список в backlog JSON)</li></ul><p><b>Детект:</b> local_git merge-commit <code>faba46000057</code> — «registry: H3184 gate (registry_row.py)»</p><h4>Позиция агента</h4><p><b>KEEP-OPEN — опровергнуто агентом</b> — Тело хендоффа прямо запрещает закрытие: «Do not close the registry row against those PRs» — PR #2138/#2139 это authoring-half; apply-half W4b (.92) не шипился и не может шипиться агентом (human-present окно). Строка остаётся открытой намеренно.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Закрыть строку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить открытой</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="H3284" data-filt="judge">
+    <header><div class="hw">H3284 — H3284-Codex_Uprava_hook-dispatcher-pre-posttooluse_22.08.26 <span class="badge">judge</span><span class="badge">local_git</span></div></header>
+    <div class="question">Строка цитируется слитыми PR, но не переведена в ✅. Вердикт: <b>закрыть</b> (работа шипилась) или <b>оставить открытой</b>?</div>
+    <div class="panel"><h4>&lt;h4&gt;Evidence (источник)&lt;/h4&gt;&lt;p&gt;&lt;b&gt;Статус строки (verbatim):&lt;/b&gt; 🟡 content filled as of 22-08-2026 (auto-corrected by registry_check.py --fix; STUB label was stale — verify actual completion status) {effort: hard}&lt;/p&gt;&lt;p&gt;&lt;b&gt;Ссылка строки:&lt;/b&gt; &lt;a href=&quot;https://github.com/gasyoun/Uprava/blob/main/handoffs/H3284-Codex_Uprava_hook-dispatcher-pre-posttooluse_22.08.26.md&quot;&gt;H3284-Codex_Uprava_hook-dispatcher-pre-posttooluse_22.08.26&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Цитирующие слитые PR (4):&lt;/b&gt;&lt;/p&gt;</h4><ul><li><code>gasyoun/Uprava</code> (title) — exec-claim: H3284 (Uprava) claimed by Sonnet 5 (claude-sonnet-5) (marker+ledger)</li><li><code>gasyoun/Uprava</code> (title) — exec-claim: H3284 (Uprava) claimed by Sonnet 5 (claude-sonnet-5) (marker+ledger)</li><li><code>gasyoun/Uprava</code> (title) — exec-claim: H3284 (Uprava) claimed by Opus 4.8 (claude-opus-4-8) (marker+ledger)</li><li><code>gasyoun/Uprava</code> (body) — H3818: estate-repair W3 — 126 open handoffs judged against the deliverable-present bar</li></ul><p><b>Детект:</b> local_git merge-commit <code>790830579516</code> — «exec-claim: H3284 (Uprava) claimed by Sonnet 5 (claude-sonnet-5) (marker+ledger)»</p><h4>Позиция агента</h4><p><b>MG-JUDGE — агент не видит доставки</b> — Цитаты в слитых PR не доказывают доставку mission (совпадение по title/body), гейтов в строке не найдено. Рекомендация агента: закрыть ТОЛЬКО если работа реально шипилась — иначе строка ждёт исполнителя.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Закрыть строку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить открытой</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="H3988" data-filt="judge">
+    <header><div class="hw">H3988 — H3988-Sonnet_Uprava_cdsl-sense-tree-parity-residual_03.09.26 <span class="badge">judge</span><span class="badge">local_git</span></div></header>
+    <div class="question">Строка цитируется слитыми PR, но не переведена в ✅. Вердикт: <b>закрыть</b> (работа шипилась) или <b>оставить открытой</b>?</div>
+    <div class="panel"><h4>&lt;h4&gt;Evidence (источник)&lt;/h4&gt;&lt;p&gt;&lt;b&gt;Статус строки (verbatim):&lt;/b&gt; 🟡 spec filled at mint (03-09-2026) {effort: medium} {launch-box: any}&lt;/p&gt;&lt;p&gt;&lt;b&gt;Ссылка строки:&lt;/b&gt; &lt;a href=&quot;https://github.com/gasyoun/Uprava/blob/main/handoffs/H3988-Sonnet_Uprava_cdsl-sense-tree-parity-residual_03.09.26.md&quot;&gt;H3988-Sonnet_Uprava_cdsl-sense-tree-parity-residual_03.09.26&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Цитирующие слитые PR (108):&lt;/b&gt;&lt;/p&gt;</h4><ul><li><code>gasyoun/Uprava</code> (title) — exec-claim: H3988 (Uprava) claimed by Sonnet 5 (claude-sonnet-5) (marker+ledger)</li><li><code>gasyoun/Uprava</code> (title) — exec-claim: H3988 (Uprava) claimed by Sonnet 5 (claude-sonnet-5) (marker+ledger)</li><li><code>gasyoun/Uprava</code> (title) — exec-claim: H3988 (Uprava) claimed by Sonnet 5 (claude-sonnet-5) (marker+ledger)</li><li><code>gasyoun/Uprava</code> (title) — exec-claim: H3988 (Uprava) claimed by Sonnet 5 (claude-sonnet-5) (marker+ledger)</li><li><code>gasyoun/Uprava</code> (title) — exec-claim: H3988 (Uprava) claimed by Sonnet 5 (claude-sonnet-5) (marker+ledger)</li><li><code>gasyoun/Uprava</code> (title) — exec-claim: H3988 (Uprava) claimed by Sonnet 5 (claude-sonnet-5) (marker+ledger)</li><li>… ещё 102 цитат (полный список в backlog JSON)</li></ul><p><b>Детект:</b> local_git merge-commit <code>7f7c4be055c6</code> — «exec-claim: H3988 (Uprava) claimed by Sonnet 5 (claude-sonnet-5) (marker+ledger)»</p><h4>Позиция агента</h4><p><b>MG-JUDGE — агент не видит доставки</b> — Цитаты в слитых PR не доказывают доставку mission (совпадение по title/body), гейтов в строке не найдено. Рекомендация агента: закрыть ТОЛЬКО если работа реально шипилась — иначе строка ждёт исполнителя.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Закрыть строку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить открытой</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="H3989" data-filt="judge">
+    <header><div class="hw">H3989 — H3989-Sonnet_Uprava_data-layers-no-consumer-reharvest_03.09.26 <span class="badge">judge</span><span class="badge">local_git</span></div></header>
+    <div class="question">Строка цитируется слитыми PR, но не переведена в ✅. Вердикт: <b>закрыть</b> (работа шипилась) или <b>оставить открытой</b>?</div>
+    <div class="panel"><h4>&lt;h4&gt;Evidence (источник)&lt;/h4&gt;&lt;p&gt;&lt;b&gt;Статус строки (verbatim):&lt;/b&gt; 🟡 spec filled at mint (03-09-2026) {effort: medium} {launch-box: any}&lt;/p&gt;&lt;p&gt;&lt;b&gt;Ссылка строки:&lt;/b&gt; &lt;a href=&quot;https://github.com/gasyoun/Uprava/blob/main/handoffs/H3989-Sonnet_Uprava_data-layers-no-consumer-reharvest_03.09.26.md&quot;&gt;H3989-Sonnet_Uprava_data-layers-no-consumer-reharvest_03.09.26&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Цитирующие слитые PR (162):&lt;/b&gt;&lt;/p&gt;</h4><ul><li><code>gasyoun/Uprava</code> (title) — exec-claim: H3989 (Uprava) claimed by Sonnet 5 (claude-sonnet-5) (marker+ledger)</li><li><code>gasyoun/Uprava</code> (title) — ask-batch: mint H3982-H3989 from the two GAPS registries</li><li><code>gasyoun/Uprava</code> (title) — mint: claim H3982..H3989 stubs (batch of 8)</li><li><code>gasyoun/Uprava</code> (title) — exec-claim: H3989 (Uprava) claimed by Sonnet 5 (claude-sonnet-5) (marker+ledger)</li><li><code>gasyoun/Uprava</code> (title) — ask-batch: mint H3982-H3989 from the two GAPS registries</li><li><code>gasyoun/Uprava</code> (title) — mint: claim H3982..H3989 stubs (batch of 8)</li><li>… ещё 156 цитат (полный список в backlog JSON)</li></ul><p><b>Детект:</b> local_git merge-commit <code>9013be1a9e6a</code> — «exec-claim: H3989 (Uprava) claimed by Sonnet 5 (claude-sonnet-5) (marker+ledger)»</p><h4>Позиция агента</h4><p><b>MG-JUDGE — агент не видит доставки</b> — Цитаты в слитых PR не доказывают доставку mission (совпадение по title/body), гейтов в строке не найдено. Рекомендация агента: закрыть ТОЛЬКО если работа реально шипилась — иначе строка ждёт исполнителя.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Закрыть строку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить открытой</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="H3991" data-filt="judge">
+    <header><div class="hw">H3991 — H3991-Opus_Uprava_findings-trailer-stale-base-false-positive_03.09.26 <span class="badge">judge</span><span class="badge">local_git</span></div></header>
+    <div class="question">Строка цитируется слитыми PR, но не переведена в ✅. Вердикт: <b>закрыть</b> (работа шипилась) или <b>оставить открытой</b>?</div>
+    <div class="panel"><h4>&lt;h4&gt;Evidence (источник)&lt;/h4&gt;&lt;p&gt;&lt;b&gt;Статус строки (verbatim):&lt;/b&gt; 🟡 spec filled at mint (03-09-2026) {effort: medium} {launch-box: any}&lt;/p&gt;&lt;p&gt;&lt;b&gt;Ссылка строки:&lt;/b&gt; &lt;a href=&quot;https://github.com/gasyoun/Uprava/blob/main/handoffs/H3991-Opus_Uprava_findings-trailer-stale-base-false-positive_03.09.26.md&quot;&gt;H3991-Opus_Uprava_findings-trailer-stale-base-false-positive_03.09.26&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Цитирующие слитые PR (216):&lt;/b&gt;&lt;/p&gt;</h4><ul><li><code>gasyoun/Uprava</code> (title) — exec-claim: H3991 (Uprava) claimed by Opus 4.8 (claude-opus-4-8) (marker+ledger)</li><li><code>gasyoun/Uprava</code> (title) — exec-claim: H3991 (Uprava) claimed by Opus 4.8 (claude-opus-4-8) (marker+ledger)</li><li><code>gasyoun/Uprava</code> (title) — mint: claim H3991 stub</li><li><code>gasyoun/Uprava</code> (title) — exec-claim: H3991 (Uprava) claimed by Opus 4.8 (claude-opus-4-8) (marker+ledger)</li><li><code>gasyoun/Uprava</code> (title) — exec-claim: H3991 (Uprava) claimed by Opus 4.8 (claude-opus-4-8) (marker+ledger)</li><li><code>gasyoun/Uprava</code> (title) — mint: claim H3991 stub</li><li>… ещё 210 цитат (полный список в backlog JSON)</li></ul><p><b>Детект:</b> local_git merge-commit <code>8ef4e179b5d1</code> — «exec-claim: H3991 (Uprava) claimed by Opus 4.8 (claude-opus-4-8) (marker+ledger)»</p><h4>Позиция агента</h4><p><b>MG-JUDGE — агент не видит доставки</b> — Цитаты в слитых PR не доказывают доставку mission (совпадение по title/body), гейтов в строке не найдено. Рекомендация агента: закрыть ТОЛЬКО если работа реально шипилась — иначе строка ждёт исполнителя.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Закрыть строку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить открытой</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="H3999" data-filt="judge">
+    <header><div class="hw">H3999 — H3999-Opus_Systema-Sanscriticum_telegram-support-leverage-w1-lms-facts-one-tap-sla_03.09.2 <span class="badge">judge</span><span class="badge">local_git</span></div></header>
+    <div class="question">Строка цитируется слитыми PR, но не переведена в ✅. Вердикт: <b>закрыть</b> (работа шипилась) или <b>оставить открытой</b>?</div>
+    <div class="panel"><h4>&lt;h4&gt;Evidence (источник)&lt;/h4&gt;&lt;p&gt;&lt;b&gt;Статус строки (verbatim):&lt;/b&gt; 🟡 spec filled at mint (03-09-2026) {effort: hard} {launch-box: any}&lt;/p&gt;&lt;p&gt;&lt;b&gt;Ссылка строки:&lt;/b&gt; &lt;a href=&quot;https://github.com/gasyoun/Uprava/blob/main/handoffs/H3999-Opus_Systema-Sanscriticum_telegram-support-leverage-w1-lms-facts-one-tap-sla_03.09.26.md&quot;&gt;H3999-Opus_Systema-Sanscriticum_telegram-support-leverage-w1-lms-facts-one-tap-sla_03.09.26&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Цитирующие слитые PR (432):&lt;/b&gt;&lt;/p&gt;</h4><ul><li><code>gasyoun/Uprava</code> (title) — exec-claim: H3999 (Systema-Sanscriticum) claimed by Opus 4.8 (claude-opus-4-8) (marker+ledger)</li><li><code>gasyoun/Uprava</code> (title) — exec-claim: H3999 (Systema-Sanscriticum) claimed by Opus 4.8 (claude-opus-4-8) (marker+ledger)</li><li><code>gasyoun/Uprava</code> (title) — exec-claim: H3999 (Systema-Sanscriticum) claimed by Opus 4.8 (claude-opus-4-8) (marker+ledger)</li><li><code>gasyoun/Uprava</code> (title) — mint: fill H3999..H4002 — Systema Telegram support leverage waves 1, 2, 3, 3b</li><li><code>gasyoun/Uprava</code> (title) — exec-claim: H3999 (Systema-Sanscriticum) claimed by Opus 4.8 (claude-opus-4-8) (marker+ledger)</li><li><code>gasyoun/Uprava</code> (title) — mint: claim H3999..H4002 stubs (batch of 4)</li><li>… ещё 426 цитат (полный список в backlog JSON)</li></ul><p><b>Детект:</b> local_git merge-commit <code>b4c504b315c3</code> — «exec-claim: H3999 (Systema-Sanscriticum) claimed by Opus 4.8 (claude-opus-4-8) (marker+ledger)»</p><h4>Позиция агента</h4><p><b>MG-JUDGE — агент не видит доставки</b> — Цитаты в слитых PR не доказывают доставку mission (совпадение по title/body), гейтов в строке не найдено. Рекомендация агента: закрыть ТОЛЬКО если работа реально шипилась — иначе строка ждёт исполнителя.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Закрыть строку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить открытой</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="H4000" data-filt="judge">
+    <header><div class="hw">H4000 — H4000-Opus_Systema-Sanscriticum_telegram-support-leverage-w2-router-shadow-kpi-builder_03. <span class="badge">judge</span><span class="badge">local_git</span></div></header>
+    <div class="question">Строка цитируется слитыми PR, но не переведена в ✅. Вердикт: <b>закрыть</b> (работа шипилась) или <b>оставить открытой</b>?</div>
+    <div class="panel"><h4>&lt;h4&gt;Evidence (источник)&lt;/h4&gt;&lt;p&gt;&lt;b&gt;Статус строки (verbatim):&lt;/b&gt; 🟡 spec filled at mint (03-09-2026) {effort: medium} {launch-box: any}&lt;/p&gt;&lt;p&gt;&lt;b&gt;Ссылка строки:&lt;/b&gt; &lt;a href=&quot;https://github.com/gasyoun/Uprava/blob/main/handoffs/H4000-Opus_Systema-Sanscriticum_telegram-support-leverage-w2-router-shadow-kpi-builder_03.09.26.md&quot;&gt;H4000-Opus_Systema-Sanscriticum_telegram-support-leverage-w2-router-shadow-kpi-builder_03.09.26&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Цитирующие слитые PR (216):&lt;/b&gt;&lt;/p&gt;</h4><ul><li><code>gasyoun/Uprava</code> (title) — exec-claim: H4000 (Systema-Sanscriticum) claimed by Opus 4.8 (claude-opus-4-8) (marker+ledger)</li><li><code>gasyoun/Uprava</code> (title) — exec-claim: H4000 (Systema-Sanscriticum) claimed by Opus 4.8 (claude-opus-4-8) (marker+ledger)</li><li><code>gasyoun/Uprava</code> (title) — exec-claim: H4000 (Systema-Sanscriticum) claimed by Opus 4.8 (claude-opus-4-8) (marker+ledger)</li><li><code>gasyoun/Uprava</code> (title) — exec-claim: H4000 (Systema-Sanscriticum) claimed by Opus 4.8 (claude-opus-4-8) (marker+ledger)</li><li><code>gasyoun/Uprava</code> (title) — exec-claim: H4000 (Systema-Sanscriticum) claimed by Opus 4.8 (claude-opus-4-8) (marker+ledger)</li><li><code>gasyoun/Uprava</code> (title) — exec-claim: H4000 (Systema-Sanscriticum) claimed by Opus 4.8 (claude-opus-4-8) (marker+ledger)</li><li>… ещё 210 цитат (полный список в backlog JSON)</li></ul><p><b>Детект:</b> local_git merge-commit <code>8b3ad2f04f54</code> — «exec-claim: H4000 (Systema-Sanscriticum) claimed by Opus 4.8 (claude-opus-4-8) (marker+ledger)»</p><h4>Позиция агента</h4><p><b>MG-JUDGE — агент не видит доставки</b> — Цитаты в слитых PR не доказывают доставку mission (совпадение по title/body), гейтов в строке не найдено. Рекомендация агента: закрыть ТОЛЬКО если работа реально шипилась — иначе строка ждёт исполнителя.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Закрыть строку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить открытой</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="H4002" data-filt="judge">
+    <header><div class="hw">H4002 — H4002-Opus_Systema-Sanscriticum_telegram-support-leverage-w3b-local-generation-clarifier_0 <span class="badge">judge</span><span class="badge">local_git</span></div></header>
+    <div class="question">Строка цитируется слитыми PR, но не переведена в ✅. Вердикт: <b>закрыть</b> (работа шипилась) или <b>оставить открытой</b>?</div>
+    <div class="panel"><h4>&lt;h4&gt;Evidence (источник)&lt;/h4&gt;&lt;p&gt;&lt;b&gt;Статус строки (verbatim):&lt;/b&gt; 🟡 spec filled at mint (03-09-2026) {effort: hard} {launch-box: any} {gate: handoff:H3999,H4001}&lt;/p&gt;&lt;p&gt;&lt;b&gt;Ссылка строки:&lt;/b&gt; &lt;a href=&quot;https://github.com/gasyoun/Uprava/blob/main/handoffs/H4002-Opus_Systema-Sanscriticum_telegram-support-leverage-w3b-local-generation-clarifier_03.09.26.md&quot;&gt;H4002-Opus_Systema-Sanscriticum_telegram-support-leverage-w3b-local-generation-clarifier_03.09.26&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Цитирующие слитые PR (270):&lt;/b&gt;&lt;/p&gt;</h4><ul><li><code>gasyoun/Uprava</code> (title) — exec-claim: H4002 (Systema-Sanscriticum) claimed by Opus 4.8 (claude-opus-4-8) (marker+ledger)</li><li><code>gasyoun/Uprava</code> (title) — mint: fill H3999..H4002 — Systema Telegram support leverage waves 1, 2, 3, 3b</li><li><code>gasyoun/Uprava</code> (title) — exec-claim: H4002 (Systema-Sanscriticum) claimed by Opus 5 (claude-opus-5) (marker+ledger)</li><li><code>gasyoun/Uprava</code> (title) — mint: claim H3999..H4002 stubs (batch of 4)</li><li><code>gasyoun/Uprava</code> (title) — exec-claim: H4002 (Systema-Sanscriticum) claimed by Opus 4.8 (claude-opus-4-8) (marker+ledger)</li><li><code>gasyoun/Uprava</code> (title) — mint: fill H3999..H4002 — Systema Telegram support leverage waves 1, 2, 3, 3b</li><li>… ещё 264 цитат (полный список в backlog JSON)</li></ul><p><b>Детект:</b> local_git merge-commit <code>95504d2bc244</code> — «exec-claim: H4002 (Systema-Sanscriticum) claimed by Opus 4.8 (claude-opus-4-8) (marker+ledger)»</p><h4>Позиция агента</h4><p><b>MG-JUDGE — агент не видит доставки</b> — Цитаты в слитых PR не доказывают доставку mission (совпадение по title/body), гейтов в строке не найдено. Рекомендация агента: закрыть ТОЛЬКО если работа реально шипилась — иначе строка ждёт исполнителя.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Закрыть строку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить открытой</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="H4007" data-filt="gate">
+    <header><div class="hw">H4007 — H4007-Opus_kosha_sense-recon-w2-precision-writeup_03.09.26 <span class="badge">gate</span><span class="badge">local_git</span></div></header>
+    <div class="question">Строка цитируется слитыми PR, но не переведена в ✅. Вердикт: <b>закрыть</b> (работа шипилась) или <b>оставить открытой</b>?</div>
+    <div class="panel"><h4>&lt;h4&gt;Evidence (источник)&lt;/h4&gt;&lt;p&gt;&lt;b&gt;Статус строки (verbatim):&lt;/b&gt; 🟡 spec filled at mint (03-09-2026) {effort: medium} {launch-box: any} {gate: human:MG — awaiting the H3910 acceptance vote}&lt;/p&gt;&lt;p&gt;&lt;b&gt;Ссылка строки:&lt;/b&gt; &lt;a href=&quot;https://github.com/gasyoun/Uprava/blob/main/handoffs/H4007-Opus_kosha_sense-recon-w2-precision-writeup_03.09.26.md&quot;&gt;H4007-Opus_kosha_sense-recon-w2-precision-writeup_03.09.26&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Цитирующие слитые PR (108):&lt;/b&gt;&lt;/p&gt;</h4><ul><li><code>gasyoun/Uprava</code> (title) — H3910 closed (agent half) + H4007 minted for the post-vote write-up</li><li><code>gasyoun/Uprava</code> (title) — mint: claim H4007 stub</li><li><code>gasyoun/Uprava</code> (title) — H3910 closed (agent half) + H4007 minted for the post-vote write-up</li><li><code>gasyoun/Uprava</code> (title) — mint: claim H4007 stub</li><li><code>gasyoun/Uprava</code> (title) — H3910 closed (agent half) + H4007 minted for the post-vote write-up</li><li><code>gasyoun/Uprava</code> (title) — mint: claim H4007 stub</li><li>… ещё 102 цитат (полный список в backlog JSON)</li></ul><p><b>Детект:</b> local_git merge-commit <code>63c793c22721</code> — «H3910 closed (agent half) + H4007 minted for the post-vote write-up»</p><h4>Позиция агента</h4><p><b>KEEP-OPEN — человеческий гейт на строке</b> — Статус строки несёт человеческий гейт/блок (⛔/human-gate/waiting on human). PR-цитаты доставку такого гейта не закрывают; строка держится открытой.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Закрыть строку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить открытой</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="H4009" data-filt="judge">
+    <header><div class="hw">H4009 — H4009-Opus_SanskritLexicography_saru-marker-head-precision-panel_03.09.26 <span class="badge">judge</span><span class="badge">local_git</span></div></header>
+    <div class="question">Строка цитируется слитыми PR, но не переведена в ✅. Вердикт: <b>закрыть</b> (работа шипилась) или <b>оставить открытой</b>?</div>
+    <div class="panel"><h4>&lt;h4&gt;Evidence (источник)&lt;/h4&gt;&lt;p&gt;&lt;b&gt;Статус строки (verbatim):&lt;/b&gt; 🟡 spec filled at mint (03-09-2026) {effort: medium} {launch-box: any}&lt;/p&gt;&lt;p&gt;&lt;b&gt;Ссылка строки:&lt;/b&gt; &lt;a href=&quot;https://github.com/gasyoun/Uprava/blob/main/handoffs/H4009-Opus_SanskritLexicography_saru-marker-head-precision-panel_03.09.26.md&quot;&gt;H4009-Opus_SanskritLexicography_saru-marker-head-precision-panel_03.09.26&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Цитирующие слитые PR (164):&lt;/b&gt;&lt;/p&gt;</h4><ul><li><code>gasyoun/Uprava</code> (title) — exec-claim: H4009 (SanskritLexicography) claimed by Opus 4.8 (claude-opus-4-8) (marker+ledger)</li><li><code>gasyoun/Uprava</code> (title) — mint: H4009 + H4010 fill — H3876 residuals become real registry rows, not GTD-only</li><li><code>gasyoun/Uprava</code> (title) — mint: claim H4009..H4010 stubs (batch of 2)</li><li><code>gasyoun/Uprava</code> (title) — exec-claim: H4009 (SanskritLexicography) claimed by Opus 4.8 (claude-opus-4-8) (marker+ledger)</li><li><code>gasyoun/Uprava</code> (title) — mint: H4009 + H4010 fill — H3876 residuals become real registry rows, not GTD-only</li><li><code>gasyoun/Uprava</code> (title) — mint: claim H4009..H4010 stubs (batch of 2)</li><li>… ещё 158 цитат (полный список в backlog JSON)</li></ul><p><b>Детект:</b> local_git merge-commit <code>77ca0b3a091e</code> — «exec-claim: H4009 (SanskritLexicography) claimed by Opus 4.8 (claude-opus-4-8) (marker+ledger)»</p><h4>Позиция агента</h4><p><b>MG-JUDGE — агент не видит доставки</b> — Цитаты в слитых PR не доказывают доставку mission (совпадение по title/body), гейтов в строке не найдено. Рекомендация агента: закрыть ТОЛЬКО если работа реально шипилась — иначе строка ждёт исполнителя.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Закрыть строку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить открытой</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="H4010" data-filt="gate">
+    <header><div class="hw">H4010 — H4010-Opus_SanskritRussian_d8-republish-two-generation-delta_03.09.26 <span class="badge">gate</span><span class="badge">local_git</span></div></header>
+    <div class="question">Строка цитируется слитыми PR, но не переведена в ✅. Вердикт: <b>закрыть</b> (работа шипилась) или <b>оставить открытой</b>?</div>
+    <div class="panel"><h4>&lt;h4&gt;Evidence (источник)&lt;/h4&gt;&lt;p&gt;&lt;b&gt;Статус строки (verbatim):&lt;/b&gt; 🟡 spec filled at mint (03-09-2026) {effort: hard} {launch-box: any} {gate: human:MG}&lt;/p&gt;&lt;p&gt;&lt;b&gt;Ссылка строки:&lt;/b&gt; &lt;a href=&quot;https://github.com/gasyoun/Uprava/blob/main/handoffs/H4010-Opus_SanskritRussian_d8-republish-two-generation-delta_03.09.26.md&quot;&gt;H4010-Opus_SanskritRussian_d8-republish-two-generation-delta_03.09.26&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Цитирующие слитые PR (110):&lt;/b&gt;&lt;/p&gt;</h4><ul><li><code>gasyoun/Uprava</code> (title) — mint: H4009 + H4010 fill — H3876 residuals become real registry rows, not GTD-only</li><li><code>gasyoun/Uprava</code> (title) — mint: claim H4009..H4010 stubs (batch of 2)</li><li><code>gasyoun/Uprava</code> (title) — mint: H4009 + H4010 fill — H3876 residuals become real registry rows, not GTD-only</li><li><code>gasyoun/Uprava</code> (title) — mint: claim H4009..H4010 stubs (batch of 2)</li><li><code>gasyoun/Uprava</code> (title) — mint: H4009 + H4010 fill — H3876 residuals become real registry rows, not GTD-only</li><li><code>gasyoun/Uprava</code> (title) — mint: claim H4009..H4010 stubs (batch of 2)</li><li>… ещё 104 цитат (полный список в backlog JSON)</li></ul><p><b>Детект:</b> local_git merge-commit <code>dfba81a56d22</code> — «mint: H4009 + H4010 fill — H3876 residuals become real registry rows, not GTD-only»</p><h4>Позиция агента</h4><p><b>KEEP-OPEN — человеческий гейт на строке</b> — Статус строки несёт человеческий гейт/блок (⛔/human-gate/waiting on human). PR-цитаты доставку такого гейта не закрывают; строка держится открытой.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Закрыть строку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить открытой</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="H4015" data-filt="judge">
+    <header><div class="hw">H4015 — H4015-OxAlpha_SanskritLexicography_hapta-1key-retranslation-window_03.09.26 <span class="badge">judge</span><span class="badge">local_git</span></div></header>
+    <div class="question">Строка цитируется слитыми PR, но не переведена в ✅. Вердикт: <b>закрыть</b> (работа шипилась) или <b>оставить открытой</b>?</div>
+    <div class="panel"><h4>&lt;h4&gt;Evidence (источник)&lt;/h4&gt;&lt;p&gt;&lt;b&gt;Статус строки (verbatim):&lt;/b&gt; 🟡 spec filled at mint (03-09-2026) {effort: medium} {launch-box: Windows} {gate: until:2026-09-06}&lt;/p&gt;&lt;p&gt;&lt;b&gt;Ссылка строки:&lt;/b&gt; &lt;a href=&quot;https://github.com/gasyoun/Uprava/blob/main/handoffs/H4015-OxAlpha_SanskritLexicography_hapta-1key-retranslation-window_03.09.26.md&quot;&gt;H4015-OxAlpha_SanskritLexicography_hapta-1key-retranslation-window_03.09.26&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Цитирующие слитые PR (324):&lt;/b&gt;&lt;/p&gt;</h4><ul><li><code>gasyoun/Uprava</code> (title) — exec-claim: H4015 (SanskritLexicography) claimed by OxAlpha (opencode/z-ai/glm-5.3-flash) (marker+ledger)</li><li><code>gasyoun/Uprava</code> (title) — exec-claim: H4015 (SanskritLexicography) claimed by OxAlpha (opencode/z-ai/glm-5.3-flash) (marker+ledger)</li><li><code>gasyoun/Uprava</code> (title) — exec-claim: H4015 (SanskritLexicography) claimed by OxAlpha (opencode/z-ai/glm-5.3-flash) (marker+ledger)</li><li><code>gasyoun/Uprava</code> (title) — exec-claim: H4015 (SanskritLexicography) claimed by OxAlpha (opencode/z-ai/glm-5.3-flash) (marker+ledger)</li><li><code>gasyoun/Uprava</code> (title) — H4015 minted: _apta 1-key c1 re-translation window (MG billing GO) + GTD row superseded pointer</li><li><code>gasyoun/Uprava</code> (title) — mint: claim H4015 stub</li><li>… ещё 318 цитат (полный список в backlog JSON)</li></ul><p><b>Детект:</b> local_git merge-commit <code>1905254ddcab</code> — «exec-claim: H4015 (SanskritLexicography) claimed by OxAlpha (opencode/z-ai/glm-5.3-flash) (marker+ledger)»</p><h4>Позиция агента</h4><p><b>MG-JUDGE — агент не видит доставки</b> — Цитаты в слитых PR не доказывают доставку mission (совпадение по title/body), гейтов в строке не найдено. Рекомендация агента: закрыть ТОЛЬКО если работа реально шипилась — иначе строка ждёт исполнителя.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Закрыть строку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить открытой</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="H4077" data-filt="judge">
+    <header><div class="hw">H4077 — H4077-OxAlpha_Systema-Sanscriticum_paypal-paste-oneline-date_04.09.26 <span class="badge">judge</span><span class="badge">local_git</span></div></header>
+    <div class="question">Строка цитируется слитыми PR, но не переведена в ✅. Вердикт: <b>закрыть</b> (работа шипилась) или <b>оставить открытой</b>?</div>
+    <div class="panel"><h4>&lt;h4&gt;Evidence (источник)&lt;/h4&gt;&lt;p&gt;&lt;b&gt;Статус строки (verbatim):&lt;/b&gt; 🟡 spec filled at mint (04-09-2026) {effort: medium} {launch-box: any}&lt;/p&gt;&lt;p&gt;&lt;b&gt;Ссылка строки:&lt;/b&gt; &lt;a href=&quot;https://github.com/gasyoun/Uprava/blob/main/handoffs/H4077-OxAlpha_Systema-Sanscriticum_paypal-paste-oneline-date_04.09.26.md&quot;&gt;H4077-OxAlpha_Systema-Sanscriticum_paypal-paste-oneline-date_04.09.26&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Цитирующие слитые PR (270):&lt;/b&gt;&lt;/p&gt;</h4><ul><li><code>gasyoun/Uprava</code> (title) — GTD: H4077 residual fully closed - invoice 14280 paid + MG replied to Kessel in Telegram</li><li><code>gasyoun/Uprava</code> (title) — GTD: Payment 14280 closed by agent (H4077 residual) - MG keeps only the student reply</li><li><code>gasyoun/Uprava</code> (title) — H4077 executed: paypal paste one-line date fix landed+deployed; MG residual row for Kessel invoice 14280</li><li><code>gasyoun/Uprava</code> (title) — exec-claim: H4077 (Systema-Sanscriticum) claimed by OxAlpha (opencode/z-ai/glm-5.3-flash) (marker+ledger)</li><li><code>gasyoun/Uprava</code> (title) — mint: claim H4077 stub</li><li><code>gasyoun/Uprava</code> (title) — GTD: H4077 residual fully closed - invoice 14280 paid + MG replied to Kessel in Telegram</li><li>… ещё 264 цитат (полный список в backlog JSON)</li></ul><p><b>Детект:</b> local_git merge-commit <code>9ade6115acc5</code> — «GTD: H4077 residual fully closed - invoice 14280 paid + MG replied to Kessel in Telegram»</p><h4>Позиция агента</h4><p><b>MG-JUDGE — агент не видит доставки</b> — Цитаты в слитых PR не доказывают доставку mission (совпадение по title/body), гейтов в строке не найдено. Рекомендация агента: закрыть ТОЛЬКО если работа реально шипилась — иначе строка ждёт исполнителя.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Закрыть строку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить открытой</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="H4091" data-filt="judge">
+    <header><div class="hw">H4091 — H4091-OxAlpha_kosha_sense-dating-nomina-reprobe_04.09.26 <span class="badge">judge</span><span class="badge">local_git</span></div></header>
+    <div class="question">Строка цитируется слитыми PR, но не переведена в ✅. Вердикт: <b>закрыть</b> (работа шипилась) или <b>оставить открытой</b>?</div>
+    <div class="panel"><h4>&lt;h4&gt;Evidence (источник)&lt;/h4&gt;&lt;p&gt;&lt;b&gt;Статус строки (verbatim):&lt;/b&gt; 🟡 spec filled at mint (04-09-2026) {effort: medium} {launch-box: any}&lt;/p&gt;&lt;p&gt;&lt;b&gt;Ссылка строки:&lt;/b&gt; &lt;a href=&quot;https://github.com/gasyoun/Uprava/blob/main/handoffs/H4091-OxAlpha_kosha_sense-dating-nomina-reprobe_04.09.26.md&quot;&gt;H4091-OxAlpha_kosha_sense-dating-nomina-reprobe_04.09.26&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Цитирующие слитые PR (1):&lt;/b&gt;&lt;/p&gt;</h4><ul><li><code>gasyoun/Uprava</code> (title) — exec-claim: H4091 (kosha) claimed by OxAlpha (opencode/z-ai/glm-5.3-flash) (marker+ledger)</li></ul><p><b>Детект:</b> local_git merge-commit <code>79b95a624cc1</code> — «exec-claim: H4091 (kosha) claimed by OxAlpha (opencode/z-ai/glm-5.3-flash) (marker+ledger)»</p><h4>Позиция агента</h4><p><b>MG-JUDGE — агент не видит доставки</b> — Цитаты в слитых PR не доказывают доставку mission (совпадение по title/body), гейтов в строке не найдено. Рекомендация агента: закрыть ТОЛЬКО если работа реально шипилась — иначе строка ждёт исполнителя.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Закрыть строку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить открытой</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="H3824" data-filt="refuted">
+    <header><div class="hw">H3824 — H3824-Sonnet_Systema-Sanscriticum_lyw-zan1-flag-on-signoff_01.09.26 <span class="badge">refuted</span><span class="badge">local_git</span></div></header>
+    <div class="question">Строка цитируется слитыми PR, но не переведена в ✅. Вердикт: <b>закрыть</b> (работа шипилась) или <b>оставить открытой</b>?</div>
+    <div class="panel"><h4>&lt;h4&gt;Evidence (источник)&lt;/h4&gt;&lt;p&gt;&lt;b&gt;Статус строки (verbatim):&lt;/b&gt; 🟠 RESUMABLE — PARTIAL (01-09-2026, Sonnet 5 `claude-sonnet-5`): MG rejected v1 (interest-tagging ≠ difficulty reduction); redesigned all 9 zan1 packs with a physical-articulation bridge before jargon + interest woven inline into the five-rows table ([PR #900](https://github.com/gasyoun/SanskritGrammar/pull/900), merged) — MG approved the direction. Review sheet regenerated with the new content, republished ([hub](https://gasyoun.github.io/vote/sheets/systema_lyw_zan1_flagon_9groups.html)); residual is MG&amp;#x27;s per-group vote + a follow-up pass flipping `LYW_ENABLED` per approve. {gate: human:MG} {&lt;/p&gt;&lt;p&gt;&lt;b&gt;Ссылка строки:&lt;/b&gt; &lt;a href=&quot;https://github.com/gasyoun/Uprava/blob/main/handoffs/H3824-Sonnet_Systema-Sanscriticum_lyw-zan1-flag-on-signoff_01.09.26.md&quot;&gt;H3824-Sonnet_Systema-Sanscriticum_lyw-zan1-flag-on-signoff_01.09.26&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Цитирующие слитые PR (1):&lt;/b&gt;&lt;/p&gt;</h4><ul><li><code><a href="https://github.com/gasyoun/SanskritGrammar/pull/900">gasyoun/SanskritGrammar#900</a></code> (title) — H3824 pilot: reduce day-1 jargon load (nol register, base + 4 nol/* packs) (#900)</li></ul><h4>Позиция агента</h4><p><b>KEEP-OPEN — опровергнуто агентом</b> — Статус строки: 🟠 RESUMABLE — PARTIAL, {gate: human:MG} — review-sheet опубликован, голоса MG по группам не собраны, флаг LYW_ENABLED не переведён. Цитируемый PR — в ЧУЖОМ репо (SanskritGrammar #900), к mission строки отношения не имеет.</p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Закрыть строку</button>
+      <button class="vote reject" data-vote="reject">&#10060; Оставить открытой</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+</main>
+<div class="votebar" id="voteBar"><span class="spacer"></span></div>
+<footer class="hint">Uprava /handoff-registry-audit Phase 4b — триаж, не автозакрытие Keyboard: <kbd>a</kbd> Закрыть строку &middot; <kbd>r</kbd> Оставить открытой
+  &middot; <kbd>d</kbd> defer &middot; <kbd>&darr;</kbd>/<kbd>&uarr;</kbd> next/prev. Votes autosave to
+  this browser's localStorage; click "Download decisions.json" when done (unvoted items export with
+  decision:null).</footer>
+<div class="legend" style="max-width:980px;margin:0 auto 20px;padding:0 20px;color:var(--muted);font-size:12px">
+  <b>Approve</b> = accept the proposed change/answer shown on the card (no separate "approve as-is" —
+  approving means agreeing as written). <b>Reject</b> = keep the current entry/answer unchanged.
+  <b>Defer</b> = not sure yet, decide later. The note field is for requesting a partial tweak instead
+  of an outright reject.
+</div>
+<script>
+(function () {
+  var SHEET_ID = "uprava-merged-pr-backlog-triage_06-09-26";
+  var STORE_KEY = 'review-sheet:' + SHEET_ID;
+  var GENERATED = "2026-09-06";
+  var ids = ["H058", "H274", "H410", "H432", "H477", "H596", "H789", "H808", "H812", "H974", "H1243", "H1259", "H1333", "H1351", "H1891", "H2073", "H2380", "H2716", "H2855", "H2965", "H3184", "H3284", "H3988", "H3989", "H3991", "H3999", "H4000", "H4002", "H4007", "H4009", "H4010", "H4015", "H4077", "H4091", "H3824"];
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(STORE_KEY) || '{}') || {}; } catch (e) { state = {}; }
+  function tally() {
+    var c = { approve:0, reject:0, defer:0 };
+    ids.forEach(function (id) { var v = state[id] && state[id].decision; if (v && c.hasOwnProperty(v)) c[v]++; });
+    document.getElementById('c-approve').textContent = c.approve;
+    document.getElementById('c-reject').textContent = c.reject;
+    document.getElementById('c-defer').textContent = c.defer;
+    document.getElementById('c-unvoted').textContent = ids.length - c.approve - c.reject - c.defer;
+  }
+  function applyCardUI(card) {
+    var id = card.getAttribute('data-id'); var rec = state[id] || {};
+    card.classList.remove('voted-approve','voted-reject','voted-defer');
+    card.querySelectorAll('button.vote').forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-vote') === rec.decision); });
+    card.querySelector('.vote-state').textContent = rec.decision ? rec.decision : 'unvoted';
+    if (rec.decision) card.classList.add('voted-' + rec.decision);
+    var ta = card.querySelector('textarea.note'); if (rec.note && !ta.value) ta.value = rec.note;
+  }
+  function save() { localStorage.setItem(STORE_KEY, JSON.stringify(state)); tally(); }
+  // H1523 residual / csl-pyutil#1 Part 1: always re-read the live textarea on vote
+  // and before export so a second vote click (or a missed `input` event) cannot
+  // drop a note that is still visible in the card.
+  function syncNoteFromDom(id) {
+    state[id] = state[id] || {};
+    var card = document.querySelector('.card[data-id="' + id + '"]');
+    if (!card) return;
+    var ta = card.querySelector('textarea.note');
+    if (ta) state[id].note = ta.value;
+  }
+  function vote(id, d) { syncNoteFromDom(id); state[id].decision = d; save(); }
+  function noteChange(id, t) { state[id] = state[id] || {}; state[id].note = t; save(); }
+  document.querySelectorAll('.card').forEach(function (card) {
+    var id = card.getAttribute('data-id'); applyCardUI(card);
+    card.querySelectorAll('button.vote').forEach(function (btn) {
+      btn.addEventListener('click', function () { vote(id, btn.getAttribute('data-vote')); applyCardUI(card); });
+    });
+    var ta = card.querySelector('textarea.note'); ta.addEventListener('input', function () { noteChange(id, ta.value); });
+  });
+  tally();
+  document.getElementById('downloadBtn').addEventListener('click', function () {
+    ids.forEach(function (id) { syncNoteFromDom(id); });
+    var decided = ids.filter(function (id) { return state[id] && state[id].decision; }).length;
+    var payload = { sheet_id: SHEET_ID, generated: "2026-09-06", decided: decided, time_total_seconds: __timeTotal(),
+      items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '', time_seconds: __timeFor(id) }; }) };
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
+    var url = URL.createObjectURL(blob); var a = document.createElement('a');
+    a.href = url; a.download = SHEET_ID + '_decisions.json'; document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+  });
+  var filterbar = document.getElementById('filterbar');
+  filterbar.addEventListener('click', function (e) {
+    var btn = e.target.closest('button[data-filter]'); if (!btn) return;
+    filterbar.querySelectorAll('button').forEach(function (b) { b.classList.remove('active'); });
+    btn.classList.add('active'); var f = btn.getAttribute('data-filter');
+    document.querySelectorAll('.card').forEach(function (card) {
+      var show = true;
+      if (f === 'unvoted') { var id = card.getAttribute('data-id'); show = !(state[id] && state[id].decision); }
+      else if (f !== 'all') { show = card.getAttribute('data-filt') === f; }
+      card.style.display = show ? '' : 'none';
+    });
+  });
+  var cardsEl = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  var activeIdx = 0;
+  function visibleCards() { return cardsEl.filter(function (c) { return c.style.display !== 'none'; }); }
+  document.addEventListener('keydown', function (e) {
+    if (e.target.tagName === 'TEXTAREA') return;
+    var vis = visibleCards(); if (!vis.length) return;
+    if (activeIdx >= vis.length) activeIdx = vis.length - 1;
+    var card = vis[activeIdx]; var id = card.getAttribute('data-id');
+    if (e.key === 'a') { vote(id, 'approve'); applyCardUI(card); }
+    else if (e.key === 'r') { vote(id, 'reject'); applyCardUI(card); }
+    else if (e.key === 'd') { vote(id, 'defer'); applyCardUI(card); }
+    else if (e.key === 'ArrowDown') { activeIdx = Math.min(activeIdx + 1, vis.length - 1); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'start'}); }
+    else if (e.key === 'ArrowUp') { activeIdx = Math.max(activeIdx - 1, 0); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'start'}); }
+    else return;
+    e.preventDefault();
+  });
+
+  var saveHandle = null, saveTimer = null;
+  function exportPayload() {
+    if (typeof syncNoteFromDom === 'function') {
+      ids.forEach(function (id) { syncNoteFromDom(id); });
+    }
+    var decided = ids.filter(function (id) { return state[id] && state[id].decision; }).length;
+    var nowIso = new Date().toISOString();
+    return JSON.stringify({ sheet_id: SHEET_ID, generated: nowIso, reviewedAt: nowIso, decided: decided, time_total_seconds: __timeTotal(),
+      items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '', time_seconds: __timeFor(id) }; }) }, null, 2);
+  }
+  function scheduleAutosave() {
+    if (!saveHandle) return;
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(function () {
+      saveHandle.createWritable().then(function (w) {
+        w.write(exportPayload()).then(function () { w.close(); });
+      }).catch(function () {});
+    }, 1000);
+  }
+  var _origSave = save;
+  save = function () { _origSave(); scheduleAutosave(); };
+  if (window.showSaveFilePicker) {
+    var saveBtn = document.getElementById('saveBtn');
+    saveBtn.style.display = '';
+    saveBtn.addEventListener('click', function () {
+      window.showSaveFilePicker({suggestedName: SHEET_ID + '_decisions.json'}).then(function (h) {
+        saveHandle = h; scheduleAutosave();
+      }).catch(function () {});
+    });
+  }
+
+  var FS_KEY = STORE_KEY + ':fs', FS_DEFAULT = 1.5;
+  function fsGet() {
+    var v = parseFloat(localStorage.getItem(FS_KEY));
+    return (isFinite(v) && v >= 0.7 && v <= 3) ? v : FS_DEFAULT;
+  }
+  function fsApply(v) {
+    document.documentElement.style.setProperty('--fs', String(v));
+    document.getElementById('fsVal').textContent = Math.round(v * 100) + '%';
+  }
+  function fsSet(v) {
+    v = Math.min(3, Math.max(0.7, Math.round(v * 10) / 10));
+    localStorage.setItem(FS_KEY, String(v)); fsApply(v);
+  }
+  fsApply(fsGet());
+  document.getElementById('fsDown').addEventListener('click', function () { fsSet(fsGet() - 0.1); });
+  document.getElementById('fsUp').addEventListener('click', function () { fsSet(fsGet() + 0.1); });
+
+  var TIME_KEY = STORE_KEY + ':timing';
+  var __timing = { total: 0, per: {} };
+  try {
+    var __t0 = JSON.parse(localStorage.getItem(TIME_KEY) || 'null');
+    if (__t0 && typeof __t0.total === 'number') __timing = __t0;
+  } catch (e) {}
+  if (!__timing.per) __timing.per = {};
+  function __timeFor(id) { return Math.round(__timing.per[id] || 0); }
+  function __timeTotal() { return Math.round(__timing.total || 0); }
+  function __timeFmt(s) {
+    s = Math.round(s); var m = Math.floor(s / 60);
+    return (m >= 60 ? Math.floor(m / 60) + ':' + ('0' + (m - Math.floor(m / 60) * 60)).slice(-2) : m)
+      + ':' + ('0' + (s - m * 60)).slice(-2);
+  }
+  function __timeShow() {
+    var el = document.getElementById('t-total');
+    if (el) el.textContent = __timeFmt(__timing.total);
+  }
+  var __timeLast = Date.now(), __timeDirty = 0;
+  var __timeCards = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  function __timeActiveId() {
+    var mid = window.innerHeight / 2, best = null, bestd = Infinity;
+    for (var i = 0; i < __timeCards.length; i++) {
+      var c = __timeCards[i];
+      if (c.style.display === 'none') continue;
+      var r = c.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > window.innerHeight) continue;
+      var center = (Math.max(r.top, 0) + Math.min(r.bottom, window.innerHeight)) / 2;
+      var d = Math.abs(center - mid);
+      if (d < bestd) { bestd = d; best = c; }
+    }
+    return best ? best.getAttribute('data-id') : null;
+  }
+  function __timeFlush() {
+    try { localStorage.setItem(TIME_KEY, JSON.stringify(__timing)); } catch (e) {}
+  }
+  // V12 (H2858): the clock is stoppable. `paused` rides in the same persisted
+  // record as the totals, so a reviewer who pauses and closes the tab does not
+  // come back to a clock that ran all night.
+  var __timePaused = !!__timing.paused;
+  // V15 (H2887): a legacy record carries `paused` and no reason — read it as
+  // manual, so an auto-rearm can never lift a pause the curator set by hand.
+  var __timePauseReason = __timePaused ? (__timing.pause_reason || 'manual') : null;
+  function __timePauseSet(v, reason) {
+    __timePaused = !!v;
+    __timing.paused = __timePaused;
+    __timePauseReason = __timePaused ? (reason || 'manual') : null;
+    __timing.pause_reason = __timePauseReason;
+    __timeLast = Date.now(); __timeFlush();
+  }
+  setInterval(function () {
+    var now = Date.now(), dt = (now - __timeLast) / 1000;
+    __timeLast = now;
+    if (document.hidden || __timePaused || dt <= 0 || dt > 4) return;
+    __timing.total += dt;
+    var id = __timeActiveId();
+    if (id) __timing.per[id] = (__timing.per[id] || 0) + dt;
+    __timeDirty += dt;
+    if (__timeDirty >= 5) { __timeDirty = 0; __timeFlush(); }
+    __timeShow();
+  }, 1000);
+  document.addEventListener('visibilitychange', function () { __timeLast = Date.now(); });
+  window.addEventListener('beforeunload', __timeFlush);
+  __timeShow();
+
+  var HANDIN_SAID = 'handed in {n} of {total} — clock stopped, the rest stay saved in this browser';
+  var __handinBtn = document.getElementById('handinBtn');
+  var __handinSaid = document.getElementById('handinSaid');
+
+  var __pauseBtn = document.getElementById('pauseBtn');
+  function __pauseShow() {
+    __pauseBtn.classList.toggle('on', __timePaused);
+    __pauseBtn.innerHTML = __timePaused ? '&#9654;' : '&#9208;';
+    var chip = document.querySelector('.tally .time');
+    if (chip) chip.classList.toggle('paused', __timePaused);
+  }
+  __pauseBtn.addEventListener('click', function () { __timePauseSet(!__timePaused); __pauseShow(); });
+  __pauseShow();
+  __handinBtn.addEventListener('click', function () {
+    ids.forEach(function (id) { syncNoteFromDom(id); });
+    __timePauseSet(true, 'export'); __pauseShow();
+    var items = ids.map(function (id) {
+      var rec = state[id] || {};
+      var item = { id: id, decision: rec.decision || null };
+      item.note = rec.note || '';
+      item.time_seconds = __timeFor(id);
+      return item;
+    });
+    var decided = items.filter(function (it) { return !!it.decision; }).length;
+    var payload = { sheet_id: SHEET_ID, generated: GENERATED, decided: decided,
+      partial: true, complete: false, undecided: items.length - decided, items: items };
+    payload.time_total_seconds = __timeTotal();
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
+    var url = URL.createObjectURL(blob); var a = document.createElement('a');
+    a.href = url; a.download = SHEET_ID + '_decisions_partial.json';
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+    __handinSaid.textContent = HANDIN_SAID.replace('{n}', decided).replace('{total}', items.length);
+  });
+
+  // --- V15 session flow (H2887) ---------------------------------------------
+  var FLOW_IDLE_SECONDS = 90;
+  var FLOW_ETA = 'about {minutes} min left';
+  var FLOW_ETA_ROUGH = 'about {minutes} min left (rough)';
+  var FLOW_CLOCK_RUNNING = 'running';
+  var FLOW_CLOCK_PAUSED = 'paused';
+  var FLOW_CLOCK_IDLE = 'idle';
+  var FLOW_PROGRESS = 'decided {n} of {total}';
+  var FLOW_UNDO_SAID = 'undo: {id} back to {decision}';
+  var FLOW_UNDO_EMPTY = 'nothing to undo';
+  var FLOW_UNDO_NONE = 'no decision';
+  var FLOW_RESUMED = 'resumed at card {n} of {total}';
+  var __flowToast = document.getElementById('flowToast');
+  var __flowToastTimer = null;
+  function __flowSay(text) {
+    if (!__flowToast) return;
+    __flowToast.textContent = text;
+    __flowToast.classList.add('on');
+    clearTimeout(__flowToastTimer);
+    __flowToastTimer = setTimeout(function () { __flowToast.classList.remove('on'); }, 2600);
+  }
+  var __flowCenterId = __timeActiveId;
+  function __flowIdxOf(id) {
+    var vis = visibleCards();
+    for (var i = 0; i < vis.length; i++) {
+      if (vis[i].getAttribute('data-id') === id) return i;
+    }
+    return -1;
+  }
+  function __flowCardById(id) {
+    var found = null;
+    cardsEl.forEach(function (c) { if (c.getAttribute('data-id') === id) found = c; });
+    return found;
+  }
+  // The visible ring IS the target of a/r/d — that identity is the whole point
+  // of this layer, so nothing may move `activeIdx` without repainting.
+  function __flowPaint() {
+    cardsEl.forEach(function (c) { c.classList.remove('kbd-active'); });
+    var vis = visibleCards();
+    if (!vis.length) return;
+    if (activeIdx >= vis.length) activeIdx = vis.length - 1;
+    if (activeIdx < 0) activeIdx = 0;
+    vis[activeIdx].classList.add('kbd-active');
+  }
+  function __flowSync() {
+    var id = __flowCenterId();
+    if (id) { var at = __flowIdxOf(id); if (at !== -1) activeIdx = at; }
+    __flowPaint();
+  }
+  var __flowScrollTimer = null;
+  window.addEventListener('scroll', function () {
+    if (__flowScrollTimer) return;
+    __flowScrollTimer = setTimeout(function () { __flowScrollTimer = null; __flowSync(); }, 120);
+  });
+  // Both bars reset `activeIdx` to 0 as they re-filter; re-derive it from the
+  // viewport on the next tick, or defect 2 returns wearing a filter.
+  ['filterbar'].forEach(function (barId) {
+    var bar = document.getElementById(barId);
+    if (bar) bar.addEventListener('click', function () { setTimeout(__flowSync, 0); });
+  });
+  function __flowClockShow() {
+    var el = document.getElementById('t-state');
+    if (!el) return;
+    var label = FLOW_CLOCK_RUNNING;
+    if (__timePaused) label = (__timePauseReason === 'idle') ? FLOW_CLOCK_IDLE : FLOW_CLOCK_PAUSED;
+    el.textContent = label;
+    el.classList.toggle('idle', !!__timePaused && __timePauseReason === 'idle');
+  }
+  // The V12 ⏸ button drives the clock straight through __timePauseSet, so the
+  // three-state label has to ride along with V12's own repaint or it goes stale
+  // the moment the curator pauses by hand.
+  var __flowOrigPauseShow = __pauseShow;
+  __pauseShow = function () { __flowOrigPauseShow(); __flowClockShow(); };
+  var __flowIdleTimer = null;
+  function __flowIdleArm() {
+    clearTimeout(__flowIdleTimer);
+    __flowIdleTimer = setTimeout(function () {
+      if (__timePaused) return;
+      __timePauseSet(true, 'idle');
+    __pauseShow();
+      __flowClockShow();
+    }, FLOW_IDLE_SECONDS * 1000);
+  }
+  function __flowRearm() {
+    if (__timePaused && __timePauseReason !== 'manual') {
+      __timePauseSet(false);
+    __pauseShow();
+    }
+    __flowClockShow();
+    __flowIdleArm();
+  }
+  // The export GESTURES, caught in the capture phase on `document` so this runs
+  // before any handler bound to the buttons themselves — including the strict
+  // layer's, which calls stopImmediatePropagation() on its own element.
+  document.addEventListener('click', function (e) {
+    var t = e.target;
+    if (!t || !t.closest || !t.closest('#downloadBtn, #saveBtn, #handinBtn')) return;
+    __timePauseSet(true, 'export');
+    __pauseShow();
+    __flowClockShow();
+  }, true);
+  ['keydown', 'pointerdown', 'scroll'].forEach(function (evt) {
+    document.addEventListener(evt, function () { __flowRearm(); }, true);
+  });
+  var __flowUndoStack = [];
+  function __flowUndo() {
+    var last = __flowUndoStack.pop();
+    if (!last) { __flowSay(FLOW_UNDO_EMPTY); return; }
+    state[last.id] = state[last.id] || {};
+    if (last.prev) state[last.id].decision = last.prev;
+    else delete state[last.id].decision;
+    save();
+    var card = __flowCardById(last.id);
+    if (card) {
+      applyCardUI(card);
+      card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      var at = __flowIdxOf(last.id);
+      if (at !== -1) activeIdx = at;
+      __flowPaint();
+    }
+    __flowSay(FLOW_UNDO_SAID.replace('{id}', last.id)
+      .replace('{decision}', last.prev || FLOW_UNDO_NONE));
+  }
+  var __flowUndoBtn = document.getElementById('flowUndoBtn');
+  if (__flowUndoBtn) __flowUndoBtn.addEventListener('click', __flowUndo);
+  function __flowFirstUndecided() {
+    var vis = visibleCards();
+    for (var i = 0; i < vis.length; i++) {
+      var id = vis[i].getAttribute('data-id');
+      if (!(state[id] && state[id].decision)) return i;
+    }
+    return -1;
+  }
+  function __flowAdvance() {
+    var at = __flowFirstUndecided();
+    if (at === -1) { __flowPaint(); return; }
+    activeIdx = at;
+    visibleCards()[at].scrollIntoView({ behavior: 'smooth', block: 'start' });
+    __flowPaint();
+  }
+  function __flowDecided() {
+    var n = 0;
+    ids.forEach(function (id) { if (state[id] && state[id].decision) n++; });
+    return n;
+  }
+  function __flowEtaText(decided, total) {
+    var secs = [];
+    ids.forEach(function (id) {
+      if (!(state[id] && state[id].decision)) return;
+      var s = __timing.per[id] || 0;
+      if (s > 0) secs.push(s);
+    });
+    if (!secs.length) return '';
+    secs.sort(function (a, b) { return a - b; });
+    var mid = Math.floor(secs.length / 2);
+    var med = (secs.length % 2) ? secs[mid] : (secs[mid - 1] + secs[mid]) / 2;
+    var left = Math.max(0, total - decided);
+    if (!left) return '';
+    var minutes = Math.max(1, Math.round(med * left / 60));
+    return (secs.length >= 5 ? FLOW_ETA : FLOW_ETA_ROUGH).replace('{minutes}', minutes);
+  }
+  function __flowProgress() {
+    var n = __flowDecided(), total = ids.length;
+    var txt = document.getElementById('flowProgText');
+    if (txt) txt.textContent = FLOW_PROGRESS.replace('{n}', n).replace('{total}', total);
+    var bar = document.getElementById('flowBar');
+    if (bar) bar.style.width = (total ? Math.round(100 * n / total) : 0) + '%';
+    var etaEl = document.getElementById('flowEta');
+    if (etaEl) etaEl.textContent = __flowEtaText(n, total);
+  }
+  var __flowOrigTally = tally;
+  tally = function () { __flowOrigTally(); __flowProgress(); };
+  var __flowOrigVote = vote;
+  vote = function (id, d) {
+    var rec = state[id] || {};
+    __flowUndoStack.push({ id: id, prev: rec.decision || null });
+    if (__flowUndoStack.length > 100) __flowUndoStack.shift();
+    __flowOrigVote(id, d);
+    __flowRearm();
+    __flowAdvance();
+  };
+  var __flowOrigNote = noteChange;
+  noteChange = function (id, t) { __flowOrigNote(id, t); __flowRearm(); };
+  document.addEventListener('keydown', function (e) {
+    if (e.target.tagName === 'TEXTAREA') return;
+    if (e.key === 'z' || e.key === 'Z') { __flowUndo(); e.preventDefault(); return; }
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') __flowPaint();
+  });
+  __flowProgress();
+  __flowSync();
+  __flowClockShow();
+  __flowIdleArm();
+  (function () {
+    if (!__flowDecided()) return;
+    var at = __flowFirstUndecided();
+    if (at === -1) return;
+    var vis = visibleCards();
+    activeIdx = at;
+    vis[at].scrollIntoView({ block: 'start' });
+    __flowPaint();
+    __flowSay(FLOW_RESUMED.replace('{n}', at + 1).replace('{total}', vis.length));
+  })();
+
+  var VOTE_TOTAL = 0;
+  var VOTE_PROGRESS = '{n} of {total} across the whole sheet';
+  var VOTE_ETA = 'about {minutes} min left for all {total}';
+  var VOTE_ETA_ROUGH = 'about {minutes} min left for all {total} (rough)';
+  var VOTE_DONE = 'all {total} decided';
+  (function () {
+    var bar = document.getElementById('voteBar');
+    if (!bar) return;
+    // The build tagged exactly the submit controls this document actually has.
+    // Navigation (filters, facets, the type-scale control) is untagged and stays
+    // on top, where it is used BEFORE deciding.
+    var moved = document.querySelectorAll('[data-submit]');
+    for (var i = 0; i < moved.length; i++) bar.appendChild(moved[i]);
+  })();
+  // One record backs every pack of a packset — STORE_KEY and TIME_KEY are keyed
+  // on sheet_id, not on the pack — so this page can count and time the WHOLE
+  // instrument without loading a single other pack.
+  function __voteDecidedAll() {
+    var n = 0;
+    for (var k in state) {
+      if (Object.prototype.hasOwnProperty.call(state, k) && state[k] && state[k].decision) n++;
+    }
+    return n;
+  }
+  function __voteSecs() {
+    var per = (typeof __timing !== 'undefined' && __timing && __timing.per) ? __timing.per : null;
+    var out = [];
+    if (!per) return out;
+    for (var k in per) {
+      if (!Object.prototype.hasOwnProperty.call(per, k)) continue;
+      if (!(state[k] && state[k].decision)) continue;
+      if (per[k] > 0) out.push(per[k]);
+    }
+    return out;
+  }
+  function __voteEta(decided, total) {
+    var left = Math.max(0, total - decided);
+    if (!left) return VOTE_DONE.replace('{total}', total);
+    var secs = __voteSecs();
+    if (!secs.length) return '';
+    secs.sort(function (a, b) { return a - b; });
+    var mid = Math.floor(secs.length / 2);
+    var med = (secs.length % 2) ? secs[mid] : (secs[mid - 1] + secs[mid]) / 2;
+    var minutes = Math.max(1, Math.round(med * left / 60));
+    return (secs.length >= 5 ? VOTE_ETA : VOTE_ETA_ROUGH)
+      .replace('{minutes}', minutes).replace('{total}', total);
+  }
+  function __voteProgress() {
+    var total = VOTE_TOTAL || ids.length;
+    var n = VOTE_TOTAL ? __voteDecidedAll() : ids.filter(function (id) {
+      return state[id] && state[id].decision; }).length;
+    if (n > total) n = total;
+    var t = document.getElementById('voteProgText');
+    if (t) t.innerHTML = VOTE_PROGRESS.replace('{n}', '<b>' + n + '</b>')
+                                      .replace('{total}', '<b>' + total + '</b>');
+    var b = document.getElementById('voteProgBar');
+    if (b) b.style.width = (total ? Math.round(100 * n / total) : 0) + '%';
+    var e = document.getElementById('voteProgEta');
+    if (e) e.textContent = __voteEta(n, total);
+  }
+  var __voteOrigTally = tally;
+  tally = function () { __voteOrigTally(); __voteProgress(); };
+  __voteProgress();
+})();
+</script>
+<div class="flowtoast" id="flowToast" role="status"></div>
+<!-- ssb-evidence: {"H058": {"verifier": "handoff_merged_pr_reconcile sweep + registry halves @ origin/main", "method": "primary_source_quote", "sources": ["https://github.com/gasyoun/Uprava/commit/bfcace699ee4f1908ca8a49892b1dd985bf49181", "https://github.com/gasyoun/Uprava/blob/main/handoffs/H058-OxAlpha_DO_MWS_SPEC1_w1c_scanlink_02.07.26.md"], "verified_date": "06-09-2026"}, "H274": {"verifier": "handoff_merged_pr_reconcile sweep + registry halves @ origin/main", "method": "primary_source_quote", "sources": ["https://github.com/gasyoun/Uprava/pull/1643", "https://github.com/gasyoun/Uprava/blob/main/handoffs/H274-Fable_DO_RussianTranslation_pwg_ru_bakeoff_compute_07.07.26.md"], "verified_date": "06-09-2026"}, "H410": {"verifier": "handoff_merged_pr_reconcile sweep + registry halves @ origin/main", "method": "primary_source_quote", "sources": ["https://github.com/gasyoun/Uprava/commit/8c4c979b62eca9c722e048a9adba0e33b6c6c099", "https://github.com/gasyoun/Uprava/blob/main/handoffs/H410-OxAlpha_SanskritLexicography_pwg-xref-redirect-resolution_09.07.26.md"], "verified_date": "06-09-2026"}, "H432": {"verifier": "handoff_merged_pr_reconcile sweep + registry halves @ origin/main", "method": "primary_source_quote", "sources": ["https://github.com/gasyoun/Uprava/commit/e65cdc1dc20fc3525ef960275c07e33fb4468a4d", "https://github.com/gasyoun/Uprava/blob/main/handoffs/H432-OxAlpha_RuWritingStyles_rws_chunk_pipeline_library_skill_09.07.26.md"], "verified_date": "06-09-2026"}, "H477": {"verifier": "handoff_merged_pr_reconcile sweep + registry halves @ origin/main", "method": "primary_source_quote", "sources": ["https://github.com/gasyoun/Uprava/commit/4f53ff13e16372bd8912efa413880f1b1e5b64e7", "https://github.com/gasyoun/Uprava/blob/main/handoffs/H477-OxAlpha_DO_Uprava_custdev_lesson_churn_map_10.07.26.md"], "verified_date": "06-09-2026"}, "H596": {"verifier": "handoff_merged_pr_reconcile sweep + registry halves @ origin/main", "method": "primary_source_quote", "sources": ["https://github.com/gasyoun/Uprava/commit/e16e85571a48930a80daa41a4dfcd789a02f79e2", "https://github.com/gasyoun/Uprava/blob/main/handoffs/H596-OxAlpha_Systema-Sanscriticum_telegram_w32_unified_reply_live_11.07.26.md"], "verified_date": "06-09-2026"}, "H789": {"verifier": "handoff_merged_pr_reconcile sweep + registry halves @ origin/main", "method": "primary_source_quote", "sources": ["https://github.com/gasyoun/SamudraManthanam/pull/328", "https://github.com/gasyoun/SamudraManthanam/pull/327", "https://github.com/gasyoun/Uprava/blob/main/handoffs/H789-Fable_SamudraManthanam_nkrya-w2-adjudication-verdict-a41-s64_12.07.26.md"], "verified_date": "06-09-2026"}, "H808": {"verifier": "handoff_merged_pr_reconcile sweep + registry halves @ origin/main", "method": "primary_source_quote", "sources": ["https://github.com/gasyoun/RussianRamayana/pull/36", "https://github.com/gasyoun/Uprava/blob/main/handoffs/H808-Opus_RussianRamayana_translator-env-wave2-all-sargas-log499_12.07.26.md"], "verified_date": "06-09-2026"}, "H812": {"verifier": "handoff_merged_pr_reconcile sweep + registry halves @ origin/main", "method": "primary_source_quote", "sources": ["https://github.com/gasyoun/Uprava/commit/a315a52313dc57306161c2e477b096a051b3e1dd", "https://github.com/gasyoun/Uprava/blob/main/handoffs/H812-OxAlpha_Systema-Sanscriticum_gasuns-course-portfolio-measurement_12.07.26.md"], "verified_date": "06-09-2026"}, "H974": {"verifier": "handoff_merged_pr_reconcile sweep + registry halves @ origin/main", "method": "primary_source_quote", "sources": ["https://github.com/gasyoun/Uprava/commit/73af687f5ec950a8c0436226035e1bfb7cdb0ebe", "https://github.com/gasyoun/Uprava/blob/main/handoffs/H974-OxAlpha_SamudraManthanam_interlinear-sa-ru-mt-benchmark_15.07.26.md"], "verified_date": "06-09-2026"}, "H1243": {"verifier": "handoff_merged_pr_reconcile sweep + registry halves @ origin/main", "method": "primary_source_quote", "sources": ["https://github.com/gasyoun/SanskritGrammar/pull/424", "https://github.com/gasyoun/Uprava/blob/main/handoffs/H1243-Fable_SanskritGrammar_concordance-v3-wackernagel-renou-pdf-gated_18.07.26.md"], "verified_date": "06-09-2026"}, "H1259": {"verifier": "handoff_merged_pr_reconcile sweep + registry halves @ origin/main", "method": "primary_source_quote", "sources": ["https://github.com/gasyoun/Uprava/commit/bcf91ecf74d4aa9e8a36655549787343a069232a", "https://github.com/gasyoun/Uprava/blob/main/handoffs/H1259-Fable_SanskritGrammar_m03-final-hybrid-line-edit-freeze_18.07.26.md"], "verified_date": "06-09-2026"}, "H1333": {"verifier": "handoff_merged_pr_reconcile sweep + registry halves @ origin/main", "method": "primary_source_quote", "sources": ["https://github.com/gasyoun/Uprava/commit/75890bed6d3e71188ed6ac82ec9a4f8727f8dd5e", "https://github.com/gasyoun/Uprava/blob/main/handoffs/H1333-Opus_RussianTranslation_pwg-ru-dhatup-palsule-wire-from-xls_19.07.26.md"], "verified_date": "06-09-2026"}, "H1351": {"verifier": "handoff_merged_pr_reconcile sweep + registry halves @ origin/main", "method": "primary_source_quote", "sources": ["https://github.com/gasyoun/Uprava/commit/2731631b37102e13208032e91a11ff689083d054", "https://github.com/gasyoun/Uprava/blob/main/handoffs/H1351-Opus_SanskritLexicography_pwg-ru-offline-spawn-cost-phase-c_20.07.26.md"], "verified_date": "06-09-2026"}, "H1891": {"verifier": "handoff_merged_pr_reconcile sweep + registry halves @ origin/main", "method": "primary_source_quote", "sources": ["https://github.com/gasyoun/Uprava/commit/97350f8dcd51c2eabfa26ff9e1cadb2bbc973994", "https://github.com/gasyoun/Uprava/blob/main/handoffs/H1891-Fable_Systema-Sanscriticum_arzamas-third-note-minaev_29.07.26.md"], "verified_date": "06-09-2026"}, "H2073": {"verifier": "handoff_merged_pr_reconcile sweep + registry halves @ origin/main", "method": "primary_source_quote", "sources": ["https://github.com/gasyoun/Uprava/commit/3c280f462a6bea65e5b23fbb2b33725fed75ff88", "https://github.com/gasyoun/Uprava/blob/main/handoffs/H2073-OxAlpha_SanskritSpellCheck_h454-grok-dual-run-compare_01.08.26.md"], "verified_date": "06-09-2026"}, "H2380": {"verifier": "handoff_merged_pr_reconcile sweep + registry halves @ origin/main", "method": "primary_source_quote", "sources": ["https://github.com/gasyoun/Uprava/commit/75633724219c2591337efa2683e29d09dc1bebb0", "https://github.com/gasyoun/Uprava/blob/main/handoffs/H2380-Grok_Systema-Sanscriticum_cabinet-adoption-kpi-experiment_07.08.26.md"], "verified_date": "06-09-2026"}, "H2716": {"verifier": "handoff_merged_pr_reconcile sweep + registry halves @ origin/main", "method": "primary_source_quote", "sources": ["https://github.com/gasyoun/Uprava/pull/1857", "https://github.com/gasyoun/Uprava/blob/main/handoffs/H2716-Opus_Uprava_t5-resize-after-ask-batch-answers_14.08.26.md"], "verified_date": "06-09-2026"}, "H2855": {"verifier": "handoff_merged_pr_reconcile sweep + registry halves @ origin/main", "method": "primary_source_quote", "sources": ["https://github.com/gasyoun/Uprava/commit/7cd6d5d234079f5d24aa4b15a2ccabb6b40202b0", "https://github.com/gasyoun/Uprava/blob/main/handoffs/H2855-Fable_Uprava_vote-platform-w2-trud-calibration_15.08.26.md"], "verified_date": "06-09-2026"}, "H2965": {"verifier": "handoff_merged_pr_reconcile sweep + registry halves @ origin/main", "method": "primary_source_quote", "sources": ["https://github.com/gasyoun/Uprava/commit/db3ffab91fb50f8d50dd4c5b2b623288513e1d8a", "https://github.com/gasyoun/Uprava/blob/main/handoffs/H2965-Fable_SanskritGrammar_m03-rws-approved-edits-gost-freeze_17.08.26.md"], "verified_date": "06-09-2026"}, "H3184": {"verifier": "handoff_merged_pr_reconcile sweep + registry halves @ origin/main", "method": "primary_source_quote", "sources": ["https://github.com/gasyoun/Uprava/commit/faba46000057dda965225a11b8093475a0539337", "https://github.com/gasyoun/Uprava/blob/main/handoffs/H3184-Opus_Systema-Sanscriticum_uptime-w4-nftables-default-deny-ssh-hardening_19.08.26.md"], "verified_date": "06-09-2026"}, "H3284": {"verifier": "handoff_merged_pr_reconcile sweep + registry halves @ origin/main", "method": "primary_source_quote", "sources": ["https://github.com/gasyoun/Uprava/commit/790830579516b5069c1bec8667ee39bf7343dbf9", "https://github.com/gasyoun/Uprava/blob/main/handoffs/H3284-Codex_Uprava_hook-dispatcher-pre-posttooluse_22.08.26.md"], "verified_date": "06-09-2026"}, "H3988": {"verifier": "handoff_merged_pr_reconcile sweep + registry halves @ origin/main", "method": "primary_source_quote", "sources": ["https://github.com/gasyoun/Uprava/commit/7f7c4be055c60b27ae808767d5d7841ca7569dc1", "https://github.com/gasyoun/Uprava/blob/main/handoffs/H3988-Sonnet_Uprava_cdsl-sense-tree-parity-residual_03.09.26.md"], "verified_date": "06-09-2026"}, "H3989": {"verifier": "handoff_merged_pr_reconcile sweep + registry halves @ origin/main", "method": "primary_source_quote", "sources": ["https://github.com/gasyoun/Uprava/commit/9013be1a9e6a4544214adb2add72e9f9c09d7784", "https://github.com/gasyoun/Uprava/blob/main/handoffs/H3989-Sonnet_Uprava_data-layers-no-consumer-reharvest_03.09.26.md"], "verified_date": "06-09-2026"}, "H3991": {"verifier": "handoff_merged_pr_reconcile sweep + registry halves @ origin/main", "method": "primary_source_quote", "sources": ["https://github.com/gasyoun/Uprava/commit/8ef4e179b5d156a407fde36a9af2c7e83a5cc121", "https://github.com/gasyoun/Uprava/blob/main/handoffs/H3991-Opus_Uprava_findings-trailer-stale-base-false-positive_03.09.26.md"], "verified_date": "06-09-2026"}, "H3999": {"verifier": "handoff_merged_pr_reconcile sweep + registry halves @ origin/main", "method": "primary_source_quote", "sources": ["https://github.com/gasyoun/Uprava/commit/b4c504b315c3970c5a8f1c53c2d4cbf6de4350df", "https://github.com/gasyoun/Uprava/blob/main/handoffs/H3999-Opus_Systema-Sanscriticum_telegram-support-leverage-w1-lms-facts-one-tap-sla_03.09.26.md"], "verified_date": "06-09-2026"}, "H4000": {"verifier": "handoff_merged_pr_reconcile sweep + registry halves @ origin/main", "method": "primary_source_quote", "sources": ["https://github.com/gasyoun/Uprava/commit/8b3ad2f04f54eb4ac9b13975816c8c1fe41a0b03", "https://github.com/gasyoun/Uprava/blob/main/handoffs/H4000-Opus_Systema-Sanscriticum_telegram-support-leverage-w2-router-shadow-kpi-builder_03.09.26.md"], "verified_date": "06-09-2026"}, "H4002": {"verifier": "handoff_merged_pr_reconcile sweep + registry halves @ origin/main", "method": "primary_source_quote", "sources": ["https://github.com/gasyoun/Uprava/commit/95504d2bc244709af884c5eef065f6ac84ffc46e", "https://github.com/gasyoun/Uprava/blob/main/handoffs/H4002-Opus_Systema-Sanscriticum_telegram-support-leverage-w3b-local-generation-clarifier_03.09.26.md"], "verified_date": "06-09-2026"}, "H4007": {"verifier": "handoff_merged_pr_reconcile sweep + registry halves @ origin/main", "method": "primary_source_quote", "sources": ["https://github.com/gasyoun/Uprava/commit/63c793c2272126edb8151e732e553c920d6149f6", "https://github.com/gasyoun/Uprava/blob/main/handoffs/H4007-Opus_kosha_sense-recon-w2-precision-writeup_03.09.26.md"], "verified_date": "06-09-2026"}, "H4009": {"verifier": "handoff_merged_pr_reconcile sweep + registry halves @ origin/main", "method": "primary_source_quote", "sources": ["https://github.com/gasyoun/Uprava/commit/77ca0b3a091ea792b930b599e14bbd924b16bd8e", "https://github.com/gasyoun/Uprava/blob/main/handoffs/H4009-Opus_SanskritLexicography_saru-marker-head-precision-panel_03.09.26.md"], "verified_date": "06-09-2026"}, "H4010": {"verifier": "handoff_merged_pr_reconcile sweep + registry halves @ origin/main", "method": "primary_source_quote", "sources": ["https://github.com/gasyoun/Uprava/commit/dfba81a56d22e8f65009fc2630c6e6f2b9fdb0ae", "https://github.com/gasyoun/Uprava/blob/main/handoffs/H4010-Opus_SanskritRussian_d8-republish-two-generation-delta_03.09.26.md"], "verified_date": "06-09-2026"}, "H4015": {"verifier": "handoff_merged_pr_reconcile sweep + registry halves @ origin/main", "method": "primary_source_quote", "sources": ["https://github.com/gasyoun/Uprava/commit/1905254ddcab97add32880da2246c2e78cadbc35", "https://github.com/gasyoun/Uprava/blob/main/handoffs/H4015-OxAlpha_SanskritLexicography_hapta-1key-retranslation-window_03.09.26.md"], "verified_date": "06-09-2026"}, "H4077": {"verifier": "handoff_merged_pr_reconcile sweep + registry halves @ origin/main", "method": "primary_source_quote", "sources": ["https://github.com/gasyoun/Uprava/commit/9ade6115acc5d733e14c89b6fd93dc1bdf176819", "https://github.com/gasyoun/Uprava/blob/main/handoffs/H4077-OxAlpha_Systema-Sanscriticum_paypal-paste-oneline-date_04.09.26.md"], "verified_date": "06-09-2026"}, "H4091": {"verifier": "handoff_merged_pr_reconcile sweep + registry halves @ origin/main", "method": "primary_source_quote", "sources": ["https://github.com/gasyoun/Uprava/commit/79b95a624cc1809cda65f49f0e8d0c19913977c6", "https://github.com/gasyoun/Uprava/blob/main/handoffs/H4091-OxAlpha_kosha_sense-dating-nomina-reprobe_04.09.26.md"], "verified_date": "06-09-2026"}, "H3824": {"verifier": "handoff_merged_pr_reconcile sweep + registry halves @ origin/main", "method": "primary_source_quote", "sources": ["https://github.com/gasyoun/SanskritGrammar/pull/900", "https://github.com/gasyoun/Uprava/blob/main/handoffs/H3824-Sonnet_Systema-Sanscriticum_lyw-zan1-flag-on-signoff_01.09.26.md"], "verified_date": "06-09-2026"}} -->
+</body>
+</html>
