@@ -1,0 +1,53 @@
+{
+  "gate0": {
+    "verdict": "FOUND — primary path, fallback не нужен",
+    "checked_utc": "2026-09-06T20:05Z",
+    "expected_by_handoff": "kosha-mastery-schedule (H3742), tier unreleased, на kosha/data/ не найден (утренняя проба 06-09-2026)",
+    "found_live": "data/mastery/combined_schedule.json @ gasyoun/kosha origin/main — живая проба перевешивает утреннюю",
+    "registry": {
+      "id": "kosha-mastery-schedule",
+      "tier": "public",
+      "license": "CC BY-SA 4.0",
+      "in_release": "unreleased",
+      "rows": 35517
+    },
+    "fallback_needed": false,
+    "family_delta": "в handoff fallback перечислял zaliznyak-drills; фактические 5 семей по H3742/MASTERY_WEIGHTS_SPEC: sandhi, samasa, morphology, vocab, thematic_vocab"
+  },
+  "source": {
+    "repo": "gasyoun/kosha",
+    "commit": "6f045963e0478c8b8e7696758d6831ddd634c433",
+    "epoch": "2026-09-01T00:00:00Z",
+    "files": {
+      "data/mastery/combined_schedule.json": "232de6d3cb0d0235182795976eeb9682a151ec00e59d9766a511f5ffe0496eea",
+      "data/sandhi/sandhi_drills.json": "484c106454cb7d3e945ff9f82d5583ca0915ba14bfc4208292fab79790d81b32",
+      "data/samasa/samasa_drills.json": "d32cba58e7abd891752ad25f269a7826064ce53155a7d9e603c7f398e62508de",
+      "data/morphology/drills.json": "916dff3f9cec8583761a860e0ff39e5f52fbcf476d3e610b8ac1ec9a3f176942",
+      "data/morphology/morphology_curriculum.tsv": "bb36467d28495e404af301129e969d50ad06a156316f41affc7be72417d4065f",
+      "data/frequency/vocab_drills.json": "6867ee7df5c7917b58e865f3bb28abfb61dfeb9ecf071ddf0c444551968c4969",
+      "data/frequency/thematic_vocab_drills.json": "070239639c77f9db4adf1e82013036e80a4185aa8d031d111521f410e93086d5"
+    }
+  },
+  "snapshot": {
+    "path": "mastery/data/mastery_snapshot.tsv",
+    "sha256": "5f837f7fd0bdd9ec9cd46b7a9d1add343621b5bf4e81ff34f6576101f55beae2",
+    "rows": 35517,
+    "columns": [
+      "family",
+      "id",
+      "ease",
+      "axis"
+    ],
+    "axis_semantics": "sandhi: lesson 1-9 · samasa: task type · morphology: curriculum lesson 1-10 (rank→lesson, функция, 0 конфликтов) · vocab: частотный ранг 1-7532 · thematic_vocab: varga-тема (20)"
+  },
+  "join_coverage": {
+    "sandhi": "396/396",
+    "samasa": "3865/3865",
+    "morphology": "12000/12000",
+    "vocab": "13334/13334",
+    "thematic_vocab": "5922/5922"
+  },
+  "ease_semantics": "0..1, выше = легче — seed-вес нового item в FSRS-микшере (data/MASTERY_WEIGHTS_SPEC.md, H3742); это веса учебной программы, НЕ данные учеников",
+  "no_personal_data": true,
+  "generated_utc": "2026-09-06T20:05Z"
+}

@@ -79,6 +79,11 @@
    "title": "Учёба",
    "items": [
     {
+     "no": 41,
+     "title": "Карта мастерства — живая версия №28/№36",
+     "url": "https://gasyoun.github.io/mastery/"
+    },
+    {
      "no": 10,
      "title": "Месяц слов",
      "url": "https://gasyoun.github.io/infographics/month-of-words-2026-08-29/index.html"
