@@ -1,0 +1,21 @@
+{
+  "source": {
+    "repo": "gasyoun/VisualDCS",
+    "path": "visual/paradigm_nominal.json",
+    "commit": "8c02054718401c7553c3c9e18310ae5891da9555",
+    "sha256": "1e647b5598b70befda2551c907e2e0792d674b9331e87e9c1ccf1b0cdb6d83c7",
+    "dataset_id": "dcs-nominal-paradigm-grid",
+    "builder": "src/DCS-data-2026/gen_paradigm_nominal.py (H1472)",
+    "corpus": "DCS (DCS-2026 release), CC BY 4.0 — derivative CC BY-SA 4.0"
+  },
+  "snapshot": {
+    "path": "paradigm_a_snapshot.json",
+    "sha256": "8a7b9342282f077ce3bf25e5c41bf8050ed1c9c552f21ad65c02b7963abfa68c",
+    "class": "a",
+    "genders": [
+      "Masc",
+      "Neut"
+    ]
+  },
+  "generated_utc": "2026-09-06T20:45Z"
+}

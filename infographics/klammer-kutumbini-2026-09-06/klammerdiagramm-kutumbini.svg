@@ -1,0 +1,97 @@
+<svg viewBox="0 0 928 640" xmlns="http://www.w3.org/2000/svg" role="img" font-family="'Klammer Serif', 'Charis SIL', Charis, 'Gentium Plus', Georgia, serif">
+<title>Klammerdiagramm — karmavyagrakuṭumbinīkucataṭasvedacchidaḥ</title>
+<desc>German-Indological bracket diagram of the six-member LEFT-nested compound karma-vyagra-kuṭumbinī-kucataṭa-sveda-cchidaḥ (Amaru-śataka): A = karma+vyagra (busy with her duties), B = [A]+kuṭumbinī (the housewife busy with her duties), C = [B]+kuca (the breast of that housewife), D = [C]+taṭa (the slope of that breast), E = [D]+sveda (the sweat of that slope), F = [E]+chidaḥ (the cutter of that sweat) — the epithet of the monsoon drops (payobindavaḥ) in the verse. II часть begins at cchidaḥ (head). Segmentation confirmed by the DharmaMitra layer (kosha data/sandhi).</desc>
+<defs>
+<pattern id="hatch" width="5.5" height="5.5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="5.5" stroke="currentColor" stroke-width="0.8"/></pattern>
+</defs>
+<line x1="44" y1="52" x2="315" y2="52" stroke="currentColor" stroke-width="1.2" stroke-dasharray="2.5 4.5"/>
+<line x1="431" y1="52" x2="702" y2="52" stroke="currentColor" stroke-width="1.2" stroke-dasharray="2.5 4.5"/>
+<path d="M702 52 C 736 54 756 70 762 96" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="2.5 4.5"/>
+<path d="M822 52 C 788 54 768 70 762 96" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="2.5 4.5"/>
+<text x="373" y="59" font-size="21" text-anchor="middle" fill="currentColor">I часть</text>
+<text x="850" y="59" font-size="21" text-anchor="middle" fill="currentColor">II часть</text>
+<text y="126" font-size="39" fill="currentColor">
+<tspan x="44.0">karma-</tspan>
+<tspan x="165.4">vyagra-</tspan>
+<tspan x="294.6">kuṭumbinī-</tspan>
+<tspan x="486.1">kuca-</tspan>
+<tspan x="579.6">taṭa-</tspan>
+<tspan x="658.2">sveda-</tspan>
+<tspan x="767.8">chidaḥ</tspan>
+</text>
+<rect x="52" y="162" width="92" height="84" fill="url(#hatch)"/>
+<rect x="144" y="198" width="599" height="48" fill="url(#hatch)"/>
+<path d="M52 146 L48 157 L57 157 Z" fill="currentColor"/>
+<path d="M144 146 L140 157 L149 157 Z" fill="currentColor"/>
+<line x1="52" y1="155" x2="52" y2="246" stroke="currentColor" stroke-width="1.3"/>
+<line x1="144" y1="155" x2="144" y2="198" stroke="currentColor" stroke-width="1.3"/>
+<line x1="144" y1="198" x2="743" y2="198" stroke="currentColor" stroke-width="1.3"/>
+<line x1="52" y1="246" x2="743" y2="246" stroke="currentColor" stroke-width="1.3"/>
+<line x1="743" y1="198" x2="743" y2="246" stroke="currentColor" stroke-width="1.3"/>
+<rect x="178" y="162" width="92" height="36" fill="url(#hatch)"/>
+<path d="M178 146 L173 157 L182 157 Z" fill="currentColor"/>
+<path d="M270 146 L265 157 L274 157 Z" fill="currentColor"/>
+<line x1="178" y1="155" x2="178" y2="198" stroke="currentColor" stroke-width="1.3"/>
+<line x1="270" y1="155" x2="270" y2="246" stroke="currentColor" stroke-width="1.3"/>
+<line x1="777" y1="198" x2="777" y2="246" stroke="currentColor" stroke-width="1.3"/>
+<line x1="777" y1="246" x2="270" y2="246" stroke="currentColor" stroke-width="1.3"/>
+<text x="760" y="231" font-size="26" text-anchor="middle" fill="currentColor">A</text>
+<rect x="338" y="162" width="92" height="154" fill="url(#hatch)"/>
+<path d="M338 146 L334 157 L343 157 Z" fill="currentColor"/>
+<path d="M430 146 L426 157 L435 157 Z" fill="currentColor"/>
+<line x1="430" y1="155" x2="430" y2="316" stroke="currentColor" stroke-width="1.3"/>
+<line x1="338" y1="155" x2="338" y2="268" stroke="currentColor" stroke-width="1.3"/>
+<line x1="707" y1="268" x2="338" y2="268" stroke="currentColor" stroke-width="1.3"/>
+<line x1="707" y1="316" x2="430" y2="316" stroke="currentColor" stroke-width="1.3"/>
+<line x1="707" y1="268" x2="707" y2="316" stroke="currentColor" stroke-width="1.3"/>
+<line x1="673" y1="292" x2="760" y2="292" stroke="currentColor" stroke-width="1.3"/>
+<line x1="760" y1="292" x2="760" y2="248" stroke="currentColor" stroke-width="1.3"/>
+<text x="690" y="301" font-size="26" text-anchor="middle" fill="currentColor">B</text>
+<rect x="490" y="162" width="73" height="224" fill="url(#hatch)"/>
+<path d="M490 146 L486 157 L495 157 Z" fill="currentColor"/>
+<path d="M563 146 L559 157 L568 157 Z" fill="currentColor"/>
+<line x1="563" y1="155" x2="563" y2="386" stroke="currentColor" stroke-width="1.3"/>
+<line x1="490" y1="155" x2="490" y2="338" stroke="currentColor" stroke-width="1.3"/>
+<line x1="637" y1="338" x2="490" y2="338" stroke="currentColor" stroke-width="1.3"/>
+<line x1="637" y1="386" x2="563" y2="386" stroke="currentColor" stroke-width="1.3"/>
+<line x1="637" y1="338" x2="637" y2="386" stroke="currentColor" stroke-width="1.3"/>
+<line x1="603" y1="362" x2="690" y2="362" stroke="currentColor" stroke-width="1.3"/>
+<line x1="690" y1="362" x2="690" y2="318" stroke="currentColor" stroke-width="1.3"/>
+<text x="620" y="371" font-size="26" text-anchor="middle" fill="currentColor">C</text>
+<rect x="584" y="162" width="58" height="294" fill="url(#hatch)"/>
+<rect x="567" y="408" width="17" height="48" fill="url(#hatch)"/>
+<path d="M584 146 L579 157 L588 157 Z" fill="currentColor"/>
+<path d="M642 146 L637 157 L646 157 Z" fill="currentColor"/>
+<line x1="642" y1="155" x2="642" y2="456" stroke="currentColor" stroke-width="1.3"/>
+<line x1="584" y1="155" x2="584" y2="408" stroke="currentColor" stroke-width="1.3"/>
+<line x1="567" y1="408" x2="584" y2="408" stroke="currentColor" stroke-width="1.3"/>
+<line x1="567" y1="456" x2="642" y2="456" stroke="currentColor" stroke-width="1.3"/>
+<line x1="567" y1="408" x2="567" y2="456" stroke="currentColor" stroke-width="1.3"/>
+<line x1="533" y1="432" x2="620" y2="432" stroke="currentColor" stroke-width="1.3"/>
+<line x1="620" y1="432" x2="620" y2="388" stroke="currentColor" stroke-width="1.3"/>
+<text x="550" y="441" font-size="26" text-anchor="middle" fill="currentColor">D</text>
+<rect x="662" y="162" width="89" height="364" fill="url(#hatch)"/>
+<rect x="497" y="478" width="165" height="48" fill="url(#hatch)"/>
+<path d="M662 146 L658 157 L667 157 Z" fill="currentColor"/>
+<path d="M751 146 L747 157 L756 157 Z" fill="currentColor"/>
+<line x1="751" y1="155" x2="751" y2="526" stroke="currentColor" stroke-width="1.3"/>
+<line x1="662" y1="155" x2="662" y2="478" stroke="currentColor" stroke-width="1.3"/>
+<line x1="497" y1="478" x2="662" y2="478" stroke="currentColor" stroke-width="1.3"/>
+<line x1="497" y1="526" x2="751" y2="526" stroke="currentColor" stroke-width="1.3"/>
+<line x1="497" y1="478" x2="497" y2="526" stroke="currentColor" stroke-width="1.3"/>
+<line x1="463" y1="502" x2="550" y2="502" stroke="currentColor" stroke-width="1.3"/>
+<line x1="550" y1="502" x2="550" y2="458" stroke="currentColor" stroke-width="1.3"/>
+<text x="480" y="511" font-size="26" text-anchor="middle" fill="currentColor">E</text>
+<rect x="780" y="162" width="92" height="434" fill="url(#hatch)"/>
+<rect x="427" y="548" width="353" height="48" fill="url(#hatch)"/>
+<path d="M780 146 L776 157 L785 157 Z" fill="currentColor"/>
+<path d="M872 146 L868 157 L877 157 Z" fill="currentColor"/>
+<line x1="872" y1="155" x2="872" y2="596" stroke="currentColor" stroke-width="1.3"/>
+<line x1="780" y1="155" x2="780" y2="548" stroke="currentColor" stroke-width="1.3"/>
+<line x1="427" y1="548" x2="780" y2="548" stroke="currentColor" stroke-width="1.3"/>
+<line x1="427" y1="596" x2="872" y2="596" stroke="currentColor" stroke-width="1.3"/>
+<line x1="427" y1="548" x2="427" y2="596" stroke="currentColor" stroke-width="1.3"/>
+<line x1="393" y1="572" x2="480" y2="572" stroke="currentColor" stroke-width="1.3"/>
+<line x1="480" y1="572" x2="480" y2="528" stroke="currentColor" stroke-width="1.3"/>
+<text x="410" y="581" font-size="26" text-anchor="middle" fill="currentColor">F</text>
+</svg>

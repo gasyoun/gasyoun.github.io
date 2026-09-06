@@ -1,0 +1,3591 @@
+{
+ "class": "a",
+ "label": "-a",
+ "exemplar": "deva",
+ "note": "masculine/neuter a-stems — the largest class. ⚠️ Its Fem column is NOT an a-stem feminine paradigm: DCS cites an adjective by its masculine -a form, so feminine tokens of -a adjectives (paramayā, uttarayā) are lemmatised here and inflect as ā-/ī-stems. Read the Fem column as 'feminine forms of -a-citation adjectives', not as a class of its own.",
+ "n": 1467730,
+ "lemmas": 49376,
+ "topLemmas": [
+  [
+   17565,
+   "deva",
+   "m"
+  ],
+  [
+   11272,
+   "loka",
+   "m"
+  ],
+  [
+   10837,
+   "artha",
+   "mn"
+  ],
+  [
+   10309,
+   "indra",
+   "m"
+  ],
+  [
+   9994,
+   "tva",
+   "n"
+  ],
+  [
+   9895,
+   "putra",
+   "m"
+  ],
+  [
+   7186,
+   "rūpa",
+   "n"
+  ],
+  [
+   6767,
+   "yajña",
+   "m"
+  ]
+ ],
+ "cases": [
+  "Nom",
+  "Acc",
+  "Ins",
+  "Dat",
+  "Abl",
+  "Gen",
+  "Loc",
+  "Voc"
+ ],
+ "numbers": [
+  "Sing",
+  "Dual",
+  "Plur"
+ ],
+ "genders": {
+  "Masc": {
+   "cells": {
+    "Abl.Dual": {
+     "endings": [
+      [
+       186,
+       "ābhyām"
+      ]
+     ],
+     "examples": [
+      {
+       "form": "netrābhyām",
+       "ref": "KūPur, 1, 7",
+       "sent": "krodhāviṣṭasya netrābhyāṃ prāpatannaśrubindavaḥ",
+       "text": "Kūrmapurāṇa"
+      },
+      {
+       "form": "karṇābhyām",
+       "ref": "AU, 1, 1",
+       "sent": "karṇābhyām śrotram",
+       "text": "Aitareyopaniṣad"
+      },
+      {
+       "form": "pādābhyām",
+       "ref": "AVŚ, 9, 8",
+       "sent": "pādābhyāṃ te jānubhyāṃ śroṇibhyāṃ pari bhaṃsasaḥ",
+       "text": "Atharvaveda (Śaunaka)"
+      }
+     ],
+     "forms": [
+      [
+       14,
+       "netrābhyām"
+      ],
+      [
+       11,
+       "karṇābhyām"
+      ],
+      [
+       8,
+       "pādābhyām"
+      ],
+      [
+       4,
+       "arthābhyām"
+      ],
+      [
+       4,
+       "aṃsābhyām"
+      ],
+      [
+       4,
+       "pārśvābhyām"
+      ],
+      [
+       4,
+       "stanābhyām"
+      ],
+      [
+       3,
+       "abhiplavābhyām"
+      ]
+     ],
+     "lemmas": 113,
+     "n": 187,
+     "segmentable": 186
+    },
+    "Abl.Plur": {
+     "endings": [
+      [
+       1390,
+       "ebhyaḥ"
+      ]
+     ],
+     "examples": [
+      {
+       "form": "devebhyaḥ",
+       "ref": "AĀ, 2, 1, 8",
+       "sent": "etaddha sma vai tad vidvān āha mahidāsa aitareya āhaṃ māṃ devebhyo veda o mad devān vedetaḥpradānā hy eta itaḥ saṃbhṛtā iti",
+       "text": "Aitareya-Āraṇyaka"
+      },
+      {
+       "form": "lokebhyaḥ",
+       "ref": "AB, 1, 23",
+       "sent": "tān tathā ebhyaḥ lokebhyaḥ anudanta",
+       "text": "Aitareyabrāhmaṇa"
+      },
+      {
+       "form": "prāṇebhyaḥ",
+       "ref": "AB, 4, 23",
+       "sent": "prajāpatir akāmayata prajāyeya bhūyān syām iti sa tapo 'tapyata sa tapas taptvemaṃ dvādaśāham apaśyad ātmana evāṅgeṣu ca prāṇeṣu ca tam ātmana evāṅgebhyaś ca prāṇebhyaś ca dvādaśadhā niramimīta tam āharat tenāyajata tat…",
+       "text": "Aitareyabrāhmaṇa"
+      }
+     ],
+     "forms": [
+      [
+       122,
+       "devebhyaḥ"
+      ],
+      [
+       93,
+       "lokebhyaḥ"
+      ],
+      [
+       57,
+       "prāṇebhyaḥ"
+      ],
+      [
+       30,
+       "arthebhyaḥ"
+      ],
+      [
+       25,
+       "manuṣyebhyaḥ"
+      ],
+      [
+       23,
+       "rathebhyaḥ"
+      ],
+      [
+       21,
+       "guṇebhyaḥ"
+      ],
+      [
+       20,
+       "brāhmaṇebhyaḥ"
+      ]
+     ],
+     "lemmas": 453,
+     "n": 1391,
+     "segmentable": 1390
+    },
+    "Abl.Sing": {
+     "endings": [
+      [
+       27518,
+       "āt"
+      ],
+      [
+       420,
+       "ataḥ"
+      ],
+      [
+       35,
+       "asmāt"
+      ],
+      [
+       5,
+       "asaḥ"
+      ]
+     ],
+     "examples": [
+      {
+       "form": "kṣaṇāt",
+       "ref": "AmaruŚ, 1",
+       "sent": "āvegādavadhīritaḥ priyatamastūṣṇīṃ sthitastatkṣaṇāt mā bhūḥ supta ivaiṣa mandavalitagrīvaṃ punarvīkṣitaḥ",
+       "text": "Amaruśataka"
+      },
+      {
+       "form": "yogāt",
+       "ref": "AgniPur, 13",
+       "sent": "śataśṛṅgāśramapade bhāryāyogād yato mṛtiḥ",
+       "text": "Agnipurāṇa"
+      },
+      {
+       "form": "prasādāt",
+       "ref": "AgniPur, 7",
+       "sent": "agastyabhrātaraṃ natvā agastyaṃ tatprasādataḥ",
+       "text": "Agnipurāṇa"
+      }
+     ],
+     "forms": [
+      [
+       636,
+       "kṣaṇāt"
+      ],
+      [
+       611,
+       "yogāt"
+      ],
+      [
+       556,
+       "prasādāt"
+      ],
+      [
+       389,
+       "dharmāt"
+      ],
+      [
+       379,
+       "abhāvāt"
+      ],
+      [
+       354,
+       "lokāt"
+      ],
+      [
+       310,
+       "prayatnāt"
+      ],
+      [
+       301,
+       "mohāt"
+      ]
+     ],
+     "lemmas": 3612,
+     "n": 28053,
+     "segmentable": 27978
+    },
+    "Acc.Dual": {
+     "endings": [
+      [
+       4873,
+       "au"
+      ],
+      [
+       259,
+       "ā"
+      ],
+      [
+       1,
+       "āḥ"
+      ]
+     ],
+     "examples": [
+      {
+       "form": "pādau",
+       "ref": "AgniPur, 6",
+       "sent": "pādau gṛhītvā rāmeṇa karṣitā sāparādhataḥ",
+       "text": "Agnipurāṇa"
+      },
+      {
+       "form": "caraṇau",
+       "ref": "AHS, Utt., 32",
+       "sent": "duṣṭaṃ kunakham apyevaṃ caraṇāvalase punaḥ",
+       "text": "Aṣṭāṅgahṛdayasaṃhitā"
+      },
+      {
+       "form": "hastau",
+       "ref": "AVP, 1, 49",
+       "sent": "ubhau hastau pratidīvno brahmaṇāpombhāmasi",
+       "text": "Atharvaveda (Paippalāda)"
+      }
+     ],
+     "forms": [
+      [
+       481,
+       "pādau"
+      ],
+      [
+       122,
+       "caraṇau"
+      ],
+      [
+       86,
+       "hastau"
+      ],
+      [
+       72,
+       "putrau"
+      ],
+      [
+       68,
+       "karṇau"
+      ],
+      [
+       65,
+       "ājyabhāgau"
+      ],
+      [
+       63,
+       "apānau"
+      ],
+      [
+       54,
+       "kālau"
+      ]
+     ],
+     "lemmas": 1267,
+     "n": 5141,
+     "segmentable": 5133
+    },
+    "Acc.Plur": {
+     "endings": [
+      [
+       40463,
+       "ān"
+      ],
+      [
+       488,
+       "āṁ"
+      ],
+      [
+       26,
+       "aḥ"
+      ],
+      [
+       3,
+       "āḥ"
+      ],
+      [
+       2,
+       "ā"
+      ],
+      [
+       2,
+       "ānt"
+      ]
+     ],
+     "examples": [
+      {
+       "form": "devān",
+       "ref": "AgniPur, 4",
+       "sent": "hiraṇyākṣo 'sureśo 'bhūt devān jitvā divi sthitaḥ",
+       "text": "Agnipurāṇa"
+      },
+      {
+       "form": "lokān",
+       "ref": "AĀ, 1, 2, 4",
+       "sent": "purastāt pratyañcam preṅkham adhirohet iti āhuḥ etasya rūpeṇa yaḥ eṣa tapati purastāt hi eṣa imān lokān pratyaṅ adhirohati iti",
+       "text": "Aitareya-Āraṇyaka"
+      },
+      {
+       "form": "prāṇān",
+       "ref": "AgniPur, 8",
+       "sent": "sītārthe yo 'tyajat prāṇān rāvaṇena hato raṇe",
+       "text": "Agnipurāṇa"
+      }
+     ],
+     "forms": [
+      [
+       1300,
+       "devān"
+      ],
+      [
+       1170,
+       "lokān"
+      ],
+      [
+       783,
+       "prāṇān"
+      ],
+      [
+       691,
+       "putrān"
+      ],
+      [
+       548,
+       "brāhmaṇān"
+      ],
+      [
+       480,
+       "pāṇḍavān"
+      ],
+      [
+       471,
+       "kāmān"
+      ],
+      [
+       456,
+       "guṇān"
+      ]
+     ],
+     "lemmas": 4718,
+     "n": 41139,
+     "segmentable": 40985
+    },
+    "Acc.Sing": {
+     "endings": [
+      [
+       161725,
+       "am"
+      ],
+      [
+       2,
+       "ham"
+      ],
+      [
+       2,
+       "um"
+      ],
+      [
+       1,
+       "a"
+      ],
+      [
+       1,
+       "asam"
+      ],
+      [
+       1,
+       "ā"
+      ]
+     ],
+     "examples": [
+      {
+       "form": "artham",
+       "ref": "AbhidhKo, 1",
+       "sent": "ṣaṣṭhāśrayaprasiddhyarthaṃ dhātavo 'ṣṭādaśa smṛtāḥ",
+       "text": "Abhidharmakośa"
+      },
+      {
+       "form": "lokam",
+       "ref": "AgniPur, 4",
+       "sent": "bhūrlokaṃ sa bhuvarlokaṃ svarlokaṃ ca padatrayaṃ",
+       "text": "Agnipurāṇa"
+      },
+      {
+       "form": "yajñam",
+       "ref": "AĀ, 1, 1, 4",
+       "sent": "ā yātaṃ rudravartanī ity ā hāsyāśvinau yajñaṃ gacchato ya evaṃ veda yeṣāṃ caivaṃ vidvān etaddhotā śaṃsati",
+       "text": "Aitareya-Āraṇyaka"
+      }
+     ],
+     "forms": [
+      [
+       4669,
+       "artham"
+      ],
+      [
+       2258,
+       "lokam"
+      ],
+      [
+       1673,
+       "yajñam"
+      ],
+      [
+       1589,
+       "ratham"
+      ],
+      [
+       1538,
+       "putram"
+      ],
+      [
+       1524,
+       "dharmam"
+      ],
+      [
+       1309,
+       "indram"
+      ],
+      [
+       1269,
+       "devam"
+      ]
+     ],
+     "lemmas": 11689,
+     "n": 162081,
+     "segmentable": 161732
+    },
+    "Dat.Dual": {
+     "endings": [
+      [
+       162,
+       "ābhyām"
+      ]
+     ],
+     "examples": [
+      {
+       "form": "agnīṣomābhyām",
+       "ref": "AB, 1, 30",
+       "sent": "agnīṣomābhyām praṇīyamānābhyām anubrūhi iti āha adhvaryuḥ",
+       "text": "Aitareyabrāhmaṇa"
+      },
+      {
+       "form": "mitrāvaruṇābhyām",
+       "ref": "BaudhŚS, 7, 6",
+       "sent": "tena gṛhṇāty atipavamānasya rājño 'yaṃ vāṃ mitrāvaruṇety anudrutyopayāmagṛhīto 'si mitrāvaruṇābhyāṃ tvā juṣṭaṃ gṛhṇāmīti",
+       "text": "Baudhāyanaśrautasūtra"
+      },
+      {
+       "form": "nāsatyābhyām",
+       "ref": "MS, 3, 11, 9",
+       "sent": "sarasvatī manasā peśalaṃ vasu nāsatyābhyāṃ vayati darśataṃ vapuḥ",
+       "text": "Maitrāyaṇīsaṃhitā"
+      }
+     ],
+     "forms": [
+      [
+       39,
+       "agnīṣomābhyām"
+      ],
+      [
+       26,
+       "mitrāvaruṇābhyām"
+      ],
+      [
+       7,
+       "nāsatyābhyām"
+      ],
+      [
+       5,
+       "apānābhyām"
+      ],
+      [
+       5,
+       "rātrābhyām"
+      ],
+      [
+       4,
+       "adhyakṣābhyām"
+      ],
+      [
+       4,
+       "agniṣomābhyām"
+      ],
+      [
+       4,
+       "indrābhyām"
+      ]
+     ],
+     "lemmas": 57,
+     "n": 162,
+     "segmentable": 162
+    },
+    "Dat.Plur": {
+     "endings": [
+      [
+       2757,
+       "ebhyaḥ"
+      ]
+     ],
+     "examples": [
+      {
+       "form": "devebhyaḥ",
+       "ref": "AgniPur, 1",
+       "sent": "viṣṇunoktaṃ yathā mahyaṃ devebhyo brahmaṇā purā",
+       "text": "Agnipurāṇa"
+      },
+      {
+       "form": "brāhmaṇebhyaḥ",
+       "ref": "AgniPur, 14",
+       "sent": "aśvamedhe dadau dānaṃ brāhmaṇebhyo 'rimardanaḥ",
+       "text": "Agnipurāṇa"
+      },
+      {
+       "form": "viśvebhyaḥ",
+       "ref": "AB, 3, 13",
+       "sent": "prajāpatir vai yajñaṃ chandāṃsi devebhyo bhāgadheyāni vyabhajat sa gāyatrīm evāgnaye vasubhyaḥ prātaḥsavane 'bhajat triṣṭubham indrāya rudrebhyo madhyaṃdine jagatīṃ viśvebhyo devebhya ādityebhyas tṛtīyasavane",
+       "text": "Aitareyabrāhmaṇa"
+      }
+     ],
+     "forms": [
+      [
+       856,
+       "devebhyaḥ"
+      ],
+      [
+       218,
+       "brāhmaṇebhyaḥ"
+      ],
+      [
+       135,
+       "viśvebhyaḥ"
+      ],
+      [
+       87,
+       "ādityebhyaḥ"
+      ],
+      [
+       83,
+       "viprebhyaḥ"
+      ],
+      [
+       59,
+       "dvijebhyaḥ"
+      ],
+      [
+       59,
+       "manuṣyebhyaḥ"
+      ],
+      [
+       47,
+       "sarpebhyaḥ"
+      ]
+     ],
+     "lemmas": 447,
+     "n": 2765,
+     "segmentable": 2757
+    },
+    "Dat.Sing": {
+     "endings": [
+      [
+       14953,
+       "āya"
+      ],
+      [
+       50,
+       "e"
+      ],
+      [
+       23,
+       "asmai"
+      ],
+      [
+       1,
+       "ase"
+      ]
+     ],
+     "examples": [
+      {
+       "form": "indrāya",
+       "ref": "AĀ, 1, 2, 1",
+       "sent": "pra va indrāya bṛhata iti yad vai bṛhat tan mahan mahadvad rūpasamṛddham etasyāhno rūpam",
+       "text": "Aitareya-Āraṇyaka"
+      },
+      {
+       "form": "arthāya",
+       "ref": "ACint, 1",
+       "sent": "pavanapracalārthāya śeṣabhāgaṃ parityajet",
+       "text": "Abhinavacintāmaṇi"
+      },
+      {
+       "form": "rudrāya",
+       "ref": "AgniPur, 3",
+       "sent": "darśayāmāsa rudrāya strīrūpaṃ bhagavān hariḥ",
+       "text": "Agnipurāṇa"
+      }
+     ],
+     "forms": [
+      [
+       992,
+       "indrāya"
+      ],
+      [
+       355,
+       "arthāya"
+      ],
+      [
+       298,
+       "rudrāya"
+      ],
+      [
+       251,
+       "somāya"
+      ],
+      [
+       227,
+       "kāmāya"
+      ],
+      [
+       209,
+       "devāya"
+      ],
+      [
+       191,
+       "vināśāya"
+      ],
+      [
+       174,
+       "vadhāya"
+      ]
+     ],
+     "lemmas": 2839,
+     "n": 15053,
+     "segmentable": 15027
+    },
+    "Gen.Dual": {
+     "endings": [
+      [
+       2389,
+       "ayoḥ"
+      ],
+      [
+       64,
+       "oḥ"
+      ]
+     ],
+     "examples": [
+      {
+       "form": "ubhayayoḥ",
+       "ref": "AHS, Sū., 14",
+       "sent": "yavagodhūmam ubhayos tadyogyāhitakalpanam",
+       "text": "Aṣṭāṅgahṛdayasaṃhitā"
+      },
+      {
+       "form": "ubhayoḥ",
+       "ref": "AB, 3, 38",
+       "sent": "yayor ojasā skabhitā rajāṃsīti vaiṣṇuvāruṇīm ṛcaṃ śaṃsati viṣṇur vai yajñasya duriṣṭam pāti varuṇaḥ sviṣṭaṃ tayor ubhayor eva śāntyai",
+       "text": "Aitareyabrāhmaṇa"
+      },
+      {
+       "form": "mitrāvaruṇayoḥ",
+       "ref": "AB, 2, 25",
+       "sent": "tau sahaivendravāyū udajayatāṃ saha mitrāvaruṇau sahāśvinau ta eṣām ete yathojjitam bhakṣā indravāyvoḥ prathamo 'tha mitrāvaruṇayor athāśvinoḥ",
+       "text": "Aitareyabrāhmaṇa"
+      }
+     ],
+     "forms": [
+      [
+       184,
+       "ubhayayoḥ"
+      ],
+      [
+       63,
+       "ubhayoḥ"
+      ],
+      [
+       62,
+       "mitrāvaruṇayoḥ"
+      ],
+      [
+       53,
+       "pādayoḥ"
+      ],
+      [
+       36,
+       "putrayoḥ"
+      ],
+      [
+       32,
+       "siṃhayoḥ"
+      ],
+      [
+       30,
+       "sūryayoḥ"
+      ],
+      [
+       28,
+       "arthayoḥ"
+      ]
+     ],
+     "lemmas": 796,
+     "n": 2457,
+     "segmentable": 2453
+    },
+    "Gen.Plur": {
+     "endings": [
+      [
+       14856,
+       "ānām"
+      ],
+      [
+       6973,
+       "āṇām"
+      ],
+      [
+       110,
+       "eṣām"
+      ],
+      [
+       14,
+       "ām"
+      ],
+      [
+       1,
+       "asām"
+      ]
+     ],
+     "examples": [
+      {
+       "form": "devānām",
+       "ref": "AgniPur, 12",
+       "sent": "sarvasvabhūto devānāṃ bhūbhāraharaṇāya saḥ",
+       "text": "Agnipurāṇa"
+      },
+      {
+       "form": "lokānām",
+       "ref": "AĀ, 1, 1, 2",
+       "sent": "trayaḥ vai ime trivṛtaḥ lokāḥ eṣām eva lokānām abhijityai",
+       "text": "Aitareya-Āraṇyaka"
+      },
+      {
+       "form": "pāṇḍavānām",
+       "ref": "AgniPur, 14",
+       "sent": "pāṇḍavānāṃ śikhaṇḍī ca tayoryuddhaṃ babhūva ha",
+       "text": "Agnipurāṇa"
+      }
+     ],
+     "forms": [
+      [
+       2270,
+       "devānām"
+      ],
+      [
+       483,
+       "lokānām"
+      ],
+      [
+       477,
+       "pāṇḍavānām"
+      ],
+      [
+       418,
+       "putrāṇām"
+      ],
+      [
+       385,
+       "manuṣyāṇām"
+      ],
+      [
+       339,
+       "brāhmaṇānām"
+      ],
+      [
+       274,
+       "sattvānām"
+      ],
+      [
+       191,
+       "varṇānām"
+      ]
+     ],
+     "lemmas": 2804,
+     "n": 22010,
+     "segmentable": 21954
+    },
+    "Gen.Sing": {
+     "endings": [
+      [
+       41620,
+       "asya"
+      ],
+      [
+       17,
+       "aḥ"
+      ],
+      [
+       1,
+       "a"
+      ],
+      [
+       1,
+       "asaḥ"
+      ]
+     ],
+     "examples": [
+      {
+       "form": "yajñasya",
+       "ref": "AB, 1, 1",
+       "sent": "ete vai yajñasya antye tanvau yat agniḥ ca viṣṇuḥ ca",
+       "text": "Aitareyabrāhmaṇa"
+      },
+      {
+       "form": "indrasya",
+       "ref": "AĀ, 1, 2, 1",
+       "sent": "tvaṃ soma kratubhiḥ sukratur bhūs tvaṃ vṛṣā vṛṣatvebhir mahitveti vṛṣaṇvad vā indrasya rūpam aindram etad ahar etasyāhno rūpam",
+       "text": "Aitareya-Āraṇyaka"
+      },
+      {
+       "form": "devasya",
+       "ref": "AĀ, 2, 7",
+       "sent": "vāṅ me manasi pratiṣṭhitā mano me vāci pratiṣṭhitam āvir āvīr ma edhi devasya ma āṇī sthaḥ śrutaṃ me mā prahāsīr anenādhītenāhorātrān saṃdadhāmy ṛtaṃ vadiṣyāmi satyaṃ vadiṣyāmi tan mām avatu tad vaktāram avatv avatu mām…",
+       "text": "Aitareya-Āraṇyaka"
+      }
+     ],
+     "forms": [
+      [
+       1240,
+       "yajñasya"
+      ],
+      [
+       998,
+       "indrasya"
+      ],
+      [
+       892,
+       "devasya"
+      ],
+      [
+       702,
+       "lokasya"
+      ],
+      [
+       562,
+       "putrasya"
+      ],
+      [
+       523,
+       "brāhmaṇasya"
+      ],
+      [
+       488,
+       "somasya"
+      ],
+      [
+       445,
+       "rāmasya"
+      ]
+     ],
+     "lemmas": 5168,
+     "n": 41773,
+     "segmentable": 41639
+    },
+    "Ins.Dual": {
+     "endings": [
+      [
+       1731,
+       "ābhyām"
+      ]
+     ],
+     "examples": [
+      {
+       "form": "hastābhyām",
+       "ref": "AgniPur, 250",
+       "sent": "ubhābhyāmatha hastābhyāṃ kuryāttasya nipātanaṃ",
+       "text": "Agnipurāṇa"
+      },
+      {
+       "form": "karābhyām",
+       "ref": "ArthaŚ, 1, 13",
+       "sent": "sarvaguṇasampannaścāyaṃ rājā śrūyate na cāsya kaścid guṇo dṛśyate yaḥ paurajānapadān daṇḍakarābhyāṃ pīḍayati iti",
+       "text": "Arthaśāstra"
+      },
+      {
+       "form": "bhujābhyām",
+       "ref": "AgniPur, 248",
+       "sent": "bhujābhyāmatra kuñjābhyāṃ prakoṣṭhābhyāṃ śubhavrata",
+       "text": "Agnipurāṇa"
+      }
+     ],
+     "forms": [
+      [
+       206,
+       "hastābhyām"
+      ],
+      [
+       69,
+       "karābhyām"
+      ],
+      [
+       65,
+       "bhujābhyām"
+      ],
+      [
+       37,
+       "pādābhyām"
+      ],
+      [
+       34,
+       "yamābhyām"
+      ],
+      [
+       28,
+       "karṇābhyām"
+      ],
+      [
+       28,
+       "rātrābhyām"
+      ],
+      [
+       22,
+       "pakṣābhyām"
+      ]
+     ],
+     "lemmas": 580,
+     "n": 1733,
+     "segmentable": 1731
+    },
+    "Ins.Plur": {
+     "endings": [
+      [
+       39982,
+       "aiḥ"
+      ],
+      [
+       510,
+       "ebhiḥ"
+      ],
+      [
+       1,
+       "abhiḥ"
+      ]
+     ],
+     "examples": [
+      {
+       "form": "śaraiḥ",
+       "ref": "AgniPur, 7",
+       "sent": "rāmaṃ rāmo 'pi yuyudhe śarair vivyādha rākṣasān",
+       "text": "Agnipurāṇa"
+      },
+      {
+       "form": "devaiḥ",
+       "ref": "AgniPur, 3",
+       "sent": "aprāpyāthāmṛtaṃ daityā devair yuddhe nipātitāḥ",
+       "text": "Agnipurāṇa"
+      },
+      {
+       "form": "guṇaiḥ",
+       "ref": "ArthaŚ, 1, 8",
+       "sent": "anyaiḥ amātya guṇaiḥ a yuktāḥ hi ete",
+       "text": "Arthaśāstra"
+      }
+     ],
+     "forms": [
+      [
+       1485,
+       "śaraiḥ"
+      ],
+      [
+       792,
+       "devaiḥ"
+      ],
+      [
+       716,
+       "guṇaiḥ"
+      ],
+      [
+       647,
+       "rasaiḥ"
+      ],
+      [
+       603,
+       "bāṇaiḥ"
+      ],
+      [
+       550,
+       "dravaiḥ"
+      ],
+      [
+       491,
+       "gaṇaiḥ"
+      ],
+      [
+       360,
+       "ādyaiḥ"
+      ]
+     ],
+     "lemmas": 4800,
+     "n": 40578,
+     "segmentable": 40493
+    },
+    "Ins.Sing": {
+     "endings": [
+      [
+       29524,
+       "ena"
+      ],
+      [
+       14680,
+       "eṇa"
+      ],
+      [
+       63,
+       "ā"
+      ],
+      [
+       2,
+       "enā"
+      ]
+     ],
+     "examples": [
+      {
+       "form": "yogena",
+       "ref": "AgniPur, 248",
+       "sent": "anena vidhiyogena sampuṭaṃ parikīrtitaṃ",
+       "text": "Agnipurāṇa"
+      },
+      {
+       "form": "kālena",
+       "ref": "AvŚat, 11",
+       "sent": "bhagavān āha kiṃ manyadhve bhikṣavo yo 'sau tena kālena tena samayena sārthavāho babhūva ahaṃ saḥ",
+       "text": "Avadānaśataka"
+      },
+      {
+       "form": "raseṇa",
+       "ref": "ACint, 2",
+       "sent": "śuklavastrāntare kṣiptvā rasena bhāvayed budhaḥ",
+       "text": "Abhinavacintāmaṇi"
+      }
+     ],
+     "forms": [
+      [
+       786,
+       "yogena"
+      ],
+      [
+       729,
+       "kālena"
+      ],
+      [
+       686,
+       "raseṇa"
+      ],
+      [
+       565,
+       "dharmeṇa"
+      ],
+      [
+       559,
+       "aṃśena"
+      ],
+      [
+       466,
+       "vegena"
+      ],
+      [
+       425,
+       "mantreṇa"
+      ],
+      [
+       410,
+       "śabdena"
+      ]
+     ],
+     "lemmas": 4879,
+     "n": 44411,
+     "segmentable": 44269
+    },
+    "Loc.Dual": {
+     "endings": [
+      [
+       1170,
+       "ayoḥ"
+      ],
+      [
+       40,
+       "oḥ"
+      ]
+     ],
+     "examples": [
+      {
+       "form": "pādayoḥ",
+       "ref": "AB, 8, 24",
+       "sent": "agnir vā eṣa vaiśvānaraḥ pañcamenir yat purohitas tasya vācy evaikā menir bhavati pādayor ekā tvacy ekā hṛdaya ekopastha ekā tābhir jvalantībhir dīpyamānābhir upodeti rājānaṃ sa yad āha kva bhagavo 'vātsīs tṛṇāny asmā ā…",
+       "text": "Aitareyabrāhmaṇa"
+      },
+      {
+       "form": "pārśvayoḥ",
+       "ref": "ArthaŚ, 10, 2",
+       "sent": "purastān nāyakaḥ madhye kalatraṃ svāmī ca pārśvayor aśvā bāhūtsāraḥ cakrānteṣu hastinaḥ prasāravṛddhir vā paścāt senāpatir yāyānniviśeta",
+       "text": "Arthaśāstra"
+      },
+      {
+       "form": "pakṣayoḥ",
+       "ref": "BaudhDhS, 4, 5",
+       "sent": "pakṣayor upavāsau dvau taddhi cāndrāyaṇaṃ smṛtam",
+       "text": "Baudhāyanadharmasūtra"
+      }
+     ],
+     "forms": [
+      [
+       199,
+       "pādayoḥ"
+      ],
+      [
+       68,
+       "pārśvayoḥ"
+      ],
+      [
+       50,
+       "pakṣayoḥ"
+      ],
+      [
+       46,
+       "karṇayoḥ"
+      ],
+      [
+       43,
+       "hastayoḥ"
+      ],
+      [
+       39,
+       "ubhayayoḥ"
+      ],
+      [
+       39,
+       "ubhayoḥ"
+      ],
+      [
+       33,
+       "antayoḥ"
+      ]
+     ],
+     "lemmas": 340,
+     "n": 1210,
+     "segmentable": 1210
+    },
+    "Loc.Plur": {
+     "endings": [
+      [
+       10785,
+       "eṣu"
+      ]
+     ],
+     "examples": [
+      {
+       "form": "lokeṣu",
+       "ref": "AĀ, 1, 2, 3",
+       "sent": "ayam vai preṅkhaḥ yaḥ ayam pavate eṣa hi eṣu lokeṣu preṅkhate iti",
+       "text": "Aitareya-Āraṇyaka"
+      },
+      {
+       "form": "deveṣu",
+       "ref": "AĀ, 2, 3, 4",
+       "sent": "yo ha vai yajñe yajñaṃ vedāhany ahar deveṣu devam adhyūḍhaṃ sa saṃprativit",
+       "text": "Aitareya-Āraṇyaka"
+      },
+      {
+       "form": "manuṣyeṣu",
+       "ref": "AbhidhKoBh zu AbhidhKo, 1, 43.2",
+       "sent": "dūrācchabdaṃ śṛṇoti sati ca prāptaviṣayatve divyaṃ cakṣuḥśrotramiha manuṣyeṣu dhyāyināṃ nopajāyeta ghrāṇādivat",
+       "text": "Abhidharmakośabhāṣya"
+      }
+     ],
+     "forms": [
+      [
+       752,
+       "lokeṣu"
+      ],
+      [
+       456,
+       "deveṣu"
+      ],
+      [
+       178,
+       "manuṣyeṣu"
+      ],
+      [
+       152,
+       "artheṣu"
+      ],
+      [
+       144,
+       "dharmeṣu"
+      ],
+      [
+       131,
+       "rogeṣu"
+      ],
+      [
+       128,
+       "yajñeṣu"
+      ],
+      [
+       109,
+       "kāleṣu"
+      ]
+     ],
+     "lemmas": 2063,
+     "n": 10823,
+     "segmentable": 10785
+    },
+    "Loc.Sing": {
+     "endings": [
+      [
+       69241,
+       "e"
+      ],
+      [
+       60,
+       "asmin"
+      ],
+      [
+       2,
+       "asi"
+      ],
+      [
+       1,
+       "aḥ"
+      ],
+      [
+       1,
+       "i"
+      ],
+      [
+       1,
+       "me"
+      ]
+     ],
+     "examples": [
+      {
+       "form": "loke",
+       "ref": "AbhCint, 2",
+       "sent": "ratyādeḥ sthāyino loke tāni cennāṭyakāvyayoḥ",
+       "text": "Abhidhānacintāmaṇi"
+      },
+      {
+       "form": "kāle",
+       "ref": "AbhCint, 2",
+       "sent": "tulyanaktaṃdine kāle viṣuvadviṣuvaṃ ca tat",
+       "text": "Abhidhānacintāmaṇi"
+      },
+      {
+       "form": "raṇe",
+       "ref": "AbhCint, 2",
+       "sent": "pānagoṣṭhyāmuccatālaṃ raṇe vīrajayantikā",
+       "text": "Abhidhānacintāmaṇi"
+      }
+     ],
+     "forms": [
+      [
+       3006,
+       "loke"
+      ],
+      [
+       2151,
+       "kāle"
+      ],
+      [
+       1916,
+       "raṇe"
+      ],
+      [
+       1686,
+       "ante"
+      ],
+      [
+       1265,
+       "arthe"
+      ],
+      [
+       747,
+       "deśe"
+      ],
+      [
+       632,
+       "yajñe"
+      ],
+      [
+       610,
+       "tale"
+      ]
+     ],
+     "lemmas": 6650,
+     "n": 69424,
+     "segmentable": 69306
+    },
+    "Nom.Dual": {
+     "endings": [
+      [
+       10652,
+       "au"
+      ],
+      [
+       469,
+       "ā"
+      ],
+      [
+       1,
+       "asā"
+      ],
+      [
+       1,
+       "aḥ"
+      ],
+      [
+       1,
+       "e"
+      ],
+      [
+       1,
+       "hau"
+      ]
+     ],
+     "examples": [
+      {
+       "form": "putrau",
+       "ref": "AgniPur, 9",
+       "sent": "rāmo 'sya lakṣmaṇaḥ putrau vanavāsaṃ gatau varau",
+       "text": "Agnipurāṇa"
+      },
+      {
+       "form": "vīrau",
+       "ref": "AgniPur, 18",
+       "sent": "tatstotraṃ cakratur vīrau rājābhūjjanarañjanāt",
+       "text": "Agnipurāṇa"
+      },
+      {
+       "form": "pādau",
+       "ref": "AgniPur, 248",
+       "sent": "bāhyāṅgulisthitau pādau stabdhajānubalāvubhau",
+       "text": "Agnipurāṇa"
+      }
+     ],
+     "forms": [
+      [
+       243,
+       "putrau"
+      ],
+      [
+       175,
+       "vīrau"
+      ],
+      [
+       161,
+       "pādau"
+      ],
+      [
+       110,
+       "apānau"
+      ],
+      [
+       103,
+       "sutau"
+      ],
+      [
+       102,
+       "hastau"
+      ],
+      [
+       102,
+       "mitrāvaruṇau"
+      ],
+      [
+       102,
+       "yamau"
+      ]
+     ],
+     "lemmas": 2989,
+     "n": 11146,
+     "segmentable": 11126
+    },
+    "Nom.Plur": {
+     "endings": [
+      [
+       82137,
+       "āḥ"
+      ],
+      [
+       1084,
+       "āsaḥ"
+      ],
+      [
+       731,
+       "e"
+      ],
+      [
+       9,
+       "ā"
+      ],
+      [
+       7,
+       "asaḥ"
+      ],
+      [
+       1,
+       "a"
+      ]
+     ],
+     "examples": [
+      {
+       "form": "devāḥ",
+       "ref": "AbhCint, 1",
+       "sent": "pañcendriyā eva devā narā nairayikā api",
+       "text": "Abhidhānacintāmaṇi"
+      },
+      {
+       "form": "putrāḥ",
+       "ref": "AgniPur, 12",
+       "sent": "hiraṇyakaśipoḥ putrāḥ ṣaḍgarbhā yoganidrayā",
+       "text": "Agnipurāṇa"
+      },
+      {
+       "form": "lokāḥ",
+       "ref": "AgniPur, 2",
+       "sent": "samudropaplutāstatra lokā bhūrādikā mune",
+       "text": "Agnipurāṇa"
+      }
+     ],
+     "forms": [
+      [
+       4489,
+       "devāḥ"
+      ],
+      [
+       1113,
+       "putrāḥ"
+      ],
+      [
+       855,
+       "lokāḥ"
+      ],
+      [
+       751,
+       "pāṇḍavāḥ"
+      ],
+      [
+       742,
+       "guṇāḥ"
+      ],
+      [
+       685,
+       "brāhmaṇāḥ"
+      ],
+      [
+       636,
+       "asurāḥ"
+      ],
+      [
+       617,
+       "janāḥ"
+      ]
+     ],
+     "lemmas": 8443,
+     "n": 84177,
+     "segmentable": 83971
+    },
+    "Nom.Sing": {
+     "endings": [
+      [
+       289520,
+       "aḥ"
+      ],
+      [
+       59,
+       "a"
+      ],
+      [
+       5,
+       "ā"
+      ],
+      [
+       4,
+       "āḥ"
+      ],
+      [
+       3,
+       ""
+      ],
+      [
+       3,
+       "am"
+      ]
+     ],
+     "examples": [
+      {
+       "form": "putraḥ",
+       "ref": "AgniPur, 5",
+       "sent": "kaikeyyāṃ bharataḥ putraḥ sumitrāyāṃ ca lakṣmaṇaḥ",
+       "text": "Agnipurāṇa"
+      },
+      {
+       "form": "indraḥ",
+       "ref": "AbhCint, 2",
+       "sent": "indro harirduścyavano 'cyutāgrajo vajrī viḍaujā maghavānpuraṃdaraḥ",
+       "text": "Abhidhānacintāmaṇi"
+      },
+      {
+       "form": "arthaḥ",
+       "ref": "AbhCint, 2",
+       "sent": "hiraṇyārtho nidhānaṃ tu kunābhiḥ śevadhirnidhiḥ",
+       "text": "Abhidhānacintāmaṇi"
+      }
+     ],
+     "forms": [
+      [
+       3151,
+       "putraḥ"
+      ],
+      [
+       3072,
+       "indraḥ"
+      ],
+      [
+       2398,
+       "arthaḥ"
+      ],
+      [
+       2204,
+       "devaḥ"
+      ],
+      [
+       1954,
+       "puruṣaḥ"
+      ],
+      [
+       1945,
+       "dharmaḥ"
+      ],
+      [
+       1906,
+       "rasaḥ"
+      ],
+      [
+       1866,
+       "kāmaḥ"
+      ]
+     ],
+     "lemmas": 23086,
+     "n": 290519,
+     "segmentable": 289596
+    },
+    "Voc.Dual": {
+     "endings": [
+      [
+       390,
+       "ā"
+      ],
+      [
+       207,
+       "au"
+      ],
+      [
+       1,
+       "āḥ"
+      ]
+     ],
+     "examples": [
+      {
+       "form": "mitrāvaruṇā",
+       "ref": "AĀ, 5, 2, 2",
+       "sent": "iṣaṃ no mitrāvaruṇā kartaneḍāṃ pīvarīm iṣaṃ kṛṇuhī na indra",
+       "text": "Aitareya-Āraṇyaka"
+      },
+      {
+       "form": "nāsatyā",
+       "ref": "AB, 5, 16",
+       "sent": "ā vāyo bhūṣa śucipā upa naḥ pra yābhir yāsi dāśvāṃsam acchā no niyudbhiḥ śatinībhir adhvaraṃ pra sotā jīro adhvareṣv asthād ye vāyava indramādanāso yā vāṃ śataṃ niyuto yāḥ sahasraṃ pra yad vām mitrāvaruṇā spūrdhann ā go…",
+       "text": "Aitareyabrāhmaṇa"
+      },
+      {
+       "form": "indrāvaruṇā",
+       "ref": "AB, 6, 12",
+       "sent": "indrāvaruṇā sutapāv imaṃ sutam iti maitrāvaruṇo yajati yuvo ratho adhvaraṃ devavītaya iti bahūni vāha tad ṛbhūṇām rūpam",
+       "text": "Aitareyabrāhmaṇa"
+      }
+     ],
+     "forms": [
+      [
+       76,
+       "mitrāvaruṇā"
+      ],
+      [
+       58,
+       "nāsatyā"
+      ],
+      [
+       41,
+       "indrāvaruṇā"
+      ],
+      [
+       33,
+       "mitrāvaruṇau"
+      ],
+      [
+       32,
+       "dasrā"
+      ],
+      [
+       23,
+       "narā"
+      ],
+      [
+       16,
+       "indrāsomā"
+      ],
+      [
+       15,
+       "agnīṣomā"
+      ]
+     ],
+     "lemmas": 120,
+     "n": 599,
+     "segmentable": 598
+    },
+    "Voc.Plur": {
+     "endings": [
+      [
+       2820,
+       "āḥ"
+      ],
+      [
+       177,
+       "āsaḥ"
+      ],
+      [
+       68,
+       "e"
+      ],
+      [
+       3,
+       "ā"
+      ]
+     ],
+     "examples": [
+      {
+       "form": "devāḥ",
+       "ref": "AB, 3, 31",
+       "sent": "viśve devāḥ śṛṇutemaṃ havam ma iti vaiśvadevam ukthaṃ śastvā vaiśvadevyā yajati yathābhāgaṃ tad devatāḥ prīṇāti",
+       "text": "Aitareyabrāhmaṇa"
+      },
+      {
+       "form": "dvijāḥ",
+       "ref": "BhāgPur, 1, 3",
+       "sent": "avatārā hy asaṃkhyeyā hareḥ sattvanidherdvijāḥ",
+       "text": "Bhāgavatapurāṇa"
+      },
+      {
+       "form": "viprāḥ",
+       "ref": "AĀ, 5, 2, 2",
+       "sent": "pra va indrāya vṛtrahantamāya viprā gāthaṃ gāyata yaj jujoṣat",
+       "text": "Aitareya-Āraṇyaka"
+      }
+     ],
+     "forms": [
+      [
+       437,
+       "devāḥ"
+      ],
+      [
+       239,
+       "dvijāḥ"
+      ],
+      [
+       156,
+       "viprāḥ"
+      ],
+      [
+       132,
+       "dvijottamāḥ"
+      ],
+      [
+       115,
+       "sattamāḥ"
+      ],
+      [
+       96,
+       "putrāḥ"
+      ],
+      [
+       81,
+       "puṃgavāḥ"
+      ],
+      [
+       76,
+       "suvratāḥ"
+      ]
+     ],
+     "lemmas": 345,
+     "n": 3069,
+     "segmentable": 3068
+    },
+    "Voc.Sing": {
+     "endings": [
+      [
+       31369,
+       "aiḥ"
+      ],
+      [
+       9812,
+       "a"
+      ],
+      [
+       2,
+       "e"
+      ],
+      [
+       1,
+       "ā"
+      ],
+      [
+       1,
+       "āḥ"
+      ]
+     ],
+     "examples": [
+      {
+       "form": "bhārataiḥ",
+       "ref": "BhāgPur, 3, 11",
+       "sent": "ayaṃ tu kathitaḥ kalpo dvitīyasyāpi bhārata",
+       "text": "Bhāgavatapurāṇa"
+      },
+      {
+       "form": "indra",
+       "ref": "AĀ, 1, 1, 4",
+       "sent": "indrā yāhi citrabhānav indrā yāhi dhiyeṣita indrā yāhi tūtujāna ity āyāhy āyāhīti śaṃsati",
+       "text": "Aitareya-Āraṇyaka"
+      },
+      {
+       "form": "rājaiḥ",
+       "ref": "BhāgPur, 8, 8",
+       "sent": "udatiṣṭhan mahārāja puruṣaḥ paramādbhutaḥ",
+       "text": "Bhāgavatapurāṇa"
+      }
+     ],
+     "forms": [
+      [
+       2201,
+       "bhārataiḥ"
+      ],
+      [
+       1640,
+       "indra"
+      ],
+      [
+       1577,
+       "rājaiḥ"
+      ],
+      [
+       1272,
+       "tātaiḥ"
+      ],
+      [
+       1132,
+       "ṛṣabhaiḥ"
+      ],
+      [
+       1111,
+       "indraiḥ"
+      ],
+      [
+       886,
+       "nṛpaiḥ"
+      ],
+      [
+       801,
+       "deva"
+      ]
+     ],
+     "lemmas": 2317,
+     "n": 41222,
+     "segmentable": 41185
+    }
+   },
+   "cellsAttested": 24,
+   "n": 921123,
+   "segmentablePct": 99.7
+  },
+  "Neut": {
+   "cells": {
+    "Abl.Dual": {
+     "endings": [
+      [
+       80,
+       "ābhyām"
+      ]
+     ],
+     "examples": [
+      {
+       "form": "netrābhyām",
+       "ref": "HV, 20",
+       "sent": "netrābhyāṃ vāri susrāva daśadhā dyotayad diśaḥ",
+       "text": "Harivaṃśa"
+      },
+      {
+       "form": "kuṇḍalābhyām",
+       "ref": "MBh, 1, 2",
+       "sent": "karṇasya parimoṣo 'tra kuṇḍalābhyāṃ puraṃdarāt",
+       "text": "Mahābhārata"
+      },
+      {
+       "form": "śrotrābhyām",
+       "ref": "GarPur, 1, 2",
+       "sent": "padbhyāṃ yasya kṣitirjātā śrotrābhyāṃ ca tathā diśaḥ",
+       "text": "Garuḍapurāṇa"
+      }
+     ],
+     "forms": [
+      [
+       9,
+       "netrābhyām"
+      ],
+      [
+       5,
+       "kuṇḍalābhyām"
+      ],
+      [
+       5,
+       "śrotrābhyām"
+      ],
+      [
+       3,
+       "matasnābhyām"
+      ],
+      [
+       3,
+       "prapadābhyām"
+      ],
+      [
+       3,
+       "pārśvābhyām"
+      ],
+      [
+       2,
+       "adhiṣavaṇābhyām"
+      ],
+      [
+       2,
+       "duḥkhābhyām"
+      ]
+     ],
+     "lemmas": 54,
+     "n": 80,
+     "segmentable": 80
+    },
+    "Abl.Plur": {
+     "endings": [
+      [
+       784,
+       "ebhyaḥ"
+      ],
+      [
+       3,
+       "ā"
+      ],
+      [
+       1,
+       "ebhyas"
+      ],
+      [
+       1,
+       "yā"
+      ]
+     ],
+     "examples": [
+      {
+       "form": "pāpebhyaḥ",
+       "ref": "BaudhDhS, 1, 2",
+       "sent": "vaiśvānarīm vrātapatām pavitreṣṭim tathā eva ca ṛtau ṛtau prayuñjānaḥ pāpebhyaḥ vipramucyate",
+       "text": "Baudhāyanadharmasūtra"
+      },
+      {
+       "form": "bhūtebhyaḥ",
+       "ref": "AĀ, 2, 1, 8",
+       "sent": "amṛto ha vā amuṣmiṃl loke sambhavaty amṛtaḥ sarvebhyo bhūtebhyo dadṛśe ya evaṃ veda ya evaṃ veda",
+       "text": "Aitareya-Āraṇyaka"
+      },
+      {
+       "form": "aṅgebhyaḥ",
+       "ref": "AB, 4, 22",
+       "sent": "saṃvatsaro hy etad ahar āpnoti saṃvatsaraṃ hy etad ahar āpnuvanty eṣa ha vai saṃvatsareṇa pāpmānam apahata eṣa viṣuvatāṅgebhyo haiva māsaiḥ pāpmānam apahate śīrṣṇo viṣuvatā",
+       "text": "Aitareyabrāhmaṇa"
+      }
+     ],
+     "forms": [
+      [
+       95,
+       "pāpebhyaḥ"
+      ],
+      [
+       49,
+       "bhūtebhyaḥ"
+      ],
+      [
+       34,
+       "aṅgebhyaḥ"
+      ],
+      [
+       18,
+       "gṛhebhyaḥ"
+      ],
+      [
+       17,
+       "āsanebhyaḥ"
+      ],
+      [
+       15,
+       "indriyebhyaḥ"
+      ],
+      [
+       14,
+       "asurarakṣasebhyaḥ"
+      ],
+      [
+       14,
+       "gātrebhyaḥ"
+      ]
+     ],
+     "lemmas": 243,
+     "n": 789,
+     "segmentable": 789
+    },
+    "Abl.Sing": {
+     "endings": [
+      [
+       23890,
+       "āt"
+      ],
+      [
+       453,
+       "ataḥ"
+      ],
+      [
+       45,
+       "asmāt"
+      ],
+      [
+       6,
+       "asaḥ"
+      ],
+      [
+       2,
+       "ān"
+      ]
+     ],
+     "examples": [
+      {
+       "form": "tvāt",
+       "ref": "AbhidhKo, 1",
+       "sent": "vivādamūlasaṃsārahetutvāt kramakāraṇāt",
+       "text": "Abhidharmakośa"
+      },
+      {
+       "form": "bhayāt",
+       "ref": "AgniPur, 12",
+       "sent": "vasudevaḥ kaṃsabhayād yaśodāśayane 'nayat",
+       "text": "Agnipurāṇa"
+      },
+      {
+       "form": "balāt",
+       "ref": "AgniPur, 9",
+       "sent": "rāmapatnī jānakī tvaṃ rāvaṇena hṛtā balāt",
+       "text": "Agnipurāṇa"
+      }
+     ],
+     "forms": [
+      [
+       3421,
+       "tvāt"
+      ],
+      [
+       738,
+       "bhayāt"
+      ],
+      [
+       533,
+       "balāt"
+      ],
+      [
+       447,
+       "darśanāt"
+      ],
+      [
+       435,
+       "vacanāt"
+      ],
+      [
+       337,
+       "mukhāt"
+      ],
+      [
+       301,
+       "kāraṇāt"
+      ],
+      [
+       294,
+       "tattvāt"
+      ]
+     ],
+     "lemmas": 2882,
+     "n": 24434,
+     "segmentable": 24396
+    },
+    "Acc.Dual": {
+     "endings": [
+      [
+       1835,
+       "e"
+      ],
+      [
+       2,
+       "ī"
+      ]
+     ],
+     "examples": [
+      {
+       "form": "kuṇḍale",
+       "ref": "BaudhDhS, 2, 6",
+       "sent": "vaiṇavaṃ daṇḍaṃ dhārayed rukmakuṇḍale ca",
+       "text": "Baudhāyanadharmasūtra"
+      },
+      {
+       "form": "pavitre",
+       "ref": "BaudhDhS, 2, 8",
+       "sent": "pavitre kṛtvādbhir mārjayati",
+       "text": "Baudhāyanadharmasūtra"
+      },
+      {
+       "form": "netre",
+       "ref": "AmaruŚ, 1",
+       "sent": "līlātāmarasāhato 'nyavanitāniḥśaṅkadaṣṭādharaḥ kaścitkesaradūṣitekṣaṇa iva vyāmīlya netre sthitaḥ",
+       "text": "Amaruśataka"
+      }
+     ],
+     "forms": [
+      [
+       101,
+       "kuṇḍale"
+      ],
+      [
+       72,
+       "pavitre"
+      ],
+      [
+       62,
+       "netre"
+      ],
+      [
+       55,
+       "havirdhāne"
+      ],
+      [
+       42,
+       "nayane"
+      ],
+      [
+       41,
+       "rātre"
+      ],
+      [
+       33,
+       "duḥkhe"
+      ],
+      [
+       27,
+       "śubhe"
+      ]
+     ],
+     "lemmas": 596,
+     "n": 1852,
+     "segmentable": 1837
+    },
+    "Acc.Plur": {
+     "endings": [
+      [
+       10562,
+       "āni"
+      ],
+      [
+       5209,
+       "āṇi"
+      ],
+      [
+       1608,
+       "ā"
+      ],
+      [
+       7,
+       "āṃsi"
+      ],
+      [
+       1,
+       "e"
+      ]
+     ],
+     "examples": [
+      {
+       "form": "varṣāṇi",
+       "ref": "AgniPur, 6",
+       "sent": "rāmasya ca vane vāsaṃ nava varṣāṇi pañca ca",
+       "text": "Agnipurāṇa"
+      },
+      {
+       "form": "bhūtāni",
+       "ref": "AĀ, 2, 2, 2",
+       "sent": "eṣa vai padam eṣa hīmāni sarvāṇi bhūtāni pādi sa yad imāni sarvāṇi bhūtāni pādi tasmāt padaṃ tasmāt padam ity ācakṣata etam eva santam",
+       "text": "Aitareya-Āraṇyaka"
+      },
+      {
+       "form": "viśvā",
+       "ref": "AB, 1, 9",
+       "sent": "ā viśva devam sat patim yaḥ imā viśvā jātāni iti savituḥ gāyatryau",
+       "text": "Aitareyabrāhmaṇa"
+      }
+     ],
+     "forms": [
+      [
+       404,
+       "varṣāṇi"
+      ],
+      [
+       367,
+       "bhūtāni"
+      ],
+      [
+       355,
+       "viśvā"
+      ],
+      [
+       328,
+       "pattrāṇi"
+      ],
+      [
+       259,
+       "rūpāṇi"
+      ],
+      [
+       254,
+       "phalāni"
+      ],
+      [
+       227,
+       "ratnāni"
+      ],
+      [
+       214,
+       "astrāṇi"
+      ]
+     ],
+     "lemmas": 2332,
+     "n": 17427,
+     "segmentable": 17387
+    },
+    "Acc.Sing": {
+     "endings": [
+      [
+       125536,
+       "am"
+      ],
+      [
+       13,
+       "aḥ"
+      ],
+      [
+       1,
+       ""
+      ],
+      [
+       1,
+       "ad"
+      ],
+      [
+       1,
+       "tam"
+      ]
+     ],
+     "examples": [
+      {
+       "form": "tvam",
+       "ref": "ACint, 2",
+       "sent": "puṭitaṃ cāndhamūṣāyāṃ sūto bhasmatvam āpnuyāt",
+       "text": "Abhinavacintāmaṇi"
+      },
+      {
+       "form": "vacanam",
+       "ref": "AgniPur, 6",
+       "sent": "pitrādivacanaṃ śrutvā tathetyuktvā sa rāghavaḥ",
+       "text": "Agnipurāṇa"
+      },
+      {
+       "form": "vākyam",
+       "ref": "AgniPur, 7",
+       "sent": "rāmaṃ surūpaṃ dṛṣṭvā sā kāminī vākyamabravīt",
+       "text": "Agnipurāṇa"
+      }
+     ],
+     "forms": [
+      [
+       1951,
+       "tvam"
+      ],
+      [
+       1748,
+       "vacanam"
+      ],
+      [
+       1723,
+       "vākyam"
+      ],
+      [
+       1413,
+       "phalam"
+      ],
+      [
+       1256,
+       "annam"
+      ],
+      [
+       1182,
+       "rūpam"
+      ],
+      [
+       1026,
+       "balam"
+      ],
+      [
+       947,
+       "vanam"
+      ]
+     ],
+     "lemmas": 9509,
+     "n": 125796,
+     "segmentable": 125552
+    },
+    "Dat.Dual": {
+     "endings": [
+      [
+       16,
+       "ābhyām"
+      ]
+     ],
+     "examples": [
+      {
+       "form": "havirdhānābhyām",
+       "ref": "AB, 1, 29",
+       "sent": "havirdhānābhyām prohyamāṇābhyām anubrūhi iti āha adhvaryuḥ",
+       "text": "Aitareyabrāhmaṇa"
+      },
+      {
+       "form": "netrābhyām",
+       "ref": "GarPur, 1, 39",
+       "sent": "oṃ bhāṃ netrābhyāṃ vauṣaṭ",
+       "text": "Garuḍapurāṇa"
+      },
+      {
+       "form": "rūpābhyām",
+       "ref": "GB, 1, 3, 13",
+       "sent": "ānaḍuhena śakṛtpiṇḍenāgnyāyatanāni parilipya homyam upasādyāgniṃ nirmathya prāṇāpānābhyāṃ svāhā samānavyānābhyāṃ svāhodānarūpābhyāṃ svāheti juhuyāt",
+       "text": "Gopathabrāhmaṇa"
+      }
+     ],
+     "forms": [
+      [
+       7,
+       "havirdhānābhyām"
+      ],
+      [
+       2,
+       "netrābhyām"
+      ],
+      [
+       2,
+       "rūpābhyām"
+      ],
+      [
+       1,
+       "ahorātrābhyām"
+      ],
+      [
+       1,
+       "apriyābhyām"
+      ],
+      [
+       1,
+       "dhānyābhyām"
+      ],
+      [
+       1,
+       "dvārābhyām"
+      ],
+      [
+       1,
+       "gatāgatābhyām"
+      ]
+     ],
+     "lemmas": 8,
+     "n": 16,
+     "segmentable": 16
+    },
+    "Dat.Plur": {
+     "endings": [
+      [
+       244,
+       "ebhyaḥ"
+      ]
+     ],
+     "examples": [
+      {
+       "form": "bhūtebhyaḥ",
+       "ref": "AĀ, 2, 1, 3",
+       "sent": "hiraṇmayaḥ ha vai amuṣmin loke sambhavati hiraṇmayaḥ sarvebhyaḥ bhūtebhyaḥ dadṛśe yaḥ evam veda",
+       "text": "Aitareya-Āraṇyaka"
+      },
+      {
+       "form": "nakṣatrebhyaḥ",
+       "ref": "AVP, 19, 27",
+       "sent": "dive cakṣuṣe nakṣatrebhyaḥ sūryāyādhipataye svāhā",
+       "text": "Atharvaveda (Paippalāda)"
+      },
+      {
+       "form": "daivatebhyaḥ",
+       "ref": "BaudhDhS, 3, 8",
+       "sent": "paurṇamāsyāṃ sthālīpākasya juhoty agnaye yā tithiḥ syān nakṣatrebhyaś ca sadaivatebhyaḥ",
+       "text": "Baudhāyanadharmasūtra"
+      }
+     ],
+     "forms": [
+      [
+       80,
+       "bhūtebhyaḥ"
+      ],
+      [
+       17,
+       "nakṣatrebhyaḥ"
+      ],
+      [
+       9,
+       "daivatebhyaḥ"
+      ],
+      [
+       9,
+       "purāṇebhyaḥ"
+      ],
+      [
+       9,
+       "pātrebhyaḥ"
+      ],
+      [
+       9,
+       "ukthebhyaḥ"
+      ],
+      [
+       8,
+       "aṅgebhyaḥ"
+      ],
+      [
+       8,
+       "viśvebhyaḥ"
+      ]
+     ],
+     "lemmas": 60,
+     "n": 244,
+     "segmentable": 244
+    },
+    "Dat.Sing": {
+     "endings": [
+      [
+       4583,
+       "āya"
+      ],
+      [
+       9,
+       "asmai"
+      ],
+      [
+       1,
+       "e"
+      ]
+     ],
+     "examples": [
+      {
+       "form": "tvāya",
+       "ref": "AB, 1, 4",
+       "sent": "triṣṭubhau bhavataḥ sa indriya tvāya",
+       "text": "Aitareyabrāhmaṇa"
+      },
+      {
+       "form": "hitāya",
+       "ref": "ASāh, 9",
+       "sent": "hitāya sukhāya pratipannā lokasya",
+       "text": "Aṣṭasāhasrikā"
+      },
+      {
+       "form": "yuddhāya",
+       "ref": "AgniPur, 10",
+       "sent": "rāmo yuddhāya tac chrutvā laṅkāṃ sakapirāyayau",
+       "text": "Agnipurāṇa"
+      }
+     ],
+     "forms": [
+      [
+       344,
+       "tvāya"
+      ],
+      [
+       204,
+       "hitāya"
+      ],
+      [
+       161,
+       "yuddhāya"
+      ],
+      [
+       114,
+       "sukhāya"
+      ],
+      [
+       76,
+       "annādyāya"
+      ],
+      [
+       71,
+       "darśanāya"
+      ],
+      [
+       63,
+       "rājyāya"
+      ],
+      [
+       61,
+       "gamanāya"
+      ]
+     ],
+     "lemmas": 911,
+     "n": 4603,
+     "segmentable": 4593
+    },
+    "Gen.Dual": {
+     "endings": [
+      [
+       701,
+       "ayoḥ"
+      ],
+      [
+       14,
+       "oḥ"
+      ]
+     ],
+     "examples": [
+      {
+       "form": "duḥkhayoḥ",
+       "ref": "AHS, Śār., 1",
+       "sent": "samam eva hi mūrdhādyair jñānaṃ ca sukhaduḥkhayoḥ",
+       "text": "Aṣṭāṅgahṛdayasaṃhitā"
+      },
+      {
+       "form": "ubhayayoḥ",
+       "ref": "GarPur, 1, 58",
+       "sent": "akṣapramāṇamubhayoḥ pramāṇaṃ tu yugārdhayoḥ",
+       "text": "Garuḍapurāṇa"
+      },
+      {
+       "form": "sāmayoḥ",
+       "ref": "BaudhŚS, 6, 5",
+       "sent": "tasya śuklakṛṣṇe saṃmṛśati śukle 'ṅguṣṭho bhavati kṛṣṇe 'ṅgulir ṛksāmayoḥ śilpe sthas te vām ārabhe te mā pātam āsya yajñasyodṛca iti",
+       "text": "Baudhāyanaśrautasūtra"
+      }
+     ],
+     "forms": [
+      [
+       34,
+       "duḥkhayoḥ"
+      ],
+      [
+       28,
+       "ubhayayoḥ"
+      ],
+      [
+       17,
+       "sāmayoḥ"
+      ],
+      [
+       16,
+       "pāpayoḥ"
+      ],
+      [
+       16,
+       "rathantarayoḥ"
+      ],
+      [
+       15,
+       "kāraṇayoḥ"
+      ],
+      [
+       14,
+       "tārayoḥ"
+      ],
+      [
+       14,
+       "ubhayoḥ"
+      ]
+     ],
+     "lemmas": 320,
+     "n": 731,
+     "segmentable": 715
+    },
+    "Gen.Plur": {
+     "endings": [
+      [
+       4210,
+       "ānām"
+      ],
+      [
+       1582,
+       "āṇām"
+      ],
+      [
+       3,
+       "eṣām"
+      ]
+     ],
+     "examples": [
+      {
+       "form": "bhūtānām",
+       "ref": "AĀ, 2, 3, 7",
+       "sent": "tad vā idaṃ bṛhatīsahasraṃ sampannaṃ tad yaśaḥ sa indraḥ sa bhūtānām adhipatiḥ",
+       "text": "Aitareya-Āraṇyaka"
+      },
+      {
+       "form": "indriyāṇām",
+       "ref": "AbhCint, 1",
+       "sent": "pratyāhārastvindriyāṇāṃ viṣayebhyaḥ samāhṛtiḥ",
+       "text": "Abhidhānacintāmaṇi"
+      },
+      {
+       "form": "dravyāṇām",
+       "ref": "ACint, 1",
+       "sent": "dravyāṇāṃ rasavīryakāryam akhilaṃ jñātā dayāluḥ sadā nirṇetā ṛtukāladeśavayasāṃ mātrādhikārī bhiṣak",
+       "text": "Abhinavacintāmaṇi"
+      }
+     ],
+     "forms": [
+      [
+       987,
+       "bhūtānām"
+      ],
+      [
+       224,
+       "indriyāṇām"
+      ],
+      [
+       180,
+       "dravyāṇām"
+      ],
+      [
+       112,
+       "yojanānām"
+      ],
+      [
+       98,
+       "tīrthānām"
+      ],
+      [
+       92,
+       "bījānām"
+      ],
+      [
+       85,
+       "ratnānām"
+      ],
+      [
+       84,
+       "nakṣatrāṇām"
+      ]
+     ],
+     "lemmas": 983,
+     "n": 5797,
+     "segmentable": 5795
+    },
+    "Gen.Sing": {
+     "endings": [
+      [
+       11462,
+       "asya"
+      ]
+     ],
+     "examples": [
+      {
+       "form": "ṛtasya",
+       "ref": "AVP, 1, 101",
+       "sent": "ṛtasya māne adhi yā dhruvāṇi ebhiḥ devāḥ amṛtam bhakṣayanti",
+       "text": "Atharvaveda (Paippalāda)"
+      },
+      {
+       "form": "annasya",
+       "ref": "AĀ, 2, 1, 3",
+       "sent": "annasya retaḥ retaḥ",
+       "text": "Aitareya-Āraṇyaka"
+      },
+      {
+       "form": "viśvasya",
+       "ref": "AĀ, 5, 2, 2",
+       "sent": "viśvasya pra stobha vidvān purā vā yadi vehāsa nūnam",
+       "text": "Aitareya-Āraṇyaka"
+      }
+     ],
+     "forms": [
+      [
+       345,
+       "ṛtasya"
+      ],
+      [
+       186,
+       "annasya"
+      ],
+      [
+       177,
+       "viśvasya"
+      ],
+      [
+       166,
+       "amṛtasya"
+      ],
+      [
+       166,
+       "bhuvanasya"
+      ],
+      [
+       157,
+       "ājyasya"
+      ],
+      [
+       154,
+       "kulasya"
+      ],
+      [
+       142,
+       "śarīrasya"
+      ]
+     ],
+     "lemmas": 1881,
+     "n": 11538,
+     "segmentable": 11462
+    },
+    "Ins.Dual": {
+     "endings": [
+      [
+       786,
+       "ābhyām"
+      ]
+     ],
+     "examples": [
+      {
+       "form": "ājyābhyām",
+       "ref": "ŚGDīp zu ŚdhSaṃh, 2, 12, 183.2",
+       "sent": "bhasmasūtaṃ mṛtaṃ pāradaṃ tatsamo gandhaḥ gandhakaṃ mṛtāyaḥ mṛtalohaṃ mṛtatāmraṃ gugguluḥ mahānimba iti citrakaḥ prasiddhaḥ śilājatusattvam etatpratyekaṃ ṣoḍaśaśāṇaṃ catuḥṣaṣṭiśāṇaṃ mṛtam abhraṃ sarvaṃ madhvājyābhyāṃ vi…",
+       "text": "Gūḍhārthadīpikā"
+      },
+      {
+       "form": "netrābhyām",
+       "ref": "BhāMañj, 13",
+       "sent": "netrābhyāṃ cārunayanā viśantī tamalakṣitā",
+       "text": "Bhāratamañjarī"
+      },
+      {
+       "form": "pavitrābhyām",
+       "ref": "BaudhGS, 1, 3",
+       "sent": "atha tiraḥpavitramājyasthālyām ājyaṃ nirupyodīco 'ṅgārānnirūhya vyantān kṛtvā teṣv adhiśrityābhidyotanenābhidyotya dve darbhāgre pracchidya prakṣālya pratyasya punar abhidyotya triḥ paryagnikṛtvā vartma kurvann udagudvā…",
+       "text": "Baudhāyanagṛhyasūtra"
+      }
+     ],
+     "forms": [
+      [
+       53,
+       "ājyābhyām"
+      ],
+      [
+       25,
+       "netrābhyām"
+      ],
+      [
+       24,
+       "pavitrābhyām"
+      ],
+      [
+       22,
+       "agrābhyām"
+      ],
+      [
+       22,
+       "kuṇḍalābhyām"
+      ],
+      [
+       19,
+       "ghṛtābhyām"
+      ],
+      [
+       14,
+       "purīṣābhyām"
+      ],
+      [
+       14,
+       "tailābhyām"
+      ]
+     ],
+     "lemmas": 289,
+     "n": 789,
+     "segmentable": 786
+    },
+    "Ins.Plur": {
+     "endings": [
+      [
+       16126,
+       "aiḥ"
+      ],
+      [
+       143,
+       "ebhiḥ"
+      ],
+      [
+       35,
+       "abhiḥ"
+      ]
+     ],
+     "examples": [
+      {
+       "form": "ādyaiḥ",
+       "ref": "AgniPur, 9",
+       "sent": "kṛtena taruśailādyair gataḥ pāraṃ mahodadheḥ",
+       "text": "Agnipurāṇa"
+      },
+      {
+       "form": "puṣpaiḥ",
+       "ref": "ArthaŚ, 14, 1",
+       "sent": "puṣpaiḥ elā kākṣi guggulu hālāhalānām ca kaṣāyam basta nara śoṇita yuktam daṃśa yogaḥ",
+       "text": "Arthaśāstra"
+      },
+      {
+       "form": "phalaiḥ",
+       "ref": "AKośa, 2",
+       "sent": "vānaspatyaḥ phalaiḥ puṣpāt tair apuṣpād vanaspatiḥ",
+       "text": "Amarakośa"
+      }
+     ],
+     "forms": [
+      [
+       272,
+       "ādyaiḥ"
+      ],
+      [
+       250,
+       "puṣpaiḥ"
+      ],
+      [
+       220,
+       "phalaiḥ"
+      ],
+      [
+       192,
+       "pāpaiḥ"
+      ],
+      [
+       177,
+       "jalaiḥ"
+      ],
+      [
+       176,
+       "kṣīraiḥ"
+      ],
+      [
+       174,
+       "lakṣaṇaiḥ"
+      ],
+      [
+       172,
+       "amlaiḥ"
+      ]
+     ],
+     "lemmas": 2607,
+     "n": 16333,
+     "segmentable": 16304
+    },
+    "Ins.Sing": {
+     "endings": [
+      [
+       19127,
+       "ena"
+      ],
+      [
+       8065,
+       "eṇa"
+      ],
+      [
+       176,
+       "ā"
+      ],
+      [
+       1,
+       "enaṃ"
+      ],
+      [
+       1,
+       "enā"
+      ]
+     ],
+     "examples": [
+      {
+       "form": "rūpeṇa",
+       "ref": "AĀ, 1, 2, 3",
+       "sent": "ekam phalakam syāt iti āhuḥ ekadhā hi eva ayam vāyuḥ pavate asya rūpeṇa iti",
+       "text": "Aitareya-Āraṇyaka"
+      },
+      {
+       "form": "tvena",
+       "ref": "ACint, 1",
+       "sent": "sāṅgatvena mahārṇavādividitāṃ tanniṣkriyāṃ sāmpratam",
+       "text": "Abhinavacintāmaṇi"
+      },
+      {
+       "form": "mātreṇa",
+       "ref": "AgniPur, 1",
+       "sent": "yena vijñānamātreṇa sarvajñatvaṃ prajāyate",
+       "text": "Agnipurāṇa"
+      }
+     ],
+     "forms": [
+      [
+       886,
+       "rūpeṇa"
+      ],
+      [
+       709,
+       "tvena"
+      ],
+      [
+       475,
+       "mātreṇa"
+      ],
+      [
+       452,
+       "ghṛtena"
+      ],
+      [
+       424,
+       "balena"
+      ],
+      [
+       402,
+       "svena"
+      ],
+      [
+       379,
+       "vīryeṇa"
+      ],
+      [
+       330,
+       "vidhānena"
+      ]
+     ],
+     "lemmas": 3215,
+     "n": 27433,
+     "segmentable": 27370
+    },
+    "Loc.Dual": {
+     "endings": [
+      [
+       352,
+       "ayoḥ"
+      ],
+      [
+       5,
+       "oḥ"
+      ],
+      [
+       2,
+       "yoḥ"
+      ]
+     ],
+     "examples": [
+      {
+       "form": "savanayoḥ",
+       "ref": "AB, 3, 29",
+       "sent": "ubhe vā eṣa ete savane vipibati yat savitā prātaḥsavanaṃ ca tṛtīyasavanaṃ ca tad yat pibavat sāvitryai nividaḥ padam purastād bhavati madvad upariṣṭād ubhayor evainaṃ tat savanayor ābhajati prātaḥsavane ca tṛtīyasavane …",
+       "text": "Aitareyabrāhmaṇa"
+      },
+      {
+       "form": "pārśvayoḥ",
+       "ref": "BhāMañj, 6",
+       "sent": "śayānā bhūdharāścānye pārśvayostasya bhūbhṛtaḥ",
+       "text": "Bhāratamañjarī"
+      },
+      {
+       "form": "uttarayoḥ",
+       "ref": "BhārŚS, 14, 2",
+       "sent": "nottarayoḥ savanayoḥ payasyā bhavati",
+       "text": "Bhāradvājaśrautasūtra"
+      }
+     ],
+     "forms": [
+      [
+       24,
+       "savanayoḥ"
+      ],
+      [
+       23,
+       "pārśvayoḥ"
+      ],
+      [
+       19,
+       "uttarayoḥ"
+      ],
+      [
+       17,
+       "ubhayayoḥ"
+      ],
+      [
+       9,
+       "netrayoḥ"
+      ],
+      [
+       7,
+       "duḥkhayoḥ"
+      ],
+      [
+       7,
+       "nasyayoḥ"
+      ],
+      [
+       7,
+       "rathantarayoḥ"
+      ]
+     ],
+     "lemmas": 176,
+     "n": 366,
+     "segmentable": 359
+    },
+    "Loc.Plur": {
+     "endings": [
+      [
+       5949,
+       "eṣu"
+      ]
+     ],
+     "examples": [
+      {
+       "form": "bhūteṣu",
+       "ref": "Aṣṭāvakragīta, 3",
+       "sent": "sarvabhūteṣu cātmānaṃ sarvabhūtāni cātmani",
+       "text": "Aṣṭāvakragīta"
+      },
+      {
+       "form": "kāryeṣu",
+       "ref": "ArthaŚ, 1, 10",
+       "sent": "tatra dharmopadhāśuddhān dharmasthīyakaṇṭakaśodhaneṣu karmasu sthāpayet arthopadhāśuddhān samāhartṛsaṃnidhātṛnicayakarmasu kāmopadhāśuddhān bāhyābhyantaravihārarakṣāsu bhayopadhāśuddhān āsannakāryeṣu rājñaḥ",
+       "text": "Arthaśāstra"
+      },
+      {
+       "form": "vaneṣu",
+       "ref": "AB, 1, 28",
+       "sent": "vaneṣu citram vibhvam viśe viśe iti abhirūpā",
+       "text": "Aitareyabrāhmaṇa"
+      }
+     ],
+     "forms": [
+      [
+       370,
+       "bhūteṣu"
+      ],
+      [
+       170,
+       "kāryeṣu"
+      ],
+      [
+       152,
+       "vaneṣu"
+      ],
+      [
+       141,
+       "tīrtheṣu"
+      ],
+      [
+       115,
+       "gṛheṣu"
+      ],
+      [
+       115,
+       "sthāneṣu"
+      ],
+      [
+       109,
+       "aṅgeṣu"
+      ],
+      [
+       102,
+       "śāstreṣu"
+      ]
+     ],
+     "lemmas": 1147,
+     "n": 5970,
+     "segmentable": 5949
+    },
+    "Loc.Sing": {
+     "endings": [
+      [
+       56005,
+       "e"
+      ],
+      [
+       31,
+       "asmin"
+      ],
+      [
+       3,
+       "asi"
+      ]
+     ],
+     "examples": [
+      {
+       "form": "madhye",
+       "ref": "AbhCint, 2",
+       "sent": "maṇiḥ syamantako haste bhujamadhye tu kaustubhaḥ",
+       "text": "Abhidhānacintāmaṇi"
+      },
+      {
+       "form": "agre",
+       "ref": "AgniPur, 7",
+       "sent": "yayau śūrpaṇakhā laṅkāṃ rāvaṇāgre 'patad bhuvi",
+       "text": "Agnipurāṇa"
+      },
+      {
+       "form": "samare",
+       "ref": "AVP, 19, 34",
+       "sent": "dakṣiṇā pārayāti mā mā riṣaṃ samare yudhām",
+       "text": "Atharvaveda (Paippalāda)"
+      }
+     ],
+     "forms": [
+      [
+       2386,
+       "madhye"
+      ],
+      [
+       1203,
+       "agre"
+      ],
+      [
+       1166,
+       "samare"
+      ],
+      [
+       1006,
+       "vane"
+      ],
+      [
+       924,
+       "antare"
+      ],
+      [
+       764,
+       "yuddhe"
+      ],
+      [
+       640,
+       "pātre"
+      ],
+      [
+       599,
+       "mukhe"
+      ]
+     ],
+     "lemmas": 5274,
+     "n": 56187,
+     "segmentable": 56039
+    },
+    "Nom.Dual": {
+     "endings": [
+      [
+       1982,
+       "e"
+      ],
+      [
+       2,
+       "ī"
+      ]
+     ],
+     "examples": [
+      {
+       "form": "rātre",
+       "ref": "AB, 2, 4",
+       "sent": "uṣāsānaktā yajaty ahorātre vā uṣāsānaktāhorātre eva tat prīṇāty ahorātrayor yajamānaṃ dadhāti",
+       "text": "Aitareyabrāhmaṇa"
+      },
+      {
+       "form": "rathantare",
+       "ref": "DrāhŚS, 10, 4",
+       "sent": "tām uttareṇodgātā gatvā paścād upaviśya bhūmispṛśo 'syāḥ pādān kṛtvā kūrcānadhastād upohyābhimṛśed bṛhadrathantare te pūrvau pādau śyaitanaudhase aparau vairūpavairāje anūcī śākvararaivate tiraścī ityetaiḥ pṛthagaṅgāni",
+       "text": "Drāhyāyaṇaśrautasūtra"
+      },
+      {
+       "form": "akṣare",
+       "ref": "AĀ, 1, 3, 7",
+       "sent": "dve daśākṣare bhavata ubhayor annādyayor upāptyai yac ca padvad yac cāpādakam iti",
+       "text": "Aitareya-Āraṇyaka"
+      }
+     ],
+     "forms": [
+      [
+       57,
+       "rātre"
+      ],
+      [
+       35,
+       "rathantare"
+      ],
+      [
+       32,
+       "akṣare"
+      ],
+      [
+       32,
+       "netre"
+      ],
+      [
+       30,
+       "sūkte"
+      ],
+      [
+       27,
+       "duḥkhe"
+      ],
+      [
+       26,
+       "ahorātre"
+      ],
+      [
+       25,
+       "śrotre"
+      ]
+     ],
+     "lemmas": 829,
+     "n": 2026,
+     "segmentable": 1984
+    },
+    "Nom.Plur": {
+     "endings": [
+      [
+       9438,
+       "āni"
+      ],
+      [
+       4173,
+       "āṇi"
+      ],
+      [
+       497,
+       "ā"
+      ]
+     ],
+     "examples": [
+      {
+       "form": "bhūtāni",
+       "ref": "AbhidhKo, 1",
+       "sent": "bhūtāni pṛthividhāturaptejovāyudhātavaḥ",
+       "text": "Abhidharmakośa"
+      },
+      {
+       "form": "indriyāṇi",
+       "ref": "AbhidhKo, 1",
+       "sent": "rūpaṃ pañcendriyāṇyarthāḥ pañcāvijñaptir eva ca",
+       "text": "Abhidharmakośa"
+      },
+      {
+       "form": "rūpāṇi",
+       "ref": "AB, 4, 29",
+       "sent": "yad vā eti ca preti ca tat prathamasyāhno rūpaṃ yad yuktavad yad rathavad yad āśumad yat pibavad yat prathame pade devatā nirucyate yad ayaṃ loko 'bhyudito yad rāthaṃtaraṃ yad gāyatraṃ yat kariṣyad etāni vai prathamasyā…",
+       "text": "Aitareyabrāhmaṇa"
+      }
+     ],
+     "forms": [
+      [
+       571,
+       "bhūtāni"
+      ],
+      [
+       255,
+       "indriyāṇi"
+      ],
+      [
+       231,
+       "rūpāṇi"
+      ],
+      [
+       176,
+       "aṅgāni"
+      ],
+      [
+       168,
+       "phalāni"
+      ],
+      [
+       141,
+       "tīrthāni"
+      ],
+      [
+       140,
+       "bījāni"
+      ],
+      [
+       139,
+       "mūlāni"
+      ]
+     ],
+     "lemmas": 2593,
+     "n": 14146,
+     "segmentable": 14108
+    },
+    "Nom.Sing": {
+     "endings": [
+      [
+       162720,
+       "am"
+      ],
+      [
+       12,
+       "aḥ"
+      ],
+      [
+       2,
+       ""
+      ],
+      [
+       2,
+       "ad"
+      ],
+      [
+       1,
+       "ā"
+      ]
+     ],
+     "examples": [
+      {
+       "form": "tvam",
+       "ref": "AbhidhKo, 2",
+       "sent": "ekādaśabhirarhattvamuktaṃ tvekasya saṃbhavāt",
+       "text": "Abhidharmakośa"
+      },
+      {
+       "form": "rūpam",
+       "ref": "AbhidhKo, 1",
+       "sent": "rūpaṃ pañcendriyāṇyarthāḥ pañcāvijñaptir eva ca",
+       "text": "Abhidharmakośa"
+      },
+      {
+       "form": "phalam",
+       "ref": "AbhCint, 2",
+       "sent": "tatkālastu tadātvaṃ syāttajjaṃ sāṃdṛṣṭikaṃ phalam",
+       "text": "Abhidhānacintāmaṇi"
+      }
+     ],
+     "forms": [
+      [
+       2796,
+       "tvam"
+      ],
+      [
+       1975,
+       "rūpam"
+      ],
+      [
+       1480,
+       "phalam"
+      ],
+      [
+       1192,
+       "satyam"
+      ],
+      [
+       1183,
+       "annam"
+      ],
+      [
+       970,
+       "kāraṇam"
+      ],
+      [
+       934,
+       "balam"
+      ],
+      [
+       834,
+       "jñānam"
+      ]
+     ],
+     "lemmas": 15586,
+     "n": 163107,
+     "segmentable": 162737
+    },
+    "Voc.Dual": {
+     "endings": [
+      [
+       4,
+       "e"
+      ]
+     ],
+     "examples": [
+      {
+       "form": "cakre",
+       "ref": "AVP, 19, 26",
+       "sent": "yathā rathasya cakre vi pathaḥ pāṃsum asyathaḥ",
+       "text": "Atharvaveda (Paippalāda)"
+      },
+      {
+       "form": "rātre",
+       "ref": "AVP, 10, 13",
+       "sent": "ahar rātre sam nahyethām mama rāṣṭrāya jayantī amitrebhyaḥ hetim asyantī",
+       "text": "Atharvaveda (Paippalāda)"
+      },
+      {
+       "form": "suṣumne",
+       "ref": "ṚV, 6, 50",
+       "sent": "uta dyāvāpṛthivī kṣatram uru bṛhad rodasī śaraṇaṃ suṣumne",
+       "text": "Ṛgveda"
+      }
+     ],
+     "forms": [
+      [
+       1,
+       "cakre"
+      ],
+      [
+       1,
+       "rātre"
+      ],
+      [
+       1,
+       "suṣumne"
+      ],
+      [
+       1,
+       "śarīre"
+      ]
+     ],
+     "lemmas": 4,
+     "n": 4,
+     "segmentable": 4
+    },
+    "Voc.Plur": {
+     "endings": [
+      [
+       5,
+       "āni"
+      ],
+      [
+       4,
+       "āṇi"
+      ]
+     ],
+     "examples": [
+      {
+       "form": "abdāni",
+       "ref": "KūPur, 2, 30",
+       "sent": "brahmahā dvādaśābdāni kuṭiṃ kṛtvā vane vaset",
+       "text": "Kūrmapurāṇa"
+      },
+      {
+       "form": "bhūtāni",
+       "ref": "AVP, 10, 14",
+       "sent": "udārā ud īrdhvaṃ viśvāni bhūtāni saṃ nahyadhvaṃ mama rāṣṭrāya jayanty amitrebhyo hetim asyanti",
+       "text": "Atharvaveda (Paippalāda)"
+      },
+      {
+       "form": "chidrāṇi",
+       "ref": "Su, Nid., 4",
+       "sent": "tatrāpathyasevināṃ vāyuḥ prakupitaḥ saṃnivṛttaḥ sthirībhūto gudamabhito 'ṅgule dvyaṅgule vā māṃsaśoṇite pradūṣyāruṇavarṇāṃ piḍakāṃ janayati sāsya todādīn vedanāviśeṣāñjanayati apratikriyamāṇā ca pākam upaiti mūtrāśayābh…",
+       "text": "Suśrutasaṃhitā"
+      }
+     ],
+     "forms": [
+      [
+       1,
+       "abdāni"
+      ],
+      [
+       1,
+       "bhūtāni"
+      ],
+      [
+       1,
+       "chidrāṇi"
+      ],
+      [
+       1,
+       "cittāni"
+      ],
+      [
+       1,
+       "gāyatrāṇi"
+      ],
+      [
+       1,
+       "pāpāni"
+      ],
+      [
+       1,
+       "saṃvatsarāṇi"
+      ],
+      [
+       1,
+       "viśvāni"
+      ]
+     ],
+     "lemmas": 9,
+     "n": 9,
+     "segmentable": 9
+    },
+    "Voc.Sing": {
+     "endings": [
+      [
+       66,
+       "am"
+      ],
+      [
+       39,
+       "a"
+      ]
+     ],
+     "examples": [
+      {
+       "form": "antarikṣa",
+       "ref": "KS, 3, 6",
+       "sent": "uro antarikṣa sajūr devena vātena",
+       "text": "Kāṭhakasaṃhitā"
+      },
+      {
+       "form": "svam",
+       "ref": "Hitop, 4",
+       "sent": "tyajet kṣudhārtā mahilā svaputraṃ khādet kṣudhārtā bhujagī svamaṇḍam",
+       "text": "Hitopadeśa"
+      },
+      {
+       "form": "akṣa",
+       "ref": "BhārGS, 2, 5",
+       "sent": "hiraṇyavarṇa haryakṣa arthaṃ mahyaṃ sādhaya svāhā",
+       "text": "Bhāradvājagṛhyasūtra"
+      }
+     ],
+     "forms": [
+      [
+       12,
+       "antarikṣa"
+      ],
+      [
+       6,
+       "svam"
+      ],
+      [
+       5,
+       "akṣa"
+      ],
+      [
+       4,
+       "rathantara"
+      ],
+      [
+       3,
+       "dakṣiṇam"
+      ],
+      [
+       2,
+       "amṛtam"
+      ],
+      [
+       2,
+       "duṣkaram"
+      ],
+      [
+       2,
+       "rathaṃtaram"
+      ]
+     ],
+     "lemmas": 76,
+     "n": 111,
+     "segmentable": 105
+    }
+   },
+   "cellsAttested": 24,
+   "n": 479788,
+   "segmentablePct": 99.8
+  }
+ },
+ "corpusRelease": "DCS-2026",
+ "classIsHeuristic": true
+}

@@ -72,6 +72,26 @@
      "no": null,
      "title": "Klammerdiagramm — разобранные примеры",
      "url": "https://github.com/gasyoun/SamasaChakram/blob/main/klammerdiagramm-worked-examples.md"
+    },
+    {
+     "no": 42,
+     "title": "Klammer-плашка: kuṭumbinī-компаунд (Амару)",
+     "url": "https://gasyoun.github.io/infographics/klammer-kutumbini-2026-09-06/"
+    },
+    {
+     "no": 43,
+     "title": "Парадигма a-основ: deva в DCS",
+     "url": "https://gasyoun.github.io/infographics/paradigm-a-stems-2026-09-06/"
+    },
+    {
+     "no": 44,
+     "title": "DCS nominal dashboard (интерактив)",
+     "url": "https://github.com/gasyoun/VisualDCS/blob/main/visual/sanskrit_nominal_dashboard.html"
+    },
+    {
+     "no": 45,
+     "title": "Sangram TOC-сеть — 7 доменов",
+     "url": "https://github.com/gasyoun/SanskritGrammar/blob/main/sangram/toc/SANGRAM_TOC_NETWORK.mdx"
     }
    ]
   },
