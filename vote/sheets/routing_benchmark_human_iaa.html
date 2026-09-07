@@ -1,0 +1,2355 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="color-scheme" content="dark">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>H3987 -- routing-benchmark: человеческая вторая разметка (IAA)</title>
+<style>
+:root { color-scheme: dark; --bg:#0d0f14; --card:#151822; --text:#e8e8ec; --muted:#9aa0ac; --accent:#5b9dff; --ok:#4caf7d; --warn:#e0a94c; --border:#262b38; --fs:1.5; }
+* { box-sizing: border-box; }
+body { background:var(--bg); color:var(--text); font-family: -apple-system, "Segoe UI", Roboto, sans-serif; font-size:calc(11px * var(--fs)); line-height:1.5; margin:0; padding:0 0 80px; }
+header { position:sticky; top:0; z-index:5; background:#11141c; border-bottom:1px solid var(--border); padding:14px 20px; }
+h1 { font-size:20px; margin:0 0 4px; }
+.sub { color:var(--muted); font-size:14px; }
+.tally { margin-top:8px; font-size:14px; color:var(--muted); }
+.tally b { color:var(--text); }
+main { max-width:880px; margin:0 auto; padding:20px; }
+.card { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:16px 18px; margin-bottom:18px; }
+.cardhead { display:flex; gap:8px; align-items:center; margin-bottom:10px; }
+.idchip { font-family: ui-monospace, monospace; background:#1d2230; border:1px solid var(--border); border-radius:5px; padding:2px 8px; font-size:13px; user-select:all; }
+.badge { font-size:12px; color:var(--muted); border:1px solid var(--border); border-radius:12px; padding:2px 9px; }
+.question { margin-bottom:12px; }
+.scenario-ru { font-size:17px; margin-bottom:6px; }
+.scenario-en { font-size:13.5px; color:var(--muted); }
+.panel { border-top:1px solid var(--border); padding-top:10px; margin-top:10px; }
+.panelhead { font-size:12.5px; text-transform:uppercase; letter-spacing:.03em; color:var(--muted); margin-bottom:6px; }
+.panelbody { font-size:14px; color:var(--text); }
+.panelbody code { background:#1d2230; padding:1px 5px; border-radius:4px; font-size:13px; }
+select.codeselect { width:100%; background:#11141a; color:var(--text); border:1px solid var(--border); border-radius:6px; padding:9px; font-size:15px; }
+textarea.note { width:100%; min-height:60px; margin-top:12px; background:#11141a !important; color:var(--text) !important; -webkit-text-fill-color:var(--text); border:1px solid var(--border); border-radius:6px; padding:9px; font-size:14px; resize:vertical; }
+textarea.note::placeholder { color:var(--muted); -webkit-text-fill-color:var(--muted); }
+.cardbtns { display:flex; gap:10px; margin-top:12px; }
+button.btn { border:1px solid var(--border); background:#1d2230; color:var(--text); border-radius:7px; padding:9px 16px; font-size:14px; cursor:pointer; }
+button.btn.submit { background:#1c3a2c; border-color:#2e5a41; }
+button.btn.submit:hover { background:#245038; }
+button.btn.defer:hover { background:#2a2f3d; }
+.cardstate { margin-top:10px; font-size:13px; color:var(--muted); }
+.cardstate.answered { color:var(--ok); }
+.cardstate.deferred { color:var(--warn); }
+.refbox { max-height:260px; overflow:auto; border:1px solid var(--border); border-radius:8px; padding:10px 14px; background:#11141a; font-size:13.5px; }
+.refgroup { margin-bottom:8px; }
+.refgrouptitle { font-weight:600; color:var(--accent); margin:6px 0 2px; }
+ul.reflist { margin:0 0 4px; padding-left:18px; }
+details.refdetails summary { cursor:pointer; color:var(--accent); font-size:14px; margin:8px 0; }
+footer.legend { max-width:880px; margin:30px auto 0; padding:0 20px; color:var(--muted); font-size:13.5px; border-top:1px solid var(--border); padding-top:16px; }
+footer.legend b { color:var(--text); }
+.exportbar { position:sticky; bottom:0; background:#11141c; border-top:1px solid var(--border); padding:12px 20px; display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+.exportbar .savepath { font-size:12px; color:var(--muted); }
+button.dl { border:1px solid var(--accent); background:#16223a; color:var(--text); border-radius:7px; padding:10px 18px; font-size:14px; cursor:pointer; }
+button.dl:hover { background:#1c2c49; }
+.screening-banner { background:#152233; border:1px solid var(--accent); border-radius:8px; padding:10px 14px; margin-bottom:16px; font-size:13.5px; color:var(--text); }
+</style>
+</head>
+<body>
+<header>
+  <h1>Human second-annotation -- which-dictionary routing benchmark (24 сценария, GAPS 10)</h1>
+  <div class="sub">sheet_id: csl-guides-routing-benchmark_human-iaa &middot; сгенерировано 07-09-2026 &middot; карточек: 24 &middot; пространство ответов: 44 кодов словарей &middot; сохранение: <span class="savepath">Uprava/review/csl-guides-routing-benchmark_human-iaa_decisions.json</span></div>
+  <div class="tally">Отвечено: <b id="t-answered">0</b> / 24 &middot; Отложено: <b id="t-deferred">0</b> &middot; Не начато: <b id="t-unvoted">24</b></div>
+</header>
+<main>
+  <div class="screening-banner" data-screening="1">
+    <b>Скрининг (Phase 0-bis):</b> deterministic 0 &middot; lookup 0 &middot; agent-resolved 0 &middot; human 24/24.
+    Ни одна из 24 карточек не может быть решена механически или агентом -- независимое суждение человека
+    здесь и есть искомый результат (класс (d): "the human label IS the deliverable"), поэтому ни одна карточка
+    не снята с рассмотрения.
+  </div>
+  <p>Для каждого из 24 сценариев выберите РОВНО ОДИН словарь из выпадающего списка (44 кодов, сгруппированных по типу словаря) и нажмите &laquo;Сохранить ответ&raquo;. Метка первого (LLM) прохода нигде на этой странице не показана -- это независимая вторая разметка.</p>
+  <details class="refdetails">
+    <summary>Показать полный список всех 44 кодов словарей (справочно)</summary>
+    <div class="refbox"><div class="refgroup"><div class="refgrouptitle">Sanskrit-English</div><ul class="reflist">
+<li><b>WIL</b> -- Wilson Sanskrit-English Dictionary (1832)</li>
+<li><b>YAT</b> -- Yates Sanskrit-English Dictionary (1846)</li>
+<li><b>GST</b> -- Goldstücker Sanskrit-English Dictionary (1856)</li>
+<li><b>BEN</b> -- Benfey Sanskrit-English Dictionary (1866)</li>
+<li><b>MW72</b> -- Monier-Williams Sanskrit-English Dictionary (1872)</li>
+<li><b>LAN</b> -- Lanman&#x27;s Sanskrit Reader Vocabulary (1884)</li>
+<li><b>LRV</b> -- Vaidya Sanskrit-English Dictionary (1889)</li>
+<li><b>AP90</b> -- Apte Practical Sanskrit-English Dictionary (1890)</li>
+<li><b>CAE</b> -- Cappeller Sanskrit-English Dictionary (1891)</li>
+<li><b>MD</b> -- Macdonell Sanskrit-English Dictionary (1893)</li>
+<li><b>MW</b> -- Monier-Williams Sanskrit-English Dictionary (1899)</li>
+<li><b>SHS</b> -- Shabda-Sagara Sanskrit-English Dictionary (1900)</li>
+<li><b>AP</b> -- Practical Sanskrit-English Dictionary, revised edition (1957)</li>
+<li><b>PD</b> -- An Encyclopedic Dictionary of Sanskrit on Historical Principles (1976)</li>
+</ul></div>
+<div class="refgroup"><div class="refgrouptitle">English-Sanskrit</div><ul class="reflist">
+<li><b>MWE</b> -- Monier-Williams English-Sanskrit Dictionary (1851)</li>
+<li><b>BOR</b> -- Borooah English-Sanskrit Dictionary (1877)</li>
+<li><b>AE</b> -- Apte Student&#x27;s English-Sanskrit Dictionary (1920)</li>
+</ul></div>
+<div class="refgroup"><div class="refgrouptitle">Sanskrit-French</div><ul class="reflist">
+<li><b>BUR</b> -- Burnouf Dictionnaire Sanscrit-Français (1866)</li>
+<li><b>STC</b> -- Stchoupak Dictionnaire Sanscrit-Français (1932)</li>
+</ul></div>
+<div class="refgroup"><div class="refgrouptitle">Sanskrit-German</div><ul class="reflist">
+<li><b>PWG</b> -- Böhtlingk and Roth Grosses Petersburger Wörterbuch (1855)</li>
+<li><b>GRA</b> -- Grassmann Wörterbuch zum Rig Veda (1873)</li>
+<li><b>PW</b> -- Böhtlingk Sanskrit-Wörterbuch in kürzerer Fassung (1879)</li>
+<li><b>CCS</b> -- Cappeller Sanskrit Wörterbuch (1887)</li>
+<li><b>SCH</b> -- Schmidt Nachträge zum Sanskrit-Wörterbuch (1928)</li>
+</ul></div>
+<div class="refgroup"><div class="refgrouptitle">Sanskrit-Latin</div><ul class="reflist">
+<li><b>BOP</b> -- Bopp Glossarium Sanscritum (1847)</li>
+</ul></div>
+<div class="refgroup"><div class="refgrouptitle">Sanskrit-Sanskrit</div><ul class="reflist">
+<li><b>ARMH</b> -- Abhidhānaratnamālā of Halāyudha (1861)</li>
+<li><b>VCP</b> -- Vacaspatyam (1873)</li>
+<li><b>SKD</b> -- Sabda-kalpadruma (1886)</li>
+<li><b>ABCH</b> -- Abhidhānacintāmaṇi of Hemacandrācārya (1896)</li>
+<li><b>ACPH</b> -- Abhidhānacintāmaṇipariśiṣṭa of Hemacandrācārya (1896)</li>
+<li><b>ACSJ</b> -- Abhidhānacintāmaṇiśiloñcha of Jinadeva (1896)</li>
+<li><b>NMMB</b> -- Nāmamālikā of Bhoja (1955)</li>
+</ul></div>
+<div class="refgroup"><div class="refgrouptitle">Specialized</div><ul class="reflist">
+<li><b>INM</b> -- Index to the Names in the Mahabharata (1904)</li>
+<li><b>VEI</b> -- The Vedic Index of Names and Subjects (1912)</li>
+<li><b>PUI</b> -- The Purana Index (1951)</li>
+<li><b>BHS</b> -- Edgerton Buddhist Hybrid Sanskrit Dictionary (1953)</li>
+<li><b>FRI</b> -- Friš Sanskrit Reader Vocabulary (1956)</li>
+<li><b>ACC</b> -- Aufrecht&#x27;s Catalogus Catalogorum (1962)</li>
+<li><b>KRM</b> -- Kṛdantarūpamālā (1965)</li>
+<li><b>IEG</b> -- Indian Epigraphical Glossary (1966)</li>
+<li><b>SNP</b> -- Meulenbeld&#x27;s Sanskrit Names of Plants (1974)</li>
+<li><b>PE</b> -- Puranic Encyclopedia (1975)</li>
+<li><b>PGN</b> -- Personal and Geographical Names in the Gupta Inscriptions (1978)</li>
+<li><b>MCI</b> -- Mahabharata Cultural Index (1993)</li>
+</ul></div></div>
+  </details>
+  
+  <div class="card" data-id="G-01">
+    <div class="cardhead">
+      <span class="idchip">G-01</span>
+      <span class="badge">Общий сценарий (G)</span>
+    </div>
+    <div class="question">
+      <div class="scenario-ru">Самый широкий по охвату классический словарь санскрит→английский, который также отмечает ведийские акценты (удары).</div>
+      <div class="scenario-en">Оригинал (EN): <em>Broadest classical Sanskrit→English reference that also marks Vedic accents.</em></div>
+    </div>
+    <div class="panel">
+      <div class="panelhead">Ваш ответ -- выберите ОДИН словарь</div>
+      <select class="codeselect">
+        <option value="">-- выберите словарь --</option>
+        <optgroup label="Sanskrit-English">
+<option value="WIL">WIL -- Wilson Sanskrit-English Dictionary (1832)</option>
+<option value="YAT">YAT -- Yates Sanskrit-English Dictionary (1846)</option>
+<option value="GST">GST -- Goldstücker Sanskrit-English Dictionary (1856)</option>
+<option value="BEN">BEN -- Benfey Sanskrit-English Dictionary (1866)</option>
+<option value="MW72">MW72 -- Monier-Williams Sanskrit-English Dictionary (1872)</option>
+<option value="LAN">LAN -- Lanman&#x27;s Sanskrit Reader Vocabulary (1884)</option>
+<option value="LRV">LRV -- Vaidya Sanskrit-English Dictionary (1889)</option>
+<option value="AP90">AP90 -- Apte Practical Sanskrit-English Dictionary (1890)</option>
+<option value="CAE">CAE -- Cappeller Sanskrit-English Dictionary (1891)</option>
+<option value="MD">MD -- Macdonell Sanskrit-English Dictionary (1893)</option>
+<option value="MW">MW -- Monier-Williams Sanskrit-English Dictionary (1899)</option>
+<option value="SHS">SHS -- Shabda-Sagara Sanskrit-English Dictionary (1900)</option>
+<option value="AP">AP -- Practical Sanskrit-English Dictionary, revised edition (1957)</option>
+<option value="PD">PD -- An Encyclopedic Dictionary of Sanskrit on Historical Principles (1976)</option>
+</optgroup>
+<optgroup label="English-Sanskrit">
+<option value="MWE">MWE -- Monier-Williams English-Sanskrit Dictionary (1851)</option>
+<option value="BOR">BOR -- Borooah English-Sanskrit Dictionary (1877)</option>
+<option value="AE">AE -- Apte Student&#x27;s English-Sanskrit Dictionary (1920)</option>
+</optgroup>
+<optgroup label="Sanskrit-French">
+<option value="BUR">BUR -- Burnouf Dictionnaire Sanscrit-Français (1866)</option>
+<option value="STC">STC -- Stchoupak Dictionnaire Sanscrit-Français (1932)</option>
+</optgroup>
+<optgroup label="Sanskrit-German">
+<option value="PWG">PWG -- Böhtlingk and Roth Grosses Petersburger Wörterbuch (1855)</option>
+<option value="GRA">GRA -- Grassmann Wörterbuch zum Rig Veda (1873)</option>
+<option value="PW">PW -- Böhtlingk Sanskrit-Wörterbuch in kürzerer Fassung (1879)</option>
+<option value="CCS">CCS -- Cappeller Sanskrit Wörterbuch (1887)</option>
+<option value="SCH">SCH -- Schmidt Nachträge zum Sanskrit-Wörterbuch (1928)</option>
+</optgroup>
+<optgroup label="Sanskrit-Latin">
+<option value="BOP">BOP -- Bopp Glossarium Sanscritum (1847)</option>
+</optgroup>
+<optgroup label="Sanskrit-Sanskrit">
+<option value="ARMH">ARMH -- Abhidhānaratnamālā of Halāyudha (1861)</option>
+<option value="VCP">VCP -- Vacaspatyam (1873)</option>
+<option value="SKD">SKD -- Sabda-kalpadruma (1886)</option>
+<option value="ABCH">ABCH -- Abhidhānacintāmaṇi of Hemacandrācārya (1896)</option>
+<option value="ACPH">ACPH -- Abhidhānacintāmaṇipariśiṣṭa of Hemacandrācārya (1896)</option>
+<option value="ACSJ">ACSJ -- Abhidhānacintāmaṇiśiloñcha of Jinadeva (1896)</option>
+<option value="NMMB">NMMB -- Nāmamālikā of Bhoja (1955)</option>
+</optgroup>
+<optgroup label="Specialized">
+<option value="INM">INM -- Index to the Names in the Mahabharata (1904)</option>
+<option value="VEI">VEI -- The Vedic Index of Names and Subjects (1912)</option>
+<option value="PUI">PUI -- The Purana Index (1951)</option>
+<option value="BHS">BHS -- Edgerton Buddhist Hybrid Sanskrit Dictionary (1953)</option>
+<option value="FRI">FRI -- Friš Sanskrit Reader Vocabulary (1956)</option>
+<option value="ACC">ACC -- Aufrecht&#x27;s Catalogus Catalogorum (1962)</option>
+<option value="KRM">KRM -- Kṛdantarūpamālā (1965)</option>
+<option value="IEG">IEG -- Indian Epigraphical Glossary (1966)</option>
+<option value="SNP">SNP -- Meulenbeld&#x27;s Sanskrit Names of Plants (1974)</option>
+<option value="PE">PE -- Puranic Encyclopedia (1975)</option>
+<option value="PGN">PGN -- Personal and Geographical Names in the Gupta Inscriptions (1978)</option>
+<option value="MCI">MCI -- Mahabharata Cultural Index (1993)</option>
+</optgroup>
+      </select>
+    </div>
+    <div class="panel">
+      <h4 class="panelhead">Evidence (источник карточки)</h4>
+      <div class="panelbody">Текст сценария взят дословно из первичного источника
+      <code>csl-guides/src/data/which-dictionary-gold.json</code>, запись <code>G-01.scenario</code>
+      (v1.0, лицензия CC-BY-SA-4.0). Метка первого прохода (gold/accepted/quizAnswer/rationale)
+      из этой же записи в карточку НЕ включена и нигде на странице не встречается -- это и есть
+      условие независимости второго прохода.</div>
+    </div>
+    <textarea class="note" placeholder="необязательное примечание (почему выбран этот словарь, или в чём сомнение)"></textarea>
+    <div class="cardbtns">
+      <button class="btn submit">Сохранить ответ</button>
+      <button class="btn defer">Отложить (не уверен(а))</button>
+    </div>
+    <div class="cardstate">не отвечено</div>
+  </div>
+
+  <div class="card" data-id="G-02">
+    <div class="cardhead">
+      <span class="idchip">G-02</span>
+      <span class="badge">Общий сценарий (G)</span>
+    </div>
+    <div class="question">
+      <div class="scenario-ru">Санскритизированная, но по виду пали-подобная форма в «Махавасту», отсутствующая в MW.</div>
+      <div class="scenario-en">Оригинал (EN): <em>A Sanskritized Pali-looking form in the Mahāvastu, absent from MW.</em></div>
+    </div>
+    <div class="panel">
+      <div class="panelhead">Ваш ответ -- выберите ОДИН словарь</div>
+      <select class="codeselect">
+        <option value="">-- выберите словарь --</option>
+        <optgroup label="Sanskrit-English">
+<option value="WIL">WIL -- Wilson Sanskrit-English Dictionary (1832)</option>
+<option value="YAT">YAT -- Yates Sanskrit-English Dictionary (1846)</option>
+<option value="GST">GST -- Goldstücker Sanskrit-English Dictionary (1856)</option>
+<option value="BEN">BEN -- Benfey Sanskrit-English Dictionary (1866)</option>
+<option value="MW72">MW72 -- Monier-Williams Sanskrit-English Dictionary (1872)</option>
+<option value="LAN">LAN -- Lanman&#x27;s Sanskrit Reader Vocabulary (1884)</option>
+<option value="LRV">LRV -- Vaidya Sanskrit-English Dictionary (1889)</option>
+<option value="AP90">AP90 -- Apte Practical Sanskrit-English Dictionary (1890)</option>
+<option value="CAE">CAE -- Cappeller Sanskrit-English Dictionary (1891)</option>
+<option value="MD">MD -- Macdonell Sanskrit-English Dictionary (1893)</option>
+<option value="MW">MW -- Monier-Williams Sanskrit-English Dictionary (1899)</option>
+<option value="SHS">SHS -- Shabda-Sagara Sanskrit-English Dictionary (1900)</option>
+<option value="AP">AP -- Practical Sanskrit-English Dictionary, revised edition (1957)</option>
+<option value="PD">PD -- An Encyclopedic Dictionary of Sanskrit on Historical Principles (1976)</option>
+</optgroup>
+<optgroup label="English-Sanskrit">
+<option value="MWE">MWE -- Monier-Williams English-Sanskrit Dictionary (1851)</option>
+<option value="BOR">BOR -- Borooah English-Sanskrit Dictionary (1877)</option>
+<option value="AE">AE -- Apte Student&#x27;s English-Sanskrit Dictionary (1920)</option>
+</optgroup>
+<optgroup label="Sanskrit-French">
+<option value="BUR">BUR -- Burnouf Dictionnaire Sanscrit-Français (1866)</option>
+<option value="STC">STC -- Stchoupak Dictionnaire Sanscrit-Français (1932)</option>
+</optgroup>
+<optgroup label="Sanskrit-German">
+<option value="PWG">PWG -- Böhtlingk and Roth Grosses Petersburger Wörterbuch (1855)</option>
+<option value="GRA">GRA -- Grassmann Wörterbuch zum Rig Veda (1873)</option>
+<option value="PW">PW -- Böhtlingk Sanskrit-Wörterbuch in kürzerer Fassung (1879)</option>
+<option value="CCS">CCS -- Cappeller Sanskrit Wörterbuch (1887)</option>
+<option value="SCH">SCH -- Schmidt Nachträge zum Sanskrit-Wörterbuch (1928)</option>
+</optgroup>
+<optgroup label="Sanskrit-Latin">
+<option value="BOP">BOP -- Bopp Glossarium Sanscritum (1847)</option>
+</optgroup>
+<optgroup label="Sanskrit-Sanskrit">
+<option value="ARMH">ARMH -- Abhidhānaratnamālā of Halāyudha (1861)</option>
+<option value="VCP">VCP -- Vacaspatyam (1873)</option>
+<option value="SKD">SKD -- Sabda-kalpadruma (1886)</option>
+<option value="ABCH">ABCH -- Abhidhānacintāmaṇi of Hemacandrācārya (1896)</option>
+<option value="ACPH">ACPH -- Abhidhānacintāmaṇipariśiṣṭa of Hemacandrācārya (1896)</option>
+<option value="ACSJ">ACSJ -- Abhidhānacintāmaṇiśiloñcha of Jinadeva (1896)</option>
+<option value="NMMB">NMMB -- Nāmamālikā of Bhoja (1955)</option>
+</optgroup>
+<optgroup label="Specialized">
+<option value="INM">INM -- Index to the Names in the Mahabharata (1904)</option>
+<option value="VEI">VEI -- The Vedic Index of Names and Subjects (1912)</option>
+<option value="PUI">PUI -- The Purana Index (1951)</option>
+<option value="BHS">BHS -- Edgerton Buddhist Hybrid Sanskrit Dictionary (1953)</option>
+<option value="FRI">FRI -- Friš Sanskrit Reader Vocabulary (1956)</option>
+<option value="ACC">ACC -- Aufrecht&#x27;s Catalogus Catalogorum (1962)</option>
+<option value="KRM">KRM -- Kṛdantarūpamālā (1965)</option>
+<option value="IEG">IEG -- Indian Epigraphical Glossary (1966)</option>
+<option value="SNP">SNP -- Meulenbeld&#x27;s Sanskrit Names of Plants (1974)</option>
+<option value="PE">PE -- Puranic Encyclopedia (1975)</option>
+<option value="PGN">PGN -- Personal and Geographical Names in the Gupta Inscriptions (1978)</option>
+<option value="MCI">MCI -- Mahabharata Cultural Index (1993)</option>
+</optgroup>
+      </select>
+    </div>
+    <div class="panel">
+      <h4 class="panelhead">Evidence (источник карточки)</h4>
+      <div class="panelbody">Текст сценария взят дословно из первичного источника
+      <code>csl-guides/src/data/which-dictionary-gold.json</code>, запись <code>G-02.scenario</code>
+      (v1.0, лицензия CC-BY-SA-4.0). Метка первого прохода (gold/accepted/quizAnswer/rationale)
+      из этой же записи в карточку НЕ включена и нигде на странице не встречается -- это и есть
+      условие независимости второго прохода.</div>
+    </div>
+    <textarea class="note" placeholder="необязательное примечание (почему выбран этот словарь, или в чём сомнение)"></textarea>
+    <div class="cardbtns">
+      <button class="btn submit">Сохранить ответ</button>
+      <button class="btn defer">Отложить (не уверен(а))</button>
+    </div>
+    <div class="cardstate">не отвечено</div>
+  </div>
+
+  <div class="card" data-id="G-03">
+    <div class="cardhead">
+      <span class="idchip">G-03</span>
+      <span class="badge">Общий сценарий (G)</span>
+    </div>
+    <div class="question">
+      <div class="scenario-ru">Самая глубокая научная проработка с наиболее полными цитатами; немецкий язык допустим.</div>
+      <div class="scenario-en">Оригинал (EN): <em>Deepest scholarly treatment with fullest citations; German acceptable.</em></div>
+    </div>
+    <div class="panel">
+      <div class="panelhead">Ваш ответ -- выберите ОДИН словарь</div>
+      <select class="codeselect">
+        <option value="">-- выберите словарь --</option>
+        <optgroup label="Sanskrit-English">
+<option value="WIL">WIL -- Wilson Sanskrit-English Dictionary (1832)</option>
+<option value="YAT">YAT -- Yates Sanskrit-English Dictionary (1846)</option>
+<option value="GST">GST -- Goldstücker Sanskrit-English Dictionary (1856)</option>
+<option value="BEN">BEN -- Benfey Sanskrit-English Dictionary (1866)</option>
+<option value="MW72">MW72 -- Monier-Williams Sanskrit-English Dictionary (1872)</option>
+<option value="LAN">LAN -- Lanman&#x27;s Sanskrit Reader Vocabulary (1884)</option>
+<option value="LRV">LRV -- Vaidya Sanskrit-English Dictionary (1889)</option>
+<option value="AP90">AP90 -- Apte Practical Sanskrit-English Dictionary (1890)</option>
+<option value="CAE">CAE -- Cappeller Sanskrit-English Dictionary (1891)</option>
+<option value="MD">MD -- Macdonell Sanskrit-English Dictionary (1893)</option>
+<option value="MW">MW -- Monier-Williams Sanskrit-English Dictionary (1899)</option>
+<option value="SHS">SHS -- Shabda-Sagara Sanskrit-English Dictionary (1900)</option>
+<option value="AP">AP -- Practical Sanskrit-English Dictionary, revised edition (1957)</option>
+<option value="PD">PD -- An Encyclopedic Dictionary of Sanskrit on Historical Principles (1976)</option>
+</optgroup>
+<optgroup label="English-Sanskrit">
+<option value="MWE">MWE -- Monier-Williams English-Sanskrit Dictionary (1851)</option>
+<option value="BOR">BOR -- Borooah English-Sanskrit Dictionary (1877)</option>
+<option value="AE">AE -- Apte Student&#x27;s English-Sanskrit Dictionary (1920)</option>
+</optgroup>
+<optgroup label="Sanskrit-French">
+<option value="BUR">BUR -- Burnouf Dictionnaire Sanscrit-Français (1866)</option>
+<option value="STC">STC -- Stchoupak Dictionnaire Sanscrit-Français (1932)</option>
+</optgroup>
+<optgroup label="Sanskrit-German">
+<option value="PWG">PWG -- Böhtlingk and Roth Grosses Petersburger Wörterbuch (1855)</option>
+<option value="GRA">GRA -- Grassmann Wörterbuch zum Rig Veda (1873)</option>
+<option value="PW">PW -- Böhtlingk Sanskrit-Wörterbuch in kürzerer Fassung (1879)</option>
+<option value="CCS">CCS -- Cappeller Sanskrit Wörterbuch (1887)</option>
+<option value="SCH">SCH -- Schmidt Nachträge zum Sanskrit-Wörterbuch (1928)</option>
+</optgroup>
+<optgroup label="Sanskrit-Latin">
+<option value="BOP">BOP -- Bopp Glossarium Sanscritum (1847)</option>
+</optgroup>
+<optgroup label="Sanskrit-Sanskrit">
+<option value="ARMH">ARMH -- Abhidhānaratnamālā of Halāyudha (1861)</option>
+<option value="VCP">VCP -- Vacaspatyam (1873)</option>
+<option value="SKD">SKD -- Sabda-kalpadruma (1886)</option>
+<option value="ABCH">ABCH -- Abhidhānacintāmaṇi of Hemacandrācārya (1896)</option>
+<option value="ACPH">ACPH -- Abhidhānacintāmaṇipariśiṣṭa of Hemacandrācārya (1896)</option>
+<option value="ACSJ">ACSJ -- Abhidhānacintāmaṇiśiloñcha of Jinadeva (1896)</option>
+<option value="NMMB">NMMB -- Nāmamālikā of Bhoja (1955)</option>
+</optgroup>
+<optgroup label="Specialized">
+<option value="INM">INM -- Index to the Names in the Mahabharata (1904)</option>
+<option value="VEI">VEI -- The Vedic Index of Names and Subjects (1912)</option>
+<option value="PUI">PUI -- The Purana Index (1951)</option>
+<option value="BHS">BHS -- Edgerton Buddhist Hybrid Sanskrit Dictionary (1953)</option>
+<option value="FRI">FRI -- Friš Sanskrit Reader Vocabulary (1956)</option>
+<option value="ACC">ACC -- Aufrecht&#x27;s Catalogus Catalogorum (1962)</option>
+<option value="KRM">KRM -- Kṛdantarūpamālā (1965)</option>
+<option value="IEG">IEG -- Indian Epigraphical Glossary (1966)</option>
+<option value="SNP">SNP -- Meulenbeld&#x27;s Sanskrit Names of Plants (1974)</option>
+<option value="PE">PE -- Puranic Encyclopedia (1975)</option>
+<option value="PGN">PGN -- Personal and Geographical Names in the Gupta Inscriptions (1978)</option>
+<option value="MCI">MCI -- Mahabharata Cultural Index (1993)</option>
+</optgroup>
+      </select>
+    </div>
+    <div class="panel">
+      <h4 class="panelhead">Evidence (источник карточки)</h4>
+      <div class="panelbody">Текст сценария взят дословно из первичного источника
+      <code>csl-guides/src/data/which-dictionary-gold.json</code>, запись <code>G-03.scenario</code>
+      (v1.0, лицензия CC-BY-SA-4.0). Метка первого прохода (gold/accepted/quizAnswer/rationale)
+      из этой же записи в карточку НЕ включена и нигде на странице не встречается -- это и есть
+      условие независимости второго прохода.</div>
+    </div>
+    <textarea class="note" placeholder="необязательное примечание (почему выбран этот словарь, или в чём сомнение)"></textarea>
+    <div class="cardbtns">
+      <button class="btn submit">Сохранить ответ</button>
+      <button class="btn defer">Отложить (не уверен(а))</button>
+    </div>
+    <div class="cardstate">не отвечено</div>
+  </div>
+
+  <div class="card" data-id="G-04">
+    <div class="cardhead">
+      <span class="idchip">G-04</span>
+      <span class="badge">Общий сценарий (G)</span>
+    </div>
+    <div class="question">
+      <div class="scenario-ru">Чётко пронумерованные значения и переведённые литературные цитаты для чтения классических (неведийских) текстов.</div>
+      <div class="scenario-en">Оригинал (EN): <em>Clean numbered senses and translated literary quotations for classical (non-Vedic) reading.</em></div>
+    </div>
+    <div class="panel">
+      <div class="panelhead">Ваш ответ -- выберите ОДИН словарь</div>
+      <select class="codeselect">
+        <option value="">-- выберите словарь --</option>
+        <optgroup label="Sanskrit-English">
+<option value="WIL">WIL -- Wilson Sanskrit-English Dictionary (1832)</option>
+<option value="YAT">YAT -- Yates Sanskrit-English Dictionary (1846)</option>
+<option value="GST">GST -- Goldstücker Sanskrit-English Dictionary (1856)</option>
+<option value="BEN">BEN -- Benfey Sanskrit-English Dictionary (1866)</option>
+<option value="MW72">MW72 -- Monier-Williams Sanskrit-English Dictionary (1872)</option>
+<option value="LAN">LAN -- Lanman&#x27;s Sanskrit Reader Vocabulary (1884)</option>
+<option value="LRV">LRV -- Vaidya Sanskrit-English Dictionary (1889)</option>
+<option value="AP90">AP90 -- Apte Practical Sanskrit-English Dictionary (1890)</option>
+<option value="CAE">CAE -- Cappeller Sanskrit-English Dictionary (1891)</option>
+<option value="MD">MD -- Macdonell Sanskrit-English Dictionary (1893)</option>
+<option value="MW">MW -- Monier-Williams Sanskrit-English Dictionary (1899)</option>
+<option value="SHS">SHS -- Shabda-Sagara Sanskrit-English Dictionary (1900)</option>
+<option value="AP">AP -- Practical Sanskrit-English Dictionary, revised edition (1957)</option>
+<option value="PD">PD -- An Encyclopedic Dictionary of Sanskrit on Historical Principles (1976)</option>
+</optgroup>
+<optgroup label="English-Sanskrit">
+<option value="MWE">MWE -- Monier-Williams English-Sanskrit Dictionary (1851)</option>
+<option value="BOR">BOR -- Borooah English-Sanskrit Dictionary (1877)</option>
+<option value="AE">AE -- Apte Student&#x27;s English-Sanskrit Dictionary (1920)</option>
+</optgroup>
+<optgroup label="Sanskrit-French">
+<option value="BUR">BUR -- Burnouf Dictionnaire Sanscrit-Français (1866)</option>
+<option value="STC">STC -- Stchoupak Dictionnaire Sanscrit-Français (1932)</option>
+</optgroup>
+<optgroup label="Sanskrit-German">
+<option value="PWG">PWG -- Böhtlingk and Roth Grosses Petersburger Wörterbuch (1855)</option>
+<option value="GRA">GRA -- Grassmann Wörterbuch zum Rig Veda (1873)</option>
+<option value="PW">PW -- Böhtlingk Sanskrit-Wörterbuch in kürzerer Fassung (1879)</option>
+<option value="CCS">CCS -- Cappeller Sanskrit Wörterbuch (1887)</option>
+<option value="SCH">SCH -- Schmidt Nachträge zum Sanskrit-Wörterbuch (1928)</option>
+</optgroup>
+<optgroup label="Sanskrit-Latin">
+<option value="BOP">BOP -- Bopp Glossarium Sanscritum (1847)</option>
+</optgroup>
+<optgroup label="Sanskrit-Sanskrit">
+<option value="ARMH">ARMH -- Abhidhānaratnamālā of Halāyudha (1861)</option>
+<option value="VCP">VCP -- Vacaspatyam (1873)</option>
+<option value="SKD">SKD -- Sabda-kalpadruma (1886)</option>
+<option value="ABCH">ABCH -- Abhidhānacintāmaṇi of Hemacandrācārya (1896)</option>
+<option value="ACPH">ACPH -- Abhidhānacintāmaṇipariśiṣṭa of Hemacandrācārya (1896)</option>
+<option value="ACSJ">ACSJ -- Abhidhānacintāmaṇiśiloñcha of Jinadeva (1896)</option>
+<option value="NMMB">NMMB -- Nāmamālikā of Bhoja (1955)</option>
+</optgroup>
+<optgroup label="Specialized">
+<option value="INM">INM -- Index to the Names in the Mahabharata (1904)</option>
+<option value="VEI">VEI -- The Vedic Index of Names and Subjects (1912)</option>
+<option value="PUI">PUI -- The Purana Index (1951)</option>
+<option value="BHS">BHS -- Edgerton Buddhist Hybrid Sanskrit Dictionary (1953)</option>
+<option value="FRI">FRI -- Friš Sanskrit Reader Vocabulary (1956)</option>
+<option value="ACC">ACC -- Aufrecht&#x27;s Catalogus Catalogorum (1962)</option>
+<option value="KRM">KRM -- Kṛdantarūpamālā (1965)</option>
+<option value="IEG">IEG -- Indian Epigraphical Glossary (1966)</option>
+<option value="SNP">SNP -- Meulenbeld&#x27;s Sanskrit Names of Plants (1974)</option>
+<option value="PE">PE -- Puranic Encyclopedia (1975)</option>
+<option value="PGN">PGN -- Personal and Geographical Names in the Gupta Inscriptions (1978)</option>
+<option value="MCI">MCI -- Mahabharata Cultural Index (1993)</option>
+</optgroup>
+      </select>
+    </div>
+    <div class="panel">
+      <h4 class="panelhead">Evidence (источник карточки)</h4>
+      <div class="panelbody">Текст сценария взят дословно из первичного источника
+      <code>csl-guides/src/data/which-dictionary-gold.json</code>, запись <code>G-04.scenario</code>
+      (v1.0, лицензия CC-BY-SA-4.0). Метка первого прохода (gold/accepted/quizAnswer/rationale)
+      из этой же записи в карточку НЕ включена и нигде на странице не встречается -- это и есть
+      условие независимости второго прохода.</div>
+    </div>
+    <textarea class="note" placeholder="необязательное примечание (почему выбран этот словарь, или в чём сомнение)"></textarea>
+    <div class="cardbtns">
+      <button class="btn submit">Сохранить ответ</button>
+      <button class="btn defer">Отложить (не уверен(а))</button>
+    </div>
+    <div class="cardstate">не отвечено</div>
+  </div>
+
+  <div class="card" data-id="G-05">
+    <div class="cardhead">
+      <span class="idchip">G-05</span>
+      <span class="badge">Общий сценарий (G)</span>
+    </div>
+    <div class="question">
+      <div class="scenario-ru">Английское слово → санскритские эквиваленты (для сочинения текста на санскрите).</div>
+      <div class="scenario-en">Оригинал (EN): <em>English word → Sanskrit equivalents (composition).</em></div>
+    </div>
+    <div class="panel">
+      <div class="panelhead">Ваш ответ -- выберите ОДИН словарь</div>
+      <select class="codeselect">
+        <option value="">-- выберите словарь --</option>
+        <optgroup label="Sanskrit-English">
+<option value="WIL">WIL -- Wilson Sanskrit-English Dictionary (1832)</option>
+<option value="YAT">YAT -- Yates Sanskrit-English Dictionary (1846)</option>
+<option value="GST">GST -- Goldstücker Sanskrit-English Dictionary (1856)</option>
+<option value="BEN">BEN -- Benfey Sanskrit-English Dictionary (1866)</option>
+<option value="MW72">MW72 -- Monier-Williams Sanskrit-English Dictionary (1872)</option>
+<option value="LAN">LAN -- Lanman&#x27;s Sanskrit Reader Vocabulary (1884)</option>
+<option value="LRV">LRV -- Vaidya Sanskrit-English Dictionary (1889)</option>
+<option value="AP90">AP90 -- Apte Practical Sanskrit-English Dictionary (1890)</option>
+<option value="CAE">CAE -- Cappeller Sanskrit-English Dictionary (1891)</option>
+<option value="MD">MD -- Macdonell Sanskrit-English Dictionary (1893)</option>
+<option value="MW">MW -- Monier-Williams Sanskrit-English Dictionary (1899)</option>
+<option value="SHS">SHS -- Shabda-Sagara Sanskrit-English Dictionary (1900)</option>
+<option value="AP">AP -- Practical Sanskrit-English Dictionary, revised edition (1957)</option>
+<option value="PD">PD -- An Encyclopedic Dictionary of Sanskrit on Historical Principles (1976)</option>
+</optgroup>
+<optgroup label="English-Sanskrit">
+<option value="MWE">MWE -- Monier-Williams English-Sanskrit Dictionary (1851)</option>
+<option value="BOR">BOR -- Borooah English-Sanskrit Dictionary (1877)</option>
+<option value="AE">AE -- Apte Student&#x27;s English-Sanskrit Dictionary (1920)</option>
+</optgroup>
+<optgroup label="Sanskrit-French">
+<option value="BUR">BUR -- Burnouf Dictionnaire Sanscrit-Français (1866)</option>
+<option value="STC">STC -- Stchoupak Dictionnaire Sanscrit-Français (1932)</option>
+</optgroup>
+<optgroup label="Sanskrit-German">
+<option value="PWG">PWG -- Böhtlingk and Roth Grosses Petersburger Wörterbuch (1855)</option>
+<option value="GRA">GRA -- Grassmann Wörterbuch zum Rig Veda (1873)</option>
+<option value="PW">PW -- Böhtlingk Sanskrit-Wörterbuch in kürzerer Fassung (1879)</option>
+<option value="CCS">CCS -- Cappeller Sanskrit Wörterbuch (1887)</option>
+<option value="SCH">SCH -- Schmidt Nachträge zum Sanskrit-Wörterbuch (1928)</option>
+</optgroup>
+<optgroup label="Sanskrit-Latin">
+<option value="BOP">BOP -- Bopp Glossarium Sanscritum (1847)</option>
+</optgroup>
+<optgroup label="Sanskrit-Sanskrit">
+<option value="ARMH">ARMH -- Abhidhānaratnamālā of Halāyudha (1861)</option>
+<option value="VCP">VCP -- Vacaspatyam (1873)</option>
+<option value="SKD">SKD -- Sabda-kalpadruma (1886)</option>
+<option value="ABCH">ABCH -- Abhidhānacintāmaṇi of Hemacandrācārya (1896)</option>
+<option value="ACPH">ACPH -- Abhidhānacintāmaṇipariśiṣṭa of Hemacandrācārya (1896)</option>
+<option value="ACSJ">ACSJ -- Abhidhānacintāmaṇiśiloñcha of Jinadeva (1896)</option>
+<option value="NMMB">NMMB -- Nāmamālikā of Bhoja (1955)</option>
+</optgroup>
+<optgroup label="Specialized">
+<option value="INM">INM -- Index to the Names in the Mahabharata (1904)</option>
+<option value="VEI">VEI -- The Vedic Index of Names and Subjects (1912)</option>
+<option value="PUI">PUI -- The Purana Index (1951)</option>
+<option value="BHS">BHS -- Edgerton Buddhist Hybrid Sanskrit Dictionary (1953)</option>
+<option value="FRI">FRI -- Friš Sanskrit Reader Vocabulary (1956)</option>
+<option value="ACC">ACC -- Aufrecht&#x27;s Catalogus Catalogorum (1962)</option>
+<option value="KRM">KRM -- Kṛdantarūpamālā (1965)</option>
+<option value="IEG">IEG -- Indian Epigraphical Glossary (1966)</option>
+<option value="SNP">SNP -- Meulenbeld&#x27;s Sanskrit Names of Plants (1974)</option>
+<option value="PE">PE -- Puranic Encyclopedia (1975)</option>
+<option value="PGN">PGN -- Personal and Geographical Names in the Gupta Inscriptions (1978)</option>
+<option value="MCI">MCI -- Mahabharata Cultural Index (1993)</option>
+</optgroup>
+      </select>
+    </div>
+    <div class="panel">
+      <h4 class="panelhead">Evidence (источник карточки)</h4>
+      <div class="panelbody">Текст сценария взят дословно из первичного источника
+      <code>csl-guides/src/data/which-dictionary-gold.json</code>, запись <code>G-05.scenario</code>
+      (v1.0, лицензия CC-BY-SA-4.0). Метка первого прохода (gold/accepted/quizAnswer/rationale)
+      из этой же записи в карточку НЕ включена и нигде на странице не встречается -- это и есть
+      условие независимости второго прохода.</div>
+    </div>
+    <textarea class="note" placeholder="необязательное примечание (почему выбран этот словарь, или в чём сомнение)"></textarea>
+    <div class="cardbtns">
+      <button class="btn submit">Сохранить ответ</button>
+      <button class="btn defer">Отложить (не уверен(а))</button>
+    </div>
+    <div class="cardstate">не отвечено</div>
+  </div>
+
+  <div class="card" data-id="G-06">
+    <div class="cardhead">
+      <span class="idchip">G-06</span>
+      <span class="badge">Общий сценарий (G)</span>
+    </div>
+    <div class="question">
+      <div class="scenario-ru">Современный глосс на французском языке.</div>
+      <div class="scenario-en">Оригинал (EN): <em>A modern French gloss.</em></div>
+    </div>
+    <div class="panel">
+      <div class="panelhead">Ваш ответ -- выберите ОДИН словарь</div>
+      <select class="codeselect">
+        <option value="">-- выберите словарь --</option>
+        <optgroup label="Sanskrit-English">
+<option value="WIL">WIL -- Wilson Sanskrit-English Dictionary (1832)</option>
+<option value="YAT">YAT -- Yates Sanskrit-English Dictionary (1846)</option>
+<option value="GST">GST -- Goldstücker Sanskrit-English Dictionary (1856)</option>
+<option value="BEN">BEN -- Benfey Sanskrit-English Dictionary (1866)</option>
+<option value="MW72">MW72 -- Monier-Williams Sanskrit-English Dictionary (1872)</option>
+<option value="LAN">LAN -- Lanman&#x27;s Sanskrit Reader Vocabulary (1884)</option>
+<option value="LRV">LRV -- Vaidya Sanskrit-English Dictionary (1889)</option>
+<option value="AP90">AP90 -- Apte Practical Sanskrit-English Dictionary (1890)</option>
+<option value="CAE">CAE -- Cappeller Sanskrit-English Dictionary (1891)</option>
+<option value="MD">MD -- Macdonell Sanskrit-English Dictionary (1893)</option>
+<option value="MW">MW -- Monier-Williams Sanskrit-English Dictionary (1899)</option>
+<option value="SHS">SHS -- Shabda-Sagara Sanskrit-English Dictionary (1900)</option>
+<option value="AP">AP -- Practical Sanskrit-English Dictionary, revised edition (1957)</option>
+<option value="PD">PD -- An Encyclopedic Dictionary of Sanskrit on Historical Principles (1976)</option>
+</optgroup>
+<optgroup label="English-Sanskrit">
+<option value="MWE">MWE -- Monier-Williams English-Sanskrit Dictionary (1851)</option>
+<option value="BOR">BOR -- Borooah English-Sanskrit Dictionary (1877)</option>
+<option value="AE">AE -- Apte Student&#x27;s English-Sanskrit Dictionary (1920)</option>
+</optgroup>
+<optgroup label="Sanskrit-French">
+<option value="BUR">BUR -- Burnouf Dictionnaire Sanscrit-Français (1866)</option>
+<option value="STC">STC -- Stchoupak Dictionnaire Sanscrit-Français (1932)</option>
+</optgroup>
+<optgroup label="Sanskrit-German">
+<option value="PWG">PWG -- Böhtlingk and Roth Grosses Petersburger Wörterbuch (1855)</option>
+<option value="GRA">GRA -- Grassmann Wörterbuch zum Rig Veda (1873)</option>
+<option value="PW">PW -- Böhtlingk Sanskrit-Wörterbuch in kürzerer Fassung (1879)</option>
+<option value="CCS">CCS -- Cappeller Sanskrit Wörterbuch (1887)</option>
+<option value="SCH">SCH -- Schmidt Nachträge zum Sanskrit-Wörterbuch (1928)</option>
+</optgroup>
+<optgroup label="Sanskrit-Latin">
+<option value="BOP">BOP -- Bopp Glossarium Sanscritum (1847)</option>
+</optgroup>
+<optgroup label="Sanskrit-Sanskrit">
+<option value="ARMH">ARMH -- Abhidhānaratnamālā of Halāyudha (1861)</option>
+<option value="VCP">VCP -- Vacaspatyam (1873)</option>
+<option value="SKD">SKD -- Sabda-kalpadruma (1886)</option>
+<option value="ABCH">ABCH -- Abhidhānacintāmaṇi of Hemacandrācārya (1896)</option>
+<option value="ACPH">ACPH -- Abhidhānacintāmaṇipariśiṣṭa of Hemacandrācārya (1896)</option>
+<option value="ACSJ">ACSJ -- Abhidhānacintāmaṇiśiloñcha of Jinadeva (1896)</option>
+<option value="NMMB">NMMB -- Nāmamālikā of Bhoja (1955)</option>
+</optgroup>
+<optgroup label="Specialized">
+<option value="INM">INM -- Index to the Names in the Mahabharata (1904)</option>
+<option value="VEI">VEI -- The Vedic Index of Names and Subjects (1912)</option>
+<option value="PUI">PUI -- The Purana Index (1951)</option>
+<option value="BHS">BHS -- Edgerton Buddhist Hybrid Sanskrit Dictionary (1953)</option>
+<option value="FRI">FRI -- Friš Sanskrit Reader Vocabulary (1956)</option>
+<option value="ACC">ACC -- Aufrecht&#x27;s Catalogus Catalogorum (1962)</option>
+<option value="KRM">KRM -- Kṛdantarūpamālā (1965)</option>
+<option value="IEG">IEG -- Indian Epigraphical Glossary (1966)</option>
+<option value="SNP">SNP -- Meulenbeld&#x27;s Sanskrit Names of Plants (1974)</option>
+<option value="PE">PE -- Puranic Encyclopedia (1975)</option>
+<option value="PGN">PGN -- Personal and Geographical Names in the Gupta Inscriptions (1978)</option>
+<option value="MCI">MCI -- Mahabharata Cultural Index (1993)</option>
+</optgroup>
+      </select>
+    </div>
+    <div class="panel">
+      <h4 class="panelhead">Evidence (источник карточки)</h4>
+      <div class="panelbody">Текст сценария взят дословно из первичного источника
+      <code>csl-guides/src/data/which-dictionary-gold.json</code>, запись <code>G-06.scenario</code>
+      (v1.0, лицензия CC-BY-SA-4.0). Метка первого прохода (gold/accepted/quizAnswer/rationale)
+      из этой же записи в карточку НЕ включена и нигде на странице не встречается -- это и есть
+      условие независимости второго прохода.</div>
+    </div>
+    <textarea class="note" placeholder="необязательное примечание (почему выбран этот словарь, или в чём сомнение)"></textarea>
+    <div class="cardbtns">
+      <button class="btn submit">Сохранить ответ</button>
+      <button class="btn defer">Отложить (не уверен(а))</button>
+    </div>
+    <div class="cardstate">не отвечено</div>
+  </div>
+
+  <div class="card" data-id="G-07">
+    <div class="cardhead">
+      <span class="idchip">G-07</span>
+      <span class="badge">Общий сценарий (G)</span>
+    </div>
+    <div class="question">
+      <div class="scenario-ru">Латинские глоссы и индоевропейские когнаты от основателя сравнительной грамматики.</div>
+      <div class="scenario-en">Оригинал (EN): <em>Latin glosses and Indo-European cognates by the founder of comparative grammar.</em></div>
+    </div>
+    <div class="panel">
+      <div class="panelhead">Ваш ответ -- выберите ОДИН словарь</div>
+      <select class="codeselect">
+        <option value="">-- выберите словарь --</option>
+        <optgroup label="Sanskrit-English">
+<option value="WIL">WIL -- Wilson Sanskrit-English Dictionary (1832)</option>
+<option value="YAT">YAT -- Yates Sanskrit-English Dictionary (1846)</option>
+<option value="GST">GST -- Goldstücker Sanskrit-English Dictionary (1856)</option>
+<option value="BEN">BEN -- Benfey Sanskrit-English Dictionary (1866)</option>
+<option value="MW72">MW72 -- Monier-Williams Sanskrit-English Dictionary (1872)</option>
+<option value="LAN">LAN -- Lanman&#x27;s Sanskrit Reader Vocabulary (1884)</option>
+<option value="LRV">LRV -- Vaidya Sanskrit-English Dictionary (1889)</option>
+<option value="AP90">AP90 -- Apte Practical Sanskrit-English Dictionary (1890)</option>
+<option value="CAE">CAE -- Cappeller Sanskrit-English Dictionary (1891)</option>
+<option value="MD">MD -- Macdonell Sanskrit-English Dictionary (1893)</option>
+<option value="MW">MW -- Monier-Williams Sanskrit-English Dictionary (1899)</option>
+<option value="SHS">SHS -- Shabda-Sagara Sanskrit-English Dictionary (1900)</option>
+<option value="AP">AP -- Practical Sanskrit-English Dictionary, revised edition (1957)</option>
+<option value="PD">PD -- An Encyclopedic Dictionary of Sanskrit on Historical Principles (1976)</option>
+</optgroup>
+<optgroup label="English-Sanskrit">
+<option value="MWE">MWE -- Monier-Williams English-Sanskrit Dictionary (1851)</option>
+<option value="BOR">BOR -- Borooah English-Sanskrit Dictionary (1877)</option>
+<option value="AE">AE -- Apte Student&#x27;s English-Sanskrit Dictionary (1920)</option>
+</optgroup>
+<optgroup label="Sanskrit-French">
+<option value="BUR">BUR -- Burnouf Dictionnaire Sanscrit-Français (1866)</option>
+<option value="STC">STC -- Stchoupak Dictionnaire Sanscrit-Français (1932)</option>
+</optgroup>
+<optgroup label="Sanskrit-German">
+<option value="PWG">PWG -- Böhtlingk and Roth Grosses Petersburger Wörterbuch (1855)</option>
+<option value="GRA">GRA -- Grassmann Wörterbuch zum Rig Veda (1873)</option>
+<option value="PW">PW -- Böhtlingk Sanskrit-Wörterbuch in kürzerer Fassung (1879)</option>
+<option value="CCS">CCS -- Cappeller Sanskrit Wörterbuch (1887)</option>
+<option value="SCH">SCH -- Schmidt Nachträge zum Sanskrit-Wörterbuch (1928)</option>
+</optgroup>
+<optgroup label="Sanskrit-Latin">
+<option value="BOP">BOP -- Bopp Glossarium Sanscritum (1847)</option>
+</optgroup>
+<optgroup label="Sanskrit-Sanskrit">
+<option value="ARMH">ARMH -- Abhidhānaratnamālā of Halāyudha (1861)</option>
+<option value="VCP">VCP -- Vacaspatyam (1873)</option>
+<option value="SKD">SKD -- Sabda-kalpadruma (1886)</option>
+<option value="ABCH">ABCH -- Abhidhānacintāmaṇi of Hemacandrācārya (1896)</option>
+<option value="ACPH">ACPH -- Abhidhānacintāmaṇipariśiṣṭa of Hemacandrācārya (1896)</option>
+<option value="ACSJ">ACSJ -- Abhidhānacintāmaṇiśiloñcha of Jinadeva (1896)</option>
+<option value="NMMB">NMMB -- Nāmamālikā of Bhoja (1955)</option>
+</optgroup>
+<optgroup label="Specialized">
+<option value="INM">INM -- Index to the Names in the Mahabharata (1904)</option>
+<option value="VEI">VEI -- The Vedic Index of Names and Subjects (1912)</option>
+<option value="PUI">PUI -- The Purana Index (1951)</option>
+<option value="BHS">BHS -- Edgerton Buddhist Hybrid Sanskrit Dictionary (1953)</option>
+<option value="FRI">FRI -- Friš Sanskrit Reader Vocabulary (1956)</option>
+<option value="ACC">ACC -- Aufrecht&#x27;s Catalogus Catalogorum (1962)</option>
+<option value="KRM">KRM -- Kṛdantarūpamālā (1965)</option>
+<option value="IEG">IEG -- Indian Epigraphical Glossary (1966)</option>
+<option value="SNP">SNP -- Meulenbeld&#x27;s Sanskrit Names of Plants (1974)</option>
+<option value="PE">PE -- Puranic Encyclopedia (1975)</option>
+<option value="PGN">PGN -- Personal and Geographical Names in the Gupta Inscriptions (1978)</option>
+<option value="MCI">MCI -- Mahabharata Cultural Index (1993)</option>
+</optgroup>
+      </select>
+    </div>
+    <div class="panel">
+      <h4 class="panelhead">Evidence (источник карточки)</h4>
+      <div class="panelbody">Текст сценария взят дословно из первичного источника
+      <code>csl-guides/src/data/which-dictionary-gold.json</code>, запись <code>G-07.scenario</code>
+      (v1.0, лицензия CC-BY-SA-4.0). Метка первого прохода (gold/accepted/quizAnswer/rationale)
+      из этой же записи в карточку НЕ включена и нигде на странице не встречается -- это и есть
+      условие независимости второго прохода.</div>
+    </div>
+    <textarea class="note" placeholder="необязательное примечание (почему выбран этот словарь, или в чём сомнение)"></textarea>
+    <div class="cardbtns">
+      <button class="btn submit">Сохранить ответ</button>
+      <button class="btn defer">Отложить (не уверен(а))</button>
+    </div>
+    <div class="cardstate">не отвечено</div>
+  </div>
+
+  <div class="card" data-id="G-08">
+    <div class="cardhead">
+      <span class="idchip">G-08</span>
+      <span class="badge">Общий сценарий (G)</span>
+    </div>
+    <div class="question">
+      <div class="scenario-ru">Определить ботанически санскритское название растения.</div>
+      <div class="scenario-en">Оригинал (EN): <em>Identify a Sanskrit plant name botanically.</em></div>
+    </div>
+    <div class="panel">
+      <div class="panelhead">Ваш ответ -- выберите ОДИН словарь</div>
+      <select class="codeselect">
+        <option value="">-- выберите словарь --</option>
+        <optgroup label="Sanskrit-English">
+<option value="WIL">WIL -- Wilson Sanskrit-English Dictionary (1832)</option>
+<option value="YAT">YAT -- Yates Sanskrit-English Dictionary (1846)</option>
+<option value="GST">GST -- Goldstücker Sanskrit-English Dictionary (1856)</option>
+<option value="BEN">BEN -- Benfey Sanskrit-English Dictionary (1866)</option>
+<option value="MW72">MW72 -- Monier-Williams Sanskrit-English Dictionary (1872)</option>
+<option value="LAN">LAN -- Lanman&#x27;s Sanskrit Reader Vocabulary (1884)</option>
+<option value="LRV">LRV -- Vaidya Sanskrit-English Dictionary (1889)</option>
+<option value="AP90">AP90 -- Apte Practical Sanskrit-English Dictionary (1890)</option>
+<option value="CAE">CAE -- Cappeller Sanskrit-English Dictionary (1891)</option>
+<option value="MD">MD -- Macdonell Sanskrit-English Dictionary (1893)</option>
+<option value="MW">MW -- Monier-Williams Sanskrit-English Dictionary (1899)</option>
+<option value="SHS">SHS -- Shabda-Sagara Sanskrit-English Dictionary (1900)</option>
+<option value="AP">AP -- Practical Sanskrit-English Dictionary, revised edition (1957)</option>
+<option value="PD">PD -- An Encyclopedic Dictionary of Sanskrit on Historical Principles (1976)</option>
+</optgroup>
+<optgroup label="English-Sanskrit">
+<option value="MWE">MWE -- Monier-Williams English-Sanskrit Dictionary (1851)</option>
+<option value="BOR">BOR -- Borooah English-Sanskrit Dictionary (1877)</option>
+<option value="AE">AE -- Apte Student&#x27;s English-Sanskrit Dictionary (1920)</option>
+</optgroup>
+<optgroup label="Sanskrit-French">
+<option value="BUR">BUR -- Burnouf Dictionnaire Sanscrit-Français (1866)</option>
+<option value="STC">STC -- Stchoupak Dictionnaire Sanscrit-Français (1932)</option>
+</optgroup>
+<optgroup label="Sanskrit-German">
+<option value="PWG">PWG -- Böhtlingk and Roth Grosses Petersburger Wörterbuch (1855)</option>
+<option value="GRA">GRA -- Grassmann Wörterbuch zum Rig Veda (1873)</option>
+<option value="PW">PW -- Böhtlingk Sanskrit-Wörterbuch in kürzerer Fassung (1879)</option>
+<option value="CCS">CCS -- Cappeller Sanskrit Wörterbuch (1887)</option>
+<option value="SCH">SCH -- Schmidt Nachträge zum Sanskrit-Wörterbuch (1928)</option>
+</optgroup>
+<optgroup label="Sanskrit-Latin">
+<option value="BOP">BOP -- Bopp Glossarium Sanscritum (1847)</option>
+</optgroup>
+<optgroup label="Sanskrit-Sanskrit">
+<option value="ARMH">ARMH -- Abhidhānaratnamālā of Halāyudha (1861)</option>
+<option value="VCP">VCP -- Vacaspatyam (1873)</option>
+<option value="SKD">SKD -- Sabda-kalpadruma (1886)</option>
+<option value="ABCH">ABCH -- Abhidhānacintāmaṇi of Hemacandrācārya (1896)</option>
+<option value="ACPH">ACPH -- Abhidhānacintāmaṇipariśiṣṭa of Hemacandrācārya (1896)</option>
+<option value="ACSJ">ACSJ -- Abhidhānacintāmaṇiśiloñcha of Jinadeva (1896)</option>
+<option value="NMMB">NMMB -- Nāmamālikā of Bhoja (1955)</option>
+</optgroup>
+<optgroup label="Specialized">
+<option value="INM">INM -- Index to the Names in the Mahabharata (1904)</option>
+<option value="VEI">VEI -- The Vedic Index of Names and Subjects (1912)</option>
+<option value="PUI">PUI -- The Purana Index (1951)</option>
+<option value="BHS">BHS -- Edgerton Buddhist Hybrid Sanskrit Dictionary (1953)</option>
+<option value="FRI">FRI -- Friš Sanskrit Reader Vocabulary (1956)</option>
+<option value="ACC">ACC -- Aufrecht&#x27;s Catalogus Catalogorum (1962)</option>
+<option value="KRM">KRM -- Kṛdantarūpamālā (1965)</option>
+<option value="IEG">IEG -- Indian Epigraphical Glossary (1966)</option>
+<option value="SNP">SNP -- Meulenbeld&#x27;s Sanskrit Names of Plants (1974)</option>
+<option value="PE">PE -- Puranic Encyclopedia (1975)</option>
+<option value="PGN">PGN -- Personal and Geographical Names in the Gupta Inscriptions (1978)</option>
+<option value="MCI">MCI -- Mahabharata Cultural Index (1993)</option>
+</optgroup>
+      </select>
+    </div>
+    <div class="panel">
+      <h4 class="panelhead">Evidence (источник карточки)</h4>
+      <div class="panelbody">Текст сценария взят дословно из первичного источника
+      <code>csl-guides/src/data/which-dictionary-gold.json</code>, запись <code>G-08.scenario</code>
+      (v1.0, лицензия CC-BY-SA-4.0). Метка первого прохода (gold/accepted/quizAnswer/rationale)
+      из этой же записи в карточку НЕ включена и нигде на странице не встречается -- это и есть
+      условие независимости второго прохода.</div>
+    </div>
+    <textarea class="note" placeholder="необязательное примечание (почему выбран этот словарь, или в чём сомнение)"></textarea>
+    <div class="cardbtns">
+      <button class="btn submit">Сохранить ответ</button>
+      <button class="btn defer">Отложить (не уверен(а))</button>
+    </div>
+    <div class="cardstate">не отвечено</div>
+  </div>
+
+  <div class="card" data-id="G-09">
+    <div class="cardhead">
+      <span class="idchip">G-09</span>
+      <span class="badge">Общий сценарий (G)</span>
+    </div>
+    <div class="question">
+      <div class="scenario-ru">Административный/налоговый термин в надписи — нужен технический смысл.</div>
+      <div class="scenario-en">Оригинал (EN): <em>Administrative/fiscal term in an inscription, technical sense needed.</em></div>
+    </div>
+    <div class="panel">
+      <div class="panelhead">Ваш ответ -- выберите ОДИН словарь</div>
+      <select class="codeselect">
+        <option value="">-- выберите словарь --</option>
+        <optgroup label="Sanskrit-English">
+<option value="WIL">WIL -- Wilson Sanskrit-English Dictionary (1832)</option>
+<option value="YAT">YAT -- Yates Sanskrit-English Dictionary (1846)</option>
+<option value="GST">GST -- Goldstücker Sanskrit-English Dictionary (1856)</option>
+<option value="BEN">BEN -- Benfey Sanskrit-English Dictionary (1866)</option>
+<option value="MW72">MW72 -- Monier-Williams Sanskrit-English Dictionary (1872)</option>
+<option value="LAN">LAN -- Lanman&#x27;s Sanskrit Reader Vocabulary (1884)</option>
+<option value="LRV">LRV -- Vaidya Sanskrit-English Dictionary (1889)</option>
+<option value="AP90">AP90 -- Apte Practical Sanskrit-English Dictionary (1890)</option>
+<option value="CAE">CAE -- Cappeller Sanskrit-English Dictionary (1891)</option>
+<option value="MD">MD -- Macdonell Sanskrit-English Dictionary (1893)</option>
+<option value="MW">MW -- Monier-Williams Sanskrit-English Dictionary (1899)</option>
+<option value="SHS">SHS -- Shabda-Sagara Sanskrit-English Dictionary (1900)</option>
+<option value="AP">AP -- Practical Sanskrit-English Dictionary, revised edition (1957)</option>
+<option value="PD">PD -- An Encyclopedic Dictionary of Sanskrit on Historical Principles (1976)</option>
+</optgroup>
+<optgroup label="English-Sanskrit">
+<option value="MWE">MWE -- Monier-Williams English-Sanskrit Dictionary (1851)</option>
+<option value="BOR">BOR -- Borooah English-Sanskrit Dictionary (1877)</option>
+<option value="AE">AE -- Apte Student&#x27;s English-Sanskrit Dictionary (1920)</option>
+</optgroup>
+<optgroup label="Sanskrit-French">
+<option value="BUR">BUR -- Burnouf Dictionnaire Sanscrit-Français (1866)</option>
+<option value="STC">STC -- Stchoupak Dictionnaire Sanscrit-Français (1932)</option>
+</optgroup>
+<optgroup label="Sanskrit-German">
+<option value="PWG">PWG -- Böhtlingk and Roth Grosses Petersburger Wörterbuch (1855)</option>
+<option value="GRA">GRA -- Grassmann Wörterbuch zum Rig Veda (1873)</option>
+<option value="PW">PW -- Böhtlingk Sanskrit-Wörterbuch in kürzerer Fassung (1879)</option>
+<option value="CCS">CCS -- Cappeller Sanskrit Wörterbuch (1887)</option>
+<option value="SCH">SCH -- Schmidt Nachträge zum Sanskrit-Wörterbuch (1928)</option>
+</optgroup>
+<optgroup label="Sanskrit-Latin">
+<option value="BOP">BOP -- Bopp Glossarium Sanscritum (1847)</option>
+</optgroup>
+<optgroup label="Sanskrit-Sanskrit">
+<option value="ARMH">ARMH -- Abhidhānaratnamālā of Halāyudha (1861)</option>
+<option value="VCP">VCP -- Vacaspatyam (1873)</option>
+<option value="SKD">SKD -- Sabda-kalpadruma (1886)</option>
+<option value="ABCH">ABCH -- Abhidhānacintāmaṇi of Hemacandrācārya (1896)</option>
+<option value="ACPH">ACPH -- Abhidhānacintāmaṇipariśiṣṭa of Hemacandrācārya (1896)</option>
+<option value="ACSJ">ACSJ -- Abhidhānacintāmaṇiśiloñcha of Jinadeva (1896)</option>
+<option value="NMMB">NMMB -- Nāmamālikā of Bhoja (1955)</option>
+</optgroup>
+<optgroup label="Specialized">
+<option value="INM">INM -- Index to the Names in the Mahabharata (1904)</option>
+<option value="VEI">VEI -- The Vedic Index of Names and Subjects (1912)</option>
+<option value="PUI">PUI -- The Purana Index (1951)</option>
+<option value="BHS">BHS -- Edgerton Buddhist Hybrid Sanskrit Dictionary (1953)</option>
+<option value="FRI">FRI -- Friš Sanskrit Reader Vocabulary (1956)</option>
+<option value="ACC">ACC -- Aufrecht&#x27;s Catalogus Catalogorum (1962)</option>
+<option value="KRM">KRM -- Kṛdantarūpamālā (1965)</option>
+<option value="IEG">IEG -- Indian Epigraphical Glossary (1966)</option>
+<option value="SNP">SNP -- Meulenbeld&#x27;s Sanskrit Names of Plants (1974)</option>
+<option value="PE">PE -- Puranic Encyclopedia (1975)</option>
+<option value="PGN">PGN -- Personal and Geographical Names in the Gupta Inscriptions (1978)</option>
+<option value="MCI">MCI -- Mahabharata Cultural Index (1993)</option>
+</optgroup>
+      </select>
+    </div>
+    <div class="panel">
+      <h4 class="panelhead">Evidence (источник карточки)</h4>
+      <div class="panelbody">Текст сценария взят дословно из первичного источника
+      <code>csl-guides/src/data/which-dictionary-gold.json</code>, запись <code>G-09.scenario</code>
+      (v1.0, лицензия CC-BY-SA-4.0). Метка первого прохода (gold/accepted/quizAnswer/rationale)
+      из этой же записи в карточку НЕ включена и нигде на странице не встречается -- это и есть
+      условие независимости второго прохода.</div>
+    </div>
+    <textarea class="note" placeholder="необязательное примечание (почему выбран этот словарь, или в чём сомнение)"></textarea>
+    <div class="cardbtns">
+      <button class="btn submit">Сохранить ответ</button>
+      <button class="btn defer">Отложить (не уверен(а))</button>
+    </div>
+    <div class="cardstate">не отвечено</div>
+  </div>
+
+  <div class="card" data-id="G-10">
+    <div class="cardhead">
+      <span class="idchip">G-10</span>
+      <span class="badge">Общий сценарий (G)</span>
+    </div>
+    <div class="question">
+      <div class="scenario-ru">Определить и локализовать собственное имя в «Махабхарате».</div>
+      <div class="scenario-en">Оригинал (EN): <em>Identify and locate a proper name in the Mahābhārata.</em></div>
+    </div>
+    <div class="panel">
+      <div class="panelhead">Ваш ответ -- выберите ОДИН словарь</div>
+      <select class="codeselect">
+        <option value="">-- выберите словарь --</option>
+        <optgroup label="Sanskrit-English">
+<option value="WIL">WIL -- Wilson Sanskrit-English Dictionary (1832)</option>
+<option value="YAT">YAT -- Yates Sanskrit-English Dictionary (1846)</option>
+<option value="GST">GST -- Goldstücker Sanskrit-English Dictionary (1856)</option>
+<option value="BEN">BEN -- Benfey Sanskrit-English Dictionary (1866)</option>
+<option value="MW72">MW72 -- Monier-Williams Sanskrit-English Dictionary (1872)</option>
+<option value="LAN">LAN -- Lanman&#x27;s Sanskrit Reader Vocabulary (1884)</option>
+<option value="LRV">LRV -- Vaidya Sanskrit-English Dictionary (1889)</option>
+<option value="AP90">AP90 -- Apte Practical Sanskrit-English Dictionary (1890)</option>
+<option value="CAE">CAE -- Cappeller Sanskrit-English Dictionary (1891)</option>
+<option value="MD">MD -- Macdonell Sanskrit-English Dictionary (1893)</option>
+<option value="MW">MW -- Monier-Williams Sanskrit-English Dictionary (1899)</option>
+<option value="SHS">SHS -- Shabda-Sagara Sanskrit-English Dictionary (1900)</option>
+<option value="AP">AP -- Practical Sanskrit-English Dictionary, revised edition (1957)</option>
+<option value="PD">PD -- An Encyclopedic Dictionary of Sanskrit on Historical Principles (1976)</option>
+</optgroup>
+<optgroup label="English-Sanskrit">
+<option value="MWE">MWE -- Monier-Williams English-Sanskrit Dictionary (1851)</option>
+<option value="BOR">BOR -- Borooah English-Sanskrit Dictionary (1877)</option>
+<option value="AE">AE -- Apte Student&#x27;s English-Sanskrit Dictionary (1920)</option>
+</optgroup>
+<optgroup label="Sanskrit-French">
+<option value="BUR">BUR -- Burnouf Dictionnaire Sanscrit-Français (1866)</option>
+<option value="STC">STC -- Stchoupak Dictionnaire Sanscrit-Français (1932)</option>
+</optgroup>
+<optgroup label="Sanskrit-German">
+<option value="PWG">PWG -- Böhtlingk and Roth Grosses Petersburger Wörterbuch (1855)</option>
+<option value="GRA">GRA -- Grassmann Wörterbuch zum Rig Veda (1873)</option>
+<option value="PW">PW -- Böhtlingk Sanskrit-Wörterbuch in kürzerer Fassung (1879)</option>
+<option value="CCS">CCS -- Cappeller Sanskrit Wörterbuch (1887)</option>
+<option value="SCH">SCH -- Schmidt Nachträge zum Sanskrit-Wörterbuch (1928)</option>
+</optgroup>
+<optgroup label="Sanskrit-Latin">
+<option value="BOP">BOP -- Bopp Glossarium Sanscritum (1847)</option>
+</optgroup>
+<optgroup label="Sanskrit-Sanskrit">
+<option value="ARMH">ARMH -- Abhidhānaratnamālā of Halāyudha (1861)</option>
+<option value="VCP">VCP -- Vacaspatyam (1873)</option>
+<option value="SKD">SKD -- Sabda-kalpadruma (1886)</option>
+<option value="ABCH">ABCH -- Abhidhānacintāmaṇi of Hemacandrācārya (1896)</option>
+<option value="ACPH">ACPH -- Abhidhānacintāmaṇipariśiṣṭa of Hemacandrācārya (1896)</option>
+<option value="ACSJ">ACSJ -- Abhidhānacintāmaṇiśiloñcha of Jinadeva (1896)</option>
+<option value="NMMB">NMMB -- Nāmamālikā of Bhoja (1955)</option>
+</optgroup>
+<optgroup label="Specialized">
+<option value="INM">INM -- Index to the Names in the Mahabharata (1904)</option>
+<option value="VEI">VEI -- The Vedic Index of Names and Subjects (1912)</option>
+<option value="PUI">PUI -- The Purana Index (1951)</option>
+<option value="BHS">BHS -- Edgerton Buddhist Hybrid Sanskrit Dictionary (1953)</option>
+<option value="FRI">FRI -- Friš Sanskrit Reader Vocabulary (1956)</option>
+<option value="ACC">ACC -- Aufrecht&#x27;s Catalogus Catalogorum (1962)</option>
+<option value="KRM">KRM -- Kṛdantarūpamālā (1965)</option>
+<option value="IEG">IEG -- Indian Epigraphical Glossary (1966)</option>
+<option value="SNP">SNP -- Meulenbeld&#x27;s Sanskrit Names of Plants (1974)</option>
+<option value="PE">PE -- Puranic Encyclopedia (1975)</option>
+<option value="PGN">PGN -- Personal and Geographical Names in the Gupta Inscriptions (1978)</option>
+<option value="MCI">MCI -- Mahabharata Cultural Index (1993)</option>
+</optgroup>
+      </select>
+    </div>
+    <div class="panel">
+      <h4 class="panelhead">Evidence (источник карточки)</h4>
+      <div class="panelbody">Текст сценария взят дословно из первичного источника
+      <code>csl-guides/src/data/which-dictionary-gold.json</code>, запись <code>G-10.scenario</code>
+      (v1.0, лицензия CC-BY-SA-4.0). Метка первого прохода (gold/accepted/quizAnswer/rationale)
+      из этой же записи в карточку НЕ включена и нигде на странице не встречается -- это и есть
+      условие независимости второго прохода.</div>
+    </div>
+    <textarea class="note" placeholder="необязательное примечание (почему выбран этот словарь, или в чём сомнение)"></textarea>
+    <div class="cardbtns">
+      <button class="btn submit">Сохранить ответ</button>
+      <button class="btn defer">Отложить (не уверен(а))</button>
+    </div>
+    <div class="cardstate">не отвечено</div>
+  </div>
+
+  <div class="card" data-id="G-11">
+    <div class="cardhead">
+      <span class="idchip">G-11</span>
+      <span class="badge">Общий сценарий (G)</span>
+    </div>
+    <div class="question">
+      <div class="scenario-ru">История и личность, стоящая за пураническим именем, изложенная ясным английским языком.</div>
+      <div class="scenario-en">Оригинал (EN): <em>The story and identity behind a Purāṇic name, in clear English.</em></div>
+    </div>
+    <div class="panel">
+      <div class="panelhead">Ваш ответ -- выберите ОДИН словарь</div>
+      <select class="codeselect">
+        <option value="">-- выберите словарь --</option>
+        <optgroup label="Sanskrit-English">
+<option value="WIL">WIL -- Wilson Sanskrit-English Dictionary (1832)</option>
+<option value="YAT">YAT -- Yates Sanskrit-English Dictionary (1846)</option>
+<option value="GST">GST -- Goldstücker Sanskrit-English Dictionary (1856)</option>
+<option value="BEN">BEN -- Benfey Sanskrit-English Dictionary (1866)</option>
+<option value="MW72">MW72 -- Monier-Williams Sanskrit-English Dictionary (1872)</option>
+<option value="LAN">LAN -- Lanman&#x27;s Sanskrit Reader Vocabulary (1884)</option>
+<option value="LRV">LRV -- Vaidya Sanskrit-English Dictionary (1889)</option>
+<option value="AP90">AP90 -- Apte Practical Sanskrit-English Dictionary (1890)</option>
+<option value="CAE">CAE -- Cappeller Sanskrit-English Dictionary (1891)</option>
+<option value="MD">MD -- Macdonell Sanskrit-English Dictionary (1893)</option>
+<option value="MW">MW -- Monier-Williams Sanskrit-English Dictionary (1899)</option>
+<option value="SHS">SHS -- Shabda-Sagara Sanskrit-English Dictionary (1900)</option>
+<option value="AP">AP -- Practical Sanskrit-English Dictionary, revised edition (1957)</option>
+<option value="PD">PD -- An Encyclopedic Dictionary of Sanskrit on Historical Principles (1976)</option>
+</optgroup>
+<optgroup label="English-Sanskrit">
+<option value="MWE">MWE -- Monier-Williams English-Sanskrit Dictionary (1851)</option>
+<option value="BOR">BOR -- Borooah English-Sanskrit Dictionary (1877)</option>
+<option value="AE">AE -- Apte Student&#x27;s English-Sanskrit Dictionary (1920)</option>
+</optgroup>
+<optgroup label="Sanskrit-French">
+<option value="BUR">BUR -- Burnouf Dictionnaire Sanscrit-Français (1866)</option>
+<option value="STC">STC -- Stchoupak Dictionnaire Sanscrit-Français (1932)</option>
+</optgroup>
+<optgroup label="Sanskrit-German">
+<option value="PWG">PWG -- Böhtlingk and Roth Grosses Petersburger Wörterbuch (1855)</option>
+<option value="GRA">GRA -- Grassmann Wörterbuch zum Rig Veda (1873)</option>
+<option value="PW">PW -- Böhtlingk Sanskrit-Wörterbuch in kürzerer Fassung (1879)</option>
+<option value="CCS">CCS -- Cappeller Sanskrit Wörterbuch (1887)</option>
+<option value="SCH">SCH -- Schmidt Nachträge zum Sanskrit-Wörterbuch (1928)</option>
+</optgroup>
+<optgroup label="Sanskrit-Latin">
+<option value="BOP">BOP -- Bopp Glossarium Sanscritum (1847)</option>
+</optgroup>
+<optgroup label="Sanskrit-Sanskrit">
+<option value="ARMH">ARMH -- Abhidhānaratnamālā of Halāyudha (1861)</option>
+<option value="VCP">VCP -- Vacaspatyam (1873)</option>
+<option value="SKD">SKD -- Sabda-kalpadruma (1886)</option>
+<option value="ABCH">ABCH -- Abhidhānacintāmaṇi of Hemacandrācārya (1896)</option>
+<option value="ACPH">ACPH -- Abhidhānacintāmaṇipariśiṣṭa of Hemacandrācārya (1896)</option>
+<option value="ACSJ">ACSJ -- Abhidhānacintāmaṇiśiloñcha of Jinadeva (1896)</option>
+<option value="NMMB">NMMB -- Nāmamālikā of Bhoja (1955)</option>
+</optgroup>
+<optgroup label="Specialized">
+<option value="INM">INM -- Index to the Names in the Mahabharata (1904)</option>
+<option value="VEI">VEI -- The Vedic Index of Names and Subjects (1912)</option>
+<option value="PUI">PUI -- The Purana Index (1951)</option>
+<option value="BHS">BHS -- Edgerton Buddhist Hybrid Sanskrit Dictionary (1953)</option>
+<option value="FRI">FRI -- Friš Sanskrit Reader Vocabulary (1956)</option>
+<option value="ACC">ACC -- Aufrecht&#x27;s Catalogus Catalogorum (1962)</option>
+<option value="KRM">KRM -- Kṛdantarūpamālā (1965)</option>
+<option value="IEG">IEG -- Indian Epigraphical Glossary (1966)</option>
+<option value="SNP">SNP -- Meulenbeld&#x27;s Sanskrit Names of Plants (1974)</option>
+<option value="PE">PE -- Puranic Encyclopedia (1975)</option>
+<option value="PGN">PGN -- Personal and Geographical Names in the Gupta Inscriptions (1978)</option>
+<option value="MCI">MCI -- Mahabharata Cultural Index (1993)</option>
+</optgroup>
+      </select>
+    </div>
+    <div class="panel">
+      <h4 class="panelhead">Evidence (источник карточки)</h4>
+      <div class="panelbody">Текст сценария взят дословно из первичного источника
+      <code>csl-guides/src/data/which-dictionary-gold.json</code>, запись <code>G-11.scenario</code>
+      (v1.0, лицензия CC-BY-SA-4.0). Метка первого прохода (gold/accepted/quizAnswer/rationale)
+      из этой же записи в карточку НЕ включена и нигде на странице не встречается -- это и есть
+      условие независимости второго прохода.</div>
+    </div>
+    <textarea class="note" placeholder="необязательное примечание (почему выбран этот словарь, или в чём сомнение)"></textarea>
+    <div class="cardbtns">
+      <button class="btn submit">Сохранить ответ</button>
+      <button class="btn defer">Отложить (не уверен(а))</button>
+    </div>
+    <div class="cardstate">не отвечено</div>
+  </div>
+
+  <div class="card" data-id="G-12">
+    <div class="cardhead">
+      <span class="idchip">G-12</span>
+      <span class="badge">Общий сценарий (G)</span>
+    </div>
+    <div class="question">
+      <div class="scenario-ru">Классические синонимы слова в традиционной форме коша (словаря синонимов).</div>
+      <div class="scenario-en">Оригинал (EN): <em>Classical synonyms of a word, in the traditional kośa form.</em></div>
+    </div>
+    <div class="panel">
+      <div class="panelhead">Ваш ответ -- выберите ОДИН словарь</div>
+      <select class="codeselect">
+        <option value="">-- выберите словарь --</option>
+        <optgroup label="Sanskrit-English">
+<option value="WIL">WIL -- Wilson Sanskrit-English Dictionary (1832)</option>
+<option value="YAT">YAT -- Yates Sanskrit-English Dictionary (1846)</option>
+<option value="GST">GST -- Goldstücker Sanskrit-English Dictionary (1856)</option>
+<option value="BEN">BEN -- Benfey Sanskrit-English Dictionary (1866)</option>
+<option value="MW72">MW72 -- Monier-Williams Sanskrit-English Dictionary (1872)</option>
+<option value="LAN">LAN -- Lanman&#x27;s Sanskrit Reader Vocabulary (1884)</option>
+<option value="LRV">LRV -- Vaidya Sanskrit-English Dictionary (1889)</option>
+<option value="AP90">AP90 -- Apte Practical Sanskrit-English Dictionary (1890)</option>
+<option value="CAE">CAE -- Cappeller Sanskrit-English Dictionary (1891)</option>
+<option value="MD">MD -- Macdonell Sanskrit-English Dictionary (1893)</option>
+<option value="MW">MW -- Monier-Williams Sanskrit-English Dictionary (1899)</option>
+<option value="SHS">SHS -- Shabda-Sagara Sanskrit-English Dictionary (1900)</option>
+<option value="AP">AP -- Practical Sanskrit-English Dictionary, revised edition (1957)</option>
+<option value="PD">PD -- An Encyclopedic Dictionary of Sanskrit on Historical Principles (1976)</option>
+</optgroup>
+<optgroup label="English-Sanskrit">
+<option value="MWE">MWE -- Monier-Williams English-Sanskrit Dictionary (1851)</option>
+<option value="BOR">BOR -- Borooah English-Sanskrit Dictionary (1877)</option>
+<option value="AE">AE -- Apte Student&#x27;s English-Sanskrit Dictionary (1920)</option>
+</optgroup>
+<optgroup label="Sanskrit-French">
+<option value="BUR">BUR -- Burnouf Dictionnaire Sanscrit-Français (1866)</option>
+<option value="STC">STC -- Stchoupak Dictionnaire Sanscrit-Français (1932)</option>
+</optgroup>
+<optgroup label="Sanskrit-German">
+<option value="PWG">PWG -- Böhtlingk and Roth Grosses Petersburger Wörterbuch (1855)</option>
+<option value="GRA">GRA -- Grassmann Wörterbuch zum Rig Veda (1873)</option>
+<option value="PW">PW -- Böhtlingk Sanskrit-Wörterbuch in kürzerer Fassung (1879)</option>
+<option value="CCS">CCS -- Cappeller Sanskrit Wörterbuch (1887)</option>
+<option value="SCH">SCH -- Schmidt Nachträge zum Sanskrit-Wörterbuch (1928)</option>
+</optgroup>
+<optgroup label="Sanskrit-Latin">
+<option value="BOP">BOP -- Bopp Glossarium Sanscritum (1847)</option>
+</optgroup>
+<optgroup label="Sanskrit-Sanskrit">
+<option value="ARMH">ARMH -- Abhidhānaratnamālā of Halāyudha (1861)</option>
+<option value="VCP">VCP -- Vacaspatyam (1873)</option>
+<option value="SKD">SKD -- Sabda-kalpadruma (1886)</option>
+<option value="ABCH">ABCH -- Abhidhānacintāmaṇi of Hemacandrācārya (1896)</option>
+<option value="ACPH">ACPH -- Abhidhānacintāmaṇipariśiṣṭa of Hemacandrācārya (1896)</option>
+<option value="ACSJ">ACSJ -- Abhidhānacintāmaṇiśiloñcha of Jinadeva (1896)</option>
+<option value="NMMB">NMMB -- Nāmamālikā of Bhoja (1955)</option>
+</optgroup>
+<optgroup label="Specialized">
+<option value="INM">INM -- Index to the Names in the Mahabharata (1904)</option>
+<option value="VEI">VEI -- The Vedic Index of Names and Subjects (1912)</option>
+<option value="PUI">PUI -- The Purana Index (1951)</option>
+<option value="BHS">BHS -- Edgerton Buddhist Hybrid Sanskrit Dictionary (1953)</option>
+<option value="FRI">FRI -- Friš Sanskrit Reader Vocabulary (1956)</option>
+<option value="ACC">ACC -- Aufrecht&#x27;s Catalogus Catalogorum (1962)</option>
+<option value="KRM">KRM -- Kṛdantarūpamālā (1965)</option>
+<option value="IEG">IEG -- Indian Epigraphical Glossary (1966)</option>
+<option value="SNP">SNP -- Meulenbeld&#x27;s Sanskrit Names of Plants (1974)</option>
+<option value="PE">PE -- Puranic Encyclopedia (1975)</option>
+<option value="PGN">PGN -- Personal and Geographical Names in the Gupta Inscriptions (1978)</option>
+<option value="MCI">MCI -- Mahabharata Cultural Index (1993)</option>
+</optgroup>
+      </select>
+    </div>
+    <div class="panel">
+      <h4 class="panelhead">Evidence (источник карточки)</h4>
+      <div class="panelbody">Текст сценария взят дословно из первичного источника
+      <code>csl-guides/src/data/which-dictionary-gold.json</code>, запись <code>G-12.scenario</code>
+      (v1.0, лицензия CC-BY-SA-4.0). Метка первого прохода (gold/accepted/quizAnswer/rationale)
+      из этой же записи в карточку НЕ включена и нигде на странице не встречается -- это и есть
+      условие независимости второго прохода.</div>
+    </div>
+    <textarea class="note" placeholder="необязательное примечание (почему выбран этот словарь, или в чём сомнение)"></textarea>
+    <div class="cardbtns">
+      <button class="btn submit">Сохранить ответ</button>
+      <button class="btn defer">Отложить (не уверен(а))</button>
+    </div>
+    <div class="cardstate">не отвечено</div>
+  </div>
+
+  <div class="card" data-id="G-13">
+    <div class="cardhead">
+      <span class="idchip">G-13</span>
+      <span class="badge">Общий сценарий (G)</span>
+    </div>
+    <div class="question">
+      <div class="scenario-ru">Имя или тема в ведийской литературе с научными ссылками.</div>
+      <div class="scenario-en">Оригинал (EN): <em>A name or subject in Vedic literature, with scholarly references.</em></div>
+    </div>
+    <div class="panel">
+      <div class="panelhead">Ваш ответ -- выберите ОДИН словарь</div>
+      <select class="codeselect">
+        <option value="">-- выберите словарь --</option>
+        <optgroup label="Sanskrit-English">
+<option value="WIL">WIL -- Wilson Sanskrit-English Dictionary (1832)</option>
+<option value="YAT">YAT -- Yates Sanskrit-English Dictionary (1846)</option>
+<option value="GST">GST -- Goldstücker Sanskrit-English Dictionary (1856)</option>
+<option value="BEN">BEN -- Benfey Sanskrit-English Dictionary (1866)</option>
+<option value="MW72">MW72 -- Monier-Williams Sanskrit-English Dictionary (1872)</option>
+<option value="LAN">LAN -- Lanman&#x27;s Sanskrit Reader Vocabulary (1884)</option>
+<option value="LRV">LRV -- Vaidya Sanskrit-English Dictionary (1889)</option>
+<option value="AP90">AP90 -- Apte Practical Sanskrit-English Dictionary (1890)</option>
+<option value="CAE">CAE -- Cappeller Sanskrit-English Dictionary (1891)</option>
+<option value="MD">MD -- Macdonell Sanskrit-English Dictionary (1893)</option>
+<option value="MW">MW -- Monier-Williams Sanskrit-English Dictionary (1899)</option>
+<option value="SHS">SHS -- Shabda-Sagara Sanskrit-English Dictionary (1900)</option>
+<option value="AP">AP -- Practical Sanskrit-English Dictionary, revised edition (1957)</option>
+<option value="PD">PD -- An Encyclopedic Dictionary of Sanskrit on Historical Principles (1976)</option>
+</optgroup>
+<optgroup label="English-Sanskrit">
+<option value="MWE">MWE -- Monier-Williams English-Sanskrit Dictionary (1851)</option>
+<option value="BOR">BOR -- Borooah English-Sanskrit Dictionary (1877)</option>
+<option value="AE">AE -- Apte Student&#x27;s English-Sanskrit Dictionary (1920)</option>
+</optgroup>
+<optgroup label="Sanskrit-French">
+<option value="BUR">BUR -- Burnouf Dictionnaire Sanscrit-Français (1866)</option>
+<option value="STC">STC -- Stchoupak Dictionnaire Sanscrit-Français (1932)</option>
+</optgroup>
+<optgroup label="Sanskrit-German">
+<option value="PWG">PWG -- Böhtlingk and Roth Grosses Petersburger Wörterbuch (1855)</option>
+<option value="GRA">GRA -- Grassmann Wörterbuch zum Rig Veda (1873)</option>
+<option value="PW">PW -- Böhtlingk Sanskrit-Wörterbuch in kürzerer Fassung (1879)</option>
+<option value="CCS">CCS -- Cappeller Sanskrit Wörterbuch (1887)</option>
+<option value="SCH">SCH -- Schmidt Nachträge zum Sanskrit-Wörterbuch (1928)</option>
+</optgroup>
+<optgroup label="Sanskrit-Latin">
+<option value="BOP">BOP -- Bopp Glossarium Sanscritum (1847)</option>
+</optgroup>
+<optgroup label="Sanskrit-Sanskrit">
+<option value="ARMH">ARMH -- Abhidhānaratnamālā of Halāyudha (1861)</option>
+<option value="VCP">VCP -- Vacaspatyam (1873)</option>
+<option value="SKD">SKD -- Sabda-kalpadruma (1886)</option>
+<option value="ABCH">ABCH -- Abhidhānacintāmaṇi of Hemacandrācārya (1896)</option>
+<option value="ACPH">ACPH -- Abhidhānacintāmaṇipariśiṣṭa of Hemacandrācārya (1896)</option>
+<option value="ACSJ">ACSJ -- Abhidhānacintāmaṇiśiloñcha of Jinadeva (1896)</option>
+<option value="NMMB">NMMB -- Nāmamālikā of Bhoja (1955)</option>
+</optgroup>
+<optgroup label="Specialized">
+<option value="INM">INM -- Index to the Names in the Mahabharata (1904)</option>
+<option value="VEI">VEI -- The Vedic Index of Names and Subjects (1912)</option>
+<option value="PUI">PUI -- The Purana Index (1951)</option>
+<option value="BHS">BHS -- Edgerton Buddhist Hybrid Sanskrit Dictionary (1953)</option>
+<option value="FRI">FRI -- Friš Sanskrit Reader Vocabulary (1956)</option>
+<option value="ACC">ACC -- Aufrecht&#x27;s Catalogus Catalogorum (1962)</option>
+<option value="KRM">KRM -- Kṛdantarūpamālā (1965)</option>
+<option value="IEG">IEG -- Indian Epigraphical Glossary (1966)</option>
+<option value="SNP">SNP -- Meulenbeld&#x27;s Sanskrit Names of Plants (1974)</option>
+<option value="PE">PE -- Puranic Encyclopedia (1975)</option>
+<option value="PGN">PGN -- Personal and Geographical Names in the Gupta Inscriptions (1978)</option>
+<option value="MCI">MCI -- Mahabharata Cultural Index (1993)</option>
+</optgroup>
+      </select>
+    </div>
+    <div class="panel">
+      <h4 class="panelhead">Evidence (источник карточки)</h4>
+      <div class="panelbody">Текст сценария взят дословно из первичного источника
+      <code>csl-guides/src/data/which-dictionary-gold.json</code>, запись <code>G-13.scenario</code>
+      (v1.0, лицензия CC-BY-SA-4.0). Метка первого прохода (gold/accepted/quizAnswer/rationale)
+      из этой же записи в карточку НЕ включена и нигде на странице не встречается -- это и есть
+      условие независимости второго прохода.</div>
+    </div>
+    <textarea class="note" placeholder="необязательное примечание (почему выбран этот словарь, или в чём сомнение)"></textarea>
+    <div class="cardbtns">
+      <button class="btn submit">Сохранить ответ</button>
+      <button class="btn defer">Отложить (не уверен(а))</button>
+    </div>
+    <div class="cardstate">не отвечено</div>
+  </div>
+
+  <div class="card" data-id="G-14">
+    <div class="cardhead">
+      <span class="idchip">G-14</span>
+      <span class="badge">Общий сценарий (G)</span>
+    </div>
+    <div class="question">
+      <div class="scenario-ru">Грамматический профиль корня — класс (gaṇa), seṭ/aniṭ, pada, производные kṛt.</div>
+      <div class="scenario-en">Оригинал (EN): <em>A root&#x27;s grammatical profile — class, seṭ/aniṭ, pada, kṛt derivatives.</em></div>
+    </div>
+    <div class="panel">
+      <div class="panelhead">Ваш ответ -- выберите ОДИН словарь</div>
+      <select class="codeselect">
+        <option value="">-- выберите словарь --</option>
+        <optgroup label="Sanskrit-English">
+<option value="WIL">WIL -- Wilson Sanskrit-English Dictionary (1832)</option>
+<option value="YAT">YAT -- Yates Sanskrit-English Dictionary (1846)</option>
+<option value="GST">GST -- Goldstücker Sanskrit-English Dictionary (1856)</option>
+<option value="BEN">BEN -- Benfey Sanskrit-English Dictionary (1866)</option>
+<option value="MW72">MW72 -- Monier-Williams Sanskrit-English Dictionary (1872)</option>
+<option value="LAN">LAN -- Lanman&#x27;s Sanskrit Reader Vocabulary (1884)</option>
+<option value="LRV">LRV -- Vaidya Sanskrit-English Dictionary (1889)</option>
+<option value="AP90">AP90 -- Apte Practical Sanskrit-English Dictionary (1890)</option>
+<option value="CAE">CAE -- Cappeller Sanskrit-English Dictionary (1891)</option>
+<option value="MD">MD -- Macdonell Sanskrit-English Dictionary (1893)</option>
+<option value="MW">MW -- Monier-Williams Sanskrit-English Dictionary (1899)</option>
+<option value="SHS">SHS -- Shabda-Sagara Sanskrit-English Dictionary (1900)</option>
+<option value="AP">AP -- Practical Sanskrit-English Dictionary, revised edition (1957)</option>
+<option value="PD">PD -- An Encyclopedic Dictionary of Sanskrit on Historical Principles (1976)</option>
+</optgroup>
+<optgroup label="English-Sanskrit">
+<option value="MWE">MWE -- Monier-Williams English-Sanskrit Dictionary (1851)</option>
+<option value="BOR">BOR -- Borooah English-Sanskrit Dictionary (1877)</option>
+<option value="AE">AE -- Apte Student&#x27;s English-Sanskrit Dictionary (1920)</option>
+</optgroup>
+<optgroup label="Sanskrit-French">
+<option value="BUR">BUR -- Burnouf Dictionnaire Sanscrit-Français (1866)</option>
+<option value="STC">STC -- Stchoupak Dictionnaire Sanscrit-Français (1932)</option>
+</optgroup>
+<optgroup label="Sanskrit-German">
+<option value="PWG">PWG -- Böhtlingk and Roth Grosses Petersburger Wörterbuch (1855)</option>
+<option value="GRA">GRA -- Grassmann Wörterbuch zum Rig Veda (1873)</option>
+<option value="PW">PW -- Böhtlingk Sanskrit-Wörterbuch in kürzerer Fassung (1879)</option>
+<option value="CCS">CCS -- Cappeller Sanskrit Wörterbuch (1887)</option>
+<option value="SCH">SCH -- Schmidt Nachträge zum Sanskrit-Wörterbuch (1928)</option>
+</optgroup>
+<optgroup label="Sanskrit-Latin">
+<option value="BOP">BOP -- Bopp Glossarium Sanscritum (1847)</option>
+</optgroup>
+<optgroup label="Sanskrit-Sanskrit">
+<option value="ARMH">ARMH -- Abhidhānaratnamālā of Halāyudha (1861)</option>
+<option value="VCP">VCP -- Vacaspatyam (1873)</option>
+<option value="SKD">SKD -- Sabda-kalpadruma (1886)</option>
+<option value="ABCH">ABCH -- Abhidhānacintāmaṇi of Hemacandrācārya (1896)</option>
+<option value="ACPH">ACPH -- Abhidhānacintāmaṇipariśiṣṭa of Hemacandrācārya (1896)</option>
+<option value="ACSJ">ACSJ -- Abhidhānacintāmaṇiśiloñcha of Jinadeva (1896)</option>
+<option value="NMMB">NMMB -- Nāmamālikā of Bhoja (1955)</option>
+</optgroup>
+<optgroup label="Specialized">
+<option value="INM">INM -- Index to the Names in the Mahabharata (1904)</option>
+<option value="VEI">VEI -- The Vedic Index of Names and Subjects (1912)</option>
+<option value="PUI">PUI -- The Purana Index (1951)</option>
+<option value="BHS">BHS -- Edgerton Buddhist Hybrid Sanskrit Dictionary (1953)</option>
+<option value="FRI">FRI -- Friš Sanskrit Reader Vocabulary (1956)</option>
+<option value="ACC">ACC -- Aufrecht&#x27;s Catalogus Catalogorum (1962)</option>
+<option value="KRM">KRM -- Kṛdantarūpamālā (1965)</option>
+<option value="IEG">IEG -- Indian Epigraphical Glossary (1966)</option>
+<option value="SNP">SNP -- Meulenbeld&#x27;s Sanskrit Names of Plants (1974)</option>
+<option value="PE">PE -- Puranic Encyclopedia (1975)</option>
+<option value="PGN">PGN -- Personal and Geographical Names in the Gupta Inscriptions (1978)</option>
+<option value="MCI">MCI -- Mahabharata Cultural Index (1993)</option>
+</optgroup>
+      </select>
+    </div>
+    <div class="panel">
+      <h4 class="panelhead">Evidence (источник карточки)</h4>
+      <div class="panelbody">Текст сценария взят дословно из первичного источника
+      <code>csl-guides/src/data/which-dictionary-gold.json</code>, запись <code>G-14.scenario</code>
+      (v1.0, лицензия CC-BY-SA-4.0). Метка первого прохода (gold/accepted/quizAnswer/rationale)
+      из этой же записи в карточку НЕ включена и нигде на странице не встречается -- это и есть
+      условие независимости второго прохода.</div>
+    </div>
+    <textarea class="note" placeholder="необязательное примечание (почему выбран этот словарь, или в чём сомнение)"></textarea>
+    <div class="cardbtns">
+      <button class="btn submit">Сохранить ответ</button>
+      <button class="btn defer">Отложить (не уверен(а))</button>
+    </div>
+    <div class="cardstate">не отвечено</div>
+  </div>
+
+  <div class="card" data-id="G-15">
+    <div class="cardhead">
+      <span class="idchip">G-15</span>
+      <span class="badge">Общий сценарий (G)</span>
+    </div>
+    <div class="question">
+      <div class="scenario-ru">Самый ранний крупный словарь санскрит–английский, основа для MW.</div>
+      <div class="scenario-en">Оригинал (EN): <em>The earliest major Sanskrit–English dictionary, MW&#x27;s foundation.</em></div>
+    </div>
+    <div class="panel">
+      <div class="panelhead">Ваш ответ -- выберите ОДИН словарь</div>
+      <select class="codeselect">
+        <option value="">-- выберите словарь --</option>
+        <optgroup label="Sanskrit-English">
+<option value="WIL">WIL -- Wilson Sanskrit-English Dictionary (1832)</option>
+<option value="YAT">YAT -- Yates Sanskrit-English Dictionary (1846)</option>
+<option value="GST">GST -- Goldstücker Sanskrit-English Dictionary (1856)</option>
+<option value="BEN">BEN -- Benfey Sanskrit-English Dictionary (1866)</option>
+<option value="MW72">MW72 -- Monier-Williams Sanskrit-English Dictionary (1872)</option>
+<option value="LAN">LAN -- Lanman&#x27;s Sanskrit Reader Vocabulary (1884)</option>
+<option value="LRV">LRV -- Vaidya Sanskrit-English Dictionary (1889)</option>
+<option value="AP90">AP90 -- Apte Practical Sanskrit-English Dictionary (1890)</option>
+<option value="CAE">CAE -- Cappeller Sanskrit-English Dictionary (1891)</option>
+<option value="MD">MD -- Macdonell Sanskrit-English Dictionary (1893)</option>
+<option value="MW">MW -- Monier-Williams Sanskrit-English Dictionary (1899)</option>
+<option value="SHS">SHS -- Shabda-Sagara Sanskrit-English Dictionary (1900)</option>
+<option value="AP">AP -- Practical Sanskrit-English Dictionary, revised edition (1957)</option>
+<option value="PD">PD -- An Encyclopedic Dictionary of Sanskrit on Historical Principles (1976)</option>
+</optgroup>
+<optgroup label="English-Sanskrit">
+<option value="MWE">MWE -- Monier-Williams English-Sanskrit Dictionary (1851)</option>
+<option value="BOR">BOR -- Borooah English-Sanskrit Dictionary (1877)</option>
+<option value="AE">AE -- Apte Student&#x27;s English-Sanskrit Dictionary (1920)</option>
+</optgroup>
+<optgroup label="Sanskrit-French">
+<option value="BUR">BUR -- Burnouf Dictionnaire Sanscrit-Français (1866)</option>
+<option value="STC">STC -- Stchoupak Dictionnaire Sanscrit-Français (1932)</option>
+</optgroup>
+<optgroup label="Sanskrit-German">
+<option value="PWG">PWG -- Böhtlingk and Roth Grosses Petersburger Wörterbuch (1855)</option>
+<option value="GRA">GRA -- Grassmann Wörterbuch zum Rig Veda (1873)</option>
+<option value="PW">PW -- Böhtlingk Sanskrit-Wörterbuch in kürzerer Fassung (1879)</option>
+<option value="CCS">CCS -- Cappeller Sanskrit Wörterbuch (1887)</option>
+<option value="SCH">SCH -- Schmidt Nachträge zum Sanskrit-Wörterbuch (1928)</option>
+</optgroup>
+<optgroup label="Sanskrit-Latin">
+<option value="BOP">BOP -- Bopp Glossarium Sanscritum (1847)</option>
+</optgroup>
+<optgroup label="Sanskrit-Sanskrit">
+<option value="ARMH">ARMH -- Abhidhānaratnamālā of Halāyudha (1861)</option>
+<option value="VCP">VCP -- Vacaspatyam (1873)</option>
+<option value="SKD">SKD -- Sabda-kalpadruma (1886)</option>
+<option value="ABCH">ABCH -- Abhidhānacintāmaṇi of Hemacandrācārya (1896)</option>
+<option value="ACPH">ACPH -- Abhidhānacintāmaṇipariśiṣṭa of Hemacandrācārya (1896)</option>
+<option value="ACSJ">ACSJ -- Abhidhānacintāmaṇiśiloñcha of Jinadeva (1896)</option>
+<option value="NMMB">NMMB -- Nāmamālikā of Bhoja (1955)</option>
+</optgroup>
+<optgroup label="Specialized">
+<option value="INM">INM -- Index to the Names in the Mahabharata (1904)</option>
+<option value="VEI">VEI -- The Vedic Index of Names and Subjects (1912)</option>
+<option value="PUI">PUI -- The Purana Index (1951)</option>
+<option value="BHS">BHS -- Edgerton Buddhist Hybrid Sanskrit Dictionary (1953)</option>
+<option value="FRI">FRI -- Friš Sanskrit Reader Vocabulary (1956)</option>
+<option value="ACC">ACC -- Aufrecht&#x27;s Catalogus Catalogorum (1962)</option>
+<option value="KRM">KRM -- Kṛdantarūpamālā (1965)</option>
+<option value="IEG">IEG -- Indian Epigraphical Glossary (1966)</option>
+<option value="SNP">SNP -- Meulenbeld&#x27;s Sanskrit Names of Plants (1974)</option>
+<option value="PE">PE -- Puranic Encyclopedia (1975)</option>
+<option value="PGN">PGN -- Personal and Geographical Names in the Gupta Inscriptions (1978)</option>
+<option value="MCI">MCI -- Mahabharata Cultural Index (1993)</option>
+</optgroup>
+      </select>
+    </div>
+    <div class="panel">
+      <h4 class="panelhead">Evidence (источник карточки)</h4>
+      <div class="panelbody">Текст сценария взят дословно из первичного источника
+      <code>csl-guides/src/data/which-dictionary-gold.json</code>, запись <code>G-15.scenario</code>
+      (v1.0, лицензия CC-BY-SA-4.0). Метка первого прохода (gold/accepted/quizAnswer/rationale)
+      из этой же записи в карточку НЕ включена и нигде на странице не встречается -- это и есть
+      условие независимости второго прохода.</div>
+    </div>
+    <textarea class="note" placeholder="необязательное примечание (почему выбран этот словарь, или в чём сомнение)"></textarea>
+    <div class="cardbtns">
+      <button class="btn submit">Сохранить ответ</button>
+      <button class="btn defer">Отложить (не уверен(а))</button>
+    </div>
+    <div class="cardstate">не отвечено</div>
+  </div>
+
+  <div class="card" data-id="G-16">
+    <div class="cardhead">
+      <span class="idchip">G-16</span>
+      <span class="badge">Общий сценарий (G)</span>
+    </div>
+    <div class="question">
+      <div class="scenario-ru">Сравнить трактовку слова у Монье-Вильямса в изданиях 1872 и 1899 годов.</div>
+      <div class="scenario-en">Оригинал (EN): <em>Compare Monier-Williams 1872 vs 1899 treatment of a word.</em></div>
+    </div>
+    <div class="panel">
+      <div class="panelhead">Ваш ответ -- выберите ОДИН словарь</div>
+      <select class="codeselect">
+        <option value="">-- выберите словарь --</option>
+        <optgroup label="Sanskrit-English">
+<option value="WIL">WIL -- Wilson Sanskrit-English Dictionary (1832)</option>
+<option value="YAT">YAT -- Yates Sanskrit-English Dictionary (1846)</option>
+<option value="GST">GST -- Goldstücker Sanskrit-English Dictionary (1856)</option>
+<option value="BEN">BEN -- Benfey Sanskrit-English Dictionary (1866)</option>
+<option value="MW72">MW72 -- Monier-Williams Sanskrit-English Dictionary (1872)</option>
+<option value="LAN">LAN -- Lanman&#x27;s Sanskrit Reader Vocabulary (1884)</option>
+<option value="LRV">LRV -- Vaidya Sanskrit-English Dictionary (1889)</option>
+<option value="AP90">AP90 -- Apte Practical Sanskrit-English Dictionary (1890)</option>
+<option value="CAE">CAE -- Cappeller Sanskrit-English Dictionary (1891)</option>
+<option value="MD">MD -- Macdonell Sanskrit-English Dictionary (1893)</option>
+<option value="MW">MW -- Monier-Williams Sanskrit-English Dictionary (1899)</option>
+<option value="SHS">SHS -- Shabda-Sagara Sanskrit-English Dictionary (1900)</option>
+<option value="AP">AP -- Practical Sanskrit-English Dictionary, revised edition (1957)</option>
+<option value="PD">PD -- An Encyclopedic Dictionary of Sanskrit on Historical Principles (1976)</option>
+</optgroup>
+<optgroup label="English-Sanskrit">
+<option value="MWE">MWE -- Monier-Williams English-Sanskrit Dictionary (1851)</option>
+<option value="BOR">BOR -- Borooah English-Sanskrit Dictionary (1877)</option>
+<option value="AE">AE -- Apte Student&#x27;s English-Sanskrit Dictionary (1920)</option>
+</optgroup>
+<optgroup label="Sanskrit-French">
+<option value="BUR">BUR -- Burnouf Dictionnaire Sanscrit-Français (1866)</option>
+<option value="STC">STC -- Stchoupak Dictionnaire Sanscrit-Français (1932)</option>
+</optgroup>
+<optgroup label="Sanskrit-German">
+<option value="PWG">PWG -- Böhtlingk and Roth Grosses Petersburger Wörterbuch (1855)</option>
+<option value="GRA">GRA -- Grassmann Wörterbuch zum Rig Veda (1873)</option>
+<option value="PW">PW -- Böhtlingk Sanskrit-Wörterbuch in kürzerer Fassung (1879)</option>
+<option value="CCS">CCS -- Cappeller Sanskrit Wörterbuch (1887)</option>
+<option value="SCH">SCH -- Schmidt Nachträge zum Sanskrit-Wörterbuch (1928)</option>
+</optgroup>
+<optgroup label="Sanskrit-Latin">
+<option value="BOP">BOP -- Bopp Glossarium Sanscritum (1847)</option>
+</optgroup>
+<optgroup label="Sanskrit-Sanskrit">
+<option value="ARMH">ARMH -- Abhidhānaratnamālā of Halāyudha (1861)</option>
+<option value="VCP">VCP -- Vacaspatyam (1873)</option>
+<option value="SKD">SKD -- Sabda-kalpadruma (1886)</option>
+<option value="ABCH">ABCH -- Abhidhānacintāmaṇi of Hemacandrācārya (1896)</option>
+<option value="ACPH">ACPH -- Abhidhānacintāmaṇipariśiṣṭa of Hemacandrācārya (1896)</option>
+<option value="ACSJ">ACSJ -- Abhidhānacintāmaṇiśiloñcha of Jinadeva (1896)</option>
+<option value="NMMB">NMMB -- Nāmamālikā of Bhoja (1955)</option>
+</optgroup>
+<optgroup label="Specialized">
+<option value="INM">INM -- Index to the Names in the Mahabharata (1904)</option>
+<option value="VEI">VEI -- The Vedic Index of Names and Subjects (1912)</option>
+<option value="PUI">PUI -- The Purana Index (1951)</option>
+<option value="BHS">BHS -- Edgerton Buddhist Hybrid Sanskrit Dictionary (1953)</option>
+<option value="FRI">FRI -- Friš Sanskrit Reader Vocabulary (1956)</option>
+<option value="ACC">ACC -- Aufrecht&#x27;s Catalogus Catalogorum (1962)</option>
+<option value="KRM">KRM -- Kṛdantarūpamālā (1965)</option>
+<option value="IEG">IEG -- Indian Epigraphical Glossary (1966)</option>
+<option value="SNP">SNP -- Meulenbeld&#x27;s Sanskrit Names of Plants (1974)</option>
+<option value="PE">PE -- Puranic Encyclopedia (1975)</option>
+<option value="PGN">PGN -- Personal and Geographical Names in the Gupta Inscriptions (1978)</option>
+<option value="MCI">MCI -- Mahabharata Cultural Index (1993)</option>
+</optgroup>
+      </select>
+    </div>
+    <div class="panel">
+      <h4 class="panelhead">Evidence (источник карточки)</h4>
+      <div class="panelbody">Текст сценария взят дословно из первичного источника
+      <code>csl-guides/src/data/which-dictionary-gold.json</code>, запись <code>G-16.scenario</code>
+      (v1.0, лицензия CC-BY-SA-4.0). Метка первого прохода (gold/accepted/quizAnswer/rationale)
+      из этой же записи в карточку НЕ включена и нигде на странице не встречается -- это и есть
+      условие независимости второго прохода.</div>
+    </div>
+    <textarea class="note" placeholder="необязательное примечание (почему выбран этот словарь, или в чём сомнение)"></textarea>
+    <div class="cardbtns">
+      <button class="btn submit">Сохранить ответ</button>
+      <button class="btn defer">Отложить (не уверен(а))</button>
+    </div>
+    <div class="cardstate">не отвечено</div>
+  </div>
+
+  <div class="card" data-id="G-17">
+    <div class="cardhead">
+      <span class="idchip">G-17</span>
+      <span class="badge">Общий сценарий (G)</span>
+    </div>
+    <div class="question">
+      <div class="scenario-ru">Компактный студенческий словарь с акцентами для чтения.</div>
+      <div class="scenario-en">Оригинал (EN): <em>A compact, accented student&#x27;s dictionary for reading.</em></div>
+    </div>
+    <div class="panel">
+      <div class="panelhead">Ваш ответ -- выберите ОДИН словарь</div>
+      <select class="codeselect">
+        <option value="">-- выберите словарь --</option>
+        <optgroup label="Sanskrit-English">
+<option value="WIL">WIL -- Wilson Sanskrit-English Dictionary (1832)</option>
+<option value="YAT">YAT -- Yates Sanskrit-English Dictionary (1846)</option>
+<option value="GST">GST -- Goldstücker Sanskrit-English Dictionary (1856)</option>
+<option value="BEN">BEN -- Benfey Sanskrit-English Dictionary (1866)</option>
+<option value="MW72">MW72 -- Monier-Williams Sanskrit-English Dictionary (1872)</option>
+<option value="LAN">LAN -- Lanman&#x27;s Sanskrit Reader Vocabulary (1884)</option>
+<option value="LRV">LRV -- Vaidya Sanskrit-English Dictionary (1889)</option>
+<option value="AP90">AP90 -- Apte Practical Sanskrit-English Dictionary (1890)</option>
+<option value="CAE">CAE -- Cappeller Sanskrit-English Dictionary (1891)</option>
+<option value="MD">MD -- Macdonell Sanskrit-English Dictionary (1893)</option>
+<option value="MW">MW -- Monier-Williams Sanskrit-English Dictionary (1899)</option>
+<option value="SHS">SHS -- Shabda-Sagara Sanskrit-English Dictionary (1900)</option>
+<option value="AP">AP -- Practical Sanskrit-English Dictionary, revised edition (1957)</option>
+<option value="PD">PD -- An Encyclopedic Dictionary of Sanskrit on Historical Principles (1976)</option>
+</optgroup>
+<optgroup label="English-Sanskrit">
+<option value="MWE">MWE -- Monier-Williams English-Sanskrit Dictionary (1851)</option>
+<option value="BOR">BOR -- Borooah English-Sanskrit Dictionary (1877)</option>
+<option value="AE">AE -- Apte Student&#x27;s English-Sanskrit Dictionary (1920)</option>
+</optgroup>
+<optgroup label="Sanskrit-French">
+<option value="BUR">BUR -- Burnouf Dictionnaire Sanscrit-Français (1866)</option>
+<option value="STC">STC -- Stchoupak Dictionnaire Sanscrit-Français (1932)</option>
+</optgroup>
+<optgroup label="Sanskrit-German">
+<option value="PWG">PWG -- Böhtlingk and Roth Grosses Petersburger Wörterbuch (1855)</option>
+<option value="GRA">GRA -- Grassmann Wörterbuch zum Rig Veda (1873)</option>
+<option value="PW">PW -- Böhtlingk Sanskrit-Wörterbuch in kürzerer Fassung (1879)</option>
+<option value="CCS">CCS -- Cappeller Sanskrit Wörterbuch (1887)</option>
+<option value="SCH">SCH -- Schmidt Nachträge zum Sanskrit-Wörterbuch (1928)</option>
+</optgroup>
+<optgroup label="Sanskrit-Latin">
+<option value="BOP">BOP -- Bopp Glossarium Sanscritum (1847)</option>
+</optgroup>
+<optgroup label="Sanskrit-Sanskrit">
+<option value="ARMH">ARMH -- Abhidhānaratnamālā of Halāyudha (1861)</option>
+<option value="VCP">VCP -- Vacaspatyam (1873)</option>
+<option value="SKD">SKD -- Sabda-kalpadruma (1886)</option>
+<option value="ABCH">ABCH -- Abhidhānacintāmaṇi of Hemacandrācārya (1896)</option>
+<option value="ACPH">ACPH -- Abhidhānacintāmaṇipariśiṣṭa of Hemacandrācārya (1896)</option>
+<option value="ACSJ">ACSJ -- Abhidhānacintāmaṇiśiloñcha of Jinadeva (1896)</option>
+<option value="NMMB">NMMB -- Nāmamālikā of Bhoja (1955)</option>
+</optgroup>
+<optgroup label="Specialized">
+<option value="INM">INM -- Index to the Names in the Mahabharata (1904)</option>
+<option value="VEI">VEI -- The Vedic Index of Names and Subjects (1912)</option>
+<option value="PUI">PUI -- The Purana Index (1951)</option>
+<option value="BHS">BHS -- Edgerton Buddhist Hybrid Sanskrit Dictionary (1953)</option>
+<option value="FRI">FRI -- Friš Sanskrit Reader Vocabulary (1956)</option>
+<option value="ACC">ACC -- Aufrecht&#x27;s Catalogus Catalogorum (1962)</option>
+<option value="KRM">KRM -- Kṛdantarūpamālā (1965)</option>
+<option value="IEG">IEG -- Indian Epigraphical Glossary (1966)</option>
+<option value="SNP">SNP -- Meulenbeld&#x27;s Sanskrit Names of Plants (1974)</option>
+<option value="PE">PE -- Puranic Encyclopedia (1975)</option>
+<option value="PGN">PGN -- Personal and Geographical Names in the Gupta Inscriptions (1978)</option>
+<option value="MCI">MCI -- Mahabharata Cultural Index (1993)</option>
+</optgroup>
+      </select>
+    </div>
+    <div class="panel">
+      <h4 class="panelhead">Evidence (источник карточки)</h4>
+      <div class="panelbody">Текст сценария взят дословно из первичного источника
+      <code>csl-guides/src/data/which-dictionary-gold.json</code>, запись <code>G-17.scenario</code>
+      (v1.0, лицензия CC-BY-SA-4.0). Метка первого прохода (gold/accepted/quizAnswer/rationale)
+      из этой же записи в карточку НЕ включена и нигде на странице не встречается -- это и есть
+      условие независимости второго прохода.</div>
+    </div>
+    <textarea class="note" placeholder="необязательное примечание (почему выбран этот словарь, или в чём сомнение)"></textarea>
+    <div class="cardbtns">
+      <button class="btn submit">Сохранить ответ</button>
+      <button class="btn defer">Отложить (не уверен(а))</button>
+    </div>
+    <div class="cardstate">не отвечено</div>
+  </div>
+
+  <div class="card" data-id="G-18">
+    <div class="cardhead">
+      <span class="idchip">G-18</span>
+      <span class="badge">Общий сценарий (G)</span>
+    </div>
+    <div class="question">
+      <div class="scenario-ru">Слово/значение отсутствует в PW; где искать научные дополнения?</div>
+      <div class="scenario-en">Оригинал (EN): <em>A word/sense missing from PW; where are the scholarly additions?</em></div>
+    </div>
+    <div class="panel">
+      <div class="panelhead">Ваш ответ -- выберите ОДИН словарь</div>
+      <select class="codeselect">
+        <option value="">-- выберите словарь --</option>
+        <optgroup label="Sanskrit-English">
+<option value="WIL">WIL -- Wilson Sanskrit-English Dictionary (1832)</option>
+<option value="YAT">YAT -- Yates Sanskrit-English Dictionary (1846)</option>
+<option value="GST">GST -- Goldstücker Sanskrit-English Dictionary (1856)</option>
+<option value="BEN">BEN -- Benfey Sanskrit-English Dictionary (1866)</option>
+<option value="MW72">MW72 -- Monier-Williams Sanskrit-English Dictionary (1872)</option>
+<option value="LAN">LAN -- Lanman&#x27;s Sanskrit Reader Vocabulary (1884)</option>
+<option value="LRV">LRV -- Vaidya Sanskrit-English Dictionary (1889)</option>
+<option value="AP90">AP90 -- Apte Practical Sanskrit-English Dictionary (1890)</option>
+<option value="CAE">CAE -- Cappeller Sanskrit-English Dictionary (1891)</option>
+<option value="MD">MD -- Macdonell Sanskrit-English Dictionary (1893)</option>
+<option value="MW">MW -- Monier-Williams Sanskrit-English Dictionary (1899)</option>
+<option value="SHS">SHS -- Shabda-Sagara Sanskrit-English Dictionary (1900)</option>
+<option value="AP">AP -- Practical Sanskrit-English Dictionary, revised edition (1957)</option>
+<option value="PD">PD -- An Encyclopedic Dictionary of Sanskrit on Historical Principles (1976)</option>
+</optgroup>
+<optgroup label="English-Sanskrit">
+<option value="MWE">MWE -- Monier-Williams English-Sanskrit Dictionary (1851)</option>
+<option value="BOR">BOR -- Borooah English-Sanskrit Dictionary (1877)</option>
+<option value="AE">AE -- Apte Student&#x27;s English-Sanskrit Dictionary (1920)</option>
+</optgroup>
+<optgroup label="Sanskrit-French">
+<option value="BUR">BUR -- Burnouf Dictionnaire Sanscrit-Français (1866)</option>
+<option value="STC">STC -- Stchoupak Dictionnaire Sanscrit-Français (1932)</option>
+</optgroup>
+<optgroup label="Sanskrit-German">
+<option value="PWG">PWG -- Böhtlingk and Roth Grosses Petersburger Wörterbuch (1855)</option>
+<option value="GRA">GRA -- Grassmann Wörterbuch zum Rig Veda (1873)</option>
+<option value="PW">PW -- Böhtlingk Sanskrit-Wörterbuch in kürzerer Fassung (1879)</option>
+<option value="CCS">CCS -- Cappeller Sanskrit Wörterbuch (1887)</option>
+<option value="SCH">SCH -- Schmidt Nachträge zum Sanskrit-Wörterbuch (1928)</option>
+</optgroup>
+<optgroup label="Sanskrit-Latin">
+<option value="BOP">BOP -- Bopp Glossarium Sanscritum (1847)</option>
+</optgroup>
+<optgroup label="Sanskrit-Sanskrit">
+<option value="ARMH">ARMH -- Abhidhānaratnamālā of Halāyudha (1861)</option>
+<option value="VCP">VCP -- Vacaspatyam (1873)</option>
+<option value="SKD">SKD -- Sabda-kalpadruma (1886)</option>
+<option value="ABCH">ABCH -- Abhidhānacintāmaṇi of Hemacandrācārya (1896)</option>
+<option value="ACPH">ACPH -- Abhidhānacintāmaṇipariśiṣṭa of Hemacandrācārya (1896)</option>
+<option value="ACSJ">ACSJ -- Abhidhānacintāmaṇiśiloñcha of Jinadeva (1896)</option>
+<option value="NMMB">NMMB -- Nāmamālikā of Bhoja (1955)</option>
+</optgroup>
+<optgroup label="Specialized">
+<option value="INM">INM -- Index to the Names in the Mahabharata (1904)</option>
+<option value="VEI">VEI -- The Vedic Index of Names and Subjects (1912)</option>
+<option value="PUI">PUI -- The Purana Index (1951)</option>
+<option value="BHS">BHS -- Edgerton Buddhist Hybrid Sanskrit Dictionary (1953)</option>
+<option value="FRI">FRI -- Friš Sanskrit Reader Vocabulary (1956)</option>
+<option value="ACC">ACC -- Aufrecht&#x27;s Catalogus Catalogorum (1962)</option>
+<option value="KRM">KRM -- Kṛdantarūpamālā (1965)</option>
+<option value="IEG">IEG -- Indian Epigraphical Glossary (1966)</option>
+<option value="SNP">SNP -- Meulenbeld&#x27;s Sanskrit Names of Plants (1974)</option>
+<option value="PE">PE -- Puranic Encyclopedia (1975)</option>
+<option value="PGN">PGN -- Personal and Geographical Names in the Gupta Inscriptions (1978)</option>
+<option value="MCI">MCI -- Mahabharata Cultural Index (1993)</option>
+</optgroup>
+      </select>
+    </div>
+    <div class="panel">
+      <h4 class="panelhead">Evidence (источник карточки)</h4>
+      <div class="panelbody">Текст сценария взят дословно из первичного источника
+      <code>csl-guides/src/data/which-dictionary-gold.json</code>, запись <code>G-18.scenario</code>
+      (v1.0, лицензия CC-BY-SA-4.0). Метка первого прохода (gold/accepted/quizAnswer/rationale)
+      из этой же записи в карточку НЕ включена и нигде на странице не встречается -- это и есть
+      условие независимости второго прохода.</div>
+    </div>
+    <textarea class="note" placeholder="необязательное примечание (почему выбран этот словарь, или в чём сомнение)"></textarea>
+    <div class="cardbtns">
+      <button class="btn submit">Сохранить ответ</button>
+      <button class="btn defer">Отложить (не уверен(а))</button>
+    </div>
+    <div class="cardstate">не отвечено</div>
+  </div>
+
+  <div class="card" data-id="P-01">
+    <div class="cardhead">
+      <span class="idchip">P-01</span>
+      <span class="badge">Профиль пользователя (P)</span>
+    </div>
+    <div class="question">
+      <div class="scenario-ru">Нужно определение НА САМОМ санскрите, с шастрическими цитатами — энциклопедический словарь санскрит–санскрит.</div>
+      <div class="scenario-en">Оригинал (EN): <em>You want the definition IN Sanskrit, with śāstric quotations — a Sanskrit–Sanskrit encyclopedic lexicon.</em></div>
+    </div>
+    <div class="panel">
+      <div class="panelhead">Ваш ответ -- выберите ОДИН словарь</div>
+      <select class="codeselect">
+        <option value="">-- выберите словарь --</option>
+        <optgroup label="Sanskrit-English">
+<option value="WIL">WIL -- Wilson Sanskrit-English Dictionary (1832)</option>
+<option value="YAT">YAT -- Yates Sanskrit-English Dictionary (1846)</option>
+<option value="GST">GST -- Goldstücker Sanskrit-English Dictionary (1856)</option>
+<option value="BEN">BEN -- Benfey Sanskrit-English Dictionary (1866)</option>
+<option value="MW72">MW72 -- Monier-Williams Sanskrit-English Dictionary (1872)</option>
+<option value="LAN">LAN -- Lanman&#x27;s Sanskrit Reader Vocabulary (1884)</option>
+<option value="LRV">LRV -- Vaidya Sanskrit-English Dictionary (1889)</option>
+<option value="AP90">AP90 -- Apte Practical Sanskrit-English Dictionary (1890)</option>
+<option value="CAE">CAE -- Cappeller Sanskrit-English Dictionary (1891)</option>
+<option value="MD">MD -- Macdonell Sanskrit-English Dictionary (1893)</option>
+<option value="MW">MW -- Monier-Williams Sanskrit-English Dictionary (1899)</option>
+<option value="SHS">SHS -- Shabda-Sagara Sanskrit-English Dictionary (1900)</option>
+<option value="AP">AP -- Practical Sanskrit-English Dictionary, revised edition (1957)</option>
+<option value="PD">PD -- An Encyclopedic Dictionary of Sanskrit on Historical Principles (1976)</option>
+</optgroup>
+<optgroup label="English-Sanskrit">
+<option value="MWE">MWE -- Monier-Williams English-Sanskrit Dictionary (1851)</option>
+<option value="BOR">BOR -- Borooah English-Sanskrit Dictionary (1877)</option>
+<option value="AE">AE -- Apte Student&#x27;s English-Sanskrit Dictionary (1920)</option>
+</optgroup>
+<optgroup label="Sanskrit-French">
+<option value="BUR">BUR -- Burnouf Dictionnaire Sanscrit-Français (1866)</option>
+<option value="STC">STC -- Stchoupak Dictionnaire Sanscrit-Français (1932)</option>
+</optgroup>
+<optgroup label="Sanskrit-German">
+<option value="PWG">PWG -- Böhtlingk and Roth Grosses Petersburger Wörterbuch (1855)</option>
+<option value="GRA">GRA -- Grassmann Wörterbuch zum Rig Veda (1873)</option>
+<option value="PW">PW -- Böhtlingk Sanskrit-Wörterbuch in kürzerer Fassung (1879)</option>
+<option value="CCS">CCS -- Cappeller Sanskrit Wörterbuch (1887)</option>
+<option value="SCH">SCH -- Schmidt Nachträge zum Sanskrit-Wörterbuch (1928)</option>
+</optgroup>
+<optgroup label="Sanskrit-Latin">
+<option value="BOP">BOP -- Bopp Glossarium Sanscritum (1847)</option>
+</optgroup>
+<optgroup label="Sanskrit-Sanskrit">
+<option value="ARMH">ARMH -- Abhidhānaratnamālā of Halāyudha (1861)</option>
+<option value="VCP">VCP -- Vacaspatyam (1873)</option>
+<option value="SKD">SKD -- Sabda-kalpadruma (1886)</option>
+<option value="ABCH">ABCH -- Abhidhānacintāmaṇi of Hemacandrācārya (1896)</option>
+<option value="ACPH">ACPH -- Abhidhānacintāmaṇipariśiṣṭa of Hemacandrācārya (1896)</option>
+<option value="ACSJ">ACSJ -- Abhidhānacintāmaṇiśiloñcha of Jinadeva (1896)</option>
+<option value="NMMB">NMMB -- Nāmamālikā of Bhoja (1955)</option>
+</optgroup>
+<optgroup label="Specialized">
+<option value="INM">INM -- Index to the Names in the Mahabharata (1904)</option>
+<option value="VEI">VEI -- The Vedic Index of Names and Subjects (1912)</option>
+<option value="PUI">PUI -- The Purana Index (1951)</option>
+<option value="BHS">BHS -- Edgerton Buddhist Hybrid Sanskrit Dictionary (1953)</option>
+<option value="FRI">FRI -- Friš Sanskrit Reader Vocabulary (1956)</option>
+<option value="ACC">ACC -- Aufrecht&#x27;s Catalogus Catalogorum (1962)</option>
+<option value="KRM">KRM -- Kṛdantarūpamālā (1965)</option>
+<option value="IEG">IEG -- Indian Epigraphical Glossary (1966)</option>
+<option value="SNP">SNP -- Meulenbeld&#x27;s Sanskrit Names of Plants (1974)</option>
+<option value="PE">PE -- Puranic Encyclopedia (1975)</option>
+<option value="PGN">PGN -- Personal and Geographical Names in the Gupta Inscriptions (1978)</option>
+<option value="MCI">MCI -- Mahabharata Cultural Index (1993)</option>
+</optgroup>
+      </select>
+    </div>
+    <div class="panel">
+      <h4 class="panelhead">Evidence (источник карточки)</h4>
+      <div class="panelbody">Текст сценария взят дословно из первичного источника
+      <code>csl-guides/src/data/which-dictionary-gold.json</code>, запись <code>P-01.scenario</code>
+      (v1.0, лицензия CC-BY-SA-4.0). Метка первого прохода (gold/accepted/quizAnswer/rationale)
+      из этой же записи в карточку НЕ включена и нигде на странице не встречается -- это и есть
+      условие независимости второго прохода.</div>
+    </div>
+    <textarea class="note" placeholder="необязательное примечание (почему выбран этот словарь, или в чём сомнение)"></textarea>
+    <div class="cardbtns">
+      <button class="btn submit">Сохранить ответ</button>
+      <button class="btn defer">Отложить (не уверен(а))</button>
+    </div>
+    <div class="cardstate">не отвечено</div>
+  </div>
+
+  <div class="card" data-id="P-02">
+    <div class="cardhead">
+      <span class="idchip">P-02</span>
+      <span class="badge">Профиль пользователя (P)</span>
+    </div>
+    <div class="question">
+      <div class="scenario-ru">Вы встретили название санскритского произведения или имя автора и хотите узнать, где это произведение засвидетельствовано и каталогизировано.</div>
+      <div class="scenario-en">Оригинал (EN): <em>You met a Sanskrit work title or author name and want to know where the work is attested and catalogued.</em></div>
+    </div>
+    <div class="panel">
+      <div class="panelhead">Ваш ответ -- выберите ОДИН словарь</div>
+      <select class="codeselect">
+        <option value="">-- выберите словарь --</option>
+        <optgroup label="Sanskrit-English">
+<option value="WIL">WIL -- Wilson Sanskrit-English Dictionary (1832)</option>
+<option value="YAT">YAT -- Yates Sanskrit-English Dictionary (1846)</option>
+<option value="GST">GST -- Goldstücker Sanskrit-English Dictionary (1856)</option>
+<option value="BEN">BEN -- Benfey Sanskrit-English Dictionary (1866)</option>
+<option value="MW72">MW72 -- Monier-Williams Sanskrit-English Dictionary (1872)</option>
+<option value="LAN">LAN -- Lanman&#x27;s Sanskrit Reader Vocabulary (1884)</option>
+<option value="LRV">LRV -- Vaidya Sanskrit-English Dictionary (1889)</option>
+<option value="AP90">AP90 -- Apte Practical Sanskrit-English Dictionary (1890)</option>
+<option value="CAE">CAE -- Cappeller Sanskrit-English Dictionary (1891)</option>
+<option value="MD">MD -- Macdonell Sanskrit-English Dictionary (1893)</option>
+<option value="MW">MW -- Monier-Williams Sanskrit-English Dictionary (1899)</option>
+<option value="SHS">SHS -- Shabda-Sagara Sanskrit-English Dictionary (1900)</option>
+<option value="AP">AP -- Practical Sanskrit-English Dictionary, revised edition (1957)</option>
+<option value="PD">PD -- An Encyclopedic Dictionary of Sanskrit on Historical Principles (1976)</option>
+</optgroup>
+<optgroup label="English-Sanskrit">
+<option value="MWE">MWE -- Monier-Williams English-Sanskrit Dictionary (1851)</option>
+<option value="BOR">BOR -- Borooah English-Sanskrit Dictionary (1877)</option>
+<option value="AE">AE -- Apte Student&#x27;s English-Sanskrit Dictionary (1920)</option>
+</optgroup>
+<optgroup label="Sanskrit-French">
+<option value="BUR">BUR -- Burnouf Dictionnaire Sanscrit-Français (1866)</option>
+<option value="STC">STC -- Stchoupak Dictionnaire Sanscrit-Français (1932)</option>
+</optgroup>
+<optgroup label="Sanskrit-German">
+<option value="PWG">PWG -- Böhtlingk and Roth Grosses Petersburger Wörterbuch (1855)</option>
+<option value="GRA">GRA -- Grassmann Wörterbuch zum Rig Veda (1873)</option>
+<option value="PW">PW -- Böhtlingk Sanskrit-Wörterbuch in kürzerer Fassung (1879)</option>
+<option value="CCS">CCS -- Cappeller Sanskrit Wörterbuch (1887)</option>
+<option value="SCH">SCH -- Schmidt Nachträge zum Sanskrit-Wörterbuch (1928)</option>
+</optgroup>
+<optgroup label="Sanskrit-Latin">
+<option value="BOP">BOP -- Bopp Glossarium Sanscritum (1847)</option>
+</optgroup>
+<optgroup label="Sanskrit-Sanskrit">
+<option value="ARMH">ARMH -- Abhidhānaratnamālā of Halāyudha (1861)</option>
+<option value="VCP">VCP -- Vacaspatyam (1873)</option>
+<option value="SKD">SKD -- Sabda-kalpadruma (1886)</option>
+<option value="ABCH">ABCH -- Abhidhānacintāmaṇi of Hemacandrācārya (1896)</option>
+<option value="ACPH">ACPH -- Abhidhānacintāmaṇipariśiṣṭa of Hemacandrācārya (1896)</option>
+<option value="ACSJ">ACSJ -- Abhidhānacintāmaṇiśiloñcha of Jinadeva (1896)</option>
+<option value="NMMB">NMMB -- Nāmamālikā of Bhoja (1955)</option>
+</optgroup>
+<optgroup label="Specialized">
+<option value="INM">INM -- Index to the Names in the Mahabharata (1904)</option>
+<option value="VEI">VEI -- The Vedic Index of Names and Subjects (1912)</option>
+<option value="PUI">PUI -- The Purana Index (1951)</option>
+<option value="BHS">BHS -- Edgerton Buddhist Hybrid Sanskrit Dictionary (1953)</option>
+<option value="FRI">FRI -- Friš Sanskrit Reader Vocabulary (1956)</option>
+<option value="ACC">ACC -- Aufrecht&#x27;s Catalogus Catalogorum (1962)</option>
+<option value="KRM">KRM -- Kṛdantarūpamālā (1965)</option>
+<option value="IEG">IEG -- Indian Epigraphical Glossary (1966)</option>
+<option value="SNP">SNP -- Meulenbeld&#x27;s Sanskrit Names of Plants (1974)</option>
+<option value="PE">PE -- Puranic Encyclopedia (1975)</option>
+<option value="PGN">PGN -- Personal and Geographical Names in the Gupta Inscriptions (1978)</option>
+<option value="MCI">MCI -- Mahabharata Cultural Index (1993)</option>
+</optgroup>
+      </select>
+    </div>
+    <div class="panel">
+      <h4 class="panelhead">Evidence (источник карточки)</h4>
+      <div class="panelbody">Текст сценария взят дословно из первичного источника
+      <code>csl-guides/src/data/which-dictionary-gold.json</code>, запись <code>P-02.scenario</code>
+      (v1.0, лицензия CC-BY-SA-4.0). Метка первого прохода (gold/accepted/quizAnswer/rationale)
+      из этой же записи в карточку НЕ включена и нигде на странице не встречается -- это и есть
+      условие независимости второго прохода.</div>
+    </div>
+    <textarea class="note" placeholder="необязательное примечание (почему выбран этот словарь, или в чём сомнение)"></textarea>
+    <div class="cardbtns">
+      <button class="btn submit">Сохранить ответ</button>
+      <button class="btn defer">Отложить (не уверен(а))</button>
+    </div>
+    <div class="cardstate">не отвечено</div>
+  </div>
+
+  <div class="card" data-id="P-03">
+    <div class="cardhead">
+      <span class="idchip">P-03</span>
+      <span class="badge">Профиль пользователя (P)</span>
+    </div>
+    <div class="question">
+      <div class="scenario-ru">MW помечает слово как «L.» (только у лексикографов), и вы хотите проверить его в тех индийских (туземных) словарях, откуда оно взято.</div>
+      <div class="scenario-en">Оригинал (EN): <em>MW marks a word &#x27;L.&#x27; (lexicographers only) and you want to verify it in the indigenous lexica it came from.</em></div>
+    </div>
+    <div class="panel">
+      <div class="panelhead">Ваш ответ -- выберите ОДИН словарь</div>
+      <select class="codeselect">
+        <option value="">-- выберите словарь --</option>
+        <optgroup label="Sanskrit-English">
+<option value="WIL">WIL -- Wilson Sanskrit-English Dictionary (1832)</option>
+<option value="YAT">YAT -- Yates Sanskrit-English Dictionary (1846)</option>
+<option value="GST">GST -- Goldstücker Sanskrit-English Dictionary (1856)</option>
+<option value="BEN">BEN -- Benfey Sanskrit-English Dictionary (1866)</option>
+<option value="MW72">MW72 -- Monier-Williams Sanskrit-English Dictionary (1872)</option>
+<option value="LAN">LAN -- Lanman&#x27;s Sanskrit Reader Vocabulary (1884)</option>
+<option value="LRV">LRV -- Vaidya Sanskrit-English Dictionary (1889)</option>
+<option value="AP90">AP90 -- Apte Practical Sanskrit-English Dictionary (1890)</option>
+<option value="CAE">CAE -- Cappeller Sanskrit-English Dictionary (1891)</option>
+<option value="MD">MD -- Macdonell Sanskrit-English Dictionary (1893)</option>
+<option value="MW">MW -- Monier-Williams Sanskrit-English Dictionary (1899)</option>
+<option value="SHS">SHS -- Shabda-Sagara Sanskrit-English Dictionary (1900)</option>
+<option value="AP">AP -- Practical Sanskrit-English Dictionary, revised edition (1957)</option>
+<option value="PD">PD -- An Encyclopedic Dictionary of Sanskrit on Historical Principles (1976)</option>
+</optgroup>
+<optgroup label="English-Sanskrit">
+<option value="MWE">MWE -- Monier-Williams English-Sanskrit Dictionary (1851)</option>
+<option value="BOR">BOR -- Borooah English-Sanskrit Dictionary (1877)</option>
+<option value="AE">AE -- Apte Student&#x27;s English-Sanskrit Dictionary (1920)</option>
+</optgroup>
+<optgroup label="Sanskrit-French">
+<option value="BUR">BUR -- Burnouf Dictionnaire Sanscrit-Français (1866)</option>
+<option value="STC">STC -- Stchoupak Dictionnaire Sanscrit-Français (1932)</option>
+</optgroup>
+<optgroup label="Sanskrit-German">
+<option value="PWG">PWG -- Böhtlingk and Roth Grosses Petersburger Wörterbuch (1855)</option>
+<option value="GRA">GRA -- Grassmann Wörterbuch zum Rig Veda (1873)</option>
+<option value="PW">PW -- Böhtlingk Sanskrit-Wörterbuch in kürzerer Fassung (1879)</option>
+<option value="CCS">CCS -- Cappeller Sanskrit Wörterbuch (1887)</option>
+<option value="SCH">SCH -- Schmidt Nachträge zum Sanskrit-Wörterbuch (1928)</option>
+</optgroup>
+<optgroup label="Sanskrit-Latin">
+<option value="BOP">BOP -- Bopp Glossarium Sanscritum (1847)</option>
+</optgroup>
+<optgroup label="Sanskrit-Sanskrit">
+<option value="ARMH">ARMH -- Abhidhānaratnamālā of Halāyudha (1861)</option>
+<option value="VCP">VCP -- Vacaspatyam (1873)</option>
+<option value="SKD">SKD -- Sabda-kalpadruma (1886)</option>
+<option value="ABCH">ABCH -- Abhidhānacintāmaṇi of Hemacandrācārya (1896)</option>
+<option value="ACPH">ACPH -- Abhidhānacintāmaṇipariśiṣṭa of Hemacandrācārya (1896)</option>
+<option value="ACSJ">ACSJ -- Abhidhānacintāmaṇiśiloñcha of Jinadeva (1896)</option>
+<option value="NMMB">NMMB -- Nāmamālikā of Bhoja (1955)</option>
+</optgroup>
+<optgroup label="Specialized">
+<option value="INM">INM -- Index to the Names in the Mahabharata (1904)</option>
+<option value="VEI">VEI -- The Vedic Index of Names and Subjects (1912)</option>
+<option value="PUI">PUI -- The Purana Index (1951)</option>
+<option value="BHS">BHS -- Edgerton Buddhist Hybrid Sanskrit Dictionary (1953)</option>
+<option value="FRI">FRI -- Friš Sanskrit Reader Vocabulary (1956)</option>
+<option value="ACC">ACC -- Aufrecht&#x27;s Catalogus Catalogorum (1962)</option>
+<option value="KRM">KRM -- Kṛdantarūpamālā (1965)</option>
+<option value="IEG">IEG -- Indian Epigraphical Glossary (1966)</option>
+<option value="SNP">SNP -- Meulenbeld&#x27;s Sanskrit Names of Plants (1974)</option>
+<option value="PE">PE -- Puranic Encyclopedia (1975)</option>
+<option value="PGN">PGN -- Personal and Geographical Names in the Gupta Inscriptions (1978)</option>
+<option value="MCI">MCI -- Mahabharata Cultural Index (1993)</option>
+</optgroup>
+      </select>
+    </div>
+    <div class="panel">
+      <h4 class="panelhead">Evidence (источник карточки)</h4>
+      <div class="panelbody">Текст сценария взят дословно из первичного источника
+      <code>csl-guides/src/data/which-dictionary-gold.json</code>, запись <code>P-03.scenario</code>
+      (v1.0, лицензия CC-BY-SA-4.0). Метка первого прохода (gold/accepted/quizAnswer/rationale)
+      из этой же записи в карточку НЕ включена и нигде на странице не встречается -- это и есть
+      условие независимости второго прохода.</div>
+    </div>
+    <textarea class="note" placeholder="необязательное примечание (почему выбран этот словарь, или в чём сомнение)"></textarea>
+    <div class="cardbtns">
+      <button class="btn submit">Сохранить ответ</button>
+      <button class="btn defer">Отложить (не уверен(а))</button>
+    </div>
+    <div class="cardstate">не отвечено</div>
+  </div>
+
+  <div class="card" data-id="P-04">
+    <div class="cardhead">
+      <span class="idchip">P-04</span>
+      <span class="badge">Профиль пользователя (P)</span>
+    </div>
+    <div class="question">
+      <div class="scenario-ru">Ригведийское слово: нужны его акцент и все места употребления в стихах, сгруппированные по конструкции/значению.</div>
+      <div class="scenario-en">Оригинал (EN): <em>A Ṛgvedic word: you want its accent and every verse location, grouped by construction/meaning.</em></div>
+    </div>
+    <div class="panel">
+      <div class="panelhead">Ваш ответ -- выберите ОДИН словарь</div>
+      <select class="codeselect">
+        <option value="">-- выберите словарь --</option>
+        <optgroup label="Sanskrit-English">
+<option value="WIL">WIL -- Wilson Sanskrit-English Dictionary (1832)</option>
+<option value="YAT">YAT -- Yates Sanskrit-English Dictionary (1846)</option>
+<option value="GST">GST -- Goldstücker Sanskrit-English Dictionary (1856)</option>
+<option value="BEN">BEN -- Benfey Sanskrit-English Dictionary (1866)</option>
+<option value="MW72">MW72 -- Monier-Williams Sanskrit-English Dictionary (1872)</option>
+<option value="LAN">LAN -- Lanman&#x27;s Sanskrit Reader Vocabulary (1884)</option>
+<option value="LRV">LRV -- Vaidya Sanskrit-English Dictionary (1889)</option>
+<option value="AP90">AP90 -- Apte Practical Sanskrit-English Dictionary (1890)</option>
+<option value="CAE">CAE -- Cappeller Sanskrit-English Dictionary (1891)</option>
+<option value="MD">MD -- Macdonell Sanskrit-English Dictionary (1893)</option>
+<option value="MW">MW -- Monier-Williams Sanskrit-English Dictionary (1899)</option>
+<option value="SHS">SHS -- Shabda-Sagara Sanskrit-English Dictionary (1900)</option>
+<option value="AP">AP -- Practical Sanskrit-English Dictionary, revised edition (1957)</option>
+<option value="PD">PD -- An Encyclopedic Dictionary of Sanskrit on Historical Principles (1976)</option>
+</optgroup>
+<optgroup label="English-Sanskrit">
+<option value="MWE">MWE -- Monier-Williams English-Sanskrit Dictionary (1851)</option>
+<option value="BOR">BOR -- Borooah English-Sanskrit Dictionary (1877)</option>
+<option value="AE">AE -- Apte Student&#x27;s English-Sanskrit Dictionary (1920)</option>
+</optgroup>
+<optgroup label="Sanskrit-French">
+<option value="BUR">BUR -- Burnouf Dictionnaire Sanscrit-Français (1866)</option>
+<option value="STC">STC -- Stchoupak Dictionnaire Sanscrit-Français (1932)</option>
+</optgroup>
+<optgroup label="Sanskrit-German">
+<option value="PWG">PWG -- Böhtlingk and Roth Grosses Petersburger Wörterbuch (1855)</option>
+<option value="GRA">GRA -- Grassmann Wörterbuch zum Rig Veda (1873)</option>
+<option value="PW">PW -- Böhtlingk Sanskrit-Wörterbuch in kürzerer Fassung (1879)</option>
+<option value="CCS">CCS -- Cappeller Sanskrit Wörterbuch (1887)</option>
+<option value="SCH">SCH -- Schmidt Nachträge zum Sanskrit-Wörterbuch (1928)</option>
+</optgroup>
+<optgroup label="Sanskrit-Latin">
+<option value="BOP">BOP -- Bopp Glossarium Sanscritum (1847)</option>
+</optgroup>
+<optgroup label="Sanskrit-Sanskrit">
+<option value="ARMH">ARMH -- Abhidhānaratnamālā of Halāyudha (1861)</option>
+<option value="VCP">VCP -- Vacaspatyam (1873)</option>
+<option value="SKD">SKD -- Sabda-kalpadruma (1886)</option>
+<option value="ABCH">ABCH -- Abhidhānacintāmaṇi of Hemacandrācārya (1896)</option>
+<option value="ACPH">ACPH -- Abhidhānacintāmaṇipariśiṣṭa of Hemacandrācārya (1896)</option>
+<option value="ACSJ">ACSJ -- Abhidhānacintāmaṇiśiloñcha of Jinadeva (1896)</option>
+<option value="NMMB">NMMB -- Nāmamālikā of Bhoja (1955)</option>
+</optgroup>
+<optgroup label="Specialized">
+<option value="INM">INM -- Index to the Names in the Mahabharata (1904)</option>
+<option value="VEI">VEI -- The Vedic Index of Names and Subjects (1912)</option>
+<option value="PUI">PUI -- The Purana Index (1951)</option>
+<option value="BHS">BHS -- Edgerton Buddhist Hybrid Sanskrit Dictionary (1953)</option>
+<option value="FRI">FRI -- Friš Sanskrit Reader Vocabulary (1956)</option>
+<option value="ACC">ACC -- Aufrecht&#x27;s Catalogus Catalogorum (1962)</option>
+<option value="KRM">KRM -- Kṛdantarūpamālā (1965)</option>
+<option value="IEG">IEG -- Indian Epigraphical Glossary (1966)</option>
+<option value="SNP">SNP -- Meulenbeld&#x27;s Sanskrit Names of Plants (1974)</option>
+<option value="PE">PE -- Puranic Encyclopedia (1975)</option>
+<option value="PGN">PGN -- Personal and Geographical Names in the Gupta Inscriptions (1978)</option>
+<option value="MCI">MCI -- Mahabharata Cultural Index (1993)</option>
+</optgroup>
+      </select>
+    </div>
+    <div class="panel">
+      <h4 class="panelhead">Evidence (источник карточки)</h4>
+      <div class="panelbody">Текст сценария взят дословно из первичного источника
+      <code>csl-guides/src/data/which-dictionary-gold.json</code>, запись <code>P-04.scenario</code>
+      (v1.0, лицензия CC-BY-SA-4.0). Метка первого прохода (gold/accepted/quizAnswer/rationale)
+      из этой же записи в карточку НЕ включена и нигде на странице не встречается -- это и есть
+      условие независимости второго прохода.</div>
+    </div>
+    <textarea class="note" placeholder="необязательное примечание (почему выбран этот словарь, или в чём сомнение)"></textarea>
+    <div class="cardbtns">
+      <button class="btn submit">Сохранить ответ</button>
+      <button class="btn defer">Отложить (не уверен(а))</button>
+    </div>
+    <div class="cardstate">не отвечено</div>
+  </div>
+
+  <div class="card" data-id="P-05">
+    <div class="cardhead">
+      <span class="idchip">P-05</span>
+      <span class="badge">Профиль пользователя (P)</span>
+    </div>
+    <div class="question">
+      <div class="scenario-ru">Начинающий, читающий учебную хрестоматию (graded reader), хочет словарь именно этой хрестоматии, а не полный словарь.</div>
+      <div class="scenario-en">Оригинал (EN): <em>A beginner reading a graded reader wants the reader&#x27;s own vocabulary, not a full dictionary.</em></div>
+    </div>
+    <div class="panel">
+      <div class="panelhead">Ваш ответ -- выберите ОДИН словарь</div>
+      <select class="codeselect">
+        <option value="">-- выберите словарь --</option>
+        <optgroup label="Sanskrit-English">
+<option value="WIL">WIL -- Wilson Sanskrit-English Dictionary (1832)</option>
+<option value="YAT">YAT -- Yates Sanskrit-English Dictionary (1846)</option>
+<option value="GST">GST -- Goldstücker Sanskrit-English Dictionary (1856)</option>
+<option value="BEN">BEN -- Benfey Sanskrit-English Dictionary (1866)</option>
+<option value="MW72">MW72 -- Monier-Williams Sanskrit-English Dictionary (1872)</option>
+<option value="LAN">LAN -- Lanman&#x27;s Sanskrit Reader Vocabulary (1884)</option>
+<option value="LRV">LRV -- Vaidya Sanskrit-English Dictionary (1889)</option>
+<option value="AP90">AP90 -- Apte Practical Sanskrit-English Dictionary (1890)</option>
+<option value="CAE">CAE -- Cappeller Sanskrit-English Dictionary (1891)</option>
+<option value="MD">MD -- Macdonell Sanskrit-English Dictionary (1893)</option>
+<option value="MW">MW -- Monier-Williams Sanskrit-English Dictionary (1899)</option>
+<option value="SHS">SHS -- Shabda-Sagara Sanskrit-English Dictionary (1900)</option>
+<option value="AP">AP -- Practical Sanskrit-English Dictionary, revised edition (1957)</option>
+<option value="PD">PD -- An Encyclopedic Dictionary of Sanskrit on Historical Principles (1976)</option>
+</optgroup>
+<optgroup label="English-Sanskrit">
+<option value="MWE">MWE -- Monier-Williams English-Sanskrit Dictionary (1851)</option>
+<option value="BOR">BOR -- Borooah English-Sanskrit Dictionary (1877)</option>
+<option value="AE">AE -- Apte Student&#x27;s English-Sanskrit Dictionary (1920)</option>
+</optgroup>
+<optgroup label="Sanskrit-French">
+<option value="BUR">BUR -- Burnouf Dictionnaire Sanscrit-Français (1866)</option>
+<option value="STC">STC -- Stchoupak Dictionnaire Sanscrit-Français (1932)</option>
+</optgroup>
+<optgroup label="Sanskrit-German">
+<option value="PWG">PWG -- Böhtlingk and Roth Grosses Petersburger Wörterbuch (1855)</option>
+<option value="GRA">GRA -- Grassmann Wörterbuch zum Rig Veda (1873)</option>
+<option value="PW">PW -- Böhtlingk Sanskrit-Wörterbuch in kürzerer Fassung (1879)</option>
+<option value="CCS">CCS -- Cappeller Sanskrit Wörterbuch (1887)</option>
+<option value="SCH">SCH -- Schmidt Nachträge zum Sanskrit-Wörterbuch (1928)</option>
+</optgroup>
+<optgroup label="Sanskrit-Latin">
+<option value="BOP">BOP -- Bopp Glossarium Sanscritum (1847)</option>
+</optgroup>
+<optgroup label="Sanskrit-Sanskrit">
+<option value="ARMH">ARMH -- Abhidhānaratnamālā of Halāyudha (1861)</option>
+<option value="VCP">VCP -- Vacaspatyam (1873)</option>
+<option value="SKD">SKD -- Sabda-kalpadruma (1886)</option>
+<option value="ABCH">ABCH -- Abhidhānacintāmaṇi of Hemacandrācārya (1896)</option>
+<option value="ACPH">ACPH -- Abhidhānacintāmaṇipariśiṣṭa of Hemacandrācārya (1896)</option>
+<option value="ACSJ">ACSJ -- Abhidhānacintāmaṇiśiloñcha of Jinadeva (1896)</option>
+<option value="NMMB">NMMB -- Nāmamālikā of Bhoja (1955)</option>
+</optgroup>
+<optgroup label="Specialized">
+<option value="INM">INM -- Index to the Names in the Mahabharata (1904)</option>
+<option value="VEI">VEI -- The Vedic Index of Names and Subjects (1912)</option>
+<option value="PUI">PUI -- The Purana Index (1951)</option>
+<option value="BHS">BHS -- Edgerton Buddhist Hybrid Sanskrit Dictionary (1953)</option>
+<option value="FRI">FRI -- Friš Sanskrit Reader Vocabulary (1956)</option>
+<option value="ACC">ACC -- Aufrecht&#x27;s Catalogus Catalogorum (1962)</option>
+<option value="KRM">KRM -- Kṛdantarūpamālā (1965)</option>
+<option value="IEG">IEG -- Indian Epigraphical Glossary (1966)</option>
+<option value="SNP">SNP -- Meulenbeld&#x27;s Sanskrit Names of Plants (1974)</option>
+<option value="PE">PE -- Puranic Encyclopedia (1975)</option>
+<option value="PGN">PGN -- Personal and Geographical Names in the Gupta Inscriptions (1978)</option>
+<option value="MCI">MCI -- Mahabharata Cultural Index (1993)</option>
+</optgroup>
+      </select>
+    </div>
+    <div class="panel">
+      <h4 class="panelhead">Evidence (источник карточки)</h4>
+      <div class="panelbody">Текст сценария взят дословно из первичного источника
+      <code>csl-guides/src/data/which-dictionary-gold.json</code>, запись <code>P-05.scenario</code>
+      (v1.0, лицензия CC-BY-SA-4.0). Метка первого прохода (gold/accepted/quizAnswer/rationale)
+      из этой же записи в карточку НЕ включена и нигде на странице не встречается -- это и есть
+      условие независимости второго прохода.</div>
+    </div>
+    <textarea class="note" placeholder="необязательное примечание (почему выбран этот словарь, или в чём сомнение)"></textarea>
+    <div class="cardbtns">
+      <button class="btn submit">Сохранить ответ</button>
+      <button class="btn defer">Отложить (не уверен(а))</button>
+    </div>
+    <div class="cardstate">не отвечено</div>
+  </div>
+
+  <div class="card" data-id="P-06">
+    <div class="cardhead">
+      <span class="idchip">P-06</span>
+      <span class="badge">Профиль пользователя (P)</span>
+    </div>
+    <div class="question">
+      <div class="scenario-ru">Вы читаете по-немецки и хотите компактный однотомный словарь вместо семитомного PWG.</div>
+      <div class="scenario-en">Оригинал (EN): <em>You read German and want a concise one-volume dictionary rather than the seven-volume PWG.</em></div>
+    </div>
+    <div class="panel">
+      <div class="panelhead">Ваш ответ -- выберите ОДИН словарь</div>
+      <select class="codeselect">
+        <option value="">-- выберите словарь --</option>
+        <optgroup label="Sanskrit-English">
+<option value="WIL">WIL -- Wilson Sanskrit-English Dictionary (1832)</option>
+<option value="YAT">YAT -- Yates Sanskrit-English Dictionary (1846)</option>
+<option value="GST">GST -- Goldstücker Sanskrit-English Dictionary (1856)</option>
+<option value="BEN">BEN -- Benfey Sanskrit-English Dictionary (1866)</option>
+<option value="MW72">MW72 -- Monier-Williams Sanskrit-English Dictionary (1872)</option>
+<option value="LAN">LAN -- Lanman&#x27;s Sanskrit Reader Vocabulary (1884)</option>
+<option value="LRV">LRV -- Vaidya Sanskrit-English Dictionary (1889)</option>
+<option value="AP90">AP90 -- Apte Practical Sanskrit-English Dictionary (1890)</option>
+<option value="CAE">CAE -- Cappeller Sanskrit-English Dictionary (1891)</option>
+<option value="MD">MD -- Macdonell Sanskrit-English Dictionary (1893)</option>
+<option value="MW">MW -- Monier-Williams Sanskrit-English Dictionary (1899)</option>
+<option value="SHS">SHS -- Shabda-Sagara Sanskrit-English Dictionary (1900)</option>
+<option value="AP">AP -- Practical Sanskrit-English Dictionary, revised edition (1957)</option>
+<option value="PD">PD -- An Encyclopedic Dictionary of Sanskrit on Historical Principles (1976)</option>
+</optgroup>
+<optgroup label="English-Sanskrit">
+<option value="MWE">MWE -- Monier-Williams English-Sanskrit Dictionary (1851)</option>
+<option value="BOR">BOR -- Borooah English-Sanskrit Dictionary (1877)</option>
+<option value="AE">AE -- Apte Student&#x27;s English-Sanskrit Dictionary (1920)</option>
+</optgroup>
+<optgroup label="Sanskrit-French">
+<option value="BUR">BUR -- Burnouf Dictionnaire Sanscrit-Français (1866)</option>
+<option value="STC">STC -- Stchoupak Dictionnaire Sanscrit-Français (1932)</option>
+</optgroup>
+<optgroup label="Sanskrit-German">
+<option value="PWG">PWG -- Böhtlingk and Roth Grosses Petersburger Wörterbuch (1855)</option>
+<option value="GRA">GRA -- Grassmann Wörterbuch zum Rig Veda (1873)</option>
+<option value="PW">PW -- Böhtlingk Sanskrit-Wörterbuch in kürzerer Fassung (1879)</option>
+<option value="CCS">CCS -- Cappeller Sanskrit Wörterbuch (1887)</option>
+<option value="SCH">SCH -- Schmidt Nachträge zum Sanskrit-Wörterbuch (1928)</option>
+</optgroup>
+<optgroup label="Sanskrit-Latin">
+<option value="BOP">BOP -- Bopp Glossarium Sanscritum (1847)</option>
+</optgroup>
+<optgroup label="Sanskrit-Sanskrit">
+<option value="ARMH">ARMH -- Abhidhānaratnamālā of Halāyudha (1861)</option>
+<option value="VCP">VCP -- Vacaspatyam (1873)</option>
+<option value="SKD">SKD -- Sabda-kalpadruma (1886)</option>
+<option value="ABCH">ABCH -- Abhidhānacintāmaṇi of Hemacandrācārya (1896)</option>
+<option value="ACPH">ACPH -- Abhidhānacintāmaṇipariśiṣṭa of Hemacandrācārya (1896)</option>
+<option value="ACSJ">ACSJ -- Abhidhānacintāmaṇiśiloñcha of Jinadeva (1896)</option>
+<option value="NMMB">NMMB -- Nāmamālikā of Bhoja (1955)</option>
+</optgroup>
+<optgroup label="Specialized">
+<option value="INM">INM -- Index to the Names in the Mahabharata (1904)</option>
+<option value="VEI">VEI -- The Vedic Index of Names and Subjects (1912)</option>
+<option value="PUI">PUI -- The Purana Index (1951)</option>
+<option value="BHS">BHS -- Edgerton Buddhist Hybrid Sanskrit Dictionary (1953)</option>
+<option value="FRI">FRI -- Friš Sanskrit Reader Vocabulary (1956)</option>
+<option value="ACC">ACC -- Aufrecht&#x27;s Catalogus Catalogorum (1962)</option>
+<option value="KRM">KRM -- Kṛdantarūpamālā (1965)</option>
+<option value="IEG">IEG -- Indian Epigraphical Glossary (1966)</option>
+<option value="SNP">SNP -- Meulenbeld&#x27;s Sanskrit Names of Plants (1974)</option>
+<option value="PE">PE -- Puranic Encyclopedia (1975)</option>
+<option value="PGN">PGN -- Personal and Geographical Names in the Gupta Inscriptions (1978)</option>
+<option value="MCI">MCI -- Mahabharata Cultural Index (1993)</option>
+</optgroup>
+      </select>
+    </div>
+    <div class="panel">
+      <h4 class="panelhead">Evidence (источник карточки)</h4>
+      <div class="panelbody">Текст сценария взят дословно из первичного источника
+      <code>csl-guides/src/data/which-dictionary-gold.json</code>, запись <code>P-06.scenario</code>
+      (v1.0, лицензия CC-BY-SA-4.0). Метка первого прохода (gold/accepted/quizAnswer/rationale)
+      из этой же записи в карточку НЕ включена и нигде на странице не встречается -- это и есть
+      условие независимости второго прохода.</div>
+    </div>
+    <textarea class="note" placeholder="необязательное примечание (почему выбран этот словарь, или в чём сомнение)"></textarea>
+    <div class="cardbtns">
+      <button class="btn submit">Сохранить ответ</button>
+      <button class="btn defer">Отложить (не уверен(а))</button>
+    </div>
+    <div class="cardstate">не отвечено</div>
+  </div>
+</main>
+<footer class="legend">
+  <p><b>Сохранить ответ</b> -- фиксирует выбранный код словаря как ваш ответ для этой карточки (можно изменить в любой момент до выгрузки). <b>Отложить</b> -- отметить карточку как требующую возврата позже, без выбора кода. Примечание -- по желанию, для комментария к выбору или сомнения. Прогресс сохраняется в этом браузере (localStorage) и переживает случайное закрытие вкладки.</p>
+  <p>По завершении нажмите &laquo;Скачать decisions.json&raquo; ниже и передайте файл в <code>Uprava/review/</code> под именем на кнопке -- это входной файл для последующего расчёта Cohen's κ и confusion-таблицы (H3987 stop condition; расчёт κ -- отдельный follow-on handoff).</p>
+</footer>
+<div class="exportbar">
+  <button class="dl" id="downloadBtn">Скачать csl-guides-routing-benchmark_human-iaa_decisions.json</button>
+  <span class="savepath" id="lastSaved"></span>
+</div>
+<script>
+(function () {
+  var SHEET_ID = "csl-guides-routing-benchmark_human-iaa";
+  var STORE_KEY = 'review-sheet:' + SHEET_ID;
+  var IDS = ["G-01", "G-02", "G-03", "G-04", "G-05", "G-06", "G-07", "G-08", "G-09", "G-10", "G-11", "G-12", "G-13", "G-14", "G-15", "G-16", "G-17", "G-18", "P-01", "P-02", "P-03", "P-04", "P-05", "P-06"];
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(STORE_KEY) || '{}'); } catch (e) { state = {}; }
+
+  function save() {
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) {}
+  }
+
+  function applyCardUI(id) {
+    var card = document.querySelector('.card[data-id="' + id + '"]');
+    if (!card) return;
+    var rec = state[id] || {};
+    var sel = card.querySelector('select.codeselect');
+    var note = card.querySelector('textarea.note');
+    var st = card.querySelector('.cardstate');
+    if (sel && rec.code) sel.value = rec.code;
+    if (note && rec.note) note.value = rec.note;
+    st.classList.remove('answered', 'deferred');
+    if (rec.decision === 'answered') { st.textContent = 'ответ сохранён: ' + rec.code; st.classList.add('answered'); }
+    else if (rec.decision === 'deferred') { st.textContent = 'отложено'; st.classList.add('deferred'); }
+    else { st.textContent = 'не отвечено'; }
+  }
+
+  function updateTally() {
+    var answered = 0, deferred = 0;
+    IDS.forEach(function (id) {
+      var d = (state[id] || {}).decision;
+      if (d === 'answered') answered++;
+      else if (d === 'deferred') deferred++;
+    });
+    document.getElementById('t-answered').textContent = answered;
+    document.getElementById('t-deferred').textContent = deferred;
+    document.getElementById('t-unvoted').textContent = IDS.length - answered - deferred;
+  }
+
+  document.querySelectorAll('button.btn.submit').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var card = btn.closest('.card');
+      var id = card.getAttribute('data-id');
+      var sel = card.querySelector('select.codeselect');
+      var note = card.querySelector('textarea.note');
+      if (!sel.value) { alert('Выберите словарь из списка перед сохранением.'); return; }
+      state[id] = { decision: 'answered', code: sel.value, note: note.value || '' };
+      save(); applyCardUI(id); updateTally();
+    });
+  });
+  document.querySelectorAll('button.btn.defer').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var card = btn.closest('.card');
+      var id = card.getAttribute('data-id');
+      var note = card.querySelector('textarea.note');
+      state[id] = { decision: 'deferred', code: (state[id] || {}).code || null, note: note.value || '' };
+      save(); applyCardUI(id); updateTally();
+    });
+  });
+
+  IDS.forEach(applyCardUI);
+  updateTally();
+
+  document.getElementById('downloadBtn').addEventListener('click', function () {
+    var items = IDS.map(function (id) {
+      var rec = state[id] || {};
+      return { id: id, decision: rec.decision || null, code: rec.code || null, note: rec.note || '' };
+    });
+    var decided = items.filter(function (it) { return it.decision === 'answered'; }).length;
+    var payload = { sheet_id: SHEET_ID, generated: "07-09-2026", reviewedAt: new Date().toISOString(), decided: decided, items: items };
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = SHEET_ID + '_decisions.json';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    document.getElementById('lastSaved').textContent = 'скачано ' + new Date().toLocaleString('ru-RU');
+  });
+})();
+</script>
+<!-- ssb-evidence: {"G-01": {"verifier": "Claude Code, Sonnet 5 (claude-sonnet-5)", "method": "primary_source_quote", "sources": ["csl-guides/src/data/which-dictionary-gold.json#G-01.scenario"], "verified_date": "07-09-2026"}, "G-02": {"verifier": "Claude Code, Sonnet 5 (claude-sonnet-5)", "method": "primary_source_quote", "sources": ["csl-guides/src/data/which-dictionary-gold.json#G-02.scenario"], "verified_date": "07-09-2026"}, "G-03": {"verifier": "Claude Code, Sonnet 5 (claude-sonnet-5)", "method": "primary_source_quote", "sources": ["csl-guides/src/data/which-dictionary-gold.json#G-03.scenario"], "verified_date": "07-09-2026"}, "G-04": {"verifier": "Claude Code, Sonnet 5 (claude-sonnet-5)", "method": "primary_source_quote", "sources": ["csl-guides/src/data/which-dictionary-gold.json#G-04.scenario"], "verified_date": "07-09-2026"}, "G-05": {"verifier": "Claude Code, Sonnet 5 (claude-sonnet-5)", "method": "primary_source_quote", "sources": ["csl-guides/src/data/which-dictionary-gold.json#G-05.scenario"], "verified_date": "07-09-2026"}, "G-06": {"verifier": "Claude Code, Sonnet 5 (claude-sonnet-5)", "method": "primary_source_quote", "sources": ["csl-guides/src/data/which-dictionary-gold.json#G-06.scenario"], "verified_date": "07-09-2026"}, "G-07": {"verifier": "Claude Code, Sonnet 5 (claude-sonnet-5)", "method": "primary_source_quote", "sources": ["csl-guides/src/data/which-dictionary-gold.json#G-07.scenario"], "verified_date": "07-09-2026"}, "G-08": {"verifier": "Claude Code, Sonnet 5 (claude-sonnet-5)", "method": "primary_source_quote", "sources": ["csl-guides/src/data/which-dictionary-gold.json#G-08.scenario"], "verified_date": "07-09-2026"}, "G-09": {"verifier": "Claude Code, Sonnet 5 (claude-sonnet-5)", "method": "primary_source_quote", "sources": ["csl-guides/src/data/which-dictionary-gold.json#G-09.scenario"], "verified_date": "07-09-2026"}, "G-10": {"verifier": "Claude Code, Sonnet 5 (claude-sonnet-5)", "method": "primary_source_quote", "sources": ["csl-guides/src/data/which-dictionary-gold.json#G-10.scenario"], "verified_date": "07-09-2026"}, "G-11": {"verifier": "Claude Code, Sonnet 5 (claude-sonnet-5)", "method": "primary_source_quote", "sources": ["csl-guides/src/data/which-dictionary-gold.json#G-11.scenario"], "verified_date": "07-09-2026"}, "G-12": {"verifier": "Claude Code, Sonnet 5 (claude-sonnet-5)", "method": "primary_source_quote", "sources": ["csl-guides/src/data/which-dictionary-gold.json#G-12.scenario"], "verified_date": "07-09-2026"}, "G-13": {"verifier": "Claude Code, Sonnet 5 (claude-sonnet-5)", "method": "primary_source_quote", "sources": ["csl-guides/src/data/which-dictionary-gold.json#G-13.scenario"], "verified_date": "07-09-2026"}, "G-14": {"verifier": "Claude Code, Sonnet 5 (claude-sonnet-5)", "method": "primary_source_quote", "sources": ["csl-guides/src/data/which-dictionary-gold.json#G-14.scenario"], "verified_date": "07-09-2026"}, "G-15": {"verifier": "Claude Code, Sonnet 5 (claude-sonnet-5)", "method": "primary_source_quote", "sources": ["csl-guides/src/data/which-dictionary-gold.json#G-15.scenario"], "verified_date": "07-09-2026"}, "G-16": {"verifier": "Claude Code, Sonnet 5 (claude-sonnet-5)", "method": "primary_source_quote", "sources": ["csl-guides/src/data/which-dictionary-gold.json#G-16.scenario"], "verified_date": "07-09-2026"}, "G-17": {"verifier": "Claude Code, Sonnet 5 (claude-sonnet-5)", "method": "primary_source_quote", "sources": ["csl-guides/src/data/which-dictionary-gold.json#G-17.scenario"], "verified_date": "07-09-2026"}, "G-18": {"verifier": "Claude Code, Sonnet 5 (claude-sonnet-5)", "method": "primary_source_quote", "sources": ["csl-guides/src/data/which-dictionary-gold.json#G-18.scenario"], "verified_date": "07-09-2026"}, "P-01": {"verifier": "Claude Code, Sonnet 5 (claude-sonnet-5)", "method": "primary_source_quote", "sources": ["csl-guides/src/data/which-dictionary-gold.json#P-01.scenario"], "verified_date": "07-09-2026"}, "P-02": {"verifier": "Claude Code, Sonnet 5 (claude-sonnet-5)", "method": "primary_source_quote", "sources": ["csl-guides/src/data/which-dictionary-gold.json#P-02.scenario"], "verified_date": "07-09-2026"}, "P-03": {"verifier": "Claude Code, Sonnet 5 (claude-sonnet-5)", "method": "primary_source_quote", "sources": ["csl-guides/src/data/which-dictionary-gold.json#P-03.scenario"], "verified_date": "07-09-2026"}, "P-04": {"verifier": "Claude Code, Sonnet 5 (claude-sonnet-5)", "method": "primary_source_quote", "sources": ["csl-guides/src/data/which-dictionary-gold.json#P-04.scenario"], "verified_date": "07-09-2026"}, "P-05": {"verifier": "Claude Code, Sonnet 5 (claude-sonnet-5)", "method": "primary_source_quote", "sources": ["csl-guides/src/data/which-dictionary-gold.json#P-05.scenario"], "verified_date": "07-09-2026"}, "P-06": {"verifier": "Claude Code, Sonnet 5 (claude-sonnet-5)", "method": "primary_source_quote", "sources": ["csl-guides/src/data/which-dictionary-gold.json#P-06.scenario"], "verified_date": "07-09-2026"}} -->
+</body>
+</html>
