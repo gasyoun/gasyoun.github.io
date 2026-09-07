@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Audit probes — run history and freshness</title>
+<style>
+:root{--bg:#fafaf8;--fg:#1c1c1e;--muted:#6e6e73;--card:#fff;--line:#e5e5e0}
+@media(prefers-color-scheme:dark){:root{--bg:#141416;--fg:#f2f2f2;--muted:#98989d;--card:#1f1f22;--line:#333336}}
+body{margin:0 auto;padding:1.25rem 1rem 4rem;max-width:52rem;background:var(--bg);color:var(--fg);font:16px/1.5 -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif}
+h1{font-size:1.25rem}h2{font-size:1rem;margin:1.4rem 0 .5rem}
+table{border-collapse:collapse;width:100%;font-size:.85rem}
+td,th{border:1px solid var(--line);padding:.3rem .45rem;text-align:left;vertical-align:top}
+th{color:var(--muted);font-weight:600}
+.badge{font-size:.7rem;border-radius:6px;padding:.1rem .4rem;border:1px solid var(--line);color:var(--muted)}
+.badge.ok{color:#2e7d32;border-color:#2e7d32}.badge.bad{color:#b3261e;border-color:#b3261e}
+.badge.warn{color:#9a6700;border-color:#9a6700}
+.note{font-size:.8rem;color:var(--muted)}
+p.note a{color:inherit}
+</style></head><body>
+<h1>Audit probes — run history and freshness</h1>
+<p class=note>Every stored sanitized run, verdicts read from records (never rewritten) and freshness resolved by the shipped resolver: current / stale / not-verified / no-evidence / unknown. history rows: 19</p>
+<p class=note><a href="audit-probes.html">← probe library</a></p>
+
+
+<h2>Per-probe freshness</h2>
+<table><tr><th>Probe</th><th>Question</th><th>Latest verdict</th><th>Freshness</th><th>Last run</th><th>Latest summary</th><th>Stored runs</th></tr>
+<tr><td>AP-001</td><td>Which hub-doc claims are load-bearing but unverified?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-002</td><td>Where do two repos silently own the same asset?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-003</td><td>What edges does the graph imply but not yet register?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-004</td><td>Which datasets have had zero consumers for 60+ days?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-005</td><td>Is the Type-D ID grammar actually used wherever IDs cross repos?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-006</td><td>What knowledge exists only in chat transcripts, no hub?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-007</td><td>What breaks silently at 02:00 besides interlinks?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-008</td><td>Which of the ~250 skills never fire — and which fire always?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-009</td><td>Where is identical logic re-implemented across Claude/Codex/Grok twins?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-010</td><td>What automation dies if this one machine or path disappears?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-011</td><td>Which guards have never once been tripped in anger?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-012</td><td>Who can corrupt human-reviewed stores today? (Q7 refresh)</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-013</td><td>Which derived datasets fail end-to-end regeneration right now?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-014</td><td>Where do rights gates live in memory instead of a ledger?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-015</td><td>What is unrecoverable if GitHub/ vanishes tonight?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-016</td><td>Is samskrtam.ru clean per the full H3164 contract — proven, not declared?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-017</td><td>What secrets surface outside already-audited scopes?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-018</td><td>What&#x27;s our real MTTR across past incidents?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-019</td><td>Which papers cite numbers that moved upstream after drafting?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-020</td><td>What single blocker keeps every readiness-4 paper unsent?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-021</td><td>Which paper-backing datasets lack citable DOIs?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-022</td><td>Which shortlisted venues have died or drifted scope?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-023</td><td>What funnel facts do pending decisions need that we don&#x27;t instrument?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-024</td><td>Which Tier-0 autumn assumptions still have no metric attached?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-025</td><td>Where does money arithmetic depend on manual ledgers?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-026</td><td>What&#x27;s missing to produce a trial→paid cohort report?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-027</td><td>What does main-tree contention cost us per week, measured?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-028</td><td>Which @DECIDE/@WAITING rows age past policy unnoticed?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-029</td><td>Are the AGENTS.md generated blocks worth their token budget?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-030</td><td>If you vanished for a month, what rots first?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-031</td><td>How many review sheets are sitting unvoted, and how old is the oldest?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-032</td><td>Which votes landed as decisions.json but were never applied downstream?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-033</td><td>Do all human gates route through the standard sheet emitter, or do banned markdown-checkbox sheets still circulate?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-034</td><td>What&#x27;s the measured round-trip from sheet issuance → vote → applied change?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-035</td><td>When multi-reviewer ballots disagree, is the disagreement preserved as data or discarded?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-036</td><td>Do quorum rules exist where they matter — and are they enforced by the pipeline, not by memory?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-037</td><td>What&#x27;s the voter-fatigue curve: how many sheets per week land on one person, and does decision quality decay?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-038</td><td>Does every visa-type decision carry an immutable audit trail from ballot → import → applied change?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-039</td><td>When a fix lands in one sheet&#x27;s builder or the shared emitter, are all not-yet-voted sheets rebuilt to the new standard automatically — while voted ones are provably untouched?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-040</td><td>Do closed handoffs point to deliverables at the recorded revision?</td><td><span class="badge ok">PASS</span></td><td><span class="badge ok">current</span></td><td>2026-09-06T09:19:33Z</td><td>All 5 sampled completions resolve with acceptance-evidence links.</td><td>1</td></tr>
+<tr><td>AP-041</td><td>Does recorded completion include a reproducible acceptance check?</td><td><span class="badge ok">PASS</span></td><td><span class="badge ok">current</span></td><td>2026-09-06T09:19:33Z</td><td>All 5 sampled completions resolve with acceptance-evidence links.</td><td>1</td></tr>
+<tr><td>AP-042</td><td>Can discovered project gates actually detect a planted failure?</td><td><span class="badge ok">PASS</span></td><td><span class="badge ok">current</span></td><td>2026-09-05T01:17:58Z</td><td>Good/bad fixtures distinguished.</td><td>1</td></tr>
+<tr><td>AP-043</td><td>Are missing gates reported honestly?</td><td><span class="badge ok">PASS</span></td><td><span class="badge ok">current</span></td><td>2026-09-05T01:17:58Z</td><td>Good/bad fixtures distinguished; empty fixture honestly empty.</td><td>1</td></tr>
+<tr><td>AP-044</td><td>Do active claims contradict branch/worktree liveness?</td><td><span class="badge ok">PASS</span></td><td><span class="badge ok">current</span></td><td>2026-09-06T09:19:34Z</td><td>2 active claim(s) checked; 0 stale or branch-less.</td><td>1</td></tr>
+<tr><td>AP-045</td><td>Are audit tools writing outside their declared output area?</td><td><span class="badge ok">PASS</span></td><td><span class="badge ok">current</span></td><td>2026-09-05T01:17:58Z</td><td>gate_discovery left the fixture tree unchanged (exit 0).</td><td>1</td></tr>
+<tr><td>AP-046</td><td>Do handoff lifecycle events cover the recorded state transitions?</td><td><span class="badge ok">PASS</span></td><td><span class="badge ok">current</span></td><td>2026-09-05T01:17:59Z</td><td>Lifecycle event coverage complete.</td><td>1</td></tr>
+<tr><td>AP-047</td><td>Do registry readers include archived completions?</td><td><span class="badge ok">PASS</span></td><td><span class="badge ok">current</span></td><td>2026-09-05T01:17:59Z</td><td>Archive half carries 7376 ✅ completion markers invisible to an active-only reader.</td><td>1</td></tr>
+<tr><td>AP-048</td><td>Are canonical owners and inter-repo edges consistent?</td><td><span class="badge ok">PASS</span></td><td><span class="badge ok">current</span></td><td>2026-09-05T01:17:59Z</td><td>14 interconnection records checked; 0 degraded to empty values (not scored healthy).</td><td>1</td></tr>
+<tr><td>AP-049</td><td>Are hub summaries older than the evidence they summarize?</td><td><span class="badge ok">PASS</span></td><td><span class="badge ok">current</span></td><td>2026-09-05T01:18:21Z</td><td>Hub staleness report generated with explicit dates.</td><td>1</td></tr>
+<tr><td>AP-050</td><td>Can a submitted ballot be traced through import to applied change?</td><td><span class="badge ok">PASS</span></td><td><span class="badge ok">current</span></td><td>2026-09-05T01:18:22Z</td><td>Vote-hub sheet inventory check passed.</td><td>1</td></tr>
+<tr><td>AP-051</td><td>Do agent instructions provide consistent executable entrypoints?</td><td><span class="badge ok">PASS</span></td><td><span class="badge ok">current</span></td><td>2026-09-06T09:19:35Z</td><td>claude-config: 2 instruction/guard finding(s) (verdict GREEN).</td><td>1</td></tr>
+<tr><td>AP-052</td><td>Do results distinguish missing dependencies, timeouts and empty output from passing checks?</td><td><span class="badge ok">PASS</span></td><td><span class="badge ok">current</span></td><td>2026-09-07T01:05:59Z</td><td>Classifier maps all six synthetic outcomes to honest verdicts.</td><td>2</td></tr>
+<tr><td>AP-053</td><td>Can changing inputs or tool versions leave a stale verified badge?</td><td><span class="badge ok">PASS</span></td><td><span class="badge ok">current</span></td><td>2026-09-07T01:05:59Z</td><td>Resolver expires stale/bumped verification and keeps history.</td><td>3</td></tr>
+<tr><td>AP-054</td><td>Can public export leak sensitive evidence?</td><td><span class="badge ok">PASS</span></td><td><span class="badge ok">current</span></td><td>2026-09-05T01:18:22Z</td><td>No canary reached the public bundle; unreviewed records rejected.</td><td>1</td></tr>
+<tr><td>AP-055</td><td>Does copy progress survive reload and preserve legacy identity?</td><td><span class="badge ok">PASS</span></td><td><span class="badge ok">current</span></td><td>2026-09-05T01:20:03Z</td><td>Page contract satisfied (6 checks).</td><td>1</td></tr>
+<tr><td>AP-056</td><td>Do pre-commit guards cover every destructive flag documented in AGENTS.md?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-057</td><td>Are exec-claims released when their session ends?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-058</td><td>Do worktree attics carry resumable payloads registered for salvage?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-059</td><td>Are generated repo-context blocks in sync with their generators?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-060</td><td>Do mirrored estates show drift older than one sync window?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-061</td><td>Which red invariants lack any enforcement hook?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-062</td><td>Are GTD rows dated and aging-visible per policy?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-063</td><td>Does the public site render content parity without JavaScript?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-064</td><td>Are landing pages consistent with the current price card?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-065</td><td>Do product pages leak internal repo names or handoff IDs?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-066</td><td>Is prod server config within the documented baseline?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-067</td><td>Do n8n webhooks require auth per the ops contract?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-068</td><td>Is there dated evidence that prod backups restorable in the documented window?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-069</td><td>Do Cologne correction batches validate end-to-end before queueing?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-070</td><td>Are derived Sanskrit datasets regenerable from registered sources?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-071</td><td>Do lexicon exports preserve encoding invariants on export?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-072</td><td>Do paper claims cite dataset revisions that still exist?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-073</td><td>Are article drafts linked to their evidence archives?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-074</td><td>Do handoff archives keep both registry halves in agreement?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-075</td><td>Are CHANGELOG releases cut for every durable artifact batch?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-076</td><td>Are metadoc companions present for long-lived manuals?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-077</td><td>Does the proven skills tier stay within prompt budget?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-078</td><td>Are memory stores free of dangerous facts that belong in DANGER_FACTS?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-079</td><td>Do published vote sheets carry type and minutes declarations?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-080</td><td>Are 7-day-aged sheets deferred with decided_at recorded?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-081</td><td>Do merged-PR titles reference the handoff IDs they close?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-082</td><td>Do archived handoff bodies keep working links after the archive move?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-083</td><td>Are dual-run compare residuals ever resolved, or only minted?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-084</td><td>Do override-executed handoffs record the actual tier that ran them?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-085</td><td>Is the registry Next-free-ID marker in sync with the highest minted ID?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-086</td><td>Have edited skills drifted from their generated cross-harness twins?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-087</td><td>Which wired hooks have zero recorded emissions in their event log?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-088</td><td>Do shipped docs carry bare model tiers without exact versions?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-089</td><td>Do two skills claim the same trigger token?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-090</td><td>Do house rules still point at files that exist?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-091</td><td>Do live worktrees hold unpushed commits older than a day?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-092</td><td>Do remote branches named for handoffs outlive their closes?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-093</td><td>Is the session freshness guard actually wired where sessions start?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-094</td><td>Does the served public page match the source repo&#x27;s latest generated artifact?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-095</td><td>Does the guarded main tree actually refuse a direct commit?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-096</td><td>Do recovery runbooks reference tools and paths that still exist?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-097</td><td>Do REUSE_INDEX rows resolve at their recorded paths?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-098</td><td>Do FEATURES_INDEX rows still exist as shipped artifacts?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-099</td><td>Are edge rows and interlink prose telling the same story?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-100</td><td>Do shared-code consumers satisfy the version pins their vendor records claim?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-101</td><td>Do kosha dataset registry entries resolve to fetchable artifacts?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-102</td><td>Do decisions.json verdicts trace back to dated sheet card IDs?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-103</td><td>Do unvoted sheets carry the adjudication-first Evidence panel?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-104</td><td>Are GTD vote rows closed when their sheet lands a decision?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-105</td><td>Do chat-transcribed votes land their audit doc in the same pass?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-106</td><td>Do policy citations inside sheets resolve at their blob URLs?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-107</td><td>Is every .env on disk covered by a gitignore rule?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-108</td><td>Are harness session stores excluded from every export path?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-109</td><td>Are credential-rotation rows aging past their due dates?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-110</td><td>Do public aggregates disclose small-cell counts?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-111</td><td>Do prod-access keys carry dated rotation evidence within policy?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-112</td><td>Do audit adapters keep BLOCKED and INCONCLUSIVE honestly apart?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-113</td><td>Which estate wrappers still verdict from exit codes alone?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-114</td><td>Does this audit toolkit honor its own declared write paths?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-115</td><td>Do executed handoffs still advertise executable starter lines anywhere?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-116</td><td>Do worktree claims carry live heartbeats where GC will look?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-117</td><td>Are dated reports discoverable by their naming contract?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-118</td><td>Do interrupted sessions leave resume notes a stranger could act on?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-119</td><td>Does any handoff carry two live claims at once?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-120</td><td>Are open claims stranded on tiers with no live lane?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-121</td><td>Does a learner who fails a check get a next step, not a dead end?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-122</td><td>Do the primary learn pages pass baseline accessibility checks?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-123</td><td>Do product pages carry links to URLs that no longer exist?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-124</td><td>Do funnel entry pages hold the mobile viewport contract?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-125</td><td>Are cohort definitions written as reproducible queries, not prose?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-126</td><td>Can this period&#x27;s revenue be reconciled across two independent sources?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-127</td><td>Do refunds and chargebacks enter the money records with the same rigor as income?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-128</td><td>Does every payout row trace to work evidence?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-129</td><td>Can tax-relevant money data be exported per period without manual reassembly?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-130</td><td>Does the pricing page serve the same price from cache and origin?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-131</td><td>Is every prod hostname&#x27;s TLS certificate more than 14 days from expiry?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-132</td><td>Do prod services match their documented unit definitions?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-133</td><td>Is prod disk headroom above the documented floor?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-134</td><td>Is the documented incident escalation path actually reachable?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-135</td><td>Do documented health endpoints answer 200 right now?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-136</td><td>Are scheduled jobs pinned to versions per the hygiene contract?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-137</td><td>Is prod running the revision the registry claims?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-138</td><td>Are exposed ports limited to the documented allowlist?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-139</td><td>Do alerts fire into a channel a human demonstrably reads?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-140</td><td>Does the newest restore drill prove recency, not just existence?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-141</td><td>Can a regeneration script overwrite human-reviewed corrections?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-142</td><td>Do export round-trips preserve homonym disambiguation markers?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-143</td><td>Do sandhi-split outputs keep their junction-rule provenance?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-144</td><td>Does every active dictionary pipeline have its golden entries?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-145</td><td>Do crosswalk joins preserve the documented key normalization?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-146</td><td>Are BOM and encoding states consistent within sibling export groups?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-147</td><td>Can a paper&#x27;s headline number be regenerated from its pinned inputs?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-148</td><td>Do manuscript methods sections carry tier + exact-version model attribution?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-149</td><td>Do citations name the edition that was actually used?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-150</td><td>Do submission packages satisfy the venue&#x27;s required-statements checklist?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-151</td><td>Are negative and failed probe results preserved in the research record?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-152</td><td>Do ORCID and byline records agree with the manuscript frontmatter?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-153</td><td>Do published datasets declare licenses matching their rights ledger?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-154</td><td>Was a versioned release (DOI slot) minted at every content freeze?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-155</td><td>Can a reader of a published artifact discover what changed and when?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-156</td><td>Do bibliography citation keys resolve to their entries?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-157</td><td>Do rendered public HTML artifacts leak build-machine paths?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-158</td><td>Do OCR/scan layers carry their claimed CER and provenance notes?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-159</td><td>Do teaching layers pin the corpus revision they were built from?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+<tr><td>AP-160</td><td>Does publication readiness agree across manuscript, ARTICLES and GTD?</td><td><span class="badge na">—</span></td><td><span class="badge na">no-evidence</span></td><td></td><td></td><td>0</td></tr>
+</table>
+<h2>Actionable findings queue (deduplicated)</h2>
+<table><tr><th>Probe</th><th>Target</th><th>Normalized condition</th><th>First run</th><th>Origin</th></tr>
+<tr><td>AP-052</td><td>18ae2fb30e</td><td>classifier matrix failed: [&#x27;planted-scratch-regression&#x27;]</td><td>AP-052-1788743158</td><td>planted scratch</td></tr>
+</table>
+</body></html>
