@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="color-scheme" content="dark">
+<meta name="generator" content="csl-pyutil/0.23.0">
+<title>Недельный разбор: устаревшие вопросы дрена — 28 items</title>
+<style>
+  :root { color-scheme: dark; --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --text:#e6e6e6; --muted:#9aa0aa;
+          --accent:#5b8cff; --ok:#3fb950; --bad:#f85149; --defer:#d29922; --border:#2a2f3a; }
+  * { box-sizing: border-box; }
+  body { background:var(--bg); color:var(--text); font-family:-apple-system,Segoe UI,Roboto,sans-serif;
+         margin:0; padding:0 0 120px 0; }
+  header.top { position:sticky; top:0; z-index:10; background:var(--panel); border-bottom:1px solid var(--border);
+               padding:14px 20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+  header.top h1 { font-size:16px; margin:0; }
+  header.top .sub { color:var(--muted); font-size:12px; max-width:760px; }
+  .tally { display:flex; gap:14px; font-size:13px; }
+  .tally span.count { font-weight:700; }
+  .tally .approve { color:var(--ok); } .tally .reject { color:var(--bad); }
+  .tally .defer { color:var(--defer); } .tally .unvoted { color:var(--muted); }
+  .toolbar { padding:10px 20px; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  button.dl { background:var(--accent); color:#fff; border:none; padding:8px 14px; border-radius:6px;
+              cursor:pointer; font-size:13px; }
+  button.dl:hover { opacity:.9; }
+  .filterbar { display:flex; gap:6px; flex-wrap:wrap; }
+  .filterbar button { background:var(--panel2); border:1px solid var(--border); color:var(--text);
+                       padding:6px 10px; border-radius:14px; font-size:12px; cursor:pointer; }
+  .filterbar button.active { border-color:var(--accent); color:var(--accent); }
+  main { max-width:980px; margin:0 auto; padding:10px 20px; }
+  .card { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:16px;
+          margin-bottom:16px; }
+  .card.voted-approve { border-left:4px solid var(--ok); }
+  .card.voted-reject { border-left:4px solid var(--bad); }
+  .card.voted-defer { border-left:4px solid var(--defer); }
+  .card header { display:flex; justify-content:space-between; align-items:baseline; }
+  .card .hw { font-size:18px; font-weight:700; }
+  .badge { font-size:11px; background:var(--panel2); padding:2px 8px; border-radius:10px;
+           margin-left:8px; color:var(--muted); }
+  .question { margin:8px 0 12px; font-size:14px; }
+  .panel { background:var(--panel2); border-radius:8px; padding:10px 12px; font-size:13px; margin-bottom:10px; }
+  .panel h4 { margin:0 0 6px; font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+  .panel pre { white-space:pre-wrap; word-break:break-word; margin:0; font-size:12px; line-height:1.45; }
+  .chip { display:inline-block; background:#263042; border-radius:5px; padding:2px 7px; margin:2px 3px 2px 0; font-size:12px; }
+  .muted { color:var(--muted); font-style:italic; }
+  .controls { display:flex; align-items:center; gap:8px; margin-top:4px; }
+  button.vote { border:1px solid var(--border); background:var(--panel2); color:var(--text);
+                padding:7px 12px; border-radius:6px; cursor:pointer; font-size:13px; }
+  button.vote.approve.active { background:var(--ok); border-color:var(--ok); color:#04240b; }
+  button.vote.reject.active { background:var(--bad); border-color:var(--bad); color:#2a0a08; }
+  button.vote.defer.active { background:var(--defer); border-color:var(--defer); color:#2a1d02; }
+  .vote-state { margin-left:6px; font-size:12px; color:var(--muted); }
+  textarea.note { width:100%; margin-top:10px; min-height:100px; background:#11141a !important; color:#e6e6e6 !important;
+                  -webkit-text-fill-color:#e6e6e6; border:1px solid var(--border); border-radius:6px; padding:8px; font-size:13px;
+                  font-family:inherit; resize:vertical; }
+  textarea.note::placeholder { color:var(--muted); opacity:1; }
+  footer.hint { max-width:980px; margin:20px auto; padding:0 20px; color:var(--muted); font-size:12px; }
+  kbd { background:#263042; border-radius:4px; padding:1px 5px; font-size:11px; }
+
+  .screening-banner { margin: 0 20px 12px; padding: 10px 14px; border-radius: 8px;
+    border: 1px solid var(--accent); background: #152033; font-size: 12px; line-height: 1.45;
+    color: var(--text); max-width: 980px; }
+  .screening-banner code { font-size: 11px; color: var(--accent); }
+  .screening-banner .sc-d { color: var(--defer); font-weight: 700; }
+
+  .idchip { font-family:ui-monospace,Consolas,monospace; font-size:11px; color:var(--muted);
+            background:var(--panel2); border:1px solid var(--border); padding:2px 7px;
+            border-radius:6px; user-select:all; }
+  .card header { gap:10px; }
+  .hw a.hwlink { color:inherit; text-decoration:underline dotted; text-underline-offset:3px; }
+  .hw a.hwlink:hover { color:var(--accent); }
+  mark.hl { background:#453407; color:#ffd75e; padding:0 2px; border-radius:3px; }
+  .savebanner { max-width:980px; margin:10px auto 0; padding:8px 20px; font-size:12.5px; }
+  .savebanner code { background:var(--panel2); border:1px solid var(--border); padding:1px 6px; border-radius:5px; }
+  .ratingrow { display:flex; align-items:center; gap:6px; margin-top:10px; flex-wrap:wrap; }
+  .ratinglabel { font-size:12px; color:var(--muted); margin-right:4px; }
+  button.rate { border:1px solid var(--border); background:var(--panel2); color:var(--text);
+                width:34px; padding:6px 0; border-radius:6px; cursor:pointer; font-size:13px; }
+  button.rate.active { background:var(--accent); border-color:var(--accent); color:#fff; }
+  button.rate.active.below { background:var(--defer); border-color:var(--defer); color:#2a1d02; }
+  .rate-state { font-size:12px; color:var(--muted); margin-left:4px; }
+  .badge-typology { border:1px solid var(--accent); color:var(--text); font-weight:600; }
+  :root { --fs:1.5; }
+  header.top h1 { font-size:calc(16px * var(--fs)) !important; }
+  header.top .sub { font-size:calc(12px * var(--fs)) !important; }
+  .tally, button.dl, button.vote, button.rate, textarea.note, .reject-label-select,
+  #strictReviewerWrap, #strictReviewerWrap input { font-size:calc(13px * var(--fs)) !important; }
+  .filterbar button, .fsctl button, .fsctl .fsval, .chip, .vote-state, .rate-state,
+  .ratinglabel, .rejectlabellabel, footer.hint, div.legend,
+  #strictReviewError { font-size:calc(12px * var(--fs)) !important; }
+  .card .hw { font-size:calc(18px * var(--fs)) !important; }
+  .badge, .panel h4, kbd, .idchip { font-size:calc(11px * var(--fs)) !important; }
+  .question { font-size:calc(14px * var(--fs)) !important; }
+  .panel { font-size:calc(13px * var(--fs)) !important; }
+  .panel pre { font-size:calc(13.5px * var(--fs)) !important; line-height:1.55; }
+  .panel .anatomy { font-size:calc(12.5px * var(--fs)) !important; }
+  .savebanner { font-size:calc(12.5px * var(--fs)) !important; }
+  .fsctl { display:flex; align-items:center; gap:4px; }
+  .fsctl button { background:var(--panel2); border:1px solid var(--border); color:var(--text);
+                  padding:6px 10px; border-radius:14px; cursor:pointer; line-height:1; }
+  .fsctl .fsval { color:var(--muted); min-width:3.4em; text-align:center; }
+  @media (max-width: 640px) {
+    header.top { padding: 10px 14px; flex-direction: column; align-items: stretch; }
+    header.top h1 { font-size: 15px; }
+    .tally { gap: 8px; font-size: 11px; }
+    .toolbar { padding: 8px 14px; }
+    main { padding: 8px 12px; }
+    .card { padding: 12px; }
+    .filterbar { flex-wrap: wrap; }
+    button.dl, button.vote, button.rate, .fsctl button, #saveBtn, #handinBtn, #pauseBtn {
+      min-height: 44px; min-width: 44px; padding: 10px 14px;
+    }
+    .controls { flex-wrap: wrap; }
+    .panel { padding: 8px 10px; }
+    textarea.note { min-height: 60px; }
+  }
+  .tally .time { color:var(--muted); }
+  .dl.handin { background:#243447; }
+  .tally .pausebtn { background:none; border:1px solid var(--border); color:var(--muted);
+                     border-radius:6px; padding:0 6px; margin-left:4px; cursor:pointer;
+                     font-size:inherit; font-family:inherit; line-height:1.6; }
+  .tally .pausebtn.on { color:#ffd479; border-color:#ffd479; }
+  .tally .time.paused { opacity:.45; }
+  .handin-said { color:var(--muted); font-size:12px; margin-left:10px; }
+  .card.kbd-active { outline:2px solid var(--accent); outline-offset:3px; }
+  .tally .tstate { color:var(--muted); font-size:.85em; margin-left:4px; }
+  .tally .tstate.idle { color:var(--defer); }
+  .flowprog { display:inline-flex; align-items:center; gap:8px; color:var(--muted); font-size:12px; }
+  .flowprog .bar { display:inline-block; width:120px; height:6px; border-radius:3px;
+                   background:var(--panel2); border:1px solid var(--border); overflow:hidden; }
+  .flowprog .bar i { display:block; height:6px; background:var(--accent); width:0; }
+  .dl.flowundo { background:#243447; }
+  .flowtoast { position:fixed; left:50%; bottom:24px; transform:translateX(-50%);
+               background:var(--panel2); border:1px solid var(--border); color:var(--text);
+               padding:8px 14px; border-radius:8px; font-size:13px; z-index:50;
+               opacity:0; pointer-events:none; transition:opacity .18s; }
+  .flowtoast.on { opacity:1; }
+  .voteprog { flex:1 0 100%; order:99; background:var(--panel);
+              border-top:1px solid var(--border); margin:6px -20px -14px; padding:8px 20px;
+              display:flex; align-items:center; gap:12px; font-size:12px; color:var(--muted); }
+  .voteprog .bar { flex:1 1 auto; height:8px; border-radius:4px; background:var(--panel2);
+                   border:1px solid var(--border); overflow:hidden; }
+  .voteprog .bar i { display:block; height:100%; width:0; background:var(--ok); transition:width .2s; }
+  .voteprog b { color:var(--text); font-weight:700; }
+  .voteprog .eta { white-space:nowrap; }
+  .votebar { position:sticky; bottom:0; z-index:9; background:var(--panel);
+             border-top:1px solid var(--border); padding:10px 20px; margin-top:24px;
+             display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  .votebar .spacer { flex:1 1 auto; }
+  .card { scroll-margin-top:96px; }
+  @media (max-width: 640px) { .voteprog { padding:6px 12px; } .votebar { padding:8px 12px; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>Недельный разбор: устаревшие вопросы дрена — 28 items</h1>
+    <div class="sub">Generated 08-09-2026 &middot; sheet_id <code>uprava-drain-vote-weekly_08-09-26</code> &middot; Items carded daily and unresolved ≥1 дня — недельный лист; ≥7 дней — авто-дефер в List 3.</div>
+  </div>
+  <div class="tally" id="tally">
+    <span class="approve">&#9989; <span class="count" id="c-approve">0</span></span>
+    <span class="reject">&#10060; <span class="count" id="c-reject">0</span></span>
+    <span class="defer">&#9208; <span class="count" id="c-defer">0</span></span>
+    <span class="time" title="active time on this sheet (while the tab is visible)">&#9201; <span class="count" id="t-total">0:00</span><span class="tstate" id="t-state"></span></span>
+    <button type="button" class="pausebtn" id="pauseBtn" title="pause the clock — a break is not review time">&#9208;</button>
+    <span class="unvoted">&#9711; <span class="count" id="c-unvoted">28</span></span>
+  </div>
+<div class="voteprog" id="voteProg"><span id="voteProgText"></span><span class="bar"><i id="voteProgBar"></i></span><span class="eta" id="voteProgEta"></span></div>
+</header>
+<aside class="screening-banner" role="status" data-screening="1"><strong>Screening (H1649)</strong> — only human-required cards are below. Off the plate: <span class="sc-a">deterministic 0</span> · <span class="sc-b">dataset lookup 0</span> · <span class="sc-c">agent adjudication 0</span> (total screened 0). Human cards: <span class="sc-d">28</span>. Evidence: <code>~/.claude/drain-vote/daily_items.jsonl + ledgers</code>. Rules: done events of every executor ledger inside the window; a card only when the close row carries an ask/pilot/default marker.</aside>
+<div class="savebanner">&#128229; Your export downloads as <code>uprava-drain-vote-weekly_08-09-26_decisions.json</code> &rarr; save it to <code>review/uprava-drain-vote-weekly_08-09-26_decisions.json</code> (the <code>sheet_id</code> inside the file is <code>uprava-drain-vote-weekly_08-09-26</code> — that is how a later session knows which sheet these decisions belong to).</div>
+<div class="toolbar">
+  <button data-submit="1" class="dl" id="downloadBtn">Download decisions.json</button><button data-submit="1" class="dl handin" id="handinBtn" title="stop the clock and export the votes made so far; the rest stay saved in this browser">Hand in what I got</button><span class="handin-said" id="handinSaid"></span><button data-submit="1" class="dl" id="saveBtn" style="display:none;margin-left:8px">Save to folder…</button>
+  <div class="fsctl" title="text size — persists in this browser"><button type="button" id="fsDown" aria-label="smaller text">A&minus;</button><span class="fsval" id="fsVal"></span><button type="button" id="fsUp" aria-label="larger text">A+</button></div>
+  <button data-submit="1" type="button" class="dl flowundo" id="flowUndoBtn" title="undo the last decision (z)">&#8630; Undo</button>
+  <span class="flowprog" id="flowProg"><span class="bar"><i id="flowBar"></i></span><span id="flowProgText"></span><span id="flowEta"></span></span>
+  <div class="filterbar" id="filterbar"><button data-filter="all" class="active">all</button><button data-filter="all">все</button><button data-filter="drain">дрен</button><button data-filter="unvoted">unvoted only</button></div>
+</div>
+<main id="cards">
+
+  <section class="card" data-id="h3234" data-filt="drain">
+    <header><div class="hw">H3234: Gate open 2x 03-09; stages 5-6 + knowledge:eval over H4001 dense leg, PR #2353 merged; flags OFF; live shadow… </div><span class="idchip" title="card id — cite this id back when discussing this card">h3234</span></header>
+    <div class="question"><p><b><mark class="hl">Закрытие</mark>:</b> | H3234 (handoff) | — | [H3234 (handoff)-Grok_Systema-Sanscriticum_ollama-gpu-experiment-oct1_21.08.26](https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3234 (handoff)-Grok_Systema-Sanscriticum_ollama-gpu-experiment-oct1_21.08.26.md) | Systema-Sanscriticum | ✅ Done 03-09-2026 (OxAlpha (opencode/z-ai/glm-5.3-flash)) — Gate open 2x 03-09; stages 5-6 + knowledge:eval over H4001 (handoff) dense leg, PR #2353 merged; flags OFF; live shadow week = GTD @DO; https://github.com/gasyoun/Systema-Sanscriticum/pull/2353 merged {effort: hard} | - H4060 (handoff): T1: mega-review sheet live — 28 cards from the 50-done drain census (H3234 (handoff)..H4045 (handoff)), hub-published + index, smoke PASS (vote+timer+reload), GTD @DECIDE row 0 added. T2: tools/drain_daily_vote_sheet.py committed — daily sheet from window closes with ask/pilot markers, 48h aging into --weekly rollup, launchd com.gasyoun.uprava-drain-vote-daily armed 09:30 (rc=0, live in launchctl); today's 1-card daily sheet published as the ritual proof. (OxAlpha)</p> <p><b>⏳ <mark class="hl">День</mark> 5 <mark class="hl">без</mark> <mark class="hl">рулинга</mark> — <mark class="hl">по</mark> <mark class="hl">рулингу</mark> MG (04-09-2026) <mark class="hl">уезжает</mark> <mark class="hl">в</mark> <mark class="hl">недельный</mark> <mark class="hl">лист</mark>.</b></p><p><b><mark class="hl">Голос</mark>:</b> <b>(<mark class="hl">а</mark>)</b> <mark class="hl">подтверждаю</mark> <mark class="hl">закрытие</mark> <mark class="hl">как</mark> <mark class="hl">есть</mark> · <b>(<mark class="hl">б</mark>)</b> <mark class="hl">переоткрыть</mark> (<mark class="hl">укажите</mark> <mark class="hl">что</mark> <mark class="hl">не</mark> <mark class="hl">так</mark> <mark class="hl">в</mark> <mark class="hl">примечании</mark>) · <b>(<mark class="hl">в</mark>)</b> <mark class="hl">на</mark> <mark class="hl">недельный</mark> <mark class="hl">разбор</mark>.</p></div>
+    <div class="panel"><h4>Ссылки</h4><p><a href='https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3234-Grok_Systema-Sanscriticum_ollama-gpu-experiment-oct1_21.08.26'>H3234-Grok_Systema-Sanscriticum_ollama-gpu-experiment-oct1_21.08.26</a></p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Подтверждаю закрытие</button>
+      <button class="vote reject" data-vote="reject">&#10060; Переоткрыть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="h3346" data-filt="drain">
+    <header><div class="hw">H3346: Q4.1 Type-D pilot concordance on sanskrit-util linkid shipped end-to-end: 258-row root-commentary dataset… </div><span class="idchip" title="card id — cite this id back when discussing this card">h3346</span></header>
+    <div class="question"><p><b><mark class="hl">Закрытие</mark>:</b> | H3346 (handoff) | — | [H3346 (handoff)-OxAlpha_CommentaryStrategies_q41-type-d-pilot-concordance_22.08.26](https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3346 (handoff)-OxAlpha_CommentaryStrategies_q41-type-d-pilot-concordance_22.08.26.md) | CommentaryStrategies | ✅ Done 26-08-2026 (OxAlpha (opencode/x-preview-f-free)) — Q4.1 Type-D pilot concordance on sanskrit-util linkid shipped end-to-end: 258-row root-commentary dataset (CommentaryStrategies PR #199 merged), dedup-vs-1058 report (156 unique / 102 verse-overlap / 0 root-overlap), review sheet hosted+registered; store write gated on the vote; https://github.com/gasyoun/CommentaryStrategies/pull/199 merged {effort: hard} | - H3514 (handoff): Full blocked-by DAG regen — tools/roadmap_deps_regen.py computes ROADMAP_DEPS.tsv from open handoff bodies (blocked-by / depends on / requires / needs / waits for|on / gated on / prerequisite / after-H-merges / unblocked-by / after-H-execute forms, executed ✅ files excluded) plus ROADMAP_INDEX.md + GTD_NEXT_ACTIONS.md prose (same verbs + "Execute [H] first" wave anchor + ROADMAP_INDEX-only " · " wave-run chains + serial ranges); 55 relations committed (seed was 19), deterministic order, per-row blob evidence URLs; --check parity gate (exit 1 on computed-vs-committed drift, date-agnostic) + 3-assertion --selftest; roadmap_deps_check.py --check green (0 errors, acyclic); GTD " · " tally lines deliberately …</p> <p><b>⏳ <mark class="hl">День</mark> 5 <mark class="hl">без</mark> <mark class="hl">рулинга</mark> — <mark class="hl">по</mark> <mark class="hl">рулингу</mark> MG (04-09-2026) <mark class="hl">уезжает</mark> <mark class="hl">в</mark> <mark class="hl">недельный</mark> <mark class="hl">лист</mark>.</b></p><p><b><mark class="hl">Голос</mark>:</b> <b>(<mark class="hl">а</mark>)</b> <mark class="hl">подтверждаю</mark> <mark class="hl">закрытие</mark> <mark class="hl">как</mark> <mark class="hl">есть</mark> · <b>(<mark class="hl">б</mark>)</b> <mark class="hl">переоткрыть</mark> (<mark class="hl">укажите</mark> <mark class="hl">что</mark> <mark class="hl">не</mark> <mark class="hl">так</mark> <mark class="hl">в</mark> <mark class="hl">примечании</mark>) · <b>(<mark class="hl">в</mark>)</b> <mark class="hl">на</mark> <mark class="hl">недельный</mark> <mark class="hl">разбор</mark>.</p></div>
+    <div class="panel"><h4>Ссылки</h4><p><a href='https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3346-OxAlpha_CommentaryStrategies_q41-type-d-pilot-concordance_22.08.26'>H3346-OxAlpha_CommentaryStrategies_q41-type-d-pilot-concordance_22.08.26</a></p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Подтверждаю закрытие</button>
+      <button class="vote reject" data-vote="reject">&#10060; Переоткрыть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="h3349" data-filt="drain">
+    <header><div class="hw">H3349: Reval R1 offgit exposure census: macOS attic EMPTY + _maintree_quarantine absent — 0 payloads, fence intact,… </div><span class="idchip" title="card id — cite this id back when discussing this card">h3349</span></header>
+    <div class="question"><p><b><mark class="hl">Закрытие</mark>:</b> | H3349 (handoff) | — | [H3349 (handoff)-OxAlpha_Uprava_offgit-asset-exposure-audit_22.08.26](https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3349 (handoff)-OxAlpha_Uprava_offgit-asset-exposure-audit_22.08.26.md) | Uprava | ✅ Done 26-08-2026 (OxAlpha (opencode/x-preview-f-free)) — Reval R1 offgit exposure census: macOS attic EMPTY + _maintree_quarantine absent — 0 payloads, fence intact, 0 rotations due; adjacent finds minted as GTD rows (Windows-box audit, ORS-FAQ public hiring-PII @DECIDE, local hiring-quarantine disposition); https://github.com/gasyoun/Uprava/pull/2297 merged {effort: medium} | - ORS-FAQ: PII history purge executed (H3349 (handoff) residual; MG ruling 05-09-2026 via H4060 (handoff) v2 vote card 1a) — git filter-repo inverted 26 candidate-PII paths out of all history (8 hire verdicts, resume memo, 7 exam-result TSVs, 4 candidate digests, 7 HR-journal histories), deleted salvage/hiring-exam-verdicts + rescue/hiring-exam-verdicts + 7 stale branches, rewrote and force-pushed tags; main b04d8d9→651897e; the 7 active HR journals restored as one fresh revision (no candidate-era history); zero PII paths verified in a fresh clone; server-side GitHub GC reclaims unreachable objects (OxAlpha (opencode/z-ai/glm-5.3-flash))</p> <p><b>⏳ <mark class="hl">День</mark> 5 <mark class="hl">без</mark> <mark class="hl">рулинга</mark> — <mark class="hl">по</mark> <mark class="hl">рулингу</mark> MG (04-09-2026) <mark class="hl">уезжает</mark> <mark class="hl">в</mark> <mark class="hl">недельный</mark> <mark class="hl">лист</mark>.</b></p><p><b><mark class="hl">Голос</mark>:</b> <b>(<mark class="hl">а</mark>)</b> <mark class="hl">подтверждаю</mark> <mark class="hl">закрытие</mark> <mark class="hl">как</mark> <mark class="hl">есть</mark> · <b>(<mark class="hl">б</mark>)</b> <mark class="hl">переоткрыть</mark> (<mark class="hl">укажите</mark> <mark class="hl">что</mark> <mark class="hl">не</mark> <mark class="hl">так</mark> <mark class="hl">в</mark> <mark class="hl">примечании</mark>) · <b>(<mark class="hl">в</mark>)</b> <mark class="hl">на</mark> <mark class="hl">недельный</mark> <mark class="hl">разбор</mark>.</p></div>
+    <div class="panel"><h4>Ссылки</h4><p><a href='https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3349-OxAlpha_Uprava_offgit-asset-exposure-audit_22.08.26'>H3349-OxAlpha_Uprava_offgit-asset-exposure-audit_22.08.26</a></p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Подтверждаю закрытие</button>
+      <button class="vote reject" data-vote="reject">&#10060; Переоткрыть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="h3353" data-filt="drain">
+    <header><div class="hw">H3353: Org-wide secrets sweep REPORT-ONLY: 192 clones/561,746 files at HEAD, 334 raw hits all dispositioned (2 TP:… </div><span class="idchip" title="card id — cite this id back when discussing this card">h3353</span></header>
+    <div class="question"><p><b><mark class="hl">Закрытие</mark>:</b> | H3353 (handoff) | — | [H3353 (handoff)-OxAlpha_Uprava_org-secrets-sweep-report_22.08.26](https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3353 (handoff)-OxAlpha_Uprava_org-secrets-sweep-report_22.08.26.md) | Uprava | ✅ Done 26-08-2026 (OxAlpha (opencode/x-preview-f-free)) — Org-wide secrets sweep REPORT-ONLY: 192 clones/561,746 files at HEAD, 334 raw hits all dispositioned (2 TP: live Firebase/Drive web keys in public SanskritKaraoke, parked as MG @DO; 46 documented-placeholder; 282 FP), zero silent hits, attic/quarantine excluded; https://github.com/gasyoun/Uprava/pull/2303 merged {effort: hard} | - H3353 (handoff): Org-wide secrets sweep REPORT-ONLY: 192 clones/561,746 files at HEAD, 334 raw hits all dispositioned (2 TP: live Firebase/Drive web keys in public SanskritKaraoke, parked as MG @DO; 46 documented-placeholder; 282 FP), zero silent hits, attic/quarantine excluded (OxAlpha (opencode/x-preview-f-free))</p> <p><b>⏳ <mark class="hl">День</mark> 5 <mark class="hl">без</mark> <mark class="hl">рулинга</mark> — <mark class="hl">по</mark> <mark class="hl">рулингу</mark> MG (04-09-2026) <mark class="hl">уезжает</mark> <mark class="hl">в</mark> <mark class="hl">недельный</mark> <mark class="hl">лист</mark>.</b></p><p><b><mark class="hl">Голос</mark>:</b> <b>(<mark class="hl">а</mark>)</b> <mark class="hl">подтверждаю</mark> <mark class="hl">закрытие</mark> <mark class="hl">как</mark> <mark class="hl">есть</mark> · <b>(<mark class="hl">б</mark>)</b> <mark class="hl">переоткрыть</mark> (<mark class="hl">укажите</mark> <mark class="hl">что</mark> <mark class="hl">не</mark> <mark class="hl">так</mark> <mark class="hl">в</mark> <mark class="hl">примечании</mark>) · <b>(<mark class="hl">в</mark>)</b> <mark class="hl">на</mark> <mark class="hl">недельный</mark> <mark class="hl">разбор</mark>.</p></div>
+    <div class="panel"><h4>Ссылки</h4><p><a href='https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3353-OxAlpha_Uprava_org-secrets-sweep-report_22.08.26'>H3353-OxAlpha_Uprava_org-secrets-sweep-report_22.08.26</a></p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Подтверждаю закрытие</button>
+      <button class="vote reject" data-vote="reject">&#10060; Переоткрыть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="h3356" data-filt="drain">
+    <header><div class="hw">H3356: Reval R3 venue-scout surface: liveness-checked sheets for 7 top-readiness papers (8 venues verified 26-08),… </div><span class="idchip" title="card id — cite this id back when discussing this card">h3356</span></header>
+    <div class="question"><p><b><mark class="hl">Закрытие</mark>:</b> | H3356 (handoff) | — | [H3356 (handoff)-OxAlpha_Uprava_publication-pipeline-unblock_22.08.26](https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3356 (handoff)-OxAlpha_Uprava_publication-pipeline-unblock_22.08.26.md) | Uprava | ✅ Done 26-08-2026 (OxAlpha (opencode/x-preview-f-free)) — Reval R3 venue-scout surface: liveness-checked sheets for 7 top-readiness papers (8 venues verified 26-08), pack skeletons A33/A34/A15/A27 + A26 stub, 6 @DECIDE rows mirrored to GTD Publication Gates - nothing submitted; https://github.com/gasyoun/Uprava/pull/2305 merged {effort: medium} | - H4088 (handoff): FINAL submit packages assembled for A33/A34/A15/A27 (04-09-2026, worker on executor Claude/c1) — filled cover letters, CITATION.cff, keywords, data-deposit links, per-venue checklist in review/weekly/H4088 (handoff)_submit_pack_A33_A34_A15_A27.md, built from the H3356 (handoff) skeletons with real title/abstract/word-count facts pulled from each manuscript; authorized by MG's dated vote ruling 04-09-2026 (card h3356_venues, approve (a): "Submit 4 ready papers"), a specific exception to the standing article-submit freeze (Uprava #1672, general freeze to 2026-11-01) for exactly these four papers. State: ready to send, submit-portal clicks are MG's (his accounts). Remaining pre-click gaps flagged, not fixed in this pass: A15 needs a dataset DOI mint (blocking for JOHD), A34 needs the IJL double-blind Title-Page split, A33/A34 have two textual …</p> <p><b>⏳ <mark class="hl">День</mark> 5 <mark class="hl">без</mark> <mark class="hl">рулинга</mark> — <mark class="hl">по</mark> <mark class="hl">рулингу</mark> MG (04-09-2026) <mark class="hl">уезжает</mark> <mark class="hl">в</mark> <mark class="hl">недельный</mark> <mark class="hl">лист</mark>.</b></p><p><b><mark class="hl">Голос</mark>:</b> <b>(<mark class="hl">а</mark>)</b> <mark class="hl">подтверждаю</mark> <mark class="hl">закрытие</mark> <mark class="hl">как</mark> <mark class="hl">есть</mark> · <b>(<mark class="hl">б</mark>)</b> <mark class="hl">переоткрыть</mark> (<mark class="hl">укажите</mark> <mark class="hl">что</mark> <mark class="hl">не</mark> <mark class="hl">так</mark> <mark class="hl">в</mark> <mark class="hl">примечании</mark>) · <b>(<mark class="hl">в</mark>)</b> <mark class="hl">на</mark> <mark class="hl">недельный</mark> <mark class="hl">разбор</mark>.</p></div>
+    <div class="panel"><h4>Ссылки</h4><p><a href='https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3356-OxAlpha_Uprava_publication-pipeline-unblock_22.08.26'>H3356-OxAlpha_Uprava_publication-pipeline-unblock_22.08.26</a></p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Подтверждаю закрытие</button>
+      <button class="vote reject" data-vote="reject">&#10060; Переоткрыть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="h3378" data-filt="drain">
+    <header><div class="hw">H3378: S6 five-metric voting baseline: 52 unvoted (oldest 51d), 164-surface scan 0 banned checkbox sheets,… </div><span class="idchip" title="card id — cite this id back when discussing this card">h3378</span></header>
+    <div class="question"><p><b><mark class="hl">Закрытие</mark>:</b> | H3378 (handoff) | — | [H3378 (handoff)-OxAlpha_Uprava_s6-voting-layer-metrics-census_23.08.26](https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3378 (handoff)-OxAlpha_Uprava_s6-voting-layer-metrics-census_23.08.26.md) | Uprava | ✅ Done 26-08-2026 (OxAlpha (opencode/x-preview-f-free)) — S6 five-metric voting baseline: 52 unvoted (oldest 51d), 164-surface scan 0 banned checkbox sheets, issued-to-applied median 2d (vote leg unknown-not-zero), quorum census (H2855 (handoff) gate prose-only), fatigue peak 43 sheets/wk; TSV+summary+tool+staged cadence fanout; https://github.com/gasyoun/Uprava/commit/d0ce730ee59f51eee7fc8d0abf6691a4f99ec59f merged {effort: medium} | - AUDIT_QUESTIONS_39 #35 answered — multi-reviewer ballot disagreement is preserved as data, never discarded (OxAlpha `zai-coding-plan/glm-5.3-flash` via opencode, 30-08-2026): [reports/A35_BALLOT_DISAGREEMENT_PRESERVED_AS_DATA_2026-08-30.md](https://github.com/gasyoun/Uprava/blob/main/reports/A35_BALLOT_DISAGREEMENT_PRESERVED_AS_DATA_2026-08-30.md) — three mechanisms with shipped applications (/gold-adjudicate keeps per-item `ruling`+`ruling_reason` with an honest ambiguous bucket; /dual-run-salvage adjudicates Class-3 conflicts with written arguments in two landing places; /review-sheet retains `decisions.json` as the vote record after HTML deletion); measured specimens G5 (146/146 adjudicated, κ=0.817), A44 (50 disagreements → taxonomy §4.6), …</p> <p><b>⏳ <mark class="hl">День</mark> 5 <mark class="hl">без</mark> <mark class="hl">рулинга</mark> — <mark class="hl">по</mark> <mark class="hl">рулингу</mark> MG (04-09-2026) <mark class="hl">уезжает</mark> <mark class="hl">в</mark> <mark class="hl">недельный</mark> <mark class="hl">лист</mark>.</b></p><p><b><mark class="hl">Голос</mark>:</b> <b>(<mark class="hl">а</mark>)</b> <mark class="hl">подтверждаю</mark> <mark class="hl">закрытие</mark> <mark class="hl">как</mark> <mark class="hl">есть</mark> · <b>(<mark class="hl">б</mark>)</b> <mark class="hl">переоткрыть</mark> (<mark class="hl">укажите</mark> <mark class="hl">что</mark> <mark class="hl">не</mark> <mark class="hl">так</mark> <mark class="hl">в</mark> <mark class="hl">примечании</mark>) · <b>(<mark class="hl">в</mark>)</b> <mark class="hl">на</mark> <mark class="hl">недельный</mark> <mark class="hl">разбор</mark>.</p></div>
+    <div class="panel"><h4>Ссылки</h4><p><a href='https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3378-OxAlpha_Uprava_s6-voting-layer-metrics-census_23.08.26'>H3378-OxAlpha_Uprava_s6-voting-layer-metrics-census_23.08.26</a></p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Подтверждаю закрытие</button>
+      <button class="vote reject" data-vote="reject">&#10060; Переоткрыть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="h3379" data-filt="drain">
+    <header><div class="hw">H3379: S7 meta-tail census: 13-incident MTTR timelines (0/13 monitor-detected, samskrtam eradication OPEN &gt;7d on .95… </div><span class="idchip" title="card id — cite this id back when discussing this card">h3379</span></header>
+    <div class="question"><p><b><mark class="hl">Закрытие</mark>:</b> | H3379 (handoff) | — | [H3379 (handoff)-OxAlpha_Uprava_s7-meta-tail-census_23.08.26](https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3379 (handoff)-OxAlpha_Uprava_s7-meta-tail-census_23.08.26.md) | Uprava | ✅ Done 26-08-2026 (OxAlpha (opencode/x-preview-f-free)) — S7 meta-tail census: 13-incident MTTR timelines (0/13 monitor-detected, samskrtam eradication OPEN >7d on .95 access wait) + context ROI of AGENTS.md blocks (~9.7k tok estate-wide; Mac pilot N=11, twins' distinctive targets 0/11 engaged; keep/trim staged) + 30-day rot map (day-1/7/30 horizons); https://github.com/gasyoun/Uprava/pull/2310 merged {effort: medium} | - H3379 (handoff): S7 meta-tail census: 13-incident MTTR timelines (0/13 monitor-detected, samskrtam eradication OPEN >7d on .95 access wait) + context ROI of AGENTS.md blocks (~9.7k tok estate-wide; Mac pilot N=11, twins' distinctive targets 0/11 engaged; keep/trim staged) + 30-day rot map (day-1/7/30 horizons) (OxAlpha (opencode/x-preview-f-free))</p> <p><b>⏳ <mark class="hl">День</mark> 5 <mark class="hl">без</mark> <mark class="hl">рулинга</mark> — <mark class="hl">по</mark> <mark class="hl">рулингу</mark> MG (04-09-2026) <mark class="hl">уезжает</mark> <mark class="hl">в</mark> <mark class="hl">недельный</mark> <mark class="hl">лист</mark>.</b></p><p><b><mark class="hl">Голос</mark>:</b> <b>(<mark class="hl">а</mark>)</b> <mark class="hl">подтверждаю</mark> <mark class="hl">закрытие</mark> <mark class="hl">как</mark> <mark class="hl">есть</mark> · <b>(<mark class="hl">б</mark>)</b> <mark class="hl">переоткрыть</mark> (<mark class="hl">укажите</mark> <mark class="hl">что</mark> <mark class="hl">не</mark> <mark class="hl">так</mark> <mark class="hl">в</mark> <mark class="hl">примечании</mark>) · <b>(<mark class="hl">в</mark>)</b> <mark class="hl">на</mark> <mark class="hl">недельный</mark> <mark class="hl">разбор</mark>.</p></div>
+    <div class="panel"><h4>Ссылки</h4><p><a href='https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3379-OxAlpha_Uprava_s7-meta-tail-census_23.08.26'>H3379-OxAlpha_Uprava_s7-meta-tail-census_23.08.26</a></p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Подтверждаю закрытие</button>
+      <button class="vote reject" data-vote="reject">&#10060; Переоткрыть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="h3419" data-filt="drain">
+    <header><div class="hw">H3419: Вакансия №8 ВК-таргетолог: стенд+фикстурная серия 5/5 HIRE-gate, спот-чек CONFIRMED x2, HIRE-draft ждёт… </div><span class="idchip" title="card id — cite this id back when discussing this card">h3419</span></header>
+    <div class="question"><p><b><mark class="hl">Закрытие</mark>:</b> | H3419 (handoff) | — | [H3419 (handoff)-OxAlpha_ORS-FAQ_vk-targetologist-vacancy_24.08.26](https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3419 (handoff)-OxAlpha_ORS-FAQ_vk-targetologist-vacancy_24.08.26.md) | ORS-FAQ | ✅ Done 26-08-2026 (OxAlpha (opencode/x-preview-f-free)) — <mark class="hl">Вакансия</mark> №8 <mark class="hl">ВК-таргетолог</mark>: <mark class="hl">стенд</mark>+<mark class="hl">фикстурная</mark> <mark class="hl">серия</mark> 5/5 HIRE-gate, <mark class="hl">спот-чек</mark> CONFIRMED x2, HIRE-draft <mark class="hl">ждёт</mark> <mark class="hl">ратификации</mark> MG; https://github.com/gasyoun/ORS-FAQ/pull/273 merged {effort: hard} | - H3419 (handoff): <mark class="hl">Вакансия</mark> №8 <mark class="hl">ВК-таргетолог</mark>: <mark class="hl">стенд</mark>+<mark class="hl">фикстурная</mark> <mark class="hl">серия</mark> 5/5 HIRE-gate, <mark class="hl">спот-чек</mark> CONFIRMED x2, HIRE-draft <mark class="hl">ждёт</mark> <mark class="hl">ратификации</mark> MG (OxAlpha (opencode/x-preview-f-free))</p> <p><b>⏳ <mark class="hl">День</mark> 5 <mark class="hl">без</mark> <mark class="hl">рулинга</mark> — <mark class="hl">по</mark> <mark class="hl">рулингу</mark> MG (04-09-2026) <mark class="hl">уезжает</mark> <mark class="hl">в</mark> <mark class="hl">недельный</mark> <mark class="hl">лист</mark>.</b></p><p><b><mark class="hl">Голос</mark>:</b> <b>(<mark class="hl">а</mark>)</b> <mark class="hl">подтверждаю</mark> <mark class="hl">закрытие</mark> <mark class="hl">как</mark> <mark class="hl">есть</mark> · <b>(<mark class="hl">б</mark>)</b> <mark class="hl">переоткрыть</mark> (<mark class="hl">укажите</mark> <mark class="hl">что</mark> <mark class="hl">не</mark> <mark class="hl">так</mark> <mark class="hl">в</mark> <mark class="hl">примечании</mark>) · <b>(<mark class="hl">в</mark>)</b> <mark class="hl">на</mark> <mark class="hl">недельный</mark> <mark class="hl">разбор</mark>.</p></div>
+    <div class="panel"><h4>Ссылки</h4><p><a href='https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3419-OxAlpha_ORS-FAQ_vk-targetologist-vacancy_24.08.26'>H3419-OxAlpha_ORS-FAQ_vk-targetologist-vacancy_24.08.26</a></p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Подтверждаю закрытие</button>
+      <button class="vote reject" data-vote="reject">&#10060; Переоткрыть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="h3548" data-filt="drain">
+    <header><div class="hw">H3548: Adapter PR #291 + 30d risk review report (10 slices, 0 proven P0/P1, 0 repair PRs) + inactive gate design, PR… </div><span class="idchip" title="card id — cite this id back when discussing this card">h3548</span></header>
+    <div class="question"><p><b><mark class="hl">Закрытие</mark>:</b> | H3548 (handoff) | — | [H3548 (handoff)-OxAlpha_ORS-FAQ_oxalpha-30d-risk-review-gate_26.08.26](https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3548 (handoff)-OxAlpha_ORS-FAQ_oxalpha-30d-risk-review-gate_26.08.26.md) | ORS-FAQ | ✅ Done 28-08-2026 (OxAlpha (opencode/z-ai/glm-5.3-flash)) — Adapter PR #291 + 30d risk review report (10 slices, 0 proven P0/P1, 0 repair PRs) + inactive gate design, PR #292 - all green/merged; https://github.com/gasyoun/ORS-FAQ/pull/291, https://github.com/gasyoun/ORS-FAQ/pull/292 merged {effort: hard} | - H4084 (handoff): weekly light cron for the H3548 (handoff) (ORS-FAQ) + H3550 (handoff) (SanskritGrammar) OxAlpha risk gates H4074 (handoff) armed — tools/risk_gates_weekly.py dispatches both via gh workflow run, waits for completion, writes RISK_GATES_WEEKLY.md; registered Windows scheduled task UpravaRiskGatesWeekly (Sun 05:10); first smoke dispatch of both gates green (ORS-FAQ run 33914993419, SanskritGrammar run 33915110872). (OxAlpha (opencode/z-ai/glm-5.3-flash))</p> <p><b>⏳ <mark class="hl">День</mark> 5 <mark class="hl">без</mark> <mark class="hl">рулинга</mark> — <mark class="hl">по</mark> <mark class="hl">рулингу</mark> MG (04-09-2026) <mark class="hl">уезжает</mark> <mark class="hl">в</mark> <mark class="hl">недельный</mark> <mark class="hl">лист</mark>.</b></p><p><b><mark class="hl">Голос</mark>:</b> <b>(<mark class="hl">а</mark>)</b> <mark class="hl">подтверждаю</mark> <mark class="hl">закрытие</mark> <mark class="hl">как</mark> <mark class="hl">есть</mark> · <b>(<mark class="hl">б</mark>)</b> <mark class="hl">переоткрыть</mark> (<mark class="hl">укажите</mark> <mark class="hl">что</mark> <mark class="hl">не</mark> <mark class="hl">так</mark> <mark class="hl">в</mark> <mark class="hl">примечании</mark>) · <b>(<mark class="hl">в</mark>)</b> <mark class="hl">на</mark> <mark class="hl">недельный</mark> <mark class="hl">разбор</mark>.</p></div>
+    <div class="panel"><h4>Ссылки</h4><p><a href='https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3548-OxAlpha_ORS-FAQ_oxalpha-30d-risk-review-gate_26.08.26'>H3548-OxAlpha_ORS-FAQ_oxalpha-30d-risk-review-gate_26.08.26</a></p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Подтверждаю закрытие</button>
+      <button class="vote reject" data-vote="reject">&#10060; Переоткрыть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="h3550" data-filt="drain">
+    <header><div class="hw">H3550: 30-day retrospective review (10 slices, 26-07..25-08-2026): adapter bootstrap PR #887, P1 guard fix PR #888… </div><span class="idchip" title="card id — cite this id back when discussing this card">h3550</span></header>
+    <div class="question"><p><b><mark class="hl">Закрытие</mark>:</b> | H3550 (handoff) | — | [H3550 (handoff)-OxAlpha_SanskritGrammar_oxalpha-30d-risk-review-gate_26.08.26](https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3550 (handoff)-OxAlpha_SanskritGrammar_oxalpha-30d-risk-review-gate_26.08.26.md) | SanskritGrammar | ✅ Done 29-08-2026 (OxAlpha (opencode/z-ai/glm-5.3-flash)) — 30-day retrospective review (10 slices, 26-07..25-08-2026): adapter bootstrap PR #887, P1 guard fix PR #888 (fail-before/pass-after regression tests), evidence report + inactive gate design PR #889 - all merged green; GTD residual minted for Uprava canonical scanner sync; https://github.com/gasyoun/SanskritGrammar/pull/889 merged {effort: hard} | - H4084 (handoff): weekly light cron for the H3548 (handoff) (ORS-FAQ) + H3550 (handoff) (SanskritGrammar) OxAlpha risk gates H4074 (handoff) armed — tools/risk_gates_weekly.py dispatches both via gh workflow run, waits for completion, writes RISK_GATES_WEEKLY.md; registered Windows scheduled task UpravaRiskGatesWeekly (Sun 05:10); first smoke dispatch of both gates green (ORS-FAQ run 33914993419, SanskritGrammar run 33915110872). (OxAlpha (opencode/z-ai/glm-5.3-flash))</p> <p><b>⏳ <mark class="hl">День</mark> 5 <mark class="hl">без</mark> <mark class="hl">рулинга</mark> — <mark class="hl">по</mark> <mark class="hl">рулингу</mark> MG (04-09-2026) <mark class="hl">уезжает</mark> <mark class="hl">в</mark> <mark class="hl">недельный</mark> <mark class="hl">лист</mark>.</b></p><p><b><mark class="hl">Голос</mark>:</b> <b>(<mark class="hl">а</mark>)</b> <mark class="hl">подтверждаю</mark> <mark class="hl">закрытие</mark> <mark class="hl">как</mark> <mark class="hl">есть</mark> · <b>(<mark class="hl">б</mark>)</b> <mark class="hl">переоткрыть</mark> (<mark class="hl">укажите</mark> <mark class="hl">что</mark> <mark class="hl">не</mark> <mark class="hl">так</mark> <mark class="hl">в</mark> <mark class="hl">примечании</mark>) · <b>(<mark class="hl">в</mark>)</b> <mark class="hl">на</mark> <mark class="hl">недельный</mark> <mark class="hl">разбор</mark>.</p></div>
+    <div class="panel"><h4>Ссылки</h4><p><a href='https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3550-OxAlpha_SanskritGrammar_oxalpha-30d-risk-review-gate_26.08.26'>H3550-OxAlpha_SanskritGrammar_oxalpha-30d-risk-review-gate_26.08.26</a></p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Подтверждаю закрытие</button>
+      <button class="vote reject" data-vote="reject">&#10060; Переоткрыть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="h3601" data-filt="drain">
+    <header><div class="hw">H3601: tools/interlinks_graph_diff.py - edge-store changelog analytics from git history: 28-commit timeline, growth… </div><span class="idchip" title="card id — cite this id back when discussing this card">h3601</span></header>
+    <div class="question"><p><b><mark class="hl">Закрытие</mark>:</b> | H3601 (handoff) | — | [H3601 (handoff)-OxAlpha_Uprava_interlinks-graph-diff-history_27.08.26](https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3601 (handoff)-OxAlpha_Uprava_interlinks-graph-diff-history_27.08.26.md) | Uprava | ✅ Done 29-08-2026 (OxAlpha (opencode/z-ai/glm-5.3-flash)) — tools/interlinks_graph_diff.py - edge-store changelog analytics from git history: 28-commit timeline, growth 120->196 (+204/-8), in-degree delta top-15, 5 waves; selftest 20/20 green; counts reconcile 28=28=28; https://github.com/gasyoun/Uprava/commit/f8ad0ab6b473912c89b87cb68e8d89828755066a merged {effort: medium} | - CHANGELOG structural repair (OxAlpha (zai-coding-plan/glm-5.3-flash), 29-08-2026): restored tagged-section intent after the #2335 release-rebase collision - the 8 leaked un-released entries (A09 pilot, H3674 (handoff), H3600 (handoff) short+full, drain-spin, H3601 (handoff), H3666 (handoff)) moved from inside ## [0.195.347]/duplicate-347 back under [Unreleased]; duplicate ## [0.195.347] heading deduped; same-pass census of the last 10 tags found and repaired two more live leaks (H3676 (handoff) wave-2 out of [0.195.349], H3649 (handoff) out of [0.195.352] - both into [Unreleased]); 355 drift = prior benign relocation into 356, left as-is; zero content edits, section order restored descending.</p> <p><b>⏳ <mark class="hl">День</mark> 5 <mark class="hl">без</mark> <mark class="hl">рулинга</mark> — <mark class="hl">по</mark> <mark class="hl">рулингу</mark> MG (04-09-2026) <mark class="hl">уезжает</mark> <mark class="hl">в</mark> <mark class="hl">недельный</mark> <mark class="hl">лист</mark>.</b></p><p><b><mark class="hl">Голос</mark>:</b> <b>(<mark class="hl">а</mark>)</b> <mark class="hl">подтверждаю</mark> <mark class="hl">закрытие</mark> <mark class="hl">как</mark> <mark class="hl">есть</mark> · <b>(<mark class="hl">б</mark>)</b> <mark class="hl">переоткрыть</mark> (<mark class="hl">укажите</mark> <mark class="hl">что</mark> <mark class="hl">не</mark> <mark class="hl">так</mark> <mark class="hl">в</mark> <mark class="hl">примечании</mark>) · <b>(<mark class="hl">в</mark>)</b> <mark class="hl">на</mark> <mark class="hl">недельный</mark> <mark class="hl">разбор</mark>.</p></div>
+    <div class="panel"><h4>Ссылки</h4><p><a href='https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3601-OxAlpha_Uprava_interlinks-graph-diff-history_27.08.26'>H3601-OxAlpha_Uprava_interlinks-graph-diff-history_27.08.26</a></p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Подтверждаю закрытие</button>
+      <button class="vote reject" data-vote="reject">&#10060; Переоткрыть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="h3673" data-filt="drain">
+    <header><div class="hw">H3673: Sense-chronology feasibility probe executed: PWG verb roots (20 frozen senses, SHA 4251c0096f2ba416) —… </div><span class="idchip" title="card id — cite this id back when discussing this card">h3673</span></header>
+    <div class="question"><p><b><mark class="hl">Закрытие</mark>:</b> | H3673 (handoff) | — | [H3673 (handoff)-OxAlpha_Uprava_sense-chronology-feasibility-probe_29.08.26](https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3673 (handoff)-OxAlpha_Uprava_sense-chronology-feasibility-probe_29.08.26.md) | Uprava | ✅ Done 30-08-2026 (OxAlpha (opencode/z-ai/glm-5.3-flash)) — Sense-chronology feasibility probe executed: PWG verb roots (20 frozen senses, SHA 4251c0096f2ba416) — verdict_feasibility GO at period-bucket granularity (20/20 dateable from estate data; 63% of 1691 citation instances dateable; STOP gate not triggered) x verdict_value WEAK (1/5 roots reorder); no build handoff minted, decision parked with MG. Memo: docs/RESULTS_SENSE_CHRONOLOGY_PROBE_29-08-2026.md (commit 3d41af712) {effort: medium} | - H3673 (handoff) residual — sense-dating build decision parked with MG as a decide brief: [decide_briefs/DECIDE_BRIEF_sense-dating-build-or-not_03-09-2026.md](https://github.com/gasyoun/Uprava/blob/main/decide_briefs/DECIDE_BRIEF_sense-dating-build-or-not_03-09-2026.md). The H3673 (handoff) probe's GO×WEAK verdict had no GTD row (decision lived only in the memo); the brief makes the ruling one sentence long — four options (close now / nomina re-probe then decide [recommended] / minimal kosha-side bucket-annotation layer / full Tamilex-style rebuild [rejected: genre shift + tie ceiling + first-attestation-is-not-origin integrity risk]), arguments per option with the measured evidence …</p> <p><b>⏳ <mark class="hl">День</mark> 5 <mark class="hl">без</mark> <mark class="hl">рулинга</mark> — <mark class="hl">по</mark> <mark class="hl">рулингу</mark> MG (04-09-2026) <mark class="hl">уезжает</mark> <mark class="hl">в</mark> <mark class="hl">недельный</mark> <mark class="hl">лист</mark>.</b></p><p><b><mark class="hl">Голос</mark>:</b> <b>(<mark class="hl">а</mark>)</b> <mark class="hl">подтверждаю</mark> <mark class="hl">закрытие</mark> <mark class="hl">как</mark> <mark class="hl">есть</mark> · <b>(<mark class="hl">б</mark>)</b> <mark class="hl">переоткрыть</mark> (<mark class="hl">укажите</mark> <mark class="hl">что</mark> <mark class="hl">не</mark> <mark class="hl">так</mark> <mark class="hl">в</mark> <mark class="hl">примечании</mark>) · <b>(<mark class="hl">в</mark>)</b> <mark class="hl">на</mark> <mark class="hl">недельный</mark> <mark class="hl">разбор</mark>.</p></div>
+    <div class="panel"><h4>Ссылки</h4><p><a href='https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3673-OxAlpha_Uprava_sense-chronology-feasibility-probe_29.08.26'>H3673-OxAlpha_Uprava_sense-chronology-feasibility-probe_29.08.26</a></p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Подтверждаю закрытие</button>
+      <button class="vote reject" data-vote="reject">&#10060; Переоткрыть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="h3915" data-filt="drain">
+    <header><div class="hw">H3915: Exit-опрос на авто-триггер «завершение курса»: is_completed false→true → задача куратору с готовыми… </div><span class="idchip" title="card id — cite this id back when discussing this card">h3915</span></header>
+    <div class="question"><p><b><mark class="hl">Закрытие</mark>:</b> | H3915 (handoff) | — | [H3915 (handoff)-OxAlpha_Systema-Sanscriticum_exit-survey-auto-trigger_02.09.26](https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3915 (handoff)-OxAlpha_Systema-Sanscriticum_exit-survey-auto-trigger_02.09.26.md) | Systema-Sanscriticum | ✅ Done 03-09-2026 (OxAlpha (opencode/z-ai/glm-5.3-flash)) — Exit-<mark class="hl">опрос</mark> <mark class="hl">на</mark> <mark class="hl">авто-триггер</mark> «<mark class="hl">завершение</mark> <mark class="hl">курса</mark>»: is_completed false→true → <mark class="hl">задача</mark> <mark class="hl">куратору</mark> <mark class="hl">с</mark> <mark class="hl">готовыми</mark> <mark class="hl">черновиками</mark> <mark class="hl">для</mark> <mark class="hl">личной</mark> <mark class="hl">отправки</mark> <mark class="hl">когорте</mark> «<mark class="hl">спросил</mark> <mark class="hl">цену</mark> → <mark class="hl">оплаты</mark> <mark class="hl">нет</mark>» (<mark class="hl">анкета</mark> /anketa/exit-price); <mark class="hl">флаг</mark> EXIT_SURVEY_AUTO_TRIGGER default OFF, <mark class="hl">дедуп</mark> courses.exit_survey_triggered_at, <mark class="hl">бэкфейс</mark> surveys:exit-survey-completed; <mark class="hl">тесты</mark> 6/6+18/18, Pint clean, PR #2352 merged; https://github.com/gasyoun/Systema-Sanscriticum/pull/2352 merged {effort: medium} | - H3915 (handoff): Exit-<mark class="hl">опрос</mark> <mark class="hl">на</mark> <mark class="hl">авто-триггер</mark> «<mark class="hl">завершение</mark> <mark class="hl">курса</mark>»: is_completed false→true → <mark class="hl">задача</mark> <mark class="hl">куратору</mark> <mark class="hl">с</mark> <mark class="hl">готовыми</mark> <mark class="hl">черновиками</mark> <mark class="hl">для</mark> <mark class="hl">личной</mark> <mark class="hl">отправки</mark> <mark class="hl">когорте</mark> «<mark class="hl">спросил</mark> <mark class="hl">цену</mark> → <mark class="hl">оплаты</mark> <mark class="hl">нет</mark>» (<mark class="hl">анкета</mark> /anketa/exit-price); <mark class="hl">флаг</mark> EXIT_SURVEY_AUTO_TRIGGER default OFF, <mark class="hl">дедуп</mark> courses.exit_survey_triggered_at, <mark class="hl">бэкфейс</mark> surveys:exit-survey-completed; <mark class="hl">тесты</mark> 6/6+18/18, Pint clean, PR #2352 merged (OxAlpha (opencode/z-ai/glm-5.3-flash))</p> <p><b>⏳ <mark class="hl">День</mark> 5 <mark class="hl">без</mark> <mark class="hl">рулинга</mark> — <mark class="hl">по</mark> <mark class="hl">рулингу</mark> MG (04-09-2026) <mark class="hl">уезжает</mark> <mark class="hl">в</mark> <mark class="hl">недельный</mark> <mark class="hl">лист</mark>.</b></p><p><b><mark class="hl">Голос</mark>:</b> <b>(<mark class="hl">а</mark>)</b> <mark class="hl">подтверждаю</mark> <mark class="hl">закрытие</mark> <mark class="hl">как</mark> <mark class="hl">есть</mark> · <b>(<mark class="hl">б</mark>)</b> <mark class="hl">переоткрыть</mark> (<mark class="hl">укажите</mark> <mark class="hl">что</mark> <mark class="hl">не</mark> <mark class="hl">так</mark> <mark class="hl">в</mark> <mark class="hl">примечании</mark>) · <b>(<mark class="hl">в</mark>)</b> <mark class="hl">на</mark> <mark class="hl">недельный</mark> <mark class="hl">разбор</mark>.</p></div>
+    <div class="panel"><h4>Ссылки</h4><p><a href='https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3915-OxAlpha_Systema-Sanscriticum_exit-survey-auto-trigger_02.09.26'>H3915-OxAlpha_Systema-Sanscriticum_exit-survey-auto-trigger_02.09.26</a></p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Подтверждаю закрытие</button>
+      <button class="vote reject" data-vote="reject">&#10060; Переоткрыть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="h4028" data-filt="drain">
+    <header><div class="hw">H4028: H4028   —  … </div><span class="idchip" title="card id — cite this id back when discussing this card">h4028</span></header>
+    <div class="question"><p><b><mark class="hl">Закрытие</mark>:</b> | H4028 (handoff) | — | [H4028 (handoff)-OxAlpha_BookIndex_print-llsh-bibliography-only_03.09.26](https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H4028 (handoff)-OxAlpha_BookIndex_print-llsh-bibliography-only_03.09.26.md) | BookIndex | ✅ DONE-ELSEWHERE 05-09-2026 — close-voted [p1_queue_close_14](https://gasyoun.github.io/vote/sheets/p1_queue_close_14.html) 14/14: delivered: BookIndex main 350dec26f+4afa2e688 (v4.17.13), merged PR #297 {effort: medium} {launch-box: any} | - H4266 (handoff) (OxAlpha `zai-coding-plan/glm-5.3-flash` via opencode, 06-09-2026): same-pass transcription of the first chat-mode drain-stamp vote — MG «6/6 approve» (H4028 (handoff) DONE-ELSEWHERE ratification, H4106 (handoff), H4108 (handoff), H4113 (handoff), H4132 (handoff), H4137 (handoff); tally 6/0/0) on the 06-09 06:30Z stamp (14 closes, 6 marker-cards, <10-cards chat rule). Audit doc: [review/weekly/archive/decisions_applied_2026-09-06_drain-stamp-6-closes.md](https://github.com/gasyoun/Uprava/blob/main/review/weekly/archive/decisions_applied_2026-09-06_drain-stamp-6-closes.md); GTD drain-vote residual row closed with the link. No sheets existed to flip (chat mode — stamp is the record). (OxAlpha (opencode/z-ai/glm-5.3-flash))</p> <p><b>⏳ <mark class="hl">День</mark> 5 <mark class="hl">без</mark> <mark class="hl">рулинга</mark> — <mark class="hl">по</mark> <mark class="hl">рулингу</mark> MG (04-09-2026) <mark class="hl">уезжает</mark> <mark class="hl">в</mark> <mark class="hl">недельный</mark> <mark class="hl">лист</mark>.</b></p><p><b><mark class="hl">Голос</mark>:</b> <b>(<mark class="hl">а</mark>)</b> <mark class="hl">подтверждаю</mark> <mark class="hl">закрытие</mark> <mark class="hl">как</mark> <mark class="hl">есть</mark> · <b>(<mark class="hl">б</mark>)</b> <mark class="hl">переоткрыть</mark> (<mark class="hl">укажите</mark> <mark class="hl">что</mark> <mark class="hl">не</mark> <mark class="hl">так</mark> <mark class="hl">в</mark> <mark class="hl">примечании</mark>) · <b>(<mark class="hl">в</mark>)</b> <mark class="hl">на</mark> <mark class="hl">недельный</mark> <mark class="hl">разбор</mark>.</p></div>
+    <div class="panel"><h4>Ссылки</h4><p><a href='https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H4028-OxAlpha_BookIndex_print-llsh-bibliography-only_03.09.26'>H4028-OxAlpha_BookIndex_print-llsh-bibliography-only_03.09.26</a></p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Подтверждаю закрытие</button>
+      <button class="vote reject" data-vote="reject">&#10060; Переоткрыть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="h4036" data-filt="drain">
+    <header><div class="hw">H4036: Digitization provenance probe GOxGO: 9 verified silent content edits in 18 PWG entries (cols 1-65/66,… </div><span class="idchip" title="card id — cite this id back when discussing this card">h4036</span></header>
+    <div class="question"><p><b><mark class="hl">Закрытие</mark>:</b> | H4036 (handoff) | — | [H4036 (handoff)-OxAlpha_Uprava_digitization-provenance-probe_04.09.26](https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H4036 (handoff)-OxAlpha_Uprava_digitization-provenance-probe_04.09.26.md) | Uprava | ✅ Done 05-09-2026 (OxAlpha (opencode/z-ai/glm-5.3-flash)) — Digitization provenance probe GOxGO: 9 verified silent content edits in 18 PWG entries (cols 1-65/66, 6-133/34) vs real scans; alignment mechanical; GTD @DECIDE 0g queued | - H4036 (handoff): digitization silent-deviation provenance probe (wave E) executed, verdict **GO × GO** (05-09-2026, OxAlpha `opencode/z-ai/glm-5.3-flash`): frozen bounded sample (first 9-entry page in vol 1 and vol 6 of the pagecolumn index: cols 1-65/66 L865–L873, 6-133/34 L82078–L82086) compared against the real Cologne scans (servepdf key = printed left column, alignment verified mechanical — the gate question); 9 hand-verified at zoom silent content edits incl. 3 silently changed citation digits (AK. 1,1,4,18→1,1,1,18; ŚAT. BR. 3,3,4,8→3,3,3,8; 14,1,4,13→14,1,1,13), 3 silently emended/rewritten Devanagari forms (अक्षिमज्→आजिमज्, भ्यानाम्→भयानाम्, यावच्छुष्यं→यावच्छस्यं), 1 vowel-length fix, 1 quote emendation, +3 borderline Latin-script normalizations (Javana→Yavana, PRĀJAÇITTEND→PRĀYAŚCITTEND, Pendschab→Pendṣab) + 4 unresolved candidates; ~0.5 verified hits/entry → apparatus lane owed pending MG ratification (GTD @DECIDE 0g). Results: …</p> <p><b>⏳ <mark class="hl">День</mark> 4 <mark class="hl">без</mark> <mark class="hl">рулинга</mark> — <mark class="hl">по</mark> <mark class="hl">рулингу</mark> MG (04-09-2026) <mark class="hl">уезжает</mark> <mark class="hl">в</mark> <mark class="hl">недельный</mark> <mark class="hl">лист</mark>.</b></p><p><b><mark class="hl">Голос</mark>:</b> <b>(<mark class="hl">а</mark>)</b> <mark class="hl">подтверждаю</mark> <mark class="hl">закрытие</mark> <mark class="hl">как</mark> <mark class="hl">есть</mark> · <b>(<mark class="hl">б</mark>)</b> <mark class="hl">переоткрыть</mark> (<mark class="hl">укажите</mark> <mark class="hl">что</mark> <mark class="hl">не</mark> <mark class="hl">так</mark> <mark class="hl">в</mark> <mark class="hl">примечании</mark>) · <b>(<mark class="hl">в</mark>)</b> <mark class="hl">на</mark> <mark class="hl">недельный</mark> <mark class="hl">разбор</mark>.</p></div>
+    <div class="panel"><h4>Ссылки</h4><p><a href='https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H4036-OxAlpha_Uprava_digitization-provenance-probe_04.09.26'>H4036-OxAlpha_Uprava_digitization-provenance-probe_04.09.26</a></p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Подтверждаю закрытие</button>
+      <button class="vote reject" data-vote="reject">&#10060; Переоткрыть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="h4038" data-filt="drain">
+    <header><div class="hw">H4038: Hitopadesa per-text concordance surfaced with H4026 era badges + RU/EN caveat + bucket legend on the… </div><span class="idchip" title="card id — cite this id back when discussing this card">h4038</span></header>
+    <div class="question"><p><b><mark class="hl">Закрытие</mark>:</b> | H4038 (handoff) | — | [H4038 (handoff)-OxAlpha_kosha_hitopadesa-concordance-surface_04.09.26](https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H4038 (handoff)-OxAlpha_kosha_hitopadesa-concordance-surface_04.09.26.md) | kosha | ✅ Done 04-09-2026 (OxAlpha (opencode/z-ai/glm-5.3-flash)) — Hitopadesa per-text concordance surfaced with H4026 (handoff) era badges + RU/EN caveat + bucket legend on the reading-pack page (badge_html/_dating_caveat_block reused verbatim); parity + order-invariance + honest-absence gates (8 tests); additive fence held (tsv/js byte-identical); evidence + live-serve proof; release v0.117.14; https://github.com/gasyoun/kosha/pull/524 merged {effort: medium} | - H4060 (handoff) v2 (MG 04-09 «deepen and widen»): second mega-review over the 23 drain closes outside v1's carded set (corpus v2: 54 done H-IDs, all ledgers, both registry halves, full close bodies, GTD residuals, cross-repo git-log landing verification 23/23 confirmed in local clones); 6 new vote cards (ORS-FAQ hiring-PII history purge residual with no live GTD row · csl-orig commit-guard ratification touching Cologne collaborators · H3647 (handoff) roadmap-guard refusal narrowing = worker-side guard weakening · H3350 (handoff) zero-unguarded-writers gate as red line · H4038 (handoff) pilot-derived concordance live on public kosha · both-registry-halves drift H4028 (handoff)/H4030 (handoff)/H4037 (handoff)), 17 no-fork closes named in screening; sheet live on the vote hub, smoke PASS, …</p> <p><b>⏳ <mark class="hl">День</mark> 5 <mark class="hl">без</mark> <mark class="hl">рулинга</mark> — <mark class="hl">по</mark> <mark class="hl">рулингу</mark> MG (04-09-2026) <mark class="hl">уезжает</mark> <mark class="hl">в</mark> <mark class="hl">недельный</mark> <mark class="hl">лист</mark>.</b></p><p><b><mark class="hl">Голос</mark>:</b> <b>(<mark class="hl">а</mark>)</b> <mark class="hl">подтверждаю</mark> <mark class="hl">закрытие</mark> <mark class="hl">как</mark> <mark class="hl">есть</mark> · <b>(<mark class="hl">б</mark>)</b> <mark class="hl">переоткрыть</mark> (<mark class="hl">укажите</mark> <mark class="hl">что</mark> <mark class="hl">не</mark> <mark class="hl">так</mark> <mark class="hl">в</mark> <mark class="hl">примечании</mark>) · <b>(<mark class="hl">в</mark>)</b> <mark class="hl">на</mark> <mark class="hl">недельный</mark> <mark class="hl">разбор</mark>.</p></div>
+    <div class="panel"><h4>Ссылки</h4><p><a href='https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H4038-OxAlpha_kosha_hitopadesa-concordance-surface_04.09.26'>H4038-OxAlpha_kosha_hitopadesa-concordance-surface_04.09.26</a></p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Подтверждаю закрытие</button>
+      <button class="vote reject" data-vote="reject">&#10060; Переоткрыть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="h4045" data-filt="drain">
+    <header><div class="hw">H4045: opencode.db valuables secured: read-only integrity_check ok; 750 sessions (40756 msgs / 164104 parts, &gt;64KB… </div><span class="idchip" title="card id — cite this id back when discussing this card">h4045</span></header>
+    <div class="question"><p><b><mark class="hl">Закрытие</mark>:</b> | H4045 (handoff) | — | [H4045 (handoff)-OxAlpha_Uprava_opencodedb-valuables-export-retire_04.09.26](https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H4045 (handoff)-OxAlpha_Uprava_opencodedb-valuables-export-retire_04.09.26.md) | Uprava | ✅ Done 04-09-2026 (OxAlpha (opencode/z-ai/glm-5.3-flash)) — opencode.db valuables secured: read-only integrity_check ok; 750 sessions (40756 msgs / 164104 parts, >64KB bodies stubbed with size notes) exported to LOCAL-ONLY ~/.local/share/opencode-archive-2026-09 (INDEX.md + manifest; file count 750==750 verified, 5 sessions spot-checked render); detached nohup waiter armed to run a final incremental export then rename db/-wal/-shm to *.retired-04-09-2026 once pgrep -x opencode is empty (drain still alive at close: rename happens post-session per handoff waiter path); GTD residuals minted: 7-day healthy-delete (~+121 GB, 11-09-2026) + quarterly re-export row.; https://github.com/gasyoun/Uprava/commit/48def266c71fee3880db8b157155dcfeddc17923 merged {effort: hard} | - H4060 (handoff): T1: mega-review sheet live — 28 cards from the 50-done drain census (H3234 (handoff)..H4045 (handoff)), hub-published + index, smoke PASS (vote+timer+reload), GTD @DECIDE row 0 added. T2: tools/drain_daily_vote_sheet.py committed — daily sheet from window closes with ask/pilot markers, 48h aging into --weekly rollup, launchd com.gasyoun.uprava-drain-vote-daily armed 09:30 (rc=0, live in launchctl); today's …</p> <p><b>⏳ <mark class="hl">День</mark> 5 <mark class="hl">без</mark> <mark class="hl">рулинга</mark> — <mark class="hl">по</mark> <mark class="hl">рулингу</mark> MG (04-09-2026) <mark class="hl">уезжает</mark> <mark class="hl">в</mark> <mark class="hl">недельный</mark> <mark class="hl">лист</mark>.</b></p><p><b><mark class="hl">Голос</mark>:</b> <b>(<mark class="hl">а</mark>)</b> <mark class="hl">подтверждаю</mark> <mark class="hl">закрытие</mark> <mark class="hl">как</mark> <mark class="hl">есть</mark> · <b>(<mark class="hl">б</mark>)</b> <mark class="hl">переоткрыть</mark> (<mark class="hl">укажите</mark> <mark class="hl">что</mark> <mark class="hl">не</mark> <mark class="hl">так</mark> <mark class="hl">в</mark> <mark class="hl">примечании</mark>) · <b>(<mark class="hl">в</mark>)</b> <mark class="hl">на</mark> <mark class="hl">недельный</mark> <mark class="hl">разбор</mark>.</p></div>
+    <div class="panel"><h4>Ссылки</h4><p><a href='https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H4045-OxAlpha_Uprava_opencodedb-valuables-export-retire_04.09.26'>H4045-OxAlpha_Uprava_opencodedb-valuables-export-retire_04.09.26</a></p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Подтверждаю закрытие</button>
+      <button class="vote reject" data-vote="reject">&#10060; Переоткрыть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="h4056" data-filt="drain">
+    <header><div class="hw">H4056: PWG evidence-demonstration packet: 10 machine-eligible cards (funnel 11,519-&gt;5,584 via real gates incl. H3948… </div><span class="idchip" title="card id — cite this id back when discussing this card">h4056</span></header>
+    <div class="question"><p><b><mark class="hl">Закрытие</mark>:</b> | H4056 (handoff) | — | [H4056 (handoff)-OxAlpha_SanskritLexicography_pwg-review-throughput-first-packet_04.09.26](https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H4056 (handoff)-OxAlpha_SanskritLexicography_pwg-review-throughput-first-packet_04.09.26.md) | SanskritLexicography | ✅ Done 05-09-2026 (OxAlpha (opencode/z-ai/glm-5.3-flash)) — PWG evidence-demonstration packet: 10 machine-eligible cards (funnel 11,519->5,584 via real gates incl. H3948 (handoff) quarantine), print RU + DE source + machine verdicts + offline TM lookup 10/10 hit (0 provider calls); voting NOT requested (banner, disabled controls, H4056 (handoff)-DEMO gate parks apply); scratch vote-to-store replay 8/8 (stable-key routing, stale-hash refusal, store byte-identical); agent-owned readiness GO/NO-GO row in GTD; https://github.com/gasyoun/SanskritLexicography/pull/2075 merged | - H4058 (handoff): Independent linguistic/corpus-evidence review of H4052 (handoff)-H4057 (handoff) sealed before peer H4059 (handoff): implementation PASS (offline scope), corpus/alignment/TM evidence FAIL, voting NOT READY — supports_senses is a lemma roll-up (19.3% rows have per-sense evidence), 1.09M parallel corpus supports 0 senses, no EN column, H4056 (handoff) TM 10/10 is self-identity (2,445 entry-level addresses/11,510 rows); two read-only probes + receipts, 0 provider calls; P0-P1 repairs minted as H4119 (handoff); SL PR #2078 open (product repo, PR-only) (Fable 5 (claude-fable-5))</p> <p><b>⏳ <mark class="hl">День</mark> 4 <mark class="hl">без</mark> <mark class="hl">рулинга</mark> — <mark class="hl">по</mark> <mark class="hl">рулингу</mark> MG (04-09-2026) <mark class="hl">уезжает</mark> <mark class="hl">в</mark> <mark class="hl">недельный</mark> <mark class="hl">лист</mark>.</b></p><p><b><mark class="hl">Голос</mark>:</b> <b>(<mark class="hl">а</mark>)</b> <mark class="hl">подтверждаю</mark> <mark class="hl">закрытие</mark> <mark class="hl">как</mark> <mark class="hl">есть</mark> · <b>(<mark class="hl">б</mark>)</b> <mark class="hl">переоткрыть</mark> (<mark class="hl">укажите</mark> <mark class="hl">что</mark> <mark class="hl">не</mark> <mark class="hl">так</mark> <mark class="hl">в</mark> <mark class="hl">примечании</mark>) · <b>(<mark class="hl">в</mark>)</b> <mark class="hl">на</mark> <mark class="hl">недельный</mark> <mark class="hl">разбор</mark>.</p></div>
+    <div class="panel"><h4>Ссылки</h4><p><a href='https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H4056-OxAlpha_SanskritLexicography_pwg-review-throughput-first-packet_04.09.26'>H4056-OxAlpha_SanskritLexicography_pwg-review-throughput-first-packet_04.09.26</a></p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Подтверждаю закрытие</button>
+      <button class="vote reject" data-vote="reject">&#10060; Переоткрыть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="h4067" data-filt="drain">
+    <header><div class="hw">H4067: Debris M6 systemic close on Mac lane (launch-box: Windows remainder staged): weekly debris_scan --check gate… </div><span class="idchip" title="card id — cite this id back when discussing this card">h4067</span></header>
+    <div class="question"><p><b><mark class="hl">Закрытие</mark>:</b> | H4067 (handoff) | — | [H4067 (handoff)-OxAlpha_Uprava_debris-m6-systemic-and-report_04.09.26](https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H4067 (handoff)-OxAlpha_Uprava_debris-m6-systemic-and-report_04.09.26.md) | Uprava | ✅ Done 05-09-2026 (OxAlpha (opencode/z-ai/glm-5.3-flash)) — Debris M6 systemic close on Mac lane (launch-box: Windows remainder staged): weekly debris_scan --check gate in weekly-review Phase 2 (claude-config PR #285 merged + live copy; MSI via crossbox net) with dated baseline (Mac live 32/8.87 GiB/5.7d, exit 0); .worktree-meta.json provenance marker via write_meta() written by wt_new.py beside the heartbeat WITH its own clone-level exclude line, fail-without-exclude case test-pinned both directions (test_wt_new 10/10, test_wt_heartbeat 36/36); scrubbed space-truth report (MSI C: 15.4 GB free vs opencode.db 58.00 GB ~4-day runway, MG row OPENCODE-DB-COMPACT refreshed; Mac first measure 14 Gi free/db 7.31 GB); Windows-physical remainder → 3 GTD @DO rows same pass; report docs/DEBRIS_M6_SYSTEMIC_CLOSE_REPORT_05-09-2026.md; https://github.com/gasyoun/Uprava/commit/e6df91d216a7b2fe8cbbd935dfc3661916bdb0c4 merged; live-half duplicate stub file removed + row moved here 05-09 (registry half-repair) | - H4112 (handoff): FILE_CAP 256,000 → 512,000 (MG ruled (<mark class="hl">а</mark>) 05-09 on the H4110 (handoff) fork; OxAlpha `opencode/z-ai/glm-5.3-flash`): …</p> <p><b>⏳ <mark class="hl">День</mark> 4 <mark class="hl">без</mark> <mark class="hl">рулинга</mark> — <mark class="hl">по</mark> <mark class="hl">рулингу</mark> MG (04-09-2026) <mark class="hl">уезжает</mark> <mark class="hl">в</mark> <mark class="hl">недельный</mark> <mark class="hl">лист</mark>.</b></p><p><b><mark class="hl">Голос</mark>:</b> <b>(<mark class="hl">а</mark>)</b> <mark class="hl">подтверждаю</mark> <mark class="hl">закрытие</mark> <mark class="hl">как</mark> <mark class="hl">есть</mark> · <b>(<mark class="hl">б</mark>)</b> <mark class="hl">переоткрыть</mark> (<mark class="hl">укажите</mark> <mark class="hl">что</mark> <mark class="hl">не</mark> <mark class="hl">так</mark> <mark class="hl">в</mark> <mark class="hl">примечании</mark>) · <b>(<mark class="hl">в</mark>)</b> <mark class="hl">на</mark> <mark class="hl">недельный</mark> <mark class="hl">разбор</mark>.</p></div>
+    <div class="panel"><h4>Ссылки</h4><p><a href='https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H4067-OxAlpha_Uprava_debris-m6-systemic-and-report_04.09.26'>H4067-OxAlpha_Uprava_debris-m6-systemic-and-report_04.09.26</a></p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Подтверждаю закрытие</button>
+      <button class="vote reject" data-vote="reject">&#10060; Переоткрыть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="h4106" data-filt="drain">
+    <header><div class="hw">H4106: mine_anthology fixes+5 families (live run 131,040, +400), F2 OVERSTATED/FALSE boundary HK-16 + 10 JSONs… </div><span class="idchip" title="card id — cite this id back when discussing this card">h4106</span></header>
+    <div class="question"><p><b><mark class="hl">Закрытие</mark>:</b> | H4106 (handoff) | — | [H4106 (handoff)-OxAlpha_Uprava_method-taxonomy-improve_04.09.26](https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H4106 (handoff)-OxAlpha_Uprava_method-taxonomy-improve_04.09.26.md) | Uprava | ✅ Done 05-09-2026 (OxAlpha (opencode/z-ai/glm-5.3-flash)) — mine_anthology fixes+5 families (live run 131,040, +400), F2 OVERSTATED/FALSE boundary HK-16 + 10 JSONs regen, GTD harvest rights/access gates, doc §1/§4 dated (EACL-2027 hard, COLING verified); https://github.com/gasyoun/Uprava/commit/2e4ea5a7a1883cbb9580a93779065729f17fbd5a merged | - H4266 (handoff) (OxAlpha `zai-coding-plan/glm-5.3-flash` via opencode, 06-09-2026): same-pass transcription of the first chat-mode drain-stamp vote — MG «6/6 approve» (H4028 (handoff) DONE-ELSEWHERE ratification, H4106 (handoff), H4108 (handoff), H4113 (handoff), H4132 (handoff), H4137 (handoff); tally 6/0/0) on the 06-09 06:30Z stamp (14 closes, 6 marker-cards, <10-cards chat rule). Audit doc: [review/weekly/archive/decisions_applied_2026-09-06_drain-stamp-6-closes.md](https://github.com/gasyoun/Uprava/blob/main/review/weekly/archive/decisions_applied_2026-09-06_drain-stamp-6-closes.md); GTD drain-vote residual row closed with the link. No sheets existed to flip (chat mode — stamp is the record). (OxAlpha (opencode/z-ai/glm-5.3-flash))</p> <p><b>⏳ <mark class="hl">День</mark> 4 <mark class="hl">без</mark> <mark class="hl">рулинга</mark> — <mark class="hl">по</mark> <mark class="hl">рулингу</mark> MG (04-09-2026) <mark class="hl">уезжает</mark> <mark class="hl">в</mark> <mark class="hl">недельный</mark> <mark class="hl">лист</mark>.</b></p><p><b><mark class="hl">Голос</mark>:</b> <b>(<mark class="hl">а</mark>)</b> <mark class="hl">подтверждаю</mark> <mark class="hl">закрытие</mark> <mark class="hl">как</mark> <mark class="hl">есть</mark> · <b>(<mark class="hl">б</mark>)</b> <mark class="hl">переоткрыть</mark> (<mark class="hl">укажите</mark> <mark class="hl">что</mark> <mark class="hl">не</mark> <mark class="hl">так</mark> <mark class="hl">в</mark> <mark class="hl">примечании</mark>) · <b>(<mark class="hl">в</mark>)</b> <mark class="hl">на</mark> <mark class="hl">недельный</mark> <mark class="hl">разбор</mark>.</p></div>
+    <div class="panel"><h4>Ссылки</h4><p><a href='https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H4106-OxAlpha_Uprava_method-taxonomy-improve_04.09.26'>H4106-OxAlpha_Uprava_method-taxonomy-improve_04.09.26</a></p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Подтверждаю закрытие</button>
+      <button class="vote reject" data-vote="reject">&#10060; Переоткрыть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="h4108" data-filt="drain">
+    <header><div class="hw">H4108: G63 September control-plane regen verified on origin/main (a668be4b8): registry_check exit 0,… </div><span class="idchip" title="card id — cite this id back when discussing this card">h4108</span></header>
+    <div class="question"><p><b><mark class="hl">Закрытие</mark>:</b> | H4108 (handoff) | — | [H4108 (handoff)-OxAlpha_Uprava_g63-september-regen_04.09.26](https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H4108 (handoff)-OxAlpha_Uprava_g63-september-regen_04.09.26.md) | Uprava | ✅ Done 05-09-2026 (OxAlpha (opencode/z-ai/glm-5.3-flash)) — G63 September control-plane regen verified on origin/main (a668be4b8): registry_check exit 0, WORK_DONE/OUTCOMES_2026-09 stamped 05-09 (1544 rows), questions pending 0, G63 now 5/5 PASS (GTD file-cap leg self-healed; H4076 (handoff) URL fixed); https://github.com/gasyoun/Uprava/commit/a668be4b8 merged | - H4266 (handoff) (OxAlpha `zai-coding-plan/glm-5.3-flash` via opencode, 06-09-2026): same-pass transcription of the first chat-mode drain-stamp vote — MG «6/6 approve» (H4028 (handoff) DONE-ELSEWHERE ratification, H4106 (handoff), H4108 (handoff), H4113 (handoff), H4132 (handoff), H4137 (handoff); tally 6/0/0) on the 06-09 06:30Z stamp (14 closes, 6 marker-cards, <10-cards chat rule). Audit doc: [review/weekly/archive/decisions_applied_2026-09-06_drain-stamp-6-closes.md](https://github.com/gasyoun/Uprava/blob/main/review/weekly/archive/decisions_applied_2026-09-06_drain-stamp-6-closes.md); GTD drain-vote residual row closed with the link. No sheets existed to flip (chat mode — stamp is the record). (OxAlpha (opencode/z-ai/glm-5.3-flash))</p> <p><b>⏳ <mark class="hl">День</mark> 4 <mark class="hl">без</mark> <mark class="hl">рулинга</mark> — <mark class="hl">по</mark> <mark class="hl">рулингу</mark> MG (04-09-2026) <mark class="hl">уезжает</mark> <mark class="hl">в</mark> <mark class="hl">недельный</mark> <mark class="hl">лист</mark>.</b></p><p><b><mark class="hl">Голос</mark>:</b> <b>(<mark class="hl">а</mark>)</b> <mark class="hl">подтверждаю</mark> <mark class="hl">закрытие</mark> <mark class="hl">как</mark> <mark class="hl">есть</mark> · <b>(<mark class="hl">б</mark>)</b> <mark class="hl">переоткрыть</mark> (<mark class="hl">укажите</mark> <mark class="hl">что</mark> <mark class="hl">не</mark> <mark class="hl">так</mark> <mark class="hl">в</mark> <mark class="hl">примечании</mark>) · <b>(<mark class="hl">в</mark>)</b> <mark class="hl">на</mark> <mark class="hl">недельный</mark> <mark class="hl">разбор</mark>.</p></div>
+    <div class="panel"><h4>Ссылки</h4><p><a href='https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H4108-OxAlpha_Uprava_g63-september-regen_04.09.26'>H4108-OxAlpha_Uprava_g63-september-regen_04.09.26</a></p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Подтверждаю закрытие</button>
+      <button class="vote reject" data-vote="reject">&#10060; Переоткрыть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="h4113" data-filt="drain">
+    <header><div class="hw">H4113: F2 κ sheet shipped as v1 blind (fbad76518), superseded same day by H4114 adjudication v2 — MG voted v2 in… </div><span class="idchip" title="card id — cite this id back when discussing this card">h4113</span></header>
+    <div class="question"><p><b><mark class="hl">Закрытие</mark>:</b> | H4113 (handoff) | — | [H4113 (handoff)-OxAlpha_Uprava_f2-kappa-calibration-sheet_05.09.26](https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H4113 (handoff)-OxAlpha_Uprava_f2-kappa-calibration-sheet_05.09.26.md) | Uprava | ✅ Done 05-09-2026 (OxAlpha (opencode/z-ai/glm-5.3-flash)) — F2 κ sheet shipped as v1 blind (fbad76518), superseded same day by H4114 (handoff) adjudication v2 — MG voted v2 in chat 05-09 («very good job»), declined re-vote, κ moot; this pass re-proved scorer (synthetic ballot κ 0.686 + confusion), gate PASS 12/12, regen parity, filled evidence blocks; https://github.com/gasyoun/Uprava/commit/661868b4e merged {effort: medium} | - H4266 (handoff) (OxAlpha `zai-coding-plan/glm-5.3-flash` via opencode, 06-09-2026): same-pass transcription of the first chat-mode drain-stamp vote — MG «6/6 approve» (H4028 (handoff) DONE-ELSEWHERE ratification, H4106 (handoff), H4108 (handoff), H4113 (handoff), H4132 (handoff), H4137 (handoff); tally 6/0/0) on the 06-09 06:30Z stamp (14 closes, 6 marker-cards, <10-cards chat rule). Audit doc: [review/weekly/archive/decisions_applied_2026-09-06_drain-stamp-6-closes.md](https://github.com/gasyoun/Uprava/blob/main/review/weekly/archive/decisions_applied_2026-09-06_drain-stamp-6-closes.md); GTD drain-vote residual row closed with the link. No sheets existed to flip (chat mode — stamp is the record). (OxAlpha (opencode/z-ai/glm-5.3-flash))</p> <p><b>⏳ <mark class="hl">День</mark> 3 <mark class="hl">без</mark> <mark class="hl">рулинга</mark> — <mark class="hl">по</mark> <mark class="hl">рулингу</mark> MG (04-09-2026) <mark class="hl">уезжает</mark> <mark class="hl">в</mark> <mark class="hl">недельный</mark> <mark class="hl">лист</mark>.</b></p><p><b><mark class="hl">Голос</mark>:</b> <b>(<mark class="hl">а</mark>)</b> <mark class="hl">подтверждаю</mark> <mark class="hl">закрытие</mark> <mark class="hl">как</mark> <mark class="hl">есть</mark> · <b>(<mark class="hl">б</mark>)</b> <mark class="hl">переоткрыть</mark> (<mark class="hl">укажите</mark> <mark class="hl">что</mark> <mark class="hl">не</mark> <mark class="hl">так</mark> <mark class="hl">в</mark> <mark class="hl">примечании</mark>) · <b>(<mark class="hl">в</mark>)</b> <mark class="hl">на</mark> <mark class="hl">недельный</mark> <mark class="hl">разбор</mark>.</p></div>
+    <div class="panel"><h4>Ссылки</h4><p><a href='https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H4113-OxAlpha_Uprava_f2-kappa-calibration-sheet_05.09.26'>H4113-OxAlpha_Uprava_f2-kappa-calibration-sheet_05.09.26</a></p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Подтверждаю закрытие</button>
+      <button class="vote reject" data-vote="reject">&#10060; Переоткрыть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="h4132" data-filt="drain">
+    <header><div class="hw">H4132: SSB W1.5 baseline over 2 API lanes: house glm-5.3-flash 6/30 (20.0%), deepseek-chat 11/30 (36.7%); per-task… </div><span class="idchip" title="card id — cite this id back when discussing this card">h4132</span></header>
+    <div class="question"><p><b><mark class="hl">Закрытие</mark>:</b> | H4132 (handoff) | — | [H4132 (handoff)-OxAlpha_Uprava_science-bench-w15-baseline-retry_05.09.26](https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H4132 (handoff)-OxAlpha_Uprava_science-bench-w15-baseline-retry_05.09.26.md) | Uprava | ✅ Done 05-09-2026 (OxAlpha (opencode/z-ai/glm-5.3-flash)) — SSB W1.5 baseline over 2 API lanes: house glm-5.3-flash 6/30 (20.0%), deepseek-chat 11/30 (36.7%); per-task results JSON + dated report tasks/RESULTS_SSB_PILOT.md; scoring sha256 identical before/after; grader gold replay 33/33; keys presence-checked only; https://github.com/gasyoun/Uprava/commit/8078bea463ba41ed21f3023e4ea583d4525a6dd8 merged {effort: medium} | - H4266 (handoff) (OxAlpha `zai-coding-plan/glm-5.3-flash` via opencode, 06-09-2026): same-pass transcription of the first chat-mode drain-stamp vote — MG «6/6 approve» (H4028 (handoff) DONE-ELSEWHERE ratification, H4106 (handoff), H4108 (handoff), H4113 (handoff), H4132 (handoff), H4137 (handoff); tally 6/0/0) on the 06-09 06:30Z stamp (14 closes, 6 marker-cards, <10-cards chat rule). Audit doc: [review/weekly/archive/decisions_applied_2026-09-06_drain-stamp-6-closes.md](https://github.com/gasyoun/Uprava/blob/main/review/weekly/archive/decisions_applied_2026-09-06_drain-stamp-6-closes.md); GTD drain-vote residual row closed with the link. No sheets existed to flip (chat mode — stamp is the record). (OxAlpha (opencode/z-ai/glm-5.3-flash))</p> <p><b>⏳ <mark class="hl">День</mark> 3 <mark class="hl">без</mark> <mark class="hl">рулинга</mark> — <mark class="hl">по</mark> <mark class="hl">рулингу</mark> MG (04-09-2026) <mark class="hl">уезжает</mark> <mark class="hl">в</mark> <mark class="hl">недельный</mark> <mark class="hl">лист</mark>.</b></p><p><b><mark class="hl">Голос</mark>:</b> <b>(<mark class="hl">а</mark>)</b> <mark class="hl">подтверждаю</mark> <mark class="hl">закрытие</mark> <mark class="hl">как</mark> <mark class="hl">есть</mark> · <b>(<mark class="hl">б</mark>)</b> <mark class="hl">переоткрыть</mark> (<mark class="hl">укажите</mark> <mark class="hl">что</mark> <mark class="hl">не</mark> <mark class="hl">так</mark> <mark class="hl">в</mark> <mark class="hl">примечании</mark>) · <b>(<mark class="hl">в</mark>)</b> <mark class="hl">на</mark> <mark class="hl">недельный</mark> <mark class="hl">разбор</mark>.</p></div>
+    <div class="panel"><h4>Ссылки</h4><p><a href='https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H4132-OxAlpha_Uprava_science-bench-w15-baseline-retry_05.09.26'>H4132-OxAlpha_Uprava_science-bench-w15-baseline-retry_05.09.26</a></p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Подтверждаю закрытие</button>
+      <button class="vote reject" data-vote="reject">&#10060; Переоткрыть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="h4137" data-filt="drain">
+    <header><div class="hw">H4137: Repo GC + archive-monolith census, 0 destructive actions: loose 26.11 MiB (crisis self-healed) + 15.66 MiB… </div><span class="idchip" title="card id — cite this id back when discussing this card">h4137</span></header>
+    <div class="question"><p><b><mark class="hl">Закрытие</mark>:</b> | H4137 (handoff) | — | [H4137 (handoff)-OxAlpha_Uprava_repo-gc-archive-monolith-audit-retry_05.09.26](https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H4137 (handoff)-OxAlpha_Uprava_repo-gc-archive-monolith-audit-retry_05.09.26.md) | Uprava | ✅ Done 05-09-2026 (OxAlpha (opencode/z-ai/glm-5.3-flash)) — Repo GC + archive-monolith census, 0 destructive actions: loose 26.11 MiB (crisis self-healed) + 15.66 MiB git garbage; monoliths GTD_ARCHIVE 5.60 MB / REGISTRY_ARCHIVE 4.72 MB / FINDINGS 2.23 MB (+35-40% since H3288 (handoff)); regenerable hygiene_trackd trio 110.8 MB stale 28-08; h180 sheet 15.78 MB; 91 worktrees / 96 merged branches ~20 GB. Ranked P1-P6 proposal brief decide_briefs/DECIDE_BRIEF_uprava-repo-gc-archive-monolith-audit_05-09-2026.md (DEFER on live-monolith chunking, fix GENERATED dashboards instead); GTD @DECIDE row; money/stenogrammy/history-rewrite excluded.; https://github.com/gasyoun/Uprava/pull/2433 merged {effort: medium} | - H4266 (handoff) (OxAlpha `zai-coding-plan/glm-5.3-flash` via opencode, 06-09-2026): same-pass transcription of the first chat-mode drain-stamp vote — MG «6/6 approve» (H4028 (handoff) DONE-ELSEWHERE ratification, H4106 (handoff), H4108 (handoff), H4113 (handoff), H4132 (handoff), H4137 (handoff); tally 6/0/0) on the 06-09 06:30Z stamp (14 closes, 6 marker-cards, <10-cards chat rule). Audit doc: …</p> <p><b>⏳ <mark class="hl">День</mark> 3 <mark class="hl">без</mark> <mark class="hl">рулинга</mark> — <mark class="hl">по</mark> <mark class="hl">рулингу</mark> MG (04-09-2026) <mark class="hl">уезжает</mark> <mark class="hl">в</mark> <mark class="hl">недельный</mark> <mark class="hl">лист</mark>.</b></p><p><b><mark class="hl">Голос</mark>:</b> <b>(<mark class="hl">а</mark>)</b> <mark class="hl">подтверждаю</mark> <mark class="hl">закрытие</mark> <mark class="hl">как</mark> <mark class="hl">есть</mark> · <b>(<mark class="hl">б</mark>)</b> <mark class="hl">переоткрыть</mark> (<mark class="hl">укажите</mark> <mark class="hl">что</mark> <mark class="hl">не</mark> <mark class="hl">так</mark> <mark class="hl">в</mark> <mark class="hl">примечании</mark>) · <b>(<mark class="hl">в</mark>)</b> <mark class="hl">на</mark> <mark class="hl">недельный</mark> <mark class="hl">разбор</mark>.</p></div>
+    <div class="panel"><h4>Ссылки</h4><p><a href='https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H4137-OxAlpha_Uprava_repo-gc-archive-monolith-audit-retry_05.09.26'>H4137-OxAlpha_Uprava_repo-gc-archive-monolith-audit-retry_05.09.26</a></p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Подтверждаю закрытие</button>
+      <button class="vote reject" data-vote="reject">&#10060; Переоткрыть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="h4139" data-filt="drain">
+    <header><div class="hw">H4139: P2 registry/README consistency audit: C1-C9 scripted diff over origin/main (registry_consistency_p2.py… </div><span class="idchip" title="card id — cite this id back when discussing this card">h4139</span></header>
+    <div class="question"><p><b><mark class="hl">Закрытие</mark>:</b> | H4139 (handoff) | — | [H4139 (handoff)-OxAlpha_Uprava_registry-consistency-wave-p2_05.09.26](https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H4139 (handoff)-OxAlpha_Uprava_registry-consistency-wave-p2_05.09.26.md) | Uprava | ✅ Done 05-09-2026 (OxAlpha (opencode/z-ai/glm-5.3-flash)) — P2 registry/README consistency audit: C1-C9 scripted diff over origin/main (registry_consistency_p2.py consuming shared parsers); core invariants green (0 dangling/link-rot/orphan/slug, marker OK), 15 findings adjudicated severity x confidence — 4 C1 file collisions (H4149 (handoff) residue + 3 artifact drifts, proposals), 4 documented executor overrides, 2 gate-token typos fixed in-pass (H3817 (handoff)/H3818 (handoff)); zero verdict changes (P1 vote owns those); https://github.com/gasyoun/Uprava/pull/2434 merged {effort: medium} | - H4132 (handoff)–H4140 (handoff) mega-review wave launched + 6 re-mints (05-09-2026, MG rulings via interactive `question` grill: all-18 wave, audit+fix-trivial, deep 2h+ sliced ≤2h, local+public only, pilot-first 2–3, mechanical-Codex-trio re-tier, H3727 (handoff)→OxAlpha{Windows}, H2380 (handoff)→Opus pass-2): RETAKES minted [H4132 (handoff)](https://github.com/gasyoun/Uprava/blob/main/handoffs/H4132 (handoff)-OxAlpha_Uprava_science-bench-w15-baseline-retry_05.09.26.md) (bench W1.5, supersedes H3728 (handoff)-Grok), [H4133 (handoff)](https://github.com/gasyoun/Uprava/blob/main/handoffs/H4133 (handoff)-OxAlpha_SanskritKaraoke_build-chapter-session-audio-run-win_05.09.26.md) (Karaoke build, …</p> <p><b>⏳ <mark class="hl">День</mark> 3 <mark class="hl">без</mark> <mark class="hl">рулинга</mark> — <mark class="hl">по</mark> <mark class="hl">рулингу</mark> MG (04-09-2026) <mark class="hl">уезжает</mark> <mark class="hl">в</mark> <mark class="hl">недельный</mark> <mark class="hl">лист</mark>.</b></p><p><b><mark class="hl">Голос</mark>:</b> <b>(<mark class="hl">а</mark>)</b> <mark class="hl">подтверждаю</mark> <mark class="hl">закрытие</mark> <mark class="hl">как</mark> <mark class="hl">есть</mark> · <b>(<mark class="hl">б</mark>)</b> <mark class="hl">переоткрыть</mark> (<mark class="hl">укажите</mark> <mark class="hl">что</mark> <mark class="hl">не</mark> <mark class="hl">так</mark> <mark class="hl">в</mark> <mark class="hl">примечании</mark>) · <b>(<mark class="hl">в</mark>)</b> <mark class="hl">на</mark> <mark class="hl">недельный</mark> <mark class="hl">разбор</mark>.</p></div>
+    <div class="panel"><h4>Ссылки</h4><p><a href='https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H4139-OxAlpha_Uprava_registry-consistency-wave-p2_05.09.26'>H4139-OxAlpha_Uprava_registry-consistency-wave-p2_05.09.26</a></p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Подтверждаю закрытие</button>
+      <button class="vote reject" data-vote="reject">&#10060; Переоткрыть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="h4140" data-filt="drain">
+    <header><div class="hw">H4140: P3 secrets sweep: estate presence-only scan (trees+4 session stores+logs+.env census), 0 real leaks, nothing… </div><span class="idchip" title="card id — cite this id back when discussing this card">h4140</span></header>
+    <div class="question"><p><b><mark class="hl">Закрытие</mark>:</b> | H4140 (handoff) | — | [H4140 (handoff)-OxAlpha_Uprava_secrets-sweep-wave-p3_05.09.26](https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H4140 (handoff)-OxAlpha_Uprava_secrets-sweep-wave-p3_05.09.26.md) | Uprava | ✅ Done 05-09-2026 (OxAlpha (opencode/z-ai/glm-5.3-flash)) — P3 secrets sweep: estate presence-only scan (trees+4 session stores+logs+.env census), 0 real leaks, nothing to rotate; in-pass .gitignore .env block; https://github.com/gasyoun/Uprava/pull/2436 merged {effort: medium} | - H4132 (handoff)–H4140 (handoff) mega-review wave launched + 6 re-mints (05-09-2026, MG rulings via interactive `question` grill: all-18 wave, audit+fix-trivial, deep 2h+ sliced ≤2h, local+public only, pilot-first 2–3, mechanical-Codex-trio re-tier, H3727 (handoff)→OxAlpha{Windows}, H2380 (handoff)→Opus pass-2): RETAKES minted [H4132 (handoff)](https://github.com/gasyoun/Uprava/blob/main/handoffs/H4132 (handoff)-OxAlpha_Uprava_science-bench-w15-baseline-retry_05.09.26.md) (bench W1.5, supersedes H3728 (handoff)-Grok), [H4133 (handoff)](https://github.com/gasyoun/Uprava/blob/main/handoffs/H4133 (handoff)-OxAlpha_SanskritKaraoke_build-chapter-session-audio-run-win_05.09.26.md) (Karaoke build, supersedes H3727 (handoff)-Grok, launch-box Windows, GTD 0h MSI kick-off row), [H4134 (handoff)](https://github.com/gasyoun/Uprava/blob/main/handoffs/H4134 (handoff)-Opus_Systema-Sanscriticum_cabinet-adoption-kpi-experiment-pass2_05.09.26.md) (cabinet-KPI pass 2, gated DEPLOY №52, H2380 (handoff) kept as pass-1 record), …</p> <p><b>⏳ <mark class="hl">День</mark> 3 <mark class="hl">без</mark> <mark class="hl">рулинга</mark> — <mark class="hl">по</mark> <mark class="hl">рулингу</mark> MG (04-09-2026) <mark class="hl">уезжает</mark> <mark class="hl">в</mark> <mark class="hl">недельный</mark> <mark class="hl">лист</mark>.</b></p><p><b><mark class="hl">Голос</mark>:</b> <b>(<mark class="hl">а</mark>)</b> <mark class="hl">подтверждаю</mark> <mark class="hl">закрытие</mark> <mark class="hl">как</mark> <mark class="hl">есть</mark> · <b>(<mark class="hl">б</mark>)</b> <mark class="hl">переоткрыть</mark> (<mark class="hl">укажите</mark> <mark class="hl">что</mark> <mark class="hl">не</mark> <mark class="hl">так</mark> <mark class="hl">в</mark> <mark class="hl">примечании</mark>) · <b>(<mark class="hl">в</mark>)</b> <mark class="hl">на</mark> <mark class="hl">недельный</mark> <mark class="hl">разбор</mark>.</p></div>
+    <div class="panel"><h4>Ссылки</h4><p><a href='https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H4140-OxAlpha_Uprava_secrets-sweep-wave-p3_05.09.26'>H4140-OxAlpha_Uprava_secrets-sweep-wave-p3_05.09.26</a></p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Подтверждаю закрытие</button>
+      <button class="vote reject" data-vote="reject">&#10060; Переоткрыть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="h4209" data-filt="drain">
+    <header><div class="hw">H4209: shell=True template substitution POSIX-quoted in spot_check_daily.judge_card +… </div><span class="idchip" title="card id — cite this id back when discussing this card">h4209</span></header>
+    <div class="question"><p><b><mark class="hl">Закрытие</mark>:</b> | H4209 (handoff) | — | [H4209 (handoff)-OxAlpha_SanskritLexicography_pilot-shell-template-quoting_06.09.26](https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H4209 (handoff)-OxAlpha_SanskritLexicography_pilot-shell-template-quoting_06.09.26.md) | SanskritLexicography | ✅ Done 06-09-2026 (OxAlpha (opencode/z-ai/glm-5.3-flash)) — shell=True template substitution POSIX-quoted in spot_check_daily.judge_card + nonstop_scheduler.canary_receipt (audit F2); selftests pin spacey-path defect red-without-fix; PR #2098 open (product repo, PR-only); https://github.com/gasyoun/SanskritLexicography/pull/2098 OPEN (product repo, PR-only) {effort: trivial} | - H4209 (handoff): shell=True template substitution POSIX-quoted in spot_check_daily.judge_card + nonstop_scheduler.canary_receipt (audit F2); selftests pin spacey-path defect red-without-fix; PR #2098 open (product repo, PR-only) (OxAlpha (opencode/z-ai/glm-5.3-flash))</p> <p><b>⏳ <mark class="hl">День</mark> 2 <mark class="hl">без</mark> <mark class="hl">рулинга</mark> — <mark class="hl">по</mark> <mark class="hl">рулингу</mark> MG (04-09-2026) <mark class="hl">уезжает</mark> <mark class="hl">в</mark> <mark class="hl">недельный</mark> <mark class="hl">лист</mark>.</b></p><p><b><mark class="hl">Голос</mark>:</b> <b>(<mark class="hl">а</mark>)</b> <mark class="hl">подтверждаю</mark> <mark class="hl">закрытие</mark> <mark class="hl">как</mark> <mark class="hl">есть</mark> · <b>(<mark class="hl">б</mark>)</b> <mark class="hl">переоткрыть</mark> (<mark class="hl">укажите</mark> <mark class="hl">что</mark> <mark class="hl">не</mark> <mark class="hl">так</mark> <mark class="hl">в</mark> <mark class="hl">примечании</mark>) · <b>(<mark class="hl">в</mark>)</b> <mark class="hl">на</mark> <mark class="hl">недельный</mark> <mark class="hl">разбор</mark>.</p></div>
+    <div class="panel"><h4>Ссылки</h4><p><a href='https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H4209-OxAlpha_SanskritLexicography_pilot-shell-template-quoting_06.09.26'>H4209-OxAlpha_SanskritLexicography_pilot-shell-template-quoting_06.09.26</a></p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Подтверждаю закрытие</button>
+      <button class="vote reject" data-vote="reject">&#10060; Переоткрыть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+
+  <section class="card" data-id="h4272" data-filt="drain">
+    <header><div class="hw">H4272: конвейер исполнен: admin-доставка черновика OK, tg/vk гейты на env/webhook, email деградация явная; GTD: виза… </div><span class="idchip" title="card id — cite this id back when discussing this card">h4272</span></header>
+    <div class="question"><p><b><mark class="hl">Закрытие</mark>:</b> | H4272 (handoff) | ✅ | [H4272 (handoff)-OxAlpha_Uprava_daily-publication-conveyor_06.09.26](https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H4272 (handoff)-OxAlpha_Uprava_daily-publication-conveyor_06.09.26.md) | Uprava | ✅ Done 06-09-2026 (OxAlpha `zai-coding-plan/glm-5.3-flash`) — <mark class="hl">конвейер</mark> <mark class="hl">исполнен</mark>: admin-<mark class="hl">доставка</mark> <mark class="hl">черновика</mark> OK, tg/vk <mark class="hl">гейты</mark> <mark class="hl">на</mark> env/webhook, email <mark class="hl">деградация</mark> <mark class="hl">явная</mark>; GTD: <mark class="hl">виза</mark> <mark class="hl">шаблона</mark> MG → launchd (commit 678f471ee) \|| - H4272 (handoff) (OxAlpha `zai-coding-plan/glm-5.3-flash`, 06-09-2026): <mark class="hl">ежедневный</mark> <mark class="hl">публикационный</mark> <mark class="hl">конвейер</mark> <mark class="hl">Института</mark> — [tools/daily_publication_conveyor.py](https://github.com/gasyoun/Uprava/blob/main/tools/daily_publication_conveyor.py). <mark class="hl">Голова</mark> <mark class="hl">очереди</mark> <mark class="hl">набора</mark> (<mark class="hl">мин</mark>. <mark class="hl">заполненность</mark> → <mark class="hl">ближайшее</mark> <mark class="hl">занятие</mark>, reuse <mark class="hl">среза</mark> H4268 (handoff)) → <mark class="hl">карточка</mark> «<mark class="hl">курс</mark> <mark class="hl">дня</mark>» (RU, <mark class="hl">рулинг</mark> <mark class="hl">имени</mark> «<mark class="hl">Институт</mark>», self-gate <mark class="hl">на</mark> <mark class="hl">запретные</mark> <mark class="hl">слова</mark> <mark class="hl">вкл</mark>. «<mark class="hl">школ</mark>»/«<mark class="hl">академ</mark>», <mark class="hl">анти-лифт</mark> <mark class="hl">язык</mark> «<mark class="hl">записи</mark>/<mark class="hl">свой</mark> <mark class="hl">темп</mark>», <mark class="hl">без</mark> <mark class="hl">срочности</mark>) → <mark class="hl">матрица</mark> <mark class="hl">доставки</mark>: admin (<mark class="hl">черновик</mark> → <mark class="hl">админ-чат</mark> MG support-<mark class="hl">ботом</mark> <mark class="hl">с</mark> .92 — <mark class="hl">токен</mark> <mark class="hl">переложен</mark> <mark class="hl">в</mark> `~/.secrets/telegram_quarantine.env`, <mark class="hl">значения</mark> <mark class="hl">в</mark> <mark class="hl">файл</mark>), `--publish tg` (<mark class="hl">гейт</mark>: prepared `~/.secrets/institute_conveyor_tg.env` + <mark class="hl">одна</mark> <mark class="hl">виза</mark> <mark class="hl">шаблона</mark> MG), `--publish vk` (n8n-<mark class="hl">хост</mark> .91 <mark class="hl">жив</mark> 80/5678; <mark class="hl">ждёт</mark> `CONVEYOR_VK_WEBHOOK`), email — <mark class="hl">постоянная</mark> <mark class="hl">деградация</mark> <mark class="hl">до</mark> ESP (GTD). <mark class="hl">Суточная</mark> <mark class="hl">ротация</mark> <mark class="hl">курсов</mark> (5-<mark class="hl">окно</mark>, <mark class="hl">сброс</mark> <mark class="hl">в</mark> <mark class="hl">полночь</mark>), writer-<mark class="hl">контракт</mark> <mark class="hl">зарегистрирован</mark>. <mark class="hl">Живой</mark> <mark class="hl">прогон</mark>: admin OK. <mark class="hl">Остатки</mark> GTD: <mark class="hl">виза</mark> <mark class="hl">шаблона</mark> (MG, 1 <mark class="hl">слово</mark>) → <mark class="hl">затем</mark> …</p> <p><b>⏳ <mark class="hl">День</mark> 2 <mark class="hl">без</mark> <mark class="hl">рулинга</mark> — <mark class="hl">по</mark> <mark class="hl">рулингу</mark> MG (04-09-2026) <mark class="hl">уезжает</mark> <mark class="hl">в</mark> <mark class="hl">недельный</mark> <mark class="hl">лист</mark>.</b></p><p><b><mark class="hl">Голос</mark>:</b> <b>(<mark class="hl">а</mark>)</b> <mark class="hl">подтверждаю</mark> <mark class="hl">закрытие</mark> <mark class="hl">как</mark> <mark class="hl">есть</mark> · <b>(<mark class="hl">б</mark>)</b> <mark class="hl">переоткрыть</mark> (<mark class="hl">укажите</mark> <mark class="hl">что</mark> <mark class="hl">не</mark> <mark class="hl">так</mark> <mark class="hl">в</mark> <mark class="hl">примечании</mark>) · <b>(<mark class="hl">в</mark>)</b> <mark class="hl">на</mark> <mark class="hl">недельный</mark> <mark class="hl">разбор</mark>.</p></div>
+    <div class="panel"><h4>Ссылки</h4><p><a href='https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H4272-OxAlpha_Uprava_daily-publication-conveyor_06.09.26'>H4272-OxAlpha_Uprava_daily-publication-conveyor_06.09.26</a></p></div>
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Подтверждаю закрытие</button>
+      <button class="vote reject" data-vote="reject">&#10060; Переоткрыть</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="free-text note (optional)"></textarea>
+  </section>
+</main>
+<div class="votebar" id="voteBar"><span class="spacer"></span></div>
+<footer class="hint">Built by <code>tools/drain_daily_vote_sheet.py</code> · apply with <code>/decisions-apply</code>. Keyboard: <kbd>a</kbd> Подтверждаю закрытие &middot; <kbd>r</kbd> Переоткрыть
+  &middot; <kbd>d</kbd> defer &middot; <kbd>&darr;</kbd>/<kbd>&uarr;</kbd> next/prev. Votes autosave to
+  this browser's localStorage; click "Download decisions.json" when done (unvoted items export with
+  decision:null).</footer>
+<div class="legend" style="max-width:980px;margin:0 auto 20px;padding:0 20px;color:var(--muted);font-size:12px">
+  <b>Approve</b> = accept the proposed change/answer shown on the card (no separate "approve as-is" —
+  approving means agreeing as written). <b>Reject</b> = keep the current entry/answer unchanged.
+  <b>Defer</b> = not sure yet, decide later. The note field is for requesting a partial tweak instead
+  of an outright reject.
+</div>
+<script>
+(function () {
+  var SHEET_ID = "uprava-drain-vote-weekly_08-09-26";
+  var STORE_KEY = 'review-sheet:' + SHEET_ID;
+  var GENERATED = "08-09-2026";
+  var ids = ["h3234", "h3346", "h3349", "h3353", "h3356", "h3378", "h3379", "h3419", "h3548", "h3550", "h3601", "h3673", "h3915", "h4028", "h4036", "h4038", "h4045", "h4056", "h4067", "h4106", "h4108", "h4113", "h4132", "h4137", "h4139", "h4140", "h4209", "h4272"];
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(STORE_KEY) || '{}') || {}; } catch (e) { state = {}; }
+  function tally() {
+    var c = { approve:0, reject:0, defer:0 };
+    ids.forEach(function (id) { var v = state[id] && state[id].decision; if (v && c.hasOwnProperty(v)) c[v]++; });
+    document.getElementById('c-approve').textContent = c.approve;
+    document.getElementById('c-reject').textContent = c.reject;
+    document.getElementById('c-defer').textContent = c.defer;
+    document.getElementById('c-unvoted').textContent = ids.length - c.approve - c.reject - c.defer;
+  }
+  function applyCardUI(card) {
+    var id = card.getAttribute('data-id'); var rec = state[id] || {};
+    card.classList.remove('voted-approve','voted-reject','voted-defer');
+    card.querySelectorAll('button.vote').forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-vote') === rec.decision); });
+    card.querySelector('.vote-state').textContent = rec.decision ? rec.decision : 'unvoted';
+    if (rec.decision) card.classList.add('voted-' + rec.decision);
+    var ta = card.querySelector('textarea.note'); if (rec.note && !ta.value) ta.value = rec.note;
+  }
+  function save() { localStorage.setItem(STORE_KEY, JSON.stringify(state)); tally(); }
+  // H1523 residual / csl-pyutil#1 Part 1: always re-read the live textarea on vote
+  // and before export so a second vote click (or a missed `input` event) cannot
+  // drop a note that is still visible in the card.
+  function syncNoteFromDom(id) {
+    state[id] = state[id] || {};
+    var card = document.querySelector('.card[data-id="' + id + '"]');
+    if (!card) return;
+    var ta = card.querySelector('textarea.note');
+    if (ta) state[id].note = ta.value;
+  }
+  function vote(id, d) { syncNoteFromDom(id); state[id].decision = d; save(); }
+  function noteChange(id, t) { state[id] = state[id] || {}; state[id].note = t; save(); }
+  document.querySelectorAll('.card').forEach(function (card) {
+    var id = card.getAttribute('data-id'); applyCardUI(card);
+    card.querySelectorAll('button.vote').forEach(function (btn) {
+      btn.addEventListener('click', function () { vote(id, btn.getAttribute('data-vote')); applyCardUI(card); });
+    });
+    var ta = card.querySelector('textarea.note'); ta.addEventListener('input', function () { noteChange(id, ta.value); });
+  });
+  tally();
+  document.getElementById('downloadBtn').addEventListener('click', function () {
+    ids.forEach(function (id) { syncNoteFromDom(id); });
+    var decided = ids.filter(function (id) { return state[id] && state[id].decision; }).length;
+    var payload = { sheet_id: SHEET_ID, generated: "08-09-2026", decided: decided, time_total_seconds: __timeTotal(),
+      items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '', time_seconds: __timeFor(id) }; }) };
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
+    var url = URL.createObjectURL(blob); var a = document.createElement('a');
+    a.href = url; a.download = SHEET_ID + '_decisions.json'; document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+  });
+  var filterbar = document.getElementById('filterbar');
+  filterbar.addEventListener('click', function (e) {
+    var btn = e.target.closest('button[data-filter]'); if (!btn) return;
+    filterbar.querySelectorAll('button').forEach(function (b) { b.classList.remove('active'); });
+    btn.classList.add('active'); var f = btn.getAttribute('data-filter');
+    document.querySelectorAll('.card').forEach(function (card) {
+      var show = true;
+      if (f === 'unvoted') { var id = card.getAttribute('data-id'); show = !(state[id] && state[id].decision); }
+      else if (f !== 'all') { show = card.getAttribute('data-filt') === f; }
+      card.style.display = show ? '' : 'none';
+    });
+  });
+  var cardsEl = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  var activeIdx = 0;
+  function visibleCards() { return cardsEl.filter(function (c) { return c.style.display !== 'none'; }); }
+  document.addEventListener('keydown', function (e) {
+    if (e.target.tagName === 'TEXTAREA') return;
+    var vis = visibleCards(); if (!vis.length) return;
+    if (activeIdx >= vis.length) activeIdx = vis.length - 1;
+    var card = vis[activeIdx]; var id = card.getAttribute('data-id');
+    if (e.key === 'a') { vote(id, 'approve'); applyCardUI(card); }
+    else if (e.key === 'r') { vote(id, 'reject'); applyCardUI(card); }
+    else if (e.key === 'd') { vote(id, 'defer'); applyCardUI(card); }
+    else if (e.key === 'ArrowDown') { activeIdx = Math.min(activeIdx + 1, vis.length - 1); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'start'}); }
+    else if (e.key === 'ArrowUp') { activeIdx = Math.max(activeIdx - 1, 0); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'start'}); }
+    else return;
+    e.preventDefault();
+  });
+
+  var saveHandle = null, saveTimer = null;
+  function exportPayload() {
+    if (typeof syncNoteFromDom === 'function') {
+      ids.forEach(function (id) { syncNoteFromDom(id); });
+    }
+    var decided = ids.filter(function (id) { return state[id] && state[id].decision; }).length;
+    var nowIso = new Date().toISOString();
+    return JSON.stringify({ sheet_id: SHEET_ID, generated: nowIso, reviewedAt: nowIso, decided: decided, time_total_seconds: __timeTotal(),
+      items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '', time_seconds: __timeFor(id) }; }) }, null, 2);
+  }
+  function scheduleAutosave() {
+    if (!saveHandle) return;
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(function () {
+      saveHandle.createWritable().then(function (w) {
+        w.write(exportPayload()).then(function () { w.close(); });
+      }).catch(function () {});
+    }, 1000);
+  }
+  var _origSave = save;
+  save = function () { _origSave(); scheduleAutosave(); };
+  if (window.showSaveFilePicker) {
+    var saveBtn = document.getElementById('saveBtn');
+    saveBtn.style.display = '';
+    saveBtn.addEventListener('click', function () {
+      window.showSaveFilePicker({suggestedName: SHEET_ID + '_decisions.json'}).then(function (h) {
+        saveHandle = h; scheduleAutosave();
+      }).catch(function () {});
+    });
+  }
+
+  var FS_KEY = STORE_KEY + ':fs', FS_DEFAULT = 1.5;
+  function fsGet() {
+    var v = parseFloat(localStorage.getItem(FS_KEY));
+    return (isFinite(v) && v >= 0.7 && v <= 3) ? v : FS_DEFAULT;
+  }
+  function fsApply(v) {
+    document.documentElement.style.setProperty('--fs', String(v));
+    document.getElementById('fsVal').textContent = Math.round(v * 100) + '%';
+  }
+  function fsSet(v) {
+    v = Math.min(3, Math.max(0.7, Math.round(v * 10) / 10));
+    localStorage.setItem(FS_KEY, String(v)); fsApply(v);
+  }
+  fsApply(fsGet());
+  document.getElementById('fsDown').addEventListener('click', function () { fsSet(fsGet() - 0.1); });
+  document.getElementById('fsUp').addEventListener('click', function () { fsSet(fsGet() + 0.1); });
+
+  var TIME_KEY = STORE_KEY + ':timing';
+  var __timing = { total: 0, per: {} };
+  try {
+    var __t0 = JSON.parse(localStorage.getItem(TIME_KEY) || 'null');
+    if (__t0 && typeof __t0.total === 'number') __timing = __t0;
+  } catch (e) {}
+  if (!__timing.per) __timing.per = {};
+  function __timeFor(id) { return Math.round(__timing.per[id] || 0); }
+  function __timeTotal() { return Math.round(__timing.total || 0); }
+  function __timeFmt(s) {
+    s = Math.round(s); var m = Math.floor(s / 60);
+    return (m >= 60 ? Math.floor(m / 60) + ':' + ('0' + (m - Math.floor(m / 60) * 60)).slice(-2) : m)
+      + ':' + ('0' + (s - m * 60)).slice(-2);
+  }
+  function __timeShow() {
+    var el = document.getElementById('t-total');
+    if (el) el.textContent = __timeFmt(__timing.total);
+  }
+  var __timeLast = Date.now(), __timeDirty = 0;
+  var __timeCards = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  function __timeActiveId() {
+    var mid = window.innerHeight / 2, best = null, bestd = Infinity;
+    for (var i = 0; i < __timeCards.length; i++) {
+      var c = __timeCards[i];
+      if (c.style.display === 'none') continue;
+      var r = c.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > window.innerHeight) continue;
+      var center = (Math.max(r.top, 0) + Math.min(r.bottom, window.innerHeight)) / 2;
+      var d = Math.abs(center - mid);
+      if (d < bestd) { bestd = d; best = c; }
+    }
+    return best ? best.getAttribute('data-id') : null;
+  }
+  function __timeFlush() {
+    try { localStorage.setItem(TIME_KEY, JSON.stringify(__timing)); } catch (e) {}
+  }
+  // V12 (H2858): the clock is stoppable. `paused` rides in the same persisted
+  // record as the totals, so a reviewer who pauses and closes the tab does not
+  // come back to a clock that ran all night.
+  var __timePaused = !!__timing.paused;
+  // V15 (H2887): a legacy record carries `paused` and no reason — read it as
+  // manual, so an auto-rearm can never lift a pause the curator set by hand.
+  var __timePauseReason = __timePaused ? (__timing.pause_reason || 'manual') : null;
+  function __timePauseSet(v, reason) {
+    __timePaused = !!v;
+    __timing.paused = __timePaused;
+    __timePauseReason = __timePaused ? (reason || 'manual') : null;
+    __timing.pause_reason = __timePauseReason;
+    __timeLast = Date.now(); __timeFlush();
+  }
+  setInterval(function () {
+    var now = Date.now(), dt = (now - __timeLast) / 1000;
+    __timeLast = now;
+    if (document.hidden || __timePaused || dt <= 0 || dt > 4) return;
+    __timing.total += dt;
+    var id = __timeActiveId();
+    if (id) __timing.per[id] = (__timing.per[id] || 0) + dt;
+    __timeDirty += dt;
+    if (__timeDirty >= 5) { __timeDirty = 0; __timeFlush(); }
+    __timeShow();
+  }, 1000);
+  document.addEventListener('visibilitychange', function () { __timeLast = Date.now(); });
+  window.addEventListener('beforeunload', __timeFlush);
+  __timeShow();
+
+  var HANDIN_SAID = 'handed in {n} of {total} — clock stopped, the rest stay saved in this browser';
+  var __handinBtn = document.getElementById('handinBtn');
+  var __handinSaid = document.getElementById('handinSaid');
+
+  var __pauseBtn = document.getElementById('pauseBtn');
+  function __pauseShow() {
+    __pauseBtn.classList.toggle('on', __timePaused);
+    __pauseBtn.innerHTML = __timePaused ? '&#9654;' : '&#9208;';
+    var chip = document.querySelector('.tally .time');
+    if (chip) chip.classList.toggle('paused', __timePaused);
+  }
+  __pauseBtn.addEventListener('click', function () { __timePauseSet(!__timePaused); __pauseShow(); });
+  __pauseShow();
+  __handinBtn.addEventListener('click', function () {
+    ids.forEach(function (id) { syncNoteFromDom(id); });
+    __timePauseSet(true, 'export'); __pauseShow();
+    var items = ids.map(function (id) {
+      var rec = state[id] || {};
+      var item = { id: id, decision: rec.decision || null };
+      item.note = rec.note || '';
+      item.time_seconds = __timeFor(id);
+      return item;
+    });
+    var decided = items.filter(function (it) { return !!it.decision; }).length;
+    var payload = { sheet_id: SHEET_ID, generated: GENERATED, decided: decided,
+      partial: true, complete: false, undecided: items.length - decided, items: items };
+    payload.time_total_seconds = __timeTotal();
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
+    var url = URL.createObjectURL(blob); var a = document.createElement('a');
+    a.href = url; a.download = SHEET_ID + '_decisions_partial.json';
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+    __handinSaid.textContent = HANDIN_SAID.replace('{n}', decided).replace('{total}', items.length);
+  });
+
+  // --- V15 session flow (H2887) ---------------------------------------------
+  var FLOW_IDLE_SECONDS = 90;
+  var FLOW_ETA = 'about {minutes} min left';
+  var FLOW_ETA_ROUGH = 'about {minutes} min left (rough)';
+  var FLOW_CLOCK_RUNNING = 'running';
+  var FLOW_CLOCK_PAUSED = 'paused';
+  var FLOW_CLOCK_IDLE = 'idle';
+  var FLOW_PROGRESS = 'decided {n} of {total}';
+  var FLOW_UNDO_SAID = 'undo: {id} back to {decision}';
+  var FLOW_UNDO_EMPTY = 'nothing to undo';
+  var FLOW_UNDO_NONE = 'no decision';
+  var FLOW_RESUMED = 'resumed at card {n} of {total}';
+  var __flowToast = document.getElementById('flowToast');
+  var __flowToastTimer = null;
+  function __flowSay(text) {
+    if (!__flowToast) return;
+    __flowToast.textContent = text;
+    __flowToast.classList.add('on');
+    clearTimeout(__flowToastTimer);
+    __flowToastTimer = setTimeout(function () { __flowToast.classList.remove('on'); }, 2600);
+  }
+  var __flowCenterId = __timeActiveId;
+  function __flowIdxOf(id) {
+    var vis = visibleCards();
+    for (var i = 0; i < vis.length; i++) {
+      if (vis[i].getAttribute('data-id') === id) return i;
+    }
+    return -1;
+  }
+  function __flowCardById(id) {
+    var found = null;
+    cardsEl.forEach(function (c) { if (c.getAttribute('data-id') === id) found = c; });
+    return found;
+  }
+  // The visible ring IS the target of a/r/d — that identity is the whole point
+  // of this layer, so nothing may move `activeIdx` without repainting.
+  function __flowPaint() {
+    cardsEl.forEach(function (c) { c.classList.remove('kbd-active'); });
+    var vis = visibleCards();
+    if (!vis.length) return;
+    if (activeIdx >= vis.length) activeIdx = vis.length - 1;
+    if (activeIdx < 0) activeIdx = 0;
+    vis[activeIdx].classList.add('kbd-active');
+  }
+  function __flowSync() {
+    var id = __flowCenterId();
+    if (id) { var at = __flowIdxOf(id); if (at !== -1) activeIdx = at; }
+    __flowPaint();
+  }
+  var __flowScrollTimer = null;
+  window.addEventListener('scroll', function () {
+    if (__flowScrollTimer) return;
+    __flowScrollTimer = setTimeout(function () { __flowScrollTimer = null; __flowSync(); }, 120);
+  });
+  // Both bars reset `activeIdx` to 0 as they re-filter; re-derive it from the
+  // viewport on the next tick, or defect 2 returns wearing a filter.
+  ['filterbar'].forEach(function (barId) {
+    var bar = document.getElementById(barId);
+    if (bar) bar.addEventListener('click', function () { setTimeout(__flowSync, 0); });
+  });
+  function __flowClockShow() {
+    var el = document.getElementById('t-state');
+    if (!el) return;
+    var label = FLOW_CLOCK_RUNNING;
+    if (__timePaused) label = (__timePauseReason === 'idle') ? FLOW_CLOCK_IDLE : FLOW_CLOCK_PAUSED;
+    el.textContent = label;
+    el.classList.toggle('idle', !!__timePaused && __timePauseReason === 'idle');
+  }
+  // The V12 ⏸ button drives the clock straight through __timePauseSet, so the
+  // three-state label has to ride along with V12's own repaint or it goes stale
+  // the moment the curator pauses by hand.
+  var __flowOrigPauseShow = __pauseShow;
+  __pauseShow = function () { __flowOrigPauseShow(); __flowClockShow(); };
+  var __flowIdleTimer = null;
+  function __flowIdleArm() {
+    clearTimeout(__flowIdleTimer);
+    __flowIdleTimer = setTimeout(function () {
+      if (__timePaused) return;
+      __timePauseSet(true, 'idle');
+    __pauseShow();
+      __flowClockShow();
+    }, FLOW_IDLE_SECONDS * 1000);
+  }
+  function __flowRearm() {
+    if (__timePaused && __timePauseReason !== 'manual') {
+      __timePauseSet(false);
+    __pauseShow();
+    }
+    __flowClockShow();
+    __flowIdleArm();
+  }
+  // The export GESTURES, caught in the capture phase on `document` so this runs
+  // before any handler bound to the buttons themselves — including the strict
+  // layer's, which calls stopImmediatePropagation() on its own element.
+  document.addEventListener('click', function (e) {
+    var t = e.target;
+    if (!t || !t.closest || !t.closest('#downloadBtn, #saveBtn, #handinBtn')) return;
+    __timePauseSet(true, 'export');
+    __pauseShow();
+    __flowClockShow();
+  }, true);
+  ['keydown', 'pointerdown', 'scroll'].forEach(function (evt) {
+    document.addEventListener(evt, function () { __flowRearm(); }, true);
+  });
+  var __flowUndoStack = [];
+  function __flowUndo() {
+    var last = __flowUndoStack.pop();
+    if (!last) { __flowSay(FLOW_UNDO_EMPTY); return; }
+    state[last.id] = state[last.id] || {};
+    if (last.prev) state[last.id].decision = last.prev;
+    else delete state[last.id].decision;
+    save();
+    var card = __flowCardById(last.id);
+    if (card) {
+      applyCardUI(card);
+      card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      var at = __flowIdxOf(last.id);
+      if (at !== -1) activeIdx = at;
+      __flowPaint();
+    }
+    __flowSay(FLOW_UNDO_SAID.replace('{id}', last.id)
+      .replace('{decision}', last.prev || FLOW_UNDO_NONE));
+  }
+  var __flowUndoBtn = document.getElementById('flowUndoBtn');
+  if (__flowUndoBtn) __flowUndoBtn.addEventListener('click', __flowUndo);
+  function __flowFirstUndecided() {
+    var vis = visibleCards();
+    for (var i = 0; i < vis.length; i++) {
+      var id = vis[i].getAttribute('data-id');
+      if (!(state[id] && state[id].decision)) return i;
+    }
+    return -1;
+  }
+  function __flowAdvance() {
+    var at = __flowFirstUndecided();
+    if (at === -1) { __flowPaint(); return; }
+    activeIdx = at;
+    visibleCards()[at].scrollIntoView({ behavior: 'smooth', block: 'start' });
+    __flowPaint();
+  }
+  function __flowDecided() {
+    var n = 0;
+    ids.forEach(function (id) { if (state[id] && state[id].decision) n++; });
+    return n;
+  }
+  function __flowEtaText(decided, total) {
+    var secs = [];
+    ids.forEach(function (id) {
+      if (!(state[id] && state[id].decision)) return;
+      var s = __timing.per[id] || 0;
+      if (s > 0) secs.push(s);
+    });
+    if (!secs.length) return '';
+    secs.sort(function (a, b) { return a - b; });
+    var mid = Math.floor(secs.length / 2);
+    var med = (secs.length % 2) ? secs[mid] : (secs[mid - 1] + secs[mid]) / 2;
+    var left = Math.max(0, total - decided);
+    if (!left) return '';
+    var minutes = Math.max(1, Math.round(med * left / 60));
+    return (secs.length >= 5 ? FLOW_ETA : FLOW_ETA_ROUGH).replace('{minutes}', minutes);
+  }
+  function __flowProgress() {
+    var n = __flowDecided(), total = ids.length;
+    var txt = document.getElementById('flowProgText');
+    if (txt) txt.textContent = FLOW_PROGRESS.replace('{n}', n).replace('{total}', total);
+    var bar = document.getElementById('flowBar');
+    if (bar) bar.style.width = (total ? Math.round(100 * n / total) : 0) + '%';
+    var etaEl = document.getElementById('flowEta');
+    if (etaEl) etaEl.textContent = __flowEtaText(n, total);
+  }
+  var __flowOrigTally = tally;
+  tally = function () { __flowOrigTally(); __flowProgress(); };
+  var __flowOrigVote = vote;
+  vote = function (id, d) {
+    var rec = state[id] || {};
+    __flowUndoStack.push({ id: id, prev: rec.decision || null });
+    if (__flowUndoStack.length > 100) __flowUndoStack.shift();
+    __flowOrigVote(id, d);
+    __flowRearm();
+    __flowAdvance();
+  };
+  var __flowOrigNote = noteChange;
+  noteChange = function (id, t) { __flowOrigNote(id, t); __flowRearm(); };
+  document.addEventListener('keydown', function (e) {
+    if (e.target.tagName === 'TEXTAREA') return;
+    if (e.key === 'z' || e.key === 'Z') { __flowUndo(); e.preventDefault(); return; }
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') __flowPaint();
+  });
+  __flowProgress();
+  __flowSync();
+  __flowClockShow();
+  __flowIdleArm();
+  (function () {
+    if (!__flowDecided()) return;
+    var at = __flowFirstUndecided();
+    if (at === -1) return;
+    var vis = visibleCards();
+    activeIdx = at;
+    vis[at].scrollIntoView({ block: 'start' });
+    __flowPaint();
+    __flowSay(FLOW_RESUMED.replace('{n}', at + 1).replace('{total}', vis.length));
+  })();
+
+  var VOTE_TOTAL = 0;
+  var VOTE_PROGRESS = '{n} of {total} across the whole sheet';
+  var VOTE_ETA = 'about {minutes} min left for all {total}';
+  var VOTE_ETA_ROUGH = 'about {minutes} min left for all {total} (rough)';
+  var VOTE_DONE = 'all {total} decided';
+  (function () {
+    var bar = document.getElementById('voteBar');
+    if (!bar) return;
+    // The build tagged exactly the submit controls this document actually has.
+    // Navigation (filters, facets, the type-scale control) is untagged and stays
+    // on top, where it is used BEFORE deciding.
+    var moved = document.querySelectorAll('[data-submit]');
+    for (var i = 0; i < moved.length; i++) bar.appendChild(moved[i]);
+  })();
+  // One record backs every pack of a packset — STORE_KEY and TIME_KEY are keyed
+  // on sheet_id, not on the pack — so this page can count and time the WHOLE
+  // instrument without loading a single other pack.
+  function __voteDecidedAll() {
+    var n = 0;
+    for (var k in state) {
+      if (Object.prototype.hasOwnProperty.call(state, k) && state[k] && state[k].decision) n++;
+    }
+    return n;
+  }
+  function __voteSecs() {
+    var per = (typeof __timing !== 'undefined' && __timing && __timing.per) ? __timing.per : null;
+    var out = [];
+    if (!per) return out;
+    for (var k in per) {
+      if (!Object.prototype.hasOwnProperty.call(per, k)) continue;
+      if (!(state[k] && state[k].decision)) continue;
+      if (per[k] > 0) out.push(per[k]);
+    }
+    return out;
+  }
+  function __voteEta(decided, total) {
+    var left = Math.max(0, total - decided);
+    if (!left) return VOTE_DONE.replace('{total}', total);
+    var secs = __voteSecs();
+    if (!secs.length) return '';
+    secs.sort(function (a, b) { return a - b; });
+    var mid = Math.floor(secs.length / 2);
+    var med = (secs.length % 2) ? secs[mid] : (secs[mid - 1] + secs[mid]) / 2;
+    var minutes = Math.max(1, Math.round(med * left / 60));
+    return (secs.length >= 5 ? VOTE_ETA : VOTE_ETA_ROUGH)
+      .replace('{minutes}', minutes).replace('{total}', total);
+  }
+  function __voteProgress() {
+    var total = VOTE_TOTAL || ids.length;
+    var n = VOTE_TOTAL ? __voteDecidedAll() : ids.filter(function (id) {
+      return state[id] && state[id].decision; }).length;
+    if (n > total) n = total;
+    var t = document.getElementById('voteProgText');
+    if (t) t.innerHTML = VOTE_PROGRESS.replace('{n}', '<b>' + n + '</b>')
+                                      .replace('{total}', '<b>' + total + '</b>');
+    var b = document.getElementById('voteProgBar');
+    if (b) b.style.width = (total ? Math.round(100 * n / total) : 0) + '%';
+    var e = document.getElementById('voteProgEta');
+    if (e) e.textContent = __voteEta(n, total);
+  }
+  var __voteOrigTally = tally;
+  tally = function () { __voteOrigTally(); __voteProgress(); };
+  __voteProgress();
+})();
+</script>
+<div class="flowtoast" id="flowToast" role="status"></div>
+</body>
+</html>
