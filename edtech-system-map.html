@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Edtech System Map — Institute for Sanskrit Research (for external AI)</title>
+<meta name="description" content="Sanitized technical capability map of the Institute for Sanskrit Research edtech platform (samskrte.ru) for external AI research agents: surfaces, stack, learning engine, personalization, AI agents, automation, honest capability states.">
+<style>
+body{font-family:Georgia,serif;max-width:880px;margin:2rem auto;padding:0 1.2rem;line-height:1.55;color:#1a1a1a}
+h1{font-size:1.7rem}h2{font-size:1.25rem;margin-top:2rem;border-bottom:2px solid #ddd;padding-bottom:.25rem}
+table{border-collapse:collapse;width:100%;margin:.8rem 0;font-size:.92rem}
+td,th{border:1px solid #ccc;padding:.35rem .5rem;text-align:left;vertical-align:top}
+th{background:#f3f0ea}code{background:#f3f0ea;padding:.05rem .3rem;border-radius:3px;font-size:.9em}
+.meta{color:#555;font-size:.9rem}.note{background:#f6f4ef;border-left:4px solid #b9a06a;padding:.6rem .9rem;font-size:.95rem}
+a{color:#7a5c1e}
+</style>
+</head>
+<body>
+<h1>Edtech System Map — Institute for Sanskrit Research</h1>
+<p class="meta">For external AI / Deep Research · State snapshot: <strong>09-09-2026</strong> · Canonical Markdown: <a href="https://github.com/gasyoun/github-spine/blob/main/EDTECH_SYSTEM_MAP_FOR_AI_2026-09.md">github-spine/EDTECH_SYSTEM_MAP_FOR_AI_2026-09.md</a> · Machine-readable catalog: <a href="https://samskrte.ru/llms.txt">samskrte.ru/llms.txt</a></p>
+<div class="note">This page is a self-contained, sanitized technical map of one edtech platform: what exists, how it is built, what is live vs dormant, what is deliberately NOT built. No internal hostnames, IPs, webhook paths, staff personal data, or financial totals. Capability states use the honest vocabulary <strong>DONE / PARTIAL / NOT_BUILT / REMOVED</strong>.</div>
+
+<h2>1. Identity</h2>
+<ul>
+<li>Public name: <strong>«Институт исследования санскрита»</strong> (Institute for Sanskrit Research). Founder-led online institute teaching <strong>Sanskrit and Hindi</strong> to Russian-speaking learners: grammar from zero to classical-text reading, chanted texts (Bhagavad Gītā, Yoga Sūtras), Vedic literature, indology subjects (astronomy, calendars, geography of India).</li>
+<li>Model: live cohort groups (weekly Zoom lessons, ~8-lesson blocks) + recorded self-serve courses. Public prices: ~RUB 4,800–8,000 per block.</li>
+<li>Scale (public aggregates, 09-09-2026): <strong>50+ visible course pages</strong>, ~90 groups total including recorded streams, hundreds of registered learners, active group sizes 1–42. Support corpus: <strong>~3,000 real support dialogs (2022–2026)</strong>.</li>
+<li>Team: solo founder-linguist + curator + accountant + external teachers. RU market, Telegram-centric acquisition, 152-FZ constraints.</li>
+</ul>
+
+<h2>2. Surfaces</h2>
+<table>
+<tr><th>Surface</th><th>What it is</th></tr>
+<tr><td><a href="https://samskrte.ru">samskrte.ru</a></td><td>Public site: course shop <code>/online</code>, course pages <code>/k/{slug}</code>, JSON-block landing builder, blog <code>/s/</code>, multi-dictionary <code>/slovar</code>, transliterator <code>/sanskritorium</code>, public SRS decks <code>/koloda</code>, browser drills <code>/lila/</code>, public schedule, uptime page, machine-readable <a href="https://samskrte.ru/llms.txt">llms.txt</a></td></tr>
+<tr><td><code>/dvaram</code> student cabinet</td><td>Lessons, SRS, dictionary, homework submissions, schedule/recordings, progress, prana wallet, certificates</td></tr>
+<tr><td><code>/admin</code> + <code>/editor</code></td><td>Filament admin (~118 resources) + separate lecture-authoring panel for editors</td></tr>
+<tr><td><code>/api/v1</code></td><td>Mobile API (token auth) consumed by the Android app</td></tr>
+<tr><td>Telegram fleet</td><td>Student bot (magic-link cabinet login), lead-magnet bots per landing, schedule/records bot, ops bot, support-history userbot</td></tr>
+<tr><td><a href="https://samskrtam.ru">samskrtam.ru</a></td><td>WordPress content/SEO surface + biography/archive + static FAQ knowledge site generated from the support-dialog corpus</td></tr>
+<tr><td>n8n automation host</td><td>Separate VPS running the automation layer (~76 documented workflows)</td></tr>
+<tr><td>Mobile</td><td>Capacitor Android app (Wave 1 shipped: native shell around the web cabinet, web checkout by design); iOS scaffold only</td></tr>
+</table>
+
+<h2>3. Stack</h2>
+<p>Laravel 12 / PHP 8.3 · Filament v3 · Livewire + Tailwind + Vite · MySQL · Redis + Horizon queues · Laravel Reverb (WebSockets) · Sanctum · DomPDF · MadelineProto (MTProto userbot). Single production VPS + separate n8n VPS; script-only deploys; SQLite tests, Sail local Docker. PWA artifacts exist (<code>manifest.webmanifest</code>, <code>sw.js</code>) — offline caching depth is a <strong>known unknown</strong>.</p>
+
+<h2>4. Learning engine (all DONE and live unless stated)</h2>
+<ul>
+<li><strong>Course structure:</strong> Course → Block → Lesson; group-based access granted automatically on payment; full-course, per-block, half-block tariffs.</li>
+<li><strong>SRS (spaced repetition):</strong> native FSRS-scheduled trainer ("Anki for Sanskrit") — decks, daily new-card limits, per-user private decks, answer-history intervals, stats. <strong>ON.</strong> Game events seed initial decks.</li>
+<li><strong>Dictionary:</strong> multi-dictionary lexical base, Devanāgarī / IAST / Cyrillic / translation per word, FULLTEXT search.</li>
+<li><strong>Drills ("lila" engines):</strong> browser trainers — <strong>sort / match / cloze / table</strong> — plus ligature and root-frequency decks; soft gate (one game free → register).</li>
+<li><strong>Reading packs:</strong> cohort-based graded reading ("Start Reading") from the research corpus spine; entitlements tied to course cohorts.</li>
+<li><strong>Homework:</strong> loop <code>draft → submitted → needs_revision → accepted</code> with curator review, files, comments, Telegram/VK push verdicts, bulk review queue. <strong>Human-in-the-loop by design — see §9.</strong></li>
+<li><strong>Live lessons:</strong> schedule + calendar; Zoom auto-creates ONE recurring meeting per course; attendance webhooks; recordings ingested and gated by entitlement.</li>
+<li><strong>Progress:</strong> lesson-view heartbeat, append-only activity events, onboarding checklist, "next lesson" hints, stuck-student reports, goal check-ins, discipline score.</li>
+<li><strong>Gamification:</strong> two-counter loyalty currency "prana" (discount wallet + lifetime rank Śiṣya→Paṇḍita), leaderboard, badges, streaks, seasonal competitions, prana shop, P2P transfer.</li>
+<li><strong>Certificates:</strong> PDF with public verification route + milestone auto-issuance.</li>
+</ul>
+
+<h2>5. Capability states (honest table)</h2>
+<table>
+<tr><th>Capability</th><th>State</th><th>Note</th></tr>
+<tr><td>SRS/FSRS engine</td><td><strong>DONE, ON</strong></td><td>live in cabinet + public decks</td></tr>
+<tr><td>Adaptive grammar recommender (Grammar Lab)</td><td><strong>BUILT, flag OFF</strong></td><td>prerequisite→weakness→overdue-card recommender with visible reason + mastery projection; routes 404 while OFF</td></tr>
+<tr><td>Quiz engine (transliteration-aware)</td><td><strong>NOT_BUILT</strong></td><td>only a config-driven marathon placement quiz exists</td></tr>
+<tr><td>CRM pipeline (Deals + kanban + follow-ups)</td><td><strong>DONE, flag OFF by default</strong></td><td>manager sales attribution shipped</td></tr>
+<tr><td>Attendance dashboard</td><td><strong>DONE</strong></td><td></td></tr>
+<tr><td>Webinar provider seam (Zoom↔BBB)</td><td><strong>PARTIAL</strong></td><td>Zoom live; BBB skeleton unused</td></tr>
+<tr><td>Bounded student AI agent</td><td><strong>BUILT, flag OFF</strong></td><td>hard 3-tool allow-list (dictionary lookup, cabinet FAQ, homework hints) with CONFIRM gate; deliberately not a free tutor</td></tr>
+<tr><td>Support AI (RAG + LLM auto-reply)</td><td><strong>DONE, ON</strong></td><td>BM25+hybrid retriever, embeddings incl. local Ollama, shadow→live promotion; Telegram dialog text IS included in LLM prompts (governed)</td></tr>
+<tr><td>Lecture AI (authoring)</td><td><strong>DONE</strong></td><td>structure/correct/place-slides in the editor panel</td></tr>
+<tr><td>n8n content engine</td><td><strong>DONE</strong></td><td>lecture clip → post / FAQ draft / article / study artifact / email candidates, human Accept/Edit/Discard</td></tr>
+<tr><td>Mobile app parity</td><td><strong>Wave 1 (Android) DONE; iOS scaffold</strong></td><td></td></tr>
+<tr><td>Email ESP</td><td><strong>PARTIAL</strong></td><td>in-house campaign engine + ESP contract; default real-mailbox SMTP; deliverability not yet claimed</td></tr>
+<tr><td>Multi-tenancy / white-label</td><td><strong>NOT_BUILT (deliberate)</strong></td><td>single-school</td></tr>
+<tr><td>Public third-party API</td><td><strong>NOT_BUILT (deliberate)</strong></td><td>mobile API is first-party only</td></tr>
+</table>
+
+<h2>6. Personalization — what exists today</h2>
+<ol>
+<li>Per-learner FSRS scheduling (per card, per user), per-deck daily limits — <strong>live</strong>.</li>
+<li>Game-event-seeded initial SRS decks — <strong>live</strong>.</li>
+<li>Per-learner pricing: loyalty tiers, personal discounts, deposits, upgrade credit — <strong>live</strong>.</li>
+<li>Marathon funnel: per-enrollment day-by-day content, warm-tail waves, A/B arm field — <strong>live</strong>.</li>
+<li>Placement: marathon level-quiz + external exam-score import — <strong>partial</strong> (no full adaptive placement engine).</li>
+<li>Adaptive grammar recommender + mastery projection — <strong>built, OFF</strong>.</li>
+<li>Goal check-ins, discipline score, stuck-student signals, onboarding checklist — <strong>live</strong>.</li>
+<li>Curated per-track practice (e.g., Hindi Telegram practice) — <strong>live</strong>.</li>
+</ol>
+
+<h2>7. AI &amp; agents — what exists today</h2>
+<ol>
+<li><strong>Support AI:</strong> RAG over the FAQ knowledge base (BM25 + hybrid retrieval; embeddings incl. local Ollama) + LLM draft/auto-reply on Telegram/VK/web with a shadow→live promotion ladder. The ~3,000 real support dialogs are the moat.</li>
+<li><strong>Message-intent classifier:</strong> hybrid regex+LLM router for support, vendored ML tool, fed by PII-masked dialog corpora.</li>
+<li><strong>Bounded student agent:</strong> in-cabinet assistant, exactly 3 tools, confirm gate (flag OFF).</li>
+<li><strong>Lecture AI:</strong> slide structure/correction/placement for lecture authors.</li>
+<li><strong>Content pipeline:</strong> n8n lecture-clip → multi-format content candidates with human acceptance.</li>
+<li><strong>Cost/ops:</strong> OpenRouter balance tracking; local Ollama experiments; support-history analytics with human-vs-AI reply breakdown.</li>
+<li><strong>By design, NOT built:</strong> automated homework grading (curator loop is the product), free-form AI tutor, student-facing AI content without human acceptance.</li>
+</ol>
+
+<h2>8. Automation &amp; operations</h2>
+<ul>
+<li><strong>n8n layer (separate host):</strong> ~76 documented workflows — lecture-clip extraction (ffmpeg), Zoom recording delivery, schedule-sheet sync, VK calendar posting, exam-score sync, alerting→GitHub issues.</li>
+<li><strong>In-app cron:</strong> 92 scheduled commands/jobs (marathon delivery, warm tails, support sync, club expiry, season open, shortfall notifications…).</li>
+<li><strong>Webhooks:</strong> payment provider, Telegram, VK, lead-magnet bots — signature-verified.</li>
+<li><strong>Email:</strong> ~40 mailables + in-house campaign/newsletter engine (suppression list, near-duplicate detector, inbound email).</li>
+<li><strong>Ops:</strong> script-only deploys, spatie backups, Better Stack uptime monitoring, restore drills performed, server resource guards.</li>
+</ul>
+
+<h2>9. Deliberate non-goals (do not recommend these)</h2>
+<ol>
+<li>No automated homework grading — curator feedback IS the pedagogy.</li>
+<li>No free-form student AI tutor — bounded 3-tool agent instead; trust before capability.</li>
+<li>No multi-tenancy/white-label — one institute, deliberately.</li>
+<li>No league-table gamification beyond seasons/prana — adult academic audience.</li>
+<li>RU-first UI; no interface i18n yet.</li>
+<li>No third-party public API yet.</li>
+</ol>
+
+<h2>10. Known unknowns (09-09-2026)</h2>
+<ol>
+<li>Email deliverability (ESP contract exists; production delivery not yet claimed).</li>
+<li>PWA service-worker offline depth.</li>
+<li>Live flag drift vs the 21-08-2026 registry snapshot (several governed flips later).</li>
+<li>Exact live n8n active-workflow count vs ~76 documented.</li>
+<li>Timing for flipping Grammar Lab / student agent / CRM flags from OFF.</li>
+</ol>
+
+<h2>11. The research spine behind the platform (the moat)</h2>
+<p>The shop sits on a large public research estate: Cologne-family Sanskrit dictionaries digitized and corrected (CDSL program), machine-translation of a monumental Sanskrit dictionary (PWG→RU), grammar-textbook claim-verification corpora, Rig-Veda and other text layers, a spoken-Sanskrit corpus, Russian style-council tooling for editorial quality, and a customer-development corpus of ~3,000 support dialogs. Datasets are registered and openly licensed where rights allow (CC BY-SA). Rare among edtech players: platform content is derived from openly published, versioned research data, not a closed authoring tool.</p>
+
+<h2>12. What we want from a comparison</h2>
+<p>An external Deep Research comparison should: (a) map our capabilities against the edtech market — RU platforms (GetCourse, Skillbox, Netology, Eduson, Okaruto, MoyKlass), international LMS/creators (Teachable, Kajabi, Thinkific, LearnDash, Moodle, Canvas, Open edX), language apps (Duolingo+Max, LingQ, Anki ecosystem, Memrise, Busuu, Babbel, Glossika), AI-tutor products (Khanmigo, Squirrel AI, Century Tech, Speak, Praktika), Sanskrit-niche (Sanskritorium, Vyoma Labs, sanskritdocuments, DCS ecosystem), marketplaces (italki, Preply), SRS tools (SuperMemo, RemNote); (b) focus on <strong>personalization and agents</strong>; (c) return a feature matrix, gaps ranked by revenue-impact × effort, and Adopt/Adapt/Defend/Avoid/Test recommendations; (d) treat unknowns as unknown, never as zero.</p>
+
+<p class="meta">_Dr. Mārcis Gasūns_ · Created 09-09-2026</p>
+</body>
+</html>
