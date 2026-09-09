@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Learner heatmaps — вовлечение, воронка, SRS-мастерство</title>
+<style>
+:root{--bg:#101318;--panel:#171c24;--ink:#d7dee8;--dim:#7d8899;--hot:#e05555;--gold:#d8a544;--cold:#1d2634;--line:#232b37;--warn:#e05555}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:14px/1.5 -apple-system,"Segoe UI",Roboto,sans-serif;margin:0;padding:24px}
+h1{font-size:22px;margin:0 0 4px}
+h2{font-size:17px;margin:28px 0 8px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.sub{color:var(--dim);font-size:12px;margin-bottom:16px}
+section{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin-bottom:18px}
+table{border-collapse:collapse;font-size:12px}
+th{color:var(--dim);font-weight:600;text-align:left;padding:2px 5px;white-space:nowrap}
+td{padding:2px 5px;border-top:1px solid var(--line)}
+td.num{text-align:right;font-variant-numeric:tabular-nums}
+.cell{width:26px;height:18px;border-radius:2px;display:inline-block;vertical-align:middle}
+.hmap td{padding:1px}
+.hmap .lbl{padding-right:8px;white-space:nowrap;max-width:260px;overflow:hidden;text-overflow:ellipsis}
+.trust{background:#12161d;border-left:3px solid #3b465a;color:var(--dim);font-size:11.5px;padding:8px 12px;margin-top:10px;border-radius:0 6px 6px 0}
+.trust b{color:#9fb0c6}
+a{color:#6db2ff;text-decoration:none}
+nav{margin:0 0 20px;font-size:12.5px}
+nav a{margin-right:14px}
+.finding{background:#1a1216;border:1px solid #4a2430;border-left:3px solid var(--warn);border-radius:0 8px 8px 0;padding:12px 14px;margin:10px 0}
+.finding b{color:var(--warn)}
+.big{font-size:22px;font-weight:700;color:var(--warn)}
+</style>
+</head>
+<body>
+<h1>Learner heatmaps — вовлечение и мастерство</h1>
+<div class="sub">H4491 · сгенерировано 2026-09-09T20:41:05+00:00 · фаза 3 decision heatmaps · прод Systema, только агрегаты — ни одной user-строки за борт (152-ФЗ)</div>
+<nav><a href="/decision-heatmaps/index.html">← фаза 1: estate</a><a href="/sanskrit-heatmaps/index.html">← фаза 2: research</a></nav>
+<div id="app"></div>
+<script>
+const D = {"generated": "2026-09-09T20:41:05+00:00", "host": "root@193.232.229.92", "privacy": "aggregates only, no user-level rows exported", "lessons": [{"lesson_id": 1811, "title": "Грамматика по Кочергиной гр.60 (#2, 21.07.26)", "course_id": 369, "opens": 125, "time_s": 38849, "maxpos_s": 7631, "students": 10}, {"lesson_id": 1802, "title": "Грамматика по Кочергиной гр.60 (#1, 14.07.26)", "course_id": 369, "opens": 94, "time_s": 31200, "maxpos_s": 6078, "students": 10}, {"lesson_id": 1816, "title": "Грамматика по Кочергиной гр.61 (#1, 27.07.26)", "course_id": 434, "opens": 92, "time_s": 47229, "maxpos_s": 4978, "students": 6}, {"lesson_id": 1794, "title": "Хинди с Костиной, начальная №1 (#6, 08.07.26)", "course_id": 401, "opens": 70, "time_s": 7406, "maxpos_s": 0, "students": 7}, {"lesson_id": 1863, "title": "Хинди с Костиной, начальная №1 (#10, 12.08.26)", "course_id": 401, "opens": 69, "time_s": 9021, "maxpos_s": 13630, "students": 7}, {"lesson_id": 1823, "title": "Хинди с Костиной, начальная №1 (#8, 29.07.26)", "course_id": 401, "opens": 61, "time_s": 7477, "maxpos_s": 4145, "students": 7}, {"lesson_id": 1825, "title": "Грамматика по Кочергиной гр.60 (#3, 28.07.26)", "course_id": 369, "opens": 59, "time_s": 25909, "maxpos_s": 12142, "students": 9}, {"lesson_id": 1661, "title": "Хинди с Костиной, начальная №1 (#1, 03.06.26)", "course_id": 401, "opens": 54, "time_s": 15670, "maxpos_s": 0, "students": 9}, {"lesson_id": 1875, "title": "Кочергина 2 (читка) (#4, 17.08.26)", "course_id": 434, "opens": 52, "time_s": 3559, "maxpos_s": 1383, "students": 3}, {"lesson_id": 1861, "title": "Кочергина 3 (читка) (#5, 11.08.26)", "course_id": 369, "opens": 51, "time_s": 6656, "maxpos_s": 7588, "students": 7}, {"lesson_id": 1667, "title": "Хинди с Костиной, начальная №2 (#1, 06.06.26)", "course_id": 402, "opens": 51, "time_s": 5642, "maxpos_s": 8630, "students": 10}, {"lesson_id": 1747, "title": "Хинди с Костиной, начальная №1 (#4, 24.06.26)", "course_id": 401, "opens": 49, "time_s": 3597, "maxpos_s": 0, "students": 8}, {"lesson_id": 1876, "title": "Хинди с Костиной, начальная №1 (#11, 19.08.26)", "course_id": 401, "opens": 48, "time_s": 9258, "maxpos_s": 6191, "students": 6}, {"lesson_id": 1726, "title": "Хинди с Костиной, начальная №1 (#3, 17.06.26)", "course_id": 401, "opens": 46, "time_s": 10517, "maxpos_s": 0, "students": 9}, {"lesson_id": 1843, "title": "Хинди с Костиной, начальная №1 (#9, 05.08.26)", "course_id": 401, "opens": 46, "time_s": 1327, "maxpos_s": 0, "students": 6}, {"lesson_id": 1755, "title": "Хинди с Костиной, начальная №2 (#4, 27.06.26)", "course_id": 402, "opens": 46, "time_s": 9364, "maxpos_s": 0, "students": 10}, {"lesson_id": 1832, "title": "Хинди с Костиной, начальная №2 (#8, 01.08.26)", "course_id": 402, "opens": 45, "time_s": 7371, "maxpos_s": 0, "students": 5}, {"lesson_id": 1774, "title": "Хинди с Костиной, начальная №1 (#5, 01.07.26)", "course_id": 401, "opens": 44, "time_s": 10289, "maxpos_s": 0, "students": 8}, {"lesson_id": 1871, "title": "Хинди с Костиной, начальная №2 (#10, 15.08.26)", "course_id": 402, "opens": 44, "time_s": 3365, "maxpos_s": 0, "students": 4}, {"lesson_id": 1812, "title": "Хинди с Костиной, начальная №1 (#7, 22.07.26)", "course_id": 401, "opens": 44, "time_s": 1834, "maxpos_s": 0, "students": 7}, {"lesson_id": 1798, "title": "Хинди с Костиной, начальная №2 (#6, 11.07.26)", "course_id": 402, "opens": 42, "time_s": 1751, "maxpos_s": 0, "students": 8}, {"lesson_id": 1737, "title": "Хинди с Костиной, начальная №2 (#3, 20.06.26)", "course_id": 402, "opens": 40, "time_s": 2331, "maxpos_s": 0, "students": 8}, {"lesson_id": 1713, "title": "Хинди с Костиной, начальная №2 (#2, 13.06.26)", "course_id": 402, "opens": 39, "time_s": 8976, "maxpos_s": 0, "students": 8}, {"lesson_id": 1838, "title": "Грамматика по Кочергиной гр.61 (#2, 03.08.26)", "course_id": 434, "opens": 38, "time_s": 6436, "maxpos_s": 8347, "students": 4}, {"lesson_id": 1897, "title": "Хинди с Костиной, начальная №1 (#12, 26.08.26)", "course_id": 401, "opens": 34, "time_s": 9512, "maxpos_s": 11415, "students": 7}, {"lesson_id": 1858, "title": "Кочергина 1 (читка) (#3, 10.08.26)", "course_id": 434, "opens": 34, "time_s": 2943, "maxpos_s": 188, "students": 5}, {"lesson_id": 1786, "title": "Хинди с Костиной, начальная №2 (#5, 05.07.26)", "course_id": 402, "opens": 34, "time_s": 855, "maxpos_s": 0, "students": 5}, {"lesson_id": 1815, "title": "Хинди с Костиной, начальная №2 (#7, 25.07.26)", "course_id": 402, "opens": 33, "time_s": 7933, "maxpos_s": 120, "students": 6}, {"lesson_id": 1854, "title": "Хинди с Костиной, начальная №2 (#9, 08.08.26)", "course_id": 402, "opens": 32, "time_s": 598, "maxpos_s": 0, "students": 5}, {"lesson_id": 1917, "title": "Хинди с Костиной, начальная №1 (#13, 02.09.26)", "course_id": 401, "opens": 31, "time_s": 7406, "maxpos_s": 5973, "students": 6}, {"lesson_id": 1841, "title": "Грамматика по Кочергиной гр.60 (#4, 04.08.26)", "course_id": 369, "opens": 30, "time_s": 9366, "maxpos_s": 12996, "students": 9}, {"lesson_id": 1889, "title": "Хинди с Костиной, начальная №2 (#11, 22.08.26)", "course_id": 402, "opens": 26, "time_s": 3407, "maxpos_s": 0, "students": 4}, {"lesson_id": 1893, "title": "Грамматика по Кочергиной гр.61 (#5, 24.08.26)", "course_id": 434, "opens": 25, "time_s": 1797, "maxpos_s": 7865, "students": 4}, {"lesson_id": 108, "title": "А.В. Парибок. «Йога-сутры» Патанджали при РУДН (01.03.2025, 1/16)", "course_id": 396, "opens": 25, "time_s": 29059, "maxpos_s": 7751, "students": 15}, {"lesson_id": 359, "title": "Азы санскритской рецитации (1/4)", "course_id": 304, "opens": 20, "time_s": 19832, "maxpos_s": 19, "students": 5}, {"lesson_id": 1680, "title": "Хинди с Костиной, начальная №1 (#2, 10.06.26)", "course_id": 401, "opens": 19, "time_s": 2034, "maxpos_s": 0, "students": 8}, {"lesson_id": 833, "title": "(01-01/16) Углубленная морфология санскрита по А.А. Зализняку, курс И. Е. Толчельникова 2025-2026 г.", "course_id": 338, "opens": 17, "time_s": 12080, "maxpos_s": 4223, "students": 4}, {"lesson_id": 1659, "title": "Строфы из Гиты, часть вторая (1/16), рецитация с Ушей (19.05.26)", "course_id": 399, "opens": 16, "time_s": 5039, "maxpos_s": 5379, "students": 5}, {"lesson_id": 87, "title": "Введение в индийскую философию (#1, 07.03.2026)", "course_id": 361, "opens": 16, "time_s": 10539, "maxpos_s": 6729, "students": 5}, {"lesson_id": 797, "title": "1-е занятие курса \"Медленное чтение «Йога-васиштхи»\"", "course_id": 334, "opens": 14, "time_s": 211, "maxpos_s": 0, "students": 6}], "funnel": {"weeks": ["2026-25", "2026-26", "2026-27", "2026-28", "2026-29", "2026-30", "2026-31", "2026-32", "2026-33", "2026-34", "2026-35", "2026-36", "2026-37"], "types": {"login": {"2026-25": 110, "2026-26": 120, "2026-27": 169, "2026-28": 130, "2026-29": 63, "2026-30": 58, "2026-31": 868, "2026-32": 1459, "2026-33": 1444, "2026-34": 1778, "2026-35": 1731, "2026-36": 1760, "2026-37": 786}, "lesson_open": {"2026-25": 140, "2026-26": 107, "2026-27": 206, "2026-28": 172, "2026-29": 68, "2026-30": 63, "2026-31": 270, "2026-32": 273, "2026-33": 263, "2026-34": 298, "2026-35": 211, "2026-36": 205, "2026-37": 107}, "lesson.mark.mastered": {"2026-29": 1, "2026-30": 3, "2026-31": 23, "2026-32": 22, "2026-33": 16, "2026-34": 32, "2026-35": 6, "2026-36": 22, "2026-37": 5}, "begin_checkout": {"2026-32": 15, "2026-33": 14, "2026-34": 14, "2026-35": 16, "2026-36": 36, "2026-37": 7}, "payment_success": {"2026-32": 17, "2026-33": 16, "2026-34": 10, "2026-35": 7, "2026-36": 29, "2026-37": 5}}}, "srs": {"deck_rating": {"1": {"1": 57, "2": 11, "3": 117, "4": 20}, "2": {"1": 8, "2": 13, "3": 27, "4": 13}, "3": {"1": 10, "3": 6, "4": 1}, "4": {"3": 2}, "5": {"1": 2, "3": 1, "4": 1}, "6": {"1": 1, "2": 9, "3": 29, "4": 6}, "7": {"1": 2, "3": 2}}, "weekly": {"%x-%v": 338}, "decks": [{"id": 1, "name": "kosha — Rung B1 demo (Nala 1 vocabulary)"}, {"id": 2, "name": "Hindi Core 100 - Basic words (EN HI with audio)"}, {"id": 3, "name": "Санскрит — ядро словаря"}, {"id": 4, "name": "Санскрит — кириллица (день 1–2)"}, {"id": 5, "name": "Корни санскрита по частотности"}, {"id": 6, "name": "Кочергина — Занятие I (словарь)"}, {"id": 7, "name": "Level 1"}, {"id": 8, "name": "Level 2"}, {"id": 9, "name": "Level 3"}, {"id": 10, "name": "Level 4"}, {"id": 11, "name": "Level 5"}, {"id": 12, "name": "Level 6"}, {"id": 13, "name": "Level 7"}, {"id": 14, "name": "Level 8"}, {"id": 15, "name": "Level 9"}, {"id": 16, "name": "Level 10"}, {"id": 17, "name": "1"}, {"id": 18, "name": "Свободный уровень — колода"}], "cards": {"1": 161, "2": 199, "3": 11685, "4": 11325, "5": 570, "6": 41, "7": 12, "8": 19, "9": 15, "10": 8, "11": 16, "12": 22, "13": 19, "14": 23, "15": 16, "16": 16}}, "grammar_lane": {"grammar_attempts": 0, "grammar_exercises": 0, "grammar_topics": 0, "grammar_mastery": 0, "grammar_exercise_reviews": 0, "grammar_topic_views": 0}, "totals": {"activity_events": 59496, "lesson_views_rows": 707, "srs_review_logs": 338, "srs_rating1": 80, "srs_window": ["2026-07-16 11:25:02", "2026-09-07 20:42:31"]}};
+const esc = (s) => String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+function color(v, max) {
+  if (!v) return 'background:#1d2634';
+  const a = 0.12 + 0.88 * Math.sqrt(v / max);
+  return 'background:rgba(224,85,85,' + a.toFixed(3) + ')';
+}
+function hmap(labels, rows, opts) {
+  opts = opts || {};
+  const max = Math.max(1, ...rows.flatMap(r => opts.val(r).map(Number)));
+  const t = document.createElement('table'); t.className = 'hmap';
+  const hr = document.createElement('tr'); hr.appendChild(document.createElement('th'));
+  labels.forEach(l => { const th = document.createElement('th'); th.textContent = l.length > 9 ? l.slice(0, 8) + '…' : l; th.style.fontSize = '9px'; th.title = l; hr.appendChild(th); });
+  const tt = document.createElement('th'); tt.textContent = opts.totalLabel || 'Σ'; hr.appendChild(tt);
+  t.appendChild(hr);
+  rows.forEach(r => {
+    const tr = document.createElement('tr');
+    const td = document.createElement('td'); td.className = 'lbl'; td.title = opts.rowtitle ? opts.rowtitle(r) : ''; tr.appendChild(td);
+    td.textContent = opts.rowname(r);
+    const vals = opts.val(r);
+    vals.forEach((v, i) => {
+      const c = document.createElement('td'); c.className = 'num';
+      const s = document.createElement('span'); s.className = 'cell';
+      s.style.cssText = color(Number(v), max);
+      if (opts.mark && opts.mark(r, i, Number(v))) s.classList.add('gold');
+      s.title = opts.rowname(r) + ' · ' + labels[i] + ' · ' + v;
+      c.appendChild(s); tr.appendChild(c);
+    });
+    const t2 = document.createElement('td'); t2.className = 'num'; t2.style.fontWeight = '700';
+    t2.textContent = vals.reduce((a, b) => a + Number(b || 0), 0);
+    tr.appendChild(t2);
+    t.appendChild(tr);
+  });
+  return t;
+}
+function trustBlock(items) {
+  const d = document.createElement('div'); d.className = 'trust';
+  d.innerHTML = '<b>Trust Block.</b> ' + items.map(esc).join(' · ');
+  return d;
+}
+function section(title, note) {
+  const s = document.createElement('section');
+  const h = document.createElement('h2'); h.textContent = title; s.appendChild(h);
+  if (note) { const n = document.createElement('div'); n.className = 'sub'; n.textContent = note; s.appendChild(n); }
+  return s;
+}
+const app = document.getElementById('app');
+const fmt = (s) => { if (s == null) return '—'; const m = Math.round(Number(s) / 60); return m >= 60 ? Math.round(m / 60) + ' ч' : m + ' мин'; };
+
+/* A. Lesson engagement */
+{
+  const L = D.lessons || [];
+  const shown = L.slice(0, 25);
+  const metrics = ['открытий', 'учеников', 'время', 'позиция'];
+  const rows = shown.map(l => ({ name: l, cells: [l.opens, l.students, l.time_s, l.maxpos_s] }));
+  const s = section('A. Уроки-магниты — топ-25 по открытиям',
+    `из ${L.length} топ-уроков · колонки: открытия · студенты (distinct) · суммарное время · макс. позиция видео — каждая колонка масштабирована к своему максимуму · наведи для урока`);
+  s.appendChild(hmap(metrics, rows, {
+    val: r => r.cells,
+    rowname: r => (r.name.title || '').slice(0, 42) + ' (#' + r.name.lesson_id + ')',
+    rowtitle: r => r.name.title + ' · course ' + r.name.course_id,
+    total: r => r.name.opens + ' откр · ' + r.name.students + ' уч.'
+  }));
+  const tbl = document.createElement('table');
+  const hr = document.createElement('tr');
+  ['урок', 'открытий', 'учеников', 'время Σ', 'макс. позиция'].forEach(h => { const th = document.createElement('th'); th.textContent = h; hr.appendChild(th); });
+  tbl.appendChild(hr);
+  L.slice(0, 15).forEach(l => {
+    const tr = document.createElement('tr');
+    [esc((l.title || '').slice(0, 44)), l.opens, l.students, fmt(l.time_s), fmt(l.maxpos_s)].forEach((v, j) => {
+      const td = document.createElement('td'); td.textContent = v; if (j > 0) td.className = 'num'; tr.appendChild(td);
+    });
+    tbl.appendChild(tr);
+  });
+  s.appendChild(tbl);
+  s.appendChild(trustBlock([
+    'источник: прод MySQL, lesson_views JOIN lessons (срез ' + esc(D.generated.slice(0, 10)) + ')',
+    'только агрегаты по урокам; distinct-ученики — счётчик, не список (152-ФЗ)',
+    'решение, которое читается: уроки с высоким opens и низким maxpos = бросают на середине (контент не дожимает); высокий time при низком opens = узкое ядро'
+  ]));
+  app.appendChild(s);
+}
+
+/* B. Weekly funnel */
+{
+  const F = D.funnel || {};
+  const weeks = F.weeks || [];
+  const names = { 'login': 'логин', 'lesson_open': 'открыл урок', 'lesson.mark.mastered': 'освоил урок', 'begin_checkout': 'начал оплату', 'payment_success': 'оплатил' };
+  const rows = Object.keys(names).filter(t => (F.types[t] && Object.keys(F.types[t]).length)).map(t => ({ name: t, cells: weeks.map(w => (F.types[t] || {})[w] || 0) }));
+  const s = section('B. Воронка обучения × неделя',
+    `${weeks.length} недель (ISO год-неделя) · ${esc(D.totals.activity_events)} событий всего · последняя неделя неполная`);
+  s.appendChild(hmap(weeks, rows, { val: r => r.cells, rowname: r => names[r.name], total: r => r.cells.reduce((a, b) => a + b, 0) }));
+  const cl = rows.length ? rows.map(r => ({ t: names[r.name], v: r.cells })).reduce((m, r) => m, null) : null;
+  const ratio = rows.length > 1 ? (rows[1].cells.reduce((a,b)=>a+b,0) / Math.max(1, rows[0].cells.reduce((a,b)=>a+b,0)) * 100).toFixed(1) : '?';
+  const f = document.createElement('div'); f.className = 'finding';
+  f.innerHTML = '<b>Обрыв воронки:</b> логин → открытый урок конвертирует всего <b>' + ratio + '%</b> — студенты входят в кабинет, но не доходят до уроков. Это главный кандидат на продукт-работу (почему заходят и не учатся).';
+  s.appendChild(f);
+  s.appendChild(trustBlock([
+    'источник: activity_events по event_type (срез ' + esc(D.generated.slice(0, 10)) + '), недельные счётчики',
+    'session_timeout события исключены из выборки',
+    'решение, которое читается: неделя с провалом lesson_open при ровном login = неделя без учебного касания'
+  ]));
+  app.appendChild(s);
+}
+
+/* C. SRS mastery */
+{
+  const S = D.srs || {};
+  const decks = (S.decks || []).filter(d => (S.deck_rating || {})[String(d.id)]);
+  const ratings = ['1', '2', '3', '4'];
+  const rows = decks.map(dk => {
+    const dr = S.deck_rating[String(dk.id)] || {};
+    return { deck: dk, cells: ratings.map(r => dr[r] || 0) };
+  });
+  const rn = { '1': 'забыл (again)', '2': 'трудно (hard)', '3': 'хорошо (good)', '4': 'легко (easy)' };
+  const s2 = section('C. SRS-мастерство — колода × оценка отзыва',
+    `${decks.length} колод с отзывами · ${esc(String(D.totals.srs_review_logs))} ревью с ${esc(String(D.totals.srs_window[0].slice(0, 10)))} по ${esc(String(D.totals.srs_window[1].slice(0, 10)))} · честно тонко: сигнал есть, массы нет`);
+  s2.appendChild(hmap(ratings, rows, {
+    val: r => r.cells,
+    rowname: r => (r.deck.name || ('deck ' + r.deck.id)).slice(0, 38) + ' · ' + ((S.cards || {})[String(r.deck.id)] || 0) + ' карт',
+    rowtitle: r => r.deck.name,
+    mark: (r, i, v) => i === 0 && v > 20,
+    total: r => r.cells.reduce((a, b) => a + b, 0)
+  }));
+  const f2 = document.createElement('div'); f2.className = 'finding';
+  const forgot = Number(D.totals.srs_rating1);
+  const total = Number(D.totals.srs_review_logs);
+  f2.innerHTML = 'Оценка «забыл» = <b>' + forgot + ' из ' + total + '</b> отзывов (' + (forgot / total * 100).toFixed(0) + '%). Колода-лидер по забыванию подсвечена золотым (rating 1 > 20).';
+  s2.appendChild(f2);
+  s2.appendChild(trustBlock([
+    'источник: srs_review_logs × srs_decks × srs_cards (агрегаты по колодам)',
+    'rating 1 = «забыл» (FSRS), стабильность=0 → карта возвращается немедленно',
+    'решение, которое читается: колода с высоким «забыл» при большом числе карт = кандидат на разбиение/переформулировку',
+    'грамматическая полка: grammar_attempts = ' + esc(String(D.grammar_lane.grammar_attempts)) + ', exercises = ' + esc(String(D.grammar_lane.grammar_exercises)) + ' — ВЕСЬ грамматический контур нулевой (панель ниже)'
+  ]));
+  app.appendChild(s2);
+}
+
+/* D. Grammar-lane zero panel */
+{
+  const G = D.grammar_lane || {};
+  const s = document.createElement('section');
+  const h = document.createElement('h2'); h.textContent = 'D. Пустая грамматическая полка'; s.appendChild(h);
+  const n = document.createElement('div'); n.className = 'sub';
+  n.textContent = 'Решение, ради которого строилась фаза 3: грамматический контур есть в схеме, но не в жизни';
+  s.appendChild(n);
+  const t = document.createElement('table');
+  const hr = document.createElement('tr');
+  ['таблица', 'строк'].forEach(x => { const th = document.createElement('th'); th.textContent = x; hr.appendChild(th); });
+  t.appendChild(hr);
+  Object.keys(G).forEach(k => {
+    const tr = document.createElement('tr');
+    const td1 = document.createElement('td'); td1.textContent = k; tr.appendChild(td1);
+    const td = document.createElement('td'); td.className = 'num';
+    td.textContent = G[k] === null ? 'нет таблицы' : G[k];
+    if (G[k] === 0) td.style.color = 'var(--warn)';
+    tr.appendChild(td); t.appendChild(tr);
+  });
+  s.appendChild(t);
+  const f = document.createElement('div'); f.className = 'finding';
+  f.innerHTML = '<b>Вывод.</b> grammar_attempts / exercises / topics / mastery = 0: модуль либо не внедрён, либо не инструментирован. Любая «мастерство × тема» теплокарта строить не из чего — сначала нужно решение: включить запись попыток или признать полку закрытой.';
+  s.appendChild(f);
+  s.appendChild(trustBlock([
+    'источник: прод MySQL, COUNT(*) по 6 таблицам (срез ' + esc(D.generated.slice(0, 10)) + ')',
+    'нулевые строки — факт схемы, не дефект выгрузки'
+  ]));
+  app.appendChild(s);
+}
+</script>
+</body>
+</html>
