@@ -1,0 +1,55 @@
+entity,view,level,dimension,score_0_5,weight,weighted_score,evidence_coverage_pct,evidence_ids,confidence,rationale_ru
+samskrte.ru,balanced,institution,positioning_audience,4,8,6.4,90,E001;E002,high,Ясный hero и три шага; аудитория «с нуля до текстов» читается сразу.
+samskrte.ru,balanced,institution,product_portfolio,4,10,8.0,85,E023;E024;E030,high,Широкий живой+записной каталог и несколько уровней; нет клуба как SKU.
+samskrte.ru,balanced,institution,curriculum_pedagogy,3,12,7.2,70,E025;E027;E012,medium,"Есть учебник/формат Zoom; syllabus = календарь, не темы."
+samskrte.ru,balanced,institution,teachers_authority,4,8,6.4,75,E008;E020;E024,high,Имена и академические фигуры видны; био на карточке курса тонкое.
+samskrte.ru,balanced,institution,pricing_value_transparency,4,10,8.0,90,E007;E022;E026;E010,high,Цена блока видна до оплаты; возврат описан. Диапазон не один.
+samskrte.ru,balanced,institution,learner_journey_funnel,4,12,9.6,85,E031;E014;E072;E003,high,Есть «с чего начать» и checkout. Траектория склеивает два шага в один курс.
+samskrte.ru,balanced,institution,ux_mobile_accessibility,3,10,6.0,50,E028;E032;E078,low,Каталог читается; пустые ₽ и нет a11y-аудита. Не ноль.
+samskrte.ru,balanced,institution,seo_content,4,10,8.0,70,E013;E017;E066,medium,Сильный хаб+беседы; утилиты на shop нет.
+samskrte.ru,balanced,institution,community_support_outcomes,3,8,4.8,60,E005;E006;E076,medium,Числа и 1 отзыв есть; независимых исходов нет.
+samskrte.ru,balanced,institution,legal_trust,4,5,4.0,80,E009;E010;E011,high,Реквизиты и возврат видны; PDF оферты не разобран.
+samskrte.ru,balanced,institution,technology_operations,3,7,4.2,70,E015;E016;E067,medium,Checkout живой; просроченный вебинар и пустая ближайшая дата.
+samskrte.ru,balanced,institution,TOTAL,,100.0,72.6,75.0,,,normalized_total=72.6; included_weight=100.0; coverage=75.0%. Не лига.
+samskrte.ru,commercial,institution,positioning_audience,4,10,8.0,90,E001;E002,high,Ясный hero и три шага; аудитория «с нуля до текстов» читается сразу.
+samskrte.ru,commercial,institution,product_portfolio,4,12,9.6,85,E023;E024;E030,high,Широкий живой+записной каталог и несколько уровней; нет клуба как SKU.
+samskrte.ru,commercial,institution,curriculum_pedagogy,3,4,2.4,70,E025;E027;E012,medium,"Есть учебник/формат Zoom; syllabus = календарь, не темы."
+samskrte.ru,commercial,institution,teachers_authority,4,4,3.2,75,E008;E020;E024,high,Имена и академические фигуры видны; био на карточке курса тонкое.
+samskrte.ru,commercial,institution,pricing_value_transparency,4,15,12.0,90,E007;E022;E026;E010,high,Цена блока видна до оплаты; возврат описан. Диапазон не один.
+samskrte.ru,commercial,institution,learner_journey_funnel,4,20,16.0,85,E031;E014;E072;E003,high,Есть «с чего начать» и checkout. Траектория склеивает два шага в один курс.
+samskrte.ru,commercial,institution,ux_mobile_accessibility,3,12,7.2,50,E028;E032;E078,low,Каталог читается; пустые ₽ и нет a11y-аудита. Не ноль.
+samskrte.ru,commercial,institution,seo_content,4,10,8.0,70,E013;E017;E066,medium,Сильный хаб+беседы; утилиты на shop нет.
+samskrte.ru,commercial,institution,community_support_outcomes,3,5,3.0,60,E005;E006;E076,medium,Числа и 1 отзыв есть; независимых исходов нет.
+samskrte.ru,commercial,institution,legal_trust,4,3,2.4,80,E009;E010;E011,high,Реквизиты и возврат видны; PDF оферты не разобран.
+samskrte.ru,commercial,institution,technology_operations,3,5,3.0,70,E015;E016;E067,medium,Checkout живой; просроченный вебинар и пустая ближайшая дата.
+samskrte.ru,commercial,institution,TOTAL,,100.0,74.8,77.4,,,normalized_total=74.8; included_weight=100.0; coverage=77.4%. Не лига.
+sanskritorium.ru,balanced,institution,positioning_audience,4,8,6.4,90,E033,high,Траектория и слоган мгновенно читаются.
+sanskritorium.ru,balanced,institution,product_portfolio,4,10,8.0,85,E034;E073,high,Путь + тексты + клубы + бесплатный слой + пали/тибетский.
+sanskritorium.ru,balanced,institution,curriculum_pedagogy,3,12,7.2,50,E040;E068,medium,Школьные обещания ясны; детальный syllabus карточек не извлечён.
+sanskritorium.ru,balanced,institution,teachers_authority,3,8,4.8,55,E039,medium,"Ростер с фото есть, но не на лендинге; регалии не сняты."
+sanskritorium.ru,balanced,institution,pricing_value_transparency,2,10,4.0,55,E035;E036;E037;E038,medium,Лендинг без цены. Карточки в индексе 900–4500. Не 0: цена не отсутствует полностью.
+sanskritorium.ru,balanced,institution,learner_journey_funnel,3,12,7.2,75,E047;E045;E074,high,"Ясный старт, но форма внешняя и даты просрочены."
+sanskritorium.ru,balanced,institution,ux_mobile_accessibility,2,10,4.0,40,E041;E068,low,Конвертер=вход; JS-тело плохо извлекается. Не доказанный провал для человека.
+sanskritorium.ru,balanced,institution,seo_content,3,10,6.0,50,E041;E066;E077,medium,Статьи/конвертер/YouTube; глубина не аудирована.
+sanskritorium.ru,balanced,institution,community_support_outcomes,3,8,4.8,60,E042;E077,medium,Клубы и каналы есть; независимых отзывов нет.
+sanskritorium.ru,balanced,institution,legal_trust,2,5,2.0,35,E043;E044;E046,low,"Документы существуют, но тело и реквизиты не видны. Не 0."
+sanskritorium.ru,balanced,institution,technology_operations,2,7,2.8,60,E045;E050;E047,medium,Просроченные CTA и копирайт 2025; WP+Яндекс.Формы.
+sanskritorium.ru,balanced,institution,TOTAL,,100.0,57.2,60.35,,,normalized_total=57.2; included_weight=100.0; coverage=60.35%. Не лига.
+sanskritorium.ru,commercial,institution,positioning_audience,4,10,8.0,90,E033,high,Траектория и слоган мгновенно читаются.
+sanskritorium.ru,commercial,institution,product_portfolio,4,12,9.6,85,E034;E073,high,Путь + тексты + клубы + бесплатный слой + пали/тибетский.
+sanskritorium.ru,commercial,institution,curriculum_pedagogy,3,4,2.4,50,E040;E068,medium,Школьные обещания ясны; детальный syllabus карточек не извлечён.
+sanskritorium.ru,commercial,institution,teachers_authority,3,4,2.4,55,E039,medium,"Ростер с фото есть, но не на лендинге; регалии не сняты."
+sanskritorium.ru,commercial,institution,pricing_value_transparency,2,15,6.0,55,E035;E036;E037;E038,medium,Лендинг без цены. Карточки в индексе 900–4500. Не 0: цена не отсутствует полностью.
+sanskritorium.ru,commercial,institution,learner_journey_funnel,3,20,12.0,75,E047;E045;E074,high,"Ясный старт, но форма внешняя и даты просрочены."
+sanskritorium.ru,commercial,institution,ux_mobile_accessibility,2,12,4.8,40,E041;E068,low,Конвертер=вход; JS-тело плохо извлекается. Не доказанный провал для человека.
+sanskritorium.ru,commercial,institution,seo_content,3,10,6.0,50,E041;E066;E077,medium,Статьи/конвертер/YouTube; глубина не аудирована.
+sanskritorium.ru,commercial,institution,community_support_outcomes,3,5,3.0,60,E042;E077,medium,Клубы и каналы есть; независимых отзывов нет.
+sanskritorium.ru,commercial,institution,legal_trust,2,3,1.2,35,E043;E044;E046,low,"Документы существуют, но тело и реквизиты не видны. Не 0."
+sanskritorium.ru,commercial,institution,technology_operations,2,5,2.0,60,E045;E050;E047,medium,Просроченные CTA и копирайт 2025; WP+Яндекс.Формы.
+sanskritorium.ru,commercial,institution,TOTAL,,100.0,57.4,63.5,,,normalized_total=57.4; included_weight=100.0; coverage=63.5%. Не лига.
+samskrte.ru,journey_overlay,learner_journey,beginner,4,,,85,E031;E072;E014,medium,"С нуля: квиз, консультация, бесплатные беседы, видимая цена. Не входит в 100-балльные итоги."
+samskrte.ru,journey_overlay,learner_journey,progressing,4,,,80,E023;E022;E025,medium,Много живых потоков и блоков; next-step на карточке местами есть. Не входит в 100-балльные итоги.
+samskrte.ru,journey_overlay,learner_journey,advanced_text,3,,,70,E023;E071,medium,"Тексты/синтаксис/Нале есть, но вход для «уже читаю» менее выделен, чем грамматика. Не входит в 100-балльные итоги."
+sanskritorium.ru,journey_overlay,learner_journey,beginner,3,,,70,E033;E074;E036,medium,"Очень ясный Начать, но просроченная дата и цена не на первом экране. Не входит в 100-балльные итоги."
+sanskritorium.ru,journey_overlay,learner_journey,progressing,3,,,60,E034;E040,medium,Основы + буддийский санскрит; цена/расписание на поверхности слабее. Не входит в 100-балльные итоги.
+sanskritorium.ru,journey_overlay,learner_journey,advanced_text,4,,,75,E034;E037;E038,medium,"Богатый текстовый ряд (Гита, Нале, тантра, сутры) как витрина. Не входит в 100-балльные итоги."
