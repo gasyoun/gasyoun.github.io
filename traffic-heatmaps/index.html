@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Traffic heatmaps — Яндекс.Метрика, куда идут посетители</title>
+<style>
+:root{--bg:#101318;--panel:#171c24;--ink:#d7dee8;--dim:#7d8899;--hot:#e05555;--gold:#d8a544;--line:#232b37;--ok:#3f8f4f;--warn:#e05555}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:14px/1.5 -apple-system,"Segoe UI",Roboto,sans-serif;margin:0;padding:24px}
+h1{font-size:22px;margin:0 0 4px}
+h2{font-size:17px;margin:28px 0 8px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.sub{color:var(--dim);font-size:12px;margin-bottom:16px}
+section{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin-bottom:18px}
+table{border-collapse:collapse;font-size:12px}
+th{color:var(--dim);font-weight:600;text-align:left;padding:2px 5px;white-space:nowrap}
+td{padding:2px 5px;border-top:1px solid var(--line)}
+td.num{text-align:right;font-variant-numeric:tabular-nums}
+.trust{background:#12161d;border-left:3px solid #3b465a;color:var(--dim);font-size:11.5px;padding:8px 12px;margin-top:10px;border-radius:0 6px 6px 0}
+.trust b{color:#9fb0c6}
+a{color:#6db2ff;text-decoration:none}
+nav{margin:0 0 20px;font-size:12.5px}
+nav a{margin-right:12px}
+.pill{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600}
+.ok{background:#17301f;color:#7ed491}
+.blocked{background:#331a1f;color:#f0a0a8}
+.decision{background:#332a17;color:#e6c877}
+.card{border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:10px 0;background:#12161d}
+.card h3{margin:0 0 6px;font-size:13.5px}
+.card p{margin:4px 0;color:var(--dim);font-size:12.5px}
+.mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin-top:8px}
+</style>
+</head>
+<body>
+<h1>Traffic heatmaps — Яндекс.Метрика</h1>
+<div class="sub">H4493 · сгенерировано 2026-09-10T05:24:21+00:00 · фаза 4 decision heatmaps · рулинг MG 09-09: инструмент = Яндекс.Метрика</div>
+<nav><a href="/decision-heatmaps/index.html">← фаза 1: estate</a><a href="/sanskrit-heatmaps/index.html">← фаза 2: research</a><a href="/learner-heatmaps/index.html">← фаза 3: learners</a></nav>
+<div id="app"></div>
+<script>
+const D = {"generated": "2026-09-10T05:24:21+00:00", "counter": "106964341", "dashboard_url": "https://app.metrika.yandex.ru/dashboard?id=106964341", "tag_coverage": {"site": "samskrte.ru (promo landing pages)", "probes": [{"slug": "geography", "url": "https://samskrte.ru/geography", "tagged": true, "counter_ok": true}, {"slug": "philosophy", "url": "https://samskrte.ru/philosophy", "tagged": true, "counter_ok": true}, {"slug": "sans", "url": "https://samskrte.ru/sans", "tagged": true, "counter_ok": true}, {"slug": "hanuman", "url": "https://samskrte.ru/hanuman", "tagged": true, "counter_ok": true}, {"slug": "calendary", "url": "https://samskrte.ru/calendary", "tagged": true, "counter_ok": true}, {"slug": "hindi", "url": "https://samskrte.ru/hindi", "tagged": true, "counter_ok": true}, {"slug": "webinar-grammatika", "url": "https://samskrte.ru/webinar-grammatika", "tagged": true, "counter_ok": true}, {"slug": "webinar-grammatika-17_06_26", "url": "https://samskrte.ru/webinar-grammatika-17_06_26", "tagged": true, "counter_ok": true}, {"slug": "sanskrit-s-nulya", "url": "https://samskrte.ru/sanskrit-s-nulya", "tagged": false, "counter_ok": false}, {"slug": "konsultaciya-po-onlayn-kursam", "url": "https://samskrte.ru/konsultaciya-po-onlayn-kursam", "tagged": true, "counter_ok": true}, {"slug": "janvar-27", "url": "https://samskrte.ru/janvar-27", "tagged": true, "counter_ok": true}, {"slug": "kashmirskii-shivaizm-3", "url": "https://samskrte.ru/kashmirskii-shivaizm-3", "tagged": true, "counter_ok": true}, {"slug": "yazyk-bogov", "url": "https://samskrte.ru/yazyk-bogov", "tagged": true, "counter_ok": true}], "n_ok": 12, "n_probed": 13}, "weekly": {"available": false, "why": "data/metrika_weekly_history.tsv отсутствует — METRIKA_OAUTH_TOKEN ещё не заполнен (GTD 393); скрипт fail-closed"}, "surfaces": [{"name": "samskrte.ru — promo лендинги", "status": "tagged", "note": "15/15 рендерят ym(106964341): 9 были в БД, 6 добавлены UPDATE+cache:clear, live-проверено"}, {"name": "samskrte.ru — кабинет", "status": "decision-point", "note": "НЕ тегируем по умолчанию: webvisor пишет полные сессии залогиненных (152-ФЗ чувствительность); внутри кабинета уже своя аналитика activity_events; переопределение — рулинг MG"}, {"name": "samskrtam.ru (WordPress, .95)", "status": "blocked", "note": "нет ssh-ключа на .95 (GTD 0aa — ждёт Артёма); нужно: домен в счётчик 106964341 или счётчик №2 в UI Метрики + вставка тега в WP-header (wp-admin, 2 мин) — MG action"}], "privacy": "агрегаты только; клики/скроллы живут в UI Метрики под логином MG"};
+const esc = (s) => String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+function trustBlock(items) {
+  const d = document.createElement('div'); d.className = 'trust';
+  d.innerHTML = '<b>Trust Block.</b> ' + items.map(esc).join(' · ');
+  return d;
+}
+function section(title, note) {
+  const s = document.createElement('section');
+  const h = document.createElement('h2'); h.textContent = title; s.appendChild(h);
+  if (note) { const n = document.createElement('div'); n.className = 'sub'; n.textContent = note; s.appendChild(n); }
+  return s;
+}
+const pill = (cls, txt) => '<span class="pill ' + txt[0] + '">' + txt[1] + '</span>';
+const app = document.getElementById('app');
+
+/* A. Coverage */
+{
+  const C = D.tag_coverage || {};
+  const s = section('A. Покрытие тегом Метрики — живая проба',
+    `счётчик ${esc(D.counter)} · ${C.n_ok}/${C.n_probed} пробованных лендингов рендерят тег (HTTP-GET каждой страницы при сборке, не вера БД)`);
+  const t = document.createElement('table');
+  const hr = document.createElement('tr');
+  ['страница', 'тег', 'счётчик'].forEach(h => { const th = document.createElement('th'); th.textContent = h; hr.appendChild(th); });
+  t.appendChild(hr);
+  (C.probes || []).forEach(p => {
+    const tr = document.createElement('tr');
+    [[p.slug, 0], [p.counter_ok ? '✓ рендерится' : (p.error ? 'ошибка пробы' : '✗ нет (неактивна?)'), 1], [p.counter_ok ? esc(D.counter) : '—', 1]].forEach(([v, num]) => {
+      const td = document.createElement('td');
+      td.innerHTML = v; if (num) td.className = 'num';
+      if (v === '✓ рендерится') td.style.color = '#7ed491';
+      if (String(v).indexOf('✗') === 0) td.style.color = '#e0a0a0';
+      tr.appendChild(td);
+    });
+    t.appendChild(tr);
+  });
+  s.appendChild(t);
+  s.appendChild(trustBlock([
+    'источник: HTTP-проба ' + esc((C.probes||[]).length) + ' промо-страниц на момент генерации',
+    'тег стоит с clickmap:true, trackLinks:true, webvisor:true (уже в шаблоне legacy) — карты кликов/скроллов и вебвизор собираются с момента тегирования, НЕ ретроактивно',
+    'sanskrit-s-nulya помечен is_active=0 в БД — 404/пустой ответ честно показан как нет тега'
+  ]));
+  app.appendChild(s);
+}
+
+/* B. Metrica UI deep links */
+{
+  const s = section('B. Карты — где смотреть (нужен ваш логин Яндекса)',
+    'клики/скроллы/вебвизор живут внутри UI Метрики под вашей учёткой — API их не отдаёт; ссылки ниже открывают счётчик ' + esc(D.counter));
+  const g = document.createElement('div'); g.className = 'mgrid';
+  const u = D.dashboard_url;
+  [['Дашборд счётчика', u, 'визиты, отказы, глубина, время'],
+   ['Карты кликов/скроллинга', u, 'Отчёты → Содержание → Карты: кликов (куда жмут), скроллинга (до какого места доскроллили) на каждой странице'],
+   ['Вебвизор', u, 'плеер сессий: видно, куда водят мышь и где бросают; по промо-страницам, не по кабинету'],
+   ['Аналитика форм', u, 'Отчёты → Содержание → Аналитика форм: где бросают заполнять лид-формы лендингов']].forEach(x => {
+    const c = document.createElement('div'); c.className = 'card';
+    c.innerHTML = '<b><a href="' + u + '" target="_blank">' + esc(x[0]) + '</a></b><p>' + esc(x[2]) + '</p>';
+    g.appendChild(c);
+  });
+  s.appendChild(g);
+  s.appendChild(trustBlock([
+    'единый глубокий URL — на дашборд (id=' + esc(D.counter) + '): точные ссылки на конкретные отчёты в UI нестабильны между версиями Метрики, поэтому карточки-навигаторы',
+    'решение, которое читается: карта кликов на топ-лендинге (география/философия) → какие блоки мертвы; карта скролла → где резать текст'
+  ]));
+  app.appendChild(s);
+}
+
+/* C. Weekly aggregates */
+{
+  const W = D.weekly || {};
+  const s = section('C. Недельные агрегаты (API)',
+    W.available ? `история: ${W.rows.length} недель` : 'пока недоступно — fail-closed');
+  if (W.available) {
+    const t = document.createElement('table');
+    const hr = document.createElement('tr');
+    (W.header || []).forEach(h => { const th = document.createElement('th'); th.textContent = h; hr.appendChild(th); });
+    t.appendChild(hr);
+    (W.rows || []).slice().reverse().forEach(r => {
+      const tr = document.createElement('tr');
+      (W.header || []).forEach(h => { const td = document.createElement('td'); td.textContent = r[h]; if (h !== 'week_start' && h !== 'week_end' && h !== 'counter' && h !== 'top_source') td.className = 'num'; tr.appendChild(td); });
+      t.appendChild(tr);
+    });
+    s.appendChild(t);
+  } else {
+    const f = document.createElement('div'); f.className = 'card';
+    f.innerHTML = '<b>' + esc(W.why || 'unavailable') + '</b><p>Заполните <code>~/.secrets/metrika.env</code> → <code>METRIKA_OAUTH_TOKEN</code> (счётчик уже вписан: ' + esc(D.counter) + ') — https://oauth.yandex.ru, приложение с правом метрика:read, ~2 мин. После этого понедельничный крон 07:30 начнёт серию, и таблица оживёт. В чат токен не вставлять — только в файл.</p>';
+    s.appendChild(f);
+  }
+  s.appendChild(trustBlock([
+    'источник: tools/pull_metrika_weekly.py → data/metrika_weekly_history.tsv (append-only, понедельник 07:30)',
+    'fail-closed: нет токена — нет чисел, никаких выдумок'
+  ]));
+  app.appendChild(s);
+}
+
+/* D. Surfaces status */
+{
+  const s = section('D. Поверхности — статус решения', 'кто тегирован, кто ждёт, где точка решения');
+  (D.surfaces || []).forEach(x => {
+    const c = document.createElement('div'); c.className = 'card';
+    const cls = x.status === 'tagged' ? 'ok' : (x.status === 'blocked' ? 'blocked' : 'decision');
+    const label = x.status === 'tagged' ? 'тегировано' : (x.status === 'blocked' ? 'блок на MG' : 'точка решения');
+    c.innerHTML = '<b>' + esc(x.name) + '</b> ' + '<span class="pill ' + cls + '">' + label + '</span><p>' + esc(x.note) + '</p>';
+    s.appendChild(c);
+  });
+  app.appendChild(s);
+}
+</script>
+</body>
+</html>
