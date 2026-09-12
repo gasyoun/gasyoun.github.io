@@ -154,6 +154,14 @@ header.top{pointer-events:none}header.top a,header.top button,header.top input,h
 </style>
 </head>
 <body>
+<div id="appliedBanner" style="position:sticky;top:0;z-index:9999;background:#7f1d1d;color:#fff;padding:12px 16px;font:600 15px/1.45 system-ui,-apple-system,sans-serif;text-align:center;border-bottom:3px solid #450a0a">&#9940; ЛИСТ УЖЕ ПРИМЕНЁН 05-09-2026 — НЕ ГОЛОСОВАТЬ. 6/6 approve, zero deviations; файловые applied-маркеры и гвард вотчера — H4631. Архивная копия: <a style="color:#fecaca" href="https://github.com/gasyoun/Uprava/blob/main/review/weekly/archive/decisions_applied_2026-09-05_drain-assumptions-v2.md">аудит применения</a>.</div>
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('button').forEach(function(b){b.disabled=true;b.title='Лист уже применён — голосование закрыто';});
+  document.querySelectorAll('.card').forEach(function(c){c.style.opacity='0.72';});
+});
+</script>
+
 <header class="top">
   <div>
     <h1>Мега-ревизия дрена v2: углубление и расширение (вечер 04-09-2026) — 6 items</h1>
