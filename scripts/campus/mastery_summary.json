@@ -1,0 +1,129 @@
+{
+ "_doc": "H4262 S2 mastery map aggregate — derived from kosha combined_schedule.json; full source lives in kosha (public)",
+ "source": {
+  "path": "kosha/data/mastery/combined_schedule.json",
+  "sha256": "232de6d3cb0d0235182795976eeb9682a151ec00e59d9766a511f5ffe0496eea",
+  "kosha_commit": "ae7f9de5a",
+  "epoch": "2026-09-01T00:00:00Z",
+  "total_items": 35517,
+  "weights_spec": "https://github.com/gasyoun/kosha/blob/main/data/MASTERY_WEIGHTS_SPEC.md",
+  "source_dir": "https://github.com/gasyoun/kosha/tree/main/data/mastery"
+ },
+ "families": {
+  "sandhi": {
+   "title_ru": "Сандхи",
+   "desc_ru": "стыки слов: правила соединения звуков",
+   "count": 396,
+   "ease_min": 0.6,
+   "ease_mean": 0.7826,
+   "ease_median": 0.75,
+   "ease_max": 1.0,
+   "bands": [
+    0,
+    0,
+    0,
+    273,
+    123
+   ],
+   "first_ids": [
+    "SD-0001",
+    "SD-0002",
+    "SD-0003",
+    "SD-0004",
+    "SD-0005"
+   ]
+  },
+  "samasa": {
+   "title_ru": "Самасы",
+   "desc_ru": "сложные слова: разбор и сборка компаундов",
+   "count": 3865,
+   "ease_min": 0.4,
+   "ease_mean": 0.5372,
+   "ease_median": 0.4,
+   "ease_max": 1.0,
+   "bands": [
+    0,
+    0,
+    2806,
+    300,
+    759
+   ],
+   "first_ids": [
+    "SM-0001",
+    "SM-0002",
+    "SM-0003",
+    "SM-0004",
+    "SM-0005"
+   ]
+  },
+  "morphology": {
+   "title_ru": "Морфология",
+   "desc_ru": "формы слов: падежи, числа, спряжения",
+   "count": 12000,
+   "ease_min": 0.4,
+   "ease_mean": 0.7131,
+   "ease_median": 0.7084,
+   "ease_max": 1.0,
+   "bands": [
+    0,
+    0,
+    3420,
+    4230,
+    4350
+   ],
+   "first_ids": [
+    "MD-00001-F",
+    "MD-00002-M",
+    "MD-00003-F",
+    "MD-00004-M",
+    "MD-00005-F"
+   ]
+  },
+  "vocab": {
+   "title_ru": "Словарь",
+   "desc_ru": "частотные слова корпуса: узнавание и припоминание",
+   "count": 13334,
+   "ease_min": 0.4,
+   "ease_mean": 0.6954,
+   "ease_median": 0.693,
+   "ease_max": 1.0,
+   "bands": [
+    0,
+    0,
+    4530,
+    4556,
+    4248
+   ],
+   "first_ids": [
+    "VC-00001",
+    "VC-00002",
+    "VC-00003",
+    "VC-00004",
+    "VC-00005"
+   ]
+  },
+  "thematic_vocab": {
+   "title_ru": "Темы",
+   "desc_ru": "словарь по темам Амаркоши: группы понятий",
+   "count": 5922,
+   "ease_min": 0.4,
+   "ease_mean": 0.745,
+   "ease_median": 0.7566,
+   "ease_max": 0.9996,
+   "bands": [
+    0,
+    0,
+    1394,
+    2018,
+    2510
+   ],
+   "first_ids": [
+    "TV-00001",
+    "TV-00002",
+    "TV-00003",
+    "TV-00004",
+    "TV-00005"
+   ]
+  }
+ }
+}
