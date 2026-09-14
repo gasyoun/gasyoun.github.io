@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render mastery/index.html from mastery_summary.json (derive-don't-store, idempotent). H4262.
+"""Render mastery/stats.html (statistical variant) from mastery_summary.json. Canonical page: mastery/index.html by mastery_map_build.py (11a5c22) (derive-don't-store, idempotent). H4262.
 
 Aggregate source: kosha/data/mastery/combined_schedule.json (H3742).
 Re-derive the summary with: python3 mastery_build.py --from-kosha <path-to-combined_schedule.json>
@@ -67,7 +67,7 @@ parts.append(f"""
 </body>
 </html>
 """)
-dest = HERE.parent.parent/"mastery"/"index.html"
+dest = HERE.parent.parent/"mastery"/"stats.html"
 dest.parent.mkdir(parents=True, exist_ok=True)
 dest.write_text(chr(10).join(parts), encoding="utf-8")
 print("wrote", dest, dest.stat().st_size, "bytes")

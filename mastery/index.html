@@ -3,87 +3,76 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Карта мастерства — пять семей навыков</title>
+<title>Карта мастерства ученика — 5 drill-семей</title>
 <style>
 :root{--bg:#101418;--fg:#e8e4da;--mut:#9aa3ad;--acc:#d9a441;--line:#2a3138}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 Georgia,'Times New Roman',serif}
 main{max-width:960px;margin:0 auto;padding:3rem 1.25rem 5rem}
 h1{font-size:2rem;margin:0 0 .25rem}h1 span{color:var(--acc)}
-.sub{color:var(--mut);margin:0 0 2.5rem}
-h2{font-size:1.25rem;margin:2.5rem 0 1rem;padding-bottom:.4rem;border-bottom:1px solid var(--line)}
-h2 .n{color:var(--acc);font-size:.85rem;font-family:Menlo,monospace;margin-right:.6rem}
-p.intro{color:var(--mut);margin:0 0 1rem}
-ul{list-style:none;margin:0;padding:0}
-li{padding:.45rem 0;border-bottom:1px dashed var(--line);display:flex;gap:.75rem;align-items:baseline}
-li .no{color:var(--acc);font-family:Menlo,monospace;font-size:.8rem;min-width:2.2rem}
-a{color:var(--fg);text-decoration:none;border-bottom:1px solid var(--acc)}
-a:hover{color:var(--acc)}
-.plain{color:var(--mut);border-bottom:none;font-style:italic}
+.sub{color:var(--mut);margin:0 0 1.5rem}
+.legend{display:flex;gap:1.2rem;flex-wrap:wrap;color:var(--mut);font-size:.9rem;margin:0 0 2rem}
+.legend .chip{margin-right:.35rem}
+section.fam h2{font-size:1.25rem;margin:2.2rem 0 .4rem;padding-bottom:.4rem;border-bottom:1px solid var(--line)}
+section.fam h2 .n{color:var(--acc);font-size:.85rem;font-family:Menlo,monospace;margin-right:.6rem}
+p.intro{color:var(--mut);margin:0 0 .8rem}
+.grid{display:flex;flex-wrap:wrap;gap:.6rem}
+button.cell{appearance:none;text-align:left;background:#161c22;border:1px solid var(--line);border-radius:8px;color:var(--fg);padding:.6rem .8rem;min-width:11rem;font:inherit;cursor:pointer}
+button.cell:hover{border-color:var(--acc)}
+button.cell.open{border-color:var(--acc);background:#1b232b}
+.cell .st{display:block;font-weight:bold}
+.cell .meta{display:block;color:var(--mut);font-size:.82rem;margin:.15rem 0 .4rem}
+.chip{display:inline-block;font-size:.75rem;padding:.1rem .5rem;border-radius:99px;border:1px solid var(--line);color:var(--mut)}
+.chip.todo{color:var(--mut)}.chip.doing{color:var(--acc);border-color:var(--acc)}.chip.done{color:#7db77d;border-color:#7db77d}
+p.next{color:var(--mut);margin:.6rem 0 0;font-size:.92rem}p.next strong{color:var(--acc)}
+#detail{margin-top:1rem;padding:1rem;border:1px dashed var(--line);border-radius:8px;color:var(--mut);display:none}
+#detail.show{display:block}
+details.trust{margin-top:3rem;border-top:1px solid var(--line);padding-top:1rem}
+details.trust summary{cursor:pointer;color:var(--acc)}
+table{border-collapse:collapse;margin:.8rem 0;font-size:.85rem}
+td{padding:.25rem .8rem .25rem 0;border-bottom:1px dashed var(--line);color:var(--mut)}
+code{font-family:Menlo,monospace;font-size:.8rem;color:var(--fg)}
 footer{margin-top:3rem;color:var(--mut);font-size:.85rem}
+a{color:var(--fg);text-decoration:none;border-bottom:1px solid var(--acc)}a:hover{color:var(--acc)}
 footer a{color:var(--mut);border-bottom-color:var(--line)}
-
-.family{border:1px solid var(--line);border-radius:10px;padding:1.25rem 1.5rem;margin:0 0 1.5rem}
-.family h2{margin:.1rem 0 .2rem;font-size:1.2rem}
-.family .desc{color:var(--mut);margin:0 0 1rem;font-size:.95rem}
-.bar{display:flex;height:14px;border-radius:7px;overflow:hidden;margin:.4rem 0 .3rem}
-.bar i{display:block;height:100%}
-.legend{display:flex;gap:1rem;flex-wrap:wrap;color:var(--mut);font-size:.78rem;margin:0 0 .8rem}
-.legend b{color:var(--fg);font-weight:normal}
-.meta{color:var(--mut);font-size:.8rem;margin:.6rem 0 0}
-.firsts{color:var(--mut);font-size:.8rem;font-family:Menlo,monospace}
-.note{border-left:3px solid var(--acc);padding:.6rem 1rem;color:var(--mut);margin:2rem 0;font-size:.92rem}
 </style>
 </head>
 <body>
 <main>
 <h1>Карта <span>мастерства</span></h1>
-<p class="sub">35517 учебных позиций в 5 семьях, одна шкала освоимости (ease 0–1, H3742). Дефицита прогресса тут нет: это карта местности — что за чем учить.</p>
-
-<section class="family">
-<h2>Сандхи <span style="color:var(--mut);font-weight:normal;font-size:.85rem">— 396 позиций</span></h2>
-<p class="desc">стыки слов: правила соединения звуков</p>
-<div class="bar"><i style="width:68.9%;background:#8fae5a" title="60–80%: 273"></i><i style="width:31.1%;background:#5f9e6e" title="легко 80–100%: 123"></i></div>
-<p class="legend"><b>трудно 0–20%</b> 0 · <b>20–40%</b> 0 · <b>40–60%</b> 0 · <b>60–80%</b> 273 · <b>легко 80–100%</b> 123</p>
-<p class="firsts">первые шаги: SD-0001 · SD-0002 · SD-0003 · SD-0004 · SD-0005</p>
-<p class="meta">ease: min 0.6 · средняя 0.7826 · медиана 0.75 · max 1.0</p>
-</section>
-<section class="family">
-<h2>Самасы <span style="color:var(--mut);font-weight:normal;font-size:.85rem">— 3865 позиций</span></h2>
-<p class="desc">сложные слова: разбор и сборка компаундов</p>
-<div class="bar"><i style="width:72.6%;background:#c08a3e" title="40–60%: 2806"></i><i style="width:7.8%;background:#8fae5a" title="60–80%: 300"></i><i style="width:19.6%;background:#5f9e6e" title="легко 80–100%: 759"></i></div>
-<p class="legend"><b>трудно 0–20%</b> 0 · <b>20–40%</b> 0 · <b>40–60%</b> 2806 · <b>60–80%</b> 300 · <b>легко 80–100%</b> 759</p>
-<p class="firsts">первые шаги: SM-0001 · SM-0002 · SM-0003 · SM-0004 · SM-0005</p>
-<p class="meta">ease: min 0.4 · средняя 0.5372 · медиана 0.4 · max 1.0</p>
-</section>
-<section class="family">
-<h2>Морфология <span style="color:var(--mut);font-weight:normal;font-size:.85rem">— 12000 позиций</span></h2>
-<p class="desc">формы слов: падежи, числа, спряжения</p>
-<div class="bar"><i style="width:28.5%;background:#c08a3e" title="40–60%: 3420"></i><i style="width:35.2%;background:#8fae5a" title="60–80%: 4230"></i><i style="width:36.2%;background:#5f9e6e" title="легко 80–100%: 4350"></i></div>
-<p class="legend"><b>трудно 0–20%</b> 0 · <b>20–40%</b> 0 · <b>40–60%</b> 3420 · <b>60–80%</b> 4230 · <b>легко 80–100%</b> 4350</p>
-<p class="firsts">первые шаги: MD-00001-F · MD-00002-M · MD-00003-F · MD-00004-M · MD-00005-F</p>
-<p class="meta">ease: min 0.4 · средняя 0.7131 · медиана 0.7084 · max 1.0</p>
-</section>
-<section class="family">
-<h2>Словарь <span style="color:var(--mut);font-weight:normal;font-size:.85rem">— 13334 позиций</span></h2>
-<p class="desc">частотные слова корпуса: узнавание и припоминание</p>
-<div class="bar"><i style="width:34.0%;background:#c08a3e" title="40–60%: 4530"></i><i style="width:34.2%;background:#8fae5a" title="60–80%: 4556"></i><i style="width:31.9%;background:#5f9e6e" title="легко 80–100%: 4248"></i></div>
-<p class="legend"><b>трудно 0–20%</b> 0 · <b>20–40%</b> 0 · <b>40–60%</b> 4530 · <b>60–80%</b> 4556 · <b>легко 80–100%</b> 4248</p>
-<p class="firsts">первые шаги: VC-00001 · VC-00002 · VC-00003 · VC-00004 · VC-00005</p>
-<p class="meta">ease: min 0.4 · средняя 0.6954 · медиана 0.693 · max 1.0</p>
-</section>
-<section class="family">
-<h2>Темы <span style="color:var(--mut);font-weight:normal;font-size:.85rem">— 5922 позиций</span></h2>
-<p class="desc">словарь по темам Амаркоши: группы понятий</p>
-<div class="bar"><i style="width:23.5%;background:#c08a3e" title="40–60%: 1394"></i><i style="width:34.1%;background:#8fae5a" title="60–80%: 2018"></i><i style="width:42.4%;background:#5f9e6e" title="легко 80–100%: 2510"></i></div>
-<p class="legend"><b>трудно 0–20%</b> 0 · <b>20–40%</b> 0 · <b>40–60%</b> 1394 · <b>60–80%</b> 2018 · <b>легко 80–100%</b> 2510</p>
-<p class="firsts">первые шаги: TV-00001 · TV-00002 · TV-00003 · TV-00004 · TV-00005</p>
-<p class="meta">ease: min 0.4 · средняя 0.745 · медиана 0.7566 · max 0.9996</p>
-</section>
-
-<div class="note">Все позиции показаны как «не начато»: это общая карта курса без персональных данных.
-Личный слой прогресса (streaks, «что повторить сегодня») живёт локально в ученической системе и на публичную страницу не попадает.</div>
-<footer>Источник: <a href="https://github.com/gasyoun/kosha/tree/main/data/mastery">kosha/data/mastery</a> (коммит ae7f9de5a, эпоха 2026-09-01T00:00:00Z, sha256 232de6d3cb0d…, <a href="https://github.com/gasyoun/kosha/blob/main/data/MASTERY_WEIGHTS_SPEC.md">семантика весов</a>) ·
-Собрано <a href="https://github.com/gasyoun/gasyoun.github.io/blob/master/scripts/campus/mastery_build.py">scripts/campus/mastery_build.py</a> · H4262 · 06-09-2026 · Dr. Mārcis Gasūns</footer>
+<p class="sub">Пять drill-семей · 35517 упражнений · данные kosha (H3742) · уровень → следующий шаг</p>
+<p class="legend"><span class="chip done">освоено</span><span class="chip doing">в процессе</span><span class="chip todo">не начато</span><span>· все ячейки сейчас «не начато»: публичная карта без персональных данных, личный слой строится локально.</span></p>
+<section class="fam" id="sandhi"><h2><span class="n">396 упр.</span>Сандхи</h2><p class="intro">Благозвучные слияния на стыке слов — старт чтения.</p><div class="grid"><button class="cell" data-fam="sandhi" data-i="0"><span class="st">Уроки 1–3 · старт чтения</span><span class="meta">30 упр. · лёгкость 0.96</span><span class="chip">не начато</span></button><button class="cell" data-fam="sandhi" data-i="1"><span class="st">Уроки 4–6</span><span class="meta">69 упр. · лёгкость 0.89</span><span class="chip">не начато</span></button><button class="cell" data-fam="sandhi" data-i="2"><span class="st">Уроки 7–9</span><span class="meta">297 упр. · лёгкость 0.74</span><span class="chip">не начато</span></button></div><p class="next">Следующий шаг: <strong>Уроки 1–3 · старт чтения</strong></p></section><section class="fam" id="samasa"><h2><span class="n">3865 упр.</span>Самасы</h2><p class="intro">Сложные слова: от опознания к самостоятельному разбору.</p><div class="grid"><button class="cell" data-fam="samasa" data-i="0"><span class="st">Опознание (identify)</span><span class="meta">759 упр. · лёгкость 1.0</span><span class="chip">не начато</span></button><button class="cell" data-fam="samasa" data-i="1"><span class="st">Член по стороне (member_side)</span><span class="meta">150 упр. · лёгкость 0.7</span><span class="chip">не начато</span></button><button class="cell" data-fam="samasa" data-i="2"><span class="st">Член по памяти (member_recall)</span><span class="meta">150 упр. · лёгкость 0.6</span><span class="chip">не начато</span></button><button class="cell" data-fam="samasa" data-i="3"><span class="st">Разбор (split)</span><span class="meta">2806 упр. · лёгкость 0.4</span><span class="chip">не начато</span></button></div><p class="next">Следующий шаг: <strong>Опознание (identify)</strong></p></section><section class="fam" id="morphology"><h2><span class="n">12000 упр.</span>Морфология</h2><p class="intro">Падежные формы существительных — сетка 7134 рангов учебной программы.</p><div class="grid"><button class="cell" data-fam="morphology" data-i="0"><span class="st">Урок 1</span><span class="meta">2936 упр. · лёгкость 0.93</span><span class="chip">не начато</span></button><button class="cell" data-fam="morphology" data-i="1"><span class="st">Урок 2</span><span class="meta">8440 упр. · лёгкость 0.66</span><span class="chip">не начато</span></button><button class="cell" data-fam="morphology" data-i="2"><span class="st">Урок 3</span><span class="meta">624 упр. · лёгкость 0.42</span><span class="chip">не начато</span></button></div><p class="next">Следующий шаг: <strong>Урок 1</strong></p></section><section class="fam" id="vocab"><h2><span class="n">13334 упр.</span>Частотная лексика</h2><p class="intro">Слова по частотным рангам DCS: от топ-500 вглубь.</p><div class="grid"><button class="cell" data-fam="vocab" data-i="0"><span class="st">Ранги 1–500</span><span class="meta">814 упр. · лёгкость 0.98</span><span class="chip">не начато</span></button><button class="cell" data-fam="vocab" data-i="1"><span class="st">Ранги 501–2000</span><span class="meta">2502 упр. · лёгкость 0.9</span><span class="chip">не начато</span></button><button class="cell" data-fam="vocab" data-i="2"><span class="st">Ранги 2001+</span><span class="meta">10018 упр. · лёгкость 0.62</span><span class="chip">не начато</span></button></div><p class="next">Следующий шаг: <strong>Ранги 1–500</strong></p></section><section class="fam" id="thematic_vocab"><h2><span class="n">5922 упр.</span>Тематическая лексика</h2><p class="intro">20 варг словаря-тезауруса: лес, люди, воины, небо…</p><div class="grid"><button class="cell" data-fam="thematic_vocab" data-i="0"><span class="st">vyomavargaḥ</span><span class="meta">24 упр. · лёгкость 0.88</span><span class="chip">не начато</span></button><button class="cell" data-fam="thematic_vocab" data-i="1"><span class="st">śabdādivargaḥ</span><span class="meta">140 упр. · лёгкость 0.8</span><span class="chip">не начато</span></button><button class="cell" data-fam="thematic_vocab" data-i="2"><span class="st">bhūmivargaḥ</span><span class="meta">98 упр. · лёгкость 0.79</span><span class="chip">не начато</span></button><button class="cell" data-fam="thematic_vocab" data-i="3"><span class="st">kālavargaḥ</span><span class="meta">292 упр. · лёгкость 0.79</span><span class="chip">не начато</span></button><button class="cell" data-fam="thematic_vocab" data-i="4"><span class="st">kṣatriyavargaḥ</span><span class="meta">608 упр. · лёгкость 0.78</span><span class="chip">не начато</span></button><button class="cell" data-fam="thematic_vocab" data-i="5"><span class="st">brahmavargaḥ</span><span class="meta">302 упр. · лёгкость 0.78</span><span class="chip">не начато</span></button><button class="cell" data-fam="thematic_vocab" data-i="6"><span class="st">śailavargaḥ</span><span class="meta">74 упр. · лёгкость 0.78</span><span class="chip">не начато</span></button><button class="cell" data-fam="thematic_vocab" data-i="7"><span class="st">manuṣyavargaḥ</span><span class="meta">814 упр. · лёгкость 0.77</span><span class="chip">не начато</span></button><button class="cell" data-fam="thematic_vocab" data-i="8"><span class="st">digvargaḥ</span><span class="meta">266 упр. · лёгкость 0.76</span><span class="chip">не начато</span></button><button class="cell" data-fam="thematic_vocab" data-i="9"><span class="st">pātālabhogivargaḥ</span><span class="meta">66 упр. · лёгкость 0.76</span><span class="chip">не начато</span></button><button class="cell" data-fam="thematic_vocab" data-i="10"><span class="st">nāṭyavargaḥ</span><span class="meta">306 упр. · лёгкость 0.76</span><span class="chip">не начато</span></button><button class="cell" data-fam="thematic_vocab" data-i="11"><span class="st">vārivargaḥ</span><span class="meta">210 упр. · лёгкость 0.75</span><span class="chip">не начато</span></button><button class="cell" data-fam="thematic_vocab" data-i="12"><span class="st">siṃhādivargaḥ</span><span class="meta">232 упр. · лёгкость 0.74</span><span class="chip">не начато</span></button><button class="cell" data-fam="thematic_vocab" data-i="13"><span class="st">svargavargaḥ</span><span class="meta">574 упр. · лёгкость 0.74</span><span class="chip">не начато</span></button><button class="cell" data-fam="thematic_vocab" data-i="14"><span class="st">vaiśyavargaḥ</span><span class="meta">560 упр. · лёгкость 0.73</span><span class="chip">не начато</span></button><button class="cell" data-fam="thematic_vocab" data-i="15"><span class="st">puravargaḥ</span><span class="meta">106 упр. · лёгкость 0.72</span><span class="chip">не начато</span></button><button class="cell" data-fam="thematic_vocab" data-i="16"><span class="st">śūdravargaḥ</span><span class="meta">176 упр. · лёгкость 0.71</span><span class="chip">не начато</span></button><button class="cell" data-fam="thematic_vocab" data-i="17"><span class="st">dhīvargaḥ</span><span class="meta">190 упр. · лёгкость 0.7</span><span class="chip">не начато</span></button><button class="cell" data-fam="thematic_vocab" data-i="18"><span class="st">narakavargaḥ</span><span class="meta">34 упр. · лёгкость 0.67</span><span class="chip">не начато</span></button><button class="cell" data-fam="thematic_vocab" data-i="19"><span class="st">vanauṣadhivargaḥ</span><span class="meta">850 упр. · лёгкость 0.66</span><span class="chip">не начато</span></button></div><p class="next">Следующий шаг: <strong>vyomavargaḥ</strong></p></section>
+<div id="detail" role="status"></div>
+<details class="trust"><summary>GATE 0: проба данных и происхождение</summary>
+<p>Вердикт: <strong>FOUND — primary path, fallback не нужен</strong> · живая проба 06-09-2026 нашла
+<a href="https://github.com/gasyoun/kosha/blob/main/data/mastery/combined_schedule.json">data/mastery/combined_schedule.json</a> в gasyoun/kosha @ <code>6f045963e047</code>
+(утренняя проба handoff’а «не найден» — устарела). Fallback на публичные drill-наборы не понадобился.
+ease 0..1 — <a href="https://github.com/gasyoun/kosha/blob/main/data/MASTERY_WEIGHTS_SPEC.md">seed-веса учебной программы (H3742)</a>, не данные учеников.
+Join-покрытие осей: sandhi 396/396 · samasa 3865/3865 · morphology 12000/12000 · vocab 13334/13334 · thematic_vocab 5922/5922. Snapshot: 35517 строк, sha256 <code>5f837f7fd0bdd9ec</code> · <a href="https://github.com/gasyoun/gasyoun.github.io/blob/master/mastery/data/mastery_manifest.json">манифест</a>.</p>
+<table><tr><td>файл kosha @ 6f045963e047</td><td>sha256 (16)</td></tr><tr><td>data/frequency/thematic_vocab_drills.json</td><td><code>070239639c77f9db</code></td></tr><tr><td>data/frequency/vocab_drills.json</td><td><code>6867ee7df5c7917b</code></td></tr><tr><td>data/mastery/combined_schedule.json</td><td><code>232de6d3cb0d0235</code></td></tr><tr><td>data/morphology/drills.json</td><td><code>916dff3f9cec8583</code></td></tr><tr><td>data/morphology/morphology_curriculum.tsv</td><td><code>bb36467d28495e40</code></td></tr><tr><td>data/samasa/samasa_drills.json</td><td><code>d32cba58e7abd891</code></td></tr><tr><td>data/sandhi/sandhi_drills.json</td><td><code>484c106454cb7d3e</code></td></tr></table>
+<p>Родня: <a href="https://github.com/gasyoun/SanskritKaraoke/blob/main/progress.html">SanskritKaraoke progress.html</a> (паттерн прогресса) · статичные
+<a href="https://gasyoun.github.io/infographics/systema-srs-2026-08-29/index.html">№28 «Дорога ученика»</a> и <a href="https://gasyoun.github.io/infographics/student-road-2026-08-29/index.html">№36 «От алфавита до Рамаяны»</a> — эта карта их живая версия ·
+хаб: <a href="https://gasyoun.github.io/campus/">Кампус наглядности, крыло «Учёба»</a>.</p>
+</details>
+<footer>Собрано <a href="https://github.com/gasyoun/gasyoun.github.io/blob/master/scripts/campus/mastery_map_build.py">scripts/campus/mastery_map_build.py</a> из снапшота kosha · H4262 · 06-09-2026 · Dr. Mārcis Gasūns</footer>
 </main>
+<script type="application/json" id="board">[{"id": "sandhi", "title": "Сандхи", "blurb": "Благозвучные слияния на стыке слов — старт чтения.", "total": 396, "stages": [{"title": "Уроки 1–3 · старт чтения", "count": 30, "ease": 0.96, "status": "не начато"}, {"title": "Уроки 4–6", "count": 69, "ease": 0.89, "status": "не начато"}, {"title": "Уроки 7–9", "count": 297, "ease": 0.74, "status": "не начато"}]}, {"id": "samasa", "title": "Самасы", "blurb": "Сложные слова: от опознания к самостоятельному разбору.", "total": 3865, "stages": [{"title": "Опознание (identify)", "count": 759, "ease": 1.0, "status": "не начато"}, {"title": "Член по стороне (member_side)", "count": 150, "ease": 0.7, "status": "не начато"}, {"title": "Член по памяти (member_recall)", "count": 150, "ease": 0.6, "status": "не начато"}, {"title": "Разбор (split)", "count": 2806, "ease": 0.4, "status": "не начато"}]}, {"id": "morphology", "title": "Морфология", "blurb": "Падежные формы существительных — сетка 7134 рангов учебной программы.", "total": 12000, "stages": [{"title": "Урок 1", "count": 2936, "ease": 0.93, "status": "не начато"}, {"title": "Урок 2", "count": 8440, "ease": 0.66, "status": "не начато"}, {"title": "Урок 3", "count": 624, "ease": 0.42, "status": "не начато"}]}, {"id": "vocab", "title": "Частотная лексика", "blurb": "Слова по частотным рангам DCS: от топ-500 вглубь.", "total": 13334, "stages": [{"title": "Ранги 1–500", "count": 814, "ease": 0.98, "status": "не начато"}, {"title": "Ранги 501–2000", "count": 2502, "ease": 0.9, "status": "не начато"}, {"title": "Ранги 2001+", "count": 10018, "ease": 0.62, "status": "не начато"}]}, {"id": "thematic_vocab", "title": "Тематическая лексика", "blurb": "20 варг словаря-тезауруса: лес, люди, воины, небо…", "total": 5922, "stages": [{"title": "vyomavargaḥ", "count": 24, "ease": 0.88, "status": "не начато"}, {"title": "śabdādivargaḥ", "count": 140, "ease": 0.8, "status": "не начато"}, {"title": "bhūmivargaḥ", "count": 98, "ease": 0.79, "status": "не начато"}, {"title": "kālavargaḥ", "count": 292, "ease": 0.79, "status": "не начато"}, {"title": "kṣatriyavargaḥ", "count": 608, "ease": 0.78, "status": "не начато"}, {"title": "brahmavargaḥ", "count": 302, "ease": 0.78, "status": "не начато"}, {"title": "śailavargaḥ", "count": 74, "ease": 0.78, "status": "не начато"}, {"title": "manuṣyavargaḥ", "count": 814, "ease": 0.77, "status": "не начато"}, {"title": "digvargaḥ", "count": 266, "ease": 0.76, "status": "не начато"}, {"title": "pātālabhogivargaḥ", "count": 66, "ease": 0.76, "status": "не начато"}, {"title": "nāṭyavargaḥ", "count": 306, "ease": 0.76, "status": "не начато"}, {"title": "vārivargaḥ", "count": 210, "ease": 0.75, "status": "не начато"}, {"title": "siṃhādivargaḥ", "count": 232, "ease": 0.74, "status": "не начато"}, {"title": "svargavargaḥ", "count": 574, "ease": 0.74, "status": "не начато"}, {"title": "vaiśyavargaḥ", "count": 560, "ease": 0.73, "status": "не начато"}, {"title": "puravargaḥ", "count": 106, "ease": 0.72, "status": "не начато"}, {"title": "śūdravargaḥ", "count": 176, "ease": 0.71, "status": "не начато"}, {"title": "dhīvargaḥ", "count": 190, "ease": 0.7, "status": "не начато"}, {"title": "narakavargaḥ", "count": 34, "ease": 0.67, "status": "не начато"}, {"title": "vanauṣadhivargaḥ", "count": 850, "ease": 0.66, "status": "не начато"}]}]</script>
+<script>
+var BOARD = JSON.parse(document.getElementById("board").textContent);
+var NEXT_HINT = {"sandhi": "Следующий шаг: Уроки 1–3 · старт чтения — 30 упражнений, средняя лёгкость 0.96. Статус меняется в локальном личном слое.", "samasa": "Следующий шаг: Опознание (identify) — 759 упражнений, средняя лёгкость 1.0. Статус меняется в локальном личном слое.", "morphology": "Следующий шаг: Урок 1 — 2936 упражнений, средняя лёгкость 0.93. Статус меняется в локальном личном слое.", "vocab": "Следующий шаг: Ранги 1–500 — 814 упражнений, средняя лёгкость 0.98. Статус меняется в локальном личном слое.", "thematic_vocab": "Следующий шаг: vyomavargaḥ — 24 упражнений, средняя лёгкость 0.88. Статус меняется в локальном личном слое."};
+var detail = document.getElementById("detail");
+var opened = null;
+Array.prototype.forEach.call(document.querySelectorAll("button.cell"), function (b) {
+  b.addEventListener("click", function () {
+    if (opened) opened.classList.remove("open");
+    if (opened === b) { opened = null; detail.classList.remove("show"); return; }
+    opened = b; b.classList.add("open");
+    var fam = BOARD.filter(function (f) { return f.id === b.getAttribute("data-fam"); })[0];
+    var s = fam.stages[Number(b.getAttribute("data-i"))];
+    detail.textContent = fam.title + " · " + s.title + ": " + s.count + " упражнений, средняя лёгкость " + s.ease + ", статус «" + s.status + "». " + NEXT_HINT[fam.id];
+    detail.classList.add("show");
+  });
+});
+</script>
 </body>
 </html>

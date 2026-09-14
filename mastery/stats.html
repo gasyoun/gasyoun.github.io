@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Карта мастерства — пять семей навыков</title>
+<style>
+:root{--bg:#101418;--fg:#e8e4da;--mut:#9aa3ad;--acc:#d9a441;--line:#2a3138}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 Georgia,'Times New Roman',serif}
+main{max-width:960px;margin:0 auto;padding:3rem 1.25rem 5rem}
+h1{font-size:2rem;margin:0 0 .25rem}h1 span{color:var(--acc)}
+.sub{color:var(--mut);margin:0 0 2.5rem}
+h2{font-size:1.25rem;margin:2.5rem 0 1rem;padding-bottom:.4rem;border-bottom:1px solid var(--line)}
+h2 .n{color:var(--acc);font-size:.85rem;font-family:Menlo,monospace;margin-right:.6rem}
+p.intro{color:var(--mut);margin:0 0 1rem}
+ul{list-style:none;margin:0;padding:0}
+li{padding:.45rem 0;border-bottom:1px dashed var(--line);display:flex;gap:.75rem;align-items:baseline}
+li .no{color:var(--acc);font-family:Menlo,monospace;font-size:.8rem;min-width:2.2rem}
+a{color:var(--fg);text-decoration:none;border-bottom:1px solid var(--acc)}
+a:hover{color:var(--acc)}
+.plain{color:var(--mut);border-bottom:none;font-style:italic}
+footer{margin-top:3rem;color:var(--mut);font-size:.85rem}
+footer a{color:var(--mut);border-bottom-color:var(--line)}
+
+.family{border:1px solid var(--line);border-radius:10px;padding:1.25rem 1.5rem;margin:0 0 1.5rem}
+.family h2{margin:.1rem 0 .2rem;font-size:1.2rem}
+.family .desc{color:var(--mut);margin:0 0 1rem;font-size:.95rem}
+.bar{display:flex;height:14px;border-radius:7px;overflow:hidden;margin:.4rem 0 .3rem}
+.bar i{display:block;height:100%}
+.legend{display:flex;gap:1rem;flex-wrap:wrap;color:var(--mut);font-size:.78rem;margin:0 0 .8rem}
+.legend b{color:var(--fg);font-weight:normal}
+.meta{color:var(--mut);font-size:.8rem;margin:.6rem 0 0}
+.firsts{color:var(--mut);font-size:.8rem;font-family:Menlo,monospace}
+.note{border-left:3px solid var(--acc);padding:.6rem 1rem;color:var(--mut);margin:2rem 0;font-size:.92rem}
+</style>
+</head>
+<body>
+<main>
+<h1>Карта <span>мастерства</span></h1>
+<p class="sub">35517 учебных позиций в 5 семьях, одна шкала освоимости (ease 0–1, H3742). Дефицита прогресса тут нет: это карта местности — что за чем учить.</p>
+
+<section class="family">
+<h2>Сандхи <span style="color:var(--mut);font-weight:normal;font-size:.85rem">— 396 позиций</span></h2>
+<p class="desc">стыки слов: правила соединения звуков</p>
+<div class="bar"><i style="width:68.9%;background:#8fae5a" title="60–80%: 273"></i><i style="width:31.1%;background:#5f9e6e" title="легко 80–100%: 123"></i></div>
+<p class="legend"><b>трудно 0–20%</b> 0 · <b>20–40%</b> 0 · <b>40–60%</b> 0 · <b>60–80%</b> 273 · <b>легко 80–100%</b> 123</p>
+<p class="firsts">первые шаги: SD-0001 · SD-0002 · SD-0003 · SD-0004 · SD-0005</p>
+<p class="meta">ease: min 0.6 · средняя 0.7826 · медиана 0.75 · max 1.0</p>
+</section>
+<section class="family">
+<h2>Самасы <span style="color:var(--mut);font-weight:normal;font-size:.85rem">— 3865 позиций</span></h2>
+<p class="desc">сложные слова: разбор и сборка компаундов</p>
+<div class="bar"><i style="width:72.6%;background:#c08a3e" title="40–60%: 2806"></i><i style="width:7.8%;background:#8fae5a" title="60–80%: 300"></i><i style="width:19.6%;background:#5f9e6e" title="легко 80–100%: 759"></i></div>
+<p class="legend"><b>трудно 0–20%</b> 0 · <b>20–40%</b> 0 · <b>40–60%</b> 2806 · <b>60–80%</b> 300 · <b>легко 80–100%</b> 759</p>
+<p class="firsts">первые шаги: SM-0001 · SM-0002 · SM-0003 · SM-0004 · SM-0005</p>
+<p class="meta">ease: min 0.4 · средняя 0.5372 · медиана 0.4 · max 1.0</p>
+</section>
+<section class="family">
+<h2>Морфология <span style="color:var(--mut);font-weight:normal;font-size:.85rem">— 12000 позиций</span></h2>
+<p class="desc">формы слов: падежи, числа, спряжения</p>
+<div class="bar"><i style="width:28.5%;background:#c08a3e" title="40–60%: 3420"></i><i style="width:35.2%;background:#8fae5a" title="60–80%: 4230"></i><i style="width:36.2%;background:#5f9e6e" title="легко 80–100%: 4350"></i></div>
+<p class="legend"><b>трудно 0–20%</b> 0 · <b>20–40%</b> 0 · <b>40–60%</b> 3420 · <b>60–80%</b> 4230 · <b>легко 80–100%</b> 4350</p>
+<p class="firsts">первые шаги: MD-00001-F · MD-00002-M · MD-00003-F · MD-00004-M · MD-00005-F</p>
+<p class="meta">ease: min 0.4 · средняя 0.7131 · медиана 0.7084 · max 1.0</p>
+</section>
+<section class="family">
+<h2>Словарь <span style="color:var(--mut);font-weight:normal;font-size:.85rem">— 13334 позиций</span></h2>
+<p class="desc">частотные слова корпуса: узнавание и припоминание</p>
+<div class="bar"><i style="width:34.0%;background:#c08a3e" title="40–60%: 4530"></i><i style="width:34.2%;background:#8fae5a" title="60–80%: 4556"></i><i style="width:31.9%;background:#5f9e6e" title="легко 80–100%: 4248"></i></div>
+<p class="legend"><b>трудно 0–20%</b> 0 · <b>20–40%</b> 0 · <b>40–60%</b> 4530 · <b>60–80%</b> 4556 · <b>легко 80–100%</b> 4248</p>
+<p class="firsts">первые шаги: VC-00001 · VC-00002 · VC-00003 · VC-00004 · VC-00005</p>
+<p class="meta">ease: min 0.4 · средняя 0.6954 · медиана 0.693 · max 1.0</p>
+</section>
+<section class="family">
+<h2>Темы <span style="color:var(--mut);font-weight:normal;font-size:.85rem">— 5922 позиций</span></h2>
+<p class="desc">словарь по темам Амаркоши: группы понятий</p>
+<div class="bar"><i style="width:23.5%;background:#c08a3e" title="40–60%: 1394"></i><i style="width:34.1%;background:#8fae5a" title="60–80%: 2018"></i><i style="width:42.4%;background:#5f9e6e" title="легко 80–100%: 2510"></i></div>
+<p class="legend"><b>трудно 0–20%</b> 0 · <b>20–40%</b> 0 · <b>40–60%</b> 1394 · <b>60–80%</b> 2018 · <b>легко 80–100%</b> 2510</p>
+<p class="firsts">первые шаги: TV-00001 · TV-00002 · TV-00003 · TV-00004 · TV-00005</p>
+<p class="meta">ease: min 0.4 · средняя 0.745 · медиана 0.7566 · max 0.9996</p>
+</section>
+
+<div class="note">Все позиции показаны как «не начато»: это общая карта курса без персональных данных.
+Личный слой прогресса (streaks, «что повторить сегодня») живёт локально в ученической системе и на публичную страницу не попадает.</div>
+<footer>Источник: <a href="https://github.com/gasyoun/kosha/tree/main/data/mastery">kosha/data/mastery</a> (коммит ae7f9de5a, эпоха 2026-09-01T00:00:00Z, sha256 232de6d3cb0d…, <a href="https://github.com/gasyoun/kosha/blob/main/data/MASTERY_WEIGHTS_SPEC.md">семантика весов</a>) ·
+Собрано <a href="https://github.com/gasyoun/gasyoun.github.io/blob/master/scripts/campus/mastery_build.py">scripts/campus/mastery_build.py</a> · H4262 · 06-09-2026 · Dr. Mārcis Gasūns</footer>
+</main>
+</body>
+</html>
