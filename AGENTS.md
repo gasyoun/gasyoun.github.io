@@ -14,6 +14,11 @@ _Created: 13-09-2026 · Last updated: 15-09-2026_
   no build system — static files only.
 - Repo-level MCP: none carried (no `.mcp.json`).
 - Landing route: PR + auto-merge (gasyoun-owned, H4086 allowlist v2).
+- Generated pages: `campus/` + `mastery/` render from
+  [scripts/campus/](https://github.com/gasyoun/gasyoun.github.io/tree/master/scripts/campus)
+  generators — edit generator/data, never the HTML; canonical mastery page =
+  `mastery_map_build.py`, stats variant = `mastery_build.py`
+  ([dual-run ledger](https://github.com/gasyoun/gasyoun.github.io/blob/master/scripts/campus/MASTERY_DUALRUN_2026-09-14.md)).
 - Census: tracked by [module-spread census v2](https://github.com/gasyoun/Uprava/blob/main/data/module_spread_census_v2.json)
   (`mcp_config` marker, H4525).
 

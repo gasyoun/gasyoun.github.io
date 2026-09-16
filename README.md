@@ -1,6 +1,6 @@
 # gasyoun.github.io
 
-_Created: 08-10-2014 · Last updated: 07-09-2026_
+_Created: 08-10-2014 · Last updated: 14-09-2026_
 
 Personal GitHub Pages site of Mārcis Gasūns ([@gasyoun](https://github.com/gasyoun)),
 served at [gasyoun.github.io](https://gasyoun.github.io/). It hosts a handful of
@@ -8,6 +8,16 @@ static Sanskrit / Vedic lexicographic experiments — not a blog or CV — kept 
 plain HTML and text data.
 
 ## What is published here
+- **[campus/](https://gasyoun.github.io/campus/)** — «Кампус наглядности»:
+  один вход ко всей визуальной наглядности имения — 67 артефактов в 4 крыльях
+  (грамматика / учёба / имение и финансы / продукты и привлечение); собирается
+  генератором
+  [scripts/campus/campus_build.py](https://github.com/gasyoun/gasyoun.github.io/blob/master/scripts/campus/campus_build.py)
+  из каталога инфографик, рукописных страниц нет (H4261).
+- **[mastery/](https://gasyoun.github.io/mastery/)** — «Карта мастерства»:
+  35 517 учебных позиций в 5 drill-семях из kosha (H3742); статистический
+  вариант — [stats.html](https://gasyoun.github.io/mastery/stats.html) (H4262,
+  [dual-run запись](https://github.com/gasyoun/gasyoun.github.io/blob/master/scripts/campus/MASTERY_DUALRUN_2026-09-14.md)).
 
 - **[index.html](https://github.com/gasyoun/gasyoun.github.io/blob/master/index.html)**
   (~12 MB) — a multilingual Ṛgveda reader. Each stanza is shown as Vedic
