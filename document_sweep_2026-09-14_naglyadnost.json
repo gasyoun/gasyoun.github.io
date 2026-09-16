@@ -1,0 +1,659 @@
+{
+  "tool": "tools/document_check.py",
+  "skill": "/document",
+  "legacy_name": "/artifact-propagate",
+  "generated": "2026-09-16 09:32:16",
+  "artifacts": [
+    {
+      "artifact": "/Users/mac/Documents/GitHub/gasyoun.github.io-document-56241/campus/index.html",
+      "repo": "/Users/mac/Documents/GitHub/gasyoun.github.io-document-56241",
+      "kind": "interface",
+      "surfaces": [
+        {
+          "id": "readme",
+          "phase": 1,
+          "label": "README.md",
+          "scope": "repo",
+          "status": "present",
+          "evidence": "/Users/mac/Documents/GitHub/gasyoun.github.io-document-56241/README.md:22: - **[index.html](https://github.com/gasyoun/gasyoun.github.io/blob/master/index.html)**"
+        },
+        {
+          "id": "claude_md",
+          "phase": 1,
+          "label": "CLAUDE.md",
+          "scope": "repo",
+          "status": "n/a",
+          "evidence": "n/a: CLAUDE.md в репо нет по конвенции — AGENTS.md несёт agent-контекст и обновлён"
+        },
+        {
+          "id": "cold_start",
+          "phase": 1,
+          "label": "Cold-start doc (GEMINI.md / equivalent)",
+          "scope": "repo",
+          "status": "present",
+          "evidence": "/Users/mac/Documents/GitHub/gasyoun.github.io-document-56241/AGENTS.md:27: This repo keeps a committed memory store at [`.claude/projects/gasyoun.github.io/memory/`](https://github.com/gasyoun/gasyoun.github.io/tree/master/.claude/proj"
+        },
+        {
+          "id": "sibling_domain_docs",
+          "phase": 1,
+          "label": "Sibling domain docs (manual/roadmap/method docs)",
+          "scope": "repo",
+          "status": "n/a",
+          "evidence": "n/a: канон — README+AGENTS этого репо, отдельного доменного дока нет"
+        },
+        {
+          "id": "metadoc",
+          "phase": 1,
+          "label": "Metadoc (<name>.meta.md)",
+          "scope": "repo",
+          "status": "n/a",
+          "evidence": "n/a: dated ledger и генерируемые страницы не несут metadoc-контракт"
+        },
+        {
+          "id": "changelog",
+          "phase": 1,
+          "label": "CHANGELOG.md -> release (/cut-release)",
+          "scope": "repo",
+          "status": "n/a",
+          "evidence": "n/a: CHANGELOG в static Pages repo не ведётся by design"
+        },
+        {
+          "id": "ai_state",
+          "phase": 1,
+          "label": ".ai_state.md",
+          "scope": "repo",
+          "status": "n/a",
+          "evidence": "n/a: .ai_state.md в репо не ведётся по конвенции"
+        },
+        {
+          "id": "issues",
+          "phase": 1,
+          "label": "Issues (per-person task issues)",
+          "scope": "repo",
+          "status": "n/a",
+          "evidence": "n/a: затронутых issue нет"
+        },
+        {
+          "id": "gtd",
+          "phase": 2,
+          "label": "Uprava/GTD_NEXT_ACTIONS.md",
+          "scope": "org",
+          "status": "present",
+          "evidence": "/Users/mac/Documents/GitHub/Uprava/GTD_NEXT_ACTIONS.md:4: > 📇 Slim index: [hub_stubs/GTD_NEXT_ACTIONS.md](https://github.com/gasyoun/Uprava/blob/main/hub_stubs/GTD_NEXT_ACTIONS.md) — read first; grep this hub; never wh"
+        },
+        {
+          "id": "handoffs_registry",
+          "phase": 2,
+          "label": "Uprava/handoffs/README.md",
+          "scope": "org",
+          "status": "present",
+          "evidence": "/Users/mac/Documents/GitHub/Uprava/handoffs/README.md:1: # Handoffs — status index"
+        },
+        {
+          "id": "features_index",
+          "phase": 2,
+          "label": "SanskritLexicography/FEATURES_INDEX.md",
+          "scope": "org",
+          "status": "present",
+          "evidence": "/Users/mac/Documents/GitHub/SanskritLexicography/FEATURES_INDEX.md:3: # FEATURES_INDEX.md — what the Sanskrit Lexicon project actually has"
+        },
+        {
+          "id": "reuse_index",
+          "phase": 2,
+          "label": "Uprava/REUSE_INDEX.md (reusable assets)",
+          "scope": "org",
+          "status": "present",
+          "evidence": "/Users/mac/Documents/GitHub/Uprava/REUSE_INDEX.md:3: # REUSE_INDEX.md — Sanskrit materials & tools you already own"
+        },
+        {
+          "id": "kosha_manifest",
+          "phase": 2,
+          "label": "kosha/data/manifest/datasets.json",
+          "scope": "org",
+          "status": "n/a",
+          "evidence": "not a derived dataset"
+        },
+        {
+          "id": "data_layers_census",
+          "phase": 2,
+          "label": "Uprava/DATA_LAYERS_CENSUS.md",
+          "scope": "org",
+          "status": "n/a",
+          "evidence": "not large/local-only data (risk) and no open statistics cell to close"
+        },
+        {
+          "id": "project_interlinks",
+          "phase": 2,
+          "label": "Uprava/PROJECT_INTERLINKS.md",
+          "scope": "org",
+          "status": "present",
+          "evidence": "/Users/mac/Documents/GitHub/Uprava/PROJECT_INTERLINKS.md:175: [`SanskritLexicography/SAMSAADHANII_INDEX.md`](https://github.com/gasyoun/SanskritLexicography/blob/master/SAMSAADHANII_INDEX.md)."
+        },
+        {
+          "id": "skills_index",
+          "phase": 2,
+          "label": "root SKILLS_INDEX.md",
+          "scope": "org",
+          "status": "n/a",
+          "evidence": "artifact is not itself a skill/command"
+        },
+        {
+          "id": "articles",
+          "phase": 2,
+          "label": "Uprava/ARTICLES.md",
+          "scope": "org",
+          "status": "n/a",
+          "evidence": "artifact is not a paper (delegate to /articles-update when it is)"
+        },
+        {
+          "id": "danger_facts",
+          "phase": 2,
+          "label": "Uprava/DANGER_FACTS.md + context_facts.yaml",
+          "scope": "org",
+          "status": "present",
+          "evidence": "/Users/mac/Documents/GitHub/Uprava/DANGER_FACTS.md:41: | **Never re-spell `~~h<N>` in a pwg_ru sub-card key — it is the IDENTITY of ~11k already-promoted store rows.** `~~h<N>` is `gen_root_split`'s 0-based `enumera"
+        },
+        {
+          "id": "questions_log",
+          "phase": 2,
+          "label": "Uprava/QUESTIONS_LOG.md",
+          "scope": "org",
+          "status": "present",
+          "evidence": "/Users/mac/Documents/GitHub/Uprava/QUESTIONS_LOG.md:31: LLM classifies it against the existing index — same underlying ask in different"
+        },
+        {
+          "id": "megabook",
+          "phase": 2,
+          "label": "Uprava/MEGABOOK.md",
+          "scope": "org",
+          "status": "n/a",
+          "evidence": "n/a: тезисов не касается"
+        },
+        {
+          "id": "skills_manual_ru",
+          "phase": 2,
+          "label": "Uprava/SKILLS_MANUAL_RU.md",
+          "scope": "org",
+          "status": "n/a",
+          "evidence": "no skill/tool contract changed"
+        },
+        {
+          "id": "hooks_index",
+          "phase": 2,
+          "label": "claude-config HOOKS_INDEX.md",
+          "scope": "org",
+          "status": "present",
+          "evidence": "/Users/mac/Documents/GitHub/claude-config/HOOKS_INDEX.md:5: # HOOKS_INDEX — the per-hook roster of the claude-config hook suite"
+        },
+        {
+          "id": "repo_status_rollup",
+          "phase": 2,
+          "label": "Uprava/REPO_STATUS_ROLLUP.md",
+          "scope": "org",
+          "status": "present",
+          "evidence": "/Users/mac/Documents/GitHub/Uprava/REPO_STATUS_ROLLUP.md:4: > 📇 Slim index: [hub_stubs/REPO_STATUS_ROLLUP.md](https://github.com/gasyoun/Uprava/blob/main/hub_stubs/REPO_STATUS_ROLLUP.md) — read first; grep this hub; neve"
+        },
+        {
+          "id": "hub_manifest",
+          "phase": 2,
+          "label": "Uprava/tools/hub_manifest.json",
+          "scope": "org",
+          "status": "present",
+          "evidence": "/Users/mac/Documents/GitHub/Uprava/tools/hub_manifest.json:50: \"id\": \"reuse-index\","
+        },
+        {
+          "id": "auto_derived_views",
+          "phase": 2,
+          "label": "Auto-derived views (NEXT_UP/BOTTLENECKS/kanban/dashboards/HUB_STALENESS_REPORT)",
+          "scope": "org",
+          "status": "n/a",
+          "evidence": "auto -- never hand-edit; verify their SOURCES carry the change instead"
+        },
+        {
+          "id": "epistemic_registries",
+          "phase": 2,
+          "label": "FINDINGS x2 + 7 epistemic registries (ASSUMPTIONS/CONTRADICTIONS/GAPS/DEAD_ENDS/RECIPES/STALENESS/GLOSSARY, Uprava + SanskritLexicography)",
+          "scope": "org",
+          "status": "n/a",
+          "evidence": "closed: FINDINGS §770 appended this pass"
+        }
+      ]
+    },
+    {
+      "artifact": "/Users/mac/Documents/GitHub/gasyoun.github.io-document-56241/mastery/stats.html",
+      "repo": "/Users/mac/Documents/GitHub/gasyoun.github.io-document-56241",
+      "kind": "interface",
+      "surfaces": [
+        {
+          "id": "readme",
+          "phase": 1,
+          "label": "README.md",
+          "scope": "repo",
+          "status": "present",
+          "evidence": "/Users/mac/Documents/GitHub/gasyoun.github.io-document-56241/README.md:19: вариант — [stats.html](https://gasyoun.github.io/mastery/stats.html) (H4262,"
+        },
+        {
+          "id": "claude_md",
+          "phase": 1,
+          "label": "CLAUDE.md",
+          "scope": "repo",
+          "status": "n/a",
+          "evidence": "n/a: CLAUDE.md в репо нет по конвенции — AGENTS.md несёт agent-контекст и обновлён"
+        },
+        {
+          "id": "cold_start",
+          "phase": 1,
+          "label": "Cold-start doc (GEMINI.md / equivalent)",
+          "scope": "repo",
+          "status": "present",
+          "evidence": "/Users/mac/Documents/GitHub/gasyoun.github.io-document-56241/AGENTS.md:20: `mastery_map_build.py`, stats variant = `mastery_build.py`"
+        },
+        {
+          "id": "sibling_domain_docs",
+          "phase": 1,
+          "label": "Sibling domain docs (manual/roadmap/method docs)",
+          "scope": "repo",
+          "status": "n/a",
+          "evidence": "n/a: канон — README+AGENTS этого репо, отдельного доменного дока нет"
+        },
+        {
+          "id": "metadoc",
+          "phase": 1,
+          "label": "Metadoc (<name>.meta.md)",
+          "scope": "repo",
+          "status": "n/a",
+          "evidence": "n/a: dated ledger и генерируемые страницы не несут metadoc-контракт"
+        },
+        {
+          "id": "changelog",
+          "phase": 1,
+          "label": "CHANGELOG.md -> release (/cut-release)",
+          "scope": "repo",
+          "status": "n/a",
+          "evidence": "n/a: CHANGELOG в static Pages repo не ведётся by design"
+        },
+        {
+          "id": "ai_state",
+          "phase": 1,
+          "label": ".ai_state.md",
+          "scope": "repo",
+          "status": "n/a",
+          "evidence": "n/a: .ai_state.md в репо не ведётся по конвенции"
+        },
+        {
+          "id": "issues",
+          "phase": 1,
+          "label": "Issues (per-person task issues)",
+          "scope": "repo",
+          "status": "n/a",
+          "evidence": "n/a: затронутых issue нет"
+        },
+        {
+          "id": "gtd",
+          "phase": 2,
+          "label": "Uprava/GTD_NEXT_ACTIONS.md",
+          "scope": "org",
+          "status": "present",
+          "evidence": "/Users/mac/Documents/GitHub/Uprava/GTD_NEXT_ACTIONS.md:721: | MG | minor | ~0d | **Review csl-orig `v02/etymology_stats/nearest_root_audit_sample.csv`** (74 deterministic rows) — mark `audit_status`/`auditor_notes`; the "
+        },
+        {
+          "id": "handoffs_registry",
+          "phase": 2,
+          "label": "Uprava/handoffs/README.md",
+          "scope": "org",
+          "status": "n/a",
+          "evidence": "closed: H4260–H4265 заминчены, закрыты ✅ и архивированы 06–07.09 — строки живут в REGISTRY_ARCHIVE.md, README их больше не несёт by design"
+        },
+        {
+          "id": "features_index",
+          "phase": 2,
+          "label": "SanskritLexicography/FEATURES_INDEX.md",
+          "scope": "org",
+          "status": "present",
+          "evidence": "/Users/mac/Documents/GitHub/SanskritLexicography/FEATURES_INDEX.md:70: | 🟡 B7 | `etymology_stats` | Cross-dict aggregates: root oracle, 41-pair agreement matrix (95% CI), affix entropy/frequency | 10 dicts · 2.9 MB | `root_oracle: "
+        },
+        {
+          "id": "reuse_index",
+          "phase": 2,
+          "label": "Uprava/REUSE_INDEX.md (reusable assets)",
+          "scope": "org",
+          "status": "present",
+          "evidence": "/Users/mac/Documents/GitHub/Uprava/REUSE_INDEX.md:76: | [DCS akshara/varṇa/ligature frequency](https://github.com/gasyoun/VisualDCS/tree/main/derived-data/Fonetika/regen-2026) | Grapheme-level frequency over the fu"
+        },
+        {
+          "id": "kosha_manifest",
+          "phase": 2,
+          "label": "kosha/data/manifest/datasets.json",
+          "scope": "org",
+          "status": "n/a",
+          "evidence": "not a derived dataset"
+        },
+        {
+          "id": "data_layers_census",
+          "phase": 2,
+          "label": "Uprava/DATA_LAYERS_CENSUS.md",
+          "scope": "org",
+          "status": "n/a",
+          "evidence": "not large/local-only data (risk) and no open statistics cell to close"
+        },
+        {
+          "id": "project_interlinks",
+          "phase": 2,
+          "label": "Uprava/PROJECT_INTERLINKS.md",
+          "scope": "org",
+          "status": "present",
+          "evidence": "/Users/mac/Documents/GitHub/Uprava/PROJECT_INTERLINKS.md:960: [`stats_census_register.csv`](https://github.com/sanskrit-lexicon/csl-observatory/blob/main/observatory/site/src/data/stats_census_register.csv)"
+        },
+        {
+          "id": "skills_index",
+          "phase": 2,
+          "label": "root SKILLS_INDEX.md",
+          "scope": "org",
+          "status": "n/a",
+          "evidence": "artifact is not itself a skill/command"
+        },
+        {
+          "id": "articles",
+          "phase": 2,
+          "label": "Uprava/ARTICLES.md",
+          "scope": "org",
+          "status": "n/a",
+          "evidence": "artifact is not a paper (delegate to /articles-update when it is)"
+        },
+        {
+          "id": "danger_facts",
+          "phase": 2,
+          "label": "Uprava/DANGER_FACTS.md + context_facts.yaml",
+          "scope": "org",
+          "status": "n/a",
+          "evidence": "n/a: destructive-risk факта нет — dual-run сведён в MASTERY_DUALRUN ledger"
+        },
+        {
+          "id": "questions_log",
+          "phase": 2,
+          "label": "Uprava/QUESTIONS_LOG.md",
+          "scope": "org",
+          "status": "present",
+          "evidence": "/Users/mac/Documents/GitHub/Uprava/QUESTIONS_LOG.md:6: _Created: 04-07-2026 · Last updated: 11-09-2026 (previous pass 11-09-2026: /weekly-review drain 19 raw rows → Q2609-001…010, H4527 claim noted as Q2609-001 reso"
+        },
+        {
+          "id": "megabook",
+          "phase": 2,
+          "label": "Uprava/MEGABOOK.md",
+          "scope": "org",
+          "status": "n/a",
+          "evidence": "n/a: тезисов не касается"
+        },
+        {
+          "id": "skills_manual_ru",
+          "phase": 2,
+          "label": "Uprava/SKILLS_MANUAL_RU.md",
+          "scope": "org",
+          "status": "n/a",
+          "evidence": "no skill/tool contract changed"
+        },
+        {
+          "id": "hooks_index",
+          "phase": 2,
+          "label": "claude-config HOOKS_INDEX.md",
+          "scope": "org",
+          "status": "n/a",
+          "evidence": "n/a: enforcement не менялся"
+        },
+        {
+          "id": "repo_status_rollup",
+          "phase": 2,
+          "label": "Uprava/REPO_STATUS_ROLLUP.md",
+          "scope": "org",
+          "status": "present",
+          "evidence": "/Users/mac/Documents/GitHub/Uprava/REPO_STATUS_ROLLUP.md:328: - **24-08-2026 — AI-marketer estate v1 BUILT (H3453, Ox Alpha `opencode/x-preview-f-free`, MG: «собрать estate по мануалу»).** [tools/aimarketer/](https://githu"
+        },
+        {
+          "id": "hub_manifest",
+          "phase": 2,
+          "label": "Uprava/tools/hub_manifest.json",
+          "scope": "org",
+          "status": "n/a",
+          "evidence": "n/a: статические страницы, не staleness-хаб"
+        },
+        {
+          "id": "auto_derived_views",
+          "phase": 2,
+          "label": "Auto-derived views (NEXT_UP/BOTTLENECKS/kanban/dashboards/HUB_STALENESS_REPORT)",
+          "scope": "org",
+          "status": "n/a",
+          "evidence": "auto -- never hand-edit; verify their SOURCES carry the change instead"
+        },
+        {
+          "id": "epistemic_registries",
+          "phase": 2,
+          "label": "FINDINGS x2 + 7 epistemic registries (ASSUMPTIONS/CONTRADICTIONS/GAPS/DEAD_ENDS/RECIPES/STALENESS/GLOSSARY, Uprava + SanskritLexicography)",
+          "scope": "org",
+          "status": "n/a",
+          "evidence": "closed: FINDINGS §770 appended this pass"
+        }
+      ]
+    },
+    {
+      "artifact": "/Users/mac/Documents/GitHub/gasyoun.github.io-document-56241/scripts/campus/MASTERY_DUALRUN_2026-09-14.md",
+      "repo": "/Users/mac/Documents/GitHub/gasyoun.github.io-document-56241",
+      "kind": "doc",
+      "surfaces": [
+        {
+          "id": "readme",
+          "phase": 1,
+          "label": "README.md",
+          "scope": "repo",
+          "status": "present",
+          "evidence": "/Users/mac/Documents/GitHub/gasyoun.github.io-document-56241/README.md:20: [dual-run запись](https://github.com/gasyoun/gasyoun.github.io/blob/master/scripts/campus/MASTERY_DUALRUN_2026-09-14.md))."
+        },
+        {
+          "id": "claude_md",
+          "phase": 1,
+          "label": "CLAUDE.md",
+          "scope": "repo",
+          "status": "n/a",
+          "evidence": "n/a: CLAUDE.md в репо нет по конвенции — AGENTS.md несёт agent-контекст и обновлён"
+        },
+        {
+          "id": "cold_start",
+          "phase": 1,
+          "label": "Cold-start doc (GEMINI.md / equivalent)",
+          "scope": "repo",
+          "status": "present",
+          "evidence": "/Users/mac/Documents/GitHub/gasyoun.github.io-document-56241/AGENTS.md:21: ([dual-run ledger](https://github.com/gasyoun/gasyoun.github.io/blob/master/scripts/campus/MASTERY_DUALRUN_2026-09-14.md))."
+        },
+        {
+          "id": "sibling_domain_docs",
+          "phase": 1,
+          "label": "Sibling domain docs (manual/roadmap/method docs)",
+          "scope": "repo",
+          "status": "n/a",
+          "evidence": "n/a: канон — README+AGENTS этого репо, отдельного доменного дока нет"
+        },
+        {
+          "id": "metadoc",
+          "phase": 1,
+          "label": "Metadoc (<name>.meta.md)",
+          "scope": "repo",
+          "status": "n/a",
+          "evidence": "n/a: dated ledger и генерируемые страницы не несут metadoc-контракт"
+        },
+        {
+          "id": "changelog",
+          "phase": 1,
+          "label": "CHANGELOG.md -> release (/cut-release)",
+          "scope": "repo",
+          "status": "n/a",
+          "evidence": "n/a: CHANGELOG в static Pages repo не ведётся by design"
+        },
+        {
+          "id": "ai_state",
+          "phase": 1,
+          "label": ".ai_state.md",
+          "scope": "repo",
+          "status": "n/a",
+          "evidence": "n/a: .ai_state.md в репо не ведётся по конвенции"
+        },
+        {
+          "id": "issues",
+          "phase": 1,
+          "label": "Issues (per-person task issues)",
+          "scope": "repo",
+          "status": "n/a",
+          "evidence": "n/a: затронутых issue нет"
+        },
+        {
+          "id": "gtd",
+          "phase": 2,
+          "label": "Uprava/GTD_NEXT_ACTIONS.md",
+          "scope": "org",
+          "status": "present",
+          "evidence": "/Users/mac/Documents/GitHub/Uprava/GTD_NEXT_ACTIONS.md:430: | 06-09-2026 | OxAlpha (opencode/z-ai/glm-5.3-flash), drain lane | ✅ | Дрен 5 детей зонтика НАГЛЯДНОСТЬ [H4260](https://github.com/gasyoun/Uprava/blob/main/hand"
+        },
+        {
+          "id": "handoffs_registry",
+          "phase": 2,
+          "label": "Uprava/handoffs/README.md",
+          "scope": "org",
+          "status": "n/a",
+          "evidence": "closed: H4260–H4265 заминчены, закрыты ✅ и архивированы 06–07.09 — строки живут в REGISTRY_ARCHIVE.md, README их больше не несёт by design"
+        },
+        {
+          "id": "features_index",
+          "phase": 2,
+          "label": "SanskritLexicography/FEATURES_INDEX.md",
+          "scope": "org",
+          "status": "n/a",
+          "evidence": "n/a for the ledger doc: I15/I16 зарегистрированы для страниц (campus/mastery); dated ledger — не capability"
+        },
+        {
+          "id": "reuse_index",
+          "phase": 2,
+          "label": "Uprava/REUSE_INDEX.md (reusable assets)",
+          "scope": "org",
+          "status": "n/a",
+          "evidence": "n/a: campus_build.py — thin one-off рендерер, не кросс-репо переиспользуемый актив"
+        },
+        {
+          "id": "kosha_manifest",
+          "phase": 2,
+          "label": "kosha/data/manifest/datasets.json",
+          "scope": "org",
+          "status": "n/a",
+          "evidence": "not a derived dataset"
+        },
+        {
+          "id": "data_layers_census",
+          "phase": 2,
+          "label": "Uprava/DATA_LAYERS_CENSUS.md",
+          "scope": "org",
+          "status": "n/a",
+          "evidence": "not large/local-only data (risk) and no open statistics cell to close"
+        },
+        {
+          "id": "project_interlinks",
+          "phase": 2,
+          "label": "Uprava/PROJECT_INTERLINKS.md",
+          "scope": "org",
+          "status": "n/a",
+          "evidence": "n/a: хаб не создаёт data-edge"
+        },
+        {
+          "id": "skills_index",
+          "phase": 2,
+          "label": "root SKILLS_INDEX.md",
+          "scope": "org",
+          "status": "n/a",
+          "evidence": "artifact is not itself a skill/command"
+        },
+        {
+          "id": "articles",
+          "phase": 2,
+          "label": "Uprava/ARTICLES.md",
+          "scope": "org",
+          "status": "n/a",
+          "evidence": "artifact is not a paper (delegate to /articles-update when it is)"
+        },
+        {
+          "id": "danger_facts",
+          "phase": 2,
+          "label": "Uprava/DANGER_FACTS.md + context_facts.yaml",
+          "scope": "org",
+          "status": "n/a",
+          "evidence": "n/a: destructive-risk факта нет — dual-run сведён в MASTERY_DUALRUN ledger"
+        },
+        {
+          "id": "questions_log",
+          "phase": 2,
+          "label": "Uprava/QUESTIONS_LOG.md",
+          "scope": "org",
+          "status": "n/a",
+          "evidence": "n/a: повторного вопросного паттерна нет"
+        },
+        {
+          "id": "megabook",
+          "phase": 2,
+          "label": "Uprava/MEGABOOK.md",
+          "scope": "org",
+          "status": "n/a",
+          "evidence": "n/a: тезисов не касается"
+        },
+        {
+          "id": "skills_manual_ru",
+          "phase": 2,
+          "label": "Uprava/SKILLS_MANUAL_RU.md",
+          "scope": "org",
+          "status": "n/a",
+          "evidence": "no skill/tool contract changed"
+        },
+        {
+          "id": "hooks_index",
+          "phase": 2,
+          "label": "claude-config HOOKS_INDEX.md",
+          "scope": "org",
+          "status": "n/a",
+          "evidence": "n/a: enforcement не менялся"
+        },
+        {
+          "id": "repo_status_rollup",
+          "phase": 2,
+          "label": "Uprava/REPO_STATUS_ROLLUP.md",
+          "scope": "org",
+          "status": "n/a",
+          "evidence": "n/a: регенерится собственным тулом"
+        },
+        {
+          "id": "hub_manifest",
+          "phase": 2,
+          "label": "Uprava/tools/hub_manifest.json",
+          "scope": "org",
+          "status": "n/a",
+          "evidence": "n/a: статические страницы, не staleness-хаб"
+        },
+        {
+          "id": "auto_derived_views",
+          "phase": 2,
+          "label": "Auto-derived views (NEXT_UP/BOTTLENECKS/kanban/dashboards/HUB_STALENESS_REPORT)",
+          "scope": "org",
+          "status": "n/a",
+          "evidence": "auto -- never hand-edit; verify their SOURCES carry the change instead"
+        },
+        {
+          "id": "epistemic_registries",
+          "phase": 2,
+          "label": "FINDINGS x2 + 7 epistemic registries (ASSUMPTIONS/CONTRADICTIONS/GAPS/DEAD_ENDS/RECIPES/STALENESS/GLOSSARY, Uprava + SanskritLexicography)",
+          "scope": "org",
+          "status": "n/a",
+          "evidence": "closed: FINDINGS §770 appended this pass"
+        }
+      ]
+    }
+  ],
+  "provenance": {
+    "host": "MacBook-Air.local",
+    "git_head": "eec5d3dca75bee36f196670ef83d8f526841569e",
+    "git_branch": "document/campus-mastery-reg-241",
+    "handoff": "H4262"
+  }
+}
