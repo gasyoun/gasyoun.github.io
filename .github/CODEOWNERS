@@ -1,0 +1,8 @@
+# CODEOWNERS — gasyoun.github.io
+# H5175 rollout (20-09-2026): GitHub-native ownership for the estate's active repos.
+# RACI basis: docs/RACI_PROCESS_OWNERSHIP_MAP_19-09-2026.md (gasyoun/Uprava).
+# Dr. Mārcis Gasūns (MG) is the sole Accountable owner; AI executor tiers are not
+# GitHub accounts and are recorded in the RACI map, not here.
+# Effect: review requests and ownership badges route to @gasyoun.
+
+* @gasyoun
