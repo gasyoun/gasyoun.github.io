@@ -1,0 +1,15 @@
+#!/bin/sh
+# H5181 (20-09-2026) publish gate: git push to a Pages repo is instant publication; guard 4 check_publish only catches gh api / visibility flips, not plain pushes. Escape: ALLOW_PUBLISH_PUSH=1 (register in claude-config escape registry is N/A — different repo; documented here).
+
+while read -r local_ref local_sha remote_ref remote_sha; do
+    if [ "$ALLOW_PUBLISH_PUSH" = "1" ]; then
+        echo "🟢 publish push allowed via ALLOW_PUBLISH_PUSH=1 — publish-safety-check contract applies" >&2
+        continue
+    fi
+    echo "🛑 pre-push: a plain push to gasyoun.github.io PUBLISHES IMMEDIATELY (live site + vote hub)" >&2
+    echo "   Run the publish-safety-check contract first (visibility, rights, secrets, personal data)." >&2
+    echo "   Sanctioned: ALLOW_PUBLISH_PUSH=1 git push ..." >&2
+    exit 1
+done
+
+exit 0
