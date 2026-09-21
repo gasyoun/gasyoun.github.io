@@ -28,11 +28,14 @@
 <a href="https://github.com/gasyoun/Uprava/blob/main/docs/PLAYBOOK_MSI_HANDY_DICTATION_21-09-2026.md">полный playbook в Uprava</a></p>
 
 <h2>Самопроверка за 1 минуту</h2>
+<div class="warn">⚠️ Вставлять в <b>cmd</b> (чёрное окно), НЕ в PowerShell — в PowerShell амперсанд запрещён. Если окно уже PowerShell — используйте второй вариант ниже.</div>
 <ol>
 <li><b>Win+R</b> → вписать <code>cmd</code> → <b>Enter</b>.</li>
 <li>Вставить эту строку и нажать <b>Enter</b>:</li>
 </ol>
 <pre><code>schtasks /query /tn HandyWatchdog /fo LIST &amp; schtasks /query /tn HandyWatchdogMeta /fo LIST &amp; tasklist | findstr /I handy &amp; type "%LOCALAPPDATA%\Handy\meta_heartbeat.txt"</code></pre>
+<p><b>Если окно PowerShell</b> — вместо неё:</p>
+<pre><code>schtasks /query /tn HandyWatchdog /fo LIST; schtasks /query /tn HandyWatchdogMeta /fo LIST; tasklist | findstr /I handy; Get-Content "$env:LOCALAPPDATA\Handy\meta_heartbeat.txt"</code></pre>
 <p><b>Здорово</b> = обе задачи «Готова / Ready», есть строка с <code>handy.exe</code>, сердцебиение свежее (сегодняшняя дата).</p>
 <p>Если что-то не так — одна команда чинит всё (пересоздаёт задачу-стража, поднимает Handy, восстанавливает настройки):</p>
 <pre><code>powershell -NoProfile -ExecutionPolicy Bypass -File "%LOCALAPPDATA%\Handy\meta_watchdog.ps1"</code></pre>
