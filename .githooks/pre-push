@@ -1,14 +1,20 @@
 #!/bin/sh
 # H5181 (20-09-2026) publish gate: git push to a Pages repo is instant publication; guard 4 check_publish only catches gh api / visibility flips, not plain pushes. Escape: ALLOW_PUBLISH_PUSH=1 (register in claude-config escape registry is N/A — different repo; documented here).
+# Narrowed 23-09-2026 (MG ruling in chat, H5281 session): Pages serves only master, so only a push that TARGETS master publishes.
+# Working-branch pushes pass freely; publication happens by merging a PR into master, after the publish-safety-check / vote-sheet gates.
 
 while read -r local_ref local_sha remote_ref remote_sha; do
+    case "$remote_ref" in
+        refs/heads/master|refs/heads/main) ;;
+        *) continue ;;
+    esac
     if [ "$ALLOW_PUBLISH_PUSH" = "1" ]; then
         echo "🟢 publish push allowed via ALLOW_PUBLISH_PUSH=1 — publish-safety-check contract applies" >&2
         continue
     fi
-    echo "🛑 pre-push: a plain push to gasyoun.github.io PUBLISHES IMMEDIATELY (live site + vote hub)" >&2
-    echo "   Run the publish-safety-check contract first (visibility, rights, secrets, personal data)." >&2
-    echo "   Sanctioned: ALLOW_PUBLISH_PUSH=1 git push ..." >&2
+    echo "🛑 pre-push: a push to $remote_ref of gasyoun.github.io PUBLISHES IMMEDIATELY (live site + vote hub)" >&2
+    echo "   Push a working branch and merge it via a PR instead (publish-safety-check contract: visibility, rights, secrets, personal data)." >&2
+    echo "   Sanctioned direct push (human only): ALLOW_PUBLISH_PUSH=1 git push ..." >&2
     exit 1
 done
 
