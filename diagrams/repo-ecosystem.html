@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sanskrit-lexicon estate - repo ecosystem</title>
+<meta name="description" content="Umbrella groups x tiers x repos across the sanskrit-lexicon and gasyoun estate, regenerated from the estate repo registry.">
+<style>
+:root { color-scheme: light dark; }
+body { margin:0; background:#f7f7f5; color:#1c1c1e;
+  font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; }
+main { max-width:1280px; margin:0 auto; padding:24px 16px 64px; }
+h1 { font-size:25px; margin:0 0 6px; }
+p.sub { margin:0 0 18px; color:#55565b; }
+.stats { display:flex; flex-wrap:wrap; gap:10px; margin:0 0 16px; }
+.stat { background:#fff; border:1px solid #e2e2de; border-radius:10px; padding:8px 12px; }
+.stat b { display:block; font-size:20px; }
+.stat span { color:#6a6b70; font-size:12.5px; }
+.legend { display:flex; flex-wrap:wrap; gap:14px; align-items:center; margin:0 0 6px; font-size:13px; }
+.key { display:inline-flex; align-items:center; gap:6px; color:#4a4b50; }
+.key i { width:13px; height:13px; border-radius:3px; display:inline-block; }
+.key b { font-size:15px; }
+.controls { margin:10px 0 14px; font-size:13.5px; color:#4a4b50; }
+.controls label { margin-right:16px; cursor:pointer; }
+.note { background:#fffbe9; border:1px solid #ecd9a0; border-radius:10px;
+  padding:10px 14px; font-size:13.5px; margin:0 0 18px; }
+svg { width:100%; height:auto; background:#fff; border:1px solid #e2e2de; border-radius:12px; }
+.clusterbox { fill:#fbfbfa; stroke:#e4e4e0; }
+.clustertitle { font-size:14px; font-weight:600; fill:#2c2d31; }
+.clustertitle .count { font-weight:400; fill:#77787d; }
+.clustertitle .fallbacktag { font-weight:400; font-size:11.5px; fill:#9a9ba0; }
+.withheld { font-size:11.5px; fill:#8a6d3b; }
+.node text { font-size:12.5px; fill:#fff; text-anchor:middle; pointer-events:none; }
+.node rect { stroke:rgba(0,0,0,.14); }
+.node { cursor:default; }
+.edge { fill:none; stroke:#5b5c62; stroke-opacity:.16; stroke-width:1; }
+.edge.plan { stroke-dasharray:4 3; stroke-opacity:.12; }
+svg.noedges .edge { display:none; }
+svg.focus .edge { stroke-opacity:.05; }
+svg.focus .edge.hot { stroke-opacity:.85; stroke-width:1.8; stroke:#b4341f; }
+svg.focus .node { opacity:.35; }
+svg.focus .node.hot { opacity:1; }
+table { border-collapse:collapse; width:100%; font-size:13px; margin-top:12px; }
+th, td { text-align:left; padding:5px 8px; border-bottom:1px solid #e7e7e3; }
+th { color:#6a6b70; font-weight:600; }
+details { margin-top:22px; }
+summary { cursor:pointer; font-weight:600; }
+footer { margin-top:28px; font-size:13px; color:#6a6b70; }
+footer code { background:#eeeeea; padding:1px 5px; border-radius:4px; }
+a { color:#2f5fa8; }
+@media (prefers-color-scheme: dark) {
+  body { background:#151517; color:#e8e8ea; }
+  .stat, svg { background:#1d1d20; border-color:#303035; }
+  .clusterbox { fill:#202024; stroke:#303035; }
+  .clustertitle { fill:#e4e4e7; }
+  .note { background:#2a2618; border-color:#4a422a; }
+  th, td { border-color:#303035; }
+  footer code { background:#26262a; }
+  a { color:#7aa5e8; }
+}
+</style>
+</head>
+<body>
+<main>
+<h1>Repo ecosystem - umbrellas &#215; tiers &#215; repos</h1>
+<p class="sub">Every repository of the estate, grouped by umbrella, coloured by tier, wired by the
+cross-repo dependency edges that are public on both ends. Generated from the estate registry - no hand-editing.</p>
+
+<div class="stats">
+  <div class="stat"><b>163</b><span>repos in the estate</span></div>
+  <div class="stat"><b>141</b><span>public - drawn by name</span></div>
+  <div class="stat"><b>22</b><span>private - counted only</span></div>
+  <div class="stat"><b>7</b><span>groups</span></div>
+  <div class="stat"><b>154</b><span>public-to-public edges</span></div>
+</div>
+
+<div class="note">
+<b>Publish safety.</b> 22 of the 163 repos are private. They appear on this page only as an
+anonymous per-group count - never by name, never as an edge endpoint, never with a local path. Ownership split:
+86 sanskrit-lexicon + 77 gasyoun. Off-estate registry rows not drawn here: 3 alias rows, 5 external rows. 93 edge record(s) were dropped because at
+least one endpoint is not a public estate repo.
+</div>
+
+<div class="legend"><span class="key"><i style="background:#b4341f"></i>Tier 0 - student / revenue</span>
+<span class="key"><i style="background:#b06a10"></i>Tier 1 - research spine</span>
+<span class="key"><i style="background:#2f6f4f"></i>Tier 2 - supporting</span>
+<span class="key"><i style="background:#3a5f9e"></i>Tier 3 - peripheral</span>
+<span class="key"><i style="background:#6d6f76"></i>untiered - no ruling yet (H5433)</span></div>
+<div class="legend"><span class="key"><b>⚙</b>agent infrastructure</span>
+<span class="key"><b>▣</b>archived</span>
+<span class="key"><b>⑂</b>fork</span>
+<span class="key"><b>◇</b>name reservation</span></div>
+<div class="controls">
+  <label><input type="checkbox" id="edgetoggle" checked> show dependency edges</label>
+  <label><input type="checkbox" id="focustoggle"> dim everything but the hovered repo</label>
+</div>
+
+<svg id="map" viewBox="0 0 1280 1156" role="img" aria-label="Repo ecosystem map">
+<g class="edges">
+<path class="edge live" data-a="csl-pywork" data-b="csl-orig" d="M964,149 C1004,149 735,149 775,149"><title>csl-pywork -&gt; csl-orig: generate_dict.sh + updateByLine.py build/XML-validation pipeline</title></path>
+<path class="edge live" data-a="CORRECTIONS" data-b="csl-orig" d="M358,115 C398,115 735,149 775,149"><title>CORRECTIONS -&gt; csl-orig: maintainer corrections (Jim Funderburk pattern)</title></path>
+<path class="edge live" data-a="csl-corrections" data-b="csl-orig" d="M743,115 C783,115 735,149 775,149"><title>csl-corrections -&gt; csl-orig: audit-trail change files for applied corrections</title></path>
+<path class="edge live" data-a="csl-corrections" data-b="csl-atlas" d="M743,115 C783,115 591,115 631,115"><title>csl-corrections -&gt; csl-atlas: data/derived/correction_loci.tsv (39,540 locus-resolved records)</title></path>
+<path class="edge live" data-a="csl-orig" data-b="SanskritLexicography" d="M775,149 C869,149 884,431 978,431"><title>csl-orig -&gt; SanskritLexicography: inm/pui onomasticon validation of Cyrillic proper-noun keys (446 of 534 keys validated against inm/pui &lt;k1&gt; headwords)</title></path>
+<path class="edge live" data-a="csl-orig" data-b="csl-websanlexicon" d="M775,149 C1089,149 -68,1091 246,1091"><title>csl-orig -&gt; csl-websanlexicon: per-dict XML/SQLite for the PHP web frontend</title></path>
+<path class="edge live" data-a="csl-orig" data-b="csl-apidev" d="M775,149 C815,149 420,115 460,115"><title>csl-orig -&gt; csl-apidev: dict data for the search API</title></path>
+<path class="edge live" data-a="csl-orig" data-b="csl-app" d="M775,149 C815,149 507,115 547,115"><title>csl-orig -&gt; csl-app: CDSL dictionaries packaged as offline Flutter app</title></path>
+<path class="edge live" data-a="csl-orig" data-b="csl-devanagari" d="M775,149 C815,149 833,115 873,115"><title>csl-orig -&gt; csl-devanagari: SLP1 source text for Devanagari round-trip</title></path>
+<path class="edge live" data-a="csl-devanagari" data-b="csl-orig" d="M873,115 C913,115 735,149 775,149"><title>csl-devanagari -&gt; csl-orig: Devanagari-tag round-trip diffs back to source</title></path>
+<path class="edge live" data-a="csl-orig" data-b="csl-inflect" d="M775,149 C925,149 397,599 547,599"><title>csl-orig -&gt; csl-inflect: MW-derived CDSL headwords keying paradigm tables</title></path>
+<path class="edge live" data-a="csl-orig" data-b="csl-atlas" d="M775,149 C815,149 591,115 631,115"><title>csl-orig -&gt; csl-atlas: all dict source texts for the cross-dict headword atlas</title></path>
+<path class="edge live" data-a="csl-orig" data-b="SanskritSpellCheck" d="M775,149 C936,149 754,633 915,633"><title>csl-orig -&gt; SanskritSpellCheck: dict body texts for body-grounded triage</title></path>
+<path class="edge live" data-a="csl-orig" data-b="MWinflect" d="M775,149 C936,149 64,633 225,633"><title>csl-orig -&gt; MWinflect: MW1899 nominal/verb entries</title></path>
+<path class="edge live" data-a="MWinflect" data-b="kosha" d="M225,633 C315,633 926,363 1016,363"><title>MWinflect -&gt; kosha: full MW inflection tables for form→lemma lookup</title></path>
+<path class="edge live" data-a="csl-orig" data-b="WhitneyRoots" d="M775,149 C880,149 747,465 852,465"><title>csl-orig -&gt; WhitneyRoots: mw_etymology.tsv → crosswalk/mw_derivations.json (620 roots)</title></path>
+<path class="edge live" data-a="csl-atlas" data-b="csl-standards" d="M631,115 C671,115 59,183 99,183"><title>csl-atlas -&gt; csl-standards: TEI/OntoLex-Lemon/FrAC export modelling ownership</title></path>
+<path class="edge live" data-a="csl-apidev" data-b="csl-websanlexicon" d="M460,115 C785,115 -79,1091 246,1091"><title>csl-apidev -&gt; csl-websanlexicon: hand-synced forked basicadjust.php/basicdisplay.php</title></path>
+<path class="edge live" data-a="csl-guides" data-b="csl-atlas" d="M1062,115 C1102,115 591,115 631,115"><title>csl-guides -&gt; csl-atlas: src/data/atlas-extract.json (OBS-R/OBS-C figures)</title></path>
+<path class="edge live" data-a="csl-guides" data-b="kosha" d="M1062,115 C1144,115 934,363 1016,363"><title>csl-guides -&gt; kosha: top-2,000 lemma_frequency excerpt → src/data/corpus-frequency.json</title></path>
+<path class="edge live" data-a="csl-guides" data-b="SanskritLexicography" d="M1062,115 C1167,115 873,431 978,431"><title>csl-guides -&gt; SanskritLexicography: mw_heritage_crosswalk aggregates → src/data/heritage-coverage.json</title></path>
+<path class="edge live" data-a="csl-newsletter" data-b="csl-guides" d="M537,149 C577,149 1022,115 1062,115"><title>csl-newsletter -&gt; csl-guides: each newsletter edition doubles as a blog post</title></path>
+<path class="edge live" data-a="csl-doc" data-b="GRA" d="M974,115 C1014,115 486,183 526,183"><title>csl-doc -&gt; GRA: front-matter scans OCR'd into GRA/prefaces/</title></path>
+<path class="edge live" data-a="csl-doc" data-b="MD" d="M974,115 C1014,115 119,217 159,217"><title>csl-doc -&gt; MD: front-matter scans OCR'd into MD/prefaces/</title></path>
+<path class="edge live" data-a="GRA" data-b="csl-guides" d="M526,183 C566,183 1022,115 1062,115"><title>GRA -&gt; csl-guides: *pref_all.* consolidated preface editions in ocr-prefaces.mdx</title></path>
+<path class="edge live" data-a="MD" data-b="csl-guides" d="M159,217 C199,217 1022,115 1062,115"><title>MD -&gt; csl-guides: *pref_all.* consolidated preface editions in ocr-prefaces.mdx</title></path>
+<path class="edge live" data-a="csl-santam" data-b="kosha" d="M1062,149 C1133,149 945,363 1016,363"><title>csl-santam -&gt; kosha: tamil SQLite corpus (mwd+cap+otl, 321,620 entries) fold</title></path>
+<path class="edge plan" data-a="csl-observatory" data-b="csl-atlas" d="M666,149 C706,149 591,115 631,115"><title>csl-observatory -&gt; csl-atlas: correction_events_release.csv (50,953 events)</title></path>
+<path class="edge live" data-a="DCS" data-b="VisualDCS" d="M428,183 C522,183 558,465 652,465"><title>DCS -&gt; VisualDCS: upstream DCS corpus data (CoNLL-U)</title></path>
+<path class="edge live" data-a="VisualDCS" data-b="kosha" d="M652,465 C692,465 976,363 1016,363"><title>VisualDCS -&gt; kosha: data/frequency/lemma_frequency.tsv (83,277 rows, M9 join)</title></path>
+<path class="edge live" data-a="VisualDCS" data-b="SanskritLexicography" d="M652,465 C692,465 938,431 978,431"><title>VisualDCS -&gt; SanskritLexicography: frequency-first pwg_ru worklist ordering</title></path>
+<path class="edge live" data-a="VisualDCS" data-b="WhitneyRoots" d="M652,465 C692,465 812,465 852,465"><title>VisualDCS -&gt; WhitneyRoots: dcs_ppp_verified.tsv (5,181 corpus-attested PPP forms)</title></path>
+<path class="edge live" data-a="VisualDCS" data-b="MWS" d="M652,465 C734,465 339,217 421,217"><title>VisualDCS -&gt; MWS: citation registers</title></path>
+<path class="edge live" data-a="VisualDCS" data-b="csl-apidev" d="M652,465 C768,465 344,115 460,115"><title>VisualDCS -&gt; csl-apidev: DCS-2026 lemmas.csv → wf.txt refresh + dcs_cdsl_xref.tsv</title></path>
+<path class="edge live" data-a="VisualDCS" data-b="csl-atlas" d="M652,465 C768,465 515,115 631,115"><title>VisualDCS -&gt; csl-atlas: DCS morphology feed for atlas mining</title></path>
+<path class="edge live" data-a="VisualDCS" data-b="SanskritGrammar" d="M652,465 C692,465 654,431 694,431"><title>VisualDCS -&gt; SanskritGrammar: varga-series-diachrony aggregates → GasunsDhatu 2026 §2.6</title></path>
+<path class="edge live" data-a="VisualDCS" data-b="CommentaryStrategies" d="M652,465 C692,465 308,363 348,363"><title>VisualDCS -&gt; CommentaryStrategies: archive.sqlite parallels → data/crosstext/archive_parallels.json</title></path>
+<path class="edge live" data-a="VisualDCS" data-b="SanskritKaraoke" d="M652,465 C692,465 787,431 827,431"><title>VisualDCS -&gt; SanskritKaraoke: subhashita verse feed (10 curated anuṣṭubhs)</title></path>
+<path class="edge live" data-a="SamudraManthanam" data-b="SanskritLexicography" d="M558,431 C598,431 938,431 978,431"><title>SamudraManthanam -&gt; SanskritLexicography: gate dicts + verse-aligned corpus_builder JSONL → L0/TMX + name glossaries</title></path>
+<path class="edge live" data-a="SamudraManthanam" data-b="buhler-sanskrit-book" d="M558,431 C614,431 75,599 131,599"><title>SamudraManthanam -&gt; buhler-sanskrit-book: samskrtam.ru /z/ verb-root deep links (static root→id table)</title></path>
+<path class="edge live" data-a="SanskritLexicography" data-b="SanskritRussian" d="M978,431 C1018,431 66,465 106,465"><title>SanskritLexicography -&gt; SanskritRussian: corpus_lexicon.jsonl → 3-layer Sa→Ru glossary</title></path>
+<path class="edge live" data-a="VisualDCS" data-b="SanskritRussian" d="M652,465 C692,465 66,465 106,465"><title>VisualDCS -&gt; SanskritRussian: form→lemma maps for glossary rollup</title></path>
+<path class="edge live" data-a="SanskritLexicography" data-b="SanskritKaraoke" d="M978,431 C1018,431 787,431 827,431"><title>SanskritLexicography -&gt; SanskritKaraoke: corpus-aligned RU glosses baked into verses/data/*.json</title></path>
+<path class="edge plan" data-a="SanskritRussian" data-b="WhitneyRoots" d="M106,465 C146,465 812,465 852,465"><title>SanskritRussian -&gt; WhitneyRoots: root-layer RU glosses ↔ Whitney/mw_roots crosswalk</title></path>
+<path class="edge live" data-a="SanskritLexicography" data-b="kosha" d="M978,431 C1018,431 976,363 1016,363"><title>SanskritLexicography -&gt; kosha: union_headwords + mw_roots + mw_etymology in data-v0.1.0 release</title></path>
+<path class="edge live" data-a="SanskritLexicography" data-b="SanskritSpellCheck" d="M978,431 C1045,431 848,633 915,633"><title>SanskritLexicography -&gt; SanskritSpellCheck: HeadwordLists/union/union_headwords.tsv attestation gate</title></path>
+<path class="edge live" data-a="SanskritSpellCheck" data-b="csl-atlas" d="M915,633 C1087,633 459,115 631,115"><title>SanskritSpellCheck -&gt; csl-atlas: nochange/do_not_file_suppress.txt (2,297 deliberate non-standard spellings)</title></path>
+<path class="edge live" data-a="SanskritSpellCheck" data-b="csl-guides" d="M915,633 C1087,633 890,115 1062,115"><title>SanskritSpellCheck -&gt; csl-guides: ortho_drift/*_reform_map.tsv (de 15,685 / ru 7,709) for gloss query normalization (1901-th/-iren + 1918-* subset)</title></path>
+<path class="edge live" data-a="WhitneyRoots" data-b="sanskrit-util" d="M852,465 C934,465 1025,217 1107,217"><title>WhitneyRoots -&gt; sanskrit-util: original transcoder donor code</title></path>
+<path class="edge live" data-a="csl-guides" data-b="sanskrit-util" d="M1062,115 C1102,115 1067,217 1107,217"><title>csl-guides -&gt; sanskrit-util: vendored JS transcoder v0.4.0</title></path>
+<path class="edge live" data-a="SanskritGrammar" data-b="buhler-sanskrit-book" d="M694,431 C750,431 75,599 131,599"><title>SanskritGrammar -&gt; buhler-sanskrit-book: source-archive upstream + docx→mdx/rstTable book pipeline</title></path>
+<path class="edge live" data-a="kosha" data-b="buhler-sanskrit-book" d="M1016,363 C1094,363 53,599 131,599"><title>kosha -&gt; buhler-sanskrit-book: per-lemma static dictionary cards</title></path>
+<path class="edge plan" data-a="Retrieval-based-Voice-Conversion-WebUI" data-b="SanskritKaraoke" d="M432,633 C499,633 760,431 827,431"><title>Retrieval-based-Voice-Conversion-WebUI -&gt; SanskritKaraoke: voice-conversion audio tooling for karaoke recordings</title></path>
+<path class="edge plan" data-a="Sundara-commentaries" data-b="CommentaryStrategies" d="M355,465 C395,465 308,363 348,363"><title>Sundara-commentaries -&gt; CommentaryStrategies: Sundarakāṇḍa apparatus (sundara_ch*_commentary_to_add.json, apparatus/ sarga reviewer manifests + gate_ledger.json, valm</title></path>
+<path class="edge live" data-a="ACC" data-b="csl-orig" d="M64,81 C104,81 735,149 775,149"><title>ACC -&gt; csl-orig: per-dictionary working repo over the CDSL spine</title></path>
+<path class="edge live" data-a="AMAR" data-b="csl-orig" d="M271,81 C311,81 735,149 775,149"><title>AMAR -&gt; csl-orig: per-dictionary working repo over the CDSL spine (Amarakośa in CDSL format)</title></path>
+<path class="edge live" data-a="AP" data-b="csl-orig" d="M320,81 C360,81 735,149 775,149"><title>AP -&gt; csl-orig: per-dictionary working repo over the CDSL spine</title></path>
+<path class="edge live" data-a="AP90" data-b="csl-orig" d="M369,81 C409,81 735,149 775,149"><title>AP90 -&gt; csl-orig: per-dictionary working repo over the CDSL spine (csl-orig/v02/ap90/ap90.txt)</title></path>
+<path class="edge live" data-a="ApteES" data-b="csl-orig" d="M432,81 C472,81 735,149 775,149"><title>ApteES -&gt; csl-orig: per-dictionary working repo over the CDSL spine</title></path>
+<path class="edge live" data-a="BHS" data-b="csl-orig" d="M757,81 C797,81 735,149 775,149"><title>BHS -&gt; csl-orig: per-dictionary working repo over the CDSL spine</title></path>
+<path class="edge live" data-a="BOP" data-b="csl-orig" d="M806,81 C846,81 735,149 775,149"><title>BOP -&gt; csl-orig: per-dictionary working repo over the CDSL spine</title></path>
+<path class="edge live" data-a="BOR" data-b="csl-orig" d="M855,81 C895,81 735,149 775,149"><title>BOR -&gt; csl-orig: per-dictionary working repo over the CDSL spine</title></path>
+<path class="edge live" data-a="BUR" data-b="csl-orig" d="M904,81 C944,81 735,149 775,149"><title>BUR -&gt; csl-orig: per-dictionary working repo over the CDSL spine</title></path>
+<path class="edge live" data-a="CAE" data-b="csl-orig" d="M953,81 C993,81 735,149 775,149"><title>CAE -&gt; csl-orig: per-dictionary working repo over the CDSL spine</title></path>
+<path class="edge live" data-a="CCS" data-b="csl-orig" d="M1002,81 C1042,81 735,149 775,149"><title>CCS -&gt; csl-orig: per-dictionary working repo over the CDSL spine</title></path>
+<path class="edge live" data-a="FRI" data-b="csl-orig" d="M477,183 C517,183 735,149 775,149"><title>FRI -&gt; csl-orig: per-dictionary working repo over the CDSL spine (Frish reader, Cologne 2015)</title></path>
+<path class="edge live" data-a="GRA" data-b="csl-orig" d="M526,183 C566,183 735,149 775,149"><title>GRA -&gt; csl-orig: per-dictionary working repo over the CDSL spine (../graxml/gra.xml)</title></path>
+<path class="edge live" data-a="INM" data-b="csl-orig" d="M911,183 C951,183 735,149 775,149"><title>INM -&gt; csl-orig: per-dictionary working repo over the CDSL spine</title></path>
+<path class="edge live" data-a="KNA" data-b="csl-orig" d="M960,183 C1000,183 735,149 775,149"><title>KNA -&gt; csl-orig: per-dictionary working repo over the CDSL spine; pwg_ru gate-evidence dict</title></path>
+<path class="edge live" data-a="KOW" data-b="csl-orig" d="M1009,183 C1049,183 735,149 775,149"><title>KOW -&gt; csl-orig: per-dictionary working repo over the CDSL spine; pwg_ru gate-evidence dict</title></path>
+<path class="edge live" data-a="KRM" data-b="csl-orig" d="M1058,183 C1098,183 735,149 775,149"><title>KRM -&gt; csl-orig: per-dictionary working repo over the CDSL spine</title></path>
+<path class="edge live" data-a="LRV" data-b="csl-orig" d="M64,217 C104,217 735,149 775,149"><title>LRV -&gt; csl-orig: per-dictionary working repo over the CDSL spine</title></path>
+<path class="edge live" data-a="MCI" data-b="csl-orig" d="M113,217 C153,217 735,149 775,149"><title>MCI -&gt; csl-orig: per-dictionary working repo over the CDSL spine</title></path>
+<path class="edge live" data-a="MD" data-b="csl-orig" d="M159,217 C199,217 735,149 775,149"><title>MD -&gt; csl-orig: per-dictionary working repo over the CDSL spine</title></path>
+<path class="edge live" data-a="MW72" data-b="csl-orig" d="M278,217 C318,217 735,149 775,149"><title>MW72 -&gt; csl-orig: per-dictionary working repo over the CDSL spine</title></path>
+<path class="edge live" data-a="MWS" data-b="csl-orig" d="M421,217 C461,217 735,149 775,149"><title>MWS -&gt; csl-orig: per-dictionary working repo over the CDSL spine (../mwsxml/mws.xml)</title></path>
+<path class="edge live" data-a="PUI" data-b="csl-orig" d="M512,217 C552,217 735,149 775,149"><title>PUI -&gt; csl-orig: per-dictionary working repo over the CDSL spine</title></path>
+<path class="edge live" data-a="PWG" data-b="csl-orig" d="M561,217 C601,217 735,149 775,149"><title>PWG -&gt; csl-orig: per-dictionary working repo over the CDSL spine (../pwgxml/pwg.xml); source of the RU/EN kit</title></path>
+<path class="edge live" data-a="PWG" data-b="SanskritLexicography" d="M561,217 C632,217 907,431 978,431"><title>PWG -&gt; SanskritLexicography: source dictionary text for the pwg_ru / pwg_en translation kit</title></path>
+<path class="edge live" data-a="PWK" data-b="csl-orig" d="M610,217 C650,217 735,149 775,149"><title>PWK -&gt; csl-orig: per-dictionary working repo over the CDSL spine (../pwkxml/pwk.xml)</title></path>
+<path class="edge live" data-a="SCH" data-b="csl-orig" d="M1191,217 C1231,217 735,149 775,149"><title>SCH -&gt; csl-orig: per-dictionary working repo over the CDSL spine</title></path>
+<path class="edge live" data-a="SHS" data-b="csl-orig" d="M64,251 C104,251 735,149 775,149"><title>SHS -&gt; csl-orig: per-dictionary working repo over the CDSL spine</title></path>
+<path class="edge live" data-a="SKD" data-b="csl-orig" d="M113,251 C153,251 735,149 775,149"><title>SKD -&gt; csl-orig: per-dictionary working repo over the CDSL spine</title></path>
+<path class="edge live" data-a="STC" data-b="csl-orig" d="M162,251 C202,251 735,149 775,149"><title>STC -&gt; csl-orig: per-dictionary working repo over the CDSL spine</title></path>
+<path class="edge live" data-a="VCP" data-b="csl-orig" d="M547,251 C587,251 735,149 775,149"><title>VCP -&gt; csl-orig: per-dictionary working repo over the CDSL spine</title></path>
+<path class="edge live" data-a="VEI" data-b="csl-orig" d="M596,251 C636,251 735,149 775,149"><title>VEI -&gt; csl-orig: per-dictionary working repo over the CDSL spine</title></path>
+<path class="edge live" data-a="Wil-YAT" data-b="csl-orig" d="M708,251 C748,251 735,149 775,149"><title>Wil-YAT -&gt; csl-orig: per-dictionary working repo over the CDSL spine (Wilson/Yates pair)</title></path>
+<path class="edge live" data-a="csl-json" data-b="VisualDCS" d="M82,149 C187,149 547,465 652,465"><title>csl-json -&gt; VisualDCS: nominal_class_split — mw.json/pwg.json entry-id sets decide -at/-ant lexeme pooling, side-car paradigm_nominal_class_spl</title></path>
+<path class="edge live" data-a="kosha" data-b="Systema-Sanscriticum" d="M1016,363 C1056,363 483,465 523,465"><title>kosha -&gt; Systema-Sanscriticum: cohort_start_chteniya</title></path>
+<path class="edge live" data-a="VisualDCS" data-b="Nagari" d="M652,465 C692,465 1127,363 1167,363"><title>VisualDCS -&gt; Nagari: fonetika_regen2026_frequency_csvs</title></path>
+<path class="edge live" data-a="csl-ldev" data-b="csl-devanagari" d="M250,149 C290,149 833,115 873,115"><title>csl-ldev -&gt; csl-devanagari: per-entry exploded dict-text snapshot (v02/*; ieg/bor/ae/mwe family holds ~10.1k files byte-identical with csl-lnum's cs</title></path>
+<path class="edge live" data-a="csl-lnum" data-b="csl-orig" d="M334,149 C374,149 735,149 775,149"><title>csl-lnum -&gt; csl-orig: per-entry exploded dict-text snapshot (v02/*)</title></path>
+<path class="edge live" data-a="ruwritingstyles-obsidian" data-b="RuWritingStyles" d="M271,431 C311,431 66,431 106,431"><title>ruwritingstyles-obsidian -&gt; RuWritingStyles: obsidian-plugin release copy (src/test/main.js built from RuWritingStyles obsidian-plugin/)</title></path>
+<path class="edge live" data-a="mw-dev" data-b="GRA" d="M215,217 C255,217 486,183 526,183"><title>mw-dev -&gt; GRA: abcode/web display frontend copied from GRA vn/gra-dev (~93 shared blobs: webtc1/webtc2 assets, fonts, help images)</title></path>
+<path class="edge live" data-a="csl-websanlexicon" data-b="GRA" d="M246,1091 C548,1091 224,183 526,183"><title>csl-websanlexicon -&gt; GRA: static display assets of the v00/grav00 template instance shared with GRA vn/gra-dev (Old Standard fonts, help images, k</title></path>
+<path class="edge live" data-a="MWinflect" data-b="csl-inflect" d="M225,633 C265,633 507,599 547,599"><title>MWinflect -&gt; csl-inflect: pysanskrit v1/v2 inflection engine copies (nominals|verbs/pysanskrit*, web/utilities, sqlite/lg* - 85 files byte-identic</title></path>
+<path class="edge live" data-a="csl-doc" data-b="MWS" d="M974,115 C1014,115 381,217 421,217"><title>csl-doc -&gt; MWS: build/_images scan copies of MWS prefaces/scans jpgs/pngs + mwauthorities scans (~22.4MB, 46 blobs)</title></path>
+<path class="edge live" data-a="sanskrit-lexicon.github.io" data-b="CORRECTIONS" d="M943,217 C983,217 318,115 358,115"><title>sanskrit-lexicon.github.io -&gt; CORRECTIONS: published mirror of CORRECTIONS ngram/output/html comparison pages (54 html, ~11.4MB)</title></path>
+<path class="edge live" data-a="CommentaryStrategies" data-b="kosha" d="M348,363 C388,363 976,363 1016,363"><title>CommentaryStrategies -&gt; kosha: Type-D link-ID grammar (SHARED_CODE s16: typed_link_lint / concordance_core)</title></path>
+<path class="edge live" data-a="DCS" data-b="csl-apidev" d="M428,183 C468,183 420,115 460,115"><title>DCS -&gt; csl-apidev: DCS-2026 lemma export -&gt; simple-search</title></path>
+<path class="edge live" data-a="VisualDCS" data-b="GRA" d="M652,465 C746,465 432,183 526,183"><title>VisualDCS -&gt; GRA: GRA-VedaWeb crosswalk (gra_vedaweb_crosswalk.tsv)</title></path>
+<path class="edge plan" data-a="MD" data-b="csl-standards" d="M159,217 C199,217 59,183 99,183"><title>MD -&gt; csl-standards: same export-modelling standard, MW-side leg</title></path>
+<path class="edge live" data-a="gasyoun.github.io" data-b="SanskritRussian" d="M603,363 C643,363 66,465 106,465"><title>gasyoun.github.io -&gt; SanskritRussian: derived Sa-Ru glossary search site</title></path>
+<path class="edge live" data-a="VisualDCS" data-b="dcs-conllu" d="M652,465 C692,465 441,363 481,363"><title>VisualDCS -&gt; dcs-conllu: DCS CoNLL-U corpus (57,144 lemmas, cells_bits24)</title></path>
+<path class="edge live" data-a="csl-observatory" data-b="PWG" d="M666,149 C706,149 521,217 561,217"><title>csl-observatory -&gt; PWG: PWG scan-index campaign registry (H1706, PR #107)</title></path>
+<path class="edge live" data-a="csl-atlas" data-b="kosha" d="M631,115 C713,115 934,363 1016,363"><title>csl-atlas -&gt; kosha: heritage_anchor witness anchors</title></path>
+<path class="edge live" data-a="csl-atlas" data-b="PD" d="M631,115 C671,115 427,217 467,217"><title>csl-atlas -&gt; PD: PD-DCS corpus-coverage crosswalk (H1336)</title></path>
+<path class="edge live" data-a="csl-atlas" data-b="DCS" d="M631,115 C671,115 388,183 428,183"><title>csl-atlas -&gt; DCS: PD-DCS corpus-coverage crosswalk, DCS leg (H1336)</title></path>
+<path class="edge live" data-a="MWS" data-b="WhitneyRoots" d="M421,217 C503,217 770,465 852,465"><title>MWS -&gt; WhitneyRoots: MW-Whitney-DCS root triangulation join (SHARED_CODE s17)</title></path>
+<path class="edge live" data-a="csl-guides" data-b="GRA" d="M1062,115 C1102,115 486,183 526,183"><title>csl-guides -&gt; GRA: OCR'd front-matter prefaces (ocr-prefaces.mdx)</title></path>
+<path class="edge live" data-a="csl-guides" data-b="MD" d="M1062,115 C1102,115 119,217 159,217"><title>csl-guides -&gt; MD: OCR'd front-matter prefaces (ocr-prefaces.mdx)</title></path>
+<path class="edge live" data-a="gasyoun.github.io" data-b="CommentaryStrategies" d="M603,363 C643,363 308,363 348,363"><title>gasyoun.github.io -&gt; CommentaryStrategies: 68-sarga Kostina ballot portal</title></path>
+<path class="edge live" data-a="gasyoun.github.io" data-b="SanskritLexicography" d="M603,363 C643,363 938,431 978,431"><title>gasyoun.github.io -&gt; SanskritLexicography: 2,110 static per-adhyaya pages</title></path>
+<path class="edge live" data-a="sanskrit-lexicon.github.io" data-b="csl-observatory" d="M943,217 C983,217 626,149 666,149"><title>sanskrit-lexicon.github.io -&gt; csl-observatory: External Reach dashboard</title></path>
+<path class="edge live" data-a="csl-atlas" data-b="WhitneyRoots" d="M631,115 C747,115 736,465 852,465"><title>csl-atlas -&gt; WhitneyRoots: review reports &lt;-&gt; reviewed files mapping</title></path>
+<path class="edge live" data-a="gasyoun.github.io" data-b="kosha" d="M603,363 C643,363 976,363 1016,363"><title>gasyoun.github.io -&gt; kosha: kosha directory pages (H236)</title></path>
+<path class="edge live" data-a="SanskritRussian" data-b="SanskritLexicography" d="M106,465 C146,465 938,431 978,431"><title>SanskritRussian -&gt; SanskritLexicography: KEWA etymology lane — kewa_pwg_crosswalk.tsv (11,418 rows; OCRed KEWA heading index + form→lemma witnesses joined to PWG</title></path>
+<path class="edge live" data-a="dcs-conllu" data-b="SanskritLexicography" d="M481,363 C521,363 938,431 978,431"><title>dcs-conllu -&gt; SanskritLexicography: wsd_frame_c1 gold frames (wsd_frame_c1_200.tsv — 200 DCS token occurrences × 48 polysemous PWG lemmas with RU sense menu</title></path>
+<path class="edge live" data-a="SamudraManthanam" data-b="SOCKS5-VPS" d="M558,431 C598,431 182,465 222,465"><title>SamudraManthanam -&gt; SOCKS5-VPS: blocked-host egress via socks5://vps-exit:1080 tailnet runner (microsocks; rebind script tools/bind_tailnet_socks_vps_ex</title></path>
+<path class="edge live" data-a="PWG" data-b="SOCKS5-VPS" d="M561,217 C643,217 140,465 222,465"><title>PWG -&gt; SOCKS5-VPS: blocked-host egress via socks5://vps-exit:1080 tailnet runner (microsocks; rebind script tools/bind_tailnet_socks_vps_ex</title></path>
+<path class="edge live" data-a="IndologyScholars" data-b="SOCKS5-VPS" d="M915,363 C955,363 182,465 222,465"><title>IndologyScholars -&gt; SOCKS5-VPS: blocked-host egress via socks5://vps-exit:1080 tailnet runner (microsocks; rebind script tools/bind_tailnet_socks_vps_ex</title></path>
+<path class="edge live" data-a="SanskritLexicography" data-b="csl-pyutil" d="M978,431 C1072,431 772,149 866,149"><title>SanskritLexicography -&gt; csl-pyutil: render_review_sheet() HTML voting-sheet emitter imports (csl_pyutil/review_sheet.py v0.22.0)</title></path>
+<path class="edge live" data-a="csl-atlas" data-b="csl-pyutil" d="M631,115 C671,115 826,149 866,149"><title>csl-atlas -&gt; csl-pyutil: render_review_sheet() HTML voting-sheet emitter imports (csl_pyutil/review_sheet.py v0.22.0)</title></path>
+<path class="edge live" data-a="SamudraManthanam" data-b="csl-pyutil" d="M558,431 C652,431 772,149 866,149"><title>SamudraManthanam -&gt; csl-pyutil: render_review_sheet() HTML voting-sheet emitter imports (csl_pyutil/review_sheet.py v0.22.0)</title></path>
+<path class="edge live" data-a="CommentaryStrategies" data-b="csl-pyutil" d="M348,363 C419,363 795,149 866,149"><title>CommentaryStrategies -&gt; csl-pyutil: render_review_sheet() HTML voting-sheet emitter imports (csl_pyutil/review_sheet.py v0.22.0)</title></path>
+<path class="edge live" data-a="WhitneyRoots" data-b="csl-pyutil" d="M852,465 C957,465 761,149 866,149"><title>WhitneyRoots -&gt; csl-pyutil: render_review_sheet() HTML voting-sheet emitter imports (csl_pyutil/review_sheet.py v0.22.0)</title></path>
+<path class="edge live" data-a="WhitneyRoots" data-b="kosha" d="M852,465 C892,465 976,363 1016,363"><title>WhitneyRoots -&gt; kosha: kosha datasets.json manifest consumers (per-dataset grain lives in the manifest): mw-roots + mw-etymology + roots-freque</title></path>
+<path class="edge live" data-a="SanskritSpellCheck" data-b="kosha" d="M915,633 C1005,633 926,363 1016,363"><title>SanskritSpellCheck -&gt; kosha: kosha datasets.json manifest consumers (per-dataset grain lives in the manifest): mw-roots + mw-etymology + roots-freque</title></path>
+<path class="edge live" data-a="SanskritRussian" data-b="kosha" d="M106,465 C146,465 976,363 1016,363"><title>SanskritRussian -&gt; kosha: kosha datasets.json manifest consumers (per-dataset grain lives in the manifest): mw-roots + mw-etymology + roots-freque</title></path>
+<path class="edge live" data-a="SanskritGrammar" data-b="kosha" d="M694,431 C734,431 976,363 1016,363"><title>SanskritGrammar -&gt; kosha: kosha datasets.json manifest consumers (per-dataset grain lives in the manifest): mw-roots + mw-etymology + roots-freque</title></path>
+<path class="edge live" data-a="Systema-Sanscriticum" data-b="kosha" d="M523,465 C563,465 976,363 1016,363"><title>Systema-Sanscriticum -&gt; kosha: kosha datasets.json manifest consumers (per-dataset grain lives in the manifest): mw-roots + mw-etymology + roots-freque</title></path>
+<path class="edge live" data-a="csl-observatory" data-b="kosha" d="M666,149 C737,149 945,363 1016,363"><title>csl-observatory -&gt; kosha: kosha datasets.json manifest consumers (per-dataset grain lives in the manifest): mw-roots + mw-etymology + roots-freque</title></path>
+<path class="edge live" data-a="csl-standards" data-b="kosha" d="M99,183 C159,183 956,363 1016,363"><title>csl-standards -&gt; kosha: kosha datasets.json manifest consumers (per-dataset grain lives in the manifest): mw-roots + mw-etymology + roots-freque</title></path>
+<path class="edge live" data-a="SanskritKaraoke" data-b="kosha" d="M827,431 C867,431 976,363 1016,363"><title>SanskritKaraoke -&gt; kosha: kosha datasets.json manifest consumers (per-dataset grain lives in the manifest): mw-roots + mw-etymology + roots-freque</title></path>
+<path class="edge live" data-a="SanskritLexicography" data-b="sanskrit-util" d="M978,431 C1049,431 1036,217 1107,217"><title>SanskritLexicography -&gt; sanskrit-util: German metalanguage detector classify_german_metalanguage + exported inventories (sanskrit-util v0.6.0, H2876) via the v</title></path>
+<path class="edge live" data-a="csl-atlas" data-b="IndologyScholars" d="M631,115 C713,115 833,363 915,363"><title>csl-atlas -&gt; IndologyScholars: curation/meso_discipline_crosswalk.csv meso-code to discipline crosswalk (50 confidence-scored mappings) + curation/disc</title></path>
+<path class="edge live" data-a="kosha" data-b="IndologyScholars" d="M1016,363 C1056,363 875,363 915,363"><title>kosha -&gt; IndologyScholars: curation/meso_discipline_crosswalk.csv meso-code to discipline crosswalk (50 confidence-scored mappings) + curation/disc</title></path>
+<path class="edge live" data-a="SamudraManthanam" data-b="CommentaryStrategies" d="M558,431 C598,431 308,363 348,363"><title>SamudraManthanam -&gt; CommentaryStrategies: canonical JSONL corpus (web/corpus_builder/jsonl/*.jsonl) → vendored census data/analysis/corpus_truth_reconciliation.js</title></path>
+<path class="edge live" data-a="WhitneyRoots" data-b="SanskritLexicography" d="M852,465 C892,465 938,431 978,431"><title>WhitneyRoots -&gt; SanskritLexicography: crosswalk/mw_roots.json (750 MW verbal-root records, 704 distinct form_keys) -&gt; h4723 five-way root-identity crosswalk (</title></path>
+<path class="edge live" data-a="MWS" data-b="SanskritLexicography" d="M421,217 C492,217 907,431 978,431"><title>MWS -&gt; SanskritLexicography: root_crosswalk/root_crosswalk.csv (935 Whitney-hub rows, 809 in-MW) -&gt; h4723 five-way root-identity crosswalk (in_MW/dcs</title></path>
+<path class="edge live" data-a="MWderivations" data-b="SanskritLexicography" d="M106,633 C173,633 911,431 978,431"><title>MWderivations -&gt; SanskritLexicography: step4/all.txt (220,248 classified derivations; col5 gender/verb-class) -&gt; h4723 five-way root-identity crosswalk fifth l</title></path>
+<path class="edge live" data-a="AMAR" data-b="SanskritLexicography" d="M271,81 C387,81 862,431 978,431"><title>AMAR -&gt; SanskritLexicography: AMAR/amar.txt lemma source (24 vargas, 5,590 synsets) -&gt; data/ak_lemma_cdsl_crosswalk.tsv (H4746: first lemma-level AK x</title></path>
+<path class="edge live" data-a="SanskritLexicography" data-b="VisualDCS" d="M978,431 C1018,431 612,465 652,465"><title>SanskritLexicography -&gt; VisualDCS: IndischeSprueche DCS locus attestation layer (H4747: 1,573/7,537 sayings bound to sentence.id loci, per-pada continuous-</title></path>
+<path class="edge live" data-a="SamudraManthanam" data-b="kosha" d="M558,431 C598,431 976,363 1016,363"><title>SamudraManthanam -&gt; kosha: corpus_builder JSONL kochergina headwords → kochergina_corpus_concordance (read-only join into the dict_corpus_concordan</title></path>
+<path class="edge live" data-a="VisualDCS" data-b="Parallel-Sanskrit-Corpora" d="M652,465 C692,465 101,397 141,397"><title>VisualDCS -&gt; Parallel-Sanskrit-Corpora: dcs-parallel-passages-full QA/recall baseline (PARA/Polnorazmernye, 245 CSV, frozen sample + joined metrics)</title></path>
+<path class="edge live" data-a="VisualDCS" data-b="RussianRamayana" d="M652,465 C692,465 1025,397 1065,397"><title>VisualDCS -&gt; RussianRamayana: dcs-parallel-passages-full (kosha manifest id; PARA/Polnorazmernye export → translator-env parallel-passage context laye</title></path>
+<path class="edge live" data-a="CommentaryStrategies" data-b="VisualDCS" d="M348,363 C388,363 612,465 652,465"><title>CommentaryStrategies -&gt; VisualDCS: DCS_Sintagmatic.csv (kosha dcs-sintagmatic-appendix7, Приложение 7) per-lemma collocate profiles as QA context for Sunda</title></path>
+<path class="edge live" data-a="SanskritGrammar" data-b="VisualDCS" d="M694,431 C734,431 612,465 652,465"><title>SanskritGrammar -&gt; VisualDCS: PWG compound-split layer (17112 splits) x DCS attested compounds cross-check (H4712; census A6; 577 attested / 3353 pref</title></path>
+<path class="edge live" data-a="kosha" data-b="SamudraManthanam" d="M1016,363 C1056,363 518,431 558,431"><title>kosha -&gt; SamudraManthanam: cyrillic-proper-noun-slp1 (Cyrillic proper-noun -&gt; SLP1 validated lookup, 534 rows/518 forms, rule_derived_keys: 0) join</title></path>
+<path class="edge live" data-a="kosha" data-b="SanskritKaraoke" d="M1016,363 C1056,363 787,431 827,431"><title>kosha -&gt; SanskritKaraoke: kosha-mastery-schedule combined FSRS mastery schedule (five drill families, 35517 rows, ease 0..1) rendered as the karao</title></path>
+<path class="edge live" data-a="SamudraManthanam" data-b="dcs-conllu" d="M558,431 C598,431 441,363 481,363"><title>SamudraManthanam -&gt; dcs-conllu: av_ru_x_dcshaunaka verse alignment — scripts/xwalk_s7_align_av_ru_dcs.py reads dcs-conllu Atharvaveda (Śaunaka) CoNLL-U </title></path>
+<path class="edge live" data-a="rvlinks" data-b="kosha" d="M673,217 C721,217 968,363 1016,363"><title>rvlinks -&gt; kosha: per-verse anchors rvMM.SSS.VV (rvhymns/, 1,028 hymns / 10,552 verses, Elizarenkova RU beside Geldner/Griffith) — address</title></path>
+<path class="edge live" data-a="AMAR" data-b="kosha" d="M271,81 C365,81 922,363 1016,363"><title>AMAR -&gt; kosha: AMAR/amar.txt varga/synset layer (24 vargas, 5,590 synsets; via SanskritLexicography ak_lemma_cdsl_crosswalk.tsv, H4746)</title></path>
+<path class="edge live" data-a="csl-orig" data-b="kosha" d="M775,149 C846,149 945,363 1016,363"><title>csl-orig -&gt; kosha: pw sense structure (Böhtlingk–Roth 7-vol) → pw-pwg-kurzfassung-cut sense-block diff + pwg_ru cut queue</title></path>
+</g>
+<g class="cluster"><rect class="clusterbox" x="28" y="28" width="1224" height="260" rx="10"/><text class="clustertitle" x="44" y="53">sanskrit-lexicon - own <tspan class="count">&#183; 80 public</tspan> <tspan class="fallbacktag">(owner + class bucket - no umbrella assigned yet, H5434)</tspan></text>
+<g class="node" data-repo="ACC"><rect x="44" y="68" width="41" height="26" rx="6" fill="#6d6f76"/><text x="64" y="85">ACC</text><title>ACC - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="alternateheadwords"><rect x="93" y="68" width="146" height="26" rx="6" fill="#6d6f76"/><text x="166" y="85">alternateheadwords</text><title>alternateheadwords - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="AMAR"><rect x="247" y="68" width="48" height="26" rx="6" fill="#6d6f76"/><text x="271" y="85">AMAR</text><title>AMAR - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="AP"><rect x="303" y="68" width="34" height="26" rx="6" fill="#6d6f76"/><text x="320" y="85">AP</text><title>AP - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="AP90"><rect x="345" y="68" width="48" height="26" rx="6" fill="#6d6f76"/><text x="369" y="85">AP90</text><title>AP90 - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="ApteES"><rect x="401" y="68" width="62" height="26" rx="6" fill="#6d6f76"/><text x="432" y="85">ApteES</text><title>ApteES - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="ArabicInSanskrit"><rect x="471" y="68" width="132" height="26" rx="6" fill="#6d6f76"/><text x="537" y="85">ArabicInSanskrit</text><title>ArabicInSanskrit - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="avlinks"><rect x="611" y="68" width="69" height="26" rx="6" fill="#6d6f76"/><text x="645" y="85">avlinks</text><title>avlinks - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="BEN"><rect x="688" y="68" width="41" height="26" rx="6" fill="#6d6f76"/><text x="708" y="85">BEN</text><title>BEN - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="BHS"><rect x="737" y="68" width="41" height="26" rx="6" fill="#6d6f76"/><text x="757" y="85">BHS</text><title>BHS - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="BOP"><rect x="786" y="68" width="41" height="26" rx="6" fill="#6d6f76"/><text x="806" y="85">BOP</text><title>BOP - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="BOR"><rect x="835" y="68" width="41" height="26" rx="6" fill="#6d6f76"/><text x="855" y="85">BOR</text><title>BOR - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="BUR"><rect x="884" y="68" width="41" height="26" rx="6" fill="#6d6f76"/><text x="904" y="85">BUR</text><title>BUR - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="CAE"><rect x="933" y="68" width="41" height="26" rx="6" fill="#6d6f76"/><text x="953" y="85">CAE</text><title>CAE - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="CCS"><rect x="982" y="68" width="41" height="26" rx="6" fill="#6d6f76"/><text x="1002" y="85">CCS</text><title>CCS - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="COLOGNE"><rect x="1031" y="68" width="69" height="26" rx="6" fill="#6d6f76"/><text x="1065" y="85">COLOGNE</text><title>COLOGNE - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="cologne-hugo"><rect x="1108" y="68" width="104" height="26" rx="6" fill="#6d6f76"/><text x="1160" y="85">cologne-hugo</text><title>cologne-hugo - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="cologne-skills"><rect x="44" y="102" width="118" height="26" rx="6" fill="#6d6f76"/><text x="103" y="119">cologne-skills</text><title>cologne-skills - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="cologne-stardict"><rect x="170" y="102" width="132" height="26" rx="6" fill="#6d6f76"/><text x="236" y="119">cologne-stardict</text><title>cologne-stardict - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="CORRECTIONS"><rect x="310" y="102" width="97" height="26" rx="6" fill="#6d6f76"/><text x="358" y="119">CORRECTIONS</text><title>CORRECTIONS - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="csl-apidev"><rect x="415" y="102" width="90" height="26" rx="6" fill="#6d6f76"/><text x="460" y="119">csl-apidev</text><title>csl-apidev - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="csl-app"><rect x="513" y="102" width="69" height="26" rx="6" fill="#6d6f76"/><text x="547" y="119">csl-app</text><title>csl-app - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="csl-atlas"><rect x="590" y="102" width="83" height="26" rx="6" fill="#6d6f76"/><text x="631" y="119">csl-atlas</text><title>csl-atlas - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="csl-corrections"><rect x="681" y="102" width="125" height="26" rx="6" fill="#6d6f76"/><text x="743" y="119">csl-corrections</text><title>csl-corrections - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="csl-devanagari"><rect x="814" y="102" width="118" height="26" rx="6" fill="#6d6f76"/><text x="873" y="119">csl-devanagari</text><title>csl-devanagari - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="csl-doc"><rect x="940" y="102" width="69" height="26" rx="6" fill="#6d6f76"/><text x="974" y="119">csl-doc</text><title>csl-doc - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="csl-guides"><rect x="1017" y="102" width="90" height="26" rx="6" fill="#6d6f76"/><text x="1062" y="119">csl-guides</text><title>csl-guides - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="csl-inflect"><rect x="1115" y="102" width="97" height="26" rx="6" fill="#6d6f76"/><text x="1163" y="119">csl-inflect</text><title>csl-inflect - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="csl-json"><rect x="44" y="136" width="76" height="26" rx="6" fill="#6d6f76"/><text x="82" y="153">csl-json</text><title>csl-json - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="csl-kale"><rect x="128" y="136" width="76" height="26" rx="6" fill="#6d6f76"/><text x="166" y="153">csl-kale</text><title>csl-kale - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="csl-ldev"><rect x="212" y="136" width="76" height="26" rx="6" fill="#6d6f76"/><text x="250" y="153">csl-ldev</text><title>csl-ldev - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="csl-lnum"><rect x="296" y="136" width="76" height="26" rx="6" fill="#6d6f76"/><text x="334" y="153">csl-lnum</text><title>csl-lnum - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="csl-lslink"><rect x="380" y="136" width="90" height="26" rx="6" fill="#6d6f76"/><text x="425" y="153">csl-lslink</text><title>csl-lslink - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="csl-newsletter"><rect x="478" y="136" width="118" height="26" rx="6" fill="#6d6f76"/><text x="537" y="153">csl-newsletter</text><title>csl-newsletter - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="csl-observatory"><rect x="604" y="136" width="125" height="26" rx="6" fill="#6d6f76"/><text x="666" y="153">csl-observatory</text><title>csl-observatory - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="csl-orig"><rect x="737" y="136" width="76" height="26" rx="6" fill="#6d6f76"/><text x="775" y="153">csl-orig</text><title>csl-orig - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="csl-pyutil"><rect x="821" y="136" width="90" height="26" rx="6" fill="#6d6f76"/><text x="866" y="153">csl-pyutil</text><title>csl-pyutil - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="csl-pywork"><rect x="919" y="136" width="90" height="26" rx="6" fill="#6d6f76"/><text x="964" y="153">csl-pywork</text><title>csl-pywork - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="csl-santam"><rect x="1017" y="136" width="90" height="26" rx="6" fill="#6d6f76"/><text x="1062" y="153">csl-santam</text><title>csl-santam - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="csl-sqlite"><rect x="1115" y="136" width="90" height="26" rx="6" fill="#6d6f76"/><text x="1160" y="153">csl-sqlite</text><title>csl-sqlite - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="csl-standards"><rect x="44" y="170" width="111" height="26" rx="6" fill="#6d6f76"/><text x="99" y="187">csl-standards</text><title>csl-standards - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="csl-westergaard"><rect x="163" y="170" width="125" height="26" rx="6" fill="#6d6f76"/><text x="225" y="187">csl-westergaard</text><title>csl-westergaard - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="csl-whitroot"><rect x="296" y="170" width="104" height="26" rx="6" fill="#6d6f76"/><text x="348" y="187">csl-whitroot</text><title>csl-whitroot - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="DCS"><rect x="408" y="170" width="41" height="26" rx="6" fill="#6d6f76"/><text x="428" y="187">DCS</text><title>DCS - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="FRI"><rect x="457" y="170" width="41" height="26" rx="6" fill="#6d6f76"/><text x="477" y="187">FRI</text><title>FRI - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="GRA"><rect x="506" y="170" width="41" height="26" rx="6" fill="#6d6f76"/><text x="526" y="187">GRA</text><title>GRA - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="GreekInSanskrit"><rect x="555" y="170" width="125" height="26" rx="6" fill="#6d6f76"/><text x="617" y="187">GreekInSanskrit</text><title>GreekInSanskrit - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="hwnorm1"><rect x="688" y="170" width="69" height="26" rx="6" fill="#6d6f76"/><text x="722" y="187">hwnorm1</text><title>hwnorm1 - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="hwnorm2"><rect x="765" y="170" width="69" height="26" rx="6" fill="#6d6f76"/><text x="799" y="187">hwnorm2</text><title>hwnorm2 - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="IEG"><rect x="842" y="170" width="41" height="26" rx="6" fill="#6d6f76"/><text x="862" y="187">IEG</text><title>IEG - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="INM"><rect x="891" y="170" width="41" height="26" rx="6" fill="#6d6f76"/><text x="911" y="187">INM</text><title>INM - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="KNA"><rect x="940" y="170" width="41" height="26" rx="6" fill="#6d6f76"/><text x="960" y="187">KNA</text><title>KNA - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="KOW"><rect x="989" y="170" width="41" height="26" rx="6" fill="#6d6f76"/><text x="1009" y="187">KOW</text><title>KOW - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="KRM"><rect x="1038" y="170" width="41" height="26" rx="6" fill="#6d6f76"/><text x="1058" y="187">KRM</text><title>KRM - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="literarysource"><rect x="1087" y="170" width="118" height="26" rx="6" fill="#6d6f76"/><text x="1146" y="187">literarysource</text><title>literarysource - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="LRV"><rect x="44" y="204" width="41" height="26" rx="6" fill="#6d6f76"/><text x="64" y="221">LRV</text><title>LRV - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="MCI"><rect x="93" y="204" width="41" height="26" rx="6" fill="#6d6f76"/><text x="113" y="221">MCI</text><title>MCI - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="MD"><rect x="142" y="204" width="34" height="26" rx="6" fill="#6d6f76"/><text x="159" y="221">MD</text><title>MD - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="mw-dev"><rect x="184" y="204" width="62" height="26" rx="6" fill="#6d6f76"/><text x="215" y="221">mw-dev</text><title>mw-dev - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="MW72"><rect x="254" y="204" width="48" height="26" rx="6" fill="#6d6f76"/><text x="278" y="221">MW72</text><title>MW72 - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="MWinflect"><rect x="310" y="204" width="83" height="26" rx="6" fill="#6d6f76"/><text x="351" y="221">MWinflect</text><title>MWinflect - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="MWS"><rect x="401" y="204" width="41" height="26" rx="6" fill="#6d6f76"/><text x="421" y="221">MWS</text><title>MWS - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="PD"><rect x="450" y="204" width="34" height="26" rx="6" fill="#6d6f76"/><text x="467" y="221">PD</text><title>PD - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="PUI"><rect x="492" y="204" width="41" height="26" rx="6" fill="#6d6f76"/><text x="512" y="221">PUI</text><title>PUI - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="PWG"><rect x="541" y="204" width="41" height="26" rx="6" fill="#6d6f76"/><text x="561" y="221">PWG</text><title>PWG - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="PWK"><rect x="590" y="204" width="41" height="26" rx="6" fill="#6d6f76"/><text x="610" y="221">PWK</text><title>PWK - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="rvlinks"><rect x="639" y="204" width="69" height="26" rx="6" fill="#6d6f76"/><text x="673" y="221">rvlinks</text><title>rvlinks - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="sanskrit-fonts"><rect x="716" y="204" width="118" height="26" rx="6" fill="#6d6f76"/><text x="775" y="221">sanskrit-fonts</text><title>sanskrit-fonts - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="sanskrit-lexicon.github.io"><rect x="842" y="204" width="202" height="26" rx="6" fill="#6d6f76"/><text x="943" y="221">sanskrit-lexicon.github.io</text><title>sanskrit-lexicon.github.io - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="sanskrit-util"><rect x="1052" y="204" width="111" height="26" rx="6" fill="#6d6f76"/><text x="1107" y="221">sanskrit-util</text><title>sanskrit-util - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="SCH"><rect x="1171" y="204" width="41" height="26" rx="6" fill="#6d6f76"/><text x="1191" y="221">SCH</text><title>SCH - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="SHS"><rect x="44" y="238" width="41" height="26" rx="6" fill="#6d6f76"/><text x="64" y="255">SHS</text><title>SHS - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="SKD"><rect x="93" y="238" width="41" height="26" rx="6" fill="#6d6f76"/><text x="113" y="255">SKD</text><title>SKD - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="STC"><rect x="142" y="238" width="41" height="26" rx="6" fill="#6d6f76"/><text x="162" y="255">STC</text><title>STC - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="temp_corrections_ap90"><rect x="191" y="238" width="167" height="26" rx="6" fill="#6d6f76"/><text x="274" y="255">temp_corrections_ap90</text><title>temp_corrections_ap90 - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="temp_corrections_mw"><rect x="366" y="238" width="153" height="26" rx="6" fill="#6d6f76"/><text x="442" y="255">temp_corrections_mw</text><title>temp_corrections_mw - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="VCP"><rect x="527" y="238" width="41" height="26" rx="6" fill="#6d6f76"/><text x="547" y="255">VCP</text><title>VCP - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="VEI"><rect x="576" y="238" width="41" height="26" rx="6" fill="#6d6f76"/><text x="596" y="255">VEI</text><title>VEI - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="WIL"><rect x="625" y="238" width="41" height="26" rx="6" fill="#6d6f76"/><text x="645" y="255">WIL</text><title>WIL - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="node" data-repo="Wil-YAT"><rect x="674" y="238" width="69" height="26" rx="6" fill="#6d6f76"/><text x="708" y="255">Wil-YAT</text><title>Wil-YAT - owner sanskrit-lexicon - tier untiered - class own</title></g>
+<g class="cluster"><rect class="clusterbox" x="28" y="310" width="1224" height="214" rx="10"/><text class="clustertitle" x="44" y="335">gasyoun - own <tspan class="count">&#183; 36 public</tspan> <tspan class="fallbacktag">(owner + class bucket - no umbrella assigned yet, H5434)</tspan></text>
+<g class="node" data-repo="AfanasiyNikitin"><rect x="44" y="350" width="125" height="26" rx="6" fill="#6d6f76"/><text x="106" y="367">AfanasiyNikitin</text><title>AfanasiyNikitin - owner gasyoun - tier untiered - class own</title></g>
+<g class="node" data-repo="BookIndex"><rect x="177" y="350" width="83" height="26" rx="6" fill="#6d6f76"/><text x="218" y="367">BookIndex</text><title>BookIndex - owner gasyoun - tier untiered - class own</title></g>
+<g class="node" data-repo="CommentaryStrategies"><rect x="268" y="350" width="160" height="26" rx="6" fill="#6d6f76"/><text x="348" y="367">CommentaryStrategies</text><title>CommentaryStrategies - owner gasyoun - tier untiered - class own</title></g>
+<g class="node" data-repo="dcs-conllu"><rect x="436" y="350" width="90" height="26" rx="6" fill="#6d6f76"/><text x="481" y="367">dcs-conllu</text><title>dcs-conllu - owner gasyoun - tier untiered - class own</title></g>
+<g class="node" data-repo="gasyoun.github.io"><rect x="534" y="350" width="139" height="26" rx="6" fill="#6d6f76"/><text x="603" y="367">gasyoun.github.io</text><title>gasyoun.github.io - owner gasyoun - tier untiered - class own</title></g>
+<g class="node" data-repo="IndologyArchiveAtlas"><rect x="681" y="350" width="160" height="26" rx="6" fill="#6d6f76"/><text x="761" y="367">IndologyArchiveAtlas</text><title>IndologyArchiveAtlas - owner gasyoun - tier untiered - class own</title></g>
+<g class="node" data-repo="IndologyScholars"><rect x="849" y="350" width="132" height="26" rx="6" fill="#6d6f76"/><text x="915" y="367">IndologyScholars</text><title>IndologyScholars - owner gasyoun - tier untiered - class own</title></g>
+<g class="node" data-repo="kosha"><rect x="989" y="350" width="55" height="26" rx="6" fill="#b06a10"/><text x="1016" y="367">kosha</text><title>kosha - owner gasyoun - tier 1 - class own</title></g>
+<g class="node" data-repo="les-1990"><rect x="1052" y="350" width="76" height="26" rx="6" fill="#6d6f76"/><text x="1090" y="367">les-1990</text><title>les-1990 - owner gasyoun - tier untiered - class own</title></g>
+<g class="node" data-repo="Nagari"><rect x="1136" y="350" width="62" height="26" rx="6" fill="#6d6f76"/><text x="1167" y="367">Nagari</text><title>Nagari - owner gasyoun - tier untiered - class own</title></g>
+<g class="node" data-repo="Parallel-Sanskrit-Corpora"><rect x="44" y="384" width="195" height="26" rx="6" fill="#6d6f76"/><text x="141" y="401">Parallel-Sanskrit-Corpora</text><title>Parallel-Sanskrit-Corpora - owner gasyoun - tier untiered - class own</title></g>
+<g class="node" data-repo="prefaces_ae"><rect x="247" y="384" width="97" height="26" rx="6" fill="#6d6f76"/><text x="295" y="401">prefaces_ae</text><title>prefaces_ae - owner gasyoun - tier untiered - class own</title></g>
+<g class="node" data-repo="prefaces_gst"><rect x="352" y="384" width="104" height="26" rx="6" fill="#6d6f76"/><text x="404" y="401">prefaces_gst</text><title>prefaces_gst - owner gasyoun - tier untiered - class own</title></g>
+<g class="node" data-repo="prefaces_lan"><rect x="464" y="384" width="104" height="26" rx="6" fill="#6d6f76"/><text x="516" y="401">prefaces_lan</text><title>prefaces_lan - owner gasyoun - tier untiered - class own</title></g>
+<g class="node" data-repo="prefaces_pe"><rect x="576" y="384" width="97" height="26" rx="6" fill="#6d6f76"/><text x="624" y="401">prefaces_pe</text><title>prefaces_pe - owner gasyoun - tier untiered - class own</title></g>
+<g class="node" data-repo="prefaces_pgn"><rect x="681" y="384" width="104" height="26" rx="6" fill="#6d6f76"/><text x="733" y="401">prefaces_pgn</text><title>prefaces_pgn - owner gasyoun - tier untiered - class own</title></g>
+<g class="node" data-repo="prefaces_snp"><rect x="793" y="384" width="104" height="26" rx="6" fill="#6d6f76"/><text x="845" y="401">prefaces_snp</text><title>prefaces_snp - owner gasyoun - tier untiered - class own</title></g>
+<g class="node" data-repo="pwg-ru-lod"><rect x="905" y="384" width="90" height="26" rx="6" fill="#6d6f76"/><text x="950" y="401">pwg-ru-lod</text><title>pwg-ru-lod - owner gasyoun - tier untiered - class own</title></g>
+<g class="node" data-repo="RussianRamayana"><rect x="1003" y="384" width="125" height="26" rx="6" fill="#6d6f76"/><text x="1065" y="401">RussianRamayana</text><title>RussianRamayana - owner gasyoun - tier untiered - class own</title></g>
+<g class="node" data-repo="RuWritingStyles"><rect x="44" y="418" width="125" height="26" rx="6" fill="#6d6f76"/><text x="106" y="435">RuWritingStyles</text><title>RuWritingStyles - owner gasyoun - tier untiered - class own</title></g>
+<g class="node" data-repo="ruwritingstyles-obsidian"><rect x="177" y="418" width="188" height="26" rx="6" fill="#6d6f76"/><text x="271" y="435">ruwritingstyles-obsidian</text><title>ruwritingstyles-obsidian - owner gasyoun - tier untiered - class own</title></g>
+<g class="node" data-repo="SamasaChakram"><rect x="373" y="418" width="111" height="26" rx="6" fill="#6d6f76"/><text x="428" y="435">SamasaChakram</text><title>SamasaChakram - owner gasyoun - tier untiered - class own</title></g>
+<g class="node" data-repo="SamudraManthanam"><rect x="492" y="418" width="132" height="26" rx="6" fill="#6d6f76"/><text x="558" y="435">SamudraManthanam</text><title>SamudraManthanam - owner gasyoun - tier untiered - class own</title></g>
+<g class="node" data-repo="SanskritGrammar"><rect x="632" y="418" width="125" height="26" rx="6" fill="#6d6f76"/><text x="694" y="435">SanskritGrammar</text><title>SanskritGrammar - owner gasyoun - tier untiered - class own</title></g>
+<g class="node" data-repo="SanskritKaraoke"><rect x="765" y="418" width="125" height="26" rx="6" fill="#6d6f76"/><text x="827" y="435">SanskritKaraoke</text><title>SanskritKaraoke - owner gasyoun - tier untiered - class own</title></g>
+<g class="node" data-repo="SanskritLexicography"><rect x="898" y="418" width="160" height="26" rx="6" fill="#b06a10"/><text x="978" y="435">SanskritLexicography</text><title>SanskritLexicography - owner gasyoun - tier 1 - class own</title></g>
+<g class="node" data-repo="SanskritMacros"><rect x="1066" y="418" width="118" height="26" rx="6" fill="#6d6f76"/><text x="1125" y="435">SanskritMacros</text><title>SanskritMacros - owner gasyoun - tier untiered - class own</title></g>
+<g class="node" data-repo="SanskritRussian"><rect x="44" y="452" width="125" height="26" rx="6" fill="#6d6f76"/><text x="106" y="469">SanskritRussian</text><title>SanskritRussian - owner gasyoun - tier untiered - class own</title></g>
+<g class="node" data-repo="SOCKS5-VPS"><rect x="177" y="452" width="90" height="26" rx="6" fill="#6d6f76"/><text x="222" y="469">SOCKS5-VPS</text><title>SOCKS5-VPS - owner gasyoun - tier untiered - class own</title></g>
+<g class="node" data-repo="Sundara-commentaries"><rect x="275" y="452" width="160" height="26" rx="6" fill="#6d6f76"/><text x="355" y="469">Sundara-commentaries</text><title>Sundara-commentaries - owner gasyoun - tier untiered - class own</title></g>
+<g class="node" data-repo="Systema-Sanscriticum"><rect x="443" y="452" width="160" height="26" rx="6" fill="#b4341f"/><text x="523" y="469">Systema-Sanscriticum</text><title>Systema-Sanscriticum - owner gasyoun - tier 0 - class own</title></g>
+<g class="node" data-repo="VisualDCS"><rect x="611" y="452" width="83" height="26" rx="6" fill="#6d6f76"/><text x="652" y="469">VisualDCS</text><title>VisualDCS - owner gasyoun - tier untiered - class own</title></g>
+<g class="node" data-repo="vote-inbox"><rect x="702" y="452" width="90" height="26" rx="6" fill="#6d6f76"/><text x="747" y="469">vote-inbox</text><title>vote-inbox - owner gasyoun - tier untiered - class own</title></g>
+<g class="node" data-repo="WhitneyRoots"><rect x="800" y="452" width="104" height="26" rx="6" fill="#6d6f76"/><text x="852" y="469">WhitneyRoots</text><title>WhitneyRoots - owner gasyoun - tier untiered - class own</title></g>
+<g class="node" data-repo="ZalizniakVideo"><rect x="912" y="452" width="118" height="26" rx="6" fill="#6d6f76"/><text x="971" y="469">ZalizniakVideo</text><title>ZalizniakVideo - owner gasyoun - tier untiered - class own</title></g>
+<g class="node" data-repo="ZettelkastenWiki"><rect x="1038" y="452" width="132" height="26" rx="6" fill="#6d6f76"/><text x="1104" y="469">ZettelkastenWiki</text><title>ZettelkastenWiki - owner gasyoun - tier untiered - class own</title></g>
+<text class="withheld" x="44" y="512">&#128274; 17 private repos in this group - names withheld (publish-safety)</text>
+<g class="cluster"><rect class="clusterbox" x="28" y="546" width="1224" height="124" rx="10"/><text class="clustertitle" x="44" y="571">gasyoun - fork <tspan class="count">&#183; 16 public</tspan> <tspan class="fallbacktag">(owner + class bucket - no umbrella assigned yet, H5434)</tspan></text>
+<g class="node" data-repo="buhler-sanskrit-book"><rect x="44" y="586" width="174" height="26" rx="6" fill="#6d6f76"/><text x="131" y="603">⑂ buhler-sanskrit-book</text><title>buhler-sanskrit-book - owner gasyoun - tier untiered - class fork</title></g>
+<g class="node" data-repo="ClickToQuote"><rect x="226" y="586" width="118" height="26" rx="6" fill="#6d6f76"/><text x="285" y="603">⑂ ClickToQuote</text><title>ClickToQuote - owner gasyoun - tier untiered - class fork</title></g>
+<g class="node" data-repo="CourseDump2022"><rect x="352" y="586" width="132" height="26" rx="6" fill="#6d6f76"/><text x="418" y="603">⑂ CourseDump2022</text><title>CourseDump2022 - owner gasyoun - tier untiered - class fork</title></g>
+<g class="node" data-repo="csl-inflect"><rect x="492" y="586" width="111" height="26" rx="6" fill="#6d6f76"/><text x="547" y="603">⑂ csl-inflect</text><title>csl-inflect - owner gasyoun - tier untiered - class fork</title></g>
+<g class="node" data-repo="DeepPavlov"><rect x="611" y="586" width="104" height="26" rx="6" fill="#6d6f76"/><text x="663" y="603">⑂ DeepPavlov</text><title>DeepPavlov - owner gasyoun - tier untiered - class fork</title></g>
+<g class="node" data-repo="filament-fullcalendar"><rect x="723" y="586" width="181" height="26" rx="6" fill="#6d6f76"/><text x="813" y="603">⑂ filament-fullcalendar</text><title>filament-fullcalendar - owner gasyoun - tier untiered - class fork</title></g>
+<g class="node" data-repo="filament-kanban"><rect x="912" y="586" width="139" height="26" rx="6" fill="#6d6f76"/><text x="981" y="603">⑂ filament-kanban</text><title>filament-kanban - owner gasyoun - tier untiered - class fork</title></g>
+<g class="node" data-repo="free-claude-code"><rect x="1059" y="586" width="146" height="26" rx="6" fill="#6d6f76"/><text x="1132" y="603">⑂ free-claude-code</text><title>free-claude-code - owner gasyoun - tier untiered - class fork</title></g>
+<g class="node" data-repo="MWderivations"><rect x="44" y="620" width="125" height="26" rx="6" fill="#6d6f76"/><text x="106" y="637">⑂ MWderivations</text><title>MWderivations - owner gasyoun - tier untiered - class fork</title></g>
+<g class="node" data-repo="MWinflect"><rect x="177" y="620" width="97" height="26" rx="6" fill="#6d6f76"/><text x="225" y="637">⑂ MWinflect</text><title>MWinflect - owner gasyoun - tier untiered - class fork</title></g>
+<g class="node" data-repo="Retrieval-based-Voice-Conversion-WebUI"><rect x="282" y="620" width="300" height="26" rx="6" fill="#6d6f76"/><text x="432" y="637">⑂ Retrieval-based-Voice-Conversion-WebUI</text><title>Retrieval-based-Voice-Conversion-WebUI - owner gasyoun - tier untiered - class fork</title></g>
+<g class="node" data-repo="sanskrit"><rect x="590" y="620" width="90" height="26" rx="6" fill="#6d6f76"/><text x="635" y="637">⑂ sanskrit</text><title>sanskrit - owner gasyoun - tier untiered - class fork</title></g>
+<g class="node" data-repo="SanskritSorting"><rect x="688" y="620" width="139" height="26" rx="6" fill="#6d6f76"/><text x="757" y="637">⑂ SanskritSorting</text><title>SanskritSorting - owner gasyoun - tier untiered - class fork</title></g>
+<g class="node" data-repo="SanskritSpellCheck"><rect x="835" y="620" width="160" height="26" rx="6" fill="#6d6f76"/><text x="915" y="637">⑂ SanskritSpellCheck</text><title>SanskritSpellCheck - owner gasyoun - tier untiered - class fork</title></g>
+<g class="node" data-repo="ScharfSandhi"><rect x="1003" y="620" width="118" height="26" rx="6" fill="#6d6f76"/><text x="1062" y="637">⑂ ScharfSandhi</text><title>ScharfSandhi - owner gasyoun - tier untiered - class fork</title></g>
+<g class="node" data-repo="w3id.org"><rect x="1129" y="620" width="90" height="26" rx="6" fill="#6d6f76"/><text x="1174" y="637">⑂ w3id.org</text><title>w3id.org - owner gasyoun - tier untiered - class fork</title></g>
+<g class="cluster"><rect class="clusterbox" x="28" y="692" width="1224" height="78" rx="10"/><text class="clustertitle" x="44" y="717">agent-infra <tspan class="count">&#183; 0 public</tspan></text>
+<text class="withheld" x="44" y="758">&#128274; 4 private repos in this group - names withheld (publish-safety)</text>
+<g class="cluster"><rect class="clusterbox" x="28" y="792" width="1224" height="112" rx="10"/><text class="clustertitle" x="44" y="817">gasyoun - name-reservation <tspan class="count">&#183; 3 public</tspan> <tspan class="fallbacktag">(owner + class bucket - no umbrella assigned yet, H5434)</tspan></text>
+<g class="node" data-repo="HindiLexicography"><rect x="44" y="832" width="153" height="26" rx="6" fill="#6d6f76"/><text x="120" y="849">◇ HindiLexicography</text><title>HindiLexicography - owner gasyoun - tier untiered - class name-reservation</title></g>
+<g class="node" data-repo="Nalopakhyanam"><rect x="205" y="832" width="125" height="26" rx="6" fill="#6d6f76"/><text x="267" y="849">◇ Nalopakhyanam</text><title>Nalopakhyanam - owner gasyoun - tier untiered - class name-reservation</title></g>
+<g class="node" data-repo="SanskritCorpora"><rect x="338" y="832" width="139" height="26" rx="6" fill="#6d6f76"/><text x="407" y="849">◇ SanskritCorpora</text><title>SanskritCorpora - owner gasyoun - tier untiered - class name-reservation</title></g>
+<text class="withheld" x="44" y="892">&#128274; 1 private repo in this group - names withheld (publish-safety)</text>
+<g class="cluster"><rect class="clusterbox" x="28" y="926" width="1224" height="90" rx="10"/><text class="clustertitle" x="44" y="951">sanskrit-lexicon - archived <tspan class="count">&#183; 4 public</tspan> <tspan class="fallbacktag">(owner + class bucket - no umbrella assigned yet, H5434)</tspan></text>
+<g class="node" data-repo="santamlegacy"><rect x="44" y="966" width="118" height="26" rx="6" fill="#6d6f76"/><text x="103" y="983">▣ santamlegacy</text><title>santamlegacy - owner sanskrit-lexicon - tier untiered - class archived</title></g>
+<g class="node" data-repo="temp_corrections_acc"><rect x="170" y="966" width="174" height="26" rx="6" fill="#6d6f76"/><text x="257" y="983">▣ temp_corrections_acc</text><title>temp_corrections_acc - owner sanskrit-lexicon - tier untiered - class archived</title></g>
+<g class="node" data-repo="temp_corrections_ae"><rect x="352" y="966" width="167" height="26" rx="6" fill="#6d6f76"/><text x="435" y="983">▣ temp_corrections_ae</text><title>temp_corrections_ae - owner sanskrit-lexicon - tier untiered - class archived</title></g>
+<g class="node" data-repo="test_cologne_push"><rect x="527" y="966" width="153" height="26" rx="6" fill="#6d6f76"/><text x="603" y="983">▣ test_cologne_push</text><title>test_cologne_push - owner sanskrit-lexicon - tier untiered - class archived</title></g>
+<g class="cluster"><rect class="clusterbox" x="28" y="1038" width="1224" height="90" rx="10"/><text class="clustertitle" x="44" y="1063">sanskrit-lexicon - fork <tspan class="count">&#183; 2 public</tspan> <tspan class="fallbacktag">(owner + class bucket - no umbrella assigned yet, H5434)</tspan></text>
+<g class="node" data-repo="csl-homepage"><rect x="44" y="1078" width="118" height="26" rx="6" fill="#6d6f76"/><text x="103" y="1095">⑂ csl-homepage</text><title>csl-homepage - owner sanskrit-lexicon - tier untiered - class fork</title></g>
+<g class="node" data-repo="csl-websanlexicon"><rect x="170" y="1078" width="153" height="26" rx="6" fill="#6d6f76"/><text x="246" y="1095">⑂ csl-websanlexicon</text><title>csl-websanlexicon - owner sanskrit-lexicon - tier untiered - class fork</title></g>
+</svg>
+
+<details>
+<summary>Data table - the 141 public repos (fallback for screen readers and small screens)</summary>
+<table>
+<thead><tr><th>repo</th><th>owner</th><th>group</th><th>tier</th><th>class</th></tr></thead>
+<tbody>
+<tr><td>ACC</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>alternateheadwords</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>AMAR</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>AP</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>AP90</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>ApteES</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>ArabicInSanskrit</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>avlinks</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>BEN</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>BHS</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>BOP</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>BOR</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>BUR</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>CAE</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>CCS</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>COLOGNE</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>cologne-hugo</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>cologne-skills</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>cologne-stardict</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>CORRECTIONS</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>csl-apidev</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>csl-app</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>csl-atlas</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>csl-corrections</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>csl-devanagari</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>csl-doc</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>csl-guides</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>csl-inflect</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>csl-json</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>csl-kale</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>csl-ldev</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>csl-lnum</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>csl-lslink</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>csl-newsletter</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>csl-observatory</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>csl-orig</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>csl-pyutil</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>csl-pywork</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>csl-santam</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>csl-sqlite</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>csl-standards</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>csl-westergaard</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>csl-whitroot</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>DCS</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>FRI</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>GRA</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>GreekInSanskrit</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>hwnorm1</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>hwnorm2</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>IEG</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>INM</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>KNA</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>KOW</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>KRM</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>literarysource</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>LRV</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>MCI</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>MD</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>mw-dev</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>MW72</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>MWinflect</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>MWS</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>PD</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>PUI</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>PWG</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>PWK</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>rvlinks</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>sanskrit-fonts</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>sanskrit-lexicon.github.io</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>sanskrit-util</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>SCH</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>SHS</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>SKD</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>STC</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>temp_corrections_ap90</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>temp_corrections_mw</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>VCP</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>VEI</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>WIL</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>Wil-YAT</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - own</td><td>-</td><td>own</td></tr>
+<tr><td>AfanasiyNikitin</td><td>gasyoun</td><td>gasyoun - own</td><td>-</td><td>own</td></tr>
+<tr><td>BookIndex</td><td>gasyoun</td><td>gasyoun - own</td><td>-</td><td>own</td></tr>
+<tr><td>CommentaryStrategies</td><td>gasyoun</td><td>gasyoun - own</td><td>-</td><td>own</td></tr>
+<tr><td>dcs-conllu</td><td>gasyoun</td><td>gasyoun - own</td><td>-</td><td>own</td></tr>
+<tr><td>gasyoun.github.io</td><td>gasyoun</td><td>gasyoun - own</td><td>-</td><td>own</td></tr>
+<tr><td>IndologyArchiveAtlas</td><td>gasyoun</td><td>gasyoun - own</td><td>-</td><td>own</td></tr>
+<tr><td>IndologyScholars</td><td>gasyoun</td><td>gasyoun - own</td><td>-</td><td>own</td></tr>
+<tr><td>kosha</td><td>gasyoun</td><td>gasyoun - own</td><td>1</td><td>own</td></tr>
+<tr><td>les-1990</td><td>gasyoun</td><td>gasyoun - own</td><td>-</td><td>own</td></tr>
+<tr><td>Nagari</td><td>gasyoun</td><td>gasyoun - own</td><td>-</td><td>own</td></tr>
+<tr><td>Parallel-Sanskrit-Corpora</td><td>gasyoun</td><td>gasyoun - own</td><td>-</td><td>own</td></tr>
+<tr><td>prefaces_ae</td><td>gasyoun</td><td>gasyoun - own</td><td>-</td><td>own</td></tr>
+<tr><td>prefaces_gst</td><td>gasyoun</td><td>gasyoun - own</td><td>-</td><td>own</td></tr>
+<tr><td>prefaces_lan</td><td>gasyoun</td><td>gasyoun - own</td><td>-</td><td>own</td></tr>
+<tr><td>prefaces_pe</td><td>gasyoun</td><td>gasyoun - own</td><td>-</td><td>own</td></tr>
+<tr><td>prefaces_pgn</td><td>gasyoun</td><td>gasyoun - own</td><td>-</td><td>own</td></tr>
+<tr><td>prefaces_snp</td><td>gasyoun</td><td>gasyoun - own</td><td>-</td><td>own</td></tr>
+<tr><td>pwg-ru-lod</td><td>gasyoun</td><td>gasyoun - own</td><td>-</td><td>own</td></tr>
+<tr><td>RussianRamayana</td><td>gasyoun</td><td>gasyoun - own</td><td>-</td><td>own</td></tr>
+<tr><td>RuWritingStyles</td><td>gasyoun</td><td>gasyoun - own</td><td>-</td><td>own</td></tr>
+<tr><td>ruwritingstyles-obsidian</td><td>gasyoun</td><td>gasyoun - own</td><td>-</td><td>own</td></tr>
+<tr><td>SamasaChakram</td><td>gasyoun</td><td>gasyoun - own</td><td>-</td><td>own</td></tr>
+<tr><td>SamudraManthanam</td><td>gasyoun</td><td>gasyoun - own</td><td>-</td><td>own</td></tr>
+<tr><td>SanskritGrammar</td><td>gasyoun</td><td>gasyoun - own</td><td>-</td><td>own</td></tr>
+<tr><td>SanskritKaraoke</td><td>gasyoun</td><td>gasyoun - own</td><td>-</td><td>own</td></tr>
+<tr><td>SanskritLexicography</td><td>gasyoun</td><td>gasyoun - own</td><td>1</td><td>own</td></tr>
+<tr><td>SanskritMacros</td><td>gasyoun</td><td>gasyoun - own</td><td>-</td><td>own</td></tr>
+<tr><td>SanskritRussian</td><td>gasyoun</td><td>gasyoun - own</td><td>-</td><td>own</td></tr>
+<tr><td>SOCKS5-VPS</td><td>gasyoun</td><td>gasyoun - own</td><td>-</td><td>own</td></tr>
+<tr><td>Sundara-commentaries</td><td>gasyoun</td><td>gasyoun - own</td><td>-</td><td>own</td></tr>
+<tr><td>Systema-Sanscriticum</td><td>gasyoun</td><td>gasyoun - own</td><td>0</td><td>own</td></tr>
+<tr><td>VisualDCS</td><td>gasyoun</td><td>gasyoun - own</td><td>-</td><td>own</td></tr>
+<tr><td>vote-inbox</td><td>gasyoun</td><td>gasyoun - own</td><td>-</td><td>own</td></tr>
+<tr><td>WhitneyRoots</td><td>gasyoun</td><td>gasyoun - own</td><td>-</td><td>own</td></tr>
+<tr><td>ZalizniakVideo</td><td>gasyoun</td><td>gasyoun - own</td><td>-</td><td>own</td></tr>
+<tr><td>ZettelkastenWiki</td><td>gasyoun</td><td>gasyoun - own</td><td>-</td><td>own</td></tr>
+<tr><td>buhler-sanskrit-book</td><td>gasyoun</td><td>gasyoun - fork</td><td>-</td><td>fork</td></tr>
+<tr><td>ClickToQuote</td><td>gasyoun</td><td>gasyoun - fork</td><td>-</td><td>fork</td></tr>
+<tr><td>CourseDump2022</td><td>gasyoun</td><td>gasyoun - fork</td><td>-</td><td>fork</td></tr>
+<tr><td>csl-inflect</td><td>gasyoun</td><td>gasyoun - fork</td><td>-</td><td>fork</td></tr>
+<tr><td>DeepPavlov</td><td>gasyoun</td><td>gasyoun - fork</td><td>-</td><td>fork</td></tr>
+<tr><td>filament-fullcalendar</td><td>gasyoun</td><td>gasyoun - fork</td><td>-</td><td>fork</td></tr>
+<tr><td>filament-kanban</td><td>gasyoun</td><td>gasyoun - fork</td><td>-</td><td>fork</td></tr>
+<tr><td>free-claude-code</td><td>gasyoun</td><td>gasyoun - fork</td><td>-</td><td>fork</td></tr>
+<tr><td>MWderivations</td><td>gasyoun</td><td>gasyoun - fork</td><td>-</td><td>fork</td></tr>
+<tr><td>MWinflect</td><td>gasyoun</td><td>gasyoun - fork</td><td>-</td><td>fork</td></tr>
+<tr><td>Retrieval-based-Voice-Conversion-WebUI</td><td>gasyoun</td><td>gasyoun - fork</td><td>-</td><td>fork</td></tr>
+<tr><td>sanskrit</td><td>gasyoun</td><td>gasyoun - fork</td><td>-</td><td>fork</td></tr>
+<tr><td>SanskritSorting</td><td>gasyoun</td><td>gasyoun - fork</td><td>-</td><td>fork</td></tr>
+<tr><td>SanskritSpellCheck</td><td>gasyoun</td><td>gasyoun - fork</td><td>-</td><td>fork</td></tr>
+<tr><td>ScharfSandhi</td><td>gasyoun</td><td>gasyoun - fork</td><td>-</td><td>fork</td></tr>
+<tr><td>w3id.org</td><td>gasyoun</td><td>gasyoun - fork</td><td>-</td><td>fork</td></tr>
+<tr><td>HindiLexicography</td><td>gasyoun</td><td>gasyoun - name-reservation</td><td>-</td><td>name-reservation</td></tr>
+<tr><td>Nalopakhyanam</td><td>gasyoun</td><td>gasyoun - name-reservation</td><td>-</td><td>name-reservation</td></tr>
+<tr><td>SanskritCorpora</td><td>gasyoun</td><td>gasyoun - name-reservation</td><td>-</td><td>name-reservation</td></tr>
+<tr><td>santamlegacy</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - archived</td><td>-</td><td>archived</td></tr>
+<tr><td>temp_corrections_acc</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - archived</td><td>-</td><td>archived</td></tr>
+<tr><td>temp_corrections_ae</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - archived</td><td>-</td><td>archived</td></tr>
+<tr><td>test_cologne_push</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - archived</td><td>-</td><td>archived</td></tr>
+<tr><td>csl-homepage</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - fork</td><td>-</td><td>fork</td></tr>
+<tr><td>csl-websanlexicon</td><td>sanskrit-lexicon</td><td>sanskrit-lexicon - fork</td><td>-</td><td>fork</td></tr>
+</tbody>
+</table>
+</details>
+
+<footer>
+<p>Source of truth: <code>data/repo_registry.tsv</code> + <code>interlinks_edges.tsv</code> in the private management hub.
+Regenerate with <code>python tools/repo_ecosystem_viz.py</code>; CI re-renders it on every derived-surfaces pass and
+<code>--check</code> fails on drift. Input snapshot <code>2981d942a3b9</code>. H5431, MG ruling 3 of 24-09-2026.</p>
+<p>Umbrella cells are still being assigned; a group marked <i>owner + class bucket</i> falls back to the GitHub owner and
+the registry class until that ruling lands. Tier colours follow the tier definitions; <i>untiered</i> means no ruling yet, not "unimportant".</p>
+</footer>
+</main>
+<script>
+(function () {
+  var svg = document.getElementById("map");
+  var edgeToggle = document.getElementById("edgetoggle");
+  var focusToggle = document.getElementById("focustoggle");
+  edgeToggle.addEventListener("change", function () {
+    svg.classList.toggle("noedges", !edgeToggle.checked);
+  });
+  var edges = Array.prototype.slice.call(svg.querySelectorAll(".edge"));
+  var nodes = Array.prototype.slice.call(svg.querySelectorAll(".node"));
+  function clear() {
+    svg.classList.remove("focus");
+    edges.forEach(function (e) { e.classList.remove("hot"); });
+    nodes.forEach(function (n) { n.classList.remove("hot"); });
+  }
+  nodes.forEach(function (node) {
+    node.addEventListener("mouseenter", function () {
+      if (!focusToggle.checked) return;
+      var name = node.getAttribute("data-repo");
+      clear();
+      svg.classList.add("focus");
+      node.classList.add("hot");
+      edges.forEach(function (e) {
+        if (e.getAttribute("data-a") === name || e.getAttribute("data-b") === name) {
+          e.classList.add("hot");
+          var other = e.getAttribute("data-a") === name ? e.getAttribute("data-b") : e.getAttribute("data-a");
+          nodes.forEach(function (n) { if (n.getAttribute("data-repo") === other) n.classList.add("hot"); });
+        }
+      });
+    });
+    node.addEventListener("mouseleave", clear);
+  });
+  focusToggle.addEventListener("change", function () { if (!focusToggle.checked) clear(); });
+})();
+</script>
+</body>
+</html>
