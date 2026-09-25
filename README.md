@@ -58,6 +58,10 @@ plain HTML and text data.
   ([skazka.html](https://github.com/gasyoun/gasyoun.github.io/blob/master/sanskrit-cognates-zalizniak-2026/skazka.html)).
   Base text is the konspekt verbatim; editorial additions are marked with 〈angle brackets〉
   (H5481).
+  - canonical page `index.html` = language-ordered tables (RU by Russian word; EN/DE/LA/GR
+  by cognate) + embedded 6-chapter detective story; regenerable via `build_page.py` (H5481,
+  MG rulings 24-09-2026: additions in ⟨…⟩, asterisk reserved for reconstructions, Zalizniak
+  transliteration). `skazka.html` is the parallel-run alternate tale (kept).
 - **[296.txt](https://github.com/gasyoun/gasyoun.github.io/blob/master/296.txt)**
   and
   **[296-SLP1.txt](https://github.com/gasyoun/gasyoun.github.io/blob/master/296-SLP1.txt)**
