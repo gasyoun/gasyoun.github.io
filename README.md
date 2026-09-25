@@ -51,6 +51,13 @@ plain HTML and text data.
   [reverse22-output/](https://github.com/gasyoun/gasyoun.github.io/tree/master/reverse22-output)
   (with its
   [input.txt](https://github.com/gasyoun/gasyoun.github.io/blob/master/reverse22-output/input.txt)).
+- **[sanskrit-cognates-zalizniak-2026/](https://github.com/gasyoun/gasyoun.github.io/tree/master/sanskrit-cognates-zalizniak-2026)**
+  — a five-language (RU·EN·DE·LA·GR) cognate reference built on A. A. Zalizniak's
+  «Конспект грамматических сведений о санскрите» (2004), in four sections (roots, nouns,
+  adjectives, indeclinables), plus a children's detective story companion page
+  ([skazka.html](https://github.com/gasyoun/gasyoun.github.io/blob/master/sanskrit-cognates-zalizniak-2026/skazka.html)).
+  Base text is the konspekt verbatim; editorial additions are marked with 〈angle brackets〉
+  (H5481).
 - **[296.txt](https://github.com/gasyoun/gasyoun.github.io/blob/master/296.txt)**
   and
   **[296-SLP1.txt](https://github.com/gasyoun/gasyoun.github.io/blob/master/296-SLP1.txt)**
