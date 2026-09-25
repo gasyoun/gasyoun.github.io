@@ -13,7 +13,13 @@ Conventions (MG rulings 24-09-2026):
   (ṚAJ, ṛkṣa-, ṛṣabha-, ṛi-, kṛmi-, gṛha-, çṛṅga-, ṛta-, mṛdu-, pṛthu-,
    pṛṣṭha-, çṛṇóti), a­gāra- -> aṅgāra-, (σκι) -> σκιά.
 """
-import io, sys
+import io, re, sys, html as _html
+import unicodedata
+
+# 25-09-2026 (MG): сквозные порядковые номера статей (якоря #nN), сортировка
+# столбцов кликом по алфавиту того языка, на котором слова написаны,
+# подраздел «глагольные корни → русские слова», повесть — отдельным файлом
+# povest.html, внизу — выводы по сопоставлению с Fasmer fasmer-dr-ind.
 
 # sec: К корень · С существительное · П прилагательное · Н наречие/частица
 # each entry: dict(sec, san, gloss, ru, en, de, la, gr, note, add)
@@ -509,6 +515,27 @@ e("Н", "svayam", "сам", ru=["сам"])
 
 SEC_NAME = {"К": "корень", "С": "сущ.", "П": "прил.", "Н": "нареч."}
 
+# ---- сквозная нумерация статей конспекта (единая по всему документу) ----
+for _i, _m in enumerate(M, 1):
+    _m["n"] = _i
+
+def kstr(seq):
+    """Стабильная строка сортировки из ключа-последовательности/строки."""
+    return "".join("%05d" % (x if isinstance(x, int) else ord(x)) for x in seq)
+
+def strip_marks(s):
+    s = unicodedata.normalize('NFKD', s)
+    return ''.join(c for c in s if not unicodedata.combining(c))
+
+def san_key(w):
+    """Алфавит транслитерации Зализняка: ç→c, ā→a, ₂→2 и т.п."""
+    s = strip_marks(w.lower())
+    return kstr([c for c in s if c.isalnum()])
+
+def gloss_key(g):
+    s = strip_marks(g.lower())
+    return kstr([c for c in s if c.isalnum() or c == ' '][:80])
+
 RU_ORDER = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"
 def ru_key(w):
     w = w.lower().lstrip("⟨([“'·—- ")
@@ -545,12 +572,23 @@ def rows_for(lang_key, keyfn):
     rows.sort(key=lambda t: t[0])
     return rows
 
-def render_rows(rows, first_header):
+_anchor_done = set()
+
+def num_cell(m):
+    """Сквозной номер статьи; якорь #nN ставится один раз (первое вхождение)."""
+    n = m["n"]
+    if n in _anchor_done:
+        return "<td class='num'>%d</td>" % n
+    _anchor_done.add(n)
+    return "<td class='num'><a id='n%d' href='#n%d' title='Ссылка на это место'>%d</a></td>" % (n, n, n)
+
+def render_rows(rows, keyfn):
+    """Строки таблицы одного языка. Сортируемые столбцы несут data-k."""
     out = []
-    for _, m, words in rows:
+    for k0, m, words in rows:
         cross = []
         for lk, tag in (("ru", "рус."), ("en", "англ."), ("de", "нем."), ("la", "лат."), ("gr", "греч.")):
-            if lk == lang_of[first_header]:
+            if m[lk] is words:
                 continue
             if m[lk]:
                 cross.append(tag + " " + fmt_lang(m[lk], m["add"]))
@@ -559,35 +597,91 @@ def render_rows(rows, first_header):
             extra = " · также: " + "; ".join(cross)
             note = (note + "; " if note else "") + extra.strip(" ;")
         out.append(
-            "<tr><td class='k'>%s</td><td class='san'>%s</td>"
-            "<td>%s</td><td class='sec'>%s</td><td class='nt'>%s</td></tr>"
-            % (fmt_lang(words, m["add"]), m["san"], m["gloss"], SEC_NAME[m["sec"]], note or "")
+            "<tr>%s"
+            "<td class='k' data-k='%s'>%s</td>"
+            "<td class='san' data-k='%s'>%s</td>"
+            "<td data-k='%s'>%s</td>"
+            "<td class='sec'>%s</td><td class='nt'>%s</td></tr>"
+            % (num_cell(m),
+               kstr(keyfn(words[0] if words else "")), fmt_lang(words, m["add"]),
+               kstr(san_key(m["san"])), m["san"],
+               gloss_key(m["gloss"]), m["gloss"],
+               SEC_NAME[m["sec"]], note or "")
         )
     return "\n".join(out)
 
-lang_of = {"ru": "ru", "en": "en", "de": "de", "la": "la", "gr": "gr"}
+def render_roots():
+    """Подраздел: только санскритские глагольные корни → русские слова."""
+    out = []
+    for m in M:
+        if m["sec"] != "К":
+            continue
+        ru = " · ".join(m["ru"]) if m["ru"] else "—"
+        out.append(
+            "<tr>%s"
+            "<td class='san' data-k='%s'>%s</td><td>%s</td>"
+            "<td class='k' data-k='%s'>%s</td><td class='nt'>%s</td></tr>"
+            % (num_cell(m),
+               kstr(san_key(m["san"])), m["san"], m["gloss"],
+               kstr(ru_key(m["ru"][0])) if m["ru"] else "", ru,
+               m["note"] or "")
+        )
+    return "\n".join(out)
 
 def counts():
     return {lk: sum(1 for m in M if m[lk]) for lk in ("ru", "en", "de", "la", "gr")}
 
 def build(frame_html):
+    c = counts()
     tables = {
-        "RU_COUNT": counts()["ru"], "EN_COUNT": counts()["en"], "DE_COUNT": counts()["de"],
-        "LA_COUNT": counts()["la"], "GR_COUNT": counts()["gr"],
-        "TABLE_RU": render_rows(rows_for("ru", ru_key), "ru"),
-        "TABLE_EN": render_rows(rows_for("en", foreign_key), "en"),
-        "TABLE_DE": render_rows(rows_for("de", foreign_key), "de"),
-        "TABLE_LA": render_rows(rows_for("la", foreign_key), "la"),
-        "TABLE_GR": render_rows(rows_for("gr", foreign_key), "gr"),
+        # корневой подраздел первым — канонические якоря #nN для корней
+        "TABLE_ROOTS": render_roots(),
+        "ROOTS_COUNT": sum(1 for m in M if m["sec"] == "К"),
+        "RU_COUNT": c["ru"], "EN_COUNT": c["en"], "DE_COUNT": c["de"],
+        "LA_COUNT": c["la"], "GR_COUNT": c["gr"],
+        "TOTAL_COUNT": sum(c.values()), "ENTRY_COUNT": len(M),
+        "TABLE_RU": render_rows(rows_for("ru", ru_key), ru_key),
+        "TABLE_EN": render_rows(rows_for("en", foreign_key), foreign_key),
+        "TABLE_DE": render_rows(rows_for("de", foreign_key), foreign_key),
+        "TABLE_LA": render_rows(rows_for("la", foreign_key), foreign_key),
+        "TABLE_GR": render_rows(rows_for("gr", foreign_key), foreign_key),
     }
     html = frame_html
     for k, v in tables.items():
         html = html.replace("{{%s}}" % k, str(v))
     return html
 
+POVEST_SHELL = """<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Повесть «Дело о пропавшей родне» — cognates Зализняка</title>
+<style>
+  body{margin:0;background:#faf6ee;color:#26221c;font:17px/1.65 Georgia,"Times New Roman",serif}
+  main{max-width:1080px;margin:0 auto;padding:32px 20px 80px}
+  .story{background:#fffdf8;border:1px solid #e4dcc9;border-radius:14px;padding:8px 30px 26px;margin-top:14px}
+  .story h2{color:#2f5d50;border-bottom:2px solid #e4dcc9;padding-bottom:6px}
+  .story h3{color:#8a3324;font-size:1.25rem;margin-top:2em}
+  .note{font-size:.85rem;color:#6b6353;font-style:italic}
+  .meta{font-size:.86rem;color:#6b6353;font-family:"Segoe UI",system-ui,sans-serif}
+  .back{font-family:"Segoe UI",system-ui,sans-serif;font-size:.95rem}
+  sup{font-size:.75em}
+</style>
+</head>
+<body>
+<main>
+<p class="back"><a href="index.html">← Когнаты Зализняка: сводная страница</a></p>
+{{STORY}}
+<p class="meta">Отдельный файл с 25-09-2026 (решение МГ: повесть — вне сводной страницы, в index.html остаётся только список). Источник списков-«улик»: <a href="index.html">когнаты из конспекта А.&nbsp;А.&nbsp;Зализняка</a>.</p>
+</main>
+</body>
+</html>
+"""
+
 if __name__ == "__main__":
     frame = io.open("frame.html", encoding="utf-8").read()
     story = io.open("story_fragment.html", encoding="utf-8").read()
-    frame = frame.replace("{{STORY}}", story)
     io.open("index.html", "w", encoding="utf-8").write(build(frame))
-    print("counts:", counts())
+    io.open("povest.html", "w", encoding="utf-8").write(POVEST_SHELL.replace("{{STORY}}", story))
+    print("counts:", counts(), "| total:", sum(counts().values()), "| entries:", len(M))
