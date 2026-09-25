@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Родня слов: санскрит и пять языков — когнаты из конспекта Зализняка</title>
+<style>
+  :root{
+    --ink:#26221c; --paper:#faf6ee; --card:#fffdf8; --line:#e4dcc9;
+    --accent:#8a3324; --accent2:#2f5d50; --gold:#b8860b; --muted:#6b6353;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);
+       font:17px/1.65 "Georgia","Times New Roman",serif}
+  main{max-width:1080px;margin:0 auto;padding:32px 20px 80px}
+  h1{font-size:2rem;line-height:1.2;margin:8px 0 4px;color:var(--accent)}
+  h2{font-size:1.45rem;margin:2.2em 0 .5em;color:var(--accent2);
+     border-bottom:2px solid var(--line);padding-bottom:6px}
+  h3{font-size:1.12rem;margin:1.6em 0 .4em;color:var(--ink)}
+  .sub{color:var(--muted);font-size:1.02rem;margin-top:0}
+  .meta{font-size:.86rem;color:var(--muted);font-family:"Segoe UI",system-ui,sans-serif}
+  .box{background:var(--card);border:1px solid var(--line);border-radius:12px;
+       padding:14px 18px;margin:18px 0}
+  .box h3{margin:.2em 0 .4em}
+  .toc{columns:2;column-gap:34px;font-family:"Segoe UI",system-ui,sans-serif;font-size:.95rem}
+  .toc a{color:var(--accent2);text-decoration:none}
+  .toc a:hover{text-decoration:underline}
+  .toc li{margin:4px 0}
+  table{width:100%;border-collapse:collapse;background:var(--card);
+        font-size:.93rem;margin:10px 0 26px;font-family:"Segoe UI",system-ui,sans-serif}
+  th{background:#efe7d3;text-align:left;padding:7px 9px;border:1px solid var(--line);
+     font-size:.8rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+  td{border:1px solid var(--line);padding:6px 9px;vertical-align:top}
+  tr:nth-child(even) td{background:#f7f1e2}
+  td.san{font-weight:600;white-space:nowrap;color:var(--accent);font-size:.95rem}
+  td.k{font-weight:600;color:var(--accent2)}
+  td.sec{color:var(--muted);font-size:.8rem;white-space:nowrap}
+  td.nt{color:var(--muted);font-size:.83rem}
+  td.num{color:var(--muted);font-size:.78rem;white-space:nowrap;font-family:"Segoe UI",system-ui,sans-serif}
+  td.num a{color:var(--gold);text-decoration:none}
+  td.num a:hover{text-decoration:underline}
+  th[data-sort]{cursor:pointer;user-select:none}
+  th[data-sort]:hover{color:var(--accent)}
+  th[data-sort]::after{content:" \21C5";color:var(--gold)}
+  th[data-dir="asc"]::after{content:" \2191"}
+  th[data-dir="desc"]::after{content:" \2193"}
+  .count{display:inline-block;background:var(--accent2);color:#fff;border-radius:999px;
+         font:600 .78rem "Segoe UI",system-ui,sans-serif;padding:2px 10px;margin-left:8px;vertical-align:2px}
+  .story{background:var(--card);border:1px solid var(--line);border-radius:14px;
+         padding:8px 30px 26px;margin-top:14px}
+  .story h2{border:none}
+  .story h3{color:var(--accent);font-size:1.25rem;margin-top:2em}
+  .note{font-size:.85rem;color:var(--muted);font-style:italic}
+  .prim{background:#f2ecdc;border-left:3px solid var(--gold);padding:8px 14px;margin:14px 0;
+        font-size:.9rem;border-radius:0 8px 8px 0}
+  .prim b{color:var(--gold)}
+  .lg-greek{font-family:"Cambria","Palatino Linotype",serif}
+  footer{margin-top:60px;border-top:1px solid var(--line);padding-top:14px;
+         color:var(--muted);font-size:.85rem;font-family:"Segoe UI",system-ui,sans-serif}
+  @media print{
+    body{background:#fff} .box,.story,table{border-color:#bbb}
+    main{padding:10mm} .toc{columns:2}
+  }
+  @media (max-width:760px){ .toc{columns:1} table{font-size:.82rem} td.nt{display:none} }
+</style>
+</head>
+<body>
+<main>
+<header>
+  <div class="meta">H5481 · создано 24-09-2026 · обновлено 25-09-2026 (МГ: переименование в zalizniak-2026, сквозные номера, сортировка столбцов, повесть отдельным файлом, выводы по Фасмеру) · по правилам MG от 24-09-2026 (гриль-раунд: github.io-подпапка; строгость «консспект + добавки в треугольных скобках»; знак * зарезервирован за реконструкциями; транслитерация — только как у Зализняка)</div>
+  <h1>Родня слов: санскрит, русский, английский, немецкий, латынь и древнегреческий</h1>
+  <p class="sub">Когнаты из грамматического конспекта А.&nbsp;А.&nbsp;Зализняка (2004). Клик по заголовку столбца сортирует слова по алфавиту того языка, на котором они написаны — по-русски, по-английски, по-немецки, по-латыни, по-гречески, по-санскритски (транслитерация Зализняка).</p>
+  <p class="meta">Статистика: русских {{RU_COUNT}} · английских {{EN_COUNT}} · немецких {{DE_COUNT}} · латинских {{LA_COUNT}} · греческих {{GR_COUNT}} — суммарно <b>{{TOTAL_COUNT}}</b> слов в {{ENTRY_COUNT}} статьях конспекта. Короткий адрес: <a href="https://gasyoun.github.io/zalizniak-2026/">gasyoun.github.io/zalizniak-2026</a> (без /index.html — открывается и без него).</p>
+  <p class="meta">Источник: <a href="https://gasyoun.github.io/SanskritGrammar/grammars/ZalizniakKonspekt_2004/zalizniak-konspekt-2015-11-X_bd_t">Zalizniak Konspekt (2004)</a> — разделы «Важнейшие корни», «Некоторые существительные», «Некоторые прилагательные», «Из неизменяемых». Стиль рассказа учитывает подачу лекции С.&nbsp;Бурлак <a href="https://samskrtam.ru/burlak-sanskrit-2018">«Какой же русский не понимает санскрита?»</a> (2018).</p>
+</header>
+
+<div class="box">
+  <h3>Как читать списки (договорённости)</h3>
+  <ul>
+    <li><b>Основа — строго консспект:</b> в круглых скобках у Зализняка когнаты уже собраны; русские когнаты у него подчёркнуты — здесь они стали первым столбцом.</li>
+    <li><b>Знак <code>*</code> не используется</b> — он в лингвистике зарезервирован для реконструированных праформ (решение МГ, 24-09-2026).</li>
+    <li><b>Всё, что добавлено сверх консспекта, стоит в треугольных скобках ⟨вот так⟩.</b> Термины родства консспект скобками не снабжает вовсе — там добавки, помеченные отдельно.</li>
+    <li><b>Транслитерация — Зализняка, без изменений:</b> <i>ç</i> (не <i>ś</i>), цифры у корней — тип презенса, <code>*</code> — неполноизменяемый корень, <code>•</code> — корень с долготным рядом, <code>[i]</code> — вставное <i>i</i>, индекс внизу (GAR₂) — второй омонимичный корень.</li>
+    <li><b>Восстановленные глифы</b> (в файле-источнике знак ⎷ и выпавшие огласовки): ⎷ → <i>ṛ</i> (ṚAJ, ṛkṣa‑, ṛṣabha‑, ṛi‑, kṛmi‑, gṛha‑, çṛṅga‑, ṛta‑, mṛdu‑, pṛthu‑, pṛṣṭha‑, çṛṇóti), a­gāra‑ → <i>aṅgāra‑</i> ‘уголь’, (ски) → <i>σκιά</i> ‘тень’.</li>
+    <li>Возможность/сомнение — как у Зализняка: <i>возм.</i></li>
+  </ul>
+</div>
+
+<nav class="box">
+  <h3>Содержание</h3>
+  <ol class="toc">
+    <li><a href="#ru">I. Русские когнаты — по русскому слову</a> <span class="count">{{RU_COUNT}}</span></li>
+    <li><a href="#roots">I.a. Санскритские глагольные корни → русские слова</a> <span class="count">{{ROOTS_COUNT}}</span></li>
+    <li><a href="#en">II. English — по английскому слову</a> <span class="count">{{EN_COUNT}}</span></li>
+    <li><a href="#de">III. Deutsch — по немецкому слову</a> <span class="count">{{DE_COUNT}}</span></li>
+    <li><a href="#la">IV. Latina — по латинскому слову</a> <span class="count">{{LA_COUNT}}</span></li>
+    <li><a href="#gr">V. Ἑλληνική — по древнегреческому слову</a> <span class="count">{{GR_COUNT}}</span></li>
+    <li><a href="povest.html">VI. Повесть «Дело о пропавшей родне» (10–16 лет) — отдельный файл</a></li>
+    <li><a href="#fasmer">VII. Выводы: как выборка Зализняка соотносится с Фасмером</a></li>
+  </ol>
+</nav>
+
+<h2 id="ru">I. Русские когнаты — по русскому слову</h2>
+<p class="note">Первый столбец — русское слово (у Зализняка подчёркнуто); рядом санскритский корень или слово, его перевод и помета раздела конспекта. Слова-родственники внутри одного языка не считаются (родня — между языками). <b>Клик по заголовку — сортировка</b> (повторный клик — обратный порядок); <b>№ — сквозные номера статей</b>, на любое место можно сослаться: …#n57.</p>
+<table>
+<tr><th>№</th><th data-sort>Русское слово</th><th data-sort>Санскрит</th><th data-sort>Что значит по-санскритски</th><th>Раздел</th><th>Примечание</th></tr>
+{{TABLE_RU}}
+</table>
+
+<h3 id="roots">I.a. Санскритские глагольные корни → русские слова</h3>
+<p class="note">Только корневой раздел консспекта («Важнейшие корни»): санскритский корень, его значение и отсылки к русским словам. Номера — те же сквозные, что и в списках выше.</p>
+<table>
+<tr><th>№</th><th data-sort>Корень</th><th>Что значит</th><th data-sort>Русские слова</th><th>Примечание</th></tr>
+{{TABLE_ROOTS}}
+</table>
+
+<h2 id="en">II. English — по английскому слову</h2>
+<table>
+<tr><th>№</th><th data-sort>English</th><th data-sort>Sanskrit</th><th data-sort>Что значит по-санскритски</th><th>Раздел</th><th>Примечание</th></tr>
+{{TABLE_EN}}
+</table>
+
+<h2 id="de">III. Deutsch — по немецкому слову</h2>
+<table>
+<tr><th>№</th><th data-sort>Deutsch</th><th data-sort>Sanskrit</th><th data-sort>Что значит по-санскритски</th><th>Раздел</th><th>Примечание</th></tr>
+{{TABLE_DE}}
+</table>
+
+<h2 id="la">IV. Latina — по латинскому слову</h2>
+<table>
+<tr><th>№</th><th data-sort>Latina</th><th data-sort>Sanskrit</th><th data-sort>Что значит по-санскритски</th><th>Раздел</th><th>Примечание</th></tr>
+{{TABLE_LA}}
+</table>
+
+<h2 id="gr" class="lg-greek">V. Ἑλληνική — по древнегреческому слову</h2>
+<table class="lg-greek">
+<tr><th>№</th><th data-sort>Ελληνικά</th><th data-sort>Sanskrit</th><th data-sort>Что значит по-санскритски</th><th>Раздел</th><th>Примечание</th></tr>
+{{TABLE_GR}}
+</table>
+
+<h2 id="fasmer">VII. Выводы: как выборка Зализняка соотносится с Фасмером</h2>
+<div class="box">
+<p>Сопоставление с подборкой <b>fasmer-dr-ind</b> — статьями «Этимологического словаря русского языка» М.&nbsp;Фасмера, в которых есть древнеиндийские (др.-инд.) параллели (файл fasmer-dr-ind.htm из репозитория SamudraManthanam; 1410 статей, 1405 уникальных заголовочных слов после нормализации).</p>
+<ul>
+<li><b>Пересечение: 167 слова.</b> Это <b>63&nbsp;%</b> русской колонки Зализняка (233 позиции; 265 уникальных форм после нормализации ударений и диакритики). Ядро выборки Зализняка подтверждается Фасмером почти на две трети.</li>
+<li><b>98 слов Зализняка</b> в др.-инд. подборке Фасмера отсутствуют — это по большей части помеченные самим Зализняком «возм.» гипотезы, добавки ⟨в треугольных скобках⟩, древнерусские и диалектные параллели (типа «къде», «тьло»), а также слова, где Фасмер выводит родню не напрямую через др.-инд.</li>
+<li><b>Обратно: у Фасмера ещё 1238 статей</b> с др.-инд. параллелями, которых в выборке Зализняка нет (примерно в 5 раз больше по заголовкам). Но это в основном областная и диалектная лексика (алес «сырое место», бавить, базло, балаболить…), отдельные говорные формы и производные — шум выше, отбор слабее.</li>
+<li><b>Итог:</b> консспект Зализняка — компактное отобранное <i>ядро</i> (корни и базовые слова, ~40&nbsp% его русской колонки имеют прямое фасмеровское др.-инд. подтверждение в ядре), качественно строже; fasmer-dr-ind — количественно шире (≈5,3× по заголовкам), но требует фильтрации. Их удобно использовать вместе: Зализняк — что учить, Фасмер — где копать дальше.</li>
+</ul>
+<p class="note">Метод: заголовочные слова статей Фасмера сопоставлены с русской колонкой консспекта после нормализации (строчные, без ударений, ё→е, без помет «др.-рус.»/«возм.»). Подсчёт 25-09-2026 по fasmer-dr-ind.jsonl (SamudraManthanam). Нормализация грубая: часть «уникальных» расхождений — словоформы одного слова.</p>
+</div>
+
+<footer>
+  <p>Составлено 24-09-2026 по конспекту А.&nbsp;А.&nbsp;Зализняка (2004) с его орфографией и пометами; добавления помечены треугольными скобками. Повесть «Дело о пропавшей родне» — <a href="povest.html">отдельным файлом</a>; черновая сказка — <a href="skazka.html">skazka.html</a> (помечена как неудачная, не переделывалась).</p>
+  <p class="meta">H5481 (OxAlpha — glm-5.3-flash) · обновлено 25-09-2026 · gasyoun.github.io · <a href="https://github.com/gasyoun/gasyoun.github.io/tree/master/zalizniak-2026">исходники страницы</a></p>
+  <p><i>Гасунс</i></p>
+</footer>
+</main>
+<script>
+(function(){
+  document.querySelectorAll("table").forEach(function(tb){
+    var body = tb.tBodies[0] || tb;
+    Array.prototype.forEach.call(tb.querySelectorAll("th[data-sort]"), function(th){
+      th.addEventListener("click", function(){
+        var idx = Array.prototype.indexOf.call(th.parentNode.children, th);
+        var rows = Array.prototype.slice.call(body.rows);
+        var dir = th.getAttribute("data-dir") === "asc" ? "desc" : "asc";
+        Array.prototype.forEach.call(tb.querySelectorAll("th[data-sort]"), function(o){ o.removeAttribute("data-dir"); });
+        th.setAttribute("data-dir", dir);
+        rows.sort(function(a, b){
+          var ca = a.children[idx], cb = b.children[idx];
+          var ka = ca && (ca.getAttribute("data-k") || ""), kb = cb && (cb.getAttribute("data-k") || "");
+          if (ka === kb) return 0;
+          return (ka < kb ? -1 : 1) * (dir === "asc" ? 1 : -1);
+        });
+        for (var i = 0; i < rows.length; i++) body.appendChild(rows[i]);
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>
