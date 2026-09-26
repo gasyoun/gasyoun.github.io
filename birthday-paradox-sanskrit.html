@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Парадокс дней рождения на наших санскритских данных</title>
+<style>
+  :root { --ink:#1a1a2e; --paper:#faf7f2; --accent:#8b2635; --muted:#6b6b7b; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink);
+         font:17px/1.65 Georgia,'Times New Roman',serif; }
+  main { max-width:760px; margin:0 auto; padding:48px 22px 80px; }
+  h1 { font-size:1.9rem; line-height:1.25; margin:0 0 6px; }
+  .lede { color:var(--muted); font-style:italic; margin:0 0 36px; }
+  h2 { font-size:1.25rem; margin:44px 0 12px; color:var(--accent); }
+  .formula { background:#fff; border:1px solid #e5ded2; border-left:4px solid var(--accent);
+             padding:14px 18px; margin:18px 0; font-family:Georgia,serif; font-size:1.05rem; }
+  table { border-collapse:collapse; width:100%; margin:18px 0; font-size:.95rem; background:#fff; }
+  th,td { border:1px solid #e5ded2; padding:8px 10px; text-align:left; }
+  th { background:#f3ede2; }
+  td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; }
+  .verdict { font-weight:bold; color:#2e7d32; }
+  .small { font-size:.85rem; color:var(--muted); }
+  code { background:#f0e9dc; padding:1px 5px; border-radius:3px; font-size:.9em; }
+  footer { margin-top:56px; padding-top:18px; border-top:1px solid #e5ded2;
+           color:var(--muted); font-size:.9rem; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Парадокс дней рождения на наших санскритских данных</h1>
+  <p class="lede">Почему «два слова из десяти начинаются на одну букву» — это не открытие, а математическая неизбежность. Разбор на реальном батче Cologne.</p>
+
+  <h2>1 · Сам парадокс</h2>
+  <p>В комнате из 35 человек шанс, что у двоих совпадёт день рождения, — <b>81,4%</b>, хотя возможных дат 365. Интуиция ошибается, потому что считает не «кто-то против всех», а <b>пары</b>: у 35 человек их 595, и каждая пара — шанс на совпадение.</p>
+  <div class="formula">P(хоть одно совпадение) ≈ 1 − exp( −k(k−1) / 2n ),<br>где k — объектов, n — размер пространства категорий.</div>
+  <p>На 365 дат: 10 человек → ~12%, 23 → ~50%, 35 → ~81%. Растёт квадратично.</p>
+
+  <h2>2 · Применяем к Cologne (Monier-Williams, 194 083 леммы)</h2>
+  <p>Наше «пространство дней» — фонетические поля санскрита. Мерили честно, индексом Херфиндаля по <i>реальному</i> распределению лемм (санскрит скошен, «ровные 365» врали бы):</p>
+  <table>
+    <tr><th>Поле</th><th class="num">Категорий</th><th class="num">Эффективное m</th><th class="num">P(2 из 10 совпадут)</th></tr>
+    <tr><td>первые 3 буквы</td><td class="num">5 566</td><td class="num">304</td><td class="num">13,7%</td></tr>
+    <tr><td>начальный стык (онсет)</td><td class="num">3 115</td><td class="num">81</td><td class="num">42,6%</td></tr>
+    <tr><td>первые 2 буквы</td><td class="num">680</td><td class="num">71</td><td class="num">46,8%</td></tr>
+    <tr><td>финальные 2 буквы</td><td class="num">709</td><td class="num">31</td><td class="num">77,1%</td></tr>
+    <tr><td>первая буква</td><td class="num">47</td><td class="num">15</td><td class="num">95,1%</td></tr>
+    <tr><td><b>финальная буква</b></td><td class="num">50</td><td class="num"><b>2,6</b></td><td class="num"><b>~100%</b></td></tr>
+  </table>
+  <p>Финалы санскрита сжаты до эффективных <b>трёх</b> категорий — почти всё кончается на <code>-a</code>. Совпадение по финалу среди десяти слов гарантировано и не значит ничего.</p>
+
+  <h2>3 · Эксперимент на нашем реальном батче (18 кейсов)</h2>
+  <p>Батч Cologne 2026-08-04: 18 вставленных двойных лемм MW72 (стыковые формы вроде <code>yoktaśvottara</code>, <code>Agniveṣyāyaṇa</code>). 153 пары. Сравнили наблюдаемые совпадения с предсказанием парадокса:</p>
+  <table>
+    <tr><th>Поле</th><th class="num">Наблюдается</th><th class="num">Ожидается</th><th>p-значение</th><th>Вердикт</th></tr>
+    <tr><td>первая буква</td><td class="num">9</td><td class="num">10,2</td><td class="num">0,69</td><td class="verdict">шум</td></tr>
+    <tr><td>первые 2 буквы</td><td class="num">2</td><td class="num">2,1</td><td class="num">0,63</td><td class="verdict">шум</td></tr>
+    <tr><td>первые 3 буквы</td><td class="num">1</td><td class="num">0,5</td><td class="num">0,40</td><td class="verdict">шум</td></tr>
+    <tr><td>финальная буква</td><td class="num">67</td><td class="num">59,7</td><td class="num">0,19</td><td class="verdict">шум</td></tr>
+    <tr><td>финальные 2 буквы</td><td class="num">6</td><td class="num">5,0</td><td class="num">0,39</td><td class="verdict">шум</td></tr>
+    <tr><td>онсет</td><td class="num">2</td><td class="num">1,9</td><td class="num">0,56</td><td class="verdict">шум</td></tr>
+  </table>
+  <p><b>Каждое совпадение легло ровно на предсказание.</b> Парные «похожести» батча — <code>jawāyus</code>/<code>janu</code>, <code>dattila</code>/<code>dattiya</code>, <code>golikā</code>/<code>jīrukā</code> — фоновый шум, а не система.</p>
+
+  <h2>4 · Правило на будущее</h2>
+  <p>Совпадение в 10 кейсах удивительно (P &lt; 5%) только если эффективное число категорий поля <b>m ≳ 900</b> — в MW это первые 3 буквы и точнее. Всё грубее — априорный шум. Прежде чем объявлять «системную ошибку» по кластеру похожих слов, гоняйте батч через <a href="https://github.com/gasyoun/SanskritLexicography/blob/master/birthday_collision_baseline.py">базовый скрипт</a>.</p>
+
+  <footer>
+    <p>Данные: Cologne Digital Sanskrit Dictionaries, Monier-Williams 1899 (<a href="https://github.com/sanskrit-lexicon/csl-orig">csl-orig</a>); батч — <a href="https://github.com/sanskrit-lexicon/csl-corrections/tree/main/batch_20260804">csl-corrections 2026-08-04</a>. Метод и инструменты: <a href="https://github.com/gasyoun/SanskritLexicography">SanskritLexicography</a>.</p>
+    <p class="small">_Created: 26-09-2026 · Гасунс_</p>
+  </footer>
+</main>
+</body>
+</html>
