@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Сколько всего слов в санскрите? — 5 знаменателей + ∞</title>
+<style>
+  :root{--ink:#1a1a2e;--mut:#5c5c70;--acc:#8b2f1f;--bg:#faf7f2;--card:#ffffff;--line:#e5dfd3;--gold:#b8860b;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Georgia,'Times New Roman',serif;background:var(--bg);color:var(--ink);line-height:1.65;padding:2rem 1rem 4rem}
+  main{max-width:880px;margin:0 auto}
+  h1{font-size:clamp(1.6rem,4vw,2.4rem);line-height:1.25;margin:.4rem 0 .2rem}
+  .kicker{color:var(--acc);font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700}
+  .meta{color:var(--mut);font-size:.9rem;margin-bottom:2rem}
+  h2{font-size:1.35rem;margin:2.4rem 0 .8rem;padding-bottom:.3rem;border-bottom:2px solid var(--line)}
+  h3{font-size:1.05rem;margin:1.4rem 0 .4rem}
+  p{margin:.6rem 0}
+  .tldr{background:var(--card);border-left:4px solid var(--acc);padding:1.1rem 1.3rem;border-radius:0 8px 8px 0;box-shadow:0 1px 4px rgba(0,0,0,.06);margin:1.2rem 0}
+  .tldr b{color:var(--acc)}
+  table{width:100%;border-collapse:collapse;margin:1rem 0;background:var(--card);box-shadow:0 1px 4px rgba(0,0,0,.05);font-size:.95rem}
+  th,td{padding:.6rem .7rem;border:1px solid var(--line);vertical-align:top;text-align:left}
+  th{background:#f0ebe0;font-size:.85rem;text-transform:uppercase;letter-spacing:.05em}
+  td.num{font-size:1.15rem;font-weight:700;white-space:nowrap;color:var(--acc)}
+  .proof{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:1rem 1.3rem;margin:1rem 0}
+  .proof ol{margin:.5rem 0 .5rem 1.4rem}
+  .myth{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:1rem 1.3rem;margin:1rem 0;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+  .myth .claim{font-weight:700;margin-bottom:.3rem}
+  .myth .claim::before{content:"✗ ";color:var(--acc)}
+  .myth .err{color:var(--mut);font-size:.95rem}
+  .myth .err b{color:var(--ink)}
+  .steps{counter-reset:st;margin:1rem 0}
+  .steps li{margin:.5rem 0 .5rem 1.4rem}
+  .note{background:#f4f0e6;border:1px dashed var(--gold);border-radius:8px;padding:.8rem 1.1rem;font-size:.92rem;color:var(--mut);margin:1.2rem 0}
+  .ladder{display:flex;flex-direction:column;gap:.5rem;margin:1rem 0}
+  .rung{display:flex;align-items:baseline;gap:.8rem;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:.7rem 1rem}
+  .rung .n{font-size:1.5rem;font-weight:700;color:var(--acc);min-width:6.5rem}
+  .rung .lbl{font-size:.92rem;color:var(--mut)}
+  .inf{font-size:1.5rem;font-weight:700;color:var(--gold)}
+  a{color:var(--acc)}
+  code{background:#efe9dc;padding:.1rem .35rem;border-radius:4px;font-size:.88em}
+  footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);color:var(--mut);font-size:.88rem}
+  sup{font-size:.75em}
+</style>
+</head>
+<body>
+<main>
+  <div class="kicker">Математическая задача · санскрит · разбор мифов</div>
+  <h1>Сколько всего слов в санскрите?</h1>
+  <div class="meta">Короткий ответ: у вопроса нет одного числа — «слово» измеряется пятью способами, и пять знаменателей измерены; полный же набор слов счётно-неограничен. 26-09-2026 · М. Гасунс · данные: <a href="https://github.com/gasyoun/SanskritLexicography/blob/master/FEATURES_INDEX.md">SanskritLexicography</a> · канонический текст: <a href="https://github.com/gasyoun/SanskritLexicography/blob/master/SANSKRIT_WORD_COUNT_FIVE_DENOMINATORS_26-09-2026.md">.md в репо</a></div>
+
+  <div class="tldr">
+    <b>TL;DR.</b> «Сколько слов» — это пять разных вопросов. Корни: ~2 тысячи. Аттестованные леммы: <b>98 606</b> (DCS-2026; DCS-2021: 83 239). Словарные статьи 15 словарей: <b>323 425</b> (включая 17 386 «призраков» MW). Словоформы в корпусе: <b>408 000+</b> на 5,69 млн токенов. Порождаемых грамматикой Пāнини — на порядки больше (корпусом аттестовано лишь 10,44% падёжного пространства). Компаунды (samāsa): <b>бесконечно много</b>, счётно (ℵ₀). Каждый интернет-миф о «числе слов» — подмена одного знаменателя другим.
+  </div>
+
+  <h2>Лестница: шесть уровней ответа</h2>
+  <div class="ladder">
+    <div class="rung"><span class="n">≈ 2 000</span><span class="lbl"><b>Корни (dhātu)</b> — Westergaard 1 982 · Mādhavīya 2 247 · Whitney 935 верифицированных</span></div>
+    <div class="rung"><span class="n">98 606</span><span class="lbl"><b>Леммы, аттестованные корпусом DCS</b> (2026; в 2021 — 83 239: число зависит от корпуса и даты)</span></div>
+    <div class="rung"><span class="n">323 425</span><span class="lbl"><b>Статьи 15 академических словарей (CDSL union)</b> — из них 17 386 статей MW не attested в текстах; независимая корроборация 34,7%</span></div>
+    <div class="rung"><span class="n">408 000+</span><span class="lbl"><b>Различные словоформы корпуса</b> — на 5 688 416 токенов, 270 текстов</span></div>
+    <div class="rung"><span class="n">≫ 10<sup>6</sup></span><span class="lbl"><b>Порождаемые Пāнини формы</b> — аттестовано лишь 10,44% 24-клеточного падёжного пространства; медиана — 1 клетка на лемму</span></div>
+    <div class="rung"><span class="inf">ℵ₀</span><span class="lbl"><b>Компаунды (samāsa)</b> — счётно-неограниченно: доказательство ниже</span></div>
+  </div>
+
+  <h2>Доказательство: компаундов счётно-бесконечно много</h2>
+  <div class="proof">
+    <ol>
+      <li><b>Нижняя граница.</b> Правила samāsa (Aṣṭādhyāyī 2.1–2.2) соединяют имя с именем без предела длины: если w — допустимый компаунд, то w + новый член — снова допустимый, и он другой. По индукции существуют компаунды любой длины, все различные ⇒ |C| ≥ ℵ₀.</li>
+      <li><b>Верхняя граница.</b> Каждый компаунд — конечная строка конечного алфавита; таких строк счётное множество ⇒ |C| ≤ ℵ₀.</li>
+      <li><b>Итого:</b> |C| = ℵ₀.</li>
+    </ol>
+  </div>
+  <p>Это верно для любого живого языка с продуктивным словообразованием — английского, немецкого, русского. Санскрит уникален не бесконечностью, а тем, что его продуктивная грамматика формализована ~2 500 лет назад.</p>
+
+  <h2>Шесть интернет-мифов и их ошибки</h2>
+  <div class="note">Живая оговорка: 26-09-2026 поисковики блокировали автоматический сбор живых URL (Google — капча 429, Bing/DDG/Mojeek — бот-стены), поэтому мифы даны в канонических формулировках с воспроизводимыми поисковыми запросами — любой может проверить за 10 секунд.</div>
+
+  <div class="myth">
+    <div class="claim">«В санскрите 102 араба (10,2 млрд) слов»</div>
+    <div class="err">Кочует по Hindi-прессе и YouTube (<a href="https://www.youtube.com/results?search_query=%22%E0%A4%B8%E0%A4%82%E0%A4%B8%E0%A5%8D%E0%A4%95%E0%A5%83%E0%A4%A4%22+%22102+%E0%A4%85%E0%A4%B0%E0%A4%AC%22">проверить поиск</a>). Ошибки: попытка оценить порождаемое множество выдаётся за словарь; модель порождения за числом не стоит; если считать компаунды, ответ — ℵ₀, а не 10<sup>10</sup>. Ни один измеренный уровень до 10<sup>10</sup> не дотягивает.</div>
+  </div>
+  <div class="myth">
+    <div class="claim">«Все слова происходят из ~2 000 дхату»</div>
+    <div class="err"><b>Ошибка единиц измерения.</b> Дхату — корневой атом (1 982–2 247 по свидетелям), отглагольное дерево огромно, но дхату ≠ слова: именные основы, местоимения и неизменяемые из корней напрямую не выводятся. Корни — уровень 1 лестницы, а не весь словарь.</div>
+  </div>
+  <div class="myth">
+    <div class="claim">«Monier-Williams содержит весь санскрит (~180 тысяч слов)»</div>
+    <div class="err">У MW ≈ 185 803 статей, но: 17 386 из них — «призраки» без текстовой аттестации; независимая корроборация после схлопывания словарных семей — 34,7%; 15-словарный union на 43% больше (323 425); и множество статей растёт (+14,3% за 2014–2026). «Полноты» не существует.</div>
+  </div>
+  <div class="myth">
+    <div class="claim">«NASA признала санскрит лучшим языком для ИИ»</div>
+    <div class="err"><b>Апелляция к авторитету вместо знаменателя.</b> Реальный источник — Rick Briggs, <i>Knowledge Representation in Sanskrit and AI</i> (AI Magazine, 1985): обсуждение формализма Пāнини, никакой оценки словаря там нет.</div>
+  </div>
+  <div class="myth">
+    <div class="claim">«Слов бесконечно много — считать бессмысленно»</div>
+    <div class="err">Наполовину прав (для компаундов), дефектен в выводе: неограниченность одного уровня не отменяет измеримости других — уровни 1–4 измерены с точностью до единиц.</div>
+  </div>
+  <div class="myth">
+    <div class="claim">«В английском 171 476 слов (OED) — сравните с санскритом»</div>
+    <div class="err"><b>Яблоки против апельсинов:</b> OED считает лемма-семейства; вирусные санскрит-цифры — корни или порождаемые формы. Сравнимы только одноимённые уровни.</div>
+  </div>
+
+  <h2>Как считать правильно</h2>
+  <ol class="steps">
+    <li><b>Назови множество</b>: корни / леммы / статьи / формы / порождаемые / компаунды.</li>
+    <li><b>Назови корпус и дату среза</b>: DCS-2021 и DCS-2026 — разные числа.</li>
+    <li><b>Различай статусы</b>: аттестованное, словарное, порождаемое.</li>
+    <li><b>Публикуй воспроизводимо</b>: закреплённый SHA данных, генератор, таблица-свидетель.</li>
+  </ol>
+
+  <h2>Источники</h2>
+  <p>Все числа — измерения проекта: <a href="https://github.com/gasyoun/SanskritLexicography/blob/master/SANSKRIT_WORD_COUNT_FIVE_DENOMINATORS_26-09-2026.md">канонический текст со ссылками на каждый источник</a> (union_headwords C13, E27, E44, E46, E47, E52, data/dhp, NOW_VS_THEN). Внешние: <a href="https://en.wikipedia.org/wiki/Sanskrit">Wikipedia «Sanskrit»</a> — показательна тем, что числа слов не называет вовсе; Rick Briggs, AI Magazine 6(4), 1985, doi:10.1609/aimag.v6i4.566.</p>
+
+  <footer>М. Гасунс · 26-09-2026 · Handoff <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H5509-OxAlpha_SanskritLexicography_sanskrit-word-count-five-denominators-myth-audit_26.09.26.md">H5509</a> · executor OxAlpha (opencode/z-ai/glm-5.3-flash)</footer>
+</main>
+</body>
+</html>
