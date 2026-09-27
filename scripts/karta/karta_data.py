@@ -100,10 +100,10 @@ ITEMS = [
     dict(id="K016", sec="D", key="reverse21-output/", href="reverse21-output/devanagarisorted3.html", status="tomb",
          title="Реверс деванагари — итерация 21",
          note="Промежуточная итерация реверс-выкладки; заменена K015. Держится для истории сравнения."),
-    dict(id="K017", sec="D", key="reverse20-ouput/", href="reverse20-ouput/devanagarisorted3.html", status="tomb",
-         title="Реверс деванагари — итерация 20 (опечатка в имени)",
-         note="Первая итерация реверс-выкладки; заменена K015. В имени каталога опечатка «ouput» — "
-              "переименование заведено в GTD, чтобы не ломать старые ссылки молча."),
+    dict(id="K017", sec="D", key="reverse20-output/", href="reverse20-output/devanagarisorted3.html", status="tomb",
+         title="Реверс деванагари — итерация 20",
+         note="Первая итерация реверс-выкладки; заменена K015. Каталог переименован из «reverse20-ouput» "
+              "(опечатка в имени) 27-09-2026 (H5530); ссылки на прежнее имя больше не работают."),
     dict(id="K018", sec="D", key="PWGagainstMW.html", status="amber",
          title="PWG против MW",
          note="Сверка статей PWG с Monier-Williams: параллельные выписки для проверки полноты перевода. "
@@ -195,11 +195,6 @@ ITEMS = [
          title="H2582 — публичные копии артефактов исследования",
          note="Два из 13 артефактов исследования «samskrte.ru vs Sanskritorium»: скоркарты и 21 рекомендация. "
               "Выложены как фетчабельный вход для Deep Research; каноничное множество — в приватном репо."),
-    dict(id="K041", sec="F", key="index2.html", status="tomb",
-         title="index2.html — бойлерплейт GitHub Pages",
-         note="Автогенерированная приветственная страница GitHub Pages времён создания репо. "
-              "Кандидат на удаление; корень по решению MG 27-09-2026 не трогается, поэтому живёт в GTD."),
-
     # ---------- G. Острова домена ----------
     dict(id="K042", sec="G", url="kosha/", status="green",
          title="kosha — словарный поиск для переводчика",

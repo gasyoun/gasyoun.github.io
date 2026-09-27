@@ -44,8 +44,8 @@ plain HTML and text data.
   viewer.
 - **Reverse-index / reverse-sort outputs** — devanagari-sorted and
   reverse-sorted word lists derived from headword input:
-  [reverse20-ouput/](https://github.com/gasyoun/gasyoun.github.io/tree/master/reverse20-ouput)
-  (note the misspelled directory name, preserved as published),
+  [reverse20-output/](https://github.com/gasyoun/gasyoun.github.io/tree/master/reverse20-output)
+  (renamed from the misspelled `reverse20-ouput` on 27-09-2026, H5528),
   [reverse21-output/](https://github.com/gasyoun/gasyoun.github.io/tree/master/reverse21-output),
   and
   [reverse22-output/](https://github.com/gasyoun/gasyoun.github.io/tree/master/reverse22-output)
@@ -70,11 +70,10 @@ plain HTML and text data.
 
 ## Leftover scaffolding
 
-[index2.html](https://github.com/gasyoun/gasyoun.github.io/blob/master/index2.html)
-and
 [params.json](https://github.com/gasyoun/gasyoun.github.io/blob/master/params.json)
-are the original GitHub Pages "automatic generator" (Merlot theme) template
-files, kept as-is; the served landing page is `index.html`, not `index2.html`.
+is a leftover of the original GitHub Pages "automatic generator" (Merlot theme)
+template, kept as-is; the served landing page is `index.html`. The sibling
+`index2.html` boilerplate page was deleted on 27-09-2026 (H5528).
 
 ## Maintenance
 
