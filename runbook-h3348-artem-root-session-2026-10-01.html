@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Рунбук: root-сессия на .95 — искоренение импланта samskrtam.ru (08-10-2026)</title>
+<style>
+  body{font-family:Georgia,'Times New Roman',serif;max-width:820px;margin:2rem auto;padding:0 1.2rem;line-height:1.6;color:#1a1a1a;background:#fbf9f4}
+  h1{font-size:1.5rem;border-bottom:2px solid #8a6d3b;padding-bottom:.3rem}
+  h2{font-size:1.15rem;margin-top:1.8rem;color:#5c4a21}
+  h3{font-size:1.02rem;color:#5c4a21}
+  code,pre{font-family:Consolas,monospace}
+  code{background:#efe8d8;padding:.1rem .3rem;border-radius:3px;font-size:.9em;word-break:break-all}
+  pre{background:#2d2a24;color:#e8e2d0;padding:.9rem 1rem;border-radius:6px;overflow-x:auto;font-size:.86rem}
+  pre code{background:none;padding:0;color:inherit}
+  table{border-collapse:collapse;width:100%;margin:.8rem 0;font-size:.9rem}
+  th,td{border:1px solid #d8cfae;padding:.4rem .6rem;text-align:left}
+  th{background:#efe8d8}
+  .meta{background:#f3eee0;border-left:4px solid #8a6d3b;padding:.7rem 1rem;margin:1rem 0;border-radius:0 6px 6px 0;font-size:.92rem}
+  footer{margin-top:2.5rem;border-top:1px solid #d8cfae;padding-top:.8rem;color:#6b6357;font-size:.85rem}
+  a{color:#7a5c1e}
+</style>
+</head>
+<body>
+<h1>Рунбук: root-сессия Артёма на .95 — искоренение импланта samskrtam.ru</h1>
+<div class="meta">
+<b>Для:</b> Артём (@t3t3r1n) — единственный держатель root/панели на 193.232.229.95 ·
+<b>Сессия:</b> 08-10-2026 (или день по согласованию) ·
+<b>Ведёт:</b> агент, Артём — руки на root-SSH.<br>
+Канонический источник документа — <a href="https://github.com/gasyoun/Uprava/blob/main/docs/RUNBOOK_H3348_ARTEM_ROOT_SESSION_2026-10-01.md">Uprava/docs/RUNBOOK_H3348_ARTEM_ROOT_SESSION_2026-10-01.md</a>
+(приватный репозиторий, откроется только своим); эта страница — его точная копия для сессии.
+</div>
+<h1
+id="runbook-root-сессия-артёма-на-95--искоренение-импланта-samskrtamru--01-10-2026">Runbook:
+root-сессия Артёма на .95 — искоренение импланта samskrtam.ru —
+01-10-2026</h1>
+<p><em>Created: 03-09-2026 · Last updated: 03-09-2026</em></p>
+<p><strong>Для:</strong> Артём <code>@t3t3r1n</code> (единственный
+держатель root/панели на <code>193.232.229.95</code>) ·
+<strong>Исполнение:</strong> OxAlpha ведёт сессию, Артём — руки на
+root-SSH · <strong>Закрывает:</strong> <a
+href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H3348-OxAlpha_samskrtam-ru_implant-eradication-round_22.08.26.md">H3348</a>
+· <strong>Контекст:</strong> <a
+href="https://github.com/gasyoun/Uprava/blob/main/docs/INCIDENT_SAMSKRTAM_RU_DEFACEMENT_19-08-2026.md">инцидент
+19-08</a> · <a
+href="https://github.com/gasyoun/Uprava/blob/main/docs/VERDICT_MEMO_SAMSKRTAM_TRUTH_PASS_25-08-2026.md">вердикт
+H3347</a> · <a
+href="https://github.com/gasyoun/Uprava/blob/main/docs/RESULTS_SAMSKRTAM_PRE_ARTEM_CONTAINMENT_03-09-2026.md">контейнмент
+H4017 03-09</a></p>
+<h2 id="0-состояние-на-03-09-что-известно">0. Состояние на 03-09 (что
+известно)</h2>
+<ol type="1">
+<li><code>www/samskrtam.ru/index.php</code> — обфусцированный
+<code>goto</code>-имплант, <strong>22 057 байт</strong>, права 444;
+регенерируется бокс-сайд реврайтером (FTP <code>DELE</code> не
+держит).</li>
+<li><code>wp-includes/images/</code> — GET-бэкдоры
+<code>xit-3x.gif</code> (20 953 B), <code>xit-2x.gif</code>,
+<code>wpspin-1x/2x.gif</code>; возрождаются за секунды после удаления
+(проверено 03-09).</li>
+<li>Динамика (PHP) тормозит 12–35 s/запрос — имплант делает исходящий
+curl перед отдачей; главная спасена статикой (<code>index.html</code>,
+переустановлен 03-09).</li>
+<li>Векторы входа НЕ известны; админ-ростер чистый (9 легитимных),
+плагины чистые (проверено 03-09).</li>
+<li>Root SSH на <code>.95</code> до сих пор
+<code>Permission denied</code> для всех наших ключей; <code>.92</code>
+видит <code>.95</code> по LAN (<code>192.168.200.95</code>, ping 0.3
+ms).</li>
+</ol>
+<h2 id="1-сессия-по-порядку-не-пропускать">1. Сессия (по порядку, не
+пропускать)</h2>
+<ol type="1">
+<li><strong>Артём открывает root SSH на <code>.95</code></strong> (или
+даёт агенту одноразовый доступ/консоль ISPmanager под root).</li>
+<li><strong>Охота на персистенс реврайтера — НАЙТИ ДО ТОГО, как чистить
+файлы</strong> (иначе восстановит):
+<ol type="1">
+<li><code>for u in $(cut -d: -f1 /etc/passwd); do crontab -u $u -l 2&gt;/dev/null | grep -v '^#'; done</code>
++ <code>ls -la /etc/cron*</code> + <code>cat /etc/crontab</code>.</li>
+<li><code>systemctl list-timers --all</code>;
+<code>ls /etc/systemd/system/ | grep -v wants</code>.</li>
+<li><code>grep -r auto_prepend_file /etc/php* /etc/php.d/ 2&gt;/dev/null</code>;
+php-fpm пулы:
+<code>grep -r "php_admin_value\|php_value" /etc/php-fpm*</code>.</li>
+<li>Панель: ISPmanager → планировщик + <code>php настройки</code> домена
+(веб-интерфейс уровня root).</li>
+<li>Ловушка на писателе:
+<code>apt/yum install inotify-tools; inotifywait -m -e create,modify,attrib /var/www/samskrtam/data/www/samskrtam.ru/index.php</code>
+— кто трогает, тот и реврайтер (см. PID → <code>lsof -p PID</code>,
+<code>cat /proc/PID/cmdline</code>, путь бинарника).</li>
+</ol></li>
+<li><strong>Убить персистенс</strong> (процесс + его автозапуск), только
+потом:</li>
+<li><strong>Заменить имплант:</strong>
+<code>cd /root &amp;&amp; unzip -o wordpress-7.0.4.zip wordpress/wp-includes/… wordpress/index.php</code>
+— из архива <code>/root/wordpress-7.0.4.zip</code> (sha256
+<code>f0885ad10c35ac87e70517bc5789275cd54ccac052222a58acfb7b9f870082b0</code>,
+уже на <code>.92</code>, перенести) взять <strong>стоковый</strong>
+<code>index.php</code> (405 B) → положить в docroot, <code>chown</code>
+как у соседей, права 644. Проверить:
+<code>curl -s https://samskrtam.ru/cart/ -o /dev/null -w '%{http_code} %{time_starttransfer}\n'</code>
+→ 200 и <strong>&lt; 1 s</strong> (имплант мёртв). <code>500</code> на
+/cart/ = стоп по килл-свитчу (H3348 § Hardening legs 1).</li>
+<li><strong>Удалить xit-семью:</strong>
+<code>rm -f wp-includes/images/xit-*.gif wp-includes/images/wpspin-*.gif</code>
+и ВСЕ <code>filefuns.php</code>/<code>BiaoJiOk</code>-маркеры по дереву.
+Через 1–2 мин повторный <code>curl</code> каждого — <strong>файлы не
+должны вернуться</strong> (возвращаются = реврайтер жив, шаг 2 сделан не
+до конца).</li>
+<li><strong>Чекsum-диф ядра:</strong> на Mac/с <code>.92</code>
+запустить
+<code>python3 tools/h3348_integrity_scan.py --out docs/evidence_h3348 --stock-zip /root/wordpress-7.0.4.zip</code>
+(FTP-ходок по wp-admin/wp-includes против официального манифеста;
+DIFFERS-файлы → замена стоковыми).</li>
+<li><strong>Truth-pass ×2 с интервалом ≥30 мин:</strong>
+<code>python3 tools/eradicate_samskrtam.py --check</code> (после каждого
+— записать результат в лог). Оба должны быть CLEAN.</li>
+<li><strong>Вердикт-памятка:</strong> OxAlpha пишет
+<code>VERDICT_…CLEAN…md</code> + <code>/handoff-close H3348</code> —
+только после двух CLEAN и суток зелёного вочдога
+(<code>ssh root@193.232.229.92 'tail /var/log/samskrtam-watch.jsonl'</code>).</li>
+<li><strong>Ротации (тем же днём):</strong>
+<ol type="1">
+<li>Пароль БД в <code>wp-config.php</code> (+ обновить в
+<code>.env</code>-ах, где он есть).</li>
+<li>FTP/панель-пароль → обновить
+<code>~/.secrets/ftp_samskrtam.env</code> <strong>и</strong>
+<code>ORS-FAQ/.env.deploy</code> в тот же проход.</li>
+<li>WP: пере-выпустить App Password агента, по желанию re-rotate соли
+(уже раз 19-08).</li>
+<li>WooCommerce API-ключи + консультация с Точкой (смена мерчант-кредов)
+— через MG.</li>
+</ol></li>
+<li><strong>После CLEAN:</strong> выключить крон-репинер и
+вочдог-миграцию: <code>/root/samskrtam_home_repin.py</code> + его
+<code>*/5</code> cron на <code>.92</code> больше не нужны (главную снова
+отдаёт WP/Rocket) — снять строку из crontab; вочдог оставить (поменять
+baseline xit-семьи на 404 после искоренения). Включить авто-обновления
+безопасности или подтвердить месячный ручной ритм <a
+href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H3185-OxAlpha_samskrtam.ru_samskrtam-wp-monthly-update-cadence-performance_19.08.26.md">H3185</a>;
+пересобрать Rocket-кэш; снять <code>index.html</code>-заплатку (пусть WP
+снова отдаёт главную) только после суток чистой динамики.</li>
+</ol>
+<h2 id="2-красные-линии">2. Красные линии</h2>
+<ol type="1">
+<li>Никаких обновлений ядра/плагинов по FTP до убийства реврайтера (550
+на живых loader'ах = mixed tree; килл-свитч <code>/cart/</code>
+500).</li>
+<li>Не чистить файлы до убийства персистенса — бесполезно, восстановит
+(доказано 21-08, 24-08, 03-09).</li>
+<li>Не пушить креды в репо; пароли — только в
+<code>~/.secrets</code>/<code>.env</code> + смена в тот же проход.</li>
+<li>«Чисто» объявляет только двухкратный CLEAN truth-pass + зелёный
+вочдог; единичный проход — не вердикт.</li>
+</ol>
+<h2
+id="appendix--wave-a-находки-для-root-сессии-h4269-06-09-2026">Appendix
+— wave-A находки для root-сессии (H4269, 06-09-2026)</h2>
+<p>Добавлено из <a
+href="https://github.com/gasyoun/Uprava/blob/main/docs/AUDIT_SAMSKRTE_SURFACE_CENSUS_H4269_06-09-2026.md">аудита
+поверхности</a> — делать ПОСЛЕ искоренения, в той же сессии:</p>
+<ol type="1">
+<li><strong>wp-login.php rate-limit</strong> (nginx
+<code>limit_req</code> зона на <code>/wp-login.php</code>) — форма
+открыта миру, брутфорс-поверхность (F3).</li>
+<li><strong><code>admin</code> (id=1)</strong> — переименовать/удалить
+(acceptance H3164, до сих пор жив; F4).</li>
+<li><strong>readme.html</strong> — nginx deny (disclosure версий;
+F6).</li>
+<li><strong>8 диагностических <code>h3348-*</code> mu-plugins</strong>
+(26-08) — решить: снять или перенести в архив (грузятся на каждый
+запрос; F2; GTD @DO OxAlpha — сверка с этим runbook'ом).</li>
+<li><strong>Security headers</strong> для samskrtam.ru (HSTS и_co —
+сейчас нулевые) + <strong>origin-firewall: только CF IP</strong> после
+NS-переключения Cloudflare (ратифицировано MG 06-09; на .92 это делает
+агент — wave C).</li>
+<li><strong>Log-liveness</strong>: <code>debug.log</code> мёртв 166д,
+<code>wflogs/attack-data.php</code> 156д (F1, 🔴) — после CLEAN
+настроить ротацию/запись и живой <code>wflogs</code>; census-вочдог
+теперь алертит дрейф (daily 07:20 MSK + локальный прогон).</li>
+<li><strong><code>wp-content/debug.log</code> публично читаем
+вебом</strong> — 200, 5.3 MB (B2 🔴, <a
+href="https://github.com/gasyoun/Uprava/blob/main/docs/AUDIT_EXTERNAL_SURFACE_SAMSKRTE_ESTATES_H4271_06-09-2026.md">surface
+audit H4271</a>): nginx deny + удалить файл в root-сессии.</li>
+<li><strong>Посторонние живые свойства на боксе</strong> (B3 🟠):
+vertoletu.ru (прод?), test. + test2.samskrtam.ru (публичные тест-стенды
+— закрыть basic-auth/deny), yoga.od.ua;
+<code>/.env</code>+<code>/.git/HEAD</code> — 000-зависания, подтвердить
+блок (B8); <code>wp-config.php</code> deny (B7).</li>
+</ol>
+<hr />
+<p><em>Dr. Mārcis Gasūns</em></p>
+
+<footer>Развернуто 01-10-2026 · <a href="https://gasyoun.github.io/">gasyoun.github.io</a></footer>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Сообщение Артёму — root-сессия samskrtam.ru (08-10-2026)</title>
+<style>
+  body{font-family:Georgia,'Times New Roman',serif;max-width:760px;margin:2rem auto;padding:0 1.2rem;line-height:1.6;color:#1a1a1a;background:#fbf9f4}
+  h1{font-size:1.25rem;border-bottom:2px solid #8a6d3b;padding-bottom:.3rem}
+  .how{background:#f3eee0;border-left:4px solid #8a6d3b;padding:.7rem 1rem;margin:1rem 0;border-radius:0 6px 6px 0;font-size:.95rem}
+  button{font-size:1.05rem;padding:.6rem 1.2rem;border-radius:6px;border:1px solid #8a6d3b;background:#8a6d3b;color:#fff;cursor:pointer}
+  button:hover{background:#6e562e}
+  #status{margin-left:.8rem;color:#5c4a21}
+  #msg{background:#fff;border:1px solid #d8cfae;border-radius:8px;padding:1.2rem 1.4rem;margin-top:1rem}
+  #msg p{margin:.55rem 0}
+  .muted{color:#6b6357;font-size:.88rem}
+  a{color:#7a5c1e}
+</style>
+</head>
+<body>
+<h1>Сообщение Артёму — root-сессия samskrtam.ru</h1>
+<div class="how">
+1. Нажми кнопку — сообщение с жирным и ссылкой попадёт в буфер (rich text).<br>
+2. Вставь в чат с Артёмом: Ctrl+V (десктоп) или долгое нажатие → «Вставить» (телефон).<br>
+<span class="muted">Кнопка не сработала? Выдели мышкой текст рамки ниже → Ctrl+C.</span>
+</div>
+<button onclick="copyMsg()">📋 Скопировать сообщение</button><span id="status"></span>
+
+<div id="msg">
+<p>Привет, Артём!</p>
+<p>По samskrtam.ru (взлом 19.08 — имплант на .95 до сих пор восстанавливается сам, чистить бессмысленно, пока не убит его автозапуск). Мы всё подготовили: всю работу делает наш агент, от тебя — одна сессия. Всё одним пакетом:</p>
+<p><b>1. Root-сессия на .95 — предлагаю 8 октября</b> (или назови удобный день, включимся по твоему окну). Твоя часть ~30 минут:<br>
+• открыть root SSH на .95 (или дать одноразовый доступ / консоль ISPmanager под root);<br>
+• вместе с агентом посмотреть в ISPmanager планировщик и PHP-настройки домена — ищем, что перезаписывает index.php;<br>
+• сразу после чистки сменить пароль FTP/панели.<br>
+Остальное (бэкап, поиск автозапуска, замена файлов, двойная проверка, харденинг) — агент по рунбуку: <a href="https://gasyoun.github.io/runbook-h3348-artem-root-session-2026-10-01.html">https://gasyoun.github.io/runbook-h3348-artem-root-session-2026-10-01.html</a></p>
+<p><b>2. Тот же заход, Proxmox (5 минут):</b> потолок /tmp на .91.</p>
+<p><b>3. Чтобы я больше тебя по этому серверу не дёргал:</b><br>
+• постоянный механизм разового доступа на случай «SSH умер»: временный пароль одноразовой ссылкой или консоль по запросу — тогда инциденты гасим сами, пишем только если хост лежит насмерть;<br>
+• после чистки включить авто-обновления безопасности WordPress (или зафиксируем месячный ручной ритм);<br>
+• «ок» на харденинг (делает агент): rate-limit на wp-login, закрыть readme.html и debug.log, security headers, origin-firewall только Cloudflare, прикрыть test/test2.samskrtam.ru и yoga.od.ua.</p>
+<p>Правило дальше простое: мы всегда сначала сами проверяем доступность — SSH жив, значит молчим. Какое время удобно 8-го?</p>
+</div>
+
+<p class="muted">Страница-помощник, не для публикации: скопировал — вставил — закрыл. Рунбук для Артёма: <a href="https://gasyoun.github.io/runbook-h3348-artem-root-session-2026-10-01.html">открыть</a>.</p>
+
+<script>
+function flash(t){document.getElementById('status').textContent=t;}
+async function copyMsg(){
+  const node=document.getElementById('msg');
+  try{
+    await navigator.clipboard.write([
+      new ClipboardItem({
+        'text/html': new Blob([node.innerHTML],{type:'text/html'}),
+        'text/plain': new Blob([node.innerText],{type:'text/plain'})
+      })
+    ]);
+    flash('✓ Скопировано — вставляй в Telegram');
+  }catch(e){
+    const range=document.createRange(); range.selectNodeContents(node);
+    const sel=getSelection(); sel.removeAllRanges(); sel.addRange(range);
+    const ok=document.execCommand('copy'); sel.removeAllRanges();
+    flash(ok?'✓ Скопировано — вставляй в Telegram':'Не вышло — выдели текст мышкой и Ctrl+C');
+  }
+}
+</script>
+</body>
+</html>
