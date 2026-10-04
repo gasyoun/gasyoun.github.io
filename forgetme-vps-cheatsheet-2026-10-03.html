@@ -1,0 +1,1100 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Пошаговая инструкция: новый VPS с Debian 12, SSH, XFCE, TigerVNC, noVNC и Firefox. Команды, проверки и восстановление подключения.">
+<title>VPS с нуля — шпаргалка ForgetMe</title>
+<link rel="canonical" href="https://gasyoun.github.io/forgetme-vps-cheatsheet-2026-10-03.html">
+<meta name="color-scheme" content="light dark">
+<script>
+/* Тема до первой отрисовки: явный выбор из localStorage, иначе системная (CSS prefers-color-scheme) */
+(function(d){d.classList.add('js');if('HTMLDialogElement' in window)d.classList.add('has-dialog');try{var t=localStorage.getItem('forgetme-cheatsheet-theme');if(t==='light'||t==='dark')d.setAttribute('data-theme',t)}catch(e){}})(document.documentElement);
+</script>
+<style>
+/* ---------- Токены: светлая тема по умолчанию ---------- */
+:root{
+ --font:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans","Helvetica Neue",Arial,sans-serif;
+ --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,"Cascadia Mono","Roboto Mono","DejaVu Sans Mono","Liberation Mono","Noto Sans Mono",monospace;
+ --bg:#f5f4f8;--surface:#fff;--surface-2:#f4f2f9;--surface-3:#ebe8f3;
+ --ink:#1d1b26;--ink-2:#3f3b4d;--muted:#5f5a6e;
+ --border:#e4e1ec;--border-strong:#cdc7da;
+ --accent:#6b38d4;--accent-hover:#5627b8;--accent-ink:#fff;--accent-soft:#f1ebfd;--accent-line:#d6c8f7;
+ --code-bg:#f9f8fc;--code-ink:#211e2b;--code-top:#f2eff8;--inline-code:#eeebf5;
+ --local:#0f6b5e;--local-bg:#edf7f4;--local-line:#c2e3db;
+ --vps:#5b2fc0;--vps-bg:#f5f0fe;--vps-line:#dbcdf9;
+ --desk:#4b4760;--desk-bg:#f4f3f7;--desk-line:#dedbe7;
+ --ok:#17663a;--selection:#dccdfb;
+ --shadow:0 1px 2px rgba(29,27,38,.04),0 8px 24px -14px rgba(29,27,38,.16);
+ color-scheme:light;
+}
+/* Тёмная тема: по системе, если нет явного выбора «Светлая» */
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+ --bg:#111017;--surface:#17151e;--surface-2:#1d1a26;--surface-3:#272333;
+ --ink:#ece9f3;--ink-2:#cdc8da;--muted:#a39db4;
+ --border:#2b2837;--border-strong:#433e56;
+ --accent:#b39cff;--accent-hover:#cbbaff;--accent-ink:#16121f;--accent-soft:#272040;--accent-line:#4a3d75;
+ --code-bg:#131119;--code-ink:#e6e2f0;--code-top:#1b1824;--inline-code:#272334;
+ --local:#72d3c3;--local-bg:#11252a;--local-line:#25494c;
+ --vps:#bba6ff;--vps-bg:#1e1833;--vps-line:#41356b;
+ --desk:#cbc6d8;--desk-bg:#1f1d28;--desk-line:#383447;
+ --ok:#7ad9a0;--selection:#4a3a80;
+ --shadow:0 1px 2px rgba(0,0,0,.35),0 10px 28px -16px rgba(0,0,0,.6);
+ color-scheme:dark;
+}}
+/* Тёмная тема: явный выбор */
+:root[data-theme="dark"]{
+ --bg:#111017;--surface:#17151e;--surface-2:#1d1a26;--surface-3:#272333;
+ --ink:#ece9f3;--ink-2:#cdc8da;--muted:#a39db4;
+ --border:#2b2837;--border-strong:#433e56;
+ --accent:#b39cff;--accent-hover:#cbbaff;--accent-ink:#16121f;--accent-soft:#272040;--accent-line:#4a3d75;
+ --code-bg:#131119;--code-ink:#e6e2f0;--code-top:#1b1824;--inline-code:#272334;
+ --local:#72d3c3;--local-bg:#11252a;--local-line:#25494c;
+ --vps:#bba6ff;--vps-bg:#1e1833;--vps-line:#41356b;
+ --desk:#cbc6d8;--desk-bg:#1f1d28;--desk-line:#383447;
+ --ok:#7ad9a0;--selection:#4a3a80;
+ --shadow:0 1px 2px rgba(0,0,0,.35),0 10px 28px -16px rgba(0,0,0,.6);
+ color-scheme:dark;
+}
+
+/* ---------- Основа ---------- */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:24px;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.68 var(--font);font-kerning:normal;overflow-wrap:break-word}
+::selection{background:var(--selection)}
+a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:.2em;overflow-wrap:anywhere}
+a:hover{color:var(--accent-hover);text-decoration-thickness:2px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+[tabindex="-1"]:focus:not(:focus-visible){outline:none}
+button{font:inherit;color:inherit}
+svg{flex:none}
+.vh{position:absolute!important;width:1px!important;height:1px!important;margin:-1px!important;padding:0!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;clip-path:inset(50%)!important;white-space:nowrap!important;border:0!important}
+.skip-link{position:absolute;left:12px;top:-200px;z-index:100;padding:10px 16px;border-radius:10px;background:var(--accent);color:var(--accent-ink);font-weight:650;text-decoration:none}
+.skip-link:focus{top:12px;color:var(--accent-ink)}
+/* ---------- Шапка: каналы и тема ---------- */
+.site-header{background:var(--surface);border-bottom:1px solid var(--border)}
+.site-header__inner{max-width:1240px;margin:0 auto;padding:12px 28px;display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px}
+.brand{display:flex;align-items:baseline;gap:10px;margin:0 auto 0 0;min-width:0;line-height:1.25}
+.brand-name{font-size:18px;font-weight:760;letter-spacing:-.015em;color:var(--ink)}
+.brand-doc{font-size:15px;color:var(--muted)}
+.channels{display:flex;gap:8px}
+.channel{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:40px;padding:0 14px;border:1px solid var(--border-strong);border-radius:10px;background:var(--surface);color:var(--ink);font-size:15px;font-weight:620;line-height:1.2;text-decoration:none;white-space:nowrap;overflow-wrap:normal;transition:background-color .15s,border-color .15s}
+.channel svg{width:18px;height:18px;color:var(--accent)}
+.channel:hover{background:var(--accent-soft);border-color:var(--accent-line);color:var(--ink)}
+.channel-handle{color:var(--muted);font-weight:500}
+.theme-switch{display:inline-flex;gap:2px;padding:3px;border:1px solid var(--border-strong);border-radius:12px;background:var(--surface-2)}
+.theme-btn{display:inline-flex;align-items:center;gap:6px;min-height:34px;padding:0 12px;border:0;border-radius:9px;background:transparent;color:var(--ink-2);font-size:14px;font-weight:620;line-height:1;cursor:pointer;transition:background-color .15s,color .15s}
+.theme-btn svg{width:16px;height:16px}
+.theme-btn:hover{background:var(--surface-3);color:var(--ink)}
+.theme-btn[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+html:not(.js) .theme-switch{display:none}
+
+/* ---------- Липкая панель оглавления (телефон, планшет) ---------- */
+.toc-bar{display:none;position:sticky;top:0;z-index:20;padding:6px 16px;background:var(--surface);border-bottom:1px solid var(--border)}
+.toc-open{display:flex;align-items:center;gap:10px;width:100%;max-width:868px;margin:0 auto;min-height:44px;padding:0 14px;border:1px solid var(--border-strong);border-radius:10px;background:var(--surface-2);color:var(--ink);font-size:15px;line-height:1.3;text-align:left;cursor:pointer}
+.toc-open svg{width:18px;height:18px;color:var(--accent)}
+.toc-open__label{flex:none;font-weight:680}
+.toc-open__current{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--muted)}
+
+/* ---------- Сетка и боковое оглавление ---------- */
+.layout{max-width:1240px;margin:0 auto;padding:32px 28px 72px;display:grid;grid-template-columns:268px minmax(0,1fr);gap:40px;align-items:start}
+aside{position:sticky;top:20px;max-height:calc(100vh - 40px);overflow:auto;overscroll-behavior:contain;padding:2px 6px 20px 0;font-size:14.5px;line-height:1.4;scrollbar-width:thin}
+.toc-title{margin:0 0 10px 10px;font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.toc{display:flex;flex-direction:column;gap:2px}
+.toc a{position:relative;display:grid;grid-template-columns:1.9em minmax(0,1fr);align-items:baseline;padding:7px 10px;border-radius:8px;color:var(--ink-2);text-decoration:none;overflow-wrap:normal;transition:background-color .15s,color .15s}
+.toc a:hover{background:var(--surface-3);color:var(--ink)}
+.toc-n{color:var(--muted);font-weight:650;font-variant-numeric:tabular-nums}
+.toc a[aria-current]{background:var(--accent-soft);color:var(--ink);font-weight:620}
+.toc a[aria-current]::before{content:"";position:absolute;left:0;top:7px;bottom:7px;width:3px;border-radius:3px;background:var(--accent)}
+.toc a[aria-current] .toc-n{color:var(--accent)}
+.note{margin:18px 0 0 10px;padding-top:14px;border-top:1px solid var(--border);font-size:12.5px;line-height:1.55;color:var(--muted)}
+
+/* ---------- Текст руководства ---------- */
+main{min-width:0;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:44px 52px 56px;box-shadow:var(--shadow)}
+h1,h2,h3{color:var(--ink);line-height:1.22;letter-spacing:-.018em;text-wrap:balance}
+h1{margin:0 0 16px;font-size:clamp(30px,1.6vw + 22px,42px);font-weight:780;line-height:1.12;letter-spacing:-.028em}
+h1 + p{margin:0 0 22px;color:var(--muted);font-size:15px}
+h1 + p + p{font-size:1.1em;color:var(--ink-2)}
+h2{margin:64px 0 16px;padding-top:30px;border-top:1px solid var(--border);font-size:clamp(23px,.8vw + 18px,28px);font-weight:730}
+h3{margin:36px 0 10px;font-size:clamp(18.5px,.4vw + 16px,21px);font-weight:690}
+p{margin:14px 0}
+ul,ol{margin:14px 0;padding-left:1.45em}
+li{margin:6px 0;padding-left:.15em}
+li::marker{color:var(--muted)}
+strong{font-weight:680}
+code{padding:.1em .36em;border-radius:5px;background:var(--inline-code);color:var(--ink);font-family:var(--mono);font-size:.86em;overflow-wrap:anywhere}
+.step-n{display:inline-flex;align-items:center;justify-content:center;min-width:1.7em;height:1.7em;padding:0 .32em;margin-right:.42em;border-radius:.42em;background:var(--accent-soft);color:var(--accent);font-size:.8em;font-weight:780;font-variant-numeric:tabular-nums;letter-spacing:0;vertical-align:.1em}
+/* ---------- «Где выполнять»: компьютер / VPS / удалённый рабочий стол ---------- */
+.where{position:relative;margin:22px 0 12px;padding:10px 14px 10px 44px;border:1px solid var(--w-line);border-radius:12px;background:var(--w-bg)}
+.where::before{content:"";position:absolute;left:14px;top:.84em;width:20px;height:20px;background:var(--w-fg);-webkit-mask:var(--w-icon) center/contain no-repeat;mask:var(--w-icon) center/contain no-repeat}
+.where--local{--w-line:var(--local-line);--w-bg:var(--local-bg);--w-fg:var(--local);--w-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='4' y='5' width='16' height='10' rx='1.5'/%3E%3Cpath d='M2 19h20'/%3E%3C/svg%3E")}
+.where--vps{--w-line:var(--vps-line);--w-bg:var(--vps-bg);--w-fg:var(--vps);--w-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='3.5' width='18' height='7' rx='2'/%3E%3Crect x='3' y='13.5' width='18' height='7' rx='2'/%3E%3Cpath d='M7 7h.01M7 17h.01'/%3E%3C/svg%3E")}
+.where--desk{--w-line:var(--desk-line);--w-bg:var(--desk-bg);--w-fg:var(--desk);--w-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='12' rx='2'/%3E%3Cpath d='M8 20h8M12 16v4'/%3E%3C/svg%3E")}
+.where + pre,.where + .code-block{margin-top:10px}
+.where-legend{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:16px 0;padding:0;list-style:none}
+.where-legend .where{margin:0}
+
+/* ---------- Таблицы ---------- */
+table{width:100%;margin:20px 0;border-collapse:collapse;border:1px solid var(--border);font-size:15px;line-height:1.5}
+.table-wrap{margin:20px 0;overflow-x:auto;border:1px solid var(--border);border-radius:12px}
+.table-wrap table{margin:0;border:0}
+th,td{padding:11px 14px;text-align:left;vertical-align:top;border-bottom:1px solid var(--border)}
+th + th,td + td{border-left:1px solid var(--border)}
+th{background:var(--surface-2);color:var(--ink);font-size:14px;font-weight:680}
+tbody tr:last-child td{border-bottom:0}
+
+/* ---------- Блоки кода и копирование ---------- */
+pre{margin:18px 0;padding:14px 16px;overflow:auto;border:1px solid var(--border);border-radius:12px;background:var(--code-bg);color:var(--code-ink);font-family:var(--mono);font-size:14px;line-height:1.62;tab-size:2}
+pre code{padding:0;border-radius:0;background:none;color:inherit;font-family:var(--mono);font-size:inherit;line-height:inherit;white-space:pre;overflow-wrap:normal;word-break:normal}
+pre:focus-visible,.table-wrap:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.code-block{margin:18px 0;min-width:0;border:1px solid var(--border);border-radius:12px;background:var(--code-bg)}
+.code-block pre{margin:0;border:0;border-radius:0 0 11px 11px;background:transparent}
+.code-top{display:flex;align-items:center;gap:10px;min-height:44px;padding:4px 5px 4px 14px;border-bottom:1px solid var(--border);border-radius:11px 11px 0 0;background:var(--code-top);color:var(--muted);font-size:13px;line-height:1.3}
+.code-meta{display:flex;flex:1;align-items:center;gap:8px;min-width:0}
+.code-lang{flex:none;padding:2px 7px;border:1px solid var(--border);border-radius:6px;background:var(--surface);color:var(--ink-2);font-size:12px;font-weight:650}
+.code-block--text .code-lang{background:transparent}
+.code-note{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.copy{display:inline-grid;flex:none;align-items:center;min-height:36px;padding:0 12px;border:1px solid var(--accent-line);border-radius:9px;background:var(--surface);color:var(--accent);font-size:14px;font-weight:650;line-height:1;cursor:pointer;transition:background-color .15s,border-color .15s}
+.copy > span{grid-area:1/1;display:inline-flex;align-items:center;justify-content:center;gap:7px;white-space:nowrap}
+.copy svg{width:16px;height:16px}
+.copy:hover{background:var(--accent-soft);border-color:var(--accent)}
+.copy .st-done,.copy .st-fail,.copy[data-state="done"] .st-idle,.copy[data-state="fail"] .st-idle{visibility:hidden}
+.copy[data-state="done"] .st-done,.copy[data-state="fail"] .st-fail{visibility:visible}
+.copy[data-state="done"]{color:var(--ok);border-color:currentColor}
+.copy-status{position:fixed;left:50%;bottom:20px;z-index:60;width:max-content;max-width:min(560px,calc(100vw - 32px));padding:12px 16px;border-radius:12px;background:var(--ink);color:var(--surface);font-size:15px;line-height:1.45;box-shadow:0 10px 30px -10px rgba(0,0,0,.45);transform:translateX(-50%)}
+.copy-status:not(.is-visible){width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap;box-shadow:none}
+
+/* ---------- Выдвижное оглавление (dialog) ---------- */
+.toc-drawer{position:fixed;inset:0 auto 0 0;width:min(88vw,380px);max-width:none;height:100%;max-height:none;margin:0;padding:0;border:0;border-right:1px solid var(--border);background:var(--surface);color:var(--ink);box-shadow:0 0 40px rgba(0,0,0,.25)}
+.toc-drawer::backdrop{background:rgba(20,16,32,.5)}
+.toc-drawer[open]{animation:drawer-in .18s ease-out}
+@keyframes drawer-in{from{opacity:0;transform:translateX(-16px)}}
+.toc-drawer__panel{display:flex;flex-direction:column;height:100%}
+.toc-drawer__head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 10px 8px 20px;border-bottom:1px solid var(--border)}
+.toc-drawer__title{margin:0;font-size:17px;font-weight:720}
+.toc-close{min-height:44px;padding:0 16px;border:1px solid var(--border-strong);border-radius:10px;background:var(--surface-2);color:var(--ink);font-size:15px;font-weight:620;cursor:pointer}
+.toc-drawer .toc{flex:1;overflow:auto;overscroll-behavior:contain;padding:10px 10px 28px;font-size:16px;line-height:1.35}
+.toc-drawer .toc a{min-height:44px;align-items:center;padding:8px 12px}
+html.drawer-open{overflow:hidden}
+
+/* ---------- Прочее ---------- */
+.back{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin-top:40px;padding:0 16px;border:1px solid var(--border-strong);border-radius:10px;color:var(--ink);font-size:15px;font-weight:620;text-decoration:none}
+.back::before{content:"↑";content:"↑"/"";color:var(--accent)}
+.back:hover{background:var(--accent-soft);border-color:var(--accent-line);color:var(--ink)}
+noscript{display:block;margin:0 0 24px;padding:12px 16px;border:1px solid var(--desk-line);border-radius:12px;background:var(--desk-bg);font-size:15px}
+.mobile-toc{display:none}
+.mobile-toc summary{display:flex;align-items:center;min-height:48px;padding:0 16px;font-weight:680;cursor:pointer}
+.mobile-toc .toc{padding:0 8px 10px}
+.mobile-toc summary::-webkit-details-marker{display:none}
+.mobile-toc summary::after{content:"";width:8px;height:8px;margin:0 4px 4px auto;border-right:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:rotate(45deg)}
+.mobile-toc[open] summary::after{margin-bottom:-4px;transform:rotate(-135deg)}
+
+/* ---------- Адаптивность ---------- */
+@media (max-width:1100px){.channel-handle{display:none}}
+@media (max-width:959.98px){
+ html.has-dialog{scroll-padding-top:76px}
+ html.has-dialog .toc-bar{display:block}
+ .site-header__inner{padding:10px 16px}
+ .layout{grid-template-columns:minmax(0,1fr);gap:0;max-width:900px;padding:16px 16px 56px}
+ aside{display:none}
+ main{padding:30px 28px 44px}
+ .mobile-toc{display:block;margin:0 0 26px;border:1px solid var(--border);border-radius:12px;background:var(--surface-2)}
+ html.has-dialog .mobile-toc{display:none}
+}
+/* Сенсорные цели не меньше 44px */
+@media (max-width:959.98px),(pointer:coarse){
+ .copy,.theme-btn,.channel,.toc a,.toc-open,.toc-close,.back{min-height:44px}
+ .toc a{align-items:center}
+}
+@media (max-width:760px){
+ .channels{order:3;width:100%}
+ .channel{flex:1 1 0;min-width:0}
+}
+@media (max-width:640px){
+ body{font-size:16px}
+ .brand{flex-direction:column;gap:0}
+ .brand-name{font-size:17px}
+ .brand-doc{font-size:13px}
+ .theme-btn svg{display:none}
+ html:not(.js) table{display:block;overflow-x:auto}
+ .toc-bar{padding:6px 12px}
+ .layout{padding:0 0 48px}
+ main{padding:26px 16px 40px;border-width:1px 0;border-radius:0;box-shadow:none}
+ h2{margin-top:52px;padding-top:26px}
+ pre{padding:12px 14px;font-size:13.5px}
+ .where-legend{grid-template-columns:minmax(0,1fr)}
+ table{font-size:14.5px}
+ th,td{padding:10px 12px}
+}
+@media (max-width:380px){
+ .copy svg{display:none}
+ .code-top{gap:8px;padding-left:10px}
+ .theme-btn{padding:0 10px}
+}
+
+/* ---------- Доступность ---------- */
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+@media (forced-colors:active){
+ .theme-btn[aria-pressed="true"],.toc a[aria-current]{outline:2px solid CanvasText;outline-offset:-2px}
+ .copy-status.is-visible{border:1px solid CanvasText}
+}
+
+/* ---------- Печать: всегда светлая и без интерфейса ---------- */
+@media print{
+ :root,:root:not([data-theme="light"]),:root[data-theme="dark"]{
+  --bg:#fff;--surface:#fff;--surface-2:#f2f2f2;--surface-3:#eee;--ink:#000;--ink-2:#1a1a1a;--muted:#444;
+  --border:#bbb;--border-strong:#999;--accent:#000;--accent-soft:#eee;--accent-line:#999;
+  --code-bg:#fff;--code-ink:#000;--code-top:#fff;--inline-code:#f0f0f0;
+  --local:#000;--local-bg:#fff;--local-line:#999;--vps:#000;--vps-bg:#fff;--vps-line:#999;--desk:#000;--desk-bg:#fff;--desk-line:#999;
+  color-scheme:light}
+ body{background:#fff;font-size:10.5pt;line-height:1.5}
+ .skip-link,.site-header,.toc-bar,aside,.mobile-toc,.code-top,.back,.toc-drawer,.copy-status,noscript{display:none!important}
+ .layout{display:block;max-width:none;padding:0}
+ main{padding:0;border:0;border-radius:0;box-shadow:none}
+ h1{font-size:22pt}
+ h2{margin-top:20pt;padding-top:10pt;font-size:16pt;break-after:avoid}
+ h3{font-size:12.5pt;break-after:avoid}
+ .step-n{border:1px solid #999}
+ pre{overflow:visible;font-size:8.5pt;white-space:pre-wrap;break-inside:avoid}
+ pre code{white-space:pre-wrap;overflow-wrap:anywhere}
+ .code-block{border:0;break-inside:avoid}
+ .code-block pre{border:1px solid #999;border-radius:6px}
+ .table-wrap{overflow:visible;border:0}
+ table{border:1px solid #999}
+ .where{break-inside:avoid}
+ a{color:inherit}
+ main a[href^="http"]::after{content:" (" attr(href) ")";color:#444;font-size:.85em}
+}
+</style>
+</head>
+<body id="top">
+<a class="skip-link" href="#section-1">Перейти к инструкции</a>
+<header class="site-header">
+<div class="site-header__inner">
+<p class="brand"><span class="brand-name">ForgetMe</span> <span class="brand-doc">шпаргалка</span></p>
+<nav class="channels" aria-label="Каналы ForgetMe">
+<a class="channel" href="https://t.me/forgetmeai" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21.2 4.6 3.1 11.6c-.8.3-.8 1.5.1 1.8l4.5 1.4 1.7 5.4c.2.7 1.1.9 1.6.4l2.5-2.4 4.7 3.5c.6.4 1.4.1 1.6-.6l3-14.6c.2-.9-.7-1.6-1.6-1.3Z"/><path d="m8 14.9 9.3-7.4"/></svg><span>Telegram</span> <span class="channel-handle">@forgetmeai</span><span class="vh"> (откроется в новой вкладке)</span></a>
+<a class="channel" href="https://www.youtube.com/@ForgetMeAi" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2.5" y="5" width="19" height="14" rx="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M10 9.2v5.6l4.8-2.8Z" fill="currentColor"/></svg><span>YouTube</span> <span class="channel-handle">@ForgetMeAi</span><span class="vh"> (откроется в новой вкладке)</span></a>
+</nav>
+<div class="theme-switch" role="group" aria-label="Тема оформления">
+<button type="button" class="theme-btn" data-theme-value="light" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6 6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></svg>Светлая</button>
+<button type="button" class="theme-btn" data-theme-value="dark" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>Тёмная</button>
+</div>
+</div>
+</header>
+<div class="toc-bar"><button type="button" class="toc-open" aria-haspopup="dialog" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01"/></svg><span class="toc-open__label">Оглавление<span class="vh">. Текущий раздел:</span></span><span class="toc-open__current">Начало инструкции</span></button></div>
+<div class="layout">
+<aside><p class="toc-title">Оглавление</p><nav class="toc" aria-label="Оглавление"><a href="#section-2"><span class="toc-n"></span>Что получится</a><a href="#section-3"><span class="toc-n">0.</span> Как пользоваться инструкцией</a><a href="#section-4"><span class="toc-n">1.</span> Что взять из панели провайдера</a><a href="#section-6"><span class="toc-n">2.</span> Откройте терминал на своём компьютере</a><a href="#section-10"><span class="toc-n">3.</span> Первый вход на VPS</a><a href="#section-13"><span class="toc-n">4.</span> Проверьте систему, память и диск</a><a href="#section-14"><span class="toc-n">5.</span> Для маленького сервера без swap: добавьте 4 ГБ подкачки</a><a href="#section-15"><span class="toc-n">6.</span> Обновите систему и создайте пользователя claude</a><a href="#section-19"><span class="toc-n">7.</span> Установите XFCE, Firefox и средства подключения</a><a href="#section-20"><span class="toc-n">8.</span> Настройте запуск рабочего стола и пароль VNC</a><a href="#section-24"><span class="toc-n">9.</span> Запустите удалённый экран и веб-доступ</a><a href="#section-28"><span class="toc-n">10.</span> Создайте SSH-туннель на своём компьютере</a><a href="#section-29"><span class="toc-n">11.</span> Откройте экран Linux и Firefox</a><a href="#section-34"><span class="toc-n">12.</span> Как подключаться в следующий раз</a><a href="#section-39"><span class="toc-n">13.</span> Как правильно закончить работу</a><a href="#section-40"><span class="toc-n">14.</span> Если что-то не работает</a><a href="#section-56"><span class="toc-n">15.</span> Короткая памятка после успешной установки</a><a href="#section-57"><span class="toc-n"></span>Что проверено при подготовке шпаргалки</a></nav><div class="note">Полный локальный документ.<br>Без внешних скриптов и шрифтов.<br>Debian 12 · 03.10.2026<br>Ещё материалы — <a href="https://gasyoun.github.io/karta/">карта домена</a>.</div></aside>
+<main>
+<details class="mobile-toc"><summary>Оглавление — перейти к шагу</summary><nav class="toc" aria-label="Оглавление"><a href="#section-2"><span class="toc-n"></span>Что получится</a><a href="#section-3"><span class="toc-n">0.</span> Как пользоваться инструкцией</a><a href="#section-4"><span class="toc-n">1.</span> Что взять из панели провайдера</a><a href="#section-6"><span class="toc-n">2.</span> Откройте терминал на своём компьютере</a><a href="#section-10"><span class="toc-n">3.</span> Первый вход на VPS</a><a href="#section-13"><span class="toc-n">4.</span> Проверьте систему, память и диск</a><a href="#section-14"><span class="toc-n">5.</span> Для маленького сервера без swap: добавьте 4 ГБ подкачки</a><a href="#section-15"><span class="toc-n">6.</span> Обновите систему и создайте пользователя claude</a><a href="#section-19"><span class="toc-n">7.</span> Установите XFCE, Firefox и средства подключения</a><a href="#section-20"><span class="toc-n">8.</span> Настройте запуск рабочего стола и пароль VNC</a><a href="#section-24"><span class="toc-n">9.</span> Запустите удалённый экран и веб-доступ</a><a href="#section-28"><span class="toc-n">10.</span> Создайте SSH-туннель на своём компьютере</a><a href="#section-29"><span class="toc-n">11.</span> Откройте экран Linux и Firefox</a><a href="#section-34"><span class="toc-n">12.</span> Как подключаться в следующий раз</a><a href="#section-39"><span class="toc-n">13.</span> Как правильно закончить работу</a><a href="#section-40"><span class="toc-n">14.</span> Если что-то не работает</a><a href="#section-56"><span class="toc-n">15.</span> Короткая памятка после успешной установки</a><a href="#section-57"><span class="toc-n"></span>Что проверено при подготовке шпаргалки</a></nav></details>
+<noscript>Инструкция доступна полностью. JavaScript нужен только для кнопок копирования; без него выделяйте команды вручную.</noscript>
+<h1 id="section-1">VPS с нуля: удалённый рабочий стол и Firefox через SSH</h1>
+<p>Подробная шпаргалка к видео ForgetMe. Редакция от 3 октября 2026 года.</p>
+<p>Здесь весь путь от только что купленного сервера до окна Linux с браузером: первый вход по IP и паролю, проверка системы, подкачка при нехватке памяти, отдельный пользователь, установка рабочего стола, подключение и повторный вход.</p>
+<p>Основной маршрут рассчитан на <strong>свежий личный VPS с Debian 12 Bookworm, архитектурой AMD64 / x86_64 и SSH-доступом по паролю</strong>. Подключаться можно с Mac, Windows или Linux. Создавать SSH-ключи для прохождения этой инструкции не требуется. Проверка подлинности сервера при первом входе — другое: её не отключаем.</p>
+<p>Инструкция восстановлена по нашей реальной настройке: Debian 12, KVM, файловая система ext4, около 2 ГБ RAM, 30 ГБ диска; затем были добавлены 4 ГБ swap, запущены XFCE, TigerVNC, noVNC и Firefox. В переписке есть подтверждение входа в аккаунт через удалённый Firefox. Ниже этот путь дополнен проверками и объяснениями. <strong>Именно эту редакцию на новом чистом VPS повторно не разворачивали</strong>; команды сверены с документацией, но это не обещание одинакового результата у любого провайдера.</p>
+<p>Debian 12 выбран для воспроизведения нашей конфигурации, а не как самая новая система. На дату инструкции он находится на LTS; срок поддержки указан до 30 июня 2028 года. Для Debian 13, Ubuntu и других ОС сначала нужно проверить отличия, а не смешивать команды из разных руководств. <a href="https://www.debian.org/releases/bookworm/">Информация о выпуске Debian 12</a>.</p>
+<h2 id="section-2">Что получится</h2>
+<pre><code class="language-text">Ваш компьютер
+  └─ локальный браузер с окном noVNC
+       └─ зашифрованный SSH-туннель
+            └─ VPS: рабочий стол XFCE
+                 └─ Firefox, работающий на VPS
+</code></pre>
+<p>Локальный Safari, Chrome или Edge показывает удалённый экран. Сам Firefox, открытые в нём страницы и его профиль находятся на сервере. Это не прокси, который нужно отдельно прописывать в локальном браузере.</p>
+<p>Руководство заканчивается открытым удалённым браузером. Установка Claude Code, подключение к Codex и собственный веб-чат — отдельные этапы. Пользователь Linux с именем <code>claude</code>, которого мы создадим, сам по себе не является аккаунтом Anthropic.</p>
+<p>Для использования Claude сохраняются условия Anthropic и ограничения доступности: настройка VPS не означает гарантированную защиту аккаунта от блокировки. Актуальную доступность проверяйте у самого сервиса. <a href="https://support.claude.com/en/articles/8461763-where-can-i-access-claude">Где доступен Claude</a>.</p>
+<h2 id="section-3">0. Как пользоваться инструкцией</h2>
+<p>У каждого действия указано, <strong>где его выполнять</strong>:</p>
+<ul>
+<li><strong>На своём компьютере</strong> — обычный Терминал macOS/Linux или PowerShell Windows, ещё не подключённый к серверу.</li>
+<li><strong>На VPS, root</strong> — окно после входа <code>ssh root@SERVER_IP</code>. Это администратор сервера.</li>
+<li><strong>На VPS, claude</strong> — окно после входа <code>ssh claude@SERVER_IP</code>. Это наш отдельный пользователь Linux.</li>
+<li><strong>В удалённом рабочем столе</strong> — действия мышкой и клавиатурой внутри появившегося экрана Linux.</li>
+</ul>
+<p>Копируйте только содержимое блока с командами, без тройных обратных кавычек. После однострочной команды нажимайте Enter. Если написано «вставьте весь блок», вставляйте его целиком, включая последнюю строку <code>EOF</code>, если она есть.</p>
+<p>В многострочных Linux-командах обратный слеш <code>\</code> в конце строки означает продолжение. Не добавляйте после него пробелы. После подключения по SSH такие команды выполняются уже в Linux и одинаково подходят для Mac и Windows. Для локального PowerShell SSH-команды ниже даны одной строкой.</p>
+<p><strong>После ошибки не переходите к следующему этапу.</strong> Дождитесь возврата приглашения ввода и проверьте результат. Если терминал ждёт продолжения из-за недокопированной команды, Ctrl+C отменит именно текущий ввод; затем вставьте полный блок заново. Не нажимайте Ctrl+C во время нормальной установки пакетов или в работающем окне туннеля.</p>
+<p>Если сервер уже настроен, не проходите начальную установку повторно. Начните с раздела 12 — повторного подключения.</p>
+<h2 id="section-4">1. Что взять из панели провайдера</h2>
+<p>После покупки и завершения установки ОС найдите:</p>
+<table>
+<thead>
+<tr>
+<th>Что нужно</th>
+<th>Как используется</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Публичный IPv4 сервера</td>
+<td>Подставляется вместо <code>SERVER_IP</code></td>
+</tr>
+<tr>
+<td>Имя пользователя для первого входа</td>
+<td>Обычно <code>root</code>; смотрите данные провайдера</td>
+</tr>
+<tr>
+<td>Пароль первого входа</td>
+<td>Вводится только по запросу SSH</td>
+</tr>
+<tr>
+<td>SSH-порт</td>
+<td>Обычно <code>22</code>; иногда провайдер задаёт другой</td>
+</tr>
+<tr>
+<td>Установленная ОС</td>
+<td>Для этого руководства Debian 12 Bookworm</td>
+</tr>
+<tr>
+<td>Консоль в панели провайдера</td>
+<td>Резервный доступ, если SSH недоступен</td>
+</tr>
+</tbody></table>
+<p>Во <strong>всех</strong> командах <code>SERVER_IP</code> заменяется на ваш IP. Угловые скобки и кавычки вокруг IP не нужны. Само слово <code>SERVER_IP</code> оставлять нельзя.</p>
+<p>Для ориентира: запись <code>claude@SERVER_IP</code> означает «войти на этот сервер под пользователем claude», а не адрес электронной почты. Имя сервера после <code>@</code> в приглашении терминала может быть любым — повторять наше имя хоста не нужно.</p>
+<p>Пароль не вставляйте внутрь команды, адресной строки браузера, сообщения боту или общего документа. Храните его в менеджере паролей.</p>
+<h3 id="section-5">Ресурсы и сеть</h3>
+<p>На нашем сервере было 2 ГБ RAM; для него понадобилась подкачка. Это история конкретной установки, не рекомендация минимальной конфигурации. Для нового личного сервера я бы закладывал 4–8 ГБ RAM и запас места на диске: браузер и количество вкладок сильно влияют на потребление. GPU для этого рабочего стола не нужен. Если VPS уже куплен, сначала проверьте его ресурсы на шаге 4.</p>
+<p>Для внешнего входа в этой схеме нужен только SSH-порт сервера. <strong>Не открывайте в панели провайдера порты 5901 и 6080 для интернета.</strong> Если панель позволяет ограничить SSH вашим текущим публичным IP, это дополнительная защита; при смене сети правило придётся обновить.</p>
+<table>
+<thead>
+<tr>
+<th>Порт</th>
+<th>Назначение</th>
+<th>Где должен быть доступен</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>TCP 22 либо ваш SSH-порт</td>
+<td>Вход и зашифрованный туннель</td>
+<td>С вашего компьютера до VPS</td>
+</tr>
+<tr>
+<td>TCP 5901</td>
+<td>Сам удалённый экран VNC</td>
+<td>Только внутри VPS</td>
+</tr>
+<tr>
+<td>TCP 6080 на VPS</td>
+<td>Веб-доступ noVNC</td>
+<td>Только внутри VPS</td>
+</tr>
+<tr>
+<td>TCP 6080 на компьютере</td>
+<td>Локальный вход в туннель</td>
+<td>Только на вашем компьютере</td>
+</tr>
+</tbody></table>
+<p>Не нужно открывать на VPS 80/443 для входящих подключений ради noVNC, покупать домен или ставить публичный веб-сервер. Исходящий доступ сервера к репозиториям и сайтам, напротив, должен работать.</p>
+<h2 id="section-6">2. Откройте терминал на своём компьютере</h2>
+<h3 id="section-7">macOS</h3>
+<p>Нажмите Cmd+Space, введите «Терминал» или <code>Terminal</code>, откройте приложение. Проверьте:</p>
+<pre><code class="language-sh">ssh -V
+</code></pre>
+<p>Ожидается строка с версией OpenSSH. Устанавливать отдельный графический SSH-клиент не требуется.</p>
+<h3 id="section-8">Windows</h3>
+<p>Откройте меню «Пуск», найдите <strong>PowerShell</strong> или <strong>Терминал Windows</strong>. Для обычных подключений права администратора не нужны. Проверьте:</p>
+<pre><code class="language-powershell">ssh -V
+</code></pre>
+<p>Если Windows пишет, что команда не найдена, откройте PowerShell <strong>от имени администратора</strong> и установите только клиент:</p>
+<pre><code class="language-powershell">Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0
+</code></pre>
+<p>Затем закройте это окно, откройте обычный PowerShell и ещё раз выполните <code>ssh -V</code>. Если установка требует перезагрузки, выполните её перед продолжением. <strong>OpenSSH Server на своём компьютере для этой схемы не нужен</strong>, входящие порты Windows открывать не требуется. <a href="https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse">Инструкция Microsoft по OpenSSH</a>.</p>
+<h3 id="section-9">Linux</h3>
+<p>Откройте терминал и проверьте <code>ssh -V</code>. Если клиент отсутствует, установите пакет OpenSSH Client через менеджер пакетов вашей локальной системы. Например, только для Debian/Ubuntu на компьютере:</p>
+<pre><code class="language-sh">sudo apt-get update &amp;&amp; sudo apt-get install -y openssh-client
+</code></pre>
+<h2 id="section-10">3. Первый вход на VPS</h2>
+<p><strong>Где: на своём компьютере.</strong></p>
+<p>Для стандартного порта 22:</p>
+<pre><code class="language-sh">ssh root@SERVER_IP
+</code></pre>
+<p>Если провайдер указал другой порт, добавьте <code>-p</code>. Например, <strong>только если выдан именно порт 2222</strong>:</p>
+<pre><code class="language-sh">ssh -p 2222 root@SERVER_IP
+</code></pre>
+<p>Далее во всех локальных SSH-командах тоже понадобится этот параметр. Числа 5901/6080 от этого не меняются.</p>
+<p>Если начальный логин у провайдера не <code>root</code>, подставьте выданный логин. После входа для административных шагов можно выполнить <code>sudo -i</code>, <strong>если</strong> этому пользователю разрешён sudo. Если нет ни root, ни sudo, сначала получите административный доступ через провайдера: следующие команды не выполнятся с обычными правами.</p>
+<h3 id="section-11">3.1. Подтверждение подлинности сервера</h3>
+<p>При первом входе SSH может показать отпечаток ключа сервера и вопрос <code>Are you sure you want to continue connecting?</code>.</p>
+<p>Сверьте отпечаток с панелью провайдера. Если панель его не показывает, можно открыть <strong>консоль самого VPS в панели провайдера</strong> и вывести отпечаток публичного ключа:</p>
+<pre><code class="language-sh">ssh-keygen -lf /etc/ssh/ssh_host_ed25519_key.pub
+</code></pre>
+<p>Сравнивайте отпечаток одного и того же типа ключа — здесь ED25519. Это просмотр публичного отпечатка, а не создание ключа для входа. При совпадении в своём SSH-окне напишите <code>yes</code> и нажмите Enter. При несовпадении не продолжайте до выяснения причины. <a href="https://manpages.debian.org/bookworm/openssh-client/ssh-keygen.1.en.html">Документация ssh-keygen</a>.</p>
+<h3 id="section-12">3.2. Ввод пароля</h3>
+<p>Когда появится <code>password:</code>, введите пароль, выданный провайдером, и нажмите Enter. <strong>Ни буквы, ни звёздочки не отображаются. Это нормально.</strong></p>
+<p>Если сервер требует сменить временный пароль, следуйте его запросам: текущий пароль, новый пароль, повтор нового. Запомните новый пароль. Для смены уже принятого начального пароля по своему решению команда под root — <code>passwd</code>; она меняет пароль root, а не будущего пользователя claude.</p>
+<p>После успешного входа увидите приглашение примерно такого вида:</p>
+<pre><code class="language-text">root@server:~#
+</code></pre>
+<p>С этого момента команды в этом окне выполняются <strong>на VPS</strong>, а не на компьютере. Не закрывайте окно до проверки нового пользователя на шаге 6.</p>
+<h2 id="section-13">4. Проверьте систему, память и диск</h2>
+<p><strong>Где: на VPS, root.</strong> Это чтение состояния, без изменения настроек.</p>
+<pre><code class="language-sh">whoami
+cat /etc/os-release
+dpkg --print-architecture
+free -h
+swapon --show
+df -h /
+findmnt -no FSTYPE /
+systemd-detect-virt
+</code></pre>
+<p>Что проверяем:</p>
+<ul>
+<li><code>whoami</code> — должно быть <code>root</code> на этом этапе.</li>
+<li>В <code>/etc/os-release</code> — <code>ID=debian</code>, <code>VERSION_ID=&quot;12&quot;</code>, <code>bookworm</code>.</li>
+<li>Архитектура — <code>amd64</code>. Название <code>x86_64</code> в панели означает ту же целевую архитектуру.</li>
+<li><code>free -h</code> — в строке <code>Mem</code> физическая память, в строке <code>Swap</code> подкачка. Значение около <code>1.9Gi</code> соответствует тарифу примерно с 2 ГБ RAM.</li>
+<li><code>swapon --show</code> — список уже подключённой подкачки. Пустой вывод означает, что активной подкачки нет.</li>
+<li><code>df -h /</code> — свободное место в столбце <code>Avail</code>.</li>
+<li>Файловая система и виртуализация — в нашей настройке <code>ext4</code> и <code>kvm</code>.</li>
+</ul>
+<p>Если ОС отличается, остановите именно установочную часть: не надо переустанавливать уже используемый сервер и стирать его данные ради совпадения с инструкцией. Нужна версия команд под вашу ОС.</p>
+<h2 id="section-14">5. Для маленького сервера без swap: добавьте 4 ГБ подкачки</h2>
+<p><strong>Этот раздел условный.</strong> Если подкачка уже настроена, ничего не создавайте повторно. Если памяти достаточно для ваших задач, можно перейти к шагу 6.</p>
+<p>В нашей установке были 2 ГБ RAM, нулевая подкачка и 27 ГБ свободного места. Дополнительные 4 ГБ swap дали системе резерв на диске. Они <strong>не превратили 2 ГБ RAM в 6 ГБ оперативной памяти</strong>: работа через диск медленнее, и браузер всё равно может исчерпать ресурсы.</p>
+<p>Блок ниже предназначен только для личного VPS с <strong>KVM, ext4 на <code>/</code> и без активного swap</strong>. Перед созданием требует не менее 10 ГиБ свободного места: 4 ГиБ под файл и ещё 6 ГиБ запаса. Это защитный порог данного руководства, а не системное требование Linux.</p>
+<p><strong>Где: на VPS, root. Вставьте весь блок от <code>bash</code> до последнего <code>EOF</code>.</strong></p>
+<pre><code class="language-bash">bash &lt;&lt;&#39;EOF&#39;
+set -eu
+
+if [ &quot;$(id -u)&quot; -ne 0 ]; then
+  echo &quot;STOP: run this block as root.&quot;
+  exit 1
+fi
+
+if [ &quot;$(findmnt -no FSTYPE /)&quot; != &quot;ext4&quot; ]; then
+  echo &quot;STOP: this recipe is only for ext4 on /.&quot;
+  exit 1
+fi
+
+if [ &quot;$(systemd-detect-virt)&quot; != &quot;kvm&quot; ]; then
+  echo &quot;STOP: virtualization differs from the KVM setup in this guide.&quot;
+  exit 1
+fi
+
+if [ -n &quot;$(swapon --show --noheadings)&quot; ]; then
+  echo &quot;STOP: swap is already active; do not add it blindly.&quot;
+  exit 1
+fi
+
+if [ -e /swapfile-claude ] || [ -L /swapfile-claude ]; then
+  echo &quot;STOP: /swapfile-claude already exists; nothing overwritten.&quot;
+  exit 1
+fi
+
+if grep -qE &#39;^[[:space:]]*/swapfile-claude[[:space:]]&#39; /etc/fstab; then
+  echo &quot;STOP: /etc/fstab already contains this swap path.&quot;
+  exit 1
+fi
+
+desktop_free_kib=$(df -Pk / | awk &#39;NR == 2 {print $4}&#39;)
+if [ &quot;$desktop_free_kib&quot; -lt 10485760 ]; then
+  echo &quot;STOP: less than 10 GiB free on /.&quot;
+  exit 1
+fi
+
+umask 077
+desktop_fstab_backup=$(mktemp /etc/fstab.before-desktop.XXXXXX)
+cp -p /etc/fstab &quot;$desktop_fstab_backup&quot;
+printf &#39;fstab backup: %s\n&#39; &quot;$desktop_fstab_backup&quot;
+
+fallocate -l 4G /swapfile-claude
+chmod 600 /swapfile-claude
+mkswap /swapfile-claude
+swapon /swapfile-claude
+printf &#39;/swapfile-claude none swap sw 0 0\n&#39; &gt;&gt; /etc/fstab
+systemctl daemon-reload
+
+swapon --show
+free -h
+EOF
+</code></pre>
+<p>В результате <code>swapon --show</code> должен показать <code>/swapfile-claude</code>, а строка <code>Swap</code> — примерно <code>4.0Gi</code>. Запись в <code>/etc/fstab</code> нужна, чтобы подкачка включалась после перезагрузки. Путь резервной копии <code>fstab</code> печатается перед изменениями — сохраните его у себя.</p>
+<p>Если блок остановился с <code>STOP</code>, прочитайте причину. Если произошла ошибка после создания файла, он может остаться на диске: не запускайте повторно и не удаляйте его, пока не проверены <code>swapon --show</code> и причина сбоя. На Btrfs, контейнерных VPS и других конфигурациях нужен отдельный способ, не замена одной строки. <a href="https://manpages.debian.org/bookworm/mount/swapon.8.en.html">Ограничения swap-файлов в документации Debian</a>.</p>
+<h2 id="section-15">6. Обновите систему и создайте пользователя claude</h2>
+<h3 id="section-16">6.1. Обновление и sudo</h3>
+<p><strong>Где: на VPS, root.</strong></p>
+<p>Сначала обновите список пакетов:</p>
+<pre><code class="language-sh">apt-get update
+</code></pre>
+<p>Если команда завершилась успешно, установите доступные обновления:</p>
+<pre><code class="language-sh">apt-get upgrade
+</code></pre>
+<p>Прочитайте предложенные изменения, подтвердите <code>Y</code>, если согласны, и дождитесь окончания. На свежем сервере это обычный подготовительный шаг; на сервере с чужими сервисами обновления нужно планировать отдельно. Если спрашивают про замену уже изменённого SSH-конфига, не заменяйте его наугад: сохраните текущую рабочую конфигурацию и разберите различия отдельно.</p>
+<p>Установите sudo:</p>
+<pre><code class="language-sh">apt-get install -y sudo
+</code></pre>
+<p>После ошибки установки не переходите к созданию пользователя. Не удаляйте файлы блокировок APT: пакетный менеджер может быть занят штатным обновлением.</p>
+<h3 id="section-17">6.2. Создание обычного пользователя</h3>
+<p>В том же root-окне:</p>
+<pre><code class="language-sh">adduser claude
+</code></pre>
+<p>Появятся вопросы:</p>
+<ol>
+<li><code>New password</code> — придумайте отдельный надёжный пароль пользователя Linux.</li>
+<li><code>Retype new password</code> — повторите его.</li>
+<li>Полное имя, комната, телефоны и прочие дополнительные поля — можно пропустить Enter.</li>
+<li>Подтверждение введённых данных — <code>Y</code> и Enter.</li>
+</ol>
+<p>Пароль снова не отображается. Он понадобится для обычного SSH-входа и команд <code>sudo</code>. Это <strong>не пароль аккаунта Claude и не пароль VNC</strong>.</p>
+<p>Добавьте пользователя в группу администраторов:</p>
+<pre><code class="language-sh">usermod -aG sudo claude
+id claude
+</code></pre>
+<p>В выводе <code>id</code> должна присутствовать группа <code>sudo</code>. Если <code>adduser</code> сказал, что пользователь уже существует, не удаляйте его: этот сервер или этот шаг уже использовался. Сначала выясните, ваш ли это пользователь и известен ли его пароль.</p>
+<h3 id="section-18">6.3. Проверьте новый вход, не закрывая root</h3>
+<p>Откройте <strong>второе окно терминала на своём компьютере</strong>, не внутри первого SSH-сеанса:</p>
+<pre><code class="language-sh">ssh claude@SERVER_IP
+</code></pre>
+<p>Для нестандартного SSH-порта пример такой:</p>
+<pre><code class="language-sh">ssh -p 2222 claude@SERVER_IP
+</code></pre>
+<p>Введите новый пароль пользователя <code>claude</code>. Уже на сервере выполните:</p>
+<pre><code class="language-sh">whoami
+printf &#39;%s\n&#39; &quot;$HOME&quot;
+sudo -v
+</code></pre>
+<p>Ожидается:</p>
+<pre><code class="language-text">claude
+/home/claude
+</code></pre>
+<p><code>sudo -v</code> может спросить пароль claude и при успехе ничего больше не вывести. Это нормальный результат. При ошибке остаётся открытым первое root-окно, через которое можно разобраться.</p>
+<p><strong>Только после успешной проверки</strong> вернитесь в первое root-окно и завершите именно этот установочный сеанс:</p>
+<pre><code class="language-sh">exit
+</code></pre>
+<p>Дальше работаем в проверенном окне <code>claude@server:~$</code>. Не закрывайте общие SSH-сеансы, которыми пользуются другие задачи или люди.</p>
+<h2 id="section-19">7. Установите XFCE, Firefox и средства подключения</h2>
+<p><strong>Где: на VPS, пользователь claude.</strong></p>
+<p>Снова проверьте, что вы не root:</p>
+<pre><code class="language-sh">whoami
+</code></pre>
+<p>Должно быть <code>claude</code>. Установите пакеты:</p>
+<pre><code class="language-bash">sudo apt-get update &amp;&amp; sudo apt-get install -y --no-install-recommends \
+  xfce4 xfce4-terminal dbus-x11 firefox-esr \
+  tigervnc-standalone-server tigervnc-common tigervnc-tools \
+  novnc websockify curl ca-certificates git tmux \
+  x11-xserver-utils xfonts-base libgl1-mesa-dri \
+  fonts-dejavu-core fonts-noto-color-emoji
+</code></pre>
+<p>На запрос sudo вводится пароль <strong>claude</strong>. Установка может занять несколько минут; дождитесь возвращения приглашения ввода. Если появится выбор раскладки, для начальной настройки можно выбрать <strong>English (US)</strong>. В текстовом меню обычно работают стрелки, Tab и Enter.</p>
+<p>Что мы установили:</p>
+<table>
+<thead>
+<tr>
+<th>Компонент</th>
+<th>Зачем он здесь</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>XFCE</td>
+<td>Рабочий стол Linux с окнами, панелью и меню</td>
+</tr>
+<tr>
+<td>Firefox ESR</td>
+<td>Браузер, который работает на VPS</td>
+</tr>
+<tr>
+<td>TigerVNC</td>
+<td>Создаёт виртуальный экран и передаёт его изображение</td>
+</tr>
+<tr>
+<td>noVNC + websockify</td>
+<td>Позволяют смотреть этот экран из обычного браузера компьютера</td>
+</tr>
+<tr>
+<td>tmux</td>
+<td>Оставляет веб-мост работать после отключения SSH-окна</td>
+</tr>
+<tr>
+<td>D-Bus, шрифты и графические библиотеки</td>
+<td>Обеспечивают запуск и отображение рабочего стола</td>
+</tr>
+</tbody></table>
+<p><code>--no-install-recommends</code> не устанавливает все необязательные дополнения. Поэтому <code>tigervnc-tools</code>, терминал, шрифты и другие нужные компоненты указаны явно. Отдельный физический монитор серверу не нужен. <a href="https://packages.debian.org/bookworm/xfce4">Пакет XFCE</a>, <a href="https://packages.debian.org/bookworm/tigervnc-standalone-server">TigerVNC для Debian 12</a>, <a href="https://packages.debian.org/bookworm/tigervnc-tools">утилиты TigerVNC</a>.</p>
+<p>Проверьте наличие команд и страницы noVNC:</p>
+<pre><code class="language-sh">command -v startxfce4 dbus-run-session firefox-esr tigervncserver tigervncpasswd websockify tmux
+test -r /usr/share/novnc/vnc.html &amp;&amp; echo &quot;noVNC page: OK&quot;
+</code></pre>
+<p>Должно появиться семь путей к программам и строка <code>noVNC page: OK</code>. Если части вывода нет, вернитесь к ошибке установки; не переходите к запуску.</p>
+<h2 id="section-20">8. Настройте запуск рабочего стола и пароль VNC</h2>
+<h3 id="section-21">8.1. Файл запуска XFCE</h3>
+<p><strong>Где: на VPS, claude. Вставьте блок целиком.</strong> Он создаёт файл только если его ещё нет.</p>
+<pre><code class="language-bash">bash &lt;&lt;&#39;EOF&#39;
+set -eu
+
+if [ &quot;$(id -un)&quot; != &quot;claude&quot; ]; then
+  echo &quot;STOP: log in as claude before creating the desktop configuration.&quot;
+  exit 1
+fi
+
+mkdir -p &quot;$HOME/.vnc&quot;
+chmod 700 &quot;$HOME/.vnc&quot;
+
+if [ -e &quot;$HOME/.vnc/xstartup&quot; ] || [ -L &quot;$HOME/.vnc/xstartup&quot; ]; then
+  echo &quot;STOP: xstartup already exists; inspect it instead of overwriting.&quot;
+  exit 1
+fi
+
+cat &gt; &quot;$HOME/.vnc/xstartup&quot; &lt;&lt;&#39;XSTARTUP&#39;
+#!/bin/sh
+unset SESSION_MANAGER
+unset DBUS_SESSION_BUS_ADDRESS
+exec dbus-run-session -- startxfce4
+XSTARTUP
+
+chmod 700 &quot;$HOME/.vnc/xstartup&quot;
+echo &quot;xstartup: created&quot;
+EOF
+</code></pre>
+<p>Ожидается <code>xstartup: created</code>. Если файл уже существовал, посмотреть его можно так:</p>
+<pre><code class="language-sh">cat &quot;$HOME/.vnc/xstartup&quot;
+</code></pre>
+<p>Для нашей настройки в нём должны быть четыре строки: от <code>#!/bin/sh</code> до <code>exec dbus-run-session -- startxfce4</code>. Если содержимое другое, не перезаписывайте неизвестную настройку автоматически. Если оно совпадает, повторное создание не нужно.</p>
+<p><code>dbus-run-session</code> запускает XFCE внутри отдельного сеансового D-Bus. Этот способ подходит для рабочего стола без обычного графического экрана входа. <a href="https://manpages.debian.org/bookworm/dbus-daemon/dbus-run-session.1.en.html">Документация dbus-run-session</a>.</p>
+<h3 id="section-22">8.2. Отдельный пароль рабочего стола</h3>
+<p>В том же окне, <strong>без sudo</strong>:</p>
+<pre><code class="language-sh">tigervncpasswd
+</code></pre>
+<p>Введите и повторите отдельный случайный пароль VNC. В используемом классическом режиме учитываются только первые восемь символов; используйте отдельные восемь случайных ASCII-символов, не повторяйте пароль почты или SSH. Пароль сохраняйте в менеджере паролей, не в командной строке.</p>
+<p>На вопрос:</p>
+<pre><code class="language-text">Would you like to enter a view-only password (y/n)?
+</code></pre>
+<p>ответьте <code>n</code>. Нам нужен доступ с управлением мышкой и клавиатурой, а не только просмотр.</p>
+<p>Затем ограничьте доступ к файлу:</p>
+<pre><code class="language-sh">chmod 600 &quot;$HOME/.vnc/passwd&quot;
+</code></pre>
+<p>Не показывайте содержимое этого файла и не публикуйте его. Защита внешнего соединения в этой схеме обеспечивается SSH; один VNC-пароль не повод открывать рабочий стол в интернет. <a href="https://manpages.debian.org/bookworm/tigervnc-tools/tigervncpasswd.1.en.html">Документация tigervncpasswd</a>.</p>
+<h3 id="section-23">Три пароля — три разных назначения</h3>
+<table>
+<thead>
+<tr>
+<th>Когда спрашивают</th>
+<th>Какой пароль нужен</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>ssh root@SERVER_IP</code></td>
+<td>Пароль root от провайдера или ваш новый пароль root</td>
+</tr>
+<tr>
+<td><code>ssh claude@SERVER_IP</code>, запрос <code>[sudo] password for claude</code></td>
+<td>Пароль пользователя Linux claude, заданный на шаге 6</td>
+</tr>
+<tr>
+<td>Connect в noVNC</td>
+<td>Пароль VNC, заданный на шаге 8</td>
+</tr>
+</tbody></table>
+<p>Пароль аккаунта на сайте не подходит ни к одному из этих трёх пунктов, если вы специально не сделали опасное совпадение.</p>
+<h2 id="section-24">9. Запустите удалённый экран и веб-доступ</h2>
+<h3 id="section-25">9.1. Экран TigerVNC</h3>
+<p><strong>Где: на VPS, claude, без sudo.</strong></p>
+<pre><code class="language-bash">tigervncserver :1 -localhost yes -geometry 1440x900 -depth 24 \
+  -SecurityTypes VncAuth -xstartup &quot;$HOME/.vnc/xstartup&quot;
+</code></pre>
+<p>После запуска проверьте:</p>
+<pre><code class="language-sh">tigervncserver -list
+ss -ltnp &#39;( sport = :5901 )&#39;
+</code></pre>
+<p>Должен появиться экран <code>:1</code> и слушающий порт <code>5901</code>. Если сервер сообщил, что <code>:1</code> уже запущен, не создавайте <code>:2</code>: сначала проверьте существующий экран. Вся инструкция дальше использует именно <code>:1</code>.</p>
+<p>Значения в команде: <code>:1</code> — номер виртуального экрана; <code>1440x900</code> — его размер; <code>-localhost yes</code> — приём только локальных соединений; <code>-xstartup</code> — наш файл запуска XFCE. Для экрана <code>:1</code> стандартный VNC-порт равен 5901. Не заменяйте <code>-localhost yes</code> на <code>no</code>. <a href="https://manpages.debian.org/bookworm/tigervnc-standalone-server/tigervncserver.1.en.html">Параметры TigerVNC для Debian 12</a>.</p>
+<h3 id="section-26">9.2. Веб-мост noVNC</h3>
+<p>Только после успешного запуска экрана, в том же SSH-окне:</p>
+<pre><code class="language-bash">tmux new-session -d -s desktop-web \
+  &#39;websockify --web=/usr/share/novnc/ 127.0.0.1:6080 127.0.0.1:5901&#39;
+</code></pre>
+<p>Веб-мост запускается в фоне. Сам tmux не открывает рабочий стол и не заменяет TigerVNC. Он лишь удерживает процесс websockify после отключения SSH. После перезагрузки VPS этот процесс нужно запускать снова; автозапуска служб в данном рецепте нет. <a href="https://manpages.debian.org/bookworm/tmux/tmux.1.en.html">Документация tmux</a>, <a href="https://github.com/novnc/noVNC">устройство noVNC и websockify</a>.</p>
+<h3 id="section-27">9.3. Проверьте доступ до открытия браузера</h3>
+<p><strong>На VPS, claude:</strong></p>
+<pre><code class="language-sh">tigervncserver -list
+tmux list-sessions
+ss -ltnp &#39;( sport = :5901 or sport = :6080 )&#39;
+curl --noproxy &#39;*&#39; -I --max-time 5 http://127.0.0.1:6080/vnc.html
+</code></pre>
+<p>Ожидается:</p>
+<ul>
+<li>В TigerVNC есть <code>:1</code>.</li>
+<li>В tmux есть сессия <code>desktop-web</code>.</li>
+<li>На 5901 слушает VNC, на 6080 — веб-мост.</li>
+<li>В ответе curl есть успешный код <code>200</code>. Версия HTTP и остальные заголовки могут отличаться.</li>
+</ul>
+<p><strong>В колонке Local Address:Port</strong> для этих портов допустимы <code>127.0.0.1:5901</code>, <code>[::1]:5901</code> и <code>127.0.0.1:6080</code>. Адрес <code>::1</code> — тоже локальная петля. Не путайте с колонкой Peer Address:Port: звёздочки в ней у слушающего сокета нормальны.</p>
+<p>Если именно в <strong>Local Address:Port</strong> у 5901/6080 стоит <code>0.0.0.0</code>, <code>[::]</code>, <code>*</code> или публичный IP, не продолжайте: сервис слушает не только внутри VPS. Проверьте точную команду запуска и правила сети. Открывать эти порты снаружи для «починки» не нужно.</p>
+<p><code>curl</code> проверяет наличие страницы noVNC, а не весь рабочий стол. Полная проверка закончится только когда вы увидите экран и сможете открыть Firefox.</p>
+<h2 id="section-28">10. Создайте SSH-туннель на своём компьютере</h2>
+<p><strong>Где: новое локальное окно Терминала или PowerShell. Не текущее SSH-окно на VPS.</strong></p>
+<p>Если запустить туннель из уже открытого серверного терминала, локальный порт появится не на вашем компьютере — адрес в вашем браузере не заработает. Поэтому откройте отдельное новое окно приложения на компьютере.</p>
+<p>Команда одинаковая для Mac, Linux и PowerShell Windows. Замените только <code>SERVER_IP</code>:</p>
+<pre><code class="language-sh">ssh -o ExitOnForwardFailure=yes -o ServerAliveInterval=30 -o ServerAliveCountMax=3 -N -L 127.0.0.1:6080:127.0.0.1:6080 claude@SERVER_IP
+</code></pre>
+<p>Если SSH-порт у вас 2222, <strong>вместо предыдущей команды</strong> используйте:</p>
+<pre><code class="language-sh">ssh -p 2222 -o ExitOnForwardFailure=yes -o ServerAliveInterval=30 -o ServerAliveCountMax=3 -N -L 127.0.0.1:6080:127.0.0.1:6080 claude@SERVER_IP
+</code></pre>
+<p>Для другого выданного порта замените <code>2222</code>. Не запускайте оба варианта одновременно.</p>
+<p>Введите пароль <strong>пользователя Linux claude</strong>. После этого окно обычно ничего не выводит и не возвращает приглашение ввода — так и должно быть. <strong>Оставьте его открытым.</strong> Это окно туннеля, а не место для следующих серверных команд.</p>
+<p>Что происходит: порт 6080 на вашем компьютере перенаправляется в порт 6080 внутри VPS. <code>-N</code> означает, что отдельная серверная командная оболочка не запускается. Проверки соединения помогают обнаружить обрыв, но не делают автоматическое переподключение. <a href="https://manpages.debian.org/bookworm/openssh-client/ssh.1.en.html">Локальное перенаправление в OpenSSH</a>.</p>
+<p>Если SSH сразу вернул ошибку и обычное приглашение ввода, туннель не работает. Найдите причину в разделе 14.</p>
+<h2 id="section-29">11. Откройте экран Linux и Firefox</h2>
+<h3 id="section-30">11.1. Окно noVNC на вашем компьютере</h3>
+<p>Откройте обычный браузер <strong>на компьютере</strong> — Safari, Chrome, Edge или Firefox — и вставьте в адресную строку:</p>
+<pre><code class="language-text">http://127.0.0.1:6080/vnc.html
+</code></pre>
+<p>Это именно <code>http</code>, не <code>https</code>, и именно <code>127.0.0.1</code>, не IP сервера. HTTP здесь используется на локальных концах соединения; между компьютером и VPS трафик идёт внутри зашифрованного SSH-туннеля. Публичный HTTP-доступ к рабочему столу мы не создавали.</p>
+<p>На странице noVNC:</p>
+<ol>
+<li>Нажмите <strong>Connect / Подключиться</strong>.</li>
+<li>Если требуется пароль, введите <strong>пароль VNC</strong> с шага 8.</li>
+<li>Дождитесь рабочего стола XFCE.</li>
+<li>Если XFCE впервые спрашивает конфигурацию панели, выберите стандартную — <strong>Use default config</strong>.</li>
+</ol>
+<p>Если окно noVNC предлагает отдельно ввести адрес сервера, не указывайте публичный IP VPS: соединение должно идти через открытый локальный адрес. Начните с обычной страницы <code>vnc.html</code> без сохранённых ручных настроек подключения.</p>
+<h3 id="section-31">11.2. Запуск Firefox на VPS</h3>
+<p>Теперь действия выполняются <strong>внутри изображения рабочего стола Linux</strong>:</p>
+<ol>
+<li>Откройте меню <strong>Applications / Приложения</strong>.</li>
+<li>Найдите <strong>Internet → Firefox ESR</strong>. В зависимости от меню пункт может называться Firefox или Web Browser.</li>
+<li>Дождитесь появления окна Firefox.</li>
+</ol>
+<p>Если значка нет, откройте <strong>Terminal Emulator / Терминал</strong> внутри XFCE и выполните:</p>
+<pre><code class="language-sh">firefox-esr about:blank
+</code></pre>
+<p>Это команда для терминала <strong>внутри графического рабочего стола</strong>, а не для обычного SSH-окна без графического окружения. Она может оставить терминал занятым до завершения браузера — это не ошибка.</p>
+<p>В адресной строке <strong>этого удалённого Firefox</strong> откройте нужный сайт. Если продолжаете шаги из видео, адрес Claude:</p>
+<pre><code class="language-text">https://claude.ai/
+</code></pre>
+<p>Адрес вводится не в верхнюю строку Safari/Chrome, где открыт noVNC, а в строку Firefox внутри удалённого экрана. Обычное открытие <code>claude.ai</code> в локальном браузере создаст локальную вкладку, а не вкладку на VPS.</p>
+<h3 id="section-32">11.3. Проверка результата</h3>
+<p>Настройка выполнена, если одновременно:</p>
+<ul>
+<li>В локальном браузере открыт адрес <code>127.0.0.1:6080/vnc.html</code>.</li>
+<li>Видны панель и окна Linux XFCE.</li>
+<li>Внутри этого экрана открывается Firefox, работает ввод и загружаются страницы.</li>
+<li>В терминале внутри XFCE команда <code>whoami</code> показывает <code>claude</code>.</li>
+<li>На сервере 5901 и 6080 слушают только локальные адреса.</li>
+<li>Локальное окно SSH-туннеля остаётся открытым без ошибки.</li>
+</ul>
+<p><strong>На этом основной путь закончен: у вас есть удалённый рабочий стол с браузером.</strong> Вход в конкретный сервис и его проверки выполняются отдельно по правилам этого сервиса.</p>
+<h3 id="section-33">11.4. Масштаб и буфер обмена</h3>
+<p>Если рабочий стол не помещается, раскройте боковую панель noVNC, откройте настройки масштабирования и выберите <strong>Local Scaling / Локальное масштабирование</strong>, если такой пункт есть в установленной версии.</p>
+<p>Для текста с компьютера используйте панель <strong>Clipboard / Буфер обмена</strong> noVNC: вставьте туда текст, затем вставьте его в удалённое приложение. В Linux-терминале обычно используется Ctrl+Shift+V, в обычном поле — Ctrl+V. Прямой Cmd+V/Ctrl+V через границу двух браузеров работает не во всех сочетаниях браузера и noVNC. Если буфер не передаётся, короткую команду можно набрать вручную; не отключайте защиту браузера ради вставки.</p>
+<p>Здесь два разных буфера и два разных компьютера. Файл, скачанный в удалённом Firefox, сохраняется на VPS, а не автоматически в «Загрузках» Mac или Windows.</p>
+<h2 id="section-34">12. Как подключаться в следующий раз</h2>
+<h3 id="section-35">Сценарий А. Закрыли вкладку noVNC, туннель остался открыт</h3>
+<p>Просто снова откройте на компьютере:</p>
+<pre><code class="language-text">http://127.0.0.1:6080/vnc.html
+</code></pre>
+<p>Нажмите Connect и при запросе введите пароль VNC. Переустановка не нужна.</p>
+<h3 id="section-36">Сценарий Б. Закрыли терминал, выключили компьютер или пропал интернет</h3>
+<p>Если VPS не перезагружался и его процессы живы, достаточно заново запустить <strong>на своём компьютере</strong>:</p>
+<pre><code class="language-sh">ssh -o ExitOnForwardFailure=yes -o ServerAliveInterval=30 -o ServerAliveCountMax=3 -N -L 127.0.0.1:6080:127.0.0.1:6080 claude@SERVER_IP
+</code></pre>
+<p>При нестандартном порте добавьте свой <code>-p</code>, как на шаге 10. Затем откройте локальный адрес noVNC. Не нужно заново создавать пользователя, пароль или файл <code>xstartup</code>.</p>
+<p>Сон ноутбука и смена сети могут оборвать туннель. SSH не гарантирует, что соединение переживёт сон; после пробуждения при необходимости переподключитесь.</p>
+<h3 id="section-37">Сценарий В. VPS был перезагружен или рабочий стол завершился</h3>
+<p>После перезагрузки установленные программы и файлы сохраняются, но запущенные процессы TigerVNC, tmux и Firefox завершаются. Сначала в обычном локальном терминале войдите:</p>
+<pre><code class="language-sh">ssh claude@SERVER_IP
+</code></pre>
+<p><strong>Теперь на VPS, claude</strong>, проверьте:</p>
+<pre><code class="language-sh">tigervncserver -list
+tmux list-sessions
+ss -ltnp &#39;( sport = :5901 or sport = :6080 )&#39;
+</code></pre>
+<p>Если tmux пишет, что сервер не запущен, после перезагрузки это ожидаемо.</p>
+<p>Если <code>:1</code> показан с отметкой <strong><code>(stale)</code></strong>, это может быть старая служебная запись после аварийного завершения, а не работающий экран. Сначала проверьте процессы своего пользователя и порт:</p>
+<pre><code class="language-sh">pgrep -a -u &quot;$(id -u)&quot; Xtigervnc
+ss -ltnp &#39;( sport = :5901 )&#39;
+</code></pre>
+<p>Пустой вывод pgrep означает, что таких процессов у вашего пользователя не найдено. <strong>Только если живого Xtigervnc для <code>:1</code> нет и порт 5901 не прослушивается</strong>, очистите устаревшую запись именно этого экрана:</p>
+<pre><code class="language-sh">tigervncserver -list :1 -cleanstale
+</code></pre>
+<p>Эта команда очищает устаревшие служебные записи VNC, а не профиль Firefox. Если процесс или слушающий порт есть либо результат непонятен, очистку не выполняйте: сначала выясните, кому принадлежит работающий экран. <a href="https://manpages.debian.org/bookworm/tigervnc-standalone-server/tigervncserver.1.en.html#OPTIONS">Очистка stale-записей в TigerVNC</a>.</p>
+<p>Когда подтверждено, что рабочего экрана <code>:1</code> нет, запустите его:</p>
+<pre><code class="language-bash">tigervncserver :1 -localhost yes -geometry 1440x900 -depth 24 \
+  -SecurityTypes VncAuth -xstartup &quot;$HOME/.vnc/xstartup&quot;
+</code></pre>
+<p>Если сессии <code>desktop-web</code> нет и порт 6080 свободен, запустите веб-мост:</p>
+<pre><code class="language-bash">tmux new-session -d -s desktop-web \
+  &#39;websockify --web=/usr/share/novnc/ 127.0.0.1:6080 127.0.0.1:5901&#39;
+</code></pre>
+<p>Если сессия или порт уже есть, второй экземпляр не запускайте: проверьте владельца и назначение существующего процесса. Повторите проверки шага 9.3. Затем в <strong>отдельном новом локальном окне</strong> запустите туннель из шага 10 и откройте noVNC.</p>
+<p>Firefox при необходимости снова запускается через меню XFCE. Его сохранённый профиль остаётся на диске, но сохранность несохранённых вкладок, форм и входов зависит от браузера и самого сайта — не рассчитывайте на перезагрузку как на безопасное сохранение работы.</p>
+<h3 id="section-38">Нужно ли автоматически запускать всё после перезагрузки?</h3>
+<p>В этой шпаргалке оставлен наш понятный ручной маршрут. <code>tmux</code> — не замена автозапуску и не контроль исправности приложения. Службы systemd можно настроить отдельно после успешной ручной проверки; для первого открытия рабочего стола они не нужны.</p>
+<h2 id="section-39">13. Как правильно закончить работу</h2>
+<p><strong>Отключиться, оставив рабочий стол на VPS:</strong> сохраните важные данные, закройте вкладку noVNC. В специально открытом вами локальном окне туннеля нажмите Ctrl+C. Если это не общее соединение для других задач, его окно затем можно закрыть. Само отключение просмотра не является командой выхода из XFCE.</p>
+<p><strong>Закрыть только Firefox и освободить его память:</strong> сохраните работу и закройте окно Firefox внутри Linux. Рабочий стол продолжит работать.</p>
+<p><strong>Не нажимайте Log Out / Выйти в XFCE, если хотите оставить эту графическую сессию работающей.</strong> Выход завершает рабочий стол, и после него может понадобиться запуск по разделу 12. Shutdown / Выключить относится к VPS; не используйте его как кнопку закрытия просмотра.</p>
+<p>Не используйте <code>killall</code>, массовое завершение SSH или удаление конфигурации для обычного отключения. Это может прервать другие задачи на сервере.</p>
+<h2 id="section-40">14. Если что-то не работает</h2>
+<h3 id="section-41">14.1. <code>Could not resolve hostname SERVER_IP</code></h3>
+<p>Слово <code>SERVER_IP</code> осталось незаменённым либо в адрес попали скобки, пробелы или посторонние символы. Возьмите реальный публичный IPv4 из панели провайдера и подставьте его после <code>@</code>.</p>
+<h3 id="section-42">14.2. SSH: <code>Connection timed out</code> или <code>Connection refused</code></h3>
+<p>Проверьте в панели, что VPS включён, первичная установка завершена, IP и SSH-порт правильные, а вход с вашей сети разрешён. Timeout часто связан с сетевой доступностью или фильтрацией; refused — с отсутствием принимающей службы либо явным отказом. Сам текст не устанавливает точную причину.</p>
+<p>Для резервной проверки используйте консоль провайдера. Не открывайте все порты и не выключайте целиком сетевой экран в качестве первого решения. Перезагрузка VPS — не универсальная проверка: она прервёт все работающие процессы.</p>
+<h3 id="section-43">14.3. SSH: <code>Permission denied</code></h3>
+<p>Проверьте пользователя: для root нужен пароль root, для claude — пароль с шага 6. Проверьте раскладку, Caps Lock и пробелы при копировании. Слишком много попыток подряд может вызвать временную блокировку у провайдера.</p>
+<p>Если сообщение содержит только <code>publickey</code>, сервер может не разрешать вход по паролю. Этот рецепт предполагает, что провайдер такой вход предоставил; получите правильные данные или настройте доступ через его консоль. Не отключайте проверки SSH наугад.</p>
+<h3 id="section-44">14.4. <code>REMOTE HOST IDENTIFICATION HAS CHANGED</code></h3>
+<p>Это предупреждение о сменившемся ключе сервера, а не о неправильном пароле. Оно может возникнуть после переустановки VPS, но требует проверки.</p>
+<p>Сначала через панель провайдера подтвердите, что это ваш VPS и переустановка действительно была, затем сверяйте новый отпечаток способом из шага 3.1. <strong>Только после подтверждения</strong> можно удалить устаревшую запись именно этого адреса на своём компьютере:</p>
+<pre><code class="language-sh">ssh-keygen -R SERVER_IP
+</code></pre>
+<p>Для нестандартного порта 2222 запись другая:</p>
+<pre><code class="language-sh">ssh-keygen -R &quot;[SERVER_IP]:2222&quot;
+</code></pre>
+<p>После этого подключитесь снова и сверяйте новый отпечаток. Не удаляйте весь файл <code>known_hosts</code> и не используйте <code>StrictHostKeyChecking=no</code> как исправление.</p>
+<h3 id="section-45">14.5. <code>[sudo] password for claude</code> и <code>Sorry, try again</code></h3>
+<p>Нужен пароль пользователя Linux claude, <strong>не root, не VNC и не пароль сайта</strong>. Если пароль забыт, у владельца сервера с подтверждённым root-доступом есть адресный сброс:</p>
+<pre><code class="language-sh">passwd claude
+</code></pre>
+<p>Это меняет пароль пользователя и требует root; не выполняйте для чужого пользователя. После смены используйте новый пароль при следующем SSH-входе и sudo.</p>
+<p>Если написано <code>claude is not in the sudoers file</code>, в сохранённом root-сеансе проверьте <code>id claude</code> и при необходимости выполните <code>usermod -aG sudo claude</code>. Затем откройте новый SSH-вход под claude, чтобы обновились группы.</p>
+<h3 id="section-46">14.6. <code>sudo: command not found</code> или пакет не найден</h3>
+<p>На минимальной системе sudo мог отсутствовать — его устанавливают под root на шаге 6. Если APT не находит пакеты, сначала проверьте ОС и успешность <code>apt-get update</code>. Ошибки DNS, репозитория или места на диске нельзя исправить продолжением следующих шагов.</p>
+<p>Если APT сообщает о блокировке, дождитесь окончания другого пакетного процесса. Не удаляйте lock-файлы и не завершайте пакетный менеджер вслепую.</p>
+<h3 id="section-47">14.7. Не запускается VNC, серый/чёрный экран или быстрое завершение сессии</h3>
+<p>Сначала <strong>на VPS, claude</strong>:</p>
+<pre><code class="language-sh">whoami
+ls -ld &quot;$HOME/.vnc&quot;
+ls -l &quot;$HOME/.vnc/xstartup&quot;
+cat &quot;$HOME/.vnc/xstartup&quot;
+command -v startxfce4 dbus-run-session
+tigervncserver -list
+</code></pre>
+<p>Проверьте пользователя, четыре строки <code>xstartup</code> из шага 8 и право исполнения файла. На созданном нами файле права задаются адресно:</p>
+<pre><code class="language-sh">chmod 700 &quot;$HOME/.vnc/xstartup&quot;
+</code></pre>
+<p>Для просмотра последних сообщений VNC:</p>
+<pre><code class="language-sh">find &quot;$HOME/.vnc&quot; -maxdepth 1 -type f -name &#39;*.log&#39; -print -exec tail -n 60 {} \;
+</code></pre>
+<p>Перед передачей логов другому человеку удалите личные URL, пути и другие данные. Файл <code>passwd</code>, cookies и содержимое профиля браузера не пересылайте.</p>
+<p>Если конфигурация исправлена, но старый <strong>ваш</strong> экран <code>:1</code> ещё жив, изменение файла не перезапустит его автоматически. После сохранения работы и проверки, что именно эту сессию можно завершить, допустим адресный перезапуск:</p>
+<pre><code class="language-sh">tigervncserver -kill :1
+</code></pre>
+<p>Он закрывает приложения в этой графической сессии; несохранённые данные могут потеряться. Затем используйте команду запуска из шага 9.1. Не добавляйте <code>-clean</code>, не удаляйте все VNC-файлы и не завершайте чужие экраны.</p>
+<h3 id="section-48">14.8. <code>A VNC server is already running</code> / <code>duplicate session: desktop-web</code></h3>
+<p>Это означает, что повторно запускается уже существующий экран или tmux-сессия. Сначала выполните проверки шага 9.3. Если страница noVNC отвечает и экран существует, используйте их. Не создавайте дополнительные номера экранов и не убивайте рабочий процесс ради повторного запуска.</p>
+<h3 id="section-49">14.9. Туннель: <code>Address already in use</code> / <code>Could not request local forwarding</code></h3>
+<p>Локальный порт 6080 уже занят. Возможно, ранее открытый туннель ещё работает: сначала попробуйте существующий адрес noVNC.</p>
+<p>Если порт занят другой программой, её закрывать не обязательно. Используйте <strong>локальный 6081</strong>, оставив серверный 6080:</p>
+<pre><code class="language-sh">ssh -o ExitOnForwardFailure=yes -o ServerAliveInterval=30 -o ServerAliveCountMax=3 -N -L 127.0.0.1:6081:127.0.0.1:6080 claude@SERVER_IP
+</code></pre>
+<p>При нестандартном SSH-порте добавьте свой <code>-p</code>. Тогда адрес в браузере компьютера будет:</p>
+<pre><code class="language-text">http://127.0.0.1:6081/vnc.html
+</code></pre>
+<p>Команду websockify на VPS из-за этого менять не нужно. Локальный порт в команде туннеля и в адресной строке должны совпадать.</p>
+<h3 id="section-50">14.10. Браузер не открывает даже страницу noVNC</h3>
+<p>Проверьте, что окно туннеля остаётся открытым, команда запущена на компьютере, а в браузере указан правильный локальный порт. На VPS выполните:</p>
+<pre><code class="language-sh">curl --noproxy &#39;*&#39; -I --max-time 5 http://127.0.0.1:6080/vnc.html
+</code></pre>
+<p>Если ответа нет и на VPS, проблема до туннеля — в websockify или его запуске. Если на VPS есть <code>200</code>, а локально нет, проверяйте туннель и локальный браузер. Системный прокси не должен отправлять адрес <code>127.0.0.1</code> на внешний прокси; не отключайте все защитные средства вместо точной проверки локального адреса.</p>
+<p>Наличие HTTP-ответа ещё не доказывает, что VNC работает: это отдельный следующий участок соединения.</p>
+<h3 id="section-51">14.11. noVNC открылся, но Connect выдаёт ошибку</h3>
+<p>Страница загрузилась, значит веб-часть доступна. Проверьте пароль VNC, наличие экрана <code>:1</code> и порта 5901. После Log Out в XFCE экран мог завершиться, хотя websockify продолжает показывать страницу.</p>
+<p>Чтобы посмотреть только вывод нашего веб-моста, <strong>на VPS, claude</strong>:</p>
+<pre><code class="language-sh">tmux capture-pane -p -t &#39;=desktop-web&#39; -S -60
+</code></pre>
+<p>Если такой сессии уже нет, проверьте порты, затем запускайте её по разделу 12. Если порт занят неизвестным процессом, сначала установите его назначение; не завершайте его по одному номеру порта.</p>
+<h3 id="section-52">14.12. <code>X11 forwarding request failed</code> или <code>DISPLAY is not set</code> при запуске Firefox</h3>
+<p>Основная инструкция не использует <code>ssh -X</code> и не требует локального X-сервера. Firefox нужно запускать через меню XFCE или терминал <strong>внутри удалённого экрана</strong>. Обычный SSH-терминал не является графическим рабочим столом.</p>
+<p>Не запускайте Firefox через sudo и не выключайте его sandbox. Если в приглашении видите root, вернитесь к обычному пользователю claude.</p>
+<h3 id="section-53">14.13. Firefox уже запущен, но не отвечает</h3>
+<p>Сначала проверьте, не открыто ли его окно на другом рабочем пространстве XFCE. Если браузер показывает диалог восстановления или блокировки профиля, разберите его причину. Не удаляйте профиль или файлы блокировки наугад: можно потерять данные или повредить живую сессию.</p>
+<h3 id="section-54">14.14. Интерфейс тормозит, браузер закрывается</h3>
+<p>На VPS проверьте:</p>
+<pre><code class="language-sh">free -h
+swapon --show
+df -h /
+</code></pre>
+<p>Закройте ненужные вкладки <strong>своего</strong> Firefox, не запускайте параллельно тяжёлые задачи. Если память постоянно заканчивается, swap не заменит увеличение RAM. Если свободного диска мало, сначала выясните, что занимает место; не удаляйте системные файлы или проекты ради быстрого освобождения.</p>
+<p>Само исчезновение окна ещё не доказывает нехватку RAM: для вывода о причине нужны сообщения системы или приложения.</p>
+<h3 id="section-55">14.15. Рабочий стол работает, но конкретный сайт не пускает</h3>
+<p>Это отдельная проблема сайта, аккаунта, сети или правил доступа. Исправность SSH и noVNC не гарантирует доступность каждого сервиса. Не переустанавливайте рабочий стол только из-за отказа одной страницы.</p>
+<h2 id="section-56">15. Короткая памятка после успешной установки</h2>
+<p>Сохраните у себя в менеджере паролей IP, SSH-порт, пароль пользователя claude и отдельный пароль VNC. Не публикуйте эту заполненную памятку.</p>
+<p><strong>Обычный просмотр, если VPS не перезагружался — на компьютере:</strong></p>
+<pre><code class="language-sh">ssh -o ExitOnForwardFailure=yes -o ServerAliveInterval=30 -o ServerAliveCountMax=3 -N -L 127.0.0.1:6080:127.0.0.1:6080 claude@SERVER_IP
+</code></pre>
+<p><strong>Адрес — в браузере компьютера:</strong></p>
+<pre><code class="language-text">http://127.0.0.1:6080/vnc.html
+</code></pre>
+<p><strong>Проверка состояния — после обычного SSH-входа на VPS под claude:</strong></p>
+<pre><code class="language-sh">tigervncserver -list
+tmux list-sessions
+ss -ltnp &#39;( sport = :5901 or sport = :6080 )&#39;
+curl --noproxy &#39;*&#39; -I --max-time 5 http://127.0.0.1:6080/vnc.html
+</code></pre>
+<p>Если VPS перезагружался, восстанавливайте процессы по разделу 12. Не повторяйте установку пакетов, создание пользователя и создание swap.</p>
+<h2 id="section-57">Что проверено при подготовке шпаргалки</h2>
+<p>Исторический маршрут взят из фактической настройки, а не придуман с нуля. Пути и параметры сверены с документацией Debian 12, OpenSSH, TigerVNC, tmux, D-Bus и noVNC; ссылки стоят у соответствующих шагов. Добавлены явные проверки пользователя, локальных портов, существующих файлов и свободного места. Эти дополнительные защитные проверки — улучшения данной редакции, а не утверждение, что мы выполняли именно их в первоначальном диалоге.</p>
+<p>Рабочий VPS при подготовке документа не изменяли. Чистую установку этой редакции заново не выполняли. Пакет готов как инструкция; успешность на конкретном новом сервере подтверждается проверками каждого шага и открытием управляемого Firefox в конце.</p>
+
+<a class="back" href="#top">Вернуться к началу</a>
+</main>
+</div>
+<div id="copy-status" class="copy-status" role="status" aria-live="polite" aria-atomic="true"></div>
+<script>
+(()=>{
+'use strict';
+const doc=document,root=doc.documentElement,STORE='forgetme-cheatsheet-theme';
+const each=(sel,fn,ctx)=>Array.prototype.forEach.call((ctx||doc).querySelectorAll(sel),fn);
+const listen=(mq,fn)=>{if(!mq)return;if(mq.addEventListener)mq.addEventListener('change',fn);else if(mq.addListener)mq.addListener(fn)};
+const svg=body=>'<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+body+'</svg>';
+
+/* Тема: явный выбор сохраняется, без выбора — системная */
+const darkMq=window.matchMedia?window.matchMedia('(prefers-color-scheme: dark)'):null;
+const activeTheme=()=>{const t=root.getAttribute('data-theme');return t==='light'||t==='dark'?t:(darkMq&&darkMq.matches?'dark':'light')};
+const syncTheme=()=>{const t=activeTheme();each('[data-theme-value]',b=>b.setAttribute('aria-pressed',String(b.getAttribute('data-theme-value')===t)))};
+each('[data-theme-value]',b=>b.addEventListener('click',()=>{
+ const t=b.getAttribute('data-theme-value');root.setAttribute('data-theme',t);
+ try{localStorage.setItem(STORE,t)}catch(e){/* хранилище недоступно: выбор действует до перезагрузки */}
+ syncTheme();
+}));
+listen(darkMq,syncTheme);syncTheme();
+
+/* Таблицы прокручиваются внутри своей обёртки */
+each('main table',t=>{const w=doc.createElement('div');w.className='table-wrap';t.parentNode.insertBefore(w,t);w.appendChild(t)});
+
+/* Номер шага в h2 — отдельный значок; textContent заголовка не меняется */
+each('main h2',h=>{
+ const n=h.firstChild,m=n&&n.nodeType===3&&/^(\d+)\.(?=\s)/.exec(n.data);if(!m)return;
+ const s=doc.createElement('span'),dot=doc.createElement('span');
+ s.className='step-n';dot.className='vh';dot.textContent='.';
+ s.appendChild(doc.createTextNode(m[1]));s.appendChild(dot);
+ n.data=n.data.slice(m[0].length);h.insertBefore(s,n);
+});
+
+/* «Где выполнять»: абзацы «Где: …» и легенда в разделе 0 */
+const placeKind=t=>{t=t.toLowerCase();if(t.indexOf('удалённом рабочем столе')>-1)return'desk';if(/локальн|своём компьютере|на компьютере/.test(t))return'local';return t.indexOf('vps')>-1?'vps':''};
+each('main p > strong:first-child',st=>{
+ const p=st.parentNode,t=st.textContent;
+ if(p.firstChild!==st||!/^(Где:|На VPS|Теперь на VPS)/.test(t))return;
+ const k=placeKind(t);if(k)p.classList.add('where','where--'+k);
+});
+for(let el=doc.getElementById('section-3');el&&(el=el.nextElementSibling)&&el.tagName!=='H2';){
+ if(el.tagName!=='UL')continue;
+ el.classList.add('where-legend');
+ each('li',li=>{const st=li.firstChild,k=st&&st.nodeType===1&&st.tagName==='STRONG'?placeKind(st.textContent):'';if(k)li.classList.add('where','where--'+k)},el);
+ break;
+}
+
+/* Копирование: Clipboard API → execCommand с временным textarea → выделение и подсказка */
+const status=doc.getElementById('copy-status');let statusTimer=0,msgTimer=0;
+const announce=(msg,show)=>{
+ clearTimeout(statusTimer);clearTimeout(msgTimer);
+ status.textContent='';status.classList.toggle('is-visible',!!show);
+ msgTimer=setTimeout(()=>{status.textContent=msg},60);
+ statusTimer=setTimeout(()=>{status.classList.remove('is-visible');status.textContent=''},show?9000:3000);
+};
+const plural=n=>{const a=n%10,b=n%100;return a===1&&b!==11?'строка':a>1&&a<5&&(b<12||b>14)?'строки':'строк'};
+const legacyCopy=(text,btn)=>{
+ const ta=doc.createElement('textarea');let ok=false;
+ ta.value=text;ta.setAttribute('readonly','');ta.setAttribute('aria-hidden','true');ta.tabIndex=-1;
+ ta.style.cssText='position:fixed;top:0;left:-9999px;width:2em;height:2em;padding:0;border:0;font-size:16px';
+ doc.body.appendChild(ta);
+ try{ta.focus({preventScroll:true});ta.select();ta.setSelectionRange(0,text.length);ok=doc.execCommand('copy')===true}catch(e){ok=false}
+ doc.body.removeChild(ta);
+ try{btn.focus({preventScroll:true})}catch(e){}
+ return ok;
+};
+const selectCode=code=>{try{const r=doc.createRange(),s=window.getSelection();r.selectNodeContents(code);s.removeAllRanges();s.addRange(r)}catch(e){}};
+const setState=(btn,st)=>{clearTimeout(btn._t);btn.setAttribute('data-state',st);if(st!=='idle')btn._t=setTimeout(()=>btn.setAttribute('data-state','idle'),st==='done'?2200:6000)};
+const ICON_COPY=svg('<rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/>'),
+ ICON_DONE=svg('<path d="m5 12.5 4.5 4.5L19 7.5"/>'),
+ ICON_SEL=svg('<path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"/>');
+each('main pre',(pre,i)=>{
+ const code=pre.querySelector('code');if(!code)return;
+ let lang='text';Array.prototype.forEach.call(code.classList,c=>{if(c.indexOf('language-')===0)lang=c.slice(9)});
+ const isText=lang==='text',lines=code.textContent.replace(/\n$/,'').split('\n').length;
+ const box=doc.createElement('div'),top=doc.createElement('div'),meta=doc.createElement('span'),tag=doc.createElement('span'),note=doc.createElement('span'),btn=doc.createElement('button');
+ box.className='code-block code-block--'+(isText?'text':'cmd');top.className='code-top';
+ meta.className='code-meta';meta.id='code-meta-'+(i+1);
+ tag.className='code-lang';tag.textContent=isText?'Текст':lang==='powershell'?'PowerShell':'Терминал';
+ note.className='code-note';note.textContent=isText?'Адрес, схема или пример вывода':lines+' '+plural(lines);
+ meta.appendChild(tag);meta.appendChild(doc.createTextNode(' '));meta.appendChild(note);
+ btn.type='button';btn.className='copy';btn.setAttribute('data-state','idle');btn.setAttribute('aria-describedby',meta.id);
+ btn.innerHTML='<span class="st-idle">'+ICON_COPY+'Копировать</span><span class="st-done">'+ICON_DONE+'Скопировано</span><span class="st-fail">'+ICON_SEL+'Выделено</span>';
+ btn.addEventListener('click',()=>{
+  const text=code.textContent; /* ровно textContent блока: без номеров строк, приглашений и подстановок */
+  const done=()=>{setState(btn,'done');announce('Скопировано в буфер обмена.',false)};
+  const fallback=()=>{
+   if(legacyCopy(text,btn)){done();return}
+   selectCode(code);setState(btn,'fail');
+   announce('Скопировать автоматически не удалось. Текст блока выделен — нажмите Ctrl+C (на Mac — ⌘C) или выберите «Копировать» в меню.',true);
+  };
+  let p=null;
+  try{if(navigator.clipboard&&typeof navigator.clipboard.writeText==='function')p=navigator.clipboard.writeText(text)}catch(e){p=null}
+  if(p&&typeof p.then==='function')p.then(done,fallback);else fallback();
+ });
+ pre.parentNode.insertBefore(box,pre);top.appendChild(meta);top.appendChild(btn);box.appendChild(top);box.appendChild(pre);
+});
+/* Выдвижное оглавление для узких экранов (dialog: Escape, фокус, фон неактивен) */
+const side=doc.querySelector('aside'),bar=doc.querySelector('.toc-bar'),openBtn=doc.querySelector('.toc-open'),curLabel=doc.querySelector('.toc-open__current');
+const links=Array.prototype.slice.call(doc.querySelectorAll('.toc a[href^="#"]'));
+const focusTarget=t=>{
+ if(!t.hasAttribute('tabindex')){t.setAttribute('tabindex','-1');const rm=()=>{t.removeAttribute('tabindex');t.removeEventListener('blur',rm)};t.addEventListener('blur',rm)}
+ try{t.focus({preventScroll:true})}catch(e){t.focus()}
+};
+const keepVisible=box=>{
+ if(!box||!box.offsetParent)return;const a=box.querySelector('a[aria-current]');if(!a)return;
+ const br=box.getBoundingClientRect(),ar=a.getBoundingClientRect();
+ if(ar.top<br.top+8||ar.bottom>br.bottom-8)box.scrollTop+=ar.top-br.top-box.clientHeight/2+ar.height/2;
+};
+if(openBtn&&side&&window.HTMLDialogElement){
+ const drawer=doc.createElement('dialog');
+ drawer.className='toc-drawer';drawer.id='toc-drawer';drawer.setAttribute('aria-labelledby','toc-drawer-title');
+ drawer.innerHTML='<div class="toc-drawer__panel"><div class="toc-drawer__head"><p class="toc-drawer__title" id="toc-drawer-title">Оглавление</p><button type="button" class="toc-close">Закрыть</button></div></div>';
+ const nav=side.querySelector('nav').cloneNode(true);
+ drawer.firstChild.appendChild(nav);doc.body.appendChild(drawer);
+ Array.prototype.push.apply(links,nav.querySelectorAll('a'));
+ openBtn.setAttribute('aria-controls','toc-drawer');
+ const closeDrawer=()=>{root.classList.remove('drawer-open');openBtn.setAttribute('aria-expanded','false');if(drawer.open)drawer.close()};
+ openBtn.addEventListener('click',()=>{
+  root.classList.add('drawer-open');drawer.showModal();openBtn.setAttribute('aria-expanded','true');
+  keepVisible(nav);
+  const a=nav.querySelector('a[aria-current]')||nav.querySelector('a');
+  if(a)try{a.focus({preventScroll:true})}catch(e){a.focus()}
+ });
+ /* Любой путь закрытия (Escape, кнопка, фон, выбор раздела) снимает блокировку прокрутки */
+ drawer.addEventListener('close',()=>{root.classList.remove('drawer-open');openBtn.setAttribute('aria-expanded','false')});
+ drawer.addEventListener('click',e=>{if(e.target===drawer)closeDrawer()});
+ drawer.querySelector('.toc-close').addEventListener('click',closeDrawer);
+ nav.addEventListener('click',e=>{
+  const a=e.target.closest&&e.target.closest('a');if(!a)return;
+  const id=decodeURIComponent(a.getAttribute('href').slice(1)),t=doc.getElementById(id);if(!t)return;
+  e.preventDefault();closeDrawer();
+  if(location.hash==='#'+id)t.scrollIntoView();else location.hash=id;
+  focusTarget(t);
+ });
+ listen(window.matchMedia&&window.matchMedia('(min-width: 960px)'),e=>{if(e.matches)closeDrawer()});
+}
+
+/* Текущий раздел: подсветка в оглавлении и подпись в липкой панели */
+const seen={},heads=[];
+links.forEach(a=>{const id=a.getAttribute('href').slice(1),h=doc.getElementById(id);if(h&&!seen[id]){seen[id]=1;heads.push(h)}});
+let current=null;
+const updateCurrent=()=>{
+ const line=(bar&&bar.offsetHeight?bar.offsetHeight:0)+Math.min(140,window.innerHeight*.25);
+ let found=null;
+ for(const h of heads){if(h.getBoundingClientRect().top<=line)found=h;else break}
+ if(heads.length&&window.innerHeight+window.pageYOffset>=root.scrollHeight-4)found=heads[heads.length-1];
+ const id=found?found.id:'';if(id===current)return;current=id;
+ links.forEach(a=>{if(id&&a.getAttribute('href')==='#'+id)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current')});
+ if(curLabel)curLabel.textContent=found?found.textContent.replace(/\s+/g,' ').trim():'Начало инструкции';
+ keepVisible(side);
+};
+
+/* Прокручиваемые по горизонтали код и таблицы доступны с клавиатуры */
+const markScrollable=()=>each('main pre, .table-wrap',el=>{if(el.scrollWidth>el.clientWidth+1)el.setAttribute('tabindex','0');else el.removeAttribute('tabindex')});
+
+let ticking=false,resizeTimer=0;
+const onScroll=()=>{if(ticking)return;ticking=true;window.requestAnimationFrame(()=>{ticking=false;updateCurrent()})};
+window.addEventListener('scroll',onScroll,{passive:true});
+window.addEventListener('hashchange',onScroll);
+window.addEventListener('resize',()=>{onScroll();clearTimeout(resizeTimer);resizeTimer=setTimeout(markScrollable,150)});
+window.addEventListener('load',markScrollable);
+updateCurrent();markScrollable();
+})();
+</script>
+</body>
+</html>

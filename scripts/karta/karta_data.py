@@ -181,6 +181,11 @@ ITEMS = [
     dict(id="K036", sec="F", key="handy-dictation-playbook-2026-09-21.html", status="green",
          title="Диктовка на MSI (кнопка *)",
          note="Плейбук диктовки с самопроверкой и ремонтом на MSI-машине. Датированный практический мануал."),
+    dict(id="K060", sec="F", key="forgetme-vps-cheatsheet-2026-10-03.html", status="green",
+         title="ForgetMe-шпаргалка: VPS с нуля (Debian 12)",
+         note="Пошаговая инструкция к видео ForgetMe: от купленного VPS с Debian 12 до рабочего стола XFCE "
+              "с Firefox через SSH-туннель и noVNC — рабочий путь к Claude из РФ. "
+              "Самодостаточная страница: светлые/тёмные темы, оглавление, копирование команд."),
     dict(id="K037", sec="F", key="kostya-covers-tz-2026-09-10.html", status="amber",
          title="ТЗ: автообложки уроков — Костя",
          note="Техническое задание на чистый шаблон автообложек уроков. Рабочий документ соавторства с Константином."),
