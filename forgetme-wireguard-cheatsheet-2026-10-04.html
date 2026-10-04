@@ -1,0 +1,604 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Пошаговая инструкция: WireGuard-сервер на Debian 12, ключи, QR-конфиг, подключение телефона. Проверки, автозапуск и восстановление.">
+<title>WireGuard на VPS — шпаргалка ForgetMe</title>
+<link rel="canonical" href="https://gasyoun.github.io/forgetme-vps-cheatsheet-2026-10-03.html">
+<meta name="color-scheme" content="light dark">
+<script>
+/* Тема до первой отрисовки: явный выбор из localStorage, иначе системная (CSS prefers-color-scheme) */
+(function(d){d.classList.add('js');if('HTMLDialogElement' in window)d.classList.add('has-dialog');try{var t=localStorage.getItem('forgetme-cheatsheet-theme');if(t==='light'||t==='dark')d.setAttribute('data-theme',t)}catch(e){}})(document.documentElement);
+</script>
+<style>
+/* ---------- Токены: светлая тема по умолчанию ---------- */
+:root{
+ --font:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans","Helvetica Neue",Arial,sans-serif;
+ --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,"Cascadia Mono","Roboto Mono","DejaVu Sans Mono","Liberation Mono","Noto Sans Mono",monospace;
+ --bg:#f5f4f8;--surface:#fff;--surface-2:#f4f2f9;--surface-3:#ebe8f3;
+ --ink:#1d1b26;--ink-2:#3f3b4d;--muted:#5f5a6e;
+ --border:#e4e1ec;--border-strong:#cdc7da;
+ --accent:#6b38d4;--accent-hover:#5627b8;--accent-ink:#fff;--accent-soft:#f1ebfd;--accent-line:#d6c8f7;
+ --code-bg:#f9f8fc;--code-ink:#211e2b;--code-top:#f2eff8;--inline-code:#eeebf5;
+ --local:#0f6b5e;--local-bg:#edf7f4;--local-line:#c2e3db;
+ --vps:#5b2fc0;--vps-bg:#f5f0fe;--vps-line:#dbcdf9;
+ --desk:#4b4760;--desk-bg:#f4f3f7;--desk-line:#dedbe7;
+ --ok:#17663a;--selection:#dccdfb;
+ --shadow:0 1px 2px rgba(29,27,38,.04),0 8px 24px -14px rgba(29,27,38,.16);
+ color-scheme:light;
+}
+/* Тёмная тема: по системе, если нет явного выбора «Светлая» */
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+ --bg:#111017;--surface:#17151e;--surface-2:#1d1a26;--surface-3:#272333;
+ --ink:#ece9f3;--ink-2:#cdc8da;--muted:#a39db4;
+ --border:#2b2837;--border-strong:#433e56;
+ --accent:#b39cff;--accent-hover:#cbbaff;--accent-ink:#16121f;--accent-soft:#272040;--accent-line:#4a3d75;
+ --code-bg:#131119;--code-ink:#e6e2f0;--code-top:#1b1824;--inline-code:#272334;
+ --local:#72d3c3;--local-bg:#11252a;--local-line:#25494c;
+ --vps:#bba6ff;--vps-bg:#1e1833;--vps-line:#41356b;
+ --desk:#cbc6d8;--desk-bg:#1f1d28;--desk-line:#383447;
+ --ok:#7ad9a0;--selection:#4a3a80;
+ --shadow:0 1px 2px rgba(0,0,0,.35),0 10px 28px -16px rgba(0,0,0,.6);
+ color-scheme:dark;
+}}
+/* Тёмная тема: явный выбор */
+:root[data-theme="dark"]{
+ --bg:#111017;--surface:#17151e;--surface-2:#1d1a26;--surface-3:#272333;
+ --ink:#ece9f3;--ink-2:#cdc8da;--muted:#a39db4;
+ --border:#2b2837;--border-strong:#433e56;
+ --accent:#b39cff;--accent-hover:#cbbaff;--accent-ink:#16121f;--accent-soft:#272040;--accent-line:#4a3d75;
+ --code-bg:#131119;--code-ink:#e6e2f0;--code-top:#1b1824;--inline-code:#272334;
+ --local:#72d3c3;--local-bg:#11252a;--local-line:#25494c;
+ --vps:#bba6ff;--vps-bg:#1e1833;--vps-line:#41356b;
+ --desk:#cbc6d8;--desk-bg:#1f1d28;--desk-line:#383447;
+ --ok:#7ad9a0;--selection:#4a3a80;
+ --shadow:0 1px 2px rgba(0,0,0,.35),0 10px 28px -16px rgba(0,0,0,.6);
+ color-scheme:dark;
+}
+
+/* ---------- Основа ---------- */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:24px;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.68 var(--font);font-kerning:normal;overflow-wrap:break-word}
+::selection{background:var(--selection)}
+a{color:var(--accent);text-decoration-thickness:1px;text-underline-offset:.2em;overflow-wrap:anywhere}
+a:hover{color:var(--accent-hover);text-decoration-thickness:2px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+[tabindex="-1"]:focus:not(:focus-visible){outline:none}
+button{font:inherit;color:inherit}
+svg{flex:none}
+.vh{position:absolute!important;width:1px!important;height:1px!important;margin:-1px!important;padding:0!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;clip-path:inset(50%)!important;white-space:nowrap!important;border:0!important}
+.skip-link{position:absolute;left:12px;top:-200px;z-index:100;padding:10px 16px;border-radius:10px;background:var(--accent);color:var(--accent-ink);font-weight:650;text-decoration:none}
+.skip-link:focus{top:12px;color:var(--accent-ink)}
+/* ---------- Шапка: каналы и тема ---------- */
+.site-header{background:var(--surface);border-bottom:1px solid var(--border)}
+.site-header__inner{max-width:1240px;margin:0 auto;padding:12px 28px;display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px}
+.brand{display:flex;align-items:baseline;gap:10px;margin:0 auto 0 0;min-width:0;line-height:1.25}
+.brand-name{font-size:18px;font-weight:760;letter-spacing:-.015em;color:var(--ink)}
+.brand-doc{font-size:15px;color:var(--muted)}
+.channels{display:flex;gap:8px}
+.channel{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:40px;padding:0 14px;border:1px solid var(--border-strong);border-radius:10px;background:var(--surface);color:var(--ink);font-size:15px;font-weight:620;line-height:1.2;text-decoration:none;white-space:nowrap;overflow-wrap:normal;transition:background-color .15s,border-color .15s}
+.channel svg{width:18px;height:18px;color:var(--accent)}
+.channel:hover{background:var(--accent-soft);border-color:var(--accent-line);color:var(--ink)}
+.channel-handle{color:var(--muted);font-weight:500}
+.theme-switch{display:inline-flex;gap:2px;padding:3px;border:1px solid var(--border-strong);border-radius:12px;background:var(--surface-2)}
+.theme-btn{display:inline-flex;align-items:center;gap:6px;min-height:34px;padding:0 12px;border:0;border-radius:9px;background:transparent;color:var(--ink-2);font-size:14px;font-weight:620;line-height:1;cursor:pointer;transition:background-color .15s,color .15s}
+.theme-btn svg{width:16px;height:16px}
+.theme-btn:hover{background:var(--surface-3);color:var(--ink)}
+.theme-btn[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+html:not(.js) .theme-switch{display:none}
+
+/* ---------- Липкая панель оглавления (телефон, планшет) ---------- */
+.toc-bar{display:none;position:sticky;top:0;z-index:20;padding:6px 16px;background:var(--surface);border-bottom:1px solid var(--border)}
+.toc-open{display:flex;align-items:center;gap:10px;width:100%;max-width:868px;margin:0 auto;min-height:44px;padding:0 14px;border:1px solid var(--border-strong);border-radius:10px;background:var(--surface-2);color:var(--ink);font-size:15px;line-height:1.3;text-align:left;cursor:pointer}
+.toc-open svg{width:18px;height:18px;color:var(--accent)}
+.toc-open__label{flex:none;font-weight:680}
+.toc-open__current{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--muted)}
+
+/* ---------- Сетка и боковое оглавление ---------- */
+.layout{max-width:1240px;margin:0 auto;padding:32px 28px 72px;display:grid;grid-template-columns:268px minmax(0,1fr);gap:40px;align-items:start}
+aside{position:sticky;top:20px;max-height:calc(100vh - 40px);overflow:auto;overscroll-behavior:contain;padding:2px 6px 20px 0;font-size:14.5px;line-height:1.4;scrollbar-width:thin}
+.toc-title{margin:0 0 10px 10px;font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.toc{display:flex;flex-direction:column;gap:2px}
+.toc a{position:relative;display:grid;grid-template-columns:1.9em minmax(0,1fr);align-items:baseline;padding:7px 10px;border-radius:8px;color:var(--ink-2);text-decoration:none;overflow-wrap:normal;transition:background-color .15s,color .15s}
+.toc a:hover{background:var(--surface-3);color:var(--ink)}
+.toc-n{color:var(--muted);font-weight:650;font-variant-numeric:tabular-nums}
+.toc a[aria-current]{background:var(--accent-soft);color:var(--ink);font-weight:620}
+.toc a[aria-current]::before{content:"";position:absolute;left:0;top:7px;bottom:7px;width:3px;border-radius:3px;background:var(--accent)}
+.toc a[aria-current] .toc-n{color:var(--accent)}
+.note{margin:18px 0 0 10px;padding-top:14px;border-top:1px solid var(--border);font-size:12.5px;line-height:1.55;color:var(--muted)}
+
+/* ---------- Текст руководства ---------- */
+main{min-width:0;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:44px 52px 56px;box-shadow:var(--shadow)}
+h1,h2,h3{color:var(--ink);line-height:1.22;letter-spacing:-.018em;text-wrap:balance}
+h1{margin:0 0 16px;font-size:clamp(30px,1.6vw + 22px,42px);font-weight:780;line-height:1.12;letter-spacing:-.028em}
+h1 + p{margin:0 0 22px;color:var(--muted);font-size:15px}
+h1 + p + p{font-size:1.1em;color:var(--ink-2)}
+h2{margin:64px 0 16px;padding-top:30px;border-top:1px solid var(--border);font-size:clamp(23px,.8vw + 18px,28px);font-weight:730}
+h3{margin:36px 0 10px;font-size:clamp(18.5px,.4vw + 16px,21px);font-weight:690}
+p{margin:14px 0}
+ul,ol{margin:14px 0;padding-left:1.45em}
+li{margin:6px 0;padding-left:.15em}
+li::marker{color:var(--muted)}
+strong{font-weight:680}
+code{padding:.1em .36em;border-radius:5px;background:var(--inline-code);color:var(--ink);font-family:var(--mono);font-size:.86em;overflow-wrap:anywhere}
+.step-n{display:inline-flex;align-items:center;justify-content:center;min-width:1.7em;height:1.7em;padding:0 .32em;margin-right:.42em;border-radius:.42em;background:var(--accent-soft);color:var(--accent);font-size:.8em;font-weight:780;font-variant-numeric:tabular-nums;letter-spacing:0;vertical-align:.1em}
+/* ---------- «Где выполнять»: компьютер / VPS / удалённый рабочий стол ---------- */
+.where{position:relative;margin:22px 0 12px;padding:10px 14px 10px 44px;border:1px solid var(--w-line);border-radius:12px;background:var(--w-bg)}
+.where::before{content:"";position:absolute;left:14px;top:.84em;width:20px;height:20px;background:var(--w-fg);-webkit-mask:var(--w-icon) center/contain no-repeat;mask:var(--w-icon) center/contain no-repeat}
+.where--local{--w-line:var(--local-line);--w-bg:var(--local-bg);--w-fg:var(--local);--w-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='4' y='5' width='16' height='10' rx='1.5'/%3E%3Cpath d='M2 19h20'/%3E%3C/svg%3E")}
+.where--vps{--w-line:var(--vps-line);--w-bg:var(--vps-bg);--w-fg:var(--vps);--w-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='3.5' width='18' height='7' rx='2'/%3E%3Crect x='3' y='13.5' width='18' height='7' rx='2'/%3E%3Cpath d='M7 7h.01M7 17h.01'/%3E%3C/svg%3E")}
+.where--desk{--w-line:var(--desk-line);--w-bg:var(--desk-bg);--w-fg:var(--desk);--w-icon:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='12' rx='2'/%3E%3Cpath d='M8 20h8M12 16v4'/%3E%3C/svg%3E")}
+.where + pre,.where + .code-block{margin-top:10px}
+.where-legend{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:16px 0;padding:0;list-style:none}
+.where-legend .where{margin:0}
+
+/* ---------- Таблицы ---------- */
+table{width:100%;margin:20px 0;border-collapse:collapse;border:1px solid var(--border);font-size:15px;line-height:1.5}
+.table-wrap{margin:20px 0;overflow-x:auto;border:1px solid var(--border);border-radius:12px}
+.table-wrap table{margin:0;border:0}
+th,td{padding:11px 14px;text-align:left;vertical-align:top;border-bottom:1px solid var(--border)}
+th + th,td + td{border-left:1px solid var(--border)}
+th{background:var(--surface-2);color:var(--ink);font-size:14px;font-weight:680}
+tbody tr:last-child td{border-bottom:0}
+
+/* ---------- Блоки кода и копирование ---------- */
+pre{margin:18px 0;padding:14px 16px;overflow:auto;border:1px solid var(--border);border-radius:12px;background:var(--code-bg);color:var(--code-ink);font-family:var(--mono);font-size:14px;line-height:1.62;tab-size:2}
+pre code{padding:0;border-radius:0;background:none;color:inherit;font-family:var(--mono);font-size:inherit;line-height:inherit;white-space:pre;overflow-wrap:normal;word-break:normal}
+pre:focus-visible,.table-wrap:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.code-block{margin:18px 0;min-width:0;border:1px solid var(--border);border-radius:12px;background:var(--code-bg)}
+.code-block pre{margin:0;border:0;border-radius:0 0 11px 11px;background:transparent}
+.code-top{display:flex;align-items:center;gap:10px;min-height:44px;padding:4px 5px 4px 14px;border-bottom:1px solid var(--border);border-radius:11px 11px 0 0;background:var(--code-top);color:var(--muted);font-size:13px;line-height:1.3}
+.code-meta{display:flex;flex:1;align-items:center;gap:8px;min-width:0}
+.code-lang{flex:none;padding:2px 7px;border:1px solid var(--border);border-radius:6px;background:var(--surface);color:var(--ink-2);font-size:12px;font-weight:650}
+.code-block--text .code-lang{background:transparent}
+.code-note{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.copy{display:inline-grid;flex:none;align-items:center;min-height:36px;padding:0 12px;border:1px solid var(--accent-line);border-radius:9px;background:var(--surface);color:var(--accent);font-size:14px;font-weight:650;line-height:1;cursor:pointer;transition:background-color .15s,border-color .15s}
+.copy > span{grid-area:1/1;display:inline-flex;align-items:center;justify-content:center;gap:7px;white-space:nowrap}
+.copy svg{width:16px;height:16px}
+.copy:hover{background:var(--accent-soft);border-color:var(--accent)}
+.copy .st-done,.copy .st-fail,.copy[data-state="done"] .st-idle,.copy[data-state="fail"] .st-idle{visibility:hidden}
+.copy[data-state="done"] .st-done,.copy[data-state="fail"] .st-fail{visibility:visible}
+.copy[data-state="done"]{color:var(--ok);border-color:currentColor}
+.copy-status{position:fixed;left:50%;bottom:20px;z-index:60;width:max-content;max-width:min(560px,calc(100vw - 32px));padding:12px 16px;border-radius:12px;background:var(--ink);color:var(--surface);font-size:15px;line-height:1.45;box-shadow:0 10px 30px -10px rgba(0,0,0,.45);transform:translateX(-50%)}
+.copy-status:not(.is-visible){width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap;box-shadow:none}
+
+/* ---------- Выдвижное оглавление (dialog) ---------- */
+.toc-drawer{position:fixed;inset:0 auto 0 0;width:min(88vw,380px);max-width:none;height:100%;max-height:none;margin:0;padding:0;border:0;border-right:1px solid var(--border);background:var(--surface);color:var(--ink);box-shadow:0 0 40px rgba(0,0,0,.25)}
+.toc-drawer::backdrop{background:rgba(20,16,32,.5)}
+.toc-drawer[open]{animation:drawer-in .18s ease-out}
+@keyframes drawer-in{from{opacity:0;transform:translateX(-16px)}}
+.toc-drawer__panel{display:flex;flex-direction:column;height:100%}
+.toc-drawer__head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 10px 8px 20px;border-bottom:1px solid var(--border)}
+.toc-drawer__title{margin:0;font-size:17px;font-weight:720}
+.toc-close{min-height:44px;padding:0 16px;border:1px solid var(--border-strong);border-radius:10px;background:var(--surface-2);color:var(--ink);font-size:15px;font-weight:620;cursor:pointer}
+.toc-drawer .toc{flex:1;overflow:auto;overscroll-behavior:contain;padding:10px 10px 28px;font-size:16px;line-height:1.35}
+.toc-drawer .toc a{min-height:44px;align-items:center;padding:8px 12px}
+html.drawer-open{overflow:hidden}
+
+/* ---------- Прочее ---------- */
+.back{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin-top:40px;padding:0 16px;border:1px solid var(--border-strong);border-radius:10px;color:var(--ink);font-size:15px;font-weight:620;text-decoration:none}
+.back::before{content:"↑";content:"↑"/"";color:var(--accent)}
+.back:hover{background:var(--accent-soft);border-color:var(--accent-line);color:var(--ink)}
+noscript{display:block;margin:0 0 24px;padding:12px 16px;border:1px solid var(--desk-line);border-radius:12px;background:var(--desk-bg);font-size:15px}
+.mobile-toc{display:none}
+.mobile-toc summary{display:flex;align-items:center;min-height:48px;padding:0 16px;font-weight:680;cursor:pointer}
+.mobile-toc .toc{padding:0 8px 10px}
+.mobile-toc summary::-webkit-details-marker{display:none}
+.mobile-toc summary::after{content:"";width:8px;height:8px;margin:0 4px 4px auto;border-right:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:rotate(45deg)}
+.mobile-toc[open] summary::after{margin-bottom:-4px;transform:rotate(-135deg)}
+
+/* ---------- Адаптивность ---------- */
+@media (max-width:1100px){.channel-handle{display:none}}
+@media (max-width:959.98px){
+ html.has-dialog{scroll-padding-top:76px}
+ html.has-dialog .toc-bar{display:block}
+ .site-header__inner{padding:10px 16px}
+ .layout{grid-template-columns:minmax(0,1fr);gap:0;max-width:900px;padding:16px 16px 56px}
+ aside{display:none}
+ main{padding:30px 28px 44px}
+ .mobile-toc{display:block;margin:0 0 26px;border:1px solid var(--border);border-radius:12px;background:var(--surface-2)}
+ html.has-dialog .mobile-toc{display:none}
+}
+/* Сенсорные цели не меньше 44px */
+@media (max-width:959.98px),(pointer:coarse){
+ .copy,.theme-btn,.channel,.toc a,.toc-open,.toc-close,.back{min-height:44px}
+ .toc a{align-items:center}
+}
+@media (max-width:760px){
+ .channels{order:3;width:100%}
+ .channel{flex:1 1 0;min-width:0}
+}
+@media (max-width:640px){
+ body{font-size:16px}
+ .brand{flex-direction:column;gap:0}
+ .brand-name{font-size:17px}
+ .brand-doc{font-size:13px}
+ .theme-btn svg{display:none}
+ html:not(.js) table{display:block;overflow-x:auto}
+ .toc-bar{padding:6px 12px}
+ .layout{padding:0 0 48px}
+ main{padding:26px 16px 40px;border-width:1px 0;border-radius:0;box-shadow:none}
+ h2{margin-top:52px;padding-top:26px}
+ pre{padding:12px 14px;font-size:13.5px}
+ .where-legend{grid-template-columns:minmax(0,1fr)}
+ table{font-size:14.5px}
+ th,td{padding:10px 12px}
+}
+@media (max-width:380px){
+ .copy svg{display:none}
+ .code-top{gap:8px;padding-left:10px}
+ .theme-btn{padding:0 10px}
+}
+
+/* ---------- Доступность ---------- */
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+@media (forced-colors:active){
+ .theme-btn[aria-pressed="true"],.toc a[aria-current]{outline:2px solid CanvasText;outline-offset:-2px}
+ .copy-status.is-visible{border:1px solid CanvasText}
+}
+
+/* ---------- Печать: всегда светлая и без интерфейса ---------- */
+@media print{
+ :root,:root:not([data-theme="light"]),:root[data-theme="dark"]{
+  --bg:#fff;--surface:#fff;--surface-2:#f2f2f2;--surface-3:#eee;--ink:#000;--ink-2:#1a1a1a;--muted:#444;
+  --border:#bbb;--border-strong:#999;--accent:#000;--accent-soft:#eee;--accent-line:#999;
+  --code-bg:#fff;--code-ink:#000;--code-top:#fff;--inline-code:#f0f0f0;
+  --local:#000;--local-bg:#fff;--local-line:#999;--vps:#000;--vps-bg:#fff;--vps-line:#999;--desk:#000;--desk-bg:#fff;--desk-line:#999;
+  color-scheme:light}
+ body{background:#fff;font-size:10.5pt;line-height:1.5}
+ .skip-link,.site-header,.toc-bar,aside,.mobile-toc,.code-top,.back,.toc-drawer,.copy-status,noscript{display:none!important}
+ .layout{display:block;max-width:none;padding:0}
+ main{padding:0;border:0;border-radius:0;box-shadow:none}
+ h1{font-size:22pt}
+ h2{margin-top:20pt;padding-top:10pt;font-size:16pt;break-after:avoid}
+ h3{font-size:12.5pt;break-after:avoid}
+ .step-n{border:1px solid #999}
+ pre{overflow:visible;font-size:8.5pt;white-space:pre-wrap;break-inside:avoid}
+ pre code{white-space:pre-wrap;overflow-wrap:anywhere}
+ .code-block{border:0;break-inside:avoid}
+ .code-block pre{border:1px solid #999;border-radius:6px}
+ .table-wrap{overflow:visible;border:0}
+ table{border:1px solid #999}
+ .where{break-inside:avoid}
+ a{color:inherit}
+ main a[href^="http"]::after{content:" (" attr(href) ")";color:#444;font-size:.85em}
+}
+</style>
+</head>
+<body id="top">
+<a class="skip-link" href="#section-1">Перейти к инструкции</a>
+<header class="site-header">
+<div class="site-header__inner">
+<p class="brand"><span class="brand-name">ForgetMe</span> <span class="brand-doc">шпаргалка</span></p>
+<nav class="channels" aria-label="Каналы ForgetMe">
+<a class="channel" href="https://t.me/forgetmeai" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21.2 4.6 3.1 11.6c-.8.3-.8 1.5.1 1.8l4.5 1.4 1.7 5.4c.2.7 1.1.9 1.6.4l2.5-2.4 4.7 3.5c.6.4 1.4.1 1.6-.6l3-14.6c.2-.9-.7-1.6-1.6-1.3Z"/><path d="m8 14.9 9.3-7.4"/></svg><span>Telegram</span> <span class="channel-handle">@forgetmeai</span><span class="vh"> (откроется в новой вкладке)</span></a>
+<a class="channel" href="https://www.youtube.com/@ForgetMeAi" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2.5" y="5" width="19" height="14" rx="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M10 9.2v5.6l4.8-2.8Z" fill="currentColor"/></svg><span>YouTube</span> <span class="channel-handle">@ForgetMeAi</span><span class="vh"> (откроется в новой вкладке)</span></a>
+</nav>
+<div class="theme-switch" role="group" aria-label="Тема оформления">
+<button type="button" class="theme-btn" data-theme-value="light" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6 6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></svg>Светлая</button>
+<button type="button" class="theme-btn" data-theme-value="dark" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>Тёмная</button>
+</div>
+</div>
+</header>
+<div class="toc-bar"><button type="button" class="toc-open" aria-haspopup="dialog" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01"/></svg><span class="toc-open__label">Оглавление<span class="vh">. Текущий раздел:</span></span><span class="toc-open__current">Начало инструкции</span></button></div>
+<div class="layout">
+<aside><p class="toc-title">Оглавление</p><nav class="toc" aria-label="Оглавление"><a href="#section-2"><span class="toc-n"></span>Что получится</a><a href="#section-3"><span class="toc-n">0.</span>Как пользоваться инструкцией</a><a href="#section-4"><span class="toc-n">1.</span>Что взять из панели провайдера</a><a href="#section-5"><span class="toc-n">2.</span>Установите WireGuard</a><a href="#section-6"><span class="toc-n">3.</span>Ключи: пара на каждое устройство</a><a href="#section-7"><span class="toc-n">4.</span>Узнайте внешний интерфейс и IPv6</a><a href="#section-8"><span class="toc-n">5.</span>Конфиг сервера wg0.conf</a><a href="#section-9"><span class="toc-n">6.</span>IP-форвардинг, запуск, автозапуск</a><a href="#section-10"><span class="toc-n">7.</span>Конфиг клиента и QR-код</a><a href="#section-11"><span class="toc-n">8.</span>Подключите телефон</a><a href="#section-12"><span class="toc-n">9.</span>Проверка результата</a><a href="#section-13"><span class="toc-n">10.</span>Второй и третий клиент</a><a href="#section-14"><span class="toc-n">11.</span>После перезагрузки VPS</a><a href="#section-15"><span class="toc-n">12.</span>Если провайдер режет WireGuard</a><a href="#section-16"><span class="toc-n">13.</span>Если что-то не работает</a><a href="#section-17"><span class="toc-n">14.</span>Короткая памятка</a><a href="#section-18"><span class="toc-n"></span>Что проверено при подготовке шпаргалки</a></nav><div class="note">Дополнение к <a href="https://gasyoun.github.io/forgetme-vps-cheatsheet-2026-10-03.html">«VPS с нуля»</a>.<br>Без внешних скриптов и шрифтов.<br>Debian 12 · 04.10.2026<br>Ещё материалы — <a href="https://gasyoun.github.io/karta/">карта домена</a>.</div></aside>
+<main><h1 id="section-1">WireGuard на VPS: весь телефон через свой сервер</h1>
+<p>Подробная шпаргалка к видео ForgetMe. Редакция от 4 октября 2026 года. Дополнение к <a href="https://gasyoun.github.io/forgetme-vps-cheatsheet-2026-10-03.html">«VPS с нуля»</a> (там раздел 16.3 — набросок этого маршрута).</p>
+<p>Что получится: телефон, планшет и компьютер ходят в интернет <strong>через ваш VPS</strong> — claude.ai открывается в обычном браузере, без Termius-переадресаций и без Tailscale-клиента. Настройка делается один раз; после перезагрузки VPS туннель поднимается сам. База — тот же сервер из «VPS с нуля» (Debian 12, пользователь claude), но подойдёт любой свежий Debian/Ubuntu с sudo.</p>
+<p><strong>Это выходной адрес, а не анонимность.</strong> Аккаунт Claude отвечает с адреса VPS — те же условия Anthropic и те же риски, что обсуждались в основной шпаргалке. И главное: <strong>ключ — это секрет</strong>. Не отправляйте его в мессенджерах, не вставляйте в скриншоты, храните в менеджере паролей.</p>
+<h2 id="section-2">Что получится</h2>
+<pre><code class="language-text">Ваш телефон
+ └─ WireGuard-туннель (UDP 51820, шифрованный)
+     └─ VPS: NAT-выход в интернет (MASQUERADE)
+         └─ claude.ai и все сайты — с адреса VPS
+</code></pre>
+<p>Браузер телефона показывает сайты так, будто вы в дата-центре, где стоит VPS. Сами приложения, вкладки и пароли остаются на телефоне — это не «чужой экран» (как noVNC из основной шпаргалки), а ваш обычный интернет с другим адресом.</p>
+<h2 id="section-3">0. Как пользоваться инструкцией</h2>
+<p>У каждого действия указано, <strong>где его выполнять</strong>:</p>
+<ul>
+<li><strong>На VPS, claude</strong> — окно ssh-терминала с сервером: <code>ssh claude@SERVER_IP</code>. Команды Linux.</li>
+<li><strong>На телефоне</strong> — в приложении WireGuard или в браузере телефона.</li>
+<li><strong>В панели провайдера</strong> — веб-кабинет, где вы покупали VPS.</li>
+<li><strong>В менеджере паролей</strong> — хранение ключей и конфигов.</li>
+</ul>
+<p>Копируйте только содержимое блока с командами, без тройных кавычек. После однострочной команды нажимайте Enter. Если написано «вставьте весь блок», вставляйте его целиком, включая последнюю строку <code>EOF</code>. После ошибки не переходите к следующему шагу: дождитесь приглашения ввода и сверьтесь с разделом 13.</p>
+<h2 id="section-4">1. Что взять из панели провайдера</h2>
+<p>Нужен только <code>SERVER_IP</code> — адрес сервера, он же Endpoint для телефона. Про SSH-порт и пароли — разделы 1 и 6 основной шпаргалки.</p>
+<p><strong>Файрвол:</strong> если в панели провайдера есть файрвол — разрешите входящий <code>UDP 51820</code>. Если файрвола в панели нет (частый случай), ничего открывать не нужно: проверка в разделе 9 сама покажет, дошёл ли handshake. Как и SSH-порт в основной инструкции, этот порт не требует перезагрузки сервера.</p>
+<h2 id="section-5">2. Установите WireGuard</h2>
+<p><strong>Где: на VPS, claude.</strong> Ожидание: секунды, без перезагрузки — модуль ядра уже внутри Debian 12, отдельные dkms-пакеты не нужны.</p>
+<pre><code class="language-sh">sudo apt-get update &amp;&amp; sudo apt-get install -y wireguard qrencode iptables
+wg --version
+</code></pre>
+<p>Ожидается: <code>wireguard-tools v1.0...</code>. Если пишет «command not found» после установки — вернитесь к первой команде: она была прервана.</p>
+<h2 id="section-6">3. Ключи: пара на каждое устройство</h2>
+<p><strong>Где: на VPS, claude.</strong> Правило одно: <strong>одна пара ключей на одно устройство</strong>. Никогда не копируйте один конфиг на два телефона — сервер перестанет корректно обслуживать оба.</p>
+<pre><code class="language-sh">mkdir -p ~/wireguard &amp;&amp; chmod 700 ~/wireguard
+umask 077
+wg genkey | tee ~/wireguard/server.key | wg pubkey &gt; ~/wireguard/server.pub
+wg genkey | tee ~/wireguard/phone1.key | wg pubkey &gt; ~/wireguard/phone1.pub
+ls -l ~/wireguard
+</code></pre>
+<p>Ожидается: четыре файла с правами <code>-rw-------</code>. Второй и третий клиент — повторите последнюю команду с именами <code>tablet1</code>, <code>mac1</code> (шаги раздела 10).</p>
+<h2 id="section-7">4. Узнайте внешний интерфейс и IPv6</h2>
+<p><strong>Где: на VPS, claude.</strong> В конфиге ниже нужно имя внешнего интерфейса — уточните своё:</p>
+<pre><code class="language-sh">ip route get 1.1.1.1
+</code></pre>
+<p>Ожидается строка вида <code>... dev eth0 ...</code>. В примерах ниже стоит <code>eth0</code> — <strong>замените на своё</strong> (может быть <code>ens3</code>, <code>ens18</code>, <code>venet0</code>).</p>
+<p><strong>Проверка IPv6</strong> — решает, добавлять ли <code>::/0</code> в разделах 5 и 7:</p>
+<pre><code class="language-sh">ip -6 addr show dev eth0 scope global
+</code></pre>
+<p>Пусто (частый случай) — IPv6 у VPS нет: <strong>не добавляйте</strong> <code>::/0</code>, иначе IPv6-сайты на телефоне «зависнут». Есть глобальный адрес — можете добавить.</p>
+<h2 id="section-8">5. Конфиг сервера wg0.conf</h2>
+<p><strong>Где: на VPS, claude. Вставьте весь блок целиком</strong> до последнего <code>EOF</code>. Перед вставкой замените: <code>eth0</code> — ваш интерфейс из раздела 4. Ключи подставятся сами из файлов раздела 3.</p>
+<pre><code class="language-sh">SERVER_KEY=$(cat ~/wireguard/server.key)
+PHONE1_PUB=$(cat ~/wireguard/phone1.pub)
+sudo tee /etc/wireguard/wg0.conf >/dev/null <<EOF
+[Interface]
+Address = 10.66.60.1/24
+ListenPort = 51820
+PrivateKey = $SERVER_KEY
+PostUp = iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+PostDown = iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE
+
+[Peer]
+PublicKey = $PHONE1_PUB
+AllowedIPs = 10.66.60.2/32
+EOF
+sudo chmod 600 /etc/wireguard/wg0.conf
+</code></pre>
+<p>Диапазон <code>10.66.60.0/24</code> — произвольная приватная сеть; если чем-то занята, возьмите другую, например <code>10.77.70.0/24</code>, и держите её во всех шагах. Проверка синтаксиса:</p>
+<pre><code class="language-sh">sudo wg-quick strip wg0 >/dev/null &amp;&amp; echo config-ok
+</code></pre>
+<p>Ожидается: <code>config-ok</code>. Ошибка здесь почти всегда = не заменили <code>eth0</code> или вставили блок не целиком.</p>
+<h2 id="section-9">6. IP-форвардинг, запуск, автозапуск</h2>
+<p><strong>Где: на VPS, claude.</strong> Форвардинг — чтобы телефон выходил в интернет через сервер, а не только «стучался» в него:</p>
+<pre><code class="language-sh">echo 'net.ipv4.ip_forward=1' | sudo tee /etc/sysctl.d/99-wireguard-forward.conf
+sudo sysctl --system
+sysctl net.ipv4.ip_forward
+</code></pre>
+<p>Ожидается: <code>net.ipv4.ip_forward = 1</code>. Запуск и автозапуск после перезагрузок:</p>
+<pre><code class="language-sh">sudo systemctl enable --now wg-quick@wg0
+sudo wg show
+ss -ulnp | grep 51820
+</code></pre>
+<p>Ожидается: <code>interface: wg0</code>, <code>listening port: 51820</code>; peer phone1 есть, но <code>transfer: 0 received</code> — телефон ещё не подключался, это нормально. <code>ss</code> показывает <code>udp :51820</code> с процессом <code>wg-quick</code>.</p>
+<h2 id="section-10">7. Конфиг клиента и QR-код</h2>
+<p><strong>Где: на VPS, claude.</strong> Замените <code>SERVER_IP</code> на адрес вашего VPS — внутрь блока переменные не подставляются, это делается руками. Если в разделе 4 решили добавлять IPv6 — впишите <code>::/0</code> строкой ниже <code>0.0.0.0/0</code>.</p>
+<pre><code class="language-sh">cat > ~/wireguard/phone1.conf <<EOF
+[Interface]
+PrivateKey = $(cat ~/wireguard/phone1.key)
+Address = 10.66.60.2/32
+DNS = 1.1.1.1
+
+[Peer]
+PublicKey = $(cat ~/wireguard/server.pub)
+Endpoint = SERVER_IP:51820
+AllowedIPs = 0.0.0.0/0
+PersistentKeepalive = 25
+EOF
+chmod 600 ~/wireguard/phone1.conf
+qrencode -t ansiutf8 < ~/wireguard/phone1.conf
+</code></pre>
+<p><code>AllowedIPs = 0.0.0.0/0</code> — весь трафик телефона идёт через VPS; <code>DNS = 1.1.1.1</code> — чтобы и запросы имён шли туда же; <code>PersistentKeepalive = 25</code> — держит туннель живым в мобильных сетях. В терминале появится <strong>QR-код — не фотографируйте его</strong>: это секрет в картинке.</p>
+<h2 id="section-11">8. Подключите телефон</h2>
+<p><strong>Где: на телефоне.</strong> Один раз на устройство.</p>
+<ul>
+<li><strong>iPhone:</strong> App Store → «WireGuard» → «+» → «Создать из QR-кода» → отсканируйте → назовите <code>phone1</code> → включите тумблер. Удобно задать «По требованию» (On-Demand): VPN поднимается сам в Wi-Fi и LTE.</li>
+<li><strong>Android:</strong> приложение «WireGuard» → «+» → сканировать QR-код → включить туннель.</li>
+</ul>
+<h2 id="section-12">9. Проверка результата</h2>
+<p><strong>Где: на телефоне.</strong> В приложении WireGuard у туннеля растёт «Latest handshake» и счётчики transfer. Откройте <code>whoer.net</code> или <code>2ip.ru</code> — показанный адрес должен быть <code>SERVER_IP</code>. Затем откройте claude.ai — нативно, без туннелей и прокси в настройках Wi-Fi.</p>
+<p><strong>Где: на VPS, claude.</strong> <code>sudo wg show</code> — у peer с ключом phone1 появились <code>latest handshake</code> и <code>transfer</code> больше нуля.</p>
+<p>Проверка пройдена, когда выполнены оба условия: egress-IP на телефоне равен адресу VPS и handshake виден с двух сторон. Полный успех = открытие claude.ai в браузере телефона.</p>
+<h2 id="section-13">10. Второй и третий клиент</h2>
+<p><strong>Где: на VPS, claude.</strong> Каждому устройству — своя пара ключей (раздел 3, имена <code>tablet1</code>, <code>mac1</code>…), свой адрес <code>10.66.60.3/32</code>, <code>.4/32</code>… и свой <code>[Peer]</code> в <code>/etc/wireguard/wg0.conf</code>:</p>
+<pre><code class="language-sh">TABLET1_PUB=$(cat ~/wireguard/tablet1.pub)
+sudo tee -a /etc/wireguard/wg0.conf >/dev/null <<EOF
+
+[Peer]
+PublicKey = $TABLET1_PUB
+AllowedIPs = 10.66.60.3/32
+EOF
+sudo wg syncconf wg0 &lt;(sudo wg-quick strip wg0)
+</code></pre>
+<p><code>syncconf</code> применяет пиров <strong>без разрыва</strong> активных туннелей (в отличие от рестарта сервиса). Дальше — конфиг и QR для нового устройства по разделу 7 (Address <code>.3/32</code>, имя файла <code>tablet1.conf</code>). Официальные приложения WireGuard есть и для macOS, и для Windows — импортируйте <code>.conf</code> файлом (пересылка файла — по защищённому каналу, не через публичную почту).</p>
+<h2 id="section-14">11. После перезагрузки VPS</h2>
+<p>WireGuard поднимается сам: systemd-юнит <code>wg-quick@wg0</code> включён в разделе 6. Проверка:</p>
+<pre><code class="language-sh">systemctl status wg-quick@wg0 | head -3
+sudo wg show
+</code></pre>
+<p>А вот рабочий стол из основной шпаргалки сам не поднимется — восстановите его по сценарию В раздела 12 там, если он вам нужен. Для чисто телефонного сценария (claude.ai через VPS) рабочий стол вообще не обязателен.</p>
+<h2 id="section-15">12. Если провайдер режет WireGuard</h2>
+<p>Классический WireGuard узнаётся в сети по сигнатуре. Обход — <strong>AmneziaWG</strong>: та же топология и те же команды, но пакеты называются <code>amneziawg</code> и <code>amneziawg-tools</code>, модуль ставится отдельно, а в <code>[Interface]</code> добавляются параметры обфускации <code>Jc, Jmin, Jmax, S1, S2</code> и <code>H1–H4</code>. Приложения — «AmneziaWG» (iOS/Android); есть и самохостинг-установщик Amnezia, поднимающий сервер целиком. Актуальные параметры и установка — <a href="https://docs.amnezia.org/">docs.amnezia.org</a>: эта ветка в шпаргалке только названа и не прогонялась.</p>
+<h2 id="section-16">13. Если что-то не работает</h2>
+<ul>
+<li><strong>Handshake не появляется (в приложении «0 s» навсегда).</strong> Опечатка в <code>Endpoint</code>, либо UDP 51820 закрыт: файрвол панели провайдера (раздел 1) или <code>INPUT</code> на VPS — проверьте <code>sudo iptables -S INPUT | head</code>. Изнутри VPS порт «работает» всегда — смотрите на счётчики handshake, а не на локальные проверки.</li>
+<li><strong>Handshake есть, сайты не открываются.</strong> Не включён форвардинг или MASQUERADE не на вашем интерфейсе: сверьте шаг 6 (<code>sysctl net.ipv4.ip_forward</code>) и <code>sudo iptables -t nat -S POSTROUTING | grep MASQ</code> — там должно быть ваше имя интерфейса из раздела 4.</li>
+<li><strong>IPv6-сайты «зависают» при включённом туннеле.</strong> У VPS нет IPv6, а <code>::/0</code> добавлен в конфиг телефона: уберите строку, пересканируйте QR (разделы 4 и 7).</li>
+<li><strong>Телефон остаётся без интернета при включённом туннеле, но handshake есть.</strong> Проверьте строки <code>AllowedIPs</code> и <code>DNS</code> в <code>phone1.conf</code> — они должны совпадать с разделом 7 дословно.</li>
+<li><strong><code>Address already in use</code> при wg-quick up.</strong> Туннель уже поднят: <code>sudo wg-quick down wg0</code>, затем up заново. Список живых интерфейсов — <code>sudo wg show</code>.</li>
+<li><strong>Скорость заметно ниже, чем без VPN.</strong> Мобильные сети чувствительны к MTU: добавьте в <code>[Interface]</code> конфига телефона <code>MTU = 1380</code> и пересканируйте. Пробуйте 1420 → 1380 → 1360.</li>
+</ul>
+<h2 id="section-17">14. Короткая памятка</h2>
+<p><strong>Где что живёт:</strong> сервер — <code>/etc/wireguard/wg0.conf</code>; ключи и клиентские конфиги — <code>~/wireguard/</code>; автозапуск — systemd-юнит <code>wg-quick@wg0</code>. Содержимое <code>~/wireguard/</code> — секреты: копия в менеджере паролей или зашифрованном хранилище.</p>
+<p><strong>Три команды статуса:</strong></p>
+<pre><code class="language-sh">sudo wg show
+systemctl status wg-quick@wg0 | head -3
+sudo iptables -t nat -S POSTROUTING | grep MASQ
+</code></pre>
+<p><strong>Новый клиент</strong> = раздел 3 (пара ключей) + <code>[Peer]</code> и syncconf из раздела 10 + конфиг и QR из раздела 7. Пароли и адреса — в менеджере паролей (как в памятке основной шпаргалки).</p>
+<h2 id="section-18">Что проверено при подготовке шпаргалки</h2>
+<p>Маршрут сверён с документацией WireGuard (<code>wireguard.com/quickstart</code>, <code>man wg</code>, <code>man wg-quick</code>) и пакетной базой Debian 12: модуль в ядре, пакет <code>wireguard-tools</code>, юнит <code>wg-quick@</code>. Стиль блоков, проверок и ключевой дисциплины — тот же, что в основной шпаргалке; каждая команда несёт свою проверку ожидаемого вывода.</p>
+<p>Чистый прогон именно этой редакции на новом VPS не выполнялся: успех на конкретном сервере подтверждается проверками шагов и финальной картиной раздела 9 — handshake с двух сторон и egress-IP, равный адресу VPS. Ветка AmneziaWG (раздел 12) — набросок без прогона.</p>
+</main>
+</div>
+<div id="copy-status" class="copy-status" role="status" aria-live="polite" aria-atomic="true"></div>
+<script>
+(()=>{
+'use strict';
+const doc=document,root=doc.documentElement,STORE='forgetme-cheatsheet-theme';
+const each=(sel,fn,ctx)=>Array.prototype.forEach.call((ctx||doc).querySelectorAll(sel),fn);
+const listen=(mq,fn)=>{if(!mq)return;if(mq.addEventListener)mq.addEventListener('change',fn);else if(mq.addListener)mq.addListener(fn)};
+const svg=body=>'<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+body+'</svg>';
+
+/* Тема: явный выбор сохраняется, без выбора — системная */
+const darkMq=window.matchMedia?window.matchMedia('(prefers-color-scheme: dark)'):null;
+const activeTheme=()=>{const t=root.getAttribute('data-theme');return t==='light'||t==='dark'?t:(darkMq&&darkMq.matches?'dark':'light')};
+const syncTheme=()=>{const t=activeTheme();each('[data-theme-value]',b=>b.setAttribute('aria-pressed',String(b.getAttribute('data-theme-value')===t)))};
+each('[data-theme-value]',b=>b.addEventListener('click',()=>{
+ const t=b.getAttribute('data-theme-value');root.setAttribute('data-theme',t);
+ try{localStorage.setItem(STORE,t)}catch(e){/* хранилище недоступно: выбор действует до перезагрузки */}
+ syncTheme();
+}));
+listen(darkMq,syncTheme);syncTheme();
+
+/* Таблицы прокручиваются внутри своей обёртки */
+each('main table',t=>{const w=doc.createElement('div');w.className='table-wrap';t.parentNode.insertBefore(w,t);w.appendChild(t)});
+
+/* Номер шага в h2 — отдельный значок; textContent заголовка не меняется */
+each('main h2',h=>{
+ const n=h.firstChild,m=n&&n.nodeType===3&&/^(\d+)\.(?=\s)/.exec(n.data);if(!m)return;
+ const s=doc.createElement('span'),dot=doc.createElement('span');
+ s.className='step-n';dot.className='vh';dot.textContent='.';
+ s.appendChild(doc.createTextNode(m[1]));s.appendChild(dot);
+ n.data=n.data.slice(m[0].length);h.insertBefore(s,n);
+});
+
+/* «Где выполнять»: абзацы «Где: …» и легенда в разделе 0 */
+const placeKind=t=>{t=t.toLowerCase();if(t.indexOf('удалённом рабочем столе')>-1)return'desk';if(/локальн|своём компьютере|на компьютере/.test(t))return'local';return t.indexOf('vps')>-1?'vps':''};
+each('main p > strong:first-child',st=>{
+ const p=st.parentNode,t=st.textContent;
+ if(p.firstChild!==st||!/^(Где:|На VPS|Теперь на VPS)/.test(t))return;
+ const k=placeKind(t);if(k)p.classList.add('where','where--'+k);
+});
+for(let el=doc.getElementById('section-3');el&&(el=el.nextElementSibling)&&el.tagName!=='H2';){
+ if(el.tagName!=='UL')continue;
+ el.classList.add('where-legend');
+ each('li',li=>{const st=li.firstChild,k=st&&st.nodeType===1&&st.tagName==='STRONG'?placeKind(st.textContent):'';if(k)li.classList.add('where','where--'+k)},el);
+ break;
+}
+
+/* Копирование: Clipboard API → execCommand с временным textarea → выделение и подсказка */
+const status=doc.getElementById('copy-status');let statusTimer=0,msgTimer=0;
+const announce=(msg,show)=>{
+ clearTimeout(statusTimer);clearTimeout(msgTimer);
+ status.textContent='';status.classList.toggle('is-visible',!!show);
+ msgTimer=setTimeout(()=>{status.textContent=msg},60);
+ statusTimer=setTimeout(()=>{status.classList.remove('is-visible');status.textContent=''},show?9000:3000);
+};
+const plural=n=>{const a=n%10,b=n%100;return a===1&&b!==11?'строка':a>1&&a<5&&(b<12||b>14)?'строки':'строк'};
+const legacyCopy=(text,btn)=>{
+ const ta=doc.createElement('textarea');let ok=false;
+ ta.value=text;ta.setAttribute('readonly','');ta.setAttribute('aria-hidden','true');ta.tabIndex=-1;
+ ta.style.cssText='position:fixed;top:0;left:-9999px;width:2em;height:2em;padding:0;border:0;font-size:16px';
+ doc.body.appendChild(ta);
+ try{ta.focus({preventScroll:true});ta.select();ta.setSelectionRange(0,text.length);ok=doc.execCommand('copy')===true}catch(e){ok=false}
+ doc.body.removeChild(ta);
+ try{btn.focus({preventScroll:true})}catch(e){}
+ return ok;
+};
+const selectCode=code=>{try{const r=doc.createRange(),s=window.getSelection();r.selectNodeContents(code);s.removeAllRanges();s.addRange(r)}catch(e){}};
+const setState=(btn,st)=>{clearTimeout(btn._t);btn.setAttribute('data-state',st);if(st!=='idle')btn._t=setTimeout(()=>btn.setAttribute('data-state','idle'),st==='done'?2200:6000)};
+const ICON_COPY=svg('<rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/>'),
+ ICON_DONE=svg('<path d="m5 12.5 4.5 4.5L19 7.5"/>'),
+ ICON_SEL=svg('<path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"/>');
+each('main pre',(pre,i)=>{
+ const code=pre.querySelector('code');if(!code)return;
+ let lang='text';Array.prototype.forEach.call(code.classList,c=>{if(c.indexOf('language-')===0)lang=c.slice(9)});
+ const isText=lang==='text',lines=code.textContent.replace(/\n$/,'').split('\n').length;
+ const box=doc.createElement('div'),top=doc.createElement('div'),meta=doc.createElement('span'),tag=doc.createElement('span'),note=doc.createElement('span'),btn=doc.createElement('button');
+ box.className='code-block code-block--'+(isText?'text':'cmd');top.className='code-top';
+ meta.className='code-meta';meta.id='code-meta-'+(i+1);
+ tag.className='code-lang';tag.textContent=isText?'Текст':lang==='powershell'?'PowerShell':'Терминал';
+ note.className='code-note';note.textContent=isText?'Адрес, схема или пример вывода':lines+' '+plural(lines);
+ meta.appendChild(tag);meta.appendChild(doc.createTextNode(' '));meta.appendChild(note);
+ btn.type='button';btn.className='copy';btn.setAttribute('data-state','idle');btn.setAttribute('aria-describedby',meta.id);
+ btn.innerHTML='<span class="st-idle">'+ICON_COPY+'Копировать</span><span class="st-done">'+ICON_DONE+'Скопировано</span><span class="st-fail">'+ICON_SEL+'Выделено</span>';
+ btn.addEventListener('click',()=>{
+  const text=code.textContent; /* ровно textContent блока: без номеров строк, приглашений и подстановок */
+  const done=()=>{setState(btn,'done');announce('Скопировано в буфер обмена.',false)};
+  const fallback=()=>{
+   if(legacyCopy(text,btn)){done();return}
+   selectCode(code);setState(btn,'fail');
+   announce('Скопировать автоматически не удалось. Текст блока выделен — нажмите Ctrl+C (на Mac — ⌘C) или выберите «Копировать» в меню.',true);
+  };
+  let p=null;
+  try{if(navigator.clipboard&&typeof navigator.clipboard.writeText==='function')p=navigator.clipboard.writeText(text)}catch(e){p=null}
+  if(p&&typeof p.then==='function')p.then(done,fallback);else fallback();
+ });
+ pre.parentNode.insertBefore(box,pre);top.appendChild(meta);top.appendChild(btn);box.appendChild(top);box.appendChild(pre);
+});
+/* Выдвижное оглавление для узких экранов (dialog: Escape, фокус, фон неактивен) */
+const side=doc.querySelector('aside'),bar=doc.querySelector('.toc-bar'),openBtn=doc.querySelector('.toc-open'),curLabel=doc.querySelector('.toc-open__current');
+const links=Array.prototype.slice.call(doc.querySelectorAll('.toc a[href^="#"]'));
+const focusTarget=t=>{
+ if(!t.hasAttribute('tabindex')){t.setAttribute('tabindex','-1');const rm=()=>{t.removeAttribute('tabindex');t.removeEventListener('blur',rm)};t.addEventListener('blur',rm)}
+ try{t.focus({preventScroll:true})}catch(e){t.focus()}
+};
+const keepVisible=box=>{
+ if(!box||!box.offsetParent)return;const a=box.querySelector('a[aria-current]');if(!a)return;
+ const br=box.getBoundingClientRect(),ar=a.getBoundingClientRect();
+ if(ar.top<br.top+8||ar.bottom>br.bottom-8)box.scrollTop+=ar.top-br.top-box.clientHeight/2+ar.height/2;
+};
+if(openBtn&&side&&window.HTMLDialogElement){
+ const drawer=doc.createElement('dialog');
+ drawer.className='toc-drawer';drawer.id='toc-drawer';drawer.setAttribute('aria-labelledby','toc-drawer-title');
+ drawer.innerHTML='<div class="toc-drawer__panel"><div class="toc-drawer__head"><p class="toc-drawer__title" id="toc-drawer-title">Оглавление</p><button type="button" class="toc-close">Закрыть</button></div></div>';
+ const nav=side.querySelector('nav').cloneNode(true);
+ drawer.firstChild.appendChild(nav);doc.body.appendChild(drawer);
+ Array.prototype.push.apply(links,nav.querySelectorAll('a'));
+ openBtn.setAttribute('aria-controls','toc-drawer');
+ const closeDrawer=()=>{root.classList.remove('drawer-open');openBtn.setAttribute('aria-expanded','false');if(drawer.open)drawer.close()};
+ openBtn.addEventListener('click',()=>{
+  root.classList.add('drawer-open');drawer.showModal();openBtn.setAttribute('aria-expanded','true');
+  keepVisible(nav);
+  const a=nav.querySelector('a[aria-current]')||nav.querySelector('a');
+  if(a)try{a.focus({preventScroll:true})}catch(e){a.focus()}
+ });
+ /* Любой путь закрытия (Escape, кнопка, фон, выбор раздела) снимает блокировку прокрутки */
+ drawer.addEventListener('close',()=>{root.classList.remove('drawer-open');openBtn.setAttribute('aria-expanded','false')});
+ drawer.addEventListener('click',e=>{if(e.target===drawer)closeDrawer()});
+ drawer.querySelector('.toc-close').addEventListener('click',closeDrawer);
+ nav.addEventListener('click',e=>{
+  const a=e.target.closest&&e.target.closest('a');if(!a)return;
+  const id=decodeURIComponent(a.getAttribute('href').slice(1)),t=doc.getElementById(id);if(!t)return;
+  e.preventDefault();closeDrawer();
+  if(location.hash==='#'+id)t.scrollIntoView();else location.hash=id;
+  focusTarget(t);
+ });
+ listen(window.matchMedia&&window.matchMedia('(min-width: 960px)'),e=>{if(e.matches)closeDrawer()});
+}
+
+/* Текущий раздел: подсветка в оглавлении и подпись в липкой панели */
+const seen={},heads=[];
+links.forEach(a=>{const id=a.getAttribute('href').slice(1),h=doc.getElementById(id);if(h&&!seen[id]){seen[id]=1;heads.push(h)}});
+let current=null;
+const updateCurrent=()=>{
+ const line=(bar&&bar.offsetHeight?bar.offsetHeight:0)+Math.min(140,window.innerHeight*.25);
+ let found=null;
+ for(const h of heads){if(h.getBoundingClientRect().top<=line)found=h;else break}
+ if(heads.length&&window.innerHeight+window.pageYOffset>=root.scrollHeight-4)found=heads[heads.length-1];
+ const id=found?found.id:'';if(id===current)return;current=id;
+ links.forEach(a=>{if(id&&a.getAttribute('href')==='#'+id)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current')});
+ if(curLabel)curLabel.textContent=found?found.textContent.replace(/\s+/g,' ').trim():'Начало инструкции';
+ keepVisible(side);
+};
+
+/* Прокручиваемые по горизонтали код и таблицы доступны с клавиатуры */
+const markScrollable=()=>each('main pre, .table-wrap',el=>{if(el.scrollWidth>el.clientWidth+1)el.setAttribute('tabindex','0');else el.removeAttribute('tabindex')});
+
+let ticking=false,resizeTimer=0;
+const onScroll=()=>{if(ticking)return;ticking=true;window.requestAnimationFrame(()=>{ticking=false;updateCurrent()})};
+window.addEventListener('scroll',onScroll,{passive:true});
+window.addEventListener('hashchange',onScroll);
+window.addEventListener('resize',()=>{onScroll();clearTimeout(resizeTimer);resizeTimer=setTimeout(markScrollable,150)});
+window.addEventListener('load',markScrollable);
+updateCurrent();markScrollable();
+})();
+</script>
+</body>
+</html>
