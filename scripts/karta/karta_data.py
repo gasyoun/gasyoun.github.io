@@ -237,6 +237,19 @@ ITEMS = [
     dict(id="K054", sec="G", url="ZalizniakVideo/", status="green",
          title="ZalizniakVideo — архив видеозаписей Зализняка",
          note="192 видеотранскрипта А. А. Зализняка: архив с поиском по расшифровкам."),
+    dict(id="K056", sec="F", key="handoff-status/", status="green",
+         title="Handoff-status — публичное зеркало статуса хендоффов",
+         note="Ежечасный bot-refresh статусов хендоффов поместья; вход — index.html."),
+    dict(id="K057", sec="F", key="payroll/", status="amber",
+         title="Payroll — ведомости зарплат",
+         note="Ведомости авг+сен 2026 (noindex/nofollow, robots-block; на github.com репо публичны). "
+              "Решение по доступу — GTD @DO 0O3, ожидает MG (bughunt 04-10-2026)."),
+    dict(id="K058", sec="F", key="runbook-h3348-artem-root-session-2026-10-01.html", status="amber",
+         title="Рунбук H3348 — root-сессия на .95",
+         note="Служебный рунбук: искоренение импланта samskrtam.ru (Artem, root-сессия)."),
+    dict(id="K059", sec="F", key="telegram-artem-h3348-2026-10-01.html", status="amber",
+         title="Сообщение Артёму — root-сессия H3348",
+         note="Служебная выгрузка сообщения Артёму по root-сессии samskrtam.ru."),
 ]
 
 STATUS_BADGE = {
