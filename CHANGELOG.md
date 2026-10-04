@@ -2,6 +2,17 @@
 
 Формат: дата · хендофф · что изменилось. Новые записи сверху.
 
+## 04-10-2026 — H5972 (OxAlpha) — ForgetMe VPS-шпаргалка (K060)
+
+- **Добавлено:** `forgetme-vps-cheatsheet-2026-10-03.html` — самодостаточная
+  инструкция «VPS с нуля» к видео ForgetMe (Debian 12 → SSH → XFCE +
+  TigerVNC/noVNC + Firefox через SSH-туннель; редакция 03-10-2026, доведена
+  ZCode после смерти MSI). В странице: canonical на живой URL и ссылка на
+  [карту домена](https://gasyoun.github.io/karta/) в сайдбаре.
+- **Карта:** +1 пункт — K060 (секция F, green); `karta/index.html`
+  регенерирован (59 пунктов), `--check` зелёный.
+- Корневой `index.html` (Ригведа) не тронут — решение MG 27-09-2026 в силе.
+
 ## 04-10-2026 — bughunt-fixes (GLM 5.3 Flash) — Фиксы MEDIUM по охоте 04-10
 
 - **Karta coverage → GREEN:** +4 пункта в `karta_data.py` — K056
