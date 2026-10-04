@@ -2,6 +2,23 @@
 
 Формат: дата · хендофф · что изменилось. Новые записи сверху.
 
+## 04-10-2026 — bughunt (GLM 5.3 Flash) — Охота по коду: 1 HIGH, отчёт
+
+- **HIGH (money-class, без авто-фикса):** payroll-ведомости (авг+сен 2026)
+  публичны дважды — живой URL отвечает 200, и оба файла лежат в публичном
+  репо, где robots.txt / noindex не действуют; с сайта туда же ведёт линк из
+  vote-листа. GTD @DO 0O3 заминчена — решение за MG (приватность репо /
+  перенос / осознанный приём).
+- **Два живых гейта RED:** karta coverage (4 пункта мимо karta_data.py) и
+  индекс infographics (DRIFTED, 2 директории не вписаны в index.html).
+  Фиксы механические — по слову MG (дневной режим).
+- **Код:** render_slugs.mjs:8 берёт корень от cwd вместо import.meta.url —
+  работает только из корня репо (сосед render.mjs:8 делает правильно).
+- **Отчёт:**
+  [BUGHUNT-FINDINGS-gasyoun.github.io-04.10.2026.md](https://github.com/gasyoun/gasyoun.github.io/blob/master/BUGHUNT-FINDINGS-gasyoun.github.io-04.10.2026.md).
+  Ночной прогон 03:00 погиб на provider-таймауте после PHASE 1 (отчёт не
+  сел) — докончено дневным проходом 04-10 с живой перевёркой.
+
 ## 27-09-2026 — H5530 (OxAlpha) — Уборка по GTD 0JQ/0JR
 
 - **Переименовано:** `reverse20-ouput/` → `reverse20-output/` (опечатка в имени;
