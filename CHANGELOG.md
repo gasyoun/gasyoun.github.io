@@ -2,6 +2,19 @@
 
 Формат: дата · хендофф · что изменилось. Новые записи сверху.
 
+## 04-10-2026 — bughunt-fixes (GLM 5.3 Flash) — Фиксы MEDIUM по охоте 04-10
+
+- **Karta coverage → GREEN:** +4 пункта в `karta_data.py` — K056
+  `handoff-status/`, K057 `payroll/` (amber, @DO 0O3), K058 рунбук H3348,
+  K059 сообщение Артёму H3348; `karta/index.html` перегенерирован (58 пунктов).
+- **Индекс infographics → GREEN:** `--emit` вписал 2 директории
+  (klammer-kutumbini, paradigm-a-stems); `check.mjs --index` 0 ошибок.
+- **render_slugs.mjs:8:** корень берётся от `import.meta.url`, а не от cwd —
+  запуск из любого каталога теперь работает (паттерн соседа render.mjs).
+- **Vote-листы:** два недельных дрейн-листа (21_09, 28_09) довнесены в git —
+  серия `uprava_drain_vote_weekly_*` отныне трекается целиком.
+- HIGH (payroll-публичность) не тронут — money-class, решение по @DO 0O3 за MG.
+
 ## 04-10-2026 — bughunt (GLM 5.3 Flash) — Охота по коду: 1 HIGH, отчёт
 
 - **HIGH (money-class, без авто-фикса):** payroll-ведомости (авг+сен 2026)

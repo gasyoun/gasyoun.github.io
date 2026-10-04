@@ -3,9 +3,9 @@
  * Playwright resolves from NODE_PATH; missing playwright is a skip, not a fake PNG. */
 import fs from "node:fs";
 import path from "node:path";
-import { pathToFileURL } from "node:url";
+import { pathToFileURL, fileURLToPath } from "node:url";
 
-const root = path.resolve(path.dirname(""), process.cwd());
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 let playwright;
 try {
   playwright = await import("playwright");

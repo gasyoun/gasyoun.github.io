@@ -34,6 +34,7 @@
   "gtd-snapshot-2026-08-29",
   "homonyms-2026-08-29",
   "indology-atlas-2026-08-29",
+  "klammer-kutumbini-2026-09-06",
   "license-lights-2026-08-29",
   "license-traffic-light-2026-08-29",
   "longest-words-2026-08-29",
@@ -46,6 +47,7 @@
   "o-vs-o-pairs-2026-08-29",
   "observatory-reports-2026-08-29",
   "ors-funnel-2026-08-29",
+  "paradigm-a-stems-2026-09-06",
   "prefaces-seven-2026-08-29",
   "price-of-word-2026-08-29",
   "product-campus-2026-08-29",
@@ -392,5 +394,14 @@
    "dict-suitcases-2026-08-29"
   ]
  ],
- "other": []
+ "other": [
+  [
+   "klammer-kutumbini-2026-09-06",
+   "Klammerdiagramm — karmavyagrakuṭumbinīkucataṭasvedacchidaḥ"
+  ],
+  [
+   "paradigm-a-stems-2026-09-06",
+   "Парадигма a-основ: deva в корпусе DCS"
+  ]
+ ]
 }
