@@ -186,6 +186,11 @@ ITEMS = [
          note="Пошаговая инструкция к видео ForgetMe: от купленного VPS с Debian 12 до рабочего стола XFCE "
               "с Firefox через SSH-туннель и noVNC — рабочий путь к Claude из РФ. "
               "Самодостаточная страница: светлые/тёмные темы, оглавление, копирование команд."),
+    dict(id="K061", sec="F", key="forgetme-wireguard-cheatsheet-2026-10-04.html", status="green",
+         title="ForgetMe-шпаргалка: WireGuard на VPS",
+         note="Спутник K060: WireGuard-сервер на Debian 12 — ключи (пара на устройство), wg0.conf с MASQUERADE, "
+              "QR-конфиг, подключение iPhone/Android, egress-проверка, AmneziaWG против блокировок. "
+              "Весь телефон через свой сервер без Tailscale-клиента."),
     dict(id="K037", sec="F", key="kostya-covers-tz-2026-09-10.html", status="amber",
          title="ТЗ: автообложки уроков — Костя",
          note="Техническое задание на чистый шаблон автообложек уроков. Рабочий документ соавторства с Константином."),
