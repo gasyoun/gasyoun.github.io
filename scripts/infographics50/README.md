@@ -39,6 +39,26 @@ Batch b1 (#2,3,4,5,6,9,11,12,17,50) arrived already emitted by the parallel H370
 
 _Dr. Mārcis Gasūns_
 
+## H5744 wave b6 (08-10-2026)
+
+Census after b5: all 58 catalog rows (#1–#50 + probes #51–#58) already `готово`, zero
+remaining idea slots — so wave b6 registers eight fresh estate probes as rows #59–#66
+(same extension mechanism as H3711's #51–#58) and closes them in the same pass:
+
+- Pages: `h5744_probe.py` (8/8 PASS, derive-don't-store → `data/h5744.json`) +
+  `h5744_build.py` (8 pages, catalog extension, `data/h5744_built.json`), PNG via
+  `render_h5744.mjs` (Playwright + Chrome channel; skip is not a fake PNG).
+- Sources: kosha manifest (148 datasets), vote/sheets (278), Uprava handoffs
+  lifecycle (5 738: 231 live + 5 507 archived), RV 4-language verses (10 552×4),
+  module_spread_census_v2 universe, SERVER_OUTAGES rows, Uprava/reports (787
+  files), GTD queue aggregates (counts only, no personal data).
+- Catalog probe revived after the Uprava 0K8 retirement (28-09-2026) as
+  `catalog_probe.py` beside the catalog it guards; `--links` now derives every
+  catalog link from the HTML itself (exact linked path), so future waves are
+  covered without edits. `check.mjs` loads `h5744_built.json`.
+
+_Dr. Mārcis Gasūns_
+
 ## H3710 b4 completion (30-08-2026)
 
 Batch b4 (#33,41,42,43,44,46,48,49 + spares prefaces/bookindex) arrived already emitted by the parallel H3705 sweep; this pass completed the production contract without touching any page's counted numbers:

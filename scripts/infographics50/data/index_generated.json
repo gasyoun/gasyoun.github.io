@@ -21,6 +21,7 @@
   "empire-map-2026-08-29",
   "estate-growth-2026-08-29",
   "estate-timeline-2026-08-29",
+  "evidence-reports-2026-10-08",
   "five-encodings-2026-08-29",
   "five-lexicographers-2026-08-29",
   "fuzzyalpha-dupes-2026-08-29",
@@ -31,14 +32,18 @@
   "github-sanskrit-estate-isometric-2026-08-28",
   "github-sanskrit-story-styles-2026-08-29",
   "growth-slider-2026-08-29",
+  "gtd-queue-2026-10-08",
   "gtd-snapshot-2026-08-29",
+  "handoff-lifecycle-2026-10-08",
   "homonyms-2026-08-29",
   "indology-atlas-2026-08-29",
   "klammer-kutumbini-2026-09-06",
+  "kosha-manifest-2026-10-08",
   "license-lights-2026-08-29",
   "license-traffic-light-2026-08-29",
   "longest-words-2026-08-29",
   "meta-dashboard-2026-08-29",
+  "module-spread-census-2026-10-08",
   "month-of-words-2026-08-29",
   "morph-snowflake-2026-08-29",
   "mw-among-greats-2026-08-29",
@@ -47,11 +52,13 @@
   "o-vs-o-pairs-2026-08-29",
   "observatory-reports-2026-08-29",
   "ors-funnel-2026-08-29",
+  "outage-ledger-2026-10-08",
   "paradigm-a-stems-2026-09-06",
   "prefaces-seven-2026-08-29",
   "price-of-word-2026-08-29",
   "product-campus-2026-08-29",
   "ramayana-numbers-2026-08-29",
+  "rigveda-4langs-2026-10-08",
   "samasa-chakram-2026-08-29",
   "samasa-wheel-2026-08-29",
   "sandhi-records-2026-08-29",
@@ -66,6 +73,7 @@
   "three-languages-2026-08-29",
   "typo-gold-2026-08-29",
   "visualdcs-derived-2026-08-29",
+  "vote-hub-sheets-2026-10-08",
   "who-writes-2026-08-29",
   "year-one-frame-2026-08-29",
   "zaliznyak-bridge-2026-08-29"
@@ -90,6 +98,7 @@
   "empire-map-2026-08-29",
   "estate-growth-2026-08-29",
   "estate-timeline-2026-08-29",
+  "evidence-reports-2026-10-08",
   "five-encodings-2026-08-29",
   "five-lexicographers-2026-08-29",
   "fuzzyalpha-dupes-2026-08-29",
@@ -100,12 +109,16 @@
   "github-sanskrit-estate-isometric-2026-08-28",
   "github-sanskrit-story-styles-2026-08-29",
   "growth-slider-2026-08-29",
+  "gtd-queue-2026-10-08",
   "gtd-snapshot-2026-08-29",
+  "handoff-lifecycle-2026-10-08",
   "homonyms-2026-08-29",
   "indology-atlas-2026-08-29",
+  "kosha-manifest-2026-10-08",
   "license-traffic-light-2026-08-29",
   "longest-words-2026-08-29",
   "meta-dashboard-2026-08-29",
+  "module-spread-census-2026-10-08",
   "month-of-words-2026-08-29",
   "morph-snowflake-2026-08-29",
   "mw-among-greats-2026-08-29",
@@ -114,10 +127,12 @@
   "o-vs-o-pairs-2026-08-29",
   "observatory-reports-2026-08-29",
   "ors-funnel-2026-08-29",
+  "outage-ledger-2026-10-08",
   "prefaces-seven-2026-08-29",
   "price-of-word-2026-08-29",
   "product-campus-2026-08-29",
   "ramayana-numbers-2026-08-29",
+  "rigveda-4langs-2026-10-08",
   "samasa-chakram-2026-08-29",
   "sandhi-records-2026-08-29",
   "sanskrit-sorting-2026-08-29",
@@ -128,6 +143,7 @@
   "three-languages-2026-08-29",
   "typo-gold-2026-08-29",
   "visualdcs-derived-2026-08-29",
+  "vote-hub-sheets-2026-10-08",
   "who-writes-2026-08-29",
   "year-one-frame-2026-08-29",
   "zaliznyak-bridge-2026-08-29"
@@ -210,6 +226,10 @@
    "Хронология имения"
   ],
   [
+   "evidence-reports-2026-10-08",
+   "Отчёты-доказательства"
+  ],
+  [
    "five-encodings-2026-08-29",
    "Пять кодировок"
   ],
@@ -238,8 +258,16 @@
    "Слайдер роста"
   ],
   [
+   "gtd-queue-2026-10-08",
+   "Очередь GTD"
+  ],
+  [
    "gtd-snapshot-2026-08-29",
    "Roadmap-снепшот"
+  ],
+  [
+   "handoff-lifecycle-2026-10-08",
+   "Жизненный цикл хендоффов"
   ],
   [
    "homonyms-2026-08-29",
@@ -248,6 +276,10 @@
   [
    "indology-atlas-2026-08-29",
    "Атлас индологов"
+  ],
+  [
+   "kosha-manifest-2026-10-08",
+   "kosha: 148 датасетов"
   ],
   [
    "license-traffic-light-2026-08-29",
@@ -260,6 +292,10 @@
   [
    "meta-dashboard-2026-08-29",
    "Вселенная санскрита"
+  ],
+  [
+   "module-spread-census-2026-10-08",
+   "Разброс модулей"
   ],
   [
    "month-of-words-2026-08-29",
@@ -294,6 +330,10 @@
    "Воронка ORS"
   ],
   [
+   "outage-ledger-2026-10-08",
+   "Журнал простоев источников"
+  ],
+  [
    "prefaces-seven-2026-08-29",
    "Предисловия семи словарей"
   ],
@@ -308,6 +348,10 @@
   [
    "ramayana-numbers-2026-08-29",
    "Рамаяна в цифрах"
+  ],
+  [
+   "rigveda-4langs-2026-10-08",
+   "Ригведа на четырёх языках"
   ],
   [
    "samasa-chakram-2026-08-29",
@@ -348,6 +392,10 @@
   [
    "visualdcs-derived-2026-08-29",
    "VisualDCS: derived-data"
+  ],
+  [
+   "vote-hub-sheets-2026-10-08",
+   "Хаб голосований"
   ],
   [
    "who-writes-2026-08-29",

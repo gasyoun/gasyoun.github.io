@@ -1,0 +1,312 @@
+{
+  "counted": "08.10.2026",
+  "kosha": {
+    "path": "kosha/data/manifest/datasets.json",
+    "n_datasets": 148,
+    "tiers": {
+      "public": 129,
+      "restricted": 16,
+      "intermediate": 3
+    },
+    "formats": {
+      "tsv": 71,
+      "tsv.gz": 2,
+      "tsv + json + svg": 1,
+      "jsonl": 7,
+      "sqlite": 6,
+      "mixed (DICO hypertext, TSV, OCaml banks)": 1,
+      "csv": 16,
+      "json": 22,
+      "txt": 1,
+      "mdf (SFM, one record per file)": 1,
+      "lift (XML)": 1,
+      "mdf (SFM, blank-line-delimited records, single file)": 1,
+      "csv (Level A varga map) + tsv (Level B candidates, gold, annotator passes)": 1,
+      "tsv+jsonl": 1,
+      "js": 1,
+      "json+tsv": 1,
+      "git repo + LFS (jsonl/tar.gz/json)": 1,
+      "tsv + jsonl + json": 1,
+      "jsonl + tmx + tei-xml + turtle": 1,
+      "turtle + tei-xml + json": 1,
+      "json + tsv + yml": 1,
+      "tsv + md": 1,
+      "jsonl (parsed) + html (raw)": 2,
+      "pack.zip (168 entries: tsv/jsonl/txt/md/cff/LICENSE-DATA + MANIFEST.json sha256 per file) + 4 loose root docs on the record": 1,
+      "sqlite (regenerable fold)": 1,
+      "tsv+json": 1,
+      "tsv (index only — full transcripts NOT vendored, source is a private Yandex.Disk remote)": 1,
+      "csv+json (67-file catalog)": 1,
+      "tar.gz of per-lemma JSON ({key1 SLP1, iast, nws, sch, pw_len, has_nws_extra})": 1
+    },
+    "doi_count": 12,
+    "rows_sum": 68865781,
+    "top_formats": [
+      [
+        "tsv",
+        71
+      ],
+      [
+        "json",
+        22
+      ],
+      [
+        "csv",
+        16
+      ],
+      [
+        "jsonl",
+        7
+      ],
+      [
+        "sqlite",
+        6
+      ]
+    ]
+  },
+  "vote": {
+    "path": "vote/sheets/**/*.html",
+    "n_sheets": 278,
+    "top_prefixes": [
+      [
+        "pack-",
+        156
+      ],
+      [
+        "h",
+        26
+      ],
+      [
+        "uprava",
+        22
+      ],
+      [
+        "skill",
+        16
+      ],
+      [
+        "gloss",
+        4
+      ],
+      [
+        "commentarystrategies",
+        3
+      ],
+      [
+        "systema",
+        3
+      ],
+      [
+        "bli",
+        2
+      ],
+      [
+        "f",
+        2
+      ],
+      [
+        "kosha",
+        2
+      ]
+    ]
+  },
+  "handoffs": {
+    "path": "Uprava/handoffs[/archive]/*.md (H-numbered)",
+    "live": 231,
+    "archived": 5507,
+    "total": 5738,
+    "pools": [
+      [
+        "OxAlpha",
+        1815
+      ],
+      [
+        "Opus",
+        1341
+      ],
+      [
+        "Sonnet",
+        1057
+      ],
+      [
+        "Fable",
+        742
+      ],
+      [
+        "Grok",
+        541
+      ],
+      [
+        "GLM",
+        136
+      ],
+      [
+        "Codex",
+        78
+      ],
+      [
+        "Haiku",
+        20
+      ],
+      [
+        "DRAFT",
+        1
+      ],
+      [
+        "EXECUTION",
+        1
+      ],
+      [
+        "RUN",
+        1
+      ],
+      [
+        "VERIFIER",
+        1
+      ],
+      [
+        "SYNTHESIS",
+        1
+      ],
+      [
+        "VERIFICATION",
+        1
+      ],
+      [
+        "Kimi",
+        1
+      ],
+      [
+        "pwg",
+        1
+      ]
+    ]
+  },
+  "rigveda": {
+    "path": "RV/index.html",
+    "classes": {
+      "sa": 10552,
+      "ru": 10552,
+      "de": 10552,
+      "en": 10552
+    },
+    "stamps": 10557,
+    "verses": 10552,
+    "langs": 4
+  },
+  "modules": {
+    "path": "Uprava/data/module_spread_census_v2.json",
+    "declared": 162,
+    "listed": 162,
+    "probed": 132,
+    "no_clone": 30,
+    "classes": {
+      "active": 41,
+      "semi": 90,
+      "dormant": 1,
+      "unknown": 0
+    },
+    "module_to_handoff": 9
+  },
+  "outages": {
+    "path": "Uprava/SERVER_OUTAGES.md",
+    "rows": 22,
+    "hosts": [
+      [
+        "api.c-salt.uni-koeln.de",
+        1
+      ],
+      [
+        "www.sanskrit-lexicon.uni-koeln.de",
+        1
+      ],
+      [
+        "nc.spbu.ru",
+        1
+      ],
+      [
+        "iaas.msu.ru",
+        1
+      ],
+      [
+        "Claude Workflow generation API",
+        1
+      ],
+      [
+        "valmiki.iitk.ac.in",
+        1
+      ],
+      [
+        "archive.org item YKTn_a-handful-of-popular-maxims-vol-1-... only",
+        1
+      ],
+      [
+        "vedaweb.uni-koeln.de",
+        1
+      ],
+      [
+        "openrouter.ai",
+        1
+      ],
+      [
+        "sanskrit.inria.fr, gitlab.inria.fr",
+        1
+      ]
+    ]
+  },
+  "reports": {
+    "path": "Uprava/reports/**",
+    "total_files": 787,
+    "top_dirs": [
+      [
+        "audit_probes",
+        80
+      ],
+      [
+        "h4184",
+        46
+      ],
+      [
+        "acl_anthology_mining_2026-10-05_hits",
+        16
+      ],
+      [
+        "acl_anthology_mining_2026-09-04_hits",
+        16
+      ],
+      [
+        "RESCUE_14.09.26",
+        14
+      ],
+      [
+        "H4790_SECURITY_ALERT_VERIFY_2026-09-15",
+        9
+      ],
+      [
+        "h4511",
+        8
+      ],
+      [
+        "h5044",
+        6
+      ],
+      [
+        "H5811_verification_bundle",
+        6
+      ],
+      [
+        "evidence_rtk_pilot_H5461_24-09-2026",
+        5
+      ]
+    ]
+  },
+  "gtd": {
+    "path": "Uprava/GTD_NEXT_ACTIONS.md",
+    "table_rows": 29,
+    "markers": {
+      "@DO": 328,
+      "@WAITING": 34,
+      "@DECIDE": 45
+    }
+  }
+}
