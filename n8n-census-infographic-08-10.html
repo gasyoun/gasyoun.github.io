@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8">
+<title>Перепись машинерии n8n — чертёж 08-10-2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@600;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root { --bg:#123A66; --bg-2:#0D3054; --line:#D8E8F8; --line-soft:rgb(216 232 248/.45);
+ --ink:#EAF2FB; --ink-muted:#9FB8D4; --chart-1:#3E9BD6; --chart-2:#B8860B;
+ --chart-3:#C75B9B; --chart-4:#6F9436; --de-emphasis:#2A537F; --radius:0; }
+* { box-sizing:border-box; margin:0 }
+body { font-family:'IBM Plex Mono',monospace; color:var(--ink); background:var(--bg);
+ width:1080px; }
+.grid-bg { background-image:linear-gradient(var(--line-soft) 1px,transparent 1px),
+ linear-gradient(90deg,var(--line-soft) 1px,transparent 1px); background-size:40px 40px; }
+.frame { border:2px solid var(--line); outline:1px solid var(--line); outline-offset:5px;
+ margin:12px; padding:48px 56px 40px; }
+h1 { font-family:'Saira Condensed',sans-serif; font-weight:700; text-transform:uppercase;
+ letter-spacing:.04em; font-size:64px; line-height:.95 }
+h2 { font-family:'Saira Condensed',sans-serif; font-weight:600; text-transform:uppercase;
+ letter-spacing:.06em; font-size:22px; color:var(--ink); margin-bottom:12px }
+.annotation { font:400 14px/1.5 'IBM Plex Mono',monospace; color:var(--ink-muted) }
+.annotation i { font-style:italic }
+.hero { display:flex; align-items:flex-end; gap:48px; margin:8px 0 8px }
+.hero .big { font-family:'Saira Condensed',sans-serif; font-weight:700; font-size:230px;
+ line-height:.85; color:var(--ink) }
+.statrow { display:flex; gap:56px; margin:8px 0 40px }
+.stat b { font-family:'Saira Condensed',sans-serif; font-weight:700; font-size:54px; display:block }
+.stat span { font-size:13px; color:var(--ink-muted) }
+svg { display:block; width:100%; height:auto }
+svg text { font-family:'IBM Plex Mono',monospace }
+.lbl { font-size:15px; fill:var(--ink) } .val { font-size:16px; font-weight:600; fill:var(--ink) }
+.dim { stroke:var(--line); stroke-width:1 }
+.dimfill { fill:var(--line) } .knock { fill:var(--bg) }
+.dimtxt { font-size:13px; fill:var(--ink-muted) }
+.bar { fill:var(--chart-1); fill-opacity:.85; stroke:var(--line); stroke-width:2 }
+.bar.peak { fill:var(--chart-2) } .bar.hatch { fill:url(#hatchp); stroke:var(--line) }
+.cell { stroke:var(--line); stroke-width:1.5 } .cell.on { fill:var(--chart-4) }
+.cell.silent { fill:var(--chart-2) } .cell.off { fill:var(--de-emphasis) }
+.leader { fill:var(--line) } .rank { font-size:30px; font-weight:600; fill:var(--ink-muted) }
+.revcloud { fill:none; stroke:var(--chart-3); stroke-width:2 }
+.revtxt { font-size:13px; fill:var(--ink) }
+.legend { display:flex; gap:32px; margin-top:10px; font-size:13px; color:var(--ink-muted) }
+.legend i { display:inline-block; width:12px; height:12px; margin-right:8px; vertical-align:-1px }
+section { margin-top:40px }
+.titleblock { margin-top:48px; display:flex; justify-content:space-between; align-items:flex-end }
+.tb { border:2px solid var(--line); outline:1px solid var(--line); outline-offset:4px;
+ background:var(--bg-2); padding:16px 24px; font-size:12.5px; line-height:1.9;
+ color:var(--ink-muted); min-width:430px }
+.tb b { color:var(--ink); font-weight:600 }
+.quietbox { border:1px dashed var(--chart-2); padding:14px 18px; max-width:460px }
+.quietbox svg { height:auto }
+</style></head><body class="grid-bg"><div class="frame">
+<!-- Composition: Specimen sheet / Big Object (blueprint canon); angle chosen unattended:
+     "101 день непрерывной работы" — масштаб и пульс, герой = 101. -->
+<header>
+<div class="annotation">CHERTÈZH № H6232 · МАСШТАБ 1:95 · SHTAMP NIJE</div>
+<h1>Перепись машинерии n8n</h1>
+<div class="annotation"><i>vps91 · context-ai.ru · n8n 2.38.6 · чертёж по живому снимку от 08-10-2026</i></div>
+</header>
+
+<div class="hero" data-hero>
+<div class="big">101</div>
+<div>
+<svg viewBox="0 0 560 170" role="img" aria-label="Возраст инстанса">
+<line x1="10" y1="40" x2="550" y2="40" class="dim"/><path d="M10 40 l9 -3 v6 z" class="dimfill"/><path d="M550 40 l-9 -3 v6 z" class="dimfill"/><rect x="202.0" y="31" width="156" height="18" class="knock"/><text x="280.0" y="44" text-anchor="middle" class="dimtxt">29-06-2026 → 08-10-2026 · непрерывно</text>
+<text x="10" y="80" class="lbl">первый воркфлоу создан 29 июня;</text>
+<text x="10" y="104" class="lbl">текущий контейнер — с 20 сентября;</text>
+<text x="10" y="128" class="lbl">caddy-реверс — с 11 сентября.</text>
+<text x="10" y="156" class="dimtxt">возраст инстанса, дней</text>
+</svg>
+</div>
+</div>
+
+<div class="statrow">
+<div class="stat"><b>95</b><span>воркфлоу всего</span></div>
+<div class="stat"><b>18</b><span>активных</span></div>
+<div class="stat"><b>602</b><span>экзекуций за 8 дней</span></div>
+<div class="stat"><b>99,0%</b><span>успех (596/602)</span></div>
+<div class="stat"><b>21</b><span>типов подключений</span></div>
+</div>
+
+<section>
+<h2>Полка модулей — 95 шт.</h2>
+<svg viewBox="0 0 920 460" role="img" aria-label="Полка из 95 модулей"><rect x="90" y="0" width="36" height="28" class="cell on"/><rect x="178" y="0" width="36" height="28" class="cell on"/><rect x="266" y="0" width="36" height="28" class="cell on"/><rect x="354" y="0" width="36" height="28" class="cell on"/><rect x="442" y="0" width="36" height="28" class="cell on"/><rect x="530" y="0" width="36" height="28" class="cell on"/><rect x="618" y="0" width="36" height="28" class="cell on"/><rect x="706" y="0" width="36" height="28" class="cell on"/><rect x="794" y="0" width="36" height="28" class="cell on"/><rect x="882" y="0" width="36" height="28" class="cell on"/><rect x="90" y="44" width="36" height="28" class="cell on"/><rect x="178" y="44" width="36" height="28" class="cell silent"/><rect x="266" y="44" width="36" height="28" class="cell silent"/><rect x="354" y="44" width="36" height="28" class="cell silent"/><rect x="442" y="44" width="36" height="28" class="cell silent"/><rect x="530" y="44" width="36" height="28" class="cell silent"/><rect x="618" y="44" width="36" height="28" class="cell silent"/><rect x="706" y="44" width="36" height="28" class="cell silent"/><rect x="794" y="44" width="36" height="28" class="cell off"/><rect x="882" y="44" width="36" height="28" class="cell off"/><rect x="90" y="88" width="36" height="28" class="cell off"/><rect x="178" y="88" width="36" height="28" class="cell off"/><rect x="266" y="88" width="36" height="28" class="cell off"/><rect x="354" y="88" width="36" height="28" class="cell off"/><rect x="442" y="88" width="36" height="28" class="cell off"/><rect x="530" y="88" width="36" height="28" class="cell off"/><rect x="618" y="88" width="36" height="28" class="cell off"/><rect x="706" y="88" width="36" height="28" class="cell off"/><rect x="794" y="88" width="36" height="28" class="cell off"/><rect x="882" y="88" width="36" height="28" class="cell off"/><rect x="90" y="132" width="36" height="28" class="cell off"/><rect x="178" y="132" width="36" height="28" class="cell off"/><rect x="266" y="132" width="36" height="28" class="cell off"/><rect x="354" y="132" width="36" height="28" class="cell off"/><rect x="442" y="132" width="36" height="28" class="cell off"/><rect x="530" y="132" width="36" height="28" class="cell off"/><rect x="618" y="132" width="36" height="28" class="cell off"/><rect x="706" y="132" width="36" height="28" class="cell off"/><rect x="794" y="132" width="36" height="28" class="cell off"/><rect x="882" y="132" width="36" height="28" class="cell off"/><rect x="90" y="176" width="36" height="28" class="cell off"/><rect x="178" y="176" width="36" height="28" class="cell off"/><rect x="266" y="176" width="36" height="28" class="cell off"/><rect x="354" y="176" width="36" height="28" class="cell off"/><rect x="442" y="176" width="36" height="28" class="cell off"/><rect x="530" y="176" width="36" height="28" class="cell off"/><rect x="618" y="176" width="36" height="28" class="cell off"/><rect x="706" y="176" width="36" height="28" class="cell off"/><rect x="794" y="176" width="36" height="28" class="cell off"/><rect x="882" y="176" width="36" height="28" class="cell off"/><rect x="90" y="220" width="36" height="28" class="cell off"/><rect x="178" y="220" width="36" height="28" class="cell off"/><rect x="266" y="220" width="36" height="28" class="cell off"/><rect x="354" y="220" width="36" height="28" class="cell off"/><rect x="442" y="220" width="36" height="28" class="cell off"/><rect x="530" y="220" width="36" height="28" class="cell off"/><rect x="618" y="220" width="36" height="28" class="cell off"/><rect x="706" y="220" width="36" height="28" class="cell off"/><rect x="794" y="220" width="36" height="28" class="cell off"/><rect x="882" y="220" width="36" height="28" class="cell off"/><rect x="90" y="264" width="36" height="28" class="cell off"/><rect x="178" y="264" width="36" height="28" class="cell off"/><rect x="266" y="264" width="36" height="28" class="cell off"/><rect x="354" y="264" width="36" height="28" class="cell off"/><rect x="442" y="264" width="36" height="28" class="cell off"/><rect x="530" y="264" width="36" height="28" class="cell off"/><rect x="618" y="264" width="36" height="28" class="cell off"/><rect x="706" y="264" width="36" height="28" class="cell off"/><rect x="794" y="264" width="36" height="28" class="cell off"/><rect x="882" y="264" width="36" height="28" class="cell off"/><rect x="90" y="308" width="36" height="28" class="cell off"/><rect x="178" y="308" width="36" height="28" class="cell off"/><rect x="266" y="308" width="36" height="28" class="cell off"/><rect x="354" y="308" width="36" height="28" class="cell off"/><rect x="442" y="308" width="36" height="28" class="cell off"/><rect x="530" y="308" width="36" height="28" class="cell off"/><rect x="618" y="308" width="36" height="28" class="cell off"/><rect x="706" y="308" width="36" height="28" class="cell off"/><rect x="794" y="308" width="36" height="28" class="cell off"/><rect x="882" y="308" width="36" height="28" class="cell off"/><rect x="90" y="352" width="36" height="28" class="cell off"/><rect x="178" y="352" width="36" height="28" class="cell off"/><rect x="266" y="352" width="36" height="28" class="cell off"/><rect x="354" y="352" width="36" height="28" class="cell off"/><rect x="442" y="352" width="36" height="28" class="cell off"/><rect x="530" y="352" width="36" height="28" class="cell off"/><rect x="618" y="352" width="36" height="28" class="cell off"/><rect x="706" y="352" width="36" height="28" class="cell off"/><rect x="794" y="352" width="36" height="28" class="cell off"/><rect x="882" y="352" width="36" height="28" class="cell off"/><rect x="90" y="396" width="36" height="28" class="cell off"/><rect x="178" y="396" width="36" height="28" class="cell off"/><rect x="266" y="396" width="36" height="28" class="cell off"/><rect x="354" y="396" width="36" height="28" class="cell off"/><rect x="442" y="396" width="36" height="28" class="cell off"/></svg>
+<div class="legend">
+<span><i style="background:var(--chart-4)"></i>работают: 11</span>
+<span><i style="background:var(--chart-2)"></i>активны, но молчат: 7</span>
+<span><i style="background:var(--de-emphasis)"></i>выключены: 77</span>
+</div>
+</section>
+
+<section>
+<h2>Дыхание недели — экзекуции по дням</h2>
+<svg viewBox="0 0 900 280" role="img" aria-label="Экзекуции по дням"><rect x="40" y="188" width="56" height="62" class="bar "/><text x="68" y="178" text-anchor="middle" class="val">41</text><text x="68" y="272" text-anchor="middle" class="dimtxt">01</text><rect x="145" y="156" width="56" height="94" class="bar "/><text x="173" y="146" text-anchor="middle" class="val">62</text><text x="173" y="272" text-anchor="middle" class="dimtxt">02</text><rect x="250" y="116" width="56" height="134" class="bar "/><text x="278" y="106" text-anchor="middle" class="val">88</text><text x="278" y="272" text-anchor="middle" class="dimtxt">03</text><rect x="355" y="159" width="56" height="91" class="bar "/><text x="383" y="149" text-anchor="middle" class="val">60</text><text x="383" y="272" text-anchor="middle" class="dimtxt">04</text><rect x="460" y="60" width="56" height="190" class="bar peak"/><text x="488" y="50" text-anchor="middle" class="val">125</text><text x="488" y="272" text-anchor="middle" class="dimtxt">05</text><rect x="446" y="16" width="84" height="26" rx="9" class="revcloud"/><text x="488" y="34" text-anchor="middle" class="revtxt">ПИК · 05.10</text><rect x="565" y="95" width="56" height="155" class="bar "/><text x="593" y="85" text-anchor="middle" class="val">102</text><text x="593" y="272" text-anchor="middle" class="dimtxt">06</text><rect x="670" y="142" width="56" height="108" class="bar "/><text x="698" y="132" text-anchor="middle" class="val">71</text><text x="698" y="272" text-anchor="middle" class="dimtxt">07</text><rect x="775" y="169" width="56" height="81" class="bar "/><text x="803" y="159" text-anchor="middle" class="val">53</text><text x="803" y="272" text-anchor="middle" class="dimtxt">08</text></svg>
+<div class="annotation"><i>окно 7-дневного ретеншена; пик 05-10 — churn-волна + АДМИНКА</i></div>
+</section>
+
+<section>
+<h2>Девять контуров + черновики</h2>
+<svg viewBox="0 0 900 460" role="img" aria-label="Кластеры"><text x="330" y="18" text-anchor="end" class="lbl">Черновики «My workflow»</text><line x1="338" y1="20" x2="778" y2="20" class="dim"/><rect x="338" y="6" width="430" height="26" class="bar hatch"/><path d="M768 19 l8 -3 v6 z" class="dimfill"/><text x="784" y="23" class="val">20</text><text x="330" y="62" text-anchor="end" class="lbl">Боты и переписки</text><line x1="338" y1="64" x2="778" y2="64" class="dim"/><rect x="338" y="50" width="387" height="26" class="bar"/><path d="M725 63 l8 -3 v6 z" class="dimfill"/><text x="741" y="67" class="val">18 · акт. 1</text><text x="330" y="106" text-anchor="end" class="lbl">Контент и соцсети</text><line x1="338" y1="108" x2="778" y2="108" class="dim"/><rect x="338" y="94" width="301" height="26" class="bar"/><path d="M639 107 l8 -3 v6 z" class="dimfill"/><text x="655" y="111" class="val">14 · акт. 1</text><text x="330" y="150" text-anchor="end" class="lbl">Вебинарный контур ZOOM→видео</text><line x1="338" y1="152" x2="778" y2="152" class="dim"/><rect x="338" y="138" width="215" height="26" class="bar"/><path d="M553 151 l8 -3 v6 z" class="dimfill"/><text x="569" y="155" class="val">10 · акт. 2</text><text x="330" y="194" text-anchor="end" class="lbl">Названия и транскрипция</text><line x1="338" y1="196" x2="778" y2="196" class="dim"/><rect x="338" y="182" width="215" height="26" class="bar"/><path d="M553 195 l8 -3 v6 z" class="dimfill"/><text x="569" y="199" class="val">10 · акт. 3</text><text x="330" y="238" text-anchor="end" class="lbl">Оплаты и учёба</text><line x1="338" y1="240" x2="778" y2="240" class="dim"/><rect x="338" y="226" width="172" height="26" class="bar"/><path d="M510 239 l8 -3 v6 z" class="dimfill"/><text x="526" y="243" class="val">8 · акт. 1</text><text x="330" y="282" text-anchor="end" class="lbl">Удержание (churn)</text><line x1="338" y1="284" x2="778" y2="284" class="dim"/><rect x="338" y="270" width="86" height="26" class="bar"/><path d="M424 283 l8 -3 v6 z" class="dimfill"/><text x="440" y="287" class="val">4 · акт. 3</text><text x="330" y="326" text-anchor="end" class="lbl">Анонсы и расписания</text><line x1="338" y1="328" x2="778" y2="328" class="dim"/><rect x="338" y="314" width="86" height="26" class="bar"/><path d="M424 327 l8 -3 v6 z" class="dimfill"/><text x="440" y="331" class="val">4 · акт. 3</text><text x="330" y="370" text-anchor="end" class="lbl">Инфраструктура и алерты</text><line x1="338" y1="372" x2="778" y2="372" class="dim"/><rect x="338" y="358" width="86" height="26" class="bar"/><path d="M424 371 l8 -3 v6 z" class="dimfill"/><text x="440" y="375" class="val">4 · акт. 3</text><text x="330" y="414" text-anchor="end" class="lbl">Фидбек занятий</text><line x1="338" y1="416" x2="778" y2="416" class="dim"/><rect x="338" y="402" width="64" height="26" class="bar"/><path d="M402 415 l8 -3 v6 z" class="dimfill"/><text x="418" y="419" class="val">3 · акт. 1</text></svg>
+<div class="annotation"><i>штриховка = черновики «My workflow»: пятая часть инстанса никогда не запускалась</i></div>
+</section>
+
+<section>
+<h2>Три рабочие лошадки</h2>
+<svg viewBox="0 0 900 170" role="img" aria-label="Топ-3"><text x="8" y="20" class="rank">1</text><text x="44" y="20" class="lbl">ловим названия copy</text><circle cx="36" cy="15" r="3" class="leader"/><text x="8" y="74" class="rank">2</text><text x="44" y="74" class="lbl">Systema soft-alert → GitHub issue </text><circle cx="36" cy="69" r="3" class="leader"/><text x="8" y="128" class="rank">3</text><text x="44" y="128" class="lbl">АДМИНКА+ТАБЛИЦА ОПЛАТ</text><circle cx="36" cy="123" r="3" class="leader"/></svg>
+<div class="annotation"><i>383 + 59 + 53 = 82% всех экзекуций окна</i></div>
+</section>
+
+<section>
+<div class="titleblock">
+<div class="quietbox">
+<h2 style="font-size:16px">Тихие активные — 7 шт.</h2>
+<svg viewBox="0 0 440 160" role="img" aria-label="Тихие активные"><text x="8" y="16" class="dimtxt">— H3746 Weekly TG schedule @institutsanskrita</text><text x="8" y="38" class="dimtxt">— H3812 September 2026 schedule announce @institutsanskrita (one-shot)</text><text x="8" y="60" class="dimtxt">— H5184 N07 churn-d7 (D7-отчёт)</text><text x="8" y="82" class="dimtxt">— Lecture clip extract (H1452) — ffmpeg + VK + Laravel callback</text><text x="8" y="104" class="dimtxt">— Uprava harness drain control</text><text x="8" y="126" class="dimtxt">— Приветствие zapisi (per-chat cards + 24h limit, H4315/H4317)</text><text x="8" y="148" class="dimtxt">— транскриб</text></svg>
+</div>
+<div class="tb">
+<div><b>ЧЕРТЁЖ</b> · ПЕРЕПИСЬ МАШИНЕРИИ N8N VPS91</div>
+<div><b>DWG №</b> H6232 · <b>SCALE</b> 1:95 · <b>ДАТА</b> 08-10-2026</div>
+<div><b>ИСТОЧНИК</b> n8n_census_08-10.json (H6231, sqlite read-only)</div>
+<div><b>ПРОЕКТИРОВАЛ</b> GLM 5.3 (z.ai) · канон: epic-infographics/blueprint</div>
+</div>
+</div>
+</section>
+</div></body></html>
