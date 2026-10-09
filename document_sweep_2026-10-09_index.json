@@ -1,0 +1,229 @@
+{
+  "tool": "tools/document_check.py",
+  "skill": "/document",
+  "legacy_name": "/artifact-propagate",
+  "generated": "2026-10-09 20:41:23",
+  "artifacts": [
+    {
+      "artifact": "/Users/mac/Documents/GitHub-worktrees/gasyoun.github.io/gasyoun.github.io-h6296-89787/smb-pain-benchmark-2026/index.html",
+      "repo": "/Users/mac/Documents/GitHub-worktrees/gasyoun.github.io/gasyoun.github.io-h6296-89787",
+      "kind": "interface",
+      "surfaces": [
+        {
+          "id": "readme",
+          "phase": 1,
+          "label": "README.md",
+          "scope": "repo",
+          "status": "present",
+          "evidence": "/Users/mac/Documents/GitHub-worktrees/gasyoun.github.io/gasyoun.github.io-h6296-89787/README.md:22: - **[index.html](https://github.com/gasyoun/gasyoun.github.io/blob/master/index.html)**"
+        },
+        {
+          "id": "claude_md",
+          "phase": 1,
+          "label": "CLAUDE.md",
+          "scope": "repo",
+          "status": "n/a",
+          "evidence": "репо живёт на AGENTS.md (он и cold-start); поведенческой sync-правки дашборд не требует"
+        },
+        {
+          "id": "cold_start",
+          "phase": 1,
+          "label": "Cold-start doc (GEMINI.md / equivalent)",
+          "scope": "repo",
+          "status": "present",
+          "evidence": "/Users/mac/Documents/GitHub-worktrees/gasyoun.github.io/gasyoun.github.io-h6296-89787/AGENTS.md:27: This repo keeps a committed memory store at [`.claude/projects/gasyoun.github.io/memory/`](https://github.com/gasyoun/gasyoun.github.io/tree/master/.claude/proj"
+        },
+        {
+          "id": "sibling_domain_docs",
+          "phase": 1,
+          "label": "Sibling domain docs (manual/roadmap/method docs)",
+          "scope": "repo",
+          "status": "n/a",
+          "evidence": "нет смежных доменных доков в сайт-репо; правящие доки — Uprava decisions/handoff"
+        },
+        {
+          "id": "metadoc",
+          "phase": 1,
+          "label": "Metadoc (<name>.meta.md)",
+          "scope": "repo",
+          "status": "present",
+          "evidence": "/Users/mac/Documents/GitHub-worktrees/gasyoun.github.io/gasyoun.github.io-h6296-89787/smb-pain-benchmark-2026/index.meta.md:3: # Metadoc — smb-pain-benchmark-2026/index.html"
+        },
+        {
+          "id": "changelog",
+          "phase": 1,
+          "label": "CHANGELOG.md -> release (/cut-release)",
+          "scope": "repo",
+          "status": "present",
+          "evidence": "/Users/mac/Documents/GitHub-worktrees/gasyoun.github.io/gasyoun.github.io-h6296-89787/CHANGELOG.md:7: - **Добавлено:** [smb-pain-benchmark-2026/index.html](https://github.com/gasyoun/gasyoun.github.io/blob/master/smb-pain-benchmark-2026/index.html) + [data.json]"
+        },
+        {
+          "id": "ai_state",
+          "phase": 1,
+          "label": ".ai_state.md",
+          "scope": "repo",
+          "status": "missing",
+          "evidence": "/Users/mac/Documents/GitHub-worktrees/gasyoun.github.io/gasyoun.github.io-h6296-89787/.ai_state.md (file exists, no mention of artifact found)"
+        },
+        {
+          "id": "issues",
+          "phase": 1,
+          "label": "Issues (per-person task issues)",
+          "scope": "repo",
+          "status": "n/a",
+          "evidence": "персональных таск-issue поверхностей для публичного дашборда нет; residuals уже в GTD 0PX"
+        },
+        {
+          "id": "gtd",
+          "phase": 2,
+          "label": "Uprava/GTD_NEXT_ACTIONS.md",
+          "scope": "org",
+          "status": "present",
+          "evidence": "/Users/mac/Documents/GitHub/Uprava/GTD_NEXT_ACTIONS.md:2: > 📇 Slim index: [hub_stubs/GTD_NEXT_ACTIONS.md](https://github.com/gasyoun/Uprava/blob/main/hub_stubs/GTD_NEXT_ACTIONS.md) — read first; grep this hub; never wh"
+        },
+        {
+          "id": "handoffs_registry",
+          "phase": 2,
+          "label": "Uprava/handoffs/README.md",
+          "scope": "org",
+          "status": "present",
+          "evidence": "/Users/mac/Documents/GitHub/Uprava/handoffs/README.md:1: # Handoffs — status index"
+        },
+        {
+          "id": "features_index",
+          "phase": 2,
+          "label": "SanskritLexicography/FEATURES_INDEX.md",
+          "scope": "org",
+          "status": "present",
+          "evidence": "/Users/mac/Documents/GitHub/SanskritLexicography/FEATURES_INDEX.md:3: # FEATURES_INDEX.md — what the Sanskrit Lexicon project actually has"
+        },
+        {
+          "id": "reuse_index",
+          "phase": 2,
+          "label": "Uprava/REUSE_INDEX.md (reusable assets)",
+          "scope": "org",
+          "status": "present",
+          "evidence": "/Users/mac/Documents/GitHub/Uprava/REUSE_INDEX.md:3: # REUSE_INDEX.md — Sanskrit materials & tools you already own"
+        },
+        {
+          "id": "kosha_manifest",
+          "phase": 2,
+          "label": "kosha/data/manifest/datasets.json",
+          "scope": "org",
+          "status": "n/a",
+          "evidence": "not a derived dataset"
+        },
+        {
+          "id": "data_layers_census",
+          "phase": 2,
+          "label": "Uprava/DATA_LAYERS_CENSUS.md",
+          "scope": "org",
+          "status": "n/a",
+          "evidence": "not large/local-only data (risk) and no open statistics cell to close"
+        },
+        {
+          "id": "project_interlinks",
+          "phase": 2,
+          "label": "Uprava/PROJECT_INTERLINKS.md",
+          "scope": "org",
+          "status": "present",
+          "evidence": "/Users/mac/Documents/GitHub/Uprava/PROJECT_INTERLINKS.md:3: _Created: 23-06-2026 · Last updated: 02-10-2026 (H5612: wiki-puller top-50 auto-candidates reviewed in full — 1 new edge `uprava-recover-22-09`,`Uprava-frozen-b"
+        },
+        {
+          "id": "skills_index",
+          "phase": 2,
+          "label": "root SKILLS_INDEX.md",
+          "scope": "org",
+          "status": "n/a",
+          "evidence": "artifact is not itself a skill/command"
+        },
+        {
+          "id": "articles",
+          "phase": 2,
+          "label": "Uprava/ARTICLES.md",
+          "scope": "org",
+          "status": "n/a",
+          "evidence": "artifact is not a paper (delegate to /articles-update when it is)"
+        },
+        {
+          "id": "danger_facts",
+          "phase": 2,
+          "label": "Uprava/DANGER_FACTS.md + context_facts.yaml",
+          "scope": "org",
+          "status": "present",
+          "evidence": "/Users/mac/Documents/GitHub/Uprava/DANGER_FACTS.md:41: | **Never re-spell `~~h<N>` in a pwg_ru sub-card key — it is the IDENTITY of ~11k already-promoted store rows.** `~~h<N>` is `gen_root_split`'s 0-based `enumera"
+        },
+        {
+          "id": "questions_log",
+          "phase": 2,
+          "label": "Uprava/QUESTIONS_LOG.md",
+          "scope": "org",
+          "status": "present",
+          "evidence": "/Users/mac/Documents/GitHub/Uprava/QUESTIONS_LOG.md:31: LLM classifies it against the existing index — same underlying ask in different"
+        },
+        {
+          "id": "megabook",
+          "phase": 2,
+          "label": "Uprava/MEGABOOK.md",
+          "scope": "org",
+          "status": "n/a",
+          "evidence": "операционный юнит, не тезис-уровень"
+        },
+        {
+          "id": "skills_manual_ru",
+          "phase": 2,
+          "label": "Uprava/SKILLS_MANUAL_RU.md",
+          "scope": "org",
+          "status": "n/a",
+          "evidence": "no skill/tool contract changed"
+        },
+        {
+          "id": "hooks_index",
+          "phase": 2,
+          "label": "claude-config HOOKS_INDEX.md",
+          "scope": "org",
+          "status": "present",
+          "evidence": "/Users/mac/Documents/GitHub/claude-config/HOOKS_INDEX.md:5: # HOOKS_INDEX — the per-hook roster of the claude-config hook suite"
+        },
+        {
+          "id": "repo_status_rollup",
+          "phase": 2,
+          "label": "Uprava/REPO_STATUS_ROLLUP.md",
+          "scope": "org",
+          "status": "present",
+          "evidence": "/Users/mac/Documents/GitHub/Uprava/REPO_STATUS_ROLLUP.md:4: > 📇 Slim index: [hub_stubs/REPO_STATUS_ROLLUP.md](https://github.com/gasyoun/Uprava/blob/main/hub_stubs/REPO_STATUS_ROLLUP.md) — read first; grep this hub; neve"
+        },
+        {
+          "id": "hub_manifest",
+          "phase": 2,
+          "label": "Uprava/tools/hub_manifest.json",
+          "scope": "org",
+          "status": "present",
+          "evidence": "/Users/mac/Documents/GitHub/Uprava/tools/hub_manifest.json:50: \"id\": \"reuse-index\","
+        },
+        {
+          "id": "auto_derived_views",
+          "phase": 2,
+          "label": "Auto-derived views (NEXT_UP/BOTTLENECKS/kanban/dashboards/HUB_STALENESS_REPORT)",
+          "scope": "org",
+          "status": "n/a",
+          "evidence": "auto -- never hand-edit; verify their SOURCES carry the change instead"
+        },
+        {
+          "id": "epistemic_registries",
+          "phase": 2,
+          "label": "FINDINGS x2 + 7 epistemic registries (ASSUMPTIONS/CONTRADICTIONS/GAPS/DEAD_ENDS/RECIPES/STALENESS/GLOSSARY, Uprava + SanskritLexicography)",
+          "scope": "org",
+          "status": "n/a",
+          "evidence": "finding salary_payout улёгся FINDINGS §1580 (PR #4583, merged); дашборд на предпосылках не стоит"
+        }
+      ]
+    }
+  ],
+  "provenance": {
+    "host": "MacBook-Air.local",
+    "git_head": "bc004a60dc782040ddf24b8fb2275f82ccb56f03",
+    "git_branch": "h6296-smb-fix2",
+    "handoff": "H6296"
+  }
+}
