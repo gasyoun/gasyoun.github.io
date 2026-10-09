@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Топ-5 воркфлоу n8n vps91 — динамическая визуализация (октябрь 2026)</title>
+<style>
+:root {
+  --bg:#fafafa; --panel:#ffffff; --text:#222; --muted:#666;
+  --grid:#eaeaea; --axis:#333; --accent:#d62728; --highlight:#fdae61;
+  --cat-entry:#1f77b4; --cat-action:#d62728; --cat-logic:#ff7f0e;
+  --cat-transform:#2ca02c; --cat-ai:#9467bd;
+  --edge:#b9b9b9; --pulse:#fdae61; --pulse-err:#d62728;
+}
+[data-theme="dark"] {
+  --bg:#14161a; --panel:#1d2026; --text:#e6e6e6; --muted:#9aa0a6;
+  --grid:#2a2e35; --axis:#9aa0a6;
+  --edge:#4a4f58;
+}
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--text);
+  font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; }
+header { padding:18px 22px 8px; }
+h1 { font-size:20px; margin:0 0 4px; }
+.sub { color:var(--muted); font-size:12.5px; }
+.tabs { display:flex; flex-wrap:wrap; gap:6px; padding:10px 22px 0;
+  border-bottom:2px solid var(--grid); }
+.tab { border:1px solid var(--grid); background:var(--panel); color:var(--text);
+  border-radius:8px 8px 0 0; padding:7px 13px; cursor:pointer; font-size:13px; }
+.tab.on { border-bottom:2px solid var(--accent); margin-bottom:-2px; font-weight:600; }
+.view { display:none; padding:14px 22px 30px; }
+.view.on { display:block; }
+.chips { display:flex; flex-wrap:wrap; gap:8px; margin:6px 0 12px; }
+.chip { background:var(--panel); border:1px solid var(--grid); border-radius:14px;
+  padding:3px 12px; font-size:12.5px; }
+.chip b { font-weight:600; }
+.chip.err { border-color:var(--accent); color:var(--accent); }
+.controls { display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin:4px 0 10px; }
+.controls button { background:var(--panel); color:var(--text);
+  border:1px solid var(--grid); border-radius:7px; padding:5px 12px; cursor:pointer;
+  font-size:13px; }
+.controls button:hover { border-color:var(--axis); }
+.controls label { font-size:12.5px; color:var(--muted); }
+.graph-wrap { position:relative; background:var(--panel); border:1px solid var(--grid);
+  border-radius:10px; overflow:hidden; }
+.graph-wrap svg { display:block; width:100%; height:64vh; min-height:340px;
+  cursor:grab; touch-action:none; }
+.graph-wrap svg:active { cursor:grabbing; }
+.legend { display:flex; flex-wrap:wrap; gap:14px; margin-top:8px; font-size:12.5px;
+  color:var(--muted); }
+.legend .sw { display:inline-block; width:11px; height:11px; border-radius:3px;
+  margin-right:5px; vertical-align:-1px; border:2px solid; }
+.node rect { fill:var(--panel); stroke-width:2.5; rx:9; }
+.node text { fill:var(--text); font-size:11px; }
+.node .t { fill:var(--muted); font-size:9px; }
+.node.hot rect { stroke-width:4; }
+.edge { stroke:var(--edge); stroke-width:1.6; fill:none; }
+.pulse { fill:var(--pulse); }
+.pulse.err { fill:var(--pulse-err); }
+.trust, .ov-kpis { background:var(--panel); border:1px solid var(--grid);
+  border-radius:10px; padding:12px 16px; }
+.trust { margin-top:18px; font-size:12.5px; color:var(--muted); }
+.trust b { color:var(--text); }
+.ov-kpis { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:16px; }
+.kpi { text-align:center; padding:6px 18px; border-right:1px solid var(--grid); }
+.kpi:last-child { border-right:none; }
+.kpi .v { font-size:22px; font-weight:700; }
+.kpi .k { font-size:11px; color:var(--muted); }
+.bar-row { display:flex; align-items:center; gap:10px; margin:5px 0; font-size:12.5px; }
+.bar-row .lbl { width:270px; min-width:170px; white-space:nowrap; overflow:hidden;
+  text-overflow:ellipsis; }
+.bar-row .bar { height:16px; border-radius:4px; background:var(--accent);
+  opacity:.85; min-width:2px; }
+.day-strip { display:flex; align-items:flex-end; gap:10px; height:110px;
+  padding:8px 4px 0; }
+.day-col { display:flex; flex-direction:column; align-items:center; gap:4px;
+  flex:1; max-width:88px; }
+.day-col .col { width:100%; background:var(--cat-entry); border-radius:4px 4px 0 0;
+  min-height:2px; }
+.day-col .n { font-size:11px; color:var(--muted); }
+.day-col .d { font-size:10.5px; color:var(--muted); }
+table { border-collapse:collapse; width:100%; font-size:12.5px; margin-top:6px; }
+th, td { text-align:left; border-bottom:1px solid var(--grid); padding:5px 9px; }
+th { color:var(--muted); font-weight:600; }
+details.data-table { margin-top:12px; }
+details.data-table summary { cursor:pointer; font-weight:600; font-size:13px; }
+.theme-btn { position:fixed; top:14px; right:16px; z-index:5; }
+.theme-btn button { background:var(--panel); color:var(--text);
+  border:1px solid var(--grid); border-radius:8px; padding:5px 11px; cursor:pointer; }
+footer { padding:6px 22px 26px; color:var(--muted); font-size:11.5px; }
+a { color:var(--cat-entry); }
+</style>
+</head>
+<body>
+<div class="theme-btn"><button id="themeToggle" type="button">🌙 тёмная</button></div>
+<header>
+  <h1>Топ-5 воркфлоу n8n vps91 — динамическая визуализация</h1>
+  <div class="sub">H6272 · по числу экзекуций за окно переписи 01–08.10.2026 ·
+    позиции нод — реальный canvas-экспорт n8n 2.38.6 · сгенерировано
+    <span id="genDate"></span></div>
+</header>
+<nav class="tabs" id="tabs"></nav>
+<main id="views"></main>
+<aside class="trust" id="trust">
+  <b>Trust block.</b> Источники: <b>docs/n8n/n8n_census_08-10.json</b> +
+  <b>docs/n8n/n8n_census_derived_08-10.json</b> (перепись H6231, снапшот
+  08-10-2026) и <b>docs/n8n/n8n_top5_graphs_09-10.json</b> (живой экспорт
+  <code>docker exec n8n-n8n-1 n8n export:workflow</code>, ночь 08→09-10-2026
+  МСК (поле exported_at в фиде несёт UTC-дату 2026-10-08 — тот же момент);
+  санитизировано — без parameters/credentials/webhookId/pinData).
+  Окно: 01–08.10.2026, n = <span class="t-total"></span> экзекуций
+  (<span class="t-ok"></span> успех / <span class="t-err"></span> ошибка);
+  95 воркфлоу, 18 активных. Топ-5 — по экзекуциям за окно.
+  <b>Анимация схематична:</b> частота импульсов ∝ среднему числу экзекуций в
+  день, маршрут — случайный проход по графу от корней к листьям; по-нодовой
+  телеметрии в экспорте n8n нет. Имена воркфлоу — на 09-10 (после чистки
+  H6241 имена двух из них изменились; имя переписи показано рядом).
+  Фид-таблицы — под каждым графом; полный фид закоммичен рядом с этой
+  страницей. Регенерация/проверка:
+  <code>python3 n8n_top5_dynamic_09-10.py --check</code>.
+</aside>
+<footer id="foot"></footer>
+
+<script id="feed" type="application/json">{"generated":"2026-10-09","model":"GLM-5.3 (account:zai-individual-coding-plan/GLM-5.3)","window":{"first":"2026-10-01 11:38:07.271","last":"2026-10-08 16:13:02.904","days":8,"total":602,"success":596,"error":6,"workflows":95,"active":18},"per_day":[{"day":"01","execs":41},{"day":"02","execs":62},{"day":"03","execs":88},{"day":"04","execs":60},{"day":"05","execs":125},{"day":"06","execs":102},{"day":"07","execs":71},{"day":"08","execs":53}],"cat_labels":{"entry":"вход / триггер","logic":"логика","transform":"преобразование","ai":"ИИ","action":"действие"},"workflows":[{"id":"egCkjS06dYtYcnmv","name":"ловим названия","census_name":"ловим названия copy","active":true,"cluster":2,"execs":383,"errors":0,"success_pct":100.0,"triggers":[],"ncreds":2,"first":"2026-10-01","last":"2026-10-08","nodes":[{"name":"Webhook (╨╕╨╖ Laravel)","type":"webhook","cat":"entry","x":-256,"y":16},{"name":"Append or update row in sheet","type":"googleSheets","cat":"action","x":128,"y":16},{"name":"Code in JavaScript1","type":"code","cat":"transform","x":-96,"y":16},{"name":"TG подтверждение МГ","type":"telegram","cat":"action","x":330,"y":16}],"edges":[{"s":"Code in JavaScript1","t":"Append or update row in sheet"},{"s":"Webhook (╨╕╨╖ Laravel)","t":"Code in JavaScript1"},{"s":"Append or update row in sheet","t":"TG подтверждение МГ"}],"bounds":{"x0":-376,"y0":-64,"x1":600,"y1":156},"spawn_per_sec":4.7875},{"id":"softAlertH2148","name":"Systema soft-alert → GitHub issue (H2148)","census_name":"Systema soft-alert → GitHub issue (H2148)","active":true,"cluster":8,"execs":59,"errors":0,"success_pct":100.0,"triggers":[],"ncreds":0,"first":"2026-10-02","last":"2026-10-08","nodes":[{"name":"Webhook soft-alert","type":"webhook","cat":"entry","x":0,"y":0},{"name":"IF secret matches","type":"if","cat":"logic","x":240,"y":0},{"name":"Respond 401","type":"respondToWebhook","cat":"action","x":480,"y":120},{"name":"GitHub create issue","type":"httpRequest","cat":"action","x":480,"y":-80},{"name":"Respond 202","type":"respondToWebhook","cat":"action","x":720,"y":-80}],"edges":[{"s":"Webhook soft-alert","t":"IF secret matches"},{"s":"IF secret matches","t":"GitHub create issue"},{"s":"IF secret matches","t":"Respond 401"},{"s":"GitHub create issue","t":"Respond 202"}],"bounds":{"x0":-120,"y0":-160,"x1":990,"y1":260},"spawn_per_sec":0.7375},{"id":"XWQHAwlxBAFe6xfj","name":"АДМИНКА+ТАБЛИЦА ОПЛАТ","census_name":"АДМИНКА+ТАБЛИЦА ОПЛАТ","active":true,"cluster":5,"execs":53,"errors":0,"success_pct":100.0,"triggers":[],"ncreds":2,"first":"2026-10-01","last":"2026-10-08","nodes":[{"name":"Webhook","type":"webhook","cat":"entry","x":0,"y":0},{"name":"Append or update row in sheet","type":"googleSheets","cat":"action","x":208,"y":0}],"edges":[{"s":"Webhook","t":"Append or update row in sheet"}],"bounds":{"x0":-120,"y0":-80,"x1":478,"y1":140},"spawn_per_sec":0.6625},{"id":"1EIqqNzMl5NNIxST","name":"ZOOM + АДМИНКА","census_name":"ZOOM 1.4 (Final) + АДМИНКА ТЕСТ","active":true,"cluster":1,"execs":29,"errors":1,"success_pct":96.6,"triggers":[],"ncreds":8,"first":"2026-10-01","last":"2026-10-08","nodes":[{"name":"СОЗДАЁМ УРОК В АДМИНКЕ","type":"httpRequest","cat":"action","x":3264,"y":64},{"name":"Respond to Webhook","type":"respondToWebhook","cat":"action","x":-720,"y":704},{"name":"Code in JavaScript","type":"code","cat":"transform","x":-912,"y":704},{"name":"Switch","type":"switch","cat":"logic","x":-1120,"y":608},{"name":"Code in JavaScript1","type":"code","cat":"transform","x":-976,"y":384},{"name":"DOWNLOAD","type":"httpRequest","cat":"action","x":-352,"y":384},{"name":"Upload a video","type":"youTube","cat":"action","x":96,"y":464},{"name":"Get row(s) in sheet","type":"googleSheets","cat":"action","x":-752,"y":384},{"name":"Get row(s) in sheet1","type":"googleSheets","cat":"action","x":-640,"y":384},{"name":"ZOOM","type":"webhook","cat":"entry","x":-1312,"y":608},{"name":"Add a playlist item","type":"youTube","cat":"action","x":256,"y":64},{"name":"ЗАГРУЗКА НА РУТУБ","type":"httpRequest","cat":"action","x":-224,"y":-128},{"name":"ДОБАВЛЯЕМ В ПЛЕЙЛИСТ","type":"httpRequest","cat":"action","x":704,"y":64},{"name":"ПОЛУЧАЕМ ССЫЛКУ","type":"httpRequest","cat":"action","x":816,"y":64},{"name":"СОКРАЩАЕМ ССЫЛКУ","type":"httpRequest","cat":"action","x":928,"y":64},{"name":"Send a text message","type":"telegram","cat":"action","x":2960,"y":352},{"name":"Respond to Webhook1","type":"respondToWebhook","cat":"action","x":-864,"y":384},{"name":"Wait (Playlist)","type":"wait","cat":"action","x":592,"y":64},{"name":"Wait (Subtitles)","type":"wait","cat":"action","x":1040,"y":64},{"name":"Search files and folders","type":"googleDrive","cat":"action","x":480,"y":368},{"name":"Download file","type":"googleDrive","cat":"action","x":608,"y":368},{"name":"HTTP Request1","type":"httpRequest","cat":"action","x":144,"y":64},{"name":"ЗАГРУЗКА НА РУТУБ1","type":"httpRequest","cat":"action","x":352,"y":-112},{"name":"Merge","type":"merge","cat":"logic","x":256,"y":-112},{"name":"Execute a command","type":"ssh","cat":"action","x":3088,"y":352},{"name":"Code in JavaScript2","type":"code","cat":"transform","x":2384,"y":736},{"name":"ОБНОВЛЯЕМ ВИДЕО (YouTube)","type":"httpRequest","cat":"action","x":2768,"y":864},{"name":"ЗАГРУЗКА НА РУТУБ2","type":"httpRequest","cat":"action","x":2928,"y":736},{"name":"Wait","type":"wait","cat":"action","x":3424,"y":608},{"name":"Webhook","type":"webhook","cat":"entry","x":-1312,"y":128},{"name":"Switch1","type":"switch","cat":"logic","x":-1120,"y":128},{"name":"Respond to Webhook2","type":"respondToWebhook","cat":"action","x":-704,"y":16},{"name":"Code in JavaScript5","type":"code","cat":"transform","x":-912,"y":64},{"name":"Switch2","type":"switch","cat":"logic","x":3200,"y":352},{"name":"DELETE FROM ZOOM","type":"httpRequest","cat":"action","x":3488,"y":432},{"name":"DELETE FROM ГАСУНС","type":"httpRequest","cat":"action","x":3488,"y":224},{"name":"Send a text message1","type":"telegram","cat":"action","x":-416,"y":160},{"name":"Format Title","type":"code","cat":"transform","x":-512,"y":384},{"name":"Create TXT File","type":"code","cat":"transform","x":2528,"y":944},{"name":"Upload file","type":"googleDrive","cat":"action","x":2624,"y":944},{"name":"AI Agent1","type":"ai:agent","cat":"ai","x":2160,"y":736},{"name":"Code2","type":"code","cat":"transform","x":1680,"y":736},{"name":"Download a file","type":"ssh","cat":"action","x":1776,"y":736},{"name":"Скачиваем аудио","type":"ssh","cat":"action","x":1584,"y":736},{"name":"Чистка хранилища","type":"ssh","cat":"action","x":2944,"y":80},{"name":"Чистка хранилища1","type":"ssh","cat":"action","x":2800,"y":64},{"name":"Code in JavaScript3","type":"code","cat":"transform","x":1968,"y":736},{"name":"Code in JavaScript4","type":"code","cat":"transform","x":2064,"y":736},{"name":"OpenRouter Chat Model1","type":"ai:lmChatOpenRouter","cat":"ai","x":2080,"y":912},{"name":"HTTP Request2","type":"httpRequest","cat":"action","x":1872,"y":736},{"name":"HTTP Request","type":"httpRequest","cat":"action","x":192,"y":464},{"name":"СОЗДАЁМ УРОК В АДМИНКЕ1","type":"httpRequest","cat":"action","x":3520,"y":64},{"name":"Resolve YT channel","type":"code","cat":"transform","x":-208,"y":384},{"name":"IF Hindi YT","type":"if","cat":"logic","x":-64,"y":384},{"name":"Upload a video (Hindi)","type":"youTube","cat":"action","x":96,"y":272},{"name":"HTTP Request (Hindi privacy)","type":"httpRequest","cat":"action","x":192,"y":272},{"name":"Normalize YT","type":"code","cat":"transform","x":336,"y":368},{"name":"IF Hindi YT thumb","type":"if","cat":"logic","x":880,"y":640},{"name":"HTTP Request1 (Hindi thumb)","type":"httpRequest","cat":"action","x":1088,"y":736},{"name":"Add a playlist item (Hindi)","type":"youTube","cat":"action","x":1184,"y":736},{"name":"IF Hindi YT update","type":"if","cat":"logic","x":2480,"y":736},{"name":"ОБНОВЛЯЕМ ВИДЕО (YouTube Hindi)","type":"httpRequest","cat":"action","x":2720,"y":608},{"name":"Собрать ретрай","type":"code","cat":"transform","x":780,"y":1100},{"name":"IF исчерпано?","type":"if","cat":"logic","x":1000,"y":1100},{"name":"Первая попытка?","type":"if","cat":"logic","x":1220,"y":1200},{"name":"TG: предупреждение группе","type":"telegram","cat":"action","x":1440,"y":1300},{"name":"Wait 6ч","type":"wait","cat":"action","x":1660,"y":1200},{"name":"Куда грузим?","type":"if","cat":"logic","x":1880,"y":1200},{"name":"TG: финальная тревога","type":"telegram","cat":"action","x":1220,"y":950},{"name":"Encoding Guard (Send a text message)","type":"code","cat":"transform","x":3192,"y":540},{"name":"Encoding Guard (Send a text message1)","type":"code","cat":"transform","x":-464,"y":332},{"name":"Encoding Guard (TG: предупреждение групп)","type":"code","cat":"transform","x":1330,"y":1310},{"name":"Encoding Guard (TG: финальная тревога)","type":"code","cat":"transform","x":1110,"y":1085},{"name":"Есть запись?","type":"if","cat":"logic","x":-274,"y":212},{"name":"Свежая ссылка (Цыди)","type":"httpRequest","cat":"action","x":-80,"y":-80},{"name":"Свежая ссылка (Гасунс)","type":"httpRequest","cat":"action","x":-80,"y":60},{"name":"Неизвестный аккаунт (pass-through)","type":"code","cat":"transform","x":-80,"y":200},{"name":"Аккаунт fresh-link","type":"switch","cat":"logic","x":-280,"y":40},{"name":"Аккаунт известен?","type":"if","cat":"logic","x":-1250,"y":200},{"name":"TG: неизвестный Zoom-аккаунт","type":"telegram","cat":"action","x":-1250,"y":80},{"name":"Replay свежей ссылкой?","type":"switch","cat":"logic","x":-560,"y":560},{"name":"DOWNLOAD свежая (Цыди)","type":"httpRequest","cat":"action","x":-360,"y":500},{"name":"DOWNLOAD свежая (Гасунс)","type":"httpRequest","cat":"action","x":-360,"y":640},{"name":"TG: replay недоступен","type":"telegram","cat":"action","x":-560,"y":760},{"name":"Обложка найдена?","type":"if","cat":"logic","x":700,"y":368},{"name":"Обложки нет — пропуск","type":"code","cat":"transform","x":920,"y":568},{"name":"Settings найдена?","type":"if","cat":"logic","x":-532,"y":384},{"name":"TG: нет Settings-строки","type":"telegram","cat":"action","x":-312,"y":544},{"name":"Titles найдены?","type":"if","cat":"logic","x":-420,"y":384},{"name":"TG: нет Titles-строки","type":"telegram","cat":"action","x":-200,"y":544},{"name":"TG доставлено?","type":"if","cat":"logic","x":3180,"y":352},{"name":"TG: дубль финальной ссылки","type":"telegram","cat":"action","x":3400,"y":512},{"name":"Урок создан?","type":"if","cat":"logic","x":3740,"y":64},{"name":"TG: урок не создан","type":"telegram","cat":"action","x":3960,"y":224},{"name":"Канал валиден?","type":"if","cat":"logic","x":12,"y":224},{"name":"TG: канал подозрителен","type":"telegram","cat":"action","x":232,"y":384},{"name":"Диагноз fresh-link","type":"code","cat":"transform","x":-474,"y":412},{"name":"Деградация fresh-link?","type":"code","cat":"transform","x":-474,"y":-208},{"name":"TG: fresh-link деградировал","type":"telegram","cat":"action","x":-254,"y":-208},{"name":"HEAD вебхук-токен","type":"httpRequest","cat":"action","x":-54,"y":452},{"name":"Вердикт fresh-link","type":"code","cat":"transform","x":166,"y":452},{"name":"TG: диагноз fresh-link","type":"telegram","cat":"action","x":386,"y":452},{"name":"Стоп: запись не получена","type":"code","cat":"transform","x":606,"y":452},{"name":"Стоп: replay невозможен","type":"code","cat":"transform","x":-340,"y":760}],"edges":[{"s":"Code in JavaScript","t":"Respond to Webhook"},{"s":"Switch","t":"Code in JavaScript1"},{"s":"Switch","t":"Code in JavaScript"},{"s":"Code in JavaScript1","t":"Respond to Webhook1"},{"s":"Code in JavaScript1","t":"Аккаунт известен?"},{"s":"DOWNLOAD","t":"Resolve YT channel"},{"s":"DOWNLOAD","t":"Replay свежей ссылкой?"},{"s":"Upload a video","t":"HTTP Request"},{"s":"Upload a video","t":"Собрать ретрай"},{"s":"Get row(s) in sheet","t":"Settings найдена?"},{"s":"ZOOM","t":"Switch"},{"s":"Get row(s) in sheet1","t":"Titles найдены?"},{"s":"Add a playlist item","t":"ЗАГРУЗКА НА РУТУБ"},{"s":"ЗАГРУЗКА НА РУТУБ","t":"Merge"},{"s":"ДОБАВЛЯЕМ В ПЛЕЙЛИСТ","t":"ПОЛУЧАЕМ ССЫЛКУ"},{"s":"ПОЛУЧАЕМ ССЫЛКУ","t":"СОКРАЩАЕМ ССЫЛКУ"},{"s":"СОКРАЩАЕМ ССЫЛКУ","t":"Wait (Subtitles)"},{"s":"Respond to Webhook1","t":"Get row(s) in sheet"},{"s":"Wait (Playlist)","t":"ДОБАВЛЯЕМ В ПЛЕЙЛИСТ"},{"s":"Download file","t":"IF Hindi YT thumb"},{"s":"Download file","t":"Merge"},{"s":"HTTP Request1","t":"Add a playlist item"},{"s":"Merge","t":"ЗАГРУЗКА НА РУТУБ1"},{"s":"ЗАГРУЗКА НА РУТУБ1","t":"Wait (Playlist)"},{"s":"Send a text message","t":"TG доставлено?"},{"s":"Wait (Subtitles)","t":"Скачиваем аудио"},{"s":"Code in JavaScript2","t":"Create TXT File"},{"s":"Code in JavaScript2","t":"IF Hindi YT update"},{"s":"ЗАГРУЗКА НА РУТУБ2","t":"Wait"},{"s":"Execute a command","t":"Switch2"},{"s":"Wait","t":"Encoding Guard (Send a text message)"},{"s":"Webhook","t":"Switch1"},{"s":"Code in JavaScript5","t":"Respond to Webhook2"},{"s":"Switch1","t":"Code in JavaScript5"},{"s":"Switch1","t":"Code in JavaScript1"},{"s":"Switch2","t":"DELETE FROM ГАСУНС"},{"s":"Switch2","t":"DELETE FROM ZOOM"},{"s":"Format Title","t":"Encoding Guard (Send a text message1)"},{"s":"Create TXT File","t":"Upload file"},{"s":"AI Agent1","t":"Code in JavaScript2"},{"s":"AI Agent1","t":"Чистка хранилища1"},{"s":"Code2","t":"Download a file"},{"s":"Download a file","t":"HTTP Request2"},{"s":"Download a file","t":"Скачиваем аудио"},{"s":"Скачиваем аудио","t":"Code2"},{"s":"Чистка хранилища1","t":"Чистка хранилища"},{"s":"Code in JavaScript3","t":"Code in JavaScript4"},{"s":"Code in JavaScript4","t":"AI Agent1"},{"s":"HTTP Request2","t":"Code in JavaScript3"},{"s":"HTTP Request","t":"Normalize YT"},{"s":"СОЗДАЁМ УРОК В АДМИНКЕ","t":"СОЗДАЁМ УРОК В АДМИНКЕ1"},{"s":"ОБНОВЛЯЕМ ВИДЕО (YouTube)","t":"ЗАГРУЗКА НА РУТУБ2"},{"s":"Resolve YT channel","t":"Канал валиден?"},{"s":"IF Hindi YT","t":"Upload a video (Hindi)"},{"s":"IF Hindi YT","t":"Upload a video"},{"s":"Upload a video (Hindi)","t":"HTTP Request (Hindi privacy)"},{"s":"Upload a video (Hindi)","t":"Собрать ретрай"},{"s":"HTTP Request (Hindi privacy)","t":"Normalize YT"},{"s":"Normalize YT","t":"Search files and folders"},{"s":"IF Hindi YT thumb","t":"HTTP Request1 (Hindi thumb)"},{"s":"IF Hindi YT thumb","t":"HTTP Request1"},{"s":"HTTP Request1 (Hindi thumb)","t":"Add a playlist item (Hindi)"},{"s":"Add a playlist item (Hindi)","t":"ЗАГРУЗКА НА РУТУБ"},{"s":"IF Hindi YT update","t":"ОБНОВЛЯЕМ ВИДЕО (YouTube Hindi)"},{"s":"IF Hindi YT update","t":"ОБНОВЛЯЕМ ВИДЕО (YouTube)"},{"s":"ОБНОВЛЯЕМ ВИДЕО (YouTube Hindi)","t":"ЗАГРУЗКА НА РУТУБ2"},{"s":"Собрать ретрай","t":"IF исчерпано?"},{"s":"IF исчерпано?","t":"Encoding Guard (TG: финальная тревога)"},{"s":"IF исчерпано?","t":"Первая попытка?"},{"s":"Первая попытка?","t":"Encoding Guard (TG: предупреждение групп)"},{"s":"Первая попытка?","t":"Wait 6ч"},{"s":"TG: предупреждение группе","t":"Wait 6ч"},{"s":"Wait 6ч","t":"Куда грузим?"},{"s":"Куда грузим?","t":"Upload a video (Hindi)"},{"s":"Куда грузим?","t":"Upload a video"},{"s":"Encoding Guard (Send a text message)","t":"Send a text message"},{"s":"Encoding Guard (Send a text message1)","t":"Send a text message1"},{"s":"Encoding Guard (TG: предупреждение групп)","t":"TG: предупреждение группе"},{"s":"Encoding Guard (TG: финальная тревога)","t":"TG: финальная тревога"},{"s":"Send a text message1","t":"Аккаунт fresh-link"},{"s":"Есть запись?","t":"DOWNLOAD"},{"s":"Есть запись?","t":"HEAD вебхук-токен"},{"s":"Свежая ссылка (Цыди)","t":"Диагноз fresh-link"},{"s":"Свежая ссылка (Гасунс)","t":"Диагноз fresh-link"},{"s":"Неизвестный аккаунт (pass-through)","t":"Диагноз fresh-link"},{"s":"Аккаунт fresh-link","t":"Свежая ссылка (Цыди)"},{"s":"Аккаунт fresh-link","t":"Свежая ссылка (Гасунс)"},{"s":"Аккаунт fresh-link","t":"Неизвестный аккаунт (pass-through)"},{"s":"Аккаунт известен?","t":"TG: неизвестный Zoom-аккаунт"},{"s":"Replay свежей ссылкой?","t":"DOWNLOAD свежая (Цыди)"},{"s":"Replay свежей ссылкой?","t":"DOWNLOAD свежая (Гасунс)"},{"s":"Replay свежей ссылкой?","t":"TG: replay недоступен"},{"s":"DOWNLOAD свежая (Цыди)","t":"Resolve YT channel"},{"s":"DOWNLOAD свежая (Цыди)","t":"HEAD вебхук-токен"},{"s":"DOWNLOAD свежая (Гасунс)","t":"Resolve YT channel"},{"s":"DOWNLOAD свежая (Гасунс)","t":"HEAD вебхук-токен"},{"s":"TG: replay недоступен","t":"Стоп: replay невозможен"},{"s":"Search files and folders","t":"Обложка найдена?"},{"s":"Обложка найдена?","t":"Download file"},{"s":"Обложка найдена?","t":"Обложки нет — пропуск"},{"s":"Обложки нет — пропуск","t":"ЗАГРУЗКА НА РУТУБ"},{"s":"Settings найдена?","t":"Get row(s) in sheet1"},{"s":"Settings найдена?","t":"TG: нет Settings-строки"},{"s":"Titles найдены?","t":"Format Title"},{"s":"Titles найдены?","t":"TG: нет Titles-строки"},{"s":"TG доставлено?","t":"СОЗДАЁМ УРОК В АДМИНКЕ"},{"s":"TG доставлено?","t":"TG: дубль финальной ссылки"},{"s":"СОЗДАЁМ УРОК В АДМИНКЕ1","t":"Урок создан?"},{"s":"Урок создан?","t":"Execute a command"},{"s":"Урок создан?","t":"TG: урок не создан"},{"s":"Канал валиден?","t":"IF Hindi YT"},{"s":"Канал валиден?","t":"TG: канал подозрителен"},{"s":"Диагноз fresh-link","t":"Деградация fresh-link?"},{"s":"Диагноз fresh-link","t":"Есть запись?"},{"s":"Деградация fresh-link?","t":"TG: fresh-link деградировал"},{"s":"HEAD вебхук-токен","t":"Вердикт fresh-link"},{"s":"Вердикт fresh-link","t":"TG: диагноз fresh-link"},{"s":"TG: диагноз fresh-link","t":"Стоп: запись не получена"}],"bounds":{"x0":-1432,"y0":-288,"x1":4230,"y1":1450},"spawn_per_sec":0.3625},{"id":"1OyrlvvXBObeSxLx","name":"H5184 N07 churn-curator (флаг куратору)","census_name":"H5184 N07 churn-curator (флаг куратору)","active":true,"cluster":6,"execs":23,"errors":0,"success_pct":100.0,"triggers":[],"ncreds":2,"first":"2026-10-05","last":"2026-10-05","nodes":[{"name":"Webhook","type":"webhook","cat":"entry","x":0,"y":0},{"name":"Флаг куратору","type":"telegram","cat":"action","x":260,"y":0}],"edges":[{"s":"Webhook","t":"Флаг куратору"}],"bounds":{"x0":-120,"y0":-80,"x1":530,"y1":140},"spawn_per_sec":0.2875}]}</script>
+<script>
+"use strict";
+const DATA = JSON.parse(document.getElementById("feed").textContent);
+const NW = Math.max(160, Math.min(220, ...DATA.workflows.map(w => w.nodes.length > 12 ? 150 : 200)));
+const NH = 56, PAD = 12;
+
+const el = (t, cls, txt) => {
+  const e = document.createElement(t);
+  if (cls) e.className = cls;
+  if (txt !== undefined) e.textContent = txt;
+  return e;
+};
+
+/* ---------- вкладки ---------- */
+const tabs = document.getElementById("tabs"), views = document.getElementById("views");
+function addTab(id, label, build) {
+  const b = el("button", "tab", label); b.dataset.tab = id; tabs.appendChild(b);
+  const v = el("section", "view"); v.id = "view-" + id; views.appendChild(v);
+  b.addEventListener("click", () => selectTab(id));
+  build(v);
+  return v;
+}
+function selectTab(id) {
+  document.querySelectorAll(".tab").forEach(t => t.classList.toggle("on", t.dataset.tab === id));
+  document.querySelectorAll(".view").forEach(v => v.classList.toggle("on", v.id === "view-" + id));
+  stopAllExcept(id);
+}
+
+/* ---------- обзор ---------- */
+function buildOverview(v) {
+  const k = el("div", "ov-kpis");
+  const w = DATA.window;
+  [["95", "воркфлоу всего"], [String(w.active), "активных"], [String(w.total), "экзекуций за окно"],
+   [(100 * w.success / w.total).toFixed(1) + "%", "успех"], [String(DATA.workflows.reduce((a, x) => a + x.nodes.length, 0)), "нод в топ-5"]]
+   .forEach(([v_, k_]) => { const c = el("div", "kpi"); c.appendChild(el("div", "v", v_)); c.appendChild(el("div", "k", k_)); k.appendChild(c); });
+  v.appendChild(k);
+
+  const strip = el("div", "trust");
+  strip.style.margin = "0 0 16px";
+  strip.appendChild(el("div", "", "Экзекуций в день (все 95 воркфлоу):"));
+  const ds = el("div", "day-strip");
+  const maxD = Math.max(...DATA.per_day.map(d => d.execs));
+  DATA.per_day.forEach(d => {
+    const c = el("div", "day-col");
+    c.appendChild(el("div", "col")).style.height = (76 * d.execs / maxD) + "px";
+    c.appendChild(el("div", "n", String(d.execs)));
+    c.appendChild(el("div", "d", d.day + ".10"));
+    ds.appendChild(c);
+  });
+  strip.appendChild(ds);
+  v.appendChild(strip);
+
+  v.appendChild(el("h2", "", "Топ-5 по экзекуциям")).style.fontSize = "16px";
+  const maxE = DATA.workflows[0].execs;
+  DATA.workflows.forEach((wf, i) => {
+    const r = el("div", "bar-row");
+    r.appendChild(el("div", "lbl", (i + 1) + ". " + wf.name + (wf.name !== wf.census_name ? " (в переписи: " + wf.census_name + ")" : "")));
+    const bar = el("div", "bar"); bar.style.width = (520 * wf.execs / maxE) + "px";
+    bar.title = wf.execs + " экз.";
+    r.appendChild(bar);
+    r.appendChild(el("span", "", wf.execs + " экз. · ошибок " + wf.errors + " · нод " + wf.nodes.length));
+    v.appendChild(r);
+  });
+
+  const t = el("table");
+  t.innerHTML = "<tr><th>#</th><th>воркфлоу (09-10)</th><th>кластер</th><th>экз.</th><th>ошиб.</th><th>успех</th><th>нод</th><th>кред.</th><th>статус</th><th>первый / последний запуск</th></tr>";
+  DATA.workflows.forEach((wf, i) => {
+    const tr = el("tr");
+    [i + 1, wf.name, wf.cluster, wf.execs, wf.errors,
+     wf.success_pct === null ? "—" : wf.success_pct + "%",
+     wf.nodes.length, wf.ncreds, wf.active ? "активен" : "выключен",
+     (wf.first || "—").slice(0, 16) + " / " + (wf.last || "—").slice(0, 16)]
+     .forEach(x => tr.appendChild(el("td", "", String(x))));
+    t.appendChild(tr);
+  });
+  const dt = el("details", "data-table"); dt.open = true;
+  dt.appendChild(el("summary", "", "Таблица топ-5 (data-table fallback)"));
+  dt.appendChild(t);
+  v.appendChild(dt);
+}
+
+/* ---------- граф воркфлоу ---------- */
+const engines = {};
+function stopAllExcept(id) {
+  Object.entries(engines).forEach(([k, eng]) => { if (k !== id && eng.running) eng.toggle(); });
+}
+
+function buildWorkflow(v, wf) {
+  const chips = el("div", "chips");
+  const chip = (html, cls) => { const c = el("div", "chip" + (cls ? " " + cls : "")); c.innerHTML = html; chips.appendChild(c); };
+  chip("<b>" + wf.name + "</b>");
+  if (wf.name !== wf.census_name) chip("в переписи: " + wf.census_name);
+  chip("кластер: <b>" + wf.cluster + "</b>");
+  chip(wf.active ? "активен" : "выключен", wf.active ? "" : "err");
+  chip("экзекуций: <b>" + wf.execs + "</b> (окно 01–08.10)");
+  chip("ошибок: <b>" + wf.errors + "</b>", wf.errors ? "err" : "");
+  chip("успех: <b>" + (wf.success_pct === null ? "—" : wf.success_pct + "%") + "</b>");
+  chip("нод: <b>" + wf.nodes.length + "</b> · связей: <b>" + wf.edges.length + "</b>");
+  chip("кред-типов: " + wf.ncreds);
+  chip("≈" + (wf.execs / 8).toFixed(1) + " экз./день");
+  v.appendChild(chips);
+
+  const ctr = el("div", "controls");
+  const play = el("button", "", "⏸ пауза");
+  const zin = el("button", "", "+"), zout = el("button", "", "−"), fit = el("button", "", "⤢ вписать");
+  const spdLabel = el("label", "", "скорость ×1");
+  const spd = document.createElement("input");
+  spd.type = "range"; spd.min = "0.25"; spd.max = "8"; spd.step = "0.25"; spd.value = "1";
+  ctr.append(play, spd, spdLabel, zin, zout, fit);
+  v.appendChild(ctr);
+
+  const wrap = el("div", "graph-wrap");
+  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  svg.setAttribute("viewBox", [wf.bounds.x0, wf.bounds.y0, wf.bounds.x1 - wf.bounds.x0, wf.bounds.y1 - wf.bounds.y0].join(" "));
+  wrap.appendChild(svg);
+  v.appendChild(wrap);
+
+  const legend = el("div", "legend");
+  Object.entries(DATA.cat_labels).forEach(([cat, lbl]) => {
+    const s = el("span"); s.appendChild(el("i", "sw")).style.borderColor = "var(--cat-" + cat + ")";
+    s.appendChild(document.createTextNode(lbl));
+    legend.appendChild(s);
+  });
+  const pulseNote = el("span"); pulseNote.appendChild(el("i", "sw")).style.borderColor = "var(--pulse)";
+  pulseNote.appendChild(document.createTextNode("импульс экзекуции (схема)"));
+  legend.appendChild(pulseNote);
+  v.appendChild(legend);
+
+  /* рёбра */
+  const pos = {}; wf.nodes.forEach(n => pos[n.name] = n);
+  const NS = "http://www.w3.org/2000/svg";
+  const edgeEls = {};
+  wf.edges.forEach((e, i) => {
+    const a = pos[e.s], b = pos[e.t];
+    const x1 = a.x + NW, y1 = a.y + NH / 2, x2 = b.x, y2 = b.y + NH / 2;
+    let d;
+    if (x2 - x1 >= -20) {
+      const dx = Math.min(200, Math.max(40, (x2 - x1) * 0.5));
+      d = "M" + x1 + "," + y1 + " C" + (x1 + dx) + "," + y1 + " " + (x2 - dx) + "," + y2 + " " + x2 + "," + y2;
+    } else {
+      const mx = (x1 + x2) / 2, bul = Math.max(y1, y2) + NH + 60;
+      d = "M" + x1 + "," + y1 + " C" + (mx) + "," + y1 + " " + mx + "," + bul + " " + mx + "," + bul +
+          " C" + mx + "," + bul + " " + mx + "," + y2 + " " + x2 + "," + y2;
+    }
+    const p = document.createElementNS(NS, "path");
+    p.setAttribute("class", "edge"); p.setAttribute("d", d);
+    svg.appendChild(p);
+    edgeEls[e.s + "\u0000" + e.t] = p;
+  });
+
+  /* ноды */
+  const nodeEls = {};
+  wf.nodes.forEach(n => {
+    const g = document.createElementNS(NS, "g");
+    g.setAttribute("class", "node");
+    const r = document.createElementNS(NS, "rect");
+    r.setAttribute("x", n.x); r.setAttribute("y", n.y);
+    r.setAttribute("width", NW); r.setAttribute("height", NH); r.setAttribute("rx", 9);
+    r.style.stroke = "var(--cat-" + n.cat + ")";
+    g.appendChild(r);
+    const name = document.createElementNS(NS, "text");
+    name.setAttribute("x", n.x + 9); name.setAttribute("y", n.y + 21);
+    let label = n.name; if (label.length > 24) label = label.slice(0, 23) + "…";
+    name.textContent = label; name.appendChild(document.createTextNode(""));
+    g.appendChild(name);
+    const tp = document.createElementNS(NS, "text");
+    tp.setAttribute("class", "t"); tp.setAttribute("x", n.x + 9); tp.setAttribute("y", n.y + 38);
+    tp.textContent = n.type;
+    g.appendChild(tp);
+    const tip = document.createElementNS(NS, "title");
+    tip.textContent = n.name + " [" + DATA.cat_labels[n.cat] + "]";
+    g.appendChild(tip);
+    svg.appendChild(g);
+    nodeEls[n.name] = g;
+  });
+
+  /* pan / zoom */
+  let vb = { x: wf.bounds.x0, y: wf.bounds.y0, w: wf.bounds.x1 - wf.bounds.x0, h: wf.bounds.y1 - wf.bounds.y0 };
+  const VB0 = { ...vb };
+  const apply = () => svg.setAttribute("viewBox", [vb.x, vb.y, vb.w, vb.h].join(" "));
+  const zoom = (f, cx, cy) => {
+    const nw = Math.min(VB0.w * 4, Math.max(VB0.w / 8, vb.w * f));
+    const k = nw / vb.w;
+    vb.x = cx - (cx - vb.x) * k; vb.y = cy - (cy - vb.y) * k; vb.w *= k; vb.h *= k; apply();
+  };
+  svg.addEventListener("wheel", ev => { ev.preventDefault();
+    const r = svg.getBoundingClientRect();
+    const cx = vb.x + (ev.clientX - r.left) / r.width * vb.w;
+    const cy = vb.y + (ev.clientY - r.top) / r.height * vb.h;
+    zoom(ev.deltaY > 0 ? 1.12 : 0.89, cx, cy);
+  }, { passive: false });
+  let drag = null;
+  svg.addEventListener("pointerdown", ev => { drag = { x: ev.clientX, y: ev.clientY, vx: vb.x, vy: vb.y }; svg.setPointerCapture(ev.pointerId); });
+  svg.addEventListener("pointermove", ev => { if (!drag) return;
+    const r = svg.getBoundingClientRect();
+    vb.x = drag.vx - (ev.clientX - drag.x) * vb.w / r.width;
+    vb.y = drag.vy - (ev.clientY - drag.y) * vb.h / r.height; apply(); });
+  svg.addEventListener("pointerup", () => drag = null);
+  zin.onclick = () => zoom(0.8, vb.x + vb.w / 2, vb.y + vb.h / 2);
+  zout.onclick = () => zoom(1.25, vb.x + vb.w / 2, vb.y + vb.h / 2);
+  fit.onclick = () => { vb = { ...VB0 }; apply(); };
+
+  /* анимация: импульсы от корней к листьям */
+  const incoming = {}; wf.edges.forEach(e => incoming[e.t] = (incoming[e.t] || 0) + 1);
+  const out = {}; wf.edges.forEach(e => (out[e.s] = out[e.s] || []).push(e.t));
+  const roots = wf.nodes.filter(n => !incoming[n.name]).map(n => n.name);
+  const layer = svg.appendChild(document.createElementNS(NS, "g"));
+  const pulses = [];
+  const errP = wf.execs ? wf.errors / wf.execs : 0;
+
+  function spawn() {
+    if (pulses.length > 60) return;
+    const c = document.createElementNS(NS, "circle");
+    c.setAttribute("r", 7); c.setAttribute("class", "pulse");
+    layer.appendChild(c);
+    const p = { el: c, route: pickRoute(), seg: 0, t: 0, err: Math.random() < errP };
+    if (p.err) c.classList.add("err");
+    pulses.push(p);
+  }
+  function pickRoute() {
+    if (!roots.length) return [];
+    const route = []; let cur = roots[Math.floor(Math.random() * roots.length)];
+    const seen = new Set();
+    while (cur && !seen.has(cur) && out[cur] && out[cur].length) {
+      seen.add(cur);
+      const nxt = out[cur][Math.floor(Math.random() * out[cur].length)];
+      route.push([cur, nxt]); cur = nxt;
+    }
+    return route;
+  }
+  let speed = 1, acc = 0, last = 0, running = true;
+  const eng = { running: true, toggle() { running = !running; play.textContent = running ? "⏸ пауза" : "▶ пуск"; eng.running = running; } };
+  play.onclick = eng.toggle;
+  spd.oninput = () => { speed = parseFloat(spd.value); spdLabel.textContent = "скорость ×" + speed; };
+  engines[wf.id] = eng;
+
+  function frame(ts) {
+    if (!last) last = ts;
+    const dt = Math.min(0.1, (ts - last) / 1000); last = ts;
+    if (running && wf.spawn_per_sec > 0) {
+      acc += dt * speed * wf.spawn_per_sec;
+      while (acc >= 1) { spawn(); acc -= 1; }
+    }
+    for (let i = pulses.length - 1; i >= 0; i--) {
+      const p = pulses[i];
+      if (!p.route.length || p.seg >= p.route.length) {
+        p.el.remove(); pulses.splice(i, 1); continue;
+      }
+      if (!p.dwell) p.dwell = 0;
+      if (p.dwell > 0) { p.dwell -= dt; continue; }
+      const [s, t2] = p.route[p.seg];
+      const path = edgeEls[s + "\u0000" + t2];
+      if (!path) { p.seg++; continue; }
+      const L = path.getTotalLength();
+      p.t += dt * speed * (L > 0 ? 190 / L : 1);
+      if (p.t >= 1) {
+        p.t = 0; p.seg++; p.dwell = 0.14;
+        const nd = nodeEls[t2];
+        if (nd) { nd.classList.add("hot"); setTimeout(() => nd.classList.remove("hot"), 260); }
+        if (p.seg >= p.route.length) { p.el.remove(); pulses.splice(i, 1); }
+        continue;
+      }
+      const pt = path.getPointAtLength(p.t * L);
+      p.el.setAttribute("cx", pt.x); p.el.setAttribute("cy", pt.y);
+      p.el.setAttribute("r", p.err ? 8 : 6.5 - 2 * Math.abs(0.5 - p.t));
+    }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+
+  /* data-table fallback */
+  const dt = el("details", "data-table"); dt.open = wf.nodes.length <= 12;
+  dt.appendChild(el("summary", "", "Ноды и связи (data-table fallback)"));
+  const tn = el("table");
+  tn.innerHTML = "<tr><th>#</th><th>нода</th><th>тип</th><th>категория</th><th>x</th><th>y</th></tr>";
+  wf.nodes.forEach((n, i) => {
+    const tr = el("tr");
+    [i + 1, n.name, n.type, DATA.cat_labels[n.cat], n.x, n.y].forEach(x => tr.appendChild(el("td", "", String(x))));
+    tn.appendChild(tr);
+  });
+  dt.appendChild(tn);
+  const te = el("table");
+  te.innerHTML = "<tr><th>#</th><th>из</th><th>в</th></tr>";
+  wf.edges.forEach((e, i) => {
+    const tr = el("tr");
+    [i + 1, e.s, e.t].forEach(x => tr.appendChild(el("td", "", String(x))));
+    te.appendChild(tr);
+  });
+  const sd = el("details"); sd.appendChild(el("summary", "", "Связи (" + wf.edges.length + ")"));
+  sd.appendChild(te); dt.appendChild(sd);
+  v.appendChild(dt);
+}
+
+/* ---------- сборка ---------- */
+addTab("overview", "Обзор", buildOverview);
+DATA.workflows.forEach(wf => addTab(wf.id, wf.name + " · " + wf.execs, v => buildWorkflow(v, wf)));
+const wanted = decodeURIComponent(location.hash.slice(1));
+const validTabs = ["overview"].concat(DATA.workflows.map(w => w.id));
+selectTab(validTabs.includes(wanted) ? wanted : "overview");
+
+document.getElementById("genDate").textContent = DATA.generated + ", " + DATA.model;
+document.getElementById("foot").textContent = "n8n_top5_dynamic_09-10.py · H6272 · фиды: n8n_top5_graphs_09-10.json + n8n_census_derived_08-10.json · к.ф.н. М.Ю. Гасунс";
+document.querySelectorAll(".t-total").forEach(e => e.textContent = DATA.window.total);
+document.querySelectorAll(".t-ok").forEach(e => e.textContent = DATA.window.success);
+document.querySelectorAll(".t-err").forEach(e => e.textContent = DATA.window.error);
+
+document.getElementById("themeToggle").onclick = () => {
+  const cur = document.documentElement.getAttribute("data-theme") === "dark" ? "" : "dark";
+  document.documentElement.setAttribute("data-theme", cur);
+  document.getElementById("themeToggle").textContent = cur === "dark" ? "☀️ светлая" : "🌙 тёмная";
+};
+</script>
+</body>
+</html>
