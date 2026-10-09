@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="color-scheme" content="dark">
+<meta name="generator" content="csl-pyutil/0.25.0">
+<title>Skill-mine: дельта-перепись H6143–H6313 (09-10-2026) — 9 items</title>
+<style>
+  :root { color-scheme: dark; --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --text:#e6e6e6; --muted:#9aa0aa;
+          --accent:#5b8cff; --ok:#3fb950; --bad:#f85149; --defer:#d29922; --border:#2a2f3a; }
+  * { box-sizing: border-box; }
+  body { background:var(--bg); color:var(--text); font-family:-apple-system,Segoe UI,Roboto,sans-serif;
+         margin:0; padding:0 0 120px 0; }
+  header.top { position:sticky; top:0; z-index:10; background:var(--panel); border-bottom:1px solid var(--border);
+               padding:14px 20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+  header.top h1 { font-size:16px; margin:0; }
+  header.top .sub { color:var(--muted); font-size:12px; max-width:760px; }
+  .tally { display:flex; gap:14px; font-size:13px; }
+  .tally span.count { font-weight:700; }
+  .tally .approve { color:var(--ok); } .tally .reject { color:var(--bad); }
+  .tally .defer { color:var(--defer); } .tally .unvoted { color:var(--muted); }
+  .toolbar { padding:10px 20px; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  button.dl { background:var(--accent); color:#fff; border:none; padding:8px 14px; border-radius:6px;
+              cursor:pointer; font-size:13px; }
+  button.dl:hover { opacity:.9; }
+  .filterbar { display:flex; gap:6px; flex-wrap:wrap; }
+  .filterbar button { background:var(--panel2); border:1px solid var(--border); color:var(--text);
+                       padding:6px 10px; border-radius:14px; font-size:12px; cursor:pointer; }
+  .filterbar button.active { border-color:var(--accent); color:var(--accent); }
+  main { max-width:980px; margin:0 auto; padding:10px 20px; }
+  .card { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:16px;
+          margin-bottom:16px; }
+  .card.voted-approve { border-left:4px solid var(--ok); }
+  .card.voted-reject { border-left:4px solid var(--bad); }
+  .card.voted-defer { border-left:4px solid var(--defer); }
+  .card header { display:flex; justify-content:space-between; align-items:baseline; }
+  .card .hw { font-size:18px; font-weight:700; }
+  .badge { font-size:11px; background:var(--panel2); padding:2px 8px; border-radius:10px;
+           margin-left:8px; color:var(--muted); }
+  .question { margin:8px 0 12px; font-size:14px; }
+  .panel { background:var(--panel2); border-radius:8px; padding:10px 12px; font-size:13px; margin-bottom:10px; }
+  .panel h4 { margin:0 0 6px; font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+  .panel pre { white-space:pre-wrap; word-break:break-word; margin:0; font-size:12px; line-height:1.45; }
+  .chip { display:inline-block; background:#263042; border-radius:5px; padding:2px 7px; margin:2px 3px 2px 0; font-size:12px; }
+  .muted { color:var(--muted); font-style:italic; }
+  .controls { display:flex; align-items:center; gap:8px; margin-top:4px; }
+  button.vote { border:1px solid var(--border); background:var(--panel2); color:var(--text);
+                padding:7px 12px; border-radius:6px; cursor:pointer; font-size:13px; }
+  button.vote.approve.active { background:var(--ok); border-color:var(--ok); color:#04240b; }
+  button.vote.reject.active { background:var(--bad); border-color:var(--bad); color:#2a0a08; }
+  button.vote.defer.active { background:var(--defer); border-color:var(--defer); color:#2a1d02; }
+  .vote-state { margin-left:6px; font-size:12px; color:var(--muted); }
+  textarea.note { width:100%; margin-top:10px; min-height:88px; background:#11141a !important; color:#e6e6e6 !important;
+                  -webkit-text-fill-color:#e6e6e6; border:1px solid var(--border); border-radius:6px; padding:8px; font-size:13px;
+                  font-family:inherit; resize:vertical; }
+  textarea.note::placeholder { color:var(--muted); opacity:1; }
+  footer.hint { max-width:980px; margin:20px auto; padding:0 20px; color:var(--muted); font-size:12px; }
+  kbd { background:#263042; border-radius:4px; padding:1px 5px; font-size:11px; }
+
+  .screening-banner { margin: 0 20px 12px; padding: 10px 14px; border-radius: 8px;
+    border: 1px solid var(--accent); background: #152033; font-size: 12px; line-height: 1.45;
+    color: var(--text); max-width: 980px; }
+  .screening-banner code { font-size: 11px; color: var(--accent); }
+  .screening-banner .sc-d { color: var(--defer); font-weight: 700; }
+
+  .idchip { font-family:ui-monospace,Consolas,monospace; font-size:11px; color:var(--muted);
+            background:var(--panel2); border:1px solid var(--border); padding:2px 7px;
+            border-radius:6px; user-select:all; }
+  .card header { gap:10px; }
+  .hw a.hwlink { color:inherit; text-decoration:underline dotted; text-underline-offset:3px; }
+  .hw a.hwlink:hover { color:var(--accent); }
+  mark.hl { background:#453407; color:#ffd75e; padding:0 2px; border-radius:3px; }
+  .savebanner { max-width:980px; margin:10px auto 0; padding:8px 20px; font-size:12.5px; }
+  .savebanner code { background:var(--panel2); border:1px solid var(--border); padding:1px 6px; border-radius:5px; }
+  .ratingrow { display:flex; align-items:center; gap:6px; margin-top:10px; flex-wrap:wrap; }
+  .ratinglabel { font-size:12px; color:var(--muted); margin-right:4px; }
+  button.rate { border:1px solid var(--border); background:var(--panel2); color:var(--text);
+                width:34px; padding:6px 0; border-radius:6px; cursor:pointer; font-size:13px; }
+  button.rate.active { background:var(--accent); border-color:var(--accent); color:#fff; }
+  button.rate.active.below { background:var(--defer); border-color:var(--defer); color:#2a1d02; }
+  .rate-state { font-size:12px; color:var(--muted); margin-left:4px; }
+  .badge-typology { border:1px solid var(--accent); color:var(--text); font-weight:600; }
+  :root { --fs:1.5; }
+  header.top h1 { font-size:calc(16px * var(--fs)) !important; }
+  header.top .sub { font-size:calc(12px * var(--fs)) !important; }
+  .tally, button.dl, button.vote, button.rate, textarea.note, .reject-label-select,
+  #strictReviewerWrap, #strictReviewerWrap input { font-size:calc(13px * var(--fs)) !important; }
+  .filterbar button, .fsctl button, .fsctl .fsval, .chip, .vote-state, .rate-state,
+  .ratinglabel, .rejectlabellabel, footer.hint, div.legend,
+  #strictReviewError { font-size:calc(12px * var(--fs)) !important; }
+  .card .hw { font-size:calc(18px * var(--fs)) !important; }
+  .badge, .panel h4, kbd, .idchip { font-size:calc(11px * var(--fs)) !important; }
+  .question { font-size:calc(14px * var(--fs)) !important; }
+  .panel { font-size:calc(13px * var(--fs)) !important; }
+  .panel pre { font-size:calc(13.5px * var(--fs)) !important; line-height:1.55; }
+  .panel .anatomy { font-size:calc(12.5px * var(--fs)) !important; }
+  .savebanner { font-size:calc(12.5px * var(--fs)) !important; }
+  .fsctl { display:flex; align-items:center; gap:4px; }
+  .fsctl button { background:var(--panel2); border:1px solid var(--border); color:var(--text);
+                  padding:6px 10px; border-radius:14px; cursor:pointer; line-height:1; }
+  .fsctl .fsval { color:var(--muted); min-width:3.4em; text-align:center; }
+  @media (max-width: 640px) {
+    header.top { padding: 10px 14px; flex-direction: column; align-items: stretch; }
+    header.top h1 { font-size: 15px; }
+    .tally { gap: 8px; font-size: 11px; }
+    .toolbar { padding: 8px 14px; }
+    main { padding: 8px 12px; }
+    .card { padding: 12px; }
+    .filterbar { flex-wrap: wrap; }
+    button.dl, button.vote, button.rate, .fsctl button, #saveBtn, #handinBtn, #pauseBtn {
+      min-height: 44px; min-width: 44px; padding: 10px 14px;
+    }
+    .controls { flex-wrap: wrap; }
+    .panel { padding: 8px 10px; }
+    textarea.note { min-height: 60px; }
+  }
+  .tally .time { color:var(--muted); }
+  .dl.handin { background:#243447; }
+  .tally .pausebtn { background:none; border:1px solid var(--border); color:var(--muted);
+                     border-radius:6px; padding:0 6px; margin-left:4px; cursor:pointer;
+                     font-size:inherit; font-family:inherit; line-height:1.6; }
+  .tally .pausebtn.on { color:#ffd479; border-color:#ffd479; }
+  .tally .time.paused { opacity:.45; }
+  .handin-said { color:var(--muted); font-size:12px; margin-left:10px; }
+  .card.kbd-active { outline:2px solid var(--accent); outline-offset:3px; }
+  .tally .tstate { color:var(--muted); font-size:.85em; margin-left:4px; }
+  .tally .tstate.idle { color:var(--defer); }
+  .flowprog { display:inline-flex; align-items:center; gap:8px; color:var(--muted); font-size:12px; }
+  .flowprog .bar { display:inline-block; width:120px; height:6px; border-radius:3px;
+                   background:var(--panel2); border:1px solid var(--border); overflow:hidden; }
+  .flowprog .bar i { display:block; height:6px; background:var(--accent); width:0; }
+  .dl.flowundo { background:#243447; }
+  .flowtoast { position:fixed; left:50%; bottom:24px; transform:translateX(-50%);
+               background:var(--panel2); border:1px solid var(--border); color:var(--text);
+               padding:8px 14px; border-radius:8px; font-size:13px; z-index:50;
+               opacity:0; pointer-events:none; transition:opacity .18s; }
+  .flowtoast.on { opacity:1; }
+  .voteprog { flex:1 0 100%; order:99; background:var(--panel);
+              border-top:1px solid var(--border); margin:6px -20px -14px; padding:8px 20px;
+              display:flex; align-items:center; gap:12px; font-size:12px; color:var(--muted); }
+  .voteprog .bar { flex:1 1 auto; height:8px; border-radius:4px; background:var(--panel2);
+                   border:1px solid var(--border); overflow:hidden; }
+  .voteprog .bar i { display:block; height:100%; width:0; background:var(--ok); transition:width .2s; }
+  .voteprog b { color:var(--text); font-weight:700; }
+  .voteprog .eta { white-space:nowrap; }
+  .votebar { position:sticky; bottom:0; z-index:9; background:var(--panel);
+             border-top:1px solid var(--border); padding:10px 20px; margin-top:24px;
+             display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  .votebar .spacer { flex:1 1 auto; }
+  .card { scroll-margin-top:96px; }
+  @media (max-width: 640px) { .voteprog { padding:6px 12px; } .votebar { padding:8px 12px; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>Skill-mine: дельта-перепись H6143–H6313 (09-10-2026) — 9 items</h1>
+    <div class="sub">Generated 09-10-2026 &middot; sheet_id <code>uprava-skill-mine_h6143_h6313_09-10-26</code> &middot; Дельта-перепись следов после окна H5568–H6142 (закрыто 05-10): 196 файлов / 174 сессии окна 05–09-10-2026 (~59 исполненных), все исполнители GLM-семьи, дедупликация против каталога (вкл. новые C57–C59) + рулинги D26–D102 и reject store как suppression-лист ДО отбора. 9 карточек: 2 NEW + 3 UPDATE + 4 ратификации «не навык (пока)». Голос — В ЧАТЕ, по карточкам (≤10 карточек — постоянная политика 26-08). Навыки в проходе переписи не строятся — только после голосования.</div>
+  </div>
+  <div class="tally" id="tally">
+    <span class="approve">&#9989; <span class="count" id="c-approve">0</span></span>
+    <span class="reject">&#10060; <span class="count" id="c-reject">0</span></span>
+    <span class="defer">&#9208; <span class="count" id="c-defer">0</span></span>
+    <span class="time" title="active time on this sheet (while the tab is visible)">&#9201; <span class="count" id="t-total">0:00</span><span class="tstate" id="t-state"></span></span>
+    <button type="button" class="pausebtn" id="pauseBtn" title="pause the clock — a break is not review time">&#9208;</button>
+    <span class="unvoted">&#9711; <span class="count" id="c-unvoted">9</span></span>
+  </div>
+<div class="voteprog" id="voteProg"><span id="voteProgText"></span><span class="bar"><i id="voteProgBar"></i></span><span class="eta" id="voteProgEta"></span></div>
+</header>
+<aside class="screening-banner" role="status" data-screening="1"><strong>Screening (H1649)</strong> — only human-required cards are below. Off the plate: <span class="sc-a">deterministic 3</span> · <span class="sc-b">dataset lookup 1</span> · <span class="sc-c">agent adjudication 3</span> (total screened 7). Human cards: <span class="sc-d">9</span>. Evidence: <code>SKILL_CANDIDATES_CENSUS_H6143_H6313_09_10_2026.md</code>. Rules: bar-&gt;=2-distinct-sessions (singletons dropped, listed once in the census; Fable/Astra amendment MG 07-09 NOT triggered — zero executed Fable/Astra sessions in window), prior-rulings-suppression: D26-D102 + reject store checked BEFORE candidate selection (D70/D71/D91 kill machinery, D84/D88 kill batch/planned waves, D90 kills domain programmes), catalogue-dedupe-vs-commands (covered shapes never rendered, near-misses named on the cards; bughunt fix-lane check removed a would-be UPDATE card), minted-same-day-wave test (Hermes-24 + Sanskrit-8 = 0-exec minted waves -&gt; D104; maturity-12 has 4 executed sessions -&gt; carded C60 with the D96-tension named on the card), one-programme-one-domain test (talks/Babkin, maturity fan -&gt; D105/D103), dup-mint artifact test (.claim sidecars counted once, 196 files -&gt; 174 sessions; live+archive twins counted once — archive carries the evidence), delta-basis: 174 unique window sessions after the H5568-H6142 census; no re-litigation of H1-H6142.</aside>
+<div class="savebanner">&#128229; Your export downloads as <code>uprava-skill-mine_h6143_h6313_09-10-26_decisions.json</code> &rarr; save it to <code>review/uprava-skill-mine_h6143_h6313_09-10-26_decisions.json</code> (the <code>sheet_id</code> inside the file is <code>uprava-skill-mine_h6143_h6313_09-10-26</code> — that is how a later session knows which sheet these decisions belong to).</div>
+<div class="toolbar">
+  <button data-submit="1" class="dl" id="downloadBtn">Download decisions.json</button><button data-submit="1" class="dl handin" id="handinBtn" title="stop the clock and export the votes made so far; the rest stay saved in this browser">Hand in what I got</button><span class="handin-said" id="handinSaid"></span><button data-submit="1" class="dl" id="saveBtn" style="display:none;margin-left:8px">Save to folder…</button>
+  <label data-submit="1" id="strictReviewerWrap" style="display:flex;align-items:center;gap:6px;font-size:13px">
+    Reviewer <input id="strictReviewer" type="text" autocomplete="name" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:7px 9px" />
+  </label>
+  <span data-submit="1" id="strictReviewError" role="alert" style="color:var(--bad);font-size:12px"></span>
+  <div class="fsctl" title="text size — persists in this browser"><button type="button" id="fsDown" aria-label="smaller text">A&minus;</button><span class="fsval" id="fsVal"></span><button type="button" id="fsUp" aria-label="larger text">A+</button></div>
+  <button data-submit="1" type="button" class="dl flowundo" id="flowUndoBtn" title="undo the last decision (z)">&#8630; Undo</button>
+  <span class="flowprog" id="flowProg"><span class="bar"><i id="flowBar"></i></span><span id="flowProgText"></span><span id="flowEta"></span></span>
+  <div class="filterbar" id="filterbar"><button data-filter="all" class="active">all</button><button data-filter="new">NEW</button><button data-filter="update">UPDATE</button><button data-filter="defer">Подтверждение отсрочки</button><button data-filter="unvoted">unvoted only</button></div>
+</div>
+<main id="cards">
+
+  <section class="card" data-id="C60" data-filt="new">
+    <header><div class="hw">C60 — NEW /maturity-audit: аудит зрелости репо N/5 (machine-метрики + live read-only пробы + top-3 рычага → reports/MATURITY_*) <span class="badge">freq:12</span><span class="badge">09.10</span><span class="badge">exec 4</span><span class="badge badge-typology" title="U7: count + population share">NEW (n=2, 22%)</span></div><span class="idchip" title="card id — cite this id back when discussing this card">C60</span></header>
+    <div class="question"><p><b>Что кодирует.</b> Аудит зрелости одного репо как одну дисциплину:
+machine-метрики из git/CI/telemetry (без ручного глаза) → <b>live read-only пробы</b> прода (fence: в аудите
+не чинить) → вердикт <b>N/5</b> по фиксированной рамке → top-3 рычага → отчёт
+<code>reports/MATURITY_&lt;repo&gt;_&lt;date&gt;.md</code>. Волна поднята гриллем 09-10 (MG «mint all»),
+4 отчёта уже исполнены.</p>
+<p><b>Свидетельство — 12 юнитов, 4 исполнено:</b> <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6280-OxAlpha_Uprava_maturity-handoff-registry_09.10.26.md">H6280</a> (handoff-registry ✅) · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6281-OxAlpha_claude-config_maturity-hooks-circuit_09.10.26.md">H6281</a>
+(claude-config hooks-circuit ✅) · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6286-OxAlpha_Systema-Sanscriticum_maturity-backups-dr_09.10.26.md">H6286</a> (Systema backups-DR ✅) · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6291-OxAlpha_Uprava_maturity-tgrep_09.10.26.md">H6291</a> (tgrep ✅) ·
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6284-OxAlpha_agents-skills_maturity-skills-estate_09.10.26.md">H6284</a> (skills-estate, claimed) + 7 открытых (zoo: Uprava-ланчи, csl-observatory, kosha…).</p>
+<p><b>Дедупликация.</b> <code>/tier-audit</code> — тиринг хэндофф-батчей по экономике;
+<code>/pipeline-audit</code> — capability одного пайплайна; <code>/org-health-report</code>/<code>/period-report</code> —
+отчёты поверх лейнов; <code>/skill-fit-audit</code> — гейт принятия скилла. Аудит целого репо с N/5-вердиктом
+не покрыт никем.</p>
+<p><b>Напряжённость с D96 (Bühler per-lesson очередь — promotion 2-я очередь; named honestly):</b> волна — same-day batch-mint из одного грилля (как Bühler 49).
+За NEW: 4 исполненных сессии с идентичным скелетом, дисциплина репо-генерична (любой репо/квартал, не конечная
+очередь урока). За D-класс: единый источник волны. <b>Fork на голосе:</b> approve = строить NEW;
+defer = ратифицировать программой с promotion на второй волне.</p>
+<ul>
+<li><b>approve</b> — следующий «проверь зрелость репо X» идёт одним вызовом: метрики + пробы + N/5 + рычаги, fence «не чинить в аудите» зашит.</li>
+<li><b>reject</b> — аудиты остаются импровизацией; рамка N/5 и fence дрейфуют между репо.</li>
+<li><b>defer</b> — ратифицировать как программу волны-1; кандидат на второй волне (путь карточки D103 «ратификация — maturity repair fan H6300–H6311 не навык (promotion: вторая волна)»).</li>
+</ul></div>
+    
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Approve</button>
+      <button class="vote reject" data-vote="reject">&#10060; Reject</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="NEW maturity-audit / defer→D-ратификация / reject…"></textarea>
+  </section>
+
+  <section class="card" data-id="C61" data-filt="new">
+    <header><div class="hw">C61 — NEW /paper-priv-sweep: circuit публичное↔приватное для научных текстов (policy-сверка → сведение слоя → байт-идентичный git-restore → re-point → каталог) <span class="badge">freq:4</span><span class="badge">06.10</span><span class="badge">exec 2-3</span><span class="badge badge-typology" title="U7: count + population share">NEW (n=2, 22%)</span></div><span class="idchip" title="card id — cite this id back when discussing this card">C61</span></header>
+    <div class="question"><p><b>Что кодирует.</b> Standing policy «papers/drafts — приватно» как исполняемая
+дисциплина: сверка публичных путей с политикой → сведение публичного слоя (rewrite/удаление) →
+<b>байт-идентичный restore-proof из git-истории</b> (<code>git show &lt;sha&gt;:&lt;path&gt;</code>, не рабочая
+копия) → re-point входящих ссылок (FINDINGS/README/handoffs) → обновление каталога manuscripts → PR.</p>
+<p><b>Свидетельство — 4 сессии окна + прецедент A68-restore:</b> <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6200-OxAlpha_Uprava_papers-drafts-metadata-catalog_06.10.26.md">H6200</a> (papers/drafts metadata-каталог,
+2/3) · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6202-OxAlpha_Uprava_atlas-p1p6-manuscripts-restore_06.10.26.md">H6202</a> (atlas P1–P6 manuscripts restore из истории, 2/3) · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6204-OxAlpha_Uprava_paper-priv-atlas-p1p6-removal_06.10.26.md">H6204</a> (priv-removal + re-point ✅) ·
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6196-OxAlpha_csl-standards_lex0-rng-repin-v0.9.5_06.10.26.md">H6196</a> (Lex-0 RNG repin, open). Прецедент до окна: рукопись A68 восстановлена <code>git show</code> из
+истории csl-atlas.</p>
+<p><b>Дедупликация.</b> <code>/acl-uplift</code> — venue-аплифт статьи (related-work, submit-пакет), не
+priv-слой; <code>/corpus-rights-unlock</code> — разблокировка прав на корпус-ингест (обратное направление);
+<code>/critical-apparatus</code> — научный аппарат. Priv-move/restore-механика не покрыта.</p>
+<ul>
+<li><b>approve</b> — следующее venue-решение (публичное↔приватное) идёт одним вызовом с restore-proof и re-point-чеком, а не тремя сессиями на инцидент.</li>
+<li><b>reject</b> — каждый priv-инцидент заново изобретает restore из истории и забывает re-point ссылок.</li>
+<li><b>defer</b> — до второго venue-инцидента (они следуют за решениями журналов).</li>
+</ul></div>
+    
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Approve</button>
+      <button class="vote reject" data-vote="reject">&#10060; Reject</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="NEW paper-priv-sweep / defer / reject…"></textarea>
+  </section>
+
+  <section class="card" data-id="U70" data-filt="update">
+    <header><div class="hw">U70 — UPDATE /eval-harness: recall-bench адъюнкты — замороженный gold + same-run one-snapshot + pre-registered KEEP-rules + gold-switch governance <span class="badge">freq:7</span><span class="badge">07.10→09.10</span><span class="badge">exec 7</span><span class="badge badge-typology" title="U7: count + population share">UPDATE (n=3, 33%)</span></div><span class="idchip" title="card id — cite this id back when discussing this card">U70</span></header>
+    <div class="question"><p><b>Дельта к U65 (rigor-адъюнкты 18-09).</b> Протокол recall-бенча окна, все 7 сессий
+исполнены: (1) <b>замороженный gold + same-run one-snapshot</b> — один снапшот среды на весь прогон, gold не
+регенерируется между итерациями; (2) <b>pre-registered KEEP-rules</b> — правила KEEP/ROLLBACK записаны ДО
+прогона, негативный вердикт = полноценный исход с закрытием (H6216 quant NEGATIVE для default); (3)
+<b>gold-switch governance</b> — расширение/замена gold-сета только решением MG, телеметрия до/после
+(<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6218-OxAlpha_Uprava_recall-gold-widen-telemetry_08.10.26.md">H6218</a> → <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6229-GLM_Uprava_recall-kpi-wide-gold-switch_08.10.26.md">H6229</a>); (4) победитель включается на drain-лейнах с env-швом
+(<code>$RECALL_DEFAULT_STRATEGY</code>), не прод-флипом (<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6292-OxAlpha_Uprava_recall-rerank-v2m3-drain-enable_09.10.26.md">H6292</a>).</p>
+<p><b>Свидетельство:</b> <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6214-OxAlpha_Uprava_recall-rag-github-trends-map_07.10.26.md">H6214</a> (github-trends map) · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6216-OxAlpha_Uprava_recall-rerank-quant-adaptive-bench_08.10.26.md">H6216</a> (rerank-quant adaptive bench) ·
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6217-OxAlpha_Uprava_recall-embed-refresh-2026-bench_08.10.26.md">H6217</a> (embed-refresh bench) · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6218-OxAlpha_Uprava_recall-gold-widen-telemetry_08.10.26.md">H6218</a> (gold-widen telemetry) · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6229-GLM_Uprava_recall-kpi-wide-gold-switch_08.10.26.md">H6229</a> (KPI wide gold-switch) ·
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6234-GLM_Uprava_fusion-margin-rescale-58_08.10.26.md">H6234</a> (fusion-margin rescale 58) · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6292-OxAlpha_Uprava_recall-rerank-v2m3-drain-enable_09.10.26.md">H6292</a> (v2m3 drain-enable).</p>
+<p><b>Дедупликация.</b> Сам /eval-harness (U65: N-run averaging, bias-пробы, paired-значимость) не несёт
+frozen-gold/KEEP/gold-switch governance; adjudication-половина — <code>/gold-adjudicate</code> (U68 — pool-режим 11-09).
+Дельта ложится в /eval-harness как новые адъюнкты.</p>
+<ul>
+<li><b>approve</b> — следующий бенч-пасс несёт протокол целиком из навыка, а не из памяти сессии.</li>
+<li><b>reject</b> — протокол живёт в memory-заметках и переоткрывается каждым бенч-пассом.</li>
+<li><b>defer</b> — до следующего recall-бенча (пайплайн активен еженедельно).</li>
+</ul></div>
+    
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Approve</button>
+      <button class="vote reject" data-vote="reject">&#10060; Reject</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="UPDATE eval-harness / defer / reject…"></textarea>
+  </section>
+
+  <section class="card" data-id="U71" data-filt="update">
+    <header><div class="hw">U71 — UPDATE /n8n: четвёртая форма юнита census/cleanup — перепись сценариев → verdict-map → архивация/активация → канарейка → residuals <span class="badge">freq:6</span><span class="badge">08.10</span><span class="badge">exec 6</span><span class="badge badge-typology" title="U7: count + population share">UPDATE (n=3, 33%)</span></div><span class="idchip" title="card id — cite this id back when discussing this card">U71</span></header>
+    <div class="question"><p><b>Дельта.</b> Навык сегодня владеет тремя формами (sec / hygiene / bridge). Окно
+добавило четвёртую — <b>census/cleanup</b>: перепись всех сценариев инстанса → verdict-map (активный /
+архив / тумблер-готов без триггера / нет кредов) → исполнение батчем (архивация/активация) → канарейка-прогон
+→ residual-лист. Гочи рецепта: n8n 2.38 активирует только active+activeVersionId+triggerCount; API
+<code>/activate</code> = 403 проектный скоуп → мутации через sqlite из контейнера; dup-shipped-гард на
+параллельные пассы.</p>
+<p><b>Свидетельство — 6 сессий, все исполнены:</b> <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6230-OxAlpha_Systema-Sanscriticum_sprint-task3-feedback-pipeline_08.10.26.md">H6230</a> (sprint feedback-pipeline жив) ·
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6231-OxAlpha_Uprava_n8n-scenarios-census-map_08.10.26.md">H6231</a> (census 95 сценариев / 18 активных / 602 экз.) · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6232-GLM_Uprava_n8n-census-viz-fan_08.10.26.md">H6232</a> (viz-fan 7 визуализаций) ·
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6241-OxAlpha_Uprava_n8n-vps91-instance-cleanup-wave_08.10.26.md">H6241</a> (cleanup 37→25 активных, DUPLICATE-SHIPPED закрыт) · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6242-OxAlpha_Uprava_n8n-feedback-pipeline-error-triage_08.10.26.md">H6242</a> (error-triage) ·
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6265-OxAlpha_Systema-Sanscriticum_n8n-cleanup-residuals_08.10.26.md">H6265</a> (residuals) · viz-хвост <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6272-GLM_Uprava_n8n-top5-dynamic-viz_09.10.26.md">H6272</a> — /viz-page.</p>
+<p><b>Дедупликация.</b> Сам <code>/n8n</code> — ближайший владелец (добавляем форму, не новый навык);
+<code>/viz-page</code> — публиш-хвост. Estate-оперы над инстансом никем кроме /n8n не владеются.</p>
+<ul>
+<li><b>approve</b> — следующая n8n-перепись/чистка идёт формой навыка с sqlite-рецептом и канарейкой.</li>
+<li><b>reject</b> — census→cleanup каждый раз переоткрывает activeVersionId-гочи и 403-скоуп.</li>
+<li><b>defer</b> — до следующей n8n-волны (диск vps91 под давлением, волны регулярны).</li>
+</ul></div>
+    
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Approve</button>
+      <button class="vote reject" data-vote="reject">&#10060; Reject</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="UPDATE n8n / defer / reject…"></textarea>
+  </section>
+
+  <section class="card" data-id="U72" data-filt="update">
+    <header><div class="hw">U72 — UPDATE /seo-audit: хвост аудита — fix-wave (приоритезированные фиксы + live-конфиг) и verify-after receipt (повторная проба как квитанция) <span class="badge">freq:4</span><span class="badge">05.10→06.10</span><span class="badge">exec 4, 2 сайта</span><span class="badge badge-typology" title="U7: count + population share">UPDATE (n=3, 33%)</span></div><span class="idchip" title="card id — cite this id back when discussing this card">U72</span></header>
+    <div class="question"><p><b>Дельта.</b> Навык останавливается на отчёте со скором. Окно дважды прошло
+полный контур на двух сайтах: аудит → скор-док → <b>fix-wave</b> (High/Medium/Low фиксы PR-ами + live-конфиг
+nginx той же сессией) → <b>verify-after receipt</b> (повторная live-проба изменённых эндпоинтов как квитанция
+закрытия, residual-лист явно). Оба хвоста — повторяющаяся дисциплина, не покрытая ни /seo-audit, ни
+/seo-drift (point-in-time change tracking), ни /bughunt (не баги — контур аудита).</p>
+<p><b>Свидетельство:</b> <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6160-OxAlpha_Systema-Sanscriticum_seo-audit-samskrte-2026-10-05_05.10.26.md">H6160</a> (samskrte.ru Score 83/100) → <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6165-OxAlpha_Systema-Sanscriticum_seo-fixes-audit-h6160_06.10.26.md">H6165</a> (fix-wave + nginx live ✅) ·
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6193-OxAlpha_samskrtamRU_seo-fixes-audit-0610_06.10.26.md">H6193</a> (samskrtam.ru fix-wave, PRs #2/#3) → <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6195-GLM_samskrtamRU_verify-after-hosting-fix_06.10.26.md">H6195</a> (verify-after hosting-fix ✅);
+residuals H6211 claimed.</p>
+<ul>
+<li><b>approve</b> — следующий SEO-аудит сразу предлагает fix-wave и verify-receipt, а не бросает отчёт.</li>
+<li><b>reject</b> — фикс-хвост каждый раз импровизируется, verify-after забывается.</li>
+<li><b>defer</b> — до третьего сайта (оба сайта окна уже закрыты).</li>
+</ul></div>
+    
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Approve</button>
+      <button class="vote reject" data-vote="reject">&#10060; Reject</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="UPDATE seo-audit / defer / reject…"></textarea>
+  </section>
+
+  <section class="card" data-id="D103" data-filt="defer">
+    <header><div class="hw">D103 — Подтверждение: производный fan зрелости H6300–H6311 (12 брифов из MATURITY-отчётов) — НЕ навык; promotion: вторая волна ремонтов → сверка с C60 <span class="badge">12 юнитов</span><span class="badge">09.10</span><span class="badge">0–1 исполнено</span><span class="badge badge-typology" title="U7: count + population share">RATIFY (n=4, 44%)</span></div><span class="idchip" title="card id — cite this id back when discussing this card">D103</span></header>
+    <div class="question"><p><b>Суть.</b> Ремонтный fan из аудитов C60: 12 англ. брифов с общей рамкой
+(Evidence and reuse / Locked acceptance / Execution boundaries / Decision authority), исходящих из
+MATURITY-отчётов: <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6300-GLM_Systema-Sanscriticum_chat-compose-failure-recovery_09.10.26.md">H6300</a> (chat-compose failure recovery) · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6305-GLM_Systema-Sanscriticum_morphology-existing-item-lesson-pack_09.10.26.md">H6305</a> (morphology lesson-pack) ·
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6308-GLM_Uprava_tgrep-stale-index-fail-visible_09.10.26.md">H6308</a> (tgrep stale-index fail-visible) · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6311-GLM_Uprava_mint-batch-acceptance-contract_09.10.26.md">H6311</a> (mint-batch acceptance contracts) и др.</p>
+<p><b>Почему не навык.</b> Бриф-механика = <code>/handoff-mint --spec-file</code>; программа исходится из
+MATURITY-отчётов (ядро — карточка C60 «NEW /maturity-audit (09-10-2026)»). Юниты исполняют заминченную спецификацию — классы D84 (same-day batch-minted программа) и D90 (доменная программа с built-ядром).
+<b>Promotion-правило:</b> вторая волна ремонтов из аудитов → сверка формы с C60 на следующей переписи.</p>
+<ul>
+<li><b>approve</b> («не навык») — fan не ре-литигуется; promotion записан здесь.</li>
+<li><b>reject</b> (= форсировать) — потребовать навык «repair-fan» поверх handoff-mint.</li>
+<li><b>defer</b> — решить после дренажа половины fan'а.</li>
+</ul></div>
+    
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Approve</button>
+      <button class="vote reject" data-vote="reject">&#10060; Reject</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="ратифицировать / форсировать / defer…"></textarea>
+  </section>
+
+  <section class="card" data-id="D104" data-filt="defer">
+    <header><div class="hw">D104 — Подтверждение: две 0-exec mint-волны окна — Hermes/W1 proof-package (24) + Sanskrit research (8) — НЕ кандидаты пока (promotion ≥2 исполненных каждая) <span class="badge">32 юнита</span><span class="badge">06.10→09.10</span><span class="badge">0 исполнено</span><span class="badge badge-typology" title="U7: count + population share">RATIFY (n=4, 44%)</span></div><span class="idchip" title="card id — cite this id back when discussing this card">D104</span></header>
+    <div class="question"><p><b>Суть.</b> (a) Hermes/W1 proof-package: 24 юнита <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6168-GLM_Uprava_hermes-role-lane-consumer-map_06.10.26.md">H6168</a>–<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6191-GLM_Uprava_hermes-w1-shadow-acceptance-matrix_06.10.26.md">H6191</a> —
+один locked result на юнит (артефакт + воспроизводимая проба + PR + evidence), роли OFF, deploy-гейт
+<code>hermes-24-01a10bca-wiring</code>, B-цепочка зависимостей, drain запрещён до PR. (b) Sanskrit research:
+8 юнитов <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6252-OxAlpha_Systema-Sanscriticum_learner-error-corpus_08.10.26.md">H6252</a> (learner-error corpus) – <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6260-OxAlpha_SanskritLexicography_samasa-segmentation-bench_08.10.26.md">H6260</a> (samasa-segmentation bench) —
+gold-set + bench + отчёт.</p>
+<p><b>Почему не кандидаты пока.</b> Классы D84 (same-day batch-minted программа), D88 (плановая волна 0 исполненных — не кандидат пока), D99 (chunk-* perf-волна — promotion ≥2 исполненных): бар ≥2 требует исполненной
+импровизированной дисциплины; обе волны заминчены, исполнений ноль. <b>Promotion-правило:</b> ≥2 исполненных
+юн Unit каждой волны → кандидат на следующей переписи (proof-package-форма уже наблюдаема как
+кандидат-в-ожидании).</p>
+<ul>
+<li><b>approve</b> («не кандидаты пока») — волны не ре-литигуются; promotion-правило записано.</li>
+<li><b>reject</b> (= форсировать) — потребовать навык «proof-package-slice» до исполнения юнитов.</li>
+<li><b>defer</b> — решить после первых исполнений (гейт deploy hermes-24…).</li>
+</ul></div>
+    
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Approve</button>
+      <button class="vote reject" data-vote="reject">&#10060; Reject</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="ратифицировать / форсировать / defer…"></textarea>
+  </section>
+
+  <section class="card" data-id="D105" data-filt="defer">
+    <header><div class="hw">D105 — Подтверждение: talks/Babkin content-программа одного корпуса (constructor-grill → прогон → контент) — НЕ кандидат (promotion: второй корпус → кандидат) <span class="badge">6 сессий</span><span class="badge">08.10→09.10</span><span class="badge">exec 4</span><span class="badge badge-typology" title="U7: count + population share">RATIFY (n=4, 44%)</span></div><span class="idchip" title="card id — cite this id back when discussing this card">D105</span></header>
+    <div class="question"><p><b>Суть.</b> Программа разговорного контура одного корпуса (Бабкин ВК, 6330
+постов в backups): constructor-grill <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6228-OxAlpha_Uprava_talks-constructor-yoga-fest_08.10.26.md">H6228</a> (4/15 решены интерактивом) → fest-прогон с цитатной сверкой
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6233-OxAlpha_Uprava_fest-draft-progon_08.10.26.md">H6233</a> ✅ → findings-grill <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6235-OxAlpha_Uprava_babkin-yoga-findings-grill_08.10.26.md">H6235</a> ✅ → контент-юниты <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6267-GLM_Uprava_fest-babkin-wave-inserts_09.10.26.md">H6267</a> (wave-inserts) ·
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6269-GLM_Uprava_shavasana-protocol-samskrte-article_09.10.26.md">H6269</a> (шавасана-протокол) · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6271-GLM_Uprava_babkin-dialog-comment-draft_09.10.26.md">H6271</a> (диалог-комментарий) ✅ — byte-verbatim цитаты по id дампа,
+MG-voice, публикация только по визе MG.</p>
+<p><b>Почему не кандидат.</b> Классы D72 (product/ops программа) и D84 (same-day batch-minted программа): программа одного корпуса; решающие сессии владеются
+<code>/grillme</code> + <code>/grilling</code>, письмо — <code>/pishi</code>; цитатная сверка — доменная
+дисциплина внутри программы. <b>Promotion-правило:</b> второй корпус той же формы (другой автор) →
+кандидат.</p>
+<ul>
+<li><b>approve</b> («не кандидат») — программа не ре-литигуется; promotion записан.</li>
+<li><b>reject</b> (= форсировать) — потребовать навык «corpus-quote-content» уже сейчас.</li>
+<li><b>defer</b> — решить на второй корпусной программе (Парибок ч.2 — вероятный кандидат).</li>
+</ul></div>
+    
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Approve</button>
+      <button class="vote reject" data-vote="reject">&#10060; Reject</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="ратифицировать / форсировать / defer…"></textarea>
+  </section>
+
+  <section class="card" data-id="D106" data-filt="defer">
+    <header><div class="hw">D106 — Подтверждение: registry/canonical-clone/close machinery окна (close-on-merge + reconcile-cron + clone-recovery + mint-batch contracts) — НЕ навык (классы D70/D71/D101) <span class="badge">~9 сессий</span><span class="badge">07.10→09.10</span><span class="badge">exec 4–5</span><span class="badge badge-typology" title="U7: count + population share">RATIFY (n=4, 44%)</span></div><span class="idchip" title="card id — cite this id back when discussing this card">D106</span></header>
+    <div class="question"><p><b>Суть.</b> Харденинг реестровой машинерии окна: close-on-merge workflow
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6261-OxAlpha_Uprava_handoff-close-on-merge-workflow_08.10.26.md">H6261</a> ✅ + verifier-гейт-флип <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6275-GLM_Uprava_close-on-merge-verifier-gated-flip-lane_09.10.26.md">H6275</a> ✅ + merged-PR reconcile-cron <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6226-OxAlpha_Uprava_quality-merged-pr-reconcile-cron_08.10.26.md">H6226</a> ✅ ·
+close-backlog sweep <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6210-OxAlpha_Uprava_registry-close-backlog-sweep_07.10.26.md">H6210</a> (claimed) · canonical-clone recovery / anti-stale механизмы
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6236-GLM_Uprava_canonical-clone-recovery-0810_08.10.26.md">H6236</a>/<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6237-GLM_Uprava_anti-stale-canonical-clone-mechanisms_08.10.26.md">H6237</a> (claimed) · null-guard heal <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6209-OxAlpha_Uprava_drain-unblock-null-guard-lanes-heal_07.10.26.md">H6209</a> · mint-batch acceptance contracts
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6311-GLM_Uprava_mint-batch-acceptance-contract_09.10.26.md">H6311</a> (claimed).</p>
+<p><b>Почему не навык.</b> Классы D70 (drain/session-runner machinery), D71 (guard/liveness hardening — «the recurring kill-class»), D101 (drain/claim/registry machinery hardening не навык): <code>/handoff-close</code>,
+<code>/handoff-registry-audit</code>, <code>/drain</code>, <code>/branch-contention-recover</code> владеют
+контуром; FINDINGS §1577/§1578 поглощают гочи; verifier-гейт H4235 — зафиксированное правило.
+<b>Promotion-правило:</b> третий однотипный пробой за окно → правило/гвард, не навык.</p>
+<ul>
+<li><b>approve</b> («не навык») — серия не ре-литигуется следующей переписью.</li>
+<li><b>reject</b> (= форсировать) — потребовать навык «registry-machinery-builder» поверх tools.</li>
+<li><b>defer</b> — решить, если тот же контракт сломается третьим за окно.</li>
+</ul></div>
+    
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Approve</button>
+      <button class="vote reject" data-vote="reject">&#10060; Reject</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="ратифицировать / форсировать / defer…"></textarea>
+  </section>
+</main>
+<div class="votebar" id="voteBar"><span class="spacer"></span></div>
+<footer class="hint">Источник: SKILL_CANDIDATES_CENSUS_H6143_H6313_09_10_2026.md · /skill-mine · GLM 5.3 (`account:zai-individual-coding-plan/GLM-5.3`) через ZCode · 09-10-2026. Approve — принять предложение карточки. Reject — оставить как есть (для D-карточек: «не навык» = approve). Defer — решить позже. Keyboard: <kbd>a</kbd> Approve &middot; <kbd>r</kbd> Reject
+  &middot; <kbd>d</kbd> defer &middot; <kbd>&darr;</kbd>/<kbd>&uarr;</kbd> next/prev. Votes autosave to
+  this browser's localStorage; click "Download decisions.json" when done (unvoted items export with
+  decision:null).</footer>
+<div class="legend" style="max-width:980px;margin:0 auto 20px;padding:0 20px;color:var(--muted);font-size:12px">
+  <b>Approve</b> = accept the proposed change/answer shown on the card (no separate "approve as-is" —
+  approving means agreeing as written). <b>Reject</b> = keep the current entry/answer unchanged.
+  <b>Defer</b> = not sure yet, decide later. The note field is for requesting a partial tweak instead
+  of an outright reject.
+</div>
+<script>
+(function () {
+  var SHEET_ID = "uprava-skill-mine_h6143_h6313_09-10-26";
+  var STORE_KEY = 'review-sheet:' + SHEET_ID;
+  var GENERATED = "09-10-2026";
+  var ids = ["C60", "C61", "U70", "U71", "U72", "D103", "D104", "D105", "D106"];
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(STORE_KEY) || '{}') || {}; } catch (e) { state = {}; }
+  function tally() {
+    var c = { approve:0, reject:0, defer:0 };
+    ids.forEach(function (id) { var v = state[id] && state[id].decision; if (v && c.hasOwnProperty(v)) c[v]++; });
+    document.getElementById('c-approve').textContent = c.approve;
+    document.getElementById('c-reject').textContent = c.reject;
+    document.getElementById('c-defer').textContent = c.defer;
+    document.getElementById('c-unvoted').textContent = ids.length - c.approve - c.reject - c.defer;
+  }
+  function applyCardUI(card) {
+    var id = card.getAttribute('data-id'); var rec = state[id] || {};
+    card.classList.remove('voted-approve','voted-reject','voted-defer');
+    card.querySelectorAll('button.vote').forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-vote') === rec.decision); });
+    card.querySelector('.vote-state').textContent = rec.decision ? rec.decision : 'unvoted';
+    if (rec.decision) card.classList.add('voted-' + rec.decision);
+    var ta = card.querySelector('textarea.note'); if (rec.note && !ta.value) ta.value = rec.note;
+  }
+  function save() { localStorage.setItem(STORE_KEY, JSON.stringify(state)); tally(); }
+  // H1523 residual / csl-pyutil#1 Part 1: always re-read the live textarea on vote
+  // and before export so a second vote click (or a missed `input` event) cannot
+  // drop a note that is still visible in the card.
+  function syncNoteFromDom(id) {
+    state[id] = state[id] || {};
+    var card = document.querySelector('.card[data-id="' + id + '"]');
+    if (!card) return;
+    var ta = card.querySelector('textarea.note');
+    if (ta) state[id].note = ta.value;
+  }
+  function vote(id, d) { syncNoteFromDom(id); state[id].decision = d; save(); }
+  function noteChange(id, t) { state[id] = state[id] || {}; state[id].note = t; save(); }
+  document.querySelectorAll('.card').forEach(function (card) {
+    var id = card.getAttribute('data-id'); applyCardUI(card);
+    card.querySelectorAll('button.vote').forEach(function (btn) {
+      btn.addEventListener('click', function () { vote(id, btn.getAttribute('data-vote')); applyCardUI(card); });
+    });
+    var ta = card.querySelector('textarea.note'); ta.addEventListener('input', function () { noteChange(id, ta.value); });
+  });
+  tally();
+  document.getElementById('downloadBtn').addEventListener('click', function () {
+    ids.forEach(function (id) { syncNoteFromDom(id); });
+    var decided = ids.filter(function (id) { return state[id] && state[id].decision; }).length;
+    var payload = { sheet_id: SHEET_ID, generated: "09-10-2026", decided: decided, time_total_seconds: __timeTotal(),
+      items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '', time_seconds: __timeFor(id) }; }) };
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
+    var url = URL.createObjectURL(blob); var a = document.createElement('a');
+    a.href = url; a.download = SHEET_ID + '_decisions.json'; document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+  });
+  var filterbar = document.getElementById('filterbar');
+  filterbar.addEventListener('click', function (e) {
+    var btn = e.target.closest('button[data-filter]'); if (!btn) return;
+    filterbar.querySelectorAll('button').forEach(function (b) { b.classList.remove('active'); });
+    btn.classList.add('active'); var f = btn.getAttribute('data-filter');
+    document.querySelectorAll('.card').forEach(function (card) {
+      var show = true;
+      if (f === 'unvoted') { var id = card.getAttribute('data-id'); show = !(state[id] && state[id].decision); }
+      else if (f !== 'all') { show = card.getAttribute('data-filt') === f; }
+      card.style.display = show ? '' : 'none';
+    });
+  });
+  var cardsEl = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  var activeIdx = 0;
+  function visibleCards() { return cardsEl.filter(function (c) { return c.style.display !== 'none'; }); }
+  document.addEventListener('keydown', function (e) {
+    if (e.target.tagName === 'TEXTAREA') return;
+    var vis = visibleCards(); if (!vis.length) return;
+    if (activeIdx >= vis.length) activeIdx = vis.length - 1;
+    var card = vis[activeIdx]; var id = card.getAttribute('data-id');
+    if (e.key === 'a') { vote(id, 'approve'); applyCardUI(card); }
+    else if (e.key === 'r') { vote(id, 'reject'); applyCardUI(card); }
+    else if (e.key === 'd') { vote(id, 'defer'); applyCardUI(card); }
+    else if (e.key === 'ArrowDown') { activeIdx = Math.min(activeIdx + 1, vis.length - 1); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'start'}); }
+    else if (e.key === 'ArrowUp') { activeIdx = Math.max(activeIdx - 1, 0); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'start'}); }
+    else return;
+    e.preventDefault();
+  });
+
+  var STRICT_REVIEW = {"reviewer": "MG", "requireAllVotes": true, "requireRejectNote": true, "generated": "09-10-2026"};
+  var strictReviewer = document.getElementById('strictReviewer');
+  var strictError = document.getElementById('strictReviewError');
+  strictReviewer.value = state.__reviewer || STRICT_REVIEW.reviewer || '';
+  function strictItems() {
+    return ids.map(function (id) {
+      var rec = state[id] || {};
+      return { id: id, decision: rec.decision || null, note: rec.note || '', time_seconds: __timeFor(id) };
+    });
+  }
+  function strictValidation() {
+    var items = strictItems();
+    var reviewer = strictReviewer.value.trim();
+    var unvoted = STRICT_REVIEW.requireAllVotes ? items.filter(function (item) { return !item.decision; }) : [];
+    var rejectedWithoutNote = STRICT_REVIEW.requireRejectNote ? items.filter(function (item) {
+      return item.decision === 'reject' && !item.note.trim();
+    }) : [];
+    var errors = [];
+    if (!reviewer) errors.push('reviewer is required');
+    if (unvoted.length) errors.push(unvoted.length + ' item(s) remain unvoted');
+    if (rejectedWithoutNote.length) errors.push(rejectedWithoutNote.length + ' rejection(s) need a note');
+    return { reviewer: reviewer, items: items, complete: errors.length === 0, errors: errors };
+  }
+  function strictPayload() {
+    var result = strictValidation();
+    var decided = result.items.filter(function (item) { return !!item.decision; }).length;
+    return { sheet_id: SHEET_ID, generated: "09-10-2026", decided: decided, time_total_seconds: __timeTotal(),
+      reviewer: result.reviewer, reviewedAt: result.complete ? new Date().toISOString() : null,
+      complete: result.complete, items: result.items };
+  }
+  strictReviewer.addEventListener('input', function () {
+    state.__reviewer = strictReviewer.value;
+    strictError.textContent = '';
+    save();
+  });
+  document.getElementById('downloadBtn').addEventListener('click', function (event) {
+    event.preventDefault(); event.stopImmediatePropagation();
+    var result = strictValidation();
+    if (!result.complete) {
+      strictError.textContent = result.errors.join('; ');
+      if (!result.reviewer) strictReviewer.focus();
+      return;
+    }
+    strictError.textContent = '';
+    var blob = new Blob([JSON.stringify(strictPayload(), null, 2)], { type:'application/json' });
+    var url = URL.createObjectURL(blob); var a = document.createElement('a');
+    a.href = url; a.download = SHEET_ID + '_decisions.json'; document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+  }, true);
+
+  var saveHandle = null, saveTimer = null, saveWritePending = 0;
+  var saveWriteChain = Promise.resolve();
+  var SAVE_SAVING = 'Saving…';
+  var SAVE_SAVED = 'Saved';
+  var SAVE_FAILED = 'Save failed — retry';
+  function exportPayload() {
+    return JSON.stringify(strictPayload(), null, 2);
+  }
+  function flushAutosave() {
+    if (!saveHandle) return Promise.resolve(false);
+    clearTimeout(saveTimer);
+    var payload = exportPayload();
+    saveWritePending++;
+    var writeJob = saveWriteChain.then(function () {
+      return saveHandle.createWritable().then(function (writable) {
+        return writable.write(payload).then(function () { return writable.close(); });
+      });
+    });
+    var tracked = writeJob.then(function () {
+      saveWritePending--; return true;
+    }, function (error) {
+      saveWritePending--; throw error;
+    });
+    saveWriteChain = tracked.catch(function () {});
+    return tracked;
+  }
+  function saveStatus(message) {
+    var saveBtn = document.getElementById('saveBtn');
+    if (saveBtn) saveBtn.textContent = message;
+  }
+  function scheduleAutosave() {
+    if (!saveHandle) return;
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(function () {
+      flushAutosave().then(function () { saveStatus(SAVE_SAVED); })
+        .catch(function () { saveStatus(SAVE_FAILED); });
+    }, 1000);
+  }
+  var _origSave = save;
+  save = function () { _origSave(); scheduleAutosave(); };
+  if (window.showSaveFilePicker) {
+    var saveBtn = document.getElementById('saveBtn');
+    saveBtn.style.display = '';
+    saveBtn.addEventListener('click', function () {
+      window.showSaveFilePicker({suggestedName: SHEET_ID + '_decisions.json'}).then(function (h) {
+        saveHandle = h; saveStatus(SAVE_SAVING); return flushAutosave();
+      }).then(function (saved) {
+        if (saved) saveStatus(SAVE_SAVED);
+      }).catch(function (error) {
+        if (!error || error.name !== 'AbortError') saveStatus(SAVE_FAILED);
+      });
+    });
+  }
+  window.addEventListener('beforeunload', function (event) {
+    if (!saveWritePending) return;
+    event.preventDefault();
+    event.returnValue = '';
+  });
+
+  var FS_KEY = STORE_KEY + ':fs', FS_DEFAULT = 1.5;
+  function fsGet() {
+    var v = parseFloat(localStorage.getItem(FS_KEY));
+    return (isFinite(v) && v >= 0.7 && v <= 3) ? v : FS_DEFAULT;
+  }
+  function fsApply(v) {
+    document.documentElement.style.setProperty('--fs', String(v));
+    document.getElementById('fsVal').textContent = Math.round(v * 100) + '%';
+  }
+  function fsSet(v) {
+    v = Math.min(3, Math.max(0.7, Math.round(v * 10) / 10));
+    localStorage.setItem(FS_KEY, String(v)); fsApply(v);
+  }
+  fsApply(fsGet());
+  document.getElementById('fsDown').addEventListener('click', function () { fsSet(fsGet() - 0.1); });
+  document.getElementById('fsUp').addEventListener('click', function () { fsSet(fsGet() + 0.1); });
+
+  var TIME_KEY = STORE_KEY + ':timing';
+  var __timing = { total: 0, per: {} };
+  try {
+    var __t0 = JSON.parse(localStorage.getItem(TIME_KEY) || 'null');
+    if (__t0 && typeof __t0.total === 'number') __timing = __t0;
+  } catch (e) {}
+  if (!__timing.per) __timing.per = {};
+  function __timeFor(id) { return Math.round(__timing.per[id] || 0); }
+  function __timeTotal() { return Math.round(__timing.total || 0); }
+  function __timeFmt(s) {
+    s = Math.round(s); var m = Math.floor(s / 60);
+    return (m >= 60 ? Math.floor(m / 60) + ':' + ('0' + (m - Math.floor(m / 60) * 60)).slice(-2) : m)
+      + ':' + ('0' + (s - m * 60)).slice(-2);
+  }
+  function __timeShow() {
+    var el = document.getElementById('t-total');
+    if (el) el.textContent = __timeFmt(__timing.total);
+  }
+  var __timeLast = Date.now(), __timeDirty = 0;
+  var __timeCards = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  function __timeActiveId() {
+    var mid = window.innerHeight / 2, best = null, bestd = Infinity;
+    for (var i = 0; i < __timeCards.length; i++) {
+      var c = __timeCards[i];
+      if (c.style.display === 'none') continue;
+      var r = c.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > window.innerHeight) continue;
+      var center = (Math.max(r.top, 0) + Math.min(r.bottom, window.innerHeight)) / 2;
+      var d = Math.abs(center - mid);
+      if (d < bestd) { bestd = d; best = c; }
+    }
+    return best ? best.getAttribute('data-id') : null;
+  }
+  function __timeFlush() {
+    try { localStorage.setItem(TIME_KEY, JSON.stringify(__timing)); } catch (e) {}
+  }
+  // V12 (H2858): the clock is stoppable. `paused` rides in the same persisted
+  // record as the totals, so a reviewer who pauses and closes the tab does not
+  // come back to a clock that ran all night.
+  var __timePaused = !!__timing.paused;
+  // V15 (H2887): a legacy record carries `paused` and no reason — read it as
+  // manual, so an auto-rearm can never lift a pause the curator set by hand.
+  var __timePauseReason = __timePaused ? (__timing.pause_reason || 'manual') : null;
+  function __timePauseSet(v, reason) {
+    __timePaused = !!v;
+    __timing.paused = __timePaused;
+    __timePauseReason = __timePaused ? (reason || 'manual') : null;
+    __timing.pause_reason = __timePauseReason;
+    __timeLast = Date.now(); __timeFlush();
+  }
+  setInterval(function () {
+    var now = Date.now(), dt = (now - __timeLast) / 1000;
+    __timeLast = now;
+    if (document.hidden || __timePaused || dt <= 0 || dt > 4) return;
+    __timing.total += dt;
+    var id = __timeActiveId();
+    if (id) __timing.per[id] = (__timing.per[id] || 0) + dt;
+    __timeDirty += dt;
+    if (__timeDirty >= 5) { __timeDirty = 0; __timeFlush(); }
+    __timeShow();
+  }, 1000);
+  document.addEventListener('visibilitychange', function () { __timeLast = Date.now(); });
+  window.addEventListener('beforeunload', __timeFlush);
+  __timeShow();
+
+  var HANDIN_SAID = 'handed in {n} of {total} — clock stopped, the rest stay saved in this browser';
+  var __handinBtn = document.getElementById('handinBtn');
+  var __handinSaid = document.getElementById('handinSaid');
+
+  var __pauseBtn = document.getElementById('pauseBtn');
+  function __pauseShow() {
+    __pauseBtn.classList.toggle('on', __timePaused);
+    __pauseBtn.innerHTML = __timePaused ? '&#9654;' : '&#9208;';
+    var chip = document.querySelector('.tally .time');
+    if (chip) chip.classList.toggle('paused', __timePaused);
+  }
+  __pauseBtn.addEventListener('click', function () { __timePauseSet(!__timePaused); __pauseShow(); });
+  __pauseShow();
+  __handinBtn.addEventListener('click', function () {
+    ids.forEach(function (id) { syncNoteFromDom(id); });
+    __timePauseSet(true, 'export'); __pauseShow();
+    var items = ids.map(function (id) {
+      var rec = state[id] || {};
+      var item = { id: id, decision: rec.decision || null };
+      item.note = rec.note || '';
+      item.time_seconds = __timeFor(id);
+      return item;
+    });
+    var decided = items.filter(function (it) { return !!it.decision; }).length;
+    var payload = { sheet_id: SHEET_ID, generated: GENERATED, decided: decided,
+      partial: true, complete: false, undecided: items.length - decided, items: items };
+    payload.time_total_seconds = __timeTotal();
+    payload.reviewer = strictReviewer.value.trim();
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
+    var url = URL.createObjectURL(blob); var a = document.createElement('a');
+    a.href = url; a.download = SHEET_ID + '_decisions_partial.json';
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+    __handinSaid.textContent = HANDIN_SAID.replace('{n}', decided).replace('{total}', items.length);
+  });
+
+  // --- V15 session flow (H2887) ---------------------------------------------
+  var FLOW_IDLE_SECONDS = 90;
+  var FLOW_ETA = 'about {minutes} min left';
+  var FLOW_ETA_ROUGH = 'about {minutes} min left (rough)';
+  var FLOW_CLOCK_RUNNING = 'running';
+  var FLOW_CLOCK_PAUSED = 'paused';
+  var FLOW_CLOCK_IDLE = 'idle';
+  var FLOW_PROGRESS = 'decided {n} of {total}';
+  var FLOW_UNDO_SAID = 'undo: {id} back to {decision}';
+  var FLOW_UNDO_EMPTY = 'nothing to undo';
+  var FLOW_UNDO_NONE = 'no decision';
+  var FLOW_RESUMED = 'resumed at card {n} of {total}';
+  var __flowToast = document.getElementById('flowToast');
+  var __flowToastTimer = null;
+  function __flowSay(text) {
+    if (!__flowToast) return;
+    __flowToast.textContent = text;
+    __flowToast.classList.add('on');
+    clearTimeout(__flowToastTimer);
+    __flowToastTimer = setTimeout(function () { __flowToast.classList.remove('on'); }, 2600);
+  }
+  var __flowCenterId = __timeActiveId;
+  function __flowIdxOf(id) {
+    var vis = visibleCards();
+    for (var i = 0; i < vis.length; i++) {
+      if (vis[i].getAttribute('data-id') === id) return i;
+    }
+    return -1;
+  }
+  function __flowCardById(id) {
+    var found = null;
+    cardsEl.forEach(function (c) { if (c.getAttribute('data-id') === id) found = c; });
+    return found;
+  }
+  // The visible ring IS the target of a/r/d — that identity is the whole point
+  // of this layer, so nothing may move `activeIdx` without repainting.
+  function __flowPaint() {
+    cardsEl.forEach(function (c) { c.classList.remove('kbd-active'); });
+    var vis = visibleCards();
+    if (!vis.length) return;
+    if (activeIdx >= vis.length) activeIdx = vis.length - 1;
+    if (activeIdx < 0) activeIdx = 0;
+    vis[activeIdx].classList.add('kbd-active');
+  }
+  function __flowSync() {
+    var id = __flowCenterId();
+    if (id) { var at = __flowIdxOf(id); if (at !== -1) activeIdx = at; }
+    __flowPaint();
+  }
+  var __flowScrollTimer = null;
+  window.addEventListener('scroll', function () {
+    if (__flowScrollTimer) return;
+    __flowScrollTimer = setTimeout(function () { __flowScrollTimer = null; __flowSync(); }, 120);
+  });
+  // Both bars reset `activeIdx` to 0 as they re-filter; re-derive it from the
+  // viewport on the next tick, or defect 2 returns wearing a filter.
+  ['filterbar'].forEach(function (barId) {
+    var bar = document.getElementById(barId);
+    if (bar) bar.addEventListener('click', function () { setTimeout(__flowSync, 0); });
+  });
+  function __flowClockShow() {
+    var el = document.getElementById('t-state');
+    if (!el) return;
+    var label = FLOW_CLOCK_RUNNING;
+    if (__timePaused) label = (__timePauseReason === 'idle') ? FLOW_CLOCK_IDLE : FLOW_CLOCK_PAUSED;
+    el.textContent = label;
+    el.classList.toggle('idle', !!__timePaused && __timePauseReason === 'idle');
+  }
+  // The V12 ⏸ button drives the clock straight through __timePauseSet, so the
+  // three-state label has to ride along with V12's own repaint or it goes stale
+  // the moment the curator pauses by hand.
+  var __flowOrigPauseShow = __pauseShow;
+  __pauseShow = function () { __flowOrigPauseShow(); __flowClockShow(); };
+  var __flowIdleTimer = null;
+  function __flowIdleArm() {
+    clearTimeout(__flowIdleTimer);
+    __flowIdleTimer = setTimeout(function () {
+      if (__timePaused) return;
+      __timePauseSet(true, 'idle');
+    __pauseShow();
+      __flowClockShow();
+    }, FLOW_IDLE_SECONDS * 1000);
+  }
+  function __flowRearm() {
+    if (__timePaused && __timePauseReason !== 'manual') {
+      __timePauseSet(false);
+    __pauseShow();
+    }
+    __flowClockShow();
+    __flowIdleArm();
+  }
+  // The export GESTURES, caught in the capture phase on `document` so this runs
+  // before any handler bound to the buttons themselves — including the strict
+  // layer's, which calls stopImmediatePropagation() on its own element.
+  document.addEventListener('click', function (e) {
+    var t = e.target;
+    if (!t || !t.closest || !t.closest('#downloadBtn, #saveBtn, #handinBtn')) return;
+    __timePauseSet(true, 'export');
+    __pauseShow();
+    __flowClockShow();
+  }, true);
+  ['keydown', 'pointerdown', 'scroll'].forEach(function (evt) {
+    document.addEventListener(evt, function () { __flowRearm(); }, true);
+  });
+  var __flowUndoStack = [];
+  function __flowUndo() {
+    var last = __flowUndoStack.pop();
+    if (!last) { __flowSay(FLOW_UNDO_EMPTY); return; }
+    state[last.id] = state[last.id] || {};
+    if (last.prev) state[last.id].decision = last.prev;
+    else delete state[last.id].decision;
+    save();
+    var card = __flowCardById(last.id);
+    if (card) {
+      applyCardUI(card);
+      card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      var at = __flowIdxOf(last.id);
+      if (at !== -1) activeIdx = at;
+      __flowPaint();
+    }
+    __flowSay(FLOW_UNDO_SAID.replace('{id}', last.id)
+      .replace('{decision}', last.prev || FLOW_UNDO_NONE));
+  }
+  var __flowUndoBtn = document.getElementById('flowUndoBtn');
+  if (__flowUndoBtn) __flowUndoBtn.addEventListener('click', __flowUndo);
+  function __flowFirstUndecided() {
+    var vis = visibleCards();
+    for (var i = 0; i < vis.length; i++) {
+      var id = vis[i].getAttribute('data-id');
+      if (!(state[id] && state[id].decision)) return i;
+    }
+    return -1;
+  }
+  function __flowAdvance() {
+    var at = __flowFirstUndecided();
+    if (at === -1) { __flowPaint(); return; }
+    activeIdx = at;
+    visibleCards()[at].scrollIntoView({ behavior: 'smooth', block: 'start' });
+    __flowPaint();
+  }
+  function __flowDecided() {
+    var n = 0;
+    ids.forEach(function (id) { if (state[id] && state[id].decision) n++; });
+    return n;
+  }
+  function __flowEtaText(decided, total) {
+    var secs = [];
+    ids.forEach(function (id) {
+      if (!(state[id] && state[id].decision)) return;
+      var s = __timing.per[id] || 0;
+      if (s > 0) secs.push(s);
+    });
+    if (!secs.length) return '';
+    secs.sort(function (a, b) { return a - b; });
+    var mid = Math.floor(secs.length / 2);
+    var med = (secs.length % 2) ? secs[mid] : (secs[mid - 1] + secs[mid]) / 2;
+    var left = Math.max(0, total - decided);
+    if (!left) return '';
+    var minutes = Math.max(1, Math.round(med * left / 60));
+    return (secs.length >= 5 ? FLOW_ETA : FLOW_ETA_ROUGH).replace('{minutes}', minutes);
+  }
+  function __flowProgress() {
+    var n = __flowDecided(), total = ids.length;
+    var txt = document.getElementById('flowProgText');
+    if (txt) txt.textContent = FLOW_PROGRESS.replace('{n}', n).replace('{total}', total);
+    var bar = document.getElementById('flowBar');
+    if (bar) bar.style.width = (total ? Math.round(100 * n / total) : 0) + '%';
+    var etaEl = document.getElementById('flowEta');
+    if (etaEl) etaEl.textContent = __flowEtaText(n, total);
+  }
+  var __flowOrigTally = tally;
+  tally = function () { __flowOrigTally(); __flowProgress(); };
+  var __flowOrigVote = vote;
+  vote = function (id, d) {
+    var rec = state[id] || {};
+    __flowUndoStack.push({ id: id, prev: rec.decision || null });
+    if (__flowUndoStack.length > 100) __flowUndoStack.shift();
+    __flowOrigVote(id, d);
+    __flowRearm();
+    __flowAdvance();
+  };
+  var __flowOrigNote = noteChange;
+  noteChange = function (id, t) { __flowOrigNote(id, t); __flowRearm(); };
+  document.addEventListener('keydown', function (e) {
+    if (e.target.tagName === 'TEXTAREA') return;
+    if (e.key === 'z' || e.key === 'Z') { __flowUndo(); e.preventDefault(); return; }
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') __flowPaint();
+  });
+  __flowProgress();
+  __flowSync();
+  __flowClockShow();
+  __flowIdleArm();
+  (function () {
+    if (!__flowDecided()) return;
+    var at = __flowFirstUndecided();
+    if (at === -1) return;
+    var vis = visibleCards();
+    activeIdx = at;
+    vis[at].scrollIntoView({ block: 'start' });
+    __flowPaint();
+    __flowSay(FLOW_RESUMED.replace('{n}', at + 1).replace('{total}', vis.length));
+  })();
+
+  var VOTE_TOTAL = 0;
+  var VOTE_PROGRESS = '{n} of {total} across the whole sheet';
+  var VOTE_ETA = 'about {minutes} min left for all {total}';
+  var VOTE_ETA_ROUGH = 'about {minutes} min left for all {total} (rough)';
+  var VOTE_DONE = 'all {total} decided';
+  (function () {
+    var bar = document.getElementById('voteBar');
+    if (!bar) return;
+    // The build tagged exactly the submit controls this document actually has.
+    // Navigation (filters, facets, the type-scale control) is untagged and stays
+    // on top, where it is used BEFORE deciding.
+    var moved = document.querySelectorAll('[data-submit]');
+    for (var i = 0; i < moved.length; i++) bar.appendChild(moved[i]);
+  })();
+  // One record backs every pack of a packset — STORE_KEY and TIME_KEY are keyed
+  // on sheet_id, not on the pack — so this page can count and time the WHOLE
+  // instrument without loading a single other pack.
+  function __voteDecidedAll() {
+    var n = 0;
+    for (var k in state) {
+      if (Object.prototype.hasOwnProperty.call(state, k) && state[k] && state[k].decision) n++;
+    }
+    return n;
+  }
+  function __voteSecs() {
+    var per = (typeof __timing !== 'undefined' && __timing && __timing.per) ? __timing.per : null;
+    var out = [];
+    if (!per) return out;
+    for (var k in per) {
+      if (!Object.prototype.hasOwnProperty.call(per, k)) continue;
+      if (!(state[k] && state[k].decision)) continue;
+      if (per[k] > 0) out.push(per[k]);
+    }
+    return out;
+  }
+  function __voteEta(decided, total) {
+    var left = Math.max(0, total - decided);
+    if (!left) return VOTE_DONE.replace('{total}', total);
+    var secs = __voteSecs();
+    if (!secs.length) return '';
+    secs.sort(function (a, b) { return a - b; });
+    var mid = Math.floor(secs.length / 2);
+    var med = (secs.length % 2) ? secs[mid] : (secs[mid - 1] + secs[mid]) / 2;
+    var minutes = Math.max(1, Math.round(med * left / 60));
+    return (secs.length >= 5 ? VOTE_ETA : VOTE_ETA_ROUGH)
+      .replace('{minutes}', minutes).replace('{total}', total);
+  }
+  function __voteProgress() {
+    var total = VOTE_TOTAL || ids.length;
+    var n = VOTE_TOTAL ? __voteDecidedAll() : ids.filter(function (id) {
+      return state[id] && state[id].decision; }).length;
+    if (n > total) n = total;
+    var t = document.getElementById('voteProgText');
+    if (t) t.innerHTML = VOTE_PROGRESS.replace('{n}', '<b>' + n + '</b>')
+                                      .replace('{total}', '<b>' + total + '</b>');
+    var b = document.getElementById('voteProgBar');
+    if (b) b.style.width = (total ? Math.round(100 * n / total) : 0) + '%';
+    var e = document.getElementById('voteProgEta');
+    if (e) e.textContent = __voteEta(n, total);
+  }
+  var __voteOrigTally = tally;
+  tally = function () { __voteOrigTally(); __voteProgress(); };
+  __voteProgress();
+})();
+</script>
+<div class="flowtoast" id="flowToast" role="status"></div>
+</body>
+</html>
