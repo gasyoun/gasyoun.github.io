@@ -2,6 +2,11 @@
 
 Формат: дата · хендофф · что изменилось. Новые записи сверху.
 
+## 09-10-2026 — H6296 (GLM) — Дашборд «SMB pain-benchmark: похожа ли школа на типовой профиль малого бизнеса»
+
+- **Добавлено:** [smb-pain-benchmark-2026/index.html](https://github.com/gasyoun/gasyoun.github.io/blob/master/smb-pain-benchmark-2026/index.html) + [data.json](https://github.com/gasyoun/gasyoun.github.io/blob/master/smb-pain-benchmark-2026/data.json) — сезонная матрица выручки 2024–2026 (календарные сезоны, декабрь из прошлого года; фильтры по годам/сезонам), помесячный ряд с маркерами наборов сен/янв, сверка контуров денег 2026 янв–июль (CRM ₽8,78M ≈ Tochka ₽7,02M + PayPal ₽1,37M, расхождение 4,5% ✓ ±10%), вердикты по 10 болям SMB (итог: 1 полное совпадение — «падают продажи» с 2026, −36% янв–сен к 2025; 2 частичных, 2 аналога, 5 не наши) + 5 наших болей вне топ-10; только агрегаты (PII-свип чист), meta noindex.
+- Числа трассируемы в data.json; источники: БД Systema (повторная живая проба 09-10, псевдо-тарифы «Расход»/«salary_payout» отделены от выручки), Tochka-агрегаты, PayPal-реконсил 01-09, Metrika (оба счётчика), GSC (12 мес), аудит VK Ads, отчёты BUSINESS_HEALTH/PROCESS_MINING/BLEED_AUDIT; рулинги грилла MG — Uprava docs/DECISIONS_SMB_PAIN_BENCHMARK_GRILL_09-10-2026.md.
+
 ## 09-10-2026 — H6299 (OxAlpha) — Страница «Стоимость курсов по учителям» (₽+€, noindex)
 
 - **Добавлено:** [courses/course-prices-teachers-2026-10-09.html](https://github.com/gasyoun/gasyoun.github.io/blob/master/courses/course-prices-teachers-2026-10-09.html) — все 140 курсов Systema, секции по учителям (20 + «Без учителя»); у каждого курса активные тарифы поблочно («весь курс» + блоки с периодами «мес год – мес год» из дат занятий), итог курса целиком, итог по учителю и общий итог — 5 911 801,00 ₽ / 68 366,65 €. meta `noindex, nofollow`; robots.txt уже закрывает весь сайт.
