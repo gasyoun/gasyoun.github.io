@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>n8n перепись 08-10 — визуалы к посту #задание3</title>
+<style>
+:root { --bg:#16324f; --panel:#1c3d5f; --text:#ebf2f8; --muted:#8fa9c0;
+        --accent:#d9a520; --cyan:#4aa3df; --green:#7ebc6f; }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--text);
+  font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; }
+header { padding:26px 28px 10px; }
+h1 { margin:0 0 4px; font-size:22px; }
+.sub { color:var(--muted); font-size:13px; }
+h2 { font-size:15px; letter-spacing:.06em; text-transform:uppercase;
+     color:var(--cyan); margin:26px 28px 12px; }
+.grid { display:flex; flex-wrap:wrap; gap:14px; padding:0 28px; }
+.card { background:var(--panel); border:1px solid #2a527c; border-radius:10px;
+        padding:10px; width:340px; }
+.card img { width:100%; display:block; border-radius:6px; }
+.card p { margin:8px 2px 2px; font-size:13px; color:var(--muted); }
+.card a { color:var(--text); text-decoration:none; font-weight:600; }
+.links { padding:0 28px 30px; color:var(--muted); font-size:13.5px; }
+.links a { color:var(--cyan); text-decoration:none; }
+.stat { color:var(--green); font-weight:600; }
+footer { padding:14px 28px 30px; color:var(--muted); font-size:12px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>n8n перепись 08-10 — визуалы к посту #задание3</h1>
+  <div class="sub">vps91 · context-ai.ru · n8n 2.38.6 · окно 01–08.10.2026 ·
+    <span class="stat">95 воркфлоу / 18 активных / 602 запуска / 99% успеха</span></div>
+</header>
+
+<h2>Три рабочие лошадки — анимация (GIF, можно приложить в Telegram)</h2>
+<div class="grid">
+  <div class="card"><a href="horse_1_registry.gif"><img src="horse_1_registry.gif" alt="Реестр записей"></a>
+    <p><a href="horse_1_registry.gif">horse_1_registry.gif</a> — пульс по конвейеру: сайт → webhook → белый список → таблица-реестр → чек в TG. <span class="stat">383/8 дн</span></p></div>
+  <div class="card"><a href="horse_2_softalert.gif"><img src="horse_2_softalert.gif" alt="Soft-alert"></a>
+    <p><a href="horse_2_softalert.gif">horse_2_softalert.gif</a> — платформа → webhook+секрет → GitHub issue автоматически. <span class="stat">59/8 дн</span></p></div>
+  <div class="card"><a href="horse_3_payments.gif"><img src="horse_3_payments.gif" alt="Оплаты"></a>
+    <p><a href="horse_3_payments.gif">horse_3_payments.gif</a> — оплата на сайте → /payments → строка в «Студенты_Оплаты». <span class="stat">53/8 дн</span></p></div>
+</div>
+
+<h2>Слайды переписи (16:9, для Telegram)</h2>
+<div class="grid">
+  <div class="card"><a href="deck_slide-1.png"><img src="deck_slide-1.png" alt="Слайд 1"></a>
+    <p><a href="deck_slide-1.png">1 · Титул</a> — 101 день непрерывной работы</p></div>
+  <div class="card"><a href="deck_slide-2.png"><img src="deck_slide-2.png" alt="Слайд 2"></a>
+    <p><a href="deck_slide-2.png">2 · Инстанс в цифрах</a> — 95/18/602/99%/21</p></div>
+  <div class="card"><a href="deck_slide-3.png"><img src="deck_slide-3.png" alt="Слайд 3"></a>
+    <p><a href="deck_slide-3.png">3 · 10 кластеров</a> — где живут 95 воркфлоу</p></div>
+  <div class="card"><a href="deck_slide-4.png"><img src="deck_slide-4.png" alt="Слайд 4"></a>
+    <p><a href="deck_slide-4.png">4 · Нагрузку тащат пятеро</a> — топ-5 по экзекуциям</p></div>
+  <div class="card"><a href="deck_slide-5.png"><img src="deck_slide-5.png" alt="Слайд 5"></a>
+    <p><a href="deck_slide-5.png">5 · Дыхание недели</a> — 602 запуска по дням</p></div>
+  <div class="card"><a href="deck_slide-6.png"><img src="deck_slide-6.png" alt="Слайд 6"></a>
+    <p><a href="deck_slide-6.png">6 · Триггеры</a> — что дёргает воркфлоу</p></div>
+  <div class="card"><a href="deck_slide-7.png"><img src="deck_slide-7.png" alt="Слайд 7"></a>
+    <p><a href="deck_slide-7.png">7 · Сложность × нагрузка</a></p></div>
+  <div class="card"><a href="deck_slide-8.png"><img src="deck_slide-8.png" alt="Слайд 8"></a>
+    <p><a href="deck_slide-8.png">8 · Что делать с этим знанием</a></p></div>
+</div>
+
+<h2>Постер и полный дашборд</h2>
+<div class="grid">
+  <div class="card"><a href="infographic.png"><img src="infographic.png" alt="Инфографика" style="max-height:420px;object-fit:cover;object-position:top"></a>
+    <p><a href="infographic.png">infographic.png</a> — вертикальный постер-чертёж (1100×3200)</p></div>
+  <div class="card"><a href="dashboard_full.png"><img src="dashboard_full.png" alt="Дашборд" style="max-height:420px;object-fit:cover;object-position:top"></a>
+    <p><a href="dashboard_full.png">dashboard_full.png</a> — полный дашборд одним листом (1280×12000)</p></div>
+</div>
+
+<h2>Живые страницы (открываются в браузере)</h2>
+<div class="links">
+  <a href="/n8n-census-dashboard-08-10.html">Интерактивный дашборд</a> ·
+  <a href="/n8n-census-infographic-08-10.html">Инфографика (HTML)</a> ·
+  <a href="/n8n-top5-dynamic-09-10.html">Топ-5 — динамическая страница</a>
+</div>
+
+<footer>Данные: перепись сценариев n8n vps91, снимок 08-10-2026 · генератор GIF: sprint-watch/animate_horses.py</footer>
+</body>
+</html>
