@@ -1,6 +1,6 @@
 # gasyoun.github.io
 
-_Created: 08-10-2014 · Last updated: 14-09-2026_
+_Created: 08-10-2014 · Last updated: 10-10-2026_
 
 Personal GitHub Pages site of Mārcis Gasūns ([@gasyoun](https://github.com/gasyoun)),
 served at [gasyoun.github.io](https://gasyoun.github.io/). It hosts a handful of
@@ -9,7 +9,7 @@ plain HTML and text data.
 
 ## What is published here
 - **[campus/](https://gasyoun.github.io/campus/)** — «Кампус наглядности»:
-  один вход ко всей визуальной наглядности имения — 67 артефактов в 4 крыльях
+  один вход ко всей визуальной наглядности имения — 72 артефакта в 4 крыльях
   (грамматика / учёба / имение и финансы / продукты и привлечение); собирается
   генератором
   [scripts/campus/campus_build.py](https://github.com/gasyoun/gasyoun.github.io/blob/master/scripts/campus/campus_build.py)
@@ -79,20 +79,28 @@ template, kept as-is; the served landing page is `index.html`. The sibling
 
 ## Maintenance
 
-The only automation in the repo is Dependabot
+Repo-side automation is Dependabot
 ([.github/dependabot.yml](https://github.com/gasyoun/gasyoun.github.io/blob/master/.github/dependabot.yml))
 with a
-[Dependabot auto-merge workflow](https://github.com/gasyoun/gasyoun.github.io/blob/master/.github/workflows/dependabot-auto-merge.yml).
+[Dependabot auto-merge workflow](https://github.com/gasyoun/gasyoun.github.io/blob/master/.github/workflows/dependabot-auto-merge.yml),
+plus the
+[sheet-staleness workflow](https://github.com/gasyoun/gasyoun.github.io/blob/master/.github/workflows/sheet-staleness.yml)
+— a weekly cron (Monday 06:00 UTC, also on pushes to `vote/sheets/**`) that runs
+[scripts/check_sheet_staleness.py](https://github.com/gasyoun/gasyoun.github.io/blob/master/scripts/check_sheet_staleness.py)
+against the live vote sheets. [handoff-status/index.html](https://github.com/gasyoun/gasyoun.github.io/blob/master/handoff-status/index.html)
+is refreshed hourly by an external automation that pushes `public handoff status
+refresh <timestamp>` commits — no workflow in this repo generates it.
 There is no build step: GitHub Pages serves the static files directly from the
 `master` branch.
 
-## No CHANGELOG here, deliberately
+## CHANGELOG
 
-This repository is a publish surface, not a codebase with consumers: every artifact
-carries its own date in the filename (`…-02.09.26.html`), each section index lists its
-pages newest-first, and `git log` is the only history anyone needs. The org rule that
-owes a `CHANGELOG.md` entry per durable artifact is satisfied in the repository that
-*produced* the artifact; duplicating it here would be a second, drifting copy. Checked
-and confirmed 07-09-2026 (H3970 residual 3) — do not re-open this as an omission.
+[CHANGELOG.md](https://github.com/gasyoun/gasyoun.github.io/blob/master/CHANGELOG.md)
+has been kept here since 27-09-2026 (started with the karta domain map, H5527): one
+entry per published change, newest first — дата · хендофф · что изменилось. The
+earlier "no CHANGELOG here, deliberately" ruling (checked 07-09-2026, H3970 residual 3)
+is superseded by that file. The artifact conventions still stand: every artifact
+carries its own date in the filename (`…-02.09.26.html`) and each section index lists
+its pages newest-first.
 
 _Dr. Mārcis Gasūns_
