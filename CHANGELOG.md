@@ -2,6 +2,12 @@
 
 Формат: дата · хендофф · что изменилось. Новые записи сверху.
 
+## 11-10-2026 — H6477–H6479 волна OG-превью (GLM) — root: og: meta + GitHub-lookalike карточка
+
+- **Добавлено:** [og-card.png](https://github.com/gasyoun/gasyoun.github.io/blob/master/og-card.png) — карточка 1200×630 (avatar, ऋग्वेदः hero RV 1.1.1, ряд 1028 sūktas · 10 maṇḍalas · 4 languages) + генератор [scripts/make_og_card.py](https://github.com/gasyoun/gasyoun.github.io/blob/master/scripts/make_og_card.py) (headless Chrome, `OG_AVATAR`/`CHROME_BIN` override).
+- **Изменено:** [index.html](https://github.com/gasyoun/gasyoun.github.io/blob/master/index.html) — добавлены `<title>` ( был пуст) и og:type/site_name/title/description/url/image; og:image = https://gasyoun.github.io/og-card.png. Telegram/Slack/X превью корня теперь показывают карточку вместо пустого сниппета.
+- Контекст: гриль MG 11-10-2026 «динамические OG-карточки для наших сайтов»; pilot-волна H6477 (rvlinks) / H6478 (Cologne upstream PR) / H6479 (avlinks полный сет).
+
 ## 09-10-2026 — H6296 (GLM) — Дашборд «SMB pain-benchmark: похожа ли школа на типовой профиль малого бизнеса»
 
 - **Добавлено:** [smb-pain-benchmark-2026/index.html](https://github.com/gasyoun/gasyoun.github.io/blob/master/smb-pain-benchmark-2026/index.html) + [data.json](https://github.com/gasyoun/gasyoun.github.io/blob/master/smb-pain-benchmark-2026/data.json) — сезонная матрица выручки 2024–2026 (календарные сезоны, декабрь из прошлого года; фильтры по годам/сезонам), помесячный ряд с маркерами наборов сен/янв, сверка контуров денег 2026 янв–июль (CRM ₽8,78M ≈ Tochka ₽7,02M + PayPal ₽1,37M, расхождение 4,5% ✓ ±10%), вердикты по 10 болям SMB (итог: 1 полное совпадение — «падают продажи» с 2026, −36% янв–сен к 2025; 2 частичных, 2 аналога, 5 не наши) + 5 наших болей вне топ-10; только агрегаты (PII-свип чист), meta noindex.
