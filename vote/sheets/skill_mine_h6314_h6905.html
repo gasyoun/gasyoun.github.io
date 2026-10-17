@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="color-scheme" content="dark">
+<meta name="generator" content="csl-pyutil/0.25.0">
+<title>Skill-mine: дельта-перепись H6314–H6905 (17-10-2026) — 9 items</title>
+<style>
+  :root { color-scheme: dark; --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --text:#e6e6e6; --muted:#9aa0aa;
+          --accent:#5b8cff; --ok:#3fb950; --bad:#f85149; --defer:#d29922; --border:#2a2f3a; }
+  * { box-sizing: border-box; }
+  body { background:var(--bg); color:var(--text); font-family:-apple-system,Segoe UI,Roboto,sans-serif;
+         margin:0; padding:0 0 120px 0; }
+  header.top { position:sticky; top:0; z-index:10; background:var(--panel); border-bottom:1px solid var(--border);
+               padding:14px 20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+  header.top h1 { font-size:16px; margin:0; }
+  header.top .sub { color:var(--muted); font-size:12px; max-width:760px; }
+  .tally { display:flex; gap:14px; font-size:13px; }
+  .tally span.count { font-weight:700; }
+  .tally .approve { color:var(--ok); } .tally .reject { color:var(--bad); }
+  .tally .defer { color:var(--defer); } .tally .unvoted { color:var(--muted); }
+  .toolbar { padding:10px 20px; display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  button.dl { background:var(--accent); color:#fff; border:none; padding:8px 14px; border-radius:6px;
+              cursor:pointer; font-size:13px; }
+  button.dl:hover { opacity:.9; }
+  .filterbar { display:flex; gap:6px; flex-wrap:wrap; }
+  .filterbar button { background:var(--panel2); border:1px solid var(--border); color:var(--text);
+                       padding:6px 10px; border-radius:14px; font-size:12px; cursor:pointer; }
+  .filterbar button.active { border-color:var(--accent); color:var(--accent); }
+  main { max-width:980px; margin:0 auto; padding:10px 20px; }
+  .card { background:var(--panel); border:1px solid var(--border); border-radius:10px; padding:16px;
+          margin-bottom:16px; }
+  .card.voted-approve { border-left:4px solid var(--ok); }
+  .card.voted-reject { border-left:4px solid var(--bad); }
+  .card.voted-defer { border-left:4px solid var(--defer); }
+  .card header { display:flex; justify-content:space-between; align-items:baseline; }
+  .card .hw { font-size:18px; font-weight:700; }
+  .badge { font-size:11px; background:var(--panel2); padding:2px 8px; border-radius:10px;
+           margin-left:8px; color:var(--muted); }
+  .question { margin:8px 0 12px; font-size:14px; }
+  .panel { background:var(--panel2); border-radius:8px; padding:10px 12px; font-size:13px; margin-bottom:10px; }
+  .panel h4 { margin:0 0 6px; font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+  .panel pre { white-space:pre-wrap; word-break:break-word; margin:0; font-size:12px; line-height:1.45; }
+  .chip { display:inline-block; background:#263042; border-radius:5px; padding:2px 7px; margin:2px 3px 2px 0; font-size:12px; }
+  .muted { color:var(--muted); font-style:italic; }
+  .controls { display:flex; align-items:center; gap:8px; margin-top:4px; }
+  button.vote { border:1px solid var(--border); background:var(--panel2); color:var(--text);
+                padding:7px 12px; border-radius:6px; cursor:pointer; font-size:13px; }
+  button.vote.approve.active { background:var(--ok); border-color:var(--ok); color:#04240b; }
+  button.vote.reject.active { background:var(--bad); border-color:var(--bad); color:#2a0a08; }
+  button.vote.defer.active { background:var(--defer); border-color:var(--defer); color:#2a1d02; }
+  .vote-state { margin-left:6px; font-size:12px; color:var(--muted); }
+  textarea.note { width:100%; margin-top:10px; min-height:88px; background:#11141a !important; color:#e6e6e6 !important;
+                  -webkit-text-fill-color:#e6e6e6; border:1px solid var(--border); border-radius:6px; padding:8px; font-size:13px;
+                  font-family:inherit; resize:vertical; }
+  textarea.note::placeholder { color:var(--muted); opacity:1; }
+  footer.hint { max-width:980px; margin:20px auto; padding:0 20px; color:var(--muted); font-size:12px; }
+  kbd { background:#263042; border-radius:4px; padding:1px 5px; font-size:11px; }
+
+  .screening-banner { margin: 0 20px 12px; padding: 10px 14px; border-radius: 8px;
+    border: 1px solid var(--accent); background: #152033; font-size: 12px; line-height: 1.45;
+    color: var(--text); max-width: 980px; }
+  .screening-banner code { font-size: 11px; color: var(--accent); }
+  .screening-banner .sc-d { color: var(--defer); font-weight: 700; }
+
+  .idchip { font-family:ui-monospace,Consolas,monospace; font-size:11px; color:var(--muted);
+            background:var(--panel2); border:1px solid var(--border); padding:2px 7px;
+            border-radius:6px; user-select:all; }
+  .card header { gap:10px; }
+  .hw a.hwlink { color:inherit; text-decoration:underline dotted; text-underline-offset:3px; }
+  .hw a.hwlink:hover { color:var(--accent); }
+  mark.hl { background:#453407; color:#ffd75e; padding:0 2px; border-radius:3px; }
+  .savebanner { max-width:980px; margin:10px auto 0; padding:8px 20px; font-size:12.5px; }
+  .savebanner code { background:var(--panel2); border:1px solid var(--border); padding:1px 6px; border-radius:5px; }
+  .ratingrow { display:flex; align-items:center; gap:6px; margin-top:10px; flex-wrap:wrap; }
+  .ratinglabel { font-size:12px; color:var(--muted); margin-right:4px; }
+  button.rate { border:1px solid var(--border); background:var(--panel2); color:var(--text);
+                width:34px; padding:6px 0; border-radius:6px; cursor:pointer; font-size:13px; }
+  button.rate.active { background:var(--accent); border-color:var(--accent); color:#fff; }
+  button.rate.active.below { background:var(--defer); border-color:var(--defer); color:#2a1d02; }
+  .rate-state { font-size:12px; color:var(--muted); margin-left:4px; }
+  .badge-typology { border:1px solid var(--accent); color:var(--text); font-weight:600; }
+  :root { --fs:1.5; }
+  header.top h1 { font-size:calc(16px * var(--fs)) !important; }
+  header.top .sub { font-size:calc(12px * var(--fs)) !important; }
+  .tally, button.dl, button.vote, button.rate, textarea.note, .reject-label-select,
+  #strictReviewerWrap, #strictReviewerWrap input { font-size:calc(13px * var(--fs)) !important; }
+  .filterbar button, .fsctl button, .fsctl .fsval, .chip, .vote-state, .rate-state,
+  .ratinglabel, .rejectlabellabel, footer.hint, div.legend,
+  #strictReviewError { font-size:calc(12px * var(--fs)) !important; }
+  .card .hw { font-size:calc(18px * var(--fs)) !important; }
+  .badge, .panel h4, kbd, .idchip { font-size:calc(11px * var(--fs)) !important; }
+  .question { font-size:calc(14px * var(--fs)) !important; }
+  .panel { font-size:calc(13px * var(--fs)) !important; }
+  .panel pre { font-size:calc(13.5px * var(--fs)) !important; line-height:1.55; }
+  .panel .anatomy { font-size:calc(12.5px * var(--fs)) !important; }
+  .savebanner { font-size:calc(12.5px * var(--fs)) !important; }
+  .fsctl { display:flex; align-items:center; gap:4px; }
+  .fsctl button { background:var(--panel2); border:1px solid var(--border); color:var(--text);
+                  padding:6px 10px; border-radius:14px; cursor:pointer; line-height:1; }
+  .fsctl .fsval { color:var(--muted); min-width:3.4em; text-align:center; }
+  @media (max-width: 640px) {
+    header.top { padding: 10px 14px; flex-direction: column; align-items: stretch; }
+    header.top h1 { font-size: 15px; }
+    .tally { gap: 8px; font-size: 11px; }
+    .toolbar { padding: 8px 14px; }
+    main { padding: 8px 12px; }
+    .card { padding: 12px; }
+    .filterbar { flex-wrap: wrap; }
+    button.dl, button.vote, button.rate, .fsctl button, #saveBtn, #handinBtn, #pauseBtn {
+      min-height: 44px; min-width: 44px; padding: 10px 14px;
+    }
+    .controls { flex-wrap: wrap; }
+    .panel { padding: 8px 10px; }
+    textarea.note { min-height: 60px; }
+  }
+  .tally .time { color:var(--muted); }
+  .dl.handin { background:#243447; }
+  .tally .pausebtn { background:none; border:1px solid var(--border); color:var(--muted);
+                     border-radius:6px; padding:0 6px; margin-left:4px; cursor:pointer;
+                     font-size:inherit; font-family:inherit; line-height:1.6; }
+  .tally .pausebtn.on { color:#ffd479; border-color:#ffd479; }
+  .tally .time.paused { opacity:.45; }
+  .handin-said { color:var(--muted); font-size:12px; margin-left:10px; }
+  .card.kbd-active { outline:2px solid var(--accent); outline-offset:3px; }
+  .tally .tstate { color:var(--muted); font-size:.85em; margin-left:4px; }
+  .tally .tstate.idle { color:var(--defer); }
+  .flowprog { display:inline-flex; align-items:center; gap:8px; color:var(--muted); font-size:12px; }
+  .flowprog .bar { display:inline-block; width:120px; height:6px; border-radius:3px;
+                   background:var(--panel2); border:1px solid var(--border); overflow:hidden; }
+  .flowprog .bar i { display:block; height:6px; background:var(--accent); width:0; }
+  .dl.flowundo { background:#243447; }
+  .flowtoast { position:fixed; left:50%; bottom:24px; transform:translateX(-50%);
+               background:var(--panel2); border:1px solid var(--border); color:var(--text);
+               padding:8px 14px; border-radius:8px; font-size:13px; z-index:50;
+               opacity:0; pointer-events:none; transition:opacity .18s; }
+  .flowtoast.on { opacity:1; }
+  .voteprog { flex:1 0 100%; order:99; background:var(--panel);
+              border-top:1px solid var(--border); margin:6px -20px -14px; padding:8px 20px;
+              display:flex; align-items:center; gap:12px; font-size:12px; color:var(--muted); }
+  .voteprog .bar { flex:1 1 auto; height:8px; border-radius:4px; background:var(--panel2);
+                   border:1px solid var(--border); overflow:hidden; }
+  .voteprog .bar i { display:block; height:100%; width:0; background:var(--ok); transition:width .2s; }
+  .voteprog b { color:var(--text); font-weight:700; }
+  .voteprog .eta { white-space:nowrap; }
+  .votebar { position:sticky; bottom:0; z-index:9; background:var(--panel);
+             border-top:1px solid var(--border); padding:10px 20px; margin-top:24px;
+             display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  .votebar .spacer { flex:1 1 auto; }
+  .card { scroll-margin-top:96px; }
+  @media (max-width: 640px) { .voteprog { padding:6px 12px; } .votebar { padding:8px 12px; } }
+</style>
+</head>
+<body>
+<header class="top">
+  <div>
+    <h1>Skill-mine: дельта-перепись H6314–H6905 (17-10-2026) — 9 items</h1>
+    <div class="sub">Generated 17-10-2026 &middot; sheet_id <code>uprava-skill-mine_h6314_h6905_17-10-26</code> &middot; Дельта-перепись следов после окна H6143–H6313 (закрыто 09-10): 377 файлов / 377 сессий окна 09–17-10-2026 (179 с уликой исполнения), GLM-семья 149 из 179 исполненных, дедупликация против каталога (294 команды + 702 dir-скилла, вкл. заведённые ВНУТРИ окна /wheel-watch и /course-hero-schedule) + рулинги D26–D106 и reject store как suppression-лист ДО отбора. 9 карточек: 1 NEW + 5 UPDATE + 3 ратификации «не навык (пока)». Голос — В ЧАТЕ, по карточкам (≤10 карточек — постоянная политика 26-08). Навыки в проходе переписи не строятся.</div>
+  </div>
+  <div class="tally" id="tally">
+    <span class="approve">&#9989; <span class="count" id="c-approve">0</span></span>
+    <span class="reject">&#10060; <span class="count" id="c-reject">0</span></span>
+    <span class="defer">&#9208; <span class="count" id="c-defer">0</span></span>
+    <span class="time" title="active time on this sheet (while the tab is visible)">&#9201; <span class="count" id="t-total">0:00</span><span class="tstate" id="t-state"></span></span>
+    <button type="button" class="pausebtn" id="pauseBtn" title="pause the clock — a break is not review time">&#9208;</button>
+    <span class="unvoted">&#9711; <span class="count" id="c-unvoted">9</span></span>
+  </div>
+<div class="voteprog" id="voteProg"><span id="voteProgText"></span><span class="bar"><i id="voteProgBar"></i></span><span class="eta" id="voteProgEta"></span></div>
+</header>
+<aside class="screening-banner" role="status" data-screening="1"><strong>Screening (H1649)</strong> — only human-required cards are below. Off the plate: <span class="sc-a">deterministic 3</span> · <span class="sc-b">dataset lookup 2</span> · <span class="sc-c">agent adjudication 4</span> (total screened 9). Human cards: <span class="sc-d">9</span>. Evidence: <code>SKILL_CANDIDATES_CENSUS_H6314_H6905_17_10_2026.md</code>. Rules: bar-&gt;=2-distinct-sessions (singletons dropped, listed once in the census; Fable/Astra amendment MG 07-09 NOT triggered — zero executed Fable/Astra sessions in window; the one Fable-intended row H6317 was executed by a GLM engine), prior-rulings-suppression: D26-D106 + reject store checked BEFORE candidate selection (D70/D71/D101/D106 kill machinery, D84/D88/D90/D102 kill programmes), catalogue-dedupe-vs-commands (294 commands + 702 dir-skills + 487 SKILLS_INDEX rows; covered shapes never rendered, near-misses named on the cards; the four verifier agents pushed three would-be NEW skills back into UPDATE — shadow-bench, sli-probe-build, docx-to-md), in-window-mint test (/wheel-watch minted 10-10 by H6354, /course-hero-schedule 12-10 by H6570) — clusters behind them are ratify-not-ask (D109/U75 scope narrowed), executed-vs-minted test (eval wave H6844-H6852 = 7 mint stubs with no checked evidence -&gt; D108; H6714+H6542 carry real code -&gt; U77 at freq 2), registry-staleness correction (README 20-09 + REGISTRY_ARCHIVE carry rows for 106/377 files; execution status read from the file body + archive move, with &#x27;mechanical&#x27; reconcile flips labelled), dup-mint artifact test (.claim/.claim.released-* sidecars excluded; 377 files = 377 unique IDs, no live+archive twins in this window).</aside>
+<div class="savebanner">&#128229; Your export downloads as <code>uprava-skill-mine_h6314_h6905_17-10-26_decisions.json</code> &rarr; save it to <code>review/uprava-skill-mine_h6314_h6905_17-10-26_decisions.json</code> (the <code>sheet_id</code> inside the file is <code>uprava-skill-mine_h6314_h6905_17-10-26</code> — that is how a later session knows which sheet these decisions belong to).</div>
+<div class="toolbar">
+  <button data-submit="1" class="dl" id="downloadBtn">Download decisions.json</button><button data-submit="1" class="dl handin" id="handinBtn" title="stop the clock and export the votes made so far; the rest stay saved in this browser">Hand in what I got</button><span class="handin-said" id="handinSaid"></span><button data-submit="1" class="dl" id="saveBtn" style="display:none;margin-left:8px">Save to folder…</button>
+  <label data-submit="1" id="strictReviewerWrap" style="display:flex;align-items:center;gap:6px;font-size:13px">
+    Reviewer <input id="strictReviewer" type="text" autocomplete="name" style="background:#11141a;color:var(--text);border:1px solid var(--border);border-radius:6px;padding:7px 9px" />
+  </label>
+  <span data-submit="1" id="strictReviewError" role="alert" style="color:var(--bad);font-size:12px"></span>
+  <div class="fsctl" title="text size — persists in this browser"><button type="button" id="fsDown" aria-label="smaller text">A&minus;</button><span class="fsval" id="fsVal"></span><button type="button" id="fsUp" aria-label="larger text">A+</button></div>
+  <button data-submit="1" type="button" class="dl flowundo" id="flowUndoBtn" title="undo the last decision (z)">&#8630; Undo</button>
+  <span class="flowprog" id="flowProg"><span class="bar"><i id="flowBar"></i></span><span id="flowProgText"></span><span id="flowEta"></span></span>
+  <div class="filterbar" id="filterbar"><button data-filter="all" class="active">all</button><button data-filter="new">NEW</button><button data-filter="update">UPDATE</button><button data-filter="defer">Подтверждение отсрочки</button><button data-filter="unvoted">unvoted only</button></div>
+</div>
+<main id="cards">
+
+  <section class="card" data-id="C62" data-filt="new">
+    <header><div class="hw">C62 — NEW /fz152-audit: 152-ФЗ контур ПДн как одна дисциплина (10-строчный PASS-реестр статей → suveren-скан с оценкой → месячный перескан → enforcement-флаг → фикс-PR) <span class="badge">freq:10</span><span class="badge">11.10</span><span class="badge">exec 7</span><span class="badge badge-typology" title="U7: count + population share">NEW (n=1, 11%)</span></div><span class="idchip" title="card id — cite this id back when discussing this card">C62</span></header>
+    <div class="question"><p><b>Что кодирует.</b> Российское соответствие ПДн как исполняемую дисциплину:
+10-строчный <b>PASS-реестр статей</b> (ст.18 ч.5 локализация · ст.22 реестр РКН · ст.18.1 политика ·
+ст.9 согласия · cookie-гейт · self-hosted · маскирование логов · ст.11 биометрия · права субъекта · доступность из РФ),
+каждая строка с живой пробой → <b>suveren-скан</b> с оценкой и датированным JSON рядом с доком →
+<b>месячный ритуал перескана</b> по второму домену → флаг enforcement (<code>PD_CONSENT_ENFORCE</code>) + смоук →
+находка (F1–F4) → фикс-PR тем же лейном.</p>
+<p><b>Свидетельство — 10 сессий, 7 исполнено:</b> <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6481-GLM_Systema-Sanscriticum_152fz-audit-samskrte-full-contour_11.10.26.md">H6481</a> аудит полного контура · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6503-OxAlpha_Systema-Sanscriticum_fz152-policy-doc-fill-oxalpha_11.10.26.md">H6503</a> +
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6488-Sonnet_Systema-Sanscriticum_fz152-policy-doc-fill_11.10.26.md">H6488</a> политика · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6507-GLM_Systema-Sanscriticum_152fz-suveren-rescan-f4-pass_11.10.26.md">H6507</a> рескан F4 не горит (suveren v1.0.0, 23:51 МСК) · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6512-GLM_Systema-Sanscriticum_152fz-suveren-monthly-playbook_12.10.26.md">H6512</a> месячный
+плейбук · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6513-GLM_Systema-Sanscriticum_152fz-suveren-baseline-samskrtam_12.10.26.md">H6513</a> второй домен samskrtam.ru · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6528-OxAlpha_Systema-Sanscriticum_fz152-consent-enforce-flag-rollout_12.10.26.md">H6528</a> enforcement включён на проде; открытые
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6487-Sonnet_Systema-Sanscriticum_fz152-guest-consents-journal_11.10.26.md">H6487</a> журнал согласий гостя · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6533-OxAlpha_Systema-Sanscriticum_fz152-articlecss-googlefonts-leak_12.10.26.md">H6533</a> утечка fonts.googleapis.com до согласия · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6644-OxAlpha_Systema-Sanscriticum_consent-dup-tg-21-261-262-597-279_13.10.26.md">H6644</a> дубли
+согласия в TG.</p>
+<p><b>Дедупликация.</b> <code>/gdpr-audit</code> — EU-регламент: в его собственном разделе «When NOT to use»
+стоит «Auditing non-GDPR jurisdictions — citations and triggers will be wrong», и в теле ноль упоминаний
+152/ФЗ/РКН, то есть прививать 152-ФЗ к 15-гайдному EU-навыку значит форкнуть его.
+<code>/publish-safety-check</code> — гейт публикации (визибилити/права/секреты), не аудит соответствия;
+<code>/metrika-goal-map</code> несёт 152-FZ-guardrails одним пунктом своего контура.</p>
+<ul>
+<li><b>approve</b> — следующий «проверь 152-ФЗ» идёт одной дисциплиной: реестр статей + скан + месячный ритуал + enforcement, а не заново выведенной рамкой.</li>
+<li><b>reject</b> — контур остаётся импровизацией; рамка статей и оценивающий инструмент дрейфуют между доменами.</li>
+<li><b>defer</b> — ратифицировать как программу Systema-лейна (тогда promotion: третий домен).</li>
+</ul></div>
+    
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Approve</button>
+      <button class="vote reject" data-vote="reject">&#10060; Reject</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="NEW fz152-audit / defer→программа / reject…"></textarea>
+  </section>
+
+  <section class="card" data-id="U73" data-filt="update">
+    <header><div class="hw">U73 — UPDATE /shadow-bench: пост-GO постоянная интеграция третьего инструмента + лицензионно-футпринт вето + «NEGATIVE/NO-GO — это шип» + виза-контракт wheel-watch <span class="badge">freq:16</span><span class="badge">09.10</span><span class="badge">exec 12</span><span class="badge badge-typology" title="U7: count + population share">UPDATE (n=1, 11%)</span></div><span class="idchip" title="card id — cite this id back when discussing this card">U73</span></header>
+    <div class="question"><p><b>Что кодирует.</b> Adoption-pass внешнего инструмента как одну дисциплину:
+датированная live-проба upstream (stars/лицензия/активность) ДО работы → названный инкумбент-пол
+(«что должно быть побито или переиспользовано») → пилот на данных имения, а не на фикстурах →
+<b>числовая дельта против инкумбента</b> → live-дисциплина экспозиции (loopback/tailnet + auth + creds 0600 +
+read-only grant) → один live-fire-пруф → строка в досье.</p>
+<p><b>Свидетельство — 16 сессий, 12 исполнено:</b> <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6320-OxAlpha_Systema-Sanscriticum_backrest-restic-drill-ui_09.10.26.md">H6320</a> backrest · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6321-OxAlpha_Uprava_beszel-fleet-monitoring_09.10.26.md">H6321</a> beszel ·
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6322-OxAlpha_Uprava_marker-pdf-md-ingest_09.10.26.md">H6322</a> marker · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6323-OxAlpha_Uprava_lychee-link-census-sweep_09.10.26.md">H6323</a> lychee · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6324-OxAlpha_claude-config_ast-grep-sweep-migration_09.10.26.md">H6324</a> ast-grep · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6325-OxAlpha_SanskritLexicography_surya-devanagari-ocr-pilot_09.10.26.md">H6325</a> surya
+(<b>NEGATIVE — recall ≤0.12, PR смёржен</b>) · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6326-OxAlpha_Systema-Sanscriticum_evidence-money-dashboard_09.10.26.md">H6326</a> evidence (Metabase отклонён по AGPL/JVM) ·
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6362-OxAlpha_claude-config_wheel1-hooks-probity-medusa_10.10.26.md">H6362</a> probity · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6363-OxAlpha_claude-config_wheel2-skills-spec-adoption_10.10.26.md">H6363</a> skills-spec · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6456-OxAlpha_SanskritGrammar_process-sanskrit-sandhi-pilot_11.10.26.md">H6456</a> process-sanskrit · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6659-OxAlpha_Uprava_token-economy-trend-scan-wave2_13.10.26.md">H6659</a> token-saver-скан ·
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6712-GLM_Uprava_balrog-drill-smoke_14.10.26.md">H6712</a> BALROG; открытые <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6532-GLM_Uprava_postiz-plain-posting-pilot_12.10.26.md">H6532</a> Postiz · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6841-OxAlpha_kosha_wheel9-sandhikosh-benchmark-bakeoff_14.10.26.md">H6841</a> SandhiKosh · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6842-OxAlpha_SanskritGrammar_wheel9-ud-sanskrit-claims-probes_14.10.26.md">H6842</a> UD-Sanskrit ·
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6327-OxAlpha_Systema-Sanscriticum_excalidraw-devanagari-board_09.10.26.md">H6327</a> excalidraw.</p>
+<p><b>Почему UPDATE, а не NEW.</b> <code>/shadow-bench</code> уже владеет измеренческой половиной и прямо
+называет «tool» в скоупе: «Adopt-or-reject ONE external candidate … state the incumbent floor → measure
+shadow-only (never prod) with pre-registered GO/NO-GO thresholds». Но его же забор гласит «wiring stays a
+separate unit even on GO», а <code>/wheel-watch</code> останавливается на @DECIDE-карте («авто-apply запрещён»).
+Половина, которую эти сессии реально делали — <b>пост-визовую постоянную интеграцию</b> — не владеет никто;
+<code>/vps-prod-standup</code> харденит уже свой апп, а не выбирает и не проводит третий инструмент.</p>
+<ul>
+<li><b>approve</b> — Phase 5 (standing integration) + лицензионно-футпринт вето + правило «NEGATIVE-отчёт и есть результат» + виза-контракт.</li>
+<li><b>reject</b> — половина остаётся импровизацией, каждый pass заново выводит критерии пробы и заборы экспозиции.</li>
+<li><b>defer</b> — оставить shadow-bench чисто измерительным; тогда wiring-половина вернётся кандидатом отдельно.</li>
+</ul></div>
+    
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Approve</button>
+      <button class="vote reject" data-vote="reject">&#10060; Reject</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="UPDATE shadow-bench / defer→отдельный кандидат / reject…"></textarea>
+  </section>
+
+  <section class="card" data-id="U74" data-filt="update">
+    <header><div class="hw">U74 — UPDATE /sli-probe-build: фаза «проба стреляет, но врёт» (контрольная проба → root-cause probe-path → pos+neg фикстуры → re-run с дельтой) <span class="badge">freq:14</span><span class="badge">14.10</span><span class="badge">exec 5</span><span class="badge badge-typology" title="U7: count + population share">UPDATE (n=1, 11%)</span></div><span class="idchip" title="card id — cite this id back when discussing this card">U74</span></header>
+    <div class="question"><p><b>Что кодирует.</b> Ремонт <b>самого инструмента</b>, когда его вердикт противоречит
+реальности: контрольная проба из того же окружения («gh api rate_limit отвечает 5000/5000, а 41 из 43
+поверхностей PROBE_FAILED — подозревай инструмент, не цифру») → root-cause probe-path/scope →
+pos+neg фикстуры → re-run с записанной дельтой. Классы окна: <b>6 repair</b> · 4 чистых свипа
+(это не карточка, это `/hub-staleness-audit`+`/gtd-sync`) · 3 билда нового инструмента (это `/sli-probe-build`
+в чистом виде).</p>
+<p><b>Свидетельство:</b> <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6785-OxAlpha_Uprava_derived-surfaces-probe-repair_14.10.26.md">H6785</a> 41/43 PROBE_FAILED → 0 (глубокие клоны, estate_roots, bounded retry) ·
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6860-OxAlpha_Uprava_derived-surfaces-stale-wave-15-10_15.10.26.md">H6860</a> tgrep DEGRADED при живом 17-КБ файле (аудитор не резолвит <code>~/</code>) → FRESH 42 ·
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6786-OxAlpha_Uprava_blockers-dated-sections-scope_14.10.26.md">H6786</a> «Total: 0» против 18 живых @DECIDE · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6442-OxAlpha_Uprava_failsweep-refresh-revive_10.10.26.md">H6442</a> лейн падал «not a git repository» каждый 07:35 ·
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6434-OxAlpha_Uprava_merged-pr-reconciler-cron_10.10.26.md">H6434</a> plist_unparsable при загруженном джобе · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6497-OxAlpha_Uprava_fleet-deadman-rewire_11.10.26.md">H6497</a> deadman 144 фейла, stale_now=3 без ре-алерта ·
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6826-OxAlpha_Uprava_ci-red-branches-truth-pass_14.10.26.md">H6826</a> сам CI_HEALTH.md стейл 4 дня.</p>
+<p><b>Дедупликация.</b> <code>/sli-probe-build</code> владеет жизненным циклом пробы и уже несёт доктрину
+«a measurement that never fired is folklore» — но не половину «сработала и соврала».
+<code>/hook-wiring-audit</code> несёт ту же доктрину, но только для хуков; <code>/pipeline-audit</code> прямо
+запрещён чинить («the audit session patches nothing»); <code>/launchd-lane</code> — только планировщик;
+<code>/md-hygiene</code> — «fix BOTH the data and the generator», но лишь для Markdown.</p>
+<ul>
+<li><b>approve</b> — добавляется одна фаза с фикстурами: следующая «аудитор врёт» не переизобретает контрольную пробу.</li>
+<li><b>reject</b> — половина остаётся импровизацией; контрольная проба выводится заново каждым агентом.</li>
+<li><b>defer</b> — записать как правило в FINDINGS (тогда promotion: четвёртый однотипный пробой).</li>
+</ul></div>
+    
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Approve</button>
+      <button class="vote reject" data-vote="reject">&#10060; Reject</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="UPDATE sli-probe-build / defer→правило / reject…"></textarea>
+  </section>
+
+  <section class="card" data-id="U75" data-filt="update">
+    <header><div class="hw">U75 — UPDATE /systema-case-feature: mode-row `waitlist` (ждyн-фуннель бота: команда/карточка → тесты → деплой .92 → live-проба; allowlist с отказом без данных; /ga/→клики→цели) <span class="badge">freq:11</span><span class="badge">10.10</span><span class="badge">exec 11</span><span class="badge badge-typology" title="U7: count + population share">UPDATE (n=1, 11%)</span></div><span class="idchip" title="card id — cite this id back when discussing this card">U75</span></header>
+    <div class="question"><p><b>Что кодирует.</b> Один юнит ждун-фуннеля: команда/карточка бота или
+геро-поверхность → фича-тесты → деплой на .92 → live-проба; гейтинг админ-чата по allowlist конфига с
+<b>отказом без данных</b> (не-админ не видит цифр, но и не получает пустой экран); цепь атрибуции
+<code>/ga/&lt;slug&gt;</code> overlay → <code>anons_link_clicks</code> (без ПД) → цели Метрики.</p>
+<p><b>Свидетельство — 11 сессий, все 11 исполнены:</b> <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6407-OxAlpha_Systema-Sanscriticum_zhdun-stats-bot-command_10.10.26.md">H6407</a> <code>/zhdun-stats</code> ·
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6408-OxAlpha_Systema-Sanscriticum_zhdun-slot-prompt-after-vote_10.10.26.md">H6408</a> слот-промпт после голоса · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6443-GLM_Systema-Sanscriticum_zhdun-stats-allowlist-chats_11.10.26.md">H6443</a> allowlist чатов · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6450-GLM_Systema-Sanscriticum_waitlist-forget-votes_11.10.26.md">H6450</a> forget-votes ·
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6466-GLM_Systema-Sanscriticum_zhdun-bot-course-deeplink_11.10.26.md">H6466</a> deeplink на курс · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6482-GLM_Systema-Sanscriticum_zhdun-tracked-overlays_11.10.26.md">H6482</a>/<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6489-GLM_Systema-Sanscriticum_ga-short-overlays_11.10.26.md">H6489</a> overlays · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6521-GLM_Systema-Sanscriticum_zhdun-funnel-metrika-goals_12.10.26.md">H6521</a> цели Метрики ·
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6559-GLM_Systema-Sanscriticum_hero-waitlist-intent_12.10.26.md">H6559</a> intent-кнопка · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6566-GLM_Systema-Sanscriticum_zhdun-volunteer-link_12.10.26.md">H6566</a> volunteer-link · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6570-GLM_Systema-Sanscriticum_hero-course-schedule_12.10.26.md">H6570</a> hero-расписание.</p>
+<p><b>Дедупликация — карточка узкая намеренно.</b> <code>/systema-case-feature</code> реально держит
+mode-таблицу (14 строк, 7 из них наросли голосами) и правило «Aggregates only in committed analytics; no
+per-student PII exports», но в 225-строчном теле <b>ноль</b> упоминаний waitlist/zhdun/telegram/metrika/
+tracked_link. Hero-расписание карточка <b>не трогает</b>: H6570 в этом же окне вынесен в
+<code>/course-hero-schedule</code> (dir-скилл), который владеет расчётом дат и лендинг-флоу.
+<code>/metrika-goal-map</code> владеет целями счётчика, <code>/anons-attribution-mint</code> — UTM-ссылками.</p>
+<ul>
+<li><b>approve</b> — следующий юнит ждун-фуннеля идёт одним вызовом с зашитым гейтингом и цепью атрибуции.</li>
+<li><b>reject</b> — лейн остаётся импровизацией; гейтинг админ-чата и цепь клик→цель переизобретаются.</li>
+<li><b>defer</b> — ратифицировать как контент-программу канала (тогда promotion: второй канал/фуннель).</li>
+</ul></div>
+    
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Approve</button>
+      <button class="vote reject" data-vote="reject">&#10060; Reject</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="UPDATE systema-case-feature / defer→программа / reject…"></textarea>
+  </section>
+
+  <section class="card" data-id="U76" data-filt="update">
+    <header><div class="hw">U76 — UPDATE /docx-to-md: пост-конверсионная lesson-surface арка + tripwire «смена уровня заголовка ломает exact-line матчеры и сдвигает loc-оффсеты» (search-нога — обычная repo-работа) <span class="badge">freq:10</span><span class="badge">12.10</span><span class="badge">exec 10</span><span class="badge badge-typology" title="U7: count + population share">UPDATE (n=1, 11%)</span></div><span class="idchip" title="card id — cite this id back when discussing this card">U76</span></header>
+    <div class="question"><p><b>Что кодирует.</b> Пост-конверсионный слой уже сконвертированной книги:
+перепись маркеров против авторитетного источника (.docx / печатный TOC / topics.yml) → правка <b>только</b>
+строк-маркеров (h1→h2), текст книги verbatim → <b>в том же проходе</b> exact-line матчеры становятся
+level-agnostic (<code>build_lessonpack.lesson_slice</code>, <code>extract_sentences.lesson_re</code> ×2,
+<code>harvest_quantifiers.sec_rx</code>) → регенерация производных реестров (topics.yml loci, claims.yml
+loc-оффсеты, catalog.mdx, lesson-backlinks.json, CLAIMS_VERIFIED/ERRATA) с byte-identical доказательством и
+откатом чужого regen-мусора → <code>npm run build</code> + pytest + 8 валидаторов + live-якорь → PR → Pages.</p>
+<p><b>Свидетельство — 10 сессий, 10 исполнено.</b> Арка (6): <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6548-GLM_SanskritGrammar_lessons-nav-toc-kochergina-buhler_12.10.26.md">H6548</a> nav/TOC · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6562-GLM_SanskritGrammar_lesson-titles-enrich_12.10.26.md">H6562</a> подписи
+уроков · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6563-OxAlpha_SanskritGrammar_lessons-nav-toc-wave-rest-books_12.10.26.md">H6563</a> волна остальных книг · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6564-OxAlpha_SanskritGrammar_buhler-lessons-v-xxxix-restore_12.10.26.md">H6564</a> восстановление уроков V и XXXIX ·
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6674-OxAlpha_SanskritGrammar_buhler-xxxvii-xl-continuity-notes_13.10.26.md">H6674</a> continuity notes · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6673-GLM_SanskritGrammar_claims-errata-regen-drift_13.10.26.md">H6673</a> дрейф claims/errata. Search-нога (4): <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6552-GLM_SanskritGrammar_search-contexts_12.10.26.md">H6552</a>
+контексты · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6567-GLM_SanskritGrammar_search-lean-root-badges_12.10.26.md">H6567</a> худой root · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6593-GLM_SanskritGrammar_search-counter-cap_13.10.26.md">H6593</a> кап счётчика · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6672-GLM_SanskritGrammar_search-priority-ranking_13.10.26.md">H6672</a> приоритеты выдачи.</p>
+<p><b>Tripwire, которого нет ни в одном навыке:</b> смена уровня/текста заголовка ломает exact-line
+матчеры И сдвигает loc-оффсеты реестров — это стоило красного CI на #1082, было предупреждено в H6562,
+переисправлено в H6563 и всё равно выведено заново в H6674. Дедупликация: <code>/docx-to-md</code> владеет
+конверсией («A clean MDX compile is the only real proof»), но не её пост-слоем; <code>/docusaurus-scaffold</code>
+останавливается на «already-has-site»; реестровая нога наполовину у <code>/errata</code> и
+<code>/grammar-claims-audit</code>. <b>Search-нога карточкой не берётся:</b> один репо, одна неделя,
+пиннутая версия vendored-плагина — это обычная repo-работа, ратифицируется в D109 (ратификация — восемь семейств, которыми каталог уже владеет).</p>
+<p><b>Честный caveat:</b> H6563/H6564/H6673 оставили Acceptance/Evidence шаблоном («_&lt;artifact 1&gt;_»),
+то есть их гейты — проза на строке Status, не квитанции. UPDATE кодирует метод, а не подтверждает их приёмку.</p>
+<ul>
+<li><b>approve</b> — следующая волна уроков идёт с tripwire-ом и byte-доказательством реестров в том же проходе.</li>
+<li><b>reject</b> — арка остаётся импровизацией; матчеры и loc-оффсеты ломаются на каждой волне.</li>
+<li><b>defer</b> — закодировать только tripwire как правило репо (тогда promotion: следующая книга).</li>
+</ul></div>
+    
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Approve</button>
+      <button class="vote reject" data-vote="reject">&#10060; Reject</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="UPDATE docx-to-md / defer→правило / reject…"></textarea>
+  </section>
+
+  <section class="card" data-id="U77" data-filt="update">
+    <header><div class="hw">U77 — UPDATE /eval-harness: третий вид контракта `eval` (reference solution + negative class + balanced set) + stepwise-вариант дрилла с cost-ledger <span class="badge">freq:2</span><span class="badge">12.10</span><span class="badge">exec 2</span><span class="badge badge-typology" title="U7: count + population share">UPDATE (n=1, 11%)</span></div><span class="idchip" title="card id — cite this id back when discussing this card">U77</span></header>
+    <div class="question"><p><b>Что кодирует.</b> Две исполненные половины eval-дизайна:
+(1) третий вид контракта <code>eval</code> в admission-гейте — <b>reference solution + negative class +
+balanced set</b>, с правилом «0% pass@100 = сломанная задача, а не сложная» (<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6714-OxAlpha_Uprava_evals-acceptance-contract_14.10.26.md">H6714</a>, зашиплен кодом);
+(2) <b>stepwise/multi-turn</b> вариант фрозен-gold дрилла с проверяемыми чекпойнтами + per-drill cost-ledger
+против одного прогона (<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6542-GLM_claude-config_eval-stepwise-drill-pilot_12.10.26.md">H6542</a>).</p>
+<p><b>Почему freq 2, а не 9.</b> Остальные 7 сессий волны (H6844–H6852) — минт-стабы без исполнения:
+ни одного отмеченного evidence-пункта, а названные в миссии артефакты (<code>tools/eval_saturation_watch.py</code>)
+на диске не существуют. Они уходят в D108 (ратификация — программные фаны (paper-лейн + PD + eval-стабы) не навык пока) с promotion-правилом, а не в карточку: метод из непрошедших
+спек — это дизайн-проза, а не дисциплина.</p>
+<p><b>Дедупликация.</b> <code>/eval-harness</code> владеет «single-run number on a nondeterministic pipeline
+is noise» + rigor-адъюнктами (length/position probes, McNemar, pass^k); <code>/skill-drill-eval</code> —
+поведение скилла, <code>/precision-panel</code> — k судей, <code>/shadow-bench</code> — внешний кандидат,
+<code>/gold-adjudicate</code> — два прохода. Ни один не владеет ни balanced-set контрактом, ни stepwise-дриллом.</p>
+<ul>
+<li><b>approve</b> — eval-контракт и stepwise-прогон становятся частью навыка, а не разовым кодом.</li>
+<li><b>reject</b> — обе половины остаются в двух репо-коммитах, невидимых следующей сессии.</li>
+<li><b>defer</b> — вернуться, когда волна H6844–H6852 даст ≥2 исполненных суб-шейпа.</li>
+</ul></div>
+    
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Approve</button>
+      <button class="vote reject" data-vote="reject">&#10060; Reject</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="UPDATE eval-harness / defer→D108 / reject…"></textarea>
+  </section>
+
+  <section class="card" data-id="D107" data-filt="defer">
+    <header><div class="hw">D107 — ратификация: handoff/claim/close/reconcile/registry машинерия окна (~32 сессии) — НЕ навык (классы D70/D71/D101/D106) <span class="badge">freq:~32</span><span class="badge">окно</span><span class="badge">kill-class</span><span class="badge badge-typology" title="U7: count + population share">RATIFY (n=1, 11%)</span></div><span class="idchip" title="card id — cite this id back when discussing this card">D107</span></header>
+    <div class="question"><p><b>Что ратифицируется.</b> Самая частая форма окна после программных фанов:
+claim-serialization, push-race, ref-reaper, close-route parity, row-divergence, reconcile-intents,
+refresh-dedupe, main-tree-refresh-blocked, mint-drift, split-candidate, effort-unrated —
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6334-OxAlpha_Uprava_claim-serialization-double-run-guard_10.10.26.md">H6334</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6670-OxAlpha_Uprava_claim-push-hot-main-diagnostics-quiescence_13.10.26.md">H6670</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6876-OxAlpha_Uprava_claim-ref-reaper_15.10.26.md">H6876</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6877-OxAlpha_Uprava_claim-push-race-check_15.10.26.md">H6877</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6862-OxAlpha_Uprava_handoff-close-row-divergence_15.10.26.md">H6862</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6875-GLM_Uprava_handoff-close-route-lifecycle-parity_15.10.26.md">H6875</a> ·
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6869-GLM_Uprava_reconcile-acknowledge-snapshot-intents_15.10.26.md">H6869</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6870-GLM_Uprava_reconcile-quarantine-malformed-intents_15.10.26.md">H6870</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6871-GLM_Uprava_refresh-recovery-dedupe-by-blocker_15.10.26.md">H6871</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6872-GLM_claude-config_handoff-lifecycle-contract-doc-drift_15.10.26.md">H6872</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6880-GLM_Uprava_main-tree-refresh-blocked-h6875_15.10.26.md">H6880</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6903-OxAlpha_Uprava_effort-token-backfill-git-evidence_17.10.26.md">H6903</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6904-OxAlpha_Uprava_split-candidate-decide-rows_17.10.26.md">H6904</a> ·
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6328-GLM_Uprava_canary-empty-tree-tip-hardguard_09.10.26.md">H6328</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6330-GLM_Uprava_uprava-main-tree-restore-after-gutting_09.10.26.md">H6330</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6357-OxAlpha_Uprava_station-picker-launchbox-stub-filter_10.10.26.md">H6357</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6360-OxAlpha_Uprava_station-picker-tier-and-blocked-rows_10.10.26.md">H6360</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6413-OxAlpha_Uprava_drain-done-flip-fail-loud_10.10.26.md">H6413</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6441-OxAlpha_Uprava_registry-hygiene-tsv-marker-shard12-dedup_10.10.26.md">H6441</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6492-OxAlpha_Uprava_close-path-hang-diagnosis-h6393-h5330-close-flips_11.10.26.md">H6492</a> ·
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6526-OxAlpha_Uprava_claim-preflight-feeds-title-false-positive_12.10.26.md">H6526</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6539-GLM_Uprava_registry-merged-pr-backlog-close_12.10.26.md">H6539</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6557-OxAlpha_Uprava_claim-preflight-recurring-citation_12.10.26.md">H6557</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6578-GLM_Uprava_claim-sidecar-orphan-release_13.10.26.md">H6578</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6615-OxAlpha_Uprava_finished-handoff-nightly-clean_13.10.26.md">H6615</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6671-OxAlpha_Uprava_close-windowed-truncation-forensics_13.10.26.md">H6671</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6690-OxAlpha_Uprava_uborka-silt-tail-sweep_13.10.26.md">H6690</a> ·
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6693-GLM_Uprava_registry-runtime-gates-blocked-rows_13.10.26.md">H6693</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6696-GLM_Uprava_gate-none-close-condition-truth_13.10.26.md">H6696</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6687-OxAlpha_Uprava_uborka-archive-first-gate_13.10.26.md">H6687</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6688-OxAlpha_Uprava_uborka-redundancy-git-test_13.10.26.md">H6688</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6689-OxAlpha_Uprava_uborka-shared-tree-reset-guards_13.10.26.md">H6689</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6701-GLM_Uprava_main-tree-refresh-blocked-h6560_14.10.26.md">H6701</a>.</p>
+<p><b>Почему не навык.</b> Классы D70 (drain/session-runner machinery), D71 (guard/liveness hardening — «the recurring kill-class»), D101 (drain/claim/registry machinery hardening не навык) и D106 (registry/clone/close machinery не навык) — стоячий kill-class: машинерией владеют
+<code>/handoff-close</code>, <code>/handoff-registry-audit</code>, <code>/drain</code>,
+<code>/worktree-claim</code>, <code>/branch-contention-recover</code> и сами tools; каждый дефект уникален
+(одноразовый баг в реестре), а не повторяющаяся дисциплина. Verifier-гейт H4235 и claim-лок — уже
+зафиксированные правила, а не импровизация.</p>
+<p><b>Promotion-правило:</b> третий однотипный пробой за окно → правило или гвард в
+<code>.githooks/</code>/хук, не навык. Если пробои начнут повторяться с идентичным скелетом — вернуть
+кандидатом на следующей переписи.</p>
+<ul>
+<li><b>approve</b> — «не навык»: машинерия остаётся у tools и четырёх навыков-владельцев.</li>
+<li><b>reject</b> — считать это навыком (тогда заводить отдельный, вопреки D70/D71/D101/D106).</li>
+<li><b>defer</b> — решить на следующей переписи по правилу трёх пробоев.</li>
+</ul></div>
+    
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Approve</button>
+      <button class="vote reject" data-vote="reject">&#10060; Reject</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="ratify machinery / defer to next census / reject…"></textarea>
+  </section>
+
+  <section class="card" data-id="D108" data-filt="defer">
+    <header><div class="hw">D108 — ратификация: программные фаны окна — paper-лейн A68/A72/B3 (≈29) + PD-программа (16) + eval-волна 7 стабов — одному фану один лейн <span class="badge">freq:~52</span><span class="badge">окно</span><span class="badge">programme</span><span class="badge badge-typology" title="U7: count + population share">RATIFY (n=1, 11%)</span></div><span class="idchip" title="card id — cite this id back when discussing this card">D108</span></header>
+    <div class="question"><p><b>Что ратифицируется.</b> Три программных фана: <b>paper-лейн</b> A68
+(novelty-fence, структурное сравнение, siglum-верификация, exhibit+acks, numbers:
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6695-OxAlpha_Uprava_a68-novelty-claim-sweep_13.10.26.md">H6695</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6697-OxAlpha_Uprava_a68-claim-fence-and-deep-sweep_13.10.26.md">H6697</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6698-OxAlpha_Uprava_a68-voice-pass-followups-umbrella_13.10.26.md">H6698</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6702-OxAlpha_Uprava_a68-iscls-structural-comparison_14.10.26.md">H6702</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6707-OxAlpha_Uprava_a68-aob-pass2-declared-canon_14.10.26.md">H6707</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6708-OxAlpha_Uprava_a68-acc-name-authority-correlation_14.10.26.md">H6708</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6709-OxAlpha_Uprava_a68-locus-full-100x5_14.10.26.md">H6709</a> ·
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6710-OxAlpha_Uprava_a68-specimen-exhibit-and-acks_14.10.26.md">H6710</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6713-OxAlpha_Uprava_a68-imperfect-data-kupamanduka-note_14.10.26.md">H6713</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6858-OxAlpha_Uprava_a68-article-gather-kalepu-chat_15.10.26.md">H6858</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6892-OxAlpha_Uprava_a68-q1-novelty-hedge_17.10.26.md">H6892</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6893-OxAlpha_Uprava_a68-q4-h6722-section-six_17.10.26.md">H6893</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6894-OxAlpha_Uprava_a68-q9-scope-block_17.10.26.md">H6894</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6895-OxAlpha_Uprava_a68-q11-mahabha-caveat_17.10.26.md">H6895</a> ·
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6897-OxAlpha_Uprava_a68-verify-bharat-epic-siglum_17.10.26.md">H6897</a>), A72 (<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6459-OxAlpha_csl-atlas_a72-validation-table_11.10.26.md">H6459</a>–<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6465-OxAlpha_csl-atlas_a72-label-reading-student-guide_11.10.26.md">H6465</a>), B3/A71 (<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6439-GLM_Uprava_a73-submission-pack_10.10.26.md">H6439</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6476-OxAlpha_Uprava_iscls9-a68-pd-third-submission_11.10.26.md">H6476</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6843-OxAlpha_Uprava_b3-mw-sense-inventory-sembank-camera-ready_14.10.26.md">H6843</a>), окна
+подачи (<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6403-OxAlpha_Uprava_iscls9-b3-submission-window_10.10.26.md">H6403</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6575-OxAlpha_Uprava_iscls9-b3-window-withdraw-round6_12.10.26.md">H6575</a>); <b>PD-программа</b> (16 юнитов MuseSpark/OxAlpha:
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6715-MuseSpark_Uprava_pd-knowledge-page_14.10.26.md">H6715</a>–<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6726-MuseSpark_Uprava_pd-outreach-nws-patch_14.10.26.md">H6726</a> + <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6884-OxAlpha_SanskritLexicography_pd-feat-index-number-sweep_16.10.26.md">H6884</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6885-OxAlpha_kosha_pd-manifest-note-sweep_16.10.26.md">H6885</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6890-OxAlpha_SanskritLexicography_pd-numbers-sweep-features-row_17.10.26.md">H6890</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6891-OxAlpha_kosha_pd-numbers-sweep-datasets-row_17.10.26.md">H6891</a>);
+<b>eval-волна</b> 7 стабов (<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6844-OxAlpha_Uprava_ssb-f5f6f7-grading-engines_14.10.26.md">H6844</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6845-OxAlpha_RuWritingStyles_judge-bias-calibration_14.10.26.md">H6845</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6846-OxAlpha_multi_eval-harness-scaffold-rollout-4-repos_14.10.26.md">H6846</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6847-OxAlpha_Uprava_evals-saturation-watch_14.10.26.md">H6847</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6850-OxAlpha_Uprava_eval-contract-seed-size_14.10.26.md">H6850</a> ·
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6851-OxAlpha_Systema-Sanscriticum_user-simulator-student-dialogues_14.10.26.md">H6851</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6852-OxAlpha_Uprava_suite-lifecycle-isolation-graduation_14.10.26.md">H6852</a>).</p>
+<p><b>Почему не навык.</b> Один фан = один лейн, и владельцы уже есть:
+<code>/paper-author-pass</code>, <code>/paper-referee</code>, <code>/paper-camera-ready</code>,
+<code>/paper-submission-pack</code>, <code>/acl-uplift</code> (4 формы uplift — C-класс с 25-08),
+<code>/verify-claims</code>, а для PD-строк — <code>/readme-truth-pass</code> (свип
+про-каталогизированного дрейфа) и <code>/computed-table</code> (derive-don't-store). PD — программа одного
+источника (Petersburg Dictionary): knowledge page, ownership, exhibits, census row, TOC-сверка читаются как
+разные главы одной программы, а не как повторяющаяся дисциплина.</p>
+<p><b>Promotion-правила:</b> PD-форма → второй источник (второй словарь той же формы) даёт кандидата;
+eval-волна → ≥2 исполненных одного суб-шейпа; paper-фан → если единица начнёт повторяться вне
+subject-статьи (как U76 (UPDATE /docx-to-md — lesson-surface арка + matcher tripwire (17-10-2026)) вышел из `/docx-to-md`).</p>
+<ul>
+<li><b>approve</b> — фаны остаются у своих лейнов, ни один не переспрашивается на следующей переписи.</li>
+<li><b>reject</b> — заводить навык на программный фан (вопреки D84 (same-day batch-minted программа), D88 (плановая волна 0 исполненных — не кандидат пока), D90 (доменная программа с built-ядром) и D102 (батч one-off программ не навыки)).</li>
+<li><b>defer</b> — вернуть кандидатом при срабатывании promotion-правила.</li>
+</ul></div>
+    
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Approve</button>
+      <button class="vote reject" data-vote="reject">&#10060; Reject</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="ratify programme fans / defer / reject…"></textarea>
+  </section>
+
+  <section class="card" data-id="D109" data-filt="defer">
+    <header><div class="hw">D109 — ратификация: семейства, которыми каталог уже владеет (red-branch repair · maturity · wheel-watch · fleet token/disk · anons/video · skills-estate · drain-liveness · support-SLA · search-нога) <span class="badge">freq:~73</span><span class="badge">окно</span><span class="badge">covered</span><span class="badge badge-typology" title="U7: count + population share">RATIFY (n=1, 11%)</span></div><span class="idchip" title="card id — cite this id back when discussing this card">D109</span></header>
+    <div class="question"><p><b>Что ратифицируется.</b> Восемь кластеров, у которых владелец уже есть:
+<b>red-branch repair</b> (10, автофайл <code>ci_repair_handoff.py</code>: <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6376-GLM_BookIndex_red-branch-repair-ci_10.10.26.md">H6376</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6377-GLM_IndologyScholars_red-branch-repair-rebuild-deploy-indology-scholars-portal_10.10.26.md">H6377</a> ·
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6378-GLM_SamudraManthanam_red-branch-repair-ci_10.10.26.md">H6378</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6379-GLM_SanskritKaraoke_red-branch-repair-student-page-generator_10.10.26.md">H6379</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6380-GLM_SanskritKaraoke_red-branch-repair-tests_10.10.26.md">H6380</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6381-GLM_csl-observatory_red-branch-repair-project-sync-milestone-project-board_10.10.26.md">H6381</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6383-GLM_Uprava_ci-repair-mint-timeout-budget_10.10.26.md">H6383</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6856-Sonnet_csl-orig_red-branch-repair-guard-backstop_15.10.26.md">H6856</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6368-OxAlpha_SanskritKaraoke_ci-ffmpeg-student-regen_10.10.26.md">H6368</a> ·
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6517-OxAlpha_SanskritLexicography_ci-regreen-pin-claim_12.10.26.md">H6517</a>) → <code>/gh-fix-ci</code>; <b>maturity</b> (<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6395-OxAlpha_Systema-Sanscriticum_maturity-product-core_10.10.26.md">H6395</a>–<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6400-OxAlpha_Uprava_maturity-fleet-dr_10.10.26.md">H6400</a>) → <code>/maturity-audit</code> (C60 — NEW /maturity-audit (09-10-2026));
+<b>wheel-watch</b> (<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6354-OxAlpha_claude-config_wheel-watch-skill_10.10.26.md">H6354</a> завёл навык в этом окне, далее <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6364-OxAlpha_claude-config_wheel3-memory-alignment_10.10.26.md">H6364</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6365-OxAlpha_Uprava_wheel4-dispatch-resilience_10.10.26.md">H6365</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6366-OxAlpha_claude-config_wheel5-skill-evals_10.10.26.md">H6366</a> ·
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6436-GLM_Uprava_wheelwatch-agent-infra-monthly_10.10.26.md">H6436</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6437-GLM_Uprava_wheelwatch-agent-memory-monthly_10.10.26.md">H6437</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6438-GLM_Uprava_wheelwatch-sandhi-nlp-monthly_10.10.26.md">H6438</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6475-OxAlpha_Uprava_awesome-second-brain-rescan_11.10.26.md">H6475</a>) → <code>/wheel-watch</code>;
+<b>fleet token/disk</b> (19: <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6336-GLM_Uprava_fleet-token-usage-architecture-review_10.10.26.md">H6336</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6339-GLM_Uprava_fleet-context-discipline-d1d2_10.10.26.md">H6339</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6340-GLM_Uprava_subagent-brief-budgets-d3_10.10.26.md">H6340</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6341-GLM_Uprava_fleet-usage-daily-aggregate-d4_10.10.26.md">H6341</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6342-GLM_Uprava_opencode-db-retention-d5_10.10.26.md">H6342</a> ·
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6432-GLM_Uprava_residual-budget-owner-limit_10.10.26.md">H6432</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6444-GLM_Uprava_mac-memory-census_11.10.26.md">H6444</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6445-GLM_claude-config_mcp-orphan-reaper-lane_11.10.26.md">H6445</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6446-GLM_Uprava_fleet-admission-gate_11.10.26.md">H6446</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6499-OxAlpha_Uprava_mac-disk-headroom-key-escrow_11.10.26.md">H6499</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6511-OxAlpha_Uprava_mac-disk-cleanup-t1t2-approved_12.10.26.md">H6511</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6523-OxAlpha_Uprava_mac-disk-t1-standing-h5909-bundles_12.10.26.md">H6523</a> ·
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6524-OxAlpha_Uprava_mac-disk-t2-executed-prune-unblocked_12.10.26.md">H6524</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6529-GLM_claude-config_ssd-census-hardening-1210_12.10.26.md">H6529</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6660-OxAlpha_Uprava_token-burn-attribution-weekly_13.10.26.md">H6660</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6661-OxAlpha_Uprava_umbrella-cwd-kpi-checkpoint_13.10.26.md">H6661</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6662-OxAlpha_Uprava_token-economy-synthesis-q4_13.10.26.md">H6662</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6704-OxAlpha_Uprava_token-saver-ab-wave1-run-pairs_14.10.26.md">H6704</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6886-OxAlpha_Uprava_magenta-seat-30d-instrument_16.10.26.md">H6886</a>) →
+<code>/cpu</code>+<code>/ssd</code>+<code>/session-report</code>+<code>/receipts</code>;
+<b>anons/video</b> (<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6546-OxAlpha_Systema-Sanscriticum_tg-video-anons-lane_12.10.26.md">H6546</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6573-OxAlpha_Systema-Sanscriticum_tg-video-stories-arm_12.10.26.md">H6573</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6574-OxAlpha_Systema-Sanscriticum_video-anons-shorts-vk_12.10.26.md">H6574</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6576-GLM_claude-config_anons-post-template-checklist_12.10.26.md">H6576</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6579-GLM_claude-config_anons-types-playbook_13.10.26.md">H6579</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6580-GLM_Systema-Sanscriticum_anons-post-to-course-page_13.10.26.md">H6580</a> ·
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6594-GLM_Systema-Sanscriticum_ors-volunteer-anons_13.10.26.md">H6594</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6681-GLM_claude-config_anons-ga-only-link-gate_13.10.26.md">H6681</a>) → <code>/anons</code>+<code>/plates-intake-qc</code>+<code>/anons-attribution-mint</code>;
+<b>drain-liveness</b> (11) → <code>/launchd-lane</code>+<code>/drain</code> (его описание уже несёт
+«zombie/orphan purge» и «dead-writer repair»); <b>support-SLA</b> (<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6604-OxAlpha_Systema-Sanscriticum_support-sla-drain-tg-vk_13.10.26.md">H6604</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6645-OxAlpha_Systema-Sanscriticum_sla-autopost-filter-groups_13.10.26.md">H6645</a> ·
+<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/H6834-OxAlpha_Systema-Sanscriticum_support-replies-review_14.10.26.md">H6834</a>) → студент-скиллы + <code>/custdev-slice</code>; <b>search-нога</b> SanskritGrammar
+(<a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6552-GLM_SanskritGrammar_search-contexts_12.10.26.md">H6552</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6567-GLM_SanskritGrammar_search-lean-root-badges_12.10.26.md">H6567</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6593-GLM_SanskritGrammar_search-counter-cap_13.10.26.md">H6593</a> · <a href="https://github.com/gasyoun/Uprava/blob/main/handoffs/archive/H6672-GLM_SanskritGrammar_search-priority-ranking_13.10.26.md">H6672</a>) → обычная repo-работа одного репо и одной
+пиннутой версии vendored-плагина, карточку не заслуживает.</p>
+<p><b>Почему не навык.</b> Ни один кластер не переспрашивается, пока владелец не потеряет половину —
+как <code>/shadow-bench</code> потерял wiring-половину и получил U73 (UPDATE /shadow-bench — пост-GO standing integration + лицензионно-футпринт вето (17-10-2026)). Это и есть смысл ратификации:
+зафиксировать, что каталог покрывает, чтобы следующая перепись не переоткрывала.</p>
+<ul>
+<li><b>approve</b> — все восемь остаются у владельцев; список — suppression-лист следующей переписи.</li>
+<li><b>reject</b> — заводить навык на один из кластеров (назвать, какой именно, в заметке).</li>
+<li><b>defer</b> — пере-проверить на следующей переписи, не потерял ли владелец половину.</li>
+</ul></div>
+    
+    <div class="controls">
+      <button class="vote approve" data-vote="approve">&#9989; Approve</button>
+      <button class="vote reject" data-vote="reject">&#10060; Reject</button>
+      <button class="vote defer" data-vote="defer">&#9208; Defer</button>
+      <span class="vote-state">unvoted</span>
+    </div>
+    <textarea class="note" placeholder="ratify covered families / defer / reject…"></textarea>
+  </section>
+</main>
+<div class="votebar" id="voteBar"><span class="spacer"></span></div>
+<footer class="hint">Источник: SKILL_CANDIDATES_CENSUS_H6314_H6905_17_10_2026.md · /skill-mine · DSH (deepseek-flash) · 17-10-2026. Approve — принять предложение карточки. Reject — оставить как есть (для D-карточек: «не навык» = approve). Defer — решить позже. Keyboard: <kbd>a</kbd> Approve &middot; <kbd>r</kbd> Reject
+  &middot; <kbd>d</kbd> defer &middot; <kbd>&darr;</kbd>/<kbd>&uarr;</kbd> next/prev. Votes autosave to
+  this browser's localStorage; click "Download decisions.json" when done (unvoted items export with
+  decision:null).</footer>
+<div class="legend" style="max-width:980px;margin:0 auto 20px;padding:0 20px;color:var(--muted);font-size:12px">
+  <b>Approve</b> = accept the proposed change/answer shown on the card (no separate "approve as-is" —
+  approving means agreeing as written). <b>Reject</b> = keep the current entry/answer unchanged.
+  <b>Defer</b> = not sure yet, decide later. The note field is for requesting a partial tweak instead
+  of an outright reject.
+</div>
+<script>
+(function () {
+  var SHEET_ID = "uprava-skill-mine_h6314_h6905_17-10-26";
+  var STORE_KEY = 'review-sheet:' + SHEET_ID;
+  var GENERATED = "17-10-2026";
+  var ids = ["C62", "U73", "U74", "U75", "U76", "U77", "D107", "D108", "D109"];
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(STORE_KEY) || '{}') || {}; } catch (e) { state = {}; }
+  function tally() {
+    var c = { approve:0, reject:0, defer:0 };
+    ids.forEach(function (id) { var v = state[id] && state[id].decision; if (v && c.hasOwnProperty(v)) c[v]++; });
+    document.getElementById('c-approve').textContent = c.approve;
+    document.getElementById('c-reject').textContent = c.reject;
+    document.getElementById('c-defer').textContent = c.defer;
+    document.getElementById('c-unvoted').textContent = ids.length - c.approve - c.reject - c.defer;
+  }
+  function applyCardUI(card) {
+    var id = card.getAttribute('data-id'); var rec = state[id] || {};
+    card.classList.remove('voted-approve','voted-reject','voted-defer');
+    card.querySelectorAll('button.vote').forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-vote') === rec.decision); });
+    card.querySelector('.vote-state').textContent = rec.decision ? rec.decision : 'unvoted';
+    if (rec.decision) card.classList.add('voted-' + rec.decision);
+    var ta = card.querySelector('textarea.note'); if (rec.note && !ta.value) ta.value = rec.note;
+  }
+  function save() { localStorage.setItem(STORE_KEY, JSON.stringify(state)); tally(); }
+  // H1523 residual / csl-pyutil#1 Part 1: always re-read the live textarea on vote
+  // and before export so a second vote click (or a missed `input` event) cannot
+  // drop a note that is still visible in the card.
+  function syncNoteFromDom(id) {
+    state[id] = state[id] || {};
+    var card = document.querySelector('.card[data-id="' + id + '"]');
+    if (!card) return;
+    var ta = card.querySelector('textarea.note');
+    if (ta) state[id].note = ta.value;
+  }
+  function vote(id, d) { syncNoteFromDom(id); state[id].decision = d; save(); }
+  function noteChange(id, t) { state[id] = state[id] || {}; state[id].note = t; save(); }
+  document.querySelectorAll('.card').forEach(function (card) {
+    var id = card.getAttribute('data-id'); applyCardUI(card);
+    card.querySelectorAll('button.vote').forEach(function (btn) {
+      btn.addEventListener('click', function () { vote(id, btn.getAttribute('data-vote')); applyCardUI(card); });
+    });
+    var ta = card.querySelector('textarea.note'); ta.addEventListener('input', function () { noteChange(id, ta.value); });
+  });
+  tally();
+  document.getElementById('downloadBtn').addEventListener('click', function () {
+    ids.forEach(function (id) { syncNoteFromDom(id); });
+    var decided = ids.filter(function (id) { return state[id] && state[id].decision; }).length;
+    var payload = { sheet_id: SHEET_ID, generated: "17-10-2026", decided: decided, time_total_seconds: __timeTotal(),
+      items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '', time_seconds: __timeFor(id) }; }) };
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
+    var url = URL.createObjectURL(blob); var a = document.createElement('a');
+    a.href = url; a.download = SHEET_ID + '_decisions.json'; document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+  });
+  var filterbar = document.getElementById('filterbar');
+  filterbar.addEventListener('click', function (e) {
+    var btn = e.target.closest('button[data-filter]'); if (!btn) return;
+    filterbar.querySelectorAll('button').forEach(function (b) { b.classList.remove('active'); });
+    btn.classList.add('active'); var f = btn.getAttribute('data-filter');
+    document.querySelectorAll('.card').forEach(function (card) {
+      var show = true;
+      if (f === 'unvoted') { var id = card.getAttribute('data-id'); show = !(state[id] && state[id].decision); }
+      else if (f !== 'all') { show = card.getAttribute('data-filt') === f; }
+      card.style.display = show ? '' : 'none';
+    });
+  });
+  var cardsEl = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  var activeIdx = 0;
+  function visibleCards() { return cardsEl.filter(function (c) { return c.style.display !== 'none'; }); }
+  document.addEventListener('keydown', function (e) {
+    if (e.target.tagName === 'TEXTAREA') return;
+    var vis = visibleCards(); if (!vis.length) return;
+    if (activeIdx >= vis.length) activeIdx = vis.length - 1;
+    var card = vis[activeIdx]; var id = card.getAttribute('data-id');
+    if (e.key === 'a') { vote(id, 'approve'); applyCardUI(card); }
+    else if (e.key === 'r') { vote(id, 'reject'); applyCardUI(card); }
+    else if (e.key === 'd') { vote(id, 'defer'); applyCardUI(card); }
+    else if (e.key === 'ArrowDown') { activeIdx = Math.min(activeIdx + 1, vis.length - 1); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'start'}); }
+    else if (e.key === 'ArrowUp') { activeIdx = Math.max(activeIdx - 1, 0); vis[activeIdx].scrollIntoView({behavior:'smooth',block:'start'}); }
+    else return;
+    e.preventDefault();
+  });
+
+  var STRICT_REVIEW = {"reviewer": "MG", "requireAllVotes": true, "requireRejectNote": true, "generated": "17-10-2026"};
+  var strictReviewer = document.getElementById('strictReviewer');
+  var strictError = document.getElementById('strictReviewError');
+  strictReviewer.value = state.__reviewer || STRICT_REVIEW.reviewer || '';
+  function strictItems() {
+    return ids.map(function (id) {
+      var rec = state[id] || {};
+      return { id: id, decision: rec.decision || null, note: rec.note || '', time_seconds: __timeFor(id) };
+    });
+  }
+  function strictValidation() {
+    var items = strictItems();
+    var reviewer = strictReviewer.value.trim();
+    var unvoted = STRICT_REVIEW.requireAllVotes ? items.filter(function (item) { return !item.decision; }) : [];
+    var rejectedWithoutNote = STRICT_REVIEW.requireRejectNote ? items.filter(function (item) {
+      return item.decision === 'reject' && !item.note.trim();
+    }) : [];
+    var errors = [];
+    if (!reviewer) errors.push('reviewer is required');
+    if (unvoted.length) errors.push(unvoted.length + ' item(s) remain unvoted');
+    if (rejectedWithoutNote.length) errors.push(rejectedWithoutNote.length + ' rejection(s) need a note');
+    return { reviewer: reviewer, items: items, complete: errors.length === 0, errors: errors };
+  }
+  function strictPayload() {
+    var result = strictValidation();
+    var decided = result.items.filter(function (item) { return !!item.decision; }).length;
+    return { sheet_id: SHEET_ID, generated: "17-10-2026", decided: decided, time_total_seconds: __timeTotal(),
+      reviewer: result.reviewer, reviewedAt: result.complete ? new Date().toISOString() : null,
+      complete: result.complete, items: result.items };
+  }
+  strictReviewer.addEventListener('input', function () {
+    state.__reviewer = strictReviewer.value;
+    strictError.textContent = '';
+    save();
+  });
+  document.getElementById('downloadBtn').addEventListener('click', function (event) {
+    event.preventDefault(); event.stopImmediatePropagation();
+    var result = strictValidation();
+    if (!result.complete) {
+      strictError.textContent = result.errors.join('; ');
+      if (!result.reviewer) strictReviewer.focus();
+      return;
+    }
+    strictError.textContent = '';
+    var blob = new Blob([JSON.stringify(strictPayload(), null, 2)], { type:'application/json' });
+    var url = URL.createObjectURL(blob); var a = document.createElement('a');
+    a.href = url; a.download = SHEET_ID + '_decisions.json'; document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+  }, true);
+
+  var saveHandle = null, saveTimer = null, saveWritePending = 0;
+  var saveWriteChain = Promise.resolve();
+  var SAVE_SAVING = 'Saving…';
+  var SAVE_SAVED = 'Saved';
+  var SAVE_FAILED = 'Save failed — retry';
+  function exportPayload() {
+    return JSON.stringify(strictPayload(), null, 2);
+  }
+  function flushAutosave() {
+    if (!saveHandle) return Promise.resolve(false);
+    clearTimeout(saveTimer);
+    var payload = exportPayload();
+    saveWritePending++;
+    var writeJob = saveWriteChain.then(function () {
+      return saveHandle.createWritable().then(function (writable) {
+        return writable.write(payload).then(function () { return writable.close(); });
+      });
+    });
+    var tracked = writeJob.then(function () {
+      saveWritePending--; return true;
+    }, function (error) {
+      saveWritePending--; throw error;
+    });
+    saveWriteChain = tracked.catch(function () {});
+    return tracked;
+  }
+  function saveStatus(message) {
+    var saveBtn = document.getElementById('saveBtn');
+    if (saveBtn) saveBtn.textContent = message;
+  }
+  function scheduleAutosave() {
+    if (!saveHandle) return;
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(function () {
+      flushAutosave().then(function () { saveStatus(SAVE_SAVED); })
+        .catch(function () { saveStatus(SAVE_FAILED); });
+    }, 1000);
+  }
+  var _origSave = save;
+  save = function () { _origSave(); scheduleAutosave(); };
+  if (window.showSaveFilePicker) {
+    var saveBtn = document.getElementById('saveBtn');
+    saveBtn.style.display = '';
+    saveBtn.addEventListener('click', function () {
+      window.showSaveFilePicker({suggestedName: SHEET_ID + '_decisions.json'}).then(function (h) {
+        saveHandle = h; saveStatus(SAVE_SAVING); return flushAutosave();
+      }).then(function (saved) {
+        if (saved) saveStatus(SAVE_SAVED);
+      }).catch(function (error) {
+        if (!error || error.name !== 'AbortError') saveStatus(SAVE_FAILED);
+      });
+    });
+  }
+  window.addEventListener('beforeunload', function (event) {
+    if (!saveWritePending) return;
+    event.preventDefault();
+    event.returnValue = '';
+  });
+
+  var FS_KEY = STORE_KEY + ':fs', FS_DEFAULT = 1.5;
+  function fsGet() {
+    var v = parseFloat(localStorage.getItem(FS_KEY));
+    return (isFinite(v) && v >= 0.7 && v <= 3) ? v : FS_DEFAULT;
+  }
+  function fsApply(v) {
+    document.documentElement.style.setProperty('--fs', String(v));
+    document.getElementById('fsVal').textContent = Math.round(v * 100) + '%';
+  }
+  function fsSet(v) {
+    v = Math.min(3, Math.max(0.7, Math.round(v * 10) / 10));
+    localStorage.setItem(FS_KEY, String(v)); fsApply(v);
+  }
+  fsApply(fsGet());
+  document.getElementById('fsDown').addEventListener('click', function () { fsSet(fsGet() - 0.1); });
+  document.getElementById('fsUp').addEventListener('click', function () { fsSet(fsGet() + 0.1); });
+
+  var TIME_KEY = STORE_KEY + ':timing';
+  var __timing = { total: 0, per: {} };
+  try {
+    var __t0 = JSON.parse(localStorage.getItem(TIME_KEY) || 'null');
+    if (__t0 && typeof __t0.total === 'number') __timing = __t0;
+  } catch (e) {}
+  if (!__timing.per) __timing.per = {};
+  function __timeFor(id) { return Math.round(__timing.per[id] || 0); }
+  function __timeTotal() { return Math.round(__timing.total || 0); }
+  function __timeFmt(s) {
+    s = Math.round(s); var m = Math.floor(s / 60);
+    return (m >= 60 ? Math.floor(m / 60) + ':' + ('0' + (m - Math.floor(m / 60) * 60)).slice(-2) : m)
+      + ':' + ('0' + (s - m * 60)).slice(-2);
+  }
+  function __timeShow() {
+    var el = document.getElementById('t-total');
+    if (el) el.textContent = __timeFmt(__timing.total);
+  }
+  var __timeLast = Date.now(), __timeDirty = 0;
+  var __timeCards = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  function __timeActiveId() {
+    var mid = window.innerHeight / 2, best = null, bestd = Infinity;
+    for (var i = 0; i < __timeCards.length; i++) {
+      var c = __timeCards[i];
+      if (c.style.display === 'none') continue;
+      var r = c.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > window.innerHeight) continue;
+      var center = (Math.max(r.top, 0) + Math.min(r.bottom, window.innerHeight)) / 2;
+      var d = Math.abs(center - mid);
+      if (d < bestd) { bestd = d; best = c; }
+    }
+    return best ? best.getAttribute('data-id') : null;
+  }
+  function __timeFlush() {
+    try { localStorage.setItem(TIME_KEY, JSON.stringify(__timing)); } catch (e) {}
+  }
+  // V12 (H2858): the clock is stoppable. `paused` rides in the same persisted
+  // record as the totals, so a reviewer who pauses and closes the tab does not
+  // come back to a clock that ran all night.
+  var __timePaused = !!__timing.paused;
+  // V15 (H2887): a legacy record carries `paused` and no reason — read it as
+  // manual, so an auto-rearm can never lift a pause the curator set by hand.
+  var __timePauseReason = __timePaused ? (__timing.pause_reason || 'manual') : null;
+  function __timePauseSet(v, reason) {
+    __timePaused = !!v;
+    __timing.paused = __timePaused;
+    __timePauseReason = __timePaused ? (reason || 'manual') : null;
+    __timing.pause_reason = __timePauseReason;
+    __timeLast = Date.now(); __timeFlush();
+  }
+  setInterval(function () {
+    var now = Date.now(), dt = (now - __timeLast) / 1000;
+    __timeLast = now;
+    if (document.hidden || __timePaused || dt <= 0 || dt > 4) return;
+    __timing.total += dt;
+    var id = __timeActiveId();
+    if (id) __timing.per[id] = (__timing.per[id] || 0) + dt;
+    __timeDirty += dt;
+    if (__timeDirty >= 5) { __timeDirty = 0; __timeFlush(); }
+    __timeShow();
+  }, 1000);
+  document.addEventListener('visibilitychange', function () { __timeLast = Date.now(); });
+  window.addEventListener('beforeunload', __timeFlush);
+  __timeShow();
+
+  var HANDIN_SAID = 'handed in {n} of {total} — clock stopped, the rest stay saved in this browser';
+  var __handinBtn = document.getElementById('handinBtn');
+  var __handinSaid = document.getElementById('handinSaid');
+
+  var __pauseBtn = document.getElementById('pauseBtn');
+  function __pauseShow() {
+    __pauseBtn.classList.toggle('on', __timePaused);
+    __pauseBtn.innerHTML = __timePaused ? '&#9654;' : '&#9208;';
+    var chip = document.querySelector('.tally .time');
+    if (chip) chip.classList.toggle('paused', __timePaused);
+  }
+  __pauseBtn.addEventListener('click', function () { __timePauseSet(!__timePaused); __pauseShow(); });
+  __pauseShow();
+  __handinBtn.addEventListener('click', function () {
+    ids.forEach(function (id) { syncNoteFromDom(id); });
+    __timePauseSet(true, 'export'); __pauseShow();
+    var items = ids.map(function (id) {
+      var rec = state[id] || {};
+      var item = { id: id, decision: rec.decision || null };
+      item.note = rec.note || '';
+      item.time_seconds = __timeFor(id);
+      return item;
+    });
+    var decided = items.filter(function (it) { return !!it.decision; }).length;
+    var payload = { sheet_id: SHEET_ID, generated: GENERATED, decided: decided,
+      partial: true, complete: false, undecided: items.length - decided, items: items };
+    payload.time_total_seconds = __timeTotal();
+    payload.reviewer = strictReviewer.value.trim();
+    var blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
+    var url = URL.createObjectURL(blob); var a = document.createElement('a');
+    a.href = url; a.download = SHEET_ID + '_decisions_partial.json';
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+    __handinSaid.textContent = HANDIN_SAID.replace('{n}', decided).replace('{total}', items.length);
+  });
+
+  // --- V15 session flow (H2887) ---------------------------------------------
+  var FLOW_IDLE_SECONDS = 90;
+  var FLOW_ETA = 'about {minutes} min left';
+  var FLOW_ETA_ROUGH = 'about {minutes} min left (rough)';
+  var FLOW_CLOCK_RUNNING = 'running';
+  var FLOW_CLOCK_PAUSED = 'paused';
+  var FLOW_CLOCK_IDLE = 'idle';
+  var FLOW_PROGRESS = 'decided {n} of {total}';
+  var FLOW_UNDO_SAID = 'undo: {id} back to {decision}';
+  var FLOW_UNDO_EMPTY = 'nothing to undo';
+  var FLOW_UNDO_NONE = 'no decision';
+  var FLOW_RESUMED = 'resumed at card {n} of {total}';
+  var __flowToast = document.getElementById('flowToast');
+  var __flowToastTimer = null;
+  function __flowSay(text) {
+    if (!__flowToast) return;
+    __flowToast.textContent = text;
+    __flowToast.classList.add('on');
+    clearTimeout(__flowToastTimer);
+    __flowToastTimer = setTimeout(function () { __flowToast.classList.remove('on'); }, 2600);
+  }
+  var __flowCenterId = __timeActiveId;
+  function __flowIdxOf(id) {
+    var vis = visibleCards();
+    for (var i = 0; i < vis.length; i++) {
+      if (vis[i].getAttribute('data-id') === id) return i;
+    }
+    return -1;
+  }
+  function __flowCardById(id) {
+    var found = null;
+    cardsEl.forEach(function (c) { if (c.getAttribute('data-id') === id) found = c; });
+    return found;
+  }
+  // The visible ring IS the target of a/r/d — that identity is the whole point
+  // of this layer, so nothing may move `activeIdx` without repainting.
+  function __flowPaint() {
+    cardsEl.forEach(function (c) { c.classList.remove('kbd-active'); });
+    var vis = visibleCards();
+    if (!vis.length) return;
+    if (activeIdx >= vis.length) activeIdx = vis.length - 1;
+    if (activeIdx < 0) activeIdx = 0;
+    vis[activeIdx].classList.add('kbd-active');
+  }
+  function __flowSync() {
+    var id = __flowCenterId();
+    if (id) { var at = __flowIdxOf(id); if (at !== -1) activeIdx = at; }
+    __flowPaint();
+  }
+  var __flowScrollTimer = null;
+  window.addEventListener('scroll', function () {
+    if (__flowScrollTimer) return;
+    __flowScrollTimer = setTimeout(function () { __flowScrollTimer = null; __flowSync(); }, 120);
+  });
+  // Both bars reset `activeIdx` to 0 as they re-filter; re-derive it from the
+  // viewport on the next tick, or defect 2 returns wearing a filter.
+  ['filterbar'].forEach(function (barId) {
+    var bar = document.getElementById(barId);
+    if (bar) bar.addEventListener('click', function () { setTimeout(__flowSync, 0); });
+  });
+  function __flowClockShow() {
+    var el = document.getElementById('t-state');
+    if (!el) return;
+    var label = FLOW_CLOCK_RUNNING;
+    if (__timePaused) label = (__timePauseReason === 'idle') ? FLOW_CLOCK_IDLE : FLOW_CLOCK_PAUSED;
+    el.textContent = label;
+    el.classList.toggle('idle', !!__timePaused && __timePauseReason === 'idle');
+  }
+  // The V12 ⏸ button drives the clock straight through __timePauseSet, so the
+  // three-state label has to ride along with V12's own repaint or it goes stale
+  // the moment the curator pauses by hand.
+  var __flowOrigPauseShow = __pauseShow;
+  __pauseShow = function () { __flowOrigPauseShow(); __flowClockShow(); };
+  var __flowIdleTimer = null;
+  function __flowIdleArm() {
+    clearTimeout(__flowIdleTimer);
+    __flowIdleTimer = setTimeout(function () {
+      if (__timePaused) return;
+      __timePauseSet(true, 'idle');
+    __pauseShow();
+      __flowClockShow();
+    }, FLOW_IDLE_SECONDS * 1000);
+  }
+  function __flowRearm() {
+    if (__timePaused && __timePauseReason !== 'manual') {
+      __timePauseSet(false);
+    __pauseShow();
+    }
+    __flowClockShow();
+    __flowIdleArm();
+  }
+  // The export GESTURES, caught in the capture phase on `document` so this runs
+  // before any handler bound to the buttons themselves — including the strict
+  // layer's, which calls stopImmediatePropagation() on its own element.
+  document.addEventListener('click', function (e) {
+    var t = e.target;
+    if (!t || !t.closest || !t.closest('#downloadBtn, #saveBtn, #handinBtn')) return;
+    __timePauseSet(true, 'export');
+    __pauseShow();
+    __flowClockShow();
+  }, true);
+  ['keydown', 'pointerdown', 'scroll'].forEach(function (evt) {
+    document.addEventListener(evt, function () { __flowRearm(); }, true);
+  });
+  var __flowUndoStack = [];
+  function __flowUndo() {
+    var last = __flowUndoStack.pop();
+    if (!last) { __flowSay(FLOW_UNDO_EMPTY); return; }
+    state[last.id] = state[last.id] || {};
+    if (last.prev) state[last.id].decision = last.prev;
+    else delete state[last.id].decision;
+    save();
+    var card = __flowCardById(last.id);
+    if (card) {
+      applyCardUI(card);
+      card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      var at = __flowIdxOf(last.id);
+      if (at !== -1) activeIdx = at;
+      __flowPaint();
+    }
+    __flowSay(FLOW_UNDO_SAID.replace('{id}', last.id)
+      .replace('{decision}', last.prev || FLOW_UNDO_NONE));
+  }
+  var __flowUndoBtn = document.getElementById('flowUndoBtn');
+  if (__flowUndoBtn) __flowUndoBtn.addEventListener('click', __flowUndo);
+  function __flowFirstUndecided() {
+    var vis = visibleCards();
+    for (var i = 0; i < vis.length; i++) {
+      var id = vis[i].getAttribute('data-id');
+      if (!(state[id] && state[id].decision)) return i;
+    }
+    return -1;
+  }
+  function __flowAdvance() {
+    var at = __flowFirstUndecided();
+    if (at === -1) { __flowPaint(); return; }
+    activeIdx = at;
+    visibleCards()[at].scrollIntoView({ behavior: 'smooth', block: 'start' });
+    __flowPaint();
+  }
+  function __flowDecided() {
+    var n = 0;
+    ids.forEach(function (id) { if (state[id] && state[id].decision) n++; });
+    return n;
+  }
+  function __flowEtaText(decided, total) {
+    var secs = [];
+    ids.forEach(function (id) {
+      if (!(state[id] && state[id].decision)) return;
+      var s = __timing.per[id] || 0;
+      if (s > 0) secs.push(s);
+    });
+    if (!secs.length) return '';
+    secs.sort(function (a, b) { return a - b; });
+    var mid = Math.floor(secs.length / 2);
+    var med = (secs.length % 2) ? secs[mid] : (secs[mid - 1] + secs[mid]) / 2;
+    var left = Math.max(0, total - decided);
+    if (!left) return '';
+    var minutes = Math.max(1, Math.round(med * left / 60));
+    return (secs.length >= 5 ? FLOW_ETA : FLOW_ETA_ROUGH).replace('{minutes}', minutes);
+  }
+  function __flowProgress() {
+    var n = __flowDecided(), total = ids.length;
+    var txt = document.getElementById('flowProgText');
+    if (txt) txt.textContent = FLOW_PROGRESS.replace('{n}', n).replace('{total}', total);
+    var bar = document.getElementById('flowBar');
+    if (bar) bar.style.width = (total ? Math.round(100 * n / total) : 0) + '%';
+    var etaEl = document.getElementById('flowEta');
+    if (etaEl) etaEl.textContent = __flowEtaText(n, total);
+  }
+  var __flowOrigTally = tally;
+  tally = function () { __flowOrigTally(); __flowProgress(); };
+  var __flowOrigVote = vote;
+  vote = function (id, d) {
+    var rec = state[id] || {};
+    __flowUndoStack.push({ id: id, prev: rec.decision || null });
+    if (__flowUndoStack.length > 100) __flowUndoStack.shift();
+    __flowOrigVote(id, d);
+    __flowRearm();
+    __flowAdvance();
+  };
+  var __flowOrigNote = noteChange;
+  noteChange = function (id, t) { __flowOrigNote(id, t); __flowRearm(); };
+  document.addEventListener('keydown', function (e) {
+    if (e.target.tagName === 'TEXTAREA') return;
+    if (e.key === 'z' || e.key === 'Z') { __flowUndo(); e.preventDefault(); return; }
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') __flowPaint();
+  });
+  __flowProgress();
+  __flowSync();
+  __flowClockShow();
+  __flowIdleArm();
+  (function () {
+    if (!__flowDecided()) return;
+    var at = __flowFirstUndecided();
+    if (at === -1) return;
+    var vis = visibleCards();
+    activeIdx = at;
+    vis[at].scrollIntoView({ block: 'start' });
+    __flowPaint();
+    __flowSay(FLOW_RESUMED.replace('{n}', at + 1).replace('{total}', vis.length));
+  })();
+
+  var VOTE_TOTAL = 0;
+  var VOTE_PROGRESS = '{n} of {total} across the whole sheet';
+  var VOTE_ETA = 'about {minutes} min left for all {total}';
+  var VOTE_ETA_ROUGH = 'about {minutes} min left for all {total} (rough)';
+  var VOTE_DONE = 'all {total} decided';
+  (function () {
+    var bar = document.getElementById('voteBar');
+    if (!bar) return;
+    // The build tagged exactly the submit controls this document actually has.
+    // Navigation (filters, facets, the type-scale control) is untagged and stays
+    // on top, where it is used BEFORE deciding.
+    var moved = document.querySelectorAll('[data-submit]');
+    for (var i = 0; i < moved.length; i++) bar.appendChild(moved[i]);
+  })();
+  // One record backs every pack of a packset — STORE_KEY and TIME_KEY are keyed
+  // on sheet_id, not on the pack — so this page can count and time the WHOLE
+  // instrument without loading a single other pack.
+  function __voteDecidedAll() {
+    var n = 0;
+    for (var k in state) {
+      if (Object.prototype.hasOwnProperty.call(state, k) && state[k] && state[k].decision) n++;
+    }
+    return n;
+  }
+  function __voteSecs() {
+    var per = (typeof __timing !== 'undefined' && __timing && __timing.per) ? __timing.per : null;
+    var out = [];
+    if (!per) return out;
+    for (var k in per) {
+      if (!Object.prototype.hasOwnProperty.call(per, k)) continue;
+      if (!(state[k] && state[k].decision)) continue;
+      if (per[k] > 0) out.push(per[k]);
+    }
+    return out;
+  }
+  function __voteEta(decided, total) {
+    var left = Math.max(0, total - decided);
+    if (!left) return VOTE_DONE.replace('{total}', total);
+    var secs = __voteSecs();
+    if (!secs.length) return '';
+    secs.sort(function (a, b) { return a - b; });
+    var mid = Math.floor(secs.length / 2);
+    var med = (secs.length % 2) ? secs[mid] : (secs[mid - 1] + secs[mid]) / 2;
+    var minutes = Math.max(1, Math.round(med * left / 60));
+    return (secs.length >= 5 ? VOTE_ETA : VOTE_ETA_ROUGH)
+      .replace('{minutes}', minutes).replace('{total}', total);
+  }
+  function __voteProgress() {
+    var total = VOTE_TOTAL || ids.length;
+    var n = VOTE_TOTAL ? __voteDecidedAll() : ids.filter(function (id) {
+      return state[id] && state[id].decision; }).length;
+    if (n > total) n = total;
+    var t = document.getElementById('voteProgText');
+    if (t) t.innerHTML = VOTE_PROGRESS.replace('{n}', '<b>' + n + '</b>')
+                                      .replace('{total}', '<b>' + total + '</b>');
+    var b = document.getElementById('voteProgBar');
+    if (b) b.style.width = (total ? Math.round(100 * n / total) : 0) + '%';
+    var e = document.getElementById('voteProgEta');
+    if (e) e.textContent = __voteEta(n, total);
+  }
+  var __voteOrigTally = tally;
+  tally = function () { __voteOrigTally(); __voteProgress(); };
+  __voteProgress();
+})();
+</script>
+<div class="flowtoast" id="flowToast" role="status"></div>
+</body>
+</html>
