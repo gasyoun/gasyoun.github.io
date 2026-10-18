@@ -260,6 +260,25 @@ ITEMS = [
     dict(id="K059", sec="F", key="telegram-artem-h3348-2026-10-01.html", status="amber",
          title="Сообщение Артёму — root-сессия H3348",
          note="Служебная выгрузка сообщения Артёму по root-сессии samskrtam.ru."),
+    dict(id="K062", sec="F", key="courses/", status="amber",
+         title="Стоимость курсов по учителям — 09-10-2026",
+         note="Служебная выкладка цен по преподавателям (таблица ~1 356 строк). Внутренний документ, не витрина; "
+              "в карту внесён ради полноты покрытия (bughunt 04.10 M1, повтор 18-10)."),
+    dict(id="K063", sec="F", key="n8n-census-0810/", status="amber",
+         title="Перепись n8n — ассеты колоды (октябрь 2026)",
+         note="PNG-слайды колоды к переписи сценариев n8n vps91 (08-10-2026); ассеты рядом с дашбордом и инфографикой."),
+    dict(id="K064", sec="B", key="n8n-census-dashboard-08-10.html", status="green",
+         title="Перепись сценариев n8n vps91 — дашборд",
+         note="Дашборд переписи сценариев n8n на vps91 (октябрь 2026): состав, классы, покрытие."),
+    dict(id="K065", sec="B", key="n8n-census-infographic-08-10.html", status="green",
+         title="Перепись машинерии n8n — чертёж",
+         note="Инфографика-чертёж машинерии n8n (08-10-2026) — визуальная версия переписи."),
+    dict(id="K066", sec="B", key="n8n-top5-dynamic-09-10.html", status="green",
+         title="Топ-5 воркфлоу n8n vps91 — динамическая визуализация",
+         note="Динамическая визуализация топ-5 воркфлоу n8n (09-10-2026), продолжение переписи."),
+    dict(id="K067", sec="D", key="smb-pain-benchmark-2026/", status="green",
+         title="SMB pain-benchmark · ОРС/Systema · 2024–2026",
+         note="Исследовательская выкладка боли малого бизнеса (index.html + data.json + метаданные), 09-10-2026."),
 ]
 
 STATUS_BADGE = {
