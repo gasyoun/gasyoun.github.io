@@ -1,0 +1,12 @@
+# token-size-gate: files here are not agent-authored — generated data/assets.
+# Code, docs and reports stay under the 5000-token limit.
+vote/**
+reverse20-output/**
+RV/**
+fasmer-2026/**
+zaliznyak-2026/**
+diagrams/**
+mockups/**
+h3744-sense-align/**
+h3457-compare/**
+*.html
