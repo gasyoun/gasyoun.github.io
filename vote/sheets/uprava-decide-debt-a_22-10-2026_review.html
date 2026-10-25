@@ -155,7 +155,7 @@
 <header class="top">
   <div>
     <h1>Uprava Decide-Debt Window A — инфра/опс/эстейт — 22-10-2026 — 10 bundled cards — 10 items</h1>
-    <div class="sub">Generated 22-10-2026 &middot; sheet_id <code>uprava-decide-debt-a_22-10-2026</code> &middot; H7132 @DECIDE-debt adjudication · generated 22-10-2026 · sheet_id <code>uprava-decide-debt-a_22-10-2026</code> · 10 bundled cards (60 исходных строк → бандлы; см. closing table). Голос approve/reject/defer + заметка, затем скачать decisions.json → /decisions-apply.</div>
+    <div class="sub">Generated 22-10-2026 &middot; sheet_id <code>uprava-decide-debt-a_22-10-2026</code> &middot; H7132 @DECIDE-debt adjudication · generated 22-10-2026 · sheet_id <code>uprava-decide-debt-a_22-10-2026</code> · 10 bundled cards (60 исходных строк → бандлы; см. closing table). rev 25-10-2026: «Последствие» дописано на 11 карт (A4, A5, A6, B1, B2, B3, B5, B6, B7, B9, B10) — теперь 20/20; сет 22-10 не ре-деривился. Голос approve/reject/defer + заметка, затем скачать decisions.json → /decisions-apply.</div>
   </div>
   <div class="tally" id="tally">
     <span class="approve">&#9989; <span class="count" id="c-approve">0</span></span>
@@ -219,7 +219,7 @@
 
   <section class="card" data-id="A4-systema-merges" data-filt="gtd">
     <header><div class="hw">Systema: жать ли PR #3142 и #3162 (money-class, human merge) <span class="badge">GTD @DECIDE</span><span class="badge">H7132</span></div><span class="idchip" title="card id — cite this id back when discussing this card">A4-systema-merges</span></header>
-    <div class="question"><p>#3142 — evidence-money витрина (SQL+build+nginx+crontab; server-side уже live, parity 0 ₽); #3162 — гейт BACKUP_ARCHIVE_PASSWORD (off-site выгрузка отказывает без пароля; verifier PASS cou-1 записан). (а) merge оба — <strong>рекомендую</strong>; (б) отложить с датой. Прод-репо ⇒ merge-кнопка только MG. [бандл L754+L765]</p></div>
+    <div class="question"><p>#3142 — evidence-money витрина (SQL+build+nginx+crontab; server-side уже live, parity 0 ₽); #3162 — гейт BACKUP_ARCHIVE_PASSWORD (off-site выгрузка отказывает без пароля; verifier PASS cou-1 записан). (а) merge оба — <strong>рекомендую</strong>; (б) отложить с датой. Последствие (а): обе стороны становятся прод-дефолтом, money-class долг закрыт; (б): server-side уже live, но оба PR висят до назначенной даты и merge остаётся ручным шагом MG. Прод-репо ⇒ merge-кнопка только MG. [бандл L754+L765]</p></div>
     <div class="panel"><h4>Evidence</h4><p>Verbatim-источник — строки GTD_NEXT_ACTIONS.md, бандл H7132 (механический перенос <code>tools/h7132_decide_debt_sweep.py</code>, куриация H7132); опции/рекомендации — из строк-источников, closing table: <code>reports/H7132_DECIDE_DEBT_CLOSING_TABLE_2026-10-22.md</code>.</p></div>
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Approve</button>
@@ -232,7 +232,7 @@
 
   <section class="card" data-id="A5-clone-ops" data-filt="gtd">
     <header><div class="hw">Клон-опс: пауза prune-лейна + сериализация fetch/push <span class="badge">GTD @DECIDE</span><span class="badge">H7132</span></div><span class="idchip" title="card id — cite this id back when discussing this card">A5-clone-ops</span></header>
-    <div class="question"><p>Prune: (а) плановая пауза лейна pause→prune→resume — <strong>рекомендую</strong>; (б) live VACUUM-INTO+swap (58 ГБ free при 5-17). Fetch/push: serialized fetch-lane vs git_net-only pushes — ref thrashes backwards (5 moves за сессию 20-10), голодает mint-бюджет, триггерит stale-base guard. [бандл L906+L1263]</p></div>
+    <div class="question"><p>Prune: (а) плановая пауза лейна pause→prune→resume — <strong>рекомендую</strong>; (б) live VACUUM-INTO+swap (58 ГБ free при 5-17). Fetch/push: serialized fetch-lane vs git_net-only pushes — ref thrashes backwards (5 moves за сессию 20-10), голодает mint-бюджет, триггерит stale-base guard. Последствие (а): прун идёт в паузу лейна, без гонки с живым fetch; (б): live VACUUM-INTO+swap требует 58 ГБ free при 5–17 занятых; fetch/push-сериализация убирает откат ref назад и разгружает mint-бюджет/stale-base guard. [бандл L906+L1263]</p></div>
     <div class="panel"><h4>Evidence</h4><p>Verbatim-источник — строки GTD_NEXT_ACTIONS.md, бандл H7132 (механический перенос <code>tools/h7132_decide_debt_sweep.py</code>, куриация H7132); опции/рекомендации — из строк-источников, closing table: <code>reports/H7132_DECIDE_DEBT_CLOSING_TABLE_2026-10-22.md</code>.</p></div>
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Approve</button>
@@ -245,7 +245,7 @@
 
   <section class="card" data-id="A6-magicdns" data-filt="gtd">
     <header><div class="hw">MagicDNS: выбрать и запинить upstream <span class="badge">GTD @DECIDE</span><span class="badge">H7132</span></div><span class="idchip" title="card id — cite this id back when discussing this card">A6-magicdns</span></header>
-    <div class="question"><p>(а) tailnet global resolver 1.1.1.1 + drop мёртвый 8.8.8.8 — <strong>рекомендую</strong>; (б) in-tailnet DoH; (в) accept-dns=false навсегда. После рулинга — предрегистрированный integrity (ASN/TLS) + leak-тест, затем accept-dns=true. [L1069]</p></div>
+    <div class="question"><p>(а) tailnet global resolver 1.1.1.1 + drop мёртвый 8.8.8.8 — <strong>рекомендую</strong>; (б) in-tailnet DoH; (в) accept-dns=false навсегда. Последствие (а): upstream запинен на 1.1.1.1, мёртвый 8.8.8.8 уходит, integrity+leak-тест гоняется до accept-dns=true; (б): DoH живёт внутри tailnet, внешний резолвер не нужен; (в): accept-dns=false — tailnet-имена и split-DNS не разрешаются. После рулинга — предрегистрированный integrity (ASN/TLS) + leak-тест, затем accept-dns=true. [L1069]</p></div>
     <div class="panel"><h4>Evidence</h4><p>Verbatim-источник — строки GTD_NEXT_ACTIONS.md, бандл H7132 (механический перенос <code>tools/h7132_decide_debt_sweep.py</code>, куриация H7132); опции/рекомендации — из строк-источников, closing table: <code>reports/H7132_DECIDE_DEBT_CLOSING_TABLE_2026-10-22.md</code>.</p></div>
     <div class="controls">
       <button class="vote approve" data-vote="approve">&#9989; Approve</button>
