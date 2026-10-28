@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MSI GL73 8RC — апгрейд ОЗУ до 32 ГБ</title>
+<meta name="description" content="Задание для мастера: подтвердить, купить и установить 2×16 ГБ DDR4 SO-DIMM в ноутбук MSI GL73 8RC. Спецификация машины, кандидаты с ценами и ссылками, чек-лист приёмки.">
+<style>
+  :root { --ink:#1a1a1a; --muted:#5c5c5c; --line:#d8d8d8; --bg:#fbfbf9; --accent:#0b5d3b; --warn:#8a2b12; }
+  * { box-sizing:border-box; }
+  body {
+    margin:0 auto; padding:32px 20px 64px; max-width:920px;
+    font:16px/1.6 -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color:var(--ink); background:var(--bg);
+  }
+  h1 { font-size:1.75rem; line-height:1.25; margin:0 0 .25em; }
+  h2 { font-size:1.2rem; margin:2.2em 0 .6em; padding-bottom:.3em; border-bottom:2px solid var(--line); }
+  .sub { color:var(--muted); margin:0 0 1.4em; }
+  .meta { font-size:.9rem; color:var(--muted); border-left:3px solid var(--accent); padding:.5em 0 .5em .9em; margin:0 0 2em; }
+  table { width:100%; border-collapse:collapse; margin:1em 0 1.4em; font-size:.94rem; }
+  th, td { text-align:left; vertical-align:top; padding:.5em .6em; border-bottom:1px solid var(--line); }
+  th { background:#efefea; font-weight:600; }
+  code, .url { font-family:ui-monospace, SFMono-Regular, Consolas, monospace; font-size:.85em; }
+  .url { display:block; word-break:break-all; color:#14507a; }
+  a { color:#14507a; }
+  ul, ol { padding-left:1.3em; }
+  li { margin:.3em 0; }
+  .box { background:#fff; border:1px solid var(--line); border-radius:8px; padding:1em 1.2em; margin:1.2em 0; }
+  .check { list-style:none; padding-left:0; }
+  .check li { padding:.35em 0 .35em 1.9em; position:relative; border-bottom:1px dotted var(--line); }
+  .check li::before { content:"☐"; position:absolute; left:.2em; font-size:1.15em; line-height:1; }
+  .no { color:var(--warn); font-weight:600; }
+  .tot { font-weight:700; white-space:nowrap; }
+  .sign td { height:2.4em; }
+  footer { margin-top:3em; padding-top:1em; border-top:1px solid var(--line); font-size:.85rem; color:var(--muted); }
+  @media print {
+    body { max-width:none; padding:0; background:#fff; font-size:11pt; }
+    h2 { break-after:avoid; }
+    table, .box { break-inside:avoid; }
+    a { color:inherit; text-decoration:none; }
+    .noprint { display:none; }
+  }
+</style>
+</head>
+<body>
+
+<h1>MSI GL73 8RC — апгрейд ОЗУ до 32 ГБ</h1>
+<p class="sub">Задание для мастера: подтвердить выбор планок, купить, установить.</p>
+
+<p class="meta">
+  Составлено <strong>28.10.2026</strong>. Все характеристики машины сняты прямым опросом оборудования
+  самого ноутбука (WMI/CIM), а не взяты из документации производителя. Цены указаны на дату
+  составления и требуют проверки на момент покупки.
+</p>
+
+<h2>1. Коротко</h2>
+<p>
+  Ноутбук <strong>MSI GL73 8RC</strong> (плата MS-17C6). Сейчас <strong>2×8 ГБ = 16 ГБ</strong>,
+  оба слота заняты. Задача: <strong>2×16 ГБ = 32 ГБ</strong> — это максимум, который поддерживает машина.
+</p>
+<p>
+  Купить: <strong>две одинаковые планки DDR4 SO-DIMM, 260-pin, non-ECC, unbuffered, 1.2 В,
+  2666 или 3200 МГц, 2Rx8</strong>.
+</p>
+
+<h2>2. Машина — проверенные факты</h2>
+<table>
+  <tr><th style="width:42%">Параметр</th><th>Значение</th></tr>
+  <tr><td>Модель</td><td>MSI GL73 8RC</td></tr>
+  <tr><td>Плата</td><td>MS-17C6, REV:1.0</td></tr>
+  <tr><td>Процессор</td><td>Intel Core i5-8300H, 4 ядра / 8 потоков</td></tr>
+  <tr><td>Чипсет</td><td>Intel HM370</td></tr>
+  <tr><td>BIOS</td><td>E17C6IMS.107 от 05.09.2018</td></tr>
+  <tr><td>ОС</td><td>Windows 11 Pro, 64-bit</td></tr>
+  <tr><td>Слотов ОЗУ</td><td>2 × SO-DIMM, оба заняты</td></tr>
+  <tr><td>Максимум по спецификации MSI</td><td><strong>32 ГБ</strong></td></tr>
+  <tr><td>Установлено сейчас</td><td>2×8 ГБ DDR4-2666, фактическая частота <strong>2400 МГц</strong></td></tr>
+</table>
+
+<p>Текущие модули (оба 1Rx8, 1.2 В):</p>
+<table>
+  <tr><th>Слот</th><th>Модуль</th><th>Объём</th><th>Заявлено / факт</th></tr>
+  <tr><td>ChannelA-DIMM0</td><td><code>Micron 8ATF1G64HZ-2G3E1</code></td><td>8 ГБ</td><td>2667 / 2400 МГц</td></tr>
+  <tr><td>ChannelB-DIMM0</td><td><code>Samsung M471A1K43CB1-CTD</code></td><td>8 ГБ</td><td>2667 / 2400 МГц</td></tr>
+</table>
+
+<div class="box">
+  <strong>Почему апгрейд оправдан:</strong> занято 11,5 ГБ из 15,85 ГБ (72 %), а файл подкачки
+  за 8 дней непрерывной работы дорос до пика 10,6 ГБ. Памяти машине реально не хватает —
+  это не «на вырост».
+</div>
+
+<h2>3. Что подходит, а что нет</h2>
+<p>
+  <strong>Обязательные параметры:</strong> DDR4 · SO-DIMM 260-pin · non-ECC · unbuffered · 1.2 В ·
+  CL19 или CL22 · 2666 либо 3200 МГц (модуль 3200 сам опустится до 2666 — это нормально и безопасно).
+</p>
+<p>
+  <strong>Предпочтительно:</strong> <strong>2Rx8</strong> на 8-гигабитных чипах — конфигурация,
+  под которую платформа 2018 года проектировалась.
+</p>
+
+<table>
+  <tr><th style="width:34%">Не покупать</th><th>Причина</th></tr>
+  <tr><td class="no">ECC / ECC-Unbuffered</td><td>Чипсет HM370 не поддерживает ECC. Частая ловушка: такие модули массово продаются как «серверные» для Synology/QNAP</td></tr>
+  <tr><td class="no">288-pin DIMM</td><td>Настольная память, физически не встанет</td></tr>
+  <tr><td class="no">2×32 ГБ = 64 ГБ</td><td>MSI ограничивает плату 32 ГБ; BIOS 2018 года планки на 32 ГБ не поднимет</td></tr>
+  <tr><td class="no">Kingston KVR26S19S8/16</td><td>Снят с производства, плюс это 1Rx8 на 16-гигабитных чипах — лишний риск для BIOS 2018 года</td></tr>
+</table>
+
+<h2>4. Кандидаты на покупку (цены на 28.10.2026)</h2>
+<table>
+  <tr>
+    <th>#</th><th>Что именно</th><th>Кол-во</th><th>Цена</th><th>Итого</th>
+  </tr>
+  <tr>
+    <td><strong>A</strong></td>
+    <td>SK hynix <code>HMA82GS6JJR8N-VK</code> — 16 ГБ, 2666, CL19, <strong>2Rx8</strong><br>
+      <a class="url" href="https://market.yandex.ru/card/operativnaya-pamyat-dlya-noutbuka-sk-hynix-ddr4-16gb-2666-mhz-hma82gs6jjr8n-vk-1kh16-gb/5233586001">https://market.yandex.ru/card/operativnaya-pamyat-dlya-noutbuka-sk-hynix-ddr4-16gb-2666-mhz-hma82gs6jjr8n-vk-1kh16-gb/5233586001</a></td>
+    <td>2</td><td>9 713 ₽/шт</td><td class="tot">19 426 ₽</td>
+  </tr>
+  <tr>
+    <td><strong>B</strong></td>
+    <td>Samsung <code>M471A2K43CB1</code> / <code>M471A2K43DB1</code> — 16 ГБ, <strong>2Rx8</strong>, OEM (б/у)<br>
+      <a class="url" href="https://www.avito.ru/sankt-peterburg/tovary_dlya_kompyutera/samsung_ddr4_16gb_3200mhz_so_dimm_3738992324">https://www.avito.ru/sankt-peterburg/tovary_dlya_kompyutera/samsung_ddr4_16gb_3200mhz_so_dimm_3738992324</a><br>
+      <span style="font-size:.85rem;color:#5c5c5c">Поиск по артикулу:</span>
+      <a class="url" href="https://www.avito.ru/all/tovary_dlya_kompyutera/komplektuyuschie/operativnaya_pamyat-ASgBAgICAkTGB~pm7gnYZw?q=M471A2K43">https://www.avito.ru/all/tovary_dlya_kompyutera/komplektuyuschie/operativnaya_pamyat-ASgBAgICAkTGB~pm7gnYZw?q=M471A2K43</a></td>
+    <td>2</td><td>8 800 ₽/шт</td><td class="tot">17 600 ₽</td>
+  </tr>
+  <tr>
+    <td><strong>C</strong></td>
+    <td>Kingston <code>KVR32S22D8/16</code> — 16 ГБ, 3200, CL22, <strong>2Rx8</strong>, новый<br>
+      <a class="url" href="https://www.ozon.ru/product/kingston-operativnaya-pamyat-valueram-ddr4-3200-mgts-1x16-gb-kvr32s22d8-16-1637456121/">https://www.ozon.ru/product/kingston-operativnaya-pamyat-valueram-ddr4-3200-mgts-1x16-gb-kvr32s22d8-16-1637456121/</a></td>
+    <td>2</td><td>13 025 ₽/шт</td><td class="tot">26 050 ₽</td>
+  </tr>
+  <tr>
+    <td><strong>D</strong></td>
+    <td>Одна планка из A–C + оставить свою 8 ГБ → 24 ГБ</td>
+    <td>1</td><td>—</td><td class="tot">≈9 000 ₽</td>
+  </tr>
+</table>
+
+<p><strong>Альтернативные площадки для того же Kingston (вариант C):</strong></p>
+<a class="url" href="https://market.yandex.ru/card/operativnaya-pamyat-kingston-valueram-16-gb-ddr4-sodimm-3200-mgts-dlya-noutbukov-kvr32s22d816/5484153810">https://market.yandex.ru/card/operativnaya-pamyat-kingston-valueram-16-gb-ddr4-sodimm-3200-mgts-dlya-noutbukov-kvr32s22d816/5484153810</a>
+<a class="url" href="https://andpro.ru/catalog/computer_hardware/memory_ram/modul_pamyati_kingston_valueram_16gb_sodimm_ddr4_3200mhz_kvr32s22d8_16/">https://andpro.ru/catalog/computer_hardware/memory_ram/modul_pamyati_kingston_valueram_16gb_sodimm_ddr4_3200mhz_kvr32s22d8_16/</a>
+<a class="url" href="https://www.dns-shop.ru/catalog/recipe/da52a6ead49c305f/16-gb/">https://www.dns-shop.ru/catalog/recipe/da52a6ead49c305f/16-gb/</a>
+
+<p style="font-size:.9rem;color:#5c5c5c">
+  По карточке Kingston подтверждено: 2Rx8, 8 Гбит, CL22, 1.2 В, гарантия производителя 120 месяцев.
+</p>
+
+<h2>5. Что прошу подтвердить — заполняет мастер</h2>
+<ul class="check">
+  <li>Артикул и ранг совпадают с заказом, <strong>2Rx8</strong> видно по маркировке самих планок</li>
+  <li>В наличии именно <strong>две одинаковые</strong> планки (не разные партии и не разные ранги)</li>
+  <li>Финальная цена и срок поставки</li>
+  <li>Что берём: новые с гарантией или OEM б/у — рекомендация и обоснование</li>
+  <li>Планки заведутся на BIOS <code>E17C6IMS.107</code> <strong>без обновления BIOS</strong></li>
+  <li>Установите и прогоните тест памяти</li>
+  <li>Заодно чистка от пыли / замена термопасты — нужна или нет</li>
+</ul>
+
+<div class="box">
+  <strong>Приоритет владельца:</strong> вариант <strong>A</strong> (2666 нативно, 2Rx8, без риска
+  плотности). При существенной разнице в цене — вариант <strong>B</strong>.<br><br>
+  Согласен с выбором: ☐ да &nbsp; ☐ нет — предлагаю вместо этого:
+  <span style="display:inline-block;min-width:45%;border-bottom:1px solid #999">&nbsp;</span>
+</div>
+
+<h2>6. Приёмка после установки</h2>
+<ul class="check">
+  <li>В системе видно <strong>32 ГБ</strong> (Диспетчер задач → Производительность → Память)</li>
+  <li>Частота <strong>2666</strong> или <strong>2400 МГц</strong>, режим двухканальный</li>
+  <li>Тест памяти (MemTest86 или HCI MemTest): 1–2 прохода, <strong>0 ошибок</strong></li>
+  <li>Windows 11 Pro загружается штатно</li>
+  <li>Снятые 2×8 ГБ возвращены владельцу (не выбрасывать — они имеют стоимость)</li>
+</ul>
+
+<p>Проверка из Windows после установки:</p>
+<div class="box"><code>wmic memorychip get BankLabel,DeviceLocator,Capacity,Speed,ConfiguredClockSpeed,PartNumber</code></div>
+
+<h2>7. Перед разборкой — безопасность</h2>
+<ul class="check">
+  <li>BitLocker: выполнить <code>manage-bde -status C:</code> — <strong>если шифрование включено,
+      приостановить его</strong> до замены планок</li>
+  <li>Снять статический заряд с себя</li>
+  <li>Записать, какой модуль стоял в каком слоте (для возврата в исходное состояние при проблеме)</li>
+  <li>Обе планки находятся под нижней крышкой — клавиатуру и батарею разбирать не требуется
+      (конструкция GL73 8RC)</li>
+</ul>
+
+<h2>8. Отметка мастера</h2>
+<table class="sign">
+  <tr><th style="width:38%">Поле</th><th>Значение</th></tr>
+  <tr><td>Дата</td><td></td></tr>
+  <tr><td>Мастер</td><td></td></tr>
+  <tr><td>Выбранный вариант</td><td></td></tr>
+  <tr><td>Артикул</td><td></td></tr>
+  <tr><td>Цена итого</td><td></td></tr>
+  <tr><td>Срок поставки</td><td></td></tr>
+  <tr><td>Комментарий</td><td></td></tr>
+  <tr><td>Подпись</td><td></td></tr>
+</table>
+
+<footer>
+  <p>
+    <strong>Источник данных.</strong> Характеристики машины получены прямым опросом оборудования
+    28.10.2026 (<code>Win32_ComputerSystem</code>, <code>Win32_PhysicalMemory</code>,
+    <code>Win32_PhysicalMemoryArray</code>, <code>Win32_BIOS</code>, <code>Win32_BaseBoard</code>,
+    <code>Win32_OperatingSystem</code>). Спецификация модели — с официальной страницы MSI GL73 8RC
+    и из конфигуратора Kingston для этой модели (2 слота, максимум 32 ГБ).
+  </p>
+  <p>Цены и наличие проверялись 28.10.2026. Документ статичный: если он открыт позже, цены могли измениться.</p>
+</footer>
+
+</body>
+</html>
