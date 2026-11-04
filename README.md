@@ -1,11 +1,14 @@
 # gasyoun.github.io
 
-_Created: 08-10-2014 · Last updated: 10-10-2026_
+_Created: 08-10-2014 · Last updated: 05-11-2026_
 
 Personal GitHub Pages site of Mārcis Gasūns ([@gasyoun](https://github.com/gasyoun)),
 served at [gasyoun.github.io](https://gasyoun.github.io/). It hosts a handful of
 static Sanskrit / Vedic lexicographic experiments — not a blog or CV — kept as
-plain HTML and text data.
+plain HTML and text data. Since 09-10-2026 it also carries a few deliberately
+`noindex` ops/business dashboards and cheat-sheets (SMB benchmark, course prices,
+n8n census, VPS cheat-sheets) — [CHANGELOG.md](https://github.com/gasyoun/gasyoun.github.io/blob/master/CHANGELOG.md)
+is the full catalog.
 
 ## What is published here
 - **[campus/](https://gasyoun.github.io/campus/)** — «Кампус наглядности»:
@@ -25,6 +28,9 @@ plain HTML and text data.
   (Elizarenkova), German (Geldner), and English (Griffith) translations, using
   Indological web fonts served from
   [fonts/](https://github.com/gasyoun/gasyoun.github.io/tree/master/fonts). The
+  root page carries `og:` preview meta and
+  [og-card.png](https://github.com/gasyoun/gasyoun.github.io/blob/master/og-card.png)
+  (since 11-10-2026, H6477–H6479; regenerable via `scripts/make_og_card.py`). The
   same document also lives under
   [RV/](https://github.com/gasyoun/gasyoun.github.io/tree/master/RV) with its own
   [rigveda.css](https://github.com/gasyoun/gasyoun.github.io/blob/master/RV/rigveda.css).
@@ -83,8 +89,11 @@ Repo-side automation is Dependabot
 ([.github/dependabot.yml](https://github.com/gasyoun/gasyoun.github.io/blob/master/.github/dependabot.yml))
 with a
 [Dependabot auto-merge workflow](https://github.com/gasyoun/gasyoun.github.io/blob/master/.github/workflows/dependabot-auto-merge.yml),
-plus the
-[sheet-staleness workflow](https://github.com/gasyoun/gasyoun.github.io/blob/master/.github/workflows/sheet-staleness.yml)
+the
+[sheet-staleness workflow](https://github.com/gasyoun/gasyoun.github.io/blob/master/.github/workflows/sheet-staleness.yml),
+the [changelog duplicate-entry guard](https://github.com/gasyoun/gasyoun.github.io/blob/master/.github/workflows/changelog-lint.yml)
+(since 24-10-2026), and the pinned-F821 gate
+([f821-gate.yml](https://github.com/gasyoun/gasyoun.github.io/blob/master/.github/workflows/f821-gate.yml))
 — a weekly cron (Monday 06:00 UTC, also on pushes to `vote/sheets/**`) that runs
 [scripts/check_sheet_staleness.py](https://github.com/gasyoun/gasyoun.github.io/blob/master/scripts/check_sheet_staleness.py)
 against the live vote sheets. [handoff-status/index.html](https://github.com/gasyoun/gasyoun.github.io/blob/master/handoff-status/index.html)
@@ -97,7 +106,8 @@ There is no build step: GitHub Pages serves the static files directly from the
 
 [CHANGELOG.md](https://github.com/gasyoun/gasyoun.github.io/blob/master/CHANGELOG.md)
 has been kept here since 27-09-2026 (started with the karta domain map, H5527): one
-entry per published change, newest first — дата · хендофф · что изменилось. The
+entry per published change, newest first — дата · хендофф · что изменилось (the
+hourly `handoff-status` refreshes and vote-sheet churn are exempt). The
 earlier "no CHANGELOG here, deliberately" ruling (checked 07-09-2026, H3970 residual 3)
 is superseded by that file. The artifact conventions still stand: every artifact
 carries its own date in the filename (`…-02.09.26.html`) and each section index lists
