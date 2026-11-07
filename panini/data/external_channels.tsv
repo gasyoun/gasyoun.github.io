@@ -1,0 +1,120 @@
+batch	deva	iast	structural_total	explicit	inherited	governed	grammar_df	grammar_tf	mahabhasya_df	kaumudi_df	vakyapadiya_df	other_grammar_df	dsg_mentions	dsg_ru_mentions	dsg_headword_df	stem_short	dsg_cites	dsg_panini_cites	dsg_chars	dcs_key	dcs_best_key	dcs_key_variants	dcs_variant_hits	dcs_count	dcs_present	dcs_rank	dcs_difficulty_rank	gloss
+0	च	ca	911	847	94	0	3081	6614	126	1971	907	77	404	192	364	1	7	2	1011	ca	ca		ca=3385	3385	1	2		and; carries a preceding rule forward
+0	न	na	335	121	219	0	3266	7133	175	1868	1147	76	322	185	1224	1	7	6	948	na	na		na=1648	1648	1	4		negation / prohibition (pratiṣedha)
+0	वा	vā	463	112	76	279	1695	2495	48	1122	482	43	152	86	196	1	0	0	172	vA	vA		vA=821	821	1	12	10.0	optionally
+0	विभाषा	vibhāṣā	265	110	56	100	179	279	3	168	6	2	23	17	5	0	1	1	525	viBAzA	viBAzA		viBAzA=1	1	1	18243		optional rule (two alternatives)
+0	अन्यतरस्याम्	anyatarasyām	156	95	63	0	1	1	0	1	0	0	10	4	1	0	0	0	157	anyatarasyAm				0	0	50475		in either of the two alternatives
+0	नित्यम्	nityam	50	36	14	0	709	1102	57	475	169	8	18	12	0	0	0	0	0	nityam	nityam		nityam=23	23	1	1019		obligatorily / invariably
+0	बहुलम्	bahulam	46	38	8	0	132	197	4	120	4	4	14	8	0	0	0	0	0	bahulam				0	0	50475		variously (licensed latitude)
+0	छन्दसि	chandasi	226	110	116	0	68	86	3	61	1	3	19	9	0	0	0	0	0	Candasi		CaMdasi		0	0	50475		in the Veda (register tag)
+0	सञ्ज्ञायाम्	sañjñāyām	102	65	37	0	53	59	0	51	0	2	10	8	0	0	0	0	0	saYjYAyAm		saMjYAyAm		0	0	50475		when a technical name is meant
+0	इति	iti	94	39	55	0	4522	17167	300	3208	915	99	173	76	0	1	0	0	0	iti	iti		iti=1512	1512	1	5		quotation / end-of-term marker
+0	अपि	api	58	31	28	0	268	333	16	45	196	11	14	10	2	1	1	1	305	api	api		api=1480	1480	1	6		also, even
+0	वार्त्तिक	vārttika	0	0	0	0	952	1571	16	874	53	9	105	19	4	0	4	1	1590	vArttika				0	0	50475	5393.0	Kātyāyana's supplementary rule
+1	अक्षरसमाम्नाय	akṣarasamāmnāya	0	0	0	0	2	2	1	1	0	0	6	4	1	0	2	0	2753	akzarasamAmnAya		akzarasamAMnAya		0	0	50475		the 14 Śiva-sūtras; the sound inventory
+1	प्रत्याहार	pratyāhāra	0	0	0	0	53	77	10	43	0	0	61	35	5	0	3	3	1241	pratyAhAra	pratyAhAra		pratyAhAra=1	1	1	18243	5461.0	abbreviated sound class (aC, iK, haL …)
+1	इत्	it	50	25	25	0	3825	11144	202	2714	803	106	565	30	7	1	5	5	4900	it	it		it=2	2	1	12994		anubandha: mute marker letter
+1	सवर्ण	savarṇa	8	5	3	0	142	279	14	127	1	0	31	23	5	0	3	3	767	savarRa	savarRa		savarRa=5	5	1	6548	3497.5	homorganic / same place+manner
+1	अनुनासिक	anunāsika	15	12	3	0	54	87	0	54	0	0	19	10	1	0	2	0	1533	anunAsika	anunAsika		anunAsika=2	2	1	12994		nasal
+1	संयोग	saṃyoga	24	16	8	0	229	402	2	177	47	3	24	19	6	0	2	1	262	saMyoga	saMyoga		saMyoga=17	17	1	1609	753.0	consonant cluster
+1	ह्रस्व / दीर्घ / प्लुत	hrasva / dīrgha / pluta	155	60	96	0	847	1990	32	779	35	1	67	46	9	0	1	1	169	hrasva	hrasva		hrasva=4	4	1	7985	2447.0	short / long / protracted vowel
+1	उदात्त / अनुदात्त / स्वरित	udātta / anudātta / svarita	252	53	111	130	303	515	8	255	16	24	124	72	16	0	0	0	834	udAtta	udAtta		udAtta=7	7	1	4725		the three accents
+1	गुण	guṇa	46	30	17	0	789	1683	18	502	256	13	40	25	16	0	7	1	1684	guRa	guRa		guRa=198	198	1	61	45.0	the a/e/o grade
+1	वृद्धि	vṛddhi	61	8	53	0	305	553	6	291	8	0	104	73	4	0	0	0	0	vfdDi	vfdDi		vfdDi=39	39	1	510	604.5	the ā/ai/au grade
+1	संप्रसारण	saṃprasāraṇa	47	10	38	0	188	468	0	179	9	0	14	5	2	0	6	4	1064	saMprasAraRa	samprasAraRa	samprasAraRa	samprasAraRa=1	1	1	18243		semivowel → vowel replacement
+1	संहिता / संधि	saṃhitā / sandhi	302	5	0	300	45	80	1	22	21	1	123	42	15	0	0	0	1160	saMhitA	saMhitA		saMhitA=1	1	1	18243	1210.5	contiguity; euphonic combination
+1	लोप / लुक् / श्लु / लुप्	lopa / luk / ślu / lup	181	75	107	0	912	1791	8	881	20	3	32	23	32	0	4	2	595	lopa	lopa		lopa=1	1	1	18243	3461.5	the four kinds of elision (zero)
+1	आदेश	ādeśa	6	3	3	0	151	204	0	146	2	3	115	79	2	0	8	1	1462	AdeSa	AdeSa		AdeSa=12	12	1	2537	3537.0	substitute
+1	स्थानिन्	sthānin	9	3	6	0	174	437	0	166	7	1	9	6	1	0	1	1	183	sTAnin	sTAnin		sTAnin=6	6	1	5496		the item replaced
+1	आगम	āgama	0	0	0	0	54	67	7	22	25	0	43	25	2	0	1	0	1163	Agama	Agama		Agama=20	20	1	1259	987.5	augment (iṭ, aṭ, num …)
+1	प्रगृह्य	pragṛhya	10	2	8	0	20	24	0	18	2	0	13	7	1	0	2	1	243	pragfhya	pragfhya		pragfhya=1	1	1	18243		vowel not subject to sandhi
+1	उपधा / टि / अन्त / आदि	upadhā / ṭi / anta / ādi	429	219	168	104	955	1732	20	819	82	34	234	126	47	0	1	1	219	upaDA	upaDA		upaDA=21	21	1	1174		penultimate / final-part / end / beginning
+2	प्रत्यय	pratyaya	1853	22	15	1821	851	1389	9	622	194	26	135	84	22	0	7	2	1516	pratyaya	pratyaya		pratyaya=17	17	1	1609	930.0	affix (the single highest-scope term)
+2	धातु	dhātu	653	23	29	610	808	1554	13	618	122	55	158	81	27	0	3	3	2591	DAtu	DAtu		DAtu=29	29	1	768	393.0	verbal root
+2	प्रातिपदिक	prātipadika	12	7	5	0	232	502	6	158	55	13	45	22	7	0	2	2	1684	prAtipadika	prAtipadika		prAtipadika=5	5	1	6548		nominal base (before a sup)
+2	अङ्ग	aṅga	642	24	6	613	207	335	2	171	31	3	7	5	3	0	0	0	0	aNga	aNga	aMga	aNga=127	127	1	113	102.0	base immediately before an affix
+2	पद	pada	266	43	9	220	1024	2188	46	523	421	34	113	23	119	0	11	3	3709	pada	pada		pada=137	137	1	98	148.0	finished word (sup/tiṅ-ending)
+2	भ	bha	51	5	0	47	712	1080	22	146	522	22	25	18	385	1	2	2	712	Ba	Ba		Ba=2	2	1	12994		base before certain vowel/svarādi affixes
+2	प्रकृति	prakṛti	98	7	91	0	389	609	13	251	110	15	57	34	12	0	4	1	878	prakfti	prakfti		prakfti=55	55	1	316	395.0	underlying base; unchanged form
+2	विकरण	vikaraṇa	0	0	0	0	20	30	0	17	3	0	52	17	4	0	2	1	1201	vikaraRa	vikaraRa		vikaraRa=7	7	1	4725		conjugational stem-forming affix (śap etc.)
+2	सुप्	sup	206	19	83	107	235	368	6	208	10	11	2	2	2	1	4	4	749	sup	sup		sup=1	1	1	18243		the 21 nominal endings
+2	तिङ्	tiṅ	49	9	40	0	151	224	2	108	35	6	9	7	2	1	1	0	397	tiN				0	0	50475		the 18 verbal endings
+2	विभक्ति	vibhakti	58	11	47	0	192	267	7	137	46	2	53	31	12	0	0	0	767	viBakti	viBakti		viBakti=8	8	1	4061		case / personal ending
+2	लकार	lakāra	523	276	255	36	3015	8261	101	2286	557	71	27	16	4	0	0	0	99	lakAra	lakAra		lakAra=7	7	1	4725		tense-mood marker (laṭ, liṭ …)
+2	कृत्	kṛt	545	42	511	36	1041	1857	43	751	212	35	184	136	16	1	5	0	1470	kft	kft		kft=24	24	1	963	329.0	primary (root → noun) affix
+2	कृत्य	kṛtya	52	13	39	36	89	171	5	68	14	2	37	30	4	0	2	2	528	kftya	kftya		kftya=24	24	1	963	1586.5	gerundive / participial kṛt subset
+2	तद्धित	taddhita	1174	18	43	1115	191	333	8	167	11	5	136	36	3	0	2	1	2698	tadDita	tadDita		tadDita=3	3	1	10003		secondary (noun → noun) affix
+2	समासान्त	samāsānta	93	1	0	93	76	105	0	76	0	0	18	9	3	0	1	1	1991	samAsAnta		samAsAMta		0	0	50475		compound-final affix
+2	स्त्रीप्रत्यय	strīpratyaya	112	14	2	98	66	93	0	60	4	2	8	3	1	0	1	1	304	strIpratyaya				0	0	50475		feminine-forming affix (ṭāp, ṅīp …)
+3	लिङ्ग	liṅga	3	3	0	0	264	413	6	134	121	3	81	47	23	0	8	2	1068	liNga	liNga	liMga	liNga=10	10	1	3134	299.0	gender
+3	वचन	vacana	14	12	2	0	335	407	10	235	83	7	120	82	29	0	5	2	972	vacana	vacana		vacana=96	96	1	157	158.0	number (sg / du / pl)
+3	पुरुष	puruṣa	8	8	0	0	200	339	18	75	96	11	82	47	9	0	0	0	365	puruza	puruza		puruza=140	140	1	95	51.0	person (prathama/madhyama/uttama)
+3	संख्या	saṅkhyā	54	29	26	0	314	604	5	151	143	15	71	43	0	0	3	1	412	saNKyA	saNKyA	saMKyA	saNKyA=13	13	1	2297	827.0	numeral
+3	सर्वनामन्	sarvanāman	67	12	55	0	194	390	4	159	24	7	7	5	1	0	6	3	964	sarvanAman	sarvanAman		sarvanAman=1	1	1	18243		pronominal
+3	सर्वनामस्थान	sarvanāmasthāna	22	5	17	0	73	108	0	73	0	0	11	7	1	0	0	0	498	sarvanAmasTAna	sarvanAmasTAna		sarvanAmasTAna=1	1	1	18243		strong case stem
+3	अव्यय	avyaya	56	23	21	17	139	238	3	123	7	6	38	27	4	0	2	1	500	avyaya	avyaya		avyaya=4	4	1	7985	965.5	indeclinable
+3	निपात	nipāta	12	6	6	0	394	556	9	351	11	23	56	37	14	0	6	1	2527	nipAta	nipAta		nipAta=6	6	1	5496	3497.5	particle
+3	उपसर्ग	upasarga	97	27	70	0	177	304	2	153	17	5	44	23	7	0	10	4	3277	upasarga	upasarga		upasarga=4	4	1	7985	3737.5	verbal preverb (pra, vi, sam …)
+3	गति	gati	32	10	23	0	166	274	3	124	33	6	10	6	14	0	0	0	1019	gati	gati		gati=72	72	1	214	209.0	preverb-like item before a verb
+3	कर्मप्रवचनीय	karmapravacanīya	20	2	18	16	61	122	0	44	17	0	5	3	0	0	0	0	0	karmapravacanIya				0	0	50475		quasi-preposition governing a case
+3	कारक	kāraka	45	7	6	33	204	364	2	93	97	12	100	50	30	0	4	2	1358	kAraka	kAraka		kAraka=15	15	1	1904	1395.5	syntactico-semantic role
+3	कर्तृ	kartṛ	69	27	43	0	483	1147	9	294	159	21	36	22	11	0	2	2	641	kartf	kartf		kartf=33	33	1	652	575.0	agent (svatantraḥ kartā)
+3	कर्मन्	karman	202	62	143	16	904	2187	28	557	287	32	39	24	4	0	2	1	1852	karman	karman		karman=261	261	1	48	28.0	object / patient
+3	करण	karaṇa	43	19	24	9	246	434	13	118	110	5	459	164	86	0	8	0	1410	karaRa	karaRa		karaRa=44	44	1	434	583.5	instrument (sādhakatamam)
+3	सम्प्रदान	sampradāna	14	5	9	0	54	115	0	30	23	1	9	2	1	0	0	0	0	sampradAna	sampradAna	saMpradAna	sampradAna=1	1	1	18243		recipient / indirect object
+3	अपादान	apādāna	12	5	7	0	36	47	0	12	23	1	14	7	1	0	1	1	227	apAdAna	apAdAna		apAdAna=4	4	1	7985		source / ablative role
+3	अधिकरण	adhikaraṇa	24	14	10	0	58	70	2	47	9	0	30	14	1	0	1	0	355	aDikaraRa	aDikaraRa		aDikaraRa=10	10	1	3134	4056.0	locus
+3	संबुद्धि / आमन्त्रित	sambuddhi / āmantrita	10	9	2	0	39	68	0	35	4	0	8	6	3	0	0	0	0	sambudDi	sambudDi	saMbudDi	sambudDi=2	2	1	12994		vocative
+3	समानाधिकरण	samānādhikaraṇa	32	5	27	0	67	99	1	51	11	4	10	4	1	0	2	2	319	samAnADikaraRa				0	0	50475		co-referential / same case basis
+4	दश लकाराः	daśa lakārāḥ	89	61	33	0	532	899	7	386	131	8	0	0	0	0	0	0	0	daSalakArAH				0	0	50475		laṭ liṭ luṭ lṛṭ loṭ laṅ liṅ luṅ lṛṅ leṭ
+4	परस्मैपद	parasmaipada	44	13	31	0	210	299	0	200	10	0	37	19	1	0	2	1	1100	parasmEpada	parasmEpada		parasmEpada=1	1	1	18243		active endings
+4	आत्मनेपद	ātmanepada	81	10	71	0	130	188	1	115	14	0	47	21	2	0	1	1	394	Atmanepada	Atmanepada		Atmanepada=1	1	1	18243		middle endings
+4	प्रथम / मध्यम / उत्तम	prathama / madhyama / uttama	56	31	26	0	625	1131	18	473	123	11	93	55	10	0	6	2	832	praTama	praTama		praTama=61	61	1	274	379.0	3rd / 2nd / 1st person
+4	सार्वधातुक	sārvadhātuka	61	11	51	0	139	201	0	137	2	0	21	9	2	0	2	2	615	sArvaDAtuka	sArvaDAtuka		sArvaDAtuka=2	2	1	12994		affix before which guṇa applies
+4	आर्धधातुक	ārdhadhātuka	98	7	45	48	89	143	0	89	0	0	15	7	3	0	3	2	1116	ArDaDAtuka	ArDaDAtuka		ArDaDAtuka=1	1	1	18243		affix with iṭ / no guṇa
+4	इट् / सेट् / अनिट्	iṭ / seṭ / aniṭ	85	12	78	0	188	359	0	188	0	0	574	33	5	0	0	0	0	iw	iw		iw=2	2	1	12994		intervening i augment
+4	क्ङिति / कित् / ङित्	kṅiti / kit / ṅit	79	13	66	0	338	600	1	335	2	0	18	16	6	0	0	0	0	kNiti				0	0	50475		k/ṅ-marked affix (no guṇa)
+4	अभ्यास / अभ्यस्त	abhyāsa / abhyasta	78	21	57	39	184	290	1	171	12	0	20	15	3	0	1	0	130	aByAsa	aByAsa		aByAsa=10	10	1	3134	1497.5	reduplication syllable / reduplicated
+4	द्वित्व	dvitva	0	0	0	0	286	768	1	253	32	0	13	4	1	0	9	6	1557	dvitva	dvitva		dvitva=2	2	1	12994		doubling / reduplication
+4	कर्तरि / कर्मणि / भावे	kartari / karmaṇi / bhāve	288	66	145	95	2088	5113	111	1532	376	69	64	29	2	0	0	0	0	kartari				0	0	50475		active / passive / impersonal voice
+4	सन् / सन्नन्त	san / sannanta	19	13	6	0	460	744	22	259	172	7	22	16	23	0	1	1	690	san	san		san=4	4	1	7985	3306.0	desiderative
+4	णिच् / णिजन्त	ṇic / ṇijanta	37	12	25	0	122	253	0	106	15	1	21	19	3	0	7	7	1825	Ric				0	0	50475		causative
+4	निष्ठा / सत्	niṣṭhā / sat	73	23	50	0	800	1346	22	399	348	31	24	19	13	0	1	1	87	nizWA	nizWA		nizWA=2	2	1	12994	1769.5	kta/ktavatu; present participle
+4	सकर्मक / अकर्मक	sakarmaka / akarmaka	16	12	4	0	113	231	0	94	14	5	8	4	2	0	0	0	297	sakarmaka				0	0	50475		transitive / intransitive
+4	हेतु	hetu	16	11	6	0	196	402	5	87	91	13	6	3	3	0	3	2	220	hetu	hetu		hetu=68	68	1	233	214.5	causer / instigator
+4	आम्रेडित	āmreḍita	8	7	1	0	3	3	0	3	0	0	2	2	2	0	1	1	666	Amreqita	Amreqita		Amreqita=1	1	1	18243		repeated word in iteration
+5	समास	samāsa	122	14	16	93	524	1100	9	421	68	26	103	64	25	0	2	0	1351	samAsa	samAsa		samAsa=2	2	1	12994	2920.0	compound
+5	तत्पुरुष	tatpuruṣa	150	13	59	80	123	162	0	115	5	3	35	15	4	0	8	6	2711	tatpuruza	tatpuruza		tatpuruza=12	12	1	2537	5430.0	determinative compound
+5	कर्मधारय	karmadhāraya	17	8	9	0	85	136	4	79	1	1	12	7	1	0	0	0	793	karmaDAraya	karmaDAraya		karmaDAraya=1	1	1	18243		appositional tatpuruṣa
+5	द्विगु	dvigu	3	3	0	0	61	133	1	59	1	0	8	8	2	0	1	1	761	dvigu	dvigu		dvigu=4	4	1	7985		numeral-initial tatpuruṣa
+5	बहुव्रीहि	bahuvrīhi	3	2	1	0	177	268	6	160	9	2	42	20	3	0	2	1	852	bahuvrIhi	bahuvrIhi		bahuvrIhi=4	4	1	7985		exocentric (possessive) compound
+5	द्वन्द्व	dvandva	37	17	20	0	283	463	1	238	41	3	30	15	2	0	0	0	0	dvandva	dvandva	dvaMdva	dvandva=13	13	1	2297	1386.0	copulative compound
+5	अव्ययीभाव	avyayībhāva	32	8	8	17	41	78	0	39	1	1	9	7	1	0	2	0	419	avyayIBAva	avyayIBAva		avyayIBAva=3	3	1	10003		indeclinable compound
+5	पूर्वपद / उत्तरपद	pūrvapada / uttarapada	402	34	149	248	297	546	8	268	10	11	22	16	4	0	2	0	220	pUrvapada				0	0	50475		prior / latter compound member
+5	उपसर्जन	upasarjana	13	6	7	0	46	67	0	43	3	0	12	8	1	0	1	0	974	upasarjana	upasarjana		upasarjana=6	6	1	5496		subordinate compound member
+5	उपपद	upapada	13	10	3	0	148	193	3	120	23	2	30	19	4	0	5	2	1036	upapada				0	0	50475		governing co-occurring word
+5	सामर्थ्य	sāmarthya	836	7	0	830	308	445	13	106	182	7	12	7	2	0	1	0	429	sAmarTya	sAmarTya		sAmarTya=12	12	1	2537	2985.5	semantic fitness required for derivation
+5	अपत्य	apatya	86	3	84	0	79	120	0	78	0	1	28	18	1	0	0	0	117	apatya	apatya		apatya=26	26	1	881	1340.0	descendant (taddhita sense)
+5	गोत्र / युवन् / तद्राज	gotra / yuvan / tadrāja	50	23	28	0	154	397	1	149	4	0	26	17	5	0	2	2	340	gotra	gotra		gotra=12	12	1	2537	1862.5	lineage grades in taddhita
+5	वृद्ध	vṛddha	36	18	19	0	263	403	3	242	15	3	11	7	6	0	0	0	0	vfdDa	vfdDa		vfdDa=57	57	1	299	504.5	name-eligible elder / vṛddha-class
+5	नदी / घि / घु	nadī / ghi / ghu	42	26	16	0	186	358	0	178	7	1	24	15	34	0	1	1	730	nadI	nadI		nadI=30	30	1	736	406.0	special stem classes
+5	अवसान	avasāna	4	3	1	0	9	11	0	9	0	0	7	4	1	0	0	0	115	avasAna	avasAna		avasAna=11	11	1	2802	3554.5	pause / word-final position
+5	अपृक्त	apṛkta	9	5	4	0	20	26	0	20	0	0	8	6	1	0	1	1	165	apfkta				0	0	50475		affix consisting of a single phoneme
+5	विग्रह	vigraha	0	0	0	0	616	1156	4	599	8	5	7	6	5	0	4	0	1453	vigraha	vigraha		vigraha=37	37	1	546	1422.0	analytic paraphrase of a compound
+6	सञ्ज्ञा	sañjñā	114	73	41	0	380	610	4	291	79	6	126	84	14	0	1	0	691	saYjYA	saYjYA	saMjYA	saYjYA=28	28	1	805	420.0	technical term (saṃjñā)
+6	परिभाषा	paribhāṣā	0	0	0	0	91	125	0	90	1	0	133	69	31	0	0	0	2364	pariBAzA	pariBAzA		pariBAzA=8	8	1	4061	6665.0	metarule interpreting other rules
+6	अनुवृत्ति	anuvṛtti	0	0	0	0	3	3	1	2	0	0	12	7	1	0	0	0	554	anuvftti				0	0	50475		recurrence of words from a prior rule
+6	अधिकार	adhikāra	1	1	0	0	49	55	2	40	6	1	63	37	1	0	1	0	2560	aDikAra	aDikAra		aDikAra=18	18	1	1482	2153.0	governing heading rule
+6	अपवाद / उत्सर्ग	apavāda / utsarga	0	0	0	0	46	59	1	40	4	1	44	22	5	0	2	0	739	apavAda	apavAda		apavAda=4	4	1	7985	4462.0	exception / general rule
+6	अतिदेश	atideśa	0	0	0	0	9	11	0	8	1	0	15	9	1	0	16	7	1965	atideSa	atideSa		atideSa=10	10	1	3134		transfer of properties by extension
+6	असिद्ध	asiddha	156	3	0	154	22	30	0	18	3	1	70	43	3	0	0	0	2349	asidDa	asidDa		asidDa=3	3	1	10003		not yet in effect (rule ordering)
+6	अन्तरङ्ग / बहिरङ्ग	antaraṅga / bahiraṅga	0	0	0	0	64	110	2	50	12	0	32	14	9	0	3	0	2292	antaraNga	antaraNga	aMtaraMga|aMtaraNga|antaraMga	antaraNga=10	10	1	3134		internally / externally conditioned
+6	नित्य / अनित्य	nitya / anitya	56	40	16	0	735	1163	57	493	175	10	59	34	6	0	5	1	1566	nitya	nitya		nitya=35	35	1	591	449.5	invariably / variably applicable
+6	स्थाने / अन्तरतम	sthāne / antaratama	12	3	9	0	97	147	4	83	10	0	23	13	3	0	0	0	0	sTAne	sTAne		sTAne=17	17	1	1609		in place of / nearest substitute
+6	योगविभाग	yogavibhāga	0	0	0	0	88	99	3	84	0	1	6	5	1	0	9	0	827	yogaviBAga				0	0	50475		splitting one sūtra into two
+6	उपसंख्यान / इष्टि	upasaṅkhyāna / iṣṭi	0	0	0	0	59	62	0	54	5	0	20	11	1	0	0	0	0	upasaNKyAna	upasaNKyAna	upasaMKyAna	upasaNKyAna=2	2	1	12994		supplement / desideratum to a rule
+6	व्याकरण	vyākaraṇa	0	0	0	0	141	201	72	29	35	5	221	52	35	0	15	4	1268	vyAkaraRa	vyAkaraRa		vyAkaraRa=2	2	1	12994		grammar (the discipline)
+6	शब्द / अर्थ / स्फोट	śabda / artha / sphoṭa	69	54	15	0	1591	3324	200	502	839	50	614	371	70	0	0	0	0	Sabda	Sabda		Sabda=63	63	1	258	153.0	word / meaning / semantic whole
+6	वाच्य / वाचक	vācya / vācaka	0	0	0	0	763	1160	21	514	180	48	28	9	4	0	9	3	510	vAcya	vAcya		vAcya=2	2	1	12994		expressed sense / expression
+6	प्रातिशाख्य / शिक्षा	prātiśākhya / śikṣā	0	0	0	0	25	30	6	16	3	0	200	34	13	0	0	0	2276	prAtiSAKya				0	0	50475		Vedic phonetics treatises
+6	महाभाष्य / काशिका / सिद्धान्तकौमुदी	Mahābhāṣya / Kāśikā / SK	0	0	0	0	40	42	3	28	6	3	311	102	28	0	0	0	4026	mahABAzya				0	0	50475		the three reference works

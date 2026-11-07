@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Что учить первым: измеренный порядок терминов санскритской грамматики</title>
+<style>
+:root{--bg:#faf8f4;--card:#fff;--ink:#24222a;--muted:#6c6872;--line:#e5e0d6;
+ --accent:#4a447f;--accent2:#c2703a;--soft:#f3f0ea;--warn:#8a5a20}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+ font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:1040px;margin:0 auto;padding:0 28px 90px}
+header{padding:56px 0 28px;border-bottom:2px solid var(--ink)}
+h1{font-size:36px;line-height:1.18;margin:0 0 12px}
+.sub{color:var(--muted);font-size:17px;max-width:760px}
+nav{font-size:14.5px;margin-top:18px;line-height:2}
+nav a{color:var(--accent);margin-right:18px;white-space:nowrap}
+h2{font-size:25px;margin:48px 0 12px;padding-top:14px;border-top:1px solid var(--line)}
+h3{font-size:18px;margin:24px 0 6px}
+p{margin:10px 0}
+ul,ol{margin:10px 0 10px 22px;padding:0}li{margin:6px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:22px 0}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 20px}
+.stat .n{font-size:30px;font-weight:700;color:var(--accent);line-height:1.1}
+.stat .t{font-size:14px;color:var(--muted);margin-top:6px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 22px;margin:16px 0}
+.card.hl{border-left:4px solid var(--accent2)}
+.card.warn{border-left:4px solid var(--warn)}
+table{border-collapse:collapse;width:100%;font-size:14.5px;margin:16px 0;background:var(--card)}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--soft);font-weight:600}
+code{background:var(--soft);padding:1px 5px;border-radius:4px;font-size:13px}
+.deva{font-family:"Nirmala UI","Noto Sans Devanagari","Mangal",serif;font-size:16px}
+.tag{display:inline-block;font-size:12px;padding:2px 9px;border-radius:20px;
+ background:var(--soft);color:var(--muted);margin-right:5px}
+.b{display:inline-block;background:var(--accent);color:#fff;border-radius:5px;
+ padding:1px 8px;font-size:12px;font-weight:600}
+details{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:10px 18px;margin:18px 0}
+summary{cursor:pointer;font-weight:600;padding:8px 0}
+.note{font-size:13.5px;color:var(--muted)}
+footer{margin-top:54px;padding-top:18px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+@media print{body{background:#fff}.wrap{max-width:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="tag">Aṣṭādhyāyī</div> <div class="tag">DSG</div> <div class="tag">измерение</div> <div class="tag">русский</div>
+  <h1>Что учить первым</h1>
+  <div class="sub">Словарь санскритской грамматики содержит 4&nbsp;383 статьи — слишком много для начала.
+  Измерив, как термины реально требуются при чтении 3&nbsp;983 сутр, мы свели список к
+  <b>119 ядерным терминам в семи блоках</b> и объяснили, почему частотность в обычных текстах
+  здесь не работает.</div>
+  <nav>
+    <a href="#method">Метод</a>
+    <a href="#batches">Семь блоков</a>
+    <a href="#axes">Три оси</a>
+    <a href="experiment.html">Эксперимент: что можно проверить</a>
+    <a href="quiz.html">Пилотный тест</a>
+    <a href="study.html">Полный отчёт (EN)</a>
+    <a href="channels.html">Внешние каналы (EN)</a>
+    <a href="data/">Данные и код</a>
+  </nav>
+</header>
+
+<div class="grid">
+  <div class="stat"><div class="n">4 383</div><div class="t">статьи в Dictionary of Sanskrit Grammar (Abhyankar, 1961) — алфавитный справочник, а не программа</div></div>
+  <div class="stat"><div class="n">119 / 7</div><div class="t">ядерных терминов в семи обучающих блоках; 88 saṃjñā-определений найдено в разметке сутр</div></div>
+  <div class="stat"><div class="n">≈65 %</div><div class="t">требуемых чтений термина <b>не написаны</b> в сутре: их дают anuvṛtti и adhikāra</div></div>
+  <div class="stat"><div class="n">ρ = 0,139</div><div class="t">связь структурного спроса с частотой в DCS — корпус литературы почти не предсказывает учебную важность</div></div>
+</div>
+
+<div class="card warn">
+  <b>Чего здесь нет.</b> Это корпусное исследование, <b>не педагогический эксперимент</b>.
+  Порядок блоков обоснован измерением и согласуется с частотой терминов в грамматических сочинениях
+  (ρ = 0,557), но <b>не проверен на учащихся</b>: прирост обучения никто не измерял.
+  Какой эксперимент можно поставить, какие гипотезы он опровергнет и какой тест уже готов —
+  см. <a href="experiment.html"><b>протокол на русском</b></a>.
+</div>
+
+<h2 id="method">Как считали</h2>
+<p>Источник — закреплённый снимок <a href="https://github.com/ashtadhyayi-com/data">ashtadhyayi-com/data</a>
+(<code>sutraani/data.txt</code>): 3&nbsp;983 сутры с полями <code>pc</code> (padaccheda),
+<code>an</code> (anuvṛtti), <code>ad</code> (adhikāra). Считается <b>документная частота</b> —
+число <i>различных сутр</i>, в которых термин требуется; повтор слова внутри одной сутры не удваивает
+счёт, потому что для ученика это одно событие чтения.</p>
+<table>
+<tr><th>Канал</th><th>Что означает</th><th>Вхождений</th><th>Различных форм</th></tr>
+<tr><td><code>pc</code></td><td>термин написан явно</td><td>13 068</td><td>6 741</td></tr>
+<tr><td><code>an</code></td><td>термин перенесён из предыдущей сутры</td><td>9 808</td><td>1 571</td></tr>
+<tr><td><code>ad</code></td><td>термин задан управляющим заголовком</td><td>14 323</td><td>69</td></tr>
+<tr><td colspan="2"><b>Всего требуемых чтений</b></td><td><b>37 199</b></td><td>6 809 форм</td></tr>
+</table>
+<p>Отсюда главный результат: <b>самое написанное слово — <span class="deva">च</span> ca</b> (847 сутр),
+но это оператор-связка, а <b>самый востребованный технический термин — <span class="deva">प्रत्यय</span>
+pratyaya</b>: он написан лишь в 22 сутрах, зато управляет 1&nbsp;821 сутрой. Учить по «что чаще
+встречается в тексте» — значит начать с <i>ca</i>, <i>na</i>, <i>iti</i> и никогда не дойти до
+<i>pratyaya</i>.</p>
+
+<h2 id="axes">Три оси, а не «три канала плюс четвёртый»</h2>
+<p>Первоначальные три канала — это <b>три позиции внутри одного текста</b>, а не три корпуса.
+Частота в грамматиках и DCS лежат на других осях:</p>
+<table>
+<tr><th>Ось</th><th>Что измеряет</th><th>Роль в порядке обучения</th></tr>
+<tr><td><b>A · структурный спрос</b></td><td><code>pc / an / ad</code> в 3 983 сутрах</td><td><b>основа порядка</b> (семь блоков)</td></tr>
+<tr><td><b>B · грамматический дискурс</b></td><td>G: 12 627 пассажей Mahābhāṣya, Kaumudī, Vākyapadīya и др.; L: упоминания в 4 383 статьях DSG</td><td><b>проверка и темп</b>: ρ = 0,557 с осью A</td></tr>
+<tr><td><b>C · общий литературный регистр</b></td><td>D: 50 474 ключа DCS</td><td><b>отрицательный контроль</b>: ρ = 0,139; __DCS_ABSENT__ термина отсутствуют, __DCS_LE5__ имеют счёт ≤ 5</td></tr>
+</table>
+<table>
+<tr><th>Термин</th><th>Спрос в Aṣṭādhyāyī</th><th>Частота в грамматиках (df)</th><th>DCS</th></tr>
+<tr><td><i>pratyaya</i></td><td>1 853 (управляет 1 821 сутрой)</td><td>851</td><td><b>17</b></td></tr>
+<tr><td><i>taddhita</i></td><td>1 174 (управляет 1 115)</td><td>191</td><td><b>3</b></td></tr>
+<tr><td><i>ca</i></td><td>911</td><td>3 081</td><td><b>3 385</b></td></tr>
+<tr><td><i>iti</i></td><td>94</td><td>4 522</td><td><b>1 512</b></td></tr>
+</table>
+<p class="note">Низкая частота в DCS — это <b>довод за</b> раннее изучение термина: литература его
+никогда не подскажет. Делать DCS равноправным четвёртым весом значило бы развернуть syllabus
+в сторону служебных слов.</p>
+
+<h2 id="batches">Семь блоков</h2>
+<p>Порядок сохраняет «грамматический хребет»: сначала операторы чтения, затем звук, затем
+деривационный механизм, и только потом именная и глагольная системы, сложные слова и метаправила.
+Служебные слова вынесены в B0 и исключены из содержательного ранжирования; внутри каждого блока
+термины отсортированы по измеренному спросу.</p>
+__BATCH_CARDS__
+
+<details>
+<summary>Показать все 119 терминов с русскими толкованиями</summary>
+__TERM_TABLE__
+<p class="note">Толкования — краткие учебные ориентиры, не перевод словарных статей Abhyankar.
+Полные статьи доступны по ссылкам DSG в <a href="data/core_terms.tsv">core_terms.tsv</a>.</p>
+</details>
+
+<h2>Что делать ученику</h2>
+<ol>
+<li>Пройти B0–B2 как единый «двигатель чтения»: без <i>pratyaya</i>, <i>dhātu</i>, <i>aṅga</i>,
+  <i>pada</i> последующие блоки не связываются.</li>
+<li>С B3 переходить к сутрам: для каждой определять, что написано, что перенесено по
+  <i>anuvṛtti</i>, что задано <i>adhikāra</i>.</li>
+<li>B5–B6 не заучивать, а держать как справочную полку: DSG открывать по требованию,
+  а не читать подряд. Не менее 42&nbsp;% словаря — инвентарь (аффиксы, корни, имена авторов).</li>
+</ol>
+
+<h2>Эксперимент: чего исследование не доказало</h2>
+<div class="card hl">
+  <p style="margin-top:0"><b>«Прирост обучения не измерялся» — и что с этим делать.</b>
+  Нужен рандомизированный эксперимент: четыре группы с разным <i>порядком</i> одних и тех же
+  119 карточек, тест до / сразу после / через три недели, первичная конечная точка — прирост
+  на заданиях «восстанови неписаный термин». Гипотезы, мощность, план анализа, критерии
+  опровержения и лестница из четырёх ступеней (от калибровки заданий до полного РКИ) разобраны
+  в <a href="experiment.html"><b>протоколе</b></a>.</p>
+  <p>Уже готово для пилота: <a href="quiz.html"><b>офлайн-тест</b></a> с двумя параллельными
+  формами A/B и экспортом CSV и <a href="data/item_bank.tsv"><b>банк из __BANK_TOTAL__ заданий</b></a>,
+  сгенерированный из тех же сутр: __BANK_IMPLICIT__ потенциальных неявных слотов,
+  __BANK_FORMS__ заданий в каждой форме, __BANK_GLOSS__ русских толкований.</p>
+</div>
+
+<h2>Качество данных: ключи DSG и короткие термины</h2>
+<div class="card hl">
+  <p style="margin-top:0"><b>Колонка <code>slp1</code> в DSG — это Harvard-Kyoto, а не SLP1.</b>
+  Прямое соединение с корпусом DCS даёт неверные ключи: <code>Adeza</code> вместо
+  <code>AdeSa</code>, <code>saJjJA</code> вместо <code>saYjYA</code>,
+  <code>kRt</code> вместо <code>kft</code>. HK и SLP1 различаются <i>циклической</i>
+  подстановкой, поэтому нужна однопроходная конверсия, а не последовательная замена.
+  Конвертер вынесен в <a href="code/slp1_keys.py"><code>slp1_keys.py</code></a> и проверен
+  по независимой колонке IAST: __DQ_AGREE__ проверок, расхождений нет.</p>
+  <p><b>Варианты «классовый назальный ↔ анусвара» добавлены</b> и для деванагари
+  (<span class="deva">सञ्ज्ञा</span> / <span class="deva">संज्ञा</span>,
+  <span class="deva">सङ्ख्या</span> / <span class="deva">संख्या</span>), и для SLP1
+  (<code>saYjYA</code>/<code>saMjYA</code>, <code>aNga</code>/<code>aMga</code>,
+  <code>saMbanDa</code>/<code>sambanDa</code>). Варианты — это альтернативные написания
+  одного леммы, поэтому берётся наиболее засвидетельствованный ключ, а не сумма счётчиков.</p>
+  <p>Исправленное соединение всех 4 383 словарных статей с DCS —
+  <a href="data/dsg_dcs_join.tsv"><code>dsg_dcs_join.tsv</code></a>:
+  наивное соединение по HK давало __DQ_NAIVE__ совпадений, исправленное даёт
+  <b>__DQ_FIXED__</b> — возвращено __DQ_MISSED__ ранее потерянных совпадений.</p>
+  <p style="margin-bottom:0"><b>__SHORT_N__ коротких терминов измерены, а не объявлены
+  «неизмеримыми».</b> <i>ca</i>, <i>na</i>, <i>it</i> и др. сталкиваются в английском
+  тексте DSG с английскими служебными словами, поэтому каждый из них измерен в трёх
+  полях: английское определение (верхняя граница), русское определение (без английских
+  омонимов) и деванагари-заголовки. Например, <i>it</i>: 565 вхождений в английском
+  тексте, но 30 в русском — основная масса английских вхождений это местоимение «it».
+  Пустых значений нет, правила подсчёта зафиксированы в
+  <a href="data/external_channels.json"><code>external_channels.json</code></a>.</p>
+</div>
+
+<h2>Ограничения</h2>
+<ul>
+<li>Состав словаря DSG оценивался эвристикой по первому определению; граница «термин / инвентарь» приблизительна.</li>
+<li>В DSG нет отдельных статей <i>vṛddhi</i>, <i>aṅga</i>, <i>saṃjñā</i>. Варианты написаний
+  <span class="deva">सञ्ज्ञा</span> / <span class="deva">संज्ञा</span> и
+  <span class="deva">अङ्ग</span> / <span class="deva">अंग</span> теперь нормализуются
+  системно; две статьи с нелатинскими символами-заполнителями (jihvāmūlīya, upadhmānīya)
+  не имеют SLP1-ключа и помечены <code>slp1_source=none</code>.</li>
+<li>Канал G считает пассажи, а не tokens в унифицированной разбивке; D — закреплённый
+  ранжирующий список DCS (50 474 ключа), а не полный экспорт корпуса.</li>
+<li>Короткие латинские основы в английском тексте DSG дают завышенную оценку; рядом всегда
+  приводятся счётчики по русскому тексту и по заголовкам, корреляции посчитаны по обоим.</li>
+<li>Корреляция с частотой в грамматиках подтверждает осмысленность порядка, но не причинность.
+  Никакого сравнения групп учащихся не проводилось.</li>
+</ul>
+
+<h2>Источники и воспроизводимость</h2>
+<table>
+<tr><th>Что</th><th>Откуда</th><th>Файл</th></tr>
+<tr><td>4 383 статьи DSG</td><td><a href="https://samskrtam.ru/sanskrit-lexicon/dsg/">samskrtam.ru</a>, Abhyankar 1961</td><td><a href="data/dsg_entries.tsv">dsg_entries.tsv</a></td></tr>
+<tr><td>3 983 сутры с <code>pc/an/ad</code></td><td><a href="https://github.com/ashtadhyayi-com/data">ashtadhyayi-com/data</a></td><td><a href="data/panini_word_forms.tsv">panini_word_forms.tsv</a></td></tr>
+<tr><td>Внешние каналы G / L / D</td><td>10 файлов vyākaraṇa-корпуса, DSG, DCS</td><td><a href="data/external_channels.tsv">external_channels.tsv</a></td></tr>
+<tr><td>Числа и хэши источников</td><td>—</td><td><a href="data/report.json">report.json</a>, <a href="data/external_channels.json">external_channels.json</a></td></tr>
+<tr><td>Скрипты</td><td>измерение, блоки, внешние каналы, банк заданий</td><td><a href="code/">code/</a></td></tr>
+</table>
+<p class="note">Снимки источников закреплены по SHA-256 в <code>report.json</code>;
+сетевых запросов при повторном расчёте не требуется. Англоязычные отчёты сохранены как
+первичные исследовательские артефакты: <a href="study.html">измеренный порядок</a> и
+<a href="channels.html">внешние каналы</a>.</p>
+
+<footer>
+  Измерение и русская версия подготовлены в проекте Sanskrit Lexicon estate · 7 ноября 2026 г.
+  Это упорядочивающее исследование, а не проверенная методика преподавания:
+  <a href="experiment.html">как это проверить →</a>
+</footer>
+</div>
+</body>
+</html>

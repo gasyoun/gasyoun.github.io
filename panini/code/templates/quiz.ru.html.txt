@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>__TITLE__</title>
+<style>
+:root{--bg:#faf8f4;--card:#fff;--ink:#24222a;--muted:#6c6872;--line:#e5e0d6;
+ --accent:#4a447f;--accent2:#c2703a;--soft:#f3f0ea;--ok:#2f6b4f;--bad:#a33;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+ font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:820px;margin:0 auto;padding:0 24px 80px}
+header{padding:38px 0 22px;border-bottom:2px solid var(--ink)}
+h1{font-size:28px;line-height:1.25;margin:0 0 8px}
+.sub{color:var(--muted);font-size:14px}
+nav{font-size:14px;margin:14px 0 0}
+nav a{color:var(--accent)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;
+ padding:22px 24px;margin:22px 0;box-shadow:0 1px 2px rgba(0,0,0,.03)}
+label{display:block;margin:12px 0}
+label span{display:block;font-size:13px;color:var(--muted);margin-bottom:4px}
+input[type=text],select{font:16px/1.4 inherit;padding:8px 10px;border:1px solid var(--line);
+ border-radius:6px;background:#fff;color:var(--ink);min-width:220px}
+button{font:16px/1.4 inherit;padding:10px 20px;border:0;border-radius:7px;
+ background:var(--accent);color:#fff;cursor:pointer}
+button:disabled{opacity:.45;cursor:not-allowed}
+button.ghost{background:var(--soft);color:var(--ink);border:1px solid var(--line)}
+.opt{display:block;width:100%;text-align:left;background:#fff;color:var(--ink);
+ border:1px solid var(--line);border-radius:7px;padding:11px 14px;margin:9px 0;
+ font:inherit;cursor:pointer}
+.opt:hover{border-color:var(--accent);background:#f7f5ff}
+.deva{font-size:22px;line-height:1.5;font-family:"Nirmala UI","Noto Sans Devanagari",
+ "Mangal",serif}
+.sutra{background:var(--soft);border-left:3px solid var(--accent2);
+ padding:12px 16px;margin:14px 0;border-radius:0 6px 6px 0}
+.sutra .ref{font-size:12px;color:var(--muted);letter-spacing:.04em}
+.pc{font-size:15px;color:var(--muted);margin-top:6px;word-break:break-word}
+.bar{height:6px;background:var(--line);border-radius:4px;overflow:hidden;margin:10px 0 18px}
+.bar>i{display:block;height:100%;background:var(--accent)}
+.meta{display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}
+.tag{display:inline-block;font-size:12px;padding:2px 8px;border-radius:20px;
+ background:var(--soft);color:var(--muted);margin-right:6px}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{border-bottom:1px solid var(--line);padding:7px 9px;text-align:left}
+th{color:var(--muted);font-weight:600}
+footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);
+ font-size:13px;color:var(--muted)}
+.note{font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>Пилотный тест: понимание терминов Aṣṭādhyāyī</h1>
+  <div class="sub">Инструмент для измерения прироста обучения · формы A и B · работает без сервера</div>
+  <nav><a href="index.html">← Главная</a> · <a href="experiment.html">Протокол исследования</a> · <a href="data/item_bank.tsv">Банк заданий</a></nav>
+</header>
+
+<section class="card" id="setup">
+  <h2 style="margin-top:0">Перед началом</h2>
+  <p class="note">Тест занимает около 10–15 минут. В каждой форме 30 заданий трёх типов:
+  значение термина, восстановление неписаного термина в сутрах 1–3 адхьяй (обучающая выборка)
+  и в сутрах 4–8 адхьяй (перенос на новый материал). Обратной связи по ходу теста нет.
+  Ответы не отправляются никуда: по окончании вы скачиваете CSV-файл и передаёте его исследователю.</p>
+  <label><span>Код участника (придумайте сами, без имени)</span><input type="text" id="pid" placeholder="напр. P-014"></label>
+  <label><span>Условие обучения (группа)</span><select id="arm">
+    <option value="A">A — структурный порядок (7 блоков)</option>
+    <option value="B">B — алфавитный порядок DSG</option>
+    <option value="C">C — порядок по частоте DCS</option>
+    <option value="D">D — порядок традиционного учебника</option>
+    <option value="X">не относится / пилот без группы</option>
+  </select></label>
+  <label><span>Форма</span><select id="form"><option value="A">A</option><option value="B">B</option></select></label>
+  <label><span>Точка измерения</span><select id="wave">
+    <option value="pre">до обучения (pretest)</option>
+    <option value="post">сразу после (posttest)</option>
+    <option value="delayed">через 3 недели (retention)</option>
+  </select></label>
+  <label style="margin-top:16px"><input type="checkbox" id="consent"> Я согласен(на) на участие; понимаю, что результаты анонимны и не влияют на оценки.</label>
+  <p style="margin-top:18px"><button id="start" disabled>Начать тест</button></p>
+  <p class="note" id="bankinfo"></p>
+</section>
+
+<section class="card" id="test" hidden>
+  <div class="meta"><span id="pos"></span><span id="clock"></span></div>
+  <div class="bar"><i id="fill" style="width:0%"></i></div>
+  <div id="qbody"></div>
+  <div id="opts"></div>
+</section>
+
+<section class="card" id="done" hidden>
+  <h2 style="margin-top:0">Тест завершён</h2>
+  <div id="result"></div>
+  <p style="margin-top:20px"><button id="csv">Скачать CSV с ответами</button>
+     <button class="ghost" id="again" style="margin-left:8px">Пройти ещё раз</button></p>
+  <p class="note">CSV содержит: код участника, группу, форму, точку измерения, идентификатор задания,
+  тип, ответ, правильность и время реакции (мс). Никакие данные не покидают браузер до скачивания файла.</p>
+</section>
+
+<footer>
+  Сгенерировано из <code>panini_data.txt</code> (3&nbsp;983 сутры) и <code>core_terms.tsv</code> (119 терминов).
+  Это пилотный инструмент, <b>не валидированный психометрический тест</b>: до основного эксперимента
+  требуется калибровка сложности заданий. <a href="experiment.html">См. протокол →</a>
+</footer>
+</div>
+
+<script type="application/json" id="bank">__ITEMS__</script>
+<script>
+"use strict";
+const BANK = JSON.parse(document.getElementById('bank').textContent);
+const META = __META__;
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+$('bankinfo').textContent = 'Банк: ' + META.core_terms + ' терминов, '
+  + META.russian_glosses + ' русских толкований; форма A — '
+  + META.forms.A.total + ' заданий, форма B — ' + META.forms.B.total + ' заданий.';
+
+$('consent').addEventListener('change', () => { $('start').disabled = !$('consent').checked; });
+
+// Deterministic per-participant shuffle so pre/post orders are reproducible.
+function seeded(str){ let h=2166136261; for(const c of str){h^=c.charCodeAt(0);h=Math.imul(h,16777619);} 
+  return function(){h+=0x6D2B79F5;let t=h;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);
+    return ((t^t>>>14)>>>0)/4294967296;}; }
+function shuffled(a,rnd){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(rnd()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+let CTX=null, ITEMS=[], CUR=0, RESP=[], T0=0;
+
+$('start').addEventListener('click', () => {
+  const pid = $('pid').value.trim().padStart(4,'0') || 'ANON';
+  const arm = $('arm').value, form = $('form').value, wave = $('wave').value;
+  CTX = {pid, arm, form, wave, started:new Date().toISOString()};
+  const rnd = seeded(pid+'|'+form+'|'+wave);
+  ITEMS = shuffled(BANK.filter(i=>i.form===form), rnd);
+  CUR=0; RESP=[];
+  $('setup').hidden=true; $('done').hidden=true; $('test').hidden=false;
+  render();
+});
+
+function render(){
+  if(CUR>=ITEMS.length){ return finish(); }
+  const it=ITEMS[CUR];
+  $('pos').textContent='Задание '+(CUR+1)+' из '+ITEMS.length;
+  $('clock').textContent = ({gloss:'значение термина',implicit_trained:'неписаный термин · обученный материал',
+    implicit_transfer:'неписаный термин · перенос'})[it.type] || it.type;
+  $('fill').style.width=(100*CUR/ITEMS.length)+'%';
+  let h='<div><span class="tag">'+esc(it.type)+'</span><span class="tag">блок B'+it.batch+'</span>';
+  if(it.channel) h+='<span class="tag">'+esc(it.channel)+'</span>';
+  h+='</div><p>'+it.prompt+'</p>';
+  if(it.sutra_ref){
+    h+='<div class="sutra"><div class="ref">Aṣṭādhyāyī '+esc(it.sutra_ref)+'</div>'
+      +'<div class="deva">&#9673; '+esc(it.sutra_deva)+'</div>'
+      +'<div class="pc">padaccheda: [ &#9633; ] '+esc(it.padaccheda)+'</div></div>';
+  } else {
+    h+='<div class="sutra deva">'+esc(it.term_deva)+' &nbsp;<span style="font-size:15px;color:var(--muted)">'+esc(it.term_iast)+'</span></div>';
+  }
+  h+='</div>';
+  $('qbody').innerHTML=h;
+  const box=$('opts'); box.innerHTML='';
+  it.options.forEach((o,k)=>{
+    const b=document.createElement('button'); b.className='opt'; b.textContent=o;
+    b.addEventListener('click',()=>answer(k)); box.appendChild(b);
+  });
+  T0=performance.now();
+}
+
+function answer(k){
+  const it=ITEMS[CUR];
+  RESP.push({participant:CTX.pid,arm:CTX.arm,form:CTX.form,wave:CTX.wave,
+    item_id:it.id,type:it.type,batch:it.batch,term_iast:it.term_iast,
+    sutra_ref:it.sutra_ref,channel:it.channel,answer_index:k,correct_index:it.answer,
+    is_correct:k===it.answer?1:0,rt_ms:Math.round(performance.now()-T0),
+    timestamp:new Date().toISOString()});
+  CUR++; render();
+}
+
+function finish(){
+  $('test').hidden=true; $('done').hidden=false;
+  const groups={}; for(const r of RESP){ (groups[r.type]=groups[r.type]||[]).push(r); }
+  let h='<p><b>Всего верно: '+RESP.filter(r=>r.is_correct).length+' из '+RESP.length+'</b></p><table><tr><th>Тип задания</th><th>Верно</th><th>Из</th><th>Среднее время, мс</th></tr>';
+  for(const k of Object.keys(groups)){
+    const g=groups[k], ok=g.filter(r=>r.is_correct).length,
+      rt=Math.round(g.reduce((s,r)=>s+r.rt_ms,0)/g.length);
+    h+='<tr><td>'+esc(k)+'</td><td>'+ok+'</td><td>'+g.length+'</td><td>'+rt+'</td></tr>';
+  }
+  h+='</table><p class="note">Первичная конечная точка протокола — прирост по подшкале '
+    +'<code>implicit_trained + implicit_transfer</code> относительно pretest; '
+    +'задания типа <code>gloss</code> служат ковариатом базового словарного запаса.</p>';
+  $('result').innerHTML=h;
+}
+
+$('csv').addEventListener('click',()=>{
+  const cols=['participant','arm','form','wave','item_id','type','batch','term_iast',
+    'sutra_ref','channel','answer_index','correct_index','is_correct','rt_ms','timestamp'];
+  const q=v=>'"'+String(v==null?'':v).replace(/"/g,'""')+'"';
+  const lines=[cols.join(',')].concat(RESP.map(r=>cols.map(c=>q(r[c])).join(',')));
+  const blob=new Blob(['\ufeff'+lines.join('\r\n')],{type:'text/csv;charset=utf-8'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='panini_'+CTX.pid+'_'+CTX.form+'_'+CTX.wave+'.csv';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(()=>URL.revokeObjectURL(a.href),2000);
+});
+$('again').addEventListener('click',()=>{ $('done').hidden=true; $('setup').hidden=false; });
+</script>
+</body>
+</html>
