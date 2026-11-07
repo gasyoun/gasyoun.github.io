@@ -11,6 +11,13 @@ n8n census, VPS cheat-sheets) — [CHANGELOG.md](https://github.com/gasyoun/gasy
 is the full catalog.
 
 ## What is published here
+- **[wiki/](https://gasyoun.github.io/wiki/)** — «Sanskrit terms by etymology»:
+  учебный вид [одноимённой категории Wiktionary](https://en.wiktionary.org/wiki/Category:Sanskrit_terms_by_etymology)
+  (42 подкатегории в трёх линзах, шкала числа слов, интерактивный стенд
+  guṇa/vṛddhi). Каждая категория, число и пример слова — ссылка на оригинал;
+  без CDN и сборки. Рядом **[wiki/archive/](https://gasyoun.github.io/wiki/archive/)** —
+  байт-в-байт бэкап исходной страницы, 5 426 заголовков дерева категорий,
+  SHA-256 и инструкция восстановления.
 - **[campus/](https://gasyoun.github.io/campus/)** — «Кампус наглядности»:
   один вход ко всей визуальной наглядности имения — 72 артефакта в 4 крыльях
   (грамматика / учёба / имение и финансы / продукты и привлечение); собирается

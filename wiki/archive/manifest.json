@@ -1,0 +1,94 @@
+{
+  "snapshot_id": "sanskrit-etymology-2026-11-07",
+  "created_at_utc": "2026-11-07T05:14:14Z",
+  "source": {
+    "category_page": "https://en.wiktionary.org/wiki/Category:Sanskrit_terms_by_etymology",
+    "api": "https://en.wiktionary.org/w/api.php",
+    "rights": "Wiktionary text is CC BY-SA; see https://en.wiktionary.org/wiki/Wiktionary:Copyrights"
+  },
+  "purpose": "Restorable backup of the source taxonomy if the Wiktionary category is moved, renamed or lost.",
+  "totals": {
+    "subcategories": 42,
+    "direct_members_captured": 5426
+  },
+  "files": [
+    {
+      "file": "raw/category.html",
+      "bytes": 84378,
+      "sha256": "d5486b29ae715dc5d71ca9a477a713b7742d490fa5f52242cf63b85602d650dc",
+      "source": "https://en.wiktionary.org/wiki/Category:Sanskrit_terms_by_etymology",
+      "fetched_at_utc": "2026-11-07T05:14:14Z"
+    },
+    {
+      "file": "raw/subcategories.json",
+      "bytes": 3351,
+      "sha256": "b8e69b6f6ad71e53e7991b2d7624a6bc80a88a9d269d405d71d9afb7a3ca133a",
+      "source": "https://en.wiktionary.org/w/api.php?action=query&list=categorymembers&cmtitle=Category%3ASanskrit+terms+by+etymology&cmtype=subcat&cmlimit=500&format=json",
+      "fetched_at_utc": "2026-11-07T05:14:14Z"
+    },
+    {
+      "file": "raw/category-wikitext.json",
+      "bytes": 107,
+      "sha256": "cea7d965c24b123912be8ca860f08e21dfa9d49bb3f12b0e04b105851f09d276",
+      "source": "https://en.wiktionary.org/w/api.php?action=parse&page=Category%3ASanskrit+terms+by+etymology&prop=wikitext&format=json",
+      "fetched_at_utc": "2026-11-07T05:14:14Z"
+    },
+    {
+      "file": "raw/category-rendered.json",
+      "bytes": 11936,
+      "sha256": "1dc0aadb8746eda077c50545151e1341c7a1d26dd693d059fbc1230fa5dbe3ef",
+      "source": "https://en.wiktionary.org/w/api.php?action=parse&page=Category%3ASanskrit+terms+by+etymology&prop=text&format=json&formatversion=2",
+      "fetched_at_utc": "2026-11-07T05:14:14Z"
+    },
+    {
+      "file": "raw/subcategory-members.json",
+      "bytes": 303841,
+      "sha256": "c7862fda12775adc7ed4aa70e54bfff927913b2f983e79a721d059e4460d6900",
+      "source": [
+        "https://en.wiktionary.org/w/api.php?list=categorymembers&cmtitle=Sanskrit%20back-formations",
+        "https://en.wiktionary.org/w/api.php?list=categorymembers&cmtitle=Sanskrit%20borrowed%20terms",
+        "https://en.wiktionary.org/w/api.php?list=categorymembers&cmtitle=Sanskrit%20calques",
+        "https://en.wiktionary.org/w/api.php?list=categorymembers&cmtitle=Sanskrit%20compound%20terms",
+        "https://en.wiktionary.org/w/api.php?list=categorymembers&cmtitle=Sanskrit%20deverbals",
+        "https://en.wiktionary.org/w/api.php?list=categorymembers&cmtitle=Sanskrit%20doublets",
+        "https://en.wiktionary.org/w/api.php?list=categorymembers&cmtitle=Sanskrit%20inherited%20terms",
+        "https://en.wiktionary.org/w/api.php?list=categorymembers&cmtitle=Sanskrit%20neologisms",
+        "https://en.wiktionary.org/w/api.php?list=categorymembers&cmtitle=Sanskrit%20nonce%20terms",
+        "https://en.wiktionary.org/w/api.php?list=categorymembers&cmtitle=Sanskrit%20onomatopoeias",
+        "https://en.wiktionary.org/w/api.php?list=categorymembers&cmtitle=Sanskrit%20reconstructed%20terms",
+        "https://en.wiktionary.org/w/api.php?list=categorymembers&cmtitle=Sanskrit%20reduplications",
+        "https://en.wiktionary.org/w/api.php?list=categorymembers&cmtitle=Sanskrit%20roots",
+        "https://en.wiktionary.org/w/api.php?list=categorymembers&cmtitle=Sanskrit%20semantic%20loans",
+        "https://en.wiktionary.org/w/api.php?list=categorymembers&cmtitle=Sanskrit%20sound-symbolic%20terms",
+        "https://en.wiktionary.org/w/api.php?list=categorymembers&cmtitle=Sanskrit%20syncopic%20forms",
+        "https://en.wiktionary.org/w/api.php?list=categorymembers&cmtitle=Sanskrit%20terms%20attributed%20to%20a%20specific%20source",
+        "https://en.wiktionary.org/w/api.php?list=categorymembers&cmtitle=Sanskrit%20terms%20borrowed%20back%20into%20Sanskrit",
+        "https://en.wiktionary.org/w/api.php?list=categorymembers&cmtitle=Sanskrit%20terms%20by%20Arabic%20root",
+        "https://en.wiktionary.org/w/api.php?list=categorymembers&cmtitle=Sanskrit%20terms%20by%20Ashokan%20Prakrit%20root",
+        "https://en.wiktionary.org/w/api.php?list=categorymembers&cmtitle=Sanskrit%20terms%20by%20Proto-Dravidian%20root",
+        "https://en.wiktionary.org/w/api.php?list=categorymembers&cmtitle=Sanskrit%20terms%20by%20Proto-Dravidian%20word",
+        "https://en.wiktionary.org/w/api.php?list=categorymembers&cmtitle=Sanskrit%20terms%20by%20Proto-Indo-Aryan%20root",
+        "https://en.wiktionary.org/w/api.php?list=categorymembers&cmtitle=Sanskrit%20terms%20by%20Proto-Indo-European%20root",
+        "https://en.wiktionary.org/w/api.php?list=categorymembers&cmtitle=Sanskrit%20terms%20by%20Proto-Indo-European%20word",
+        "https://en.wiktionary.org/w/api.php?list=categorymembers&cmtitle=Sanskrit%20terms%20by%20Proto-Indo-Iranian%20root",
+        "https://en.wiktionary.org/w/api.php?list=categorymembers&cmtitle=Sanskrit%20terms%20by%20Proto-South%20Dravidian%20root",
+        "https://en.wiktionary.org/w/api.php?list=categorymembers&cmtitle=Sanskrit%20terms%20by%20Sanskrit%20root",
+        "https://en.wiktionary.org/w/api.php?list=categorymembers&cmtitle=Sanskrit%20terms%20by%20Vedic%20Sanskrit%20root",
+        "https://en.wiktionary.org/w/api.php?list=categorymembers&cmtitle=Sanskrit%20terms%20by%20interfix",
+        "https://en.wiktionary.org/w/api.php?list=categorymembers&cmtitle=Sanskrit%20terms%20by%20prefix",
+        "https://en.wiktionary.org/w/api.php?list=categorymembers&cmtitle=Sanskrit%20terms%20by%20root",
+        "https://en.wiktionary.org/w/api.php?list=categorymembers&cmtitle=Sanskrit%20terms%20by%20suffix",
+        "https://en.wiktionary.org/w/api.php?list=categorymembers&cmtitle=Sanskrit%20terms%20derived%20from%20Middle%20Indo-Aryan%20by%20Sanskritization",
+        "https://en.wiktionary.org/w/api.php?list=categorymembers&cmtitle=Sanskrit%20terms%20derived%20from%20other%20languages",
+        "https://en.wiktionary.org/w/api.php?list=categorymembers&cmtitle=Sanskrit%20terms%20of%20the%20defective%20word%20group",
+        "https://en.wiktionary.org/w/api.php?list=categorymembers&cmtitle=Sanskrit%20terms%20with%20Indo-Aryan%20extensions",
+        "https://en.wiktionary.org/w/api.php?list=categorymembers&cmtitle=Sanskrit%20terms%20with%20unknown%20etymologies",
+        "https://en.wiktionary.org/w/api.php?list=categorymembers&cmtitle=Sanskrit%20univerbations",
+        "https://en.wiktionary.org/w/api.php?list=categorymembers&cmtitle=Sanskrit%20vrddhi%20derivatives",
+        "https://en.wiktionary.org/w/api.php?list=categorymembers&cmtitle=Sanskrit%20words%20derived%20through%20corruption",
+        "https://en.wiktionary.org/w/api.php?list=categorymembers&cmtitle=Sanskrit%20words%20derived%20through%20metathesis"
+      ],
+      "fetched_at_utc": "2026-11-07T05:14:14Z"
+    }
+  ]
+}

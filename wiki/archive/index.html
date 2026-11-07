@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source archive — Sanskrit terms by etymology</title>
+<meta name="description" content="Byte-faithful backup of Wiktionary's Category:Sanskrit terms by etymology: raw HTML, wikitext, API responses, 42 subcategories and 5,426 member titles, with SHA-256 checksums.">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="wrap">
+
+<header class="masthead">
+  <p class="eyebrow">Backup · independent of the live source</p>
+  <h1>Source archive</h1>
+  <p class="lede">A restorable copy of the Wiktionary category tree behind the <a class="srclink" href="../">teaching view</a>. Held in version control so the material survives if the original category is moved, renamed, vandalised or lost.</p>
+  <p class="meta">Snapshot <span id="snapid"></span> · <span id="snapdate"></span> · <span id="snaptotal"></span> subcategories · <span id="snapmembers"></span> member titles captured.</p>
+  <div class="topnav">
+    <a class="pill primary ext" id="srccat" href="#" target="_blank" rel="noopener noreferrer">Original category on Wiktionary</a>
+    <a class="pill ext" href="../">Back to the teaching view</a>
+    <a class="pill ext" href="https://github.com/gasyoun/gasyoun.github.io/tree/master/wiki/archive" target="_blank" rel="noopener noreferrer">Archive on GitHub</a>
+    <a class="pill ext" href="https://github.com/gasyoun/sanskrit-etymology-source-archive" target="_blank" rel="noopener noreferrer">Independent mirror repo</a>
+  </div>
+</header>
+
+<section class="block" style="margin-top:0">
+  <div class="callout"><strong>Why this exists.</strong> The parent category contains no word pages at all — only subcategories. Backing up the parent page alone would preserve 42 labels and none of the vocabulary. This snapshot therefore also captures every direct member one level down, so the taxonomy can be rebuilt from these files without Wiktionary.</div>
+  <span class="sectionnum">01 · what was saved</span>
+  <h2>Raw source files</h2>
+  <p class="intro">Byte-faithful responses as received. <code>category.html</code> is the original page; <code>category-rendered.json</code> preserves the template-generated introduction text that is not present in the wikitext.</p>
+  <div class="bars" style="padding:8px 12px">
+    <table>
+      <thead><tr><th>File</th><th class="num">Bytes</th><th>SHA-256</th><th>Open</th></tr></thead>
+      <tbody id="files"></tbody>
+    </table>
+  </div>
+  <p class="intro" style="margin-top:14px">Also available: <a class="srclink ext" href="manifest.json" target="_blank" rel="noopener noreferrer">manifest.json</a> (machine-readable provenance and checksums) and <a class="srclink ext" href="https://github.com/gasyoun/gasyoun.github.io/blob/master/wiki/archive/SNAPSHOT.md" target="_blank" rel="noopener noreferrer">SNAPSHOT.md</a> (the same record as readable Markdown).</p>
+</section>
+
+<section class="block">
+  <span class="sectionnum">02 · the taxonomy</span>
+  <h2>All 42 subcategories</h2>
+  <p class="intro">Every name links to its original Wiktionary category. <code>c</code> = subcategories, <code>e</code> = word pages, exactly as displayed at snapshot time.</p>
+  <div class="bars" style="padding:8px 12px">
+    <table>
+      <thead><tr><th>Subcategory</th><th class="num">c</th><th class="num">e</th><th>Grouping in the teaching view</th></tr></thead>
+      <tbody id="cats"></tbody>
+    </table>
+  </div>
+</section>
+
+<section class="block">
+  <span class="sectionnum">03 · restoring</span>
+  <h2>How to rebuild</h2>
+  <div class="notes">
+    <ul>
+      <li><code>raw/subcategories.json</code> gives the authoritative list of 42 subcategory titles from the MediaWiki API.</li>
+      <li><code>raw/subcategory-members.json</code> maps each of those titles to its direct subcategories and word pages (5,426 titles total). That is enough to reconstruct the tree one level down.</li>
+      <li><code>raw/category.html</code> and <code>raw/category-rendered.json</code> preserve the page as displayed, including the introductory definitions and the <code>(N c, M e)</code> counts.</li>
+      <li>To refresh against a live Wiktionary, run <code>python3 wiki/scripts/fetch_snapshot.py</code>; it rewrites the raw files, both manifests, <code>SNAPSHOT.md</code> and the data files used by the site, and records a new timestamp and checksums on every run.</li>
+      <li>Verify any file with <code>shasum -a 256 &lt;file&gt;</code> against the digest in <a class="srclink" href="manifest.json" target="_blank" rel="noopener noreferrer">manifest.json</a>.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <p>Source: <a class="srclink ext" id="footsrc" href="#" target="_blank" rel="noopener noreferrer">English Wiktionary, Category:Sanskrit terms by etymology</a>. Category names and counts are reproduced for teaching and citation; text is available under CC BY-SA — see <a class="srclink ext" id="footcpr" href="#" target="_blank" rel="noopener noreferrer">Wiktionary:Copyrights</a>.</p>
+  <p>The same snapshot is mirrored in a <a class="srclink ext" href="https://github.com/gasyoun/sanskrit-etymology-source-archive" target="_blank" rel="noopener noreferrer">separate GitHub repository</a>, so loss of this Pages repo does not lose the backup.</p>
+</footer>
+
+</div>
+<script src="../data/etymology.js"></script>
+<script src="../data/manifest.js"></script>
+<script>
+(function () {
+  "use strict";
+  var D = window.ETYMOLOGY, M = window.ETYMOLOGY_MANIFEST, T = ' target="_blank" rel="noopener noreferrer"';
+  var esc = function (s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (ch) {
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[ch];
+    });
+  };
+  var GH = 'https://github.com/gasyoun/gasyoun.github.io/blob/master/wiki/archive/';
+  document.getElementById('snapid').textContent = D.snapshotId;
+  document.getElementById('snapdate').textContent = D.fetchedAtUtc;
+  document.getElementById('snaptotal').textContent = D.categories.length;
+  document.getElementById('srccat').href = D.categoryUrl;
+  document.getElementById('footsrc').href = D.categoryUrl;
+  document.getElementById('footcpr').href = D.sourceLinks.copyrights;
+  document.getElementById('snapmembers').textContent = M ? M.totals.direct_members_captured.toLocaleString() : '—';
+
+  document.getElementById('files').innerHTML = (M ? M.files : []).map(function (f) {
+    var name = f.file.split('/').pop();
+    return '<tr><td><a class="srclink" href="' + esc(f.file) + '"' + T + '><code>' + esc(name) + '</code></a></td>' +
+      '<td class="num">' + f.bytes.toLocaleString() + '</td>' +
+      '<td><code>' + esc(f.sha256.slice(0, 24)) + '…</code></td>' +
+      '<td><a class="srclink ext" href="' + esc(GH + f.file) + '"' + T + '>View on GitHub</a></td></tr>';
+  }).join('');
+
+  var labels = { origin: 'Where from? · provenance', formation: 'How built? · formation', evidence: 'How sure? · evidence' };
+  document.getElementById('cats').innerHTML = D.categories.map(function (c) {
+    return '<tr><td><a class="srclink ext" href="' + esc(c.url) + '"' + T + ' title="' + esc(c.desc) + '">' +
+      esc(c.name) + '</a></td><td class="num">' + (c.c || '—') + '</td><td class="num">' + (c.e || '—') +
+      '</td><td style="color:var(--muted)">' + labels[c.lens] + '</td></tr>';
+  }).join('');
+})();
+</script>
+</body>
+</html>

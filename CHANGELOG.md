@@ -2,6 +2,13 @@
 
 Формат: дата · хендофф · что изменилось. Новые записи сверху.
 
+## 07-11-2026 — /wiki/: визуализация Sanskrit terms by etymology + архив источника
+
+- **Добавлено:** [wiki/index.html](https://gasyoun.github.io/wiki/) — учебная страница по [Category:Sanskrit terms by etymology](https://en.wiktionary.org/wiki/Category:Sanskrit_terms_by_etymology). 42 подкатегории перегруппированы в три линзы (происхождение / словообразование / достоверность), шкала по числу слов (e) отделена от ширины таксономии (c), добавлен интерактивный стенд guṇa/vṛddhi с worked examples в IAST и деванагари. Все 42 категории, 20 баров, 25 чипов и каждый пример слова кликабельны и ведут на точные страницы Wiktionary: 96 сгенерированных ссылок, все 42 URL проверены через MediaWiki API. Статика без CDN и без сборки, работает офлайн папкой.
+- **Добавлено:** [wiki/archive/](https://gasyoun.github.io/wiki/archive/) — байт-в-байт бэкап источника на случай переименования или потери страницы: исходный HTML, wikitext (`{{auto cat}}`), отрендеренный intro, API-список 42 подкатегорий и 5 426 прямых членов дерева уровнем ниже (у родительской категории нет ни одной словарной страницы, поэтому копия только родителя бесполезна). Провенанс и SHA-256 — [manifest.json](https://gasyoun.github.io/wiki/archive/manifest.json), читаемая копия — SNAPSHOT.md, генератор — wiki/scripts/fetch_snapshot.py. Независимое зеркало — репозиторий `sanskrit-etymology-source-archive`.
+- **Изменено:** [.token-gate-ignore](https://github.com/gasyoun/gasyoun.github.io/blob/master/.token-gate-ignore) — добавлен glob `wiki/archive/raw/**`: скачанные сторонние данные (303 КБ JSON, 84 КБ HTML) не проходят лимит 20 КБ на staged-файл. [README.md](https://github.com/gasyoun/gasyoun.github.io/blob/master/README.md) — новый пункт в каталоге публикаций.
+- Контекст: запрос MG 07-11-2026 «выложить всё на github.io/wiki, сделать кликабельным с ссылками на оригинал и забакапить на GitHub на случай потери исходной страницы».
+
 ## 11-10-2026 — H6477–H6479 волна OG-превью (GLM) — root: og: meta + GitHub-lookalike карточка
 
 - **Добавлено:** [og-card.png](https://github.com/gasyoun/gasyoun.github.io/blob/master/og-card.png) — карточка 1200×630 (avatar, ऋग्वेदः hero RV 1.1.1, ряд 1028 sūktas · 10 maṇḍalas · 4 languages) + генератор [scripts/make_og_card.py](https://github.com/gasyoun/gasyoun.github.io/blob/master/scripts/make_og_card.py) (headless Chrome, `OG_AVATAR`/`CHROME_BIN` override).

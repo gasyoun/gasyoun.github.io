@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sanskrit terms by etymology — a teaching view</title>
+<meta name="description" content="An interactive teaching view of Wiktionary's Category:Sanskrit terms by etymology: 42 subcategories regrouped into provenance, formation and evidence, with a guṇa/vṛddhi derivation lab. Every item links to its original source.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+
+<header class="masthead">
+  <p class="eyebrow">Sanskrit education · a visual reading of a source taxonomy</p>
+  <h1>Sanskrit terms by etymology</h1>
+  <p class="lede">English Wiktionary files 42 subcategories here in one flat, alphabetical list. This page regroups the same data along the three questions a student actually asks, shows where the vocabulary really comes from, and turns the vṛddhi rule into something you can click.</p>
+  <p class="meta">Source snapshot <span id="snapid"></span> · taken <span id="snapdate"></span> · <span id="snaptotal"></span> subcategories, <span id="snapmembers"></span> member titles archived.</p>
+  <div class="topnav">
+    <a class="pill primary ext" id="srccat" href="#" target="_blank" rel="noopener noreferrer">Original category on Wiktionary</a>
+    <a class="pill ext" href="archive/">Source archive &amp; backup</a>
+    <a class="pill ext" href="https://github.com/gasyoun/gasyoun.github.io/tree/master/wiki" target="_blank" rel="noopener noreferrer">Page source on GitHub</a>
+    <a class="pill ext" id="cpr" href="#" target="_blank" rel="noopener noreferrer">Wiktionary copyrights</a>
+  </div>
+</header>
+
+<section class="block" id="lenses">
+  <span class="sectionnum">01 · regrouping</span>
+  <h2>Three questions hidden in one flat list</h2>
+  <p class="intro">Alphabetical order puts <em>Proto-Indo-European roots</em> next to <em>nonce terms</em>. Those are answers to different questions. Lens 1 is the historical timeline, lens 2 is the Pāṇinian word factory, lens 3 keeps attested, reconstructed and unknown material separate. Every row below opens its exact original Wiktionary category.</p>
+  <div class="toolbar">
+    <input type="search" id="q" placeholder="Filter the 42 categories…" aria-label="Filter categories">
+    <span class="hint" id="qcount"></span>
+  </div>
+  <div class="lenses" id="lensgrid"></div>
+  <p class="lensfoot"><code>c</code> = subcategories (breadth of the taxonomy), <code>e</code> = entries (actual word pages). Wiktionary mixes both units in one list; they are never added together here.</p>
+</section>
+
+<section class="block" id="counts">
+  <span class="sectionnum">02 · the shape of the data</span>
+  <h2>Where the words actually are</h2>
+  <p class="intro">Entry counts on one honest, linear scale. Each bar is a link to the category it measures.</p>
+  <div class="bars">
+    <div class="legend">
+      <span><i class="swatch" style="background:#378add"></i> Formation types</span>
+      <span><i class="swatch" style="background:#ef9f27"></i> Limits of what we know</span>
+      <span style="margin-left:auto">Number of word pages (e)</span>
+    </div>
+    <div id="bars"></div>
+  </div>
+  <p class="intro" style="margin-top:18px">Different unit — subcategory counts (c) measure how wide the taxonomy is, not how many words it holds:</p>
+  <div class="chips" id="chips"></div>
+</section>
+
+<section class="block" id="lab">
+  <span class="sectionnum">03 · the derivational engine</span>
+  <h2>Guṇa and vṛddhi, by clicking</h2>
+  <p class="intro">A list cannot teach the mechanism. Pick a root vowel to see the zero, guṇa and vṛddhi grades, the sandhi that applies before a following vowel, and a worked example whose every word opens its Wiktionary entry.</p>
+  <div class="lab">
+    <div class="vowels"><span class="lbl">Root vowel</span><span id="vbtns" style="display:flex;flex-wrap:wrap;gap:8px"></span></div>
+    <div class="grades" id="grades"></div>
+    <div class="sandhi" id="sandhi"></div>
+    <div class="example" id="example"></div>
+    <div class="lablinks" id="lablinks"></div>
+  </div>
+</section>
+
+<section class="block" id="notes">
+  <span class="sectionnum">04 · teaching notes</span>
+  <h2>What to say in the classroom</h2>
+  <div class="notes">
+    <ul>
+      <li><strong>Sanskrit vocabulary is overwhelmingly built, not borrowed.</strong> <a class="srclink" id="n1" href="#" target="_blank" rel="noopener noreferrer">1,576 compound entries</a> and <a class="srclink" id="n2" href="#" target="_blank" rel="noopener noreferrer">816 roots</a> dwarf the <a class="srclink" id="n3" href="#" target="_blank" rel="noopener noreferrer">55 Sanskritized Middle-Indo-Aryan</a> and 24 borrowed-back forms. Students often assume a received, monolithic lexicon; the data describes a generative engine.</li>
+      <li><strong>Uncertainty is part of the subject.</strong> <a class="srclink" id="n4" href="#" target="_blank" rel="noopener noreferrer">447 entries have unknown etymology</a> — more than all vṛddhi derivatives — and sit beside 22 explicitly reconstructed (*) forms and 9 sound-symbolic ones.</li>
+      <li><strong>Borrowing is wide but shallow.</strong> There are 50 donor-language buckets under "borrowed terms", yet most are tiny; the largest origin families are <a class="srclink" id="n5" href="#" target="_blank" rel="noopener noreferrer">556 Proto-Indo-European root subcategories</a> and 106 PIE word subcategories.</li>
+      <li><strong>Do not read these as percentages of Sanskrit.</strong> They are Wiktionary's curated category counts at snapshot time, not a corpus survey. They show editorial shape, which is exactly what makes them useful for teaching how taxonomies get built.</li>
+      <li><strong>Avoid word clouds, force-directed graphs and sunbursts here.</strong> The 42 names are overlapping tags, not a hierarchy: one word can be a compound, a vṛddhi derivative and PIE-rooted at once. Any visual that forces a single tree misrepresents the data.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <p>Source: <a class="srclink ext" id="footsrc" href="#" target="_blank" rel="noopener noreferrer">English Wiktionary, Category:Sanskrit terms by etymology</a> and its subcategories. Category names and counts are reproduced for teaching and citation; text is available under CC BY-SA — see <a class="srclink ext" id="footcpr" href="#" target="_blank" rel="noopener noreferrer">Wiktionary:Copyrights</a>.</p>
+  <p>A byte-faithful <a class="srclink ext" href="archive/">source snapshot</a> and its SHA-256 manifest are kept in this repository so the material survives if the original page moves or disappears. Refresh with <code>python3 wiki/scripts/fetch_snapshot.py</code>.</p>
+</footer>
+
+</div>
+<script src="data/etymology.js"></script>
+<script>
+(function () {
+  "use strict";
+  var D = window.ETYMOLOGY;
+  var T = ' target="_blank" rel="noopener noreferrer"';
+  var esc = function (s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (ch) {
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[ch];
+    });
+  };
+  var byName = {};
+  D.categories.forEach(function (c) { byName[c.name] = c; });
+
+  document.title = 'Sanskrit terms by etymology — a teaching view';
+  document.getElementById('snapid').textContent = D.snapshotId;
+  document.getElementById('snapdate').textContent = D.fetchedAtUtc;
+  document.getElementById('snaptotal').textContent = D.categories.length;
+  document.getElementById('srccat').href = D.categoryUrl;
+  document.getElementById('cpr').href = D.sourceLinks.copyrights;
+  document.getElementById('footsrc').href = D.categoryUrl;
+  document.getElementById('footcpr').href = D.sourceLinks.copyrights;
+  var ms = document.createElement('script');
+  ms.src = 'data/manifest.js';
+  ms.onload = function () {
+    var m = window.ETYMOLOGY_MANIFEST;
+    if (m) document.getElementById('snapmembers').textContent = m.totals.direct_members_captured.toLocaleString();
+  };
+  document.head.appendChild(ms);
+
+  function badge(c) {
+    var bits = [];
+    if (c.c) bits.push(c.c.toLocaleString() + ' c');
+    if (c.e) bits.push(c.e.toLocaleString() + ' e');
+    return bits.length ? bits.join(', ') : '0';
+  }
+  function catRow(c) {
+    return '<a class="catrow" data-search="' + esc((c.name + ' ' + c.desc).toLowerCase()) + '" href="' + esc(c.url) + '"' + T +
+      ' title="' + esc(c.desc) + '"><span class="nm">' + esc(c.name) + '</span><span class="ct">' + badge(c) + '</span></a>';
+  }
+
+  var LENSES = [
+    { key: 'origin', title: '1 · Where from?', sub: 'Provenance &amp; borrowing' },
+    { key: 'formation', title: '2 · How built?', sub: 'Formation &amp; derivation' },
+    { key: 'evidence', title: '3 · How sure?', sub: 'Evidence &amp; confidence' }
+  ];
+  document.getElementById('lensgrid').innerHTML = LENSES.map(function (L) {
+    var items = D.categories.filter(function (c) { return c.lens === L.key; });
+    return '<div class="lens ' + L.key + '"><div class="lenshead"><h3>' + L.title + '</h3>' +
+      '<span class="n">' + items.length + ' categories</span></div><p class="lenssub">' + L.sub + '</p>' +
+      items.map(catRow).join('') + '</div>';
+  }).join('');
+
+  var withE = D.categories.filter(function (c) { return c.e > 0; }).sort(function (a, b) { return b.e - a.e; });
+  var max = withE[0].e;
+  var amber = { 'Sanskrit terms with unknown etymologies': 1, 'Sanskrit reconstructed terms': 1 };
+  document.getElementById('bars').innerHTML = withE.map(function (c) {
+    var w = Math.max(1.5, (c.e / max) * 100);
+    return '<a class="bar' + (amber[c.name] ? ' amber' : '') + '" data-search="' +
+      esc((c.name + ' ' + c.desc).toLowerCase()) + '" href="' + esc(c.url) + '"' + T +
+      ' title="' + esc(c.desc) + '"><span class="bl">' + esc(c.name) + '</span>' +
+      '<span class="track"><span class="fill" style="width:' + w.toFixed(2) + '%"></span></span>' +
+      '<span class="v">' + c.e.toLocaleString() + '</span></a>';
+  }).join('');
+
+  var withC = D.categories.filter(function (c) { return c.c > 0; }).sort(function (a, b) { return b.c - a.c; });
+  document.getElementById('chips').innerHTML = withC.map(function (c) {
+    return '<a class="chip" data-search="' + esc((c.name + ' ' + c.desc).toLowerCase()) + '" href="' +
+      esc(c.url) + '"' + T + ' title="' + esc(c.desc) + '"><span>' + esc(c.name) + '</span><b>' +
+      c.c.toLocaleString() + ' c</b></a>';
+  }).join('');
+
+  var q = document.getElementById('q');
+  var count = document.getElementById('qcount');
+  function filter() {
+    var needle = q.value.trim().toLowerCase();
+    var shown = 0, rows = document.querySelectorAll('.catrow');
+    rows.forEach(function (el) {
+      var hit = !needle || el.getAttribute('data-search').indexOf(needle) > -1;
+      el.hidden = !hit;
+      if (hit) shown++;
+    });
+    document.querySelectorAll('.bar, .chip').forEach(function (el) {
+      el.hidden = !!needle && el.getAttribute('data-search').indexOf(needle) === -1;
+    });
+    count.textContent = needle ? shown + ' of 42 categories shown' : '';
+  }
+  q.addEventListener('input', filter);
+
+  var vb = document.getElementById('vbtns');
+  vb.innerHTML = D.grades.map(function (g, i) {
+    return '<button type="button" class="vbtn" data-i="' + i + '">' + esc(g.vowels) + '</button>';
+  }).join('');
+
+  function stage(tag, iast, deva, url) {
+    var inner = '<div class="st">' + tag + '</div>' +
+      (url ? '<a href="' + esc(url) + '"' + T + ' title="Open ' + esc(iast) + ' on Wiktionary">' : '<div>') +
+      '<div class="si">' + esc(iast) + '</div><div class="sd">' + esc(deva || '—') + '</div>' +
+      (url ? '</a>' : '</div>');
+    return '<div class="stage">' + inner + '</div>';
+  }
+  function gradeCard(label, value, caption, url) {
+    var c = url ? '<a class="srclink ext" href="' + esc(url) + '"' + T + '>' + esc(caption) + '</a>' : esc(caption);
+    return '<div class="grade"><div class="gl">' + label + '</div><div class="gv">' + esc(value) +
+      '</div><div class="gc">' + c + '</div></div>';
+  }
+
+  function setGrade(i) {
+    var g = D.grades[i];
+    vb.querySelectorAll('.vbtn').forEach(function (b) {
+      b.classList.toggle('on', Number(b.getAttribute('data-i')) === i);
+    });
+    document.getElementById('grades').innerHTML =
+      gradeCard('Zero grade · the root', g.zero, 'as the dhātu is listed', '') +
+      gradeCard('Guṇa · first strengthening', g.guna, 'e.g. ' + g.gunaIast, g.gunaUrl) +
+      gradeCard('Vṛddhi · full strengthening', g.vrddhi, 'e.g. ' + g.vrddhiIast, g.vrddhiUrl);
+    document.getElementById('sandhi').textContent = g.sandhi;
+    document.getElementById('example').innerHTML =
+      '<div class="eh">Worked example · one root, three grades</div><div class="stages">' +
+      stage('Root', g.rootIast, g.root, g.rootUrl) + '<div class="arrow">→</div>' +
+      stage('Guṇa', g.gunaIast, g.gunaWord, g.gunaUrl) + '<div class="arrow">→</div>' +
+      stage('Vṛddhi', g.vrddhiIast, g.vrddhiWord, g.vrddhiUrl) + '</div>' +
+      '<div class="gloss">' + esc(g.gloss) + '</div>';
+  }
+  vb.addEventListener('click', function (e) {
+    var b = e.target.closest('.vbtn');
+    if (b) setGrade(Number(b.getAttribute('data-i')));
+  });
+  setGrade(2);
+
+  var S = D.sourceLinks;
+  document.getElementById('lablinks').innerHTML =
+    '<a class="pill ext" href="' + esc(S.vrddhi) + '"' + T + '>Vṛddhi derivatives on Wiktionary</a>' +
+    '<a class="pill ext" href="' + esc(S.roots) + '"' + T + '>Sanskrit roots</a>' +
+    '<a class="pill ext" href="' + esc(S.pieRoots) + '"' + T + '>PIE root families</a>' +
+    '<a class="pill ext" href="' + esc(S.unknown) + '"' + T + '>Unknown etymologies</a>';
+
+  [['n1', 'Sanskrit compound terms', '1,576 compound entries'],
+   ['n2', 'Sanskrit roots', '816 roots'],
+   ['n3', 'Sanskrit terms derived from Middle Indo-Aryan by Sanskritization', '55 Sanskritized Middle-Indo-Aryan'],
+   ['n4', 'Sanskrit terms with unknown etymologies', '447 entries have unknown etymology'],
+   ['n5', 'Sanskrit terms by Proto-Indo-European root', '556 Proto-Indo-European root subcategories']
+  ].forEach(function (x) {
+    var c = byName[x[1]];
+    var el = document.getElementById(x[0]);
+    if (c) { el.href = c.url; el.textContent = x[2]; }
+  });
+})();
+</script>
+</body>
+</html>
