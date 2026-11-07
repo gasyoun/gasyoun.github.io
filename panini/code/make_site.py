@@ -39,6 +39,11 @@ def num(n):
     return format(int(n), ",").replace(",", " ")
 
 
+def rho(x):
+    """Spearman value with a Russian decimal comma, always 3 places."""
+    return ("%.3f" % float(x)).replace(".", ",")
+
+
 def load():
     terms = list(csv.DictReader(open(os.path.join(HERE, "core_terms.tsv"), encoding="utf-8"), delimiter="\t"))
     for t in terms:
@@ -219,8 +224,8 @@ README = """# panini — что учить первым в санскритск�
 DSG (Abhyankar, 1961) содержит 4 383 статьи и не годится как учебная программа.
 Три структурных канала в 3 983 сутрах (`pc` / `an` / `ad`) дают 37 199 требуемых
 чтений, из которых ≈65 % — неявные (`anuvṛtti`, `adhikāra`). 119 ядерных терминов
-разбиты на семь блоков. Частота в грамматиках подтверждает порядок (ρ = 0,557),
-частота в DCS — почти нет (ρ = 0,139), поэтому DCS используется как отрицательный
+разбиты на семь блоков. Частота в грамматиках подтверждает порядок (ρ = __RHO_GRAMMAR__),
+частота в DCS — почти нет (ρ = __RHO_DCS__), поэтому DCS используется как отрицательный
 контроль, а не как четвёртый равноправный канал.
 
 ## Качество ключей (исправлено)
@@ -263,7 +268,12 @@ def main():
 
     # ---- Russian landing
     tpl = open(os.path.join(TPL, "index.ru.html"), encoding="utf-8").read()
+    corr = ext["correlations"]["content_only_107_terms_excluding_B0_operators"]
     replacements = {
+        # Shared measured facts. Every numeric claim in the prose is filled from
+        # external_channels.json so the DCS key fix cannot leave stale numbers.
+        "__RHO_DCS__": rho(corr["structural ~ dcs_count"]["spearman"]),
+        "__RHO_GRAMMAR__": rho(corr["structural ~ grammar_df"]["spearman"]),
         "__BATCH_CARDS__": batch_cards(terms),
         "__TERM_TABLE__": term_table(terms),
         "__BANK_TOTAL__": num(stats["total_items_in_bank"]),
@@ -290,10 +300,15 @@ def main():
     # ---- Russian protocol
     proto = open(os.path.join(TPL, "experiment.ru.html"), encoding="utf-8").read()
     proto = proto.replace("__BANK_STATS__", bank_stats_html(stats))
+    for k, v in replacements.items():
+        proto = proto.replace(k, v)
     open(os.path.join(SITE, "experiment.html"), "w", encoding="utf-8").write(proto)
 
     # ---- README + directory indexes
-    open(os.path.join(SITE, "README.md"), "w", encoding="utf-8").write(README)
+    readme = README
+    for k, v in replacements.items():
+        readme = readme.replace(k, v)
+    open(os.path.join(SITE, "README.md"), "w", encoding="utf-8").write(readme)
     dir_index(DATA, "Данные исследования", "../index.html",
               '<p class="note">TSV в UTF-8, разделитель — табуляция; JSON с отступами. '
               'Хэши исходных снимков — в <code>report.json</code>.</p>')
