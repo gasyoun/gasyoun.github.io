@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Поиск по этимологии — санскритские слова</title>
+<meta name="description" content="Поиск по 3 164 реальным санскритским леммам и 2 005 категориям-источникам из снимка Wiktionary «Sanskrit terms by etymology». Каждое слово и каждая метка ссылается на первоисточник.">
+<link rel="alternate" hreflang="en" href="https://gasyoun.github.io/wiki/explorer.html">
+<link rel="alternate" hreflang="ru" href="https://gasyoun.github.io/wiki/ru/explorer.html">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="wrap">
+
+<nav class="sitenav" aria-label="Разделы">
+  <a class="brand" href="index.html">Этимология санскрита</a>
+  <div class="sitelinks">
+    <a href="index.html">Обзор</a>
+    <a class="on" href="explorer.html">Поиск слов</a>
+    <a href="cognates.html">Карта когнатов</a>
+    <a href="timeline.html">Слои</a>
+    <a href="archive/">Архив</a>
+  </div>
+  <a class="src ext" id="navsrc" href="#" target="_blank" rel="noopener noreferrer">Оригинал в Wiktionary</a>
+  <span class="langsw" aria-label="Язык издания"><a href="../explorer.html" lang="en" hreflang="en" title="English edition">EN</a><span class="on" lang="ru">RU</span></span>
+</nav>
+
+<header class="masthead">
+  <p class="eyebrow">Учебный инструмент 01 · сама лексика</p>
+  <h1>Поиск по этимологии</h1>
+  <p class="lede">Страница категории показывает ярлыки, а не слова. Этот инструмент открывает архив на один уровень глубже: каждую санскритскую лемму, напрямую входящую в одну из 42 подкатегорий, и каждую категорию-источник второго уровня — семьи ПИЕ-корней, языки-доноры, суффиксы и приставки. Найдите слово, проследите его этимологические метки или посмотрите, откуда слова берутся.</p>
+  <p class="meta">Снимок <span id="snapid"></span> · <span id="snapdate"></span> · <span id="snapwords"></span> уникальных лемм, <span id="snapnested"></span> категорий-источников; все связаны с оригиналом.</p>
+  <div class="topnav">
+    <a class="pill primary ext" id="srccat" href="#" target="_blank" rel="noopener noreferrer">Оригинальная категория в Wiktionary</a>
+    <a class="pill ext" href="../archive/">Исходный снимок</a>
+    <a class="pill ext" href="https://github.com/gasyoun/gasyoun.github.io/blob/master/wiki/data/lemmata.js" target="_blank" rel="noopener noreferrer">lemmata.js на GitHub</a>
+    <a class="pill ext" href="timeline.html">Перейти к слоям</a>
+  </div>
+</header>
+
+<section class="block" style="margin-top:0">
+  <div class="callout"><strong>Сначала прочтите о границах, потом о числах.</strong> Резервная копия обходит <em>один уровень</em> ниже 42 подкатегорий. Здесь их непосредственные участники: достоверная, цитируемая выборка того, как Wiktionary раскладывает санскритские слова, а не полный словарь санскрита. Слов, лежащих только внутри более глубоких категорий (например, внутри одной семьи ПИЕ-корня), в этом списке нет. Каждый элемент ниже — реальный заголовок из <a class="srclink ext" href="../archive/manifest.json" target="_blank" rel="noopener noreferrer">сохранённых ответов API</a>. Названия категорий-источников оставлены на языке оригинала: это заголовки Wiktionary, по которым они и открываются.</div>
+  <div class="statrow" id="stats"></div>
+  <div class="toolbar">
+    <span class="tabs" id="modetabs">
+      <button type="button" class="tab on" data-mode="words">Слова</button>
+      <button type="button" class="tab" data-mode="sources">Категории-источники</button>
+    </span>
+    <input type="search" id="q" placeholder="Слово в деванагари или источник…" aria-label="Поиск лемм">
+    <select id="lens" aria-label="Фильтр по призме"></select>
+    <select id="cat" aria-label="Фильтр по категории"></select>
+    <select id="sort" aria-label="Сортировка"></select>
+    <span class="hint" id="qcount"></span>
+  </div>
+  <div id="results"></div>
+  <div class="pager" id="pager"></div>
+</section>
+
+<section class="block" id="overlaps">
+  <span class="sectionnum">02 · пересекающиеся метки</span>
+  <h2>Одно слово — несколько этимологий</h2>
+  <p class="intro">Эти леммы отнесены сразу к нескольким из 42 категорий. Это самое наглядное доказательство того, что исходный список — набор пересекающихся меток, а не дерево. Каждая метка — ссылка на точную категорию Wiktionary.</p>
+  <div class="wordlist" id="cross"></div>
+</section>
+
+<section class="block" id="other">
+  <span class="sectionnum">03 · ничего не отброшено</span>
+  <h2>Заголовки, не являющиеся леммами</h2>
+  <p class="intro">Wiktionary помещает сюда также несколько страниц из пространства имён шаблонов. Это не санскритские слова, поэтому в список лемм они не попали — но архив их сохраняет, и ссылки на оригинал остаются.</p>
+  <div class="wordlist" id="otherlist"></div>
+</section>
+
+<section class="block" id="notes">
+  <span class="sectionnum">04 · методические заметки</span>
+  <h2>Как использовать на занятии</h2>
+  <div class="notes">
+    <ul>
+      <li><strong>Начинайте с категорий-источников, а не со слов.</strong> В разделе <a class="srclink" id="n1" href="#" target="_blank" rel="noopener noreferrer">слов по корню</a> архив хранит 959 именованных семей дхату; в разделе <a class="srclink" id="n2" href="#" target="_blank" rel="noopener noreferrer">слов по праиндоевропейскому корню</a> — ещё 556. Студент, который пролистает их, увидит, что лексика санскрита порождается из корней, а не собрана в виде списка.</li>
+      <li><strong>Противопоставьте наследование заимствованию.</strong> Языков-доноров всего <a class="srclink" id="n3" href="#" target="_blank" rel="noopener noreferrer">50 категорий</a>, а <a class="srclink" id="n4" href="#" target="_blank" rel="noopener noreferrer">сложных слов — 1 576 статей</a>. Попросите найти по одному заимствованному и одному образованному слову и сравнить, как Wiktionary их описывает.</li>
+      <li><strong>Используйте слова с несколькими метками как упражнение.</strong> Дайте лемму, отнесённую к трём категориям, и спросите, на какой вопрос — откуда, как построено, насколько надёжно — отвечает каждая метка. Метки дополняют, а не исключают друг друга.</li>
+      <li><strong>Отмечайте реконструкции.</strong> В архиве <span id="reccount">22</span> заголовка с префиксом <code>Reconstruction:</code> — это не засвидетельствованные формы, а научные реконструкции. Wiktionary держит их в тех же категориях, и именно поэтому нужна призма «достоверность».</li>
+      <li><strong>Никогда не складывайте <code>c</code> и <code>e</code>.</strong> <code>c</code> считает подкатегории, <code>e</code> — словарные статьи. Это разные величины, и инструмент держит их отдельно.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <p>Источник: <a class="srclink ext" id="footsrc" href="#" target="_blank" rel="noopener noreferrer">английский Wiktionary, Category:Sanskrit terms by etymology</a> и его 42 подкатегории. Заголовки слов и названия категорий воспроизведены для обучения и цитирования; текст доступен по лицензии CC BY-SA — см. <a class="srclink ext" id="footcpr" href="#" target="_blank" rel="noopener noreferrer">Wiktionary:Copyrights</a>.</p>
+  <p>Сгенерировано из <a class="srclink ext" href="../archive/raw/subcategory-members.json" target="_blank" rel="noopener noreferrer">сохранённых ответов об участниках категорий</a>; пересборка без сети: <code>python3 wiki/scripts/fetch_snapshot.py --offline</code>.</p>
+</footer>
+
+</div>
+<script src="../data/lemmata.js"></script>
+<script src="../data/etymology.js"></script>
+<script src="../data/i18n-ru.js"></script>
+<script>
+(function () {
+  "use strict";
+  var L = window.ETYMOLOGY_LEMMATA, D = window.ETYMOLOGY, R = window.WIKI_RU;
+  var T = ' target="_blank" rel="noopener noreferrer"';
+  var esc = function (s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (ch) {
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[ch];
+    });
+  };
+  function cn(name) { return R.cat[name] || name; }
+  function cd(name) { return R.desc[name] || R.descFallback; }
+  function hay(name) { return (name + ' ' + cn(name)).toLowerCase(); }
+  function path(title) {
+    return encodeURIComponent(title.replace(/ /g, '_')).replace(/%3A/gi, ':');
+  }
+  function wordUrl(t) {
+    return L.base + '/wiki/' + path(t) + (t.indexOf('Reconstruction:') === 0 ? '' : '#Sanskrit');
+  }
+  function bucketUrl(short) { return L.base + '/wiki/' + path('Category:' + short); }
+  var lensLetter = { origin: 'o', formation: 'f', evidence: 'e' };
+  var lensLabel = { origin: R.lens.origin, formation: R.lens.formation, evidence: R.lens.evidence };
+
+  document.getElementById('snapid').textContent = L.snapshotId;
+  document.getElementById('snapdate').textContent = L.fetchedAtUtc;
+  document.getElementById('snapwords').textContent = L.totals.uniqueWords.toLocaleString();
+  document.getElementById('snapnested').textContent = L.totals.nested.toLocaleString();
+  ['navsrc', 'srccat', 'footsrc'].forEach(function (id) {
+    document.getElementById(id).href = D.categoryUrl;
+  });
+  document.getElementById('footcpr').href = D.sourceLinks.copyrights;
+
+  var byName = {};
+  L.categories.forEach(function (c) { byName[c.name] = c; });
+  [['n1', 'Sanskrit terms by root'], ['n2', 'Sanskrit terms by Proto-Indo-European root'],
+   ['n3', 'Sanskrit borrowed terms'], ['n4', 'Sanskrit compound terms']].forEach(function (x) {
+    var el = document.getElementById(x[0]);
+    if (byName[x[1]]) el.href = byName[x[1]].url;
+  });
+
+  document.getElementById('stats').innerHTML = [
+    ['uniqueWords', 'уникальных санскритских лемм', D.categoryUrl, 'открыть категорию-источник'],
+    ['memberships', 'членств в категориях в архиве', '../archive/raw/subcategory-members.json', 'открыть исходный список'],
+    ['crossListed', 'слов в 2 и более категориях', D.categoryUrl, 'почему это не дерево'],
+    ['nested', 'категорий-источников второго уровня', '../archive/SNAPSHOT.md', 'как они были получены']
+  ].map(function (s) {
+    return '<div class="stat"><div class="k">' + L.totals[s[0]].toLocaleString() + '</div>' +
+      '<div class="v">' + s[1] + ' · <a class="ext" href="' + esc(s[2]) + '"' + T +
+      ' title="' + esc(s[3]) + '">' + esc(s[3]) + '</a></div></div>';
+  }).join('');
+
+  // Selects ------------------------------------------------------------------
+  var lensSel = document.getElementById('lens');
+  lensSel.innerHTML = '<option value="">Все три призмы</option>' +
+    ['origin', 'formation', 'evidence'].map(function (k) {
+      return '<option value="' + k + '">только ' + lensLabel[k] + '</option>';
+    }).join('');
+  var catSel = document.getElementById('cat');
+  catSel.innerHTML = '<option value="">Все 42 категории</option>' + L.categories.map(function (c, i) {
+    return '<option value="' + i + '" title="' + esc(c.name) + '">' + esc(cn(c.name)) + '</option>';
+  }).join('');
+  var sortSel = document.getElementById('sort');
+
+  var mode = 'words', page = 1, PAGE_SIZE = 60;
+  var expanded = {};
+
+  function setSortOptions() {
+    sortSel.innerHTML = mode === 'words'
+      ? '<option value="az">А → Я</option><option value="za">Я → А</option>' +
+        '<option value="most">Сначала с бо́льшим числом меток</option><option value="few">Сначала с меньшим числом меток</option>'
+      : '<option value="az">А → Я</option><option value="za">Я → А</option>' +
+        '<option value="big">Сначала самые крупные категории</option>';
+  }
+  setSortOptions();
+
+  // Word rows ----------------------------------------------------------------
+  function tagHtml(idx) {
+    var c = L.categories[idx];
+    return '<a class="wtag ' + lensLetter[c.lens] + '" href="' + esc(c.url) + '"' + T +
+      ' title="' + esc(c.name + ' — ' + cd(c.name)) + '">' + esc(cn(c.name)) + '</a>';
+  }
+  function wordRow(w) {
+    var title = w[0], ids = w[1];
+    var isRec = w[2] === 1 || title.indexOf('Reconstruction:') === 0;
+    var isLatin = !/[\u0900-\u097F]/.test(title);
+    var label = isRec ? title.replace(/^Reconstruction:[^/]*\//, '') : title;
+    return '<div class="wordrow"><a class="wd' + (isLatin ? ' latin' : '') + '" href="' +
+      esc(wordUrl(title)) + '"' + T + ' title="Открыть ' + esc(title) + ' в Wiktionary">' +
+      (isRec ? '<span class="rec">реконструкция</span>' : '') + esc(label) + '</a>' +
+      '<div class="wtags">' + ids.map(tagHtml).join('') + '</div>' +
+      '<div class="nc" title="Число категорий">' + ids.length + '</div></div>';
+  }
+
+  // Source buckets -----------------------------------------------------------
+  function bucketHtml(group) {
+    var parent = L.categories[group.pi];
+    var links = group.items;
+    var shown = expanded[group.pi] ? links : links.slice(0, 24);
+    var more = (!expanded[group.pi] && links.length > 24)
+      ? '<button type="button" class="blink" data-expand="' + group.pi + '">ещё +' +
+        (links.length - 24).toLocaleString() + ' (всего ' + links.length.toLocaleString() + ')</button>'
+      : '';
+    return '<div class="bucket"><div class="buckethead"><h3><a class="srclink" href="' +
+      esc(parent.url) + '"' + T + ' title="' + esc(parent.name) + '">' + esc(cn(parent.name)) +
+      '</a></h3><span class="n">показано ' +
+      links.length.toLocaleString() + ' из ' + group.total.toLocaleString() + ' · ' +
+      lensLabel[parent.lens] + '</span></div><div class="bucketlinks">' +
+      shown.map(function (s) {
+        return '<a class="blink" href="' + esc(bucketUrl(s)) + '"' + T +
+          ' title="Открыть ' + esc(s) + ' в Wiktionary">' + esc(s.replace(/^Sanskrit /, '')) + '</a>';
+      }).join('') + more + '</div></div>';
+  }
+
+  // Filtering ----------------------------------------------------------------
+  function filteredWords() {
+    var needle = document.getElementById('q').value.trim().toLowerCase();
+    var lens = lensSel.value, cat = catSel.value, sort = sortSel.value;
+    var out = L.words.filter(function (w) {
+      if (cat !== '' && w[1].indexOf(Number(cat)) === -1) return false;
+      if (lens && !w[1].some(function (i) { return L.categories[i].lens === lens; })) return false;
+      if (!needle) return true;
+      if (w[0].toLowerCase().indexOf(needle) > -1) return true;
+      return w[1].some(function (i) { return hay(L.categories[i].name).indexOf(needle) > -1; });
+    });
+    if (sort === 'za') out = out.slice().reverse();
+    else if (sort === 'most') out.sort(function (a, b) { return b[1].length - a[1].length || (a[0] < b[0] ? -1 : 1); });
+    else if (sort === 'few') out.sort(function (a, b) { return a[1].length - b[1].length || (a[0] < b[0] ? -1 : 1); });
+    return { list: out, needle: needle };
+  }
+  function filteredBuckets() {
+    var needle = document.getElementById('q').value.trim().toLowerCase();
+    var cat = catSel.value, sort = sortSel.value;
+    var groups = [];
+    L.categories.forEach(function (c, pi) {
+      var all = L.nested.filter(function (n) { return n[1] === pi; });
+      var items = all.map(function (n) { return n[0]; }).filter(function (s) {
+        return !needle || s.toLowerCase().indexOf(needle) > -1 || hay(c.name).indexOf(needle) > -1;
+      });
+      if (items.length) groups.push({ pi: pi, items: items, total: all.length });
+    });
+    if (cat !== '') groups = groups.filter(function (g) { return g.pi === Number(cat); });
+    if (sort === 'za') groups.forEach(function (g) { g.items.reverse(); });
+    if (sort === 'big') groups.sort(function (a, b) { return b.items.length - a.items.length; });
+    return { list: groups, needle: needle };
+  }
+
+  function render() {
+    var res = document.getElementById('results');
+    var pager = document.getElementById('pager');
+    var count = document.getElementById('qcount');
+    var r = mode === 'words' ? filteredWords() : filteredBuckets();
+    var n = r.list.length;
+    count.textContent = (r.needle || lensSel.value || catSel.value !== '')
+      ? 'показано ' + n.toLocaleString() + ' из ' + (mode === 'words'
+          ? L.totals.uniqueWords.toLocaleString() + ' лемм'
+          : L.totals.nested.toLocaleString() + ' категорий-источников')
+      : '';
+    if (!n) {
+      res.innerHTML = '<div class="wordlist"><div class="empty">Ничего не найдено. Попробуйте более короткий запрос или сбросьте фильтры призмы и категории.</div></div>';
+      pager.innerHTML = '';
+      return;
+    }
+    if (mode === 'words') {
+      var slice = r.list.slice(0, page * PAGE_SIZE);
+      res.innerHTML = '<div class="wordlist">' + slice.map(wordRow).join('') + '</div>';
+      pager.innerHTML = slice.length < n
+        ? '<span>Показано ' + slice.length.toLocaleString() + ' из ' + n.toLocaleString() + '</span>' +
+          '<button type="button" class="btn" id="more">Показать ещё 60</button>'
+        : '<span>Показаны все ' + n.toLocaleString() + ' найденных лемм</span>';
+      var more = document.getElementById('more');
+      if (more) more.addEventListener('click', function () { page++; render(); });
+    } else {
+      res.innerHTML = '<div class="wordlist">' + r.list.map(bucketHtml).join('') + '</div>';
+      pager.innerHTML = '<span>' + n.toLocaleString() + ' из ' +
+        L.categories.length + ' родительских категорий содержат подходящие вложенные категории</span>';
+      res.querySelectorAll('[data-expand]').forEach(function (b) {
+        b.addEventListener('click', function () {
+          expanded[Number(b.getAttribute('data-expand'))] = true;
+          render();
+        });
+      });
+    }
+  }
+
+  document.getElementById('modetabs').addEventListener('click', function (e) {
+    var b = e.target.closest('.tab');
+    if (!b) return;
+    mode = b.getAttribute('data-mode');
+    this.querySelectorAll('.tab').forEach(function (t) { t.classList.toggle('on', t === b); });
+    lensSel.disabled = (mode !== 'words');
+    page = 1;
+    setSortOptions();
+    render();
+  });
+  ['q', 'lens', 'cat', 'sort'].forEach(function (id) {
+    var el = document.getElementById(id);
+    el.addEventListener(id === 'q' ? 'input' : 'change', function () { page = 1; render(); });
+  });
+
+  // Cross-listed panel -------------------------------------------------------
+  var cross = L.words.filter(function (w) { return w[1].length > 1; })
+    .sort(function (a, b) { return b[1].length - a[1].length || (a[0] < b[0] ? -1 : 1); })
+    .slice(0, 12);
+  document.getElementById('cross').innerHTML = cross.map(wordRow).join('');
+
+  // Non-lemma titles, kept so that nothing from the archive disappears -------
+  document.getElementById('reccount').textContent = L.totals.reconstructed.toLocaleString();
+  document.getElementById('otherlist').innerHTML = L.other.map(function (o) {
+    var parent = L.categories[o[1]];
+    return '<div class="wordrow"><a class="wd latin" href="' +
+      esc(L.base + '/wiki/' + path(o[0])) + '"' + T + ' title="Открыть ' + esc(o[0]) +
+      ' в Wiktionary"><span class="rec">пространство имён ' + o[2] + '</span>' + esc(o[0]) +
+      '</a><div class="wtags"><a class="wtag" href="' + esc(parent.url) + '"' + T +
+      ' title="' + esc(parent.name) + '">' + esc(cn(parent.name)) + '</a></div><div class="nc">—</div></div>';
+  }).join('');
+
+  render();
+})();
+</script>
+</body>
+</html>

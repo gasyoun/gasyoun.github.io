@@ -7,7 +7,10 @@ Byte-faithful, checksummed snapshot of
 on English Wiktionary, plus its 42 subcategories and every direct member one
 level down. See [index.html](index.html) for the browsable version,
 [manifest.json](manifest.json) for provenance and SHA-256 digests, and
-[SNAPSHOT.md](SNAPSHOT.md) for the complete readable record.
+[SNAPSHOT.md](SNAPSHOT.md) for the complete readable record. A Russian reading
+of this archive page is at <https://gasyoun.github.io/wiki/ru/archive/>; it
+shows the same files and checksums, with translated prose and the original
+English category titles printed under each Russian label.
 
 ## Why the parent page alone is not a backup
 

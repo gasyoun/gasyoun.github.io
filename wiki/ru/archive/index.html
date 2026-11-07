@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Архив источника — санскритские слова по этимологии</title>
+<meta name="description" content="Побайтовая резервная копия категории Wiktionary «Sanskrit terms by etymology»: исходный HTML, викитекст, ответы API, 42 подкатегории и 5 426 заголовков участников с контрольными суммами SHA-256.">
+<link rel="alternate" hreflang="en" href="https://gasyoun.github.io/wiki/archive/">
+<link rel="alternate" hreflang="ru" href="https://gasyoun.github.io/wiki/ru/archive/">
+<link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+<div class="wrap">
+
+<nav class="sitenav" aria-label="Разделы">
+  <a class="brand" href="../index.html">Этимология санскрита</a>
+  <div class="sitelinks">
+    <a href="../index.html">Обзор</a>
+    <a href="../explorer.html">Поиск слов</a>
+    <a href="../cognates.html">Карта когнатов</a>
+    <a href="../timeline.html">Слои</a>
+    <a class="on" href="index.html">Архив</a>
+  </div>
+  <a class="src ext" id="navsrc" href="#" target="_blank" rel="noopener noreferrer">Оригинал в Wiktionary</a>
+  <span class="langsw" aria-label="Язык издания"><a href="../../archive/" lang="en" hreflang="en" title="English edition">EN</a><span class="on" lang="ru">RU</span></span>
+</nav>
+
+<header class="masthead">
+  <p class="eyebrow">Резервная копия · независимая от живого источника</p>
+  <h1>Архив источника</h1>
+  <p class="lede">Восстанавливаемая копия дерева категорий Wiktionary, лежащего за <a class="srclink" href="../">учебным обзором</a>. Хранится под версионным контролем, чтобы материалы сохранились, если оригинальную категорию перемесят, переименуют, испортят или утратят.</p>
+  <p class="meta">Снимок <span id="snapid"></span> · <span id="snapdate"></span> · <span id="snaptotal"></span> подкатегорий · сохранено <span id="snapmembers"></span> заголовков участников.</p>
+  <div class="topnav">
+    <a class="pill primary ext" id="srccat" href="#" target="_blank" rel="noopener noreferrer">Оригинальная категория в Wiktionary</a>
+    <a class="pill ext" href="../">Назад к учебному обзору</a>
+    <a class="pill ext" href="https://github.com/gasyoun/gasyoun.github.io/tree/master/wiki/archive" target="_blank" rel="noopener noreferrer">Архив на GitHub</a>
+    <a class="pill ext" href="https://github.com/gasyoun/sanskrit-etymology-source-archive" target="_blank" rel="noopener noreferrer">Отдельный репозиторий-зеркало</a>
+  </div>
+</header>
+
+<section class="block" style="margin-top:0">
+  <div class="callout"><strong>Зачем это существует.</strong> В родительской категории нет ни одной словарной статьи — только подкатегории. Сохранение одной лишь родительской страницы уберегло бы 42 ярлыка и ни одного слова. Поэтому снимок захватывает также всех непосредственных участников на один уровень ниже: по этим файлам классификацию можно восстановить без обращения к Wiktionary.</div>
+  <span class="sectionnum">01 · что сохранено</span>
+  <h2>Исходные файлы</h2>
+  <p class="intro">Ответы побайтово, как они были получены. <code>category.html</code> — оригинальная страница; <code>category-rendered.json</code> сохраняет сгенерированный шаблоном вступительный текст, которого нет в викитексте. Имена файлов и контрольные суммы воспроизведены без перевода.</p>
+  <div class="bars" style="padding:8px 12px">
+    <table>
+      <thead><tr><th>Файл</th><th class="num">Байт</th><th>SHA-256</th><th>Открыть</th></tr></thead>
+      <tbody id="files"></tbody>
+    </table>
+  </div>
+  <p class="intro" style="margin-top:14px">Также доступны: <a class="srclink ext" href="../../archive/manifest.json" target="_blank" rel="noopener noreferrer">manifest.json</a> (машиночитаемые происхождение и контрольные суммы), <a class="srclink ext" href="../../archive/cognates-manifest.json" target="_blank" rel="noopener noreferrer">cognates-manifest.json</a> (точный URL каждой запрошенной категории ПИЕ / наследования) и <a class="srclink ext" href="../../archive/SNAPSHOT.md" target="_blank" rel="noopener noreferrer">SNAPSHOT.md</a> (та же запись в читаемом Markdown).</p>
+  <p class="intro" style="margin-top:10px">Производные файлы, полностью пересобираемые из исходных: <a class="srclink ext" href="../../data/etymology.js" target="_blank" rel="noopener noreferrer">etymology.js</a>, <a class="srclink ext" href="../../data/lemmata.js" target="_blank" rel="noopener noreferrer">lemmata.js</a> (3 164 леммы + 2 005 категорий-источников), <a class="srclink ext" href="../../data/cognates.js" target="_blank" rel="noopener noreferrer">cognates.js</a>, <a class="srclink ext" href="../../data/manifest.js" target="_blank" rel="noopener noreferrer">manifest.js</a> и <a class="srclink ext" href="../../data/i18n-ru.js" target="_blank" rel="noopener noreferrer">i18n-ru.js</a> (строки русского издания).</p>
+</section>
+
+<section class="block">
+  <span class="sectionnum">02 · классификация</span>
+  <h2>Все 42 подкатегории</h2>
+  <p class="intro">Каждое название ссылается на оригинальную категорию Wiktionary. Русский ярлык — учебный перевод; под ним приведён англоязычный оригинал, как он записан в источнике. <code>c</code> = подкатегории, <code>e</code> = словарные статьи, ровно в том виде, как показано на момент снимка.</p>
+  <div class="bars showorig" style="padding:8px 12px">
+    <table>
+      <thead><tr><th>Подкатегория</th><th class="num">c</th><th class="num">e</th><th>Группа в учебном обзоре</th></tr></thead>
+      <tbody id="cats"></tbody>
+    </table>
+  </div>
+</section>
+
+<section class="block">
+  <span class="sectionnum">03 · восстановление</span>
+  <h2>Как пересобрать</h2>
+  <div class="notes">
+    <ul>
+      <li><code>raw/subcategories.json</code> даёт авторитетный список 42 названий подкатегорий из MediaWiki API.</li>
+      <li><code>raw/subcategory-members.json</code> сопоставляет каждому из них непосредственные подкатегории и словарные статьи (всего 5 426 заголовков). Этого достаточно, чтобы восстановить дерево на один уровень вглубь.</li>
+      <li><code>raw/category.html</code> и <code>raw/category-rendered.json</code> сохраняют страницу в том виде, как она отображалась, включая вступительные определения и счётчики <code>(N c, M e)</code>.</li>
+      <li><code>raw/cognates.json</code> содержит списки участников 114 языковых категорий ПИЕ-корней/слов и 4 пластов наследования, используемых <a class="srclink" href="../cognates.html">картой когнатов</a> и <a class="srclink" href="../timeline.html">слоями</a>. Их URL-источники — в <a class="srclink" href="../../archive/cognates-manifest.json">cognates-manifest.json</a>.</li>
+      <li><code>python3 wiki/scripts/fetch_snapshot.py --offline</code> пересобирает все производные файлы из этих исходных байтов без сети, сохраняя исходную метку времени и контрольные суммы, — полезно, если Wiktionary недоступен.</li>
+      <li>Чтобы обновить данные по живому Wiktionary, выполните <code>python3 wiki/scripts/fetch_cognates.py</code>, затем <code>python3 wiki/scripts/fetch_snapshot.py</code>: они перезапишут исходные файлы, оба манифеста, <code>SNAPSHOT.md</code> и все файлы данных, и при каждом запуске зафиксируют новую метку времени и контрольные суммы.</li>
+      <li>Проверьте любой файл командой <code>shasum -a 256 &lt;файл&gt;</code> против дайджеста в <a class="srclink" href="../../archive/manifest.json" target="_blank" rel="noopener noreferrer">manifest.json</a>.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <p>Источник: <a class="srclink ext" id="footsrc" href="#" target="_blank" rel="noopener noreferrer">английский Wiktionary, Category:Sanskrit terms by etymology</a>. Названия категорий и числовые данные воспроизведены для обучения и цитирования; текст доступен по лицензии CC BY-SA — см. <a class="srclink ext" id="footcpr" href="#" target="_blank" rel="noopener noreferrer">Wiktionary:Copyrights</a>.</p>
+  <p>Тот же снимок зеркалируется в <a class="srclink ext" href="https://github.com/gasyoun/sanskrit-etymology-source-archive" target="_blank" rel="noopener noreferrer">отдельном репозитории GitHub</a>, чтобы утрата этого репозитория Pages не уничтожила резервную копию.</p>
+</footer>
+
+</div>
+<script src="../../data/etymology.js"></script>
+<script src="../../data/manifest.js"></script>
+<script src="../../data/i18n-ru.js"></script>
+<script>
+(function () {
+  "use strict";
+  var D = window.ETYMOLOGY, M = window.ETYMOLOGY_MANIFEST, R = window.WIKI_RU;
+  var T = ' target="_blank" rel="noopener noreferrer"';
+  var esc = function (s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (ch) {
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[ch];
+    });
+  };
+  var ARCH = '../../archive/';
+  var GH = 'https://github.com/gasyoun/gasyoun.github.io/blob/master/wiki/archive/';
+  document.getElementById('snapid').textContent = D.snapshotId;
+  document.getElementById('snapdate').textContent = D.fetchedAtUtc;
+  document.getElementById('snaptotal').textContent = D.categories.length;
+  document.getElementById('navsrc').href = D.categoryUrl;
+  document.getElementById('srccat').href = D.categoryUrl;
+  document.getElementById('footsrc').href = D.categoryUrl;
+  document.getElementById('footcpr').href = D.sourceLinks.copyrights;
+  document.getElementById('snapmembers').textContent = M ? M.totals.direct_members_captured.toLocaleString() : '—';
+
+  document.getElementById('files').innerHTML = (M ? M.files : []).map(function (f) {
+    var name = f.file.split('/').pop();
+    return '<tr><td><a class="srclink" href="' + esc(ARCH + f.file) + '"' + T + '><code>' + esc(name) + '</code></a></td>' +
+      '<td class="num">' + f.bytes.toLocaleString() + '</td>' +
+      '<td><code>' + esc(f.sha256.slice(0, 24)) + '…</code></td>' +
+      '<td><a class="srclink ext" href="' + esc(GH + f.file) + '"' + T + '>Смотреть на GitHub</a></td></tr>';
+  }).join('');
+
+  var labels = {
+    origin: 'Откуда? · ' + R.lens.origin,
+    formation: 'Как построено? · ' + R.lens.formation,
+    evidence: 'Насколько надёжно? · ' + R.lens.evidence
+  };
+  document.getElementById('cats').innerHTML = D.categories.map(function (c) {
+    return '<tr><td><a class="srclink ext" href="' + esc(c.url) + '"' + T +
+      ' title="' + esc(c.name + ' — ' + (R.desc[c.name] || R.descFallback)) + '">' + esc(R.cat[c.name] || c.name) +
+      '<span class="orig">' + esc(c.name) + '</span></a></td>' +
+      '<td class="num">' + (c.c || '—') + '</td><td class="num">' + (c.e || '—') +
+      '</td><td style="color:var(--muted)">' + labels[c.lens] + '</td></tr>';
+  }).join('');
+})();
+</script>
+</body>
+</html>

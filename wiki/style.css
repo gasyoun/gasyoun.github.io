@@ -39,6 +39,16 @@ a:hover .ext::after, a.ext:hover::after { color: var(--blue); }
 .sitelinks a:hover { background: var(--blue-soft); color: var(--blue-deep); }
 .sitelinks a.on { background: var(--gray-soft); color: var(--ink); font-weight: 500; }
 .sitenav .src { margin-left: auto; color: var(--blue-deep); white-space: nowrap; }
+/* EN / RU edition switcher, present on every page of both editions. */
+.langsw { display: inline-flex; align-items: center; gap: 1px; background: var(--surface);
+  border: 1px solid var(--line); border-radius: 999px; padding: 2px; white-space: nowrap; }
+.langsw a, .langsw .on { font: 500 11px/1 var(--sans); letter-spacing: .06em;
+  padding: 4px 8px; border-radius: 999px; color: var(--muted); }
+.langsw .on { background: var(--blue-soft); color: var(--blue-deep); }
+.langsw a:hover { color: var(--blue-deep); background: var(--gray-soft); }
+/* The verbatim English Wiktionary title behind a translated Russian label. */
+.orig { display: none; font: 400 11px/1.35 var(--sans); color: var(--faint); letter-spacing: 0; }
+.showorig .orig { display: block; }
 
 header.masthead { padding: 34px 0 28px; border-bottom: 1px solid var(--line); margin-bottom: 34px; }
 .eyebrow { font-size: 12px; letter-spacing: .09em; text-transform: uppercase; color: var(--faint); margin: 0 0 10px; }

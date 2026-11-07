@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Карта когнатов — санскритские слова по этимологии</title>
+<meta name="description" content="Матрица 18 праиндоевропейских корней и слов с опорой на источник: санскрит, авестийский, древнегреческий, латынь, древнеанглийский и английский. Каждый рефлекс ссылается на статью Wiktionary.">
+<link rel="alternate" hreflang="en" href="https://gasyoun.github.io/wiki/cognates.html">
+<link rel="alternate" hreflang="ru" href="https://gasyoun.github.io/wiki/ru/cognates.html">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="wrap">
+
+<nav class="sitenav" aria-label="Разделы">
+  <a class="brand" href="index.html">Этимология санскрита</a>
+  <div class="sitelinks">
+    <a href="index.html">Обзор</a>
+    <a href="explorer.html">Поиск слов</a>
+    <a class="on" href="cognates.html">Карта когнатов</a>
+    <a href="timeline.html">Слои</a>
+    <a href="archive/">Архив</a>
+  </div>
+  <a class="src ext" id="navsrc" href="#" target="_blank" rel="noopener noreferrer">Оригинал в Wiktionary</a>
+  <span class="langsw" aria-label="Язык издания"><a href="../cognates.html" lang="en" hreflang="en" title="English edition">EN</a><span class="on" lang="ru">RU</span></span>
+</nav>
+
+<header class="masthead">
+  <p class="eyebrow">Учебный инструмент 02 · санскрит среди родственников</p>
+  <h1>Карта когнатов</h1>
+  <p class="lede">Санскритское слово редко бывает одиноко. Эта матрица ставит 18 праиндоевропейских корней и слов рядом с их реальными продолжениями в восьми языках — по категориям Wiktionary вида «terms derived from the PIE root/word» для каждого языка. Нажмите на любую форму, чтобы открыть статью, где она описана; нажмите на число, чтобы открыть всю категорию.</p>
+  <p class="meta">Снимок <span id="snapdate"></span> · <span id="snapitems"></span> ПИЕ-гнёзд · прочитано <span id="snapcats"></span> категорий Wiktionary · здесь не придумано ни одной реконструкции.</p>
+  <div class="topnav">
+    <a class="pill primary ext" id="srccat" href="#" target="_blank" rel="noopener noreferrer">Оригинальная категория в Wiktionary</a>
+    <a class="pill ext" href="../archive/cognates-manifest.json" target="_blank" rel="noopener noreferrer">Все использованные URL источников</a>
+    <a class="pill ext" href="https://github.com/gasyoun/gasyoun.github.io/blob/master/wiki/data/cognates.js" target="_blank" rel="noopener noreferrer">cognates.js на GitHub</a>
+    <a class="pill ext" href="timeline.html">Смотреть слои наследования</a>
+  </div>
+</header>
+
+<section class="block" style="margin-top:0">
+  <div class="callout"><strong>Что означают ячейки.</strong> В каждой перечислены краткие рефлексы, найденные как реальные заголовки страниц в соответствующей языковой категории Wiktionary, плюс ссылка на полную категорию. Категория содержит и более поздние производные, поэтому членство в ней — свидетельство общего источника, <em>а не</em> доказательство того, что каждое перечисленное слово является прямым когнатом. Формы со звёздочкой и заголовки <code>Reconstruction:</code> — научные реконструкции, а не засвидетельствованные слова. Названия языков и ветвей переведены; все формы оставлены в точном виде источника.</div>
+  <div class="statrow" id="stats"></div>
+  <span class="sectionnum">01 · матрица</span>
+  <h2>Одна праформа — восемь продолжений</h2>
+  <p class="intro">Отфильтруйте по ветви, чтобы сравнить индоиранскую с греческой, италийской и германской. Столбец санскрита выделен цветом. Прочерк означает, что у Wiktionary нет категории для этого корня в этом языке, — но не то, что рефлекса не существует.</p>
+  <div class="toolbar">
+    <span class="tabs" id="branchtabs"></span>
+    <input type="search" id="q" placeholder="Праформа или значение…" aria-label="Фильтр ПИЕ-гнёзд">
+    <span class="hint" id="qcount"></span>
+  </div>
+  <div class="branchkey" id="branchkey"></div>
+  <div class="matrixscroll">
+    <table class="matrix" id="matrix">
+      <colgroup id="cols"></colgroup>
+      <thead id="mhead"></thead>
+      <tbody id="mbody"></tbody>
+    </table>
+  </div>
+</section>
+
+<section class="block" id="focus">
+  <span class="sectionnum">02 · звуковые соответствия</span>
+  <h2>Прочесть один корень в четырёх языках</h2>
+  <p class="intro">Выберите праформу. Панель ставит её кратчайшие рефлексы рядом, чтобы студенты услышали регулярные соответствия: один и тот же ПИЕ-звук предсказуемо отражается в санскрите, греческом, латыни и древнеанглийском. Каждая форма ссылается на свою статью Wiktionary.</p>
+  <div class="toolbar" id="focusbtns"></div>
+  <div class="grades" id="focusgrid" style="grid-template-columns:repeat(4,minmax(0,1fr))"></div>
+  <p class="lensfoot" id="focusnote"></p>
+</section>
+
+<section class="block" id="notes">
+  <span class="sectionnum">03 · методические заметки</span>
+  <h2>Что сказать на занятии</h2>
+  <div class="notes">
+    <ul>
+      <li><strong>Когнат — не то же самое, что заимствование.</strong> Санскритское <a class="srclink" id="n1" href="#" target="_blank" rel="noopener noreferrer">भृ</a> и английское <em>bear</em> продолжают общего предка; <a class="srclink" id="n2" href="#" target="_blank" rel="noopener noreferrer">слова, заимствованные из древнегреческого</a>, пришли через контакт. Wiktionary держит эти два пути в разных семействах категорий — в этом различении и весь смысл этимологической классификации.</li>
+      <li><strong>Соответствия регулярны, а не просто похожи.</strong> В <a class="srclink ext" id="n3" href="#" target="_blank" rel="noopener noreferrer">гнезде *bʰer-</a> ПИЕ *bʰ даёт санскритское <em>bh</em>, греческое <em>ph</em> (φ), латинское <em>f</em> и германское <em>b</em>. Попросите студентов проверить это по панели выше, а не поверить на слово.</li>
+      <li><strong>Реконструкция — гипотеза со своим обозначением.</strong> Звёздочка отмечает форму, не засвидетельствованную ни одним текстом. Пространство имён <code>Reconstruction:</code> в Wiktionary хранит их отдельно; карта их помечает, чтобы студент никогда не перепутал модель с рукописью.</li>
+      <li><strong>Пустая ячейка — отсутствие категории.</strong> Это редакционные рубрики живой вики. Пустая ячейка ничего не говорит об историческом языке — только о том, что пока никто не зафиксировал такое сочетание.</li>
+      <li><strong>Продолжайте слоями.</strong> <a class="srclink" href="timeline.html">Исторические слои</a> показывают тот же материал как последовательные пласты наследования с реальными числами слов.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <p>Источник: языковые категории Wiktionary для ПИЕ-корней и слов, перечисленные по отдельности в <a class="srclink ext" href="../archive/cognates-manifest.json" target="_blank" rel="noopener noreferrer">cognates-manifest.json</a> и сохранённые побайтово как <a class="srclink ext" href="../archive/raw/cognates.json" target="_blank" rel="noopener noreferrer">raw/cognates.json</a>. Текст доступен по лицензии CC BY-SA — см. <a class="srclink ext" id="footcpr" href="#" target="_blank" rel="noopener noreferrer">Wiktionary:Copyrights</a>.</p>
+  <p>Обновление: <code>python3 wiki/scripts/fetch_cognates.py</code>, затем <code>python3 wiki/scripts/fetch_snapshot.py --offline</code>.</p>
+</footer>
+
+</div>
+<script src="../data/cognates.js"></script>
+<script src="../data/etymology.js"></script>
+<script src="../data/i18n-ru.js"></script>
+<script>
+(function () {
+  "use strict";
+  var C = window.ETYMOLOGY_COGNATES, D = window.ETYMOLOGY, R = window.WIKI_RU;
+  var BASE = 'https://en.wiktionary.org';
+  var T = ' target="_blank" rel="noopener noreferrer"';
+  var esc = function (s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (ch) {
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[ch];
+    });
+  };
+  function lang(l) { return R.lang[l] || l; }
+  function branch(b) { return R.branch[b] || b; }
+  function gloss(form, fallback) { return R.gloss[form] || fallback; }
+  var ANCHOR = {
+    'Sanskrit': '#Sanskrit', 'Avestan': '#Avestan',
+    'Proto-Indo-Iranian': '#Proto-Indo-Iranian', 'Vedic Sanskrit': '#Vedic_Sanskrit',
+    'Ancient Greek': '#Ancient_Greek', 'Latin': '#Latin',
+    'Old English': '#Old_English', 'English': '#English'
+  };
+  var BRANCH = {
+    'Sanskrit': 'Indo-Iranian', 'Avestan': 'Indo-Iranian',
+    'Proto-Indo-Iranian': 'Indo-Iranian', 'Vedic Sanskrit': 'Indo-Iranian',
+    'Ancient Greek': 'Hellenic', 'Latin': 'Italic',
+    'Old English': 'Germanic', 'English': 'Germanic'
+  };
+  function path(t) { return encodeURIComponent(t.replace(/ /g, '_')).replace(/%3A/gi, ':'); }
+  function entryUrl(title, lng) {
+    var isRec = title.indexOf('Reconstruction:') === 0;
+    return BASE + '/wiki/' + path(title) + (isRec ? '' : (ANCHOR[lng] || ''));
+  }
+
+  var nCats = C.items.reduce(function (n, it) { return n + it.cells.length; }, 0) + C.layers.length;
+  document.getElementById('snapdate').textContent = C.fetchedAtUtc;
+  document.getElementById('snapitems').textContent = C.items.length;
+  document.getElementById('snapcats').textContent = nCats.toLocaleString();
+  ['navsrc', 'srccat'].forEach(function (id) { document.getElementById(id).href = D.categoryUrl; });
+  document.getElementById('footcpr').href = D.sourceLinks.copyrights;
+
+  document.getElementById('stats').innerHTML = [
+    [C.items.length, 'ПИЕ-корней и слов', D.sourceLinks.pieRoots, 'семьи ПИЕ-корней в Wiktionary'],
+    [C.languages.length, 'языков сравнения', '#matrix', 'перейти к матрице'],
+    [nCats, 'прочитано категорий Wiktionary', '../archive/cognates-manifest.json', 'открыть манифест URL'],
+    [C.layers.length, 'пластов наследования', 'timeline.html', 'открыть слои']
+  ].map(function (s) {
+    return '<div class="stat"><div class="k">' + Number(s[0]).toLocaleString() + '</div>' +
+      '<div class="v">' + s[1] + ' · <a href="' + esc(s[2]) + '"' +
+      (s[2].indexOf('http') === 0 ? T : '') + '>' + esc(s[3]) + '</a></div></div>';
+  }).join('');
+
+  // Branch filter ------------------------------------------------------------
+  var branches = ['all', 'Indo-Iranian', 'Hellenic', 'Italic', 'Germanic'];
+  var branchNow = 'all';
+  document.getElementById('branchtabs').innerHTML = branches.map(function (b) {
+    return '<button type="button" class="tab' + (b === 'all' ? ' on' : '') +
+      '" data-b="' + b + '">' + (b === 'all' ? 'Все ветви' : branch(b)) + '</button>';
+  }).join('');
+  document.getElementById('branchkey').innerHTML = [
+    '<span>' + branch('Indo-Iranian') + ': ' + lang('Sanskrit') + ', ' + lang('Avestan') + ', ' + lang('Proto-Indo-Iranian') + ', ' + lang('Vedic Sanskrit') + '</span>',
+    '<span>' + branch('Hellenic') + ': ' + lang('Ancient Greek') + '</span>',
+    '<span>' + branch('Italic') + ': ' + lang('Latin') + '</span>',
+    '<span>' + branch('Germanic') + ': ' + lang('Old English') + ', ' + lang('English') + '</span>'
+  ].join('');
+
+  function visible(l) { return branchNow === 'all' || BRANCH[l] === branchNow; }
+
+  // Table --------------------------------------------------------------------
+  document.getElementById('cols').innerHTML = '<col style="min-width:172px">' +
+    C.languages.map(function (l) {
+      return '<col class="' + (l === 'Sanskrit' ? 'sa' : '') + '">';
+    }).join('');
+  document.getElementById('mhead').innerHTML = '<tr><th>ПИЕ-корень / слово</th>' +
+    C.languages.map(function (l) {
+      return '<th data-lang="' + esc(l) + '" title="' + esc(l) + '">' + esc(lang(l)) +
+        '<span class="piegloss">' + esc(branch(BRANCH[l])) + '</span></th>';
+    }).join('') + '</tr>';
+
+  function cellHtml(it, l) {
+    var cell = null;
+    for (var i = 0; i < it.cells.length; i++) if (it.cells[i].lang === l) { cell = it.cells[i]; break; }
+    if (!cell) return '<span class="nomembers" title="Нет категории Wiktionary для этого сочетания">—</span>';
+    var refs = (cell.short || []).map(function (w) {
+      return '<a class="reflex" href="' + esc(entryUrl(w, l)) + '"' + T +
+        ' title="Открыть ' + esc(w) + ' в Wiktionary">' + esc(w) + '</a>';
+    }).join('') + (cell.recon || []).map(function (w) {
+      var label = w.replace(/^Reconstruction:[^/]*\//, '*');
+      return '<a class="reflex r" href="' + esc(entryUrl(w, l)) + '"' + T +
+        ' title="Реконструированная форма: ' + esc(w) + '">' + esc(label) + '</a>';
+    }).join('');
+    return '<div class="reflexes">' + (refs || '<span class="nomembers">только реконструкции</span>') +
+      '</div><a class="cellmore ext" href="' + esc(cell.url) + '"' + T +
+      ' title="Открыть полную категорию в Wiktionary">' +
+      Number(cell.total).toLocaleString() + ' в категории</a>';
+  }
+  function rowHtml(it) {
+    return '<tr data-search="' + esc((it.form + ' ' + it.gloss + ' ' + gloss(it.form, it.gloss) + ' ' + it.kind).toLowerCase()) + '">' +
+      '<td><a class="pie" href="' + esc(it.reconstruction) + '"' + T +
+      ' title="Открыть ПИЕ-реконструкцию в Wiktionary">' + esc(it.form) + '</a>' +
+      '<span class="piegloss" title="' + esc(it.gloss) + '">' + esc(gloss(it.form, it.gloss)) + '</span>' +
+      '<a class="piekind ext" href="' + esc(it.sanskritCategory) + '"' + T +
+      ' title="Sanskrit terms derived from this form">ПИЕ · ' + esc(R.kind[it.kind] || it.kind) +
+      ' · категория санскрита</a></td>' +
+      C.languages.map(function (l) {
+        return '<td data-lang="' + esc(l) + '">' + cellHtml(it, l) + '</td>';
+      }).join('') + '</tr>';
+  }
+
+  function render() {
+    var needle = document.getElementById('q').value.trim().toLowerCase();
+    var rows = C.items.filter(function (it) {
+      return !needle || (it.form + ' ' + it.gloss + ' ' + gloss(it.form, it.gloss)).toLowerCase().indexOf(needle) > -1;
+    });
+    document.getElementById('mbody').innerHTML = rows.map(rowHtml).join('') ||
+      '<tr><td colspan="' + (C.languages.length + 1) + '"><div class="empty">Ни одно ПИЕ-гнездо не подходит под «' +
+      esc(needle) + '».</div></td></tr>';
+    document.getElementById('qcount').textContent = needle
+      ? 'показано ' + rows.length + ' из ' + C.items.length + ' гнёзд' : '';
+    document.querySelectorAll('#matrix th[data-lang], #matrix td[data-lang]').forEach(function (el) {
+      el.hidden = !visible(el.getAttribute('data-lang'));
+    });
+  }
+  document.getElementById('branchtabs').addEventListener('click', function (e) {
+    var b = e.target.closest('.tab');
+    if (!b) return;
+    branchNow = b.getAttribute('data-b');
+    this.querySelectorAll('.tab').forEach(function (t) { t.classList.toggle('on', t === b); });
+    render();
+  });
+  document.getElementById('q').addEventListener('input', render);
+  render();
+
+  // Focus panel --------------------------------------------------------------
+  var FOCUS = ['Sanskrit', 'Ancient Greek', 'Latin', 'Old English'];
+  var focus = 0;
+  document.getElementById('focusbtns').innerHTML = C.items.map(function (it, i) {
+    return '<button type="button" class="btn' + (i === 0 ? ' on' : '') + '" data-i="' + i + '">' +
+      esc(it.form) + '</button>';
+  }).join('');
+  function renderFocus() {
+    var it = C.items[focus];
+    document.getElementById('focusgrid').innerHTML = FOCUS.map(function (l) {
+      var cell = null;
+      for (var i = 0; i < it.cells.length; i++) if (it.cells[i].lang === l) { cell = it.cells[i]; break; }
+      var forms = cell ? (cell.short || []).concat(cell.recon || []).slice(0, 5) : [];
+      return '<div class="grade"><div class="gl"><a class="srclink" href="' +
+        esc(cell ? cell.url : it.sanskritCategory) + '"' + T + ' title="' + esc(l) + '">' + esc(lang(l)) + '</a></div>' +
+        (forms.length
+          ? '<div class="gv" style="font-size:20px;line-height:1.5">' + forms.map(function (w) {
+              var label = w.replace(/^Reconstruction:[^/]*\//, '*');
+              return '<a class="srclink" href="' + esc(entryUrl(w, l)) + '"' + T + '>' +
+                esc(label) + '</a>';
+            }).join('<br>') + '</div>'
+          : '<div class="gv" style="font-size:20px;color:var(--faint)">—</div>') +
+        '<div class="gc">' + (cell
+          ? '<a class="srclink ext" href="' + esc(cell.url) + '"' + T + '>' +
+            Number(cell.total).toLocaleString() + ' в категории</a>'
+          : 'нет категории в Wiktionary') + '</div></div>';
+    }).join('');
+    document.getElementById('focusnote').innerHTML =
+      'ПИЕ <a class="srclink ext" href="' + esc(it.reconstruction) + '"' + T + '>' + esc(it.form) +
+      '</a> · ' + esc(gloss(it.form, it.gloss)) + ' · <span title="' + esc(it.gloss) + '">оригинал: ' + esc(it.gloss) +
+      '</span>. Показаны кратчайшие участники категории; более длинные производные — в ' +
+      '<a class="srclink ext" href="' + esc(it.sanskritCategory) + '"' + T + '>категории санскрита</a>.';
+    document.querySelectorAll('#focusbtns .btn').forEach(function (b) {
+      b.classList.toggle('on', Number(b.getAttribute('data-i')) === focus);
+    });
+  }
+  document.getElementById('focusbtns').addEventListener('click', function (e) {
+    var b = e.target.closest('.btn');
+    if (!b) return;
+    focus = Number(b.getAttribute('data-i'));
+    renderFocus();
+  });
+  renderFocus();
+
+  // Teaching-note links ------------------------------------------------------
+  var ber = null;
+  C.items.forEach(function (it) { if (it.form === '*bʰer-') ber = it; });
+  if (ber) {
+    var sk = null;
+    ber.cells.forEach(function (c) { if (c.lang === 'Sanskrit') sk = c; });
+    if (sk && sk.short.length) {
+      document.getElementById('n1').href = entryUrl(sk.short[0], 'Sanskrit');
+      document.getElementById('n1').textContent = sk.short[0];
+    }
+    document.getElementById('n3').href = ber.reconstruction;
+  }
+  var greekLoan = 'Category:Sanskrit terms borrowed from Ancient Greek';
+  document.getElementById('n2').href = BASE + '/wiki/' + path(greekLoan);
+})();
+</script>
+</body>
+</html>

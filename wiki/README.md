@@ -23,7 +23,27 @@ HTML/CSS/JS that also works when the folder is opened from disk.
 | `cognates.html` | Cognate map: 18 PIE roots/words × 8 languages, branch filter, sound-correspondence panel. Every reflex links to its Wiktionary entry. |
 | `timeline.html` | Timeline of layers: four inheritance strata with real word counts, then internal derivation, contact and uncertainty. |
 | `archive/index.html` | Browsable source archive with SHA-256 checksums and restore instructions. |
-| `style.css` | Shared stylesheet for all five pages, including the persistent section nav. |
+| `style.css` | Shared stylesheet for all ten pages, including the persistent section nav, the EN/RU switcher and the `.orig` original-title display. |
+
+## Russian edition (`ru/`)
+
+A complete parallel edition at <https://gasyoun.github.io/wiki/ru/>, with the
+same five pages (`ru/index.html`, `ru/explorer.html`, `ru/cognates.html`,
+`ru/timeline.html`, `ru/archive/index.html`), `<html lang="ru">` and translated
+UI, teaching notes, layer names, language/branch labels, sandhi notes and
+glosses. It loads the **same** `data/*.js` files via `../data/` (the archive via
+`../../data/`) and the same `style.css`, so a snapshot refresh updates both
+editions together. No duplicated data, no CDN, no build step.
+
+Source data is deliberately **not** translated: Wiktionary category titles,
+Devanagari/IAST lemmata, PIE reconstructions, reflexes in eight languages and
+every source URL remain byte-for-byte the ones used by the English pages. A
+pairwise comparison of the generated Wiktionary URL sets on initial render
+returns zero differences for all five page pairs. The original English
+category titles stay available in `title` attributes, are always visible under
+the Russian label on the archive page, and can be toggled on the overview with
+"Показать оригинальные названия". Every page of both editions carries an EN/RU
+switcher plus reciprocal `hreflang` alternates.
 
 ## Data and generators
 
@@ -33,6 +53,7 @@ HTML/CSS/JS that also works when the folder is opened from disk.
 | `data/lemmata.js` | Inverted index: 3,164 unique lemmata with 3,419 category memberships, 2,005 nested source buckets and 2 non-lemma titles. |
 | `data/cognates.js` | 18 PIE sets across 8 languages plus 4 inheritance layers, read from 118 Wiktionary categories. |
 | `data/manifest.js` | Same as `archive/manifest.json`, as a script so pages work without `fetch`. |
+| `data/i18n-ru.js` | `window.WIKI_RU` — Russian translation layer for the `ru/` edition only: 42 category labels, 28 descriptions, 18 PIE glosses, layer/language/branch names, 5 sandhi notes, 5 example glosses, 3 grade labels. Source titles are never translated. |
 | `scripts/fetch_snapshot.py` | Fetches the category tree and regenerates every derived file. |
 | `scripts/fetch_cognates.py` | Fetches the per-language PIE and inheritance-layer member lists. |
 | `scripts/etymology_meta.py` | Lens rules, category descriptions and the guṇa/vṛddhi grade table, kept in a separate module so the generator stays under the repo's staged-file token gate. |

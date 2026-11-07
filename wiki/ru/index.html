@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Санскритские слова по этимологии — учебный взгляд</title>
+<meta name="description" content="Интерактивный учебный обзор категории Wiktionary «Sanskrit terms by etymology»: 42 подкатегории, перегруппированные по происхождению, словообразованию и достоверности, и лаборатория гуна/вриддхи. Каждый элемент ссылается на первоисточник.">
+<link rel="alternate" hreflang="en" href="https://gasyoun.github.io/wiki/">
+<link rel="alternate" hreflang="ru" href="https://gasyoun.github.io/wiki/ru/">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="wrap" id="page">
+
+<nav class="sitenav" aria-label="Разделы">
+  <a class="brand" href="index.html">Этимология санскрита</a>
+  <div class="sitelinks">
+    <a class="on" href="index.html">Обзор</a>
+    <a href="explorer.html">Поиск слов</a>
+    <a href="cognates.html">Карта когнатов</a>
+    <a href="timeline.html">Слои</a>
+    <a href="archive/">Архив</a>
+  </div>
+  <a class="src ext" id="navsrc" href="#" target="_blank" rel="noopener noreferrer">Оригинал в Wiktionary</a>
+  <span class="langsw" aria-label="Язык издания"><a href="../index.html" lang="en" hreflang="en" title="English edition">EN</a><span class="on" lang="ru">RU</span></span>
+</nav>
+
+<header class="masthead">
+  <p class="eyebrow">Обучение санскриту · наглядное прочтение классификации источника</p>
+  <h1>Санскритские слова по этимологии</h1>
+  <p class="lede">Английский Wiktionary перечисляет здесь 42 подкатегории одним плоским алфавитным списком. Эта страница перегруппировывает те же данные вокруг трёх вопросов, которые действительно задаёт студент, показывает, откуда на самом деле берётся лексика, и превращает правило вриддхи в то, можно ли потрогать кнопками.</p>
+  <p class="meta">Снимок источника <span id="snapid"></span> · сделан <span id="snapdate"></span> · <span id="snaptotal"></span> подкатегорий, <span id="snapmembers"></span> заголовков участников сохранено.</p>
+  <div class="topnav">
+    <a class="pill primary ext" id="srccat" href="#" target="_blank" rel="noopener noreferrer">Оригинальная категория в Wiktionary</a>
+    <a class="pill" href="explorer.html">Поиск по словам</a>
+    <a class="pill" href="cognates.html">Карта когнатов</a>
+    <a class="pill" href="timeline.html">Исторические слои</a>
+    <a class="pill ext" href="archive/">Архив и резервная копия</a>
+    <a class="pill ext" href="https://github.com/gasyoun/gasyoun.github.io/tree/master/wiki/ru" target="_blank" rel="noopener noreferrer">Код страницы на GitHub</a>
+    <a class="pill ext" id="cpr" href="#" target="_blank" rel="noopener noreferrer">Авторские права Wiktionary</a>
+  </div>
+</header>
+
+<section class="block" id="lenses">
+  <span class="sectionnum">01 · перегруппировка</span>
+  <h2>Три вопроса, спрятанные в одном плоском списке</h2>
+  <p class="intro">Алфавитный порядок ставит <em>праиндоевропейские корни</em> рядом с <em>окказионализмами</em>. Но это ответы на разные вопросы. Первая призма — историческая последовательность, вторая — панинийская «фабрика слов», третья отделяет засвидетельствованное от реконструированного и неизвестного. Каждая строка ниже открывает соответствующую категорию Wiktionary. Русские названия — учебные ярлыки: наведите курсор или включите переключатель, чтобы увидеть англоязычный оригинал, как он записан в источнике.</p>
+  <div class="toolbar">
+    <input type="search" id="q" placeholder="Фильтр по 42 категориям…" aria-label="Фильтр категорий">
+    <button type="button" class="btn" id="origtoggle" aria-pressed="false">Показать оригинальные названия</button>
+    <span class="hint" id="qcount"></span>
+  </div>
+  <div class="lenses" id="lensgrid"></div>
+  <p class="lensfoot"><code>c</code> = подкатегории (широта классификации), <code>e</code> = словарные статьи (собственно слова). Wiktionary смешивает обе единицы в одном списке; здесь они никогда не складываются.</p>
+</section>
+
+<section class="block" id="counts">
+  <span class="sectionnum">02 · форма данных</span>
+  <h2>Где на самом деле находятся слова</h2>
+  <p class="intro">Число статей на одной честной линейной шкале. Каждая полоса — ссылка на категорию, которую она измеряет.</p>
+  <div class="bars">
+    <div class="legend">
+      <span><i class="swatch" style="background:#378add"></i> Типы словообразования</span>
+      <span><i class="swatch" style="background:#ef9f27"></i> Границы нашего знания</span>
+      <span style="margin-left:auto">Число словарных статей (e)</span>
+    </div>
+    <div id="bars"></div>
+  </div>
+  <p class="intro" style="margin-top:18px">Другая единица — число подкатегорий (c) показывает широту классификации, а не количество слов в ней:</p>
+  <div class="chips" id="chips"></div>
+</section>
+
+<section class="block" id="lab">
+  <span class="sectionnum">03 · механизм словообразования</span>
+  <h2>Гуна и вриддхи — нажимая на кнопки</h2>
+  <p class="intro">Список не может научить механизму. Выберите корневой гласный, чтобы увидеть нулевую ступень, гуну и вриддхи, сандхи перед последующим гласным и разобранный пример, в котором каждое слово открывает свою статью в Wiktionary. Формы в деванагари и транслитерации IAST оставлены без перевода — это данные источника.</p>
+  <div class="lab">
+    <div class="vowels"><span class="lbl">Корневой гласный</span><span id="vbtns" style="display:flex;flex-wrap:wrap;gap:8px"></span></div>
+    <div class="grades" id="grades"></div>
+    <div class="sandhi" id="sandhi"></div>
+    <div class="example" id="example"></div>
+    <div class="lablinks" id="lablinks"></div>
+  </div>
+</section>
+
+<section class="block" id="notes">
+  <span class="sectionnum">04 · методические заметки</span>
+  <h2>Что сказать на занятии</h2>
+  <div class="notes">
+    <ul>
+      <li><strong>Лексика санскрита по преимуществу создаётся, а не заимствуется.</strong> <a class="srclink" id="n1" href="#" target="_blank" rel="noopener noreferrer">1 576 сложных слов</a> и <a class="srclink" id="n2" href="#" target="_blank" rel="noopener noreferrer">816 корней</a> намного превосходят <a class="srclink" id="n3" href="#" target="_blank" rel="noopener noreferrer">55 санскритизированных среднеиндоарийских</a> и 24 возвратных заимствования. Студенты часто представляют словарь как некий полученный готовым монолит; данные описывают порождающий механизм.</li>
+      <li><strong>Неопределённость — часть предмета.</strong> <a class="srclink" id="n4" href="#" target="_blank" rel="noopener noreferrer">У 447 статей этимология неизвестна</a> — больше, чем всех производных вриддхи, — и рядом с ними 22 явно реконструированные (*) формы и 9 звукоизобразительных.</li>
+      <li><strong>Заимствования широки, но неглубоки.</strong> Под «заимствованиями» 50 языков-источников, но почти все они малы; крупнейшие семьи происхождения — <a class="srclink" id="n5" href="#" target="_blank" rel="noopener noreferrer">556 подкатегорий праиндоевропейских корней</a> и 106 подкатегорий праиндоевропейских слов.</li>
+      <li><strong>Не читайте эти числа как проценты от санскритского словаря.</strong> Это отобранные редакторами Wiktionary количества категорий на момент снимка, а не обследование корпуса. Они показывают устройство классификации — именно поэтому и полезны для обучения тому, как классификации создаются.</li>
+      <li><strong>Избегайте здесь облаков слов, графов с силами и солнечных диаграмм.</strong> 42 названия — пересекающиеся метки, а не иерархия: одно слово может быть одновременно сложным, производным вриддхи и возведённым к праиндоевропейскому корню. Любая визуализация, навязывающая единое дерево, искажает данные.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <p>Источник: <a class="srclink ext" id="footsrc" href="#" target="_blank" rel="noopener noreferrer">английский Wiktionary, Category:Sanskrit terms by etymology</a> и его подкатегории. Названия категорий и числовые данные воспроизведены для обучения и цитирования; текст доступен по лицензии CC BY-SA — см. <a class="srclink ext" id="footcpr" href="#" target="_blank" rel="noopener noreferrer">Wiktionary:Copyrights</a>.</p>
+  <p>Побайтовая <a class="srclink ext" href="archive/">копия снимка источника</a> и её манифест SHA-256 хранятся в этом репозитории, чтобы материалы сохранились, если оригинальная страница переместится или исчезнет. Обновление: <code>python3 wiki/scripts/fetch_snapshot.py</code>.</p>
+</footer>
+
+</div>
+<script src="../data/etymology.js"></script>
+<script src="../data/i18n-ru.js"></script>
+<script>
+(function () {
+  "use strict";
+  var D = window.ETYMOLOGY, R = window.WIKI_RU;
+  var T = ' target="_blank" rel="noopener noreferrer"';
+  var esc = function (s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (ch) {
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[ch];
+    });
+  };
+  function cn(name) { return R.cat[name] || name; }
+  function cd(name) { return R.desc[name] || R.descFallback; }
+  function orig(name) { return '<span class="orig">' + esc(name) + '</span>'; }
+  var byName = {};
+  D.categories.forEach(function (c) { byName[c.name] = c; });
+
+  document.getElementById('snapid').textContent = D.snapshotId;
+  document.getElementById('snapdate').textContent = D.fetchedAtUtc;
+  document.getElementById('snaptotal').textContent = D.categories.length;
+  document.getElementById('navsrc').href = D.categoryUrl;
+  document.getElementById('srccat').href = D.categoryUrl;
+  document.getElementById('cpr').href = D.sourceLinks.copyrights;
+  document.getElementById('footsrc').href = D.categoryUrl;
+  document.getElementById('footcpr').href = D.sourceLinks.copyrights;
+  var ms = document.createElement('script');
+  ms.src = '../data/manifest.js';
+  ms.onload = function () {
+    var m = window.ETYMOLOGY_MANIFEST;
+    if (m) document.getElementById('snapmembers').textContent = m.totals.direct_members_captured.toLocaleString();
+  };
+  document.head.appendChild(ms);
+
+  // Toggle the verbatim Wiktionary titles behind the translated labels.
+  var origOn = false;
+  var ob = document.getElementById('origtoggle');
+  ob.addEventListener('click', function () {
+    origOn = !origOn;
+    document.getElementById('page').className = origOn ? 'wrap showorig' : 'wrap';
+    ob.textContent = origOn ? 'Скрыть оригинальные названия' : 'Показать оригинальные названия';
+    ob.setAttribute('aria-pressed', origOn ? 'true' : 'false');
+  });
+
+  function badge(c) {
+    var bits = [];
+    if (c.c) bits.push(c.c.toLocaleString() + ' c');
+    if (c.e) bits.push(c.e.toLocaleString() + ' e');
+    return bits.length ? bits.join(', ') : '0';
+  }
+  function haystack(c) {
+    return (c.name + ' ' + cn(c.name) + ' ' + c.desc + ' ' + cd(c.name)).toLowerCase();
+  }
+  function catRow(c) {
+    return '<a class="catrow" data-search="' + esc(haystack(c)) + '" href="' + esc(c.url) + '"' + T +
+      ' title="' + esc(c.name + ' — ' + cd(c.name)) + '"><span class="nm">' + esc(cn(c.name)) +
+      orig(c.name) + '</span><span class="ct">' + badge(c) + '</span></a>';
+  }
+
+  var LENSES = [
+    { key: 'origin', title: '1 · Откуда?', sub: 'Происхождение и заимствования' },
+    { key: 'formation', title: '2 · Как построено?', sub: 'Словообразование и деривация' },
+    { key: 'evidence', title: '3 · Насколько надёжно?', sub: 'Доказательность и уверенность' }
+  ];
+  document.getElementById('lensgrid').innerHTML = LENSES.map(function (L) {
+    var items = D.categories.filter(function (c) { return c.lens === L.key; });
+    return '<div class="lens ' + L.key + '"><div class="lenshead"><h3>' + L.title + '</h3>' +
+      '<span class="n">' + items.length + ' категорий</span></div><p class="lenssub">' + L.sub + '</p>' +
+      '<p class="lenssub" style="font-size:11px;opacity:.75;margin-top:-6px">' + esc(R.lens[L.key]) + '</p>' +
+      items.map(catRow).join('') + '</div>';
+  }).join('');
+
+  var withE = D.categories.filter(function (c) { return c.e > 0; }).sort(function (a, b) { return b.e - a.e; });
+  var max = withE[0].e;
+  var amber = { 'Sanskrit terms with unknown etymologies': 1, 'Sanskrit reconstructed terms': 1 };
+  document.getElementById('bars').innerHTML = withE.map(function (c) {
+    var w = Math.max(1.5, (c.e / max) * 100);
+    return '<a class="bar' + (amber[c.name] ? ' amber' : '') + '" data-search="' +
+      esc(haystack(c)) + '" href="' + esc(c.url) + '"' + T +
+      ' title="' + esc(c.name + ' — ' + cd(c.name)) + '"><span class="bl">' + esc(cn(c.name)) +
+      orig(c.name) + '</span>' +
+      '<span class="track"><span class="fill" style="width:' + w.toFixed(2) + '%"></span></span>' +
+      '<span class="v">' + c.e.toLocaleString() + '</span></a>';
+  }).join('');
+
+  var withC = D.categories.filter(function (c) { return c.c > 0; }).sort(function (a, b) { return b.c - a.c; });
+  document.getElementById('chips').innerHTML = withC.map(function (c) {
+    return '<a class="chip" data-search="' + esc(haystack(c)) + '" href="' +
+      esc(c.url) + '"' + T + ' title="' + esc(c.name + ' — ' + cd(c.name)) + '"><span>' + esc(cn(c.name)) +
+      orig(c.name) + '</span><b>' + c.c.toLocaleString() + ' c</b></a>';
+  }).join('');
+
+  var q = document.getElementById('q');
+  var count = document.getElementById('qcount');
+  function filter() {
+    var needle = q.value.trim().toLowerCase();
+    var shown = 0, rows = document.querySelectorAll('.catrow');
+    rows.forEach(function (el) {
+      var hit = !needle || el.getAttribute('data-search').indexOf(needle) > -1;
+      el.hidden = !hit;
+      if (hit) shown++;
+    });
+    document.querySelectorAll('.bar, .chip').forEach(function (el) {
+      el.hidden = !!needle && el.getAttribute('data-search').indexOf(needle) === -1;
+    });
+    count.textContent = needle ? 'показано ' + shown + ' из 42 категорий' : '';
+  }
+  q.addEventListener('input', filter);
+
+  var vb = document.getElementById('vbtns');
+  vb.innerHTML = D.grades.map(function (g, i) {
+    return '<button type="button" class="vbtn" data-i="' + i + '">' + esc(g.vowels) + '</button>';
+  }).join('');
+
+  function stage(tag, iast, deva, url) {
+    var inner = '<div class="st">' + tag + '</div>' +
+      (url ? '<a href="' + esc(url) + '"' + T + ' title="Открыть ' + esc(iast) + ' в Wiktionary">' : '<div>') +
+      '<div class="si">' + esc(iast) + '</div><div class="sd">' + esc(deva || '—') + '</div>' +
+      (url ? '</a>' : '</div>');
+    return '<div class="stage">' + inner + '</div>';
+  }
+  function gradeCard(label, value, caption, url) {
+    var c = url ? '<a class="srclink ext" href="' + esc(url) + '"' + T + '>' + esc(caption) + '</a>' : esc(caption);
+    return '<div class="grade"><div class="gl">' + label + '</div><div class="gv">' + esc(value) +
+      '</div><div class="gc">' + c + '</div></div>';
+  }
+
+  function setGrade(i) {
+    var g = D.grades[i];
+    vb.querySelectorAll('.vbtn').forEach(function (b) {
+      b.classList.toggle('on', Number(b.getAttribute('data-i')) === i);
+    });
+    document.getElementById('grades').innerHTML =
+      gradeCard(R.gradeLabel[0], g.zero, R.gradeNote, '') +
+      gradeCard(R.gradeLabel[1], g.guna, 'напр. ' + g.gunaIast, g.gunaUrl) +
+      gradeCard(R.gradeLabel[2], g.vrddhi, 'напр. ' + g.vrddhiIast, g.vrddhiUrl);
+    document.getElementById('sandhi').textContent = R.sandhi[i];
+    document.getElementById('example').innerHTML =
+      '<div class="eh">Пример · один корень, три ступени</div><div class="stages">' +
+      stage('Корень', g.rootIast, g.root, g.rootUrl) + '<div class="arrow">→</div>' +
+      stage('Гуна', g.gunaIast, g.gunaWord, g.gunaUrl) + '<div class="arrow">→</div>' +
+      stage('Вриддхи', g.vrddhiIast, g.vrddhiWord, g.vrddhiUrl) + '</div>' +
+      '<div class="gloss">' + esc(R.gradeGloss[i]) + '</div>';
+  }
+  vb.addEventListener('click', function (e) {
+    var b = e.target.closest('.vbtn');
+    if (b) setGrade(Number(b.getAttribute('data-i')));
+  });
+  setGrade(2);
+
+  var S = D.sourceLinks;
+  document.getElementById('lablinks').innerHTML =
+    '<a class="pill ext" href="' + esc(S.vrddhi) + '"' + T + '>Производные вриддхи в Wiktionary</a>' +
+    '<a class="pill ext" href="' + esc(S.roots) + '"' + T + '>Корни санскрита</a>' +
+    '<a class="pill ext" href="' + esc(S.pieRoots) + '"' + T + '>Семьи ПИЕ-корней</a>' +
+    '<a class="pill ext" href="' + esc(S.unknown) + '"' + T + '>Неустановленная этимология</a>';
+
+  [['n1', 'Sanskrit compound terms', '1 576 сложных слов'],
+   ['n2', 'Sanskrit roots', '816 корней'],
+   ['n3', 'Sanskrit terms derived from Middle Indo-Aryan by Sanskritization', '55 санскритизированных среднеиндоарийских'],
+   ['n4', 'Sanskrit terms with unknown etymologies', 'У 447 статей этимология неизвестна'],
+   ['n5', 'Sanskrit terms by Proto-Indo-European root', '556 подкатегорий праиндоевропейских корней']
+  ].forEach(function (x) {
+    var c = byName[x[1]];
+    var el = document.getElementById(x[0]);
+    if (c) { el.href = c.url; el.textContent = x[2]; }
+  });
+})();
+</script>
+</body>
+</html>
