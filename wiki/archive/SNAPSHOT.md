@@ -18,6 +18,8 @@ See [manifest.json](manifest.json) for SHA-256 checksums and source URLs.
 | [`category-wikitext.json`](raw/category-wikitext.json) | 107 | `cea7d965c24b123912be8ca860f08e21dfa9d49bb3f12b0e04b105851f09d276` |
 | [`category-rendered.json`](raw/category-rendered.json) | 11936 | `1dc0aadb8746eda077c50545151e1341c7a1d26dd693d059fbc1230fa5dbe3ef` |
 | [`subcategory-members.json`](raw/subcategory-members.json) | 303841 | `c7862fda12775adc7ed4aa70e54bfff927913b2f983e79a721d059e4460d6900` |
+| [`cognates.json`](raw/cognates.json) | 175703 | `450120de85824ca3dbd4de42971fedd915f10843b56318da834a1c671ab5d6a2` |
+| [`cognates-manifest.json`](cognates-manifest.json) | 39204 | `26491a7ae44eb957a306e7b360ccabe8b30aab57c2d8d497e3615d7995ec5dff` |
 
 ## The 42 subcategories
 
@@ -99,9 +101,22 @@ See [manifest.json](manifest.json) for SHA-256 checksums and source URLs.
 - **Sanskrit words derived through corruption** — Result of a sporadic, non-systematic change.
 - **Sanskrit words derived through metathesis** — Created by transposing sounds.
 
+## Derived teaching data
+
+Rebuilt from the raw files above; no extra network access needed.
+
+| File | Contents |
+| --- | --- |
+| [`data/etymology.js`](../data/etymology.js) | 42 categories with `c`/`e` counts, lens grouping, descriptions and the guṇa/vṛddhi grades. |
+| [`data/lemmata.js`](../data/lemmata.js) | 3,164 unique word lemmata with their 3,419 category memberships, plus 2,005 second-level source buckets (PIE roots, donor languages, suffixes, prefixes). |
+| [`data/cognates.js`](../data/cognates.js) | 18 PIE root/word sets across 8 languages and 4 inheritance layers, drawn from 118 queried Wiktionary categories. |
+| [`cognates-manifest.json`](cognates-manifest.json) | Exact source URL of every category used to build the cognate data. |
+
+The crawl is **one level deep**: it captures direct members of the 42 subcategories, not the full contents of the 2,005 nested buckets. The explorer therefore presents a faithful sample, not a complete lexicon.
+
 ## Rights
 
 Wiktionary text is available under CC BY-SA; see [Wiktionary:Copyrights](https://en.wiktionary.org/wiki/Wiktionary:Copyrights).
 This snapshot reproduces category names and counts for teaching and citation, with a link back to the original on every item.
 
-Regenerate with `python3 wiki/scripts/fetch_snapshot.py`.
+Regenerate with `python3 wiki/scripts/fetch_snapshot.py`. Run `fetch_cognates.py` first if the cognate sets need refreshing. Add `--offline` to rebuild every derived file from this snapshot alone, preserving the original timestamp and checksums.

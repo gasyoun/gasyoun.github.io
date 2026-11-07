@@ -10,6 +10,18 @@
 <body>
 <div class="wrap">
 
+<nav class="sitenav" aria-label="Sections">
+  <a class="brand" href="index.html">Sanskrit etymology</a>
+  <div class="sitelinks">
+    <a class="on" href="index.html">Overview</a>
+    <a href="explorer.html">Explorer</a>
+    <a href="cognates.html">Cognate map</a>
+    <a href="timeline.html">Timeline</a>
+    <a href="archive/">Archive</a>
+  </div>
+  <a class="src ext" id="navsrc" href="#" target="_blank" rel="noopener noreferrer">Original category</a>
+</nav>
+
 <header class="masthead">
   <p class="eyebrow">Sanskrit education · a visual reading of a source taxonomy</p>
   <h1>Sanskrit terms by etymology</h1>
@@ -17,6 +29,9 @@
   <p class="meta">Source snapshot <span id="snapid"></span> · taken <span id="snapdate"></span> · <span id="snaptotal"></span> subcategories, <span id="snapmembers"></span> member titles archived.</p>
   <div class="topnav">
     <a class="pill primary ext" id="srccat" href="#" target="_blank" rel="noopener noreferrer">Original category on Wiktionary</a>
+    <a class="pill" href="explorer.html">Etymology explorer</a>
+    <a class="pill" href="cognates.html">Cognate map</a>
+    <a class="pill" href="timeline.html">Timeline of layers</a>
     <a class="pill ext" href="archive/">Source archive &amp; backup</a>
     <a class="pill ext" href="https://github.com/gasyoun/gasyoun.github.io/tree/master/wiki" target="_blank" rel="noopener noreferrer">Page source on GitHub</a>
     <a class="pill ext" id="cpr" href="#" target="_blank" rel="noopener noreferrer">Wiktionary copyrights</a>
@@ -102,6 +117,7 @@
   document.getElementById('snapid').textContent = D.snapshotId;
   document.getElementById('snapdate').textContent = D.fetchedAtUtc;
   document.getElementById('snaptotal').textContent = D.categories.length;
+  document.getElementById('navsrc').href = D.categoryUrl;
   document.getElementById('srccat').href = D.categoryUrl;
   document.getElementById('cpr').href = D.sourceLinks.copyrights;
   document.getElementById('footsrc').href = D.categoryUrl;

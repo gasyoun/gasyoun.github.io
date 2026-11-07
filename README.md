@@ -14,10 +14,18 @@ is the full catalog.
 - **[wiki/](https://gasyoun.github.io/wiki/)** — «Sanskrit terms by etymology»:
   учебный вид [одноимённой категории Wiktionary](https://en.wiktionary.org/wiki/Category:Sanskrit_terms_by_etymology)
   (42 подкатегории в трёх линзах, шкала числа слов, интерактивный стенд
-  guṇa/vṛddhi). Каждая категория, число и пример слова — ссылка на оригинал;
-  без CDN и сборки. Рядом **[wiki/archive/](https://gasyoun.github.io/wiki/archive/)** —
-  байт-в-байт бэкап исходной страницы, 5 426 заголовков дерева категорий,
-  SHA-256 и инструкция восстановления.
+  guṇa/vṛddhi) плюс три инструмента поверх реального словаря:
+  [Etymology explorer](https://gasyoun.github.io/wiki/explorer.html) (3 164 леммы,
+  2 005 buckets источников, поиск и фильтры),
+  [Cognate map](https://gasyoun.github.io/wiki/cognates.html) (18 PIE корней/слов ×
+  8 языков, 118 категорий-источников) и
+  [Timeline of layers](https://gasyoun.github.io/wiki/timeline.html) (4 слоя
+  наследования с реальными числами, затем словообразование, контакты, лакуны).
+  Каждая категория, число, лемма и рефлекс — ссылка на точную страницу оригинала;
+  без CDN и сборки, работает офлайн папкой. Рядом
+  **[wiki/archive/](https://gasyoun.github.io/wiki/archive/)** — байт-в-байт бэкап
+  исходной страницы, 5 426 заголовков дерева категорий, 7 файлов с SHA-256,
+  URL-манифест и инструкция восстановления (в т.ч. `--offline`-пересборка без сети).
 - **[campus/](https://gasyoun.github.io/campus/)** — «Кампус наглядности»:
   один вход ко всей визуальной наглядности имения — 72 артефакта в 4 крыльях
   (грамматика / учёба / имение и финансы / продукты и привлечение); собирается

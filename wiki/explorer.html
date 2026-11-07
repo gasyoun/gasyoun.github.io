@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Etymology explorer — Sanskrit terms by etymology</title>
+<meta name="description" content="Search 3,142 real Sanskrit lemmata and 2,005 source buckets archived from Wiktionary's Category:Sanskrit terms by etymology. Every word and every tag links to its original source.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+
+<nav class="sitenav" aria-label="Sections">
+  <a class="brand" href="index.html">Sanskrit etymology</a>
+  <div class="sitelinks">
+    <a href="index.html">Overview</a>
+    <a class="on" href="explorer.html">Explorer</a>
+    <a href="cognates.html">Cognate map</a>
+    <a href="timeline.html">Timeline</a>
+    <a href="archive/">Archive</a>
+  </div>
+  <a class="src ext" id="navsrc" href="#" target="_blank" rel="noopener noreferrer">Original category</a>
+</nav>
+
+<header class="masthead">
+  <p class="eyebrow">Study tool 01 · the vocabulary itself</p>
+  <h1>Etymology explorer</h1>
+  <p class="lede">The category page shows labels, not words. This explorer opens the archive one level down: every Sanskrit lemma that is a direct member of one of the 42 subcategories, and every second-level source bucket — PIE root families, donor languages, suffixes and prefixes. Search a word, follow its etymology tags, or browse where words come from.</p>
+  <p class="meta">Snapshot <span id="snapid"></span> · <span id="snapdate"></span> · <span id="snapwords"></span> unique lemmata, <span id="snapnested"></span> source buckets, all linked to the original.</p>
+  <div class="topnav">
+    <a class="pill primary ext" id="srccat" href="#" target="_blank" rel="noopener noreferrer">Original category on Wiktionary</a>
+    <a class="pill ext" href="archive/">Raw source snapshot</a>
+    <a class="pill ext" href="https://github.com/gasyoun/gasyoun.github.io/blob/master/wiki/data/lemmata.js" target="_blank" rel="noopener noreferrer">lemmata.js on GitHub</a>
+    <a class="pill ext" href="timeline.html">Go to the timeline</a>
+  </div>
+</header>
+
+<section class="block" style="margin-top:0">
+  <div class="callout"><strong>Read the scope before the numbers.</strong> The backup crawls <em>one level</em> below the 42 subcategories. These are their direct members — a faithful, citable sample of how Wiktionary files Sanskrit words, not a complete Sanskrit lexicon. Words sitting only inside deeper buckets (for example inside a single PIE-root category) are not in this list. Every item below is a real title from the <a class="srclink ext" href="archive/manifest.json" target="_blank" rel="noopener noreferrer">archived API responses</a>.</div>
+  <div class="statrow" id="stats"></div>
+  <div class="toolbar">
+    <span class="tabs" id="modetabs">
+      <button type="button" class="tab on" data-mode="words">Words</button>
+      <button type="button" class="tab" data-mode="sources">Source buckets</button>
+    </span>
+    <input type="search" id="q" placeholder="Search a Devanagari word or a source…" aria-label="Search lemmata">
+    <select id="lens" aria-label="Filter by lens"></select>
+    <select id="cat" aria-label="Filter by category"></select>
+    <select id="sort" aria-label="Sort results"></select>
+    <span class="hint" id="qcount"></span>
+  </div>
+  <div id="results"></div>
+  <div class="pager" id="pager"></div>
+</section>
+
+<section class="block" id="overlaps">
+  <span class="sectionnum">02 · overlapping tags</span>
+  <h2>One word, several etymologies</h2>
+  <p class="intro">These lemmata are filed under more than one of the 42 categories at once. That is the clearest proof that the source list is a set of overlapping tags, not a tree. Each tag is a link to the exact Wiktionary category.</p>
+  <div class="wordlist" id="cross"></div>
+</section>
+
+<section class="block" id="other">
+  <span class="sectionnum">03 · nothing discarded</span>
+  <h2>Non-lemma titles in the same categories</h2>
+  <p class="intro">Wiktionary also files a couple of template-namespace pages here. They are not Sanskrit words, so they are not in the lemma list — but the archive keeps them and they remain linked to the original.</p>
+  <div class="wordlist" id="otherlist"></div>
+</section>
+
+<section class="block" id="notes">
+  <span class="sectionnum">04 · teaching notes</span>
+  <h2>How to use this in class</h2>
+  <div class="notes">
+    <ul>
+      <li><strong>Start with the source buckets, not the words.</strong> Under <a class="srclink" id="n1" href="#" target="_blank" rel="noopener noreferrer">terms by root</a> the archive holds 959 named dhātu families; under <a class="srclink" id="n2" href="#" target="_blank" rel="noopener noreferrer">terms by Proto-Indo-European root</a> another 556. A student who browses these sees that Sanskrit vocabulary is generated from roots, not collected as a word list.</li>
+      <li><strong>Contrast inheritance with borrowing.</strong> There are only <a class="srclink" id="n3" href="#" target="_blank" rel="noopener noreferrer">50 donor-language buckets</a> but <a class="srclink" id="n4" href="#" target="_blank" rel="noopener noreferrer">1,576 compound entries</a>. Ask students to find a borrowed word and a built word, then compare how Wiktionary describes each.</li>
+      <li><strong>Use the cross-listed words as an exercise.</strong> Give a lemma filed under three categories and ask which answer — where from, how built, how sure — each tag gives. The tags are complementary, not competing.</li>
+      <li><strong>Mark the reconstructions.</strong> The archive holds <span id="reccount">32</span> entries prefixed <code>Reconstruction:</code> — not attested forms, but scholarly reconstructions. Wiktionary keeps them in the same categories, which is precisely why an "evidence" lens matters.</li>
+      <li><strong>Never add <code>c</code> and <code>e</code>.</strong> <code>c</code> counts subcategories, <code>e</code> counts word pages. They measure different things and the explorer keeps them apart.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <p>Source: <a class="srclink ext" id="footsrc" href="#" target="_blank" rel="noopener noreferrer">English Wiktionary, Category:Sanskrit terms by etymology</a> and its 42 subcategories. Word titles and category names are reproduced for teaching and citation; text is available under CC BY-SA — see <a class="srclink ext" id="footcpr" href="#" target="_blank" rel="noopener noreferrer">Wiktionary:Copyrights</a>.</p>
+  <p>Generated from the <a class="srclink ext" href="archive/raw/subcategory-members.json" target="_blank" rel="noopener noreferrer">archived category-member responses</a>; rebuild offline with <code>python3 wiki/scripts/fetch_snapshot.py --offline</code>.</p>
+</footer>
+
+</div>
+<script src="data/lemmata.js"></script>
+<script src="data/etymology.js"></script>
+<script>
+(function () {
+  "use strict";
+  var L = window.ETYMOLOGY_LEMMATA, D = window.ETYMOLOGY;
+  var T = ' target="_blank" rel="noopener noreferrer"';
+  var esc = function (s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (ch) {
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[ch];
+    });
+  };
+  function path(title) {
+    return encodeURIComponent(title.replace(/ /g, '_')).replace(/%3A/gi, ':');
+  }
+  function wordUrl(t) {
+    return L.base + '/wiki/' + path(t) + (t.indexOf('Reconstruction:') === 0 ? '' : '#Sanskrit');
+  }
+  function bucketUrl(short) { return L.base + '/wiki/' + path('Category:' + short); }
+  var lensLetter = { origin: 'o', formation: 'f', evidence: 'e' };
+  var lensLabel = { origin: 'provenance', formation: 'formation', evidence: 'evidence' };
+
+  document.getElementById('snapid').textContent = L.snapshotId;
+  document.getElementById('snapdate').textContent = L.fetchedAtUtc;
+  document.getElementById('snapwords').textContent = L.totals.uniqueWords.toLocaleString();
+  document.getElementById('snapnested').textContent = L.totals.nested.toLocaleString();
+  ['navsrc', 'srccat', 'footsrc'].forEach(function (id) {
+    document.getElementById(id).href = D.categoryUrl;
+  });
+  document.getElementById('footcpr').href = D.sourceLinks.copyrights;
+
+  var byName = {};
+  L.categories.forEach(function (c) { byName[c.name] = c; });
+  [['n1', 'Sanskrit terms by root'], ['n2', 'Sanskrit terms by Proto-Indo-European root'],
+   ['n3', 'Sanskrit borrowed terms'], ['n4', 'Sanskrit compound terms']].forEach(function (x) {
+    var el = document.getElementById(x[0]);
+    if (byName[x[1]]) el.href = byName[x[1]].url;
+  });
+
+  document.getElementById('stats').innerHTML = [
+    ['uniqueWords', 'distinct Sanskrit lemmata', D.categoryUrl, 'open the source category'],
+    ['memberships', 'category memberships in the archive', 'archive/raw/subcategory-members.json', 'open the raw member list'],
+    ['crossListed', 'words filed under 2+ categories', D.categoryUrl, 'why the list is not a tree'],
+    ['nested', 'second-level source buckets', 'archive/SNAPSHOT.md', 'see how they were captured']
+  ].map(function (s) {
+    return '<div class="stat"><div class="k">' + L.totals[s[0]].toLocaleString() + '</div>' +
+      '<div class="v">' + s[1] + ' · <a class="ext" href="' + esc(s[2]) + '"' + T +
+      ' title="' + esc(s[3]) + '">' + esc(s[3]) + '</a></div></div>';
+  }).join('');
+
+  // Selects ------------------------------------------------------------------
+  var lensSel = document.getElementById('lens');
+  lensSel.innerHTML = '<option value="">All three lenses</option>' +
+    ['origin', 'formation', 'evidence'].map(function (k) {
+      return '<option value="' + k + '">' + lensLabel[k] + ' only</option>';
+    }).join('');
+  var catSel = document.getElementById('cat');
+  catSel.innerHTML = '<option value="">All 42 categories</option>' + L.categories.map(function (c, i) {
+    return '<option value="' + i + '">' + esc(c.name) + '</option>';
+  }).join('');
+  var sortSel = document.getElementById('sort');
+
+  var mode = 'words', page = 1, PAGE_SIZE = 60;
+  var expanded = {};
+
+  function setSortOptions() {
+    sortSel.innerHTML = mode === 'words'
+      ? '<option value="az">A → Z</option><option value="za">Z → A</option>' +
+        '<option value="most">Most tags first</option><option value="few">Fewest tags first</option>'
+      : '<option value="az">A → Z</option><option value="za">Z → A</option>' +
+        '<option value="big">Biggest bucket first</option>';
+  }
+  setSortOptions();
+
+  // Word rows ----------------------------------------------------------------
+  function tagHtml(idx) {
+    var c = L.categories[idx];
+    return '<a class="wtag ' + lensLetter[c.lens] + '" href="' + esc(c.url) + '"' + T +
+      ' title="' + esc(c.desc) + '">' + esc(c.name.replace(/^Sanskrit /, '')) + '</a>';
+  }
+  function wordRow(w) {
+    var title = w[0], ids = w[1];
+    var isRec = w[2] === 1 || title.indexOf('Reconstruction:') === 0;
+    var isLatin = !/[\u0900-\u097F]/.test(title);
+    var label = isRec ? title.replace(/^Reconstruction:[^/]*\//, '') : title;
+    return '<div class="wordrow"><a class="wd' + (isLatin ? ' latin' : '') + '" href="' +
+      esc(wordUrl(title)) + '"' + T + ' title="Open ' + esc(title) + ' on Wiktionary">' +
+      (isRec ? '<span class="rec">reconstructed</span>' : '') + esc(label) + '</a>' +
+      '<div class="wtags">' + ids.map(tagHtml).join('') + '</div>' +
+      '<div class="nc" title="Number of categories">' + ids.length + '</div></div>';
+  }
+
+  // Source buckets -----------------------------------------------------------
+  function bucketHtml(group) {
+    var parent = L.categories[group.pi];
+    var links = group.items;
+    var shown = expanded[group.pi] ? links : links.slice(0, 24);
+    var more = (!expanded[group.pi] && links.length > 24)
+      ? '<button type="button" class="blink" data-expand="' + group.pi + '">+' +
+        (links.length - 24).toLocaleString() + ' more (' + links.length.toLocaleString() + ' total)</button>'
+      : '';
+    return '<div class="bucket"><div class="buckethead"><h3><a class="srclink" href="' +
+      esc(parent.url) + '"' + T + '>' + esc(parent.name) + '</a></h3><span class="n">' +
+      links.length.toLocaleString() + ' of ' + group.total.toLocaleString() + ' buckets shown · ' +
+      lensLabel[parent.lens] + '</span></div><div class="bucketlinks">' +
+      shown.map(function (s) {
+        return '<a class="blink" href="' + esc(bucketUrl(s)) + '"' + T +
+          ' title="Open ' + esc(s) + ' on Wiktionary">' + esc(s.replace(/^Sanskrit /, '')) + '</a>';
+      }).join('') + more + '</div></div>';
+  }
+
+  // Filtering ----------------------------------------------------------------
+  function filteredWords() {
+    var needle = document.getElementById('q').value.trim().toLowerCase();
+    var lens = lensSel.value, cat = catSel.value, sort = sortSel.value;
+    var out = L.words.filter(function (w) {
+      if (cat !== '' && w[1].indexOf(Number(cat)) === -1) return false;
+      if (lens && !w[1].some(function (i) { return L.categories[i].lens === lens; })) return false;
+      if (!needle) return true;
+      if (w[0].toLowerCase().indexOf(needle) > -1) return true;
+      return w[1].some(function (i) {
+        return L.categories[i].name.toLowerCase().indexOf(needle) > -1;
+      });
+    });
+    if (sort === 'za') out = out.slice().reverse();
+    else if (sort === 'most') out.sort(function (a, b) { return b[1].length - a[1].length || (a[0] < b[0] ? -1 : 1); });
+    else if (sort === 'few') out.sort(function (a, b) { return a[1].length - b[1].length || (a[0] < b[0] ? -1 : 1); });
+    return { list: out, needle: needle };
+  }
+  function filteredBuckets() {
+    var needle = document.getElementById('q').value.trim().toLowerCase();
+    var cat = catSel.value, sort = sortSel.value;
+    var groups = [];
+    L.categories.forEach(function (c, pi) {
+      var all = L.nested.filter(function (n) { return n[1] === pi; });
+      var items = all.map(function (n) { return n[0]; }).filter(function (s) {
+        return !needle || s.toLowerCase().indexOf(needle) > -1 ||
+               c.name.toLowerCase().indexOf(needle) > -1;
+      });
+      if (items.length) groups.push({ pi: pi, items: items, total: all.length });
+    });
+    if (cat !== '') groups = groups.filter(function (g) { return g.pi === Number(cat); });
+    if (sort === 'za') groups.forEach(function (g) { g.items.reverse(); });
+    if (sort === 'big') groups.sort(function (a, b) { return b.items.length - a.items.length; });
+    return { list: groups, needle: needle };
+  }
+
+  function render() {
+    var res = document.getElementById('results');
+    var pager = document.getElementById('pager');
+    var count = document.getElementById('qcount');
+    var r = mode === 'words' ? filteredWords() : filteredBuckets();
+    var n = r.list.length;
+    count.textContent = (r.needle || lensSel.value || catSel.value !== '')
+      ? n.toLocaleString() + ' of ' + (mode === 'words'
+          ? L.totals.uniqueWords.toLocaleString() + ' lemmata'
+          : L.totals.nested.toLocaleString() + ' buckets') + ' shown'
+      : '';
+    if (!n) {
+      res.innerHTML = '<div class="wordlist"><div class="empty">Nothing matches. Try a shorter search, or clear the lens and category filters.</div></div>';
+      pager.innerHTML = '';
+      return;
+    }
+    if (mode === 'words') {
+      var slice = r.list.slice(0, page * PAGE_SIZE);
+      res.innerHTML = '<div class="wordlist">' + slice.map(wordRow).join('') + '</div>';
+      pager.innerHTML = slice.length < n
+        ? '<span>Showing ' + slice.length.toLocaleString() + ' of ' + n.toLocaleString() + '</span>' +
+          '<button type="button" class="btn" id="more">Show 60 more</button>'
+        : '<span>All ' + n.toLocaleString() + ' matching lemmata shown</span>';
+      var more = document.getElementById('more');
+      if (more) more.addEventListener('click', function () { page++; render(); });
+    } else {
+      res.innerHTML = '<div class="wordlist">' + r.list.map(bucketHtml).join('') + '</div>';
+      pager.innerHTML = '<span>' + n.toLocaleString() + ' of ' +
+        L.categories.length + ' parent categories have matching buckets</span>';
+      res.querySelectorAll('[data-expand]').forEach(function (b) {
+        b.addEventListener('click', function () {
+          expanded[Number(b.getAttribute('data-expand'))] = true;
+          render();
+        });
+      });
+    }
+  }
+
+  document.getElementById('modetabs').addEventListener('click', function (e) {
+    var b = e.target.closest('.tab');
+    if (!b) return;
+    mode = b.getAttribute('data-mode');
+    this.querySelectorAll('.tab').forEach(function (t) { t.classList.toggle('on', t === b); });
+    lensSel.disabled = (mode !== 'words');
+    page = 1;
+    setSortOptions();
+    render();
+  });
+  ['q', 'lens', 'cat', 'sort'].forEach(function (id) {
+    var el = document.getElementById(id);
+    el.addEventListener(id === 'q' ? 'input' : 'change', function () { page = 1; render(); });
+  });
+
+  // Cross-listed panel -------------------------------------------------------
+  var cross = L.words.filter(function (w) { return w[1].length > 1; })
+    .sort(function (a, b) { return b[1].length - a[1].length || (a[0] < b[0] ? -1 : 1); })
+    .slice(0, 12);
+  document.getElementById('cross').innerHTML = cross.map(wordRow).join('');
+
+  // Non-lemma titles, kept so that nothing from the archive disappears -------
+  document.getElementById('reccount').textContent = L.totals.reconstructed.toLocaleString();
+  document.getElementById('otherlist').innerHTML = L.other.map(function (o) {
+    var parent = L.categories[o[1]];
+    return '<div class="wordrow"><a class="wd latin" href="' +
+      esc(L.base + '/wiki/' + path(o[0])) + '"' + T + ' title="Open ' + esc(o[0]) +
+      ' on Wiktionary"><span class="rec">namespace ' + o[2] + '</span>' + esc(o[0]) +
+      '</a><div class="wtags"><a class="wtag" href="' + esc(parent.url) + '"' + T +
+      '>' + esc(parent.name.replace(/^Sanskrit /, '')) + '</a></div><div class="nc">—</div></div>';
+  }).join('');
+
+  render();
+})();
+</script>
+</body>
+</html>

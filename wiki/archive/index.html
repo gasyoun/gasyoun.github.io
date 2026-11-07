@@ -10,6 +10,18 @@
 <body>
 <div class="wrap">
 
+<nav class="sitenav" aria-label="Sections">
+  <a class="brand" href="../index.html">Sanskrit etymology</a>
+  <div class="sitelinks">
+    <a href="../index.html">Overview</a>
+    <a href="../explorer.html">Explorer</a>
+    <a href="../cognates.html">Cognate map</a>
+    <a href="../timeline.html">Timeline</a>
+    <a class="on" href="index.html">Archive</a>
+  </div>
+  <a class="src ext" id="navsrc" href="#" target="_blank" rel="noopener noreferrer">Original category</a>
+</nav>
+
 <header class="masthead">
   <p class="eyebrow">Backup · independent of the live source</p>
   <h1>Source archive</h1>
@@ -34,7 +46,8 @@
       <tbody id="files"></tbody>
     </table>
   </div>
-  <p class="intro" style="margin-top:14px">Also available: <a class="srclink ext" href="manifest.json" target="_blank" rel="noopener noreferrer">manifest.json</a> (machine-readable provenance and checksums) and <a class="srclink ext" href="https://github.com/gasyoun/gasyoun.github.io/blob/master/wiki/archive/SNAPSHOT.md" target="_blank" rel="noopener noreferrer">SNAPSHOT.md</a> (the same record as readable Markdown).</p>
+  <p class="intro" style="margin-top:14px">Also available: <a class="srclink ext" href="manifest.json" target="_blank" rel="noopener noreferrer">manifest.json</a> (machine-readable provenance and checksums), <a class="srclink ext" href="cognates-manifest.json" target="_blank" rel="noopener noreferrer">cognates-manifest.json</a> (the exact URL of every PIE / inheritance category queried) and <a class="srclink ext" href="SNAPSHOT.md" target="_blank" rel="noopener noreferrer">SNAPSHOT.md</a> (the same record as readable Markdown).</p>
+  <p class="intro" style="margin-top:10px">Derived, fully regenerable from the raw files: <a class="srclink ext" href="../data/etymology.js" target="_blank" rel="noopener noreferrer">etymology.js</a>, <a class="srclink ext" href="../data/lemmata.js" target="_blank" rel="noopener noreferrer">lemmata.js</a> (3,164 lemmata + 2,005 source buckets), <a class="srclink ext" href="../data/cognates.js" target="_blank" rel="noopener noreferrer">cognates.js</a> and <a class="srclink ext" href="../data/manifest.js" target="_blank" rel="noopener noreferrer">manifest.js</a>.</p>
 </section>
 
 <section class="block">
@@ -57,7 +70,9 @@
       <li><code>raw/subcategories.json</code> gives the authoritative list of 42 subcategory titles from the MediaWiki API.</li>
       <li><code>raw/subcategory-members.json</code> maps each of those titles to its direct subcategories and word pages (5,426 titles total). That is enough to reconstruct the tree one level down.</li>
       <li><code>raw/category.html</code> and <code>raw/category-rendered.json</code> preserve the page as displayed, including the introductory definitions and the <code>(N c, M e)</code> counts.</li>
-      <li>To refresh against a live Wiktionary, run <code>python3 wiki/scripts/fetch_snapshot.py</code>; it rewrites the raw files, both manifests, <code>SNAPSHOT.md</code> and the data files used by the site, and records a new timestamp and checksums on every run.</li>
+      <li><code>raw/cognates.json</code> holds the member lists of 114 per-language PIE root/word categories and 4 inheritance layers used by the <a class="srclink" href="../cognates.html">cognate map</a> and <a class="srclink" href="../timeline.html">timeline</a>. Its source URLs are in <a class="srclink" href="cognates-manifest.json">cognates-manifest.json</a>.</li>
+      <li><code>python3 wiki/scripts/fetch_snapshot.py --offline</code> rebuilds every derived file from these raw bytes with no network, preserving the original timestamp and checksums — useful if Wiktionary is unreachable.</li>
+      <li>To refresh against a live Wiktionary, run <code>python3 wiki/scripts/fetch_cognates.py</code> then <code>python3 wiki/scripts/fetch_snapshot.py</code>; they rewrite the raw files, both manifests, <code>SNAPSHOT.md</code> and all four data files, and record a new timestamp and checksums on every run.</li>
       <li>Verify any file with <code>shasum -a 256 &lt;file&gt;</code> against the digest in <a class="srclink" href="manifest.json" target="_blank" rel="noopener noreferrer">manifest.json</a>.</li>
     </ul>
   </div>
@@ -84,6 +99,7 @@
   document.getElementById('snapid').textContent = D.snapshotId;
   document.getElementById('snapdate').textContent = D.fetchedAtUtc;
   document.getElementById('snaptotal').textContent = D.categories.length;
+  document.getElementById('navsrc').href = D.categoryUrl;
   document.getElementById('srccat').href = D.categoryUrl;
   document.getElementById('footsrc').href = D.categoryUrl;
   document.getElementById('footcpr').href = D.sourceLinks.copyrights;

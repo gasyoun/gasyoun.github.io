@@ -1,0 +1,832 @@
+{
+  "fetched_at_utc": "2026-11-07T05:37:53Z",
+  "source_urls": [
+    {
+      "category": "Category:Sanskrit terms derived from the Proto-Indo-European root *bʰer-",
+      "url": "https://en.wiktionary.org/wiki/Category:Sanskrit_terms_derived_from_the_Proto-Indo-European_root_%2Ab%CA%B0er-",
+      "member_count": 19,
+      "form": "*bʰer-",
+      "language": "Sanskrit"
+    },
+    {
+      "category": "Category:Avestan terms derived from the Proto-Indo-European root *bʰer-",
+      "url": "https://en.wiktionary.org/wiki/Category:Avestan_terms_derived_from_the_Proto-Indo-European_root_%2Ab%CA%B0er-",
+      "member_count": 2,
+      "form": "*bʰer-",
+      "language": "Avestan"
+    },
+    {
+      "category": "Category:Proto-Indo-Iranian terms derived from the Proto-Indo-European root *bʰer-",
+      "url": "https://en.wiktionary.org/wiki/Category:Proto-Indo-Iranian_terms_derived_from_the_Proto-Indo-European_root_%2Ab%CA%B0er-",
+      "member_count": 2,
+      "form": "*bʰer-",
+      "language": "Proto-Indo-Iranian"
+    },
+    {
+      "category": "Category:Ancient Greek terms derived from the Proto-Indo-European root *bʰer-",
+      "url": "https://en.wiktionary.org/wiki/Category:Ancient_Greek_terms_derived_from_the_Proto-Indo-European_root_%2Ab%CA%B0er-",
+      "member_count": 107,
+      "form": "*bʰer-",
+      "language": "Ancient Greek"
+    },
+    {
+      "category": "Category:Latin terms derived from the Proto-Indo-European root *bʰer-",
+      "url": "https://en.wiktionary.org/wiki/Category:Latin_terms_derived_from_the_Proto-Indo-European_root_%2Ab%CA%B0er-",
+      "member_count": 226,
+      "form": "*bʰer-",
+      "language": "Latin"
+    },
+    {
+      "category": "Category:Old English terms derived from the Proto-Indo-European root *bʰer-",
+      "url": "https://en.wiktionary.org/wiki/Category:Old_English_terms_derived_from_the_Proto-Indo-European_root_%2Ab%CA%B0er-",
+      "member_count": 20,
+      "form": "*bʰer-",
+      "language": "Old English"
+    },
+    {
+      "category": "Category:English terms derived from the Proto-Indo-European root *bʰer-",
+      "url": "https://en.wiktionary.org/wiki/Category:English_terms_derived_from_the_Proto-Indo-European_root_%2Ab%CA%B0er-",
+      "member_count": 538,
+      "form": "*bʰer-",
+      "language": "English"
+    },
+    {
+      "category": "Category:Sanskrit terms derived from the Proto-Indo-European root *h₁es-",
+      "url": "https://en.wiktionary.org/wiki/Category:Sanskrit_terms_derived_from_the_Proto-Indo-European_root_%2Ah%E2%82%81es-",
+      "member_count": 24,
+      "form": "*h₁es-",
+      "language": "Sanskrit"
+    },
+    {
+      "category": "Category:Proto-Indo-Iranian terms derived from the Proto-Indo-European root *h₁es-",
+      "url": "https://en.wiktionary.org/wiki/Category:Proto-Indo-Iranian_terms_derived_from_the_Proto-Indo-European_root_%2Ah%E2%82%81es-",
+      "member_count": 8,
+      "form": "*h₁es-",
+      "language": "Proto-Indo-Iranian"
+    },
+    {
+      "category": "Category:Ancient Greek terms derived from the Proto-Indo-European root *h₁es-",
+      "url": "https://en.wiktionary.org/wiki/Category:Ancient_Greek_terms_derived_from_the_Proto-Indo-European_root_%2Ah%E2%82%81es-",
+      "member_count": 129,
+      "form": "*h₁es-",
+      "language": "Ancient Greek"
+    },
+    {
+      "category": "Category:Latin terms derived from the Proto-Indo-European root *h₁es-",
+      "url": "https://en.wiktionary.org/wiki/Category:Latin_terms_derived_from_the_Proto-Indo-European_root_%2Ah%E2%82%81es-",
+      "member_count": 62,
+      "form": "*h₁es-",
+      "language": "Latin"
+    },
+    {
+      "category": "Category:Old English terms derived from the Proto-Indo-European root *h₁es-",
+      "url": "https://en.wiktionary.org/wiki/Category:Old_English_terms_derived_from_the_Proto-Indo-European_root_%2Ah%E2%82%81es-",
+      "member_count": 9,
+      "form": "*h₁es-",
+      "language": "Old English"
+    },
+    {
+      "category": "Category:English terms derived from the Proto-Indo-European root *h₁es-",
+      "url": "https://en.wiktionary.org/wiki/Category:English_terms_derived_from_the_Proto-Indo-European_root_%2Ah%E2%82%81es-",
+      "member_count": 143,
+      "form": "*h₁es-",
+      "language": "English"
+    },
+    {
+      "category": "Category:Sanskrit terms derived from the Proto-Indo-European root *ǵenh₁-",
+      "url": "https://en.wiktionary.org/wiki/Category:Sanskrit_terms_derived_from_the_Proto-Indo-European_root_%2A%C7%B5enh%E2%82%81-",
+      "member_count": 24,
+      "form": "*ǵenh₁-",
+      "language": "Sanskrit"
+    },
+    {
+      "category": "Category:Avestan terms derived from the Proto-Indo-European root *ǵenh₁-",
+      "url": "https://en.wiktionary.org/wiki/Category:Avestan_terms_derived_from_the_Proto-Indo-European_root_%2A%C7%B5enh%E2%82%81-",
+      "member_count": 1,
+      "form": "*ǵenh₁-",
+      "language": "Avestan"
+    },
+    {
+      "category": "Category:Proto-Indo-Iranian terms derived from the Proto-Indo-European root *ǵenh₁-",
+      "url": "https://en.wiktionary.org/wiki/Category:Proto-Indo-Iranian_terms_derived_from_the_Proto-Indo-European_root_%2A%C7%B5enh%E2%82%81-",
+      "member_count": 3,
+      "form": "*ǵenh₁-",
+      "language": "Proto-Indo-Iranian"
+    },
+    {
+      "category": "Category:Ancient Greek terms derived from the Proto-Indo-European root *ǵenh₁-",
+      "url": "https://en.wiktionary.org/wiki/Category:Ancient_Greek_terms_derived_from_the_Proto-Indo-European_root_%2A%C7%B5enh%E2%82%81-",
+      "member_count": 74,
+      "form": "*ǵenh₁-",
+      "language": "Ancient Greek"
+    },
+    {
+      "category": "Category:Latin terms derived from the Proto-Indo-European root *ǵenh₁-",
+      "url": "https://en.wiktionary.org/wiki/Category:Latin_terms_derived_from_the_Proto-Indo-European_root_%2A%C7%B5enh%E2%82%81-",
+      "member_count": 105,
+      "form": "*ǵenh₁-",
+      "language": "Latin"
+    },
+    {
+      "category": "Category:Old English terms derived from the Proto-Indo-European root *ǵenh₁-",
+      "url": "https://en.wiktionary.org/wiki/Category:Old_English_terms_derived_from_the_Proto-Indo-European_root_%2A%C7%B5enh%E2%82%81-",
+      "member_count": 7,
+      "form": "*ǵenh₁-",
+      "language": "Old English"
+    },
+    {
+      "category": "Category:English terms derived from the Proto-Indo-European root *ǵenh₁-",
+      "url": "https://en.wiktionary.org/wiki/Category:English_terms_derived_from_the_Proto-Indo-European_root_%2A%C7%B5enh%E2%82%81-",
+      "member_count": 673,
+      "form": "*ǵenh₁-",
+      "language": "English"
+    },
+    {
+      "category": "Category:Sanskrit terms derived from the Proto-Indo-European root *dʰeh₁-",
+      "url": "https://en.wiktionary.org/wiki/Category:Sanskrit_terms_derived_from_the_Proto-Indo-European_root_%2Ad%CA%B0eh%E2%82%81-",
+      "member_count": 23,
+      "form": "*dʰeh₁-",
+      "language": "Sanskrit"
+    },
+    {
+      "category": "Category:Avestan terms derived from the Proto-Indo-European root *dʰeh₁-",
+      "url": "https://en.wiktionary.org/wiki/Category:Avestan_terms_derived_from_the_Proto-Indo-European_root_%2Ad%CA%B0eh%E2%82%81-",
+      "member_count": 1,
+      "form": "*dʰeh₁-",
+      "language": "Avestan"
+    },
+    {
+      "category": "Category:Proto-Indo-Iranian terms derived from the Proto-Indo-European root *dʰeh₁-",
+      "url": "https://en.wiktionary.org/wiki/Category:Proto-Indo-Iranian_terms_derived_from_the_Proto-Indo-European_root_%2Ad%CA%B0eh%E2%82%81-",
+      "member_count": 12,
+      "form": "*dʰeh₁-",
+      "language": "Proto-Indo-Iranian"
+    },
+    {
+      "category": "Category:Ancient Greek terms derived from the Proto-Indo-European root *dʰeh₁-",
+      "url": "https://en.wiktionary.org/wiki/Category:Ancient_Greek_terms_derived_from_the_Proto-Indo-European_root_%2Ad%CA%B0eh%E2%82%81-",
+      "member_count": 208,
+      "form": "*dʰeh₁-",
+      "language": "Ancient Greek"
+    },
+    {
+      "category": "Category:Latin terms derived from the Proto-Indo-European root *dʰeh₁-",
+      "url": "https://en.wiktionary.org/wiki/Category:Latin_terms_derived_from_the_Proto-Indo-European_root_%2Ad%CA%B0eh%E2%82%81-",
+      "member_count": 799,
+      "form": "*dʰeh₁-",
+      "language": "Latin"
+    },
+    {
+      "category": "Category:Old English terms derived from the Proto-Indo-European root *dʰeh₁-",
+      "url": "https://en.wiktionary.org/wiki/Category:Old_English_terms_derived_from_the_Proto-Indo-European_root_%2Ad%CA%B0eh%E2%82%81-",
+      "member_count": 25,
+      "form": "*dʰeh₁-",
+      "language": "Old English"
+    },
+    {
+      "category": "Category:English terms derived from the Proto-Indo-European root *dʰeh₁-",
+      "url": "https://en.wiktionary.org/wiki/Category:English_terms_derived_from_the_Proto-Indo-European_root_%2Ad%CA%B0eh%E2%82%81-",
+      "member_count": 2111,
+      "form": "*dʰeh₁-",
+      "language": "English"
+    },
+    {
+      "category": "Category:Sanskrit terms derived from the Proto-Indo-European root *ped-",
+      "url": "https://en.wiktionary.org/wiki/Category:Sanskrit_terms_derived_from_the_Proto-Indo-European_root_%2Aped-",
+      "member_count": 6,
+      "form": "*ped-",
+      "language": "Sanskrit"
+    },
+    {
+      "category": "Category:Avestan terms derived from the Proto-Indo-European root *ped-",
+      "url": "https://en.wiktionary.org/wiki/Category:Avestan_terms_derived_from_the_Proto-Indo-European_root_%2Aped-",
+      "member_count": 1,
+      "form": "*ped-",
+      "language": "Avestan"
+    },
+    {
+      "category": "Category:Proto-Indo-Iranian terms derived from the Proto-Indo-European root *ped-",
+      "url": "https://en.wiktionary.org/wiki/Category:Proto-Indo-Iranian_terms_derived_from_the_Proto-Indo-European_root_%2Aped-",
+      "member_count": 1,
+      "form": "*ped-",
+      "language": "Proto-Indo-Iranian"
+    },
+    {
+      "category": "Category:Ancient Greek terms derived from the Proto-Indo-European root *ped-",
+      "url": "https://en.wiktionary.org/wiki/Category:Ancient_Greek_terms_derived_from_the_Proto-Indo-European_root_%2Aped-",
+      "member_count": 64,
+      "form": "*ped-",
+      "language": "Ancient Greek"
+    },
+    {
+      "category": "Category:Latin terms derived from the Proto-Indo-European root *ped-",
+      "url": "https://en.wiktionary.org/wiki/Category:Latin_terms_derived_from_the_Proto-Indo-European_root_%2Aped-",
+      "member_count": 107,
+      "form": "*ped-",
+      "language": "Latin"
+    },
+    {
+      "category": "Category:Old English terms derived from the Proto-Indo-European root *ped-",
+      "url": "https://en.wiktionary.org/wiki/Category:Old_English_terms_derived_from_the_Proto-Indo-European_root_%2Aped-",
+      "member_count": 1,
+      "form": "*ped-",
+      "language": "Old English"
+    },
+    {
+      "category": "Category:English terms derived from the Proto-Indo-European root *ped-",
+      "url": "https://en.wiktionary.org/wiki/Category:English_terms_derived_from_the_Proto-Indo-European_root_%2Aped-",
+      "member_count": 149,
+      "form": "*ped-",
+      "language": "English"
+    },
+    {
+      "category": "Category:Sanskrit terms derived from the Proto-Indo-European root *ḱerd-",
+      "url": "https://en.wiktionary.org/wiki/Category:Sanskrit_terms_derived_from_the_Proto-Indo-European_root_%2A%E1%B8%B1erd-",
+      "member_count": 5,
+      "form": "*ḱerd-",
+      "language": "Sanskrit"
+    },
+    {
+      "category": "Category:Proto-Indo-Iranian terms derived from the Proto-Indo-European root *ḱerd-",
+      "url": "https://en.wiktionary.org/wiki/Category:Proto-Indo-Iranian_terms_derived_from_the_Proto-Indo-European_root_%2A%E1%B8%B1erd-",
+      "member_count": 2,
+      "form": "*ḱerd-",
+      "language": "Proto-Indo-Iranian"
+    },
+    {
+      "category": "Category:Ancient Greek terms derived from the Proto-Indo-European root *ḱerd-",
+      "url": "https://en.wiktionary.org/wiki/Category:Ancient_Greek_terms_derived_from_the_Proto-Indo-European_root_%2A%E1%B8%B1erd-",
+      "member_count": 3,
+      "form": "*ḱerd-",
+      "language": "Ancient Greek"
+    },
+    {
+      "category": "Category:Latin terms derived from the Proto-Indo-European root *ḱerd-",
+      "url": "https://en.wiktionary.org/wiki/Category:Latin_terms_derived_from_the_Proto-Indo-European_root_%2A%E1%B8%B1erd-",
+      "member_count": 54,
+      "form": "*ḱerd-",
+      "language": "Latin"
+    },
+    {
+      "category": "Category:Old English terms derived from the Proto-Indo-European root *ḱerd-",
+      "url": "https://en.wiktionary.org/wiki/Category:Old_English_terms_derived_from_the_Proto-Indo-European_root_%2A%E1%B8%B1erd-",
+      "member_count": 1,
+      "form": "*ḱerd-",
+      "language": "Old English"
+    },
+    {
+      "category": "Category:English terms derived from the Proto-Indo-European root *ḱerd-",
+      "url": "https://en.wiktionary.org/wiki/Category:English_terms_derived_from_the_Proto-Indo-European_root_%2A%E1%B8%B1erd-",
+      "member_count": 141,
+      "form": "*ḱerd-",
+      "language": "English"
+    },
+    {
+      "category": "Category:Sanskrit terms derived from the Proto-Indo-European root *meh₁-",
+      "url": "https://en.wiktionary.org/wiki/Category:Sanskrit_terms_derived_from_the_Proto-Indo-European_root_%2Ameh%E2%82%81-",
+      "member_count": 13,
+      "form": "*meh₁-",
+      "language": "Sanskrit"
+    },
+    {
+      "category": "Category:Proto-Indo-Iranian terms derived from the Proto-Indo-European root *meh₁-",
+      "url": "https://en.wiktionary.org/wiki/Category:Proto-Indo-Iranian_terms_derived_from_the_Proto-Indo-European_root_%2Ameh%E2%82%81-",
+      "member_count": 1,
+      "form": "*meh₁-",
+      "language": "Proto-Indo-Iranian"
+    },
+    {
+      "category": "Category:Ancient Greek terms derived from the Proto-Indo-European root *meh₁-",
+      "url": "https://en.wiktionary.org/wiki/Category:Ancient_Greek_terms_derived_from_the_Proto-Indo-European_root_%2Ameh%E2%82%81-",
+      "member_count": 31,
+      "form": "*meh₁-",
+      "language": "Ancient Greek"
+    },
+    {
+      "category": "Category:Latin terms derived from the Proto-Indo-European root *meh₁-",
+      "url": "https://en.wiktionary.org/wiki/Category:Latin_terms_derived_from_the_Proto-Indo-European_root_%2Ameh%E2%82%81-",
+      "member_count": 57,
+      "form": "*meh₁-",
+      "language": "Latin"
+    },
+    {
+      "category": "Category:Old English terms derived from the Proto-Indo-European root *meh₁-",
+      "url": "https://en.wiktionary.org/wiki/Category:Old_English_terms_derived_from_the_Proto-Indo-European_root_%2Ameh%E2%82%81-",
+      "member_count": 3,
+      "form": "*meh₁-",
+      "language": "Old English"
+    },
+    {
+      "category": "Category:English terms derived from the Proto-Indo-European root *meh₁-",
+      "url": "https://en.wiktionary.org/wiki/Category:English_terms_derived_from_the_Proto-Indo-European_root_%2Ameh%E2%82%81-",
+      "member_count": 360,
+      "form": "*meh₁-",
+      "language": "English"
+    },
+    {
+      "category": "Category:Sanskrit terms derived from the Proto-Indo-European root *h₂eǵ-",
+      "url": "https://en.wiktionary.org/wiki/Category:Sanskrit_terms_derived_from_the_Proto-Indo-European_root_%2Ah%E2%82%82e%C7%B5-",
+      "member_count": 0,
+      "form": "*h₂eǵ-",
+      "language": "Sanskrit"
+    },
+    {
+      "category": "Category:Proto-Indo-Iranian terms derived from the Proto-Indo-European root *h₂eǵ-",
+      "url": "https://en.wiktionary.org/wiki/Category:Proto-Indo-Iranian_terms_derived_from_the_Proto-Indo-European_root_%2Ah%E2%82%82e%C7%B5-",
+      "member_count": 0,
+      "form": "*h₂eǵ-",
+      "language": "Proto-Indo-Iranian"
+    },
+    {
+      "category": "Category:Ancient Greek terms derived from the Proto-Indo-European root *h₂eǵ-",
+      "url": "https://en.wiktionary.org/wiki/Category:Ancient_Greek_terms_derived_from_the_Proto-Indo-European_root_%2Ah%E2%82%82e%C7%B5-",
+      "member_count": 0,
+      "form": "*h₂eǵ-",
+      "language": "Ancient Greek"
+    },
+    {
+      "category": "Category:Latin terms derived from the Proto-Indo-European root *h₂eǵ-",
+      "url": "https://en.wiktionary.org/wiki/Category:Latin_terms_derived_from_the_Proto-Indo-European_root_%2Ah%E2%82%82e%C7%B5-",
+      "member_count": 0,
+      "form": "*h₂eǵ-",
+      "language": "Latin"
+    },
+    {
+      "category": "Category:Old English terms derived from the Proto-Indo-European root *h₂eǵ-",
+      "url": "https://en.wiktionary.org/wiki/Category:Old_English_terms_derived_from_the_Proto-Indo-European_root_%2Ah%E2%82%82e%C7%B5-",
+      "member_count": 0,
+      "form": "*h₂eǵ-",
+      "language": "Old English"
+    },
+    {
+      "category": "Category:English terms derived from the Proto-Indo-European root *h₂eǵ-",
+      "url": "https://en.wiktionary.org/wiki/Category:English_terms_derived_from_the_Proto-Indo-European_root_%2Ah%E2%82%82e%C7%B5-",
+      "member_count": 0,
+      "form": "*h₂eǵ-",
+      "language": "English"
+    },
+    {
+      "category": "Category:Sanskrit terms derived from the Proto-Indo-European root *bʰeh₂-",
+      "url": "https://en.wiktionary.org/wiki/Category:Sanskrit_terms_derived_from_the_Proto-Indo-European_root_%2Ab%CA%B0eh%E2%82%82-",
+      "member_count": 0,
+      "form": "*bʰeh₂-",
+      "language": "Sanskrit"
+    },
+    {
+      "category": "Category:Proto-Indo-Iranian terms derived from the Proto-Indo-European root *bʰeh₂-",
+      "url": "https://en.wiktionary.org/wiki/Category:Proto-Indo-Iranian_terms_derived_from_the_Proto-Indo-European_root_%2Ab%CA%B0eh%E2%82%82-",
+      "member_count": 0,
+      "form": "*bʰeh₂-",
+      "language": "Proto-Indo-Iranian"
+    },
+    {
+      "category": "Category:Ancient Greek terms derived from the Proto-Indo-European root *bʰeh₂-",
+      "url": "https://en.wiktionary.org/wiki/Category:Ancient_Greek_terms_derived_from_the_Proto-Indo-European_root_%2Ab%CA%B0eh%E2%82%82-",
+      "member_count": 0,
+      "form": "*bʰeh₂-",
+      "language": "Ancient Greek"
+    },
+    {
+      "category": "Category:Latin terms derived from the Proto-Indo-European root *bʰeh₂-",
+      "url": "https://en.wiktionary.org/wiki/Category:Latin_terms_derived_from_the_Proto-Indo-European_root_%2Ab%CA%B0eh%E2%82%82-",
+      "member_count": 0,
+      "form": "*bʰeh₂-",
+      "language": "Latin"
+    },
+    {
+      "category": "Category:Old English terms derived from the Proto-Indo-European root *bʰeh₂-",
+      "url": "https://en.wiktionary.org/wiki/Category:Old_English_terms_derived_from_the_Proto-Indo-European_root_%2Ab%CA%B0eh%E2%82%82-",
+      "member_count": 0,
+      "form": "*bʰeh₂-",
+      "language": "Old English"
+    },
+    {
+      "category": "Category:English terms derived from the Proto-Indo-European root *bʰeh₂-",
+      "url": "https://en.wiktionary.org/wiki/Category:English_terms_derived_from_the_Proto-Indo-European_root_%2Ab%CA%B0eh%E2%82%82-",
+      "member_count": 0,
+      "form": "*bʰeh₂-",
+      "language": "English"
+    },
+    {
+      "category": "Category:Sanskrit terms derived from the Proto-Indo-European word *ph₂tḗr",
+      "url": "https://en.wiktionary.org/wiki/Category:Sanskrit_terms_derived_from_the_Proto-Indo-European_word_%2Aph%E2%82%82t%E1%B8%97r",
+      "member_count": 1,
+      "form": "*ph₂tḗr",
+      "language": "Sanskrit"
+    },
+    {
+      "category": "Category:Proto-Indo-Iranian terms derived from the Proto-Indo-European word *ph₂tḗr",
+      "url": "https://en.wiktionary.org/wiki/Category:Proto-Indo-Iranian_terms_derived_from_the_Proto-Indo-European_word_%2Aph%E2%82%82t%E1%B8%97r",
+      "member_count": 1,
+      "form": "*ph₂tḗr",
+      "language": "Proto-Indo-Iranian"
+    },
+    {
+      "category": "Category:Ancient Greek terms derived from the Proto-Indo-European word *ph₂tḗr",
+      "url": "https://en.wiktionary.org/wiki/Category:Ancient_Greek_terms_derived_from_the_Proto-Indo-European_word_%2Aph%E2%82%82t%E1%B8%97r",
+      "member_count": 9,
+      "form": "*ph₂tḗr",
+      "language": "Ancient Greek"
+    },
+    {
+      "category": "Category:Latin terms derived from the Proto-Indo-European word *ph₂tḗr",
+      "url": "https://en.wiktionary.org/wiki/Category:Latin_terms_derived_from_the_Proto-Indo-European_word_%2Aph%E2%82%82t%E1%B8%97r",
+      "member_count": 39,
+      "form": "*ph₂tḗr",
+      "language": "Latin"
+    },
+    {
+      "category": "Category:Old English terms derived from the Proto-Indo-European word *ph₂tḗr",
+      "url": "https://en.wiktionary.org/wiki/Category:Old_English_terms_derived_from_the_Proto-Indo-European_word_%2Aph%E2%82%82t%E1%B8%97r",
+      "member_count": 1,
+      "form": "*ph₂tḗr",
+      "language": "Old English"
+    },
+    {
+      "category": "Category:English terms derived from the Proto-Indo-European word *ph₂tḗr",
+      "url": "https://en.wiktionary.org/wiki/Category:English_terms_derived_from_the_Proto-Indo-European_word_%2Aph%E2%82%82t%E1%B8%97r",
+      "member_count": 7,
+      "form": "*ph₂tḗr",
+      "language": "English"
+    },
+    {
+      "category": "Category:Sanskrit terms derived from the Proto-Indo-European word *méh₂tēr",
+      "url": "https://en.wiktionary.org/wiki/Category:Sanskrit_terms_derived_from_the_Proto-Indo-European_word_%2Am%C3%A9h%E2%82%82t%C4%93r",
+      "member_count": 2,
+      "form": "*méh₂tēr",
+      "language": "Sanskrit"
+    },
+    {
+      "category": "Category:Proto-Indo-Iranian terms derived from the Proto-Indo-European word *méh₂tēr",
+      "url": "https://en.wiktionary.org/wiki/Category:Proto-Indo-Iranian_terms_derived_from_the_Proto-Indo-European_word_%2Am%C3%A9h%E2%82%82t%C4%93r",
+      "member_count": 1,
+      "form": "*méh₂tēr",
+      "language": "Proto-Indo-Iranian"
+    },
+    {
+      "category": "Category:Ancient Greek terms derived from the Proto-Indo-European word *méh₂tēr",
+      "url": "https://en.wiktionary.org/wiki/Category:Ancient_Greek_terms_derived_from_the_Proto-Indo-European_word_%2Am%C3%A9h%E2%82%82t%C4%93r",
+      "member_count": 6,
+      "form": "*méh₂tēr",
+      "language": "Ancient Greek"
+    },
+    {
+      "category": "Category:Latin terms derived from the Proto-Indo-European word *méh₂tēr",
+      "url": "https://en.wiktionary.org/wiki/Category:Latin_terms_derived_from_the_Proto-Indo-European_word_%2Am%C3%A9h%E2%82%82t%C4%93r",
+      "member_count": 23,
+      "form": "*méh₂tēr",
+      "language": "Latin"
+    },
+    {
+      "category": "Category:Old English terms derived from the Proto-Indo-European word *méh₂tēr",
+      "url": "https://en.wiktionary.org/wiki/Category:Old_English_terms_derived_from_the_Proto-Indo-European_word_%2Am%C3%A9h%E2%82%82t%C4%93r",
+      "member_count": 1,
+      "form": "*méh₂tēr",
+      "language": "Old English"
+    },
+    {
+      "category": "Category:English terms derived from the Proto-Indo-European word *méh₂tēr",
+      "url": "https://en.wiktionary.org/wiki/Category:English_terms_derived_from_the_Proto-Indo-European_word_%2Am%C3%A9h%E2%82%82t%C4%93r",
+      "member_count": 25,
+      "form": "*méh₂tēr",
+      "language": "English"
+    },
+    {
+      "category": "Category:Sanskrit terms derived from the Proto-Indo-European word *bʰréh₂tēr",
+      "url": "https://en.wiktionary.org/wiki/Category:Sanskrit_terms_derived_from_the_Proto-Indo-European_word_%2Ab%CA%B0r%C3%A9h%E2%82%82t%C4%93r",
+      "member_count": 2,
+      "form": "*bʰréh₂tēr",
+      "language": "Sanskrit"
+    },
+    {
+      "category": "Category:Proto-Indo-Iranian terms derived from the Proto-Indo-European word *bʰréh₂tēr",
+      "url": "https://en.wiktionary.org/wiki/Category:Proto-Indo-Iranian_terms_derived_from_the_Proto-Indo-European_word_%2Ab%CA%B0r%C3%A9h%E2%82%82t%C4%93r",
+      "member_count": 1,
+      "form": "*bʰréh₂tēr",
+      "language": "Proto-Indo-Iranian"
+    },
+    {
+      "category": "Category:Ancient Greek terms derived from the Proto-Indo-European word *bʰréh₂tēr",
+      "url": "https://en.wiktionary.org/wiki/Category:Ancient_Greek_terms_derived_from_the_Proto-Indo-European_word_%2Ab%CA%B0r%C3%A9h%E2%82%82t%C4%93r",
+      "member_count": 1,
+      "form": "*bʰréh₂tēr",
+      "language": "Ancient Greek"
+    },
+    {
+      "category": "Category:Latin terms derived from the Proto-Indo-European word *bʰréh₂tēr",
+      "url": "https://en.wiktionary.org/wiki/Category:Latin_terms_derived_from_the_Proto-Indo-European_word_%2Ab%CA%B0r%C3%A9h%E2%82%82t%C4%93r",
+      "member_count": 10,
+      "form": "*bʰréh₂tēr",
+      "language": "Latin"
+    },
+    {
+      "category": "Category:Old English terms derived from the Proto-Indo-European word *bʰréh₂tēr",
+      "url": "https://en.wiktionary.org/wiki/Category:Old_English_terms_derived_from_the_Proto-Indo-European_word_%2Ab%CA%B0r%C3%A9h%E2%82%82t%C4%93r",
+      "member_count": 1,
+      "form": "*bʰréh₂tēr",
+      "language": "Old English"
+    },
+    {
+      "category": "Category:English terms derived from the Proto-Indo-European word *bʰréh₂tēr",
+      "url": "https://en.wiktionary.org/wiki/Category:English_terms_derived_from_the_Proto-Indo-European_word_%2Ab%CA%B0r%C3%A9h%E2%82%82t%C4%93r",
+      "member_count": 27,
+      "form": "*bʰréh₂tēr",
+      "language": "English"
+    },
+    {
+      "category": "Category:Sanskrit terms derived from the Proto-Indo-European word *pṓds",
+      "url": "https://en.wiktionary.org/wiki/Category:Sanskrit_terms_derived_from_the_Proto-Indo-European_word_%2Ap%E1%B9%93ds",
+      "member_count": 3,
+      "form": "*pṓds",
+      "language": "Sanskrit"
+    },
+    {
+      "category": "Category:Proto-Indo-Iranian terms derived from the Proto-Indo-European word *pṓds",
+      "url": "https://en.wiktionary.org/wiki/Category:Proto-Indo-Iranian_terms_derived_from_the_Proto-Indo-European_word_%2Ap%E1%B9%93ds",
+      "member_count": 1,
+      "form": "*pṓds",
+      "language": "Proto-Indo-Iranian"
+    },
+    {
+      "category": "Category:Ancient Greek terms derived from the Proto-Indo-European word *pṓds",
+      "url": "https://en.wiktionary.org/wiki/Category:Ancient_Greek_terms_derived_from_the_Proto-Indo-European_word_%2Ap%E1%B9%93ds",
+      "member_count": 46,
+      "form": "*pṓds",
+      "language": "Ancient Greek"
+    },
+    {
+      "category": "Category:Latin terms derived from the Proto-Indo-European word *pṓds",
+      "url": "https://en.wiktionary.org/wiki/Category:Latin_terms_derived_from_the_Proto-Indo-European_word_%2Ap%E1%B9%93ds",
+      "member_count": 90,
+      "form": "*pṓds",
+      "language": "Latin"
+    },
+    {
+      "category": "Category:Old English terms derived from the Proto-Indo-European word *pṓds",
+      "url": "https://en.wiktionary.org/wiki/Category:Old_English_terms_derived_from_the_Proto-Indo-European_word_%2Ap%E1%B9%93ds",
+      "member_count": 1,
+      "form": "*pṓds",
+      "language": "Old English"
+    },
+    {
+      "category": "Category:English terms derived from the Proto-Indo-European word *pṓds",
+      "url": "https://en.wiktionary.org/wiki/Category:English_terms_derived_from_the_Proto-Indo-European_word_%2Ap%E1%B9%93ds",
+      "member_count": 90,
+      "form": "*pṓds",
+      "language": "English"
+    },
+    {
+      "category": "Category:Sanskrit terms derived from the Proto-Indo-European word *ḱm̥tóm",
+      "url": "https://en.wiktionary.org/wiki/Category:Sanskrit_terms_derived_from_the_Proto-Indo-European_word_%2A%E1%B8%B1m%CC%A5t%C3%B3m",
+      "member_count": 3,
+      "form": "*ḱm̥tóm",
+      "language": "Sanskrit"
+    },
+    {
+      "category": "Category:Avestan terms derived from the Proto-Indo-European word *ḱm̥tóm",
+      "url": "https://en.wiktionary.org/wiki/Category:Avestan_terms_derived_from_the_Proto-Indo-European_word_%2A%E1%B8%B1m%CC%A5t%C3%B3m",
+      "member_count": 2,
+      "form": "*ḱm̥tóm",
+      "language": "Avestan"
+    },
+    {
+      "category": "Category:Proto-Indo-Iranian terms derived from the Proto-Indo-European word *ḱm̥tóm",
+      "url": "https://en.wiktionary.org/wiki/Category:Proto-Indo-Iranian_terms_derived_from_the_Proto-Indo-European_word_%2A%E1%B8%B1m%CC%A5t%C3%B3m",
+      "member_count": 1,
+      "form": "*ḱm̥tóm",
+      "language": "Proto-Indo-Iranian"
+    },
+    {
+      "category": "Category:Ancient Greek terms derived from the Proto-Indo-European word *ḱm̥tóm",
+      "url": "https://en.wiktionary.org/wiki/Category:Ancient_Greek_terms_derived_from_the_Proto-Indo-European_word_%2A%E1%B8%B1m%CC%A5t%C3%B3m",
+      "member_count": 1,
+      "form": "*ḱm̥tóm",
+      "language": "Ancient Greek"
+    },
+    {
+      "category": "Category:Latin terms derived from the Proto-Indo-European word *ḱm̥tóm",
+      "url": "https://en.wiktionary.org/wiki/Category:Latin_terms_derived_from_the_Proto-Indo-European_word_%2A%E1%B8%B1m%CC%A5t%C3%B3m",
+      "member_count": 15,
+      "form": "*ḱm̥tóm",
+      "language": "Latin"
+    },
+    {
+      "category": "Category:Old English terms derived from the Proto-Indo-European word *ḱm̥tóm",
+      "url": "https://en.wiktionary.org/wiki/Category:Old_English_terms_derived_from_the_Proto-Indo-European_word_%2A%E1%B8%B1m%CC%A5t%C3%B3m",
+      "member_count": 2,
+      "form": "*ḱm̥tóm",
+      "language": "Old English"
+    },
+    {
+      "category": "Category:English terms derived from the Proto-Indo-European word *ḱm̥tóm",
+      "url": "https://en.wiktionary.org/wiki/Category:English_terms_derived_from_the_Proto-Indo-European_word_%2A%E1%B8%B1m%CC%A5t%C3%B3m",
+      "member_count": 31,
+      "form": "*ḱm̥tóm",
+      "language": "English"
+    },
+    {
+      "category": "Category:Sanskrit terms derived from the Proto-Indo-European word *déḱm̥",
+      "url": "https://en.wiktionary.org/wiki/Category:Sanskrit_terms_derived_from_the_Proto-Indo-European_word_%2Ad%C3%A9%E1%B8%B1m%CC%A5",
+      "member_count": 10,
+      "form": "*déḱm̥",
+      "language": "Sanskrit"
+    },
+    {
+      "category": "Category:Avestan terms derived from the Proto-Indo-European word *déḱm̥",
+      "url": "https://en.wiktionary.org/wiki/Category:Avestan_terms_derived_from_the_Proto-Indo-European_word_%2Ad%C3%A9%E1%B8%B1m%CC%A5",
+      "member_count": 2,
+      "form": "*déḱm̥",
+      "language": "Avestan"
+    },
+    {
+      "category": "Category:Proto-Indo-Iranian terms derived from the Proto-Indo-European word *déḱm̥",
+      "url": "https://en.wiktionary.org/wiki/Category:Proto-Indo-Iranian_terms_derived_from_the_Proto-Indo-European_word_%2Ad%C3%A9%E1%B8%B1m%CC%A5",
+      "member_count": 4,
+      "form": "*déḱm̥",
+      "language": "Proto-Indo-Iranian"
+    },
+    {
+      "category": "Category:Ancient Greek terms derived from the Proto-Indo-European word *déḱm̥",
+      "url": "https://en.wiktionary.org/wiki/Category:Ancient_Greek_terms_derived_from_the_Proto-Indo-European_word_%2Ad%C3%A9%E1%B8%B1m%CC%A5",
+      "member_count": 20,
+      "form": "*déḱm̥",
+      "language": "Ancient Greek"
+    },
+    {
+      "category": "Category:Latin terms derived from the Proto-Indo-European word *déḱm̥",
+      "url": "https://en.wiktionary.org/wiki/Category:Latin_terms_derived_from_the_Proto-Indo-European_word_%2Ad%C3%A9%E1%B8%B1m%CC%A5",
+      "member_count": 77,
+      "form": "*déḱm̥",
+      "language": "Latin"
+    },
+    {
+      "category": "Category:Old English terms derived from the Proto-Indo-European word *déḱm̥",
+      "url": "https://en.wiktionary.org/wiki/Category:Old_English_terms_derived_from_the_Proto-Indo-European_word_%2Ad%C3%A9%E1%B8%B1m%CC%A5",
+      "member_count": 9,
+      "form": "*déḱm̥",
+      "language": "Old English"
+    },
+    {
+      "category": "Category:English terms derived from the Proto-Indo-European word *déḱm̥",
+      "url": "https://en.wiktionary.org/wiki/Category:English_terms_derived_from_the_Proto-Indo-European_word_%2Ad%C3%A9%E1%B8%B1m%CC%A5",
+      "member_count": 151,
+      "form": "*déḱm̥",
+      "language": "English"
+    },
+    {
+      "category": "Category:Sanskrit terms derived from the Proto-Indo-European word *dwóh₁",
+      "url": "https://en.wiktionary.org/wiki/Category:Sanskrit_terms_derived_from_the_Proto-Indo-European_word_%2Adw%C3%B3h%E2%82%81",
+      "member_count": 40,
+      "form": "*dwóh₁",
+      "language": "Sanskrit"
+    },
+    {
+      "category": "Category:Avestan terms derived from the Proto-Indo-European word *dwóh₁",
+      "url": "https://en.wiktionary.org/wiki/Category:Avestan_terms_derived_from_the_Proto-Indo-European_word_%2Adw%C3%B3h%E2%82%81",
+      "member_count": 1,
+      "form": "*dwóh₁",
+      "language": "Avestan"
+    },
+    {
+      "category": "Category:Proto-Indo-Iranian terms derived from the Proto-Indo-European word *dwóh₁",
+      "url": "https://en.wiktionary.org/wiki/Category:Proto-Indo-Iranian_terms_derived_from_the_Proto-Indo-European_word_%2Adw%C3%B3h%E2%82%81",
+      "member_count": 2,
+      "form": "*dwóh₁",
+      "language": "Proto-Indo-Iranian"
+    },
+    {
+      "category": "Category:Ancient Greek terms derived from the Proto-Indo-European word *dwóh₁",
+      "url": "https://en.wiktionary.org/wiki/Category:Ancient_Greek_terms_derived_from_the_Proto-Indo-European_word_%2Adw%C3%B3h%E2%82%81",
+      "member_count": 194,
+      "form": "*dwóh₁",
+      "language": "Ancient Greek"
+    },
+    {
+      "category": "Category:Latin terms derived from the Proto-Indo-European word *dwóh₁",
+      "url": "https://en.wiktionary.org/wiki/Category:Latin_terms_derived_from_the_Proto-Indo-European_word_%2Adw%C3%B3h%E2%82%81",
+      "member_count": 445,
+      "form": "*dwóh₁",
+      "language": "Latin"
+    },
+    {
+      "category": "Category:Old English terms derived from the Proto-Indo-European word *dwóh₁",
+      "url": "https://en.wiktionary.org/wiki/Category:Old_English_terms_derived_from_the_Proto-Indo-European_word_%2Adw%C3%B3h%E2%82%81",
+      "member_count": 15,
+      "form": "*dwóh₁",
+      "language": "Old English"
+    },
+    {
+      "category": "Category:English terms derived from the Proto-Indo-European word *dwóh₁",
+      "url": "https://en.wiktionary.org/wiki/Category:English_terms_derived_from_the_Proto-Indo-European_word_%2Adw%C3%B3h%E2%82%81",
+      "member_count": 1852,
+      "form": "*dwóh₁",
+      "language": "English"
+    },
+    {
+      "category": "Category:Sanskrit terms derived from the Proto-Indo-European word *dyḗws",
+      "url": "https://en.wiktionary.org/wiki/Category:Sanskrit_terms_derived_from_the_Proto-Indo-European_word_%2Ady%E1%B8%97ws",
+      "member_count": 3,
+      "form": "*dyḗws",
+      "language": "Sanskrit"
+    },
+    {
+      "category": "Category:Proto-Indo-Iranian terms derived from the Proto-Indo-European word *dyḗws",
+      "url": "https://en.wiktionary.org/wiki/Category:Proto-Indo-Iranian_terms_derived_from_the_Proto-Indo-European_word_%2Ady%E1%B8%97ws",
+      "member_count": 1,
+      "form": "*dyḗws",
+      "language": "Proto-Indo-Iranian"
+    },
+    {
+      "category": "Category:Ancient Greek terms derived from the Proto-Indo-European word *dyḗws",
+      "url": "https://en.wiktionary.org/wiki/Category:Ancient_Greek_terms_derived_from_the_Proto-Indo-European_word_%2Ady%E1%B8%97ws",
+      "member_count": 10,
+      "form": "*dyḗws",
+      "language": "Ancient Greek"
+    },
+    {
+      "category": "Category:Latin terms derived from the Proto-Indo-European word *dyḗws",
+      "url": "https://en.wiktionary.org/wiki/Category:Latin_terms_derived_from_the_Proto-Indo-European_word_%2Ady%E1%B8%97ws",
+      "member_count": 43,
+      "form": "*dyḗws",
+      "language": "Latin"
+    },
+    {
+      "category": "Category:English terms derived from the Proto-Indo-European word *dyḗws",
+      "url": "https://en.wiktionary.org/wiki/Category:English_terms_derived_from_the_Proto-Indo-European_word_%2Ady%E1%B8%97ws",
+      "member_count": 33,
+      "form": "*dyḗws",
+      "language": "English"
+    },
+    {
+      "category": "Category:Sanskrit terms derived from the Proto-Indo-European word *wódr̥",
+      "url": "https://en.wiktionary.org/wiki/Category:Sanskrit_terms_derived_from_the_Proto-Indo-European_word_%2Aw%C3%B3dr%CC%A5",
+      "member_count": 7,
+      "form": "*wódr̥",
+      "language": "Sanskrit"
+    },
+    {
+      "category": "Category:Proto-Indo-Iranian terms derived from the Proto-Indo-European word *wódr̥",
+      "url": "https://en.wiktionary.org/wiki/Category:Proto-Indo-Iranian_terms_derived_from_the_Proto-Indo-European_word_%2Aw%C3%B3dr%CC%A5",
+      "member_count": 1,
+      "form": "*wódr̥",
+      "language": "Proto-Indo-Iranian"
+    },
+    {
+      "category": "Category:Ancient Greek terms derived from the Proto-Indo-European word *wódr̥",
+      "url": "https://en.wiktionary.org/wiki/Category:Ancient_Greek_terms_derived_from_the_Proto-Indo-European_word_%2Aw%C3%B3dr%CC%A5",
+      "member_count": 23,
+      "form": "*wódr̥",
+      "language": "Ancient Greek"
+    },
+    {
+      "category": "Category:Latin terms derived from the Proto-Indo-European word *wódr̥",
+      "url": "https://en.wiktionary.org/wiki/Category:Latin_terms_derived_from_the_Proto-Indo-European_word_%2Aw%C3%B3dr%CC%A5",
+      "member_count": 9,
+      "form": "*wódr̥",
+      "language": "Latin"
+    },
+    {
+      "category": "Category:Old English terms derived from the Proto-Indo-European word *wódr̥",
+      "url": "https://en.wiktionary.org/wiki/Category:Old_English_terms_derived_from_the_Proto-Indo-European_word_%2Aw%C3%B3dr%CC%A5",
+      "member_count": 1,
+      "form": "*wódr̥",
+      "language": "Old English"
+    },
+    {
+      "category": "Category:English terms derived from the Proto-Indo-European word *wódr̥",
+      "url": "https://en.wiktionary.org/wiki/Category:English_terms_derived_from_the_Proto-Indo-European_word_%2Aw%C3%B3dr%CC%A5",
+      "member_count": 468,
+      "form": "*wódr̥",
+      "language": "English"
+    },
+    {
+      "category": "Category:Sanskrit terms inherited from Proto-Indo-European",
+      "url": "https://en.wiktionary.org/wiki/Category:Sanskrit_terms_inherited_from_Proto-Indo-European",
+      "member_count": 2376,
+      "form": "inheritance layer",
+      "language": "Sanskrit"
+    },
+    {
+      "category": "Category:Sanskrit terms inherited from Proto-Indo-Iranian",
+      "url": "https://en.wiktionary.org/wiki/Category:Sanskrit_terms_inherited_from_Proto-Indo-Iranian",
+      "member_count": 2058,
+      "form": "inheritance layer",
+      "language": "Sanskrit"
+    },
+    {
+      "category": "Category:Sanskrit terms inherited from Proto-Indo-Aryan",
+      "url": "https://en.wiktionary.org/wiki/Category:Sanskrit_terms_inherited_from_Proto-Indo-Aryan",
+      "member_count": 1229,
+      "form": "inheritance layer",
+      "language": "Sanskrit"
+    },
+    {
+      "category": "Category:Sanskrit terms inherited from Vedic Sanskrit",
+      "url": "https://en.wiktionary.org/wiki/Category:Sanskrit_terms_inherited_from_Vedic_Sanskrit",
+      "member_count": 1,
+      "form": "inheritance layer",
+      "language": "Sanskrit"
+    }
+  ],
+  "note": "One entry per queried Wiktionary category."
+}
