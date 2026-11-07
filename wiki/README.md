@@ -24,6 +24,7 @@ HTML/CSS/JS that also works when the folder is opened from disk.
 | `timeline.html` | Timeline of layers: four inheritance strata with real word counts, then internal derivation, contact and uncertainty. |
 | `dhatu.html` | Dhātu desk: 930 Whitney roots with gloss, class, period, frequency and attested forms; site coverage indicator (86.6%); search, sort and filter by class/period. |
 | `wordformation.html` | Word formation: 27 affixes (kṛt / taddhita / stri) with surface form, pratyaya, anubandha, function and examples; samāsa taxonomy (4 classes, 9 families, 58 leaves with vigraha); 12 curated compound samples. |
+| `translit.html` | Transliteration reference: all 42 etymology categories in IAST transliteration with no Devanagari required for reading. Static article-style page with tables, the guṇa/vṛddhi gradation table for all five root vowel types, sandhi rules, terminology glossary, and teaching takeaways. No JavaScript data loading — fully self-contained HTML. |
 | `archive/index.html` | Browsable source archive with SHA-256 checksums and restore instructions. |
 | `style.css` | Shared stylesheet for all fourteen pages, including the persistent section nav, the EN/RU switcher and the `.orig` original-title display. |
 | `formation.css` | Formation-specific styles for the Dhātu desk, Word formation pages and Explorer formation panel (split from `style.css` to stay under the 20 KB staged-file token gate). |
@@ -31,9 +32,9 @@ HTML/CSS/JS that also works when the folder is opened from disk.
 ## Russian edition (`ru/`)
 
 A complete parallel edition at <https://gasyoun.github.io/wiki/ru/>, with the
-same seven pages (`ru/index.html`, `ru/explorer.html`, `ru/cognates.html`,
+same eight pages (`ru/index.html`, `ru/explorer.html`, `ru/cognates.html`,
 `ru/timeline.html`, `ru/dhatu.html`, `ru/wordformation.html`,
-`ru/archive/index.html`), `<html lang="ru">` and translated
+`ru/translit.html`, `ru/archive/index.html`), `<html lang="ru">` and translated
 UI, teaching notes, layer names, language/branch labels, sandhi notes,
 glosses, and formation page labels. It loads the **same** `data/*.js` files via
 `../data/` (the archive via `../../data/`) and the same `style.css` +
