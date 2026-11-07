@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Что учить первым: измеренный порядок терминов санскритской грамматики</title>
+<style>
+:root{--bg:#faf8f4;--card:#fff;--ink:#24222a;--muted:#6c6872;--line:#e5e0d6;
+ --accent:#4a447f;--accent2:#c2703a;--soft:#f3f0ea;--warn:#8a5a20}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+ font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:1040px;margin:0 auto;padding:0 28px 90px}
+header{padding:56px 0 28px;border-bottom:2px solid var(--ink)}
+h1{font-size:36px;line-height:1.18;margin:0 0 12px}
+.sub{color:var(--muted);font-size:17px;max-width:760px}
+nav{font-size:14.5px;margin-top:18px;line-height:2}
+nav a{color:var(--accent);margin-right:18px;white-space:nowrap}
+h2{font-size:25px;margin:48px 0 12px;padding-top:14px;border-top:1px solid var(--line)}
+h3{font-size:18px;margin:24px 0 6px}
+p{margin:10px 0}
+ul,ol{margin:10px 0 10px 22px;padding:0}li{margin:6px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:22px 0}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 20px}
+.stat .n{font-size:30px;font-weight:700;color:var(--accent);line-height:1.1}
+.stat .t{font-size:14px;color:var(--muted);margin-top:6px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 22px;margin:16px 0}
+.card.hl{border-left:4px solid var(--accent2)}
+.card.warn{border-left:4px solid var(--warn)}
+table{border-collapse:collapse;width:100%;font-size:14.5px;margin:16px 0;background:var(--card)}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--soft);font-weight:600}
+code{background:var(--soft);padding:1px 5px;border-radius:4px;font-size:13px}
+.deva{font-family:"Nirmala UI","Noto Sans Devanagari","Mangal",serif;font-size:16px}
+.tag{display:inline-block;font-size:12px;padding:2px 9px;border-radius:20px;
+ background:var(--soft);color:var(--muted);margin-right:5px}
+.b{display:inline-block;background:var(--accent);color:#fff;border-radius:5px;
+ padding:1px 8px;font-size:12px;font-weight:600}
+details{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:10px 18px;margin:18px 0}
+summary{cursor:pointer;font-weight:600;padding:8px 0}
+.note{font-size:13.5px;color:var(--muted)}
+footer{margin-top:54px;padding-top:18px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+@media print{body{background:#fff}.wrap{max-width:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="tag">Aṣṭādhyāyī</div> <div class="tag">DSG</div> <div class="tag">измерение</div> <div class="tag">русский</div>
+  <h1>Что учить первым</h1>
+  <div class="sub">Словарь санскритской грамматики содержит 4&nbsp;383 статьи — слишком много для начала.
+  Измерив, как термины реально требуются при чтении 3&nbsp;983 сутр, мы свели список к
+  <b>119 ядерным терминам в семи блоках</b> и объяснили, почему частотность в обычных текстах
+  здесь не работает.</div>
+  <nav>
+    <a href="#method">Метод</a>
+    <a href="#batches">Семь блоков</a>
+    <a href="#axes">Три оси</a>
+    <a href="experiment.html">Эксперимент: что можно проверить</a>
+    <a href="quiz.html">Пилотный тест</a>
+    <a href="study.html">Полный отчёт (EN)</a>
+    <a href="channels.html">Внешние каналы (EN)</a>
+    <a href="data/">Данные и код</a>
+  </nav>
+</header>
+
+<div class="grid">
+  <div class="stat"><div class="n">4 383</div><div class="t">статьи в Dictionary of Sanskrit Grammar (Abhyankar, 1961) — алфавитный справочник, а не программа</div></div>
+  <div class="stat"><div class="n">119 / 7</div><div class="t">ядерных терминов в семи обучающих блоках; 88 saṃjñā-определений найдено в разметке сутр</div></div>
+  <div class="stat"><div class="n">≈65 %</div><div class="t">требуемых чтений термина <b>не написаны</b> в сутре: их дают anuvṛtti и adhikāra</div></div>
+  <div class="stat"><div class="n">ρ = 0,139</div><div class="t">связь структурного спроса с частотой в DCS — корпус литературы почти не предсказывает учебную важность</div></div>
+</div>
+
+<div class="card warn">
+  <b>Чего здесь нет.</b> Это корпусное исследование, <b>не педагогический эксперимент</b>.
+  Порядок блоков обоснован измерением и согласуется с частотой терминов в грамматических сочинениях
+  (ρ = 0,557), но <b>не проверен на учащихся</b>: прирост обучения никто не измерял.
+  Какой эксперимент можно поставить, какие гипотезы он опровергнет и какой тест уже готов —
+  см. <a href="experiment.html"><b>протокол на русском</b></a>.
+</div>
+
+<h2 id="method">Как считали</h2>
+<p>Источник — закреплённый снимок <a href="https://github.com/ashtadhyayi-com/data">ashtadhyayi-com/data</a>
+(<code>sutraani/data.txt</code>): 3&nbsp;983 сутры с полями <code>pc</code> (padaccheda),
+<code>an</code> (anuvṛtti), <code>ad</code> (adhikāra). Считается <b>документная частота</b> —
+число <i>различных сутр</i>, в которых термин требуется; повтор слова внутри одной сутры не удваивает
+счёт, потому что для ученика это одно событие чтения.</p>
+<table>
+<tr><th>Канал</th><th>Что означает</th><th>Вхождений</th><th>Различных форм</th></tr>
+<tr><td><code>pc</code></td><td>термин написан явно</td><td>13 068</td><td>6 741</td></tr>
+<tr><td><code>an</code></td><td>термин перенесён из предыдущей сутры</td><td>9 808</td><td>1 571</td></tr>
+<tr><td><code>ad</code></td><td>термин задан управляющим заголовком</td><td>14 323</td><td>69</td></tr>
+<tr><td colspan="2"><b>Всего требуемых чтений</b></td><td><b>37 199</b></td><td>6 809 форм</td></tr>
+</table>
+<p>Отсюда главный результат: <b>самое написанное слово — <span class="deva">च</span> ca</b> (847 сутр),
+но это оператор-связка, а <b>самый востребованный технический термин — <span class="deva">प्रत्यय</span>
+pratyaya</b>: он написан лишь в 22 сутрах, зато управляет 1&nbsp;821 сутрой. Учить по «что чаще
+встречается в тексте» — значит начать с <i>ca</i>, <i>na</i>, <i>iti</i> и никогда не дойти до
+<i>pratyaya</i>.</p>
+
+<h2 id="axes">Три оси, а не «три канала плюс четвёртый»</h2>
+<p>Первоначальные три канала — это <b>три позиции внутри одного текста</b>, а не три корпуса.
+Частота в грамматиках и DCS лежат на других осях:</p>
+<table>
+<tr><th>Ось</th><th>Что измеряет</th><th>Роль в порядке обучения</th></tr>
+<tr><td><b>A · структурный спрос</b></td><td><code>pc / an / ad</code> в 3 983 сутрах</td><td><b>основа порядка</b> (семь блоков)</td></tr>
+<tr><td><b>B · грамматический дискурс</b></td><td>G: 12 627 пассажей Mahābhāṣya, Kaumudī, Vākyapadīya и др.; L: упоминания в 4 383 статьях DSG</td><td><b>проверка и темп</b>: ρ = 0,557 с осью A</td></tr>
+<tr><td><b>C · общий литературный регистр</b></td><td>D: 50 474 ключа DCS</td><td><b>отрицательный контроль</b>: ρ = 0,139; 23 термина отсутствуют, 40 имеют счёт ≤ 5</td></tr>
+</table>
+<table>
+<tr><th>Термин</th><th>Спрос в Aṣṭādhyāyī</th><th>Частота в грамматиках (df)</th><th>DCS</th></tr>
+<tr><td><i>pratyaya</i></td><td>1 853 (управляет 1 821 сутрой)</td><td>851</td><td><b>17</b></td></tr>
+<tr><td><i>taddhita</i></td><td>1 174 (управляет 1 115)</td><td>191</td><td><b>3</b></td></tr>
+<tr><td><i>ca</i></td><td>911</td><td>3 081</td><td><b>3 385</b></td></tr>
+<tr><td><i>iti</i></td><td>94</td><td>4 522</td><td><b>1 512</b></td></tr>
+</table>
+<p class="note">Низкая частота в DCS — это <b>довод за</b> раннее изучение термина: литература его
+никогда не подскажет. Делать DCS равноправным четвёртым весом значило бы развернуть syllabus
+в сторону служебных слов.</p>
+
+<h2 id="batches">Семь блоков</h2>
+<p>Порядок сохраняет «грамматический хребет»: сначала операторы чтения, затем звук, затем
+деривационный механизм, и только потом именная и глагольная системы, сложные слова и метаправила.
+Служебные слова вынесены в B0 и исключены из содержательного ранжирования; внутри каждого блока
+термины отсортированы по измеренному спросу.</p>
+<div class="card"><h3 style="margin:0 0 4px"><span class="b">B0</span> Операторы сутры <span class="note">· 12 терминов</span></h3><p class="note" style="margin:4px 0 10px">Как читать любое правило: соединители, отрицание, факультативность, пометы регистра.</p><div><span class="deva">च</span> <i>ca</i>, <span class="deva">वा</span> <i>vā</i>, <span class="deva">न</span> <i>na</i>, <span class="deva">विभाषा</span> <i>vibhāṣā</i>, <span class="deva">छन्दसि</span> <i>chandasi</i>, <span class="deva">अन्यतरस्याम्</span> <i>anyatarasyām</i></div></div>
+<div class="card"><h3 style="margin:0 0 4px"><span class="b">B1</span> Алфавит, звуковые классы, замены <span class="note">· 18 терминов</span></h3><p class="note" style="margin:4px 0 10px">Шива-сутры, pratyāhāra, guṇa/vṛddhi, sandhi, элизия и субституция.</p><div><span class="deva">उपधा / टि / अन्त / आदि</span> <i>upadhā / ṭi / anta / ādi</i>, <span class="deva">संहिता / संधि</span> <i>saṃhitā / sandhi</i>, <span class="deva">उदात्त / अनुदात्त / स्वरित</span> <i>udātta / anudātta / svarita</i>, <span class="deva">लोप / लुक् / श्लु / लुप्</span> <i>lopa / luk / ślu / lup</i>, <span class="deva">ह्रस्व / दीर्घ / प्लुत</span> <i>hrasva / dīrgha / pluta</i>, <span class="deva">वृद्धि</span> <i>vṛddhi</i></div></div>
+<div class="card"><h3 style="margin:0 0 4px"><span class="b">B2</span> Деривационный механизм <span class="note">· 17 терминов</span></h3><p class="note" style="margin:4px 0 10px">pratyaya → dhātu → aṅga → pada: каркас, на который опирается вся деривация.</p><div><span class="deva">प्रत्यय</span> <i>pratyaya</i>, <span class="deva">तद्धित</span> <i>taddhita</i>, <span class="deva">धातु</span> <i>dhātu</i>, <span class="deva">अङ्ग</span> <i>aṅga</i>, <span class="deva">कृत्</span> <i>kṛt</i>, <span class="deva">लकार</span> <i>lakāra</i></div></div>
+<div class="card"><h3 style="margin:0 0 4px"><span class="b">B3</span> Именная система и kāraka <span class="note">· 20 терминов</span></h3><p class="note" style="margin:4px 0 10px">Род, число, лицо, местоимения, приставки и шесть kāraka-ролей.</p><div><span class="deva">कर्मन्</span> <i>karman</i>, <span class="deva">उपसर्ग</span> <i>upasarga</i>, <span class="deva">कर्तृ</span> <i>kartṛ</i>, <span class="deva">सर्वनामन्</span> <i>sarvanāman</i>, <span class="deva">अव्यय</span> <i>avyaya</i>, <span class="deva">संख्या</span> <i>saṅkhyā</i></div></div>
+<div class="card"><h3 style="margin:0 0 4px"><span class="b">B4</span> Глагольная система <span class="note">· 17 терминов</span></h3><p class="note" style="margin:4px 0 10px">la-показатели, sārvadhātuka/ārdhadhātuka, удвоение, залоги, вторичные основы.</p><div><span class="deva">कर्तरि / कर्मणि / भावे</span> <i>kartari / karmaṇi / bhāve</i>, <span class="deva">आर्धधातुक</span> <i>ārdhadhātuka</i>, <span class="deva">दश लकाराः</span> <i>daśa lakārāḥ</i>, <span class="deva">इट् / सेट् / अनिट्</span> <i>iṭ / seṭ / aniṭ</i>, <span class="deva">आत्मनेपद</span> <i>ātmanepada</i>, <span class="deva">क्ङिति / कित् / ङित्</span> <i>kṅiti / kit / ṅit</i></div></div>
+<div class="card"><h3 style="margin:0 0 4px"><span class="b">B5</span> Сложные слова и вторичная деривация <span class="note">· 18 терминов</span></h3><p class="note" style="margin:4px 0 10px">Четыре класса samāsa, члены сложного слова и taddhita-значения.</p><div><span class="deva">सामर्थ्य</span> <i>sāmarthya</i>, <span class="deva">पूर्वपद / उत्तरपद</span> <i>pūrvapada / uttarapada</i>, <span class="deva">तत्पुरुष</span> <i>tatpuruṣa</i>, <span class="deva">समास</span> <i>samāsa</i>, <span class="deva">अपत्य</span> <i>apatya</i>, <span class="deva">गोत्र / युवन् / तद्राज</span> <i>gotra / yuvan / tadrāja</i></div></div>
+<div class="card"><h3 style="margin:0 0 4px"><span class="b">B6</span> Метаправила, герменевтика, справочная полка <span class="note">· 17 терминов</span></h3><p class="note" style="margin:4px 0 10px">sañjñā, paribhāṣā, anuvṛtti, adhikāra, asiddha и справочные сочинения.</p><div><span class="deva">असिद्ध</span> <i>asiddha</i>, <span class="deva">सञ्ज्ञा</span> <i>sañjñā</i>, <span class="deva">शब्द / अर्थ / स्फोट</span> <i>śabda / artha / sphoṭa</i>, <span class="deva">नित्य / अनित्य</span> <i>nitya / anitya</i>, <span class="deva">स्थाने / अन्तरतम</span> <i>sthāne / antaratama</i>, <span class="deva">अधिकार</span> <i>adhikāra</i></div></div>
+
+<details>
+<summary>Показать все 119 терминов с русскими толкованиями</summary>
+<h3><span class="b">B0</span> Операторы сутры <span class="note">· 12</span></h3>
+<table><tr><th>Термин</th><th>IAST</th><th>Толкование</th><th>Спрос</th><th>явно / an / ad</th><th>Сутра</th></tr>
+<tr><td class="deva">च <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#1529" title="DSG">↗</a></td><td><i>ca</i></td><td>«и»; переносит слова предыдущей сутры вперёд</td><td>911</td><td class="note">847 / 94 / 0</td><td class="note">passim</td></tr>
+<tr><td class="deva">वा <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#3363" title="DSG">↗</a></td><td><i>vā</i></td><td>факультативно, «или»</td><td>463</td><td class="note">112 / 76 / 279</td><td class="note">passim</td></tr>
+<tr><td class="deva">न <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#2146" title="DSG">↗</a></td><td><i>na</i></td><td>отрицание / запрет (pratiṣedha)</td><td>335</td><td class="note">121 / 219 / 0</td><td class="note">passim</td></tr>
+<tr><td class="deva">विभाषा <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#3496" title="DSG">↗</a></td><td><i>vibhāṣā</i></td><td>факультативное правило (две возможности)</td><td>265</td><td class="note">110 / 56 / 100</td><td class="note">1.1.44</td></tr>
+<tr><td class="deva">छन्दसि </td><td><i>chandasi</i></td><td>в ведийском узусе (помета регистра)</td><td>226</td><td class="note">110 / 116 / 0</td><td class="note">passim</td></tr>
+<tr><td class="deva">अन्यतरस्याम् <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#288" title="DSG">↗</a></td><td><i>anyatarasyām</i></td><td>в одном из двух случаев</td><td>156</td><td class="note">95 / 63 / 0</td><td class="note">passim</td></tr>
+<tr><td class="deva">सञ्ज्ञायाम् </td><td><i>sañjñāyām</i></td><td>когда имеется в виду технический термин</td><td>102</td><td class="note">65 / 37 / 0</td><td class="note">passim</td></tr>
+<tr><td class="deva">इति </td><td><i>iti</i></td><td>кавычка / маркер конца термина</td><td>94</td><td class="note">39 / 55 / 0</td><td class="note">passim</td></tr>
+<tr><td class="deva">अपि <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#320" title="DSG">↗</a></td><td><i>api</i></td><td>также, даже</td><td>58</td><td class="note">31 / 28 / 0</td><td class="note">passim</td></tr>
+<tr><td class="deva">नित्यम् </td><td><i>nityam</i></td><td>обязательно, неизменно</td><td>50</td><td class="note">36 / 14 / 0</td><td class="note">passim</td></tr>
+<tr><td class="deva">बहुलम् </td><td><i>bahulam</i></td><td>с допустимой свободой, «по-разному»</td><td>46</td><td class="note">38 / 8 / 0</td><td class="note">passim</td></tr>
+<tr><td class="deva">वार्त्तिक <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#3403" title="DSG">↗</a></td><td><i>vārttika</i></td><td>дополнительное правило Кātyāyana к сутре</td><td>0</td><td class="note">0 / 0 / 0</td><td class="note">—</td></tr>
+</table>
+<h3><span class="b">B1</span> Алфавит, звуковые классы, замены <span class="note">· 18</span></h3>
+<table><tr><th>Термин</th><th>IAST</th><th>Толкование</th><th>Спрос</th><th>явно / an / ad</th><th>Сутра</th></tr>
+<tr><td class="deva">उपधा / टि / अन्त / आदि <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#860" title="DSG">↗</a></td><td><i>upadhā / ṭi / anta / ādi</i></td><td>предпоследний / конечная часть / конец / начало</td><td>429</td><td class="note">219 / 168 / 104</td><td class="note">1.1.64–65</td></tr>
+<tr><td class="deva">संहिता / संधि <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#4018" title="DSG">↗</a></td><td><i>saṃhitā / sandhi</i></td><td>смежность звуков; сандхи</td><td>302</td><td class="note">5 / 0 / 300</td><td class="note">1.4.109</td></tr>
+<tr><td class="deva">उदात्त / अनुदात्त / स्वरित <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#828" title="DSG">↗</a></td><td><i>udātta / anudātta / svarita</i></td><td>три ведийских акцента</td><td>252</td><td class="note">53 / 111 / 130</td><td class="note">1.2.29–31</td></tr>
+<tr><td class="deva">लोप / लुक् / श्लु / लुप् <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#3291" title="DSG">↗</a></td><td><i>lopa / luk / ślu / lup</i></td><td>четыре вида элизии (нулевой показатель)</td><td>181</td><td class="note">75 / 107 / 0</td><td class="note">1.1.60–61</td></tr>
+<tr><td class="deva">ह्रस्व / दीर्घ / प्लुत <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#4383" title="DSG">↗</a></td><td><i>hrasva / dīrgha / pluta</i></td><td>краткий / долгий / протяжный гласный</td><td>155</td><td class="note">60 / 96 / 0</td><td class="note">1.2.27</td></tr>
+<tr><td class="deva">वृद्धि </td><td><i>vṛddhi</i></td><td>ступень vṛddhi: ā, ai, au</td><td>61</td><td class="note">8 / 53 / 0</td><td class="note">1.1.1</td></tr>
+<tr><td class="deva">इत् <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#701" title="DSG">↗</a></td><td><i>it</i></td><td>анбандха: «немой» маркерный звук</td><td>50</td><td class="note">25 / 25 / 0</td><td class="note">1.3.2–1.3.9</td></tr>
+<tr><td class="deva">संप्रसारण <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#3988" title="DSG">↗</a></td><td><i>saṃprasāraṇa</i></td><td>замена полугласного соответствующим гласным</td><td>47</td><td class="note">10 / 38 / 0</td><td class="note">1.1.45</td></tr>
+<tr><td class="deva">गुण <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#1443" title="DSG">↗</a></td><td><i>guṇa</i></td><td>ступень guṇa: a, e, o</td><td>46</td><td class="note">30 / 17 / 0</td><td class="note">1.1.2</td></tr>
+<tr><td class="deva">संयोग <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#3998" title="DSG">↗</a></td><td><i>saṃyoga</i></td><td>стечение согласных</td><td>24</td><td class="note">16 / 8 / 0</td><td class="note">1.1.7</td></tr>
+<tr><td class="deva">अनुनासिक <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#224" title="DSG">↗</a></td><td><i>anunāsika</i></td><td>назальный звук</td><td>15</td><td class="note">12 / 3 / 0</td><td class="note">1.1.8</td></tr>
+<tr><td class="deva">प्रगृह्य <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#2551" title="DSG">↗</a></td><td><i>pragṛhya</i></td><td>гласный, не подвергающийся сандхи</td><td>10</td><td class="note">2 / 8 / 0</td><td class="note">1.1.11–19</td></tr>
+<tr><td class="deva">स्थानिन् <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#4268" title="DSG">↗</a></td><td><i>sthānin</i></td><td>заменяемый элемент</td><td>9</td><td class="note">3 / 6 / 0</td><td class="note">1.1.56</td></tr>
+<tr><td class="deva">सवर्ण <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#4122" title="DSG">↗</a></td><td><i>savarṇa</i></td><td>однородный (то же место и способ образования)</td><td>8</td><td class="note">5 / 3 / 0</td><td class="note">1.1.9–10</td></tr>
+<tr><td class="deva">आदेश <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#590" title="DSG">↗</a></td><td><i>ādeśa</i></td><td>субститут, заменяющий элемент</td><td>6</td><td class="note">3 / 3 / 0</td><td class="note">1.1.56</td></tr>
+<tr><td class="deva">अक्षरसमाम्नाय <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#39" title="DSG">↗</a></td><td><i>akṣarasamāmnāya</i></td><td>14 Шива-сутр; инвентарь звуков</td><td>0</td><td class="note">0 / 0 / 0</td><td class="note">Śiva-sūtras</td></tr>
+<tr><td class="deva">प्रत्याहार <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#2608" title="DSG">↗</a></td><td><i>pratyāhāra</i></td><td>сокращённое обозначение класса звуков (aC, iK, haL …)</td><td>0</td><td class="note">0 / 0 / 0</td><td class="note">1.1.71</td></tr>
+<tr><td class="deva">आगम <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#555" title="DSG">↗</a></td><td><i>āgama</i></td><td>аугмент, вставка (iṭ, aṭ, num …)</td><td>0</td><td class="note">0 / 0 / 0</td><td class="note">passim</td></tr>
+</table>
+<h3><span class="b">B2</span> Деривационный механизм <span class="note">· 17</span></h3>
+<table><tr><th>Термин</th><th>IAST</th><th>Толкование</th><th>Спрос</th><th>явно / an / ad</th><th>Сутра</th></tr>
+<tr><td class="deva">प्रत्यय <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#2588" title="DSG">↗</a></td><td><i>pratyaya</i></td><td>аффикс (термин с наибольшей областью действия)</td><td>1 853</td><td class="note">22 / 15 / 1 821</td><td class="note">3.1.1</td></tr>
+<tr><td class="deva">तद्धित <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#1815" title="DSG">↗</a></td><td><i>taddhita</i></td><td>вторичный аффикс (имя → имя)</td><td>1 174</td><td class="note">18 / 43 / 1 115</td><td class="note">4.1.76</td></tr>
+<tr><td class="deva">धातु <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#2103" title="DSG">↗</a></td><td><i>dhātu</i></td><td>глагольный корень</td><td>653</td><td class="note">23 / 29 / 610</td><td class="note">1.3.1</td></tr>
+<tr><td class="deva">अङ्ग </td><td><i>aṅga</i></td><td>основа непосредственно перед аффиксом</td><td>642</td><td class="note">24 / 6 / 613</td><td class="note">1.4.13</td></tr>
+<tr><td class="deva">कृत् <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#1277" title="DSG">↗</a></td><td><i>kṛt</i></td><td>первичный аффикс (корень → имя)</td><td>545</td><td class="note">42 / 511 / 36</td><td class="note">3.1.93</td></tr>
+<tr><td class="deva">लकार <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#3215" title="DSG">↗</a></td><td><i>lakāra</i></td><td>показатель времени и наклонения (laṭ, liṭ …)</td><td>523</td><td class="note">276 / 255 / 36</td><td class="note">3.2.110ff</td></tr>
+<tr><td class="deva">पद <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#2323" title="DSG">↗</a></td><td><i>pada</i></td><td>готовое слово с окончанием sup или tiṅ</td><td>266</td><td class="note">43 / 9 / 220</td><td class="note">1.4.14–17</td></tr>
+<tr><td class="deva">सुप् <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#4227" title="DSG">↗</a></td><td><i>sup</i></td><td>21 именное окончание</td><td>206</td><td class="note">19 / 83 / 107</td><td class="note">1.1.4 / 4.1.2</td></tr>
+<tr><td class="deva">स्त्रीप्रत्यय <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#4263" title="DSG">↗</a></td><td><i>strīpratyaya</i></td><td>аффикс женского рода (ṭāp, ṅīp …)</td><td>112</td><td class="note">14 / 2 / 98</td><td class="note">4.1.3ff</td></tr>
+<tr><td class="deva">प्रकृति <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#2528" title="DSG">↗</a></td><td><i>prakṛti</i></td><td>исходная основа; неизменяемая форма</td><td>98</td><td class="note">7 / 91 / 0</td><td class="note">passim</td></tr>
+<tr><td class="deva">समासान्त <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#4082" title="DSG">↗</a></td><td><i>samāsānta</i></td><td>аффикс на конце сложного слова</td><td>93</td><td class="note">1 / 0 / 93</td><td class="note">5.4.68ff</td></tr>
+<tr><td class="deva">विभक्ति <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#3485" title="DSG">↗</a></td><td><i>vibhakti</i></td><td>падежное / личное окончание</td><td>58</td><td class="note">11 / 47 / 0</td><td class="note">1.4.104</td></tr>
+<tr><td class="deva">कृत्य <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#1282" title="DSG">↗</a></td><td><i>kṛtya</i></td><td>герундивная / причастная разновидность kṛt</td><td>52</td><td class="note">13 / 39 / 36</td><td class="note">3.1.95–97</td></tr>
+<tr><td class="deva">भ <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#2808" title="DSG">↗</a></td><td><i>bha</i></td><td>основа перед частью гласных и svarādi-аффиксов</td><td>51</td><td class="note">5 / 0 / 47</td><td class="note">1.4.18–20</td></tr>
+<tr><td class="deva">तिङ् <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#1877" title="DSG">↗</a></td><td><i>tiṅ</i></td><td>18 глагольных окончаний</td><td>49</td><td class="note">9 / 40 / 0</td><td class="note">1.1.4 / 3.4.78</td></tr>
+<tr><td class="deva">प्रातिपदिक <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#2690" title="DSG">↗</a></td><td><i>prātipadika</i></td><td>именная основа до присоединения sup</td><td>12</td><td class="note">7 / 5 / 0</td><td class="note">1.2.45–46</td></tr>
+<tr><td class="deva">विकरण <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#3418" title="DSG">↗</a></td><td><i>vikaraṇa</i></td><td>аффикс, образующий спрягаемую основу (śap и др.)</td><td>0</td><td class="note">0 / 0 / 0</td><td class="note">3.1.68</td></tr>
+</table>
+<h3><span class="b">B3</span> Именная система и kāraka <span class="note">· 20</span></h3>
+<table><tr><th>Термин</th><th>IAST</th><th>Толкование</th><th>Спрос</th><th>явно / an / ad</th><th>Сутра</th></tr>
+<tr><td class="deva">कर्मन् <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#1120" title="DSG">↗</a></td><td><i>karman</i></td><td>объект / пациенс</td><td>202</td><td class="note">62 / 143 / 16</td><td class="note">1.4.49</td></tr>
+<tr><td class="deva">उपसर्ग <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#884" title="DSG">↗</a></td><td><i>upasarga</i></td><td>глагольная приставка (pra, vi, sam …)</td><td>97</td><td class="note">27 / 70 / 0</td><td class="note">1.4.59</td></tr>
+<tr><td class="deva">कर्तृ <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#1111" title="DSG">↗</a></td><td><i>kartṛ</i></td><td>агенс (svatantraḥ kartā)</td><td>69</td><td class="note">27 / 43 / 0</td><td class="note">1.4.54</td></tr>
+<tr><td class="deva">सर्वनामन् <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#4100" title="DSG">↗</a></td><td><i>sarvanāman</i></td><td>местоименная основа</td><td>67</td><td class="note">12 / 55 / 0</td><td class="note">1.1.27–31</td></tr>
+<tr><td class="deva">अव्यय <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#469" title="DSG">↗</a></td><td><i>avyaya</i></td><td>неизменяемое слово</td><td>56</td><td class="note">23 / 21 / 17</td><td class="note">1.1.37–41</td></tr>
+<tr><td class="deva">संख्या <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#3942" title="DSG">↗</a></td><td><i>saṅkhyā</i></td><td>числительное</td><td>54</td><td class="note">29 / 26 / 0</td><td class="note">1.1.23–25</td></tr>
+<tr><td class="deva">कारक <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#1198" title="DSG">↗</a></td><td><i>kāraka</i></td><td>синтаксико-семантическая роль</td><td>45</td><td class="note">7 / 6 / 33</td><td class="note">1.4.23–55</td></tr>
+<tr><td class="deva">करण <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#1106" title="DSG">↗</a></td><td><i>karaṇa</i></td><td>орудие (sādhakatamam)</td><td>43</td><td class="note">19 / 24 / 9</td><td class="note">1.4.42</td></tr>
+<tr><td class="deva">गति <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#1416" title="DSG">↗</a></td><td><i>gati</i></td><td>приставочный элемент перед глаголом</td><td>32</td><td class="note">10 / 23 / 0</td><td class="note">1.4.60–79</td></tr>
+<tr><td class="deva">समानाधिकरण <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#4072" title="DSG">↗</a></td><td><i>samānādhikaraṇa</i></td><td>сореферентность, общий падеж</td><td>32</td><td class="note">5 / 27 / 0</td><td class="note">2.1.49</td></tr>
+<tr><td class="deva">अधिकरण <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#141" title="DSG">↗</a></td><td><i>adhikaraṇa</i></td><td>locus: место или основание действия</td><td>24</td><td class="note">14 / 10 / 0</td><td class="note">1.4.45</td></tr>
+<tr><td class="deva">सर्वनामस्थान <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#4101" title="DSG">↗</a></td><td><i>sarvanāmasthāna</i></td><td>«сильная» именная основа</td><td>22</td><td class="note">5 / 17 / 0</td><td class="note">1.1.42–43</td></tr>
+<tr><td class="deva">कर्मप्रवचनीय </td><td><i>karmapravacanīya</i></td><td>квази-предлог, управляющий падежом</td><td>20</td><td class="note">2 / 18 / 16</td><td class="note">1.4.83–98</td></tr>
+<tr><td class="deva">वचन <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#3309" title="DSG">↗</a></td><td><i>vacana</i></td><td>число (ед. / дв. / мн.)</td><td>14</td><td class="note">12 / 2 / 0</td><td class="note">1.4.102–103</td></tr>
+<tr><td class="deva">सम्प्रदान </td><td><i>sampradāna</i></td><td>адресат / косвенное дополнение</td><td>14</td><td class="note">5 / 9 / 0</td><td class="note">1.4.32</td></tr>
+<tr><td class="deva">निपात <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#2218" title="DSG">↗</a></td><td><i>nipāta</i></td><td>частица</td><td>12</td><td class="note">6 / 6 / 0</td><td class="note">1.4.56–58</td></tr>
+<tr><td class="deva">अपादान <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#317" title="DSG">↗</a></td><td><i>apādāna</i></td><td>источник, исходная точка</td><td>12</td><td class="note">5 / 7 / 0</td><td class="note">1.4.24</td></tr>
+<tr><td class="deva">संबुद्धि / आमन्त्रित </td><td><i>sambuddhi / āmantrita</i></td><td>звательная форма</td><td>10</td><td class="note">9 / 2 / 0</td><td class="note">2.3.48–49</td></tr>
+<tr><td class="deva">पुरुष <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#2470" title="DSG">↗</a></td><td><i>puruṣa</i></td><td>лицо (prathama / madhyama / uttama)</td><td>8</td><td class="note">8 / 0 / 0</td><td class="note">1.4.101</td></tr>
+<tr><td class="deva">लिङ्ग <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#3254" title="DSG">↗</a></td><td><i>liṅga</i></td><td>род</td><td>3</td><td class="note">3 / 0 / 0</td><td class="note">passim</td></tr>
+</table>
+<h3><span class="b">B4</span> Глагольная система <span class="note">· 17</span></h3>
+<table><tr><th>Термин</th><th>IAST</th><th>Толкование</th><th>Спрос</th><th>явно / an / ad</th><th>Сутра</th></tr>
+<tr><td class="deva">कर्तरि / कर्मणि / भावे </td><td><i>kartari / karmaṇi / bhāve</i></td><td>актив / пассив / безличный залог</td><td>288</td><td class="note">66 / 145 / 95</td><td class="note">3.4.67–69</td></tr>
+<tr><td class="deva">आर्धधातुक <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#658" title="DSG">↗</a></td><td><i>ārdhadhātuka</i></td><td>аффикс с iṭ и без guṇa</td><td>98</td><td class="note">7 / 45 / 48</td><td class="note">3.4.114–117</td></tr>
+<tr><td class="deva">दश लकाराः </td><td><i>daśa lakārāḥ</i></td><td>десять la-показателей: laṭ liṭ luṭ lṛṭ loṭ laṅ liṅ luṅ lṛṅ leṭ</td><td>89</td><td class="note">61 / 33 / 0</td><td class="note">3.2–3.4</td></tr>
+<tr><td class="deva">इट् / सेट् / अनिट् </td><td><i>iṭ / seṭ / aniṭ</i></td><td>вставной аугмент i; seṭ / aniṭ-корни</td><td>85</td><td class="note">12 / 78 / 0</td><td class="note">7.2.35ff</td></tr>
+<tr><td class="deva">आत्मनेपद <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#579" title="DSG">↗</a></td><td><i>ātmanepada</i></td><td>медиальные (ātmanepada) окончания</td><td>81</td><td class="note">10 / 71 / 0</td><td class="note">1.4.100</td></tr>
+<tr><td class="deva">क्ङिति / कित् / ङित् </td><td><i>kṅiti / kit / ṅit</i></td><td>аффикс с маркером k/ṅ (запрет guṇa)</td><td>79</td><td class="note">13 / 66 / 0</td><td class="note">1.1.5</td></tr>
+<tr><td class="deva">अभ्यास / अभ्यस्त <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#633" title="DSG">↗</a></td><td><i>abhyāsa / abhyasta</i></td><td>удвоенный слог / удвоенная основа</td><td>78</td><td class="note">21 / 57 / 39</td><td class="note">6.1.4–5</td></tr>
+<tr><td class="deva">निष्ठा / सत् <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#2268" title="DSG">↗</a></td><td><i>niṣṭhā / sat</i></td><td>kta / ktavatu; причастие настоящего времени</td><td>73</td><td class="note">23 / 50 / 0</td><td class="note">1.1.26 / 3.2.127</td></tr>
+<tr><td class="deva">सार्वधातुक <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#4193" title="DSG">↗</a></td><td><i>sārvadhātuka</i></td><td>аффикс, перед которым действует guṇa</td><td>61</td><td class="note">11 / 51 / 0</td><td class="note">3.4.113</td></tr>
+<tr><td class="deva">प्रथम / मध्यम / उत्तम <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#2615" title="DSG">↗</a></td><td><i>prathama / madhyama / uttama</i></td><td>3-е / 2-е / 1-е лицо</td><td>56</td><td class="note">31 / 26 / 0</td><td class="note">1.4.101</td></tr>
+<tr><td class="deva">परस्मैपद <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#2363" title="DSG">↗</a></td><td><i>parasmaipada</i></td><td>активные (parasmaipada) окончания</td><td>44</td><td class="note">13 / 31 / 0</td><td class="note">1.4.99</td></tr>
+<tr><td class="deva">णिच् / णिजन्त <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#1781" title="DSG">↗</a></td><td><i>ṇic / ṇijanta</i></td><td>каузативная основа</td><td>37</td><td class="note">12 / 25 / 0</td><td class="note">3.1.26</td></tr>
+<tr><td class="deva">सन् / सन्नन्त <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#4043" title="DSG">↗</a></td><td><i>san / sannanta</i></td><td>дезидеративная основа</td><td>19</td><td class="note">13 / 6 / 0</td><td class="note">3.1.7</td></tr>
+<tr><td class="deva">सकर्मक / अकर्मक <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#4021" title="DSG">↗</a></td><td><i>sakarmaka / akarmaka</i></td><td>переходный / непереходный глагол</td><td>16</td><td class="note">12 / 4 / 0</td><td class="note">1.4.52ff</td></tr>
+<tr><td class="deva">हेतु <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#4363" title="DSG">↗</a></td><td><i>hetu</i></td><td>побудитель, инициатор действия</td><td>16</td><td class="note">11 / 6 / 0</td><td class="note">1.4.55</td></tr>
+<tr><td class="deva">आम्रेडित <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#642" title="DSG">↗</a></td><td><i>āmreḍita</i></td><td>повторённое слово при итерации</td><td>8</td><td class="note">7 / 1 / 0</td><td class="note">8.1.2</td></tr>
+<tr><td class="deva">द्वित्व <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#2075" title="DSG">↗</a></td><td><i>dvitva</i></td><td>удвоение</td><td>0</td><td class="note">0 / 0 / 0</td><td class="note">6.1.1ff</td></tr>
+</table>
+<h3><span class="b">B5</span> Сложные слова и вторичная деривация <span class="note">· 18</span></h3>
+<table><tr><th>Термин</th><th>IAST</th><th>Толкование</th><th>Спрос</th><th>явно / an / ad</th><th>Сутра</th></tr>
+<tr><td class="deva">सामर्थ्य <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#4157" title="DSG">↗</a></td><td><i>sāmarthya</i></td><td>смысловая совместимость как условие деривации</td><td>836</td><td class="note">7 / 0 / 830</td><td class="note">2.1.1</td></tr>
+<tr><td class="deva">पूर्वपद / उत्तरपद <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#2490" title="DSG">↗</a></td><td><i>pūrvapada / uttarapada</i></td><td>первая / последняя часть сложного слова</td><td>402</td><td class="note">34 / 149 / 248</td><td class="note">passim</td></tr>
+<tr><td class="deva">तत्पुरुष <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#1810" title="DSG">↗</a></td><td><i>tatpuruṣa</i></td><td>определительное сложное слово</td><td>150</td><td class="note">13 / 59 / 80</td><td class="note">2.1.22</td></tr>
+<tr><td class="deva">समास <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#4078" title="DSG">↗</a></td><td><i>samāsa</i></td><td>сложное слово</td><td>122</td><td class="note">14 / 16 / 93</td><td class="note">2.1.3</td></tr>
+<tr><td class="deva">अपत्य <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#306" title="DSG">↗</a></td><td><i>apatya</i></td><td>потомок (значение taddhita)</td><td>86</td><td class="note">3 / 84 / 0</td><td class="note">4.1.92ff</td></tr>
+<tr><td class="deva">गोत्र / युवन् / तद्राज <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#1464" title="DSG">↗</a></td><td><i>gotra / yuvan / tadrāja</i></td><td>ступени родства в taddhita</td><td>50</td><td class="note">23 / 28 / 0</td><td class="note">4.1.162–174</td></tr>
+<tr><td class="deva">नदी / घि / घु <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#2157" title="DSG">↗</a></td><td><i>nadī / ghi / ghu</i></td><td>особые классы именных основ</td><td>42</td><td class="note">26 / 16 / 0</td><td class="note">1.4.3–9, 1.1.20</td></tr>
+<tr><td class="deva">द्वन्द्व </td><td><i>dvandva</i></td><td>сочинительное сложное слово</td><td>37</td><td class="note">17 / 20 / 0</td><td class="note">2.2.29</td></tr>
+<tr><td class="deva">वृद्ध </td><td><i>vṛddha</i></td><td>«старший»; класс основ, допускающих именование</td><td>36</td><td class="note">18 / 19 / 0</td><td class="note">1.1.73–75</td></tr>
+<tr><td class="deva">अव्ययीभाव <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#472" title="DSG">↗</a></td><td><i>avyayībhāva</i></td><td>наречное сложное слово</td><td>32</td><td class="note">8 / 8 / 17</td><td class="note">2.1.5</td></tr>
+<tr><td class="deva">कर्मधारय <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#1119" title="DSG">↗</a></td><td><i>karmadhāraya</i></td><td>аппозитивный tatpuruṣa</td><td>17</td><td class="note">8 / 9 / 0</td><td class="note">1.2.42</td></tr>
+<tr><td class="deva">उपसर्जन <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#891" title="DSG">↗</a></td><td><i>upasarjana</i></td><td>подчинённый член сложного слова</td><td>13</td><td class="note">6 / 7 / 0</td><td class="note">1.2.43–44</td></tr>
+<tr><td class="deva">उपपद <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#864" title="DSG">↗</a></td><td><i>upapada</i></td><td>управляющее слово при корне</td><td>13</td><td class="note">10 / 3 / 0</td><td class="note">3.1.92</td></tr>
+<tr><td class="deva">अपृक्त <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#323" title="DSG">↗</a></td><td><i>apṛkta</i></td><td>аффикс из одной фонемы</td><td>9</td><td class="note">5 / 4 / 0</td><td class="note">1.2.41</td></tr>
+<tr><td class="deva">अवसान <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#449" title="DSG">↗</a></td><td><i>avasāna</i></td><td>пауза / конец слова</td><td>4</td><td class="note">3 / 1 / 0</td><td class="note">1.4.110</td></tr>
+<tr><td class="deva">द्विगु <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#2070" title="DSG">↗</a></td><td><i>dvigu</i></td><td>tatpuruṣa с числительным в первой части</td><td>3</td><td class="note">3 / 0 / 0</td><td class="note">2.1.23</td></tr>
+<tr><td class="deva">बहुव्रीहि <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#2767" title="DSG">↗</a></td><td><i>bahuvrīhi</i></td><td>экзоцентрическое (посессивное) сложное слово</td><td>3</td><td class="note">2 / 1 / 0</td><td class="note">2.2.23</td></tr>
+<tr><td class="deva">विग्रह <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#3434" title="DSG">↗</a></td><td><i>vigraha</i></td><td>аналитическая парафраза сложного слова</td><td>0</td><td class="note">0 / 0 / 0</td><td class="note">—</td></tr>
+</table>
+<h3><span class="b">B6</span> Метаправила, герменевтика, справочная полка <span class="note">· 17</span></h3>
+<table><tr><th>Термин</th><th>IAST</th><th>Толкование</th><th>Спрос</th><th>явно / an / ad</th><th>Сутра</th></tr>
+<tr><td class="deva">असिद्ध <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#516" title="DSG">↗</a></td><td><i>asiddha</i></td><td>«ещё не действующее»: порядок применения правил</td><td>156</td><td class="note">3 / 0 / 154</td><td class="note">8.2.1 / 6.4.22</td></tr>
+<tr><td class="deva">सञ्ज्ञा <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#3954" title="DSG">↗</a></td><td><i>sañjñā</i></td><td>технический термин</td><td>114</td><td class="note">73 / 41 / 0</td><td class="note">1.1.1ff</td></tr>
+<tr><td class="deva">शब्द / अर्थ / स्फोट </td><td><i>śabda / artha / sphoṭa</i></td><td>слово / значение / смысловое целое</td><td>69</td><td class="note">54 / 15 / 0</td><td class="note">Vākyapadīya</td></tr>
+<tr><td class="deva">नित्य / अनित्य <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#2213" title="DSG">↗</a></td><td><i>nitya / anitya</i></td><td>всегда / не всегда применимое правило</td><td>56</td><td class="note">40 / 16 / 0</td><td class="note">paribhāṣā</td></tr>
+<tr><td class="deva">स्थाने / अन्तरतम </td><td><i>sthāne / antaratama</i></td><td>«вместо» / ближайший субститут</td><td>12</td><td class="note">3 / 9 / 0</td><td class="note">1.1.50 / 1.1.56</td></tr>
+<tr><td class="deva">अधिकार <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#142" title="DSG">↗</a></td><td><i>adhikāra</i></td><td>управляющая сутра-заголовок</td><td>1</td><td class="note">1 / 0 / 0</td><td class="note">passim</td></tr>
+<tr><td class="deva">परिभाषा <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#2376" title="DSG">↗</a></td><td><i>paribhāṣā</i></td><td>метаправило, задающее чтение других правил</td><td>0</td><td class="note">0 / 0 / 0</td><td class="note">passim</td></tr>
+<tr><td class="deva">अनुवृत्ति <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#243" title="DSG">↗</a></td><td><i>anuvṛtti</i></td><td>перенос слов из предыдущей сутры</td><td>0</td><td class="note">0 / 0 / 0</td><td class="note">passim</td></tr>
+<tr><td class="deva">अपवाद / उत्सर्ग <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#310" title="DSG">↗</a></td><td><i>apavāda / utsarga</i></td><td>исключение / общее правило</td><td>0</td><td class="note">0 / 0 / 0</td><td class="note">passim</td></tr>
+<tr><td class="deva">अतिदेश <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#89" title="DSG">↗</a></td><td><i>atideśa</i></td><td>перенос свойств по аналогии</td><td>0</td><td class="note">0 / 0 / 0</td><td class="note">passim</td></tr>
+<tr><td class="deva">अन्तरङ्ग / बहिरङ्ग <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#270" title="DSG">↗</a></td><td><i>antaraṅga / bahiraṅga</i></td><td>внутренне / внешне обусловленное правило</td><td>0</td><td class="note">0 / 0 / 0</td><td class="note">paribhāṣā</td></tr>
+<tr><td class="deva">योगविभाग <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#3093" title="DSG">↗</a></td><td><i>yogavibhāga</i></td><td>разделение одной сутры на две</td><td>0</td><td class="note">0 / 0 / 0</td><td class="note">paribhāṣā</td></tr>
+<tr><td class="deva">उपसंख्यान / इष्टि </td><td><i>upasaṅkhyāna / iṣṭi</i></td><td>дополнение / пожелание к правилу</td><td>0</td><td class="note">0 / 0 / 0</td><td class="note">vārttika</td></tr>
+<tr><td class="deva">व्याकरण <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#3664" title="DSG">↗</a></td><td><i>vyākaraṇa</i></td><td>грамматика как дисциплина</td><td>0</td><td class="note">0 / 0 / 0</td><td class="note">—</td></tr>
+<tr><td class="deva">वाच्य / वाचक <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#3387" title="DSG">↗</a></td><td><i>vācya / vācaka</i></td><td>выражаемый смысл / выражающее слово</td><td>0</td><td class="note">0 / 0 / 0</td><td class="note">later Vyākaraṇa</td></tr>
+<tr><td class="deva">प्रातिशाख्य / शिक्षा <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#2696" title="DSG">↗</a></td><td><i>prātiśākhya / śikṣā</i></td><td>ведийские фонетические трактаты</td><td>0</td><td class="note">0 / 0 / 0</td><td class="note">—</td></tr>
+<tr><td class="deva">महाभाष्य / काशिका / सिद्धान्तकौमुदी <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/#2954" title="DSG">↗</a></td><td><i>Mahābhāṣya / Kāśikā / SK</i></td><td>три основных справочных сочинения</td><td>0</td><td class="note">0 / 0 / 0</td><td class="note">—</td></tr>
+</table>
+<p class="note">Толкования — краткие учебные ориентиры, не перевод словарных статей Abhyankar.
+Полные статьи доступны по ссылкам DSG в <a href="data/core_terms.tsv">core_terms.tsv</a>.</p>
+</details>
+
+<h2>Что делать ученику</h2>
+<ol>
+<li>Пройти B0–B2 как единый «двигатель чтения»: без <i>pratyaya</i>, <i>dhātu</i>, <i>aṅga</i>,
+  <i>pada</i> последующие блоки не связываются.</li>
+<li>С B3 переходить к сутрам: для каждой определять, что написано, что перенесено по
+  <i>anuvṛtti</i>, что задано <i>adhikāra</i>.</li>
+<li>B5–B6 не заучивать, а держать как справочную полку: DSG открывать по требованию,
+  а не читать подряд. Не менее 42&nbsp;% словаря — инвентарь (аффиксы, корни, имена авторов).</li>
+</ol>
+
+<h2>Эксперимент: чего исследование не доказало</h2>
+<div class="card hl">
+  <p style="margin-top:0"><b>«Прирост обучения не измерялся» — и что с этим делать.</b>
+  Нужен рандомизированный эксперимент: четыре группы с разным <i>порядком</i> одних и тех же
+  119 карточек, тест до / сразу после / через три недели, первичная конечная точка — прирост
+  на заданиях «восстанови неписаный термин». Гипотезы, мощность, план анализа, критерии
+  опровержения и лестница из четырёх ступеней (от калибровки заданий до полного РКИ) разобраны
+  в <a href="experiment.html"><b>протоколе</b></a>.</p>
+  <p>Уже готово для пилота: <a href="quiz.html"><b>офлайн-тест</b></a> с двумя параллельными
+  формами A/B и экспортом CSV и <a href="data/item_bank.tsv"><b>банк из 240 заданий</b></a>,
+  сгенерированный из тех же сутр: 9 377 потенциальных неявных слотов,
+  30 заданий в каждой форме, 119 русских толкований.</p>
+</div>
+
+<h2>Качество данных: ключи DSG и короткие термины</h2>
+<div class="card hl">
+  <p style="margin-top:0"><b>Колонка <code>slp1</code> в DSG — это Harvard-Kyoto, а не SLP1.</b>
+  Прямое соединение с корпусом DCS даёт неверные ключи: <code>Adeza</code> вместо
+  <code>AdeSa</code>, <code>saJjJA</code> вместо <code>saYjYA</code>,
+  <code>kRt</code> вместо <code>kft</code>. HK и SLP1 различаются <i>циклической</i>
+  подстановкой, поэтому нужна однопроходная конверсия, а не последовательная замена.
+  Конвертер вынесен в <a href="code/slp1_keys.py"><code>slp1_keys.py</code></a> и проверен
+  по независимой колонке IAST: 3 272 проверок, расхождений нет.</p>
+  <p><b>Варианты «классовый назальный ↔ анусвара» добавлены</b> и для деванагари
+  (<span class="deva">सञ्ज्ञा</span> / <span class="deva">संज्ञा</span>,
+  <span class="deva">सङ्ख्या</span> / <span class="deva">संख्या</span>), и для SLP1
+  (<code>saYjYA</code>/<code>saMjYA</code>, <code>aNga</code>/<code>aMga</code>,
+  <code>saMbanDa</code>/<code>sambanDa</code>). Варианты — это альтернативные написания
+  одного леммы, поэтому берётся наиболее засвидетельствованный ключ, а не сумма счётчиков.</p>
+  <p>Исправленное соединение всех 4 383 словарных статей с DCS —
+  <a href="data/dsg_dcs_join.tsv"><code>dsg_dcs_join.tsv</code></a>:
+  наивное соединение по HK давало 266 совпадений, исправленное даёт
+  <b>1 178</b> — возвращено 921 ранее потерянных совпадений.</p>
+  <p style="margin-bottom:0"><b>10 коротких терминов измерены, а не объявлены
+  «неизмеримыми».</b> <i>ca</i>, <i>na</i>, <i>it</i> и др. сталкиваются в английском
+  тексте DSG с английскими служебными словами, поэтому каждый из них измерен в трёх
+  полях: английское определение (верхняя граница), русское определение (без английских
+  омонимов) и деванагари-заголовки. Например, <i>it</i>: 565 вхождений в английском
+  тексте, но 30 в русском — основная масса английских вхождений это местоимение «it».
+  Пустых значений нет, правила подсчёта зафиксированы в
+  <a href="data/external_channels.json"><code>external_channels.json</code></a>.</p>
+</div>
+
+<h2>Ограничения</h2>
+<ul>
+<li>Состав словаря DSG оценивался эвристикой по первому определению; граница «термин / инвентарь» приблизительна.</li>
+<li>В DSG нет отдельных статей <i>vṛddhi</i>, <i>aṅga</i>, <i>saṃjñā</i>. Варианты написаний
+  <span class="deva">सञ्ज्ञा</span> / <span class="deva">संज्ञा</span> и
+  <span class="deva">अङ्ग</span> / <span class="deva">अंग</span> теперь нормализуются
+  системно; две статьи с нелатинскими символами-заполнителями (jihvāmūlīya, upadhmānīya)
+  не имеют SLP1-ключа и помечены <code>slp1_source=none</code>.</li>
+<li>Канал G считает пассажи, а не tokens в унифицированной разбивке; D — закреплённый
+  ранжирующий список DCS (50 474 ключа), а не полный экспорт корпуса.</li>
+<li>Короткие латинские основы в английском тексте DSG дают завышенную оценку; рядом всегда
+  приводятся счётчики по русскому тексту и по заголовкам, корреляции посчитаны по обоим.</li>
+<li>Корреляция с частотой в грамматиках подтверждает осмысленность порядка, но не причинность.
+  Никакого сравнения групп учащихся не проводилось.</li>
+</ul>
+
+<h2>Источники и воспроизводимость</h2>
+<table>
+<tr><th>Что</th><th>Откуда</th><th>Файл</th></tr>
+<tr><td>4 383 статьи DSG</td><td><a href="https://samskrtam.ru/sanskrit-lexicon/dsg/">samskrtam.ru</a>, Abhyankar 1961</td><td><a href="data/dsg_entries.tsv">dsg_entries.tsv</a></td></tr>
+<tr><td>3 983 сутры с <code>pc/an/ad</code></td><td><a href="https://github.com/ashtadhyayi-com/data">ashtadhyayi-com/data</a></td><td><a href="data/panini_word_forms.tsv">panini_word_forms.tsv</a></td></tr>
+<tr><td>Внешние каналы G / L / D</td><td>10 файлов vyākaraṇa-корпуса, DSG, DCS</td><td><a href="data/external_channels.tsv">external_channels.tsv</a></td></tr>
+<tr><td>Числа и хэши источников</td><td>—</td><td><a href="data/report.json">report.json</a>, <a href="data/external_channels.json">external_channels.json</a></td></tr>
+<tr><td>Скрипты</td><td>измерение, блоки, внешние каналы, банк заданий</td><td><a href="code/">code/</a></td></tr>
+</table>
+<p class="note">Снимки источников закреплены по SHA-256 в <code>report.json</code>;
+сетевых запросов при повторном расчёте не требуется. Англоязычные отчёты сохранены как
+первичные исследовательские артефакты: <a href="study.html">измеренный порядок</a> и
+<a href="channels.html">внешние каналы</a>.</p>
+
+<footer>
+  Измерение и русская версия подготовлены в проекте Sanskrit Lexicon estate · 7 ноября 2026 г.
+  Это упорядочивающее исследование, а не проверенная методика преподавания:
+  <a href="experiment.html">как это проверить →</a>
+</footer>
+</div>
+</body>
+</html>

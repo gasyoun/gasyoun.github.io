@@ -1,0 +1,120 @@
+batch	deva	iast	total	explicit	inherited	governed	first_layer	dsg_chars	dsg_cites	sutra	gloss	dsg_url
+0	च	ca	911	847	94	0	2	1011	7	passim	and; carries a preceding rule forward	https://samskrtam.ru/sanskrit-lexicon/dsg/#1529
+0	न	na	335	121	219	0	1	948	7	passim	negation / prohibition (pratiṣedha)	https://samskrtam.ru/sanskrit-lexicon/dsg/#2146
+0	वा	vā	463	112	76	279	1	172	0	passim	optionally	https://samskrtam.ru/sanskrit-lexicon/dsg/#3363
+0	विभाषा	vibhāṣā	265	110	56	100	1	525	1	1.1.44	optional rule (two alternatives)	https://samskrtam.ru/sanskrit-lexicon/dsg/#3496
+0	अन्यतरस्याम्	anyatarasyām	156	95	63	0	2	157	0	passim	in either of the two alternatives	https://samskrtam.ru/sanskrit-lexicon/dsg/#288
+0	नित्यम्	nityam	50	36	14	0	1	0	0	passim	obligatorily / invariably	
+0	बहुलम्	bahulam	46	38	8	0	2	0	0	passim	variously (licensed latitude)	
+0	छन्दसि	chandasi	226	110	116	0	2	0	0	passim	in the Veda (register tag)	
+0	सञ्ज्ञायाम्	sañjñāyām	102	65	37	0	2	0	0	passim	when a technical name is meant	
+0	इति	iti	94	39	55	0	1	0	0	passim	quotation / end-of-term marker	
+0	अपि	api	58	31	28	0	2	305	1	passim	also, even	https://samskrtam.ru/sanskrit-lexicon/dsg/#320
+0	वार्त्तिक	vārttika	0	0	0	0		1590	4	—	Kātyāyana's supplementary rule	https://samskrtam.ru/sanskrit-lexicon/dsg/#3403
+1	अक्षरसमाम्नाय	akṣarasamāmnāya	0	0	0	0		2753	2	Śiva-sūtras	the 14 Śiva-sūtras; the sound inventory	https://samskrtam.ru/sanskrit-lexicon/dsg/#39
+1	प्रत्याहार	pratyāhāra	0	0	0	0		1241	3	1.1.71	abbreviated sound class (aC, iK, haL …)	https://samskrtam.ru/sanskrit-lexicon/dsg/#2608
+1	इत्	it	50	25	25	0	1	4900	5	1.3.2–1.3.9	anubandha: mute marker letter	https://samskrtam.ru/sanskrit-lexicon/dsg/#701
+1	सवर्ण	savarṇa	8	5	3	0	1	767	3	1.1.9–10	homorganic / same place+manner	https://samskrtam.ru/sanskrit-lexicon/dsg/#4122
+1	अनुनासिक	anunāsika	15	12	3	0	1	1533	2	1.1.8	nasal	https://samskrtam.ru/sanskrit-lexicon/dsg/#224
+1	संयोग	saṃyoga	24	16	8	0	1	262	2	1.1.7	consonant cluster	https://samskrtam.ru/sanskrit-lexicon/dsg/#3998
+1	ह्रस्व / दीर्घ / प्लुत	hrasva / dīrgha / pluta	155	60	96	0	1	169	1	1.2.27	short / long / protracted vowel	https://samskrtam.ru/sanskrit-lexicon/dsg/#4383
+1	उदात्त / अनुदात्त / स्वरित	udātta / anudātta / svarita	252	53	111	130	1	834	0	1.2.29–31	the three accents	https://samskrtam.ru/sanskrit-lexicon/dsg/#828
+1	गुण	guṇa	46	30	17	0	1	1684	7	1.1.2	the a/e/o grade	https://samskrtam.ru/sanskrit-lexicon/dsg/#1443
+1	वृद्धि	vṛddhi	61	8	53	0	1	0	0	1.1.1	the ā/ai/au grade	
+1	संप्रसारण	saṃprasāraṇa	47	10	38	0	1	1064	6	1.1.45	semivowel → vowel replacement	https://samskrtam.ru/sanskrit-lexicon/dsg/#3988
+1	संहिता / संधि	saṃhitā / sandhi	302	5	0	300	2	1160	0	1.4.109	contiguity; euphonic combination	https://samskrtam.ru/sanskrit-lexicon/dsg/#4018
+1	लोप / लुक् / श्लु / लुप्	lopa / luk / ślu / lup	181	75	107	0	1	595	4	1.1.60–61	the four kinds of elision (zero)	https://samskrtam.ru/sanskrit-lexicon/dsg/#3291
+1	आदेश	ādeśa	6	3	3	0	1	1462	8	1.1.56	substitute	https://samskrtam.ru/sanskrit-lexicon/dsg/#590
+1	स्थानिन्	sthānin	9	3	6	0	1	183	1	1.1.56	the item replaced	https://samskrtam.ru/sanskrit-lexicon/dsg/#4268
+1	आगम	āgama	0	0	0	0		1163	1	passim	augment (iṭ, aṭ, num …)	https://samskrtam.ru/sanskrit-lexicon/dsg/#555
+1	प्रगृह्य	pragṛhya	10	2	8	0	1	243	2	1.1.11–19	vowel not subject to sandhi	https://samskrtam.ru/sanskrit-lexicon/dsg/#2551
+1	उपधा / टि / अन्त / आदि	upadhā / ṭi / anta / ādi	429	219	168	104	1	219	1	1.1.64–65	penultimate / final-part / end / beginning	https://samskrtam.ru/sanskrit-lexicon/dsg/#860
+2	प्रत्यय	pratyaya	1853	22	15	1821	1	1516	7	3.1.1	affix (the single highest-scope term)	https://samskrtam.ru/sanskrit-lexicon/dsg/#2588
+2	धातु	dhātu	653	23	29	610	2	2591	3	1.3.1	verbal root	https://samskrtam.ru/sanskrit-lexicon/dsg/#2103
+2	प्रातिपदिक	prātipadika	12	7	5	0	1	1684	2	1.2.45–46	nominal base (before a sup)	https://samskrtam.ru/sanskrit-lexicon/dsg/#2690
+2	अङ्ग	aṅga	642	24	6	613	2	0	0	1.4.13	base immediately before an affix	
+2	पद	pada	266	43	9	220	1	3709	11	1.4.14–17	finished word (sup/tiṅ-ending)	https://samskrtam.ru/sanskrit-lexicon/dsg/#2323
+2	भ	bha	51	5	0	47	6	712	2	1.4.18–20	base before certain vowel/svarādi affixes	https://samskrtam.ru/sanskrit-lexicon/dsg/#2808
+2	प्रकृति	prakṛti	98	7	91	0	1	878	4	passim	underlying base; unchanged form	https://samskrtam.ru/sanskrit-lexicon/dsg/#2528
+2	विकरण	vikaraṇa	0	0	0	0		1201	2	3.1.68	conjugational stem-forming affix (śap etc.)	https://samskrtam.ru/sanskrit-lexicon/dsg/#3418
+2	सुप्	sup	206	19	83	107	2	749	4	1.1.4 / 4.1.2	the 21 nominal endings	https://samskrtam.ru/sanskrit-lexicon/dsg/#4227
+2	तिङ्	tiṅ	49	9	40	0	2	397	1	1.1.4 / 3.4.78	the 18 verbal endings	https://samskrtam.ru/sanskrit-lexicon/dsg/#1877
+2	विभक्ति	vibhakti	58	11	47	0	1	767	0	1.4.104	case / personal ending	https://samskrtam.ru/sanskrit-lexicon/dsg/#3485
+2	लकार	lakāra	523	276	255	36	1	99	0	3.2.110ff	tense-mood marker (laṭ, liṭ …)	https://samskrtam.ru/sanskrit-lexicon/dsg/#3215
+2	कृत्	kṛt	545	42	511	36	1	1470	5	3.1.93	primary (root → noun) affix	https://samskrtam.ru/sanskrit-lexicon/dsg/#1277
+2	कृत्य	kṛtya	52	13	39	36	2	528	2	3.1.95–97	gerundive / participial kṛt subset	https://samskrtam.ru/sanskrit-lexicon/dsg/#1282
+2	तद्धित	taddhita	1174	18	43	1115	2	2698	2	4.1.76	secondary (noun → noun) affix	https://samskrtam.ru/sanskrit-lexicon/dsg/#1815
+2	समासान्त	samāsānta	93	1	0	93	10	1991	1	5.4.68ff	compound-final affix	https://samskrtam.ru/sanskrit-lexicon/dsg/#4082
+2	स्त्रीप्रत्यय	strīpratyaya	112	14	2	98	2	304	1	4.1.3ff	feminine-forming affix (ṭāp, ṅīp …)	https://samskrtam.ru/sanskrit-lexicon/dsg/#4263
+3	लिङ्ग	liṅga	3	3	0	0	1	1068	8	passim	gender	https://samskrtam.ru/sanskrit-lexicon/dsg/#3254
+3	वचन	vacana	14	12	2	0	1	972	5	1.4.102–103	number (sg / du / pl)	https://samskrtam.ru/sanskrit-lexicon/dsg/#3309
+3	पुरुष	puruṣa	8	8	0	0	4	365	0	1.4.101	person (prathama/madhyama/uttama)	https://samskrtam.ru/sanskrit-lexicon/dsg/#2470
+3	संख्या	saṅkhyā	54	29	26	0	1	412	3	1.1.23–25	numeral	https://samskrtam.ru/sanskrit-lexicon/dsg/#3942
+3	सर्वनामन्	sarvanāman	67	12	55	0	1	964	6	1.1.27–31	pronominal	https://samskrtam.ru/sanskrit-lexicon/dsg/#4100
+3	सर्वनामस्थान	sarvanāmasthāna	22	5	17	0	1	498	0	1.1.42–43	strong case stem	https://samskrtam.ru/sanskrit-lexicon/dsg/#4101
+3	अव्यय	avyaya	56	23	21	17	1	500	2	1.1.37–41	indeclinable	https://samskrtam.ru/sanskrit-lexicon/dsg/#469
+3	निपात	nipāta	12	6	6	0	1	2527	6	1.4.56–58	particle	https://samskrtam.ru/sanskrit-lexicon/dsg/#2218
+3	उपसर्ग	upasarga	97	27	70	0	2	3277	10	1.4.59	verbal preverb (pra, vi, sam …)	https://samskrtam.ru/sanskrit-lexicon/dsg/#884
+3	गति	gati	32	10	23	0	2	1019	0	1.4.60–79	preverb-like item before a verb	https://samskrtam.ru/sanskrit-lexicon/dsg/#1416
+3	कर्मप्रवचनीय	karmapravacanīya	20	2	18	16	2	0	0	1.4.83–98	quasi-preposition governing a case	
+3	कारक	kāraka	45	7	6	33	2	1358	4	1.4.23–55	syntactico-semantic role	https://samskrtam.ru/sanskrit-lexicon/dsg/#1198
+3	कर्तृ	kartṛ	69	27	43	0	2	641	2	1.4.54	agent (svatantraḥ kartā)	https://samskrtam.ru/sanskrit-lexicon/dsg/#1111
+3	कर्मन्	karman	202	62	143	16	1	1852	2	1.4.49	object / patient	https://samskrtam.ru/sanskrit-lexicon/dsg/#1120
+3	करण	karaṇa	43	19	24	9	2	1410	8	1.4.42	instrument (sādhakatamam)	https://samskrtam.ru/sanskrit-lexicon/dsg/#1106
+3	सम्प्रदान	sampradāna	14	5	9	0	2	0	0	1.4.32	recipient / indirect object	
+3	अपादान	apādāna	12	5	7	0	2	227	1	1.4.24	source / ablative role	https://samskrtam.ru/sanskrit-lexicon/dsg/#317
+3	अधिकरण	adhikaraṇa	24	14	10	0	2	355	1	1.4.45	locus	https://samskrtam.ru/sanskrit-lexicon/dsg/#141
+3	संबुद्धि / आमन्त्रित	sambuddhi / āmantrita	10	9	2	0	2	0	0	2.3.48–49	vocative	
+3	समानाधिकरण	samānādhikaraṇa	32	5	27	0	1	319	2	2.1.49	co-referential / same case basis	https://samskrtam.ru/sanskrit-lexicon/dsg/#4072
+4	दश लकाराः	daśa lakārāḥ	89	61	33	0	1	0	0	3.2–3.4	laṭ liṭ luṭ lṛṭ loṭ laṅ liṅ luṅ lṛṅ leṭ	
+4	परस्मैपद	parasmaipada	44	13	31	0	2	1100	2	1.4.99	active endings	https://samskrtam.ru/sanskrit-lexicon/dsg/#2363
+4	आत्मनेपद	ātmanepada	81	10	71	0	2	394	1	1.4.100	middle endings	https://samskrtam.ru/sanskrit-lexicon/dsg/#579
+4	प्रथम / मध्यम / उत्तम	prathama / madhyama / uttama	56	31	26	0	1	832	6	1.4.101	3rd / 2nd / 1st person	https://samskrtam.ru/sanskrit-lexicon/dsg/#2615
+4	सार्वधातुक	sārvadhātuka	61	11	51	0	2	615	2	3.4.113	affix before which guṇa applies	https://samskrtam.ru/sanskrit-lexicon/dsg/#4193
+4	आर्धधातुक	ārdhadhātuka	98	7	45	48	1	1116	3	3.4.114–117	affix with iṭ / no guṇa	https://samskrtam.ru/sanskrit-lexicon/dsg/#658
+4	इट् / सेट् / अनिट्	iṭ / seṭ / aniṭ	85	12	78	0	2	0	0	7.2.35ff	intervening i augment	
+4	क्ङिति / कित् / ङित्	kṅiti / kit / ṅit	79	13	66	0	1	0	0	1.1.5	k/ṅ-marked affix (no guṇa)	
+4	अभ्यास / अभ्यस्त	abhyāsa / abhyasta	78	21	57	39	3	130	1	6.1.4–5	reduplication syllable / reduplicated	https://samskrtam.ru/sanskrit-lexicon/dsg/#633
+4	द्वित्व	dvitva	0	0	0	0		1557	9	6.1.1ff	doubling / reduplication	https://samskrtam.ru/sanskrit-lexicon/dsg/#2075
+4	कर्तरि / कर्मणि / भावे	kartari / karmaṇi / bhāve	288	66	145	95	2	0	0	3.4.67–69	active / passive / impersonal voice	
+4	सन् / सन्नन्त	san / sannanta	19	13	6	0	2	690	1	3.1.7	desiderative	https://samskrtam.ru/sanskrit-lexicon/dsg/#4043
+4	णिच् / णिजन्त	ṇic / ṇijanta	37	12	25	0	2	1825	7	3.1.26	causative	https://samskrtam.ru/sanskrit-lexicon/dsg/#1781
+4	निष्ठा / सत्	niṣṭhā / sat	73	23	50	0	1	87	1	1.1.26 / 3.2.127	kta/ktavatu; present participle	https://samskrtam.ru/sanskrit-lexicon/dsg/#2268
+4	सकर्मक / अकर्मक	sakarmaka / akarmaka	16	12	4	0	3	297	0	1.4.52ff	transitive / intransitive	https://samskrtam.ru/sanskrit-lexicon/dsg/#4021
+4	हेतु	hetu	16	11	6	0	3	220	3	1.4.55	causer / instigator	https://samskrtam.ru/sanskrit-lexicon/dsg/#4363
+4	आम्रेडित	āmreḍita	8	7	1	0	2	666	1	8.1.2	repeated word in iteration	https://samskrtam.ru/sanskrit-lexicon/dsg/#642
+5	समास	samāsa	122	14	16	93	1	1351	2	2.1.3	compound	https://samskrtam.ru/sanskrit-lexicon/dsg/#4078
+5	तत्पुरुष	tatpuruṣa	150	13	59	80	1	2711	8	2.1.22	determinative compound	https://samskrtam.ru/sanskrit-lexicon/dsg/#1810
+5	कर्मधारय	karmadhāraya	17	8	9	0	1	793	0	1.2.42	appositional tatpuruṣa	https://samskrtam.ru/sanskrit-lexicon/dsg/#1119
+5	द्विगु	dvigu	3	3	0	0	1	761	1	2.1.23	numeral-initial tatpuruṣa	https://samskrtam.ru/sanskrit-lexicon/dsg/#2070
+5	बहुव्रीहि	bahuvrīhi	3	2	1	0	2	852	2	2.2.23	exocentric (possessive) compound	https://samskrtam.ru/sanskrit-lexicon/dsg/#2767
+5	द्वन्द्व	dvandva	37	17	20	0	1	0	0	2.2.29	copulative compound	
+5	अव्ययीभाव	avyayībhāva	32	8	8	17	2	419	2	2.1.5	indeclinable compound	https://samskrtam.ru/sanskrit-lexicon/dsg/#472
+5	पूर्वपद / उत्तरपद	pūrvapada / uttarapada	402	34	149	248	1	220	2	passim	prior / latter compound member	https://samskrtam.ru/sanskrit-lexicon/dsg/#2490
+5	उपसर्जन	upasarjana	13	6	7	0	1	974	1	1.2.43–44	subordinate compound member	https://samskrtam.ru/sanskrit-lexicon/dsg/#891
+5	उपपद	upapada	13	10	3	0	2	1036	5	3.1.92	governing co-occurring word	https://samskrtam.ru/sanskrit-lexicon/dsg/#864
+5	सामर्थ्य	sāmarthya	836	7	0	830	2	429	1	2.1.1	semantic fitness required for derivation	https://samskrtam.ru/sanskrit-lexicon/dsg/#4157
+5	अपत्य	apatya	86	3	84	0	11	117	0	4.1.92ff	descendant (taddhita sense)	https://samskrtam.ru/sanskrit-lexicon/dsg/#306
+5	गोत्र / युवन् / तद्राज	gotra / yuvan / tadrāja	50	23	28	0	2	340	2	4.1.162–174	lineage grades in taddhita	https://samskrtam.ru/sanskrit-lexicon/dsg/#1464
+5	वृद्ध	vṛddha	36	18	19	0	1	0	0	1.1.73–75	name-eligible elder / vṛddha-class	
+5	नदी / घि / घु	nadī / ghi / ghu	42	26	16	0	1	730	1	1.4.3–9, 1.1.20	special stem classes	https://samskrtam.ru/sanskrit-lexicon/dsg/#2157
+5	अवसान	avasāna	4	3	1	0	2	115	0	1.4.110	pause / word-final position	https://samskrtam.ru/sanskrit-lexicon/dsg/#449
+5	अपृक्त	apṛkta	9	5	4	0	1	165	1	1.2.41	affix consisting of a single phoneme	https://samskrtam.ru/sanskrit-lexicon/dsg/#323
+5	विग्रह	vigraha	0	0	0	0		1453	4	—	analytic paraphrase of a compound	https://samskrtam.ru/sanskrit-lexicon/dsg/#3434
+6	सञ्ज्ञा	sañjñā	114	73	41	0	1	691	1	1.1.1ff	technical term (saṃjñā)	https://samskrtam.ru/sanskrit-lexicon/dsg/#3954
+6	परिभाषा	paribhāṣā	0	0	0	0		2364	0	passim	metarule interpreting other rules	https://samskrtam.ru/sanskrit-lexicon/dsg/#2376
+6	अनुवृत्ति	anuvṛtti	0	0	0	0		554	0	passim	recurrence of words from a prior rule	https://samskrtam.ru/sanskrit-lexicon/dsg/#243
+6	अधिकार	adhikāra	1	1	0	0	1	2560	1	passim	governing heading rule	https://samskrtam.ru/sanskrit-lexicon/dsg/#142
+6	अपवाद / उत्सर्ग	apavāda / utsarga	0	0	0	0		739	2	passim	exception / general rule	https://samskrtam.ru/sanskrit-lexicon/dsg/#310
+6	अतिदेश	atideśa	0	0	0	0		1965	16	passim	transfer of properties by extension	https://samskrtam.ru/sanskrit-lexicon/dsg/#89
+6	असिद्ध	asiddha	156	3	0	154	2	2349	0	8.2.1 / 6.4.22	not yet in effect (rule ordering)	https://samskrtam.ru/sanskrit-lexicon/dsg/#516
+6	अन्तरङ्ग / बहिरङ्ग	antaraṅga / bahiraṅga	0	0	0	0		2292	3	paribhāṣā	internally / externally conditioned	https://samskrtam.ru/sanskrit-lexicon/dsg/#270
+6	नित्य / अनित्य	nitya / anitya	56	40	16	0	1	1566	5	paribhāṣā	invariably / variably applicable	https://samskrtam.ru/sanskrit-lexicon/dsg/#2213
+6	स्थाने / अन्तरतम	sthāne / antaratama	12	3	9	0	1	0	0	1.1.50 / 1.1.56	in place of / nearest substitute	
+6	योगविभाग	yogavibhāga	0	0	0	0		827	9	paribhāṣā	splitting one sūtra into two	https://samskrtam.ru/sanskrit-lexicon/dsg/#3093
+6	उपसंख्यान / इष्टि	upasaṅkhyāna / iṣṭi	0	0	0	0		0	0	vārttika	supplement / desideratum to a rule	
+6	व्याकरण	vyākaraṇa	0	0	0	0		1268	15	—	grammar (the discipline)	https://samskrtam.ru/sanskrit-lexicon/dsg/#3664
+6	शब्द / अर्थ / स्फोट	śabda / artha / sphoṭa	69	54	15	0	1	0	0	Vākyapadīya	word / meaning / semantic whole	
+6	वाच्य / वाचक	vācya / vācaka	0	0	0	0		510	9	later Vyākaraṇa	expressed sense / expression	https://samskrtam.ru/sanskrit-lexicon/dsg/#3387
+6	प्रातिशाख्य / शिक्षा	prātiśākhya / śikṣā	0	0	0	0		2276	0	—	Vedic phonetics treatises	https://samskrtam.ru/sanskrit-lexicon/dsg/#2696
+6	महाभाष्य / काशिका / सिद्धान्तकौमुदी	Mahābhāṣya / Kāśikā / SK	0	0	0	0		4026	0	—	the three reference works	https://samskrtam.ru/sanskrit-lexicon/dsg/#2954

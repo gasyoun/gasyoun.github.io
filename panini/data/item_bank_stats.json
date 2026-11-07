@@ -1,0 +1,62 @@
+{
+ "sutras": 3983,
+ "core_terms": 119,
+ "terms_with_russian_gloss": 119,
+ "implicit_candidates": 9377,
+ "implicit_by_channel": {
+  "adhikāra": 6473,
+  "anuvṛtti": 2904
+ },
+ "implicit_by_adhyaya": {
+  "1": 338,
+  "2": 452,
+  "3": 2252,
+  "4": 2050,
+  "5": 2057,
+  "6": 885,
+  "7": 824,
+  "8": 519
+ },
+ "forms": {
+  "A": {
+   "total": 30,
+   "by_type": {
+    "gloss": 10,
+    "implicit_trained": 10,
+    "implicit_transfer": 10
+   },
+   "distinct_terms": 26,
+   "distinct_sutras": 20,
+   "implicit_by_batch": {
+    "0": 0,
+    "1": 4,
+    "2": 4,
+    "3": 4,
+    "4": 4,
+    "5": 2,
+    "6": 2
+   }
+  },
+  "B": {
+   "total": 30,
+   "by_type": {
+    "gloss": 10,
+    "implicit_trained": 10,
+    "implicit_transfer": 10
+   },
+   "distinct_terms": 26,
+   "distinct_sutras": 20,
+   "implicit_by_batch": {
+    "0": 0,
+    "1": 4,
+    "2": 4,
+    "3": 4,
+    "4": 4,
+    "5": 2,
+    "6": 2
+   }
+  }
+ },
+ "reserve_items": 180,
+ "total_items_in_bank": 240
+}

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The missing channels — grammars, DSG, and DCS</title>
+<style>
+:root{
+ --bg:#faf8f4; --card:#fff; --ink:#24222a; --muted:#6c6872; --line:#e5e0d6;
+ --accent:#4a447f; --accent2:#c2703a; --soft:#f3f0ea;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+ font:15px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;}
+.wrap{max-width:1080px;margin:0 auto;padding:0 28px 80px}
+header{padding:52px 0 30px;border-bottom:2px solid var(--ink)}
+h1{font-size:34px;line-height:1.18;margin:0 0 10px;letter-spacing:-.02em}
+.sub{color:var(--muted);font-size:16px;max-width:780px;margin:0}
+.kicker{text-transform:uppercase;letter-spacing:.16em;font-size:11px;color:var(--accent2);font-weight:700;margin-bottom:14px}
+.stats{display:flex;flex-wrap:wrap;gap:0;margin:26px 0 0;border:1px solid var(--line);background:var(--card)}
+.stat{flex:1 1 150px;padding:14px 18px;border-right:1px solid var(--line)}
+.stat:last-child{border-right:0}
+.stat b{display:block;font-size:25px;line-height:1.2;color:var(--accent)}
+.stat span{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+h2{font-size:23px;margin:52px 0 6px;letter-spacing:-.01em}
+h2 .n{color:var(--accent2);font-size:14px;margin-right:10px;font-variant-numeric:tabular-nums}
+.lede{color:var(--muted);max-width:820px;margin:0 0 22px}
+.card{background:var(--card);border:1px solid var(--line);padding:22px 24px;margin-bottom:16px}
+.col3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.col3 .card{margin:0}
+.card h4{margin:0 0 4px;font-size:15px}
+.card .hint{font-size:12px;color:var(--muted);margin:0 0 16px;min-height:32px}
+.bar-row{display:grid;grid-template-columns:minmax(76px,1fr) 1.15fr 38px 84px;gap:8px;align-items:center;margin:5px 0;font-size:12px}
+.bar-lab{font-family:"Nirmala UI","Noto Sans Devanagari","Mangal",system-ui,sans-serif;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar-track{background:var(--soft);height:9px;border-radius:5px;overflow:hidden}
+.bar-fill{height:100%;background:var(--accent);border-radius:5px}
+.bar-val{text-align:right;font-variant-numeric:tabular-nums;font-weight:700}
+.bar-sub{font-size:10px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.callout{background:#f2eee7;border-left:4px solid var(--accent2);padding:16px 20px;margin:20px 0;font-size:14px}
+.callout b{color:var(--accent2)}
+.method{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;counter-reset:m}
+.method .m{background:var(--card);border:1px solid var(--line);padding:16px 18px;position:relative;counter-increment:m}
+.method .m:before{content:counter(m,decimal-leading-zero);position:absolute;top:14px;right:16px;font-size:22px;color:#ded8cb;font-weight:800}
+.method h4{margin:0 0 6px;font-size:14px;padding-right:36px}
+.method p{margin:0;font-size:13px;color:var(--muted)}
+.method code{background:var(--soft);padding:1px 4px;font-size:11px;color:var(--accent)}
+.curve{width:100%;height:auto;max-width:580px;display:block;margin:6px auto 0}
+.curve .ax{fill:#8b867e;font-size:10px}
+.curve .pt{fill:#4a447f;font-size:9px;font-weight:700;text-anchor:middle}
+.curvepts{font-size:12px;color:var(--muted);text-align:center;margin-top:2px}
+nav.mini{position:sticky;top:0;background:rgba(250,248,244,.96);backdrop-filter:blur(6px);z-index:5;padding:10px 0;border-bottom:1px solid var(--line);margin:0 0 20px;display:flex;gap:6px;flex-wrap:wrap}
+nav.mini a{font-size:11px;font-weight:700;color:var(--accent);border:1px solid var(--line);background:#fff;padding:5px 10px;text-decoration:none;border-radius:20px}
+nav.mini a:hover{background:var(--accent);color:#fff}
+.batch{background:var(--card);border:1px solid var(--line);margin-bottom:18px;break-inside:avoid}
+.bhead{display:flex;gap:16px;align-items:flex-start;padding:18px 22px;border-bottom:1px solid var(--line);background:linear-gradient(90deg,#f7f4ee,#fff)}
+.bnum{font-size:22px;font-weight:800;color:var(--accent2);line-height:1;padding-top:3px;min-width:34px}
+.bhead h3{margin:0 0 3px;font-size:17px}
+.bnote{margin:0;font-size:12.5px;color:var(--muted);max-width:760px}
+.bcount{margin-left:auto;font-size:11px;color:var(--muted);white-space:nowrap;border:1px solid var(--line);padding:3px 9px;border-radius:12px}
+table.terms{width:100%;border-collapse:collapse;font-size:12.5px}
+table.terms th{text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700;padding:9px 10px;border-bottom:1px solid var(--line);background:#fcfbf8}
+table.terms td{padding:7px 10px;border-bottom:1px solid #f0ede6;vertical-align:middle}
+table.terms tr:last-child td{border-bottom:0}
+table.terms tr:hover{background:#faf7f1}
+.deva{font-family:"Nirmala UI","Noto Sans Devanagari","Mangal",system-ui,sans-serif;font-size:14px;font-weight:600;white-space:nowrap}
+.iast{font-style:italic;color:var(--accent);white-space:nowrap}
+.gloss{color:#403d45}
+.sutra{color:var(--muted);font-size:11px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.count{width:120px;white-space:nowrap}
+.minibar{display:inline-block;width:74px;height:6px;background:var(--soft);border-radius:3px;overflow:hidden;vertical-align:middle}
+.minibar i{display:block;height:100%;background:var(--accent2)}
+.ct{font-size:11px;color:var(--muted);margin-left:6px;font-variant-numeric:tabular-nums}
+.dsg{font-size:10px;font-weight:700;color:var(--accent);text-decoration:none;border:1px solid var(--line);padding:3px 7px;border-radius:4px;white-space:nowrap}
+.dsg:hover{background:var(--accent);color:#fff}
+.nodsg{color:#c9c4ba}
+footer{margin-top:56px;padding-top:22px;border-top:1px solid var(--line);font-size:11.5px;color:var(--muted)}
+footer code{font-size:10px;background:var(--soft);padding:1px 4px;word-break:break-all}
+.lim{background:#fff;border:1px solid var(--line);padding:16px 20px;font-size:12.5px;color:var(--muted)}
+.lim b{color:var(--ink)}
+.lim ul{margin:8px 0 0;padding-left:18px}
+.lim li{margin:4px 0}
+@media(max-width:820px){.col3,.method{grid-template-columns:1fr}.wrap{padding:0 16px 50px}h1{font-size:27px}
+ table.terms .gloss{display:none}.bcount{display:none}}
+@media print{body{background:#fff}.card,.batch{break-inside:avoid}nav.mini{display:none}.wrap{max-width:none}}
+</style>
+<style>
+.hot{color:#b0472b;font-weight:700}.good{color:#2f6b45;font-weight:700}.bad{color:#b0472b}
+.mono{font-size:11px;color:var(--muted)}.num{text-align:right;font-variant-numeric:tabular-nums}
+table.wide{width:100%;border-collapse:collapse;font-size:12.5px}
+table.wide th{text-align:left;padding:7px 9px;border-bottom:2px solid var(--line);
+ font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+table.wide td{padding:6px 9px;border-bottom:1px solid var(--line)}
+table.wide tr.grp td{background:var(--soft);font-weight:700;font-size:11px;
+ letter-spacing:.05em;text-transform:uppercase;color:var(--accent)}
+table.wide td.deva{font-size:15px;color:var(--accent);white-space:nowrap}
+table.wide td.iast{font-style:italic;color:var(--muted)}
+.answer{background:#fff;border:1px solid var(--line);border-left:5px solid var(--accent2);
+ padding:18px 22px;margin:18px 0 26px}
+.answer p{margin:0 0 9px}.answer p:last-child{margin:0}
+.axis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0 26px}
+.axis>div{background:var(--card);border:1px solid var(--line);padding:15px 17px}
+.axis b{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+ color:var(--accent2);margin-bottom:7px}
+.axis p{font-size:12.5px;color:var(--muted);margin:0}
+.kicker{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent2)}
+.small{font-size:12px;color:var(--muted)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+@media(max-width:820px){.axis,.two{grid-template-columns:1fr}}
+@media print{.axis>div,.answer{break-inside:avoid}}
+</style></head><body><div style="background:#efe9dc;border-bottom:1px solid #d8d0c0;padding:9px 28px;font:14px/1.5 system-ui,sans-serif;color:#3a3550">Русская версия: <a href="index.html" style="color:#4a447f">главная</a> · <a href="experiment.html" style="color:#4a447f">протокол эксперимента</a> · <a href="quiz.html" style="color:#4a447f">пилотный тест</a>&nbsp;&nbsp;<span style="color:#777">|</span>&nbsp;&nbsp;<b>This page is the English research original</b></div><div class="wrap">
+<div class="kicker">Companion study · DSG_learning_batches</div>
+<h1>The missing channels: grammars, DSG, and DCS</h1>
+<p class="lede">A direct answer to <i>“Does the 3 include frequency in grammars?
+DCS as well 4th?”</i> — with the two absent channels actually measured, not just
+described.</p>
+
+<div class="answer">
+<p><b>No.</b> The three channels were <code>pc</code> (explicitly written),
+<code>an</code> (inherited by anuvṛtti) and <code>ad</code> (supplied by a
+governing adhikāra). All three are <b>structural positions inside the same
+3,983 sūtras</b> — they describe <i>how a term is required in order to read one
+rule</i>. They are not three corpora, so they cannot contain “frequency in
+grammars”.</p>
+<p><b>DCS was not a fourth measured channel either.</b> It entered the design
+only indirectly: <code>DIFFICULTY_ORDERING_RESULT.md</code> supplied the
+function-word-exclusion principle (τ = 0.887 inside content vocabulary). No DCS
+count appeared in <code>core_terms.tsv</code>.</p>
+<p><b>So the right fix is not “3 + DCS = 4”.</b> It is a two-axis design: keep the
+three structural channels on Axis A, then add grammatical-discourse frequency on
+Axis B and DCS as a <i>register control</i> on Axis C. DCS measures how often a
+word turns up in epic / Purāṇa / kāvya text, which is the wrong target for a
+technical term.</p>
+</div>
+
+<h2><span class="n">01</span>What the three channels actually are</h2>
+<div class="axis">
+<div><b>Axis A · structural demand</b><p>One text: the Aṣṭādhyāyī. Three ways a
+term is loaded: <code>pc</code> 13,068 occurrences / 6,741 forms ·
+<code>an</code> 9,808 / 1,571 · <code>ad</code> 14,323 / 69 headings.
+37,199 required-term readings, ~1.8 implicit for every 1 explicit.</p></div>
+<div><b>Axis B · grammatical discourse</b><p>New here. Channel <b>G</b>: 12,627
+passages of Mahābhāṣya, Kaumudī, Bālamanoramā, Vākyapadīya, Bhūṣaṇasāra,
+Phitsūtras. Channel <b>L</b>: mentions + citation density across 4,383 DSG
+entries.</p></div>
+<div><b>Axis C · literary register</b><p>New here. Channel <b>D</b>: the DCS
+lemma ranking table (50,474 keys). Used to show what <i>not</i> to optimise for,
+and to flag terms that a student will never meet outside a grammar.</p></div>
+</div>
+
+<h2><span class="n">02</span>Corpus inventory (newly pinned)</h2>
+<p class="small">All files are local snapshots of
+<a href="https://github.com/ashtadhyayi-com/data" target="_blank" rel="noopener">ashtadhyayi-com/data</a>.
+The structured <code>courses/sk_with_bm.json</code> is deliberately excluded
+because it duplicates Kaumudī + Bālamanoramā. SHA-256 for every file is in
+<code>external_channels.json</code>.</p>
+<table class="wide"><thead><tr><th>Text</th><th>Group</th><th>File</th>
+<th style="text-align:right">Passages</th><th style="text-align:right">Dev. chars</th></tr></thead>
+<tbody><tr><td>Mahābhāṣya, āhnika 1</td><td class='mono'>Mahābhāṣya</td><td>mahabhashyam__1.txt</td><td class='num'>486</td><td class='num'>105,158</td></tr><tr><td>Mahābhāṣya, āhnika 2</td><td class='mono'>Mahābhāṣya</td><td>mahabhashyam__2.txt</td><td class='num'>202</td><td class='num'>32,384</td></tr><tr><td>Siddhāntakaumudī</td><td class='mono'>Kaumudī / Bālamanoramā</td><td>sutraani__kaumudi.txt</td><td class='num'>3,949</td><td class='num'>613,599</td></tr><tr><td>Laghukaumudī</td><td class='mono'>Kaumudī / Bālamanoramā</td><td>sutraani__laghukaumudi.txt</td><td class='num'>1,262</td><td class='num'>114,070</td></tr><tr><td>Bālamanoramā</td><td class='mono'>Kaumudī / Bālamanoramā</td><td>sutraani__balamanorama.txt</td><td class='num'>2,912</td><td class='num'>2,190,906</td></tr><tr><td>Vākyapadīya (mūla)</td><td class='mono'>Vākyapadīya + vṛtti</td><td>vakyapadeeyam__data.txt</td><td class='num'>2,115</td><td class='num'>153,259</td></tr><tr><td>Vākyapadīya, svopajñā vṛtti</td><td class='mono'>Vākyapadīya + vṛtti</td><td>vakyapadeeyam__swopajna.txt</td><td class='num'>1,230</td><td class='num'>902,710</td></tr><tr><td>Vākyapadīya, ambākartrī</td><td class='mono'>Vākyapadīya + vṛtti</td><td>vakyapadeeyam__ambakartri.txt</td><td class='num'>10</td><td class='num'>49,206</td></tr><tr><td>Bhūṣaṇasāra</td><td class='mono'>Bhūṣaṇasāra / Phitsūtras</td><td>bhushanasara__data.txt</td><td class='num'>288</td><td class='num'>104,600</td></tr><tr><td>Phitsūtras (with SK gloss)</td><td class='mono'>Bhūṣaṇasāra / Phitsūtras</td><td>fit__data.txt</td><td class='num'>173</td><td class='num'>7,934</td></tr></tbody></table>
+
+<h2><span class="n">03</span>Scale of the four sources</h2>
+<div class="bar-row"><div class="bar-lab">Aṣṭādhyāyī sūtras</div><div class="bar-track"><div class="bar-fill" style="width:7.9%"></div></div><div class="bar-val">3,983</div><div class="bar-sub">the one text the 3 channels live in</div></div><div class="bar-row"><div class="bar-lab">Grammar passages (G)</div><div class="bar-track"><div class="bar-fill" style="width:25.0%"></div></div><div class="bar-val">12,627</div><div class="bar-sub">Mahābhāṣya → Phitsūtras</div></div><div class="bar-row"><div class="bar-lab">DSG entries (L)</div><div class="bar-track"><div class="bar-fill" style="width:8.7%"></div></div><div class="bar-val">4,383</div><div class="bar-sub">Abhyankar&#x27;s grammatical lexicon</div></div><div class="bar-row"><div class="bar-lab">DCS keys (D)</div><div class="bar-track"><div class="bar-fill" style="width:100.0%"></div></div><div class="bar-val">50,474</div><div class="bar-sub">literary register control</div></div><div class="bar-row"><div class="bar-lab">Core terms absent from DCS</div><div class="bar-track"><div class="bar-fill" style="width:0.0%"></div></div><div class="bar-val">23</div><div class="bar-sub">of 119 curriculum terms</div></div>
+
+<h2><span class="n">04</span>The measurement: rank correlations</h2>
+<p class="small">Spearman ρ and Kendall τ-b between the original structural
+<b>reading-pressure</b> score and each new channel. Computed twice: for all 119
+curated terms, and for the 107 <i>content</i> terms after stripping the B0
+operators (the same curation move the estate's difficulty study recommends).</p>
+<table class="wide"><thead><tr><th>Comparison</th><th style="text-align:right">ρ</th>
+<th style="text-align:right">τ-b</th><th style="text-align:right">n</th></tr></thead>
+<tbody><tr class="grp"><td colspan="4">all 119 terms</td></tr><tr><td>structural ~ grammar_df</td><td class="num good">+0.504</td><td class="num good">+0.365</td><td class="num">119</td></tr><tr><td>structural ~ grammar_tf</td><td class="num ">+0.491</td><td class="num ">+0.356</td><td class="num">119</td></tr><tr><td>structural ~ dcs_count</td><td class="num bad">+0.169</td><td class="num bad">+0.117</td><td class="num">119</td></tr><tr><td>grammar_df ~ dcs_count</td><td class="num ">+0.457</td><td class="num ">+0.330</td><td class="num">119</td></tr><tr class="grp"><td colspan="4">content only 107 terms excluding B0 operators</td></tr><tr><td>structural ~ grammar_df</td><td class="num good">+0.557</td><td class="num good">+0.402</td><td class="num">107</td></tr><tr><td>structural ~ grammar_tf</td><td class="num good">+0.548</td><td class="num good">+0.397</td><td class="num">107</td></tr><tr><td>structural ~ dcs_count</td><td class="num bad">+0.140</td><td class="num bad">+0.093</td><td class="num">107</td></tr><tr><td>grammar_df ~ dcs_count</td><td class="num ">+0.393</td><td class="num ">+0.276</td><td class="num">107</td></tr><tr><td>structural ~ dsg_mentions</td><td class="num bad">+0.216</td><td class="num bad">+0.163</td><td class="num">107</td></tr><tr><td>structural ~ dsg_ru_mentions (collision-controlled)</td><td class="num bad">+0.232</td><td class="num bad">+0.173</td><td class="num">107</td></tr><tr><td>structural ~ dsg_headword_df</td><td class="num bad">+0.235</td><td class="num bad">+0.166</td><td class="num">107</td></tr></tbody></table>
+<p class="small"><b>Read this as the answer.</b> Grammar-corpus frequency tracks
+structural demand; DCS does not. DCS is therefore a diagnostic, not a fourth
+co-equal weight.</p>
+
+<h2><span class="n">05</span>The inversion that decides it</h2>
+<div class="two">
+<div><h3>Top 15 by structural demand</h3>
+<table class="wide"><thead><tr><th>Term</th><th></th>
+<th style="text-align:right">Aṣṭ. demand</th><th style="text-align:right">Grammar df</th>
+<th style="text-align:right">DCS</th><th style="text-align:right">DSG mentions</th>
+</tr></thead><tbody><tr><td class='deva'>प्रत्यय</td><td class='iast'>pratyaya</td><td class='num'>1,853</td><td class='num'>851</td><td class='num hot'>17</td><td class='num'>135</td></tr><tr><td class='deva'>तद्धित</td><td class='iast'>taddhita</td><td class='num'>1,174</td><td class='num'>191</td><td class='num hot'>3</td><td class='num'>136</td></tr><tr><td class='deva'>च</td><td class='iast'>ca</td><td class='num'>911</td><td class='num'>3,081</td><td class='num hot'>3385</td><td class='num'>404</td></tr><tr><td class='deva'>सामर्थ्य</td><td class='iast'>sāmarthya</td><td class='num'>836</td><td class='num'>308</td><td class='num hot'>12</td><td class='num'>12</td></tr><tr><td class='deva'>धातु</td><td class='iast'>dhātu</td><td class='num'>653</td><td class='num'>808</td><td class='num hot'>29</td><td class='num'>158</td></tr><tr><td class='deva'>अङ्ग</td><td class='iast'>aṅga</td><td class='num'>642</td><td class='num'>207</td><td class='num hot'>127</td><td class='num'>7</td></tr><tr><td class='deva'>कृत्</td><td class='iast'>kṛt</td><td class='num'>545</td><td class='num'>1,041</td><td class='num hot'>24</td><td class='num'>184</td></tr><tr><td class='deva'>लकार</td><td class='iast'>lakāra</td><td class='num'>523</td><td class='num'>3,015</td><td class='num hot'>7</td><td class='num'>27</td></tr><tr><td class='deva'>वा</td><td class='iast'>vā</td><td class='num'>463</td><td class='num'>1,695</td><td class='num hot'>821</td><td class='num'>152</td></tr><tr><td class='deva'>उपधा / टि / अन्त / आदि</td><td class='iast'>upadhā / ṭi / anta / ādi</td><td class='num'>429</td><td class='num'>955</td><td class='num hot'>21</td><td class='num'>234</td></tr><tr><td class='deva'>पूर्वपद / उत्तरपद</td><td class='iast'>pūrvapada / uttarapada</td><td class='num'>402</td><td class='num'>297</td><td class='num hot'>0</td><td class='num'>22</td></tr><tr><td class='deva'>न</td><td class='iast'>na</td><td class='num'>335</td><td class='num'>3,266</td><td class='num hot'>1648</td><td class='num'>322</td></tr><tr><td class='deva'>संहिता / संधि</td><td class='iast'>saṃhitā / sandhi</td><td class='num'>302</td><td class='num'>45</td><td class='num hot'>1</td><td class='num'>123</td></tr><tr><td class='deva'>कर्तरि / कर्मणि / भावे</td><td class='iast'>kartari / karmaṇi / bhāve</td><td class='num'>288</td><td class='num'>2,088</td><td class='num hot'>0</td><td class='num'>64</td></tr><tr><td class='deva'>पद</td><td class='iast'>pada</td><td class='num'>266</td><td class='num'>1,024</td><td class='num hot'>137</td><td class='num'>113</td></tr></tbody></table></div>
+<div><h3>Top 12 by DCS frequency</h3>
+<table class="wide"><thead><tr><th>Term</th><th></th>
+<th style="text-align:right">DCS</th><th style="text-align:right">Aṣṭ. demand</th>
+<th style="text-align:right">Grammar df</th></tr></thead>
+<tbody><tr><td class='deva'>च</td><td class='iast'>ca</td><td class='num hot'>3,385</td><td class='num'>911</td><td class='num'>3,081</td></tr><tr><td class='deva'>न</td><td class='iast'>na</td><td class='num hot'>1,648</td><td class='num'>335</td><td class='num'>3,266</td></tr><tr><td class='deva'>इति</td><td class='iast'>iti</td><td class='num hot'>1,512</td><td class='num'>94</td><td class='num'>4,522</td></tr><tr><td class='deva'>अपि</td><td class='iast'>api</td><td class='num hot'>1,480</td><td class='num'>58</td><td class='num'>268</td></tr><tr><td class='deva'>वा</td><td class='iast'>vā</td><td class='num hot'>821</td><td class='num'>463</td><td class='num'>1,695</td></tr><tr><td class='deva'>कर्मन्</td><td class='iast'>karman</td><td class='num hot'>261</td><td class='num'>202</td><td class='num'>904</td></tr><tr><td class='deva'>गुण</td><td class='iast'>guṇa</td><td class='num hot'>198</td><td class='num'>46</td><td class='num'>789</td></tr><tr><td class='deva'>पुरुष</td><td class='iast'>puruṣa</td><td class='num hot'>140</td><td class='num'>8</td><td class='num'>200</td></tr><tr><td class='deva'>पद</td><td class='iast'>pada</td><td class='num hot'>137</td><td class='num'>266</td><td class='num'>1,024</td></tr><tr><td class='deva'>अङ्ग</td><td class='iast'>aṅga</td><td class='num hot'>127</td><td class='num'>642</td><td class='num'>207</td></tr><tr><td class='deva'>वचन</td><td class='iast'>vacana</td><td class='num hot'>96</td><td class='num'>14</td><td class='num'>335</td></tr><tr><td class='deva'>गति</td><td class='iast'>gati</td><td class='num hot'>72</td><td class='num'>32</td><td class='num'>166</td></tr></tbody></table></div>
+</div>
+<p class="small"><code>pratyaya</code> governs 1,821 sūtras and is written in
+only 22, yet DCS gives it <b>17</b>. <code>taddhita</code> governs 1,115 sūtras
+and gets <b>3</b>; <code>saṃjñā</code>, <code>saṃdhi</code> are <b>absent</b>.
+Meanwhile <code>ca</code> gets <b>3,385</b> and <code>iti</code> <b>1,512</b>
+— operators and ordinary words, not concepts. Adding DCS as a co-equal fourth
+weight would actively invert the syllabus.</p>
+
+<h2><span class="n">06</span>Per-batch means</h2>
+<table class="wide"><thead><tr><th>Batch</th><th style="text-align:right">Terms</th>
+<th style="text-align:right">Mean structural</th><th style="text-align:right">Mean grammar df</th>
+<th style="text-align:right">Mean DCS</th><th style="text-align:right">DCS-absent</th>
+</tr></thead><tbody><tr><td>B0</td><td class='num'>12</td><td class='num'>225.5</td><td class='num'>1243.8</td><td class='num'>739.2</td><td class='num'>5</td></tr><tr><td>B1</td><td class='num'>18</td><td class='num'>88.6</td><td class='num'>502.7</td><td class='num'>18.8</td><td class='num'>1</td></tr><tr><td>B2</td><td class='num'>17</td><td class='num'>375.7</td><td class='num'>547.0</td><td class='num'>26.2</td><td class='num'>3</td></tr><tr><td>B3</td><td class='num'>20</td><td class='num'>41.8</td><td class='num'>220.4</td><td class='num'>35.9</td><td class='num'>2</td></tr><tr><td>B4</td><td class='num'>17</td><td class='num'>66.4</td><td class='num'>382.5</td><td class='num'>9.1</td><td class='num'>5</td></tr><tr><td>B5</td><td class='num'>18</td><td class='num'>103.1</td><td class='num'>190.0</td><td class='num'>12.8</td><td class='num'>3</td></tr><tr><td>B6</td><td class='num'>17</td><td class='num'>24.0</td><td class='num'>247.2</td><td class='num'>11.9</td><td class='num'>4</td></tr></tbody></table>
+
+<h2><span class="n">07</span>Data quality: the HK → SLP1 fix and the ten short stems</h2>
+<p class="small">DSG's column labelled <code>slp1</code> is <b>Harvard-Kyoto</b>,
+not SLP1. DCS is keyed in SLP1, so joining the column directly produces wrong
+keys: <code>Adeza</code> → <code>AdeSa</code>, <code>saJjJA</code> →
+<code>saYjYA</code>, <code>kRt</code> → <code>kft</code>. HK and SLP1 differ by a
+<i>cyclic</i> substitution (<code>R</code> = ṛ ↔ <code>f</code>,
+<code>G</code> = ṅ ↔ <code>N</code>, <code>N</code> = ṇ ↔ <code>R</code>,
+<code>z</code> = ś ↔ <code>S</code>), so a single-pass longest-match converter
+is required — sequential replacement corrupts the result. The conversion is
+verified against DSG's independent IAST headword column, and every one of the
+4,383 headwords is re-joined in <code>dsg_dcs_join.tsv</code>.</p>
+<table class="wide"><thead><tr><th>Check</th><th style="text-align:right">Value</th>
+<th>What it means</th></tr></thead><tbody><tr><td>DSG headwords</td><td class='num hot'>4,383</td><td class='small'>4,383 entries with a derived SLP1 key</td></tr><tr><td>HK column is wrong as a DCS key</td><td class='num hot'>3,534</td><td class='small'>headwords whose SLP1 key differs from the raw HK value</td></tr><tr><td>HK -&gt; SLP1 conversion checks</td><td class='num hot'>3,272 / 3,272</td><td class='small'>agree with the independent IAST headword; 0 disagree</td></tr><tr><td>DCS hits with the naive HK join</td><td class='num hot'>266</td><td class='small'>the old, silently wrong join</td></tr><tr><td>DCS hits with the corrected join</td><td class='num hot'>1,178</td><td class='small'>921 hits the naive join missed</td></tr><tr><td>Headwords with SLP1 spelling variants</td><td class='num hot'>627</td><td class='small'>class-nasal &lt;-&gt; anusvara alternates generated</td></tr><tr><td>Hits found only through a variant</td><td class='num hot'>10</td><td class='small'>e.g. saMbanDa -&gt; sambanDa, saMBava -&gt; samBava</td></tr><tr><td>Short terms now measured (were blank)</td><td class='num hot'>10</td><td class='small'>all measured in three fields; none blank</td></tr></tbody></table>
+<p class="small">The class-nasal ↔ anusvāra variants are now generated in
+<b>SLP1</b> as well as in Devanāgarī: <code>aNga</code>/<code>aMga</code>,
+<code>saYjYA</code>/<code>saMjYA</code>, <code>saNKyA</code>/<code>saMKyA</code>,
+<code>saMbanDa</code>/<code>sambanDa</code>. Word-final nasals are deliberately
+<i>not</i> varied — <code>aM</code> (the letter aṃ) and <code>an</code> are
+different words. Variants are alternative spellings of one lemma, so the
+best-attested spelling is used rather than summing counts (which would
+double-count); every attested variant is recorded in
+<code>external_channels.tsv</code>.</p>
+
+<h3>The ten short stems are measured, not declared unmeasurable</h3>
+<p class="small">The first release left these ten blank because
+<code>it</code>, <code>ca</code> and <code>na</code> collide with English words
+in Abhyankar's English definitions. They are now measured with one documented
+rule in three independent fields. English prose is explicitly an
+<b>upper bound</b>; the Russian definitions (where English function words are
+absent) and the Devanāgarī headword index are collision controls. No value is
+guessed and no value is blank.</p>
+<table class="wide"><thead><tr><th>Term</th><th></th>
+<th style="text-align:right">EN prose (upper bound)</th>
+<th style="text-align:right">RU prose (collision-free)</th>
+<th style="text-align:right">Dev. headwords</th>
+<th style="text-align:right">DSG cites</th></tr></thead>
+<tbody><tr><td class='deva'>च</td><td class='iast'>ca</td><td class='num'>404</td><td class='num hot'>192</td><td class='num'>364</td><td class='num'>7</td></tr><tr><td class='deva'>न</td><td class='iast'>na</td><td class='num'>322</td><td class='num hot'>185</td><td class='num'>1,224</td><td class='num'>7</td></tr><tr><td class='deva'>वा</td><td class='iast'>vā</td><td class='num'>152</td><td class='num hot'>86</td><td class='num'>196</td><td class='num'>0</td></tr><tr><td class='deva'>इति</td><td class='iast'>iti</td><td class='num'>173</td><td class='num hot'>76</td><td class='num'>0</td><td class='num'>0</td></tr><tr><td class='deva'>अपि</td><td class='iast'>api</td><td class='num'>14</td><td class='num hot'>10</td><td class='num'>2</td><td class='num'>1</td></tr><tr><td class='deva'>इत्</td><td class='iast'>it</td><td class='num'>565</td><td class='num hot'>30</td><td class='num'>7</td><td class='num'>5</td></tr><tr><td class='deva'>भ</td><td class='iast'>bha</td><td class='num'>25</td><td class='num hot'>18</td><td class='num'>385</td><td class='num'>2</td></tr><tr><td class='deva'>सुप्</td><td class='iast'>sup</td><td class='num'>2</td><td class='num hot'>2</td><td class='num'>2</td><td class='num'>4</td></tr><tr><td class='deva'>तिङ्</td><td class='iast'>tiṅ</td><td class='num'>9</td><td class='num hot'>7</td><td class='num'>2</td><td class='num'>1</td></tr><tr><td class='deva'>कृत्</td><td class='iast'>kṛt</td><td class='num'>184</td><td class='num hot'>136</td><td class='num'>16</td><td class='num'>5</td></tr></tbody></table>
+<p class="small">The collision is visible and quantified rather than hidden:
+English <code>it</code> scores 565 but Russian <code>it</code> scores 30, i.e.
+most English hits are the pronoun, not the Pāṇinian marker. Correlations are
+therefore reported for both <code>dsg_mentions</code> and the
+collision-controlled <code>dsg_ru_mentions</code>.</p>
+
+<h2><span class="n">08</span>Verdict — how to use each channel</h2>
+<div class="method">
+<div class="m"><h4>Keep A as the backbone</h4><p><code>pc / an / ad</code>
+determine <i>when a term becomes unavoidable</i> while reading Pāṇini. This is
+what fixes batch order. Do not dilute it with corpus counts.</p></div>
+<div class="m"><h4>Use G to validate and to pace</h4><p>Grammar-corpus df is the
+independent check that the tradition really talks about a term. It also tells
+you how much prose exposure a student gets in Mahābhāṣya vs. Kaumudī vs.
+Vākyapadīya.</p></div>
+<div class="m"><h4>Use L for the reference shelf</h4><p>DSG entry length,
+citation density and cross-mentions decide which terms deserve a full dictionary
+entry in a student's notes — they are a salience signal, not a learn-first
+signal.</p></div>
+<div class="m"><h4>Use D as a negative control</h4><p>Low or zero DCS count is
+<i>evidence for</i> teaching a term early: it will never be picked up by
+reading literature. High DCS count mostly flags operators and everyday words
+that must be excluded from the vocabulary list.</p></div>
+</div>
+
+<footer>
+<b>Sources.</b> Aṣṭādhyāyī <code>sutraani/data.txt</code> (3,983 sūtras) ·
+DSG <a href="https://samskrtam.ru/sanskrit-lexicon/dsg/" target="_blank"
+rel="noopener">samskrtam.ru</a> (4,383 entries) · vyākaraṇa corpus
+<a href="https://github.com/ashtadhyayi-com/data" target="_blank"
+rel="noopener">ashtadhyayi-com/data</a> · DCS ranking table
+<code>sanskrit-util/tools/KeySwap/data/dcs_freq.txt</code>.<br><br>
+<b>Limitations.</b> G counts <i>document frequency over passages</i>, not raw
+sūtra-style readings; passage granularity differs by source (an āhnika chunk is
+longer than a kārikā). Matching reuses the curated prefix inventory from
+<code>build_batches.py</code> with class-nasal ↔ anusvāra variants in both
+Devanāgarī and SLP1. L measures all 119 terms in three fields (English prose,
+Russian prose, Devanāgarī headwords); short stems use exact-token matching and
+their known English collision is reported rather than suppressed. D is the
+locally pinned 50,474-key DCS <i>ranking</i> table, not the full
+5,688,416-token / 90,349-lemma export; multi-part rows use their first lemma.
+DSG's mislabelled <code>HK</code> column is never joined to DCS directly:
+see <code>slp1_keys.py</code>, <code>dsg_entries.tsv</code> and
+<code>dsg_dcs_join.tsv</code>. Two DSG headwords (jihvāmūlīya / upadhmānīya)
+have non-Latin placeholder characters and yield no SLP1 key; they are flagged
+as <code>slp1_source=none</code>.<br><br>
+<a href="study.html">← back to the seven-batch deck</a> ·
+generated by <code>external_channels.py</code> on 2026-11-07.
+</footer>
+</div></body></html>
