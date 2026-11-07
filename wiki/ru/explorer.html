@@ -8,6 +8,7 @@
 <link rel="alternate" hreflang="en" href="https://gasyoun.github.io/wiki/explorer.html">
 <link rel="alternate" hreflang="ru" href="https://gasyoun.github.io/wiki/ru/explorer.html">
 <link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="../formation.css">
 </head>
 <body>
 <div class="wrap">
@@ -19,6 +20,8 @@
     <a class="on" href="explorer.html">Поиск слов</a>
     <a href="cognates.html">Карта когнатов</a>
     <a href="timeline.html">Слои</a>
+    <a href="dhatu.html">Дхату</a>
+    <a href="wordformation.html">Словообразование</a>
     <a href="archive/">Архив</a>
   </div>
   <a class="src ext" id="navsrc" href="#" target="_blank" rel="noopener noreferrer">Оригинал в Wiktionary</a>
@@ -52,6 +55,7 @@
     <select id="sort" aria-label="Сортировка"></select>
     <span class="hint" id="qcount"></span>
   </div>
+  <div class="fbar" id="formationbar"></div>
   <div id="results"></div>
   <div class="pager" id="pager"></div>
 </section>
@@ -92,11 +96,16 @@
 </div>
 <script src="../data/lemmata.js"></script>
 <script src="../data/etymology.js"></script>
+<script src="../data/formation.js"></script>
 <script src="../data/i18n-ru.js"></script>
 <script>
 (function () {
   "use strict";
   var L = window.ETYMOLOGY_LEMMATA, D = window.ETYMOLOGY, R = window.WIKI_RU;
+  var F = window.WIKI_FORMATION, FT = R.formation;
+  var fmap = {};
+  F.words.forEach(function (r) { fmap[r[0]] = r; });
+  var showFmt = true, onlyFmt = false, AR = "../archive/";
   var T = ' target="_blank" rel="noopener noreferrer"';
   var esc = function (s) {
     return String(s == null ? '' : s).replace(/[&<>"']/g, function (ch) {
@@ -168,6 +177,57 @@
   }
   setSortOptions();
 
+
+  // Prior-work cross-references ----------------------------------------------
+  function fdetail(title) {
+    if (!showFmt) return '';
+    var head = '<div class="fdhead">' + esc(FT.head) + ' <span class="badge s">' +
+      esc(FT.candidate) + '</span></div>';
+    var r = fmap[title];
+    if (!r) return '<div class="fdetail">' + head + '<div class="fdnone">' +
+      esc(FT.none) + '</div></div>';
+    var rows = [], bits = [];
+    if (r[2]) bits.push(esc(r[2]));
+    if (r[3]) bits.push('<code>' + esc(r[3]) + '</code>');
+    if (r[4]) bits.push('√' + esc(r[4]));
+    if (r[6]) bits.push('&lt;L&gt;' + esc(r[6]));
+    if (bits.length) rows.push([FT.mw, bits.join(' · '),
+      F.sources.mw_etymology, FT.mwSrc]);
+    if (r[7]) rows.push([FT.dcs, '<code>' + esc(r[7]) + '</code> · ' + esc(r[8]),
+      F.sources.dcs_lemma2root, FT.dcsSrc]);
+    if (r[9]) {
+      var wh = '√' + esc(r[10]) + ' (№' + esc(r[9]) + ')' +
+        (r[11] ? ' · ' + esc(r[11]) : '') +
+        (r[12] ? ' · ' + esc(FT.cl) + ' ' + esc(r[12]) : '') +
+        (r[13] ? ' · ' + esc(String(r[13]).replace(/\|/g, ' · ')) : '');
+      if (r[17]) wh += '<div class="forms">' + String(r[17]).split('|').slice(0, 6)
+        .map(function (f) { return '<span>' + esc(f) + '</span>'; }).join('') + '</div>';
+      rows.push([FT.wh, wh, F.sources.whitney_roots, FT.whSrc]);
+    }
+    return '<div class="fdetail">' + head + rows.map(function (x) {
+      return '<div class="fdrow"><div class="fdl"><a href="' + esc(x[2]) + '"' + T +
+        ' title="' + esc(x[3]) + '">' + esc(x[0]) + ' ↗</a></div><div class="fdv">' +
+        x[1] + '</div></div>';
+    }).join('') + '</div>';
+  }
+  function renderFormationBar() {
+    document.getElementById('formationbar').innerHTML =
+      '<label><input type="checkbox" id="showfmt" checked> ' + esc(FT.toggle) + '</label>' +
+      '<label><input type="checkbox" id="onlyfmt"> ' + esc(FT.only) + '</label>' +
+      '<span>' + FT.hint.replace('{n}', F.totals.annotated.toLocaleString())
+                        .replace('{t}', F.totals.devanagariLemmata.toLocaleString()) +
+        '<a href="dhatu.html">' + esc(FT.dhatu) + '</a> · <a href="' + AR +
+        'formation-manifest.json"' + T + '>' + esc(FT.join) + ' ↗</a></span>';
+    ['showfmt', 'onlyfmt'].forEach(function (id) {
+      document.getElementById(id).addEventListener('change', function () {
+        showFmt = !!document.getElementById('showfmt').checked;
+        onlyFmt = !!document.getElementById('onlyfmt').checked;
+        page = 1;
+        render();
+      });
+    });
+  }
+
   // Word rows ----------------------------------------------------------------
   function tagHtml(idx) {
     var c = L.categories[idx];
@@ -183,7 +243,7 @@
       esc(wordUrl(title)) + '"' + T + ' title="Открыть ' + esc(title) + ' в Wiktionary">' +
       (isRec ? '<span class="rec">реконструкция</span>' : '') + esc(label) + '</a>' +
       '<div class="wtags">' + ids.map(tagHtml).join('') + '</div>' +
-      '<div class="nc" title="Число категорий">' + ids.length + '</div></div>';
+      '<div class="nc" title="Число категорий">' + ids.length + '</div>' + fdetail(title) + '</div>';
   }
 
   // Source buckets -----------------------------------------------------------
@@ -211,6 +271,7 @@
     var needle = document.getElementById('q').value.trim().toLowerCase();
     var lens = lensSel.value, cat = catSel.value, sort = sortSel.value;
     var out = L.words.filter(function (w) {
+      if (onlyFmt && !fmap[w[0]]) return false;
       if (cat !== '' && w[1].indexOf(Number(cat)) === -1) return false;
       if (lens && !w[1].some(function (i) { return L.categories[i].lens === lens; })) return false;
       if (!needle) return true;
@@ -309,6 +370,21 @@
       ' title="' + esc(parent.name) + '">' + esc(cn(parent.name)) + '</a></div><div class="nc">—</div></div>';
   }).join('');
 
+
+  // Deep links from the word-formation pages: ?cat=&q=&fmt=1
+  var params = {};
+  (function () {
+    var s = (window.location && window.location.search) || '';
+    s.replace(/^\?/, '').split('&').forEach(function (kv) {
+      if (!kv) return;
+      var p = kv.split('=');
+      params[p[0]] = decodeURIComponent((p[1] || '').replace(/\+/g, ' '));
+    });
+  })();
+  if (params.q) document.getElementById('q').value = params.q;
+  if (params.cat && L.categories[Number(params.cat)]) catSel.value = params.cat;
+  if (params.fmt === '1') onlyFmt = true;
+  renderFormationBar();
   render();
 })();
 </script>

@@ -20,6 +20,8 @@ See [manifest.json](manifest.json) for SHA-256 checksums and source URLs.
 | [`subcategory-members.json`](raw/subcategory-members.json) | 303841 | `c7862fda12775adc7ed4aa70e54bfff927913b2f983e79a721d059e4460d6900` |
 | [`cognates.json`](raw/cognates.json) | 175703 | `450120de85824ca3dbd4de42971fedd915f10843b56318da834a1c671ab5d6a2` |
 | [`cognates-manifest.json`](cognates-manifest.json) | 39204 | `26491a7ae44eb957a306e7b360ccabe8b30aab57c2d8d497e3615d7995ec5dff` |
+| [`formation-sources.json`](raw/formation-sources.json) | 271794 | `4828449a3f738c8c9a75ab65b89e383e17152b5409c6eff65ce662e81d00d3ce` |
+| [`formation-manifest.json`](formation-manifest.json) | 4640 | `433db6ccdbe5386b9c79cec1adaa56f93bf494843c98ef7ff05e5ad456a3fcbc` |
 
 ## The 42 subcategories
 
@@ -111,8 +113,22 @@ Rebuilt from the raw files above; no extra network access needed.
 | [`data/lemmata.js`](../data/lemmata.js) | 3,164 unique word lemmata with their 3,419 category memberships, plus 2,005 second-level source buckets (PIE roots, donor languages, suffixes, prefixes). |
 | [`data/cognates.js`](../data/cognates.js) | 18 PIE root/word sets across 8 languages and 4 inheritance layers, drawn from 118 queried Wiktionary categories. |
 | [`cognates-manifest.json`](cognates-manifest.json) | Exact source URL of every category used to build the cognate data. |
+| [`data/formation.js`](../data/formation.js) | 797 site lemmata with candidate MW / DCS / Whitney cross-references. |
+| [`data/roots.js`](../data/roots.js) | 930 Whitney dhātu records with class, gloss, period tags and attested forms. |
+| [`data/wordformation.js`](../data/wordformation.js) | Pratyaya inventory, samāsa taxonomy and curated compound evidence. |
+| [`formation-manifest.json`](formation-manifest.json) | SHA-256 + URL + licence of every prior-work source used in the join. |
 
 The crawl is **one level deep**: it captures direct members of the 42 subcategories, not the full contents of the 2,005 nested buckets. The explorer therefore presents a faithful sample, not a complete lexicon.
+
+## Prior-work word-formation join
+
+`build_formation.py` joins the Devanagari lemmata above to earlier root, derivation, affix and compound datasets in the local workspace. It uses no network access and stores a full replayable input record at [`raw/formation-sources.json`](raw/formation-sources.json). The two CSL editions of the Monier-Williams dictionary share `<L>` line IDs, giving exact Devanagari headwords for the derivation oracle; a compact Devanagari → SLP1 converter handles the remaining joins and is validated against 8,000 of those aligned pairs on every run.
+
+**These are candidate cross-references, not new etymologies.** Homonym roots can collide, so every field stays linked to its own source and the published modules carry a warning. Only minimal derived joins are published — never dictionary text. Licences and attribution for all nine inputs are listed in [SOURCES-LICENSES.md](SOURCES-LICENSES.md).
+
+Regenerate with `python3 wiki/scripts/build_formation.py`, or `--offline` to replay the archived record without the source repositories. Then rerun `fetch_snapshot.py --offline` to fold the new checksums back into this manifest.
+
+The Zalizniak grammatical data in `/fasmer-2026/` is CC BY-NC and is deliberately **not** used here; the cognate map keeps its eight sourced Wiktionary language columns unchanged.
 
 ## Rights
 

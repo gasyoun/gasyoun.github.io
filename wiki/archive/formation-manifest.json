@@ -1,0 +1,125 @@
+{
+  "generated_at_utc": "2026-11-07T07:52:02Z",
+  "generator": "wiki/scripts/build_formation.py",
+  "purpose": "Provenance and SHA-256 checksums for the prior-work join.",
+  "inputs": [
+    {
+      "key": "mw_etymology",
+      "path": "csl-orig/v02/mw/mw_etymology.tsv",
+      "bytes": 1602340,
+      "sha256": "249ccc6ae3de224335a5bcad2b2c1444c988654b6666e441abbf3decefaa756b",
+      "license": "CC BY-SA 4.0",
+      "url": "https://github.com/sanskrit-lexicon/csl-orig/blob/main/v02/mw/mw_etymology.tsv",
+      "lines": 9378
+    },
+    {
+      "key": "mw_devanagari",
+      "path": "csl-devanagari/v02/mw/mw.txt",
+      "bytes": 66532721,
+      "sha256": "02316188db9fc8e6aa450a25e47b0a670987cc6a6bdeaa3cfe6aa9dce16b1089",
+      "license": "CC BY-SA 4.0",
+      "url": "https://github.com/sanskrit-lexicon/csl-devanagari/blob/main/v02/mw/mw.txt",
+      "lines": 880516
+    },
+    {
+      "key": "mw_slp1",
+      "path": "csl-orig/v02/mw/mw.txt",
+      "bytes": 50163993,
+      "sha256": "e4641dc4384de459408368a9b34b2a13c90a19b0ecd4671f92c055b7578d0129",
+      "license": "CC BY-SA 4.0",
+      "url": "https://github.com/sanskrit-lexicon/csl-orig/blob/main/v02/mw/mw.txt",
+      "lines": 877234
+    },
+    {
+      "key": "whitney_roots",
+      "path": "WhitneyRoots/crosswalk/roots.csv",
+      "bytes": 368685,
+      "sha256": "43792c5b8b5e6fd7f6716ff8b78adbfc0778c134aafa698469adef809c99768f",
+      "license": "Apache-2.0",
+      "url": "https://github.com/gasyoun/WhitneyRoots/blob/main/crosswalk/roots.csv",
+      "lines": 931
+    },
+    {
+      "key": "dcs_lemma2root",
+      "path": "SanskritRussian/dcs_lemma2root.tsv",
+      "bytes": 250175,
+      "sha256": "9732ab3f3a3b2e71ddd60bb2b96b9a5ee280d2de8f8cf2b97f18d8cf7c9b2ecc",
+      "license": "no LICENSE in source repo",
+      "url": "https://github.com/gasyoun/SanskritRussian/blob/main/dcs_lemma2root.tsv",
+      "lines": 12568
+    },
+    {
+      "key": "affix_data",
+      "path": "WhitneyRoots/src/affix_data.json",
+      "bytes": 24211,
+      "sha256": "62c5d1e7090c657d992ac3d02cc492aaa428b3dc892fad3d4f591cdbb3cdd6f2",
+      "license": "Apache-2.0",
+      "url": "https://github.com/gasyoun/WhitneyRoots/blob/main/src/affix_data.json",
+      "lines": 1277
+    },
+    {
+      "key": "samasa_taxonomy",
+      "path": "SamasaChakram/samasacakra/samasacakra-taxonomy.json",
+      "bytes": 15439,
+      "sha256": "23592e960b93a119fa05226549f8cf7849ebb981e52cef482e4233e039852a48",
+      "license": "Apache-2.0",
+      "url": "https://github.com/gasyoun/SamasaChakram/blob/main/samasacakra/samasacakra-taxonomy.json",
+      "lines": 530
+    },
+    {
+      "key": "compound_members",
+      "path": "MWderivations/issue15/compounds_both_sides.tsv",
+      "bytes": 51724,
+      "sha256": "c2648f83bcb35551ed51d68af840b76a0dd005dc6f34954443290495132a76e5",
+      "license": "no LICENSE in source repo",
+      "url": "https://github.com/gasyoun/MWderivations/blob/master/issue15/compounds_both_sides.tsv",
+      "lines": 4051
+    },
+    {
+      "key": "compound_list",
+      "path": "MWderivations/compounds/compounds.txt",
+      "bytes": 1333618,
+      "sha256": "5760de643893bad2a4671681723d566473ba62972f76c8814962941aa0be6cc7",
+      "license": "no LICENSE in source repo",
+      "url": "https://github.com/gasyoun/MWderivations/blob/master/compounds/compounds.txt",
+      "lines": 12609
+    }
+  ],
+  "validation": {
+    "aligned_pairs_tested": 8000,
+    "exact": 7986,
+    "mismatch": 14,
+    "accuracy_pct": 99.83,
+    "note": "Mismatches are editorial <k1> differences between the two CSL editions, not converter errors. Exact <L> alignment is preferred for the MW join."
+  },
+  "site": {
+    "file": "data/lemmata.js",
+    "sha256": "fd28d396830aa33da02750189fb9661b86d68373ba51739781d61a65a8feb9b9",
+    "snapshotId": "sanskrit-etymology-2026-11-07",
+    "uniqueWords": 3164,
+    "devanagariLemmata": 3111
+  },
+  "raw": {
+    "file": "raw/formation-sources.json",
+    "bytes": 271794,
+    "sha256": "4828449a3f738c8c9a75ab65b89e383e17152b5409c6eff65ce662e81d00d3ce"
+  },
+  "derived": [
+    {
+      "file": "data/formation.js",
+      "bytes": 131554,
+      "sha256": "2aade70fb6518401b4c12d741ea63dc9bc1cf3d6734177232010bd295d0a841d"
+    },
+    {
+      "file": "data/roots.js",
+      "bytes": 118260,
+      "sha256": "bddb9a6678ddbc5fe6dab730e12b5c69c858b8ab9dfa4b623461201ac15fb5b6"
+    },
+    {
+      "file": "data/wordformation.js",
+      "bytes": 18325,
+      "sha256": "7b2ac6da5561d2dfefaeace3e886be1187b82238729bb883d0d011f7fc18fef3"
+    }
+  ],
+  "licenses": "See archive/SOURCES-LICENSES.md. Only minimal derived joins are published; no dictionary text is copied."
+}

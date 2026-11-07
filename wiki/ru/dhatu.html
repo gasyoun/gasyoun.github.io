@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Дхату — корни санскрита и снимок Wiktionary</title>
+<meta name="description" content="Учебная страница: 930 записей корней Уитни сопоставлены с 3 111 леммами в деванагари из архива Wiktionary. Каждый корень, значение, форма и словарный номер ссылается на свой источник.">
+<link rel="alternate" hreflang="en" href="https://gasyoun.github.io/wiki/dhatu.html">
+<link rel="alternate" hreflang="ru" href="https://gasyoun.github.io/wiki/ru/dhatu.html">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="../formation.css">
+</head>
+<body>
+<div class="wrap">
+
+<nav class="sitenav" aria-label="Разделы">
+  <a class="brand" href="index.html">Этимология санскрита</a>
+  <div class="sitelinks">
+    <a href="index.html">Обзор</a>
+    <a href="explorer.html">Поиск слов</a>
+    <a href="cognates.html">Карта когнатов</a>
+    <a href="timeline.html">Слои</a>
+    <a class="on" href="dhatu.html">Дхату</a>
+    <a href="wordformation.html">Словообразование</a>
+    <a href="archive/">Архив</a>
+  </div>
+  <a class="src ext" id="navsrc" href="#" target="_blank" rel="noopener noreferrer">Оригинал в Wiktionary</a>
+  <span class="langsw" aria-label="Язык издания"><a href="../dhatu.html" lang="en" hreflang="en" title="English edition">EN</a><span class="on" lang="ru">RU</span></span>
+</nav>
+
+<header class="masthead">
+  <p class="eyebrow">Учебный инструмент 04 · прежние работы о корнях, соединённые с архивом</p>
+  <h1>Стол дхату</h1>
+  <p class="lede">Wiktionary раскладывает санскритские слова по 42 этимологическим меткам; в прежних работах этого рабочего пространства были описаны корни, которые эти слова порождают. Здесь оба подхода сведены вместе: поисковый реестр из 930 корней Уитни, соответствующие им леммы в деванагари из сохранённого снимка и точное указание, откуда взята каждая перекрёстная ссылка. Страница отвечает на вопрос «от какого корня слово?», не выдавая сопоставление за этимологию.</p>
+  <p class="meta">Снимок <span id="snapid"></span> · сопоставлено <span id="snapdate"></span> · <span id="snaprows"></span> записей корней Уитни · <span id="snapinsite"></span> из них представлены леммами в архиве.</p>
+  <div class="topnav">
+    <a class="pill primary ext" id="srccat" href="#" target="_blank" rel="noopener noreferrer">Оригинальная категория в Wiktionary</a>
+    <a class="pill ext" id="srcwhit" href="#" target="_blank" rel="noopener noreferrer">Реестр Уитни на GitHub</a>
+    <a class="pill" href="wordformation.html">Словообразование</a>
+    <a class="pill" href="explorer.html">Открыть поиск слов</a>
+    <a class="pill ext" href="../archive/SOURCES-LICENSES.md">Источники и лицензии</a>
+  </div>
+</header>
+
+<section class="block" style="margin-top:0">
+  <div class="fwarn" id="warn"></div>
+  <div class="statrow" id="stats"></div>
+  <div class="fsrcbar" id="srcbar"></div>
+</section>
+
+<section class="block" id="coverage">
+  <span class="sectionnum">01 · где срабатывает сопоставление</span>
+  <h2>Где сопоставление срабатывает</h2>
+  <p class="intro">Сопоставление намеренно неравномерно, и это поучительно. Лучше всего оно работает там, где Wiktionary хранит чистые корни, и хуже всего — где слова являются композитами, заимствованиями или неологизмами. Каждая полоса сравнивает число лемм с корневой или деривационной ссылкой со всеми леммами в деванагари в этой категории; каждая подпись открывает точную категорию Wiktionary.</p>
+  <div class="bars" id="covbars"></div>
+  <p class="lensfoot" id="covnote"></p>
+</section>
+
+<section class="block" id="roots">
+  <span class="sectionnum">02 · реестр корней</span>
+  <h2>Реестр корней</h2>
+  <p class="intro">Нумерованный список корней Уитни со значением, грамматическим классом, ведийскими пометами периода, частотностью DCS, засвидетельствованными формами и номерами записей Монье-Вильямса и Апте. Форма в деванагари появляется только тогда, что эта точная лемма есть в сохранённом снимке Wiktionary — такие ссылки гарантированно ведут на существующую страницу. Остальные строки процитированы по реестру и ссылаются на файл-источник, а не на выдуманную страницу Wiktionary.</p>
+  <div class="toolbar">
+    <input type="search" id="q" placeholder="Корень, значение, форма, деванагари или номер…" aria-label="Поиск корней">
+    <select id="filter" aria-label="Все записи"></select>
+    <select id="sort" aria-label="Номер Уитни"></select>
+    <span class="hint" id="qcount"></span>
+  </div>
+  <div id="results"></div>
+  <div class="pager" id="pager"></div>
+</section>
+
+<section class="block" id="pipeline">
+  <span class="sectionnum">03 · как делалось сопоставление</span>
+  <h2>Как делалось сопоставление</h2>
+  <p class="intro">Ни один шаг не угадывает чтение. Два проверяемых моста связывают заголовок Wiktionary в деванагари с данными в SLP1; вся входная запись сохранена, чтобы сопоставление можно было воспроизвести без сети.</p>
+  <div class="notes" id="pipe"></div>
+</section>
+
+<section class="block" id="grades">
+  <span class="sectionnum">04 · от корня к слову</span>
+  <h2>От корня к слову: три ступени</h2>
+  <p class="intro">Корень — ещё не слово. Нулевая ступень, гуна и вриддхи превращают √pac в पचति и पाक. Примеры ниже — те же связанные с Wiktionary деривации, что и в лаборатории обзора; реестр корней выше даёт исходные формы √.</p>
+  <div class="ftablewrap"><table class="gradetable" id="gradetable"></table></div>
+  <div class="lablinks"><a class="pill" href="index.html#lab">Открыть интерактивную лабораторию деривации</a></div>
+</section>
+
+<section class="block" id="notes">
+  <span class="sectionnum">05 · заметки для занятия</span>
+  <h2>Как использовать на занятии</h2>
+  <div class="notes" id="notelist"></div>
+</section>
+
+<footer>
+  <p>Основной источник: <a class="srclink ext" id="footsrc" href="#" target="_blank" rel="noopener noreferrer">English Wiktionary, Category:Sanskrit terms by etymology</a> и её 42 подкатегории. Данные о корнях, значениях, формах и номерах взяты из отдельных прежних наборов, каждый со ссылкой выше; см. <a class="srclink ext" id="footlic" href="#" target="_blank" rel="noopener noreferrer">Источники и лицензии</a>.</p>
+  <p>Создано скриптом <code>wiki/scripts/build_formation.py</code>; воспроизвести без сети: <code>python3 wiki/scripts/build_formation.py --offline</code>.</p>
+</footer>
+
+</div>
+<script src="../data/roots.js"></script>
+<script src="../data/formation.js"></script>
+<script src="../data/etymology.js"></script>
+<script src="../data/i18n-formation.js"></script>
+<script src="../data/i18n-ru.js"></script>
+<script>
+(function () {
+  "use strict";
+  var R = window.WIKI_ROOTS, F = window.WIKI_FORMATION, E = window.ETYMOLOGY;
+  var RU = window.WIKI_RU, T = window.WIKI_FORMATION_I18N["ru"];
+  var AR = "../archive/", ISRU = "ru" === "ru";
+  var EXT = ' target="_blank" rel="noopener noreferrer"';
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];
+    });
+  }
+  function link(url, label, cls, title) {
+    return '<a class="' + (cls || 'srclink') + '" href="' + esc(url) + '"' + EXT +
+      (title ? ' title="' + esc(title) + '"' : '') + '>' + label + '</a>';
+  }
+  function path(t) {
+    return encodeURIComponent(t.replace(/ /g, '_')).replace(/%3A/gi, ':');
+  }
+  function lemmaUrl(t) { return R.base + '/wiki/' + path(t) + '#Sanskrit'; }
+  function fix(s, o) {
+    return String(s).replace(/\{(\w+)\}/g, function (m, k) {
+      return Object.prototype.hasOwnProperty.call(o, k) ? o[k] : m;
+    });
+  }
+  function setHref(id, url) { document.getElementById(id).href = url; }
+  ['navsrc', 'srccat', 'footsrc'].forEach(function (id) { setHref(id, E.categoryUrl); });
+  setHref('footlic', AR + 'SOURCES-LICENSES.md');
+  setHref('srcwhit', R.sources.whitney_roots);
+  document.getElementById('warn').innerHTML = fix(T.d_warn, {AR: AR});
+  document.getElementById('snapid').textContent = F.snapshotId;
+  document.getElementById('snapdate').textContent = F.builtAtUtc;
+  document.getElementById('snaprows').textContent = R.totals.rows.toLocaleString();
+  document.getElementById('snapinsite').textContent = R.totals.inSite.toLocaleString();
+
+  // Source bar: one link per dataset that actually feeds this page.
+  var srcs = [
+    [T.d_pill_src, E.categoryUrl], [T.d_from_src, R.sources.whitney_roots],
+    [T.d_pipe4a, R.sources.mw_etymology], [T.d_pipe4b, R.sources.dcs_lemma2root],
+    [T.d_mw_link, R.sources.mw_slp1],
+    [T.d_pipe3a, AR + 'formation-manifest.json'],
+    [T.d_pill_rights, AR + 'SOURCES-LICENSES.md']
+  ];
+  document.getElementById('srcbar').innerHTML = srcs.map(function (s) {
+    return link(s[1], esc(s[0]), 'ext');
+  }).join('');
+
+  document.getElementById('stats').innerHTML = [
+    [R.totals.rows, fix(T.d_stat_rows, {S: R.sources.whitney_roots})],
+    [R.totals.distinctRoots, T.d_stat_distinct],
+    [R.totals.inSite, T.d_stat_insite],
+    [F.totals.annotated, fix(T.d_stat_annotated, {AR: AR})]
+  ].map(function (s) {
+    return '<div class="stat"><div class="k">' + s[0].toLocaleString() +
+           '</div><div class="v">' + s[1] + '</div></div>';
+  }).join('');
+
+  // 01 — coverage by Wiktionary source category.
+  var cov = F.byCategory.slice().sort(function (a, b) {
+    return (b[1] / b[2]) - (a[1] / a[2]);
+  });
+  document.getElementById('covbars').innerHTML = cov.map(function (r) {
+    var name = F.categoryNames[r[0]];
+    var cat = E.categories[r[0]];
+    var label = (ISRU && RU && RU.cat && RU.cat[name]) ? RU.cat[name] : name;
+    var pct = r[2] ? (100 * r[1] / r[2]) : 0;
+    return '<div class="bar">' + link(cat ? cat.url : R.base + '/wiki/' + path('Category:' + name),
+      esc(label), 'bl', name) + '<span class="track"><span class="fill" style="width:' +
+      Math.max(1.2, pct).toFixed(1) + '%"></span></span><span class="v">' + r[1] +
+      ' / ' + r[2] + '</span></div>';
+  }).join('');
+  document.getElementById('covnote').textContent = T.d_cov_note;
+
+  // 02 — the root inventory.
+  var filt = document.getElementById('filter'), sort = document.getElementById('sort');
+  filt.innerHTML = [['', T.d_f_all], ['in', T.d_f_in], ['out', T.d_f_out],
+                    ['forms', T.d_f_forms], ['gloss', T.d_f_gloss]].map(function (o) {
+    return '<option value="' + o[0] + '">' + esc(o[1]) + '</option>';
+  }).join('');
+  sort.innerHTML = [['no', T.d_s_no], ['freq', T.d_s_freq], ['az', T.d_s_az]].map(function (o) {
+    return '<option value="' + o[0] + '">' + esc(o[1]) + '</option>';
+  }).join('');
+  var page = 1, SIZE = 60;
+
+  function filtered() {
+    var q = document.getElementById('q').value.trim().toLowerCase();
+    var f = filt.value, s = sort.value;
+    var out = R.roots.filter(function (r) {
+      if (f === 'in' && !r[13]) return false;
+      if (f === 'out' && r[13]) return false;
+      if (f === 'forms' && !r[9]) return false;
+      if (f === 'gloss' && !r[5]) return false;
+      if (!q) return true;
+      return [r[0], r[1], r[2], r[5], r[9], r[12]].join(' ').toLowerCase().indexOf(q) > -1;
+    });
+    if (s === 'freq') out.sort(function (a, b) {
+      return (Number(b[7]) || 0) - (Number(a[7]) || 0) || (Number(a[0]) - Number(b[0]));
+    });
+    else if (s === 'az') out.sort(function (a, b) {
+      return a[1] < b[1] ? -1 : (a[1] > b[1] ? 1 : 0);
+    });
+    else out.sort(function (a, b) { return Number(a[0]) - Number(b[0]); });
+    return out;
+  }
+  function rowHtml(r) {
+    var inSite = !!r[13] && !!r[12];
+    var root = inSite
+      ? link(lemmaUrl(r[12]), '√' + esc(r[1]), 'iast', T.d_open_lemma)
+      : '<span class="muted">√' + esc(r[1]) + '</span>';
+    var deva = inSite
+      ? link(lemmaUrl(r[12]), esc(r[12]), 'deva', T.d_open_lemma)
+      : '<span class="muted">' + T.d_none + '</span>';
+    var forms = r[9] ? '<div class="forms">' + r[9].split('|').slice(0, 6).map(function (f) {
+      return '<span>' + esc(f) + '</span>';
+    }).join('') + '</div>' : '<span class="muted">' + T.d_none + '</span>';
+    var ids = (r[10] || r[11])
+      ? 'MW ' + esc(r[10]) + ' · Apte ' + esc(r[11]) + '<div class="mini">' +
+        link(R.sources.mw_slp1, T.d_mw_link, 'mini', T.d_mw_src) + '</div>'
+      : '<span class="muted">' + T.d_none + '</span>';
+    return '<tr><td class="n">' + esc(r[0]) + (r[3] ? '<sup>' + esc(r[3]) + '</sup>' : '') +
+      '</td><td>' + root + '<div class="mini"><code>' + esc(r[2]) + '</code> · ' +
+      link(R.sources.whitney_roots, T.d_from_src, 'mini') + '</div></td>' +
+      '<td>' + deva + '</td><td class="n">' + esc(r[4] || T.d_none) + '</td>' +
+      '<td>' + esc(r[5] || T.d_none) + '</td><td class="muted">' +
+      esc((r[6] || '').replace(/\|/g, ' · ') || T.d_none) + '</td>' +
+      '<td class="n">' + esc(r[7] || '0') + '</td><td>' + forms + '</td><td>' + ids + '</td></tr>';
+  }
+  function render() {
+    var out = filtered(), n = out.length, slice = out.slice(0, page * SIZE);
+    document.getElementById('qcount').textContent = fix(T.d_count,
+      {n: n.toLocaleString(), t: R.totals.rows.toLocaleString()});
+    var res = document.getElementById('results'), pg = document.getElementById('pager');
+    if (!n) {
+      res.innerHTML = '<div class="empty">' + esc(T.d_no_match) + '</div>';
+      pg.innerHTML = '';
+      return;
+    }
+    res.innerHTML = '<div class="ftablewrap"><table class="ftable"><thead><tr>' +
+      [T.d_th_no, T.d_th_root, T.d_th_deva, T.d_th_cl, T.d_th_gloss, T.d_th_period,
+       T.d_th_freq, T.d_th_forms, T.d_th_ids].map(function (h) {
+        return '<th>' + esc(h) + '</th>';
+      }).join('') + '</tr></thead><tbody>' + slice.map(rowHtml).join('') + '</tbody></table></div>';
+    pg.innerHTML = slice.length < n
+      ? '<span>' + T.d_showing + ' ' + slice.length.toLocaleString() + ' ' + T.d_of + ' ' +
+        n.toLocaleString() + '</span><button type="button" class="btn" id="more">' +
+        T.d_more + '</button>'
+      : '<span>' + T.d_all_shown + ' ' + n.toLocaleString() + ' ' + T.d_roots_shown + '</span>';
+    var b = document.getElementById('more');
+    if (b) b.addEventListener('click', function () { page++; render(); });
+  }
+  ['q', 'filter', 'sort'].forEach(function (id) {
+    var el = document.getElementById(id);
+    el.addEventListener(id === 'q' ? 'input' : 'change', function () { page = 1; render(); });
+  });
+  render();
+
+  // 03 — the join pipeline, with a source link for every step.
+  var steps = [
+    [fix(T.d_pipe1, {n: F.totals.devanagariLemmata.toLocaleString()}),
+     [[T.d_pipe1a, AR + 'raw/subcategory-members.json']]],
+    [T.d_pipe2, [[T.d_pipe2a, R.sources.mw_devanagari], [T.d_pipe2b, R.sources.mw_slp1]]],
+    [T.d_pipe3, [[T.d_pipe3a, AR + 'formation-manifest.json']]],
+    [fix(T.d_pipe4, {a: F.totals.mwParses, b: F.totals.dcsRoots,
+                     c: R.totals.rows, d: F.totals.annotated, p: F.totals.coveragePct}),
+     [[T.d_pipe4a, R.sources.mw_etymology], [T.d_pipe4b, R.sources.dcs_lemma2root],
+      [T.d_pipe4c, R.sources.whitney_roots]]]
+  ];
+  document.getElementById('pipe').innerHTML = '<ul>' + steps.map(function (s) {
+    return '<li>' + s[0] + ' ' + s[1].map(function (l) {
+      return link(l[1], esc(l[0]), 'srclink');
+    }).join(' · ') + '</li>';
+  }).join('') + '</ul>';
+
+  // 04 — the three grades, linked to the Wiktionary lemmata of the lab.
+  document.getElementById('gradetable').innerHTML = '<thead><tr>' +
+    [T.d_g_th_root, T.d_g_th_guna, T.d_g_th_vrddhi, T.d_g_th_note].map(function (h) {
+      return '<th>' + esc(h) + '</th>';
+    }).join('') + '</tr></thead><tbody>' + E.grades.map(function (g, i) {
+      function cell(u, iast, deva) {
+        return '<td><a class="gd" href="' + esc(u) + '"' + EXT + '>' + esc(iast) +
+          '</a><div class="gdv"><a href="' + esc(u) + '"' + EXT + '>' + esc(deva) +
+          '</a></div></td>';
+      }
+      var gloss = RU && RU.gradeGloss ? RU.gradeGloss[i] : g.gloss;
+      var sandhi = RU && RU.sandhi ? RU.sandhi[i] : g.sandhi;
+      return '<tr>' + cell(g.rootUrl, g.rootIast, g.root) +
+        cell(g.gunaUrl, g.gunaIast, g.gunaWord) +
+        cell(g.vrddhiUrl, g.vrddhiIast, g.vrddhiWord) +
+        '<td>' + esc(gloss) + '<div class="mini">' + esc(sandhi) + '</div></td></tr>';
+    }).join('') + '</tbody>';
+
+  // 05 — teaching notes.
+  document.getElementById('notelist').innerHTML = '<ul>' + T.d_notes.map(function (s) {
+    return '<li>' + fix(s, {AR: AR, hom: R.totals.rows.toLocaleString(),
+                            distinct: R.totals.distinctRoots.toLocaleString()}) + '</li>';
+  }).join('') + '</ul>';
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+/* Dhātu desk, word-formation views and explorer formation panels.
+   Loaded after style.css by the pages that need it. No build step, no CDN. */
+
+.fsrcbar { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+.fsrcbar a { font-size: 12px; color: var(--blue-deep); background: var(--surface);
+  border: 1px solid var(--line); border-radius: 999px; padding: 5px 11px; }
+.fsrcbar a:hover { background: var(--blue-soft); border-color: var(--blue); }
+
+.fwarn { background: var(--blue-soft); border-left: 3px solid var(--blue);
+  border-radius: 8px; padding: 13px 16px; font-size: 13px; color: var(--blue-deep);
+  margin: 0 0 20px; line-height: 1.55; }
+.fwarn strong { font-weight: 500; }
+.fwarn a { border-bottom: 1px dotted var(--blue); }
+
+.figures { display: flex; flex-wrap: wrap; gap: 18px; margin: 0 0 18px; font-size: 12px; color: var(--muted); }
+.figures b { font-weight: 500; color: var(--ink); font-variant-numeric: tabular-nums; }
+
+/* Compact, scannable data tables ----------------------------------------- */
+.ftablewrap { background: var(--surface); border: 1px solid var(--line);
+  border-radius: 14px; overflow-x: auto; }
+.ftable { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 820px; }
+.ftable th { position: sticky; top: 0; background: var(--gray-soft); z-index: 1;
+  font-size: 11px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted);
+  white-space: nowrap; }
+.ftable th, .ftable td { padding: 9px 11px; border-bottom: 1px solid var(--line);
+  vertical-align: top; text-align: left; }
+.ftable tbody tr:hover { background: var(--gray-soft); }
+.ftable td.n { text-align: right; font-variant-numeric: tabular-nums; color: var(--muted); white-space: nowrap; }
+.ftable .deva { font: 400 16px/1.4 var(--deva); color: var(--blue-deep); }
+.ftable .iast { font: 500 15px/1.4 var(--serif); color: var(--blue-deep); white-space: nowrap; }
+.ftable .muted { color: var(--muted); font-size: 12px; }
+.ftable .nowrap { white-space: nowrap; }
+
+.badge { display: inline-block; font-size: 10px; letter-spacing: .04em; text-transform: uppercase;
+  border-radius: 4px; padding: 1px 6px; background: var(--gray-soft); color: var(--muted); }
+.badge.k { background: var(--teal-soft); color: var(--teal); }
+.badge.t { background: var(--amber-soft); color: var(--amber); }
+.badge.s { background: var(--blue-soft); color: var(--blue-deep); }
+.badge.hit { background: var(--teal-soft); color: var(--teal); }
+.mini { font-size: 11px; color: var(--faint); }
+.mini a { color: var(--blue-deep); border-bottom: 1px dotted var(--blue); }
+.forms { display: flex; flex-wrap: wrap; gap: 4px; max-width: 260px; }
+.forms span { font-size: 11px; background: var(--gray-soft); border-radius: 4px; padding: 1px 5px; color: var(--muted); }
+
+/* Section headings inside the new pages ----------------------------------- */
+.fsub { font: 500 15px/1.4 var(--sans); margin: 0 0 4px; }
+.fsubnote { font-size: 12px; color: var(--muted); margin: 0 0 14px; }
+
+/* Affix cards ------------------------------------------------------------- */
+.affixgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px; }
+.affixcard { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 15px 16px; }
+.affixcard:hover { border-color: var(--blue); }
+.affixcard .surf { font: 500 26px/1.2 var(--deva); color: var(--blue-deep); }
+.affixcard .surf small { font: 400 13px/1.2 var(--serif); color: var(--muted); margin-left: 8px; }
+.affixcard .prat { font: 400 15px/1.4 var(--deva); color: var(--teal); margin-top: 6px; }
+.affixcard .fn { font-size: 13px; color: var(--ink); margin-top: 8px; }
+.affixcard .meta2 { font-size: 11px; color: var(--faint); margin-top: 6px; }
+.affixcard .ex { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
+.affixcard .ex span { font: 400 13px/1.4 var(--deva); background: var(--gray-soft); border-radius: 5px; padding: 2px 6px; }
+.affixcard .anub { font-size: 11px; color: var(--faint); margin-top: 8px; line-height: 1.5; }
+
+/* Samāsa taxonomy --------------------------------------------------------- */
+.samgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; }
+.samclass { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px; }
+.samclass .cn { font: 500 17px/1.3 var(--serif); color: var(--blue-deep); }
+.samclass .cp { font-size: 12px; color: var(--muted); margin-top: 4px; line-height: 1.5; }
+.samfam { border-top: 1px solid var(--line); margin-top: 12px; padding-top: 10px; }
+.samfam .fnm { font-size: 12px; font-weight: 500; color: var(--teal); margin-bottom: 6px; }
+.leaf { display: grid; grid-template-columns: 132px minmax(0, 1fr); gap: 8px;
+  padding: 6px 0; border-bottom: 1px dotted var(--line); font-size: 12px; }
+.leaf:last-child { border-bottom: 0; }
+.leaf .lt { color: var(--ink); font-family: var(--serif); }
+.leaf .lv { color: var(--muted); }
+.leaf .lv em { color: var(--blue-deep); font-style: normal; }
+.leaf .lv small { display: block; color: var(--faint); }
+
+/* Compound evidence ------------------------------------------------------- */
+.cmpbar { display: inline-block; height: 8px; background: var(--blue); border-radius: 2px; vertical-align: middle; }
+.cmpbar.r { background: var(--teal); }
+.cmpparts { display: flex; flex-wrap: wrap; gap: 5px; max-width: 520px; }
+.cmpparts span { font: 400 12px/1.4 var(--serif); background: var(--gray-soft); border-radius: 5px; padding: 2px 6px; color: var(--muted); }
+
+/* Explorer per-word formation panel --------------------------------------- */
+.fdetail { grid-column: 1 / -1; background: var(--blue-soft); border-radius: 8px;
+  padding: 10px 12px; margin-top: 8px; font-size: 12px; line-height: 1.6; }
+.fdetail .fdhead { font-size: 11px; letter-spacing: .05em; text-transform: uppercase;
+  color: var(--blue-deep); margin-bottom: 6px; }
+.fdrow { display: grid; grid-template-columns: 130px minmax(0, 1fr); gap: 10px; padding: 3px 0; }
+.fdrow .fdl { color: var(--muted); }
+.fdrow .fdv { color: var(--ink); }
+.fdrow .fdv a { color: var(--blue-deep); border-bottom: 1px dotted var(--blue); }
+.fdrow .fdv code { font-size: 11px; }
+.fdnone { grid-column: 1 / -1; font-size: 11px; color: var(--faint); margin-top: 6px; }
+.fbar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 12px;
+  color: var(--muted); margin: 0 0 14px; }
+.fbar label { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; }
+.fbar a { color: var(--blue-deep); border-bottom: 1px dotted var(--blue); }
+
+/* Grades at a glance ------------------------------------------------------ */
+.gradetable { width: 100%; border-collapse: collapse; font-size: 13px; }
+.gradetable th { font-size: 11px; text-transform: uppercase; letter-spacing: .05em;
+  color: var(--muted); text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+.gradetable td { padding: 9px 10px; border-bottom: 1px solid var(--line); }
+.gradetable .gd { font: 500 20px/1.3 var(--serif); color: var(--blue-deep); }
+.gradetable .gdv { font: 400 17px/1.4 var(--deva); color: var(--muted); }
+.gradetable a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+@media (max-width: 860px) {
+  .leaf { grid-template-columns: 1fr; gap: 2px; }
+  .fdrow { grid-template-columns: 1fr; gap: 0; }
+  .affixgrid, .samgrid { grid-template-columns: 1fr; }
+}

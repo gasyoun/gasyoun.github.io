@@ -154,5 +154,26 @@ window.WIKI_RU = {
     "будить → пробуждение → буддийский",
     "делать → он делает → то, что должно быть сделано",
     "В классическом санскрите почти не встречается; приведено для полноты"
-  ]
+  ],
+  /* Explorer enrichment: the prior-work root/derivation cross-reference panel.
+     The English counterparts live inline in explorer.html, as with the rest of
+     that page's UI text. Data fields themselves are never translated. */
+  "formation": {
+    "toggle": "Показывать перекрёстные ссылки на корни и деривации",
+    "only": "Только слова с перекрёстной ссылкой",
+    "hint": "{n} из {t} лемм в деванагари · ",
+    "dhatu": "Стол дхату",
+    "join": "запись сопоставления",
+    "head": "Перекрёстные ссылки прежних работ",
+    "candidate": "кандидат",
+    "none": "Точной перекрёстной ссылки в объединённых наборах нет. Отсутствие совпадения не означает отсутствия этимологии.",
+    "mw": "Деривация MW",
+    "dcs": "DCS «лемма → корень»",
+    "wh": "Корень Уитни",
+    "cl": "класс",
+    "forms": "Формы",
+    "mwSrc": "оракул MW",
+    "dcsSrc": "таблица DCS",
+    "whSrc": "реестр Уитни"
+  }
 };

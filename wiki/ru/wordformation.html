@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Словообразование — пратьяя, самаса и композиты</title>
+<meta name="description" content="Пратьяи, четыре класса самасы и наиболее продуктивные основы композитов из прежних работ рабочего пространства, связанные с архивом этимологии санскрита Wiktionary и снабжённые ссылками на источники.">
+<link rel="alternate" hreflang="en" href="https://gasyoun.github.io/wiki/wordformation.html">
+<link rel="alternate" hreflang="ru" href="https://gasyoun.github.io/wiki/ru/wordformation.html">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="../formation.css">
+</head>
+<body>
+<div class="wrap">
+
+<nav class="sitenav" aria-label="Разделы">
+  <a class="brand" href="index.html">Этимология санскрита</a>
+  <div class="sitelinks">
+    <a href="index.html">Обзор</a>
+    <a href="explorer.html">Поиск слов</a>
+    <a href="cognates.html">Карта когнатов</a>
+    <a href="timeline.html">Слои</a>
+    <a href="dhatu.html">Дхату</a>
+    <a class="on" href="wordformation.html">Словообразование</a>
+    <a href="archive/">Архив</a>
+  </div>
+  <a class="src ext" id="navsrc" href="#" target="_blank" rel="noopener noreferrer">Оригинал в Wiktionary</a>
+  <span class="langsw" aria-label="Язык издания"><a href="../wordformation.html" lang="en" hreflang="en" title="English edition">EN</a><span class="on" lang="ru">RU</span></span>
+</nav>
+
+<header class="masthead">
+  <p class="eyebrow">Учебный инструмент 05 · как устроено санскритское слово</p>
+  <h1>Словообразование</h1>
+  <p class="lede">Метки Wiktionary сообщают, что слово — композит, производное или образование вриддхи, но почти не показывают механизм. Здесь собраны три прежних набора данных: реестр пратьяй с правилами анубандхи, таксономия самасы из четырёх классов и статистика того, какие основы действительно строят композиты. Каждый набор связан со своим источником и с теми категориями Wiktionary, которые он иллюстрирует.</p>
+  <p class="meta">Снимок <span id="snapid"></span> · сопоставлено <span id="snapdate"></span> · <span id="snapaffixes"></span> пратьяй · <span id="snapleaves"></span> листьев таксономии · <span id="snapmembers"></span> основ композитов.</p>
+  <div class="topnav">
+    <a class="pill primary ext" id="srccat" href="#" target="_blank" rel="noopener noreferrer">Оригинальная категория в Wiktionary</a>
+    <a class="pill" href="dhatu.html">Стол дхату</a>
+    <a class="pill" id="pillexplorer" href="explorer.html">Показать леммы-композиты</a>
+    <a class="pill ext" href="../archive/SOURCES-LICENSES.md">Источники и лицензии</a>
+  </div>
+</header>
+
+<section class="block" style="margin-top:0">
+  <span class="sectionnum">01 · механизмы</span>
+  <div class="fwarn" id="warn"></div>
+  <div class="statrow" id="stats"></div>
+  <div class="fsrcbar" id="srcbar"></div>
+  <div class="toolbar" style="margin-top:22px">
+    <span class="tabs" id="viewtabs">
+      <button type="button" class="tab on" data-view="affixes">Пратьяя</button>
+      <button type="button" class="tab" data-view="samasa">Самаса</button>
+      <button type="button" class="tab" data-view="compounds">Композиты</button>
+    </span>
+    <input type="search" id="q" placeholder="Аффикс, функция, термин самасы…" aria-label="Поиск по словообразованию">
+    <select id="group" aria-label="Все группы"></select>
+    <span class="hint" id="qcount"></span>
+  </div>
+  <div id="results"></div>
+</section>
+
+<section class="block" id="bridge">
+  <span class="sectionnum">02 · назад к словам</span>
+  <h2>Назад к сохранённой лексике</h2>
+  <p class="intro">Эти наборы описывают механизмы; архив хранит слова. Любая ссылка ниже ведёт к тому, что Wiktionary действительно относит к соответствующей метке.</p>
+  <div class="fsrcbar" id="bridgelinks"></div>
+</section>
+
+<section class="block" id="notes">
+  <span class="sectionnum">03 · заметки для занятия</span>
+  <h2>Как использовать на занятии</h2>
+  <div class="notes" id="notelist"></div>
+</section>
+
+<footer>
+  <p>Основной источник: <a class="srclink ext" id="footsrc" href="#" target="_blank" rel="noopener noreferrer">English Wiktionary, Category:Sanskrit terms by etymology</a> и её подкатегории. Данные об аффиксах, таксономии и композитах взяты из отдельных прежних наборов, каждый со ссылкой выше; см. <a class="srclink ext" id="footlic" href="#" target="_blank" rel="noopener noreferrer">Источники и лицензии</a>.</p>
+  <p>Создано скриптом <code>wiki/scripts/build_formation.py</code>; воспроизвести без сети: <code>python3 wiki/scripts/build_formation.py --offline</code>.</p>
+</footer>
+
+</div>
+<script src="../data/wordformation.js"></script>
+<script src="../data/formation.js"></script>
+<script src="../data/etymology.js"></script>
+<script src="../data/i18n-formation.js"></script>
+<script src="../data/i18n-ru.js"></script>
+<script>
+(function () {
+  "use strict";
+  var W = window.WIKI_WORDFORMATION, F = window.WIKI_FORMATION, E = window.ETYMOLOGY;
+  var RU = window.WIKI_RU, T = window.WIKI_FORMATION_I18N["ru"];
+  var AR = "../archive/", ISRU = "ru" === "ru";
+  var EXT = ' target="_blank" rel="noopener noreferrer"';
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];
+    });
+  }
+  function link(url, label, cls, title) {
+    return '<a class="' + (cls || 'srclink') + '" href="' + esc(url) + '"' + EXT +
+      (title ? ' title="' + esc(title) + '"' : '') + '>' + label + '</a>';
+  }
+  function fix(s, o) {
+    return String(s).replace(/\{(\w+)\}/g, function (m, k) {
+      return Object.prototype.hasOwnProperty.call(o, k) ? o[k] : m;
+    });
+  }
+  function catUrl(name) {
+    var c = E.categories.filter(function (x) { return x.name === name; })[0];
+    return c ? c.url : E.categoryUrl;
+  }
+  function tr(map, s) { return (ISRU && map && map[s]) ? map[s] : s; }
+  function catIndex(name) {
+    for (var i = 0; i < E.categories.length; i++) {
+      if (E.categories[i].name === name) return i;
+    }
+    return -1;
+  }
+  ['navsrc', 'srccat', 'footsrc'].forEach(function (id) {
+    document.getElementById(id).href = E.categoryUrl;
+  });
+  document.getElementById('footlic').href = AR + 'SOURCES-LICENSES.md';
+  document.getElementById('warn').innerHTML = fix(T.w_warn, {AR: AR});
+  document.getElementById('snapid').textContent = F.snapshotId;
+  document.getElementById('snapdate').textContent = F.builtAtUtc;
+  document.getElementById('snapaffixes').textContent = W.totals.affixes.toLocaleString();
+  document.getElementById('snapleaves').textContent = W.totals.samasaLeaves.toLocaleString();
+  document.getElementById('snapmembers').textContent = W.totals.compoundMembers.toLocaleString();
+
+  var S = W.sources;
+  document.getElementById('srcbar').innerHTML = [
+    [T.w_src_affix, S.affix_data], [T.w_src_samasa, S.samasa_taxonomy],
+    [T.w_src_members, S.compound_members], [T.w_src_samples, S.compound_list],
+    [T.w_pill_src, E.categoryUrl], [T.w_pill_rights, AR + 'SOURCES-LICENSES.md']
+  ].map(function (x) { return link(x[1], esc(x[0]), 'ext'); }).join('');
+
+  document.getElementById('stats').innerHTML = [
+    [W.totals.affixes, fix(T.w_stat_affixes, {S: S.affix_data})],
+    [W.totals.groups, T.w_stat_groups],
+    [W.totals.samasaClasses + ' / ' + W.totals.samasaFamilies + ' / ' + W.totals.samasaLeaves,
+     fix(T.w_stat_samasa, {S2: S.samasa_taxonomy})],
+    [W.totals.compoundMembers, fix(T.w_stat_compounds, {S3: S.compound_members})]
+  ].map(function (s) {
+    return '<div class="stat"><div class="k">' + s[0] + '</div><div class="v">' +
+      s[1] + '</div></div>';
+  }).join('');
+
+  // Bridge back to the archived Wiktionary vocabulary.
+  var ci = catIndex('Sanskrit compound terms');
+  document.getElementById('pillexplorer').href = ci < 0
+    ? 'explorer.html' : 'explorer.html?cat=' + ci + '&mode=words';
+  document.getElementById('bridgelinks').innerHTML = [
+    [T.w_bridge_compounds, ci < 0 ? 'explorer.html' : 'explorer.html?cat=' + ci + '&mode=words'],
+    [T.w_bridge_cat, catUrl('Sanskrit compound terms')],
+    [T.w_bridge_suffix, catUrl('Sanskrit terms by suffix')],
+    [T.w_bridge_root, E.sourceLinks.roots],
+    [T.w_bridge_dhatu, 'dhatu.html'],
+    [T.w_pill_rights, AR + 'SOURCES-LICENSES.md']
+  ].map(function (x) { return link(x[1], esc(x[0]), 'ext', T.w_bridge_tag); }).join('');
+
+  // Views -------------------------------------------------------------------
+  var view = 'affixes', groupSel = document.getElementById('group');
+  groupSel.innerHTML = '<option value="">' + esc(T.w_g_all) + '</option>' +
+    W.groups.map(function (g) {
+      return '<option value="' + esc(g[0]) + '" title="' + esc(g[0]) + '">' +
+        esc(tr(T.w_group, g[0])) + '</option>';
+    }).join('');
+
+  function affixCard(a) {
+    var kind = a[4] === 'kṛt' ? 'k' : (a[4] === 'taddhita' ? 't' : 's');
+    var kindLabel = tr(T.w_kind, a[4]) ||
+      (a[4] === 'kṛt' ? T.w_kind_krt : (a[4] === 'taddhita' ? T.w_kind_tad : T.w_kind_stri));
+    var ex = a[8] || [];
+    return '<div class="affixcard"><div class="surf">' + esc(a[1]) +
+      '<small>-' + esc(a[0]) + '</small></div>' +
+      '<div class="prat">' + esc(a[3]) + '</div>' +
+      '<div class="mini">' + esc(a[2]) + ' <span class="badge ' + kind + '">' +
+      esc(kindLabel) + '</span> <span title="' + esc(a[6]) + '">' +
+      esc(tr(T.w_group, a[6])) + '</span></div>' +
+      '<div class="fn" title="' + esc(a[5]) + '">' + esc(tr(T.w_fn, a[5])) + '</div>' +
+      '<div class="meta2">' + fix(T.w_apte, {n: a[7].toLocaleString()}) + ' · ' +
+      link(S.affix_data, T.w_src_affix, 'mini') + '</div>' +
+      (ex.length ? '<div class="ex" title="' + esc(T.w_ex_label) + '">' + ex.map(function (e) {
+        return '<span title="' + esc(e[1] + ' · √' + e[2]) + '">' + esc(e[0]) + '</span>';
+      }).join('') + '</div>' : '') +
+      (a[9] && a[9].length ? '<div class="anub"><strong>' + esc(T.w_anub_label) +
+        ':</strong> ' + a[9].map(esc).join(' · ') + '</div>' : '') + '</div>';
+  }
+  function samasaCard(c) {
+    var pradhana = ISRU ? c[2] : c[2].split(' — ')[0];
+    var structure = ISRU ? c[3] : (T.w_struct[c[0]] || c[3].split(' — ')[0]);
+    var leaves = 0;
+    var families = c[4].map(function (f) {
+      leaves += f[2].length;
+      return '<div class="samfam"><div class="fnm">' + esc(f[1]) + '</div>' +
+        f[2].map(function (l) {
+          return '<div class="leaf"><span class="lt">' + esc(l[0]) + '</span>' +
+            '<span class="lv"><em>' + esc(l[1]) + '</em> = ' + esc(l[2]) +
+            (ISRU && l[3] ? '<small>' + esc(l[3]) + '</small>' : '') + '</span></div>';
+        }).join('') + '</div>';
+    }).join('');
+    return '<div class="samclass"><div class="cn">' + esc(c[1]) + '</div>' +
+      '<div class="cp"><strong>' + esc(T.w_pradhana) + ':</strong> ' + esc(pradhana) +
+      '<br><strong>' + esc(T.w_structure) + ':</strong> ' + esc(structure) + '</div>' +
+      '<div class="mini" style="margin-top:8px">' +
+      link(S.samasa_taxonomy, T.w_src_samasa, 'mini') + ' · ' + leaves + ' ' +
+      esc(T.w_leaf_gloss) + '</div>' + families + '</div>';
+  }
+  function compoundTable() {
+    var maxL = 1, maxR = 1;
+    W.compoundMembers.forEach(function (m) {
+      maxL = Math.max(maxL, m[1]); maxR = Math.max(maxR, m[2]);
+    });
+    var rows = W.compoundMembers.filter(function (m) {
+      var q = document.getElementById('q').value.trim().toLowerCase();
+      return !q || m[0].toLowerCase().indexOf(q) > -1;
+    });
+    var table = !rows.length
+      ? '<div class="empty">' + esc(T.w_no_match) + '</div>'
+      : '<div class="ftablewrap"><table class="ftable"><thead><tr>' +
+      [T.w_th_stem, T.w_th_left, T.w_th_right, T.w_th_total].map(function (h) {
+        return '<th>' + esc(h) + '</th>';
+      }).join('') + '</tr></thead><tbody>' + rows.map(function (m) {
+        return '<tr><td class="iast">−' + esc(m[0]) + '</td><td class="n">' +
+          m[1].toLocaleString() + ' <span class="cmpbar" style="width:' +
+          (52 * m[1] / maxL).toFixed(1) + 'px"></span></td><td class="n">' +
+          m[2].toLocaleString() + ' <span class="cmpbar r" style="width:' +
+          (52 * m[2] / maxR).toFixed(1) + 'px"></span></td><td class="n">' +
+          (m[1] + m[2]).toLocaleString() + '</td></tr>';
+      }).join('') + '</tbody></table></div>';
+    var q = document.getElementById('q').value.trim().toLowerCase();
+    var samples = W.compoundSamples.filter(function (s) {
+      return !q || (s[1] + ' ' + s[2].join(' ')).toLowerCase().indexOf(q) > -1;
+    });
+    var sampleHtml = samples.length ? '<section class="block"><h3>' + esc(T.w_samp_h3) +
+      '</h3><p class="fsubnote">' + esc(T.w_samp_intro) + ' · ' +
+      link(S.compound_list, T.w_src_samples, 'mini') + '</p>' +
+      samples.map(function (s) {
+        return '<div class="chip" style="display:block"><b>' + esc(s[1]) + '</b> ' +
+          '<span class="cmpparts">' + s[2].map(function (p) {
+            return '<span>' + esc(p) + '</span>';
+          }).join('') + '</span></div>';
+      }).join('') + '</section>' : '';
+    return '<div class="figures"><span class="fsub">' + esc(T.w_cmp_h3) +
+      '</span></div><p class="fsubnote">' + esc(T.w_cmp_intro) + ' · ' +
+      link(S.compound_members, T.w_src_members, 'mini') + '</p>' + table + sampleHtml;
+  }
+
+  function render() {
+    var q = document.getElementById('q').value.trim().toLowerCase();
+    var res = document.getElementById('results'), count = document.getElementById('qcount');
+    groupSel.style.display = view === 'affixes' ? '' : 'none';
+    if (view === 'affixes') {
+      var list = W.affixes.filter(function (a) {
+        if (groupSel.value && a[6] !== groupSel.value) return false;
+        if (!q) return true;
+        var hay = [a[0], a[1], a[2], a[3], a[4], a[5], a[6],
+                   (a[8] || []).map(function (e) { return e.join(' '); }).join(' ')]
+                   .join(' ').toLowerCase();
+        return hay.indexOf(q) > -1;
+      });
+      count.textContent = fix(T.w_fig_affix, {n: list.length, t: W.totals.affixes});
+      res.innerHTML = list.length
+        ? '<div class="affixgrid">' + list.map(affixCard).join('') + '</div>'
+        : '<div class="empty">' + esc(T.w_no_match) + '</div>';
+    } else if (view === 'samasa') {
+      var cls = W.samasa.filter(function (c) {
+        if (!q) return true;
+        var hay = [c[1], c[2], c[3]].join(' ') + ' ' + c[4].map(function (f) {
+          return f[1] + ' ' + f[2].map(function (l) { return l.join(' '); }).join(' ');
+        }).join(' ');
+        return hay.toLowerCase().indexOf(q) > -1;
+      });
+      var fams = cls.reduce(function (n, c) { return n + c[4].length; }, 0);
+      var lv = cls.reduce(function (n, c) {
+        return n + c[4].reduce(function (m, f) { return m + f[2].length; }, 0);
+      }, 0);
+      count.textContent = fix(T.w_fig_samasa, {n: cls.length, t: W.totals.samasaClasses,
+                                               f: fams, l: lv});
+      res.innerHTML = cls.length
+        ? '<div class="samgrid">' + cls.map(samasaCard).join('') + '</div>'
+        : '<div class="empty">' + esc(T.w_no_match) + '</div>';
+    } else {
+      count.textContent = fix(T.w_fig_compounds,
+        {n: W.totals.compoundMembers, m: W.totals.compoundSamples});
+      res.innerHTML = compoundTable();
+    }
+  }
+  document.getElementById('viewtabs').addEventListener('click', function (e) {
+    var b = e.target.closest('.tab');
+    if (!b) return;
+    view = b.getAttribute('data-view') || 'affixes';
+    this.querySelectorAll('.tab').forEach(function (t) { t.classList.toggle('on', t === b); });
+    document.getElementById('q').value = '';
+    render();
+  });
+  ['q', 'group'].forEach(function (id) {
+    var el = document.getElementById(id);
+    el.addEventListener(id === 'q' ? 'input' : 'change', render);
+  });
+  render();
+
+  document.getElementById('notelist').innerHTML = '<ul>' + T.w_notes.map(function (s) {
+    return '<li>' + s + '</li>';
+  }).join('') + '</ul>';
+})();
+</script>
+</body>
+</html>
