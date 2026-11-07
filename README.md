@@ -1,6 +1,6 @@
 # gasyoun.github.io
 
-_Created: 08-10-2014 · Last updated: 05-11-2026_
+_Created: 08-10-2014 · Last updated: 07-11-2026_
 
 Personal GitHub Pages site of Mārcis Gasūns ([@gasyoun](https://github.com/gasyoun)),
 served at [gasyoun.github.io](https://gasyoun.github.io/). It hosts a handful of
@@ -23,17 +23,20 @@ is the full catalog.
   [dual-run запись](https://github.com/gasyoun/gasyoun.github.io/blob/master/scripts/campus/MASTERY_DUALRUN_2026-09-14.md)).
 
 - **[index.html](https://github.com/gasyoun/gasyoun.github.io/blob/master/index.html)**
-  (~12 MB) — a multilingual Ṛgveda reader. Each stanza is shown as Vedic
-  Devanagari, IAST transliteration, and padapāṭha, alongside the Russian
+  — the workspace landing page: a static overview of the Sanskrit Lexicon / CDSL
+  workspace (~196 repos), with quick links to the main published pages. Replaced the
+  former Rigveda reader at the root on 07-11-2026 (the reader moved to `RV/`).
+  Carries `og:` preview meta and
+  [og-card.png](https://github.com/gasyoun/gasyoun.github.io/blob/master/og-card.png).
+- **[RV/](https://github.com/gasyoun/gasyoun.github.io/tree/master/RV)** — the
+  multilingual Ṛgveda reader (formerly the root `index.html`, ~12 MB). Each stanza is
+  shown as Vedic Devanagari, IAST transliteration, and padapāṭha, alongside the Russian
   (Elizarenkova), German (Geldner), and English (Griffith) translations, using
   Indological web fonts served from
-  [fonts/](https://github.com/gasyoun/gasyoun.github.io/tree/master/fonts). The
-  root page carries `og:` preview meta and
-  [og-card.png](https://github.com/gasyoun/gasyoun.github.io/blob/master/og-card.png)
-  (since 11-10-2026, H6477–H6479; regenerable via `scripts/make_og_card.py`). The
-  same document also lives under
-  [RV/](https://github.com/gasyoun/gasyoun.github.io/tree/master/RV) with its own
-  [rigveda.css](https://github.com/gasyoun/gasyoun.github.io/blob/master/RV/rigveda.css).
+  [fonts/](https://github.com/gasyoun/gasyoun.github.io/tree/master/fonts). Now served
+  at [gasyoun.github.io/RV/](https://gasyoun.github.io/RV/) with its own
+  [rigveda.css](https://github.com/gasyoun/gasyoun.github.io/blob/master/RV/rigveda.css)
+  and full `og:` meta tags.
 - **[eli5/](https://github.com/gasyoun/gasyoun.github.io/tree/master/eli5)** — picture-led
   explainers, one question per page, English and Russian: how the Petersburg
   dictionary is translated into Russian, and short answers to recurring student
