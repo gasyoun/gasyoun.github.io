@@ -2,6 +2,10 @@
 
 Формат: дата · хендофф · что изменилось. Новые записи сверху.
 
+## 08-11-2026 — /cpu/: agent resources memory census
+
+- **Добавлено:** [cpu/](https://gasyoun.github.io/cpu/) — дашборд «куда уходит память» по эстейт-группам (browsers / OpenCode / ZCode / Claude / Codex / Grok / Actions runners / git / Spotlight), 7-дневные графики свапа/сессий/браузеров/раннеров и механические вердикт-карточки. Источник данных: net-speed-log hourly probe (28-колоночный CSV, H7846); рендер `python3 tools/build_agent_dashboard.py` в клоне net-speed-log, статический снимок деплоится сюда.
+
 ## 07-11-2026 — /wiki/: Transliteration reference page (EN/RU)
 
 - **Добавлено:** [wiki/translit.html](https://gasyoun.github.io/wiki/translit.html) и [wiki/ru/translit.html](https://gasyoun.github.io/wiki/ru/translit.html) — статический справочник всей этимологии санскрита в транслитерации IAST. Все 42 категории Викисловаря перегруппированы в три линзы (происхождение 18 / словообразование 15 / достоверность 9), полная таблица ступеней гласных guṇa/vṛddhi для всех пяти типов корневой гласной (a, i, u, ṛ, ḷ) с примерами (√pac, √vid, √budh, √kṛ), правило сандхи (o→av, au→āv), цепочка √budh → bodha → bauddha, словарь терминов словообразования (samāsa, dhātu, upasarga, pratyaya, guṇa, vṛddhi, sandhi) и пять методических выводов.
