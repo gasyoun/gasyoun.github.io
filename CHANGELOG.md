@@ -2,6 +2,12 @@
 
 Формат: дата · хендофф · что изменилось. Новые записи сверху.
 
+## 08-11-2026 — /cpu/: fleet GB page (Air + MSI)
+
+- **Изменено:** [cpu/](https://gasyoun.github.io/cpu/) стал флот-страницей GB-цензуса: по секции на хост (MacBook-Air + MSI/DESKTOP-8N57E9U) — RAM free / swap used / disk C free (now + 24h avg), 7-дневные графики swap GB и RAM free GB, механические вердикт-карточки и предупреждение о протухшем зонде (probe stale). Хост, молчащий 45+ дней, рендерится как retired-install skip, а не секция. Рендер: `python3 tools/build_agent_dashboard.py --fleet` (net-speed-log v1.0.3, PR #22); статический снимок деплоится сюда.
+- **Починено на MSI (DESKTOP-8N57E9U):** после переустановки Windows зондило почасово, но пуш-нога умерла (3 дня строк лежали незакоммиченными в клоне, на origin не ехали); skill-копия measure.ps1 была битой (40 строк вместо 227) — развёрнута заново из репо-копии, hourly-таск AgentResourcesProbe перепрошит на windows/probe_push.ps1 (зонд + commit/push, absolute pwsh-путь), первый свежий 28-колоночный ряд (swap 1.03 GB, zcode 23 procs / 2692 MB) уехал на origin 08-11 11:22Z.
+- Полный MB-цензус по Air остался: [agent_dashboard.html](https://github.com/gasyoun/net-speed-log/blob/main/agent_dashboard.html) (рендерится по требованию).
+
 ## 08-11-2026 — /cpu/: agent resources memory census
 
 - **Добавлено:** [cpu/](https://gasyoun.github.io/cpu/) — дашборд «куда уходит память» по эстейт-группам (browsers / OpenCode / ZCode / Claude / Codex / Grok / Actions runners / git / Spotlight), 7-дневные графики свапа/сессий/браузеров/раннеров и механические вердикт-карточки. Источник данных: net-speed-log hourly probe (28-колоночный CSV, H7846); рендер `python3 tools/build_agent_dashboard.py` в клоне net-speed-log, статический снимок деплоится сюда.
