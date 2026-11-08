@@ -2,6 +2,10 @@
 
 Формат: дата · хендофф · что изменилось. Новые записи сверху.
 
+## 08-11-2026 — /cpu/: auto-refresh lane (H7869)
+
+- **Изменено:** [cpu/](https://gasyoun.github.io/cpu/) больше не статичный снимок — почасовая launchd-лейна `ml.gasyoun.cpu-page` (Air, H7869; net-speed-log v1.1.0, PR gasyoun/net-speed-log#23) рендерит `--fleet` из свежего `origin/main` net-speed-log и публикует `cpu/index.html` push-if-changed: `generated <TS>` штамп выведен из diff-гейта (без timestamp-спама), неудавшийся пуш ретраится следующим интервалом. Первый автопуш: `cpu page auto-refresh 2026-11-08T12:51:45Z (H7869 hourly lane)`.
+
 ## 08-11-2026 — /cpu/: fleet GB page (Air + MSI)
 
 - **Изменено:** [cpu/](https://gasyoun.github.io/cpu/) стал флот-страницей GB-цензуса: по секции на хост (MacBook-Air + MSI/DESKTOP-8N57E9U) — RAM free / swap used / disk C free (now + 24h avg), 7-дневные графики swap GB и RAM free GB, механические вердикт-карточки и предупреждение о протухшем зонде (probe stale). Хост, молчащий 45+ дней, рендерится как retired-install skip, а не секция. Рендер: `python3 tools/build_agent_dashboard.py --fleet` (net-speed-log v1.0.3, PR #22); статический снимок деплоится сюда.
