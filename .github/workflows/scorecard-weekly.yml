@@ -5,11 +5,15 @@ name: scorecard-weekly
 # the OpenSSF dashboard so this badge goes live:
 #   https://api.scorecard.dev/projects/github.com/gasyoun/gasyoun.github.io/badge
 # Cadence matches ossf/scorecard's own weekly run (Saturdays 01:30 UTC).
+# Permission shape obeys scorecard-action#workflow-restrictions: no workflow-
+# level writes (the writes live on the reusable job, granted here).
 
 on:
   schedule:
     - cron: '30 1 * * 6'
   workflow_dispatch:
+
+permissions: read-all
 
 jobs:
   scorecard:
