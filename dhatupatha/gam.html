@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>√gam — корневая карта (гнездо dhātu)</title>
+<style>
+  @page { size: A4; margin: 12mm; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Segoe UI", "Noto Sans", Arial, sans-serif;
+    color: #1b1b1b; background: #dcdcdc;
+    font-size: 10.5pt; line-height: 1.35;
+  }
+  .dev { font-family: "Noto Sans Devanagari", "Nirmala UI", "Mangal", serif; }
+  .sheet {
+    width: 210mm; min-height: 297mm; margin: 10mm auto; padding: 12mm;
+    background: #fff; box-shadow: 0 1mm 4mm rgba(0,0,0,.18);
+  }
+  /* ---- карты: ровно два листа A4 ---- */
+  .map { break-after: page; page-break-after: always; display: flex; flex-direction: column; }
+  .map .grid { flex: 1 0 auto; align-content: space-evenly; }
+  .map-head h1 { margin: 0 0 1mm; font-size: 20pt; letter-spacing: .2px; }
+  .map-head .sub { margin: 0 0 4mm; font-size: 10pt; color: #444; }
+  .mode {
+    display: inline-block; background: #f1e9d8; border: .35mm solid #a58b52;
+    border-radius: 1.5mm; padding: .4mm 2mm; font-size: 8.5pt; color: #5a4a22;
+  }
+  .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4.5mm; }
+  .card {
+    border: .4mm solid #333; border-radius: 1.6mm; padding: 3mm 3.2mm;
+    background: #fdfdfb; break-inside: avoid;
+  }
+  .card.root {
+    border-color: #7a1f1f; background: #fbf4f4; grid-column: span 1;
+  }
+  .card h3 {
+    margin: 0 0 2mm; font-size: 10.5pt; font-weight: 600; color: #7a1f1f;
+    border-bottom: .3mm dotted #b98; padding-bottom: 1mm;
+  }
+  .card h3 .pre { color: #333; font-weight: 600; }
+  .card h3 .stem { color: #7a1f1f; font-weight: 700; }
+  .root .r-dev { font-size: 26pt; line-height: 1.1; color: #7a1f1f; }
+  .root .r-iast { font-size: 15pt; font-weight: 700; color: #7a1f1f; }
+  .root .r-gloss { font-size: 9.5pt; color: #333; margin-top: .6mm; }
+  .root .r-src { font-size: 7.5pt; color: #777; margin-top: .6mm; }
+  ul.chips { list-style: none; margin: 0; padding: 0; }
+  ul.chips li { margin: 0 0 1.6mm; font-size: 10pt; }
+  ul.chips .t { font-weight: 600; color: #111; }
+  ul.chips .t .stem { color: #7a1f1f; }
+  ul.chips .g { color: #444; font-size: 9.5pt; }
+  .note-card {
+    grid-column: span 3; border: .4mm dashed #666; border-radius: 1.6mm;
+    padding: 2.4mm 3mm; background: #f7f7f4; font-size: 8.6pt; color: #333;
+    break-inside: avoid;
+  }
+  .note-card b { color: #7a1f1f; }
+  .keys { display: flex; gap: 4mm; flex-wrap: wrap; margin-top: 1.2mm; }
+  .keys span { background: #fff; border: .3mm solid #999; border-radius: 1.2mm; padding: .3mm 1.6mm; }
+  /* ---- расширенный словник ---- */
+  .wordlist { break-before: page; page-break-before: always; }
+  .wl-title { font-size: 15pt; margin: 0 0 1mm; }
+  .wl-sub { font-size: 9pt; color: #555; margin: 0 0 4mm; }
+  section.branch { break-inside: auto; margin: 0 0 4.5mm; }
+  section.branch h3 {
+    font-size: 11.5pt; color: #7a1f1f; margin: 0 0 1.6mm;
+    border-bottom: .4mm solid #cbb; padding-bottom: .8mm;
+  }
+  section.branch h3 .pre { color: #333; }
+  ul.wl { list-style: none; margin: 0; padding: 0; }
+  ul.wl li {
+    margin: 0 0 1.4mm; padding-left: 0; font-size: 9.8pt;
+    display: flex; gap: 2mm; align-items: baseline; flex-wrap: wrap;
+  }
+  ul.wl .tm { font-weight: 600; min-width: 34mm; color: #111; }
+  ul.wl .tm .stem { color: #7a1f1f; }
+  ul.wl .gl { flex: 1 1 60mm; color: #222; }
+  ul.wl .cite { color: #666; font-size: 8.2pt; white-space: nowrap; }
+  ul.wl .dcs {
+    color: #1f5c2e; font-size: 8pt; background: #e9f3ec;
+    border: .25mm solid #9dc3a8; border-radius: 1.2mm; padding: 0 1.4mm;
+    white-space: nowrap;
+  }
+  .fn {
+    font-size: 8.6pt; color: #555; background: #f6f4ee;
+    border-left: 1mm solid #a58b52; padding: 1.4mm 2.4mm; margin: 1mm 0 3mm;
+  }
+  .fn b { color: #5a4a22; }
+  footer.legend {
+    margin-top: 6mm; border-top: .5mm solid #333; padding-top: 2.5mm;
+    font-size: 8.4pt; color: #333; break-inside: avoid;
+  }
+  footer.legend h4 { margin: 0 0 1.4mm; font-size: 9.5pt; }
+  footer.legend ul { margin: 0; padding-left: 5mm; }
+  footer.legend li { margin-bottom: .7mm; }
+  .sig { margin-top: 2.5mm; font-size: 8pt; color: #777; }
+  @media print {
+    body { background: #fff; }
+    .sheet { margin: 0; padding: 0; width: auto; min-height: 0; box-shadow: none; }
+    .map { height: 273mm; overflow: hidden; }
+    .wordlist { break-before: page; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== ЛИСТ 1 — КАРТА ===================== -->
+<section class="sheet map" id="map-1">
+  <header class="map-head">
+    <h1>Корневая карта: <span class="dev">गम्</span>&nbsp;gam</h1>
+    <p class="sub">
+      Гнездо dhātu √gam — «идти, двигаться, приходить» · корень: <b>गम् gam</b> [W 282] [A 451a]
+      · <span class="mode">режим: гнездо dhātu (по умолчанию)</span>
+      · ветви отобраны по частоте DCS и словарным свидетельствам W/A
+    </p>
+  </header>
+  <div class="grid">
+
+    <article class="card root">
+      <h3><span class="pre">корень</span> √<span class="stem">gam</span></h3>
+      <div class="r-dev dev">गम्</div>
+      <div class="r-iast">gam</div>
+      <div class="r-gloss">идти, двигаться, приходить; cl. 1, наст. <i>gacchati</i></div>
+      <div class="r-src">[W 282] [A 451a] · DCS ×1669</div>
+      <ul class="chips" style="margin-top:1.6mm">
+        <li><span class="t">gacchati</span> <span class="g">— идёт (наст.)</span></li>
+        <li><span class="t">jagāma</span> <span class="g">— пришёл (перф.)</span></li>
+        <li><span class="t">agamat</span> <span class="g">— пошёл (аор.)</span></li>
+        <li><span class="t">gamiṣyati</span> <span class="g">— будет идти</span></li>
+        <li><span class="t">gantum</span> <span class="g">— идти (инфинитив)</span></li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <h3><span class="pre">√gam &gt;</span> <span class="stem">словообразование</span></h3>
+      <ul class="chips">
+        <li><span class="t">ga<span class="stem">ta</span></span> <span class="g">— ушедший, ставший</span></li>
+        <li><span class="t">ga<span class="stem">ti</span></span> <span class="g">— движение, судьба</span></li>
+        <li><span class="t">ga<span class="stem">mana</span></span> <span class="g">— хождение, поход</span></li>
+        <li><span class="t">ga<span class="stem">mya</span></span> <span class="g">— достижимый</span></li>
+        <li><span class="t">gan<span class="stem">tu</span></span> <span class="g">— путник</span></li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <h3><span class="pre">gam &gt;</span> <span class="stem">ā+gam</span></h3>
+      <ul class="chips">
+        <li><span class="t"><span class="stem">ā</span>gacchati</span> <span class="g">— приходит</span></li>
+        <li><span class="t"><span class="stem">ā</span>gama</span> <span class="g">— пришествие; свящ. учение</span></li>
+        <li><span class="t"><span class="stem">ā</span>gamana</span> <span class="g">— прибытие</span></li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <h3><span class="pre">gam &gt;</span> <span class="stem">anu+gam</span></h3>
+      <ul class="chips">
+        <li><span class="t"><span class="stem">anu</span>gacchati</span> <span class="g">— следует, соблюдает</span></li>
+        <li><span class="t"><span class="stem">anu</span>gāmin</span> <span class="g">— последователь</span></li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <h3><span class="pre">gam &gt;</span> <span class="stem">abhi+gam</span></h3>
+      <ul class="chips">
+        <li><span class="t"><span class="stem">abhi</span>gacchati</span> <span class="g">— приближается, достигает</span></li>
+        <li><span class="t"><span class="stem">abhi</span>gama</span> <span class="g">— приближение, визит</span></li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <h3><span class="pre">gam &gt;</span> <span class="stem">adhi+gam</span></h3>
+      <ul class="chips">
+        <li><span class="t"><span class="stem">adhi</span>gacchati</span> <span class="g">— постигает, изучает</span></li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <h3><span class="pre">gam &gt;</span> <span class="stem">ava+gam</span></h3>
+      <ul class="chips">
+        <li><span class="t"><span class="stem">ava</span>gacchati</span> <span class="g">— понимает, узнаёт</span></li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <h3><span class="pre">gam &gt;</span> <span class="stem">ud+gam</span></h3>
+      <ul class="chips">
+        <li><span class="t"><span class="stem">ud</span>gacchati</span> <span class="g">— восходит, возникает</span></li>
+        <li><span class="t"><span class="stem">ud</span>gama</span> <span class="g">— восхождение, исход</span></li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <h3><span class="pre">gam &gt;</span> <span class="stem">nir+gam</span></h3>
+      <ul class="chips">
+        <li><span class="t"><span class="stem">nir</span>gacchati</span> <span class="g">— выходит, уходит</span></li>
+        <li><span class="t"><span class="stem">nir</span>gama</span> <span class="g">— выход, исход</span></li>
+      </ul>
+    </article>
+
+  </div>
+</section>
+
+<!-- ===================== ЛИСТ 2 — КАРТА ===================== -->
+<section class="sheet map" id="map-2">
+  <div class="grid" style="margin-top:2mm">
+
+    <article class="card">
+      <h3><span class="pre">gam &gt;</span> <span class="stem">saṃ+gam</span></h3>
+      <ul class="chips">
+        <li><span class="t"><span class="stem">saṃ</span>gacchati</span> <span class="g">— встречается, соединяется</span></li>
+        <li><span class="t"><span class="stem">saṃ</span>gama</span> <span class="g">— встреча, контакт</span></li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <h3><span class="pre">gam &gt;</span> <span class="stem">vi+gam</span></h3>
+      <ul class="chips">
+        <li><span class="t"><span class="stem">vi</span>gacchati</span> <span class="g">— проходит, исчезает</span></li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <h3><span class="pre">gam &gt;</span> <span class="stem">dur+gam</span></h3>
+      <ul class="chips">
+        <li><span class="t"><span class="stem">dur</span>ga</span> <span class="g">— крепость; труднодоступный</span></li>
+        <li><span class="t"><span class="stem">dur</span>gama</span> <span class="g">— недоступный</span></li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <h3><span class="pre">gam &gt;</span> <span class="stem">ni+gam</span></h3>
+      <ul class="chips">
+        <li><span class="t"><span class="stem">ni</span>gacchati</span> <span class="g">— достигает, учится</span></li>
+        <li><span class="t"><span class="stem">ni</span>gama</span> <span class="g">— Веды; город</span></li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <h3><span class="pre">gam &gt;</span> <span class="stem">prati+gam</span></h3>
+      <ul class="chips">
+        <li><span class="t"><span class="stem">prati</span>gacchati</span> <span class="g">— идёт навстречу, возвращается</span></li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <h3><span class="pre">gam &gt;</span> <span class="stem">pari+gam</span></h3>
+      <ul class="chips">
+        <li><span class="t"><span class="stem">pari</span>gacchati</span> <span class="g">— обходит, окружает</span></li>
+      </ul>
+    </article>
+
+    <div class="note-card">
+      <b>Как читать карту.</b> Центр — корень в деванагари и IAST; ветвь объединяет слова с
+      понятным учащемуся общим признаком: одним превербом (<i>ā+gam, anu+gam, …</i>) или одним
+      способом образования (<i>-ta, -ti, -na, -ya, -tu</i>). Красным выделена корневая часть
+      слова. Членство в ветви <b>не</b> утверждает прямого образования одного слова от соседнего —
+      это гнездо словаря, а не этимологическое древо (по <i>CONTEXT.md</i>). Полный расширенный
+      словник с источниками — на следующих страницах.
+      <div class="keys">
+        <span>W — Wilson 1832</span>
+        <span>A — Apte 1890</span>
+        <span>×N — частота DCS (только отбор)</span>
+        <span>структура — Звонков, с. 84–85, 124–125</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== РАСШИРЕННЫЙ СЛОВНИК ===================== -->
+<section class="sheet wordlist" id="wordlist">
+  <h2 class="wl-title">Расширенный словник √gam</h2>
+  <p class="wl-sub">
+    Режим «гнездо dhātu» (по умолчанию). Ветви совпадают с картой; каждая лемма снабжена
+    русским значением и ключом источника, сложные образования — кратким примечанием.
+    Значения сверены по словарным статьям Wilson (W) и Apte (A) в этот же проход.
+  </p>
+
+  <section class="branch">
+    <h3>√gam — глагол без приставки</h3>
+    <ul class="wl">
+      <li data-lemma="gam" data-w="282:gama:gacCati" data-a="0451-a:gam:gacCati" data-dcs="1669">
+        <span class="tm">gam</span><span class="gl">— идти, двигаться, приходить (корень, cl. 1)</span>
+        <span class="cite">[W 282] [A 451a]</span><span class="dcs" title="DCS: частота леммы">×1669</span>
+      </li>
+      <li data-lemma="gacchati" data-w="282:gama:gacCati" data-a="0451-a:gam:gacCati">
+        <span class="tm">gacchati</span><span class="gl">— идёт, приходит (настоящее время)</span>
+        <span class="cite">[W 282] [A 451a]</span>
+      </li>
+      <li data-lemma="jagāma" data-a="0451-a:gam:jagAma">
+        <span class="tm">jagāma</span><span class="gl">— пришёл, ушёл (перфект)</span>
+        <span class="cite">[A 451a]</span>
+      </li>
+      <li data-lemma="agamat" data-a="0451-a:gam:agamat">
+        <span class="tm">agamat</span><span class="gl">— пошёл, достиг (аорист)</span>
+        <span class="cite">[A 451a]</span>
+      </li>
+      <li data-lemma="gamiṣyati" data-a="0451-a:gam:gamizyati">
+        <span class="tm">gamiṣyati</span><span class="gl">— будет идти (первое будущее)</span>
+        <span class="cite">[A 451a]</span>
+      </li>
+      <li data-lemma="gantum" data-a="0451-a:gam:gaMtuM">
+        <span class="tm">gantum</span><span class="gl">— идти (инфинитив)</span>
+        <span class="cite">[A 451a]</span>
+      </li>
+      <li data-lemma="jigamisati" data-a="0451-a:gam:jigamizati">
+        <span class="tm">jigamisati</span><span class="gl">— захотеть идти (желательный залог)</span>
+        <span class="cite">[A 451a]</span>
+      </li>
+      <li data-lemma="gamayati" data-a="0451-a:gam:gamayati" data-dcs="6">
+        <span class="tm">gamayati</span><span class="gl">— заставлять идти, вести; объяснять (причинный залог)</span>
+        <span class="cite">[A 451a]</span><span class="dcs" title="DCS: лемма gamay">×6</span>
+      </li>
+    </ul>
+    <div class="fn"><b>Примечание.</b> Настоящее <i>gacchati</i> — с подстановкой <i>gacC-</i>
+      вместо <i>gam</i> (Apte, ссылка на Pāṇini vii, 3, 77) [A 451a].</div>
+  </section>
+
+  <section class="branch">
+    <h3>√gam &gt; словообразование (-ta, -ti, -na, -ya, -tu)</h3>
+    <ul class="wl">
+      <li data-lemma="gata" data-w="279:gata:Gone" data-a="0451-b:gata:gam-kta">
+        <span class="tm">gata</span><span class="gl">— ушедший, умерший; ставший, достигший; прошлое (сущ.)</span>
+        <span class="cite">[W 279] [A 451b]</span>
+      </li>
+      <li data-lemma="gati" data-w="279:gati:motion" data-a="0452-a:gatiH:gatiH" data-dcs="157">
+        <span class="tm">gati</span><span class="gl">— движение, походка; дорога; судьба, участь; ход планеты</span>
+        <span class="cite">[W 279] [A 452a]</span><span class="dcs" title="DCS: частота леммы">×157</span>
+      </li>
+      <li data-lemma="gamana" data-w="282:gamana:lyuw" data-a="0452-b:gamanaM:gam-lyuw" data-dcs="52">
+        <span class="tm">gamana</span><span class="gl">— хождение, поход; достижение, перенесение</span>
+        <span class="cite">[W 282] [A 452b]</span><span class="dcs" title="DCS: частота леммы">×52</span>
+      </li>
+      <li data-lemma="gamya" data-w="283:gamya:Attainable" data-a="0452-c:gamya:Accessible">
+        <span class="tm">gamya</span><span class="gl">— достижимый, доступный; годный, желательный</span>
+        <span class="cite">[W 283] [A 452c]</span>
+      </li>
+      <li data-lemma="gamanīya" data-a="0452-b:gamanIya:Accessible">
+        <span class="tm">gamanīya</span><span class="gl">— доступный, понятный, подлежащий исполнению</span>
+        <span class="cite">[A 452b]</span>
+      </li>
+      <li data-lemma="gama" data-w="282:gama:backgammon" data-dcs="14">
+        <span class="tm">gama</span><span class="gl">— ходьба, поход; дорога; необдуманность (сущ.)</span>
+        <span class="cite">[W 282]</span><span class="dcs" title="DCS: частота леммы">×14</span>
+      </li>
+      <li data-lemma="gantu" data-w="280:gantu:traveller" data-dcs="1">
+        <span class="tm">gantu</span><span class="gl">— путник, странник</span>
+        <span class="cite">[W 280]</span><span class="dcs" title="DCS: частота леммы">×1</span>
+      </li>
+    </ul>
+    <div class="fn"><b>Примечания к образованию.</b> <i>gata</i> = [gam-kta] (A) [A 451b] ·
+      <i>gati</i> = [gam-ktin], суффикс <i>-ti</i> (A) [A 452a] · <i>gamana</i> = [gam-lyuw] (A)
+      [A 452b] · <i>gamya</i> — отглагольное прилагательное, affix <i>yat</i> (W) [W 283] ·
+      <i>gantu</i> — Uṇādi, affix <i>tun</i> (W) [W 280].</div>
+  </section>
+
+  <section class="branch">
+    <h3>gam &gt; ā+gam</h3>
+    <ul class="wl">
+      <li data-lemma="āgacchati" data-a="0226-a:Agam:come">
+        <span class="tm">āgacchati</span><span class="gl">— приходит, приближается, достигает</span>
+        <span class="cite">[A 226a]</span>
+      </li>
+      <li data-lemma="āgama" data-w="105:Agama:Arrival" data-dcs="24">
+        <span class="tm">āgama</span><span class="gl">— пришествие; священное учение (Āgama); грамматический прибавок</span>
+        <span class="cite">[W 105]</span><span class="dcs" title="DCS: частота леммы">×24</span>
+      </li>
+      <li data-lemma="āgamana" data-w="105:Agamana:Arriving" data-dcs="37">
+        <span class="tm">āgamana</span><span class="gl">— прибытие, пришествие</span>
+        <span class="cite">[W 105]</span><span class="dcs" title="DCS: частота леммы">×37</span>
+      </li>
+    </ul>
+    <div class="fn"><b>Примечание.</b> <i>āgama</i> (E. у Wilson: <i>āna</i> перед <i>gama</i>,
+      affix <i>ac</i>) — термин индийской традиции: «шедший сверху» текст [W 105].</div>
+  </section>
+
+  <section class="branch">
+    <h3>gam &gt; anu+gam</h3>
+    <ul class="wl">
+      <li data-lemma="anugacchati" data-a="0068-b:anugam:follow" data-dcs="95">
+        <span class="tm">anugacchati</span><span class="gl">— следует, сопровождает; соблюдает, практикует</span>
+        <span class="cite">[A 68b]</span><span class="dcs" title="DCS: лемма anugam">×95</span>
+      </li>
+      <li data-lemma="anugāmin" data-a="0069-a:anugAmin:follower">
+        <span class="tm">anugāmin</span><span class="gl">— последователь, идущий следом</span>
+        <span class="cite">[A 69a]</span>
+      </li>
+    </ul>
+  </section>
+
+  <section class="branch">
+    <h3>gam &gt; abhi+gam</h3>
+    <ul class="wl">
+      <li data-lemma="abhigacchati" data-a="0127-c:aBigam:approach" data-dcs="133">
+        <span class="tm">abhigacchati</span><span class="gl">— приближается, приходит, достигает</span>
+        <span class="cite">[A 127c]</span><span class="dcs" title="DCS: лемма abhigam">×133</span>
+      </li>
+      <li data-lemma="abhigama" data-a="0127-c:aBigamaH:Approaching" data-dcs="1">
+        <span class="tm">abhigama</span><span class="gl">— приближение, посещение, прибытие</span>
+        <span class="cite">[A 127c]</span><span class="dcs" title="DCS: лемма abhigama">×1</span>
+      </li>
+      <li data-lemma="abhigamana" data-a="0127-c:aBigamaH:arrival" data-dcs="7">
+        <span class="tm">abhigamana</span><span class="gl">— прибытие, приближение</span>
+        <span class="cite">[A 127c]</span><span class="dcs" title="DCS: лемма abhigamana">×7</span>
+      </li>
+    </ul>
+  </section>
+
+  <section class="branch">
+    <h3>gam &gt; adhi+gam</h3>
+    <ul class="wl">
+      <li data-lemma="adhigacchati" data-w="282:gama:peruse" data-dcs="45">
+        <span class="tm">adhigacchati</span><span class="gl">— постигает, приобретает (знание); изучает (книгу, правило)</span>
+        <span class="cite">[W 282]</span><span class="dcs" title="DCS: лемма adhigam">×45</span>
+      </li>
+      <li data-lemma="adhigam" data-w="282:gama:peruse" data-dcs="45">
+        <span class="tm">adhigam</span><span class="gl">— постижение, приобретение (лемма DCS)</span>
+        <span class="cite">[W 282]</span><span class="dcs" title="DCS: лемма adhigam">×45</span>
+      </li>
+    </ul>
+    <div class="fn"><b>Примечание.</b> Wilson: с <i>adhi</i> — «go over, as a book or set of
+      rules, to peruse, to learn»; отдельной словарной статьи ни у W, ни у A нет [W 282].</div>
+  </section>
+
+  <section class="branch">
+    <h3>gam &gt; ava+gam</h3>
+    <ul class="wl">
+      <li data-lemma="avagacchati" data-w="282:gama:understand" data-a="0177-b:avagam:understand" data-dcs="10">
+        <span class="tm">avagacchati</span><span class="gl">— понимает, узнаёт, полагает</span>
+        <span class="cite">[A 177b] [W 282]</span><span class="dcs" title="DCS: лемма avagam">×10</span>
+      </li>
+      <li data-lemma="avagam" data-a="0177-b:avagam:descend">
+        <span class="tm">avagam</span><span class="gl">— нисхождение; постижение (лемма DCS)</span>
+        <span class="cite">[A 177b]</span>
+      </li>
+    </ul>
+    <div class="fn"><b>Примечание.</b> Wilson: с <i>ava</i> — «to know, to understand» [W 282];
+      Apte в статье приставки <i>ava</i> отмечает значение «знание» у <i>avagam, ave</i> [A 175b].</div>
+  </section>
+
+  <section class="branch">
+    <h3>gam &gt; ud+gam</h3>
+    <ul class="wl">
+      <li data-lemma="udgacchati" data-a="0305-b:udgam:ascend" data-dcs="7">
+        <span class="tm">udgacchati</span><span class="gl">— восходит (звезда), возникает, выходит</span>
+        <span class="cite">[A 305b]</span><span class="dcs" title="DCS: лемма udgam">×7</span>
+      </li>
+      <li data-lemma="udgama" data-a="0305-b:udgamaH:ascent">
+        <span class="tm">udgama</span><span class="gl">— восхождение; исход (дыхания); вставание (волос)</span>
+        <span class="cite">[A 305b]</span>
+      </li>
+      <li data-lemma="udgamana" data-a="0305-b:udgamanaM:Rising">
+        <span class="tm">udgamana</span><span class="gl">— восхождение, появление</span>
+        <span class="cite">[A 305b]</span>
+      </li>
+    </ul>
+    <div class="fn"><b>Примечание.</b> С <i>ut</i> у Wilson: «to approach, to go near; to go up,
+      to rise» [W 282]; Apte пишет корневую форму <i>udgam</i> (удгардха) [A 305b].</div>
+  </section>
+
+  <section class="branch">
+    <h3>gam &gt; nir+gam</h3>
+    <ul class="wl">
+      <li data-lemma="nirgacchati" data-a="0632-a:nirgam:go" data-dcs="21">
+        <span class="tm">nirgacchati</span><span class="gl">— выходит, уходит; возникает; исцеляется</span>
+        <span class="cite">[A 632a]</span><span class="dcs" title="DCS: лемма nirgam">×21</span>
+      </li>
+      <li data-lemma="nirgama" data-w="474:nirgama:exit" data-dcs="3">
+        <span class="tm">nirgama</span><span class="gl">— выход, исход; полная утрата</span>
+        <span class="cite">[W 474]</span><span class="dcs" title="DCS: лемма nirgama">×3</span>
+      </li>
+    </ul>
+  </section>
+
+  <section class="branch">
+    <h3>gam &gt; saṃ+gam</h3>
+    <ul class="wl">
+      <li data-lemma="saṃgacchati" data-a="1078-c:saMgam:meet" data-dcs="37">
+        <span class="tm">saṃgacchati</span><span class="gl">— встречается, соединяется, сходится</span>
+        <span class="cite">[A 1078c]</span><span class="dcs" title="DCS: лемма saṃgam">×37</span>
+      </li>
+      <li data-lemma="saṃgama" data-a="1079-a:saMgamaH:Meeting" data-dcs="33">
+        <span class="tm">saṃgama</span><span class="gl">— встреча, соитие, контакт, общество</span>
+        <span class="cite">[A 1079a]</span><span class="dcs" title="DCS: лемма saṃgama">×33</span>
+      </li>
+      <li data-lemma="saṃgamana" data-a="1079-a:saMgamanaM:union">
+        <span class="tm">saṃgamana</span><span class="gl">— встреча, соединение</span>
+        <span class="cite">[A 1079a]</span>
+      </li>
+    </ul>
+    <div class="fn"><b>Примечание.</b> С <i>sam</i> у Wilson: «to go with, to accompany; to meet,
+      to encounter» [W 282].</div>
+  </section>
+
+  <section class="branch">
+    <h3>gam &gt; vi+gam</h3>
+    <ul class="wl">
+      <li data-lemma="vigacchati" data-a="0968-a:vigam:pass" data-dcs="32">
+        <span class="tm">vigacchati</span><span class="gl">— проходит (время), уходит, исчезает, умирает</span>
+        <span class="cite">[A 968a]</span><span class="dcs" title="DCS: лемма vigam">×32</span>
+      </li>
+      <li data-lemma="vigamayati" data-a="0968-a:vigam:spend">
+        <span class="tm">vigamayati</span><span class="gl">— проводит, тратит (время) (причинный залог)</span>
+        <span class="cite">[A 968a]</span>
+      </li>
+    </ul>
+    <div class="fn"><b>Примечание.</b> С <i>vi</i> у Wilson: «to go against as an enemy»
+      [W 282]; Apte даёт более частотное «проходить, исчезать» [A 968a].</div>
+  </section>
+
+  <section class="branch">
+    <h3>gam &gt; dur+gam</h3>
+    <ul class="wl">
+      <li data-lemma="durga" data-w="415:durga:fort">
+        <span class="tm">durga</span><span class="gl">— неприступная крепость; труднодоступный; имя богини Дурги</span>
+        <span class="cite">[W 415]</span>
+      </li>
+      <li data-lemma="durgama" data-w="415:durgama:Inaccessible" data-dcs="8">
+        <span class="tm">durgama</span><span class="gl">— недоступный, труднодоступный</span>
+        <span class="cite">[W 415]</span><span class="dcs" title="DCS: лемма durgama">×8</span>
+      </li>
+    </ul>
+    <div class="fn"><b>Примечание.</b> <i>durgama</i> (E. у Wilson: <i>dur</i> «с трудом» +
+      <i>gama</i>, affix <i>ap</i>) — «с трудом идёт», отсюда и <i>durga</i> [W 415].</div>
+  </section>
+
+  <section class="branch">
+    <h3>gam &gt; ni+gam</h3>
+    <ul class="wl">
+      <li data-lemma="nigacchati" data-a="0619-a:nigam:acquire" data-dcs="2">
+        <span class="tm">nigacchati</span><span class="gl">— достигает, приобретает; учится, входит</span>
+        <span class="cite">[A 619a]</span><span class="dcs" title="DCS: лемма nigama">×2</span>
+      </li>
+      <li data-lemma="nigama" data-w="465:nigama:town" data-a="0619-a:nigamaH:Veda" data-dcs="2">
+        <span class="tm">nigama</span><span class="gl">— Веды (священное писание); город; торговый путь</span>
+        <span class="cite">[W 465] [A 619a]</span><span class="dcs" title="DCS: лемма nigama">×2</span>
+      </li>
+      <li data-lemma="nigamana" data-a="0619-b:nigamanaM:conclusion">
+        <span class="tm">nigamana</span><span class="gl">— цитата из Веды; умозаключение (пятый член силлогизма в ньяе)</span>
+        <span class="cite">[A 619b]</span>
+      </li>
+    </ul>
+    <div class="fn"><b>Примечание.</b> <i>nigama</i> (E. у Wilson: <i>ni</i> + <i>gama</i>,
+      affix <i>ga</i> — «по чему идут») [W 465]; <i>nigamana</i> в логике ньяи — «вывод»
+      [A 619b].</div>
+  </section>
+
+  <section class="branch">
+    <h3>gam &gt; prati+gam</h3>
+    <ul class="wl">
+      <li data-lemma="pratigacchati" data-a="0736-b:pratigam:return" data-dcs="9">
+        <span class="tm">pratigacchati</span><span class="gl">— идёт навстречу, направляется; возвращается</span>
+        <span class="cite">[A 736b]</span><span class="dcs" title="DCS: лемма pratigam">×9</span>
+      </li>
+      <li data-lemma="pratigam" data-a="0736-b:pratigam:advance">
+        <span class="tm">pratigam</span><span class="gl">— движение навстречу, возвращение (лемма DCS)</span>
+        <span class="cite">[A 736b]</span>
+      </li>
+    </ul>
+    <div class="fn"><b>Примечание.</b> С <i>prati</i> и <i>ā</i> у Wilson: «to return or arrive
+      at» [W 282].</div>
+  </section>
+
+  <section class="branch">
+    <h3>gam &gt; pari+gam</h3>
+    <ul class="wl">
+      <li data-lemma="parigacchati" data-a="0672-a:parigam:surround" data-dcs="4">
+        <span class="tm">parigacchati</span><span class="gl">— обходит, окружает; постигает, умирает</span>
+        <span class="cite">[A 672a]</span><span class="dcs" title="DCS: лемма parigam">×4</span>
+      </li>
+      <li data-lemma="parigam" data-a="0672-a:parigam:pervade">
+        <span class="tm">parigam</span><span class="gl">— обход, охват (лемма DCS)</span>
+        <span class="cite">[A 672a]</span>
+      </li>
+    </ul>
+    <div class="fn"><b>Примечание.</b> С <i>pari</i> у Wilson: «to surround; to go away»
+      [W 282].</div>
+  </section>
+
+  <section class="branch">
+    <h3>Прочие ветви (только расширенный список)</h3>
+    <ul class="wl">
+      <li data-lemma="apagacchati" data-a="0104-c:apagam:depart" data-dcs="1">
+        <span class="tm">apagacchati</span><span class="gl">— уходит, проходит (время); отпадает, исчезает</span>
+        <span class="cite">[A 104c]</span><span class="dcs" title="DCS: лемма apagam">×1</span>
+      </li>
+      <li data-lemma="atigacchati" data-a="0030-b:atigam:elapse" data-dcs="1">
+        <span class="tm">atigacchati</span><span class="gl">— проходит, минует; превосходит; умирает</span>
+        <span class="cite">[A 30b]</span><span class="dcs" title="DCS: лемма atigam">×1</span>
+      </li>
+      <li data-lemma="pragacchati" data-a="0727-b:pragam:advance" data-dcs="2">
+        <span class="tm">pragacchati</span><span class="gl">— продвигается, выходит; достигает</span>
+        <span class="cite">[A 727b]</span><span class="dcs" title="DCS: лемма pragam">×2</span>
+      </li>
+      <li data-lemma="pragama" data-a="0727-b:pragamaH:courtship">
+        <span class="tm">pragama</span><span class="gl">— первое приближение, начало любовной осады</span>
+        <span class="cite">[A 727b]</span>
+      </li>
+      <li data-lemma="sugama" data-w="929:sugama:Accessible">
+        <span class="tm">sugama</span><span class="gl">— доступный, лёгкий (путь); понятный</span>
+        <span class="cite">[W 929]</span>
+      </li>
+    </ul>
+    <div class="fn"><b>Примечание.</b> Эти ветви не вынесены на карту: в срезе DCS они редки
+      (×1–2), но словарно удостоверены [W]/[A].</div>
+  </section>
+
+  <footer class="legend">
+    <h4>Легенда источников</h4>
+    <ul>
+      <li><b>[W nnn]</b> — H. H. Wilson, <i>A Dictionary, Sanscrit and English</i>, 2-е изд.,
+        Калькутта, 1832: словарная статья на странице <i>nnn</i> (проверено по тексту
+        csl-orig <code>v02/wil/wil.txt</code>).</li>
+      <li><b>[A nnnx]</b> — V. S. Apte, <i>The Practical Sanskrit-English Dictionary</i>, 1890:
+        статья на странице <i>nnnx</i> (проверено по тексту csl-orig
+        <code>v02/ap90/ap90.txt</code>).</li>
+      <li><b>×N</b> — частота леммы в срезе DCS (Mahābhārata, кн. 3, и Rāmāyaṇa: Ayodhya-,
+        Bāla- Āraṇya-kāṇḍa; 292&thinsp;493 токена). <b>Только отбор</b>: частота не даёт
+        значения и не удостоверяет этимологию.</li>
+      <li><b>Структура карты</b> — по О. А. Звонкову, «Корне-кустовой словарь русского языка»
+        (2017), с. 84–85 и 124–125: иерархия заголовков-ветвей и разметка корневой части
+        слова. Только структура, не материал.</li>
+      <li>Членство в ветви — <b>не</b> утверждение прямого словообразования соседа от соседа
+        и <b>не</b> этимологическое родство (по CONTEXT.md). Исторические кластеры и
+        межъязыковые когнаты в этом режиме не рисуются: они требуют явного specialist-источника
+        и отдельного запроса.</li>
+    </ul>
+    <div class="sig">Пример навыка dhatupatha · гнездо dhātu √gam · собрано и сверено
+      11-11-2026 · носитель: W/A из локального csl-orig, частоты: срез dcs-conllu.</div>
+  </footer>
+</section>
+
+</body>
+</html>
