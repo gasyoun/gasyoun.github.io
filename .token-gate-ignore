@@ -24,3 +24,13 @@ llms.txt
 # byte-identical — the gate cannot budget a machine surface whose job is
 # emitting the full open queue; exemption is for SIZE, not for edits.
 handoff-status/status.json
+# GTD YBX (12-11-2026): estate/*.md twins + estate/features_index.json are
+# GENERATED data — Uprava tools/build_public_site.py rewrites them every
+# hourly tick from the allowlisted hub sources through the deny-rail leak
+# guard (line-withhold + final scan; a deny hit aborts, nothing publishes).
+# Never hand-edited; byte-regenerable via build_public_site.py --check.
+# The sibling estate/*.html pages are already covered by *.html above.
+# REUSE_INDEX alone is ~130 KB — the gate cannot budget a machine surface
+# whose job is mirroring a hub; exemption is for SIZE, not for edits.
+estate/*.md
+estate/features_index.json
