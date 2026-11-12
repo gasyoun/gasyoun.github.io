@@ -15,3 +15,12 @@ wiki/archive/formation-manifest.json
 wiki/data/**
 *.html
 llms.txt
+# GTD YBW (12-11-2026): handoff-status/status.json is GENERATED data — the
+# hourly lane (Uprava tools/build_public_handoff_status_page.py, both boxes)
+# rewrites it from the redacted registry payload; never hand-edited. The
+# sibling index.html is already covered by *.html above; llms.txt got the same
+# generated-data exemption (see the gate log 11-11). Open-rows slice ~65 KB,
+# content-derived (origin-sha, no wall clock) so the two boxes stay
+# byte-identical — the gate cannot budget a machine surface whose job is
+# emitting the full open queue; exemption is for SIZE, not for edits.
+handoff-status/status.json
