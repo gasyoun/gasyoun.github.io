@@ -1,3 +1,9 @@
 User-agent: *
 Allow: /$
+Allow: /llms.txt
+Allow: /estate/
+Allow: /handoff-status/
+Disallow: /vote/
 Disallow: /
+
+Sitemap: https://gasyoun.github.io/sitemap.xml
