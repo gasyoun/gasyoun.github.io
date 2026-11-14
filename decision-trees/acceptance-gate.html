@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Production acceptance — staged gate ladder — decision tree</title>
+<style>
+:root { --ink:#1a1a2e; --accent:#16537e; --ok:#0b6e4f; --muted:#6b7280; --bg:#f6f7f9; }
+* { box-sizing:border-box; }
+body { font:16px/1.55 Georgia,'Times New Roman',serif; color:var(--ink); background:var(--bg); margin:0; padding:2rem 1rem; }
+main { max-width:44rem; margin:0 auto; }
+h1 { font-size:1.35rem; margin:0 0 .25rem; }
+.src { color:var(--muted); font-size:.85rem; margin-bottom:1.25rem; }
+.crumbs { font-size:.85rem; color:var(--muted); min-height:1.2em; margin-bottom:.75rem; }
+.card { background:#fff; border:1px solid #d6d9de; border-radius:10px; padding:1.1rem 1.25rem; }
+.card h2 { font-size:1.05rem; margin:.1rem 0 .8rem; }
+.opt { display:block; width:100%; text-align:left; margin:.45rem 0; padding:.6rem .8rem; font:inherit;
+        background:#eef3f8; border:1px solid #c6d4e2; border-radius:8px; cursor:pointer; }
+.opt:hover { background:#dfeaf4; }
+.opt.chosen { background:#e6f2ec; border-color:var(--ok); }
+.terminal { border-left:4px solid var(--ok); }
+.terminal .act { font-weight:bold; }
+.note { color:var(--muted); font-size:.9rem; margin-top:.7rem; }
+.path { margin-top:1.25rem; }
+.path h2 { font-size:.95rem; color:var(--muted); }
+.path ol { margin:.2rem 0; padding-left:1.2rem; }
+button#restart { margin-top:1rem; font:inherit; padding:.45rem .9rem; border-radius:8px;
+                  border:1px solid #c6d4e2; background:#fff; cursor:pointer; }
+@media print { .opt, #restart { display:none; } .path { display:block; } }
+</style>
+</head>
+<body>
+<main>
+<h1>Production acceptance — staged gate ladder</h1>
+<p class="src">Source of truth: <a href="https://github.com/gasyoun/claude-config/blob/main/commands/acceptance-gate.md">https://github.com/gasyoun/claude-config/blob/main/commands/acceptance-gate.md</a> · generated from <code>trees/acceptance-gate.yaml</code> — regenerate, never hand-edit.</p>
+<div id="crumbs" class="crumbs"></div>
+<div id="card" class="card"></div>
+<div id="path" class="path"><h2>Your path</h2><ol id="pathlist"></ol></div>
+<button id="restart" type="button">Start over</button>
+</main>
+<script>
+"use strict";
+var DATA = {"tree": "acceptance-gate", "title": "Production acceptance — staged gate ladder", "source": "https://github.com/gasyoun/claude-config/blob/main/commands/acceptance-gate.md", "root": "q-locked", "nodes": {"q-locked": {"question": "Phase 1 — were the gate criteria LOCKED before the evidence existed (threshold, sample, control, branch rule — quoted verbatim from the locked source)?", "terminal": false, "action": null, "link": null, "note": "The criteria must predate the evidence. Nothing locked = the deliverable is a criteria proposal parked as @DECIDE, and the gate runs in a LATER session.", "options": [{"label": "Yes — criteria verbatim from a locked source", "next": "q-instrument"}, {"label": "No — nothing was ever locked", "next": "t-park-decide"}]}, "q-instrument": {"question": "Phase 2 — does the instrument itself measure correctly (validator executes on LIVE output; probe measures the thing, not its own cap)?", "terminal": false, "action": null, "link": null, "note": null, "options": [{"label": "Yes — proven on live output, canary in place", "next": "q-measure"}, {"label": "No / unknown", "next": "t-fix-instrument"}]}, "q-measure": {"question": "Phase 3 — measured with a control and warm-up on a LIVE rung (an observed run, not a dry-run projection)?", "terminal": false, "action": null, "link": null, "note": "A diagnostic probe is not an acceptance roll. Do not re-roll the gate to chase a better number.", "options": [{"label": "Yes — live measured run with control", "next": "q-verdicts"}, {"label": "Only projections / diagnostics so far", "next": "t-inconclusive"}]}, "q-verdicts": {"question": "Phase 4 — per-axis verdicts (content quality, latency, economy, capacity, exactly-once — each on its OWN evidence, three-valued)?", "terminal": false, "action": null, "link": null, "note": "Missing evidence never passes. The honest NO-GO is the deliverable. Filter-bin GO/HOLD rules are immutable once the bin is populated (U84).", "options": [{"label": "Any axis FAIL", "next": "t-nogo"}, {"label": "Any axis INCONCLUSIVE", "next": "t-inconclusive"}, {"label": "All axes PASS — including zero-tolerance class exactly 0", "next": "t-go"}]}, "t-park-decide": {"question": null, "terminal": true, "action": "Park the criteria proposal as @DECIDE — the gate runs in a later session. Never invent criteria at evidence time.", "link": "https://github.com/gasyoun/claude-config/blob/main/commands/acceptance-gate.md", "note": null, "options": []}, "t-fix-instrument": {"question": null, "terminal": true, "action": "Fix the instrument first — a gate nobody runs reads exactly like a gate that passes (dead-validator canary; H1080 lesson).", "link": "https://github.com/gasyoun/claude-config/blob/main/commands/acceptance-gate.md", "note": null, "options": []}, "t-inconclusive": {"question": null, "terminal": true, "action": "INCONCLUSIVE — never substitute a dry-run projection for an observation (H911). Say exactly which axis and what would flip it.", "link": "https://github.com/gasyoun/claude-config/blob/main/commands/acceptance-gate.md", "note": null, "options": []}, "t-nogo": {"question": null, "terminal": true, "action": "NO-GO — name the axis, the gap, and what would flip it. A session that ends «not ready, here is exactly why» has succeeded.", "link": "https://github.com/gasyoun/claude-config/blob/main/commands/acceptance-gate.md", "note": null, "options": []}, "t-go": {"question": null, "terminal": true, "action": "GO — archive the packet; the ladder's next rung proceeds on its own evidence.", "link": "https://github.com/gasyoun/claude-config/blob/main/commands/acceptance-gate.md", "note": null, "options": []}}};
+var path = [];
+function el(id) { return document.getElementById(id); }
+function show(nid) {
+  var n = DATA.nodes[nid];
+  var crumbs = path.map(function (p) { return esc(p.label); }).join(' &rarr; ');
+  el('crumbs').innerHTML = crumbs;
+  var card = el('card');
+  card.className = 'card' + (n.terminal ? ' terminal' : '');
+  if (n.terminal) {
+    card.innerHTML = '<h2>Result</h2><p class="act">' + esc(n.action || '') + '</p>'
+      + (n.link ? '<p><a href="' + esc(n.link) + '">' + esc(n.link) + '</a></p>' : '')
+      + (n.note ? '<p class="note">' + esc(n.note) + '</p>' : '');
+  } else {
+    var btns = n.options.map(function (o, i) {
+      return '<button class="opt" type="button" data-i="' + i + '">' + esc(o.label) + '</button>';
+    }).join('');
+    card.innerHTML = '<h2>' + esc(n.question) + '</h2>' + btns
+      + (n.note ? '<p class="note">' + esc(n.note) + '</p>' : '');
+    Array.prototype.forEach.call(card.querySelectorAll('.opt'), function (b) {
+      b.addEventListener('click', function () {
+        var o = n.options[Number(b.getAttribute('data-i'))];
+        path.push({ label: o.label, from: nid });
+        Array.prototype.forEach.call(card.querySelectorAll('.opt'), function (x) {
+          if (x !== b) { x.classList.add('chosen'); } else { x.classList.add('chosen'); }
+        });
+        drawPath();
+        show(o.next);
+      });
+    });
+  }
+}
+function drawPath() {
+  el('pathlist').innerHTML = path.map(function (p) { return '<li>' + esc(p.label) + '</li>'; }).join('');
+}
+el('restart').addEventListener('click', function () { path = []; drawPath(); el('crumbs').innerHTML = ''; show(DATA.root); });
+show(DATA.root);
+</script>
+</body>
+</html>

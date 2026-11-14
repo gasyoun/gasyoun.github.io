@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Worktree verdict — is this tree removable? — decision tree</title>
+<style>
+:root { --ink:#1a1a2e; --accent:#16537e; --ok:#0b6e4f; --muted:#6b7280; --bg:#f6f7f9; }
+* { box-sizing:border-box; }
+body { font:16px/1.55 Georgia,'Times New Roman',serif; color:var(--ink); background:var(--bg); margin:0; padding:2rem 1rem; }
+main { max-width:44rem; margin:0 auto; }
+h1 { font-size:1.35rem; margin:0 0 .25rem; }
+.src { color:var(--muted); font-size:.85rem; margin-bottom:1.25rem; }
+.crumbs { font-size:.85rem; color:var(--muted); min-height:1.2em; margin-bottom:.75rem; }
+.card { background:#fff; border:1px solid #d6d9de; border-radius:10px; padding:1.1rem 1.25rem; }
+.card h2 { font-size:1.05rem; margin:.1rem 0 .8rem; }
+.opt { display:block; width:100%; text-align:left; margin:.45rem 0; padding:.6rem .8rem; font:inherit;
+        background:#eef3f8; border:1px solid #c6d4e2; border-radius:8px; cursor:pointer; }
+.opt:hover { background:#dfeaf4; }
+.opt.chosen { background:#e6f2ec; border-color:var(--ok); }
+.terminal { border-left:4px solid var(--ok); }
+.terminal .act { font-weight:bold; }
+.note { color:var(--muted); font-size:.9rem; margin-top:.7rem; }
+.path { margin-top:1.25rem; }
+.path h2 { font-size:.95rem; color:var(--muted); }
+.path ol { margin:.2rem 0; padding-left:1.2rem; }
+button#restart { margin-top:1rem; font:inherit; padding:.45rem .9rem; border-radius:8px;
+                  border:1px solid #c6d4e2; background:#fff; cursor:pointer; }
+@media print { .opt, #restart { display:none; } .path { display:block; } }
+</style>
+</head>
+<body>
+<main>
+<h1>Worktree verdict — is this tree removable?</h1>
+<p class="src">Source of truth: <a href="https://github.com/gasyoun/Uprava/blob/main/tools/worktree_gc.py">https://github.com/gasyoun/Uprava/blob/main/tools/worktree_gc.py</a> · generated from <code>trees/worktree-gc.yaml</code> — regenerate, never hand-edit.</p>
+<div id="crumbs" class="crumbs"></div>
+<div id="card" class="card"></div>
+<div id="path" class="path"><h2>Your path</h2><ol id="pathlist"></ol></div>
+<button id="restart" type="button">Start over</button>
+</main>
+<script>
+"use strict";
+var DATA = {"tree": "worktree-gc", "title": "Worktree verdict — is this tree removable?", "source": "https://github.com/gasyoun/Uprava/blob/main/tools/worktree_gc.py", "root": "q-git", "nodes": {"q-git": {"question": "Does the directory have a .git entry (is it a real linked worktree)?", "terminal": false, "action": null, "link": null, "note": "Repo-prefixed dirs with no .git are broken copies, not worktrees.", "options": [{"label": "No — bare dir claiming to be a worktree", "next": "t-phase0-orphan"}, {"label": "Yes — real linked worktree", "next": "q-dirty"}]}, "q-dirty": {"question": "Does it carry uncommitted or untracked files?", "terminal": false, "action": null, "link": null, "note": null, "options": [{"label": "Yes — dirty tree", "next": "q-claim"}, {"label": "No — clean", "next": "q-merged"}]}, "q-claim": {"question": "Is a live exec-claim (.claim) attached to it (or a matching reservation)?", "terminal": false, "action": null, "link": null, "note": "A foreign live .claim refuses commits AND ref moves — and Permission denied on removal IS liveness, not a bug.", "options": [{"label": "Yes — claimed, possibly live", "next": "t-in-flight"}, {"label": "No claim anywhere", "next": "t-at-risk"}]}, "q-merged": {"question": "Is its branch merged upstream AND pushed (proof exists, not just the PR label)?", "terminal": false, "action": null, "link": null, "note": "AT-RISK stays AT-RISK even when the PR says MERGED unless proof exists; genuinely never-pushed branches keep AT-RISK.", "options": [{"label": "Yes — merged and pushed, verifiable", "next": "t-safe-remove"}, {"label": "No / unverifiable", "next": "t-at-risk"}]}, "t-phase0-orphan": {"question": null, "terminal": true, "action": "PHASE0-ORPHAN — byte-diff against canonical first; any differing file needs a human ruling before anything is deleted.", "link": "https://github.com/gasyoun/Uprava/blob/main/tools/worktree_gc.py", "note": null, "options": []}, "t-in-flight": {"question": null, "terminal": true, "action": "IN-FLIGHT — never remove, never gc. Detached/pinned trees and canary lanes read the same: they cannot hold unique work only in the sense the ledger records.", "link": "https://github.com/gasyoun/Uprava/blob/main/tools/worktree_gc.py", "note": null, "options": []}, "t-at-risk": {"question": null, "terminal": true, "action": "AT-RISK — salvage payload BEFORE any removal (attic flow), re-classify after; only --apply on an explicit SAFE-REMOVE verdict touches git.", "link": "https://github.com/gasyoun/Uprava/blob/main/tools/worktree_gc.py", "note": "GONE-UPSTREAM is the post-merge cleanup class, separate from AT-RISK.", "options": []}, "t-safe-remove": {"question": null, "terminal": true, "action": "SAFE-REMOVE — clean AND merged AND pushed; eligible for \"worktree-gc --apply\" (report-only by default).", "link": "https://github.com/gasyoun/Uprava/blob/main/tools/worktree_gc.py", "note": null, "options": []}}};
+var path = [];
+function el(id) { return document.getElementById(id); }
+function show(nid) {
+  var n = DATA.nodes[nid];
+  var crumbs = path.map(function (p) { return esc(p.label); }).join(' &rarr; ');
+  el('crumbs').innerHTML = crumbs;
+  var card = el('card');
+  card.className = 'card' + (n.terminal ? ' terminal' : '');
+  if (n.terminal) {
+    card.innerHTML = '<h2>Result</h2><p class="act">' + esc(n.action || '') + '</p>'
+      + (n.link ? '<p><a href="' + esc(n.link) + '">' + esc(n.link) + '</a></p>' : '')
+      + (n.note ? '<p class="note">' + esc(n.note) + '</p>' : '');
+  } else {
+    var btns = n.options.map(function (o, i) {
+      return '<button class="opt" type="button" data-i="' + i + '">' + esc(o.label) + '</button>';
+    }).join('');
+    card.innerHTML = '<h2>' + esc(n.question) + '</h2>' + btns
+      + (n.note ? '<p class="note">' + esc(n.note) + '</p>' : '');
+    Array.prototype.forEach.call(card.querySelectorAll('.opt'), function (b) {
+      b.addEventListener('click', function () {
+        var o = n.options[Number(b.getAttribute('data-i'))];
+        path.push({ label: o.label, from: nid });
+        Array.prototype.forEach.call(card.querySelectorAll('.opt'), function (x) {
+          if (x !== b) { x.classList.add('chosen'); } else { x.classList.add('chosen'); }
+        });
+        drawPath();
+        show(o.next);
+      });
+    });
+  }
+}
+function drawPath() {
+  el('pathlist').innerHTML = path.map(function (p) { return '<li>' + esc(p.label) + '</li>'; }).join('');
+}
+el('restart').addEventListener('click', function () { path = []; drawPath(); el('crumbs').innerHTML = ''; show(DATA.root); });
+show(DATA.root);
+</script>
+</body>
+</html>

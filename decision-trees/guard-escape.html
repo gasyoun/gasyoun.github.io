@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mechanical gate refused — the escape decision — decision tree</title>
+<style>
+:root { --ink:#1a1a2e; --accent:#16537e; --ok:#0b6e4f; --muted:#6b7280; --bg:#f6f7f9; }
+* { box-sizing:border-box; }
+body { font:16px/1.55 Georgia,'Times New Roman',serif; color:var(--ink); background:var(--bg); margin:0; padding:2rem 1rem; }
+main { max-width:44rem; margin:0 auto; }
+h1 { font-size:1.35rem; margin:0 0 .25rem; }
+.src { color:var(--muted); font-size:.85rem; margin-bottom:1.25rem; }
+.crumbs { font-size:.85rem; color:var(--muted); min-height:1.2em; margin-bottom:.75rem; }
+.card { background:#fff; border:1px solid #d6d9de; border-radius:10px; padding:1.1rem 1.25rem; }
+.card h2 { font-size:1.05rem; margin:.1rem 0 .8rem; }
+.opt { display:block; width:100%; text-align:left; margin:.45rem 0; padding:.6rem .8rem; font:inherit;
+        background:#eef3f8; border:1px solid #c6d4e2; border-radius:8px; cursor:pointer; }
+.opt:hover { background:#dfeaf4; }
+.opt.chosen { background:#e6f2ec; border-color:var(--ok); }
+.terminal { border-left:4px solid var(--ok); }
+.terminal .act { font-weight:bold; }
+.note { color:var(--muted); font-size:.9rem; margin-top:.7rem; }
+.path { margin-top:1.25rem; }
+.path h2 { font-size:.95rem; color:var(--muted); }
+.path ol { margin:.2rem 0; padding-left:1.2rem; }
+button#restart { margin-top:1rem; font:inherit; padding:.45rem .9rem; border-radius:8px;
+                  border:1px solid #c6d4e2; background:#fff; cursor:pointer; }
+@media print { .opt, #restart { display:none; } .path { display:block; } }
+</style>
+</head>
+<body>
+<main>
+<h1>Mechanical gate refused — the escape decision</h1>
+<p class="src">Source of truth: <a href="https://github.com/gasyoun/Uprava/blob/main/DANGER_FACTS.md">https://github.com/gasyoun/Uprava/blob/main/DANGER_FACTS.md</a> · generated from <code>trees/guard-escape.yaml</code> — regenerate, never hand-edit.</p>
+<div id="crumbs" class="crumbs"></div>
+<div id="card" class="card"></div>
+<div id="path" class="path"><h2>Your path</h2><ol id="pathlist"></ol></div>
+<button id="restart" type="button">Start over</button>
+</main>
+<script>
+"use strict";
+var DATA = {"tree": "guard-escape", "title": "Mechanical gate refused — the escape decision", "source": "https://github.com/gasyoun/Uprava/blob/main/DANGER_FACTS.md", "root": "q-refusal", "nodes": {"q-refusal": {"question": "A mechanical gate refused your action. What does the refusal actually name?", "terminal": false, "action": null, "link": null, "note": "Guard escapes are trust SLICES (H3424) — APPROVAL_CONFIG_JSON interactive / background / delegated + trust. The default fails CLOSED.", "options": [{"label": "It names an ALLOW_* hatch", "next": "q-hatch"}, {"label": "It names a documented alternative route (worktree, branch+PR, scratchpad)", "next": "t-alternative"}, {"label": "It names an approval-config / trust-slice change", "next": "q-config"}, {"label": "Unclear — the refusal text was not read", "next": "t-read-it"}]}, "q-hatch": {"question": "Who is granting the hatch?", "terminal": false, "action": null, "link": null, "note": "ALLOW_* hatches are human-only. Uprava stale-base guard unwired since 12-09-2026 — there the prose IS the whole enforcement, which makes the reflex the risk, not the guard.", "options": [{"label": "A human granted it, explicitly, this session", "next": "t-granted"}, {"label": "Nobody yet — I would set it myself to unblock", "next": "t-never-self"}]}, "q-config": {"question": "Was the APPROVAL_CONFIG_JSON change granted interactively by a human?", "terminal": false, "action": null, "link": null, "note": null, "options": [{"label": "Yes — human set/approved the slice", "next": "t-granted"}, {"label": "No — I would widen trust myself", "next": "t-never-self"}]}, "t-read-it": {"question": null, "terminal": true, "action": "STOP — read the refusal first. Every hatch judgment starts from the guard's own evidence block; the reflex to retry is the risk (H3833).", "link": "https://github.com/gasyoun/Uprava/blob/main/DANGER_FACTS.md", "note": null, "options": []}, "t-never-self": {"question": null, "terminal": true, "action": "NEVER self-set. Report the refusal shape to MG (what the guard said, what base it measured against) and ask. Fabricated consent is the failure mode the gate exists for.", "link": "https://github.com/gasyoun/claude-config/blob/main/rules/agent-never-self-authorizes-an-escape.md", "note": null, "options": []}, "t-alternative": {"question": null, "terminal": true, "action": "Take the documented route — branch pushes and linked worktrees are not gated by the same chain; a PR landing is the sanctioned path when direct push refuses.", "link": "https://github.com/gasyoun/Uprava/blob/main/CLAUDE.md", "note": null, "options": []}, "t-granted": {"question": null, "terminal": true, "action": "Set exactly the granted hatch for exactly this push, name the granter in the close summary, never reuse it silently for the next one.", "link": "https://github.com/gasyoun/claude-config/blob/main/rules/agent-never-self-authorizes-an-escape.md", "note": null, "options": []}}};
+var path = [];
+function el(id) { return document.getElementById(id); }
+function show(nid) {
+  var n = DATA.nodes[nid];
+  var crumbs = path.map(function (p) { return esc(p.label); }).join(' &rarr; ');
+  el('crumbs').innerHTML = crumbs;
+  var card = el('card');
+  card.className = 'card' + (n.terminal ? ' terminal' : '');
+  if (n.terminal) {
+    card.innerHTML = '<h2>Result</h2><p class="act">' + esc(n.action || '') + '</p>'
+      + (n.link ? '<p><a href="' + esc(n.link) + '">' + esc(n.link) + '</a></p>' : '')
+      + (n.note ? '<p class="note">' + esc(n.note) + '</p>' : '');
+  } else {
+    var btns = n.options.map(function (o, i) {
+      return '<button class="opt" type="button" data-i="' + i + '">' + esc(o.label) + '</button>';
+    }).join('');
+    card.innerHTML = '<h2>' + esc(n.question) + '</h2>' + btns
+      + (n.note ? '<p class="note">' + esc(n.note) + '</p>' : '');
+    Array.prototype.forEach.call(card.querySelectorAll('.opt'), function (b) {
+      b.addEventListener('click', function () {
+        var o = n.options[Number(b.getAttribute('data-i'))];
+        path.push({ label: o.label, from: nid });
+        Array.prototype.forEach.call(card.querySelectorAll('.opt'), function (x) {
+          if (x !== b) { x.classList.add('chosen'); } else { x.classList.add('chosen'); }
+        });
+        drawPath();
+        show(o.next);
+      });
+    });
+  }
+}
+function drawPath() {
+  el('pathlist').innerHTML = path.map(function (p) { return '<li>' + esc(p.label) + '</li>'; }).join('');
+}
+el('restart').addEventListener('click', function () { path = []; drawPath(); el('crumbs').innerHTML = ''; show(DATA.root); });
+show(DATA.root);
+</script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prod incident — /sos escalation ladder — decision tree</title>
+<style>
+:root { --ink:#1a1a2e; --accent:#16537e; --ok:#0b6e4f; --muted:#6b7280; --bg:#f6f7f9; }
+* { box-sizing:border-box; }
+body { font:16px/1.55 Georgia,'Times New Roman',serif; color:var(--ink); background:var(--bg); margin:0; padding:2rem 1rem; }
+main { max-width:44rem; margin:0 auto; }
+h1 { font-size:1.35rem; margin:0 0 .25rem; }
+.src { color:var(--muted); font-size:.85rem; margin-bottom:1.25rem; }
+.crumbs { font-size:.85rem; color:var(--muted); min-height:1.2em; margin-bottom:.75rem; }
+.card { background:#fff; border:1px solid #d6d9de; border-radius:10px; padding:1.1rem 1.25rem; }
+.card h2 { font-size:1.05rem; margin:.1rem 0 .8rem; }
+.opt { display:block; width:100%; text-align:left; margin:.45rem 0; padding:.6rem .8rem; font:inherit;
+        background:#eef3f8; border:1px solid #c6d4e2; border-radius:8px; cursor:pointer; }
+.opt:hover { background:#dfeaf4; }
+.opt.chosen { background:#e6f2ec; border-color:var(--ok); }
+.terminal { border-left:4px solid var(--ok); }
+.terminal .act { font-weight:bold; }
+.note { color:var(--muted); font-size:.9rem; margin-top:.7rem; }
+.path { margin-top:1.25rem; }
+.path h2 { font-size:.95rem; color:var(--muted); }
+.path ol { margin:.2rem 0; padding-left:1.2rem; }
+button#restart { margin-top:1rem; font:inherit; padding:.45rem .9rem; border-radius:8px;
+                  border:1px solid #c6d4e2; background:#fff; cursor:pointer; }
+@media print { .opt, #restart { display:none; } .path { display:block; } }
+</style>
+</head>
+<body>
+<main>
+<h1>Prod incident — /sos escalation ladder</h1>
+<p class="src">Source of truth: <a href="https://github.com/gasyoun/claude-config/blob/main/commands/sos.md">https://github.com/gasyoun/claude-config/blob/main/commands/sos.md</a> · generated from <code>trees/sos-escalation.yaml</code> — regenerate, never hand-edit.</p>
+<div id="crumbs" class="crumbs"></div>
+<div id="card" class="card"></div>
+<div id="path" class="path"><h2>Your path</h2><ol id="pathlist"></ol></div>
+<button id="restart" type="button">Start over</button>
+</main>
+<script>
+"use strict";
+var DATA = {"tree": "sos-escalation", "title": "Prod incident — /sos escalation ladder", "source": "https://github.com/gasyoun/claude-config/blob/main/commands/sos.md", "root": "q-wrong-skill", "nodes": {"q-wrong-skill": {"question": "What does the alert actually say?", "terminal": false, "action": null, "link": null, "note": "Known samskrte hosts only. First-time unknown host — discover and document; do not guess paths.", "options": [{"label": "Soft TG «Кабинет: soft-сбой (guards)»", "next": "t-soft-playbook"}, {"label": "n8n / Caddy / ZOOM recordings on .91", "next": "t-n8n"}, {"label": "samskrtam.ru (WordPress .95) defaced / implant / rogue admin", "next": "t-compromise"}, {"label": "One student — «не могу оплатить» / payment unavailable", "next": "t-payment-help"}, {"label": "Several students hit payment at once", "next": "q-dedupe"}, {"label": "A named H", "next": "t-go-handoff"}, {"label": "Known-host outage (500 / down / error-watch spike)", "next": "q-dedupe"}]}, "q-dedupe": {"question": "Phase -1 — does the incident log on origin already carry the same fingerprint, row < ~12 h old?", "terminal": false, "action": null, "link": null, "note": null, "options": [{"label": "Yes — same fingerprint, fresh row", "next": "t-addendum"}, {"label": "No — this is a new pass", "next": "q-vantage"}]}, "q-vantage": {"question": "Phase 0 — does SSH to the box return (BatchMode, uptime)?", "terminal": false, "action": null, "link": null, "note": null, "options": [{"label": "SSH returns — box is up", "next": "t-ours"}, {"label": "SSH and curl both dead from here", "next": "q-second-vantage"}, {"label": ".91 is in the alert", "next": "t-n8n"}]}, "q-second-vantage": {"question": "Does a second vantage (another network/machine) also see the box dead?", "terminal": false, "action": null, "link": null, "note": null, "options": [{"label": "Yes — confirmed dark from two sides", "next": "t-artem"}, {"label": "No — only our side is dark", "next": "t-not-host-down"}]}, "t-soft-playbook": {"question": null, "terminal": true, "action": "Wrong skill — run SERVER_SOFT_ALERT_PLAYBOOK.md + /systema-case-feature ops-remediate.", "link": "https://github.com/gasyoun/Systema-Sanscriticum/blob/main/docs/SERVER_SOFT_ALERT_PLAYBOOK.md", "note": null, "options": []}, "t-n8n": {"question": null, "terminal": true, "action": "Wrong box/skill — run /n8n for .91 (n8n, Caddy, ZOOM 1.4 recordings).", "link": "https://github.com/gasyoun/claude-config/blob/main/commands/n8n.md", "note": null, "options": []}, "t-compromise": {"question": null, "terminal": true, "action": "Wrong skill — run /site-compromise-response (forensic → eradication → hardening).", "link": "https://github.com/gasyoun/claude-config/blob/main/commands/site-compromise-response.md", "note": null, "options": []}, "t-payment-help": {"question": null, "terminal": true, "action": "Single-student payment question — run /student-payment-help.", "link": "https://github.com/gasyoun/claude-config/blob/main/commands/student-payment-help.md", "note": null, "options": []}, "t-go-handoff": {"question": null, "terminal": true, "action": "Run /go H", "link": "https://github.com/gasyoun/claude-config/blob/main/commands/go.md", "note": null, "options": []}, "t-addendum": {"question": null, "terminal": true, "action": "This pass is a re-verify addendum — re-run only the checks that could have changed (probe, fix deploy state), write one addendum row, stop. Dedupe by CAUSE, never by symptom.", "link": "https://github.com/gasyoun/claude-config/blob/main/commands/sos.md", "note": null, "options": []}, "t-ours": {"question": null, "terminal": true, "action": "App/OS triage is ours — probe as www-data, match the fingerprint catalog. Do NOT page Artem.", "link": "https://github.com/gasyoun/claude-config/blob/main/commands/sos.md", "note": null, "options": []}, "t-artem": {"question": null, "terminal": true, "action": "Page Artem (@t3t3r1n) with the paste-ready message — only after two vantages confirm the box is dark. He is away often; say so, do not pretend a third SSH will help.", "link": "https://github.com/gasyoun/claude-config/blob/main/commands/sos.md", "note": "Provider null-route / anti-DDoS blocks have produced false «box dead» readings before — the second vantage is what makes the page honest.", "options": []}, "t-not-host-down": {"question": null, "terminal": true, "action": "Not a host-down — continue app-level triage on the live box (logs, php-fpm, nginx).", "link": "https://github.com/gasyoun/claude-config/blob/main/commands/sos.md", "note": null, "options": []}}};
+var path = [];
+function el(id) { return document.getElementById(id); }
+function show(nid) {
+  var n = DATA.nodes[nid];
+  var crumbs = path.map(function (p) { return esc(p.label); }).join(' &rarr; ');
+  el('crumbs').innerHTML = crumbs;
+  var card = el('card');
+  card.className = 'card' + (n.terminal ? ' terminal' : '');
+  if (n.terminal) {
+    card.innerHTML = '<h2>Result</h2><p class="act">' + esc(n.action || '') + '</p>'
+      + (n.link ? '<p><a href="' + esc(n.link) + '">' + esc(n.link) + '</a></p>' : '')
+      + (n.note ? '<p class="note">' + esc(n.note) + '</p>' : '');
+  } else {
+    var btns = n.options.map(function (o, i) {
+      return '<button class="opt" type="button" data-i="' + i + '">' + esc(o.label) + '</button>';
+    }).join('');
+    card.innerHTML = '<h2>' + esc(n.question) + '</h2>' + btns
+      + (n.note ? '<p class="note">' + esc(n.note) + '</p>' : '');
+    Array.prototype.forEach.call(card.querySelectorAll('.opt'), function (b) {
+      b.addEventListener('click', function () {
+        var o = n.options[Number(b.getAttribute('data-i'))];
+        path.push({ label: o.label, from: nid });
+        Array.prototype.forEach.call(card.querySelectorAll('.opt'), function (x) {
+          if (x !== b) { x.classList.add('chosen'); } else { x.classList.add('chosen'); }
+        });
+        drawPath();
+        show(o.next);
+      });
+    });
+  }
+}
+function drawPath() {
+  el('pathlist').innerHTML = path.map(function (p) { return '<li>' + esc(p.label) + '</li>'; }).join('');
+}
+el('restart').addEventListener('click', function () { path = []; drawPath(); el('crumbs').innerHTML = ''; show(DATA.root); });
+show(DATA.root);
+</script>
+</body>
+</html>

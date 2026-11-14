@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zoom/MSI mic silence — diagnostic — decision tree</title>
+<style>
+:root { --ink:#1a1a2e; --accent:#16537e; --ok:#0b6e4f; --muted:#6b7280; --bg:#f6f7f9; }
+* { box-sizing:border-box; }
+body { font:16px/1.55 Georgia,'Times New Roman',serif; color:var(--ink); background:var(--bg); margin:0; padding:2rem 1rem; }
+main { max-width:44rem; margin:0 auto; }
+h1 { font-size:1.35rem; margin:0 0 .25rem; }
+.src { color:var(--muted); font-size:.85rem; margin-bottom:1.25rem; }
+.crumbs { font-size:.85rem; color:var(--muted); min-height:1.2em; margin-bottom:.75rem; }
+.card { background:#fff; border:1px solid #d6d9de; border-radius:10px; padding:1.1rem 1.25rem; }
+.card h2 { font-size:1.05rem; margin:.1rem 0 .8rem; }
+.opt { display:block; width:100%; text-align:left; margin:.45rem 0; padding:.6rem .8rem; font:inherit;
+        background:#eef3f8; border:1px solid #c6d4e2; border-radius:8px; cursor:pointer; }
+.opt:hover { background:#dfeaf4; }
+.opt.chosen { background:#e6f2ec; border-color:var(--ok); }
+.terminal { border-left:4px solid var(--ok); }
+.terminal .act { font-weight:bold; }
+.note { color:var(--muted); font-size:.9rem; margin-top:.7rem; }
+.path { margin-top:1.25rem; }
+.path h2 { font-size:.95rem; color:var(--muted); }
+.path ol { margin:.2rem 0; padding-left:1.2rem; }
+button#restart { margin-top:1rem; font:inherit; padding:.45rem .9rem; border-radius:8px;
+                  border:1px solid #c6d4e2; background:#fff; cursor:pointer; }
+@media print { .opt, #restart { display:none; } .path { display:block; } }
+</style>
+</head>
+<body>
+<main>
+<h1>Zoom/MSI mic silence — diagnostic</h1>
+<p class="src">Source of truth: <a href="https://github.com/gasyoun/Uprava/blob/main/RUNBOOK_ZOOM_MSI_MIC_SILENCE_05-11-2026.md">https://github.com/gasyoun/Uprava/blob/main/RUNBOOK_ZOOM_MSI_MIC_SILENCE_05-11-2026.md</a> · generated from <code>trees/mic-silence.yaml</code> — regenerate, never hand-edit.</p>
+<div id="crumbs" class="crumbs"></div>
+<div id="card" class="card"></div>
+<div id="path" class="path"><h2>Your path</h2><ol id="pathlist"></ol></div>
+<button id="restart" type="button">Start over</button>
+</main>
+<script>
+"use strict";
+var DATA = {"tree": "mic-silence", "title": "Zoom/MSI mic silence — diagnostic", "source": "https://github.com/gasyoun/Uprava/blob/main/RUNBOOK_ZOOM_MSI_MIC_SILENCE_05-11-2026.md", "root": "q-meter", "nodes": {"q-meter": {"question": "In Windows Settings > Sound > Input, does the meter move when you speak?", "terminal": false, "action": null, "link": null, "note": "Check with the Zoom mic set to the MSI built-in array.", "options": [{"label": "Moves, but the app (Zoom) is deaf", "next": "t-app-config"}, {"label": "Does not move at all", "next": "q-endpoint"}]}, "q-endpoint": {"question": "Is the mic endpoint muted or at zero volume?", "terminal": false, "action": null, "link": null, "note": null, "options": [{"label": "Yes — muted/zero", "next": "t-unmute"}, {"label": "No — level is fine", "next": "q-ks"}]}, "q-ks": {"question": "Is KS (noise suppressor) unavailable, with a generic binding shown for the mic?", "terminal": false, "action": null, "link": null, "note": null, "options": [{"label": "Yes — KS unavailable, generic binding", "next": "t-vendor-driver"}, {"label": "No", "next": "q-healthy"}]}, "q-healthy": {"question": "Everything reads healthy and still silent?", "terminal": false, "action": null, "link": null, "note": null, "options": [{"label": "Yes — all healthy, still silent", "next": "t-hardware"}]}, "t-app-config": {"question": null, "terminal": true, "action": "App config — the meter works, so Windows hears you; fix the app's input device/routing.", "link": "https://github.com/gasyoun/Uprava/blob/main/RUNBOOK_ZOOM_MSI_MIC_SILENCE_05-11-2026.md", "note": null, "options": []}, "t-unmute": {"question": null, "terminal": true, "action": "Unmute / restore endpoint level, then re-test the meter.", "link": null, "note": null, "options": []}, "t-vendor-driver": {"question": null, "terminal": true, "action": "Vendor driver — reinstall/repair the vendor audio driver and rebind the mic.", "link": "https://github.com/gasyoun/Uprava/blob/main/RUNBOOK_ZOOM_MSI_MIC_SILENCE_05-11-2026.md", "note": null, "options": []}, "t-hardware": {"question": null, "terminal": true, "action": "Hardware/EC — power-drain reset first, then service.", "link": "https://github.com/gasyoun/Uprava/blob/main/RUNBOOK_ZOOM_MSI_MIC_SILENCE_05-11-2026.md", "note": "Side effect from the runbook session - NahimicService was stopped and disabled; restore with \"sc config NahimicService start= auto\" then \"sc start NahimicService\" once the mic is verified.", "options": []}}};
+var path = [];
+function el(id) { return document.getElementById(id); }
+function show(nid) {
+  var n = DATA.nodes[nid];
+  var crumbs = path.map(function (p) { return esc(p.label); }).join(' &rarr; ');
+  el('crumbs').innerHTML = crumbs;
+  var card = el('card');
+  card.className = 'card' + (n.terminal ? ' terminal' : '');
+  if (n.terminal) {
+    card.innerHTML = '<h2>Result</h2><p class="act">' + esc(n.action || '') + '</p>'
+      + (n.link ? '<p><a href="' + esc(n.link) + '">' + esc(n.link) + '</a></p>' : '')
+      + (n.note ? '<p class="note">' + esc(n.note) + '</p>' : '');
+  } else {
+    var btns = n.options.map(function (o, i) {
+      return '<button class="opt" type="button" data-i="' + i + '">' + esc(o.label) + '</button>';
+    }).join('');
+    card.innerHTML = '<h2>' + esc(n.question) + '</h2>' + btns
+      + (n.note ? '<p class="note">' + esc(n.note) + '</p>' : '');
+    Array.prototype.forEach.call(card.querySelectorAll('.opt'), function (b) {
+      b.addEventListener('click', function () {
+        var o = n.options[Number(b.getAttribute('data-i'))];
+        path.push({ label: o.label, from: nid });
+        Array.prototype.forEach.call(card.querySelectorAll('.opt'), function (x) {
+          if (x !== b) { x.classList.add('chosen'); } else { x.classList.add('chosen'); }
+        });
+        drawPath();
+        show(o.next);
+      });
+    });
+  }
+}
+function drawPath() {
+  el('pathlist').innerHTML = path.map(function (p) { return '<li>' + esc(p.label) + '</li>'; }).join('');
+}
+el('restart').addEventListener('click', function () { path = []; drawPath(); el('crumbs').innerHTML = ''; show(DATA.root); });
+show(DATA.root);
+</script>
+</body>
+</html>
