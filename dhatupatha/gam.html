@@ -15,45 +15,60 @@
   }
   .dev { font-family: "Noto Sans Devanagari", "Nirmala UI", "Mangal", serif; }
   .sheet {
-    width: 210mm; min-height: 297mm; margin: 10mm auto; padding: 12mm;
+    width: min(210mm, 100% - 20mm); min-height: 297mm; margin: 10mm auto; padding: 12mm;
     background: #fff; box-shadow: 0 1mm 4mm rgba(0,0,0,.18);
   }
-  /* ---- карты: ровно два листа A4 ---- */
+  /* ---- карты: ровно два листа A4, связная SVG-карта ---- */
   .map { break-after: page; page-break-after: always; display: flex; flex-direction: column; }
-  .map .grid { flex: 1 0 auto; align-content: space-evenly; }
   .map-head h1 { margin: 0 0 1mm; font-size: 20pt; letter-spacing: .2px; }
   .map-head .sub { margin: 0 0 4mm; font-size: 10pt; color: #444; }
+  .map-head.cont { margin-top: 0; }
+  .map-head.cont .sub { margin: 0 0 3mm; }
   .mode {
     display: inline-block; background: #f1e9d8; border: .35mm solid #a58b52;
     border-radius: 1.5mm; padding: .4mm 2mm; font-size: 8.5pt; color: #5a4a22;
   }
-  .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4.5mm; }
-  .card {
-    border: .4mm solid #333; border-radius: 1.6mm; padding: 3mm 3.2mm;
-    background: #fdfdfb; break-inside: avoid;
+  /* область карты: на узком экране локальная горизонтальная прокрутка,
+     текст не уменьшается (svg min-width сохраняет масштаб) */
+  .diagram-scroll {
+    overflow-x: auto; overflow-y: hidden; padding: 2mm;
+    border: .3mm solid #bbb; border-radius: 2mm; background: #fff;
   }
-  .card.root {
-    border-color: #7a1f1f; background: #fbf4f4; grid-column: span 1;
+  .diagram-scroll svg {
+    display: block; width: 100%; height: auto;
+    font-family: "Segoe UI", "Noto Sans", Arial, sans-serif;
   }
-  .card h3 {
-    margin: 0 0 2mm; font-size: 10.5pt; font-weight: 600; color: #7a1f1f;
-    border-bottom: .3mm dotted #b98; padding-bottom: 1mm;
+  .scroll-hint {
+    display: none; margin: 1.6mm 0 0; font-size: 9pt; color: #7a1f1f;
+    background: #f6f4ee; border-left: 1mm solid #a58b52;
+    padding: 1.2mm 2.4mm;
   }
-  .card h3 .pre { color: #333; font-weight: 600; }
-  .card h3 .stem { color: #7a1f1f; font-weight: 700; }
-  .root .r-dev { font-size: 26pt; line-height: 1.1; color: #7a1f1f; }
-  .root .r-iast { font-size: 15pt; font-weight: 700; color: #7a1f1f; }
-  .root .r-gloss { font-size: 9.5pt; color: #333; margin-top: .6mm; }
-  .root .r-src { font-size: 7.5pt; color: #777; margin-top: .6mm; }
-  ul.chips { list-style: none; margin: 0; padding: 0; }
-  ul.chips li { margin: 0 0 1.6mm; font-size: 10pt; }
-  ul.chips .t { font-weight: 600; color: #111; }
-  ul.chips .t .stem { color: #7a1f1f; }
-  ul.chips .g { color: #444; font-size: 9.5pt; }
+  /* только на узких экранах: фиксированный масштаб диаграммы +
+     локальная прокрутка + подсказка; на десктопе и в печати их нет */
+  @media (max-width: 868px) {
+    .diagram-scroll svg { min-width: 700px; }
+    .scroll-hint { display: block; }
+  }
+  /* SVG-узлы карты (координаты в единицах viewBox) */
+  .node-box { fill: #fdfdfb; stroke: #333; stroke-width: 1.4; }
+  .root-box { fill: #fbf4f4; stroke: #7a1f1f; stroke-width: 2.4; }
+  .stem { stroke: #7a1f1f; stroke-width: 2.6; stroke-linecap: round; }
+  .divider { stroke: #b99; stroke-width: 1; stroke-dasharray: 3 3; }
+  text.r-dev { font-family: "Noto Sans Devanagari", "Nirmala UI", "Mangal", serif;
+    font-size: 38px; fill: #7a1f1f; }
+  text.r-iast { font-size: 20px; font-weight: 700; fill: #7a1f1f; }
+  text.r-gloss { font-size: 11px; fill: #222; }
+  text.r-src { font-size: 10px; fill: #555; }
+  text.r-forms { font-size: 10.5px; font-weight: 600; fill: #333; }
+  text.bt { font-size: 13px; font-weight: 700; fill: #7a1f1f; }
+  text.bt .pre { fill: #333; font-weight: 600; }
+  text.lm { font-size: 10.5px; fill: #111; }
+  text.lm .gl { fill: #333; }
+  text.lm .ref { fill: #666; font-size: 9.5px; }
   .note-card {
-    grid-column: span 3; border: .4mm dashed #666; border-radius: 1.6mm;
+    border: .4mm dashed #666; border-radius: 1.6mm;
     padding: 2.4mm 3mm; background: #f7f7f4; font-size: 8.6pt; color: #333;
-    break-inside: avoid;
+    break-inside: avoid; margin-top: 4mm;
   }
   .note-card b { color: #7a1f1f; }
   .keys { display: flex; gap: 4mm; flex-wrap: wrap; margin-top: 1.2mm; }
@@ -99,6 +114,9 @@
     body { background: #fff; }
     .sheet { margin: 0; padding: 0; width: auto; min-height: 0; box-shadow: none; }
     .map { height: 273mm; overflow: hidden; }
+    .diagram-scroll { padding: 0; border: none; overflow: visible; }
+    .diagram-scroll svg { min-width: 0; }
+    .scroll-hint { display: none !important; }
     .wordlist { break-before: page; }
   }
 </style>
@@ -115,142 +133,203 @@
       · ветви отобраны по частоте DCS и словарным свидетельствам W/A
     </p>
   </header>
-  <div class="grid">
+  <div class="diagram-scroll" role="region" tabindex="0"
+       aria-label="Карта гнезда √gam, лист 1 — область с горизонтальной прокруткой">
+    <svg viewBox="0 0 700 804" role="img" aria-labelledby="map1-title map1-desc">
+      <title id="map1-title">Корневая карта гнезда √gam, лист 1</title>
+      <desc id="map1-desc">Центральный корень गम् gam вверху по центру; от него вниз идёт стебель,
+        от стебля отходят ветви к ветвям словообразования, ā+gam, anu+gam, abhi+gam, adhi+gam,
+        ava+gam, ud+gam и nir+gam. Каждая ветвь содержит показательные леммы с русским значением
+        и ключом источника. Линии означают принадлежность к словарному гнезду и группировку,
+        а не прямое образование одного слова от соседнего.</desc>
 
-    <article class="card root">
-      <h3><span class="pre">корень</span> √<span class="stem">gam</span></h3>
-      <div class="r-dev dev">गम्</div>
-      <div class="r-iast">gam</div>
-      <div class="r-gloss">идти, двигаться, приходить; cl. 1, наст. <i>gacchati</i></div>
-      <div class="r-src">[W 282] [A 451a] · DCS ×1669</div>
-      <ul class="chips" style="margin-top:1.6mm">
-        <li><span class="t">gacchati</span> <span class="g">— идёт (наст.)</span></li>
-        <li><span class="t">jagāma</span> <span class="g">— пришёл (перф.)</span></li>
-        <li><span class="t">agamat</span> <span class="g">— пошёл (аор.)</span></li>
-        <li><span class="t">gamiṣyati</span> <span class="g">— будет идти</span></li>
-        <li><span class="t">gantum</span> <span class="g">— идти (инфинитив)</span></li>
-      </ul>
-    </article>
+      <!-- стебель и отростки к ветвям (линии принадлежности гнезду) -->
+      <g class="connectors">
+        <line class="stem" data-role="connector" data-to="root" x1="350" y1="108" x2="350" y2="698"/>
+        <line class="stem" data-role="connector" data-branch="словообразование" x1="350" y1="192" x2="336" y2="214"/>
+        <line class="stem" data-role="connector" data-branch="ā+gam"         x1="350" y1="380" x2="336" y2="402"/>
+        <line class="stem" data-role="connector" data-branch="anu+gam"       x1="350" y1="536" x2="336" y2="558"/>
+        <line class="stem" data-role="connector" data-branch="abhi+gam"      x1="350" y1="676" x2="336" y2="698"/>
+        <line class="stem" data-role="connector" data-branch="adhi+gam"      x1="350" y1="192" x2="364" y2="214"/>
+        <line class="stem" data-role="connector" data-branch="ava+gam"       x1="350" y1="316" x2="364" y2="338"/>
+        <line class="stem" data-role="connector" data-branch="ud+gam"        x1="350" y1="440" x2="364" y2="462"/>
+        <line class="stem" data-role="connector" data-branch="nir+gam"       x1="350" y1="580" x2="364" y2="602"/>
+      </g>
 
-    <article class="card">
-      <h3><span class="pre">√gam &gt;</span> <span class="stem">словообразование</span></h3>
-      <ul class="chips">
-        <li><span class="t">ga<span class="stem">ta</span></span> <span class="g">— ушедший, ставший</span></li>
-        <li><span class="t">ga<span class="stem">ti</span></span> <span class="g">— движение, судьба</span></li>
-        <li><span class="t">ga<span class="stem">mana</span></span> <span class="g">— хождение, поход</span></li>
-        <li><span class="t">ga<span class="stem">mya</span></span> <span class="g">— достижимый</span></li>
-        <li><span class="t">gan<span class="stem">tu</span></span> <span class="g">— путник</span></li>
-      </ul>
-    </article>
+      <!-- центральный корень (широкий баннер: виден и при узком экране) -->
+      <g data-role="root-group">
+        <rect class="root-box" data-role="root" x="20" y="20" width="660" height="88" rx="8"/>
+        <text class="r-dev dev" x="52" y="86">गम्</text>
+        <text class="r-iast" x="150" y="62">gam</text>
+        <text class="r-gloss" x="150" y="88">идти, двигаться, приходить · cl. 1</text>
+        <text class="r-src" x="372" y="60">[W 282] [A 451a] · DCS ×1669</text>
+        <text class="r-forms" x="372" y="88">gacchati · jagāma · agamat · gamiṣyati · gantum</text>
+      </g>
 
-    <article class="card">
-      <h3><span class="pre">gam &gt;</span> <span class="stem">ā+gam</span></h3>
-      <ul class="chips">
-        <li><span class="t"><span class="stem">ā</span>gacchati</span> <span class="g">— приходит</span></li>
-        <li><span class="t"><span class="stem">ā</span>gama</span> <span class="g">— пришествие; свящ. учение</span></li>
-        <li><span class="t"><span class="stem">ā</span>gamana</span> <span class="g">— прибытие</span></li>
-      </ul>
-    </article>
+      <!-- ветви (левая колонка) -->
+      <g data-role="branch" data-branch="словообразование">
+        <rect class="node-box" x="20" y="200" width="316" height="128" rx="6"/>
+        <text class="bt" x="32" y="224"><tspan class="pre">√gam &gt;</tspan> словообразование</text>
+        <line class="divider" x1="30" y1="233" x2="326" y2="233"/>
+        <text class="lm" x="32" y="250"><tspan class="t">gata</tspan> <tspan class="gl">— ушедший, ставший</tspan> <tspan class="ref">[W 279] [A 451b]</tspan></text>
+        <text class="lm" x="32" y="266"><tspan class="t">gati</tspan> <tspan class="gl">— движение, судьба</tspan> <tspan class="ref">[W 279] [A 452a]</tspan></text>
+        <text class="lm" x="32" y="282"><tspan class="t">gamana</tspan> <tspan class="gl">— хождение, поход</tspan> <tspan class="ref">[W 282] [A 452b]</tspan></text>
+        <text class="lm" x="32" y="298"><tspan class="t">gamya</tspan> <tspan class="gl">— достижимый</tspan> <tspan class="ref">[W 283] [A 452c]</tspan></text>
+        <text class="lm" x="32" y="314"><tspan class="t">gantu</tspan> <tspan class="gl">— путник</tspan> <tspan class="ref">[W 280]</tspan></text>
+      </g>
 
-    <article class="card">
-      <h3><span class="pre">gam &gt;</span> <span class="stem">anu+gam</span></h3>
-      <ul class="chips">
-        <li><span class="t"><span class="stem">anu</span>gacchati</span> <span class="g">— следует, соблюдает</span></li>
-        <li><span class="t"><span class="stem">anu</span>gāmin</span> <span class="g">— последователь</span></li>
-      </ul>
-    </article>
+      <g data-role="branch" data-branch="ā+gam">
+        <rect class="node-box" x="20" y="388" width="316" height="96" rx="6"/>
+        <text class="bt" x="32" y="412"><tspan class="pre">gam &gt;</tspan> ā+gam</text>
+        <line class="divider" x1="30" y1="421" x2="326" y2="421"/>
+        <text class="lm" x="32" y="438"><tspan class="t">āgacchati</tspan> <tspan class="gl">— приходит</tspan> <tspan class="ref">[A 226a]</tspan></text>
+        <text class="lm" x="32" y="454"><tspan class="t">āgama</tspan> <tspan class="gl">— пришествие; свящ. учение</tspan> <tspan class="ref">[W 105]</tspan></text>
+        <text class="lm" x="32" y="470"><tspan class="t">āgamana</tspan> <tspan class="gl">— прибытие</tspan> <tspan class="ref">[W 105]</tspan></text>
+      </g>
 
-    <article class="card">
-      <h3><span class="pre">gam &gt;</span> <span class="stem">abhi+gam</span></h3>
-      <ul class="chips">
-        <li><span class="t"><span class="stem">abhi</span>gacchati</span> <span class="g">— приближается, достигает</span></li>
-        <li><span class="t"><span class="stem">abhi</span>gama</span> <span class="g">— приближение, визит</span></li>
-      </ul>
-    </article>
+      <g data-role="branch" data-branch="anu+gam">
+        <rect class="node-box" x="20" y="544" width="316" height="80" rx="6"/>
+        <text class="bt" x="32" y="568"><tspan class="pre">gam &gt;</tspan> anu+gam</text>
+        <line class="divider" x1="30" y1="577" x2="326" y2="577"/>
+        <text class="lm" x="32" y="594"><tspan class="t">anugacchati</tspan> <tspan class="gl">— следует, соблюдает</tspan> <tspan class="ref">[A 68b]</tspan></text>
+        <text class="lm" x="32" y="610"><tspan class="t">anugāmin</tspan> <tspan class="gl">— последователь</tspan> <tspan class="ref">[A 69a]</tspan></text>
+      </g>
 
-    <article class="card">
-      <h3><span class="pre">gam &gt;</span> <span class="stem">adhi+gam</span></h3>
-      <ul class="chips">
-        <li><span class="t"><span class="stem">adhi</span>gacchati</span> <span class="g">— постигает, изучает</span></li>
-      </ul>
-    </article>
+      <g data-role="branch" data-branch="abhi+gam">
+        <rect class="node-box" x="20" y="684" width="316" height="80" rx="6"/>
+        <text class="bt" x="32" y="708"><tspan class="pre">gam &gt;</tspan> abhi+gam</text>
+        <line class="divider" x1="30" y1="717" x2="326" y2="717"/>
+        <text class="lm" x="32" y="734"><tspan class="t">abhigacchati</tspan> <tspan class="gl">— приближается, достигает</tspan> <tspan class="ref">[A 127c]</tspan></text>
+        <text class="lm" x="32" y="750"><tspan class="t">abhigama</tspan> <tspan class="gl">— приближение, визит</tspan> <tspan class="ref">[A 127c]</tspan></text>
+      </g>
 
-    <article class="card">
-      <h3><span class="pre">gam &gt;</span> <span class="stem">ava+gam</span></h3>
-      <ul class="chips">
-        <li><span class="t"><span class="stem">ava</span>gacchati</span> <span class="g">— понимает, узнаёт</span></li>
-      </ul>
-    </article>
+      <!-- ветви (правая колонка) -->
+      <g data-role="branch" data-branch="adhi+gam">
+        <rect class="node-box" x="364" y="200" width="316" height="64" rx="6"/>
+        <text class="bt" x="376" y="224"><tspan class="pre">gam &gt;</tspan> adhi+gam</text>
+        <line class="divider" x1="374" y1="233" x2="670" y2="233"/>
+        <text class="lm" x="376" y="250"><tspan class="t">adhigacchati</tspan> <tspan class="gl">— постигает, изучает</tspan> <tspan class="ref">[W 282]</tspan></text>
+      </g>
 
-    <article class="card">
-      <h3><span class="pre">gam &gt;</span> <span class="stem">ud+gam</span></h3>
-      <ul class="chips">
-        <li><span class="t"><span class="stem">ud</span>gacchati</span> <span class="g">— восходит, возникает</span></li>
-        <li><span class="t"><span class="stem">ud</span>gama</span> <span class="g">— восхождение, исход</span></li>
-      </ul>
-    </article>
+      <g data-role="branch" data-branch="ava+gam">
+        <rect class="node-box" x="364" y="324" width="316" height="64" rx="6"/>
+        <text class="bt" x="376" y="348"><tspan class="pre">gam &gt;</tspan> ava+gam</text>
+        <line class="divider" x1="374" y1="357" x2="670" y2="357"/>
+        <text class="lm" x="376" y="374"><tspan class="t">avagacchati</tspan> <tspan class="gl">— понимает, узнаёт</tspan> <tspan class="ref">[A 177b] [W 282]</tspan></text>
+      </g>
 
-    <article class="card">
-      <h3><span class="pre">gam &gt;</span> <span class="stem">nir+gam</span></h3>
-      <ul class="chips">
-        <li><span class="t"><span class="stem">nir</span>gacchati</span> <span class="g">— выходит, уходит</span></li>
-        <li><span class="t"><span class="stem">nir</span>gama</span> <span class="g">— выход, исход</span></li>
-      </ul>
-    </article>
+      <g data-role="branch" data-branch="ud+gam">
+        <rect class="node-box" x="364" y="448" width="316" height="80" rx="6"/>
+        <text class="bt" x="376" y="472"><tspan class="pre">gam &gt;</tspan> ud+gam</text>
+        <line class="divider" x1="374" y1="481" x2="670" y2="481"/>
+        <text class="lm" x="376" y="498"><tspan class="t">udgacchati</tspan> <tspan class="gl">— восходит, возникает</tspan> <tspan class="ref">[A 305b]</tspan></text>
+        <text class="lm" x="376" y="514"><tspan class="t">udgama</tspan> <tspan class="gl">— восхождение, исход</tspan> <tspan class="ref">[A 305b]</tspan></text>
+      </g>
 
+      <g data-role="branch" data-branch="nir+gam">
+        <rect class="node-box" x="364" y="588" width="316" height="80" rx="6"/>
+        <text class="bt" x="376" y="612"><tspan class="pre">gam &gt;</tspan> nir+gam</text>
+        <line class="divider" x1="374" y1="621" x2="670" y2="621"/>
+        <text class="lm" x="376" y="638"><tspan class="t">nirgacchati</tspan> <tspan class="gl">— выходит, уходит</tspan> <tspan class="ref">[A 632a]</tspan></text>
+        <text class="lm" x="376" y="654"><tspan class="t">nirgama</tspan> <tspan class="gl">— выход, исход</tspan> <tspan class="ref">[W 474]</tspan></text>
+      </g>
+    </svg>
   </div>
+  <p class="scroll-hint">↔ Лист карты шире области просмотра: прокрутите его по горизонтали
+    (Shift + колесо мыши), текст остаётся в исходном размере.</p>
 </section>
 
 <!-- ===================== ЛИСТ 2 — КАРТА ===================== -->
 <section class="sheet map" id="map-2">
-  <div class="grid" style="margin-top:2mm">
+  <header class="map-head cont">
+    <p class="sub">
+      Лист 2 · корневая карта: <b>गम् gam</b> — продолжение гнезда (корень повторён,
+      чтобы ветви оставались связанными) · <span class="mode">режим: гнездо dhātu</span>
+    </p>
+  </header>
 
-    <article class="card">
-      <h3><span class="pre">gam &gt;</span> <span class="stem">saṃ+gam</span></h3>
-      <ul class="chips">
-        <li><span class="t"><span class="stem">saṃ</span>gacchati</span> <span class="g">— встречается, соединяется</span></li>
-        <li><span class="t"><span class="stem">saṃ</span>gama</span> <span class="g">— встреча, контакт</span></li>
-      </ul>
-    </article>
+  <div class="diagram-scroll" role="region" tabindex="0"
+       aria-label="Карта гнезда √gam, лист 2 — область с горизонтальной прокруткой">
+    <svg viewBox="0 0 700 584" role="img" aria-labelledby="map2-title map2-desc">
+      <title id="map2-title">Корневая карта гнезда √gam, лист 2</title>
+      <desc id="map2-desc">Центральный корень गम् gam повторён; от него стебль соединён
+        линиями с ветвями saṃ+gam, dur+gam, prati+gam, vi+gam, ni+gam и pari+gam, каждая
+        с показательными леммами, русскими значениями и ключами источников. Линии означают
+        принадлежность к словарному гнезду и группировку, а не прямое образование.</desc>
 
-    <article class="card">
-      <h3><span class="pre">gam &gt;</span> <span class="stem">vi+gam</span></h3>
-      <ul class="chips">
-        <li><span class="t"><span class="stem">vi</span>gacchati</span> <span class="g">— проходит, исчезает</span></li>
-      </ul>
-    </article>
+      <!-- стебель и отростки к ветвям -->
+      <g class="connectors">
+        <line class="stem" data-role="connector" data-to="root" x1="350" y1="108" x2="350" y2="494"/>
+        <line class="stem" data-role="connector" data-branch="saṃ+gam"   x1="350" y1="192" x2="336" y2="214"/>
+        <line class="stem" data-role="connector" data-branch="dur+gam"   x1="350" y1="332" x2="336" y2="354"/>
+        <line class="stem" data-role="connector" data-branch="prati+gam" x1="350" y1="472" x2="336" y2="494"/>
+        <line class="stem" data-role="connector" data-branch="vi+gam"    x1="350" y1="192" x2="364" y2="214"/>
+        <line class="stem" data-role="connector" data-branch="ni+gam"    x1="350" y1="316" x2="364" y2="338"/>
+        <line class="stem" data-role="connector" data-branch="pari+gam"  x1="350" y1="456" x2="364" y2="478"/>
+      </g>
 
-    <article class="card">
-      <h3><span class="pre">gam &gt;</span> <span class="stem">dur+gam</span></h3>
-      <ul class="chips">
-        <li><span class="t"><span class="stem">dur</span>ga</span> <span class="g">— крепость; труднодоступный</span></li>
-        <li><span class="t"><span class="stem">dur</span>gama</span> <span class="g">— недоступный</span></li>
-      </ul>
-    </article>
+      <!-- центральный корень (повторён на втором листе; широкий баннер) -->
+      <g data-role="root-group">
+        <rect class="root-box" data-role="root" x="20" y="20" width="660" height="88" rx="8"/>
+        <text class="r-dev dev" x="52" y="86">गम्</text>
+        <text class="r-iast" x="150" y="62">gam</text>
+        <text class="r-gloss" x="150" y="88">идти, двигаться, приходить · cl. 1</text>
+        <text class="r-src" x="372" y="60">[W 282] [A 451a] · DCS ×1669</text>
+        <text class="r-forms" x="372" y="88">gacchati · jagāma · agamat · gamiṣyati · gantum</text>
+      </g>
 
-    <article class="card">
-      <h3><span class="pre">gam &gt;</span> <span class="stem">ni+gam</span></h3>
-      <ul class="chips">
-        <li><span class="t"><span class="stem">ni</span>gacchati</span> <span class="g">— достигает, учится</span></li>
-        <li><span class="t"><span class="stem">ni</span>gama</span> <span class="g">— Веды; город</span></li>
-      </ul>
-    </article>
+      <!-- ветви (левая колонка) -->
+      <g data-role="branch" data-branch="saṃ+gam">
+        <rect class="node-box" x="20" y="200" width="316" height="80" rx="6"/>
+        <text class="bt" x="32" y="224"><tspan class="pre">gam &gt;</tspan> saṃ+gam</text>
+        <line class="divider" x1="30" y1="233" x2="326" y2="233"/>
+        <text class="lm" x="32" y="250"><tspan class="t">saṃgacchati</tspan> <tspan class="gl">— встречается, соединяется</tspan> <tspan class="ref">[A 1078c]</tspan></text>
+        <text class="lm" x="32" y="266"><tspan class="t">saṃgama</tspan> <tspan class="gl">— встреча, контакт</tspan> <tspan class="ref">[A 1079a]</tspan></text>
+      </g>
 
-    <article class="card">
-      <h3><span class="pre">gam &gt;</span> <span class="stem">prati+gam</span></h3>
-      <ul class="chips">
-        <li><span class="t"><span class="stem">prati</span>gacchati</span> <span class="g">— идёт навстречу, возвращается</span></li>
-      </ul>
-    </article>
+      <g data-role="branch" data-branch="dur+gam">
+        <rect class="node-box" x="20" y="340" width="316" height="80" rx="6"/>
+        <text class="bt" x="32" y="364"><tspan class="pre">gam &gt;</tspan> dur+gam</text>
+        <line class="divider" x1="30" y1="373" x2="326" y2="373"/>
+        <text class="lm" x="32" y="390"><tspan class="t">durga</tspan> <tspan class="gl">— крепость; труднодоступный</tspan> <tspan class="ref">[W 415]</tspan></text>
+        <text class="lm" x="32" y="406"><tspan class="t">durgama</tspan> <tspan class="gl">— недоступный</tspan> <tspan class="ref">[W 415]</tspan></text>
+      </g>
 
-    <article class="card">
-      <h3><span class="pre">gam &gt;</span> <span class="stem">pari+gam</span></h3>
-      <ul class="chips">
-        <li><span class="t"><span class="stem">pari</span>gacchati</span> <span class="g">— обходит, окружает</span></li>
-      </ul>
-    </article>
+      <g data-role="branch" data-branch="prati+gam">
+        <rect class="node-box" x="20" y="480" width="316" height="64" rx="6"/>
+        <text class="bt" x="32" y="504"><tspan class="pre">gam &gt;</tspan> prati+gam</text>
+        <line class="divider" x1="30" y1="513" x2="326" y2="513"/>
+        <text class="lm" x="32" y="530"><tspan class="t">pratigacchati</tspan> <tspan class="gl">— идёт навстречу, возвращается</tspan> <tspan class="ref">[A 736b]</tspan></text>
+      </g>
 
-    <div class="note-card">
+      <!-- ветви (правая колонка) -->
+      <g data-role="branch" data-branch="vi+gam">
+        <rect class="node-box" x="364" y="200" width="316" height="64" rx="6"/>
+        <text class="bt" x="376" y="224"><tspan class="pre">gam &gt;</tspan> vi+gam</text>
+        <line class="divider" x1="374" y1="233" x2="670" y2="233"/>
+        <text class="lm" x="376" y="250"><tspan class="t">vigacchati</tspan> <tspan class="gl">— проходит, исчезает</tspan> <tspan class="ref">[A 968a]</tspan></text>
+      </g>
+
+      <g data-role="branch" data-branch="ni+gam">
+        <rect class="node-box" x="364" y="324" width="316" height="80" rx="6"/>
+        <text class="bt" x="376" y="348"><tspan class="pre">gam &gt;</tspan> ni+gam</text>
+        <line class="divider" x1="374" y1="357" x2="670" y2="357"/>
+        <text class="lm" x="376" y="374"><tspan class="t">nigacchati</tspan> <tspan class="gl">— достигает, учится</tspan> <tspan class="ref">[A 619a]</tspan></text>
+        <text class="lm" x="376" y="390"><tspan class="t">nigama</tspan> <tspan class="gl">— Веды; город</tspan> <tspan class="ref">[W 465] [A 619a]</tspan></text>
+      </g>
+
+      <g data-role="branch" data-branch="pari+gam">
+        <rect class="node-box" x="364" y="464" width="316" height="64" rx="6"/>
+        <text class="bt" x="376" y="488"><tspan class="pre">gam &gt;</tspan> pari+gam</text>
+        <line class="divider" x1="374" y1="497" x2="670" y2="497"/>
+        <text class="lm" x="376" y="514"><tspan class="t">parigacchati</tspan> <tspan class="gl">— обходит, окружает</tspan> <tspan class="ref">[A 672a]</tspan></text>
+      </g>
+    </svg>
+  </div>
+  <p class="scroll-hint">↔ Лист карты шире области просмотра: прокрутите его по горизонтали
+    (Shift + колесо мыши), текст остаётся в исходном размере.</p>
+
+  <div class="note-card">
       <b>Как читать карту.</b> Центр — корень в деванагари и IAST; ветвь объединяет слова с
       понятным учащемуся общим признаком: одним превербом (<i>ā+gam, anu+gam, …</i>) или одним
       способом образования (<i>-ta, -ti, -na, -ya, -tu</i>). Красным выделена корневая часть
@@ -263,8 +342,6 @@
         <span>×N — частота DCS (только отбор)</span>
         <span>структура — Звонков, с. 84–85, 124–125</span>
       </div>
-    </div>
-
   </div>
 </section>
 
