@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Стиль дома — четыре слоя · Гасунс</title>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="gasyoun.github.io">
+<meta property="og:title" content="Стиль дома — четыре слоя">
+<meta property="og:description" content="Публичная сводка единого стиля дома: четыре слоя, гибридное соблюдение, русский голос как главный актив.">
+<meta property="og:url" content="https://gasyoun.github.io/style/">
+<meta property="og:image" content="https://gasyoun.github.io/og-card.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://gasyoun.github.io/og-card.png">
+<style>
+:root {
+  --bg: #fafaf7;
+  --fg: #1a1a1a;
+  --muted: #555;
+  --link: #8b0000;
+  --link-hover: #a00;
+  --border: #d8d4cc;
+  --card-bg: #fff;
+  --code-bg: #f0ede6;
+  --accent: #8b0000;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1a1a18;
+    --fg: #e0ddd5;
+    --muted: #999;
+    --link: #d4a0a0;
+    --link-hover: #e0b0b0;
+    --border: #333;
+    --card-bg: #242420;
+    --code-bg: #2a2a25;
+    --accent: #d4a0a0;
+  }
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--fg);
+  background: var(--bg);
+}
+.container { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+header { text-align: center; margin-bottom: 2.5rem; padding-top: 2rem; }
+header h1 { font-size: 1.8rem; margin-bottom: 0.5rem; }
+header .subtitle { color: var(--muted); font-size: 1rem; }
+header .author { color: var(--muted); font-size: 0.85rem; margin-top: 1rem; }
+a { color: var(--link); }
+a:hover { color: var(--link-hover); }
+.lead { font-size: 1.05rem; margin-bottom: 2.5rem; }
+.lead p + p { margin-top: 0.75rem; }
+h2 { font-size: 1.3rem; margin: 2.5rem 0 1rem; padding-bottom: 0.3rem; border-bottom: 1px solid var(--border); }
+.layers { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+.layer { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 1.1rem 1.2rem; }
+.layer .num { color: var(--accent); font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.layer h3 { font-size: 1.05rem; margin: 0.3rem 0 0.5rem; }
+.layer p { font-size: 0.95rem; color: var(--fg); }
+.layer .home { font-size: 0.85rem; color: var(--muted); margin-top: 0.6rem; }
+.two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+.col { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 1.1rem 1.2rem; }
+.col h3 { font-size: 1rem; margin-bottom: 0.5rem; }
+.col p { font-size: 0.95rem; }
+p { margin-bottom: 0.9rem; }
+ul.canon { list-style: none; margin: 1rem 0; }
+ul.canon li { padding: 0.55rem 0; border-bottom: 1px solid var(--border); font-size: 0.98rem; }
+ul.canon li:last-child { border-bottom: none; }
+ul.canon .what { color: var(--muted); }
+footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.85rem; text-align: center; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>Стиль дома</h1>
+  <div class="subtitle">Единая система из четырёх слоёв — публичная сводка</div>
+  <div class="author">к.ф.н. М.Ю. Гасунс · 17 ноября 2026</div>
+</header>
+
+<div class="lead">
+<p>Стиль этого дома — не набор разрозненных правил, а одна система из четырёх слоёв. Она объявлена решением <a href="https://github.com/gasyoun/claude-config/blob/main/docs/adr/0005-unified-house-style-canon.md">ADR-0005</a> и собрана в указатель — <a href="https://github.com/gasyoun/claude-config/blob/main/STYLEGUIDE.md">STYLEGUIDE.md</a>.</p>
+<p>Эта страница — сводка для публики. Она объясняет систему и показывает, где живёт канон. Правила здесь не повторяются: у них один дом.</p>
+</div>
+
+<h2>Четыре слоя</h2>
+
+<div class="layers">
+  <div class="layer">
+    <div class="num">Слой 1</div>
+    <h3>Регистр — как звучит дом</h3>
+    <p>Тон сообщений, глоссарий системы, формат бот-ответов: одна строка и ссылка на детали вместо стены текста.</p>
+    <div class="home">Канон слоя: <a href="https://github.com/gasyoun/claude-config/blob/main/CONTEXT.md">CONTEXT.md § Style system</a></div>
+  </div>
+  <div class="layer">
+    <div class="num">Слой 2</div>
+    <h3>Русская проза — как пишутся тексты</h3>
+    <p>Два прохода: sokratil — ясность и краткость, включён всегда; pishi — инфостиль. Плюс паспорта стилей, в том числе паспорт авторского голоса.</p>
+    <div class="home">Канон слоя: <a href="https://github.com/gasyoun/RuWritingStyles">RuWritingStyles</a></div>
+  </div>
+  <div class="layer">
+    <div class="num">Слой 3</div>
+    <h3>Договор по документам</h3>
+    <p>Markdown-гигиена, метадокументы, дисциплина архитектурных решений (ADR). У документа есть шапка, автор и один канонический дом.</p>
+    <div class="home">Канон слоя: <a href="https://github.com/gasyoun/claude-config/blob/main/commands/md-hygiene.md">md-hygiene</a> · <a href="https://github.com/gasyoun/claude-config/tree/main/docs/adr">docs/adr</a></div>
+  </div>
+  <div class="layer">
+    <div class="num">Слой 4</div>
+    <h3>Инженерные конвенции</h3>
+    <p>Линт-разборы ruff, ворота размера токенов, changelog при релизе, fail-closed хуки. Что можно проверить автоматически — проверяется автоматически.</p>
+    <div class="home">Канон слоя: <a href="https://github.com/gasyoun/claude-config/blob/main/HOOKS_INDEX.md">HOOKS_INDEX.md</a></div>
+  </div>
+</div>
+
+<h2>Как это соблюдается</h2>
+<p>Соблюдение гибридное — двумя руками.</p>
+<div class="two-col">
+  <div class="col">
+    <h3>Механическая рука</h3>
+    <p>Линтеры и ворота в CI: ruff для кода, markdownlint для разметки, Vale для англоязычных доков. Всё, что линтится машиной, линтится машиной.</p>
+  </div>
+  <div class="col">
+    <h3>Оценочная рука</h3>
+    <p>Скиллы и прозаические правила: голос, регистр, уместность. Здесь решают человек и проходы — не линтер.</p>
+  </div>
+</div>
+<p>Так сегодня строят стайлгайды зрелые команды документации — механика там, где она надёжна, суждение там, где оно нужно.</p>
+
+<h2>Русский голос — главный актив</h2>
+<p>Приоритет языков: сначала русский, потом английский. Русский голос — то, что отличает этот дом, поэтому он не линтится механически никогда: его держат проходы ясности и человек.</p>
+<p>Англоязычные документы получают лёгкий механический слой — Vale, Conventional Commits для сообщений коммитов, семантические разрывы строк.</p>
+
+<h2>Где канон</h2>
+<ul class="canon">
+  <li><a href="https://github.com/gasyoun/claude-config/blob/main/STYLEGUIDE.md">STYLEGUIDE.md</a> — <span class="what">указательный канон: объявляет систему и ведёт в каждый слой</span></li>
+  <li><a href="https://github.com/gasyoun/claude-config/blob/main/docs/adr/0005-unified-house-style-canon.md">ADR-0005</a> — <span class="what">решение: из чего состоит система и почему так</span></li>
+  <li><a href="https://github.com/gasyoun/RuWritingStyles">RuWritingStyles</a> — <span class="what">паспорта стилей, включая паспорт авторского голоса</span></li>
+</ul>
+
+<footer>
+  <em>к.ф.н. М.Ю. Гасунс</em> · публичная сводка стиля дома · <a href="https://gasyoun.github.io/">gasyoun.github.io</a>
+</footer>
+
+</div>
+</body>
+</html>
