@@ -10,3 +10,18 @@ else
   exit 1
 fi
 # <<< token-size-gate <<<
+
+# >>> vale-en-lint (managed block) >>>
+# Advisory EN-doc prose lint (ADR-0005, H8384). ADVISORY ONLY: alerts never
+# block the commit. If `vale` is not installed locally, SKIP with a visible
+# note — CI (.github/workflows/vale-lint.yml) is the enforcing surface.
+if command -v vale >/dev/null 2>&1; then
+  STAGED_VALE=$(git diff --cached --name-only --diff-filter=ACM | grep -Ei '\.(md|mdx)$' || true)
+  if [ -n "$STAGED_VALE" ]; then
+    vale --no-exit --minAlertLevel=suggestion $STAGED_VALE || true
+    echo "vale-en-lint: advisory — alerts above (if any) never block; see .vale.ini" >&2
+  fi
+else
+  echo "vale-en-lint: 'vale' not installed on this box — skipping (advisory; CI runs it: .github/workflows/vale-lint.yml)" >&2
+fi
+# <<< vale-en-lint <<<

@@ -1,0 +1,124 @@
+# Estate vocabulary — accepted terms (H8384, ADR-0005).
+# Entries are case-sensitive regexes (a `.` is literal unless regex is used);
+# prefix (?i) for case-insensitive. Multiword phrases match across line wraps.
+# Repos: gasyoun.github.io + csl-guides (keep the two lists in sync).
+
+# Estate & org names
+Gasūns
+Uprava
+(?i)kosha
+gasyoun\.github\.io
+samskrtam\.ru
+github-spine
+claude-config
+Systema-Sanscriticum
+SanskritLexicography
+SanskritGrammar
+SamasaChakram
+SamudraManthanam
+WhitneyRoots
+IndologyScholars
+CommentaryStrategies
+RuWritingStyles
+(?i)csl-guides
+(?i)csl-atlas
+(?i)csl-orig
+(?i)csl-corrections
+(?i)csl-observatory
+
+# Tooling & doc terms
+(?i)Docusaurus
+Vale
+(?i)changesets
+Reviewdog
+llms\.txt
+(?i)MDX
+(?i)mdx
+Conventional Commits
+(?i)transcoder
+
+# Indology proper nouns — (?i) where lowercase collides with paths/URLs
+Monier-Williams
+Monier Williams
+Böhtlingk
+Cappeller
+Grassmann
+Macdonell
+Mayrhofer
+Edgerton
+Stchoupak
+Turner
+Whitney
+Pāṇini
+(?i)Devanagari
+(?i)Cologne
+(?i)Sanskrit
+(?i)Vedic
+Apte
+Apte's
+Benfey
+Burnouf
+Funderburk
+Malten
+Monier
+Theodor
+Vaidya
+Scharf
+Rigveda
+
+# Transliteration & lexicography terms
+SLP1
+SLP
+IAST
+ITRANS
+Harvard-Kyoto
+Grantha
+(?i)lexicography
+(?i)lexicographical
+(?i)lexicographers
+(?i)lemmatized
+(?i)lemmatization
+(?i)transliteration
+(?i)transliterated
+(?i)lexica
+(?i)siglum
+(?i)sigla
+(?i)annexure
+(?i)dicts
+
+# German bibliographic words (cited titles in CDSL literature)
+(?i)Fassung
+(?i)zum
+(?i)und
+(?i)Verbesserungen
+(?i)indische
+(?i)Petersburger
+
+# CDSL dictionary codes (as used across csl-guides docs)
+(?i)CDSL
+(?i)CSL
+(?i)MW
+(?i)lnum
+(?i)ap90
+(?i)acc
+(?i)acph
+(?i)acsj
+(?i)abch
+(?i)armh
+(?i)inm
+(?i)ieg
+(?i)ap
+(?i)ae
+(?i)ben
+(?i)bor
+(?i)bop
+(?i)bur
+(?i)bhs
+(?i)cae
+(?i)ccs
+(?i)gra
+(?i)gst
+(?i)fri
+(?i)skt
+(?i)OCR'd
+(?i)PD's

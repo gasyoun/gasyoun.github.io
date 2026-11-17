@@ -1,0 +1,41 @@
+name: vale-en-lint
+
+# EN-doc prose linting (ADR-0005, H8384). ADVISORY: report-only — this job
+# always stays green; escalation to blocking is a later ruling after the
+# flag-rate verdict. RU prose is excluded via .vale.ini (never linted).
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  vale:
+    name: Vale EN docs (advisory)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Vale (pinned)
+        run: |
+          curl -sSL "https://github.com/errata-ai/vale/releases/download/v3.27.0/vale_3.27.0_Linux_64-bit.tar.gz" -o /tmp/vale.tgz
+          sudo tar -xzf /tmp/vale.tgz -C /usr/local/bin vale
+          vale --version
+      - name: Ensure style packages (vendored in-repo; sync only if missing)
+        run: |
+          [ -d .vale/styles/Google ] || vale sync
+      - name: Lint EN docs (report-only)
+        env:
+          FLAG_DATE: ${{ github.event_name == 'pull_request' && 'PR run' || 'push run' }}
+          VALE_BASE: Google
+        run: |
+          vale --no-exit --output=JSON . > vale-report.json
+          python3 scripts/vale_flag_report.py vale-report.json
+      - name: Upload flag report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: vale-flag-report
+          path: vale-report.json
+          retention-days: 30
