@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Console popup watch — catch and fix the 1-second console flashes on Windows</title>
+<style>
+  :root { --fg:#1d232a; --muted:#5a6672; --line:#d8dee4; --bg:#fbfcfd; --code:#f2f5f8; --accent:#0b6bcb; }
+  * { box-sizing: border-box; }
+  body { margin:0; font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; color:var(--fg); background:var(--bg); }
+  main { max-width: 860px; margin: 0 auto; padding: 32px 20px 64px; }
+  h1 { font-size: 1.9rem; line-height:1.25; margin: 0 0 8px; }
+  h2 { font-size: 1.35rem; margin: 40px 0 10px; border-bottom: 2px solid var(--line); padding-bottom: 6px; }
+  h3 { font-size: 1.1rem; margin: 24px 0 8px; }
+  p, li { color: var(--fg); }
+  .lede { color: var(--muted); font-size: 1.05rem; }
+  code, pre { font-family: ui-monospace, Consolas, "Cascadia Mono", monospace; }
+  code { background: var(--code); padding: 1px 5px; border-radius: 4px; font-size: .92em; }
+  pre { background: var(--code); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; overflow-x: auto; font-size: .88rem; line-height: 1.5; }
+  pre code { background: none; padding: 0; }
+  .note { border-left: 4px solid var(--accent); background: #eef5fc; padding: 10px 14px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  .warn { border-left: 4px solid #c25e00; background: #fdf1e3; padding: 10px 14px; border-radius: 0 8px 8px 0; margin: 16px 0; }
+  table { border-collapse: collapse; width: 100%; margin: 12px 0; }
+  th, td { border: 1px solid var(--line); padding: 6px 10px; text-align: left; vertical-align: top; }
+  th { background: var(--code); }
+  .files a { display: block; margin: 6px 0; }
+  footer { margin-top: 48px; color: var(--muted); font-size: .85rem; border-top: 1px solid var(--line); padding-top: 12px; }
+</style>
+</head>
+<body>
+<main>
+<h1>Console popup watch</h1>
+<p class="lede">Catch the 1‑second black / console windows that Windows tooling flashes at you, fix the spawns that cause them, and prove the fix did not silently revert. A small, dependency‑free toolkit plus the method behind it.</p>
+
+<div class="note"><strong>What this is.</strong> Two stdlib‑only Python scripts — a <em>watcher</em> that records every new visible top‑level window with the parent chain that created it, and a <em>three‑place byte‑match</em> that proves a fix is still in place in every copy. Both were built and used on a real Windows box to verify a tooling‑wide console‑flash repair (10 flashes in 23 minutes → 0 in a 15‑minute window, with the watcher proven not blind).</div>
+
+<h2 id="symptom">The symptom</h2>
+<p>You run an editor, a terminal‑based agent, a GUI app, or a scheduled job — and every few seconds or minutes a <strong>one‑second console window</strong> flashes, or a black window appears and vanishes faster than you can read it. Often it titles itself with an interpreter path (<code>C:\…\python.exe</code>) or <code>cmd.exe</code>. On busy days it looks like a “waterfall” of black rectangles over your desktop.</p>
+<p>The flashes are <em>child processes you did not launch by hand</em> — hooks, guards, MCP servers, probes, watchers — that your tooling spawns on every event.</p>
+
+<h2 id="why">Why it happens</h2>
+<p>On Windows a <code>.exe</code> is either a <em>console</em> subsystem image (<code>python.exe</code>, <code>cmd.exe</code>, <code>node.exe</code> is console too) or a <em>GUI</em> subsystem image (<code>pythonw.exe</code>, most editors). A console child <strong>always</strong> gets a console:</p>
+<ul>
+  <li>If the parent already has a console, the child <em>inherits</em> it — nothing appears on screen.</li>
+  <li>If the parent has <strong>no console</strong> (GUI app, pythonw, service, TUI host), Windows allocates a <strong>new one</strong> — and that is the visible flash.</li>
+</ul>
+<p>The fix is always one of two moves: <strong>tell the child not to allocate a visible console</strong> (<code>CREATE_NO_WINDOW</code> / <code>windowsHide</code>), or <strong>let a console‑less parent hand it one invisibly</strong> (hidden launcher, <code>pythonw</code>, <code>STARTUPINFO</code> with <code>SW_HIDE</code>).</p>
+
+<div class="warn"><strong>The classic trap.</strong> Your tooling spawns <code>python.exe</code> from a GUI parent <em>just to probe something</em> (check an interpreter, run a hook). That probe allocates a console window for ~1 s on every single event — the most common single source of “what is this black flash?”. Probe with <code>pythonw.exe</code>, or pass <code>CREATE_NO_WINDOW</code>, or check once and cache the answer.</div>
+
+<h2 id="fix">Fix patterns</h2>
+
+<h3>Node / TypeScript — <code>child_process</code></h3>
+<pre><code>const { spawn, spawnSync, execFile, exec } = require("child_process");
+
+// Every call site, every time — a different call without the flag still flashes:
+spawn(cmd, args, { windowsHide: true });
+spawnSync(cmd, args, { windowsHide: true, encoding: "utf8" });
+execFile(cmd, args, { windowsHide: true });
+exec(cmd, { windowsHide: true });            // prefer execFile where possible
+
+// Gotchas
+// • The flag is per-call. A wrapper that hides does NOT cover direct calls next to it.
+// • `detached: true` does not hide anything by itself.
+// • Audit with a repo-wide scan (the fix is only as good as its weakest call site):
+//   grep -rEn "spawn(Sync)?\(|execFile\(|exec\(" --include=*.ts --include=*.js .
+</code></pre>
+
+<h3>Python — <code>subprocess</code></h3>
+<pre><code>import subprocess, sys
+
+NO_WINDOW = getattr(subprocess, "CREATE_NO_WINDOW", 0)  # Windows-only constant
+
+subprocess.run([sys.executable, "tool.py"], creationflags=NO_WINDOW, check=False)
+subprocess.Popen(["cmd.exe", "/c", "ping -n 2 127.0.0.1"], creationflags=NO_WINDOW)
+
+# Shell-route alternative (STARTUPINFO):
+si = subprocess.STARTUPINFO()
+si.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+si.wShowWindow = 0  # SW_HIDE
+subprocess.run(["cmd.exe", "/c", "whoami"], startupinfo=si, creationflags=NO_WINDOW)
+
+# Interpreter probes from hooks/guards: use pythonw.exe, not python.exe.
+#   <path-to>\pythonw.exe your_script.py
+</code></pre>
+
+<h3>PowerShell / scheduled tasks / .cmd wrappers</h3>
+<pre><code># Start-Process hides the new console of a console child:
+Start-Process -FilePath "C:\tools\probe.exe" -WindowStyle Hidden -Wait
+
+# For .cmd/.bat wrappers, launch through a VBS shim (wscript.exe is GUI-subsystem):
+#   CreateObject("WScript.Shell").Run "cmd /c ""C:\path\job.cmd""", 0, False
+#   (0 = hidden window, False = don't wait)
+
+# Task Scheduler: "Run whether user is logged on or not" executes in session 0 —
+# a console there has no desktop to flash on. Otherwise the job can flash at its tick.
+</code></pre>
+
+<h2 id="verify">Verify the fix — the 15‑minute protocol</h2>
+<p>“I fixed it and the flashes stopped” is not evidence: you may have killed the feature, or the fixed code may not be loading at all (dead code cannot flash). Prove three things, in this order.</p>
+
+<h3>0. Baseline and heartbeat</h3>
+<pre><code>pythonw console_watch_cal.py --duration 900 --out watch.jsonl</code></pre>
+<p>The watcher enumerates visible top‑level windows every 80 ms, baselines what already exists, and appends only <em>new</em> windows — each with window class, title, pid, PEB command line, and the parent chain up to the launcher. It writes a heartbeat every 30 s so a dead watcher is visible in the log instead of silently proving “all clear”.</p>
+
+<h3>1. Prove the watcher is not blind (A/B canary)</h3>
+<pre><code>pythonw console_watch_cal.py --negctl --out negctl.jsonl</code></pre>
+<p>The canary spawns a control console window (<code>cmd.exe … ping</code>), waits for it, and then the same call with <code>CREATE_NO_WINDOW</code>. Expected verdict: <code>default_spawn_windows &gt; 0</code> and <code>create_no_window_windows == 0</code> — <code>"watcher_not_blind": true</code>.</p>
+<div class="warn"><strong>False‑negative trap.</strong> If you launch the canary from a <em>console‑attached</em> shell (a normal terminal‑hosted <code>python.exe</code>), the control <code>cmd</code> child <em>inherits</em> that console — no new window appears and both probes read 0/0. Run the canary under <code>pythonw.exe</code>, or force a brand‑new console for the control with <code>cmd /c start "" cmd /c "ping -n 4 127.0.0.1 &gt;nul"</code> from the same shell — the new window must be caught. A 0/0 canary is <em>inconclusive</em>, never “clean”.</div>
+
+<h3>2. The interception window</h3>
+<p>Run the watcher for ≥15 minutes while the estate is genuinely active (your normal work — hooks firing, agents reading files, builds running). Verdicts:</p>
+<ul>
+  <li><strong>0 new visible windows</strong> with heartbeats throughout → the spawn surface is quiet. Cross‑check with step 0’s baseline and the canary from step 1.</li>
+  <li><strong>Any window</strong> → name it from the JSONL: cmdline (PEB), parent chain, class, elapsed. Fix that spawn or file it; do not average it away.</li>
+</ul>
+
+<h3>3. Prove the fix did not revert</h3>
+<pre><code># live copy vs second deploy copy vs the canonical repo HEAD — CRLF-normalized
+python byte_match_3way.py --live C:/Users/you/.config/app/live \
+    --deploy C:/Users/you/deploy/app --repo C:/src/app \
+    --file hooks/guard.ts --file hooks/probe.ts
+</code></pre>
+<p>Exit 0 means every copy carries the same bytes (after CRLF→LF normalization — a CRLF difference is an EOL artifact, not a revert). Exit 1 names every drifted file. Run it <em>before and after</em> the interception window: a mid‑run revert (a sync job copying a stale “losing copy” over your fix) shows up as a byte change.</p>
+
+<h2 id="traps">Traps worth knowing</h2>
+<table>
+<tr><th>Trap</th><th>What to do</th></tr>
+<tr><td>Dead code cannot flash — “quiet” may mean the fixed plugin never loads.</td><td>Check that the component actually loads at boot (logs often show module‑load errors). A boot‑rejected plugin looks exactly like a perfectly fixed one.</td></tr>
+<tr><td>A sync/backup job copies an unfixed copy over the fix.</td><td>Register the fixed call sites in a guard the sync honors in <em>both</em> directions, or make the sync refuse copies with fewer hidden‑call sites. Then run the byte‑match before/after.</td></tr>
+<tr><td>Third‑party updaters overwrite your live patch.</td><td>Fix it upstream in the owning repo; keep a local patch only as a stopgap and re‑verify after every update.</td></tr>
+<tr><td>Broker / higher‑integrity processes give an empty PEB command line.</td><td>The parent chain still resolves — attribute via ancestry, not cmdline, for those windows.</td></tr>
+<tr><td>Scheduled tasks tick outside your window.</td><td>Check the schedule (next‑run time) before declaring the system quiet; a task at 06:30 cannot be caught by a 15‑minute evening run.</td></tr>
+<tr><td>The control flash and the suppressed spawn disagree with a real estate spawn.</td><td>That is the point: the canary must reproduce <em>both</em> outcomes (visible window / none) under your exact session and window station.</td></tr>
+</table>
+
+<h2 id="files">Download</h2>
+<div class="files">
+  <a href="console_watch_cal.py" download>console_watch_cal.py</a> — window watcher + A/B canary (239 lines, stdlib + ctypes only)
+  <a href="byte_match_3way.py" download>byte_match_3way.py</a> — three-place, CRLF‑normalized byte‑match (exit 0 / 1)
+</div>
+<p>Both scripts are dependency‑free, read‑only, and write only the JSONL you name. Python 3.8+ on Windows; the watcher uses <code>ctypes</code> and touches the Win32 API (EnumWindows, Toolhelp32, NtQueryInformationProcess).</p>
+
+<h2 id="method">Method notes</h2>
+<ul>
+  <li>Measure in <em>your</em> window station: the watcher must run in the same desktop context as the tooling you are judging.</li>
+  <li>15 minutes minimum, with the estate active; 30‑s heartbeats make silence auditable.</li>
+  <li>Keep the raw JSONL: it is the receipt (timestamp, pid, class, cmdline, ancestry) that lets anyone re‑check your claim.</li>
+  <li>Verify <em>after</em> the fix with the same instruments you used <em>before</em> it — otherwise you are comparing a measurement to a memory.</li>
+</ul>
+
+<footer>
+  MIT License · © 2026 Dr. Mārcis Gasūns · <a href="https://github.com/gasyoun/gasyoun.github.io">source repo</a>. Built while eliminating a tooling‑wide console‑flash surface on Windows: two merged fix waves, a both‑directions sync guard, and a 15‑minute zero‑window interception receipt with a proven‑not‑blind watcher.
+</footer>
+</main>
+</body>
+</html>
