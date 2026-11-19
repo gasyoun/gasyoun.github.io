@@ -2,6 +2,11 @@
 
 Формат: дата · хендофф · что изменилось. Новые записи сверху.
 
+## 19-11-2026 — ветки: `main` ретирована, её контент сведён на master (GTD YKR, рулинг A)
+
+- **Изменено:** `main` был decoy-веткой PR-intake (squash-diverged с 16-08, никогда не публиковалась). Реальный контент сведён на `master` одним PR: строгий staleness-чекер H2854 step-5 (d56a147), `vote/index.html` (H2898 harvest triage) и 3 листа (h215_gold_full_320, h2805_q3_deploy — H2854 step-6 regen; nilakantha_licence_46 — H2883). Остальное на main: stray `index2.html` (не взято), typo-переименование `reverse20-ouput/` (не взято — на master правильное `reverse20-output/`), копия MSI-страницы (уже публикуется с master, `e71dce5` удалил её как ошибку). Реф сохранён как `archive/main-diverged-19-11`, ветка `main` удалена; AGENTS.md получил секцию Branches («truth = master»).
+- **Ожидаемо красный CI:** staleness-чек на master теперь строгий (H3848-смягчение снято H2854) и честно светит на листы, сгенерированные csl-pyutil 0.13.0 при актуальной 0.25.0 (uprava_gtd_harvest_triage_22, uprava_h2868_stubs) и на листы без meta-тега (renou_hypotheses_v2, rv_divergence_gate_v5, uprava_gtd_harvest_66). Реген-волна на 0.25.0 — GTD-строка (YKR residuals).
+
 ## 08-11-2026 — /cpu/: auto-refresh lane (H7869)
 
 - **Изменено:** [cpu/](https://gasyoun.github.io/cpu/) больше не статичный снимок — почасовая launchd-лейна `ml.gasyoun.cpu-page` (Air, H7869; net-speed-log v1.1.0, PR gasyoun/net-speed-log#23) рендерит `--fleet` из свежего `origin/main` net-speed-log и публикует `cpu/index.html` push-if-changed: `generated <TS>` штамп выведен из diff-гейта (без timestamp-спама), неудавшийся пуш ретраится следующим интервалом. Первый автопуш: `cpu page auto-refresh 2026-11-08T12:51:45Z (H7869 hourly lane)`.
