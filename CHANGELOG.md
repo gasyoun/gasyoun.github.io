@@ -2,6 +2,11 @@
 
 Формат: дата · хендофф · что изменилось. Новые записи сверху.
 
+## 19-11-2026 — YLO: два live-parked листа закрыты чат-голосом MG (записи сняты из реестра)
+
+- **Сняты из `live_parked` (запись уходит в момент применения голоса — контракт реестра):** [uprava_docs-fixwaves_judgment-links_05-09-26](https://gasyoun.github.io/vote/sheets/uprava_docs-fixwaves_judgment-links_05-09-26.html) — **7/7 «Применить»** (F1–F5 масс-волны + F6 класс закрыт без прогона + F7 BookIndex признан генерённым контентом) и [uprava_skill_scan_adopt_h5129_18-09-26](https://gasyoun.github.io/vote/sheets/uprava_skill_scan_adopt_h5129_18-09-26.html) — **6/6 approve** (S1–S6 adopt-parts). Генераторы обоих листов ретированы рулингом 0K8 (MG 28-09) — реген невозможен, поэтому закрытие шло чат-голосом MG 19-11 (GTD row YLO, интерактив ≤4 карты/вызов), а хаб-копии остаются архивным record; карточки продублированы в Uprava-аудите `reports/DECISIONS_APPLIED_YL0_CHAT_19-11-2026.md`.
+- **После снятия:** `live_parked` — ровно пять листов, все ждут unblock-юнитов (GTD row YLQ: compound_rules_30, systema_nkrya, pwg_c2p2 + h3361, h180_reglue_v7); применение вердиктов — хендоффы [H8479](https://github.com/gasyoun/Uprava/blob/main/handoffs/H8479-GLM_Uprava_docs-fixwaves-apply-chat-vote_19.11.26.md) (масс-волны) + [H8480](https://github.com/gasyoun/Uprava/blob/main/handoffs/H8480-GLM_claude-config_skill-scan-adopt-h5129-apply_19.11.26.md) (adopt-parts); decisions.json — в `Uprava/review/` (локально, gitignored).
+
 ## 19-11-2026 — YL3: реген-волна листов на csl-pyutil 0.25.0 + строгий чек, скованный с LIVE-реестром (рулинг A)
 
 - **Реген (9 хаб-файлов):** [h215_gold_full_320](https://gasyoun.github.io/vote/sheets/h215_gold_full_320.html) (+32 пака H3098 в `vote/sheets/h215_gold_full_320/`), h2805_q3_deploy, rv_divergence_gate_v5, renou_hypotheses_v2 + байт-идентичный дубль renou_pilot_v2_h062, nilakantha_licence_46, uprava_h2868_stubs, h3863_giveback_slot_conflicts + дубль kosha-giveback-slot-conflicts_h3863_review — пересобраны их закоммиченными генераторами на 0.25.0; SHEET_ID/STORE_KEY/карточки не изменились (голоса в localStorage выживают); evidence h215 байт-идентичен опубликованному (263/138/252/320 из 320). Компаньон: [SanskritLexicography #2521](https://github.com/gasyoun/SanskritLexicography/pull/2521) (4 лока + 2 committed HTML).
