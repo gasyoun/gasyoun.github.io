@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="color-scheme" content="dark">
-<meta name="generator" content="csl-pyutil/0.23.0">
+<meta name="generator" content="csl-pyutil/0.25.0">
 <title>csl-inflect give-back — slot-conflict validation (kosha A3) — 40 items</title>
 <style>
   :root { color-scheme: dark; --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --text:#e6e6e6; --muted:#9aa0aa;
@@ -138,7 +138,7 @@
 <header class="top">
   <div>
     <h1>csl-inflect give-back — slot-conflict validation (kosha A3) — 40 items</h1>
-    <div class="sub">Generated 06-09-2026 &middot; sheet_id <code>kosha-giveback-slot-conflicts_h3863</code> &middot; 40 of 2,212 slot-conflicts, highest-attestation first. In each, the corpus and the generator disagree about the SAME paradigm cell. Approving ships the row upstream; a high reject rate stops the hand-off. The other 3,012 triaged rows are machine-resolved and are deliberately NOT on this sheet.</div>
+    <div class="sub">Generated 19-11-2026 &middot; sheet_id <code>kosha-giveback-slot-conflicts_h3863</code> &middot; 40 of 2,212 slot-conflicts, highest-attestation first. In each, the corpus and the generator disagree about the SAME paradigm cell. Approving ships the row upstream; a high reject rate stops the hand-off. The other 3,012 triaged rows are machine-resolved and are deliberately NOT on this sheet.</div>
   </div>
   <div class="tally" id="tally">
     <span class="approve">&#9989; <span class="count" id="c-approve">0</span></span>
@@ -695,7 +695,7 @@
 (function () {
   var SHEET_ID = "kosha-giveback-slot-conflicts_h3863";
   var STORE_KEY = 'review-sheet:' + SHEET_ID;
-  var GENERATED = "06-09-2026";
+  var GENERATED = "19-11-2026";
   var ids = ["sc-tv\u0101t", "sc-r\u0101j\u00f1", "sc-striya\u1e25", "sc-\u015briya\u1e43", "sc-striya\u1e43", "sc-tv\u0101ya", "sc-striy\u0101\u1e25", "sc-\u015briya\u1e25", "sc-dhiy\u0101", "sc-hem", "sc-kasmin", "sc-madhyata\u1e25", "sc-dev\u0101sa", "sc-tattvata\u1e25", "sc-prayatnata\u1e25", "sc-duhitr\u012b", "sc-striyo", "sc-kasmai", "sc-vyom", "sc-dhiya\u1e43", "sc-striy\u0101\u1e43", "sc-n\u0101mata\u1e25", "sc-dharmata\u1e25", "sc-kas", "sc-n\u0101mbhi\u1e25", "sc-patra\u1e25", "sc-agrata\u1e25", "sc-duhitry\u0101\u1e25", "sc-jan\u0101sa\u1e25", "sc-patr\u0101\u1e47i", "sc-chatra\u1e43", "sc-bh\u016by\u0101n", "sc-patra\u1e43", "sc-jy\u0101y\u0101n", "sc-pitar\u0101", "sc-sakh\u0101yam", "sc-mahitv\u0101", "sc-b\u0101huvo\u1e25", "sc-bhago", "sc-devebhi\u1e25"];
   var state = {};
   try { state = JSON.parse(localStorage.getItem(STORE_KEY) || '{}') || {}; } catch (e) { state = {}; }
@@ -739,7 +739,7 @@
   document.getElementById('downloadBtn').addEventListener('click', function () {
     ids.forEach(function (id) { syncNoteFromDom(id); });
     var decided = ids.filter(function (id) { return state[id] && state[id].decision; }).length;
-    var payload = { sheet_id: SHEET_ID, generated: "06-09-2026", decided: decided, time_total_seconds: __timeTotal(),
+    var payload = { sheet_id: SHEET_ID, generated: "19-11-2026", decided: decided, time_total_seconds: __timeTotal(),
       items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '', time_seconds: __timeFor(id) }; }) };
     var blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
     var url = URL.createObjectURL(blob); var a = document.createElement('a');
@@ -775,7 +775,11 @@
     e.preventDefault();
   });
 
-  var saveHandle = null, saveTimer = null;
+  var saveHandle = null, saveTimer = null, saveWritePending = 0;
+  var saveWriteChain = Promise.resolve();
+  var SAVE_SAVING = 'Saving…';
+  var SAVE_SAVED = 'Saved';
+  var SAVE_FAILED = 'Save failed — retry';
   function exportPayload() {
     if (typeof syncNoteFromDom === 'function') {
       ids.forEach(function (id) { syncNoteFromDom(id); });
@@ -785,13 +789,34 @@
     return JSON.stringify({ sheet_id: SHEET_ID, generated: nowIso, reviewedAt: nowIso, decided: decided, time_total_seconds: __timeTotal(),
       items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '', time_seconds: __timeFor(id) }; }) }, null, 2);
   }
+  function flushAutosave() {
+    if (!saveHandle) return Promise.resolve(false);
+    clearTimeout(saveTimer);
+    var payload = exportPayload();
+    saveWritePending++;
+    var writeJob = saveWriteChain.then(function () {
+      return saveHandle.createWritable().then(function (writable) {
+        return writable.write(payload).then(function () { return writable.close(); });
+      });
+    });
+    var tracked = writeJob.then(function () {
+      saveWritePending--; return true;
+    }, function (error) {
+      saveWritePending--; throw error;
+    });
+    saveWriteChain = tracked.catch(function () {});
+    return tracked;
+  }
+  function saveStatus(message) {
+    var saveBtn = document.getElementById('saveBtn');
+    if (saveBtn) saveBtn.textContent = message;
+  }
   function scheduleAutosave() {
     if (!saveHandle) return;
     clearTimeout(saveTimer);
     saveTimer = setTimeout(function () {
-      saveHandle.createWritable().then(function (w) {
-        w.write(exportPayload()).then(function () { w.close(); });
-      }).catch(function () {});
+      flushAutosave().then(function () { saveStatus(SAVE_SAVED); })
+        .catch(function () { saveStatus(SAVE_FAILED); });
     }, 1000);
   }
   var _origSave = save;
@@ -801,10 +826,19 @@
     saveBtn.style.display = '';
     saveBtn.addEventListener('click', function () {
       window.showSaveFilePicker({suggestedName: SHEET_ID + '_decisions.json'}).then(function (h) {
-        saveHandle = h; scheduleAutosave();
-      }).catch(function () {});
+        saveHandle = h; saveStatus(SAVE_SAVING); return flushAutosave();
+      }).then(function (saved) {
+        if (saved) saveStatus(SAVE_SAVED);
+      }).catch(function (error) {
+        if (!error || error.name !== 'AbortError') saveStatus(SAVE_FAILED);
+      });
     });
   }
+  window.addEventListener('beforeunload', function (event) {
+    if (!saveWritePending) return;
+    event.preventDefault();
+    event.returnValue = '';
+  });
 
   var FS_KEY = STORE_KEY + ':fs', FS_DEFAULT = 1.5;
   function fsGet() {
