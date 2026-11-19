@@ -1,0 +1,32 @@
+{
+  "_doc": "LIVE vote-sheet registry for scripts/check_sheet_staleness.py (YL3 regen wave, MG ruling A 19-11-2026 — strict-on-live). live = open voting surfaces awaiting MG; a stale or meta-less live sheet FAILS CI. live_parked = live sheets that cannot be re-rendered today, each with its blocker and resolution path; reported as a loud WARN, never a fail. frozen/archived = never scanned. Everything else hosted under vote/sheets/ (closed decision records, superseded drafts, pre-vote triage pipelines) is logged as a regen queue, never a fail. A sheet hosted with current csl-pyutil passes by construction — register it under 'live' in the SAME pass that hosts it (the /review-sheet Phase 3-bis step), and drop the entry the moment its vote applies.",
+  "live": {
+    "h215_gold_full_320": "G6 gold 320 (H2769) — open vote; regen'd 0.25.0 19-11 (YL3)",
+    "h2805_q3_deploy": "H2805 Q3 comp-graphic deploy, 7 cards — open vote; regen'd 0.25.0 19-11 (YL3)",
+    "rv_divergence_gate_v5": "RV divergence R15 calibration gate (H1844) — unvoted since 29-07, unlocks the 10,552-stanza run; regen'd 0.25.0 19-11 (YL3)",
+    "renou_hypotheses_v2": "Renou Step-0 pilot v2 (H1311) — open vote; regen'd 0.25.0 19-11 (YL3)",
+    "renou_pilot_v2_h062": "byte-identical twin hub copy of renou_hypotheses_v2 (same sheet_id, H5165 publish); updated with the same render",
+    "nilakantha_licence_46": "Nilakantha licence register vote (H2860) — open; regen'd 0.25.0 19-11 (YL3)",
+    "uprava-decide-debt-a_22-10-2026_review": "H7132 window A — MG voted 30-10, awaiting /decisions-apply",
+    "uprava-decide-debt-b_22-10-2026_review": "H7132 window B — MG voted 30-10, awaiting /decisions-apply",
+    "h3863_giveback_slot_conflicts": "kosha A3 give-back slot-conflict validation, 40 cards — open vote; regen'd 0.25.0 19-11 (YL3)",
+    "kosha-giveback-slot-conflicts_h3863_review": "byte-identical twin hub copy of h3863_giveback_slot_conflicts (same sheet_id)"
+  },
+  "live_parked": {
+    "compound_rules_30": "generator predates the H1649 screening gate — render_review_sheet(extras=True) refuses without screening= on 0.25.0; unblock = generator migration unit",
+    "systema_nkrya_gloss_lint_rare_swaps_23-09-2026": "0.25.0 SLP1-in-prose preflight fires on 'anarTa'; unblock = generator emits IAST in prose (a content edit — separate unit, no silent rewording)",
+    "pwg_c2p2_work_dating_11": "published copy carries the H4116 wave-4 agent-evidence panel (card C2P2-D1) that the base builder render drops; unblock = re-run the evidence-remake layer over a 0.25.0 render",
+    "h3361_window25_review": "H4116 agent-evidence panel (card Boktavya) + the gita-pairs input lives only on the MSI box (D:\\Tools\\wisdomlib-scrape); unblock = that data + the remake layer",
+    "h180_reglue_v7": "reglue input jsons (untracked H180-lane artifacts) evaporated; PWG_RU_DATA_ROOT tree no longer resolvable — a re-cut is a new lane, not a regen",
+    "uprava_docs-fixwaves_judgment-links_05-09-26": "generator retired by the 0K8 orphan-tool ruling (MG 28-09); <=10 cards — closable by an MG chat vote per the 04-09 lane",
+    "uprava_skill_scan_adopt_h5129_18-09-26": "generator retired by the 0K8 orphan-tool ruling (MG 28-09); 6 cards — closable by an MG chat vote per the <10-card lane"
+  },
+  "frozen": {
+    "h1210_ab_blind_40": "frozen pending @DECIDE H2778 (H2852)"
+  },
+  "archived": {
+    "h180_learner": "archived/outdated (H2852)",
+    "h180_reglue": "archived — superseded by h180_reglue_v2 (H2852: \"h180_reglue v1\")",
+    "h180_typology": "archived/outdated (H2852)"
+  }
+}

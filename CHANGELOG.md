@@ -2,6 +2,12 @@
 
 Формат: дата · хендофф · что изменилось. Новые записи сверху.
 
+## 19-11-2026 — YL3: реген-волна листов на csl-pyutil 0.25.0 + строгий чек, скованный с LIVE-реестром (рулинг A)
+
+- **Реген (9 хаб-файлов):** [h215_gold_full_320](https://gasyoun.github.io/vote/sheets/h215_gold_full_320.html) (+32 пака H3098 в `vote/sheets/h215_gold_full_320/`), h2805_q3_deploy, rv_divergence_gate_v5, renou_hypotheses_v2 + байт-идентичный дубль renou_pilot_v2_h062, nilakantha_licence_46, uprava_h2868_stubs, h3863_giveback_slot_conflicts + дубль kosha-giveback-slot-conflicts_h3863_review — пересобраны их закоммиченными генераторами на 0.25.0; SHEET_ID/STORE_KEY/карточки не изменились (голоса в localStorage выживают); evidence h215 байт-идентичен опубликованному (263/138/252/320 из 320). Компаньон: [SanskritLexicography #2521](https://github.com/gasyoun/SanskritLexicography/pull/2521) (4 лока + 2 committed HTML).
+- **Рулинг A (MG 19-11, форк YL3 «H3848-смягчение vs H2854-строгость»):** exit-1 теперь только для stale LIVE-листов — [scripts/live_vote_sheets.json](https://github.com/gasyoun/gasyoun.github.io/blob/master/scripts/live_vote_sheets.json) (10 live · 7 live_parked · 4 frozen/archived); закрытые decision-records — regen-queue в логе (91), никогда фейл; live_parked — громкий WARN с причиной и путём разблокировки. Позитив/негатив-проба: pinned 0.25.0 → rc 0; pinned 0.26.0 → rc 1 (STALE LIVE секция фейлит).
+- **Не перевыпущены (доктрина H2852 — не собирать руками):** uprava_gtd_harvest_triage_22 (строитель читает живой GTD-харвест — исторические входы не закоммичены, реген дал бы другой лист) и uprava_gtd_harvest_66 (ручная вырезка H2888, генератора нет) — закрытые голосованные записи, остаются в очереди.
+
 ## 19-11-2026 — ветки: `main` ретирована, её контент сведён на master (GTD YKR, рулинг A)
 
 - **Изменено:** `main` был decoy-веткой PR-intake (squash-diverged с 16-08, никогда не публиковалась). Реальный контент сведён на `master` одним PR: строгий staleness-чекер H2854 step-5 (d56a147), `vote/index.html` (H2898 harvest triage) и 3 листа (h215_gold_full_320, h2805_q3_deploy — H2854 step-6 regen; nilakantha_licence_46 — H2883). Остальное на main: stray `index2.html` (не взято), typo-переименование `reverse20-ouput/` (не взято — на master правильное `reverse20-output/`), копия MSI-страницы (уже публикуется с master, `e71dce5` удалил её как ошибку). Реф сохранён как `archive/main-diverged-19-11`, ветка `main` удалена; AGENTS.md получил секцию Branches («truth = master»).
