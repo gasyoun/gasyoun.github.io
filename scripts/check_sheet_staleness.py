@@ -34,14 +34,16 @@ Exit codes:
     1 - at least one LIVE sheet is stale or missing the meta tag entirely
     2 - could not determine the latest csl-pyutil release (network/API error)
 
-No GitHub token is required: sanskrit-lexicon/csl-pyutil is a public repo and
-the unauthenticated GitHub API rate limit (60 req/hour per IP) is more than
-enough for a weekly/on-push CI check.
+No secret is configured: local runs need no token (the unauthenticated
+GitHub API rate limit, 60 req/hour per IP, is more than enough), and CI
+uses the automatic per-repo ``GITHUB_TOKEN`` because shared hosted runners
+often exhaust the unauthenticated API pool.
 """
 
 from __future__ import annotations
 
 import json
+import os
 import re
 import sys
 import urllib.error
@@ -68,14 +70,22 @@ GENERATOR_META_RE = re.compile(
 
 
 def fetch_latest_csl_pyutil_version() -> str:
-    """Return the latest csl-pyutil release tag (without the leading 'v')."""
-    req = urllib.request.Request(
-        LATEST_RELEASE_API,
-        headers={
-            "Accept": "application/vnd.github+json",
-            "User-Agent": "gasyoun.github.io-sheet-staleness-check",
-        },
-    )
+    """Return the latest csl-pyutil release tag (without the leading 'v').
+
+    Unauthenticated is fine locally (60 req/hour per IP), but GitHub-hosted
+    runners share exhausted unauthenticated API pools and 403 often (seen
+    19-11-2026, run 44544163628). The workflow passes the automatic
+    ``GITHUB_TOKEN`` (per-repo quota, no secret management); any bearer token
+    in ``CSL_PYUTIL_GITHUB_TOKEN`` / ``GITHUB_TOKEN`` is used when present.
+    """
+    headers = {
+        "Accept": "application/vnd.github+json",
+        "User-Agent": "gasyoun.github.io-sheet-staleness-check",
+    }
+    token = os.environ.get("CSL_PYUTIL_GITHUB_TOKEN") or os.environ.get("GITHUB_TOKEN")
+    if token:
+        headers["Authorization"] = f"Bearer {token}"
+    req = urllib.request.Request(LATEST_RELEASE_API, headers=headers)
     with urllib.request.urlopen(req, timeout=30) as resp:
         data = json.load(resp)
     tag = data["tag_name"]

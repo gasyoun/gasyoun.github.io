@@ -32,3 +32,9 @@ jobs:
 
       - name: Run staleness check
         run: python scripts/check_sheet_staleness.py
+        env:
+          # Automatic per-repo token: unauthenticated api.github.com calls
+          # from shared hosted runners 403 often (rate pool exhausted,
+          # 19-11-2026). Reading a public repo's releases needs no extra
+          # permission; local runs stay tokenless.
+          CSL_PYUTIL_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
