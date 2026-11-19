@@ -1,6 +1,6 @@
 # AGENTS.md — gasyoun.github.io
 
-_Created: 13-09-2026 · Last updated: 15-09-2026_
+_Created: 13-09-2026 · Last updated: 19-11-2026_
 
 ## Tool manifest
 
@@ -21,6 +21,19 @@ _Created: 13-09-2026 · Last updated: 15-09-2026_
   ([dual-run ledger](https://github.com/gasyoun/gasyoun.github.io/blob/master/scripts/campus/MASTERY_DUALRUN_2026-09-14.md)).
 - Census: tracked by [module-spread census v2](https://github.com/gasyoun/Uprava/blob/main/data/module_spread_census_v2.json)
   (`mcp_config` marker, H4525).
+
+## Branches (truth since 19-11-2026 — GTD YKR ruling A)
+
+- `master` is the ONLY truth: default branch AND the GitHub Pages source. The
+  hourly refresh lanes (cpu-page H7869, public handoff-status, estate-site)
+  commit and push it directly; the site deploys from it.
+- `main` was a decoy PR-intake branch (squash-diverged since 16-08, never
+  published); retired 19-11-2026 — real content converged onto `master`, ref
+  preserved as `archive/main-diverged-19-11`. Do NOT recreate it; do NOT
+  hand-pick a non-default base when opening PRs — land on `master`.
+- A push-loop/rebase for this repo targets `origin/master` (the repo's actual
+  default), never a hardcoded `main`; the retired main history is a
+  1450-pick rebase wall by construction.
 
 ## Memory store
 
