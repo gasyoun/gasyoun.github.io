@@ -1,6 +1,6 @@
 # DATA_LAYERS_CENSUS.md — the data we own but never counted
 
-_Created: 06-07-2026 · Last updated: 20-11-2026_
+_Created: 06-07-2026 · Last updated: 21-11-2026_
 
 **Purpose.** A QA/gap-finding census of the **data layers** across the ~85 canonical
 repos, built by harvesting the filesystem (not the curated inventory). Where
@@ -550,6 +550,27 @@ HERE, not in the kosha manifest.
 | `docs/board/BOARD_DIGEST_2*.md` (70 dated digests) | 1.8 MB | `~/Documents/DataLake/Uprava/digests/archive/` | superseded by keep-14 rotation; the in-repo surface is now `BOARD_DIGEST_latest.md` only |
 | `telegram-zabota-export/` (5 analysis derivatives) | 44 KB | `~/Documents/DataLake/Uprava/_quarantine/telegram-zabota-export/` | **152-FZ personal data — never published, never re-added to git, never registered in kosha** |
 | NEW: dated digests + fleet TSV snapshots (launchd-written) | rolling ≤14 | `~/DataLake/Uprava/digests/` (TCC-safe tier) | keep-14 rotation, `tools/digest_lake.py`; `UNFINISHED_SWEEP` dated family rotates git-side on origin instead (MSI schtask box has no `~/DataLake`) |
+
+Recovery for every evicted path: the git history (pre-eviction commits) plus
+the lake copy; the janitor moves bytes same-volume (rename, no duplication).
+
+## 11 · H8512 lake eviction wave 2 — closed/evidence bulk out of git for the Veche baseline (21-11-2026)
+
+Same two tiers, same rule. This wave exists because the phase-2 trial
+measurement showed the full control-plane carry set at **314 MB whole-clone**
+(tree 202 MB + `.git` 112 MB) against the D1 **≤200 MB** budget — the trim
+is mechanical, not editorial: closed archive shards, dated one-off evidence
+packs and dated data dumps. Everything hand-authored and live (tools code,
+ledgers, GTD surfaces, hub docs, the sharded registry index
+`docs/coverage_dashboard/` — regenerated-in-place per `regen.yml`) STAYED
+in git. Kosha: zero rows again — closed internal work records, not
+published datasets.
+
+| What (ex-git since 21-11-2026) | Size | Lake home (tier) | Class / why |
+|---|---|---|---|
+| `docs/evidence/` + `docs/evidence_h4017/` + `docs/evidence_h3348/` (289 files) | 20.5 MB | `~/Documents/DataLake/Uprava/reports/docs-evidence/` | dated one-off evidence packs — same class as the §10 `reports/` row; their H-specific reader tools are closed lanes, blobs resolve on archived Uprava forever (D2) |
+| `data/` dated one-off dumps (40 files: h4597/h5250 prod dumps + backfill manifests/inventories, link audits, debtor registry snapshot, hygiene/census/sheet one-offs) | 13.4 MB | `~/Documents/DataLake/Uprava/data/h8512-dated-dumps/` | dated regenerable snapshots — same class as the §10 hygiene trio. NOT moved: `data/backfill_issue_ledger.json` (live `tools/backfill_issues.py` state, restored), hermes `*_fixture_*` files (live test fixtures), ISO-dated audit files (consumer risk, no budget need) |
+
 
 Recovery for every evicted path: the git history (pre-eviction commits) plus
 the lake copy; the janitor moves bytes same-volume (rename, no duplication).
