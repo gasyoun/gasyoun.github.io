@@ -13,16 +13,16 @@
     "kosha-giveback-slot-conflicts_h3863_review": "byte-identical twin hub copy of h3863_giveback_slot_conflicts (same sheet_id)",
     "compound_rules_30": "PWG compound-rules ratification vote (H1887/H1681) — 30 cards over 8 adjudicator rules (live TSV; historical texts said 7), open vote; generator migrated past the H1649 screening gate (SanskritLexicography #2523) + 0.25.0 regen 20-11 (YLQ)",
     "pwg_c2p2_work_dating_11": "C2 phase-2 work-dating vote (H3790), 11 contested datings — open vote; regen'd 0.25.0 + H4116 remake layer 20-11 (YLQ, SanskritLexicography #2522)",
-    "systema_nkrya_gloss_lint_rare_swaps_23-09-2026": "NKRYa rare-swaps gloss vote — open vote; IAST prose fix (Systema #4339) + 0.25.0 regen 20-11 (YLQ); DATA REFRESH: 4 vote cards (new anarTa→anartha subhashita SWAP card — pack drifted since 23-09; parked copy was 3)"
+    "systema_nkrya_gloss_lint_rare_swaps_23-09-2026": "NKRYa rare-swaps gloss vote — open vote; IAST prose fix (Systema #4339) + 0.25.0 regen 20-11 (YLQ); DATA REFRESH: 4 vote cards (new anarTa→anartha subhashita SWAP card — pack drifted since 23-09; parked copy was 3)",
+    "h180_reglue_v8": "H180 reglue spotcheck re-cut (MG ruling 20-11 — new lane, not a regen) — 15 cards vs current pwg-ru-data store @d7bd02d, crit 2 090 ALL ∅, zero ⚑; v7 superseded; SanskritLexicography #2524; cut on 0.25.0 20-11 (YLQ)",
+    "h3361_window25_review": "H3361 window-25 draft review, 24 marked-locus cards — open vote; 0.25.0 re-render + H4116 remake 20-11 (YLQ); gita pairs re-derived on Mac from the committed vps92 parity copy (pwg-ru-data #17 — 604 pairs, 603/603 byte-identical vs MSI 23-08 file, +1 new key 14.20 recorded, sheet impact zero)"
   },
-  "live_parked": {
-    "h3361_window25_review": "H4116 agent-evidence panel (card Boktavya) + the gita-pairs input lives only on the MSI box (D:\\Tools\\wisdomlib-scrape); unblock = that data + the remake layer",
-    "h180_reglue_v7": "reglue input jsons (untracked H180-lane artifacts) evaporated; PWG_RU_DATA_ROOT tree no longer resolvable — a re-cut is a new lane, not a regen"
-  },
+  "live_parked": {},
   "frozen": {
     "h1210_ab_blind_40": "frozen pending @DECIDE H2778 (H2852)"
   },
   "archived": {
+    "h180_reglue_v7": "superseded by h180_reglue_v8 (YLQ re-cut 20-11, SanskritLexicography #2524; MG ruling — re-cut as a new lane, v7 vote never applied); hub copy stays as historical record",
     "h180_learner": "archived/outdated (H2852)",
     "h180_reglue": "archived — superseded by h180_reglue_v2 (H2852: \"h180_reglue v1\")",
     "h180_typology": "archived/outdated (H2852)"
