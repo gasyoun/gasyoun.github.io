@@ -1,6 +1,6 @@
 # DATA_LAYERS_CENSUS.md — the data we own but never counted
 
-_Created: 06-07-2026 · Last updated: 29-10-2026_
+_Created: 06-07-2026 · Last updated: 20-11-2026_
 
 **Purpose.** A QA/gap-finding census of the **data layers** across the ~85 canonical
 repos, built by harvesting the filesystem (not the curated inventory). Where
@@ -526,3 +526,30 @@ all **28,446** non-pair markers). Regenerate all four together with
 artifacts stay unchanged. Report:
 [PD_LOCUS_FIELDS_C2_2026-10-29.md](https://github.com/sanskrit-lexicon/csl-atlas/blob/main/reports/PD_LOCUS_FIELDS_C2_2026-10-29.md).
 
+
+## 10 · H8511 lake eviction — generated bulk out of git (20-11-2026)
+
+**Two tiers, one rule each.** `~/Documents/DataLake/Uprava/` is the
+human-reachable tier for corpora, registries, reports and quarantine.
+`~/DataLake/Uprava/digests/` is the **launchd-TCC-safe tier**: scheduled
+lanes have **no TCC grant for `~/Documents`** (house danger fact, 11-09-2026),
+so anything a launchd/schtask lane writes must land outside the protected
+tree — dated digests and fleet snapshots rotate there (keep-14,
+`tools/digest_lake.py`). Kosha got **zero** rows from this wave: every
+evicted corpus is rights-uncertain scraped material or local telemetry —
+not "published, fetchable" datasets, so per the F7 scope ruling they belong
+HERE, not in the kosha manifest.
+
+| What (ex-git since 20-11-2026) | Size | Lake home (tier) | Class / why |
+|---|---|---|---|
+| `data/hygiene_trackd_*` trio (secret_sweep/history/wt) | 111 MB | `~/Documents/DataLake/Uprava/data/` | regenerable hygiene telemetry, lane dead since 28-08 (H4137) |
+| `reports/` dated one-offs (1,727 files: H* evidence, sweeps, OCR, audit_probes) | ~29 MB | `~/Documents/DataLake/Uprava/reports/` | generated evidence; live surfaces (fleet TSVs, STATS_HUB, INDEX.md, freshness, GTD_GATE_LATENCY, UNFINISHED keep-14) STAYED in git |
+| `review/` root one-off HTML + specs + h4093_packs (NOT `review/weekly/`) | ~18 MB | `~/Documents/DataLake/Uprava/reports/review/` | grandfathered past the pre-existing `review/*` ignore; `review/weekly/` is the live decisions surface and stays |
+| `logs/` (worktree_gc evidence, dated h3* journals, hook telemetry) | 31 MB | `~/Documents/DataLake/Uprava/logs/` | local telemetry per the in-file doctrine; active append surfaces (`guard_firings.jsonl`, `hook_verdicts.log`, `verdict_cache.log`, `flagship_gate_receipts.jsonl`) stay on disk untracked |
+| `tools/` crawl artifacts (tools_generic_domain_census.json 17.9 MB, pr_review_archive_w45.newprs.jsonl 8.7 MB, h5546.newprs.jsonl 5.8 MB) | 32 MB | `~/Documents/DataLake/Uprava/exports/` | one-off API crawl outputs; the tool CODE stays in git |
+| `docs/board/BOARD_DIGEST_2*.md` (70 dated digests) | 1.8 MB | `~/Documents/DataLake/Uprava/digests/archive/` | superseded by keep-14 rotation; the in-repo surface is now `BOARD_DIGEST_latest.md` only |
+| `telegram-zabota-export/` (5 analysis derivatives) | 44 KB | `~/Documents/DataLake/Uprava/_quarantine/telegram-zabota-export/` | **152-FZ personal data — never published, never re-added to git, never registered in kosha** |
+| NEW: dated digests + fleet TSV snapshots (launchd-written) | rolling ≤14 | `~/DataLake/Uprava/digests/` (TCC-safe tier) | keep-14 rotation, `tools/digest_lake.py`; `UNFINISHED_SWEEP` dated family rotates git-side on origin instead (MSI schtask box has no `~/DataLake`) |
+
+Recovery for every evicted path: the git history (pre-eviction commits) plus
+the lake copy; the janitor moves bytes same-volume (rename, no duplication).
