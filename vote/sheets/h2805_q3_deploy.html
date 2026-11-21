@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="color-scheme" content="dark">
-<meta name="generator" content="csl-pyutil/0.25.0">
+<meta name="generator" content="csl-pyutil/0.25.1">
 <title>H2805 — развёртка графической пометы позиции в сложном слове (˚- / -˚) — 7 карточек</title>
 <style>
   :root { color-scheme: dark; --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --text:#e6e6e6; --muted:#9aa0aa;
@@ -149,14 +149,34 @@
   .votebar .spacer { flex:1 1 auto; }
   .card { scroll-margin-top:96px; }
   @media (max-width: 640px) { .voteprog { padding:6px 12px; } .votebar { padding:8px 12px; } }
+  /* V18 intro collapse (MG 21-11-2026): the header intro folds into one
+     compact line; the HUD (tally) rides beside it, outside the fold. */
+  header.top details.intro-collapse { flex:1 1 340px; min-width:0; }
+  details.intro-collapse > summary {
+    list-style:none; cursor:pointer; font-size:13px; font-weight:600;
+    color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    padding:1px 0; user-select:none; }
+  details.intro-collapse > summary::-webkit-details-marker { display:none; }
+  details.intro-collapse > summary .intro-tri {
+    display:inline-block; width:.9em; color:var(--muted);
+    transition:transform .12s ease; }
+  details.intro-collapse[open] > summary .intro-tri { transform:rotate(90deg); }
+  details.intro-collapse .intro-body { margin-top:6px; }
+  @media print {
+    details.intro-collapse { flex:1 1 100%; }
+    details.intro-collapse > summary { white-space:normal; overflow:visible; }
+  }
 </style>
 </head>
 <body>
 <header class="top">
-  <div>
+<details class="intro-collapse">
+<summary><span class="intro-tri">&#9656;</span> H2805 — развёртка графической пометы позиции в сложном слове (˚- / -˚) (7 шт.)</summary>
+<div class="intro-body">
     <h1>H2805 — развёртка графической пометы позиции в сложном слове (˚- / -˚) — 7 карточек</h1>
-    <div class="sub">Собрано 2026-08-15 &middot; sheet_id <code>h2805_q3_deploy</code> &middot; bound <code class="bindchip" title="content_hash — binds this sheet's decisions.json export to exactly this HTML">sha256:6c1402a82712…</code> &middot; Голос MG 15-08-2026 уже постановил ФОРМУ (кружок по Кочергиной, а не слова) — форма здесь не переголосуется, и отвергнутые C1/C2/C3 не переспрашиваются. Три вопроса развёртки: Слой (D) · Глиф (G) · Тултип (T). Approve ровно ОДНОГО варианта в каждой группе достаточно. Основание: font/render-отчёт H2805 + guide §6.3.</div>
-  </div>
+    <div class="sub">Собрано 2026-08-15 &middot; sheet_id <code>h2805_q3_deploy</code> &middot; bound <code class="bindchip" title="content_hash — binds this sheet's decisions.json export to exactly this HTML">sha256:4b7652c02cb9…</code> &middot; Голос MG 15-08-2026 уже постановил ФОРМУ (кружок по Кочергиной, а не слова) — форма здесь не переголосуется, и отвергнутые C1/C2/C3 не переспрашиваются. Три вопроса развёртки: Слой (D) · Глиф (G) · Тултип (T). Approve ровно ОДНОГО варианта в каждой группе достаточно. Основание: font/render-отчёт H2805 + guide §6.3.</div>
+    </div>
+  </details>
   <div class="tally" id="tally">
     <span class="approve">&#9989; <span class="count" id="c-approve">0</span></span>
     <span class="reject">&#10060; <span class="count" id="c-reject">0</span></span>
@@ -276,7 +296,7 @@
 <script>
 (function () {
   var SHEET_ID = "h2805_q3_deploy";
-  var CONTENT_HASH = "sha256:6c1402a827125467f85d71813b43b12df0e29acda22f12be822c1b9fef8fa37c";
+  var CONTENT_HASH = "sha256:4b7652c02cb9effdfc890ec96f9777bfa9e11485cd07c08818b69e09d81a615f";
   var STORE_KEY = 'review-sheet:' + SHEET_ID;
   var GENERATED = "2026-08-15";
   var ids = ["h2805-D1", "h2805-D2", "h2805-G1", "h2805-G2", "h2805-G3", "h2805-T1", "h2805-T2"];
@@ -806,6 +826,21 @@
   var __voteOrigTally = tally;
   tally = function () { __voteOrigTally(); __voteProgress(); };
   __voteProgress();
+  // V18: a closed <details> hides its content at the UA level — no CSS rule
+  // can undo that — so paper/PDF keeps the full intro by opening the element
+  // around the print and restoring the collapsed state after it.
+  (function () {
+    var __icEl = document.querySelector('details.intro-collapse');
+    if (!__icEl) return;
+    var __icWasOpen = false;
+    window.addEventListener('beforeprint', function () {
+      __icWasOpen = __icEl.hasAttribute('open');
+      if (!__icWasOpen) __icEl.setAttribute('open', '');
+    });
+    window.addEventListener('afterprint', function () {
+      if (!__icWasOpen) __icEl.removeAttribute('open');
+    });
+  })();
 })();
 </script>
 <div class="flowtoast" id="flowToast" role="status"></div>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="color-scheme" content="dark">
-<meta name="generator" content="csl-pyutil/0.25.0">
+<meta name="generator" content="csl-pyutil/0.25.1">
 <title>H180 · выборочная проверка склейки с учётом содержания (v8) — 15 карточек</title>
 <style>
   :root { color-scheme: dark; --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --text:#e6e6e6; --muted:#9aa0aa;
@@ -238,14 +238,34 @@
     .card-split { grid-template-columns: 1fr; }
     .col-de, .col-ru { max-height: none; }
   }
+  /* V18 intro collapse (MG 21-11-2026): the header intro folds into one
+     compact line; the HUD (tally) rides beside it, outside the fold. */
+  header.top details.intro-collapse { flex:1 1 340px; min-width:0; }
+  details.intro-collapse > summary {
+    list-style:none; cursor:pointer; font-size:13px; font-weight:600;
+    color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    padding:1px 0; user-select:none; }
+  details.intro-collapse > summary::-webkit-details-marker { display:none; }
+  details.intro-collapse > summary .intro-tri {
+    display:inline-block; width:.9em; color:var(--muted);
+    transition:transform .12s ease; }
+  details.intro-collapse[open] > summary .intro-tri { transform:rotate(90deg); }
+  details.intro-collapse .intro-body { margin-top:6px; }
+  @media print {
+    details.intro-collapse { flex:1 1 100%; }
+    details.intro-collapse > summary { white-space:normal; overflow:visible; }
+  }
 </style>
 </head>
 <body class="split-layout">
 <header class="top">
-  <div>
+<details class="intro-collapse">
+<summary><span class="intro-tri">&#9656;</span> H180 · выборочная проверка склейки с учётом содержания (v8) (15 шт.)</summary>
+<div class="intro-body">
     <h1>H180 · выборочная проверка склейки с учётом содержания (v8) — 15 карточек</h1>
-    <div class="sub">Собрано 2026-11-20 &middot; sheet_id <code>h180-reglue-spotcheck-v8-2026-11-20</code> &middot; bound <code class="bindchip" title="content_hash — binds this sheet's decisions.json export to exactly this HTML">sha256:21bf34279e01…</code> &middot; 15 пилотных карточек: слева исходный PWG с чипами вставки, справа русская склейка, разметка store за ссылкой. Типология, ссылки Cologne, цепочки NWS, свёртка переносов печатной колонки<span class="modeswitch"><input type="checkbox" id="modecompact"><label for="modecompact">компактно (печатная колонка)</label></span></div>
-  </div>
+    <div class="sub">Собрано 2026-11-20 &middot; sheet_id <code>h180-reglue-spotcheck-v8-2026-11-20</code> &middot; bound <code class="bindchip" title="content_hash — binds this sheet's decisions.json export to exactly this HTML">sha256:89d74fd3502b…</code> &middot; 15 пилотных карточек: слева исходный PWG с чипами вставки, справа русская склейка, разметка store за ссылкой. Типология, ссылки Cologne, цепочки NWS, свёртка переносов печатной колонки<span class="modeswitch"><input type="checkbox" id="modecompact"><label for="modecompact">компактно (печатная колонка)</label></span></div>
+    </div>
+  </details>
   <div class="tally" id="tally">
     <span class="approve">&#9989; <span class="count" id="c-approve">0</span></span>
     <span class="reject">&#10060; <span class="count" id="c-reject">0</span></span>
@@ -9134,7 +9154,7 @@ _f._ [R. 3,2,7.](https://sanskrit-lexicon-scans.github.io/ramayanagorr/?3,2,7) [
 <script>
 (function () {
   var SHEET_ID = "h180-reglue-spotcheck-v8-2026-11-20";
-  var CONTENT_HASH = "sha256:21bf34279e012292b09325621aac3c0329faa6fbbd0315be93396dfa8f6d2845";
+  var CONTENT_HASH = "sha256:89d74fd3502b56aca84cd3bec1cf5c31aeac23962f68d0683c6cb75e3a8736a3";
   var STORE_KEY = 'review-sheet:' + SHEET_ID;
   var GENERATED = "2026-11-20";
   var ids = ["reglue2::gA", "reglue2::Cid", "reglue2::Sam", "reglue2::jIv", "reglue2::rakz", "reglue2::vraj", "reglue2::yat", "reglue2::DA", "reglue2::Ap", "reglue2::Bid", "reglue2::Buj", "reglue2::banD", "reglue2::Sru", "reglue2::viS", "reglue2::siD"];
@@ -9838,6 +9858,21 @@ _f._ [R. 3,2,7.](https://sanskrit-lexicon-scans.github.io/ramayanagorr/?3,2,7) [
         var tgt = other.querySelector('[data-pair="' + pair + '"]');
         if (tgt && tgt.scrollIntoView) tgt.scrollIntoView({ block: 'nearest' });
       }
+    });
+  })();
+  // V18: a closed <details> hides its content at the UA level — no CSS rule
+  // can undo that — so paper/PDF keeps the full intro by opening the element
+  // around the print and restoring the collapsed state after it.
+  (function () {
+    var __icEl = document.querySelector('details.intro-collapse');
+    if (!__icEl) return;
+    var __icWasOpen = false;
+    window.addEventListener('beforeprint', function () {
+      __icWasOpen = __icEl.hasAttribute('open');
+      if (!__icWasOpen) __icEl.setAttribute('open', '');
+    });
+    window.addEventListener('afterprint', function () {
+      if (!__icWasOpen) __icEl.removeAttribute('open');
     });
   })();
 })();

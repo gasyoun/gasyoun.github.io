@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="color-scheme" content="dark">
-<meta name="generator" content="csl-pyutil/0.25.0">
+<meta name="generator" content="csl-pyutil/0.25.1">
 <title>RV · типология расхождений — калибровочный гейт (H1844, шаг 8) — 100 карточек</title>
 <style>
   :root { color-scheme: dark; --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --text:#e6e6e6; --muted:#9aa0aa;
@@ -151,14 +151,34 @@
   .votebar .spacer { flex:1 1 auto; }
   .card { scroll-margin-top:96px; }
   @media (max-width: 640px) { .voteprog { padding:6px 12px; } .votebar { padding:8px 12px; } }
+  /* V18 intro collapse (MG 21-11-2026): the header intro folds into one
+     compact line; the HUD (tally) rides beside it, outside the fold. */
+  header.top details.intro-collapse { flex:1 1 340px; min-width:0; }
+  details.intro-collapse > summary {
+    list-style:none; cursor:pointer; font-size:13px; font-weight:600;
+    color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    padding:1px 0; user-select:none; }
+  details.intro-collapse > summary::-webkit-details-marker { display:none; }
+  details.intro-collapse > summary .intro-tri {
+    display:inline-block; width:.9em; color:var(--muted);
+    transition:transform .12s ease; }
+  details.intro-collapse[open] > summary .intro-tri { transform:rotate(90deg); }
+  details.intro-collapse .intro-body { margin-top:6px; }
+  @media print {
+    details.intro-collapse { flex:1 1 100%; }
+    details.intro-collapse > summary { white-space:normal; overflow:visible; }
+  }
 </style>
 </head>
 <body>
 <header class="top">
-  <div>
+<details class="intro-collapse">
+<summary><span class="intro-tri">&#9656;</span> RV · типология расхождений — калибровочный гейт (H1844, шаг 8) (100 шт.)</summary>
+<div class="intro-body">
     <h1>RV · типология расхождений — калибровочный гейт (H1844, шаг 8) — 100 карточек</h1>
-    <div class="sub">Собрано 2026-07-30 &middot; sheet_id <code>rv_divergence_gate_2026-07-30-v5</code> &middot; bound <code class="bindchip" title="content_hash — binds this sheet's decisions.json export to exactly this HTML">sha256:5b0425d17418…</code> &middot; 100 пар (строфа × пара переводчиков), по 25 на класс. Гейт открывает полный прогон при согласии ≥ 80 % (R15). Методика — внизу страницы.</div>
-  </div>
+    <div class="sub">Собрано 2026-07-30 &middot; sheet_id <code>rv_divergence_gate_2026-07-30-v5</code> &middot; bound <code class="bindchip" title="content_hash — binds this sheet's decisions.json export to exactly this HTML">sha256:35318bf62681…</code> &middot; 100 пар (строфа × пара переводчиков), по 25 на класс. Гейт открывает полный прогон при согласии ≥ 80 % (R15). Методика — внизу страницы.</div>
+    </div>
+  </details>
   <div class="tally" id="tally">
     <span class="approve">&#9989; <span class="count" id="c-approve">0</span></span>
     <span class="reject">&#10060; <span class="count" id="c-reject">0</span></span>
@@ -1591,7 +1611,7 @@
 <script>
 (function () {
   var SHEET_ID = "rv_divergence_gate_2026-07-30-v5";
-  var CONTENT_HASH = "sha256:5b0425d174185305920aa86359c880df261946b6b4213cf29251ef8f1eaccd3d";
+  var CONTENT_HASH = "sha256:35318bf62681a1cb030d64ec7548fab41fea950b44b241f4e539bc17b52e3c4e";
   var STORE_KEY = 'review-sheet:' + SHEET_ID;
   var GENERATED = "2026-07-30";
   var ids = ["1.14.5|grassmann_de_1876|elizarenkova_ru_1989", "1.35.11|grassmann_de_1876|griffith_en_1896", "1.52.10|grassmann_de_1876|griffith_en_1896", "1.54.6|grassmann_de_1876|elizarenkova_ru_1989", "1.69.10|elizarenkova_ru_1989|griffith_en_1896", "1.70.10|geldner_de_1951|griffith_en_1896", "1.81.9|geldner_de_1951|griffith_en_1896", "1.86.6|geldner_de_1951|elizarenkova_ru_1989", "1.93.12|geldner_de_1951|elizarenkova_ru_1989", "1.101.10|grassmann_de_1876|griffith_en_1896", "1.105.7|elizarenkova_ru_1989|griffith_en_1896", "1.114.8|geldner_de_1951|griffith_en_1896", "1.116.10|grassmann_de_1876|geldner_de_1951", "1.123.9|geldner_de_1951|griffith_en_1896", "1.131.7|grassmann_de_1876|griffith_en_1896", "1.185.2|geldner_de_1951|griffith_en_1896", "1.191.4|grassmann_de_1876|geldner_de_1951", "2.14.7|grassmann_de_1876|geldner_de_1951", "2.15.4|grassmann_de_1876|elizarenkova_ru_1989", "2.15.9|grassmann_de_1876|griffith_en_1896", "2.33.1|geldner_de_1951|griffith_en_1896", "3.6.5|geldner_de_1951|elizarenkova_ru_1989", "3.15.5|geldner_de_1951|griffith_en_1896", "3.36.9|grassmann_de_1876|elizarenkova_ru_1989", "3.52.5|grassmann_de_1876|elizarenkova_ru_1989", "3.54.14|geldner_de_1951|elizarenkova_ru_1989", "4.5.8|geldner_de_1951|griffith_en_1896", "4.29.4|elizarenkova_ru_1989|griffith_en_1896", "4.31.7|grassmann_de_1876|griffith_en_1896", "4.33.1|elizarenkova_ru_1989|griffith_en_1896", "4.57.2|grassmann_de_1876|griffith_en_1896", "5.29.15|grassmann_de_1876|geldner_de_1951", "5.32.7|grassmann_de_1876|griffith_en_1896", "5.52.10|elizarenkova_ru_1989|griffith_en_1896", "5.54.9|geldner_de_1951|elizarenkova_ru_1989", "5.61.7|grassmann_de_1876|elizarenkova_ru_1989", "5.78.6|grassmann_de_1876|geldner_de_1951", "6.33.2|grassmann_de_1876|elizarenkova_ru_1989", "6.46.12|grassmann_de_1876|geldner_de_1951", "6.49.11|geldner_de_1951|griffith_en_1896", "6.52.6|geldner_de_1951|griffith_en_1896", "6.62.11|elizarenkova_ru_1989|griffith_en_1896", "6.69.4|geldner_de_1951|elizarenkova_ru_1989", "6.69.8|grassmann_de_1876|griffith_en_1896", "7.34.6|elizarenkova_ru_1989|griffith_en_1896", "7.35.14|grassmann_de_1876|geldner_de_1951", "7.63.5|geldner_de_1951|griffith_en_1896", "7.66.16|grassmann_de_1876|geldner_de_1951", "7.81.1|grassmann_de_1876|griffith_en_1896", "7.104.19|geldner_de_1951|griffith_en_1896", "8.5.10|elizarenkova_ru_1989|griffith_en_1896", "8.23.20|geldner_de_1951|elizarenkova_ru_1989", "8.38.5|grassmann_de_1876|geldner_de_1951", "8.53.2|geldner_de_1951|elizarenkova_ru_1989", "8.60.16|elizarenkova_ru_1989|griffith_en_1896", "8.61.11|elizarenkova_ru_1989|griffith_en_1896", "8.63.11|geldner_de_1951|griffith_en_1896", "8.66.12|elizarenkova_ru_1989|griffith_en_1896", "8.67.21|grassmann_de_1876|griffith_en_1896", "8.68.14|grassmann_de_1876|griffith_en_1896", "8.69.17|elizarenkova_ru_1989|griffith_en_1896", "8.69.17|geldner_de_1951|griffith_en_1896", "8.70.12|elizarenkova_ru_1989|griffith_en_1896", "8.71.6|elizarenkova_ru_1989|griffith_en_1896", "8.78.4|grassmann_de_1876|griffith_en_1896", "8.79.6|elizarenkova_ru_1989|griffith_en_1896", "8.79.6|grassmann_de_1876|griffith_en_1896", "8.82.4|geldner_de_1951|elizarenkova_ru_1989", "8.87.1|geldner_de_1951|griffith_en_1896", "8.92.20|geldner_de_1951|griffith_en_1896", "8.93.10|elizarenkova_ru_1989|griffith_en_1896", "8.93.10|grassmann_de_1876|griffith_en_1896", "8.93.19|geldner_de_1951|griffith_en_1896", "8.93.30|elizarenkova_ru_1989|griffith_en_1896", "8.93.30|geldner_de_1951|griffith_en_1896", "8.101.15|geldner_de_1951|griffith_en_1896", "8.103.9|grassmann_de_1876|griffith_en_1896", "9.2.6|geldner_de_1951|griffith_en_1896", "9.8.8|elizarenkova_ru_1989|griffith_en_1896", "9.16.6|geldner_de_1951|elizarenkova_ru_1989", "9.63.25|elizarenkova_ru_1989|griffith_en_1896", "9.65.9|grassmann_de_1876|griffith_en_1896", "9.70.7|elizarenkova_ru_1989|griffith_en_1896", "9.81.5|geldner_de_1951|griffith_en_1896", "9.99.1|geldner_de_1951|griffith_en_1896", "9.106.1|geldner_de_1951|griffith_en_1896", "9.113.3|grassmann_de_1876|griffith_en_1896", "10.25.3|grassmann_de_1876|elizarenkova_ru_1989", "10.37.12|grassmann_de_1876|griffith_en_1896", "10.74.3|grassmann_de_1876|elizarenkova_ru_1989", "10.85.24|grassmann_de_1876|griffith_en_1896", "10.86.8|geldner_de_1951|griffith_en_1896", "10.100.9|grassmann_de_1876|griffith_en_1896", "10.101.12|geldner_de_1951|elizarenkova_ru_1989", "10.119.4|grassmann_de_1876|elizarenkova_ru_1989", "10.122.1|grassmann_de_1876|geldner_de_1951", "10.127.1|geldner_de_1951|griffith_en_1896", "10.127.1|grassmann_de_1876|geldner_de_1951", "10.130.5|grassmann_de_1876|geldner_de_1951", "10.133.5|geldner_de_1951|griffith_en_1896"];
@@ -2188,6 +2208,21 @@
   var __voteOrigTally = tally;
   tally = function () { __voteOrigTally(); __voteProgress(); };
   __voteProgress();
+  // V18: a closed <details> hides its content at the UA level — no CSS rule
+  // can undo that — so paper/PDF keeps the full intro by opening the element
+  // around the print and restoring the collapsed state after it.
+  (function () {
+    var __icEl = document.querySelector('details.intro-collapse');
+    if (!__icEl) return;
+    var __icWasOpen = false;
+    window.addEventListener('beforeprint', function () {
+      __icWasOpen = __icEl.hasAttribute('open');
+      if (!__icWasOpen) __icEl.setAttribute('open', '');
+    });
+    window.addEventListener('afterprint', function () {
+      if (!__icWasOpen) __icEl.removeAttribute('open');
+    });
+  })();
 })();
 </script>
 <div class="flowtoast" id="flowToast" role="status"></div>

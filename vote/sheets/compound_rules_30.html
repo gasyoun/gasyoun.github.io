@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="color-scheme" content="dark">
-<meta name="generator" content="csl-pyutil/0.25.0">
+<meta name="generator" content="csl-pyutil/0.25.1">
 <title>Правила членения сложных слов PWG: ратификация — 30 карточек</title>
 <style>
   :root { color-scheme: dark; --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --text:#e6e6e6; --muted:#9aa0aa;
@@ -177,14 +177,34 @@ table.stats tr.tot td{font-weight:700;border-top:2px solid rgba(128,128,128,.5)}
   .votebar .spacer { flex:1 1 auto; }
   .card { scroll-margin-top:96px; }
   @media (max-width: 640px) { .voteprog { padding:6px 12px; } .votebar { padding:8px 12px; } }
+  /* V18 intro collapse (MG 21-11-2026): the header intro folds into one
+     compact line; the HUD (tally) rides beside it, outside the fold. */
+  header.top details.intro-collapse { flex:1 1 340px; min-width:0; }
+  details.intro-collapse > summary {
+    list-style:none; cursor:pointer; font-size:13px; font-weight:600;
+    color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    padding:1px 0; user-select:none; }
+  details.intro-collapse > summary::-webkit-details-marker { display:none; }
+  details.intro-collapse > summary .intro-tri {
+    display:inline-block; width:.9em; color:var(--muted);
+    transition:transform .12s ease; }
+  details.intro-collapse[open] > summary .intro-tri { transform:rotate(90deg); }
+  details.intro-collapse .intro-body { margin-top:6px; }
+  @media print {
+    details.intro-collapse { flex:1 1 100%; }
+    details.intro-collapse > summary { white-space:normal; overflow:visible; }
+  }
 </style>
 </head>
 <body>
 <header class="top">
-  <div>
+<details class="intro-collapse">
+<summary><span class="intro-tri">&#9656;</span> Правила членения сложных слов PWG (30 шт., 8 правил)</summary>
+<div class="intro-body">
     <h1>Правила членения сложных слов PWG: ратификация — 30 карточек</h1>
     <div class="sub">Собрано 29-07-2026 &middot; sheet_id <code>sanskritlexicography-pwg-compound-rules_ratify30</code> &middot; 30 карточек, 8 правил. Вы решаете НЕ отдельные слова, а <b>правила</b>: каждое правило уже разобрало целый класс строк очереди <code>differs</code> (всего 4 353). Приняв правило, вы снимаете весь его класс с голосования навсегда; отклонив — возвращаете класс в очередь. Ратификация всех 8 правил снимает <b>3 780 строк</b> (86.8 % очереди).<table class="stats"><tr><th>Правило</th><th>строк очереди</th><th>доля</th><th>карточек здесь</th></tr><tr><td>Одно и то же членение, разная форма члена</td><td class="num">3 046</td><td class="num">70.0 %</td><td class="num">8</td></tr><tr><td>MW оставляет с суффиксом, PWG приводит основу</td><td class="num">324</td><td class="num">7.4 %</td><td class="num">4</td></tr><tr><td>Разрез MW оставляет не-слово</td><td class="num">279</td><td class="num">6.4 %</td><td class="num">3</td></tr><tr><td>Разрез MW поглощает начальный гласный</td><td class="num">63</td><td class="num">1.4 %</td><td class="num">3</td></tr><tr><td>Список MW — рекурсивный разбор первого члена, не другое членение</td><td class="num">28</td><td class="num">0.6 %</td><td class="num">3</td></tr><tr><td>Анусвара справа от первой части</td><td class="num">19</td><td class="num">0.4 %</td><td class="num">3</td></tr><tr><td>MW отделяет словообразовательный суффикс как член</td><td class="num">14</td><td class="num">0.3 %</td><td class="num">3</td></tr><tr><td>MW отделяет связанную морфему как член</td><td class="num">7</td><td class="num">0.2 %</td><td class="num">3</td></tr><tr class="tot"><td>Итого</td><td class="num">3 780</td><td class="num">86.8 %</td><td class="num">30</td></tr></table></div>
-  </div>
+    </div>
+  </details>
   <div class="tally" id="tally">
     <span class="approve">&#9989; <span class="count" id="c-approve">0</span></span>
     <span class="reject">&#10060; <span class="count" id="c-reject">0</span></span>
@@ -1304,6 +1324,21 @@ table.stats tr.tot td{font-weight:700;border-top:2px solid rgba(128,128,128,.5)}
   var __voteOrigTally = tally;
   tally = function () { __voteOrigTally(); __voteProgress(); };
   __voteProgress();
+  // V18: a closed <details> hides its content at the UA level — no CSS rule
+  // can undo that — so paper/PDF keeps the full intro by opening the element
+  // around the print and restoring the collapsed state after it.
+  (function () {
+    var __icEl = document.querySelector('details.intro-collapse');
+    if (!__icEl) return;
+    var __icWasOpen = false;
+    window.addEventListener('beforeprint', function () {
+      __icWasOpen = __icEl.hasAttribute('open');
+      if (!__icWasOpen) __icEl.setAttribute('open', '');
+    });
+    window.addEventListener('afterprint', function () {
+      if (!__icWasOpen) __icEl.removeAttribute('open');
+    });
+  })();
 })();
 </script>
 <div class="flowtoast" id="flowToast" role="status"></div>
