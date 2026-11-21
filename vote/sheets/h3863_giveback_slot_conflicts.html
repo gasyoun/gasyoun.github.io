@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="color-scheme" content="dark">
-<meta name="generator" content="csl-pyutil/0.25.0">
+<meta name="generator" content="csl-pyutil/0.25.1">
 <title>csl-inflect give-back — slot-conflict validation (kosha A3) — 40 items</title>
 <style>
   :root { color-scheme: dark; --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --text:#e6e6e6; --muted:#9aa0aa;
@@ -132,14 +132,34 @@
   .votebar .spacer { flex:1 1 auto; }
   .card { scroll-margin-top:96px; }
   @media (max-width: 640px) { .voteprog { padding:6px 12px; } .votebar { padding:8px 12px; } }
+  /* V18 intro collapse (MG 21-11-2026): the header intro folds into one
+     compact line; the HUD (tally) rides beside it, outside the fold. */
+  header.top details.intro-collapse { flex:1 1 340px; min-width:0; }
+  details.intro-collapse > summary {
+    list-style:none; cursor:pointer; font-size:13px; font-weight:600;
+    color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    padding:1px 0; user-select:none; }
+  details.intro-collapse > summary::-webkit-details-marker { display:none; }
+  details.intro-collapse > summary .intro-tri {
+    display:inline-block; width:.9em; color:var(--muted);
+    transition:transform .12s ease; }
+  details.intro-collapse[open] > summary .intro-tri { transform:rotate(90deg); }
+  details.intro-collapse .intro-body { margin-top:6px; }
+  @media print {
+    details.intro-collapse { flex:1 1 100%; }
+    details.intro-collapse > summary { white-space:normal; overflow:visible; }
+  }
 </style>
 </head>
 <body>
 <header class="top">
-  <div>
+<details class="intro-collapse">
+<summary><span class="intro-tri">&#9656;</span> csl-inflect give-back — slot-conflict validation (kosha A3) (40 шт.)</summary>
+<div class="intro-body">
     <h1>csl-inflect give-back — slot-conflict validation (kosha A3) — 40 items</h1>
-    <div class="sub">Generated 19-11-2026 &middot; sheet_id <code>kosha-giveback-slot-conflicts_h3863</code> &middot; 40 of 2,212 slot-conflicts, highest-attestation first. In each, the corpus and the generator disagree about the SAME paradigm cell. Approving ships the row upstream; a high reject rate stops the hand-off. The other 3,012 triaged rows are machine-resolved and are deliberately NOT on this sheet.</div>
-  </div>
+    <div class="sub">Generated 21-11-2026 &middot; sheet_id <code>kosha-giveback-slot-conflicts_h3863</code> &middot; 40 of 2,212 slot-conflicts, highest-attestation first. In each, the corpus and the generator disagree about the SAME paradigm cell. Approving ships the row upstream; a high reject rate stops the hand-off. The other 3,012 triaged rows are machine-resolved and are deliberately NOT on this sheet.</div>
+    </div>
+  </details>
   <div class="tally" id="tally">
     <span class="approve">&#9989; <span class="count" id="c-approve">0</span></span>
     <span class="reject">&#10060; <span class="count" id="c-reject">0</span></span>
@@ -695,7 +715,7 @@
 (function () {
   var SHEET_ID = "kosha-giveback-slot-conflicts_h3863";
   var STORE_KEY = 'review-sheet:' + SHEET_ID;
-  var GENERATED = "19-11-2026";
+  var GENERATED = "21-11-2026";
   var ids = ["sc-tv\u0101t", "sc-r\u0101j\u00f1", "sc-striya\u1e25", "sc-\u015briya\u1e43", "sc-striya\u1e43", "sc-tv\u0101ya", "sc-striy\u0101\u1e25", "sc-\u015briya\u1e25", "sc-dhiy\u0101", "sc-hem", "sc-kasmin", "sc-madhyata\u1e25", "sc-dev\u0101sa", "sc-tattvata\u1e25", "sc-prayatnata\u1e25", "sc-duhitr\u012b", "sc-striyo", "sc-kasmai", "sc-vyom", "sc-dhiya\u1e43", "sc-striy\u0101\u1e43", "sc-n\u0101mata\u1e25", "sc-dharmata\u1e25", "sc-kas", "sc-n\u0101mbhi\u1e25", "sc-patra\u1e25", "sc-agrata\u1e25", "sc-duhitry\u0101\u1e25", "sc-jan\u0101sa\u1e25", "sc-patr\u0101\u1e47i", "sc-chatra\u1e43", "sc-bh\u016by\u0101n", "sc-patra\u1e43", "sc-jy\u0101y\u0101n", "sc-pitar\u0101", "sc-sakh\u0101yam", "sc-mahitv\u0101", "sc-b\u0101huvo\u1e25", "sc-bhago", "sc-devebhi\u1e25"];
   var state = {};
   try { state = JSON.parse(localStorage.getItem(STORE_KEY) || '{}') || {}; } catch (e) { state = {}; }
@@ -739,7 +759,7 @@
   document.getElementById('downloadBtn').addEventListener('click', function () {
     ids.forEach(function (id) { syncNoteFromDom(id); });
     var decided = ids.filter(function (id) { return state[id] && state[id].decision; }).length;
-    var payload = { sheet_id: SHEET_ID, generated: "19-11-2026", decided: decided, time_total_seconds: __timeTotal(),
+    var payload = { sheet_id: SHEET_ID, generated: "21-11-2026", decided: decided, time_total_seconds: __timeTotal(),
       items: ids.map(function (id) { var rec = state[id] || {}; return { id: id, decision: rec.decision || null, note: rec.note || '', time_seconds: __timeFor(id) }; }) };
     var blob = new Blob([JSON.stringify(payload, null, 2)], { type:'application/json' });
     var url = URL.createObjectURL(blob); var a = document.createElement('a');
@@ -1223,6 +1243,21 @@
   var __voteOrigTally = tally;
   tally = function () { __voteOrigTally(); __voteProgress(); };
   __voteProgress();
+  // V18: a closed <details> hides its content at the UA level — no CSS rule
+  // can undo that — so paper/PDF keeps the full intro by opening the element
+  // around the print and restoring the collapsed state after it.
+  (function () {
+    var __icEl = document.querySelector('details.intro-collapse');
+    if (!__icEl) return;
+    var __icWasOpen = false;
+    window.addEventListener('beforeprint', function () {
+      __icWasOpen = __icEl.hasAttribute('open');
+      if (!__icWasOpen) __icEl.setAttribute('open', '');
+    });
+    window.addEventListener('afterprint', function () {
+      if (!__icWasOpen) __icEl.removeAttribute('open');
+    });
+  })();
 })();
 </script>
 <div class="flowtoast" id="flowToast" role="status"></div>
