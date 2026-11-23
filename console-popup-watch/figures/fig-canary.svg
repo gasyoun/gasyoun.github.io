@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="240" viewBox="0 0 860 240" role="img" aria-label="A/B canary verdict bars">
+<style>
+  :root{--fg:#1d232a;--muted:#5a6672;--line:#d8dee4;--code:#f2f5f8;--accent:#0b6bcb;--bad:#a33a1e;--good:#1e7a3f}
+  @media (prefers-color-scheme:dark){:root{--fg:#e6eaee;--muted:#98a0a8;--line:#3a4046;--code:#1f2429;--accent:#5ea3e8;--bad:#e08663;--good:#5cc389}}
+  text{fill:var(--fg);font-family:system-ui,'Segoe UI',Roboto,sans-serif}
+  .mono{font-family:ui-monospace,Consolas,'Cascadia Mono',monospace}
+  .mut{fill:var(--muted)} .acc{fill:var(--accent)} .bad{fill:var(--bad)} .good{fill:var(--good)}
+  .ln{stroke:var(--line)} .accl{stroke:var(--accent)} .fgl{stroke:var(--fg)}
+  .badl{stroke:var(--bad)} .goodl{stroke:var(--good)}
+  .box{fill:var(--code);stroke:var(--line)}
+</style>
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="context-stroke"/></marker></defs><text x="24" y="30" class="" font-size="14" font-weight="600">A/B canary verdict — is the watcher blind?</text><text x="24" y="84" class="mut" font-size="12">default spawn (no flags)</text><rect x="24" y="98" width="120" height="30" rx="7" class="" stroke-width="1.6" stroke="var(--bad)" fill="var(--bad)" fill-opacity="0.25"/><text x="168" y="118" class="bad" font-size="12" font-weight="600">1 window caught</text><text x="24" y="164" class="mut" font-size="12">CREATE_NO_WINDOW spawn</text><rect x="24" y="178" width="6" height="30" rx="7" class="" stroke-width="1.6" stroke="var(--line)"/><text x="68" y="198" class="mut" font-size="12">0 windows — the hidden spawn stayed hidden</text><rect x="500" y="98" width="336" height="56" rx="7" class="" stroke-width="1.8" stroke="var(--good)"/><text x="516" y="122" class="good" font-size="13" font-weight="600">watcher_not_blind: true</text><text x="516" y="142" class="mut" font-size="11.5">a new console appears ⇒ the watcher sees it</text><text x="24" y="232" class="mut" font-size="11.5">Same session, same window station: the canary must reproduce BOTH outcomes (visible and hidden) before a quiet log means anything.</text>
+</svg>

@@ -1,0 +1,34 @@
+{"utc": "2026-11-18T20:41:00+00:00", "type": "start", "duration_target_s": 900.0, "baseline_visible_windows": 15, "process_count": 0, "note": "console-popup watcher (gasyoun.github.io/console-popup-watch) — SYNTHETIC DEMO FEED", "demo": true}
+{"utc": "2026-11-18T20:41:01.420000+00:00", "type": "negative_control", "phase": "default-spawn", "creationflags": 0, "new_visible_windows": 1, "windows": [{"class": "ConsoleWindowClass", "title": "demo canary: default-spawn probe (synthetic)", "ancestry": [{"pid": 8120, "parent": 8112, "process": "cmd.exe", "cmdline_peb": "cmd.exe /d /s /c echo default-spawn & ping -n 4 127.0.0.1 >nul"}, {"pid": 8112, "parent": 8104, "process": "pythonw.exe", "cmdline_peb": "pythonw.exe console_watch_cal.py --negctl --out demo_negctl.jsonl"}]}]}
+{"utc": "2026-11-18T20:41:04.860000+00:00", "type": "negative_control", "phase": "create-no-window", "creationflags": 2147483648, "new_visible_windows": 0, "windows": []}
+{"utc": "2026-11-18T20:41:04.910000+00:00", "type": "negative_control_verdict", "default_spawn_windows": 1, "create_no_window_windows": 0, "watcher_not_blind": true}
+{"utc": "2026-11-18T20:41:30.080000+00:00", "type": "heartbeat", "elapsed_s": 30.08, "visible_window_count": 15}
+{"utc": "2026-11-18T20:42:00.090000+00:00", "type": "heartbeat", "elapsed_s": 60.09, "visible_window_count": 15}
+{"utc": "2026-11-18T20:42:30.080000+00:00", "type": "heartbeat", "elapsed_s": 90.08, "visible_window_count": 15}
+{"utc": "2026-11-18T20:43:00.090000+00:00", "type": "heartbeat", "elapsed_s": 120.09, "visible_window_count": 15}
+{"utc": "2026-11-18T20:43:30.080000+00:00", "type": "heartbeat", "elapsed_s": 150.08, "visible_window_count": 15}
+{"utc": "2026-11-18T20:44:00.090000+00:00", "type": "heartbeat", "elapsed_s": 180.09, "visible_window_count": 15}
+{"utc": "2026-11-18T20:44:30.080000+00:00", "type": "heartbeat", "elapsed_s": 210.08, "visible_window_count": 15}
+{"utc": "2026-11-18T20:45:00.090000+00:00", "type": "heartbeat", "elapsed_s": 240.09, "visible_window_count": 15}
+{"utc": "2026-11-18T20:45:30.080000+00:00", "type": "heartbeat", "elapsed_s": 270.08, "visible_window_count": 15}
+{"utc": "2026-11-18T20:46:00.090000+00:00", "type": "heartbeat", "elapsed_s": 300.09, "visible_window_count": 15}
+{"utc": "2026-11-18T20:46:30.080000+00:00", "type": "heartbeat", "elapsed_s": 330.08, "visible_window_count": 15}
+{"utc": "2026-11-18T20:47:00.090000+00:00", "type": "heartbeat", "elapsed_s": 360.09, "visible_window_count": 15}
+{"utc": "2026-11-18T20:47:30.080000+00:00", "type": "heartbeat", "elapsed_s": 390.08, "visible_window_count": 15}
+{"utc": "2026-11-18T20:48:00.090000+00:00", "type": "heartbeat", "elapsed_s": 420.09, "visible_window_count": 15}
+{"utc": "2026-11-18T20:48:30.080000+00:00", "type": "heartbeat", "elapsed_s": 450.08, "visible_window_count": 15}
+{"utc": "2026-11-18T20:49:00.090000+00:00", "type": "heartbeat", "elapsed_s": 480.09, "visible_window_count": 15}
+{"utc": "2026-11-18T20:49:30.080000+00:00", "type": "heartbeat", "elapsed_s": 510.08, "visible_window_count": 15}
+{"utc": "2026-11-18T20:50:00.090000+00:00", "type": "heartbeat", "elapsed_s": 540.09, "visible_window_count": 15}
+{"utc": "2026-11-18T20:50:30.080000+00:00", "type": "heartbeat", "elapsed_s": 570.08, "visible_window_count": 15}
+{"utc": "2026-11-18T20:51:00.090000+00:00", "type": "heartbeat", "elapsed_s": 600.09, "visible_window_count": 15}
+{"utc": "2026-11-18T20:51:30.080000+00:00", "type": "heartbeat", "elapsed_s": 630.08, "visible_window_count": 15}
+{"utc": "2026-11-18T20:52:00.090000+00:00", "type": "heartbeat", "elapsed_s": 660.09, "visible_window_count": 15}
+{"utc": "2026-11-18T20:52:30.080000+00:00", "type": "heartbeat", "elapsed_s": 690.08, "visible_window_count": 15}
+{"utc": "2026-11-18T20:53:00.090000+00:00", "type": "heartbeat", "elapsed_s": 720.09, "visible_window_count": 15}
+{"utc": "2026-11-18T20:53:30.080000+00:00", "type": "heartbeat", "elapsed_s": 750.08, "visible_window_count": 15}
+{"utc": "2026-11-18T20:54:00.090000+00:00", "type": "heartbeat", "elapsed_s": 780.09, "visible_window_count": 15}
+{"utc": "2026-11-18T20:54:30.080000+00:00", "type": "heartbeat", "elapsed_s": 810.08, "visible_window_count": 15}
+{"utc": "2026-11-18T20:55:00.090000+00:00", "type": "heartbeat", "elapsed_s": 840.09, "visible_window_count": 15}
+{"utc": "2026-11-18T20:55:30.080000+00:00", "type": "heartbeat", "elapsed_s": 870.08, "visible_window_count": 15}
+{"utc": "2026-11-18T20:56:00.110000+00:00", "type": "stop", "elapsed_s": 900.11}

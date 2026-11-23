@@ -25,6 +25,21 @@
   th { background: var(--code); }
   .files a { display: block; margin: 6px 0; }
   footer { margin-top: 48px; color: var(--muted); font-size: .85rem; border-top: 1px solid var(--line); padding-top: 12px; }
+
+  /* figures — SVGs read the page palette via CSS custom properties declared
+     inside each file (see figures/*.svg <style>), which also carries its own
+     prefers-color-scheme dark swap */
+  figure.fig { margin: 22px 0; padding: 10px; border: 1px solid var(--line); border-radius: 10px; }
+  figure.fig img { display: block; width: 100%; height: auto; }
+  figure.fig figcaption { margin-top: 8px; padding: 0 6px; color: var(--muted); font-size: .85rem; }
+  .trust { display: inline-block; background: var(--code); border: 1px solid var(--line); border-radius: 4px; padding: 1px 7px; font-size: .8rem; color: var(--muted); }
+  .figfeed { font-family: ui-monospace, Consolas, monospace; font-size: .8rem; }
+
+  @media (prefers-color-scheme: dark) {
+    :root { --fg:#e6eaee; --muted:#98a0a8; --line:#3a4046; --bg:#15181b; --code:#1f2429; --accent:#5ea3e8; }
+    .note { background: #1c2430; }
+    .warn { background: #241d15; }
+  }
 </style>
 </head>
 <body>
@@ -45,6 +60,11 @@
   <li>If the parent has <strong>no console</strong> (GUI app, pythonw, service, TUI host), Windows allocates a <strong>new one</strong> — and that is the visible flash.</li>
 </ul>
 <p>The fix is always one of two moves: <strong>tell the child not to allocate a visible console</strong> (<code>CREATE_NO_WINDOW</code> / <code>windowsHide</code>), or <strong>let a console‑less parent hand it one invisibly</strong> (hidden launcher, <code>pythonw</code>, <code>STARTUPINFO</code> with <code>SW_HIDE</code>).</p>
+
+<figure class="fig">
+  <img src="figures/fig-flash-cause.svg" alt="Two-lane diagram: a parent with a console passes it to the child invisibly; a console-less parent makes Windows allocate a fresh console, which is the 1-second flash.">
+  <figcaption><span class="trust">concept diagram</span> why console children flash only under console-less parents.</figcaption>
+</figure>
 
 <div class="warn"><strong>The classic trap.</strong> Your tooling spawns <code>python.exe</code> from a GUI parent <em>just to probe something</em> (check an interpreter, run a hook). That probe allocates a console window for ~1 s on every single event — the most common single source of “what is this black flash?”. Probe with <code>pythonw.exe</code>, or pass <code>CREATE_NO_WINDOW</code>, or check once and cache the answer.</div>
 
@@ -96,6 +116,11 @@ Start-Process -FilePath "C:\tools\probe.exe" -WindowStyle Hidden -Wait
 # a console there has no desktop to flash on. Otherwise the job can flash at its tick.
 </code></pre>
 
+<figure class="fig">
+  <img src="figures/fig-fix-picker.svg" alt="Static flowchart: a caught console flash goes through “who is the parent?”, then either audit the console-attached case or hide the spawn with CREATE_NO_WINDOW / windowsHide, then either patch directly or hide a third-party tool, and re-run the canary plus 15-minute watch.">
+  <figcaption><span class="trust">concept diagram</span> picking the fix move by parent type.</figcaption>
+</figure>
+
 <h2 id="verify">Verify the fix — the 15‑minute protocol</h2>
 <p>“I fixed it and the flashes stopped” is not evidence: you may have killed the feature, or the fixed code may not be loading at all (dead code cannot flash). Prove three things, in this order.</p>
 
@@ -103,10 +128,20 @@ Start-Process -FilePath "C:\tools\probe.exe" -WindowStyle Hidden -Wait
 <pre><code>pythonw console_watch_cal.py --duration 900 --out watch.jsonl</code></pre>
 <p>The watcher enumerates visible top‑level windows every 80 ms, baselines what already exists, and appends only <em>new</em> windows — each with window class, title, pid, PEB command line, and the parent chain up to the launcher. It writes a heartbeat every 30 s so a dead watcher is visible in the log instead of silently proving “all clear”.</p>
 
+<figure class="fig">
+  <img src="figures/fig-protocol.svg" alt="Four-step verification protocol: baseline with heartbeats, A/B canary, 15-minute interception, three-way byte match — with a fork under the canary: 1/0 verdict proceeds, 0/0 verdict is inconclusive and must be rerun under pythonw.">
+  <figcaption><span class="trust">concept diagram</span> the 15‑minute protocol, and the 0/0 fork that is <em>inconclusive</em>, not clean.</figcaption>
+</figure>
+
 <h3>1. Prove the watcher is not blind (A/B canary)</h3>
 <pre><code>pythonw console_watch_cal.py --negctl --out negctl.jsonl</code></pre>
 <p>The canary spawns a control console window (<code>cmd.exe … ping</code>), waits for it, and then the same call with <code>CREATE_NO_WINDOW</code>. Expected verdict: <code>default_spawn_windows &gt; 0</code> and <code>create_no_window_windows == 0</code> — <code>"watcher_not_blind": true</code>.</p>
 <div class="warn"><strong>False‑negative trap.</strong> If you launch the canary from a <em>console‑attached</em> shell (a normal terminal‑hosted <code>python.exe</code>), the control <code>cmd</code> child <em>inherits</em> that console — no new window appears and both probes read 0/0. Run the canary under <code>pythonw.exe</code>, or force a brand‑new console for the control with <code>cmd /c start "" cmd /c "ping -n 4 127.0.0.1 &gt;nul"</code> from the same shell — the new window must be caught. A 0/0 canary is <em>inconclusive</em>, never “clean”.</div>
+
+<figure class="fig">
+  <img src="figures/fig-canary.svg" alt="Two verdict bars: default spawn caught 1 window, CREATE_NO_WINDOW spawn caught 0 — watcher_not_blind true.">
+  <figcaption><span class="trust">Demo data, not a real capture</span> · feed: <a class="figfeed" href="demo/after.jsonl">demo/after.jsonl</a> — generated from the canary records that open the feed.</figcaption>
+</figure>
 
 <h3>2. The interception window</h3>
 <p>Run the watcher for ≥15 minutes while the estate is genuinely active (your normal work — hooks firing, agents reading files, builds running). Verdicts:</p>
@@ -114,6 +149,21 @@ Start-Process -FilePath "C:\tools\probe.exe" -WindowStyle Hidden -Wait
   <li><strong>0 new visible windows</strong> with heartbeats throughout → the spawn surface is quiet. Cross‑check with step 0’s baseline and the canary from step 1.</li>
   <li><strong>Any window</strong> → name it from the JSONL: cmdline (PEB), parent chain, class, elapsed. Fix that spawn or file it; do not average it away.</li>
 </ul>
+
+<figure class="fig">
+  <img src="figures/fig-timeline.svg" alt="Two timeline strips: the before feed shows 10 new-window events scattered over 23 minutes with heartbeat dots; the after feed shows zero events over 15 minutes with 30 heartbeats.">
+  <figcaption><span class="trust">Demo data, not a real capture</span> · feeds: <a class="figfeed" href="demo/before.jsonl">demo/before.jsonl</a> · <a class="figfeed" href="demo/after.jsonl">demo/after.jsonl</a> — the callout numbers match the real, already-published outcome (text above); the plotted events are synthetic.</figcaption>
+</figure>
+
+<figure class="fig">
+  <img src="figures/fig-jsonl-anatomy.svg" alt="One wrapped JSONL line from the demo feed with callouts dissecting the type, elapsed_s and ancestry fields.">
+  <figcaption><span class="trust">Demo data, not a real capture</span> · feed: <a class="figfeed" href="demo/before.jsonl">demo/before.jsonl</a> — the receipts line, field by field.</figcaption>
+</figure>
+
+<figure class="fig">
+  <img src="figures/fig-ancestry.svg" alt="Parent-chain tree for one demo event: probe.exe under demo-guard.exe under pythonw.exe under demo-gui.exe.">
+  <figcaption><span class="trust">Demo data, not a real capture</span> · feed: <a class="figfeed" href="demo/before.jsonl">demo/before.jsonl</a> — attribute by ancestry when the PEB cmdline is empty.</figcaption>
+</figure>
 
 <h3>3. Prove the fix did not revert</h3>
 <pre><code># live copy vs second deploy copy vs the canonical repo HEAD — CRLF-normalized
