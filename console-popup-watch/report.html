@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<!--
+  MIT License — © 2026 Dr. Mārcis Gasūns — https://github.com/gasyoun/gasyoun.github.io
+  report.html — client-side renderer for console_watch_cal.py JSONL receipts.
+  Self-contained: no external dependencies, no network calls beyond the optional
+  Load-demo fetch of the committed demo/ feeds. Your JSONL never leaves the browser.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>Console popup watch — JSONL report renderer</title>
+<style>
+  :root { --fg:#1d232a; --muted:#5a6672; --line:#d8dee4; --bg:#fbfcfd; --code:#f2f5f8; --accent:#0b6bcb;
+          --flash:#c23b22; --ok:#1a7f37; --warn:#c25e00; --amberbg:#fdf1e3; --okbg:#e9f7ee; --bad:#b3261e; --badbg:#fdecea; }
+  @media (prefers-color-scheme: dark) {
+    :root { --fg:#e6ebee; --muted:#98a2ac; --line:#3a444d; --bg:#161b1f; --code:#1f262b; --accent:#4da3ff;
+            --flash:#e5533c; --ok:#3fb950; --warn:#e08a2e; --amberbg:#33261a; --okbg:#12281a; --bad:#f07066; --badbg:#331715; }
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; color:var(--fg); background:var(--bg); }
+  main { max-width: 960px; margin: 0 auto; padding: 32px 20px 64px; }
+  h1 { font-size: 1.7rem; line-height:1.25; margin: 0 0 4px; }
+  h2 { font-size: 1.2rem; margin: 28px 0 10px; border-bottom: 2px solid var(--line); padding-bottom: 6px; }
+  .lede { color: var(--muted); font-size: 1.02rem; margin: 0 0 20px; }
+  .backlink { color: var(--accent); text-decoration: none; font-size: .92rem; }
+  .backlink:hover { text-decoration: underline; }
+  code, pre, .mono { font-family: ui-monospace, Consolas, "Cascadia Mono", monospace; }
+  code { background: var(--code); padding: 1px 5px; border-radius: 4px; font-size: .92em; }
+
+  .inputcard { border: 1px solid var(--line); border-radius: 10px; background: var(--code); padding: 16px; margin: 12px 0 28px; }
+  .dropzone { border: 2px dashed var(--line); border-radius: 8px; padding: 18px 14px; text-align: center;
+              color: var(--muted); margin-bottom: 12px; transition: border-color .15s, background .15s; }
+  .dropzone.over { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 8%, transparent); }
+  textarea { width: 100%; min-height: 110px; resize: vertical; border: 1px solid var(--line); border-radius: 8px;
+             background: var(--bg); color: var(--fg); padding: 10px 12px; font: .88rem/1.5 ui-monospace, Consolas, monospace; }
+  .btnrow { margin-top: 12px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  button { font: inherit; padding: 8px 16px; border-radius: 8px; border: 1px solid var(--line); background: var(--bg);
+           color: var(--fg); cursor: pointer; }
+  button.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  button:hover { filter: brightness(1.06); }
+  .hint { color: var(--muted); font-size: .88rem; }
+
+  .report { border: 1px solid var(--line); border-radius: 10px; margin: 20px 0; overflow: hidden; }
+  .report > header { background: var(--code); padding: 10px 16px; display: flex; justify-content: space-between;
+                     gap: 10px; flex-wrap: wrap; align-items: baseline; border-bottom: 1px solid var(--line); }
+  .report > header .name { font-weight: 600; word-break: break-all; }
+  .report > header .meta { color: var(--muted); font-size: .85rem; }
+  .rbody { padding: 8px 16px 16px; }
+
+  .verdict { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin: 14px 0; }
+  .stat { border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; background: var(--code); }
+  .stat .num { font-size: 1.7rem; font-weight: 700; }
+  .stat .lbl { color: var(--muted); font-size: .8rem; }
+  .badge { display: inline-block; padding: 3px 12px; border-radius: 999px; font-weight: 700; font-size: .9rem; margin: 6px 0; }
+  .badge.pass { background: var(--okbg); color: var(--ok); }
+  .badge.inconcl { background: var(--amberbg); color: var(--warn); }
+  .badge.bad { background: var(--badbg); color: var(--bad); }
+  .expl { color: var(--muted); font-size: .9rem; }
+
+  .strip { margin: 14px 0 6px; }
+  .track { position: relative; height: 34px; border: 1px solid var(--line); border-radius: 6px;
+           background: repeating-linear-gradient(90deg, transparent 0 39px, color-mix(in srgb, var(--fg) 6%, transparent) 39px 40px); }
+  .track .flashmark { position: absolute; top: 3px; width: 3px; height: 20px; background: var(--flash); border-radius: 1px; }
+  .track .hbmark { position: absolute; bottom: 3px; width: 3px; height: 6px; background: var(--ok); border-radius: 1px; }
+  .track .gapband { position: absolute; bottom: 3px; height: 6px; background: color-mix(in srgb, var(--warn) 45%, transparent); border-radius: 1px; }
+  .tracklabels { display: flex; justify-content: space-between; color: var(--muted); font-size: .78rem; margin-top: 3px; }
+  .zero-note { color: var(--ok); font-size: .9rem; margin: 4px 0; }
+  .legend { color: var(--muted); font-size: .78rem; margin-top: 4px; }
+  .legend .swatch { display:inline-block; width:10px; height:10px; border-radius:2px; margin: 0 4px 0 10px; vertical-align: baseline; }
+
+  table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: .86rem; }
+  th, td { border: 1px solid var(--line); padding: 5px 9px; text-align: left; vertical-align: top; }
+  th { background: var(--code); color: var(--muted); font-weight: 600; }
+  td.utc { white-space: nowrap; }
+  .elapsed { color: var(--muted); font-size: .78rem; }
+  .ancestry { word-break: break-word; }
+  .ancestry .hop { white-space: nowrap; }
+  .ancestry .arrow { color: var(--muted); }
+
+  .warnlist, .notelist { margin: 10px 0; padding: 0; list-style: none; }
+  .warnlist li, .notelist li { border-left: 4px solid var(--warn); background: var(--amberbg); padding: 8px 12px;
+                border-radius: 0 8px 8px 0; margin: 8px 0; font-size: .9rem; }
+  .notelist li { border-left-color: var(--accent); background: color-mix(in srgb, var(--accent) 8%, transparent); }
+
+  .statusline { padding: 6px 2px; color: var(--muted); font-size: .9rem; }
+  .errorlist li { border-left-color: var(--bad); background: var(--badbg); }
+  footer { margin-top: 48px; color: var(--muted); font-size: .85rem; border-top: 1px solid var(--line); padding-top: 12px; }
+  footer a { color: var(--accent); }
+</style>
+</head>
+<body>
+<main>
+  <a class="backlink" href="index.html">← Console popup watch — the guide</a>
+  <h1>JSONL report renderer</h1>
+  <p class="lede">Open a watcher receipt (<code>console_watch_cal.py</code> JSONL — plain watch or <code>--negctl</code> canary, in one parse) and read the verdict.
+  Runs entirely in your browser: no upload, no analytics, zero external dependencies — the page works from <code>file://</code>.</p>
+
+  <div class="inputcard" id="inputcard">
+    <div class="dropzone" id="dropzone">
+      Drag &amp; drop a <code>.jsonl</code> receipt here — or paste it below
+    </div>
+    <textarea id="paste" placeholder='Paste JSONL lines here, e.g.&#10;{"utc":"2026-11-23T10:00:00.000000+00:00","type":"start",...}&#10;{"utc":"2026-11-23T10:00:12.480000+00:00","type":"new_visible_window","pid":4212,...}'></textarea>
+    <div class="btnrow">
+      <button class="primary" id="renderbtn">Render pasted JSONL</button>
+      <button id="demobtn">Load demo feeds</button>
+      <button id="clearbtn">Clear reports</button>
+      <span class="hint">Demo: <code>demo/before.jsonl</code> + <code>demo/after.jsonl</code> (fetched from this site, nothing uploaded)</span>
+    </div>
+  </div>
+
+  <div id="status" class="statusline"></div>
+  <div id="reports"></div>
+
+  <footer>
+    MIT License · © 2026 Dr. Mārcis Gasūns · <a href="https://github.com/gasyoun/gasyoun.github.io">source repo</a>.
+    Companion to <a href="index.html">the console-popup-watch guide</a>; renders receipts written by
+    <code>console_watch_cal.py</code>. A 0/0 canary is <em>inconclusive</em> here, the same as in the guide — never “clean”.
+  </footer>
+</main>
+<script>
+"use strict";
+
+/* ---------- tiny DOM helpers (textContent only — never innerHTML with data) ---------- */
+const $ = (sel) => document.querySelector(sel);
+function el(tag, cls, text) {
+  const n = document.createElement(tag);
+  if (cls) n.className = cls;
+  if (text !== undefined) n.textContent = text;
+  return n;
+}
+function status(msg) { $("#status").textContent = msg; }
+
+/* ---------- parsing ---------- */
+function parseJsonl(name, text) {
+  const records = [], errors = [];
+  const lines = String(text).split(/\r?\n/);
+  let seenAny = false;
+  lines.forEach((raw, i) => {
+    const line = raw.trim();
+    if (!line) return;
+    seenAny = true;
+    try {
+      const obj = JSON.parse(line);
+      if (obj === null || typeof obj !== "object" || Array.isArray(obj)) throw new Error("not a JSON object");
+      records.push(obj);
+    } catch (e) {
+      errors.push({ line: i + 1, text: line.slice(0, 80), msg: e.message });
+    }
+  });
+  if (!seenAny) errors.push({ line: null, text: "", msg: "empty input — no records found" });
+  return { name, records, errors };
+}
+
+/* Session segmentation: a "start" record opens a watch session; records attach to the
+   current session until the next "start". Canary records before any start (or without
+   any start at all, as in a bare --negctl run's tail) form a canary-only pseudo-session. */
+function segment(records) {
+  const sessions = [];
+  let cur = null;
+  const canaryOnly = { canaryOnly: true, flashes: [], heartbeats: [], probes: [], verdicts: [], firstUtc: null, lastUtc: null };
+  const touch = (s, rec) => {
+    if (rec.utc) { if (!s.firstUtc) s.firstUtc = rec.utc; s.lastUtc = rec.utc; }
+  };
+  for (const rec of records) {
+    const t = rec.type;
+    if (t === "start") {
+      cur = { canaryOnly: false, start: rec, stop: null, flashes: [], heartbeats: [], probes: [], verdicts: [],
+              firstUtc: rec.utc || null, lastUtc: rec.utc || null };
+      sessions.push(cur);
+      continue;
+    }
+    if (!cur) {
+      touch(canaryOnly, rec);
+      if (t === "new_visible_window") canaryOnly.flashes.push(rec);
+      else if (t === "heartbeat") canaryOnly.heartbeats.push(rec);
+      else if (t === "negative_control") canaryOnly.probes.push(rec);
+      else if (t === "negative_control_verdict") canaryOnly.verdicts.push(rec);
+      continue;
+    }
+    touch(cur, rec);
+    if (t === "new_visible_window") cur.flashes.push(rec);
+    else if (t === "heartbeat") cur.heartbeats.push(rec);
+    else if (t === "negative_control") cur.probes.push(rec);
+    else if (t === "negative_control_verdict") cur.verdicts.push(rec);
+    else if (t === "stop") cur.stop = rec;
+  }
+  const hasAny = (s) => s.flashes.length || s.heartbeats.length || s.probes.length || s.verdicts.length ||
+                       s.start || s.stop;
+  const out = sessions.filter(hasAny);
+  if (hasAny(canaryOnly)) out.push(canaryOnly);
+  return out;
+}
+
+/* ---------- formatting ---------- */
+function fmtUtc(iso) {
+  if (!iso) return "—";
+  const d = new Date(iso);
+  if (!isNaN(d)) return d.toISOString().slice(11, 23);
+  return String(iso).slice(11, 23) || String(iso);
+}
+function fmtSpan(sec) {
+  if (sec === null || sec === undefined || !isFinite(sec)) return "?";
+  const s = Math.max(0, sec);
+  const m = Math.floor(s / 60), r = s - m * 60;
+  return m > 0 ? `${m}m ${r.toFixed(1)}s` : `${r.toFixed(1)}s`;
+}
+function spanSeconds(sess) {
+  if (sess.stop && typeof sess.stop.elapsed_s === "number") return sess.stop.elapsed_s;
+  let mx = null;
+  for (const r of [...sess.flashes, ...sess.heartbeats])
+    if (typeof r.elapsed_s === "number") mx = mx === null ? r.elapsed_s : Math.max(mx, r.elapsed_s);
+  if (mx === null && sess.start && typeof sess.start.duration_target_s === "number") return sess.start.duration_target_s;
+  return mx;
+}
+
+/* Heartbeat gap analysis: flags gaps clearly above the feed's own cadence. */
+function heartbeatGaps(sess) {
+  const hb = sess.heartbeats
+    .filter((h) => typeof h.elapsed_s === "number")
+    .sort((a, b) => a.elapsed_s - b.elapsed_s);
+  const times = [];
+  if (sess.start) {
+    // start itself marks t=0 only when the first heartbeat is far from it; handled via gaps below
+  }
+  for (let i = 0; i < hb.length; i++) {
+    if (i > 0) times.push(hb[i].elapsed_s - hb[i - 1].elapsed_s);
+  }
+  if (sess.stop && typeof sess.stop.elapsed_s === "number" && hb.length)
+    times.push(sess.stop.elapsed_s - hb[hb.length - 1].elapsed_s);
+  const real = times.filter((t) => t > 0);
+  if (real.length < 2) return { flagged: [], median: null };
+  const sorted = [...real].sort((a, b) => a - b);
+  const median = sorted[Math.floor(sorted.length / 2)];
+  const threshold = Math.max(45, median * 2.5);
+  const flagged = [];
+  for (let i = 0; i < hb.length - 1; i++) {
+    const d = hb[i + 1].elapsed_s - hb[i].elapsed_s;
+    if (d > threshold) flagged.push({ from: hb[i].elapsed_s, to: hb[i + 1].elapsed_s, dur: d });
+  }
+  if (sess.stop && typeof sess.stop.elapsed_s === "number" && hb.length) {
+    const d = sess.stop.elapsed_s - hb[hb.length - 1].elapsed_s;
+    if (d > threshold) flagged.push({ from: hb[hb.length - 1].elapsed_s, to: sess.stop.elapsed_s, dur: d });
+  }
+  return { flagged, median };
+}
+
+/* ---------- rendering ---------- */
+function renderSource(src) {
+  const sessions = segment(src.records);
+  const reports = $("#reports");
+  if (!sessions.length) {
+    const card = el("div", "report");
+    const head = el("header");
+    head.appendChild(el("div", "name", src.name));
+    head.appendChild(el("div", "meta", `${src.records.length} records`));
+    card.appendChild(head);
+    const body = el("div", "rbody");
+    const wl = el("ul", "warnlist errorlist");
+    const li = el("li", null, "No renderable records (no start / flash / heartbeat / canary lines).");
+    wl.appendChild(li);
+    body.appendChild(wl);
+    card.appendChild(body);
+    reports.appendChild(card);
+    return;
+  }
+  sessions.forEach((sess, idx) => {
+    const label = sessions.length > 1
+      ? `${src.name} — session ${idx + 1}${sess.canaryOnly ? " (canary-only, no watch start)" : ""}`
+      : `${src.name}${sess.canaryOnly ? " (canary-only records, no watch start)" : ""}`;
+    renderSession(label, sess);
+  });
+}
+
+function renderSession(label, sess) {
+  const card = el("div", "report");
+  const head = el("header");
+  head.appendChild(el("div", "name", label));
+  const span = spanSeconds(sess);
+  const meta = [`${sess.flashes.length} flash(es)`, `${sess.heartbeats.length} heartbeat(s)`];
+  if (sess.probes.length) meta.push(`${sess.probes.length} canary probe(s)`);
+  if (span !== null) meta.push(`span ${fmtSpan(span)}`);
+  head.appendChild(el("div", "meta", meta.join(" · ")));
+  card.appendChild(head);
+  const body = el("div", "rbody");
+
+  if (sess.firstUtc) body.appendChild(el("div", null, `${fmtUtc(sess.firstUtc)} → ${fmtUtc(sess.lastUtc)} UTC`));
+
+  /* canary verdict panel */
+  if (sess.probes.length || sess.verdicts.length) body.appendChild(renderVerdict(sess));
+
+  /* timeline strip — only when the session actually has time-anchored events */
+  if (sess.start && span !== null && (sess.flashes.length || sess.heartbeats.length))
+    body.appendChild(renderTimeline(sess, span));
+
+  /* flash table */
+  if (sess.flashes.length) body.appendChild(renderFlashTable(sess.flashes));
+
+  /* warnings */
+  const warns = collectWarnings(sess);
+  if (warns.length) {
+    const h = el("h2", null, "Blind-watch warnings");
+    body.appendChild(h);
+    const ul = el("ul", "warnlist");
+    warns.forEach((w) => ul.appendChild(el("li", null, w)));
+    body.appendChild(ul);
+  }
+
+  card.appendChild(body);
+  $("#reports").appendChild(card);
+}
+
+function renderVerdict(sess) {
+  const wrap = el("div");
+  const h = el("h2", null, "Canary verdict (A/B negative control)");
+  wrap.appendChild(h);
+  const v = sess.verdicts.length ? sess.verdicts[sess.verdicts.length - 1] : null;
+  const grid = el("div", "verdict");
+  const stat = (num, lbl) => {
+    const s = el("div", "stat");
+    s.appendChild(el("div", "num", String(num)));
+    s.appendChild(el("div", "lbl", lbl));
+    return s;
+  };
+  const bad = v ? v.default_spawn_windows : "—";
+  const good = v ? v.create_no_window_windows : "—";
+  grid.appendChild(stat(bad, "default_spawn_windows — control window spawned without flags"));
+  grid.appendChild(stat(good, "create_no_window_windows — same spawn with CREATE_NO_WINDOW"));
+  const blind = v ? v.watcher_not_blind : null;
+  const s3 = el("div", "stat");
+  s3.appendChild(el("div", "num", v ? (blind ? "true" : "false") : "—"));
+  s3.appendChild(el("div", "lbl", "watcher_not_blind (bad > 0 and good == 0)"));
+  grid.appendChild(s3);
+  wrap.appendChild(grid);
+
+  let badge = null, expl = "";
+  if (!v) {
+    badge = el("span", "badge inconcl", "NO VERDICT");
+    expl = "Canary probe records present but no negative_control_verdict — the canary run was truncated; its result is unknown.";
+  } else if (blind === true) {
+    badge = el("span", "badge pass", "PASS — watcher not blind");
+    expl = "The watcher caught the visible control window and correctly saw nothing for the CREATE_NO_WINDOW control. Silence in this capture is meaningful.";
+  } else if (bad === 0 && good === 0) {
+    badge = el("span", "badge inconcl", "0/0 — INCONCLUSIVE, never clean");
+    expl = "Both probes read zero: the control windows most likely inherited an existing console (the documented false negative when the canary runs from a console-attached shell). Re-run the canary under pythonw.exe — this capture proves nothing either way.";
+  } else if (good > 0) {
+    badge = el("span", "badge bad", "ANOMALY");
+    expl = `The create-no-window control produced ${good} window(s): CREATE_NO_WINDOW was ignored or the environment differs. Do not trust this capture's silence.`;
+  } else { /* bad === 0, good === 0 handled above; bad === 0 with good === 0 only remains when blind===false and good>0? no — safe fallback */
+    badge = el("span", "badge bad", "FAIL");
+    expl = "The watcher missed the visible default-spawn control window. It is blind in this environment — fix the session/desktop context before trusting any quiet log.";
+  }
+  wrap.appendChild(badge);
+  wrap.appendChild(el("div", "expl", expl));
+  /* probe detail — what the canary actually saw per phase */
+  if (sess.probes.length) {
+    const ul = el("ul", "notelist");
+    for (const p of sess.probes) {
+      const wins = Array.isArray(p.windows) ? p.windows : [];
+      const li = el("li");
+      const titles = wins.slice(0, 3).map((w) => `${w.class || "?"} / ${w.title || "(no title)"}`).join("; ");
+      li.textContent = `${p.phase || "?"} (creationflags ${p.creationflags}): ${p.new_visible_windows} new window(s)` +
+        (titles ? ` — ${titles}` : "");
+      ul.appendChild(li);
+    }
+    wrap.appendChild(ul);
+  }
+  return wrap;
+}
+
+function renderTimeline(sess, span) {
+  const wrap = el("div", "strip");
+  wrap.appendChild(el("h2", null, "Timeline strip"));
+  const track = el("div", "track");
+  const pct = (t) => `${Math.min(100, Math.max(0, (t / span) * 100))}%`;
+  if (sess.flashes.length === 0) {
+    const z = el("div", "zero-note", "0 new visible windows across the whole capture — a quiet estate (meaningful only if the canary passed and heartbeats cover the span).");
+    wrap.appendChild(z);
+  }
+  const gaps = heartbeatGaps(sess).flagged;
+  for (const g of gaps) {
+    const band = el("div", "gapband");
+    band.style.left = pct(g.from);
+    band.style.width = `${Math.min(100, ((g.to - g.from) / span) * 100)}%`;
+    band.title = `heartbeat gap ${g.from.toFixed(1)}s → ${g.to.toFixed(1)}s (${g.dur.toFixed(1)}s)`;
+    track.appendChild(band);
+  }
+  for (const f of sess.flashes) {
+    if (typeof f.elapsed_s !== "number") continue;
+    const m = el("div", "flashmark");
+    m.style.left = pct(f.elapsed_s);
+    m.title = `+${f.elapsed_s.toFixed(3)}s — ${f.title || f.class || "window"}`;
+    track.appendChild(m);
+  }
+  for (const hbeat of sess.heartbeats) {
+    if (typeof hbeat.elapsed_s !== "number") continue;
+    const m = el("div", "hbmark");
+    m.style.left = pct(hbeatLeft(hbeat));
+    m.title = `heartbeat +${hbeat.elapsed_s.toFixed(1)}s (${hbeat.visible_window_count} visible windows)`;
+    track.appendChild(m);
+  }
+  function hbeatLeft(h) { return h.elapsed_s; }
+  wrap.appendChild(track);
+  const labels = el("div", "tracklabels");
+  labels.appendChild(el("span", null, "0s"));
+  labels.appendChild(el("span", null, `→ ${fmtSpan(span)}`));
+  wrap.appendChild(labels);
+  const leg = el("div", "legend");
+  leg.appendChild(el("span", null, "watch span"));
+  const s1 = el("span", "swatch"); s1.style.background = "var(--flash)"; leg.appendChild(s1);
+  leg.appendChild(el("span", null, "flash"));
+  const s2 = el("span", "swatch"); s2.style.background = "var(--ok)"; leg.appendChild(s2);
+  leg.appendChild(el("span", null, "heartbeat"));
+  const s3 = el("span", "swatch"); s3.style.background = "color-mix(in srgb, var(--warn) 45%, transparent)"; leg.appendChild(s3);
+  leg.appendChild(el("span", null, "heartbeat gap"));
+  wrap.appendChild(leg);
+  return wrap;
+}
+
+function renderFlashTable(flashes) {
+  const wrap = el("div");
+  wrap.appendChild(el("h2", null, "Flash table"));
+  const table = el("table");
+  const thead = el("thead");
+  const trh = el("tr");
+  ["utc (UTC)", "title", "class", "pid", "ancestry chain"].forEach((t) => trh.appendChild(el("th", null, t)));
+  thead.appendChild(trh);
+  table.appendChild(thead);
+  const tbody = el("tbody");
+  for (const f of flashes) {
+    const tr = el("tr");
+    const tdU = el("td", "utc", fmtUtc(f.utc));
+    if (typeof f.elapsed_s === "number") tdU.appendChild(el("div", "elapsed", `+${f.elapsed_s.toFixed(3)}s`));
+    tr.appendChild(tdU);
+    tr.appendChild(el("td", null, f.title || "(no title)"));
+    tr.appendChild(el("td", null, f.class || "—"));
+    tr.appendChild(el("td", null, String(f.pid ?? "—")));
+    const tdA = el("td", "ancestry");
+    const chain = Array.isArray(f.ancestry) ? f.ancestry : [];
+    if (!chain.length) {
+      tdA.appendChild(el("span", "hop", "—"));
+    } else {
+      chain.forEach((hop, i) => {
+        if (i > 0) tdA.appendChild(el("span", "arrow", " ← "));
+        const name = hop.process || `pid ${hop.pid}`;
+        const span = el("span", "hop");
+        span.textContent = `${name} (${hop.pid})`;
+        if (hop.cmdline_peb) span.title = hop.cmdline_peb;
+        tdA.appendChild(span);
+      });
+    }
+    tr.appendChild(tdA);
+    tbody.appendChild(tr);
+  }
+  table.appendChild(tbody);
+  wrap.appendChild(table);
+  return wrap;
+}
+
+function collectWarnings(sess) {
+  const out = [];
+  const v = sess.verdicts.length ? sess.verdicts[sess.verdicts.length - 1] : null;
+  if (v && v.default_spawn_windows === 0 && v.create_no_window_windows === 0)
+    out.push("0/0 canary — inconclusive, never clean. The control windows likely inherited an existing console (documented false negative of a console-attached canary). Re-run the canary under pythonw.exe; do not treat this capture as proof the watcher sees everything.");
+  if (v && v.create_no_window_windows > 0)
+    out.push(`create-no-window control produced ${v.create_no_window_windows} window(s) — CREATE_NO_WINDOW was ignored in this environment; the canary verdict is not trustworthy.`);
+  if (v && v.default_spawn_windows === 0 && v.create_no_window_windows === 0) { /* covered above */ }
+  else if (v && v.default_spawn_windows === 0)
+    out.push("default-spawn control was NOT caught (0 windows) — the watcher is blind in this session/desktop context; re-run it in the same window station as the tooling you judge.");
+  if (sess.probes.length && !sess.verdicts.length)
+    out.push("Canary probe records without a negative_control_verdict — the canary run was truncated; its result is unknown.");
+  const span = spanSeconds(sess);
+  const isWatch = !!(sess.start && (sess.stop || span !== null));
+  const isCanaryProcedure = sess.probes.length > 0 && sess.flashes.length === 0 &&
+                            sess.heartbeats.length === 0 && !sess.stop;
+  if (isWatch && !isCanaryProcedure && sess.heartbeats.length === 0 && (span === null || span > 60))
+    out.push("No heartbeat records in this watch — silence is not auditable: a dead watcher and a genuinely quiet estate look identical. Re-run with heartbeats enabled (default every 30 s).");
+  if (sess.heartbeats.length) {
+    const { flagged } = heartbeatGaps(sess);
+    for (const g of flagged.slice(0, 5))
+      out.push(`Heartbeat gap ${fmtSpan(g.from)} → ${fmtSpan(g.to)} (${g.dur.toFixed(1)}s) — the watcher may have stalled during this window.`);
+    if (flagged.length > 5) out.push(`…and ${flagged.length - 5} more heartbeat gap(s) beyond the feed's own cadence.`);
+    if (sess.start && sess.stop === null && span !== null && span > 60)
+      out.push("No stop record — the capture was truncated before the planned duration ended.");
+  }
+  if (!sess.probes.length && !sess.verdicts.length && isWatch)
+    out.push("No canary records in this capture — run the A/B canary (console_watch_cal.py --negctl) before trusting a quiet interception window.");
+  return out;
+}
+
+/* ---------- top-level wiring ---------- */
+function renderParsed(src) {
+  renderSource(src);
+  const parts = [`${src.name}: ${src.records.length} record(s)`];
+  if (src.errors.length) parts.push(`${src.errors.length} parse warning(s)`);
+  status(`Rendered — ${parts.join(", ")}.`);
+}
+
+function showParseErrors(src) {
+  if (!src.errors.length) return;
+  const card = el("div", "report");
+  const head = el("header");
+  head.appendChild(el("div", "name", `${src.name} — parse warnings`));
+  head.appendChild(el("div", "meta", `${src.errors.length} line(s)`));
+  card.appendChild(head);
+  const body = el("div", "rbody");
+  const ul = el("ul", "warnlist errorlist");
+  src.errors.slice(0, 10).forEach((e) => {
+    const li = el("li");
+    li.textContent = e.line ? `line ${e.line}: ${e.msg}${e.text ? ` — “${e.text}”` : ""}` : e.msg;
+    ul.appendChild(li);
+  });
+  body.appendChild(ul);
+  if (src.errors.length > 10) body.appendChild(el("div", "hint", `…and ${src.errors.length - 10} more.`));
+  card.appendChild(body);
+  $("#reports").appendChild(card);
+}
+
+function handleFiles(files) {
+  const list = Array.from(files || []).filter((f) => !f.name || /\.(jsonl|txt|log|json)$/i.test(f.name) || true);
+  if (!list.length) { status("No file received."); return; }
+  let pending = list.length;
+  list.forEach((f) => {
+    f.text().then((text) => {
+      const src = parseJsonl(f.name, text);
+      showParseErrors(src);
+      renderParsed(src);
+    }).catch((e) => status(`Could not read ${f.name}: ${e.message}`))
+      .finally(() => { if (--pending === 0) $("#paste").value = ""; });
+  });
+}
+
+function init() {
+  const dz = $("#dropzone");
+  ["dragenter", "dragover"].forEach((ev) => dz.addEventListener(ev, (e) => { e.preventDefault(); dz.classList.add("over"); }));
+  ["dragleave", "drop"].forEach((ev) => dz.addEventListener(ev, (e) => { e.preventDefault(); dz.classList.remove("over"); }));
+  dz.addEventListener("drop", (e) => handleFiles(e.dataTransfer && e.dataTransfer.files));
+
+  $("#renderbtn").addEventListener("click", () => {
+    const text = $("#paste").value;
+    const src = parseJsonl("pasted JSONL", text);
+    showParseErrors(src);
+    if (!src.records.length) { status("Nothing to render — the input had no parseable records."); return; }
+    renderParsed(src);
+  });
+
+  $("#demobtn").addEventListener("click", async () => {
+    status("Fetching demo feeds…");
+    const results = await Promise.allSettled([
+      fetch("demo/before.jsonl", { cache: "no-store" }).then((r) => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return r.text().then((t) => ["demo/before.jsonl", t]);
+      }),
+      fetch("demo/after.jsonl", { cache: "no-store" }).then((r) => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return r.text().then((t) => ["demo/after.jsonl", t]);
+      }),
+    ]);
+    let ok = 0;
+    for (const res of results) {
+      if (res.status === "fulfilled") {
+        const [name, text] = res.value;
+        const src = parseJsonl(name, text);
+        showParseErrors(src);
+        renderParsed(src);
+        ok++;
+      }
+    }
+    if (ok < 2) {
+      const card = el("div", "report");
+      const head = el("header");
+      head.appendChild(el("div", "name", "Demo feeds unavailable"));
+      card.appendChild(head);
+      const body = el("div", "rbody");
+      const ul = el("ul", "warnlist errorlist");
+      const li = el("li");
+      li.textContent = "Could not fetch demo/before.jsonl / demo/after.jsonl. Browsers block fetch() from file:// pages — serve this folder over HTTP (as GitHub Pages does), or paste / drop the JSONL instead.";
+      ul.appendChild(li);
+      body.appendChild(ul);
+      card.appendChild(body);
+      $("#reports").appendChild(card);
+    }
+    status(ok === 2 ? "Rendered both demo feeds." : `Rendered ${ok} of 2 demo feeds (fetch failed for the rest).`);
+  });
+
+  $("#clearbtn").addEventListener("click", () => { $("#reports").textContent = ""; status("Reports cleared."); });
+}
+init();
+</script>
+</body>
+</html>
