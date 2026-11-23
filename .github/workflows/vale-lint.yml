@@ -34,7 +34,7 @@ jobs:
           python3 scripts/vale_flag_report.py vale-report.json
       - name: Upload flag report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: vale-flag-report
           path: vale-report.json
