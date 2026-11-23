@@ -5,6 +5,9 @@ Catch and fix the 1-second console windows that Windows tooling flashes.
 - **`index.html`** — the guide: symptom → cause → fix patterns (Node, Python, PowerShell/scheduled tasks) → 15-minute verification protocol → traps.
 - **`console_watch_cal.py`** — reads the interactive desktop every 80 ms, logs only NEW visible windows with class, title, pid, PEB command line and full parent chain; writes a JSONL receipt with 30-s heartbeats. Includes the A/B canary (`--negctl`) that proves the watcher is not blind.
 - **`byte_match_3way.py`** — compares a file across live / deploy / repo-HEAD with CRLF→LF normalization; exit 0 or a named drift list. Run before and after the interception window.
+- **`report.html`** — client-side JSONL report renderer (no upload, zero dependencies): timeline strip, flash table, heartbeat coverage, canary verdict. Accepts plain watch and `--negctl` receipts in one parse; a 0/0 canary renders as *inconclusive*, never clean.
+
+`demo/` — synthetic demo feeds (Load-demo fixtures, `demo: true`); `figures/` — guide figures generated from the feeds; `smoke/` — browser-smoke evidence screenshots for the renderer.
 
 ## Quickstart
 
