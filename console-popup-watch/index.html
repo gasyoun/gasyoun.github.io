@@ -188,6 +188,7 @@ python byte_match_3way.py --live C:/Users/you/.config/app/live \
 <div class="files">
   <a href="console_watch_cal.py" download>console_watch_cal.py</a> — window watcher + A/B canary (239 lines, stdlib + ctypes only)
   <a href="byte_match_3way.py" download>byte_match_3way.py</a> — three-place, CRLF‑normalized byte‑match (exit 0 / 1)
+  <a href="report.html">report.html</a> — client-side JSONL report renderer: timeline, flash table, heartbeat coverage, canary verdict — your receipt never leaves the browser
 </div>
 <p>Both scripts are dependency‑free, read‑only, and write only the JSONL you name. Python 3.8+ on Windows; the watcher uses <code>ctypes</code> and touches the Win32 API (EnumWindows, Toolhelp32, NtQueryInformationProcess).</p>
 
