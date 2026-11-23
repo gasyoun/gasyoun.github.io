@@ -1,0 +1,57 @@
+{"utc": "2026-11-18T16:02:00+00:00", "type": "start", "duration_target_s": 1380.0, "baseline_visible_windows": 14, "process_count": 0, "note": "console-popup watcher (gasyoun.github.io/console-popup-watch) — SYNTHETIC DEMO FEED", "demo": true}
+{"utc": "2026-11-18T16:02:30.080000+00:00", "type": "heartbeat", "elapsed_s": 30.08, "visible_window_count": 15}
+{"utc": "2026-11-18T16:02:41.310000+00:00", "type": "new_visible_window", "elapsed_s": 41.31, "pid": 44110, "class": "ConsoleWindowClass", "title": "C:\\tools\\probe.exe", "ancestry": [{"pid": 44110, "parent": 44102, "process": "probe.exe", "cmdline_peb": "C:\\tools\\probe.exe --tick"}, {"pid": 44102, "parent": 44098, "process": "demo-guard.exe", "cmdline_peb": "C:\\demo\\hooks\\demo-guard.exe --event tick"}, {"pid": 44098, "parent": 44090, "process": "pythonw.exe", "cmdline_peb": "pythonw.exe C:\\demo\\tools\\runner.py"}, {"pid": 44090, "parent": 4231, "process": "demo-gui.exe", "cmdline_peb": "C:\\demo\\demo-gui.exe"}]}
+{"utc": "2026-11-18T16:02:47.820000+00:00", "type": "new_visible_window", "elapsed_s": 47.82, "pid": 44221, "class": "ConsoleWindowClass", "title": "C:\\demo\\hooks\\sync.exe", "ancestry": [{"pid": 44221, "parent": 44218, "process": "sync.exe", "cmdline_peb": "C:\\demo\\hooks\\sync.exe --pulse"}, {"pid": 44218, "parent": 44090, "process": "pythonw.exe", "cmdline_peb": "pythonw.exe C:\\demo\\tools\\runner.py"}, {"pid": 44090, "parent": 4231, "process": "demo-gui.exe", "cmdline_peb": "C:\\demo\\demo-gui.exe"}]}
+{"utc": "2026-11-18T16:02:52.190000+00:00", "type": "new_visible_window", "elapsed_s": 52.19, "pid": 44330, "class": "ConsoleWindowClass", "title": "C:\\tools\\probe.exe", "ancestry": [{"pid": 44330, "parent": 44102, "process": "probe.exe", "cmdline_peb": "C:\\tools\\probe.exe --check interpreter"}, {"pid": 44102, "parent": 44098, "process": "demo-guard.exe", "cmdline_peb": "C:\\demo\\hooks\\demo-guard.exe --event tick"}, {"pid": 44098, "parent": 44090, "process": "pythonw.exe", "cmdline_peb": "pythonw.exe C:\\demo\\tools\\runner.py"}, {"pid": 44090, "parent": 4231, "process": "demo-gui.exe", "cmdline_peb": "C:\\demo\\demo-gui.exe"}]}
+{"utc": "2026-11-18T16:03:00.090000+00:00", "type": "heartbeat", "elapsed_s": 60.09, "visible_window_count": 15}
+{"utc": "2026-11-18T16:03:30.080000+00:00", "type": "heartbeat", "elapsed_s": 90.08, "visible_window_count": 15}
+{"utc": "2026-11-18T16:03:35.640000+00:00", "type": "new_visible_window", "elapsed_s": 95.64, "pid": 44401, "class": "ConsoleWindowClass", "title": "C:\\demo\\ci\\deploy.exe", "ancestry": [{"pid": 44401, "parent": 44399, "process": "deploy.exe", "cmdline_peb": "C:\\demo\\ci\\deploy.exe /stage demo"}, {"pid": 44399, "parent": 4231, "process": "demo-gui.exe", "cmdline_peb": "C:\\demo\\demo-gui.exe"}]}
+{"utc": "2026-11-18T16:04:00.090000+00:00", "type": "heartbeat", "elapsed_s": 120.09, "visible_window_count": 15}
+{"utc": "2026-11-18T16:04:30.080000+00:00", "type": "heartbeat", "elapsed_s": 150.08, "visible_window_count": 15}
+{"utc": "2026-11-18T16:05:00.090000+00:00", "type": "heartbeat", "elapsed_s": 180.09, "visible_window_count": 15}
+{"utc": "2026-11-18T16:05:30.080000+00:00", "type": "heartbeat", "elapsed_s": 210.08, "visible_window_count": 17}
+{"utc": "2026-11-18T16:05:30.270000+00:00", "type": "new_visible_window", "elapsed_s": 210.27, "pid": 44512, "class": "ConsoleWindowClass", "title": "C:\\demo\\agents\\demo-agent.exe", "ancestry": [{"pid": 44512, "parent": 44508, "process": "demo-agent.exe", "cmdline_peb": "C:\\demo\\agents\\demo-agent.exe --task lint"}, {"pid": 44508, "parent": 44098, "process": "demo-guard.exe", "cmdline_peb": "C:\\demo\\hooks\\demo-guard.exe --event review"}, {"pid": 44098, "parent": 44090, "process": "pythonw.exe", "cmdline_peb": "pythonw.exe C:\\demo\\tools\\runner.py"}, {"pid": 44090, "parent": 4231, "process": "demo-gui.exe", "cmdline_peb": "C:\\demo\\demo-gui.exe"}]}
+{"utc": "2026-11-18T16:06:00.090000+00:00", "type": "heartbeat", "elapsed_s": 240.09, "visible_window_count": 15}
+{"utc": "2026-11-18T16:06:20.710000+00:00", "type": "new_visible_window", "elapsed_s": 260.71, "pid": 44602, "class": "ConsoleWindowClass", "title": "C:\\demo\\hooks\\sync.exe", "ancestry": [{"pid": 44602, "parent": 44218, "process": "sync.exe", "cmdline_peb": "C:\\demo\\hooks\\sync.exe --push"}, {"pid": 44218, "parent": 44090, "process": "pythonw.exe", "cmdline_peb": "pythonw.exe C:\\demo\\tools\\runner.py"}, {"pid": 44090, "parent": 4231, "process": "demo-gui.exe", "cmdline_peb": "C:\\demo\\demo-gui.exe"}]}
+{"utc": "2026-11-18T16:06:24.930000+00:00", "type": "new_visible_window", "elapsed_s": 264.93, "pid": 44710, "class": "ConsoleWindowClass", "title": "C:\\tools\\probe.exe", "ancestry": [{"pid": 44710, "parent": 44102, "process": "probe.exe", "cmdline_peb": "C:\\tools\\probe.exe --version-check"}, {"pid": 44102, "parent": 44098, "process": "demo-guard.exe", "cmdline_peb": "C:\\demo\\hooks\\demo-guard.exe --event tick"}, {"pid": 44098, "parent": 44090, "process": "pythonw.exe", "cmdline_peb": "pythonw.exe C:\\demo\\tools\\runner.py"}, {"pid": 44090, "parent": 4231, "process": "demo-gui.exe", "cmdline_peb": "C:\\demo\\demo-gui.exe"}]}
+{"utc": "2026-11-18T16:06:30.080000+00:00", "type": "heartbeat", "elapsed_s": 270.08, "visible_window_count": 15}
+{"utc": "2026-11-18T16:07:00.090000+00:00", "type": "heartbeat", "elapsed_s": 300.09, "visible_window_count": 15}
+{"utc": "2026-11-18T16:07:30.080000+00:00", "type": "heartbeat", "elapsed_s": 330.08, "visible_window_count": 15}
+{"utc": "2026-11-18T16:08:00.090000+00:00", "type": "heartbeat", "elapsed_s": 360.09, "visible_window_count": 15}
+{"utc": "2026-11-18T16:08:30.080000+00:00", "type": "heartbeat", "elapsed_s": 390.08, "visible_window_count": 15}
+{"utc": "2026-11-18T16:09:00.090000+00:00", "type": "heartbeat", "elapsed_s": 420.09, "visible_window_count": 17}
+{"utc": "2026-11-18T16:09:30.080000+00:00", "type": "heartbeat", "elapsed_s": 450.08, "visible_window_count": 15}
+{"utc": "2026-11-18T16:10:00.090000+00:00", "type": "heartbeat", "elapsed_s": 480.09, "visible_window_count": 15}
+{"utc": "2026-11-18T16:10:30.080000+00:00", "type": "heartbeat", "elapsed_s": 510.08, "visible_window_count": 15}
+{"utc": "2026-11-18T16:11:00.090000+00:00", "type": "heartbeat", "elapsed_s": 540.09, "visible_window_count": 15}
+{"utc": "2026-11-18T16:11:30.080000+00:00", "type": "heartbeat", "elapsed_s": 570.08, "visible_window_count": 15}
+{"utc": "2026-11-18T16:12:00.090000+00:00", "type": "heartbeat", "elapsed_s": 600.09, "visible_window_count": 15}
+{"utc": "2026-11-18T16:12:30.080000+00:00", "type": "heartbeat", "elapsed_s": 630.08, "visible_window_count": 17}
+{"utc": "2026-11-18T16:13:00.090000+00:00", "type": "heartbeat", "elapsed_s": 660.09, "visible_window_count": 15}
+{"utc": "2026-11-18T16:13:30.080000+00:00", "type": "heartbeat", "elapsed_s": 690.08, "visible_window_count": 15}
+{"utc": "2026-11-18T16:13:39.510000+00:00", "type": "new_visible_window", "elapsed_s": 699.51, "pid": 44821, "class": "ConsoleWindowClass", "title": "C:\\demo\\ci\\demo-ci.exe", "ancestry": [{"pid": 44821, "parent": 44820, "process": "demo-ci.exe", "cmdline_peb": "C:\\demo\\ci\\demo-ci.exe build-step demo"}, {"pid": 44820, "parent": 4231, "process": "demo-gui.exe", "cmdline_peb": "C:\\demo\\demo-gui.exe"}]}
+{"utc": "2026-11-18T16:13:44.860000+00:00", "type": "new_visible_window", "elapsed_s": 704.86, "pid": 44902, "class": "ConsoleWindowClass", "title": "C:\\demo\\agents\\demo-agent.exe", "ancestry": [{"pid": 44902, "parent": 44508, "process": "demo-agent.exe", "cmdline_peb": "C:\\demo\\agents\\demo-agent.exe --task format"}, {"pid": 44508, "parent": 44098, "process": "demo-guard.exe", "cmdline_peb": "C:\\demo\\hooks\\demo-guard.exe --event review"}, {"pid": 44098, "parent": 44090, "process": "pythonw.exe", "cmdline_peb": "pythonw.exe C:\\demo\\tools\\runner.py"}, {"pid": 44090, "parent": 4231, "process": "demo-gui.exe", "cmdline_peb": "C:\\demo\\demo-gui.exe"}]}
+{"utc": "2026-11-18T16:14:00.090000+00:00", "type": "heartbeat", "elapsed_s": 720.09, "visible_window_count": 15}
+{"utc": "2026-11-18T16:14:30.080000+00:00", "type": "heartbeat", "elapsed_s": 750.08, "visible_window_count": 15}
+{"utc": "2026-11-18T16:15:00.090000+00:00", "type": "heartbeat", "elapsed_s": 780.09, "visible_window_count": 15}
+{"utc": "2026-11-18T16:15:30.080000+00:00", "type": "heartbeat", "elapsed_s": 810.08, "visible_window_count": 15}
+{"utc": "2026-11-18T16:16:00.090000+00:00", "type": "heartbeat", "elapsed_s": 840.09, "visible_window_count": 17}
+{"utc": "2026-11-18T16:16:30.080000+00:00", "type": "heartbeat", "elapsed_s": 870.08, "visible_window_count": 15}
+{"utc": "2026-11-18T16:17:00.090000+00:00", "type": "heartbeat", "elapsed_s": 900.09, "visible_window_count": 15}
+{"utc": "2026-11-18T16:17:30.080000+00:00", "type": "heartbeat", "elapsed_s": 930.08, "visible_window_count": 15}
+{"utc": "2026-11-18T16:18:00.090000+00:00", "type": "heartbeat", "elapsed_s": 960.09, "visible_window_count": 15}
+{"utc": "2026-11-18T16:18:30.080000+00:00", "type": "heartbeat", "elapsed_s": 990.08, "visible_window_count": 15}
+{"utc": "2026-11-18T16:19:00.090000+00:00", "type": "heartbeat", "elapsed_s": 1020.09, "visible_window_count": 15}
+{"utc": "2026-11-18T16:19:30.080000+00:00", "type": "heartbeat", "elapsed_s": 1050.08, "visible_window_count": 17}
+{"utc": "2026-11-18T16:20:00.090000+00:00", "type": "heartbeat", "elapsed_s": 1080.09, "visible_window_count": 15}
+{"utc": "2026-11-18T16:20:30.080000+00:00", "type": "heartbeat", "elapsed_s": 1110.08, "visible_window_count": 15}
+{"utc": "2026-11-18T16:21:00.090000+00:00", "type": "heartbeat", "elapsed_s": 1140.09, "visible_window_count": 15}
+{"utc": "2026-11-18T16:21:30.080000+00:00", "type": "heartbeat", "elapsed_s": 1170.08, "visible_window_count": 15}
+{"utc": "2026-11-18T16:22:00.090000+00:00", "type": "heartbeat", "elapsed_s": 1200.09, "visible_window_count": 15}
+{"utc": "2026-11-18T16:22:30.080000+00:00", "type": "heartbeat", "elapsed_s": 1230.08, "visible_window_count": 15}
+{"utc": "2026-11-18T16:22:39.620000+00:00", "type": "new_visible_window", "elapsed_s": 1239.62, "pid": 45007, "class": "ConsoleWindowClass", "title": "C:\\demo\\hooks\\sync.exe", "ancestry": [{"pid": 45007, "parent": 44218, "process": "sync.exe", "cmdline_peb": "C:\\demo\\hooks\\sync.exe --mirror"}, {"pid": 44218, "parent": 44090, "process": "pythonw.exe", "cmdline_peb": "pythonw.exe C:\\demo\\tools\\runner.py"}, {"pid": 44090, "parent": 4231, "process": "demo-gui.exe", "cmdline_peb": "C:\\demo\\demo-gui.exe"}]}
+{"utc": "2026-11-18T16:23:00.090000+00:00", "type": "heartbeat", "elapsed_s": 1260.09, "visible_window_count": 17}
+{"utc": "2026-11-18T16:23:30.080000+00:00", "type": "heartbeat", "elapsed_s": 1290.08, "visible_window_count": 15}
+{"utc": "2026-11-18T16:24:00.090000+00:00", "type": "heartbeat", "elapsed_s": 1320.09, "visible_window_count": 15}
+{"utc": "2026-11-18T16:24:30.080000+00:00", "type": "heartbeat", "elapsed_s": 1350.08, "visible_window_count": 15}
+{"utc": "2026-11-18T16:25:00.120000+00:00", "type": "stop", "elapsed_s": 1380.12}
