@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Crosswalk lemma disambiguation — form_key tiers and human gates — decision tree</title>
+<style>
+:root { --ink:#1a1a2e; --accent:#16537e; --ok:#0b6e4f; --muted:#6b7280; --bg:#f6f7f9; }
+* { box-sizing:border-box; }
+body { font:16px/1.55 Georgia,'Times New Roman',serif; color:var(--ink); background:var(--bg); margin:0; padding:2rem 1rem; }
+main { max-width:44rem; margin:0 auto; }
+h1 { font-size:1.35rem; margin:0 0 .25rem; }
+.src { color:var(--muted); font-size:.85rem; margin-bottom:1.25rem; }
+.crumbs { font-size:.85rem; color:var(--muted); min-height:1.2em; margin-bottom:.75rem; }
+.card { background:#fff; border:1px solid #d6d9de; border-radius:10px; padding:1.1rem 1.25rem; }
+.card h2 { font-size:1.05rem; margin:.1rem 0 .8rem; }
+.opt { display:block; width:100%; text-align:left; margin:.45rem 0; padding:.6rem .8rem; font:inherit;
+        background:#eef3f8; border:1px solid #c6d4e2; border-radius:8px; cursor:pointer; }
+.opt:hover { background:#dfeaf4; }
+.opt.chosen { background:#e6f2ec; border-color:var(--ok); }
+.terminal { border-left:4px solid var(--ok); }
+.terminal .act { font-weight:bold; }
+.note { color:var(--muted); font-size:.9rem; margin-top:.7rem; }
+.path { margin-top:1.25rem; }
+.path h2 { font-size:.95rem; color:var(--muted); }
+.path ol { margin:.2rem 0; padding-left:1.2rem; }
+button#restart { margin-top:1rem; font:inherit; padding:.45rem .9rem; border-radius:8px;
+                  border:1px solid #c6d4e2; background:#fff; cursor:pointer; }
+@media print { .opt, #restart { display:none; } .path { display:block; } }
+</style>
+</head>
+<body>
+<main>
+<h1>Crosswalk lemma disambiguation — form_key tiers and human gates</h1>
+<p class="src">Source of truth: <a href="https://github.com/gasyoun/claude-config/blob/main/commands/crosswalk-build.md">https://github.com/gasyoun/claude-config/blob/main/commands/crosswalk-build.md</a> · generated from <code>trees/crosswalk-disambiguation.yaml</code> — regenerate, never hand-edit.</p>
+<div id="crumbs" class="crumbs"></div>
+<div id="card" class="card"></div>
+<div id="path" class="path"><h2>Your path</h2><ol id="pathlist"></ol></div>
+<button id="restart" type="button">Start over</button>
+</main>
+<script>
+"use strict";
+var DATA = {"tree": "crosswalk-disambiguation", "title": "Crosswalk lemma disambiguation — form_key tiers and human gates", "source": "https://github.com/gasyoun/claude-config/blob/main/commands/crosswalk-build.md", "root": "q-prior-art", "nodes": {"q-prior-art": {"question": "Phase 0 — does a crosswalk for this pair (or a superset) already exist?", "terminal": false, "action": null, "link": null, "note": "Consume canonical assets, never rebuild — union_headwords, mw_roots.tsv, corpus_lexicon, the kosha manifest and any crosswalk already registered in Uprava PROJECT_INTERLINKS.md.", "options": [{"label": "Yes — same pair or superset exists, extend it", "next": "t-extend"}, {"label": "No — decide the deliverable mode first", "next": "q-mode"}]}, "q-mode": {"question": "What is the deliverable in this pass?", "terminal": false, "action": null, "link": null, "note": "Build mode reconciles two datasets into a new crosswalk; detector-column mode appends ONE feature detector's verdict onto an existing crosswalk or register. Never both in one pass.", "options": [{"label": "A new crosswalk reconciling two datasets", "next": "q-key"}, {"label": "One detector column on an existing table", "next": "t-detector-mode"}]}, "q-key": {"question": "Phase 1 — which join-key normalizer is applied to BOTH sides?", "terminal": false, "action": null, "link": null, "note": "Use the length-preserving form_key() from sanskrit-util — lowercase, strip nom-sg visarga, fold the anusvara and nasal class to n, drop vowel-pitch accents, PRESERVE vowel length and the ś/ṣ distinction. The same normalizer must hit both sides, BOM and whitespace included.", "options": [{"label": "form_key() on both sides", "next": "q-floor"}, {"label": "Naive NFD + strip-Mn + NFC", "next": "t-bad-key"}, {"label": "Asymmetric or undecided key", "next": "t-bad-key"}]}, "q-floor": {"question": "Phase 2 floor tier — exact match on the normalized key: what is the residue?", "terminal": false, "action": null, "link": null, "note": "The floor tier is the trust anchor. Each tier carries its own count against BOTH denominators — never one opaque fuzzy pass.", "options": [{"label": "Residue remains after exact match", "next": "q-relaxed"}, {"label": "Key collision — homograph ambiguity in the normalized key", "next": "t-collision"}, {"label": "No tier matched — row sits in the per-side residue", "next": "t-residue"}, {"label": "Clean exact join, no residue", "next": "q-coverage"}]}, "q-relaxed": {"question": "Phase 2 relaxed tier — which declared relaxations fire?", "terminal": false, "action": null, "link": null, "note": "Every relaxation is named and counted separately — final-vowel variance, avagraha, hyphenated-compound split. Undeclared relaxations are forbidden.", "options": [{"label": "Named relaxations applied, residue remains", "next": "q-fuzzy"}, {"label": "Relaxations exhausted, residue remains", "next": "q-fuzzy"}, {"label": "All matched after relaxations", "next": "q-coverage"}]}, "q-fuzzy": {"question": "Phase 2 fuzzy tier — how are edit-distance candidates handled?", "terminal": false, "action": null, "link": null, "note": "Fuzzy rows are CANDIDATES for review, never silently merged into the floor. The script emits fuzzy-candidate rows.", "options": [{"label": "Candidates will feed a downstream consumer", "next": "t-review"}, {"label": "Identity crosswalk — adjudication back half applies", "next": "q-identity"}, {"label": "Candidates stay candidates, never promoted", "next": "t-candidates"}, {"label": "No fuzzy candidates at all", "next": "q-coverage"}]}, "q-identity": {"question": "Phase 3-bis — is the adjudication back half satisfied?", "terminal": false, "action": null, "link": null, "note": "Closed evidence-class vocabulary fixed BEFORE adjudication, byte-identical re-execution twice from pinned inputs, a frozen external canary, and contested identities kept CONTESTED with the named missing evidence.", "options": [{"label": "Closed vocabulary, byte-identical runs, canary green", "next": "q-coverage"}, {"label": "Contested identity with missing evidence", "next": "t-contested"}, {"label": "Canary flipped or the two runs differ", "next": "t-rerun"}]}, "q-coverage": {"question": "Phase 3/4 — coverage report, license and registration done?", "terminal": false, "action": null, "link": null, "note": "The report gives per-tier counts and percentages against BOTH totals, states key-reconciliation caveats plainly, characterizes the residue, and names what the crosswalk CANNOT distinguish.", "options": [{"label": "Joined-side license composition is ambiguous", "next": "t-decide"}, {"label": "License clear — register the crosswalk", "next": "t-register"}, {"label": "Coverage or residue is not honest", "next": "t-report"}]}, "t-extend": {"question": null, "terminal": true, "action": "Extend the existing crosswalk. A second parallel crosswalk over the same pair (or a superset) is a defect — consume and grow, do not rebuild.", "link": "https://github.com/gasyoun/Uprava/blob/main/PROJECT_INTERLINKS.md", "note": null, "options": []}, "t-detector-mode": {"question": null, "terminal": true, "action": "One detector per pass — the Phase D0 blocker names the instrument, probe the data layer before building, declare BOTH denominators, and use confound controls with exclusion-with-reason. Never a rebuild of the table.", "link": "https://github.com/gasyoun/claude-config/blob/main/commands/crosswalk-build.md", "note": null, "options": []}, "t-collision": {"question": null, "terminal": true, "action": "Key collisions and homograph classes are judgment calls — record the colliding rows explicitly and resolve them by hand. The matcher never picks silently; the report states what the key CANNOT distinguish.", "link": "https://github.com/gasyoun/claude-config/blob/main/commands/crosswalk-build.md", "note": null, "options": []}, "t-residue": {"question": null, "terminal": true, "action": "Characterize the residue per side (coverage gap vs genuine absence) in the unmatched-residue files. Honesty about what did NOT match is the deliverable, not a silent drop.", "link": "https://github.com/gasyoun/claude-config/blob/main/commands/crosswalk-build.md", "note": null, "options": []}, "t-bad-key": {"question": null, "terminal": true, "action": "Rejected. The naive NFD + strip-Mn + NFC key collapses long vowels to short, kills retroflex dots and collides the ś/ṣ distinction with pitch-accented s — it fabricated false matches in prior sessions. Never join on it, and never normalize the two sides asymmetrically.", "link": "https://github.com/gasyoun/claude-config/blob/main/commands/crosswalk-build.md", "note": null, "options": []}, "t-review": {"question": null, "terminal": true, "action": "Human gate — route fuzzy candidates through /review-sheet before anything consumes them. Never promote a fuzzy match to a merged match without the vote.", "link": "https://github.com/gasyoun/claude-config/blob/main/commands/review-sheet.md", "note": null, "options": []}, "t-candidates": {"question": null, "terminal": true, "action": "Keep the rows as fuzzy-candidate tier entries with their basis — never promoted into the floor, never silently merged.", "link": "https://github.com/gasyoun/claude-config/blob/main/commands/crosswalk-build.md", "note": null, "options": []}, "t-contested": {"question": null, "terminal": true, "action": "Keep the identity CONTESTED with its named missing evidence. Never silently resolve a contested identity to the majority.", "link": "https://github.com/gasyoun/claude-config/blob/main/commands/crosswalk-build.md", "note": null, "options": []}, "t-rerun": {"question": null, "terminal": true, "action": "A canary flip or an inter-run diff invalidates the RUN, not the canary. Pin the non-deterministic step (date parsing, locale sort, floating tie-break) and re-run twice.", "link": "https://github.com/gasyoun/claude-config/blob/main/commands/crosswalk-build.md", "note": null, "options": []}, "t-decide": {"question": null, "terminal": true, "action": "Joined-side license is ambiguous — mirror the @DECIDE to Uprava GTD_NEXT_ACTIONS.md and never self-rule. The crosswalk inherits the MORE restrictive side's constraints.", "link": "https://github.com/gasyoun/claude-config/blob/main/commands/crosswalk-build.md", "note": null, "options": []}, "t-register": {"question": null, "terminal": true, "action": "Register the crosswalk as a feed in Uprava PROJECT_INTERLINKS.md and add or update its row in kosha data/manifest/datasets.json in the same pass.", "link": "https://github.com/gasyoun/claude-config/blob/main/commands/crosswalk-build.md", "note": null, "options": []}, "t-report": {"question": null, "terminal": true, "action": "Rewrite the coverage report — per-tier counts against BOTH totals, caveats stated plainly, residue characterized. A coverage number without its tier breakdown is a defect.", "link": "https://github.com/gasyoun/claude-config/blob/main/commands/crosswalk-build.md", "note": null, "options": []}}};
+var path = [];
+function el(id) { return document.getElementById(id); }
+function show(nid) {
+  var n = DATA.nodes[nid];
+  var crumbs = path.map(function (p) { return esc(p.label); }).join(' &rarr; ');
+  el('crumbs').innerHTML = crumbs;
+  var card = el('card');
+  card.className = 'card' + (n.terminal ? ' terminal' : '');
+  if (n.terminal) {
+    card.innerHTML = '<h2>Result</h2><p class="act">' + esc(n.action || '') + '</p>'
+      + (n.link ? '<p><a href="' + esc(n.link) + '">' + esc(n.link) + '</a></p>' : '')
+      + (n.note ? '<p class="note">' + esc(n.note) + '</p>' : '');
+  } else {
+    var btns = n.options.map(function (o, i) {
+      return '<button class="opt" type="button" data-i="' + i + '">' + esc(o.label) + '</button>';
+    }).join('');
+    card.innerHTML = '<h2>' + esc(n.question) + '</h2>' + btns
+      + (n.note ? '<p class="note">' + esc(n.note) + '</p>' : '');
+    Array.prototype.forEach.call(card.querySelectorAll('.opt'), function (b) {
+      b.addEventListener('click', function () {
+        var o = n.options[Number(b.getAttribute('data-i'))];
+        path.push({ label: o.label, from: nid });
+        Array.prototype.forEach.call(card.querySelectorAll('.opt'), function (x) {
+          if (x !== b) { x.classList.add('chosen'); } else { x.classList.add('chosen'); }
+        });
+        drawPath();
+        show(o.next);
+      });
+    });
+  }
+}
+function drawPath() {
+  el('pathlist').innerHTML = path.map(function (p) { return '<li>' + esc(p.label) + '</li>'; }).join('');
+}
+el('restart').addEventListener('click', function () { path = []; drawPath(); el('crumbs').innerHTML = ''; show(DATA.root); });
+show(DATA.root);
+</script>
+</body>
+</html>

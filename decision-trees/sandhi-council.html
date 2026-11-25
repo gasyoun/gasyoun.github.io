@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sandhi junction ambiguity — adjudication council — decision tree</title>
+<style>
+:root { --ink:#1a1a2e; --accent:#16537e; --ok:#0b6e4f; --muted:#6b7280; --bg:#f6f7f9; }
+* { box-sizing:border-box; }
+body { font:16px/1.55 Georgia,'Times New Roman',serif; color:var(--ink); background:var(--bg); margin:0; padding:2rem 1rem; }
+main { max-width:44rem; margin:0 auto; }
+h1 { font-size:1.35rem; margin:0 0 .25rem; }
+.src { color:var(--muted); font-size:.85rem; margin-bottom:1.25rem; }
+.crumbs { font-size:.85rem; color:var(--muted); min-height:1.2em; margin-bottom:.75rem; }
+.card { background:#fff; border:1px solid #d6d9de; border-radius:10px; padding:1.1rem 1.25rem; }
+.card h2 { font-size:1.05rem; margin:.1rem 0 .8rem; }
+.opt { display:block; width:100%; text-align:left; margin:.45rem 0; padding:.6rem .8rem; font:inherit;
+        background:#eef3f8; border:1px solid #c6d4e2; border-radius:8px; cursor:pointer; }
+.opt:hover { background:#dfeaf4; }
+.opt.chosen { background:#e6f2ec; border-color:var(--ok); }
+.terminal { border-left:4px solid var(--ok); }
+.terminal .act { font-weight:bold; }
+.note { color:var(--muted); font-size:.9rem; margin-top:.7rem; }
+.path { margin-top:1.25rem; }
+.path h2 { font-size:.95rem; color:var(--muted); }
+.path ol { margin:.2rem 0; padding-left:1.2rem; }
+button#restart { margin-top:1rem; font:inherit; padding:.45rem .9rem; border-radius:8px;
+                  border:1px solid #c6d4e2; background:#fff; cursor:pointer; }
+@media print { .opt, #restart { display:none; } .path { display:block; } }
+</style>
+</head>
+<body>
+<main>
+<h1>Sandhi junction ambiguity — adjudication council</h1>
+<p class="src">Source of truth: <a href="https://github.com/gasyoun/claude-config/blob/main/commands/sandhi-council.md">https://github.com/gasyoun/claude-config/blob/main/commands/sandhi-council.md</a> · generated from <code>trees/sandhi-council.yaml</code> — regenerate, never hand-edit.</p>
+<div id="crumbs" class="crumbs"></div>
+<div id="card" class="card"></div>
+<div id="path" class="path"><h2>Your path</h2><ol id="pathlist"></ol></div>
+<button id="restart" type="button">Start over</button>
+</main>
+<script>
+"use strict";
+var DATA = {"tree": "sandhi-council", "title": "Sandhi junction ambiguity — adjudication council", "source": "https://github.com/gasyoun/claude-config/blob/main/commands/sandhi-council.md", "root": "q-state", "nodes": {"q-state": {"question": "What is the state of this sandhi junction?", "terminal": false, "action": null, "link": null, "note": "The council is for GENUINE ambiguity only. A junction the deterministic tools already settle is not a council case — do not convene four agents on it.", "options": [{"label": "Unsegmented string, deterministic split confident -> /sandhi-split", "next": "t-split"}, {"label": "Already segmented, checking authored sandhi -> /sandhi-check", "next": "q-check"}, {"label": "One junction with several valid resolutions (tavedam = tava idam or tava edam), tools disagree", "next": "q-voices"}]}, "q-check": {"question": "/sandhi-check — what is the corpus verdict at this junction?", "terminal": false, "action": null, "link": null, "note": "Descriptive, not prescriptive. The corpus shows what is ATTESTED and has legitimate optional variants; reserve the hard error for outcomes the corpus never shows.", "options": [{"label": "Correct or simply not applied, one attested outcome", "next": "t-deterministic"}, {"label": "Variant — attested but rarer (Vedic non-elision, optional avagraha)", "next": "t-variant"}, {"label": "Wrong — a different, non-attested outcome", "next": "t-fix"}, {"label": "Two or more attested outcomes, cannot pick one", "next": "q-voices"}]}, "q-voices": {"question": "Have all four independent lenses reported?", "terminal": false, "action": null, "link": null, "note": "Four real spawns of the sandhi-voice subagent in one parallel batch, context-isolated — no peeking (four personas prompted in one context are four rephrasings of one opinion). Lenses: gold/corpus, neural, FST and grammar. Each returns LENS / SPLIT / RULE / CONFIDENCE / BASIS / ALTERNATIVES, archived beside the verdict. A lens returning no reading is a real contribution.", "options": [{"label": "All four agree on split and rule", "next": "q-judge"}, {"label": "Voices disagree — record the disagreement", "next": "q-judge"}, {"label": "One or more lenses returned no reading", "next": "q-judge"}]}, "q-judge": {"question": "Judge (Opus 4.8 / Fable 5) — what does the evidence support?", "terminal": false, "action": null, "link": null, "note": "Adjudicate on agreement across voices, corpus frequency of each candidate rule, and the grammar. Frequency is evidence, not proof — the rarer resolution can be the right one in context.", "options": [{"label": "Agreement, frequency and grammar converge", "next": "t-verdict"}, {"label": "Voices disagree — the disagreement IS the finding", "next": "t-dissent"}, {"label": "Undecidable without context", "next": "t-context"}]}, "t-split": {"question": null, "terminal": true, "action": "Not a council case. Run /sandhi-split — the deterministic method resolves this junction. Convening four agents here is the defect the guardrail forbids.", "link": "https://github.com/gasyoun/claude-config/blob/main/commands/sandhi-split.md", "note": null, "options": []}, "t-deterministic": {"question": null, "terminal": true, "action": "The /sandhi-check verdict stands. Apply its correction and stop; the council is reserved for genuine ambiguity.", "link": "https://github.com/gasyoun/claude-config/blob/main/commands/sandhi-check.md", "note": null, "options": []}, "t-variant": {"question": null, "terminal": true, "action": "Flag as a VARIANT, never a hard error — attested-but-rarer outcomes (Vedic non-elision, optional avagraha) are legitimate register choices.", "link": "https://github.com/gasyoun/claude-config/blob/main/commands/sandhi-check.md", "note": null, "options": []}, "t-fix": {"question": null, "terminal": true, "action": "Replace the non-attested outcome with the corpus-attested rule; cite corpus frequency as evidence, never as proof.", "link": "https://github.com/gasyoun/claude-config/blob/main/commands/sandhi-check.md", "note": null, "options": []}, "t-verdict": {"question": null, "terminal": true, "action": "Record the adjudicated split + rule + confidence, with dissent carried even under agreement and each voice's evidence archived beside the verdict. This is one council pass, not a rerun.", "link": "https://github.com/gasyoun/claude-config/blob/main/commands/sandhi-council.md", "note": null, "options": []}, "t-dissent": {"question": null, "terminal": true, "action": "Record the disagreement as the finding — state plainly what makes this junction ambiguous. Do not manufacture a false consensus from four rephrasings of one opinion.", "link": "https://github.com/gasyoun/claude-config/blob/main/commands/sandhi-council.md", "note": null, "options": []}, "t-context": {"question": null, "terminal": true, "action": "Say it is undecidable and name the context that would resolve it — metre, semantics, or the surrounding text. Do not guess.", "link": "https://github.com/gasyoun/claude-config/blob/main/commands/sandhi-council.md", "note": null, "options": []}}};
+var path = [];
+function el(id) { return document.getElementById(id); }
+function show(nid) {
+  var n = DATA.nodes[nid];
+  var crumbs = path.map(function (p) { return esc(p.label); }).join(' &rarr; ');
+  el('crumbs').innerHTML = crumbs;
+  var card = el('card');
+  card.className = 'card' + (n.terminal ? ' terminal' : '');
+  if (n.terminal) {
+    card.innerHTML = '<h2>Result</h2><p class="act">' + esc(n.action || '') + '</p>'
+      + (n.link ? '<p><a href="' + esc(n.link) + '">' + esc(n.link) + '</a></p>' : '')
+      + (n.note ? '<p class="note">' + esc(n.note) + '</p>' : '');
+  } else {
+    var btns = n.options.map(function (o, i) {
+      return '<button class="opt" type="button" data-i="' + i + '">' + esc(o.label) + '</button>';
+    }).join('');
+    card.innerHTML = '<h2>' + esc(n.question) + '</h2>' + btns
+      + (n.note ? '<p class="note">' + esc(n.note) + '</p>' : '');
+    Array.prototype.forEach.call(card.querySelectorAll('.opt'), function (b) {
+      b.addEventListener('click', function () {
+        var o = n.options[Number(b.getAttribute('data-i'))];
+        path.push({ label: o.label, from: nid });
+        Array.prototype.forEach.call(card.querySelectorAll('.opt'), function (x) {
+          if (x !== b) { x.classList.add('chosen'); } else { x.classList.add('chosen'); }
+        });
+        drawPath();
+        show(o.next);
+      });
+    });
+  }
+}
+function drawPath() {
+  el('pathlist').innerHTML = path.map(function (p) { return '<li>' + esc(p.label) + '</li>'; }).join('');
+}
+el('restart').addEventListener('click', function () { path = []; drawPath(); el('crumbs').innerHTML = ''; show(DATA.root); });
+show(DATA.root);
+</script>
+</body>
+</html>
