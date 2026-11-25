@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Книжный клуб — купить книгу и доставку</title>
+<style>
+  :root{--ink:#1f2937;--muted:#6b7280;--accent:#4338ca;--bg:#f5f4f0;--line:#e5e7eb}
+  *{box-sizing:border-box}
+  body{font-family:-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55;margin:0}
+  .wrap{max-width:800px;margin:0 auto;padding:40px 20px 72px}
+  h1{font-size:32px;margin:0 0 6px}
+  h2{font-size:21px;margin:0 0 12px}
+  .sub{color:var(--muted);margin:0 0 28px}
+  .card{background:#fff;border-radius:14px;padding:24px 26px;margin:18px 0;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+  p{margin:0 0 12px}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  table{width:100%;border-collapse:collapse;margin:12px 0}
+  th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);font-size:15px}
+  th{color:var(--muted);font-weight:600}
+  td.num{text-align:right;font-variant-numeric:tabular-nums}
+  .note{font-size:14px;color:var(--muted)}
+  .lead{font-size:17px}
+  .btn{display:inline-block;background:var(--accent);color:#fff;border-radius:10px;padding:12px 20px;font-weight:700;margin-top:8px}
+  .btn:hover{background:#3730a3;text-decoration:none}
+  ul{padding-left:20px;margin:8px 0}
+  li{margin:6px 0}
+  .foot{color:var(--muted);font-size:13px;margin-top:32px}
+  @media(max-width:560px){.wrap{padding:24px 14px 56px}h1{font-size:26px}.card{padding:18px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>Книжный клуб</h1>
+<p class="sub">книги тиража кампании planeta.ru/219924 — купить отдельно или доплатить за доставку</p>
+
+<div class="card">
+  <p class="lead">Здесь можно купить книгу «Школьные лекции» с доставкой или забрать её в Москве. Если вы уже покупали книги на Планете, доплачивать за них не нужно — платится только пересылка.</p>
+  <p class="note">Это не подписка и не доступ к курсам: покупка даёт только книгу и доставку.</p>
+</div>
+
+<div class="card">
+  <h2>Две страницы — выберите свою</h2>
+  <table>
+    <tr><th>Страница</th><th>Кому</th><th>Что делает</th></tr>
+    <tr><td><a href="https://samskrte.ru/knizhny-klub/kupit">Купить книгу</a></td><td>Всем, даже если вы не участвовали в кампании</td><td>Книга 1 000 ₽ за экземпляр + доставка или самовывоз</td></tr>
+    <tr><td><a href="https://samskrte.ru/knizhny-klub/dostavka">Доставка для участников</a></td><td>Тем, кто уже купил книги на Планете</td><td>Только оплата пересылки</td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <h2>Как купить книгу</h2>
+  <ol>
+    <li>Укажите фамилию, имя и email (он же — для входа в кабинет); телефон — по желанию.</li>
+    <li>Выберите количество: 1, 2, 3, 4 или «5 и больше».</li>
+    <li>Выберите «Доставка» или «Самовывоз (Москва)».</li>
+    <li>При доставке заполните адрес и страну; при самовывозе адрес не нужен.</li>
+    <li>Оплатите: в России — Точка/СБП, за границей — PayPal-заявка с ручной сверкой; самовывоз и заказы от 5 книг согласовываются письмом.</li>
+  </ol>
+  <p class="note">Одна посылка вмещает до 2 книг, доставка считается за каждую посылку. Например, 3 книги в России — 3 000 ₽ + 2 × 300 ₽ = 3 600 ₽.</p>
+  <a class="btn" href="https://samskrte.ru/knizhny-klub/kupit">Перейти к покупке</a>
+</div>
+
+<div class="card">
+  <h2>Стоимость доставки</h2>
+  <table>
+    <tr><th>Направление</th><th class="num">За посылку</th></tr>
+    <tr><td>Россия</td><td class="num">300 ₽</td></tr>
+    <tr><td>Латвия</td><td class="num">5 100 ₽</td></tr>
+    <tr><td>Израиль</td><td class="num">5 800 ₽</td></tr>
+    <tr><td>Германия</td><td class="num">6 200 ₽</td></tr>
+    <tr><td>США</td><td class="num">6 600 ₽</td></tr>
+    <tr><td>Другая страна</td><td class="num">6 600 ₽</td></tr>
+    <tr><td>Самовывоз в Москве</td><td class="num">0 ₽</td></tr>
+  </table>
+</div>
+
+<div class="card">
+  <h2>Что важно знать</h2>
+  <ul>
+    <li><strong>Если написано «Под заказ 2–3 недели»</strong> — книг на складе сейчас нет, но заказ всё равно принимается и выполняется в порядке очереди. Мы напишем на email.</li>
+    <li><strong>От 5 книг</strong> — заказ принимаем, а точную сумму и доставку согласуем письмом; предоплата PayPal в этом случае не нужна.</li>
+    <li><strong>Чек</strong> — одна позиция «Книжный клуб: книга «Школьные лекции» и доставка».</li>
+    <li><strong>Письма</strong> — подтверждение после заказа и письмо с трек-номером после отправки.</li>
+    <li><strong>Самовывоз</strong> — бесплатно, в Москве; адрес и время согласуем после заказа, запись — <a href="https://t.me/bsanscritica">t.me/bsanscritica</a>.</li>
+    <li>У витрины покупки срока нет. Дедлайн 7 декабря 2026 относится только к оплате доставки участникам кампании.</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h2>Уже купили книги на Планете?</h2>
+  <p>На странице <a href="https://samskrte.ru/knizhny-klub/dostavka">доставки для участников</a> понадобятся email с Планеты и номер заказа — по ним мы находим ваши книги. Тарифы доставки те же, что в таблице выше; оплата до 7 декабря 2026, после — по возможности.</p>
+</div>
+
+<p class="foot">Обновлено 25-11-2026 · вопросы по заказу — <a href="https://t.me/bsanscritica">t.me/bsanscritica</a></p>
+
+</div>
+</body>
+</html>
