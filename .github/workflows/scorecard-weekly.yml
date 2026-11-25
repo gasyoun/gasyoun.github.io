@@ -17,7 +17,7 @@ permissions: read-all
 
 jobs:
   scorecard:
-    uses: gasyoun/.github/.github/workflows/scorecard.yml@main
+    uses: gasyoun/.github/.github/workflows/scorecard.yml@eade851d9be5c1df1381a2927e301a1a585c21dd # main
     permissions:
       contents: read
       security-events: write
